@@ -1,10 +1,12 @@
 package org.mage.test.serverside.base;
 
-import mage.constants.PhaseStep;
+import java.io.File;
+import java.io.FileNotFoundException;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.constants.MultiplayerAttackOption;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.filter.Filter;
 import mage.game.Game;
@@ -16,10 +18,11 @@ import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mage.test.player.TestPlayer;
+import static org.mage.test.serverside.base.MageTestPlayerBase.TESTS_PATH;
+import static org.mage.test.serverside.base.MageTestPlayerBase.activePlayer;
+import static org.mage.test.serverside.base.MageTestPlayerBase.currentGame;
+import static org.mage.test.serverside.base.MageTestPlayerBase.logger;
 import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Base class for testing single cards and effects.
@@ -217,40 +220,42 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         if (type.equals(CardTestPlayerBase.ExpectedType.RESULT)) {
             String expected = getStringParam(line, 1);
             String actual = "draw";
-            if (currentGame.getWinner().equals("Player ComputerA is the winner")) {
-                actual = "won";
-            } else if (currentGame.getWinner().equals("Player ComputerB is the winner")) {
-                actual = "lost";
+            switch (currentGame.getWinner()) {
+                case "Player ComputerA is the winner":
+                    actual = "won";
+                    break;
+                case "Player ComputerB is the winner":
+                    actual = "lost";
+                    break;
             }
             Assert.assertEquals("Game results are not equal", expected, actual);
             return;
         }
+
+        Player player = null;
+        String playerName = getStringParam(line, 1);
+        switch (playerName) {
+            case "ComputerA":
+                player = currentGame.getPlayer(playerA.getId());
+                break;
+            case "ComputerB":
+                player = currentGame.getPlayer(playerB.getId());
+                break;
+        }
+        if (player == null) {
+            throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
+        }
+
         if (type.equals(CardTestPlayerBase.ExpectedType.LIFE)) {
-            String player = getStringParam(line, 1);
             int expected = getIntParam(line, 2);
-            if (player.equals("ComputerA")) {
-                int actual = currentGame.getPlayer(playerA.getId()).getLife();
-                Assert.assertEquals("Life amounts are not equal", expected, actual);
-            } else if (player.equals("ComputerB")) {
-                int actual = currentGame.getPlayer(playerB.getId()).getLife();
-                Assert.assertEquals("Life amounts are not equal", expected, actual);
-            } else {
-                throw new IllegalArgumentException("Wrong player in 'life' line, player=" + player + ", line=" + line);
-            }
+            int actual = player.getLife();
+            Assert.assertEquals("Life amounts are not equal", expected, actual);
             return;
         }
+
         if (type.equals(CardTestPlayerBase.ExpectedType.BATTLEFIELD)) {
-            String playerName = getStringParam(line, 1);
             String cardName = getStringParam(line, 2);
             int expectedCount = getIntParam(line, 3);
-            Player player = null;
-            if (playerName.equals("ComputerA")) {
-                player = currentGame.getPlayer(playerA.getId());
-            } else if (playerName.equals("ComputerB")) {
-                player = currentGame.getPlayer(playerB.getId());
-            } else {
-                throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
-            }
             int actualCount = 0;
             for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
                 if (permanent.getControllerId().equals(player.getId())) {
@@ -262,18 +267,10 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             Assert.assertEquals("(Battlefield) Card counts are not equal (" + cardName + ")", expectedCount, actualCount);
             return;
         }
+
         if (type.equals(CardTestPlayerBase.ExpectedType.GRAVEYARD)) {
-            String playerName = getStringParam(line, 1);
             String cardName = getStringParam(line, 2);
             int expectedCount = getIntParam(line, 3);
-            Player player = null;
-            if (playerName.equals("ComputerA")) {
-                player = currentGame.getPlayer(playerA.getId());
-            } else if (playerName.equals("ComputerB")) {
-                player = currentGame.getPlayer(playerB.getId());
-            } else {
-                throw new IllegalArgumentException("Wrong player in 'graveyard' line, player=" + player + ", line=" + line);
-            }
             int actualCount = 0;
             for (Card card : player.getGraveyard().getCards(currentGame)) {
                 if (card.getName().equals(cardName)) {

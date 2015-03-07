@@ -31,18 +31,16 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.keyword.CascadeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.Watcher;
 
@@ -55,12 +53,6 @@ public class MaelstromNexus extends CardImpl {
     public MaelstromNexus(UUID ownerId) {
         super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "ARB";
-
-
-
-
-        
-
 
         // The first spell you cast each turn has cascade.
         this.addAbility(new MaelstromNexusTriggeredAbility(), new FirstSpellCastThisTurnWatcher());
@@ -164,40 +156,7 @@ class CascadeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card;
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-        Card stackCard = game.getCard(targetPointer.getFirst(game, source));
-        if (stackCard == null) {
-            return false;
-        }
-        int sourceCost = stackCard.getManaCost().convertedManaCost();
-        do {
-            card = player.getLibrary().removeFromTop(game);
-            if (card == null) {
-                break;
-            }
-                
-            player.moveCardToExileWithInfo(card, source.getSourceId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
-        } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
-
-        if (card != null) {
-            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
-                player.cast(card.getSpellAbility(), game, true);
-                exile.remove(card.getId());
-            }
-        }
-
-        while (exile.size() > 0) {
-            card = exile.getRandom(game);
-            exile.remove(card.getId());
-            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, false, false);
-        }
-
-        return true;
+        return CascadeAbility.applyCascade(outcome, game, source);
     }
 
     @Override
