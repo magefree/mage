@@ -424,10 +424,11 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
-        if (sourceId == null)
+        if (sourceId == null) {
             effects.addEffect(effect, source);
-        else 
+        } else {
             effects.addEffect(effect, sourceId, source);
+        }
     }
 
 //    public void addMessage(String message) {

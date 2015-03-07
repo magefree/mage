@@ -119,7 +119,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
                 permanent = game.getPermanent(source.getSourceId());
             }
             if (permanent != null) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, false);
                 return true;
             }
         }

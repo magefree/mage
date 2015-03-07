@@ -52,6 +52,7 @@ import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
+import mage.constants.EffectType;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
@@ -717,7 +718,12 @@ public class ContinuousEffects implements Serializable {
             boolean onlyOne = false;
             if (rEffects.size() == 1) {
                 ReplacementEffect effect = rEffects.keySet().iterator().next();
-                HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
+                HashSet<Ability> abilities;
+                if (effect.getEffectType().equals(EffectType.REPLACEMENT)) {
+                    abilities = replacementEffects.getAbility(effect.getId());
+                } else {
+                    abilities = preventionEffects.getAbility(effect.getId());
+                }
                 if (abilities == null || abilities.size() == 1) {
                     onlyOne = true;
                 }
@@ -788,6 +794,7 @@ public class ContinuousEffects implements Serializable {
                 }
             }
             // Must be called here for some effects to be able to work correctly
+            // TODO: add info which effects that need
             game.applyEffects();
         } while (true);
         return caught;
