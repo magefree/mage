@@ -832,18 +832,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
-                    Card chosenCard = cards.get(target.getFirstTarget(), game);
-                    if (chosenCard != null) {
-                        cards.remove(chosenCard);
-                        moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, false, false);
-                    }
+                    UUID targetObjectId = target.getFirstTarget();
+                    cards.remove(targetObjectId);
+                    moveObjectToLibrary(targetObjectId, source.getSourceId(), game, false, false);
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
-                    Card chosenCard = cards.get(cards.iterator().next(), game);
-                    if (chosenCard != null) {
-                        moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, false, false);
-                    }
+                    moveObjectToLibrary(cards.iterator().next(), source.getSourceId(), game, false, false);
                 }
             }
         }
@@ -871,11 +866,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 target.setRequired(true);
                 while (isInGame() && cards.size() > 1) {
                     this.choose(Outcome.Neutral, cards, target, game);
-                    Card chosenCard = cards.get(target.getFirstTarget(), game);
-                    if (chosenCard != null) {
-                        cards.remove(chosenCard);
-                        moveObjectToLibrary(chosenCard.getId(), source.getSourceId(), game, true, false);
-                    }
+                    UUID targetObjectId = target.getFirstTarget();
+                    cards.remove(targetObjectId);     
+                    moveObjectToLibrary(targetObjectId, source.getSourceId(), game, true, false);
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
