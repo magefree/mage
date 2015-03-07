@@ -55,6 +55,17 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
         this.zoneChangeCounter = card.getZoneChangeCounter();
     }
 
+    public MageObjectReference(MageObject mageObject) {
+        this.sourceId = mageObject.getId();
+        if (mageObject instanceof Card) {
+            this.zoneChangeCounter = ((Card)mageObject).getZoneChangeCounter();
+        } else if (mageObject instanceof Permanent) {
+            this.zoneChangeCounter = ((Permanent)mageObject).getZoneChangeCounter();
+        } else {
+            this.zoneChangeCounter = 0;
+        }
+
+    }
     /**
      * That values manually (can be used to let it reference to a Permanent
      * that is not yet on the battlefield.

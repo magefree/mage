@@ -27,9 +27,8 @@
  */
 package mage.sets.alarareborn;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -46,17 +45,15 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -70,16 +67,12 @@ public class UnscytheKillerOfKings extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
-
-
-        
-
         // Equipped creature gets +3/+3 and has first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Whenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()), new EquippedDidDamageWatcher());
+        this.addAbility(new UnscytheKillerOfKingsTriggeredAbility(new UnscytheEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
@@ -98,11 +91,7 @@ public class UnscytheKillerOfKings extends CardImpl {
 class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
     public UnscytheKillerOfKingsTriggeredAbility(Effect effect) {
-        this(effect, true);
-    }
-
-    public UnscytheKillerOfKingsTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.ALL, effect, optional);
+        super(Zone.ALL, effect, true);
     }
 
     public UnscytheKillerOfKingsTriggeredAbility(final UnscytheKillerOfKingsTriggeredAbility ability) {
@@ -117,14 +106,23 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                EquippedDidDamageWatcher watcher = (EquippedDidDamageWatcher) game.getState().getWatchers().get("equippedDamagedTargets", this.getSourceId());
-                if (watcher != null
-                        && watcher.equippedDamagedTargets.contains(event.getTargetId())) {
-                    Effect effect = this.getEffects().get(0);
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    return true;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) { // target token can't create Zombie
+                Permanent equipment = game.getPermanent(getSourceId());
+                // the currently equiped creature must have done damage to the dying creature
+                if (equipment != null && equipment.getAttachedTo() != null) {
+                    boolean damageDealt = false;
+                    for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
+                        if (mor.refersTo(equipment.getAttachedTo(), game)) {
+                            damageDealt = true;
+                            break;
+                        }
+                    }
+                    if (damageDealt) {
+                        Effect effect = this.getEffects().get(0);
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                        return true;
+                    }
                 }
             }
         }
@@ -133,7 +131,7 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature dealt damage by {this} this turn dies, " + super.getRule();
+        return "Whenever a creature dealt damage by equipped creature this turn dies, " + super.getRule();
     }
 }
 
@@ -141,7 +139,7 @@ class UnscytheEffect extends OneShotEffect {
 
     public UnscytheEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "put a 2/2 black Zombie creature token onto the battlefield";
+        this.staticText = "you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield";
     }
 
     public UnscytheEffect(final UnscytheEffect effect) {
@@ -155,52 +153,15 @@ class UnscytheEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
-            if (card.moveToExile(null, "Unscythe Exile", source.getSourceId(), game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD) && controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD)) {
                 ZombieToken zombie = new ZombieToken("ALA");
                 return zombie.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             }
+            return true;
         }
         return false;
-    }
-}
-
-class EquippedDidDamageWatcher extends Watcher {
-
-    public List<UUID> equippedDamagedTargets = new ArrayList<UUID>();
-
-    public EquippedDidDamageWatcher() {
-        super("equippedDamagedTargets", WatcherScope.CARD);
-    }
-
-    public EquippedDidDamageWatcher(final EquippedDidDamageWatcher watcher) {
-        super(watcher);
-        this.equippedDamagedTargets.addAll(watcher.equippedDamagedTargets);
-    }
-
-    @Override
-    public EquippedDidDamageWatcher copy() {
-        return new EquippedDidDamageWatcher(this);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                if (permanent.getAttachments().contains(this.getSourceId())) {
-                    if (!equippedDamagedTargets.contains(event.getTargetId())) {
-                        equippedDamagedTargets.add(event.getTargetId());
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        equippedDamagedTargets.clear();
     }
 }

@@ -46,13 +46,14 @@ public class UnscytheKillerOfKingsTest extends CardTestPlayerBase {
     public void testDamagedCreatureDiesAfterEquipped() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Unscythe, Killer of Kings");
+        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
         addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
         
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 1 damage to target creature or player.", "Craw Wurm");
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip", "Prodigal Pyromancer");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Craw Wurm", "Equip", StackClause.WHILE_NOT_ON_STACK);
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();

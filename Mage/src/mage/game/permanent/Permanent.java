@@ -29,9 +29,11 @@
 package mage.game.permanent;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Rarity;
@@ -79,9 +81,9 @@ public interface Permanent extends Card, Controllable {
     void setFlipCard(boolean flipCard);
     void setFlipCardName(String flipCardName);
     void setSecondCardFace(Card card);
-    
+
     Counters getCounters();
-    
+
     List<UUID> getAttachments();
     UUID getAttachedTo();
     void attachTo(UUID permanentId, Game game);
@@ -164,19 +166,19 @@ public interface Permanent extends Card, Controllable {
      * @param maxBlockedBy maximum number of blockers
      */
     void setMaxBlockedBy(int maxBlockedBy);
-    
+
     boolean canAttack(Game game);
-    
+
     /**
-     * 
+     *
      * @param defenderId id of planeswalker or player to attack
      * @param game
-     * @return 
+     * @return
      */
     boolean canAttack(UUID defenderId, Game game);
     boolean canBlock(UUID attackerId, Game game);
     boolean canBlockAny(Game game);
-    
+
     /**
      * Checks by restriction effects if the permanent can use activated abilities
      *
@@ -190,10 +192,10 @@ public interface Permanent extends Card, Controllable {
     boolean isDeathtouched();
 
     /**
-     * Returns the list of sources that dealt damage this turn to this permanent
+     * Returns a list of object refrences that dealt damage this turn to this permanent
      * @return
      */
-    List<UUID> getDealtDamageByThisTurn();
+    HashSet<MageObjectReference> getDealtDamageByThisTurn();
 
     /**
      * Imprint some other card to this one.

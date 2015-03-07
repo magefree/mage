@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.CardType;
@@ -37,12 +38,20 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE) &&
-                    zEvent.getTarget().getDealtDamageByThisTurn().contains(this.sourceId)) {
-                for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                boolean damageDealt = false;
+                for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
+                    if (mor.refersTo(getSourceObject(game))) {
+                        damageDealt = true;
+                        break;
+                    }
                 }
-                return true;
+                if (damageDealt) {
+                    for (Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                    }
+                    return true;
+                }
             }
         }
         return false;
