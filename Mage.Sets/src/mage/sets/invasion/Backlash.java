@@ -34,6 +34,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -45,12 +48,17 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Backlash extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creature");
+    static {
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+    
     public Backlash(UUID ownerId) {
         super(ownerId, 234, "Backlash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         this.expansionSetCode = "INV";
 
         // Tap target untapped creature. That creature deals damage equal to its power to its controller.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new BacklashEffect());
     }
 

@@ -64,7 +64,7 @@ public class Duskwalker extends CardImpl {
         // If Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))),
-                KickedCondition.getInstance(),"If Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.");
+                KickedCondition.getInstance(),"If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.");
 		ability.addEffect(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield));
 		this.addAbility(ability);
     }
