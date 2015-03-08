@@ -27,16 +27,16 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author jeff
+ * @author jeffwadsworth
  */
-public class CounterPredicate implements Predicate<Card> {
+public class CounterPredicate implements Predicate<Permanent> {
 
     private final CounterType counter;
 
@@ -45,8 +45,8 @@ public class CounterPredicate implements Predicate<Card> {
     }
 
     @Override
-    public boolean apply(Card input, Game game) {
-        return input.getCounters(game).containsKey(counter);
+    public boolean apply(Permanent input, Game game) {
+        return input.getCounters().containsKey(counter);
     }
 
     @Override
