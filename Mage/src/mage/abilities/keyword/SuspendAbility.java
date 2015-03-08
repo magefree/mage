@@ -275,12 +275,6 @@ class SuspendExileEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            // check if the user really wants to suspend the card (only if the spell can't be casted because else the choose ability dialog appears)
-            if (!card.getSpellAbility().canActivate(source.getControllerId(), game)) {
-                if (!controller.chooseUse(outcome, new StringBuilder("Suspend ").append(card.getName()).append("?").toString(), game)) {
-                    return false;
-                }
-            }
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
             if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND)) {
                 if (suspend == Integer.MAX_VALUE) {
