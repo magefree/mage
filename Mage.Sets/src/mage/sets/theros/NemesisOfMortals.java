@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
@@ -59,7 +58,6 @@ public class NemesisOfMortals extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -99,9 +97,9 @@ class NemesisOfMortalsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {        
-            int reductionAmount = player.getGraveyard().count(new FilterCreatureCard(), game);            
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int reductionAmount = controller.getGraveyard().count(new FilterCreatureCard(), game);
             CardUtil.reduceCost(abilityToModify, reductionAmount);
             return true;
         }
@@ -110,8 +108,9 @@ class NemesisOfMortalsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility) && abilityToModify.getSourceId().equals(source.getSourceId())) {
-            return game.getCard(abilityToModify.getSourceId()) != null;
+        if (((abilityToModify instanceof SpellAbility) || (abilityToModify instanceof MonstrosityAbility))
+                && abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return true;
         }
         return false;
     }
