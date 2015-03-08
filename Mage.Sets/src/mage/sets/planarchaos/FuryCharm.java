@@ -49,7 +49,7 @@ import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.filter.predicate.other.CounterCardPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -65,7 +65,7 @@ public class FuryCharm extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("suspended card");
     static {
-        filter.add(new CounterPredicate(CounterType.TIME));
+        filter.add(new CounterCardPredicate(CounterType.TIME));
         filter.add(new AbilityPredicate(SuspendAbility.class));
     }
 

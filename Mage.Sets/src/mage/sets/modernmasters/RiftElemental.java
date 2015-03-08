@@ -35,7 +35,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -55,8 +54,8 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.other.CounterCardPredicate;
 import mage.filter.predicate.other.OwnerPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -71,7 +70,7 @@ public class RiftElemental extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("suspended card you own");
     static {
-        filter.add(new CounterPredicate(CounterType.TIME));
+        filter.add(new CounterCardPredicate(CounterType.TIME));
         filter.add(new AbilityPredicate(SuspendAbility.class));
         filter.add(new OwnerPredicate(TargetController.YOU));
     }
