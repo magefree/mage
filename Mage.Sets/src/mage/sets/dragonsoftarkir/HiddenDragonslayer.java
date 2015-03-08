@@ -25,55 +25,65 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ShrikeHarpy extends CardImpl {
-
-    public ShrikeHarpy(UUID ownerId) {
-        super(ownerId, 83, "Shrike Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Harpy");
-
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2</i>
-        this.addAbility(new TributeAbility(2));
-        // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
+public class HiddenDragonslayer extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater an opponent controls");
+    
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ShrikeHarpy(final ShrikeHarpy card) {
+    public HiddenDragonslayer(UUID ownerId) {
+        super(ownerId, 23, "Hidden Dragonslayer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Lifelink
+        this.addAbility(LifelinkAbility.getInstance());
+        
+        // Megamorph {2}{W}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}"), true));
+
+        // When Hidden Dragonslayer is turned face up, destroy target creature with power 4 or greater an opponent controls.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DestroyTargetEffect(), false, false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public HiddenDragonslayer(final HiddenDragonslayer card) {
         super(card);
     }
 
     @Override
-    public ShrikeHarpy copy() {
-        return new ShrikeHarpy(this);
+    public HiddenDragonslayer copy() {
+        return new HiddenDragonslayer(this);
     }
 }

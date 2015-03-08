@@ -25,55 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ShrikeHarpy extends CardImpl {
+public class GudulLurker extends CardImpl {
 
-    public ShrikeHarpy(UUID ownerId) {
-        super(ownerId, 83, "Shrike Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Harpy");
+    public GudulLurker(UUID ownerId) {
+        super(ownerId, 56, "Gudul Lurker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Salamander");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        // Gudul Lurker can't be blocked.
+        this.addAbility(new UnblockableAbility());
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2</i>
-        this.addAbility(new TributeAbility(2));
-        // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
+        // Megamorph {U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}"), true));
     }
 
-    public ShrikeHarpy(final ShrikeHarpy card) {
+    public GudulLurker(final GudulLurker card) {
         super(card);
     }
 
     @Override
-    public ShrikeHarpy copy() {
-        return new ShrikeHarpy(this);
+    public GudulLurker copy() {
+        return new GudulLurker(this);
     }
 }

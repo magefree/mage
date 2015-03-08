@@ -25,55 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ShrikeHarpy extends CardImpl {
+public class RuthlessDeathfang extends CardImpl {
 
-    public ShrikeHarpy(UUID ownerId) {
-        super(ownerId, 83, "Shrike Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Harpy");
-
-        this.color.setBlack(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    public RuthlessDeathfang(UUID ownerId) {
+        super(ownerId, 229, "Ruthless Deathfang", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{B}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Dragon");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2</i>
-        this.addAbility(new TributeAbility(2));
-        // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
+
+        // Whenever you sacrifice a creature, target opponent sacrifices a creature.
+        Ability ability = new RuthlessDeathfangTriggeredAbility();
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
+        this.addAbility(ability);
     }
 
-    public ShrikeHarpy(final ShrikeHarpy card) {
+    public RuthlessDeathfang(final RuthlessDeathfang card) {
         super(card);
     }
 
     @Override
-    public ShrikeHarpy copy() {
-        return new ShrikeHarpy(this);
+    public RuthlessDeathfang copy() {
+        return new RuthlessDeathfang(this);
+    }
+}
+
+class RuthlessDeathfangTriggeredAbility extends TriggeredAbilityImpl {
+
+    public RuthlessDeathfangTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterCreaturePermanent("creature"), 1, "target opponent"), false);
+    }
+
+    public RuthlessDeathfangTriggeredAbility(final RuthlessDeathfangTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public RuthlessDeathfangTriggeredAbility copy() {
+        return new RuthlessDeathfangTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT 
+                && event.getPlayerId().equals(this.getControllerId())
+                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getCardType().contains(CardType.CREATURE)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever you sacrifice a creature, " + super.getRule();
     }
 }

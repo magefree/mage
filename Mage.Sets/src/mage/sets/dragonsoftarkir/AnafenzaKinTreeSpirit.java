@@ -25,55 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.bornofthegods;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.TributeNotPaidCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TributeAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.keyword.BolsterEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.common.TargetOpponent;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ShrikeHarpy extends CardImpl {
+public class AnafenzaKinTreeSpirit extends CardImpl {
+    
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
 
-    public ShrikeHarpy(UUID ownerId) {
-        super(ownerId, 83, "Shrike Harpy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        this.expansionSetCode = "BNG";
-        this.subtype.add("Harpy");
+    static {
+        filter.add(Predicates.not(new TokenPredicate()));
+        filter.add(new AnotherPredicate());
+    }
 
-        this.color.setBlack(true);
+    public AnafenzaKinTreeSpirit(UUID ownerId) {
+        super(ownerId, 2, "Anafenza, Kin-Tree Spirit", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
+        this.expansionSetCode = "DTK";
+        this.supertype.add("Legendary");
+        this.subtype.add("Spirit");
+        this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Tribute 2</i>
-        this.addAbility(new TributeAbility(2));
-        // When Shrike Harpy enters the battlefield, if tribute wasn't paid, target opponent sacrifices a creature.
-        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent("a creature"), 1, "target opponent"), false);
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, TributeNotPaidCondition.getInstance(),
-                "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
+        // Whenever another nontoken creature enters the battlefield under your control, bolster 1.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BolsterEffect(1), filter, false));
     }
 
-    public ShrikeHarpy(final ShrikeHarpy card) {
+    public AnafenzaKinTreeSpirit(final AnafenzaKinTreeSpirit card) {
         super(card);
     }
 
     @Override
-    public ShrikeHarpy copy() {
-        return new ShrikeHarpy(this);
+    public AnafenzaKinTreeSpirit copy() {
+        return new AnafenzaKinTreeSpirit(this);
     }
 }
