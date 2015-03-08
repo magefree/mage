@@ -35,7 +35,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -58,8 +58,8 @@ public class EscapeArtist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Escape Artist is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Escape Artist can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
         // {U}, Discard a card: Return Escape Artist to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));

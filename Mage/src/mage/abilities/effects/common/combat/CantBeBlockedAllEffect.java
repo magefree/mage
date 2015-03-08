@@ -38,28 +38,28 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableAllEffect extends RestrictionEffect {
+public class CantBeBlockedAllEffect extends RestrictionEffect {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
-    public UnblockableAllEffect(FilterPermanent filter, Duration duration) {
+    public CantBeBlockedAllEffect(FilterPermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
 
-        this.staticText = filter.getMessage() + " are unblockable";
+        this.staticText = filter.getMessage() + " can't be blocked";
         if (duration.equals(Duration.EndOfTurn)) {
             this.staticText += " this turn";
         }
     }
 
-    public UnblockableAllEffect(UnblockableAllEffect effect) {
+    public CantBeBlockedAllEffect(CantBeBlockedAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
 
     @Override
-    public UnblockableAllEffect copy() {
-        return new UnblockableAllEffect(this);
+    public CantBeBlockedAllEffect copy() {
+        return new CantBeBlockedAllEffect(this);
     }
 
     @Override

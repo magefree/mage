@@ -33,7 +33,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -56,7 +56,7 @@ public class AzoriusHerald extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Azorius Herald can't be blocked.
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
         // When Azorius Herald enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
         // When Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.

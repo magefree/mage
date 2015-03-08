@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.TransmuteAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -51,8 +51,8 @@ public class DimirInfiltrator extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Dimir Infiltrator is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Dimir Infiltrator can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
         // Transmute {1}{U}{B}
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }

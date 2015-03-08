@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -56,7 +56,7 @@ public class IncursionSpecialist extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and is unblockable this turn.
+        // Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and can't be blocked this turn.
         this.addAbility(new IncursionTriggeredAbility(), new IncursionWatcher());
     }
 
@@ -74,7 +74,7 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl {
 
     public IncursionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn));
-        this.addEffect(new UnblockableSourceEffect(Duration.EndOfTurn));
+        this.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
     }
 
     public IncursionTriggeredAbility(final IncursionTriggeredAbility ability) {
@@ -99,7 +99,7 @@ class IncursionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and is unblockable this turn.";
+        return "Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and can't be blocked this turn.";
     }
 }
 

@@ -224,10 +224,10 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     /**
-     * Tests Unblockable
+     * Tests can't be blocked
      */
     @Test
-    public void testUnblockable() {
+    public void testCantBeBlocked() {
         addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
 
         addCard(Zone.BATTLEFIELD, playerA, "Blighted Agent");
@@ -246,7 +246,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
     
     @Test
-    public void testUnblockableTormentedSoul() {
+    public void testCantBeBlockedTormentedSoul() {
         addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
         
         addCard(Zone.BATTLEFIELD, playerA, "Memnite");

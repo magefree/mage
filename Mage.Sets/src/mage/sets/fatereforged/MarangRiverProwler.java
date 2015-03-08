@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBlockSourceEffect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -65,7 +65,7 @@ public class MarangRiverProwler extends CardImpl {
 
         // Marang River Prowler can't block and can't be blocked.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
-        Effect effect = new UnblockableSourceEffect();
+        Effect effect = new CantBeBlockedSourceEffect();
         effect.setText("and can't be blocked");
         ability.addEffect(effect);
         this.addAbility(ability);

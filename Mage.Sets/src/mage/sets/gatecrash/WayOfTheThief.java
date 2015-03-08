@@ -40,7 +40,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class WayOfTheThief extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Gate"));
     }    
-    private final String rule = "Enchanted creature is unblockable as long as you control a Gate";
+    private final String rule = "Enchanted creature can't be blocked as long as you control a Gate";
 
     public WayOfTheThief(UUID ownerId) {
         super(ownerId, 56, "Way of the Thief", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
@@ -80,8 +80,8 @@ public class WayOfTheThief extends CardImpl {
         // Enchanted creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
-        // Enchanted creature is unblockable as long as you control a Gate.
-        Effect effect = new ConditionalRestrictionEffect(new UnblockableAttachedEffect(AttachmentType.AURA), new PermanentsOnTheBattlefieldCondition(filter));
+        // Enchanted creature can't be blocked as long as you control a Gate.
+        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA), new PermanentsOnTheBattlefieldCondition(filter));
         effect.setText(rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

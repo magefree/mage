@@ -33,7 +33,7 @@ import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.keyword.ScryEffect;
-import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -64,7 +64,7 @@ public class AqueousForm extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
         
         // Whenever enchanted creature attacks, scry 1.
         this.addAbility(new AttacksAttachedTriggeredAbility(new ScryEffect(1), AttachmentType.AURA,false));

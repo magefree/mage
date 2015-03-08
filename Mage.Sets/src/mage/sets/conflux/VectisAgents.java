@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 
@@ -57,11 +57,11 @@ public class VectisAgents extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // {U}{B}: Vectis Agents gets -2/-0 until end of turn and is unblockable this turn.
+        // {U}{B}: Vectis Agents gets -2/-0 until end of turn and can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(-2, -0, Duration.EndOfTurn),
                 new ManaCostsImpl("{U}{B}"));
-        ability.addEffect(new UnblockableSourceEffect(Duration.EndOfTurn));
+        ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability);
     }
 

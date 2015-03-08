@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
 
@@ -55,11 +55,11 @@ public class BouncingBeebles extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        //Bouncing Beebles is unblockable as long as defending player controls an artifact.
+        //Bouncing Beebles can't be blocked as long as defending player controls an artifact.
         Effect effect = new ConditionalRestrictionEffect(
-                new UnblockableSourceEffect(),
+                new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsCondition(new FilterArtifactPermanent()));
-        effect.setText("{this} is unblockable as long as defending player controls an artifact");
+        effect.setText("{this} can't be blocked as long as defending player controls an artifact");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

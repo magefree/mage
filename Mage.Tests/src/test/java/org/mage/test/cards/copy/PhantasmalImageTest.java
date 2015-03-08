@@ -315,7 +315,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Frost Titan");
         addCard(Zone.HAND, playerA, "Terror");
-        // {1}{U} - Target creature gains shroud until end of turn and is unblockable this turn.
+        // {1}{U} - Target creature gains shroud until end of turn and can't be blocked this turn.
         addCard(Zone.HAND, playerA, "Veil of Secrecy");        
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);

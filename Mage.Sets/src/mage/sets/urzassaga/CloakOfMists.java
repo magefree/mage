@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -59,8 +59,8 @@ public class CloakOfMists extends CardImpl {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-        // Enchanted creature is unblockable.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAttachedEffect(AttachmentType.AURA)));
+        // Enchanted creature can't be blocked.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
     }
 
     public CloakOfMists(final CloakOfMists card) {

@@ -46,9 +46,7 @@ public class TouchOfInvisibility extends CardImpl {
         super(ownerId, 109, "Touch of Invisibility", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
-
-        // Target creature is unblockable this turn.
+        // Target creature can't be blocked this turn.
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

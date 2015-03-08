@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -62,8 +62,8 @@ public class DeepchannelMentor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Blue creatures you control are unblockable.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAllEffect(filter, Duration.WhileOnBattlefield)));
+        // Blue creatures you control can't be blocked.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public DeepchannelMentor(final DeepchannelMentor card) {

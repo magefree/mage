@@ -37,7 +37,7 @@ import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
@@ -70,10 +70,10 @@ public class Teleportal extends CardImpl {
         this.color.setBlue(true);
         this.color.setRed(true);
 
-        // Target creature you control gets +1/+0 until end of turn and is unblockable this turn.
+        // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
+        this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());
 
         // Overload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
         OverloadAbility ability = new OverloadAbility(this, new BoostAllEffect(1,0, Duration.EndOfTurn, filter,false), new ManaCostsImpl("{3}{U}{R}"), TimingRule.SORCERY);
@@ -97,7 +97,7 @@ class TeleportalEffect extends OneShotEffect {
 
     public TeleportalEffect(FilterCreaturePermanent filter) {
         super(Outcome.ReturnToHand);
-        staticText = "each creature you control is unblockable this turn";
+        staticText = "each creature you control can't be blocked this turn";
         this.filter = filter;
     }
 
@@ -109,7 +109,7 @@ class TeleportalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            UnblockableTargetEffect effect = new UnblockableTargetEffect();
+            CantBeBlockedTargetEffect effect = new CantBeBlockedTargetEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);
         }

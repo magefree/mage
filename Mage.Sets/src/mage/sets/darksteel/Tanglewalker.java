@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,11 +65,11 @@ public class Tanglewalker extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Each creature you control is unblockable as long as defending player controls an artifact land.
+        // Each creature you control can't be blocked as long as defending player controls an artifact land.
         Effect effect = new ConditionalRestrictionEffect(
-                new UnblockableAllEffect(new FilterControlledCreaturePermanent("Creatures you control"), Duration.WhileOnBattlefield),
+                new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent("Creatures you control"), Duration.WhileOnBattlefield),
                 new DefendingPlayerControlsCondition(filter));
-        effect.setText("Each creature you control is unblockable as long as defending player controls an artifact land");
+        effect.setText("Each creature you control can't be blocked as long as defending player controls an artifact land");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

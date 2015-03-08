@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,6 @@ public class ThassaGodOfTheSea extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -35,7 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -64,8 +64,8 @@ public class DeepSeaKraken extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Deep-Sea Kraken is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Deep-Sea Kraken can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
         // Suspend 9-{2}{U}
         this.addAbility(new SuspendAbility(9, new ManaCostsImpl("{2}{U}"), this));
         // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.

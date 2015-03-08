@@ -41,7 +41,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 /*
  *  Elvish Champion
  *  Creature — Elf 2/2, 1GG
- *  Other Elf creatures get +1/+1 and have forestwalk. (They're unblockable as long as defending player controls a Forest.)
+ *  Other Elf creatures get +1/+1 and have forestwalk. (They can't be blocked as long as defending player controls a Forest.)
  */
 
 public class ElvishChampionForestwalkTest extends CardTestPlayerBase {

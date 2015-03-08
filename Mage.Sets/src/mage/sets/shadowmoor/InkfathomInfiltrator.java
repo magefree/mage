@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -53,7 +53,7 @@ public class InkfathomInfiltrator extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(new CantBlockAbility());
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     public InkfathomInfiltrator(final InkfathomInfiltrator card) {

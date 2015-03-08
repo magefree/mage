@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -63,8 +63,8 @@ public class SoulswornSpirit extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Soulsworn Spirit is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Soulsworn Spirit can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
         
         // When Soulsworn Spirit enters the battlefield, detain target creature an opponent controls. 
         //(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)

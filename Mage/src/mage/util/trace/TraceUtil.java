@@ -10,7 +10,7 @@ import mage.abilities.effects.ContinuousEffectsList;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -65,11 +65,11 @@ public class TraceUtil {
                             }
                         }
                     }
-                    if (hasUnblockable(attacker)) {
+                    if (cantBeBlocked(attacker)) {
                         if (group.getBlockers().size() > 0) {
                             Permanent blocker = game.getPermanent(group.getBlockers().get(0));
                             if (blocker != null) {
-                                log.warn("Found unblockable creature blocked by some other creature");
+                                log.warn("Found creature that can't be blocked by some other creature");
                                 traceCombat(game, attacker, blocker);
                             }
                         }
@@ -110,9 +110,9 @@ public class TraceUtil {
         return false;
     }
 
-    private static boolean hasUnblockable(Permanent permanent) {
+    private static boolean cantBeBlocked(Permanent permanent) {
         for (Ability ability : permanent.getAbilities()) {
-            if (ability instanceof UnblockableAbility) {
+            if (ability instanceof CantBeBlockedSourceAbility) {
                 return true;
             }
         }

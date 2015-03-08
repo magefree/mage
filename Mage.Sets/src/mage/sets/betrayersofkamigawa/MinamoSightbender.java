@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.Filter;
@@ -64,8 +64,8 @@ public class MinamoSightbender extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {X}, {T}: Target creature with power X or less is unblockable this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
+        // {X}, {T}: Target creature with power X or less can't be blocked this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl("{X}"));
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         ability.addCost(new TapSourceCost());
@@ -77,7 +77,7 @@ public class MinamoSightbender extends CardImpl {
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SimpleActivatedAbility) {
             for (Effect effect :ability.getEffects()) {
-                if (effect instanceof UnblockableTargetEffect) {
+                if (effect instanceof CantBeBlockedTargetEffect) {
                     int manaX = ability.getManaCostsToPay().getX();
                     ability.getTargets().clear();
                     FilterCreaturePermanent newFilter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(manaX).append(" or less").toString());

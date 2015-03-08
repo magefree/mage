@@ -79,7 +79,7 @@ public class InfiltratorsMagemark extends CardImpl {
         this.addAbility(ability);
         // Creatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false));
-        Effect effect = new InfiltratorsMagemarkUnblockableAllEffect(filter, Duration.WhileOnBattlefield);
+        Effect effect = new InfiltratorsMagemarkCantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield);
         ability.addEffect(effect);
         this.addAbility(ability);
     }
@@ -94,24 +94,24 @@ public class InfiltratorsMagemark extends CardImpl {
     }
 }
 
-class InfiltratorsMagemarkUnblockableAllEffect extends RestrictionEffect {
+class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
 
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
-    public InfiltratorsMagemarkUnblockableAllEffect(FilterPermanent filter, Duration duration) {
+    public InfiltratorsMagemarkCantBeBlockedAllEffect(FilterPermanent filter, Duration duration) {
         super(duration);
         this.filter = filter;
         this.staticText = "and can't be blocked except by creatures with defender";
     }
 
-    public InfiltratorsMagemarkUnblockableAllEffect(InfiltratorsMagemarkUnblockableAllEffect effect) {
+    public InfiltratorsMagemarkCantBeBlockedAllEffect(InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
 
     @Override
-    public InfiltratorsMagemarkUnblockableAllEffect copy() {
-        return new InfiltratorsMagemarkUnblockableAllEffect(this);
+    public InfiltratorsMagemarkCantBeBlockedAllEffect copy() {
+        return new InfiltratorsMagemarkCantBeBlockedAllEffect(this);
     }
 
     @Override

@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -72,8 +72,8 @@ public class SoratamiMirrorGuard extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         
-        // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less is unblockable this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
+        // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less can't be blocked this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);

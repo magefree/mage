@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class DimirKeyrune extends CardImpl {
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
 
-        // {U}{B}: Dimir Keyrune becomes a 2/2 blue and black Horror and is unblockable this turn
+        // {U}{B}: Dimir Keyrune becomes a 2/2 blue and black Horror and can't be blocked this turn
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DimirKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{U}{B}")));
     }
 
@@ -71,7 +71,7 @@ public class DimirKeyrune extends CardImpl {
 
     private class DimirKeyruneToken extends Token {
         DimirKeyruneToken() {
-            super("Horror", "2/2 blue and black Horror until end of turn and is unblockable this turn");
+            super("Horror", "2/2 blue and black Horror until end of turn and can't be blocked this turn");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
@@ -79,7 +79,7 @@ public class DimirKeyrune extends CardImpl {
             subtype.add("Horror");
             power = new MageInt(2);
             toughness = new MageInt(2);
-            this.addAbility(new UnblockableAbility());
+            this.addAbility(new CantBeBlockedSourceAbility());
         }
     }
 }

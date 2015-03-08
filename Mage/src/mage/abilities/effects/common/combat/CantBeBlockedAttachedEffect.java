@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,24 +38,24 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableAttachedEffect extends RestrictionEffect {
+public class CantBeBlockedAttachedEffect extends RestrictionEffect {
 
-    public UnblockableAttachedEffect(AttachmentType attachmentType) {
+    public CantBeBlockedAttachedEffect(AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield);
         if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature is unblockable";
+            this.staticText = "Enchanted creature can't be blocked";
         } else {
-            this.staticText = "Equiped creature is unblockable";
+            this.staticText = "Equiped creature can't be blocked";
         }
     }
 
-    public UnblockableAttachedEffect(UnblockableAttachedEffect effect) {
+    public CantBeBlockedAttachedEffect(CantBeBlockedAttachedEffect effect) {
         super(effect);
     }
 
     @Override
-    public UnblockableAttachedEffect copy() {
-        return new UnblockableAttachedEffect(this);
+    public CantBeBlockedAttachedEffect copy() {
+        return new CantBeBlockedAttachedEffect(this);
     }
 
     @Override

@@ -38,7 +38,7 @@ import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class CreepingTarPit extends CardImpl {
         this.addAbility(new BlueManaAbility());
         this.addAbility(new BlackManaAbility());
         
-        // {1}{U}{B}: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable. It's still a land.
+        // {1}{U}{B}: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and can't be blocked. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new CreepingTarPitToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
     }
 
@@ -78,13 +78,13 @@ public class CreepingTarPit extends CardImpl {
 
 class CreepingTarPitToken extends Token {
     public CreepingTarPitToken() {
-        super("", "3/2 blue and black Elemental creature and is unblockable");
+        super("", "3/2 blue and black Elemental creature and can't be blocked");
         cardType.add(CardType.CREATURE);
         subtype.add("Elemental");
         color.setBlue(true);
         color.setBlack(true);
         power = new MageInt(3);
         toughness = new MageInt(2);
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 }

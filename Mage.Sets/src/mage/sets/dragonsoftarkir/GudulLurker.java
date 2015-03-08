@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -50,7 +50,7 @@ public class GudulLurker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Gudul Lurker can't be blocked.
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
 
         // Megamorph {U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}"), true));

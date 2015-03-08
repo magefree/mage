@@ -32,7 +32,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
@@ -50,11 +50,11 @@ public class DistortionStrike extends CardImpl {
 
         this.color.setBlue(true);
 
-        // Target creature gets +1/+0 until end of turn and is unblockable this turn.
+        // Target creature gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        Effect effect = new UnblockableTargetEffect();
-        effect.setText("and is unblockable this turn");
+        Effect effect = new CantBeBlockedTargetEffect();
+        effect.setText("and can't be blocked this turn");
         this.getSpellAbility().addEffect(effect);
         // Rebound
         this.addAbility(new ReboundAbility());

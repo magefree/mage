@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -52,8 +52,8 @@ public class InvisibleStalker extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(HexproofAbility.getInstance());
-        // Invisible Stalker is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Invisible Stalker can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     public InvisibleStalker(final InvisibleStalker card) {

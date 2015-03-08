@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.abilities.keyword.MorphAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -54,7 +54,7 @@ public class MysticOfTheHiddenWay extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Mystic of the Hidden Way can't be blocked.
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
         // Morph {2}{U}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }

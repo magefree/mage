@@ -36,7 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -60,11 +60,11 @@ public class BubblingBeebles extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Bubbling Beebles is unblockable as long as defending player controls an enchantment.
+        // Bubbling Beebles can't be blocked as long as defending player controls an enchantment.
         Effect effect = new ConditionalRestrictionEffect(
-                new UnblockableSourceEffect(),
+                new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsCondition(filter));
-        effect.setText("{this} is unblockable as long as defending player controls an enchantment");
+        effect.setText("{this} can't be blocked as long as defending player controls an enchantment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

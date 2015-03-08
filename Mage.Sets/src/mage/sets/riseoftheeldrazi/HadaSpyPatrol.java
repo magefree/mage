@@ -36,7 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -64,7 +64,7 @@ public class HadaSpyPatrol extends LevelerCard {
         // 2/2
         // Hada Spy Patrol can't be blocked.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        abilities1.add(new UnblockableAbility());
+        abilities1.add(new CantBeBlockedSourceAbility());
 
         // LEVEL 3+
         // 3/3
@@ -72,7 +72,7 @@ public class HadaSpyPatrol extends LevelerCard {
         // Hada Spy Patrol can't be blocked.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(ShroudAbility.getInstance());
-        abilities2.add(new UnblockableAbility());
+        abilities2.add(new CantBeBlockedSourceAbility());
         
         LevelerCardBuilder.construct(this,
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),

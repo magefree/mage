@@ -31,10 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.BestowAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
@@ -60,10 +60,10 @@ public class FlitterstepEidolon extends CardImpl {
         // Bestow {5}{U}
         this.addAbility(new BestowAbility(this, "{5}{U}"));
         // Flitterstep Eidolon can't be blocked.
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
         // Enchanted creature gets +1/+1 and can't be blocked.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
-        ability.addEffect(new UnblockableAttachedEffect(AttachmentType.AURA));        
+        ability.addEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA));        
         this.addAbility(ability);
     }
 

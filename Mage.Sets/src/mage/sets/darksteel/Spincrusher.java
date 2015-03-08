@@ -38,7 +38,7 @@ import mage.MageInt;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -57,9 +57,9 @@ public class Spincrusher extends CardImpl {
 
         // Whenever Spincrusher blocks, put a +1/+1 counter on it.
         this.addAbility(new BlocksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
-        // Remove a +1/+1 counter from Spincrusher: Spincrusher is unblockable this turn.
+        // Remove a +1/+1 counter from Spincrusher: Spincrusher can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new UnblockableSourceEffect(Duration.EndOfTurn),
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }
 

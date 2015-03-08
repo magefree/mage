@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,8 +49,8 @@ public class ArtfulDodge extends CardImpl {
 
         this.color.setBlue(true);
 
-        // Target creature is unblockable this turn.
-        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
+        // Target creature can't be blocked this turn.
+        this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.SORCERY));

@@ -45,7 +45,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
-import mage.abilities.effects.common.combat.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -91,8 +91,8 @@ public class VenserTheSojourner extends CardImpl {
         ability1.addTarget(target);
         this.addAbility(ability1);
 
-        // -1: Creatures are unblockable this turn.
-        this.addAbility(new LoyaltyAbility(new UnblockableAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn), -1));
+        // -1: Creatures can't be blocked this turn.
+        this.addAbility(new LoyaltyAbility(new CantBeBlockedAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn), -1));
 
         // -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);

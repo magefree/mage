@@ -16,7 +16,7 @@ public class AEtherFigmentTest extends CardTestPlayerBase {
         Creature - Illusion
         1/1
         Kicker {3} (You may pay an additional as you cast this spell.)
-        AEther Figment is unblockable.
+        AEther Figment can't be blocked.
         If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it.
     */
     @Test

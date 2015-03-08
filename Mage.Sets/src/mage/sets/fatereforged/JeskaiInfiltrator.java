@@ -42,7 +42,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect.FaceDownType;
 import mage.cards.Card;
@@ -71,7 +71,7 @@ public class JeskaiInfiltrator extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Jeskai Infiltrator can't be blocked as long as you control no other creatures.
-        Effect effect = new ConditionalRestrictionEffect(new UnblockableSourceEffect(), new OneControlledCreatureCondition());
+        Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedSourceEffect(), new OneControlledCreatureCondition());
         effect.setText("{this} can't be blocked as long as you control no other creatures");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -49,8 +49,8 @@ public class LatchSeeker extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // Latch Seeker is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Latch Seeker can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     public LatchSeeker(final LatchSeeker card) {

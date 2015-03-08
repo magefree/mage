@@ -30,7 +30,7 @@ package mage.sets.fifthdawn;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -51,8 +51,8 @@ public class PlasmaElemental extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
-        // Plasma Elemental is unblockable.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableSourceEffect()));
+        // Plasma Elemental can't be blocked.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect()));
     }
 
     public PlasmaElemental(final PlasmaElemental card) {

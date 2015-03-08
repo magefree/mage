@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.EvolveAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -52,8 +52,8 @@ public class ElusiveKrasis extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 
-        // Elusive Krasis is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Elusive Krasis can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
         // Evolve
         this.addAbility(new EvolveAbility());
     }

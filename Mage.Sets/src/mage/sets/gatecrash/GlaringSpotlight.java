@@ -41,7 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.combat.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ import mage.game.permanent.Permanent;
  * ignore hexproof for purposes of choosing targets of spells and abilities you control.
  *
  * Creatures that come under your control after Glaring Spotlight's last ability 
- * resolves won't have hexproof but will be unblockable that turn.
+ * resolves won't have hexproof but can't be blocked that turn.
  *
  * @author LevelX2
  */
@@ -70,11 +70,11 @@ public class GlaringSpotlight extends CardImpl {
         // Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaringSpotlightEffect()));
 
-        // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and are unblockable this turn.
+        // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(),false),
                 new GenericManaCost(3));
-        ability.addEffect(new UnblockableAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
+        ability.addEffect(new CantBeBlockedAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

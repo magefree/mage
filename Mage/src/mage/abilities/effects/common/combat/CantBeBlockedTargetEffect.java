@@ -35,30 +35,24 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
-
 public class CantBeBlockedTargetEffect extends RestrictionEffect {
+
+    public CantBeBlockedTargetEffect() {
+        this(Duration.EndOfTurn);
+    }
 
     public CantBeBlockedTargetEffect(Duration duration) {
         super(duration, Outcome.Benefit);
     }
 
-    public CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {
+    public CantBeBlockedTargetEffect(CantBeBlockedTargetEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
     }
 
     @Override
@@ -67,24 +61,42 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect {
     }
 
     @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return getTargetPointer().getTargets(game, source).contains(permanent.getId());
+    }
+
+    @Override
     public String getText(Mode mode) {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if(target.getNumberOfTargets() > 1){
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
-            }
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
-        } else {
-            sb.append("Target ").append(target.getTargetName()).append(" can't be blocked");
-        }
-        if (duration.equals(Duration.EndOfTurn)) {
-            sb.append(" this turn");
+        if (mode.getTargets().isEmpty()) {
+            return "";
         }
 
+        StringBuilder sb = new StringBuilder();
+        Target target = mode.getTargets().get(0);
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append("s can't be blocked");
+        } else {
+            sb.append(" can't be blocked");
+        }
+
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            sb.append(" this turn");
+        }
         return sb.toString();
     }
 }

@@ -29,7 +29,7 @@ package mage.sets.journeyintonyx;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -51,7 +51,7 @@ public class TritonShorestalker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Triton Shorestalker can't be blocked.
-        this.addAbility(new UnblockableAbility("{this} can't be blocked"));
+        this.addAbility(new CantBeBlockedSourceAbility("{this} can't be blocked"));
     }
 
     public TritonShorestalker(final TritonShorestalker card) {

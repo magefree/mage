@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -71,9 +71,9 @@ public class HarborBandit extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
-        // {1}{U}: Harbor Bandit is unblockable this turn.
+        // {1}{U}: Harbor Bandit can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new UnblockableSourceEffect(Duration.EndOfTurn),
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{U}")));
     }
 

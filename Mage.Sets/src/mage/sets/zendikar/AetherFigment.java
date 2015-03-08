@@ -38,7 +38,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -58,8 +58,8 @@ public class AetherFigment extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // AEther Figment is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // AEther Figment can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
 
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));

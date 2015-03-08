@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -52,7 +52,7 @@ public class BlightedAgent extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new UnblockableAbility());
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     public BlightedAgent(final BlightedAgent card) {

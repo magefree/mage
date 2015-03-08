@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -61,13 +61,13 @@ public class VeilOfSecrecy extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        // Target creature gains shroud until end of turn and is unblockable this turn.
+        // Target creature gains shroud until end of turn and is can't be blocked this turn.
         Effect effect = new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         effect.setText("Target creature gains shroud until end of turn");
         this.getSpellAbility().addEffect(effect);
-        effect = new UnblockableTargetEffect();
-        effect.setText("and is unblockable this turn");
+        effect = new CantBeBlockedTargetEffect();
+        effect.setText("and can't be blocked this turn");
         this.getSpellAbility().addEffect(effect);
         
         // Splice onto Arcane-Return a blue creature you control to its owner's hand.

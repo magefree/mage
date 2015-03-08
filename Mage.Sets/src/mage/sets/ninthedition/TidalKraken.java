@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -49,8 +49,8 @@ public class TidalKraken extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Tidal Kraken is unblockable.
-        this.addAbility(new UnblockableAbility());
+        // Tidal Kraken can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
     }
 
     public TidalKraken(final TidalKraken card) {

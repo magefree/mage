@@ -37,7 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.combat.UnblockableAttachedEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ShroudAbility;
@@ -55,8 +55,8 @@ public class WhispersilkCloak extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Equipment");
 
-        // Equipped creature is unblockable and has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAttachedEffect(AttachmentType.EQUIPMENT)));
+        // Equipped creature can't be blocked and has shroud.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

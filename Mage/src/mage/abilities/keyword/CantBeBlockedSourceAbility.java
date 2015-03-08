@@ -29,31 +29,31 @@ package mage.abilities.keyword;
 
 import mage.abilities.EvasionAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
-public class UnblockableAbility extends EvasionAbility {
+public class CantBeBlockedSourceAbility extends EvasionAbility {
 
-    public UnblockableAbility() {
+    public CantBeBlockedSourceAbility() {
         this("");
     }
 
-    public UnblockableAbility(String ruleText) {
-        Effect effect = new UnblockableSourceEffect();
+    public CantBeBlockedSourceAbility(String ruleText) {
+        Effect effect = new CantBeBlockedSourceEffect();
         if (ruleText != null && !ruleText.isEmpty()) {
             effect.setText(ruleText);
         }
         this.addEffect(effect);
     }
 
-    private UnblockableAbility(UnblockableAbility ability) {
+    private CantBeBlockedSourceAbility(CantBeBlockedSourceAbility ability) {
         super(ability);
     }
 
     @Override
-    public UnblockableAbility copy() {
-        return new UnblockableAbility(this);
+    public CantBeBlockedSourceAbility copy() {
+        return new CantBeBlockedSourceAbility(this);
     }
 }

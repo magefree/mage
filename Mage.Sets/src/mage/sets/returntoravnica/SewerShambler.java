@@ -51,7 +51,7 @@ public class SewerShambler extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
+        // Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)
         this.addAbility(new SwampwalkAbility());
         // Scavenge {2}{B} ({2}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{2}{B}")));

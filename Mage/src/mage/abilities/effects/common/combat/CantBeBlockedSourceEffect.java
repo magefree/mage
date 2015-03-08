@@ -27,9 +27,9 @@
  */
 package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -37,26 +37,26 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableSourceEffect extends RestrictionEffect {
+public class CantBeBlockedSourceEffect extends RestrictionEffect {
 
-    public UnblockableSourceEffect() {
+    public CantBeBlockedSourceEffect() {
         this(Duration.WhileOnBattlefield);
     }
-    public UnblockableSourceEffect(Duration duration) {
+    public CantBeBlockedSourceEffect(Duration duration) {
         super(duration);
-        this.staticText = "{this} is unblockable";
+        this.staticText = "{this} can't be blocked";
         if (Duration.EndOfTurn.equals(this.duration)) {
             this.staticText += " this turn";
         }
     }
 
-    public UnblockableSourceEffect(UnblockableSourceEffect effect) {
+    public CantBeBlockedSourceEffect(CantBeBlockedSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public UnblockableSourceEffect copy() {
-        return new UnblockableSourceEffect(this);
+    public CantBeBlockedSourceEffect copy() {
+        return new CantBeBlockedSourceEffect(this);
     }
 
     @Override

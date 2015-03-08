@@ -34,8 +34,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.UnblockableTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.keyword.CantBeBlockedSourceAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,10 +54,10 @@ public class NeurokInvisimancer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Neurok Invisimancer is unblockable.
-        this.addAbility(new UnblockableAbility());
-        // When Neurok Invisimancer enters the battlefield, target creature is unblockable this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new UnblockableTargetEffect());
+        // Neurok Invisimancer can't be blocked.
+        this.addAbility(new CantBeBlockedSourceAbility());
+        // When Neurok Invisimancer enters the battlefield, target creature can't be blocked this turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBeBlockedTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

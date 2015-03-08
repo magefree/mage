@@ -36,7 +36,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -62,7 +62,7 @@ public class OgreMarauder extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // Whenever Ogre Marauder attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
+        // Whenever Ogre Marauder attacks, it gains "Ogre Marauder can't be blocked" until end of turn unless defending player sacrifices a creature.
         this.addAbility(new AttacksTriggeredAbility(new OgreMarauderEffect(), false));
     }
 
@@ -80,7 +80,7 @@ class OgreMarauderEffect extends OneShotEffect {
 
     public OgreMarauderEffect() {
         super(Outcome.Benefit);
-        this.staticText = "it gains \"{this} is unblockable\" until end of turn unless defending player sacrifices a creature";
+        this.staticText = "it gains \"{this} can't be blocked\" until end of turn unless defending player sacrifices a creature";
     }
 
     public OgreMarauderEffect(final OgreMarauderEffect effect) {
@@ -100,10 +100,10 @@ class OgreMarauderEffect extends OneShotEffect {
         if (defender != null && sourceObject != null) {
             Cost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent());
             if (cost.canPay(source, source.getSourceId(), defendingPlayerId, game) &&
-                    defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent " + sourceObject.getLogName() + " from getting unblockable?", game)) {
+                    defender.chooseUse(Outcome.LoseAbility, "Sacrifice a creature to prevent that " + sourceObject.getLogName() + " can't be blocked?", game)) {
                 if (!cost.pay(source, game, source.getSourceId(), defendingPlayerId, false)) {
-                    // cost was not payed - so source gets unblockable
-                    ContinuousEffect effect = new UnblockableSourceEffect(Duration.EndOfTurn);
+                    // cost was not payed - so source can't be blocked
+                    ContinuousEffect effect = new CantBeBlockedSourceEffect(Duration.EndOfTurn);
                     game.addEffect(effect, source);
                 }
             }

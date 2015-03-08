@@ -75,7 +75,7 @@ public class StormtideLeviathan extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 
-        // Islandwalk (This creature is unblockable as long as defending player controls an Island.)
+        // Islandwalk (This creature can't be blocked as long as defending player controls an Island.)
         this.addAbility(new IslandwalkAbility());
         // All lands are Islands in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StormtideLeviathanEffect()));

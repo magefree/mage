@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.combat.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -53,9 +53,9 @@ public class TrespassingSouleater extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {UP}: Trespassing Souleater is unblockable this turn.
+        // {UP}: Trespassing Souleater can't be blocked this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new UnblockableSourceEffect(Duration.EndOfTurn),
+                new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new PhyrexianManaCost(ColoredManaSymbol.U)));
     }
 
