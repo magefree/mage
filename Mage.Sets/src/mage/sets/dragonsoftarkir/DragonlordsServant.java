@@ -59,7 +59,7 @@ public class DragonlordsServant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dragon spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     public DragonlordsServant(final DragonlordsServant card) {
