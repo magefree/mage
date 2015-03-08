@@ -176,15 +176,48 @@ public class SuspendAbility extends ActivatedAbilityImpl {
                 .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
                 .append(")</i>");
             }
-        } else {
-            gainedTemporary = true;
+            if (card.getManaCost().isEmpty()) {
+                setRuleAtTheTop(true);
+            }
+            card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
+            card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
         }
         ruleText = sb.toString();
-        if (card.getManaCost().isEmpty()) {
-            setRuleAtTheTop(true);
-        }        
-        card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
-        card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
+    }
+
+    /**
+     * Adds suspend to a card that does not have it regularly
+     * e.g. Epochrasite or added by Jhoira of the Ghitu
+     * @param card
+     * @param source
+     * @param game
+     */
+    public static void addSuspendTemporaryToCard(Card card, Ability source, Game game) {
+        SuspendAbility ability = new SuspendAbility(0, null, card, false);
+        ability.setSourceId(card.getId());
+        ability.setControllerId(card.getOwnerId());
+        game.getState().addOtherAbility(card.getId(), ability);
+
+        SuspendBeginningOfUpkeepTriggeredAbility ability1 = new SuspendBeginningOfUpkeepTriggeredAbility();
+        ability1.setSourceId(card.getId());
+        ability1.setControllerId(card.getOwnerId());
+        game.getState().addOtherAbility(card.getId(), ability1);
+        game.getState().addAbility(ability1, source.getSourceId(), card);
+
+        SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE));
+        ability2.setSourceId(card.getId());
+        ability2.setControllerId(card.getOwnerId());
+        game.getState().addOtherAbility(card.getId(), ability2);
+        game.getState().addAbility(ability2, source.getSourceId(), card);
+    }
+
+    public static UUID getSuspendExileId(UUID controllerId, Game game) {
+        UUID exileId = (UUID) game.getState().getValue("SuspendExileId" + controllerId.toString());
+        if (exileId == null) {
+            exileId = UUID.randomUUID();
+            game.getState().setValue("SuspendExileId" + controllerId.toString(), exileId);
+        }
+        return exileId;
     }
 
     public SuspendAbility(SuspendAbility ability) {
@@ -248,12 +281,8 @@ class SuspendExileEffect extends OneShotEffect {
                     return false;
                 }
             }
-            UUID exileId = (UUID) game.getState().getValue("SuspendExileId" + source.getControllerId().toString());
-            if (exileId == null) {
-                exileId = UUID.randomUUID();
-                game.getState().setValue("SuspendExileId" + source.getControllerId().toString(), exileId);
-            }
-            if (card.moveToExile(exileId, new StringBuilder("Suspended cards of ").append(controller.getName()).toString() , source.getSourceId(), game)) {
+            UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
+            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND)) {
                 if (suspend == Integer.MAX_VALUE) {
                     suspend = source.getManaCostsToPay().getX();
                 }
@@ -312,7 +341,7 @@ class SuspendPlayCardEffect extends OneShotEffect {
 
     public SuspendPlayCardEffect(boolean isCreature) {
         super(Outcome.PutCardInPlay);
-        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";                       
+        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";
     }
 
     public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
@@ -380,7 +409,7 @@ class GainHasteEffect extends ContinuousEffectImpl {
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (suspendController.equals(source.getControllerId())) { 
+            if (suspendController.equals(source.getControllerId())) {
                 permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 return true;
             } else {

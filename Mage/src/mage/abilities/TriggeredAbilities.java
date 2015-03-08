@@ -73,7 +73,6 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
             if (ability.isInUseableZone(game, null, event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
-
                     MageObject object = null;
                     if (!ability.getZone().equals(Zone.COMMAND) && !game.getState().getZone(ability.getSourceId()).equals(ability.getZone())) {
                         object = game.getShortLivingLKI(ability.getSourceId(), ability.getZone());
@@ -83,15 +82,13 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
 
                     if (object != null) {
-                        if (checkAbilityStillExists(ability, event, object)) {
-                            if (object instanceof Permanent) {
-                                ability.setControllerId(((Permanent) object).getControllerId());
-                            }
-                            ability.setSourceObject(object);
-                            if (ability.checkTrigger(event, game)) {
-                                UUID controllerId = ability.getControllerId();
-                                ability.trigger(game, controllerId);
-                            }
+                        if (object instanceof Permanent) {
+                            ability.setControllerId(((Permanent) object).getControllerId());
+                        }
+                        ability.setSourceObject(object);
+                        if (ability.checkTrigger(event, game)) {
+                            UUID controllerId = ability.getControllerId();
+                            ability.trigger(game, controllerId);
                         }
                     }
                 }

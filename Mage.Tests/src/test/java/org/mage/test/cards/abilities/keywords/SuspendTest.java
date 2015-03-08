@@ -62,5 +62,28 @@ public class SuspendTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Epochrasite", 4, 4);
 
     }
+    /**
+     * Tests Jhoira of the Ghitu works (give suspend to a exiled card)
+     * {2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend.
+     *
+     */
+    @Test
+    public void testJhoiraOfTheGhitu() {
 
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        addCard(Zone.HAND, playerA, "Silvercoat Lion",1);
+        addCard(Zone.BATTLEFIELD, playerA, "Jhoira of the Ghitu", 1);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend <i>(At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)</i>.");
+        setChoice(playerA, "Silvercoat Lion");
+
+        setStopAt(11, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Jhoira of the Ghitu", 1);
+        assertHandCount(playerA, "Silvercoat Lion", 0);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        
+    }
 }

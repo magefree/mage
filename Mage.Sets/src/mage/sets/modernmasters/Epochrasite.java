@@ -32,18 +32,25 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.CastFromHandCondition;
 import mage.abilities.condition.InvertCondition;
-import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.SourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.SuspendAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.game.Game;
+import mage.players.Player;
 import mage.watchers.common.CastFromHandWatcher;
 
 /**
@@ -68,10 +75,7 @@ public class Epochrasite extends CardImpl {
                 new CastFromHandWatcher());
 
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
-        Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
-        ability.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(3), new StaticValue(0), false, true));
-        ability.addEffect(new GainAbilitySourceEffect(new SuspendAbility(3, null, this), Duration.OneUse, true));
-        this.addAbility(ability);
+        this.addAbility(new DiesTriggeredAbility(new EpochrasiteEffect()));
     }
 
     public Epochrasite(final Epochrasite card) {
@@ -84,3 +88,63 @@ public class Epochrasite extends CardImpl {
     }
 }
 
+class EpochrasiteEffect extends OneShotEffect {
+
+    public EpochrasiteEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "exile it with three time counters on it and it gains suspend";
+    }
+
+    public EpochrasiteEffect(final EpochrasiteEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EpochrasiteEffect copy() {
+        return new EpochrasiteEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (controller != null && card != null) {
+            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
+                controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                card.addCounters(CounterType.TIME.createInstance(3), game);
+                game.addEffect(new GainSuspendEffect(), source);
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
+class GainSuspendEffect extends ContinuousEffectImpl implements SourceEffect {
+
+    public GainSuspendEffect() {
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        staticText = "{this} gains suspend";
+    }
+
+    public GainSuspendEffect(final GainSuspendEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GainSuspendEffect copy() {
+        return new GainSuspendEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
+            SuspendAbility.addSuspendTemporaryToCard(card, source, game);
+        } else {
+            discard();
+        }
+        return true;
+    }
+}

@@ -701,6 +701,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    /**
+     * Adds the ability to continuous or triggered abilities
+     * @param ability
+     * @param card
+     */
+    public void addOtherAbility(Ability ability, Card card) {
+        addOtherAbility(card.getId(), ability);
+        addAbility(ability, card.getId(), card);
+    }
+
     private void resetOtherAbilities() {
         otherAbilities.clear();
     }
