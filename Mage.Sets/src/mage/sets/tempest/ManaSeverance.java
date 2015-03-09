@@ -13,11 +13,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 /**
  *
@@ -29,7 +29,7 @@ public class ManaSeverance extends CardImpl {
         super(ownerId, 73, "Mana Severance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "TMP";
         
-        // Search your library for any number of land cards and remove the from the game.
+        // Search your library for any number of land cards and remove them from the game.
         // Shuffle your library afterwards.
         this.getSpellAbility().addEffect(new ManaSeveranceEffect());
     }
@@ -63,20 +63,19 @@ class ManaSeveranceEffect extends SearchEffect {
     
      @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            if (you.searchLibrary(target, game)) {
-                UUID exileZone = CardUtil.getCardExileZoneId(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     for (UUID cardId : target.getTargets()) {
-                        Card card = you.getLibrary().getCard(cardId, game);
+                        Card card = controller.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            card.moveToExile(exileZone, "Mana Severance", source.getSourceId(), game);
+                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
                         }
                     }
                 }
             }
-            you.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
 
         }
