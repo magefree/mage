@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -89,9 +90,7 @@ class SuppressionFieldCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof ActivatedAbility 
-                && !(abilityToModify instanceof ManaAbility)
-                && !(abilityToModify instanceof SpellAbility)) {
+        if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
             return true;
         }
         return false;
