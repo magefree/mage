@@ -34,9 +34,9 @@ import static mage.constants.TargetController.ANY;
 import static mage.constants.TargetController.CONTROLLER_ATTACHED_TO;
 import static mage.constants.TargetController.OPPONENT;
 import static mage.constants.TargetController.YOU;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -52,11 +52,16 @@ public class AtTheBeginOfNextEndStepDelayedTriggeredAbility extends DelayedTrigg
     }
 
     public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Effect effect, TargetController targetController) {
+        this(Zone.ALL, effect, targetController);
+    }
+
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone zone, Effect effect, TargetController targetController) {
         super(effect);
+        this.zone = zone;
         this.targetController = targetController;
     }
 
-    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
+    public AtTheBeginOfNextEndStepDelayedTriggeredAbility(final AtTheBeginOfNextEndStepDelayedTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
     }

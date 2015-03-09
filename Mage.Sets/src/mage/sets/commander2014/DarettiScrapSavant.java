@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -180,7 +181,7 @@ class DarettiSacrificeEffect extends OneShotEffect {
 class DarettiScrapSavantEmblem extends Emblem {
     // You get an emblem with "Whenever an artifact is put into your graveyard from the battlefield, return that card to the battlefield at the beginning of the next end step."
     public DarettiScrapSavantEmblem() {
-        this.setName("EMBLEM: Daretti, Scrap Savant");
+        this.setName("Emblem - Daretti");
         this.getAbilities().add(new DarettiScrapSavantTriggeredAbility());
     }
 }
@@ -246,7 +247,7 @@ class DarettiScrapSavantEffect extends OneShotEffect {
             Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
             effect.setTargetPointer(new FixedTarget(card.getId()));
             effect.setText("return that card to the battlefield at the beginning of the next end step");
-            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+            DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(Zone.COMMAND, effect, TargetController.ANY);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.setSourceObject(source.getSourceObject(game));

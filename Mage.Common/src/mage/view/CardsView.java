@@ -46,6 +46,7 @@ import static mage.constants.Zone.GRAVEYARD;
 import static mage.constants.Zone.STACK;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
 
@@ -65,32 +66,41 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
 
     public CardsView ( Collection<? extends Ability> abilities, Game game ) {
         for ( Ability ability : abilities ) {
-            Card sourceCard = null;
+            MageObject sourceObject = null;
+            AbilityView abilityView = null;
             switch ( ability.getZone() ) {
                 case ALL:
                 case EXILED:
                 case GRAVEYARD:
-                    sourceCard = game.getCard(ability.getSourceId());
+                    sourceObject = game.getCard(ability.getSourceId());
                     break;
                 case BATTLEFIELD:
-                    sourceCard = game.getPermanent(ability.getSourceId());
-                    if (sourceCard == null) {
-                        sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+                    sourceObject = game.getPermanent(ability.getSourceId());
+                    if (sourceObject == null) {
+                        sourceObject = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
                     }
                     break;
                 case STACK:
-                    sourceCard = game.getCard(ability.getSourceId());
+                    sourceObject = game.getObject(ability.getSourceId());
                     break;
                 case COMMAND:
-                    sourceCard = game.getCard(ability.getSourceId());
-                    if (sourceCard == null) {
-                        ability.newId();
-                        this.put(ability.getId(), new AbilityView(ability, "Emblem", new CardView("Emblem")));
+                    sourceObject = game.getObject(ability.getSourceId());
+                    if (sourceObject instanceof Emblem) {                            
+                        Card planeswalkerCard = game.getCard(((Emblem)sourceObject).getSourceId());
+                        if (planeswalkerCard != null) {
+                            abilityView = new AbilityView(ability, "Emblem " + planeswalkerCard.getName(), new CardView(sourceObject));
+                            abilityView.setName("Emblem " + planeswalkerCard.getName());
+                            abilityView.setExpansionSetCode(planeswalkerCard.getExpansionSetCode());
+                        } else {
+                            throw new IllegalArgumentException("Source card for emblem not found.");
+                        }                                            
                     }
                     break;
             }
-            if (sourceCard != null) {
-                AbilityView abilityView = new AbilityView(ability, sourceCard.getLogName(), new CardView(sourceCard));
+            if (sourceObject != null) {
+                if (abilityView == null) {
+                    abilityView = new AbilityView(ability, sourceObject.getLogName(), new CardView(sourceObject));
+                }
                 if (ability.getTargets().size() > 0) {
                     abilityView.setTargets(ability.getTargets());
                 } else {

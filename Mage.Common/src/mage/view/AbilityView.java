@@ -63,4 +63,10 @@ public class AbilityView extends CardView {
     public CardView getSourceCard() {
         return this.sourceCard;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+
 }
