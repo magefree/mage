@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.keyword;
 
 import java.util.ArrayList;
@@ -46,6 +45,7 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -91,24 +91,30 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class ConvokeAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
 
+    private static final FilterCreaturePermanent filterUntapped = new FilterCreaturePermanent();
+
+    static {
+        filterUntapped.add(Predicates.not(new TappedPredicate()));
+    }
+
     public ConvokeAbility() {
         super(Zone.STACK, null);
         this.setRuleAtTheTop(true);
     }
 
     public ConvokeAbility(final ConvokeAbility ability) {
-      super(ability);
+        super(ability);
     }
 
     @Override
     public ConvokeAbility copy() {
-      return new ConvokeAbility(this);
+        return new ConvokeAbility(this);
     }
 
     @Override
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getGraveyard().size() > 0) {
+        if (controller != null && game.getBattlefield().contains(filterUntapped, controller.getId(), 1, game)) {
             if (unpaid.getMana().getColorless() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
                 SpecialAction specialAction = new ConvokeSpecialAction(unpaid);
                 specialAction.setControllerId(source.getControllerId());
@@ -147,7 +153,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
 
     @Override
     public String getRule() {
-      return "Convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
+        return "Convoke <i>(Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)</i>";
     }
 }
 
@@ -193,60 +199,60 @@ class ConvokeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-                for (UUID creatureId: this.getTargetPointer().getTargets(game, source)) {
-                    Permanent perm = game.getPermanent(creatureId);
-                    if (perm == null) {
-                        continue;
-                    }
-                    String manaName;
-                    if (!perm.isTapped() && perm.tap(game)) {
-                        ManaPool manaPool = controller.getManaPool();
-                        Choice chooseManaType = buildChoice(perm.getColor(), unpaid.getMana());
-                        if (chooseManaType.getChoices().size() > 0) {
-                            if (chooseManaType.getChoices().size() > 1) {
-                                chooseManaType.getChoices().add("Colorless");
-                                chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
-                                while (!chooseManaType.isChosen()) {
-                                    controller.choose(Outcome.Benefit, chooseManaType, game);
-                                    if (!controller.isInGame()) {
-                                        return false;
-                                    }
+            for (UUID creatureId : this.getTargetPointer().getTargets(game, source)) {
+                Permanent perm = game.getPermanent(creatureId);
+                if (perm == null) {
+                    continue;
+                }
+                String manaName;
+                if (!perm.isTapped() && perm.tap(game)) {
+                    ManaPool manaPool = controller.getManaPool();
+                    Choice chooseManaType = buildChoice(perm.getColor(), unpaid.getMana());
+                    if (chooseManaType.getChoices().size() > 0) {
+                        if (chooseManaType.getChoices().size() > 1) {
+                            chooseManaType.getChoices().add("Colorless");
+                            chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
+                            while (!chooseManaType.isChosen()) {
+                                controller.choose(Outcome.Benefit, chooseManaType, game);
+                                if (!controller.isInGame()) {
+                                    return false;
                                 }
-                            } else {
-                                chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
                             }
-                            if (chooseManaType.getChoice().equals("Black")) {
-                                manaPool.addMana(Mana.BlackMana, game, source);
-                                manaPool.unlockManaType(ManaType.BLACK);
-                            }
-                            if (chooseManaType.getChoice().equals("Blue")) {
-                                manaPool.addMana(Mana.BlueMana, game, source);
-                                manaPool.unlockManaType(ManaType.BLUE);
-                            }
-                            if (chooseManaType.getChoice().equals("Green")) {
-                                manaPool.addMana(Mana.GreenMana, game, source);
-                                manaPool.unlockManaType(ManaType.GREEN);
-                            }
-                            if (chooseManaType.getChoice().equals("White")) {
-                                manaPool.addMana(Mana.WhiteMana, game, source);
-                                manaPool.unlockManaType(ManaType.WHITE);
-                            }
-                            if (chooseManaType.getChoice().equals("Red")) {
-                                manaPool.addMana(Mana.RedMana, game, source);
-                                manaPool.unlockManaType(ManaType.RED);
-                            }
-                            if (chooseManaType.getChoice().equals("Colorless")) {
-                                manaPool.addMana(Mana.ColorlessMana, game, source);
-                                manaPool.unlockManaType(ManaType.COLORLESS);
-                            }
-                            manaName = chooseManaType.getChoice().toLowerCase();
                         } else {
+                            chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
+                        }
+                        if (chooseManaType.getChoice().equals("Black")) {
+                            manaPool.addMana(Mana.BlackMana, game, source);
+                            manaPool.unlockManaType(ManaType.BLACK);
+                        }
+                        if (chooseManaType.getChoice().equals("Blue")) {
+                            manaPool.addMana(Mana.BlueMana, game, source);
+                            manaPool.unlockManaType(ManaType.BLUE);
+                        }
+                        if (chooseManaType.getChoice().equals("Green")) {
+                            manaPool.addMana(Mana.GreenMana, game, source);
+                            manaPool.unlockManaType(ManaType.GREEN);
+                        }
+                        if (chooseManaType.getChoice().equals("White")) {
+                            manaPool.addMana(Mana.WhiteMana, game, source);
+                            manaPool.unlockManaType(ManaType.WHITE);
+                        }
+                        if (chooseManaType.getChoice().equals("Red")) {
+                            manaPool.addMana(Mana.RedMana, game, source);
+                            manaPool.unlockManaType(ManaType.RED);
+                        }
+                        if (chooseManaType.getChoice().equals("Colorless")) {
                             manaPool.addMana(Mana.ColorlessMana, game, source);
                             manaPool.unlockManaType(ManaType.COLORLESS);
-                            manaName = "colorless";
                         }
-                        game.informPlayers("Convoke: " + controller.getName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
+                        manaName = chooseManaType.getChoice().toLowerCase();
+                    } else {
+                        manaPool.addMana(Mana.ColorlessMana, game, source);
+                        manaPool.unlockManaType(ManaType.COLORLESS);
+                        manaName = "colorless";
                     }
+                    game.informPlayers("Convoke: " + controller.getName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
+                }
 
             }
             return true;
@@ -255,22 +261,22 @@ class ConvokeEffect extends OneShotEffect {
     }
 
     private Choice buildChoice(ObjectColor creatureColor, Mana mana) {
-       Choice choice = new ChoiceImpl();
-       if (creatureColor.isBlack() && mana.getBlack() > 0) {
-           choice.getChoices().add("Black");
-       }
-       if (creatureColor.isBlue() && mana.getBlue() > 0) {
-           choice.getChoices().add("Blue");
-       }
-       if (creatureColor.isGreen() && mana.getGreen() > 0) {
-           choice.getChoices().add("Green");
-       }
-       if (creatureColor.isRed() && mana.getRed() > 0) {
-           choice.getChoices().add("Red");
-       }
-       if (creatureColor.isWhite() && mana.getWhite() > 0) {
-           choice.getChoices().add("White");
-       }
-       return choice;
+        Choice choice = new ChoiceImpl();
+        if (creatureColor.isBlack() && mana.getBlack() > 0) {
+            choice.getChoices().add("Black");
+        }
+        if (creatureColor.isBlue() && mana.getBlue() > 0) {
+            choice.getChoices().add("Blue");
+        }
+        if (creatureColor.isGreen() && mana.getGreen() > 0) {
+            choice.getChoices().add("Green");
+        }
+        if (creatureColor.isRed() && mana.getRed() > 0) {
+            choice.getChoices().add("Red");
+        }
+        if (creatureColor.isWhite() && mana.getWhite() > 0) {
+            choice.getChoices().add("White");
+        }
+        return choice;
     }
 }
