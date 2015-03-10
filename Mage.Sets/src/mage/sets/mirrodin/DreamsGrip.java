@@ -36,6 +36,7 @@ import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -53,13 +54,13 @@ public class DreamsGrip extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
         //Tap target permanent; 
-        TargetPermanent target1 = new TargetPermanent();
+        TargetPermanent target1 = new TargetPermanent(new FilterPermanent("Permanent to tap"));
         Effect tapEffect = new TapTargetEffect();
         this.getSpellAbility().addTarget(target1);
         this.getSpellAbility().addEffect(tapEffect);
         //or untap target permanent.
         Mode mode = new Mode();
-        TargetPermanent target2 = new TargetPermanent();
+        TargetPermanent target2 = new TargetPermanent(new FilterPermanent("Permanent to untap"));
         mode.getTargets().add(target2);
         Effect untapEffect = new UntapTargetEffect();
         mode.getEffects().add(untapEffect);
