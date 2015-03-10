@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -153,6 +154,9 @@ class ProtectionFromPlayerAbility extends ProtectionAbility {
             }
             if (source instanceof StackObject) {
                 return !((StackObject) source).getControllerId().equals(playerId);
+            }
+            if (source instanceof Card) { // e.g. for Vengeful Pharaoh
+                return !((Card) source).getOwnerId().equals(playerId);
             }
         }
         return true;
