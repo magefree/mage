@@ -34,6 +34,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -70,7 +71,7 @@ public class ShadowbornApostle extends CardImpl {
         this.toughness = new MageInt(1);
 
         // A deck can have any number of cards named Shadowborn Apostle.
-        this.addInfo("rule", "A deck can have any number of cards named Shadowborn Apostle.");
+        this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Shadowborn Apostle."));
         // {B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{B}"));

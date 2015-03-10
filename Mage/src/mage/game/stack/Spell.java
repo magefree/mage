@@ -702,6 +702,11 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
+    public List<String> getRules(Game game) {
+        return card.getRules(game);
+    }
+
+    @Override
     public String getExpansionSetCode() {
         return card.getExpansionSetCode();
     }
@@ -900,7 +905,7 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void addInfo(String key, String value) {
+    public void addInfo(String key, String value, Game game) {
         // do nothing
     }
 

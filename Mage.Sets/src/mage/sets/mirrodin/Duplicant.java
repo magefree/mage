@@ -109,7 +109,7 @@ class ExileTargetEffect extends OneShotEffect {
         if (permanent != null) {
             if(sourcePermananent != null){
                 sourcePermananent.imprint(permanent.getId(), game);
-                sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append("]").toString());
+                sourcePermananent.addInfo("imprint", new StringBuilder("[Imprinted card - ").append(permanent.getName()).append("]").toString(), game);
             }
             return permanent.moveToExile(null, null, source.getSourceId(), game);
         } 

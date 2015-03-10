@@ -33,6 +33,7 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -76,7 +77,7 @@ public class TorrentOfSouls extends CardImpl {
         this.getSpellAbility().addTarget(targetCreature);
         this.getSpellAbility().addTarget(targetPlayer);
 
-        this.addInfo("Info1", "<i>(Do both if {B}{R} was spent.)</i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {B}{R} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }

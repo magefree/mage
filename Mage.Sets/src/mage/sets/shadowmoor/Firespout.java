@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -68,7 +69,7 @@ public class Firespout extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageAllEffect(3, filter2),
                 new ManaWasSpentCondition(ColoredManaSymbol.G), " And 3 damage to each creature with flying if {G} was spent to cast it"));
-        this.addInfo("Info1", "<i>(Do both if {R}{G} was spent.)</i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {R}{G} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
 

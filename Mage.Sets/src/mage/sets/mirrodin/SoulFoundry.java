@@ -134,7 +134,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
-                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"));
+                            permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + "]"), game);
                         }
                     }
                 }

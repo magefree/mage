@@ -35,6 +35,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -69,7 +70,7 @@ public class BatwingBrume extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new BatwingBrumeEffect(),
                 new ManaWasSpentCondition(ColoredManaSymbol.B), "Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast {this}"));
-        this.addInfo("Info1", "<i>(Do both if {W}{B} was spent.)<i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {W}{B} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
 
     }

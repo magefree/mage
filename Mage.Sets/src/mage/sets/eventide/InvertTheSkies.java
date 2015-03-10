@@ -34,6 +34,7 @@ import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -72,7 +73,7 @@ public class InvertTheSkies extends CardImpl {
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.U)),
                 "and creatures you control gain flying until end of turn if {U} was spent to cast it"));
-        this.addInfo("Info1", "<i>(Do both if {G}{U} was spent.)<i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {G}{U} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 

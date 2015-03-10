@@ -107,7 +107,7 @@ class NevermoreEffect1 extends OneShotEffect {
             String cardName = cardChoice.getChoice();
             game.informPlayers(permanent.getLogName() + ", named card: [" + cardName + "]");
             game.getState().setValue(source.getSourceId().toString(), cardName);
-            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"));
+            permanent.addInfo("named card", CardUtil.addToolTipMarkTags("Named card: [" + cardName +"]"), game);
             return true;
         }        
         return false;
