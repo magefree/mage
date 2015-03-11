@@ -40,6 +40,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -70,7 +71,7 @@ public class RelentlessRats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RelentlessRatsEffect()));
 
         // A deck can have any number of cards named Relentless Rats.
-        this.addInfo("rule", "A deck can have any number of cards named Relentless Rats.");
+        this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Relentless Rats."));
     }
 
     public RelentlessRats(final RelentlessRats card) {

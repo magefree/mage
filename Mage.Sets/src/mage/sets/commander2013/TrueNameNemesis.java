@@ -113,7 +113,7 @@ class TrueNameNemesisChoosePlayerEffect extends OneShotEffect {
                 if (chosenPlayer != null) {
                     game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + chosenPlayer.getName());
                     game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
-                    permanent.addInfo("chosen player", "<i>Chosen player: " + chosenPlayer.getName() + "</i>");
+                    permanent.addInfo("chosen player", "<i>Chosen player: " + chosenPlayer.getName() + "</i>", game);
                     return true;
                 }
             }

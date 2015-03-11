@@ -103,7 +103,7 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
                 game.getState().setValue(source.getSourceId() + "_player1", player1);
                 game.getState().setValue(source.getSourceId() + "_player2", player2);
                 game.informPlayers(permanent.getName() + ": " + controller.getName() + " has chosen " + player1.getName() + " and " + player2.getName());
-                permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() +", " + player2.getName() + "</font>");
+                permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() +", " + player2.getName() + "</font>", game);
                 return true;
             }
         }

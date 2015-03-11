@@ -190,15 +190,15 @@ public class CardView extends SimpleCardView {
             this.isSplitCard = true;
             leftSplitName = splitCard.getLeftHalfCard().getName();
             leftSplitCosts = splitCard.getLeftHalfCard().getManaCost();
-            leftSplitRules = splitCard.getLeftHalfCard().getRules();
+            leftSplitRules = splitCard.getLeftHalfCard().getRules(game);
             rightSplitName = splitCard.getRightHalfCard().getName();
             rightSplitCosts = splitCard.getRightHalfCard().getManaCost();
-            rightSplitRules = splitCard.getRightHalfCard().getRules();
+            rightSplitRules = splitCard.getRightHalfCard().getRules(game);
         }
 
         this.name = card.getImageName();
         this.displayName = card.getName();
-        this.rules = card.getRules();
+        this.rules = card.getRules(game);
         this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
@@ -254,7 +254,7 @@ public class CardView extends SimpleCardView {
             }
             //
             // set code und card number for token copies to get the image
-            this.rules = ((PermanentToken) card).getRules();
+            this.rules = ((PermanentToken) card).getRules(game);
             this.type = ((PermanentToken)card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();

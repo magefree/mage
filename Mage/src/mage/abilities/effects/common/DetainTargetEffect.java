@@ -141,7 +141,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
         for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]");
+                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]", game);
             }
         }
     }
@@ -154,7 +154,7 @@ class DetainRestrictionEffect extends RestrictionEffect {
                 for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"");
+                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"", game);
                     }
                 }
                 return true;

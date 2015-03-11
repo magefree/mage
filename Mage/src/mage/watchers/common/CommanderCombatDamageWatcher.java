@@ -108,21 +108,21 @@ public class CommanderCombatDamageWatcher extends Watcher {
             if (castCount != null) {
                 sb.append(" ").append(castCount).append(castCount.intValue() == 1 ? " time":" times").append(" casted from the command zone.");
             }
-            this.addInfo(object, "Commander",sb.toString());
+            this.addInfo(object, "Commander",sb.toString(), game);
             for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                 Player damagedPlayer = game.getPlayer(entry.getKey());
                 sb.setLength(0);
                 sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getName()).append(".");
-                this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString());
+                this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString(), game);
             }
         }
     }
 
-    private void addInfo(MageObject object, String key, String value) {
+    private void addInfo(MageObject object, String key, String value, Game game) {
         if (object instanceof Card) {
-            ((Card) object).addInfo(key, value);
+            ((Card) object).addInfo(key, value, game);
         } else if (object instanceof Permanent) {
-            ((Permanent) object).addInfo(key, value);
+            ((Permanent) object).addInfo(key, value, game);
         }
     }
 

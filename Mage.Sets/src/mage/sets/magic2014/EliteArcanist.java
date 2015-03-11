@@ -130,7 +130,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(source.getSourceId());
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);
-                        permanent.addInfo("imprint", new StringBuilder("[Exiled card - ").append(card.getName()).append("]").toString());
+                        permanent.addInfo("imprint", new StringBuilder("[Exiled card - ").append(card.getName()).append("]").toString(), game);
                     }
                     return true;
                 }

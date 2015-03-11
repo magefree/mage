@@ -59,7 +59,7 @@ public class CardTextPredicate implements Predicate<Card> {
             boolean found = false;
             if (!token.isEmpty()) {
                 // then try to find in rules
-                for (String rule : input.getRules()) {
+                for (String rule : input.getRules(game)) {
                     if (rule.toLowerCase().contains(token)) {
                         found = true;
                         break;

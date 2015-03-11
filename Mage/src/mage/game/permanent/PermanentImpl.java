@@ -63,6 +63,7 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -110,7 +111,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected Counters counters;
     protected List<Counter> markedDamage;
     protected int timesLoyaltyUsed = 0;
-
+    protected Map<String, String> info;
+    
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
     public PermanentImpl(UUID ownerId, UUID controllerId, String name) {
@@ -153,6 +155,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             for (Counter counter : permanent.markedDamage) {
                 markedDamage.add(counter.copy());
             }
+        }
+        if (permanent.info != null) {
+            info = new HashMap<>();
+            info.putAll(permanent.info);
         }
         this.counters = permanent.counters.copy();
         this.attachedTo = permanent.attachedTo;
@@ -207,6 +213,33 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             sb.append(counter.getName()).append(counter.getCount());
         }
         return sb.toString();
+    }
+
+    @Override
+    public void addInfo(String key, String value, Game game) {
+        if (info == null) {
+            info = new HashMap<>();
+        }
+        if (value == null || value.isEmpty()) {
+            info.remove(key);
+        } else {
+            info.put(key, value);
+        }
+    }
+
+    @Override
+    public List<String> getRules(Game game) {
+        try {
+            List<String> rules = getRules();
+            if (info != null) {
+                for (String data : info.values()) {
+                    rules.add(data);
+                }
+            }
+            return rules;
+        } catch (Exception e) {
+            return rulesError;
+        }
     }
 
     @Override

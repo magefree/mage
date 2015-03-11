@@ -32,6 +32,7 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -64,7 +65,7 @@ public class RepelIntruders extends CardImpl {
                 new CounterTargetEffect(),
                 new ManaWasSpentCondition(ColoredManaSymbol.U), " Counter up to one target creature spell if {U} was spent to cast {this}"));
         this.getSpellAbility().addTarget(target);
-        this.addInfo("Info1", "<i>(Do both if {W}{U} was spent.)</i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {W}{U} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
         
     }

@@ -40,7 +40,6 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
-import mage.watchers.Watcher;
 
 public interface Card extends MageObject {
 
@@ -51,7 +50,8 @@ public interface Card extends MageObject {
     void addAbility(Ability ability);
     void setSpellAbility(SpellAbility ability);
     SpellAbility getSpellAbility();
-    List<String> getRules();
+    List<String> getRules(); // gets base card rules
+    List<String> getRules(Game game);  // gets card rules + in game modifications
     String getExpansionSetCode();
     String getTokenSetCode();
     void setFaceDown(boolean value);
@@ -71,7 +71,7 @@ public interface Card extends MageObject {
     int getZoneChangeCounter();
     void updateZoneChangeCounter();
 
-    void addInfo(String key, String value);
+    void addInfo(String key, String value, Game game);
 
     /**
      * Moves the card to the specified zone

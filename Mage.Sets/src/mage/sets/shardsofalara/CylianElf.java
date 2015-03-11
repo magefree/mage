@@ -41,11 +41,11 @@ import mage.cards.CardImpl;
 public class CylianElf extends CardImpl {
 
     public CylianElf (UUID ownerId) {
-        super(ownerId, 127, "Cylian Elf", Rarity.COMMON, new CardType[]{}, "{1}{G}");
+        super(ownerId, 127, "Cylian Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elf");
         this.subtype.add("Scout");
-        this.color.setGreen(true);
+        
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

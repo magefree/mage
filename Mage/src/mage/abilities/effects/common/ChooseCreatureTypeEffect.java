@@ -69,7 +69,7 @@ public class ChooseCreatureTypeEffect extends OneShotEffect {
             }
             game.informPlayers(permanent.getName() + ": " + controller.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()));
+            permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
         }
         return false;
     }

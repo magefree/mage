@@ -35,6 +35,7 @@ import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -72,7 +73,7 @@ public class Moonhold extends CardImpl {
                 effect2,
                 new LockedInCondition(new ManaWasSpentCondition(ColoredManaSymbol.W))));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.addInfo("Info1", "<i>(Do both if {R}{W} was spent.)</i>");
+        this.getSpellAbility().addEffect(new InfoEffect("<i>(Do both if {R}{W} was spent.)</i>"));
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 

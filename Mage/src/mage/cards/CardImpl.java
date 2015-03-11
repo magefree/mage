@@ -31,9 +31,7 @@ package mage.cards;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
@@ -59,6 +57,7 @@ import static mage.constants.Zone.PICK;
 import static mage.constants.Zone.STACK;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
@@ -87,7 +86,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected boolean flipCard;
     protected String flipCardName;
     protected int zoneChangeCounter = 1;
-    protected Map<String, String> info;
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
@@ -153,10 +151,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             nightCard = card.nightCard;
         }
         zoneChangeCounter = card.zoneChangeCounter;
-        if (card.info != null) {
-            info = new HashMap<>();
-            info.putAll(card.info);
-        }
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
@@ -208,22 +202,38 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
+    public void addInfo(String key, String value, Game game) {
+        game.getState().getCardState(objectId).addInfo(key, value);
+    }
+
+    protected static final ArrayList<String> rulesError = new ArrayList<String>() {{add("Exception occured in rules generation");}};
+    
+    @Override
     public List<String> getRules() {
         try {
-            List<String> rules = abilities.getRules(this.getLogName());
-            if (info != null) {
-                for (String data : info.values()) {
-                    rules.add(data);
-                }
+            return abilities.getRules(this.getLogName());
+        } catch (Exception e) {
+            logger.info("Exception in rules generation for card: " + this.getName(), e);
+        }
+        return rulesError;
+    }
+    
+    @Override
+    public List<String> getRules(Game game) {
+        try {
+            List<String> rules = getRules();
+            CardState state = game.getState().getCardState(objectId);
+            for (String data : state.getInfo().values()) {
+                rules.add(data);
             }
+//            for (Ability ability: state.getAbilities()) {
+//                rules.add(ability.getRule());
+//            }
             return rules;
         } catch (Exception e) {
-            System.out.println("Exception in rules generation for card: " + this.getName());
-            e.printStackTrace();
+            logger.error("Exception in rules generation for card: " + this.getName(), e);
         }
-        ArrayList<String> rules = new ArrayList<>();
-        rules.add("Exception occured in rules generation");
-        return rules;
+        return rulesError;
     }
 
     @Override
@@ -619,18 +629,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public void updateZoneChangeCounter() {
         zoneChangeCounter++;
 //        logger.info(name + " set= " + zoneChangeCounter + "  " + ((this instanceof Permanent) ? " Permanent":"Card"));
-    }
-
-    @Override
-    public void addInfo(String key, String value) {
-        if (info == null) {
-            info = new HashMap<>();
-        }
-        if (value == null || value.isEmpty()) {
-            info.remove(key);
-        } else {
-            info.put(key, value);
-        }
     }
 
     @Override
