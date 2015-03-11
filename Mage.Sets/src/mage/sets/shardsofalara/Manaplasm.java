@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EmptyEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -77,7 +77,7 @@ public class Manaplasm extends CardImpl {
 class ManaplasmAbility extends TriggeredAbilityImpl {
 
     public ManaplasmAbility() {
-        super(Zone.BATTLEFIELD, new EmptyEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);
+        super(Zone.BATTLEFIELD, new InfoEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);
     }
 
 

@@ -35,11 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
@@ -72,7 +72,7 @@ public class WerewolfRansacker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect(WerewolfRansackerAbility.RULE_TEXT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(WerewolfRansackerAbility.RULE_TEXT)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);

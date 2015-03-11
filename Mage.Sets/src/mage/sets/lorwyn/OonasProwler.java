@@ -29,10 +29,9 @@ package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -41,7 +40,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 
 /**
  *
@@ -64,7 +62,7 @@ public class OonasProwler extends CardImpl {
         // Discard a card: Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-2,-0, Duration.EndOfTurn) , new DiscardCardCost());
         ability.setMayActivate(TargetController.ANY);
-        ability.addEffect(new EmptyEffect("Any player may activate this ability"));
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
     }
 

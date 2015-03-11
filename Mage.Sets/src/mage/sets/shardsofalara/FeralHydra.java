@@ -28,18 +28,22 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.*;
+import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +69,7 @@ public class FeralHydra extends CardImpl {
         // {3}: Put a +1/+1 counter on Feral Hydra. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()) , new ManaCostsImpl("{3}"));
         ability.setMayActivate(TargetController.ANY);
-        ability.addEffect(new EmptyEffect("Any player may activate this ability"));
+        ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);
     }
 

@@ -29,9 +29,9 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -61,7 +61,7 @@ public class GhostfireBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
 
         // Ghostfire Blade's equip ability costs {2} less to activate if it targets a colorless creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect("{this}'s equip ability costs {2} less to activate if it targets a colorless creature")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this}'s equip ability costs {2} less to activate if it targets a colorless creature")));
     }
   @Override
     public void adjustCosts(Ability ability, Game game) {

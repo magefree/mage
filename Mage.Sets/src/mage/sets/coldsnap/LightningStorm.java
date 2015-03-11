@@ -29,13 +29,13 @@ package mage.sets.coldsnap;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -71,7 +71,7 @@ public class LightningStorm extends CardImpl {
                 new LightningStormAddCounterEffect() ,
                 new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         ability.setMayActivate(TargetController.ANY);
-        ability.addEffect(new EmptyEffect("Any player may activate this ability but only if {this} is on the stack"));
+        ability.addEffect(new InfoEffect("Any player may activate this ability but only if {this} is on the stack"));
         this.addAbility(ability);
     }
 
