@@ -222,9 +222,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public List<String> getRules(Game game) {
         try {
             List<String> rules = getRules();
-            CardState state = game.getState().getCardState(objectId);
-            for (String data : state.getInfo().values()) {
-                rules.add(data);
+            if (game != null) {
+                CardState cardState = game.getState().getCardState(objectId);
+                if (cardState != null) {
+                    for (String data : cardState.getInfo().values()) {
+                        rules.add(data);
+                    }
+                }
             }
 //            for (Ability ability: state.getAbilities()) {
 //                rules.add(ability.getRule());

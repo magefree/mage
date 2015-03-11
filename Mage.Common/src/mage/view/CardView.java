@@ -198,7 +198,11 @@ public class CardView extends SimpleCardView {
 
         this.name = card.getImageName();
         this.displayName = card.getName();
-        this.rules = card.getRules(game);
+        if (game == null) {
+            this.rules = card.getRules();
+        } else {
+            this.rules = card.getRules(game);
+        }
         this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
