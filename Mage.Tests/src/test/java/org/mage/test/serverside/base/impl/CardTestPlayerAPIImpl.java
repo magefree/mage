@@ -697,11 +697,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, Player target) {
-        player.addAction(turnNum, step, "activate:Cast " + cardName + ";targetPlayer=" + target.getName());
+        player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName());
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
-        player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName);
+        player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
     }
 
     public enum StackClause {
@@ -736,19 +736,19 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, StackClause clause) {
         if (StackClause.WHILE_ON_STACK.equals(clause)) {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$spellOnStack=" + spellOnStack);
         } else {
-            player.addAction(turnNum, step, "activate:Cast " + cardName + ";target=" + targetName + ";!spellOnStack=" + spellOnStack);
+            player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName + "$!spellOnStack=" + spellOnStack);
         }
     }
 
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName, String spellOnStack, String spellOnTopOfStack) {
-        String action = "activate:Cast " + cardName + ";target=" + targetName;
+        String action = "activate:Cast " + cardName + "$target=" + targetName;
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            action += ";spellOnStack=" + spellOnStack;
+            action += "$spellOnStack=" + spellOnStack;
         }
         if (spellOnTopOfStack != null && !spellOnTopOfStack.isEmpty()) {
-            action += ";spellOnTopOfStack=" + spellOnTopOfStack;
+            action += "$spellOnTopOfStack=" + spellOnTopOfStack;
         }
         player.addAction(turnNum, step, action);
     }
@@ -762,26 +762,26 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, Player target) {
-        player.addAction(turnNum, step, "activate:" + ability + ";targetPlayer=" + target.getName());
+        player.addAction(turnNum, step, "activate:" + ability + "$targetPlayer=" + target.getName());
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName) {
-        player.addAction(turnNum, step, "activate:" + ability + ";target=" + targetName);
+        player.addAction(turnNum, step, "activate:" + ability + "$target=" + targetName);
     }
 
     public void activateAbility(int turnNum, PhaseStep step, TestPlayer player, String ability, String targetName, String spellOnStack) {
         StringBuilder sb = new StringBuilder("activate:").append(ability);
         if (targetName != null && !targetName.isEmpty()) {
-            sb.append(";target=" ).append(targetName);
+            sb.append("$target=" ).append(targetName);
         }
         if (spellOnStack != null && !spellOnStack.isEmpty()) {
-            sb.append(";spellOnStack=").append(spellOnStack);
+            sb.append("$spellOnStack=").append(spellOnStack);
         }
         player.addAction(turnNum, step, sb.toString());
     }
 
     public void addCounters(int turnNum, PhaseStep step, TestPlayer player, String cardName, CounterType type, int count) {
-        player.addAction(turnNum, step, "addCounters:" + cardName + ";" + type.getName() + ";" + count);
+        player.addAction(turnNum, step, "addCounters:" + cardName + "$" + type.getName() + "$" + count);
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker) {
@@ -789,11 +789,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
-        player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append(";planeswalker=").append(planeswalker).toString());
+        player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
     }
 
     public void block(int turnNum, TestPlayer player, String blocker, String attacker) {
-        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:"+blocker+";"+attacker);
+        player.addAction(turnNum, PhaseStep.DECLARE_BLOCKERS, "block:"+blocker+"$"+attacker);
     }
 
     /**
