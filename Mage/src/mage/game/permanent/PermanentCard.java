@@ -190,7 +190,7 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        if (isMorphCard() && isFaceDown()) {
+        if (isFaceDown() && fromZone.equals(Zone.BATTLEFIELD) && (isMorphed() || isManifested())) {
             setFaceDown(false);
             game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
         }

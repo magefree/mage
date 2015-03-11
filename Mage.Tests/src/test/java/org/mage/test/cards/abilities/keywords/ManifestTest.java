@@ -27,8 +27,11 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -204,5 +207,49 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }    
-    
+    /*
+    I casted a Silence the Believers on a manifested card. It moved to the exile zone face-down.
+    */
+    @Test
+    public void testCardGetsExiledFaceUp() {
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+        // Exile target creature. Its controller manifests the top card of his or her library {1}{U}
+        addCard(Zone.HAND, playerB, "Reality Shift");
+        // Silence the Believers - Instant {2}{B}{B}
+        // Strive — Silence the Believers costs more to cast for each target beyond the first.
+        // Exile any number of target creatures and all Auras attached to them.
+        addCard(Zone.HAND, playerB, "Silence the Believers");
+        addTarget(playerB, "face down creature");
+        // Gore Swine {2}{R}
+        // 4/1
+        addCard(Zone.LIBRARY, playerA, "Gore Swine");
+        
+        // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Silence the Believers", "face down creature");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerB, "Reality Shift", 1);
+        assertExileCount("Silvercoat Lion" , 1);
+        assertExileCount("Gore Swine" , 1);
+        // no facedown creature is on the battlefield
+        assertPermanentCount(playerA, "face down creature", 0);
+        
+        for (Card card :currentGame.getExile().getAllCards(currentGame)){
+            if (card.getName().equals("Gore Swine")) {
+                Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown());
+            }
+        }
+
+    }       
 }
