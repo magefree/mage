@@ -140,7 +140,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
-        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mtgimage.com (HQ)"  /*, "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
+        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com"/*, "mtgimage.com (HQ)" , "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
         jComboBox1 = new JComboBox();
 
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -157,9 +157,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 1:
                         cardImageSource = WizardCardsImageSource.getInstance();
-                        break;
-                    case 2:
-                        cardImageSource = MtgImageSource.getInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();

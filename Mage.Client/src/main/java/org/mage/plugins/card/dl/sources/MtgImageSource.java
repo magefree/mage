@@ -31,7 +31,11 @@ package org.mage.plugins.card.dl.sources;
 import org.mage.plugins.card.images.CardDownloadData;
 
 /**
- *
+ * Site was shutdown by wizards Feb. 2015
+ * 
+ * 
+ * 
+ * 
  * @author LevelX2
  */
 
