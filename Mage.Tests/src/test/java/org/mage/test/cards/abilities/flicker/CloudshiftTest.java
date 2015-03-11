@@ -106,6 +106,8 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         addCard(Zone.HAND, playerA, "Cloudshift");
+        // Haste
+        // When Fervent Cathar enters the battlefield, target creature can't block this turn.
         addCard(Zone.HAND, playerB, "Fervent Cathar");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Fervent Cathar");

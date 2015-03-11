@@ -148,7 +148,7 @@ public class TestPlayer extends ComputerPlayer {
                 if (action.getAction().startsWith("manaActivate:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("manaActivate:") + 13);
-                    String[] groups = command.split("$");
+                    String[] groups = command.split("\\$");
                     List<Permanent> manaPerms = this.getAvailableManaProducers(game);
                     for (Permanent perm: manaPerms) {
                         for (Ability manaAbility: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
@@ -176,7 +176,7 @@ public class TestPlayer extends ComputerPlayer {
                 if (action.getAction().startsWith("addCounters:")) {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("addCounters:") + 12);
-                    String[] groups = command.split("$");
+                    String[] groups = command.split("\\$");
                     for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
                         if (permanent.getName().equals(groups[0])) {
                             Counter counter = new Counter(groups[1], Integer.parseInt(groups[2]));
@@ -204,7 +204,7 @@ public class TestPlayer extends ComputerPlayer {
                 }
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
-                String[] groups = command.split("$");
+                String[] groups = command.split("\\$");
                 for (int i = 1; i < groups.length; i++) {
                     String group = groups[i];
                     if (group.startsWith("planeswalker=")) {
@@ -234,7 +234,7 @@ public class TestPlayer extends ComputerPlayer {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
-                String[] groups = command.split("$");
+                String[] groups = command.split("\\$");
                 FilterCreatureForCombatBlock filterBlocker = new FilterCreatureForCombatBlock();
                 filterBlocker.add(new NamePredicate(groups[0]));
                 filterBlocker.add(Predicates.not(new BlockingPredicate()));
