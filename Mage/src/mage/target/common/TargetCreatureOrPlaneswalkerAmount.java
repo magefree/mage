@@ -35,9 +35,11 @@
     import mage.abilities.Ability;
     import mage.abilities.dynamicvalue.DynamicValue;
     import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.constants.TargetController;
     import mage.filter.Filter;
     import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
     import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
     import mage.game.Game;
     import mage.game.permanent.Permanent;
     import mage.target.TargetAmount;
@@ -63,6 +65,7 @@
             super(amount);
             this.zone = Zone.ALL;
             this.filter = new FilterCreatureOrPlaneswalkerPermanent();
+            this.filter.add(new ControllerPredicate(TargetController.OPPONENT));
             this.targetName = filter.getMessage();
         }
 
