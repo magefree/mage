@@ -34,8 +34,8 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class NaturalOrder extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a green creature");
-    private static final FilterCard filterCard = new FilterCard("green creature card");
+    private static final FilterCreatureCard filterCard = new FilterCreatureCard("green creature card");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
