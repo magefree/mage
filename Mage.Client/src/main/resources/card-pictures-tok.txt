@@ -175,6 +175,7 @@ $|Generate|TOK:MLP|Thopter|
 |Generate|TOK:RTR|Assassin|
 |Generate|TOK:RTR|Dragon|
 |Generate|TOK:RTR|Goblin|
+|Generate|TOK:RTR|Centaur 1|
 |Generate|TOK:RTR|Ooze|
 |Generate|TOK:RTR|Rhino|
 |Generate|TOK:RTR|Saproling|
