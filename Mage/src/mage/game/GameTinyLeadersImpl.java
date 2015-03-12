@@ -31,6 +31,7 @@ package mage.game;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.InfoEffect;
@@ -38,15 +39,19 @@ import mage.abilities.effects.common.continuous.CommanderManaReplacementEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
+import mage.watchers.common.CommanderInfoWatcher;
 
 /**
  *
@@ -74,22 +79,22 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
             if (player != null){
-                if (player.getSideboard().size() > 0){
-                    CardInfo cardInfo = CardRepository.instance.findCard(player.getMatchPlayer().getDeck().getName());
-                    if (cardInfo != null) {
-                        Card commander = cardInfo.getCard();
-                        Set<Card> cards = new HashSet<>();
-                        cards.add(commander);
-                        this.loadCards(cards, playerId);
-                        if (commander != null) {
-                            player.setCommanderId(commander.getId());
-                            commander.moveToZone(Zone.COMMAND, null, this, true);
-                            ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
-                            ability.addEffect(new CommanderCostModification(commander.getId()));
-                            ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
-                            getState().setValue(commander.getId() + "_castCount", 0);
-                        }
-                    }
+                Card commander = getCommanderCard(player.getMatchPlayer().getDeck().getName(), player.getId());
+                if (commander != null) {
+                    Set<Card> cards = new HashSet<>();
+                    cards.add(commander);
+                    this.loadCards(cards, playerId);
+                    player.setCommanderId(commander.getId());
+                    commander.moveToZone(Zone.COMMAND, null, this, true);
+                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoLibrary));
+                    ability.addEffect(new CommanderCostModification(commander.getId()));
+                    ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
+                    getState().setValue(commander.getId() + "_castCount", 0);
+                    CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), false);
+                    getState().getWatchers().add(watcher);
+                    watcher.addCardInfoToCommander(this);
+                } else {
+                    throw new UnknownError("Commander card could not be created");
                 }
             }
 
@@ -99,6 +104,34 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }
+    }
+
+    /**
+     * Name of Tiny Leader comes from the deck name (it's not in the sideboard)
+     * Additionally, it was taken into account that WOTC had missed a few color combinations
+     * when making Legendary Creatures at 3 CMC. There are three Commanders available to use 
+     * for the missing color identities: 
+     *  Mardu [WBR 2/2], 
+     *  Sultai [UBG 2/2], and 
+     *  Jeskai [WUR 2/2]. 
+     *
+     * @param commanderName
+     * @param ownerId
+     * @return 
+     */
+    public static Card getCommanderCard(String commanderName, UUID ownerId) {
+        Card commander = null;
+        switch (commanderName) {
+            case "Sultai":
+                commander = new DefaultCommander(ownerId, commanderName, "{U}{B}{G}");
+                break;
+            default:
+                CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
+                if (cardInfo != null) {
+                    commander = cardInfo.getCard();
+                }
+        }
+        return commander;
     }
 
     @Override
@@ -121,4 +154,43 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
         this.alsoLibrary = alsoLibrary;
     }
     
+}
+
+class DefaultCommander extends CardImpl {
+
+    public DefaultCommander(UUID ownerId, String commanderName, String manaString) {
+        super(ownerId, 999, commanderName, Rarity.RARE, new CardType[]{CardType.CREATURE}, manaString);
+        this.expansionSetCode = "";
+        this.supertype.add("Legendary");
+        //this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        if (manaString.contains("{G}")) {
+            this.color.setGreen(true);
+        }
+        if (manaString.contains("{W}")) {
+            this.color.setWhite(true);
+        }
+        if (manaString.contains("{U}")) {
+            this.color.setBlue(true);
+        }
+        if (manaString.contains("{B}")) {
+            this.color.setBlack(true);
+        }
+        if (manaString.contains("{R}")) {
+            this.color.setRed(true);
+        }
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+    }
+
+    public DefaultCommander(final DefaultCommander card) {
+        super(card);
+    }
+
+    @Override
+    public DefaultCommander copy() {
+        return new DefaultCommander(this);
+    }
 }

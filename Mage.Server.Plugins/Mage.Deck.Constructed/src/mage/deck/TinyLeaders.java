@@ -38,6 +38,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
 import mage.filter.FilterMana;
+import mage.game.GameTinyLeadersImpl;
 import mage.util.CardUtil;
 
 /**
@@ -121,6 +122,7 @@ public class TinyLeaders extends DeckValidator {
         List<String> basicLandNames = new ArrayList<>(Arrays.asList("Forest", "Island", "Mountain", "Swamp", "Plains",
                 "Snow-Covered Forest", "Snow-Covered Island", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains"));
         Map<String, Integer> counts = new HashMap<>();
+        counts.put(deck.getName(), 1); // add the commander to the counts, so it can't be in the deck or sideboard again
         countCards(counts, deck.getCards());
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry : counts.entrySet()) {
@@ -139,15 +141,8 @@ public class TinyLeaders extends DeckValidator {
             }
         }
 
-        if (deck.getSideboard().size() <= 11) {
-            Card commander = null;
-            
-            for (Card card : deck.getSideboard()) {
-                if (card.getName().equalsIgnoreCase(deck.getName())) {
-                    commander = card;
-                }
-            }
-            
+        if (deck.getSideboard().size() <= 10) {
+            Card commander = GameTinyLeadersImpl.getCommanderCard(deck.getName(), null);
             /**
              * 905.5b - Each card must have a converted mana cost of three of less.
              *          Cards with {X} in their mana cost count X as zero.
@@ -156,10 +151,10 @@ public class TinyLeaders extends DeckValidator {
             
             if (commander == null  || commander.getManaCost().convertedManaCost() > 3) {
                 if (commander == null) {
-                    invalid.put("Leader", "Please be sure to set your leader in the NAME field in the DECK EDITOR");
+                    invalid.put("Leader", "Please be sure to set your leader in the NAME field in the DECK EDITOR (use the names Mardu, Sultai or Jeskai as default Commanders)");
                 }
                 if (commander != null && commander.getManaCost().convertedManaCost() > 3) {
-                    invalid.put("Leader", "Commander CMC is Greater than 3");
+                    invalid.put("Leader", "Commanders converted mana cost is greater than 3");
                 }
                 return false;
             }
@@ -188,7 +183,7 @@ public class TinyLeaders extends DeckValidator {
                 valid = false;
             }
         } else {
-            invalid.put("Commander", "Sideboard must contain only the commander and a maximum of 10 sideboard cards");
+            invalid.put("Commander", "Sideboard must contain only a maximum of 10 sideboard cards (the Tiny Leader name must be written to the deck name)");
             valid = false;
         }
 

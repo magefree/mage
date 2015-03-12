@@ -52,12 +52,12 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-import mage.watchers.common.CommanderCombatDamageWatcher;
+import mage.watchers.common.CommanderInfoWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
-    private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<>();
+    private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
     
     protected boolean alsoLibrary; // replace also commander going to library
     protected boolean startingPlayerSkipsDraw = true;
@@ -88,7 +88,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                         getState().setValue(commander.getId() + "_castCount", 0);
-                        CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), true);
                         getState().getWatchers().add(watcher);
                         this.commanderCombatWatcher.add(watcher);
                         watcher.addCardInfoToCommander(this);
@@ -182,7 +182,7 @@ public abstract class GameCommanderImpl extends GameImpl {
      */
     @Override
     protected boolean checkStateBasedActions() {
-        for (CommanderCombatDamageWatcher damageWatcher: commanderCombatWatcher) {
+        for (CommanderInfoWatcher damageWatcher: commanderCombatWatcher) {
             for(Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()){
                 if (entrySet.getValue() > 20) {
                     Player player = getPlayer(entrySet.getKey());

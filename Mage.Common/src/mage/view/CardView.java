@@ -134,7 +134,7 @@ public class CardView extends SimpleCardView {
      *
      * @param card
      * @param game
-     * @param cardId
+     * @param cardId not used?
      * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
      */
     public CardView(Card card, Game game, UUID cardId, boolean controlled) {
