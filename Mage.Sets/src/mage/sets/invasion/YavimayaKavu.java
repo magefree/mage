@@ -48,8 +48,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class YavimayaKavu extends CardImpl {
   
-    private static final FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("Green");
-    private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("Red");
+    private static final FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creatures on the battlefield");
+    private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures on the battlefield");
     
     static {
       filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));

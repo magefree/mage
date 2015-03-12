@@ -29,6 +29,7 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -64,10 +65,9 @@ public class CursedFlesh extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets -1/-1 and has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
-        
-        
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "and has fear"));
+        this.addAbility(ability);               
     }
 
     public CursedFlesh(final CursedFlesh card) {
