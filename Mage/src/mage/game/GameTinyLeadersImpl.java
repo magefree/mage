@@ -162,8 +162,6 @@ class DefaultCommander extends CardImpl {
         super(ownerId, 999, commanderName, Rarity.RARE, new CardType[]{CardType.CREATURE}, manaString);
         this.expansionSetCode = "";
         this.supertype.add("Legendary");
-        //this.subtype.add("Human");
-        this.subtype.add("Soldier");
 
         if (manaString.contains("{G}")) {
             this.color.setGreen(true);
