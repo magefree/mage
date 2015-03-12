@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
+import mage.constants.Rarity;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 public class GuiDisplayUtil {
@@ -221,21 +222,27 @@ public class GuiDisplayUtil {
         }
         buffer.append(getTypes(card));
         buffer.append("</td><td align='right'>");
-        switch (card.getRarity()) {
-            case RARE:
-                buffer.append("<b color='#FFBF00'>");
-                break;
-            case UNCOMMON:
-                buffer.append("<b color='silver'>");
-                break;
-            case COMMON:
-                buffer.append("<b color='black'>");
-                break;
-            case MYTHIC:
-                buffer.append("<b color='#D5330B'>");
-                break;
+        String rarity ;
+        if (card.getRarity() == null) {
+            rarity = Rarity.COMMON.getCode();
+            buffer.append("<b color='black'>");            
+        }else {
+            switch (card.getRarity()) {
+                case RARE:
+                    buffer.append("<b color='#FFBF00'>");
+                    break;
+                case UNCOMMON:
+                    buffer.append("<b color='silver'>");
+                    break;
+                case COMMON:
+                    buffer.append("<b color='black'>");
+                    break;
+                case MYTHIC:
+                    buffer.append("<b color='#D5330B'>");
+                    break;
+            }
+            rarity = card.getRarity().getCode();
         }
-        String rarity = card.getRarity().getCode();
         if (card.getExpansionSetCode() != null) {
             buffer.append(ManaSymbols.replaceSetCodeWithHTML(card.getExpansionSetCode().toUpperCase(), rarity));
         }
