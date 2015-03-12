@@ -11,9 +11,14 @@
 #|Generate|TOK:PTC|Wolf|
 #|Generate|TOK:PTC|Wurm|
 
-$|Generate|TOK:DTK|Djinn Monk|
-$|Generate|TOK:DTK|Goblin|
-$|Generate|TOK:DTK|Zombie|
+#|Generate|TOK:DTK|Djinn Monk|
+#|Generate|TOK:DTK|Dragon|
+#|Generate|TOK:DTK|Goblin|
+#|Generate|TOK:DTK|Morph|
+#|Generate|TOK:DTK|Warrior|
+#|Generate|TOK:DTK|Zombie|
+#|Generate|TOK:DTK|Zombie Horror|
+#|Generate|EMBLEM!:DTK|Emblem Narset Transcendent|
 
 #|Generate|TOK:GRC|Bird|
 #|Generate|TOK:GRC|Golem|
@@ -28,7 +33,7 @@ $|Generate|TOK:DTK|Zombie|
 #|Generate|TOK:MBP|Goblin|
 #|Generate|TOK:MBP|Zombie|
 
-$|Generate|TOK:MLP|Thopter|
+#|Generate|TOK:MLP|Thopter|
 
 #|Generate|TOK:WMCQ|Angel|
 
@@ -46,6 +51,8 @@ $|Generate|TOK:MLP|Thopter|
 #|Generate|TOK:MGDC|Sliver|
 
 #|Generate|TOK:FNMP|Centaur|
+|Generate|TOK:FNMP|Human|
+|Generate|TOK:FNMP|Wolf|
 #|Generate|TOK:FNMP|Wurm|
 
 |Generate|TOK:DDN|Goblin|
