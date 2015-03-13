@@ -141,7 +141,7 @@ public class CardView extends SimpleCardView {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode());
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
-        if (card.isFaceDown(game)) {
+        if (game != null && card.isFaceDown(game)) {
             this.fillEmpty(card, controlled);
             if (card instanceof Spell) {
                 // special handling for casting of Morph cards
