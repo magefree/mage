@@ -12,14 +12,12 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 /**
  *
  * @author Noahsark
  */
 public class LoseAbilitySourceEffect extends ContinuousEffectImpl{
     
-    private static final Logger logger = Logger.getLogger(LoseAbilitySourceEffect.class);
     protected Ability ability;
     
     public LoseAbilitySourceEffect(Ability ability){
@@ -46,12 +44,10 @@ public class LoseAbilitySourceEffect extends ContinuousEffectImpl{
     public boolean apply(Game game, Ability source){
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null){
-            permanent.getAbilities().remove(ability);
-//            while(permanent.getAbilities().contains(ability)){
-//                if (!permanent.getAbilities().remove(ability)) {
-//                    logger.warn("ability " + ability.getRule() + " couldn't be removed.");
-//                }
-//            }
+            // 112.10
+            while (permanent.getAbilities().remove(ability)) {
+                
+            }
         }
         return true;
     }
