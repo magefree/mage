@@ -27,14 +27,10 @@
  */
 package mage.sets.innistrad;
 
-import java.util.Iterator;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Abilities;
@@ -44,8 +40,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -70,11 +67,38 @@ public class ManorGargoyle extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(DefenderAbility.getInstance());
-        // Manor Gargoyle is indestructible as long as it has defender.
+        
+        
+    /*
+    TODO: Implement the dependency rule
+    613.7. Within a layer or sublayer, determining which order effects are applied in is sometimes done using a dependency system. 
+              If a dependency exists, it will override the timestamp system.
+        613.7a An effect is said to “depend on” another if 
+                (a) it’s applied in the same layer (and, if applicable, sublayer) as the other effect (see rules 613.1 and 613.3); 
+                (b) applying the other would change the text or the existence of the first effect, what it applies to, or what 
+                    it does to any of the things it applies to; and 
+                (c) neither effect is from a characteristic-defining ability or both effects are from characteristic-defining 
+                    abilities. Otherwise, the effect is considered to be independent of the other effect.
+        613.7b  An effect dependent on one or more other effects waits to apply until just after all of those effects have been applied.
+                If multiple dependent effects would apply simultaneously in this way, they’re applied in timestamp order relative to each
+                other. If several dependent effects form a dependency loop, then this rule is ignored and the effects in the dependency 
+                loop are applied in timestamp order.
+        613.7c  After each effect is applied, the order of remaining effects is reevaluated and may change if an effect that has not yet
+                been applied becomes dependent on or independent of one or more other effects that have not yet been applied.
+         */
+
+        // Manor Gargoyle has indestructible as long as it has defender.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), HasDefenderCondition.getInstance(), rule);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        
         // {1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{1}")));
+        Effect effect2 = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn);
+        effect2.setText("Until end of turn, {this} loses defender");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect2, new ManaCostsImpl("{1}"));
+        effect2 = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect2.setText("and gains flying");
+        ability.addEffect(effect2);
+        this.addAbility(ability);
     }
 
     public ManorGargoyle(final ManorGargoyle card) {
@@ -84,55 +108,6 @@ public class ManorGargoyle extends CardImpl {
     @Override
     public ManorGargoyle copy() {
         return new ManorGargoyle(this);
-    }
-}
-
-class GargoyleSentinelEffect extends ContinuousEffectImpl {
-
-    public GargoyleSentinelEffect() {
-        super(Duration.EndOfTurn, Outcome.AddAbility);
-        staticText = "Until end of turn, {this} loses defender and gains flying";
-    }
-
-    public GargoyleSentinelEffect(final GargoyleSentinelEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GargoyleSentinelEffect copy() {
-        return new GargoyleSentinelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            switch (layer) {
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        for (Iterator<Ability> ability = permanent.getAbilities().iterator(); ability.hasNext();) {
-                            Ability entry = ability.next();
-                            if (entry.getId().equals(DefenderAbility.getInstance().getId())) {
-                                ability.remove();
-                            }
-                        }
-                        permanent.getAbilities().add(FlyingAbility.getInstance());
-                    }
-                    break;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6;
     }
 }
 
