@@ -111,7 +111,7 @@ class HoodedHydraEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && !permanent.isFaceDown()) {
+        if (permanent != null && !permanent.isFaceDown(game)) {
             Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
             if (obj != null && obj instanceof SpellAbility) {
                 int amount = ((SpellAbility) obj).getManaCostsToPay().getX();

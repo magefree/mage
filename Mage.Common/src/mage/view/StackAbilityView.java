@@ -74,7 +74,7 @@ public class StackAbilityView extends CardView {
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();                   
         String nameToShow;
-        if (sourceCard.isMorphCard() && sourceCard.isFaceDown()) {
+        if (sourceCard.isFaceDown()) {
             CardView tmpSourceCard = this.getSourceCard();
             tmpSourceCard.displayName =  "Face Down";
             tmpSourceCard.superTypes.clear();

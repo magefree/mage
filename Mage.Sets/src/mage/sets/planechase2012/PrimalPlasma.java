@@ -106,7 +106,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
         }

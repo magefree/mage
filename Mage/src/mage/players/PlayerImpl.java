@@ -2835,13 +2835,18 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId) {
-        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false);
+        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, false, false);
     }
 
     @Override
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped) {
+        return this.putOntoBattlefieldWithInfo(card, game, fromZone, sourceId, tapped, false);
+    }
+    
+    @Override
+    public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
         boolean result = false;
-        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped)) {
+        if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
             game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(card.getLogName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")

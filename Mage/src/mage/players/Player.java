@@ -498,6 +498,19 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped);
+
+    /**
+     * Uses putOntoBattlefield and posts also a info message about in the game log
+     *
+     * @param card
+     * @param game
+     * @param fromZone
+     * @param sourceId
+     * @param tapped the card enters the battlefield tapped
+     * @param facedown the card enters the battlefield facedown
+     * @return
+     */
+    boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown);
     
     /**
      * Checks if the playerToCheckId is from an opponent in range

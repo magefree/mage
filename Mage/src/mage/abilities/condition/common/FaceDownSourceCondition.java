@@ -52,10 +52,10 @@ public class FaceDownSourceCondition implements Condition {
         MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject != null) {
             if (mageObject instanceof Permanent) {
-                return ((Permanent)mageObject).isFaceDown();
+                return ((Permanent)mageObject).isFaceDown(game);
             }
             if (mageObject instanceof Card) {
-                return ((Card)mageObject).isFaceDown();
+                return ((Card)mageObject).isFaceDown(game);
             }
         }
         return false;

@@ -107,8 +107,7 @@ class ShorecrasherElementalEffect extends OneShotEffect {
             if (shorecrasherElemental.moveToExile(source.getSourceId(), "Shorecrasher Elemental", source.getSourceId(), game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
-                    card.setFaceDown(true);
-                    return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    return card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId(), false, true);
                 }
             }
         }

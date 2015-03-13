@@ -107,7 +107,7 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
         }
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+            if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
             }
         }

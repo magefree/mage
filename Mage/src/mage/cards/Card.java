@@ -54,8 +54,8 @@ public interface Card extends MageObject {
     List<String> getRules(Game game);  // gets card rules + in game modifications
     String getExpansionSetCode();
     String getTokenSetCode();
-    void setFaceDown(boolean value);
-    boolean isFaceDown();
+    void setFaceDown(boolean value, Game game);
+    boolean isFaceDown(Game game);
     boolean turnFaceUp(Game game, UUID playerId);
     boolean turnFaceDown(Game game, UUID playerId);
     boolean isFlipCard();
@@ -106,12 +106,12 @@ public interface Card extends MageObject {
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped);
-    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects);
     List<Mana> getMana();
 
     void build();
 
-    void setUsesVariousArt(boolean usesVariousArt);
     /**
      *
      * @return true if there exists various art images for this card
@@ -127,9 +127,6 @@ public interface Card extends MageObject {
     void removeCounters(String name, int amount, Game game);
     void removeCounters(Counter counter, Game game);
     
-    void setMorphCard(boolean morphCard);
-    boolean isMorphCard();
-
     @Override
     Card copy();
     

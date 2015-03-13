@@ -114,12 +114,10 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             Card sourceCard = game.getCard(source.getSourceId());
             if (sourcePermanent != null && sourceCard != null) {                
                 player.moveCardToExileWithInfo(sourcePermanent, sourcePermanent.getId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD);
-                sourceCard.setFaceDown(true);
                 cardsToManifest.add(sourceCard);
             }
             if (sourcePermanent!= null && player.getLibrary().size() > 0) {
                 Card cardFromLibrary = player.getLibrary().removeFromTop(game);
-                cardFromLibrary.setFaceDown(true);
                 player.moveCardToExileWithInfo(cardFromLibrary, sourcePermanent.getId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY);
                 cardsToManifest.add(cardFromLibrary);
             }
@@ -128,7 +126,6 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
             for (Card card : cardsToManifest) {
-                card.setFaceDown(true);
                 ManaCosts manaCosts = null;
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -138,7 +135,7 @@ class JeskaiInfiltratorEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
-                if (card.moveToZone(Zone.BATTLEFIELD, newSource.getSourceId(), game, false)) {
+                if (player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId(), false, true)) {
                     game.informPlayers(new StringBuilder(player.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                 }

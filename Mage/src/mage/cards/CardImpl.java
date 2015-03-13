@@ -39,6 +39,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -78,7 +79,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected String expansionSetCode;
     protected String tokenSetCode;
     protected Rarity rarity;
-    protected boolean faceDown;
     protected boolean canTransform;
     protected Card secondSideCard;
     protected boolean nightCard;
@@ -143,7 +143,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         cardNumber = card.cardNumber;
         expansionSetCode = card.expansionSetCode;
         rarity = card.rarity;
-        faceDown = card.faceDown;
 
         canTransform = card.canTransform;
         if (canTransform) {
@@ -155,7 +154,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
         usesVariousArt = card.usesVariousArt;
-        morphCard = card.isMorphCard();
     }
 
     @Override
@@ -341,10 +339,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }
             
-            if (isFaceDown() && !event.getToZone().equals(Zone.BATTLEFIELD)) { // to battlefield is possible because of Morph
-                setFaceDown(false);
-                game.getCard(this.getId()).setFaceDown(false);
-            }
+            setFaceDown(false, game);
             updateZoneChangeCounter();
             switch (event.getToZone()) {
                 case GRAVEYARD:
@@ -477,6 +472,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             } else {
                 game.getExile().createZone(exileId, name).add(this);
             }
+            setFaceDown(false, game);
             updateZoneChangeCounter();
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
@@ -487,17 +483,21 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, false);
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, false, false, null);
     }
         
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped){
-        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, null);
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, false, null);
+    }
 
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown){
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, facedown, null);
     }
      
     @Override   
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects){
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects){
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
         if (!game.replaceEvent(event)) {
             if (fromZone != null) {
@@ -514,10 +514,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     case EXILED:
                         game.getExile().removeCard(this, game);
-                        if (isFaceDown()) {
-                            // 110.6b Permanents enter the battlefield untapped, unflipped, face up, and phased in unless a spell or ability says otherwise.
-                            this.setFaceDown(false);
-                        }
                         removed = true;
                         break;
                     case COMMAND:
@@ -543,6 +539,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             setZone(Zone.BATTLEFIELD, game);
             game.setScopeRelevant(true);
             permanent.setTapped(tapped);
+            permanent.setFaceDown(facedown, game);
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);
             game.applyEffects();
@@ -553,21 +550,20 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setFaceDown(boolean value) {
-        faceDown = value;
+    public void setFaceDown(boolean value, Game game) {
+        game.getState().getCardState(objectId).setFaceDown(value);
     }
 
     @Override
-    public boolean isFaceDown() {
-        return faceDown;
+    public boolean isFaceDown(Game game) {
+        return game.getState().getCardState(objectId).isFaceDown();
     }
 
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEUP, getId(), playerId);
         if (!game.replaceEvent(event)) {
-            setFaceDown(false);
-            game.getCard(objectId).setFaceDown(false); // Another instance?
+            setFaceDown(false, game);
             for (Ability ability :abilities) { // abilities that were set to not visible face down must be set to visible again
                 if (ability.getWorksFaceDown() && !ability.getRuleVisible()) {
                     ability.setRuleVisible(true);
@@ -583,8 +579,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     public boolean turnFaceDown(Game game, UUID playerId) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.TURNFACEDOWN, getId(), playerId);
         if (!game.replaceEvent(event)) {
-            setFaceDown(true);
-            game.getCard(objectId).setFaceDown(true); // Another instance?
+            setFaceDown(true, game);
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNEDFACEDOWN, getId(), playerId));
             return true;
         }
@@ -637,11 +632,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public void build() {}
-
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        this.usesVariousArt = usesVariousArt;
-    }
 
     @Override
     public boolean getUsesVariousArt() {
@@ -714,20 +704,10 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     }
 
     @Override
-    public void setMorphCard(boolean morphCard) {
-        this.morphCard = morphCard;
-    }
-
-    @Override
-    public boolean isMorphCard() {
-        return morphCard;
-    }
-
-    @Override
     public String getLogName() {
-        if (this.isFaceDown()) {
-            return "facedown card";
-        }
+//        if (this.isFaceDown()) {
+//            return "facedown card";
+//        }
         return name;
     }
 
