@@ -70,13 +70,16 @@ public class AjaniGoldmane extends CardImpl {
         this.color.setWhite(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
+        // +1: You gain 2 life.
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(2), 1));
 
+        // -1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
         Effects effects1 = new Effects();
         effects1.add(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()));
         effects1.add(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(new LoyaltyAbility(effects1, -1));
 
+        // -6: Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AvatarToken()), -6));
 
     }
