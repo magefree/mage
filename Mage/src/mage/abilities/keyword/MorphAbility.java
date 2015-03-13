@@ -122,7 +122,6 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         super(Zone.HAND, null);
         this.morphCosts = morphCosts;
         this.megamorph = megamorph;
-        card.setMorphCard(true);
         this.setWorksFaceDown(true);
         StringBuilder sb = new StringBuilder();
         if (megamorph) {
@@ -203,7 +202,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
             Spell spell = game.getStack().getSpell(ability.getId());
             if (player != null && spell != null) {
                 this.resetMorph();
-                spell.setFaceDown(true); // so only the back is visible
+                spell.setFaceDown(true, game); // so only the back is visible
                 if (alternateCosts.canPay(ability, sourceId, controllerId, game)) {
                     if (player.chooseUse(Outcome.Benefit, new StringBuilder("Cast this card as a 2/2 face-down creature for ").append(getCosts().getText()).append(" ?").toString(), game)) {
                         activateMorph(game);
@@ -226,7 +225,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                         spellColor.setWhite(false);
                         spellColor.setBlue(false);
                     } else {
-                        spell.setFaceDown(false);
+                        spell.setFaceDown(false, game);
                     }
                 }
             }

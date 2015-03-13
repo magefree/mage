@@ -132,7 +132,7 @@ public class PlayerView implements Serializable {
                 if(commander.getControllerId().equals(this.playerId)){
                     Card sourceCard = game.getCard(commander.getSourceId());
                     if(sourceCard != null){
-                        commandList.add(new CommanderView(commander, sourceCard));
+                        commandList.add(new CommanderView(commander, sourceCard, game));
                     }
                 }
             }

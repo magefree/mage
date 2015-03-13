@@ -107,8 +107,8 @@ class MemoryJarEffect extends OneShotEffect {
                     Card card = hand.get(hand.iterator().next(), game);
                     if(card != null)
                     {
-                        card.setFaceDown(true);
                         card.moveToExile(getId(), "Memory Jar", source.getSourceId(), game);
+                        card.setFaceDown(true, game);
                         cards.add(card);
                     }
                 }

@@ -30,12 +30,12 @@ package mage.sets.journeyintonyx;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.Card;
@@ -99,7 +99,7 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     private int lastTriggeredTurn;
     
     KeranosGodOfStormsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EmptyEffect(""), false);
+        super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
     KeranosGodOfStormsTriggeredAbility(final KeranosGodOfStormsTriggeredAbility ability) {

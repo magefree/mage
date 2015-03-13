@@ -30,6 +30,7 @@ package mage.abilities.common;
 import java.io.ObjectStreamException;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.constants.Zone;
 
 /**
@@ -50,7 +51,7 @@ public class CanBeYourCommanderAbility extends StaticAbility implements MageSing
     }
 
     private CanBeYourCommanderAbility() {
-        super(Zone.ALL, new EmptyEffect("{this} can be your commander"));
+        super(Zone.ALL, new InfoEffect("{this} can be your commander"));
     }
 
     @Override

@@ -88,7 +88,16 @@ public class PermanentCard extends PermanentImpl {
     protected void copyFromCard(Card card) {
         this.name = card.getName();
         this.abilities.clear();
-        this.abilities.addAll(card.getAbilities().copy());
+        if (this.faceDown) {
+            for (Ability ability: card.getAbilities()) {
+                if (ability.getWorksFaceDown()) {
+                    this.abilities.add(ability.copy());
+                }
+            }
+        }
+        else {
+            this.abilities = card.getAbilities().copy();
+        }
         this.abilities.setControllerId(this.controllerId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
@@ -116,8 +125,6 @@ public class PermanentCard extends PermanentImpl {
         }
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
-        this.faceDown = card.isFaceDown();
-        this.morphCard = card.isMorphCard();
     }
 
     public Card getCard() {
@@ -134,12 +141,6 @@ public class PermanentCard extends PermanentImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             Card originalCard = game.getCard(this.getId());
-            if (isFaceDown()) {
-                setFaceDown(false);
-                if (originalCard != null) {
-                    originalCard.setFaceDown(false); //TODO: Do this in a better way
-                }
-            }
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
                 Player owner = game.getPlayer(ownerId);
@@ -190,10 +191,6 @@ public class PermanentCard extends PermanentImpl {
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        if (isMorphCard() && isFaceDown()) {
-            setFaceDown(false);
-            game.getCard(this.getId()).setFaceDown(false); //TODO: Do this in a better way
-        }
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
@@ -228,16 +225,6 @@ public class PermanentCard extends PermanentImpl {
         if (super.turnFaceUp(game, playerId)) {
             setManifested(false);
             setMorphed(false);
-            card.setFaceDown(false);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean turnFaceDown(Game game, UUID playerId) {
-        if (super.turnFaceDown(game, playerId)) {
-            card.setFaceDown(true);
             return true;
         }
         return false;
@@ -259,16 +246,8 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public void setFaceDown(boolean value) {
-        super.setFaceDown(value);
-        if (card != null) {
-            card.setFaceDown(value);
-        }
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCost() {
-        if (isFaceDown()) { // face down permanent has always {0} mana costs
+        if (faceDown) { // face down permanent has always {0} mana costs
             manaCost.clear();
             return manaCost;
         }

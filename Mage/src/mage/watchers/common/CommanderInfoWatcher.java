@@ -48,29 +48,33 @@ import mage.watchers.Watcher;
  *
  * @author Plopman
  */
-public class CommanderCombatDamageWatcher extends Watcher {
 
-    public Map<UUID, Integer> damageToPlayer = new HashMap<UUID, Integer>();
+public class CommanderInfoWatcher extends Watcher {
 
-    public CommanderCombatDamageWatcher(UUID commander) {
+    public Map<UUID, Integer> damageToPlayer = new HashMap<>();
+    public boolean checkCommanderDamage;
+
+    public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
         super("CommanderCombatDamageWatcher", WatcherScope.CARD);
         this.sourceId = commander;
+        this.checkCommanderDamage = checkCommanderDamage;
     }
     
 
-    public CommanderCombatDamageWatcher(final CommanderCombatDamageWatcher watcher) {
+    public CommanderInfoWatcher(final CommanderInfoWatcher watcher) {
         super(watcher);
         this.damageToPlayer.putAll(watcher.damageToPlayer);
+        this.checkCommanderDamage = watcher.checkCommanderDamage;
     }
 
     @Override
-    public CommanderCombatDamageWatcher copy() {
-        return new CommanderCombatDamageWatcher(this);
+    public CommanderInfoWatcher copy() {
+        return new CommanderInfoWatcher(this);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
+        if (checkCommanderDamage && event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
             if (sourceId.equals(event.getSourceId())) {
                 DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
                 if (damageEvent.isCombatDamage()) {
@@ -106,22 +110,24 @@ public class CommanderCombatDamageWatcher extends Watcher {
             sb.append("<b>Commander</b>");
             Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
             if (castCount != null) {
-                sb.append(" ").append(castCount).append(castCount.intValue() == 1 ? " time":" times").append(" casted from the command zone.");
+                sb.append(" ").append(castCount).append(castCount == 1 ? " time":" times").append(" casted from the command zone.");
             }
             this.addInfo(object, "Commander",sb.toString(), game);
-            for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
-                Player damagedPlayer = game.getPlayer(entry.getKey());
-                sb.setLength(0);
-                sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getName()).append(".");
-                this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString(), game);
+            
+            if (checkCommanderDamage) {
+                for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
+                    Player damagedPlayer = game.getPlayer(entry.getKey());
+                    sb.setLength(0);
+                    sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getName()).append(".");
+                    this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString(), game);
+                }
             }
         }
     }
 
     private void addInfo(MageObject object, String key, String value, Game game) {
-        if (object instanceof Card) {
-            ((Card) object).addInfo(key, value, game);
-        } else if (object instanceof Permanent) {
+        ((Card) object).addInfo(key, value, game);
+        if (object instanceof Permanent) {
             ((Permanent) object).addInfo(key, value, game);
         }
     }

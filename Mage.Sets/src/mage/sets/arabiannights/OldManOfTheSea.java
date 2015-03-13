@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.CompoundCondition;
@@ -39,6 +38,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -126,7 +126,7 @@ result is save to a state value to be available for the condition of the continu
 class OldManOfTheSeaStateBasedTriggeredAbility extends StateTriggeredAbility {
 
     public OldManOfTheSeaStateBasedTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EmptyEffect(""));
+        super(Zone.BATTLEFIELD, new InfoEffect(""));
         this.setRuleVisible(false);
         this.usesStack = false;
     }

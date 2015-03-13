@@ -87,7 +87,7 @@ public class CardView extends SimpleCardView {
     protected boolean transformed;
 
     protected boolean flipCard;
-    protected boolean morphCard;
+    protected boolean faceDown;
     
     protected String alternateName;
     protected String originalName;
@@ -134,17 +134,16 @@ public class CardView extends SimpleCardView {
      *
      * @param card
      * @param game
-     * @param cardId
+     * @param cardId not used?
      * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
      */
     public CardView(Card card, Game game, UUID cardId, boolean controlled) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt(), card.getTokenSetCode());
-        this.morphCard = card.isMorphCard();
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode());
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
-        if (card.isFaceDown()) {
+        if (card.isFaceDown(game)) {
             this.fillEmpty(card, controlled);
-            if (card.isMorphCard() && card instanceof Spell) {
+            if (card instanceof Spell) {
                 // special handling for casting of Morph cards
                 if (controlled) {
                     this.name = card.getName();
@@ -198,7 +197,11 @@ public class CardView extends SimpleCardView {
 
         this.name = card.getImageName();
         this.displayName = card.getName();
-        this.rules = card.getRules(game);
+        if (game == null) {
+            this.rules = card.getRules();
+        } else {
+            this.rules = card.getRules(game);
+        }
         this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
@@ -238,7 +241,7 @@ public class CardView extends SimpleCardView {
         this.color = card.getColor();
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
-
+        this.faceDown = game != null ? card.isFaceDown(game) : false;
         
         if (card instanceof PermanentToken) {
             this.isToken = true;
@@ -295,7 +298,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, false, "");
+        super(object.getId(), "", 0, false, "");
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -339,7 +342,7 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, false, "");
+        super(null, "", 0, false, "");
     }
     
     public CardView(EmblemView emblem) {
@@ -355,7 +358,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(boolean empty) {
-        super(null, "", 0, false, false, "");
+        super(null, "", 0, false, "");
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
@@ -413,7 +416,7 @@ public class CardView extends SimpleCardView {
     }
 
     CardView(Token token) {
-        super(token.getId(), "", 0, false, false, "");
+        super(token.getId(), "", 0, false, "");
         this.isToken  = true;
         this.id = token.getId();
         this.name = token.getName();
@@ -577,7 +580,6 @@ public class CardView extends SimpleCardView {
         return getName() + " [" + getId() + "]";
     }
 
-    @Override
     public boolean isFaceDown() {
         return faceDown;
     }
@@ -690,10 +692,6 @@ public class CardView extends SimpleCardView {
 
     public boolean isFlipCard() {
         return flipCard;
-    }
-
-    public boolean isMorphCard() {
-        return morphCard;
     }
 
     public boolean isToRotate() {

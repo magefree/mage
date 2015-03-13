@@ -113,8 +113,8 @@ class CloneShellEffect extends OneShotEffect {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.setFaceDown(true);
                 card.moveToExile(getId(), "Clone Shell (Imprint)", source.getSourceId(), game);
+                card.setFaceDown(true, game);
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {
                     permanent.imprint(card.getId(), game);
@@ -166,7 +166,7 @@ class CloneShellDiesEffect extends OneShotEffect {
             List<UUID> imprinted = permanent.getImprinted();
             if (imprinted.size() > 0) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
-                imprintedCard.setFaceDown(false);
+                imprintedCard.setFaceDown(false, game);
                 if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
                     imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
                 }

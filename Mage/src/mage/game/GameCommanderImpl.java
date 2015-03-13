@@ -34,8 +34,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.CommanderManaReplacementEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
@@ -52,12 +52,12 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.util.CardUtil;
-import mage.watchers.common.CommanderCombatDamageWatcher;
+import mage.watchers.common.CommanderInfoWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
     private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
-    private final Set<CommanderCombatDamageWatcher> commanderCombatWatcher = new HashSet<>();
+    private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
     
     protected boolean alsoLibrary; // replace also commander going to library
     protected boolean startingPlayerSkipsDraw = true;
@@ -74,7 +74,7 @@ public abstract class GameCommanderImpl extends GameImpl {
 
     @Override
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new EmptyEffect("Commander effects"));
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move commander to command zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -88,7 +88,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                         getState().setValue(commander.getId() + "_castCount", 0);
-                        CommanderCombatDamageWatcher watcher = new CommanderCombatDamageWatcher(commander.getId());
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), true);
                         getState().getWatchers().add(watcher);
                         this.commanderCombatWatcher.add(watcher);
                         watcher.addCardInfoToCommander(this);
@@ -127,8 +127,8 @@ public abstract class GameCommanderImpl extends GameImpl {
                     if(!mulliganedCards.containsKey(playerId)){
                         mulliganedCards.put(playerId, new CardsImpl());
                     }
-                    card.setFaceDown(true);
                     card.moveToExile(null, "", null, this);
+                    card.setFaceDown(true, this);
                     mulliganedCards.get(playerId).add(card);
                 }
             }
@@ -165,8 +165,8 @@ public abstract class GameCommanderImpl extends GameImpl {
         if(player != null && mulliganedCards.containsKey(playerId)){
             for(Card card : mulliganedCards.get(playerId).getCards(this)){
                 if(card != null){
-                    card.setFaceDown(false);
                     card.moveToZone(Zone.LIBRARY, null, this, false);
+                    card.setFaceDown(false, this);
                 }
             }
             if(mulliganedCards.get(playerId).size() > 0){
@@ -182,7 +182,7 @@ public abstract class GameCommanderImpl extends GameImpl {
      */
     @Override
     protected boolean checkStateBasedActions() {
-        for (CommanderCombatDamageWatcher damageWatcher: commanderCombatWatcher) {
+        for (CommanderInfoWatcher damageWatcher: commanderCombatWatcher) {
             for(Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()){
                 if (entrySet.getValue() > 20) {
                     Player player = getPlayer(entrySet.getKey());

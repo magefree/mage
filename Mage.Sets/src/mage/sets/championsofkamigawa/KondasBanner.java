@@ -31,9 +31,9 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -69,7 +69,7 @@ public class KondasBanner extends CardImpl {
         this.subtype.add("Equipment");
 
         // Konda's Banner can be attached only to a legendary creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect("{this} can be attached only to a legendary creature")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this} can be attached only to a legendary creature")));
 
         // Creatures that share a color with equipped creature get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));

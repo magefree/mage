@@ -82,7 +82,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(getSourceId())) {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
             if (sourcePermanent != null) {
-                if (sourcePermanent.isFaceDown()) {
+                if (sourcePermanent.isFaceDown(game)) {
                     // if face down and it's not itself that is turned face up, it does not trigger
                     return false;
                 }

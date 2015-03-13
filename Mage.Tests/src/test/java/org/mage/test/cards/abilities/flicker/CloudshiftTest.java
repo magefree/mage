@@ -5,6 +5,7 @@ import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -73,7 +74,8 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerA, "Bonesplitter");
-
+        
+        // Exile target creature you control, then return that card to the battlefield under your control.
         addCard(Zone.HAND, playerA, "Cloudshift");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion");
@@ -104,6 +106,8 @@ public class CloudshiftTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         addCard(Zone.HAND, playerA, "Cloudshift");
+        // Haste
+        // When Fervent Cathar enters the battlefield, target creature can't block this turn.
         addCard(Zone.HAND, playerB, "Fervent Cathar");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Fervent Cathar");
@@ -147,4 +151,82 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertLife(playerA, 27); // 5 from the first with Giant Growth + 2 from the second bear.
     }
     
+    /*
+    I had a Stoneforge Mystic equipped with a Umesawa's Jitte. I activated Jitte 4 times to make
+    Stoneforge Mystic 9/10. My opponent put into play a Flickerwisp with his AEther Vial and
+    targeted my Stoneforge Mystic. At the end of my turn, Stoneforge Mystic came back as a 9/10,
+    before going down to 1/2 normally once my turn ended.
+    */
+    @Test
+    public void testDontApplyEffectToNewInstanceOfPreviousEquipedPermanent() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Umezawa's Jitte");
+
+        // Exile target creature you control, then return that card to the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Cloudshift");
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Silvercoat Lion");
+        
+        attack(3, playerA, "Silvercoat Lion");
+        
+        activateAbility(3, PhaseStep.END_COMBAT, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        setModeChoice(playerA, "1");
+        castSpell(3, PhaseStep.END_COMBAT, playerA, "Cloudshift", "Silvercoat Lion", "Remove a charge counter from");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        Permanent Umezawa = getPermanent("Umezawa's Jitte", playerA.getId());
+        Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
+        assertCounterCount("Umezawa's Jitte", CounterType.CHARGE, 1);
+        assertPermanentCount(playerA,"Silvercoat Lion", 1);
+        assertGraveyardCount(playerA,"Cloudshift", 1);
+        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assert.assertTrue("Umezawa must not be connected to Silvercoat Lion",Umezawa.getAttachedTo() == null);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
+        
+    }
+    
+    @Test
+    public void testDontApplyEffectToNewInstanceOfPreviousEquipedPermanentFlickerwisp() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Umezawa's Jitte");
+
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        // Flying
+        // When Flickerwisp enters the battlefield, exile another target permanent. Return that
+        // card to the battlefield under its owner's control at the beginning of the next end step.
+        addCard(Zone.HAND, playerB, "Flickerwisp");
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {2}", "Silvercoat Lion");
+        
+        attack(3, playerA, "Silvercoat Lion");
+        
+        activateAbility(4, PhaseStep.DRAW, playerA, "Remove a charge counter from {this}: Choose one &mdash;<br>&bull  Equipped creature gets");
+        setModeChoice(playerA, "1");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerB, "Flickerwisp");
+        addTarget(playerB, "Silvercoat Lion");
+
+        setStopAt(4, PhaseStep.END_TURN);
+        execute();
+
+        Permanent Umezawa = getPermanent("Umezawa's Jitte", playerA.getId());
+        Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 18);
+        assertCounterCount("Umezawa's Jitte", CounterType.CHARGE, 1);
+        assertPermanentCount(playerA,"Silvercoat Lion", 1);
+        assertPermanentCount(playerB,"Flickerwisp", 1);
+        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assert.assertTrue("Umezawa must not be connected to Silvercoat Lion",Umezawa.getAttachedTo() == null);
+        assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
+        
+    }
 }

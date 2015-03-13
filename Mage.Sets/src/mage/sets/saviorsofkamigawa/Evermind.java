@@ -29,9 +29,9 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -52,7 +52,7 @@ public class Evermind extends CardImpl {
         this.color.setBlue(true);
 
         // <i>(Nonexistent mana costs can't be paid.)</i>
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect("<i>(Nonexistent mana costs can't be paid.)</i>"));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Nonexistent mana costs can't be paid.)</i>"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

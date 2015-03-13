@@ -99,14 +99,12 @@ class GhastlyConscriptionEffect extends OneShotEffect {
             for(Card card: targetPlayer.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                 cardsToManifest.add(card);
                 controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
-                card.setFaceDown(true);
             }
             Collections.shuffle(cardsToManifest);
             game.informPlayers(controller.getName() + " shuffles the face-down pile");
             Ability newSource = source.copy();
             newSource.setWorksFaceDown(true);
             for (Card card: cardsToManifest) {
-                card.setFaceDown(true);
                 ManaCosts manaCosts = null;
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -116,7 +114,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);
-                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
+                if (controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId(), false, true)) {
                     game.informPlayers(new StringBuilder(controller.getName())
                             .append(" puts facedown card from exile onto the battlefield").toString());
                 }

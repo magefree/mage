@@ -860,7 +860,7 @@ public abstract class AbilityImpl implements Ability {
                 return false;
             }
         } else if (object instanceof PermanentCard) {
-            if (((PermanentCard)object).isFaceDown()&& !this.getWorksFaceDown()) {
+            if (((PermanentCard)object).isFaceDown(game)&& !this.getWorksFaceDown()) {
                 return false;
             }
         }

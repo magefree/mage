@@ -84,7 +84,10 @@ public class LightningBoltTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         
         addCard(Zone.GRAVEYARD, playerB, "Forest");
+        // Destroy target creature with defender.
         addCard(Zone.GRAVEYARD, playerB, "Clear a Path");
+        // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1. 
+        // (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
         addCard(Zone.BATTLEFIELD, playerB, "Tarmogoyf");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Tarmogoyf");
@@ -93,6 +96,10 @@ public class LightningBoltTest extends CardTestPlayerBase {
         execute();
         // Tarmogoyf is a 2/3 that then takes 3 damage, then becomes a 3/4 as the 
         // Lightning Bolt is put into the graveyard and then state base actions are checked and Tarmogoyf survives.
+        // First, the Tarmogoyf will receive the damage, then Lightning Bolt goes to the graveyard. 
+        // Then the active player would receive priority - which means, that right before that happens, state-based 
+        // effects are checked: the game sees a 3/4 creature will 3 damage on it, so nothing happens. 
+        // Then the active player receives priority.
         assertPermanentCount(playerB, "Tarmogoyf", 1);
     }
 

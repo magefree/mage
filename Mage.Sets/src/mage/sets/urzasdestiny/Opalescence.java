@@ -27,9 +27,7 @@
  */
 package mage.sets.urzasdestiny;
 
-import java.util.Iterator;
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -87,7 +85,7 @@ class OpalescenceEffect extends ContinuousEffectImpl {
     
     public OpalescenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
-        staticText = "Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost.";
+        staticText = "Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost";
     }
 
     public OpalescenceEffect(final OpalescenceEffect effect) {

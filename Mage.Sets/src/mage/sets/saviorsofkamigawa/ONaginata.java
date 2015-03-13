@@ -29,10 +29,10 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -66,7 +66,7 @@ public class ONaginata extends CardImpl {
         this.subtype.add("Equipment");
 
         // O-Naginata can be attached only to a creature with 3 or more power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect("{this} can be attached only to a creature with 3 or more power")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this} can be attached only to a creature with 3 or more power")));
         
         // Equipped creature gets +3/+0 and has trample.
         Effect effect = new BoostEquippedEffect(3, 0);

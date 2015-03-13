@@ -29,8 +29,8 @@ package mage.sets.seventhedition;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
@@ -73,7 +73,7 @@ class RowenAbility extends TriggeredAbilityImpl {
     private int lastTriggeredTurn;
 
     RowenAbility() {
-        super(Zone.BATTLEFIELD, new EmptyEffect(""), false);
+        super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
     RowenAbility(final RowenAbility ability) {

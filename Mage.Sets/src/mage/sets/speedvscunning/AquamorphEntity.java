@@ -115,7 +115,7 @@ class AquamorphEntityReplacementEffect extends ReplacementEffectImpl {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             if (event.getTargetId().equals(source.getSourceId())) {
                 Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                if (sourcePermanent != null && !sourcePermanent.isFaceDown()) {
+                if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                     return true;
                 }
             }

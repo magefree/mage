@@ -29,15 +29,15 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.Target;
@@ -58,7 +58,6 @@ public class OblivionRing extends CardImpl {
     public OblivionRing(UUID ownerId) {
         super(ownerId, 20, "Oblivion Ring", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ALA";
-        this.color.setWhite(true);
 
         // When Oblivion Ring enters the battlefield, exile another target nonland permanent.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);

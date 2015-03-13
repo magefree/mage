@@ -184,7 +184,7 @@ class LensOfClarityLookFaceDownEffect extends OneShotEffect {
         Permanent faceDownCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (faceDownCreature != null) {
             Permanent copyFaceDown = faceDownCreature.copy();
-            copyFaceDown.setFaceDown(false);
+            copyFaceDown.setFaceDown(false, game);
             Cards cards = new CardsImpl();
             cards.add(copyFaceDown);
             Player player = game.getPlayer(faceDownCreature.getControllerId());
