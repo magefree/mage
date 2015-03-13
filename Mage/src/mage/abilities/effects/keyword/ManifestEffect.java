@@ -79,7 +79,6 @@ public class ManifestEffect extends OneShotEffect {
             newSource.setWorksFaceDown(true);
             List<Card> cards = controller.getLibrary().getTopCards(game, amount);
             for (Card card: cards) {
-                card.setFaceDown(true);
                 ManaCosts manaCosts = null;
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     manaCosts = card.getSpellAbility().getManaCosts();
@@ -89,7 +88,7 @@ public class ManifestEffect extends OneShotEffect {
                 }
                 MageObjectReference objectReference= new MageObjectReference(card.getId(), card.getZoneChangeCounter() +1, game);
                 game.addEffect(new BecomesFaceDownCreatureEffect(manaCosts, objectReference, Duration.Custom, FaceDownType.MANIFESTED), newSource);                                
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId());
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, newSource.getSourceId(), false, true);
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                     permanent.setManifested(true);

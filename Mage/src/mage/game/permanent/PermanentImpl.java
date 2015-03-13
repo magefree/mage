@@ -93,6 +93,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean controlledFromStartOfControllerTurn;
     protected int turnsOnBattlefield;
     protected boolean phasedIn = true;
+    protected boolean faceDown;
     protected boolean attacking;
     protected int blocking;
     // number of creatures the permanent can block
@@ -139,6 +140,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.controlledFromStartOfControllerTurn = permanent.controlledFromStartOfControllerTurn;
         this.turnsOnBattlefield = permanent.turnsOnBattlefield;
         this.phasedIn = permanent.phasedIn;
+        this.faceDown = permanent.faceDown;
         this.attacking = permanent.attacking;
         this.blocking = permanent.blocking;
         this.maxBlocks = permanent.maxBlocks;
@@ -429,6 +431,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
         }
         return false;
+    }
+
+    @Override
+    public void setFaceDown(boolean value, Game game) {
+        this.faceDown = value;
+    }
+
+    @Override
+    public boolean isFaceDown(Game game) {
+        return faceDown;
     }
 
     @Override
@@ -838,7 +850,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
-        if (this.isFaceDown()) {
+        if (this.isFaceDown(game)) {
             // remove some attributes here, bceause first apply effects comes later otherwise abilities (e.g. color related) will unintended trigger
             MorphAbility.setPermanentToFaceDownCreature(this);
         }
@@ -1226,7 +1238,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            if (isFaceDown()) {
+            if (faceDown) {
                 return "face down creature";
             } else {
                 return "a creature without name";

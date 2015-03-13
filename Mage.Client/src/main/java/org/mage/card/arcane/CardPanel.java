@@ -721,13 +721,13 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private BufferedImage getFaceDownImage() {
         if (isPermanent) {
-            if (gameCard.isMorphCard() && ((PermanentView) gameCard).isMorphed()) {
+            if (((PermanentView) gameCard).isMorphed()) {
                 return ImageCache.getMorphImage();
             } else {
                 return ImageCache.getManifestImage();
             }
         } else {
-            if (gameCard.isMorphCard() && this.gameCard instanceof StackAbilityView) {
+            if (this.gameCard instanceof StackAbilityView) {
                 return ImageCache.getMorphImage();
             } else {
                 return ImageCache.loadImage(new TFile(DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename));

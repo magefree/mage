@@ -9,6 +9,7 @@ import mage.counters.Counters;
  */
 public class CardState {
     
+    protected boolean faceDown;
     protected Map<String, String> info;
     protected Counters counters;
     
@@ -19,6 +20,7 @@ public class CardState {
     }
     
     public CardState(final CardState state) {
+        this.faceDown = state.faceDown;
         if (state.info != null) {
             info = new HashMap<>();
             info.putAll(state.info);
@@ -30,6 +32,14 @@ public class CardState {
         return new CardState(this);
     }
     
+    public void setFaceDown(boolean value) {
+        faceDown = value;
+    }
+
+    public boolean isFaceDown() {
+        return faceDown;
+    }
+
     public Counters getCounters() {
         return counters;
     }

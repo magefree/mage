@@ -575,7 +575,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
-                        if (object instanceof Card && ((Card) object).isFaceDown()) {
+                        if (object instanceof Card && ((Card) object).isFaceDown(game)) {
                             revealFaceDownCard((Card) object, game);
                             result = true;
                         }

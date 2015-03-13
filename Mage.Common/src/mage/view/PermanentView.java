@@ -84,10 +84,7 @@ public class PermanentView extends CardView {
         } else {
             if (card != null) {
                 // original may not be face down
-                boolean wasfaceDown = card.isFaceDown();
-                card.setFaceDown(false);
                 original = new CardView(card);
-                card.setFaceDown(wasfaceDown);
             } else {
                 original = null;
             }
@@ -119,7 +116,7 @@ public class PermanentView extends CardView {
            this.nameOwner = ""; 
         }
         
-        if (permanent.isFaceDown() && card != null) {
+        if (permanent.isFaceDown(game) && card != null) {
             if (controlled){
                 // must be a morphed or manifested card
                 for (Ability permanentAbility : permanent.getAbilities()) {

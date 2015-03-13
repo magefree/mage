@@ -112,8 +112,7 @@ class AshcloudPhoenixEffect extends OneShotEffect {
             if (card != null) {
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null && owner.getGraveyard().contains(card.getId())) {
-                    card.setFaceDown(true);
-                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId());
+                    player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false, true);
                 }
             }
             return true;

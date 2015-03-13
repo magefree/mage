@@ -247,7 +247,7 @@ public class ManifestTest extends CardTestPlayerBase {
         
         for (Card card :currentGame.getExile().getAllCards(currentGame)){
             if (card.getName().equals("Gore Swine")) {
-                Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown());
+                Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown(currentGame));
             }
         }
 

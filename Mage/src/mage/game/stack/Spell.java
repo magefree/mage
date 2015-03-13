@@ -267,10 +267,7 @@ public class Spell implements StackObject, Card {
             }
         } else {
             updateOptionalCosts(0);
-            if (isFaceDown()) {
-                card.setFaceDown(true);
-            }
-            result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId);
+            result = card.putOntoBattlefield(game, fromZone, ability.getSourceId(), controllerId, false, faceDown);
             return result;
         }
     }
@@ -628,7 +625,7 @@ public class Spell implements StackObject, Card {
     @Override
     public int getConvertedManaCost() {
         int cmc = 0;
-        if (this.isMorphCard() && this.isFaceDown()) {
+        if (faceDown) {
             return 0;
         }
         for (Ability spellAbility: spellAbilities) {
@@ -717,24 +714,24 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void setFaceDown(boolean value) {
+    public void setFaceDown(boolean value, Game game) {
         faceDown = value;
     }
 
     @Override
     public boolean turnFaceUp(Game game, UUID playerId) {
-        setFaceDown(false);
+        setFaceDown(false, game);
         return true;
     }
 
     @Override
     public boolean turnFaceDown(Game game, UUID playerId) {
-        setFaceDown(true);
+        setFaceDown(true, game);
         return true;
     }
 
     @Override
-    public boolean isFaceDown() {
+    public boolean isFaceDown(Game game) {
         return faceDown;
     }
 
@@ -855,7 +852,12 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects) {
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -867,11 +869,6 @@ public class Spell implements StackObject, Card {
     @Override
     public boolean getUsesVariousArt() {
         return card.getUsesVariousArt();
-    }
-
-    @Override
-    public void setUsesVariousArt(boolean usesVariousArt) {
-        card.setUsesVariousArt(usesVariousArt);
     }
 
     @Override
@@ -971,16 +968,6 @@ public class Spell implements StackObject, Card {
 
     public Card getCard() {
         return card;
-    }
-
-    @Override
-    public void setMorphCard(boolean morphCard) {
-        throw new UnsupportedOperationException("Not supported");
-    }
-
-    @Override
-    public boolean isMorphCard() {
-        return card.isMorphCard();
     }
 
     @Override

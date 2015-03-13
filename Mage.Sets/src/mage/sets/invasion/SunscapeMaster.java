@@ -59,7 +59,7 @@ public class SunscapeMaster extends CardImpl {
 
         // {G}{G}, {tap}: Creatures you control get +2/+2 until end of turn.
         Effect effect1 = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
-        effect1.setText("Creatures you control get +2/+2");
+        effect1.setText("Creatures you control get +2/+2 until end of turn");
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl("{G}{G}"));
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);

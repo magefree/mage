@@ -122,10 +122,10 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                             exileId = UUID.randomUUID();
                             exileIds.put(exileKey, exileId);
                         }
-                        card.setFaceDown(true);
                         player.moveCardToExileWithInfo(card, exileId, 
                                 new StringBuilder(sourceObject.getLogName() +" (").append(player.getName()).append(")").toString(),
                                 source.getSourceId(), game, Zone.LIBRARY);
+                        card.setFaceDown(true, game);
                     }
                 }
             }
@@ -173,7 +173,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
                         ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                         if (exileZone != null) {
                             for(Card card: exileZone.getCards(game)) {
-                                card.setFaceDown(false);
+//                                card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
                                     player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
                                 }
