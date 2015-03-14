@@ -27,15 +27,9 @@
  */
 package mage.sets.nemesis;
 
-import java.util.UUID;
-
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -44,11 +38,12 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,13 +82,14 @@ class TreetopBracersAbility extends StaticAbility {
     private static FilterCreaturePermanent onlyFlyingCreatures = new FilterCreaturePermanent("except by creatures with flying");
 
     static {
-        onlyFlyingCreatures.add(new AbilityPredicate(FlyingAbility.class));
+        onlyFlyingCreatures.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
     public TreetopBracersAbility() {
         super(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         Effect cantBeBlocked = new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, onlyFlyingCreatures, AttachmentType.AURA);
         cantBeBlocked.setText("and can't be blocked except by creatures with flying.");
+        addEffect(cantBeBlocked);
     }
 
     public TreetopBracersAbility(TreetopBracersAbility ability) {
