@@ -25,48 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class SegmentedKrotiq extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    public SegmentedKrotiq(UUID ownerId) {
+        super(ownerId, 202, "Segmented Krotiq", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Insect");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(5);
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        // Megamorph {6}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}"), true));
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public SegmentedKrotiq(final SegmentedKrotiq card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public SegmentedKrotiq copy() {
+        return new SegmentedKrotiq(this);
     }
 }

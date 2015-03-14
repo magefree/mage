@@ -144,9 +144,7 @@ class GruulRagebeastEffect extends OneShotEffect {
                 && target != null
                 && triggeredCreature.getCardType().contains(CardType.CREATURE)
                 && target.getCardType().contains(CardType.CREATURE)) {
-            triggeredCreature.damage(target.getPower().getValue(), target.getId(), game, false, true);
-            target.damage(triggeredCreature.getPower().getValue(), triggeredCreature.getId(), game, false, true);
-            return true;
+            return triggeredCreature.fight(target, source, game);
         }
         return false;
     }

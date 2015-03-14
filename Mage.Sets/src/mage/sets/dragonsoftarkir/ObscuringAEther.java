@@ -25,48 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.other.FaceDownPredicate;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class ObscuringAEther extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Face-down creature spells");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+    static {
+        filter.add(new FaceDownPredicate());
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public ObscuringAEther(UUID ownerId) {
+        super(ownerId, 194, "Obscuring AEther", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "DTK";
+
+        // Face-down creature spells you cast cost {1} less to cast.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+
+        // {1}{G}: Turn Obscuring AEther face down.
+        Effect effect = new BecomesFaceDownCreatureEffect(null, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED);
+        effect.setText("Turn Obscuring AEther face down. <i>(It becomes a 2/2 creature.)</i>");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
+
+    }
+
+    public ObscuringAEther(final ObscuringAEther card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public ObscuringAEther copy() {
+        return new ObscuringAEther(this);
     }
 }

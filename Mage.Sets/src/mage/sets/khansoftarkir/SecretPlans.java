@@ -28,9 +28,8 @@
 package mage.sets.khansoftarkir;
 
 import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
@@ -38,11 +37,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.FaceDownPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -67,7 +64,7 @@ public class SecretPlans extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,1, Duration.WhileOnBattlefield, filter)));
 
         // Whenever a permanent you control is turned face up, draw a card.
-        this.addAbility(new SecretPlanTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(new DrawCardSourceControllerEffect(1), new FilterControlledPermanent()));
 
     }
 
@@ -78,40 +75,5 @@ public class SecretPlans extends CardImpl {
     @Override
     public SecretPlans copy() {
         return new SecretPlans(this);
-    }
-}
-
-class SecretPlanTriggeredAbility extends TriggeredAbilityImpl{
-
-    public SecretPlanTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public SecretPlanTriggeredAbility(final SecretPlanTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SecretPlanTriggeredAbility copy() {
-        return new SecretPlanTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.TURNEDFACEUP;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent.getControllerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When a permanent you control is turned face up, " + super.getRule();
     }
 }

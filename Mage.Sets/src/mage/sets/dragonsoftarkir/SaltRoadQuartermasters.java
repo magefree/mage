@@ -25,48 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class SaltRoadQuartermasters extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    public SaltRoadQuartermasters(UUID ownerId) {
+        super(ownerId, 199, "Salt Road Quartermasters", Rarity.UNCOMMON, new CardType[]{}, "{2}{G}");
+        this.expansionSetCode = "DTK";
+        this.supertype.add("Creautre");
+        this.supertype.add("Human");
+        this.supertype.add("Soldier");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Salt Road QUartermasters enters the battlefield with two +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+                "with two +1/+1 counters on it"));
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        // {2}{G}, Remove a +1/+1 counter from Salt Road Quartermasters: Put a +1/+1 counter on target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new ManaCostsImpl("{2}{G}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
+
+
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public SaltRoadQuartermasters(final SaltRoadQuartermasters card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public SaltRoadQuartermasters copy() {
+        return new SaltRoadQuartermasters(this);
     }
 }

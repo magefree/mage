@@ -599,7 +599,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @return
      */
     private int getDamageValueFromPermanent(Permanent permanent, Game game) {
-        if (game.getCombat().useToughnessForDamage()) {
+        if (game.getCombat().useToughnessForDamage(permanent, game)) {
             return permanent.getToughness().getValue();
         } else {
             return permanent.getPower().getValue();

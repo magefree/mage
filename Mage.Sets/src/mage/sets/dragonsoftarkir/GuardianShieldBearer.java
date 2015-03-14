@@ -25,48 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class GuardianShieldBearer extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public GuardianShieldBearer(UUID ownerId) {
+        super(ownerId, 189, "Guardian Shield-Bearer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Megamorph {3}{G}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}"), true));
+
+        // When Guardian Shield-Bearer is turned face up, put a +1/+1 counter on another target creature you control.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        ability.addTarget(new TargetControlledCreaturePermanent(filter));
+        this.addAbility(ability);
+
+    }
+
+    public GuardianShieldBearer(final GuardianShieldBearer card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public GuardianShieldBearer copy() {
+        return new GuardianShieldBearer(this);
     }
 }

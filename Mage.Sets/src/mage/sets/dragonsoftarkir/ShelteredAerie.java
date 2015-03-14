@@ -25,48 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class ShelteredAerie extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    public ShelteredAerie(UUID ownerId) {
+        super(ownerId, 206, "Sheltered Aerie", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Aura");
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
+        Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public ShelteredAerie(final ShelteredAerie card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public ShelteredAerie copy() {
+        return new ShelteredAerie(this);
     }
 }

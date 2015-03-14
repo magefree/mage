@@ -25,15 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -43,30 +46,32 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class DragonScarredBear extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
-
-        this.color.setBlack(true);
+    public DragonScarredBear(UUID ownerId) {
+        super(ownerId, 183, "Dragon-Scarred Bear", Rarity.COMMON, new CardType[]{}, "{2}{G}");
+        this.expansionSetCode = "DTK";
+        this.supertype.add("Creaure");
+        this.supertype.add("Bear");
         this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        // <i>Formidable</i> - {1}{G}: Regenerate Dragon-Scarred Bear. Activate this only if creatures you control have total power 8 or greater.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new RegenerateSourceEffect(),
+                new ManaCostsImpl("{1}{G}"),
+                FormidableCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.FORMIDABLE);
+        this.addAbility(ability);
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public DragonScarredBear(final DragonScarredBear card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public DragonScarredBear copy() {
+        return new DragonScarredBear(this);
     }
 }

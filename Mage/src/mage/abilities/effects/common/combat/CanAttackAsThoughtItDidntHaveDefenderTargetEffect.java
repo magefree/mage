@@ -25,48 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.Outcome;
+import mage.game.Game;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+public class CanAttackAsThoughtItDidntHaveDefenderTargetEffect extends AsThoughEffectImpl {
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+    public CanAttackAsThoughtItDidntHaveDefenderTargetEffect(Duration duration) {
+        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
-        super(card);
+    public CanAttackAsThoughtItDidntHaveDefenderTargetEffect(final CanAttackAsThoughtItDidntHaveDefenderTargetEffect effect) {
+        super(effect);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public CanAttackAsThoughtItDidntHaveDefenderTargetEffect copy() {
+        return new CanAttackAsThoughtItDidntHaveDefenderTargetEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return this.getTargetPointer().getTargets(game, source).contains(objectId);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        if (!mode.getTargets().isEmpty()) {
+            if (this.duration == Duration.EndOfTurn) {
+                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack this turn as though it didn't have defender";
+            } else {
+                return "Target " + mode.getTargets().get(0).getTargetName() + " can attack as though it didn't have defender";
+            }
+        } else {
+            throw new UnsupportedOperationException("No target defined");
+        }
     }
 }

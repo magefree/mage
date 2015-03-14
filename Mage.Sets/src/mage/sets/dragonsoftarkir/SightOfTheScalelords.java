@@ -28,44 +28,56 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.Filter.ComparisonType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class CollectedCompany extends CardImpl {
+public class SightOfTheScalelords extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("up to two creature cards with converted mana cost 3 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control with toughness 4 or greater");
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 4));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.GreaterThan, 3));
     }
 
-    public CollectedCompany(UUID ownerId) {
-        super(ownerId, 177, "Collected Company", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");
+    public SightOfTheScalelords(UUID ownerId) {
+        super(ownerId, 207, "Sight of the Scalelords", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "DTK";
 
-        // Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(6, 2, filter, false, true, Zone.BATTLEFIELD, false));
-
+        // At the beginning of combat on your turn, creature you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.
+        Effect effect = new BoostControlledEffect(2,2,Duration.EndOfTurn, filter, false);
+        effect.setText("creature you control with toughness 4 or greater get +2/+2");
+        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false, false);
+        effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter);
+        effect.setText("and gain vigilance until end of turn");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public CollectedCompany(final CollectedCompany card) {
+    public SightOfTheScalelords(final SightOfTheScalelords card) {
         super(card);
     }
 
     @Override
-    public CollectedCompany copy() {
-        return new CollectedCompany(this);
+    public SightOfTheScalelords copy() {
+        return new SightOfTheScalelords(this);
     }
 }

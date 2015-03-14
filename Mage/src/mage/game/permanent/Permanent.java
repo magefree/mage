@@ -119,6 +119,8 @@ public interface Permanent extends Card, Controllable {
     boolean destroy(UUID sourceId, Game game, boolean noRegen);
     boolean sacrifice(UUID sourceId, Game game);
     boolean regenerate(UUID sourceId, Game game);
+    boolean fight(Permanent fightTarget, Ability source, Game game);
+
     void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
     String getValue();
 

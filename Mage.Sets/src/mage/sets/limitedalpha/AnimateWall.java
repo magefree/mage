@@ -32,7 +32,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -74,7 +74,7 @@ public class AnimateWall extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted Wall can attack as though it didn't have defender.
-        Ability canAttackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield));
+        Ability canAttackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
         Effect enchantEffect = new GainAbilityAttachedEffect(canAttackAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         enchantEffect.setText("Enchanted Wall can attack as though it didn't have defender");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, enchantEffect));

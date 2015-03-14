@@ -61,6 +61,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
     // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
     private boolean useToughnessForDamage;
+    private List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
@@ -130,16 +131,28 @@ public class Combat implements Serializable, Copyable<Combat> {
         return blockers;
     }
 
-    public boolean useToughnessForDamage() {
-        return useToughnessForDamage;
+    public boolean useToughnessForDamage(Permanent permanent, Game game) {
+        if (useToughnessForDamage) {
+            for(FilterCreaturePermanent filter: useToughnessForDamageFilters) {
+                if (filter.match(permanent, game)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void setUseToughnessForDamage(boolean useToughnessForDamage) {
         this.useToughnessForDamage = useToughnessForDamage;
     }
 
+    public void addUseToughnessForDamageFilter(FilterCreaturePermanent filter) {
+        this.useToughnessForDamageFilters.add(filter);
+    }
+
     public void reset() {
         this.useToughnessForDamage = false;
+        this.useToughnessForDamageFilters.clear();
     }
 
     public void clear() {

@@ -25,17 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.condition.common.FormidableCondition;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -43,30 +46,35 @@ import mage.constants.Zone;
  *
  * @author LevelX2
  */
-public class ReturnedPhalanx extends CardImpl {
+public class CircleOfElders extends CardImpl {
 
-    public ReturnedPhalanx(UUID ownerId) {
-        super(ownerId, 104, "Returned Phalanx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Zombie");
-        this.subtype.add("Soldier");
+    public CircleOfElders(UUID ownerId) {
+        super(ownerId, 176, "Circle of Elders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        // <i>Formidable</i> - {T}: Add {3} to your mana pool. Activate this only if creatures you control have total power 8 or greater.
+        Ability ability = new ActivateIfConditionManaAbility(
+                Zone.BATTLEFIELD,
+                new BasicManaEffect(new Mana(0,0,0,0,0,3,0)),
+                new TapSourceCost(),
+                FormidableCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.FORMIDABLE);
+        this.addAbility(ability);
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    public CircleOfElders(final CircleOfElders card) {
         super(card);
     }
 
     @Override
-    public ReturnedPhalanx copy() {
-        return new ReturnedPhalanx(this);
+    public CircleOfElders copy() {
+        return new CircleOfElders(this);
     }
 }
