@@ -31,15 +31,20 @@ import java.util.UUID;
 
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -65,8 +70,7 @@ public class TreetopBracers extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TreetopBracersEffect()));
+        this.addAbility(new TreetopBracersAbility());
     }
 
     public TreetopBracers(final TreetopBracers card) {
@@ -79,34 +83,30 @@ public class TreetopBracers extends CardImpl {
     }
 }
 
-class TreetopBracersEffect extends RestrictionEffect {
+class TreetopBracersAbility extends StaticAbility {
+    private static FilterCreaturePermanent onlyFlyingCreatures = new FilterCreaturePermanent("except by creatures with flying");
 
-    public TreetopBracersEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't be blocked except by creatures with flying.";
+    static {
+        onlyFlyingCreatures.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public TreetopBracersEffect(final TreetopBracersEffect effect) {
-        super(effect);
+    public TreetopBracersAbility() {
+        super(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        Effect cantBeBlocked = new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, onlyFlyingCreatures, AttachmentType.AURA);
+        cantBeBlocked.setText("and can't be blocked except by creatures with flying.");
     }
 
+    public TreetopBracersAbility(TreetopBracersAbility ability) {
+        super(ability);
+    }
+
+    /**
+     * Creates a fresh copy of this ability.
+     *
+     * @return A new copy of this ability.
+     */
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent aura = game.getPermanent(source.getSourceId());
-        if(aura != null && aura.getAttachedTo() != null) {
-            Permanent enchanted = game.getPermanent(aura.getAttachedTo());
-            return permanent.getId().equals(enchanted.getId());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().contains(FlyingAbility.getInstance());
-    }
-
-    @Override
-    public TreetopBracersEffect copy() {
-        return new TreetopBracersEffect(this);
+    public TreetopBracersAbility copy() {
+        return new TreetopBracersAbility(this);
     }
 }
