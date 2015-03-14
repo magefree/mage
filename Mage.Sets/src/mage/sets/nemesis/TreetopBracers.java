@@ -32,6 +32,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
+
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
