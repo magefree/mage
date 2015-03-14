@@ -35,7 +35,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAllEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAllAbilitiesAllEffect;
-import mage.abilities.effects.common.continuous.LoseAllAbilitiesTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
