@@ -93,7 +93,7 @@ class AssaultFormationCombatDamageRuleEffect extends ContinuousEffectImpl {
 
     public AssaultFormationCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
+        staticText = "Each creature you control assigns combat damage equal to its toughness rather than its power";
     }
 
     public AssaultFormationCombatDamageRuleEffect(final AssaultFormationCombatDamageRuleEffect effect) {

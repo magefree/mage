@@ -27,6 +27,7 @@
         <gameType name="Free For All" jar="mage-game-freeforall-${project.version}.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
         <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel-${project.version}.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall-${project.version}.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
+		<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel-${project.version}.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed-${project.version}.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
@@ -71,6 +72,7 @@
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ZendikarBlock"/>
         <deckType name="Variant Magic - Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.Commander"/>
         <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.DuelCommander"/>
+		<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Limited" jar="mage-deck-limited-${project.version}.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>
