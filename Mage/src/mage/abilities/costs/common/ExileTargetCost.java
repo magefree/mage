@@ -72,11 +72,13 @@ public class ExileTargetCost extends CostImpl {
                     return false;
                 }
                 permanents.add(permanent.copy());
-                paid |= game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD);
+                // 117.11. The actions performed when paying a cost may be modified by effects. 
+                // Even if they are, meaning the actions that are performed don't match the actions 
+                // that are called for, the cost has still been paid.
+                // so return state here is not important because the user indended to exile the target anyway
+                game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD);
             }
-            if (!paid && targets.get(0).getNumberOfTargets() == 0) {
-                paid = true;
-            }
+            paid = true;
         }
         return paid;
     }

@@ -145,7 +145,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
     }
 
     private void setText() {
-        if (type.length() > 0) {
+        if (type != null && type.length() > 0) {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
         }
         else {
