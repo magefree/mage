@@ -29,16 +29,16 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
@@ -53,10 +53,11 @@ public class FireServant extends CardImpl {
         super(ownerId, 137, "Fire Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
+        // If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FireServantEffect()));
     }
 
@@ -88,18 +89,19 @@ class FireServantEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER) ||
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_CREATURE:
-            case DAMAGE_PLAYER:
-            case DAMAGE_PLANESWALKER:
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && spell.getControllerId().equals(source.getControllerId()) && spell.getColor().isRed() &&
-                        (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY))) {
-                    event.setAmount(event.getAmount() * 2);
-                }
-        }
-        return false;
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+        return spell != null &&
+                spell.getControllerId().equals(source.getControllerId()) &&
+                spell.getColor().isRed() &&
+                (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
     }
 
     @Override
@@ -109,7 +111,8 @@ class FireServantEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
 }

@@ -41,9 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
@@ -97,15 +95,17 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-                Permanent enchantment = game.getPermanent(source.getSourceId());
-                if (enchantment != null && 
-                        enchantment.getAttachedTo() != null &&
-                        event.getTargetId().equals(enchantment.getAttachedTo())) {
-                        return true;
-                }
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && 
+                enchantment.getAttachedTo() != null &&
+                event.getTargetId().equals(enchantment.getAttachedTo())) {
+                return true;
         }
         return false;
     }
