@@ -106,7 +106,7 @@ class ScytheOfTheWretchedAbility extends DiesAndDealtDamageThisTurnTriggeredAbil
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equippedCreature = getEquippedCreature(game);
-        if(equippedCreature == null) return false;
+        if(equippedCreature == null) { return false; }
 
         ZoneChangeEvent zoneChange = (ZoneChangeEvent) event;
         if(zoneChange.isDiesEvent() && zoneChange.getTarget().getCardType().contains(CardType.CREATURE)) {
