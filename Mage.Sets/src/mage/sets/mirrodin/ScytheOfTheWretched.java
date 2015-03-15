@@ -52,6 +52,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
 import mage.watchers.common.CreaturesDiedWatcher;
@@ -151,7 +152,8 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if(card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
+            Player player = game.getPlayer(source.getControllerId());
+            if(player != null && player.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId())) {
                 return true;
             }
         }
