@@ -49,8 +49,7 @@ public class SymbioticBeast extends CardImpl {
         this.subtype.add("Beast");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.color.setGreen(true);
-        
+      
         // When Symbiotic Beast dies, put four 1/1 green Insect creature tokens onto the battlefield.
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new InsectToken(), 4)));
     }

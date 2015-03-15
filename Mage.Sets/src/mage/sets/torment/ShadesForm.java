@@ -56,26 +56,23 @@ public class ShadesForm extends CardImpl {
         super(ownerId, 81, "Shade's Form", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "TOR";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-       
-	this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));	
-        // Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
+        this.getSpellAbility().addTarget(auraTarget);      
+	this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility)); //mikä on oikea outcome	+ tutki koodia
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-        new BoostEnchantedEffect(1, 1, Duration.EndOfTurn),
-        new ColoredManaCost(ColoredManaSymbol.B)));
+
+	// {B}: Enchanted creature gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
 
 
-        // When enchanted creature dies, return that card to the battlefield under your control.
+	// When enchanted creature dies, return that card to the battlefield under your control.
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "enchanted creature"));
 
 
     }
+
 
     public ShadesForm(final ShadesForm card) {
         super(card);

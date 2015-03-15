@@ -65,16 +65,14 @@ public class WormfangDrake extends CardImpl {
         this.subtype.add("Drake");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.color.setBlue(true);
+    
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         
-        //
-        
-        
+        //When Wormfang Drake enters the battlefield, sacriice it unless you exile a creature you control other than Wormfang Drake.     
         Ability ability1;
-        ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTargetCost( new TargetControlledPermanent(filter))), true);
+        ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTargetCost(new TargetControlledPermanent(filter))), true);
         Target target = new TargetPermanent(filter);
         ability1.addTarget(target);
         this.addAbility(ability1);
@@ -82,7 +80,6 @@ public class WormfangDrake extends CardImpl {
         // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
-    
     
     }
 
