@@ -146,7 +146,6 @@ public class PermanentCard extends PermanentImpl {
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
-                    this.setControllerId(ownerId); // neccessary for e.g. abilities in graveyard or hand to not have a controller != owner
                     if (originalCard != null) {
                         originalCard.updateZoneChangeCounter();
                     }

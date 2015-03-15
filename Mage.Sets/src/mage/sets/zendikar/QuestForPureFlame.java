@@ -28,10 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +36,11 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,8 +57,6 @@ public class QuestForPureFlame extends CardImpl {
     public QuestForPureFlame(UUID ownerId) {
         super(ownerId, 144, "Quest for Pure Flame", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "ZEN";
-
-        this.color.setRed(true);
 
         // Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.
         this.addAbility(new QuestForPureFlameTriggeredAbility());
@@ -139,22 +136,24 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            Player player = game.getPlayer(event.getSourceId());
-            StackObject spell = game.getStack().getStackObject(event.getSourceId());
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+    }
 
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
-                event.setAmount(event.getAmount() * 2);
-            }
-            if (player != null && player.getId().equals(source.getControllerId())) {
-                event.setAmount(event.getAmount() * 2);
-            }
-            if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-                event.setAmount(event.getAmount() * 2);
-            }
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+            return true;
+        }
+        Player player = game.getPlayer(event.getSourceId());
+        if (player != null && player.getId().equals(source.getControllerId())) {
+            return true;
+        }
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+        if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
+            return true;
         }
         return false;
     }
@@ -166,6 +165,7 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 }

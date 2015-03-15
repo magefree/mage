@@ -28,17 +28,18 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
@@ -50,8 +51,6 @@ public class ParallelLives extends CardImpl {
     public ParallelLives(UUID ownerId) {
         super(ownerId, 199, "Parallel Lives", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "ISD";
-
-        this.color.setGreen(true);
 
         // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ParallelLivesEffect()));
@@ -84,15 +83,14 @@ class ParallelLivesEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.CREATE_TOKEN);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case CREATE_TOKEN:
-                StackObject spell = game.getStack().getStackObject(event.getSourceId());
-                if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-                    event.setAmount(event.getAmount() * 2);
-                }
-        }
-        return false;
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+        return spell != null && spell.getControllerId().equals(source.getControllerId());
     }
 
     @Override
@@ -102,7 +100,8 @@ class ParallelLivesEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
 }

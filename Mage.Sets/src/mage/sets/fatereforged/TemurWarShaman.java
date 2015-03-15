@@ -124,8 +124,7 @@ class TemurWarShamanFightEffect extends OneShotEffect {
                 && target != null
                 && triggeredCreature.getCardType().contains(CardType.CREATURE)
                 && target.getCardType().contains(CardType.CREATURE)) {
-            triggeredCreature.damage(target.getPower().getValue(), target.getId(), game, false, true);
-            target.damage(triggeredCreature.getPower().getValue(), triggeredCreature.getId(), game, false, true);
+            triggeredCreature.fight(target, source, game);
             return true;
         }
         return false;

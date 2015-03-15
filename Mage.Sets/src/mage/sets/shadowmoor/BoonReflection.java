@@ -28,14 +28,18 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -47,8 +51,6 @@ public class BoonReflection extends CardImpl {
     public BoonReflection(UUID ownerId) {
         super(ownerId, 5, "Boon Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "SHM";
-
-        this.color.setWhite(true);
 
         // If you would gain life, you gain twice that much life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoonReflectionEffect()));
@@ -87,17 +89,17 @@ class BoonReflectionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.GAIN_LIFE);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case GAIN_LIFE:
-                if (event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null)) {
-                    event.setAmount(event.getAmount() * 2);
-                }
-        }
-        return false;
+        return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
     }
 }

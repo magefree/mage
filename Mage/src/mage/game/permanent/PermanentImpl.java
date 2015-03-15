@@ -1297,5 +1297,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.secondSideCard = card;
     }
 
-
+    @Override
+    public boolean fight(Permanent fightTarget, Ability source, Game game) {
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, fightTarget.getId(), getId(), source.getControllerId()));
+        game.fireEvent(GameEvent.getEvent(GameEvent.EventType.FIGHTED_PERMANENT, getId(), fightTarget.getId(), source.getControllerId()));
+        damage(fightTarget.getPower().getValue(), fightTarget.getId(), game, false, true);
+        fightTarget.damage(getPower().getValue(), getId(), game, false, true);
+        return true;
+    }
 }

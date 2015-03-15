@@ -38,8 +38,6 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DAMAGE_CREATURE;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 import mage.target.TargetPermanent;
 
 /**
@@ -89,15 +87,14 @@ class FireServantEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_CREATURE:
-            case DAMAGE_PLAYER:
-                if (event.getSourceId().equals(this.getTargetPointer().getFirst(game, source))) {
-                    event.setAmount(event.getAmount() * 2);
-                }
-        }
-        return false;
+        return event.getSourceId().equals(this.getTargetPointer().getFirst(game, source));
     }
 
     @Override
@@ -107,7 +104,8 @@ class FireServantEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() * 2);
+        return false;
     }
 
 }

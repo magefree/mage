@@ -46,7 +46,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     }
 
     public AddManaOfAnyColorEffect(final int amount) {
-        super(new Mana(0,0,0,0,0,0,1));
+        super(new Mana(0,0,0,0,0,0, amount));
         this.amount = amount;
         this.staticText = new StringBuilder("add ")
                 .append(CardUtil.numberToText(amount))

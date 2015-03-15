@@ -57,13 +57,10 @@ public class FightTargetSourceEffect extends OneShotEffect {
             // only if target is legal the effect will be applied
             if (source.getTargets().get(0).isLegal(source, game)) {
                 Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-
                 // 20110930 - 701.10
                 if (creature1 != null && sourcePermanent != null) {
                     if (creature1.getCardType().contains(CardType.CREATURE) && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
-                        creature1.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, false, true);
-                        sourcePermanent.damage(creature1.getPower().getValue(), creature1.getId(), game, false, true);
-                        return true;
+                        return sourcePermanent.fight(creature1, source, game);
                     }
                 }
             }

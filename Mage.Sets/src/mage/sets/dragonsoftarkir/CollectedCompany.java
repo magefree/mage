@@ -32,6 +32,7 @@ import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +56,7 @@ public class CollectedCompany extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // Look at the top six cards of your library. Put up to two creature cards with converted mana cost 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(6, 2, filter, true));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(6, 2, filter, false, true, Zone.BATTLEFIELD, false));
 
     }
 

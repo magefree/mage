@@ -90,15 +90,18 @@ class VeilstoneAmuletEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGET;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability ability, Game game) {
-        if (event.getType() == EventType.TARGET) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                if (permanent.getCardType().contains(CardType.CREATURE) &&
-                    permanent.getControllerId().equals(ability.getControllerId()) &&
-                    game.getPlayer(ability.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-                    return true;
-                }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            if (permanent.getCardType().contains(CardType.CREATURE) &&
+                permanent.getControllerId().equals(ability.getControllerId()) &&
+                game.getPlayer(ability.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+                return true;
             }
         }
         return false;

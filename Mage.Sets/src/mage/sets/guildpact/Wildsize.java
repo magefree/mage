@@ -28,6 +28,7 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -48,9 +49,14 @@ public class Wildsize extends CardImpl {
     public Wildsize(UUID ownerId) {
         super(ownerId, 98, "Wildsize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "GPT";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+
+        // Target creature gets +2/+2 and gains trample until end of turn.
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setText("Target creature gets +2/+2");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

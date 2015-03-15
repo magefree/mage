@@ -34,7 +34,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -53,12 +52,15 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public TurnedFaceUpAllTriggeredAbility(Effect effect, FilterPermanent filter,  boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect);
+        this(Zone.BATTLEFIELD, effect, filter, setTargetPointer, false);
+    }
+
+    public TurnedFaceUpAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean setTargetPointer, boolean optional) {
+        super(zone, effect, optional);
         // has to be set so the ability triggers if card itself is turn faced up
         this.setWorksFaceDown(true);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-
     }
 
     public TurnedFaceUpAllTriggeredAbility(final TurnedFaceUpAllTriggeredAbility ability) {
@@ -105,7 +107,7 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When " + filter.getMessage() + " is turned face up, " + super.getRule();
+        return "Whenever " + filter.getMessage() + " is turned face up, " + super.getRule();
     }
 }
 

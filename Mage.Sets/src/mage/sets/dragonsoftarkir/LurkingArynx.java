@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,45 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.combat;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.constants.AsThoughEffectType;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.FormidableCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.game.Game;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
+public class LurkingArynx extends CardImpl {
 
-public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectImpl {
+    public LurkingArynx(UUID ownerId) {
+        super(ownerId, 192, "Lurking Arynx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Cat");
+        this.subtype.add("Beast");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(5);
 
-    public CanAttackAsThoughtItDidntHaveDefenderEffect(Duration duration) {
-        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
-        staticText = "{this} can attack as though it didn't have defender";
+        // <i>Formidable</i> - {2}{G}: Target creature blocks Lurking Arynx this turn if able. Activate this ability only if creatures you control have total power 8 or greater.
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
+                new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
+                new ManaCostsImpl("{2}{G}"),
+                FormidableCondition.getInstance());
+        ability.setAbilityWord(AbilityWord.FORMIDABLE);
+        this.addAbility(ability);
     }
 
-    public CanAttackAsThoughtItDidntHaveDefenderEffect(final CanAttackAsThoughtItDidntHaveDefenderEffect effect) {
-        super(effect);
+    public LurkingArynx(final LurkingArynx card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public LurkingArynx copy() {
+        return new LurkingArynx(this);
     }
-
-    @Override
-    public CanAttackAsThoughtItDidntHaveDefenderEffect copy() {
-        return new CanAttackAsThoughtItDidntHaveDefenderEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(source.getSourceId());
-    }
-
 }

@@ -27,7 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -35,11 +35,18 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import static mage.game.events.GameEvent.EventType.DAMAGE_CREATURE;
+import static mage.game.events.GameEvent.EventType.DAMAGE_PLANESWALKER;
+import static mage.game.events.GameEvent.EventType.DAMAGE_PLAYER;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,8 +60,6 @@ public class GiselaBladeOfGoldnight extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -94,7 +99,34 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.DAMAGE_CREATURE) ||
+                event.getType().equals(EventType.DAMAGE_PLANESWALKER) ||
+                event.getType().equals(EventType.DAMAGE_PLAYER);
+    }
+
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
+        int amount = (int)Math.ceil(event.getAmount() / 2.0);
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount, false);
+        if (!game.replaceEvent(preventEvent)) {
+            event.setAmount(event.getAmount() - amount);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount));
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 if (event.getTargetId().equals(source.getControllerId())) {
@@ -116,25 +148,4 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
-    private void preventDamage(GameEvent event, Ability source, UUID target, Game game) {
-        int amount = (int)Math.ceil(event.getAmount() / 2.0);
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount, false);
-        if (!game.replaceEvent(preventEvent)) {
-            event.setAmount(event.getAmount() - amount);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, target, source.getSourceId(), source.getControllerId(), amount));
-        }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
-    }
-
 }
-

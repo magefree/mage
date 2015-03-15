@@ -35,7 +35,7 @@ import mage.abilities.condition.common.MonstrousCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -73,7 +73,7 @@ public class ColossusOfAkros extends CardImpl {
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.getInstance(),
                 "As long as {this} is monstrous, it has trample"));
-        Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderEffect(Duration.WhileOnBattlefield),
+        Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 MonstrousCondition.getInstance());
         effect.setText("and can attack as though it didn't have defender");
         ability.addEffect(effect);

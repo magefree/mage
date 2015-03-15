@@ -28,15 +28,15 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -51,8 +51,6 @@ public class DoublingSeason extends CardImpl {
     public DoublingSeason(UUID ownerId) {
         super(ownerId, 141, "Doubling Season", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "MMA";
-
-        this.color.setGreen(true);
 
         // If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoublingSeasonTokenEffect()));

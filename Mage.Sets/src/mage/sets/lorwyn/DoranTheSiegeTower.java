@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
 /**
@@ -87,6 +88,8 @@ public class DoranTheSiegeTower extends CardImpl {
 
 class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     public DoranTheSiegeTowerCombatDamageRuleEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
@@ -103,13 +106,10 @@ class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                // Change the rule
-                game.getCombat().setUseToughnessForDamage(true);
-                break;
-        }
-        return false;
+        // Change the rule
+        game.getCombat().setUseToughnessForDamage(true);
+        game.getCombat().addUseToughnessForDamageFilter(filter);
+        return true;
     }
 
     @Override

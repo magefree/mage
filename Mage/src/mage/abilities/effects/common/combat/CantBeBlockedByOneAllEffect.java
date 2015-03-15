@@ -55,7 +55,12 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
+        StringBuilder sb = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked ");
+        if (duration.equals(Duration.EndOfTurn)) {
+            sb.append("this turn ");
+        }
+        sb.append("except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
+        staticText = sb.toString();
     }
 
     public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {

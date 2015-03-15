@@ -37,7 +37,6 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
 import mage.cards.CardImpl;
@@ -72,7 +71,7 @@ public class CraterElemental extends CardImpl {
         ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD, 
                 new SetPowerSourceEffect(new StaticValue(8), Duration.EndOfTurn), 
-                new ManaCostsImpl("{4}{R}{R}"), 
+                new ManaCostsImpl("{2}{R}"),
                 FormidableCondition.getInstance());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);        
         this.addAbility(ability);

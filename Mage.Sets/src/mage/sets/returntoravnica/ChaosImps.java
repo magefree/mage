@@ -28,9 +28,6 @@
 package mage.sets.returntoravnica;
  
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -40,8 +37,11 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
- 
+
 /**
  *
  * @author LevelX2
@@ -52,8 +52,7 @@ public class ChaosImps extends CardImpl {
         super(ownerId, 90, "Chaos Imps", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Imp");
- 
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
  
@@ -66,7 +65,7 @@ public class ChaosImps extends CardImpl {
         // Chaos Imps has trample as long as it has a +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), 
-                new SourceHasCounterCondition(CounterType.P1P1),"Chaos Imps has trample as long as it has a +1/+1 counter on it")));
+                new SourceHasCounterCondition(CounterType.P1P1),"{this} has trample as long as it has a +1/+1 counter on it")));
         
     }
  
