@@ -60,7 +60,9 @@ public class AnthemOfRakdos extends CardImpl {
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(effect, false, true);
-        ability.addEffect(new DamageControllerEffect(1));
+        Effect dcEffect = new DamageControllerEffect(1);
+        dcEffect.setText("and {this} deals 1 damage to you");
+        ability.addEffect(dcEffect);
         this.addAbility(ability);
        
         
@@ -95,15 +97,14 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-            case DAMAGE_CREATURE:
-                if (game.getControllerId(event.getSourceId()).equals(source.getControllerId()) && HellbentCondition.getInstance().apply(game, source)) {
-                    event.setAmount(event.getAmount() * 2);
-                }
-        }
-        return false;
+        return game.getControllerId(event.getSourceId()).equals(source.getControllerId()) && HellbentCondition.getInstance().apply(game, source);
     }
 
     @Override
@@ -113,7 +114,8 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
-    }
-    
+        event.setAmount(event.getAmount() * 2);
+        return false;
+    }    
 }
+
