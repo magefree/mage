@@ -87,9 +87,10 @@ public class ScytheOfTheWretched extends CardImpl {
     }
 }
 
-class ScytheOfTheWretchedAbility extends DiesAndDealtDamageThisTurnTriggeredAbility {
+class ScytheOfTheWretchedAbility extends TriggeredAbilityImpl {
+
     public ScytheOfTheWretchedAbility() {
-        super(new ScytheOfTheWretchedReanimateEffect());
+        super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
         Effect attachToThatCreature = new AttachEffect(Outcome.AddAbility);
         attachToThatCreature.setText("Attach {this} to that creature.");
         addEffect(attachToThatCreature);
@@ -100,8 +101,13 @@ class ScytheOfTheWretchedAbility extends DiesAndDealtDamageThisTurnTriggeredAbil
     }
 
     @Override
-    public DiesAndDealtDamageThisTurnTriggeredAbility copy() {
+    public ScytheOfTheWretchedAbility copy() {
         return new ScytheOfTheWretchedAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
     @Override
@@ -122,6 +128,11 @@ class ScytheOfTheWretchedAbility extends DiesAndDealtDamageThisTurnTriggeredAbil
         return false;
     }
 
+    @Override
+    public String getRule() {
+        return "Whenever a creature dealt damage by equipped creature this turn dies, " + super.getRule();
+    }
+
     private void setTarget(TargetPointer target) {
         for(Effect effect : getEffects()) {
             effect.setTargetPointer(target);
@@ -140,7 +151,7 @@ class ScytheOfTheWretchedAbility extends DiesAndDealtDamageThisTurnTriggeredAbil
 class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
     public ScytheOfTheWretchedReanimateEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control.";
+        this.staticText = "return that card to the battlefield under your control";
     }
 
     public ScytheOfTheWretchedReanimateEffect(final ScytheOfTheWretchedReanimateEffect effect) {
