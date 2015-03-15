@@ -41,7 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
@@ -53,10 +54,10 @@ import mage.target.common.TargetControlledPermanent;
 public class WormfangDrake extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
+    
     static {
       
-        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new NamePredicate("Wormfang Drake")));
     }
     public WormfangDrake(UUID ownerId) {
         super(ownerId, 57, "Wormfang Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -70,7 +71,7 @@ public class WormfangDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         
-        //When Wormfang Drake enters the battlefield, sacriice it unless you exile a creature you control other than Wormfang Drake.     
+        //When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
         Ability ability1;
         ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTargetCost(new TargetControlledPermanent(filter))), true);
         Target target = new TargetPermanent(filter);
