@@ -25,47 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.target.common.TargetArtifactPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RallyTheForces extends CardImpl {
+public class Vandalize extends CardImpl {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
+    public Vandalize(UUID ownerId) {
+        super(ownerId, 165, "Vandalize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
+        this.expansionSetCode = "DTK";
 
-        // Attacking creatures get +1/+0 and gain first strike until end of turn.
-        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("Attacking creatures get +1/+0");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("and gain first strike until end of turn");
-        this.getSpellAbility().addEffect(effect);
+        // Choose one or both - Destroy target artifact; or Destroy target land.
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+
+        Mode mode1 = new Mode();
+        mode1.getTargets().add(new TargetLandPermanent());
+        mode1.getEffects().add(new DestroyTargetEffect());
+        this.getSpellAbility().addMode(mode1);
+
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public Vandalize(final Vandalize card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public Vandalize copy() {
+        return new Vandalize(this);
     }
-
 }

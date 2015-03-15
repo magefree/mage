@@ -29,59 +29,50 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.condition.common.FormidableCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class AvatarOfTheResolute extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
-    
-    static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new AnotherPredicate());
-    }
+public class SabertoothOutrider extends CardImpl {
 
-    public AvatarOfTheResolute(UUID ownerId) {
-        super(ownerId, 175, "Avatar of the Resolute", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}");
+    public SabertoothOutrider(UUID ownerId) {
+        super(ownerId, 152, "Sabertooth Outrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DTK";
-        this.subtype.add("Avatar");
-        this.power = new MageInt(3);
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // Reach
-        this.addAbility(ReachAbility.getInstance());
-        
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
-        // Avatar of the Resolute enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.
-        DynamicValue numberCounters = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), numberCounters, true),
-                "with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it"));
-        
+
+        // <i>Formidable</i> - Whenever Sabertooth Outrider attacks, if creatures you control have total power 8 or greater, Sabertooth Outrider gains first strike until end of turn.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new AttacksTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), false),
+                FormidableCondition.getInstance(),
+                "<i>Formidable</i> &mdash; Whenever {this} attacks, if creatures you control have total power 8 or greater, {this} gains first strike until end of turn."
+        ));
+
     }
 
-    public AvatarOfTheResolute(final AvatarOfTheResolute card) {
+    public SabertoothOutrider(final SabertoothOutrider card) {
         super(card);
     }
 
     @Override
-    public AvatarOfTheResolute copy() {
-        return new AvatarOfTheResolute(this);
+    public SabertoothOutrider copy() {
+        return new SabertoothOutrider(this);
     }
 }

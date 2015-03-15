@@ -35,6 +35,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -58,7 +59,7 @@ import mage.watchers.Watcher;
  */
 public class DraconicRoar extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand (you don't have to)");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));
@@ -69,14 +70,23 @@ public class DraconicRoar extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // As an additional cost to cast Draconic Roar, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, new FilterCreatureCard("a Dragon card"))));
-        // TODO: You may is missing
+        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
 
         // Draconic Roar deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast Draconic Roar, Draconic Roar deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DraconicRoarEffect());
         this.getSpellAbility().addWatcher(new DraconicRoarCastWatcher());
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            if (controller.getHand().count(filter, game) > 0) {
+                ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+            }
+        }
     }
 
     public DraconicRoar(final DraconicRoar card) {

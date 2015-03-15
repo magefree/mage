@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RallyTheForces extends CardImpl {
+public class ThunderbreakRegent extends mage.sets.gameday.ThunderbreakRegent {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
-
-        // Attacking creatures get +1/+0 and gain first strike until end of turn.
-        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("Attacking creatures get +1/+0");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("and gain first strike until end of turn");
-        this.getSpellAbility().addEffect(effect);
+    public ThunderbreakRegent(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 162;
+        this.expansionSetCode = "DTK";
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public ThunderbreakRegent(final ThunderbreakRegent card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public ThunderbreakRegent copy() {
+        return new ThunderbreakRegent(this);
     }
-
 }

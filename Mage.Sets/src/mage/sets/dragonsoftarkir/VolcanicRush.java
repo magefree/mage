@@ -25,47 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RallyTheForces extends CardImpl {
+public class VolcanicRush extends CardImpl {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
+    public VolcanicRush(UUID ownerId) {
+        super(ownerId, 166, "Volcanic Rush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
+        this.expansionSetCode = "DTK";
 
-        // Attacking creatures get +1/+0 and gain first strike until end of turn.
-        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("Attacking creatures get +1/+0");
+        // Attacking creatures get +2/+0 and gain trample until end of turn.
+        Effect effect = new BoostAllEffect(2, 0, Duration.EndOfTurn, new FilterAttackingCreature(), false);
+        effect.setText("Attacking creatures get +2/+0");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("and gain first strike until end of turn");
+        effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature(), false);
+        effect.setText("and gain trample until end of turn");
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public VolcanicRush(final VolcanicRush card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public VolcanicRush copy() {
+        return new VolcanicRush(this);
     }
-
 }

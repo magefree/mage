@@ -28,60 +28,42 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.ReachAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class AvatarOfTheResolute extends CardImpl {
-    
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control with a +1/+1 counter on it");
-    
-    static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
-        filter.add(new AnotherPredicate());
-    }
+public class SarkhansRage extends CardImpl {
 
-    public AvatarOfTheResolute(UUID ownerId) {
-        super(ownerId, 175, "Avatar of the Resolute", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}");
+    public SarkhansRage(UUID ownerId) {
+        super(ownerId, 153, "Sarkhan's Rage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "DTK";
-        this.subtype.add("Avatar");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
 
-        // Reach
-        this.addAbility(ReachAbility.getInstance());
-        
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        
-        // Avatar of the Resolute enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.
-        DynamicValue numberCounters = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), numberCounters, true),
-                "with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it"));
-        
+        // Sarkhan's Rage deals 5 damage to target creature or player. If you control no Dragons, Sarkhan's Rage deals 2 damage to you.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(5));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageControllerEffect(2),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Dragon","you control no Dragons"), CountType.EQUAL_TO, 0)
+        ));
+
     }
 
-    public AvatarOfTheResolute(final AvatarOfTheResolute card) {
+    public SarkhansRage(final SarkhansRage card) {
         super(card);
     }
 
     @Override
-    public AvatarOfTheResolute copy() {
-        return new AvatarOfTheResolute(this);
+    public SarkhansRage copy() {
+        return new SarkhansRage(this);
     }
 }

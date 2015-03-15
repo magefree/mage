@@ -46,18 +46,18 @@ public class FissureVent extends CardImpl {
     public FissureVent(UUID ownerId) {
         super(ownerId, 144, "Fissure Vent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "ROE";
-        this.color.setRed(true);
+
+        // Choose one or both - Destroy target artifact; and/or destroy target nonbasic land.
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
+
         Mode mode1 = new Mode();
         mode1.getTargets().add(new TargetNonBasicLandPermanent());
         mode1.getEffects().add(new DestroyTargetEffect());
         this.getSpellAbility().addMode(mode1);
-        Mode mode2 = new Mode();
-        mode2.getTargets().add(new TargetArtifactPermanent());
-        mode2.getTargets().add(new TargetNonBasicLandPermanent());
-        mode2.getEffects().add(new DestroyMultiTargetEffect());
-        this.getSpellAbility().addMode(mode2);
     }
 
     public FissureVent(final FissureVent card) {

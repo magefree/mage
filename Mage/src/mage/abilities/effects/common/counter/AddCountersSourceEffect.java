@@ -118,17 +118,19 @@ public class AddCountersSourceEffect extends OneShotEffect {
                     if (counter != null) {
                         Counter newCounter = counter.copy();
                         int countersToAdd = amount.calculate(game, source, this);
-                        if (countersToAdd > 0 && newCounter.getCount() == 1) {
-                            countersToAdd--;
-                        }
-                        newCounter.add(countersToAdd);
-                        int before = permanent.getCounters().getCount(newCounter.getName());
-                        permanent.addCounters(newCounter, game);
-                        int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
-                        if (informPlayers) {
-                            Player player = game.getPlayer(source.getControllerId());
-                            if (player != null) {
-                                game.informPlayers(player.getName()+" puts "+amountAdded+" "+newCounter.getName().toLowerCase()+" counter on "+permanent.getLogName());
+                        if (countersToAdd > 0) {
+                            if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                                countersToAdd--;
+                            }
+                            newCounter.add(countersToAdd);
+                            int before = permanent.getCounters().getCount(newCounter.getName());
+                            permanent.addCounters(newCounter, game);
+                            int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
+                            if (informPlayers) {
+                                Player player = game.getPlayer(source.getControllerId());
+                                if (player != null) {
+                                    game.informPlayers(player.getName()+" puts "+amountAdded+" "+newCounter.getName().toLowerCase()+" counter on "+permanent.getLogName());
+                                }
                             }
                         }
                     }

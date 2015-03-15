@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -44,21 +45,13 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class CallToMind extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
     public CallToMind(UUID ownerId) {
         super(ownerId, 47, "Call to Mind", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
 
+        // Return target instant or sorcery card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard")));
     }
 
     public CallToMind(final CallToMind card) {

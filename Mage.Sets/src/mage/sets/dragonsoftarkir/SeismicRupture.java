@@ -25,47 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.mirrodinbesieged;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RallyTheForces extends CardImpl {
+public class SeismicRupture extends CardImpl {
 
-    public RallyTheForces (UUID ownerId) {
-        super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
-        this.expansionSetCode = "MBS";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
-        // Attacking creatures get +1/+0 and gain first strike until end of turn.
-        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("Attacking creatures get +1/+0");
-        this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
-        effect.setText("and gain first strike until end of turn");
-        this.getSpellAbility().addEffect(effect);
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 
-    public RallyTheForces (final RallyTheForces card) {
+    public SeismicRupture(UUID ownerId) {
+        super(ownerId, 156, "Seismic Rupture", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
+        this.expansionSetCode = "DTK";
+
+        // Seismic Rupture deals 2 damage to each creature without flying.
+        this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
+    }
+
+    public SeismicRupture(final SeismicRupture card) {
         super(card);
     }
 
     @Override
-    public RallyTheForces copy() {
-        return new RallyTheForces(this);
+    public SeismicRupture copy() {
+        return new SeismicRupture(this);
     }
-
 }

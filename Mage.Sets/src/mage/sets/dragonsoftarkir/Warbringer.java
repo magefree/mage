@@ -25,72 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.cost;
+package mage.sets.dragonsoftarkir;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.cards.Card;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.DashAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class SpellsCostReductionControllerEffect extends CostModificationEffectImpl {
+public class Warbringer extends CardImpl {
 
-    private final FilterCard filter;
-    private final int amount;
-    private ManaCosts<ManaCost> manaCostsToReduce = null;
+    public Warbringer(UUID ownerId) {
+        super(ownerId, 168, "Warbringer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Orc");
+        this.subtype.add("Berserker");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
+        // Dash costs you pay cost {2} less (as long as this creature is on the battlefield).
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarbringerSpellsCostReductionEffect()));
 
-    public SpellsCostReductionControllerEffect(FilterCard filter, ManaCosts<ManaCost> manaCostsToReduce) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
-        this.amount = 0;
-        this.manaCostsToReduce = manaCostsToReduce;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost ");
-        for (String manaSymbol :manaCostsToReduce.getSymbols()) {
-            sb.append(manaSymbol);
-        }
-        sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
-        this.staticText = sb.toString();
+        // Dash {2}{R}
+        this.addAbility(new DashAbility(this, "{2}{R}"));
     }
 
-
-    public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
-        this.amount = amount;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost {").append(amount).append("} less to cast");
-        this.staticText = sb.toString();
+    public Warbringer(final Warbringer card) {
+        super(card);
     }
 
-    protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
+    @Override
+    public Warbringer copy() {
+        return new Warbringer(this);
+    }
+}
+
+class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
+
+    public WarbringerSpellsCostReductionEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        this.staticText = "Dash costs you pay cost {2} less (as long as this creature is on the battlefield)";
+    }
+
+    protected WarbringerSpellsCostReductionEffect(final WarbringerSpellsCostReductionEffect effect) {
         super(effect);
-        this.filter = effect.filter;
-        this.amount = effect.amount;
-        this.manaCostsToReduce = effect.manaCostsToReduce;
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (manaCostsToReduce != null){
-            CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
-        } else {
-            CardUtil.reduceCost(abilityToModify, this.amount);
-        }
+        CardUtil.reduceCost(abilityToModify, 2);
         return true;
     }
 
@@ -100,11 +99,13 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
                 if (spell != null) {
-                    return this.filter.match(spell, game);
-                } else {
-                    // used at least for flashback ability because Flashback ability doesn't use stack or for getPlayables where spell is not cast yet
-                    Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                    return sourceCard != null && this.filter.match(sourceCard, game);
+                    for (Ability ability : spell.getCard().getAbilities()) {
+                        if (ability instanceof DashAbility) {
+                            if (((DashAbility) ability).isActivated()) {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -112,7 +113,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
     }
 
     @Override
-    public SpellsCostReductionControllerEffect copy() {
-        return new SpellsCostReductionControllerEffect(this);
+    public WarbringerSpellsCostReductionEffect copy() {
+        return new WarbringerSpellsCostReductionEffect(this);
     }
 }

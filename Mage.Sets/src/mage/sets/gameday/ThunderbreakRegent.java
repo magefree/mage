@@ -25,14 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2015;
+package mage.sets.gameday;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -43,56 +43,57 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.target.TargetStackObject;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author LevelX2
  */
-public class DiffusionSliver extends CardImpl {
+public class ThunderbreakRegent extends CardImpl {
 
-    public DiffusionSliver(UUID ownerId) {
-        super(ownerId, 50, "Diffusion Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "M15";
-        this.subtype.add("Sliver");
+    public ThunderbreakRegent(UUID ownerId) {
+        super(ownerId, 44, "Thunderbreak Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "MGDC";
+        this.subtype.add("Dragon");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
-        this.addAbility(new DiffusionSliverTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(2))));
+        // Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, Thunderbreak Regent deals 3 damage to that player.
+        this.addAbility(new ThunderbreakRegentTriggeredAbility(new DamageTargetEffect(3)));
     }
 
-    public DiffusionSliver(final DiffusionSliver card) {
+    public ThunderbreakRegent(final ThunderbreakRegent card) {
         super(card);
     }
 
     @Override
-    public DiffusionSliver copy() {
-        return new DiffusionSliver(this);
+    public ThunderbreakRegent copy() {
+        return new ThunderbreakRegent(this);
     }
 }
 
-class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
+class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Sliver creature you control");
 
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate("Dragon"));
     }
 
-    public DiffusionSliverTriggeredAbility(Effect effect) {
+    public ThunderbreakRegentTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    public DiffusionSliverTriggeredAbility(final DiffusionSliverTriggeredAbility ability) {
+    public ThunderbreakRegentTriggeredAbility(final ThunderbreakRegentTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public DiffusionSliverTriggeredAbility copy() {
-        return new DiffusionSliverTriggeredAbility(this);
+    public ThunderbreakRegentTriggeredAbility copy() {
+        return new ThunderbreakRegentTriggeredAbility(this);
     }
 
     @Override
@@ -105,10 +106,9 @@ class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
             if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
-                this.getTargets().clear();
-                TargetStackObject target = new TargetStackObject();
-                target.add(event.getSourceId(), game);
-                this.addTarget(target);
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
                 return true;
             }
         }
@@ -117,6 +117,6 @@ class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Sliver creature you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.";
+        return "Whenever a Dragon you control becomes the target of a spell or ability your opponent controls, {this} deals 3 damage to that player.";
     }
 }
