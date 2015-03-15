@@ -28,19 +28,17 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -48,18 +46,26 @@ import mage.game.permanent.Permanent;
  */
 public class PyreheartWolf extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+
     public PyreheartWolf(UUID ownerId) {
         super(ownerId, 101, "Pyreheart Wolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "DKA";
         this.subtype.add("Wolf");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
         // Whenever Pyreheart Wolf attacks, each creature you control can't be blocked this turn except by two or more creatures.
+        this.addAbility(new AttacksTriggeredAbility(new CantBeBlockedByOneAllEffect(2, filter, Duration.EndOfTurn), false));
+
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         this.addAbility(new UndyingAbility());
-        this.addAbility(new AttacksTriggeredAbility(new PyreheartWolfEffect(), false));
+
     }
 
     public PyreheartWolf(final PyreheartWolf card) {
@@ -69,34 +75,5 @@ public class PyreheartWolf extends CardImpl {
     @Override
     public PyreheartWolf copy() {
         return new PyreheartWolf(this);
-    }
-}
-
-class PyreheartWolfEffect extends OneShotEffect {
-
-    public PyreheartWolfEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "creatures you control can't be blocked except by two or more creatures until end of turn";
-    }
-
-    public PyreheartWolfEffect(final PyreheartWolfEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PyreheartWolfEffect copy() {
-        return new PyreheartWolfEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            CantBeBlockedByOneEffect effect = new CantBeBlockedByOneEffect(2, Duration.EndOfTurn);
-            SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-            perm.addAbility(ability, game);
-        }
-        return false;
     }
 }

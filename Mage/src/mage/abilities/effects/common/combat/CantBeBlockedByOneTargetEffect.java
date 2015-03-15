@@ -27,62 +27,53 @@
  */
 package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
 
-    private FilterCreaturePermanent filter;
+public class CantBeBlockedByOneTargetEffect extends ContinuousEffectImpl {
+
     protected int amount;
 
-    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter) {
-        this(amount, filter, Duration.WhileOnBattlefield);
+    public CantBeBlockedByOneTargetEffect(int amount) {
+        this(amount, Duration.WhileOnBattlefield);
     }
 
-    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter, Duration duration) {
+    public CantBeBlockedByOneTargetEffect(int amount, Duration duration) {
         super(duration, Outcome.Benefit);
         this.amount = amount;
-        this.filter = filter;
-        StringBuilder sb = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked ");
-        if (duration.equals(Duration.EndOfTurn)) {
-            sb.append("this turn ");
-        }
-        sb.append("except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
-        staticText = sb.toString();
+        staticText = "Target creature can't be blocked except by " + amount + " or more creatures";
     }
 
-    public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
+    public CantBeBlockedByOneTargetEffect(final CantBeBlockedByOneTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
-        this.filter = effect.filter;
     }
 
     @Override
-    public CantBeBlockedByOneAllEffect copy() {
-        return new CantBeBlockedByOneAllEffect(this);
+    public CantBeBlockedByOneTargetEffect copy() {
+        return new CantBeBlockedByOneTargetEffect(this);
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    perm.setMinBlockedBy(amount);
-                }
-                break;
+        for(UUID targetId: getTargetPointer().getTargets(game, source)) {
+            Permanent perm = game.getPermanent(targetId);
+            if (perm != null) {
+                perm.setMinBlockedBy(amount);
             }
+        }
         return true;
     }
 
