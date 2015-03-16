@@ -25,38 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class Disperse extends CardImpl {
+public class SilumgarSpellEater extends CardImpl {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    public SilumgarSpellEater(UUID ownerId) {
+        super(ownerId, 77, "Silumgar Spell-Eater", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Naga");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Return target nonland permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Megamorph {4}{U}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}"), true));
+        
+        // When Silumgar Spell-Eater is turned face up, counter target spell unless its controller pays {3}.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), false, false);
+        ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
     }
 
-    public Disperse (final Disperse card) {
+    public SilumgarSpellEater(final SilumgarSpellEater card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public SilumgarSpellEater copy() {
+        return new SilumgarSpellEater(this);
     }
-
 }

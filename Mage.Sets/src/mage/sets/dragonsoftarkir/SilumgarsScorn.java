@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,38 +41,39 @@ import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 /**
  *
  * @author LevelX2
  */
-public class DraconicRoar extends CardImpl {
+public class SilumgarsScorn extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand (you don't have to)");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));
-    }
-
-    public DraconicRoar(UUID ownerId) {
-        super(ownerId, 134, "Draconic Roar", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+    }    
+    
+    public SilumgarsScorn(UUID ownerId) {
+        super(ownerId, 78, "Silumgar's Scorn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "DTK";
 
-        // As an additional cost to cast Draconic Roar, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
-
-        // Draconic Roar deals 3 damage to target creature. If you revealed a Dragon card or controlled a Dragon as you cast Draconic Roar, Draconic Roar deals 3 damage to that creature's controller.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new DraconicRoarEffect());
+        // As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.
+        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand<br/>"));
+        
+        // Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.
+        this.getSpellAbility().addEffect(new SilumgarsScornCounterEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
+        
     }
 
+    
     @Override
     public void adjustCosts(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
@@ -82,59 +83,58 @@ public class DraconicRoar extends CardImpl {
             }
         }
     }
-
-    public DraconicRoar(final DraconicRoar card) {
+    
+    public SilumgarsScorn(final SilumgarsScorn card) {
         super(card);
     }
 
     @Override
-    public DraconicRoar copy() {
-        return new DraconicRoar(this);
+    public SilumgarsScorn copy() {
+        return new SilumgarsScorn(this);
     }
 }
 
+class SilumgarsScornCounterEffect extends OneShotEffect {
 
-class DraconicRoarEffect extends OneShotEffect {
-
-    public DraconicRoarEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "If you revealed a Dragon card or controlled a Dragon as you cast {this}, {this} deals 3 damage to that creature's controller";
+    public SilumgarsScornCounterEffect() {
+        super(Outcome.Detriment);
+        staticText = "Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast {this}, counter that spell instead";
     }
 
-    public DraconicRoarEffect(final DraconicRoarEffect effect) {
+    public SilumgarsScornCounterEffect(final SilumgarsScornCounterEffect effect) {
         super(effect);
     }
 
     @Override
-    public DraconicRoarEffect copy() {
-        return new DraconicRoarEffect(this);
+    public SilumgarsScornCounterEffect copy() {
+        return new SilumgarsScornCounterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-            boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
-            if (!condition) {
-                for (Cost cost: source.getCosts()) {
-                    if (cost instanceof RevealTargetFromHandCost) {
-                        condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
+        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        if (spell != null) {
+            Player player = game.getPlayer(spell.getControllerId());
+            if (player != null) {
+                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
+                boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
+                if (!condition) {
+                    for (Cost cost: source.getCosts()) {
+                        if (cost instanceof RevealTargetFromHandCost) {
+                            condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
+                        }
                     }
                 }
-            }
-            if (condition) {
-                Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-                if (permanent != null) {
-                    Player player = game.getPlayer(permanent.getControllerId());
-                    if (player != null) {
-                        player.damage(3, source.getSourceId(), game, false, true);
-                    }
+                if (condition) {
+                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
+                }
+                if (!(player.chooseUse(Outcome.Benefit, "Would you like to pay {1} to prevent counter effect?", game) && 
+                        new GenericManaCost(1).pay(source, game, spell.getSourceId(), spell.getControllerId(), false))) {
+                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
-}
 
+}

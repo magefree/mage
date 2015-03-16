@@ -54,7 +54,7 @@ import mage.watchers.Watcher;
 public class TapestryOfTheAges extends CardImpl {
 
     public TapestryOfTheAges(UUID ownerId) {
-        super(ownerId, 246, "Tapestry of the Ages", Rarity.UNCOMMON, new CardType[]{}, "Artifact");
+        super(ownerId, 246, "Tapestry of the Ages", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT},"{4}" );
         this.expansionSetCode = "DTK";
 
         // {2}, {T}: Draw a card. Activate this ability only if you've cast a noncreature spell this turn.

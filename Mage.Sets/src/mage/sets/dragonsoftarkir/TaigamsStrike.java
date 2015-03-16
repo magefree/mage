@@ -25,38 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class Disperse extends CardImpl {
+public class TaigamsStrike extends CardImpl {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    public TaigamsStrike(UUID ownerId) {
+        super(ownerId, 81, "Taigam's Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
+        this.expansionSetCode = "DTK";
 
-        // Return target nonland permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Target creature gets +2/+0 until end of turn and can't be blocked this turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
+        Effect effect = new CantBeBlockedTargetEffect();
+        effect.setText("and can't be blocked this turn");
+        this.getSpellAbility().addEffect(effect);        
+        
+        // Rebound
+        this.addAbility(new ReboundAbility());
     }
 
-    public Disperse (final Disperse card) {
+    public TaigamsStrike(final TaigamsStrike card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public TaigamsStrike copy() {
+        return new TaigamsStrike(this);
     }
-
 }

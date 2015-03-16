@@ -25,38 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class Disperse extends CardImpl {
+public class YouthfulScholar extends CardImpl {
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    public YouthfulScholar(UUID ownerId) {
+        super(ownerId, 84, "Youthful Scholar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Return target nonland permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // When Youthful Scholar dies, draw two cards.
+        this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(2), false));
     }
 
-    public Disperse (final Disperse card) {
+    public YouthfulScholar(final YouthfulScholar card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public YouthfulScholar copy() {
+        return new YouthfulScholar(this);
     }
-
 }

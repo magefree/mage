@@ -25,38 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.ExploitCreatureTriggeredAbility;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ExploitAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetNonlandPermanent;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class Disperse extends CardImpl {
+public class SilumgarSorcerer extends CardImpl {
+    
+    private static final FilterSpell filter = new FilterSpell("creature spell");
 
-    public Disperse (UUID ownerId) {
-        super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "SOM";
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+    
+    public SilumgarSorcerer(UUID ownerId) {
+        super(ownerId, 76, "Silumgar Sorcerer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Return target nonland permanent to its owner's hand.
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Exploit (When this creature enters the battlefield, you may sacrifice a creature.)
+        this.addAbility(new ExploitAbility());
+        
+        // When Silumgar Sorcerer exploits a creature, counter target creature spell.
+        Ability ability = new ExploitCreatureTriggeredAbility(new CounterTargetEffect(), false);
+        ability.addTarget(new TargetSpell(filter));
+        this.addAbility(ability);        
     }
 
-    public Disperse (final Disperse card) {
+    public SilumgarSorcerer(final SilumgarSorcerer card) {
         super(card);
     }
 
     @Override
-    public Disperse copy() {
-        return new Disperse(this);
+    public SilumgarSorcerer copy() {
+        return new SilumgarSorcerer(this);
     }
-
 }
