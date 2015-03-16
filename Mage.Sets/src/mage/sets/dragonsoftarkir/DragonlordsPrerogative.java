@@ -72,7 +72,7 @@ public class DragonlordsPrerogative extends CardImpl {
         Condition condition = new DragonlordsPrerogativeCondition();
         ContinuousRuleModifyingEffect cantBeCountered = new CantBeCounteredSourceEffect();
         ConditionalContinuousRuleModifyingEffect conditionalCantBeCountered = new ConditionalContinuousRuleModifyingEffect(cantBeCountered, condition);
-        conditionalCantBeCountered.setText("If you revealed a Dragon card or controlled a Dragon as you cast {this}, {this} can't be countered");
+        conditionalCantBeCountered.setText("<br/>If you revealed a Dragon card or controlled a Dragon as you cast {this}, {this} can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, conditionalCantBeCountered);
         this.addAbility(ability);
         

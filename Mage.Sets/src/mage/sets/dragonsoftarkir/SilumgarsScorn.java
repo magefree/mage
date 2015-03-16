@@ -64,7 +64,7 @@ public class SilumgarsScorn extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand<br/>"));
+        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
         
         // Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.
         this.getSpellAbility().addEffect(new SilumgarsScornCounterEffect());
@@ -98,7 +98,7 @@ class SilumgarsScornCounterEffect extends OneShotEffect {
 
     public SilumgarsScornCounterEffect() {
         super(Outcome.Detriment);
-        staticText = "Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast {this}, counter that spell instead";
+        staticText = "<br/>Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast {this}, counter that spell instead";
     }
 
     public SilumgarsScornCounterEffect(final SilumgarsScornCounterEffect effect) {
