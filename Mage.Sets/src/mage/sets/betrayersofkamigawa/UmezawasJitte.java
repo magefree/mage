@@ -112,6 +112,18 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DAMAGED_CREATURE:
+            case DAMAGED_PLANESWALKER:
+            case DAMAGED_PLAYER:
+            case COMBAT_DAMAGE_STEP_PRE:
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event instanceof DamagedEvent && !usedInPhase && ((DamagedEvent) event).isCombatDamage()) {
             Permanent permanent = game.getPermanent(event.getSourceId());

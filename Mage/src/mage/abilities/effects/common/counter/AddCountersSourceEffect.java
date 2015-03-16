@@ -118,7 +118,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                     if (counter != null) {
                         Counter newCounter = counter.copy();
                         int countersToAdd = amount.calculate(game, source, this);
-                        if (countersToAdd > 0) {
+                        if (amount instanceof StaticValue || countersToAdd > 0) {
                             if (countersToAdd > 0 && newCounter.getCount() == 1) {
                                 countersToAdd--;
                             }
