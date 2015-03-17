@@ -31,9 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
@@ -58,7 +56,6 @@ public class RoarOfTheCrowd extends CardImpl {
         this.expansionSetCode = "MOR";
 
         // Choose a creature type. Roar of the Crowd deals damage to target creature or player equal to the number of permanents you control of the chosen type.
-        
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new RoarOfTheCrowdEffect());
@@ -103,10 +100,7 @@ class RoarOfTheCrowdEffect extends OneShotEffect {
             }
             FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(new SubtypePredicate(typeChoice.getChoice()));
-            PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-            DamageTargetEffect effect = new DamageTargetEffect(count);
-            
-            return effect.apply(game, source);
+            return new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)).apply(game, source);
         }
         return false;
   }
