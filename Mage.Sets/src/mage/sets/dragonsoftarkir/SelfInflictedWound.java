@@ -25,18 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,64 +49,69 @@ import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class TributeToHunger extends CardImpl {
+public class SelfInflictedWound extends CardImpl {
 
-    public TributeToHunger(UUID ownerId) {
-        super(ownerId, 119, "Tribute to Hunger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "ISD";
+    public SelfInflictedWound(UUID ownerId) {
+        super(ownerId, 117, "Self-Inflicted Wound", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        this.expansionSetCode = "DTK";
 
-        // Target opponent sacrifices a creature. You gain life equal to that creature's toughness.
+        // Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new TributeToHungerEffect());
+        this.getSpellAbility().addEffect(new SelfInflictedWoundEffect());        
+        
     }
 
-    public TributeToHunger(final TributeToHunger card) {
+    public SelfInflictedWound(final SelfInflictedWound card) {
         super(card);
     }
 
     @Override
-    public TributeToHunger copy() {
-        return new TributeToHunger(this);
+    public SelfInflictedWound copy() {
+        return new SelfInflictedWound(this);
     }
 }
 
-class TributeToHungerEffect extends OneShotEffect {
+class SelfInflictedWoundEffect extends OneShotEffect {
 
-    TributeToHungerEffect() {
+    SelfInflictedWoundEffect() {
         super(Outcome.Sacrifice);
-        staticText = "Target opponent sacrifices a creature. You gain life equal to that creature's toughness";
+        staticText = "Target opponent sacrifices a green or white creature. If that player does, he or she loses 2 life";
     }
 
-    TributeToHungerEffect(TributeToHungerEffect effect) {
+    SelfInflictedWoundEffect(SelfInflictedWoundEffect effect) {
         super(effect);
     }
 
     @Override
-    public TributeToHungerEffect copy() {
-        return new TributeToHungerEffect(this);
+    public SelfInflictedWoundEffect copy() {
+        return new SelfInflictedWoundEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getTargets().getFirstTarget());
+        Player targetOpponent = game.getPlayer(source.getTargets().getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-
-        FilterControlledPermanent filter = new FilterControlledPermanent("creature");
+        if (targetOpponent == null || controller == null) {
+            return false;
+        }
+        FilterControlledPermanent filter = new FilterControlledPermanent("a green or white creature");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.GREEN), new ColorPredicate(ObjectColor.WHITE)));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
-        if (target.canChoose(player.getId(), game)) {
-            player.chooseTarget(Outcome.Sacrifice, target, source, game);
+        if (target.canChoose(targetOpponent.getId(), game)) {
+            targetOpponent.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                permanent.sacrifice(source.getSourceId(), game);
-                controller.gainLife(permanent.getToughness().getValue(), game);                
+                if (permanent.sacrifice(source.getSourceId(), game)) {
+                    controller.loseLife(2, game);
+                }                
             }
-            return true;
+            
         }
-        return false;
+        return true;
     }
 }

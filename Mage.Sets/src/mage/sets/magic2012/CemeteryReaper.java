@@ -55,6 +55,7 @@ import mage.target.common.TargetCardInGraveyard;
 public class CemeteryReaper extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
+    
     static {
         filter.add(new SubtypePredicate("Zombie"));
     }
@@ -63,10 +64,13 @@ public class CemeteryReaper extends CardImpl {
         super(ownerId, 86, "Cemetery Reaper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // Other Zombie creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        
+        // {2}{B}, {T} : Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.                
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CreateTokenEffect(new ZombieToken("M12")));
