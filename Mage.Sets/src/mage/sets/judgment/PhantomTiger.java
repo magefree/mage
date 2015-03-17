@@ -59,7 +59,6 @@ public class PhantomTiger extends CardImpl {
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
-        this.color.setGreen(true);
         
         
         // Phantom Tiger enters the battlefield with two +1/+1 counters on it.
