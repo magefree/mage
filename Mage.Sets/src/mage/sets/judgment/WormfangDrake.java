@@ -44,7 +44,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.target.Target;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -70,11 +69,10 @@ public class WormfangDrake extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        
+      
         //When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
-        Ability ability1;
-        ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTargetCost(new TargetControlledPermanent(filter))), true);
-        Target target = new TargetPermanent(filter);
+        Ability ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect((new ExileTargetCost(new TargetControlledPermanent(filter)))), false);
+        Target target = new TargetControlledPermanent(1,1,filter,true);
         ability1.addTarget(target);
         this.addAbility(ability1);
 
