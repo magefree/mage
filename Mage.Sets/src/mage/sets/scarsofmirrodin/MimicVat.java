@@ -146,7 +146,9 @@ class MimicVatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
 
         // return older cards to graveyard
         for (UUID imprinted : permanent.getImprinted()) {
@@ -192,7 +194,9 @@ class MimicVatCreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
 
         if (permanent.getImprinted().size() > 0) {
             Card card = game.getCard(permanent.getImprinted().get(0));

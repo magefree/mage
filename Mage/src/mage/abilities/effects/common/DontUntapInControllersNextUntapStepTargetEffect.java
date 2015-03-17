@@ -47,6 +47,7 @@ import mage.game.permanent.Permanent;
 public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousRuleModifyingEffectImpl {
 
     private int validForTurnNum;
+    private String targetName;
 
     /**
      * Attention: This effect won't work with targets controlled by different controllers
@@ -57,14 +58,16 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         super(Duration.Custom, Outcome.Detriment, false, true);
     }
 
-    public DontUntapInControllersNextUntapStepTargetEffect(String text) {
+    public DontUntapInControllersNextUntapStepTargetEffect(String targetName) {
         this();
-        this.staticText = text;
+        this.targetName = targetName;
     }
 
     public DontUntapInControllersNextUntapStepTargetEffect(final DontUntapInControllersNextUntapStepTargetEffect effect) {
         super(effect);
         this.validForTurnNum = effect.validForTurnNum;
+        this.targetName = effect.targetName;
+
     }
 
     @Override
@@ -139,12 +142,15 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
 
     @Override
     public String getText(Mode mode) {
-            if (staticText.length() > 0) {
-                return staticText + " doesn't untap during its controller's next untap step";
-            }
-            else {
-                return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
-            }
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        if (targetName.length() > 0) {
+            return targetName + " doesn't untap during its controller's next untap step";
+        }
+        else {
+            return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+        }
     }
 
 }

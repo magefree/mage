@@ -80,7 +80,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         Target target = mode.getTargets().get(0);        
-        sb.append("Return ");
+        sb.append("return ");
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
