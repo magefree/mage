@@ -77,7 +77,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.staticText = sb.toString();
     }
 
-    protected SpellsCostReductionControllerEffect(SpellsCostReductionControllerEffect effect) {
+    protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.amount = effect.amount;

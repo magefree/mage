@@ -83,7 +83,7 @@ public class LoseLifeTargetEffect extends OneShotEffect {
         String message = amount.getMessage();
 
         if (mode.getTargets().size() > 0) {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         } else {
             sb.append("that player");
         }

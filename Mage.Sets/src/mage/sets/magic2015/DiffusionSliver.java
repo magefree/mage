@@ -96,8 +96,13 @@ class DiffusionSliverTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
             if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
                 this.getTargets().clear();

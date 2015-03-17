@@ -54,8 +54,6 @@ public class TributeToHunger extends CardImpl {
         super(ownerId, 119, "Tribute to Hunger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
-
         // Target opponent sacrifices a creature. You gain life equal to that creature's toughness.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new TributeToHungerEffect());
@@ -98,12 +96,11 @@ class TributeToHungerEffect extends OneShotEffect {
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 
         if (target.canChoose(player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-
+            player.chooseTarget(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
-                controller.gainLife(permanent.getToughness().getValue(), game);
-                return permanent.sacrifice(source.getSourceId(), game);
+                permanent.sacrifice(source.getSourceId(), game);
+                controller.gainLife(permanent.getToughness().getValue(), game);                
             }
             return true;
         }

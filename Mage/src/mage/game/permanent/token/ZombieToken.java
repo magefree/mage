@@ -30,7 +30,6 @@ package mage.game.permanent.token;
 
 import java.util.Random;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 
 /**

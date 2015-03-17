@@ -90,7 +90,7 @@ class IreShamanExileEffect extends OneShotEffect {
 
     public IreShamanExileEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Exile the top card of your library. Until end of turn, you may play that card";
+        this.staticText = "exile the top card of your library. Until end of turn, you may play that card";
     }
 
     public IreShamanExileEffect(final IreShamanExileEffect effect) {

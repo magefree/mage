@@ -29,6 +29,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -44,14 +45,18 @@ import mage.filter.common.FilterAttackingCreature;
  * @author Loki
  */
 public class RallyTheForces extends CardImpl {
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("Attacking creatures");
 
     public RallyTheForces (UUID ownerId) {
         super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MBS";
-        this.color.setRed(true);
-        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter, false));
+
+        // Attacking creatures get +1/+0 and gain first strike until end of turn.
+        Effect effect = new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
+        effect.setText("Attacking creatures get +1/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false);
+        effect.setText("and gain first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public RallyTheForces (final RallyTheForces card) {

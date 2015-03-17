@@ -62,7 +62,7 @@ public class ServantOfTheScale extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Servant of the Scale enters the battlefield with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 "with a +1/+1 counters on it"));
 
         // When Servant of the Scale dies, put X +1/+1 counters on target creature you control, where X is the number of +1/+1 counter on Servant of the Scale.

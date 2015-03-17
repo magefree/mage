@@ -44,8 +44,8 @@ public class Disperse extends CardImpl {
     public Disperse (UUID ownerId) {
         super(ownerId, 31, "Disperse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
 
+        // Return target nonland permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }

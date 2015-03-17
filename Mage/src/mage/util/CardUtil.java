@@ -439,7 +439,7 @@ public class CardUtil {
 
     public static String numberToText(String number, String forOne) {
         if (checkNumeric(number)) {
-            return numberToText(Integer.parseInt(number));
+            return numberToText(Integer.parseInt(number), forOne);
         }
         return number;
     }

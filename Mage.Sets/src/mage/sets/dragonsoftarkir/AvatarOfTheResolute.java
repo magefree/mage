@@ -71,7 +71,7 @@ public class AvatarOfTheResolute extends CardImpl {
         
         // Avatar of the Resolute enters the battlefield with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it.
         DynamicValue numberCounters = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), numberCounters, true),
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), numberCounters, true),
                 "with a +1/+1 counter on it for each other creature you control with a +1/+1 counter on it"));
         
     }

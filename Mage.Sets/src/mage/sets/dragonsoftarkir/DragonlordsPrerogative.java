@@ -36,6 +36,7 @@ import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -45,6 +46,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -64,20 +66,31 @@ public class DragonlordsPrerogative extends CardImpl {
         this.expansionSetCode = "DTK";
 
         // As an additional cost to cast Dragonlord's Prerogative, you may reveal a Dragon card from your hand.
-        // If you revealed a Dragon card or controlled a Dragon as you cast Dragonlord's Prerogative, Dragonlord's Prerogative can't be countered.
-        // Draw four cards.
+        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
         
-        this.getSpellAbility().addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, 1, filter)));
+        // If you revealed a Dragon card or controlled a Dragon as you cast Dragonlord's Prerogative, Dragonlord's Prerogative can't be countered.        
         Condition condition = new DragonlordsPrerogativeCondition();
         ContinuousRuleModifyingEffect cantBeCountered = new CantBeCounteredSourceEffect();
         ConditionalContinuousRuleModifyingEffect conditionalCantBeCountered = new ConditionalContinuousRuleModifyingEffect(cantBeCountered, condition);
-        conditionalCantBeCountered.setText("If you revealed a Dragon card or controlled a Dragon as you cast {this}, {this} can't be countered");
+        conditionalCantBeCountered.setText("<br/>If you revealed a Dragon card or controlled a Dragon as you cast {this}, {this} can't be countered");
         Ability ability = new SimpleStaticAbility(Zone.STACK, conditionalCantBeCountered);
         this.addAbility(ability);
+        
+        // Draw four cards.        
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
 
     }
-
+    
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller != null) {
+            if (controller.getHand().count(filter, game) > 0) {
+                ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+            }
+        }
+    }
+    
     public DragonlordsPrerogative(final DragonlordsPrerogative card) {
         super(card);
     }
