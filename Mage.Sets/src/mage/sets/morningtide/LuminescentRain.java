@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -40,7 +39,7 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,7 +53,6 @@ public class LuminescentRain extends CardImpl {
     public LuminescentRain(UUID ownerId) {
         super(ownerId, 129, "Luminescent Rain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "MOR";
-        this.color.setGreen(true);
         
         // Choose a creature type. You gain 2 life for each permanent you control of that type.
         this.getSpellAbility().addEffect(new LuminescentRainEffect());
@@ -97,7 +95,7 @@ class LuminescentRainEffect  extends OneShotEffect {
                     return false;
                 }
             }
-            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+            FilterControlledPermanent filter = new FilterControlledPermanent();
             filter.add(new SubtypePredicate(typeChoice.getChoice()));
             return new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)).apply(game, source);
         }
