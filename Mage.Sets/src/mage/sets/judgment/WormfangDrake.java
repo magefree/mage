@@ -84,7 +84,7 @@ public class WormfangDrake extends CardImpl {
       
         //When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
         
-
+        this.addAbility(new WormfangDrakeAbility(this, CardType.CREATURE));
 
         //Ability ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect((new ExileTargetCost(new TargetControlledPermanent(filter)))), false);
         //Target target = new TargetControlledPermanent(1,1,filter,true);
@@ -133,7 +133,7 @@ public class WormfangDrake extends CardImpl {
         filter.add(Predicates.or(cardtypesPredicates));
         filter.add(new AnotherPredicate());
 
-        // When this permanent enters the battlefield, sacrifice it unless you exile another [object] you control.
+        // When Wormfang Drake enters the battlefield, sacrifice it unless you exile another creature you control.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new WormfangDrakeExileCost(filter, new StringBuilder(card.getName()).append(" WormfangDrakeed permanents").toString())),false);
         ability1.setRuleVisible(false);
         card.addAbility(ability1);
