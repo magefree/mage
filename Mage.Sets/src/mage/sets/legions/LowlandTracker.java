@@ -48,7 +48,6 @@ public class LowlandTracker extends CardImpl {
         this.subtype.add("Soldier");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.color.setWhite(true);
         
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
