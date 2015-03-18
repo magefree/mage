@@ -5,6 +5,7 @@ import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.text.JTextComponent;
 
 /**
  * Component for displaying text in mage.
@@ -12,6 +13,7 @@ import java.awt.*;
  *
  * @author nantuko
  */
+
 public class MageTextArea extends JEditorPane {
 
     public MageTextArea() {
@@ -19,35 +21,31 @@ public class MageTextArea extends JEditorPane {
         setEditable(false);
         setBackground(new Color(0, 0, 0, 0)); // transparent background
         setFocusable(false);
-        //setBorder(BorderFactory.createLineBorder(Color.red));
-        //setSelectionColor(new Color(0, 0, 0, 0));
+        // setBorder(BorderFactory.createLineBorder(Color.red));
+        // setSelectionColor(new Color(0, 0, 0, 0));
     }
 
+    @Override
     public void setText(String text) {
         setText(text, 16);
     }
 
     public void setText(String text, int fontSize) {
-        if (text == null) return;
-
-        String fontFamily = "times";
+        if (text == null) {
+            return;
+        }
 
         final StringBuilder buffer = new StringBuilder(512);
-        buffer.append("<html><body style='font-family:");
-        buffer.append(fontFamily);
-        buffer.append(";font-size:");
+        // Dialog is a java logical font family, so it should work on all systems
+        buffer.append("<html><body style='font-family:Dialog;font-size:");
         buffer.append(fontSize);
         buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
 
         text = text.replaceAll("#([^#]+)#", "<i>$1</i>");
         //text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
         text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
-        //text += "<br>";
 
         if (text.length() > 0) {
-            //buffer.append("<br>");
-            //text = text.replaceAll("\\{this\\}", card.getName());
-            //text = text.replaceAll("\\{source\\}", card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(text, ManaSymbols.Type.PAY));
         }
 
