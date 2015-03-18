@@ -28,23 +28,26 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
-import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
@@ -52,29 +55,33 @@ import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
  *
  * @author LevelX2
  */
-public class SilumgarsScorn extends CardImpl {
+public class OratorOfOjutai extends CardImpl {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand (you don't have to)");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));
-    }    
-    
-    public SilumgarsScorn(UUID ownerId) {
-        super(ownerId, 78, "Silumgar's Scorn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
-        this.expansionSetCode = "DTK";
-
-        // As an additional cost to cast Silumgar's Scorn, you may reveal a Dragon card from your hand.
-        this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
-        
-        // Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast Silumgar's Scorn, counter that spell instead.
-        this.getSpellAbility().addEffect(new SilumgarsScornCounterEffect());
-        this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
-        
     }
 
-    
+    public OratorOfOjutai(UUID ownerId) {
+        super(ownerId, 28, "Orator of Ojutai", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "DTK";
+        this.subtype.add("Bird");
+        this.subtype.add("Monk");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(4);
+
+        // Defender, flying
+        this.addAbility(DefenderAbility.getInstance());
+        this.addAbility(FlyingAbility.getInstance());
+
+        // As an additional cost to cast Orator of Ojutai, you may reveal a Dragon card from your hand.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand")));
+
+        // When Orator of Ojutai enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast Orator of Ojutai, draw a card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new OratorOfOjutaiEffect()));
+    }
+
     @Override
     public void adjustCosts(Ability ability, Game game) {
         if (ability.getAbilityType().equals(AbilityType.SPELL)) {
@@ -86,58 +93,43 @@ public class SilumgarsScorn extends CardImpl {
             }
         }
     }
-    
-    public SilumgarsScorn(final SilumgarsScorn card) {
+
+    public OratorOfOjutai(final OratorOfOjutai card) {
         super(card);
     }
 
     @Override
-    public SilumgarsScorn copy() {
-        return new SilumgarsScorn(this);
+    public OratorOfOjutai copy() {
+        return new OratorOfOjutai(this);
     }
 }
 
-class SilumgarsScornCounterEffect extends OneShotEffect {
+class OratorOfOjutaiEffect extends OneShotEffect {
 
-    public SilumgarsScornCounterEffect() {
-        super(Outcome.Detriment);
-        staticText = "<br/>Counter target spell unless its controller pays {1}. If you revealed a Dragon card or controlled a Dragon as you cast {this}, counter that spell instead";
+    public OratorOfOjutaiEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "If you revealed a Dragon card or controlled a Dragon as you cast {this}, draw a card";
     }
 
-    public SilumgarsScornCounterEffect(final SilumgarsScornCounterEffect effect) {
+    public OratorOfOjutaiEffect(final OratorOfOjutaiEffect effect) {
         super(effect);
     }
 
     @Override
-    public SilumgarsScornCounterEffect copy() {
-        return new SilumgarsScornCounterEffect(this);
+    public OratorOfOjutaiEffect copy() {
+        return new OratorOfOjutaiEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Player player = game.getPlayer(spell.getControllerId());
-            if (player != null) {
-                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-                boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
-                if (!condition) {
-                    for (Cost cost: source.getCosts()) {
-                        if (cost instanceof RevealTargetFromHandCost) {
-                            condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
-                        }
-                    }
-                }
-                if (condition) {
-                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                }
-                if (!(player.chooseUse(Outcome.Benefit, "Would you like to pay {1} to prevent counter effect?", game) && 
-                        new GenericManaCost(1).pay(source, game, spell.getSourceId(), spell.getControllerId(), false))) {
-                    return game.getStack().counter(spell.getId(), source.getSourceId(), game);
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
+            if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
+                controller.drawCards(1, game);
             }
+            return true;
         }
-        return true;
+        return false;
     }
-
 }
