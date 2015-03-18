@@ -53,7 +53,6 @@ public class LoyalSentry extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -83,7 +82,7 @@ class LoyalSentryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getFirstTarget());        
+        Permanent p = game.getPermanent(getTargetPointer().getFirst(game, source));        
         if (p != null) {
             p.destroy(source.getSourceId(), game, false);
         }
