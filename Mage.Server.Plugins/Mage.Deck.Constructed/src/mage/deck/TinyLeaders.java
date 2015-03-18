@@ -151,7 +151,7 @@ public class TinyLeaders extends DeckValidator {
             
             if (commander == null  || commander.getManaCost().convertedManaCost() > 3) {
                 if (commander == null) {
-                    invalid.put("Leader", "Please be sure to set your leader in the NAME field in the DECK EDITOR (use the names Mardu, Sultai or Jeskai as default Commanders)");
+                    invalid.put("Leader", "Please be sure to set your leader name in the NAME field in the DECK EDITOR (use the Sultai for a UBG (2/2) default Commander)");
                 }
                 if (commander != null && commander.getManaCost().convertedManaCost() > 3) {
                     invalid.put("Leader", "Commanders converted mana cost is greater than 3");

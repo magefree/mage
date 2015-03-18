@@ -349,6 +349,12 @@ public class TableController {
             return false;
         }
         Deck deck = Deck.load(deckList, false, false);
+        if (table.getState() == TableState.SIDEBOARDING && table.getMatch() != null) {
+            MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
+            if (mPlayer != null) {
+                deck.setName(mPlayer.getDeck().getName());
+            }
+        }
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
         }
