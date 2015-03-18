@@ -316,6 +316,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, 1));
                 }
             }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, name, amount));
         }
     }
 
@@ -335,6 +336,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), 1));
                 }
             }
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERS_ADDED, objectId, controllerId, counter.getName(), amount));
         }
     }
 
