@@ -29,7 +29,6 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.constants.CardType;
 
 /**
@@ -39,7 +38,7 @@ import mage.constants.CardType;
 public class BearToken extends Token {
 
     public BearToken() {
-        super("Beast", "2/2 green Bear creature token");
+        super("Bear", "2/2 green Bear creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Bear");

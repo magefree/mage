@@ -39,7 +39,6 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.game.permanent.token.BearToken;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
@@ -60,6 +59,7 @@ public class GrizzlyFate extends CardImpl {
                                                      new CardsInControllerGraveCondition(7),
                                                      "Put two 2/2 green Bear creature tokens onto the battlefield.<br/><br/><i>Threshold</i> - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.");
         this.getSpellAbility().addEffect(effect);
+
         // Flashback {5}{G}{G}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
