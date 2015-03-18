@@ -32,11 +32,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
@@ -80,7 +80,7 @@ public class ScaleguardSentinels extends CardImpl {
     
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof EntersBattlefieldAbility) {
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
                 if (controller.getHand().count(filter, game) > 0) {
@@ -111,14 +111,6 @@ class ScaleguardSentinelsCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-        boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
-        if (!condition) {
-            for (Cost cost: source.getCosts()) {
-                if (cost instanceof RevealTargetFromHandCost) {
-                    condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
-                }
-            }
-        }
-        return condition;
+        return (watcher != null && watcher.castWithConditionTrue(source.getId()));
     }
 }
