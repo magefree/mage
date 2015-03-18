@@ -55,7 +55,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        StringBuilder sb = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked ");
+        StringBuilder sb = new StringBuilder("each ").append(filter.getMessage()).append(" can't be blocked ");
         if (duration.equals(Duration.EndOfTurn)) {
             sb.append("this turn ");
         }

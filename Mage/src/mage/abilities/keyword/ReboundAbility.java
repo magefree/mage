@@ -106,17 +106,7 @@ public class ReboundAbility extends TriggeredAbilityImpl {
         if (event.getType() == EventType.SPELL_CAST && this.installReboundEffect) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && spell.getSourceId().equals(this.getSourceId())) {
-                Effect reboundEffect = new ReboundEffect();
-                boolean found = false;
-                for (Effect effect : spell.getSpellAbility().getEffects()) {
-                    if (effect instanceof ReboundEffect) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    spell.getSpellAbility().addEffect(reboundEffect);
-                }
+                addReboundEffectToSpellIfMissing(spell);
                 this.installReboundEffect = false;
             }
         }
@@ -131,6 +121,20 @@ public class ReboundAbility extends TriggeredAbilityImpl {
     @Override
     public ReboundAbility copy() {
         return new ReboundAbility(this);
+    }
+    
+    static public void addReboundEffectToSpellIfMissing(Spell spell) {
+        Effect reboundEffect = new ReboundEffect();
+        boolean found = false;
+        for (Effect effect : spell.getSpellAbility().getEffects()) {
+            if (effect instanceof ReboundEffect) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            spell.getSpellAbility().addEffect(reboundEffect);
+        }        
     }
 }
 

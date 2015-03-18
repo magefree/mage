@@ -28,6 +28,7 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -117,17 +118,17 @@ class DomriRadeEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
-                controller.lookAtCards("Domri Rade", cards, game);
+                controller.lookAtCards(sourceObject.getLogName(), cards, game);
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    if (controller.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), game)) {
-                        card = controller.getLibrary().removeFromTop(game);
+                    if (controller.chooseUse(outcome, "Reveal " + card.getName() + " and put it into your hand?", game)) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        controller.revealCards("Domri Rade", cards, game);
+                        controller.revealCards(sourceObject.getLogName(), cards, game);
                     }
                 }
                 return true;

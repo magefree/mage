@@ -54,8 +54,6 @@ public class HomicidalSeclusion extends CardImpl {
         super(ownerId, 108, "Homicidal Seclusion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
-
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
         ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);
         Effect effect = new ConditionalContinuousEffect(boostEffect, new OneControlledCreatureCondition(), rule);
@@ -64,10 +62,6 @@ public class HomicidalSeclusion extends CardImpl {
         effect = new ConditionalContinuousEffect(lifelinkEffect, new OneControlledCreatureCondition(), "and has lifelink");
         ability.addEffect(effect);
         this.addAbility(ability);
-
-        
-        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public HomicidalSeclusion(final HomicidalSeclusion card) {

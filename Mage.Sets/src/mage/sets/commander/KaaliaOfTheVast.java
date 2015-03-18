@@ -61,9 +61,6 @@ public class KaaliaOfTheVast extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
-        this.color.setRed(true);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -159,7 +156,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
                     UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
                     if (defenderId != null) {
                         player.getHand().remove(card);
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);
                         Permanent creature = game.getPermanent(cardId);
                         if (creature != null) {
                             game.getCombat().declareAttacker(card.getId(), defenderId, game);
