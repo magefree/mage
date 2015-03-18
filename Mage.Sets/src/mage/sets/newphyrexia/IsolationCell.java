@@ -81,11 +81,15 @@ class IsolationCellTriggeredAbility extends TriggeredAbilityImpl {
     public IsolationCellTriggeredAbility copy() {
         return new IsolationCellTriggeredAbility(this);
     }
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }    
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Card card = game.getCard(event.getSourceId());
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));

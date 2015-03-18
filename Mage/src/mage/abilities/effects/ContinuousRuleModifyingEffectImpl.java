@@ -68,7 +68,7 @@ public abstract class ContinuousRuleModifyingEffectImpl extends ContinuousEffect
      * @param duration
      * @param outcome
      * @param messageToUser - Every time the effect replaces an event, the user gets a message in a dialog window.
-     *                        Don't set it to true if the event heppens regularly or very often. The message can be
+     *                        Don't set it to true if the event happens regularly or very often. The message itself can be
      *                        changed by overriding the getInfoMessage method.
      * @param messageToLog  - Every time the effect replaces an event, a message is posted to the game log. The message
      *                        can be changed by overriding the getInfoMessage method.
