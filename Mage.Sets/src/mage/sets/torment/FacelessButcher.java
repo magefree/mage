@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author anonymous
+ * @author Temba21
  */
 public class FacelessButcher extends mage.sets.timeshifted.FacelessButcher {
 
