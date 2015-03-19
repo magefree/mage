@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
 
 /**
  *
- * @author Temba
+ * @author Temba21
  */
 public class FacelessButcher extends CardImpl {
 
@@ -70,7 +70,7 @@ public class FacelessButcher extends CardImpl {
         // When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);
         Target target = new TargetPermanent(filter);
-	ability1.addTarget(target);
+        ability1.addTarget(target);
         this.addAbility(ability1);
 
         // When Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.
