@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author Temba21
  */
 public class SkirkMarauder extends mage.sets.legions.SkirkMarauder {
 
