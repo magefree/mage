@@ -60,7 +60,7 @@ public class DragonlordKolaghan extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elder");
         this.subtype.add("Dragon");        
-        this.power = new MageInt(5);
+        this.power = new MageInt(6);
         this.toughness = new MageInt(5);
         
         // Flying
