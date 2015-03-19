@@ -2764,7 +2764,69 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         return result;
     }
-
+    
+    @Override
+    public boolean moveCardsToGraveyardWithInfo(Cards allCards, Ability source, Game game, Zone fromZone) {
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.addAll(allCards.getCards(game));
+        return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+    }
+    
+    @Override
+    public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+        while (!allCards.isEmpty()) {
+            // identify cards from one owner
+            Cards cards = new CardsImpl();
+            UUID ownerId = null;
+            for (Card card: allCards) {
+                if (cards.isEmpty()) {
+                    ownerId = card.getOwnerId();
+                }
+                if (card.getOwnerId().equals(ownerId)) {
+                    cards.add(card);
+                }
+            }
+            allCards.removeAll(cards);
+            // move cards ot graveyard in order the owner decides
+            if (cards.size() != 0) {
+                TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));
+                target.setRequired(true);
+                Player choosingPlayer = this;
+                if (ownerId != this.getId()) {
+                    choosingPlayer = game.getPlayer(ownerId);
+                }
+                if (choosingPlayer == null) {
+                    continue;
+                }
+                boolean chooseOrder = true;
+                if (cards.size() > 2) {
+                    chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Do you like to choose the order the cards go to graveyard?", game);
+                }
+                if (chooseOrder) {
+                    while (choosingPlayer.isInGame() && cards.size() > 1) {
+                        choosingPlayer.chooseTarget(Outcome.Neutral, cards, target, source, game);
+                        UUID targetObjectId = target.getFirstTarget();                    
+                        Card card = cards.get(targetObjectId, game);
+                        cards.remove(targetObjectId);     
+                        if (card != null) {                        
+                            choosingPlayer.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, fromZone);
+                        }
+                        target.clearChosen();
+                    }
+                    if (cards.size() == 1) {
+                        choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), source.getSourceId(), game, fromZone);
+                    }
+                } else {
+                    for (Card card : cards.getCards(game)) {
+                        choosingPlayer.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, fromZone);
+                    }
+                }
+            }
+            
+        }
+        return true;
+    }
+    
     @Override
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
