@@ -37,7 +37,7 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author Temba
+ * @author Temba21
  */
 public class LowlandTracker extends CardImpl {
 
