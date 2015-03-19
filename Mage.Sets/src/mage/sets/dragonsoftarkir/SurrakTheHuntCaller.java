@@ -61,7 +61,7 @@ public class SurrakTheHuntCaller extends CardImpl {
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), TargetController.YOU, false),
                 FormidableCondition.getInstance(),
-                "<i>Formidable</i> &mdash; Whenever {this} attacks, if creatures you control have total power 8 or greater, creatures you control gain trample until end of turn.");
+                "<i>Formidable</i> &mdash; Whenever {this} attacks, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
