@@ -54,17 +54,18 @@ public class JaceBeleren extends CardImpl {
         this.color.setBlue(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
-
+        // +2: Each player draws a card.        
         this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));
 
+        // -1: Target player draws a card.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardTargetEffect(1), -1);
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
+        // -10: Target player puts the top twenty cards of his or her library into his or her graveyard.
         LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(20), -10);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
-
     }
 
     public JaceBeleren(final JaceBeleren card) {

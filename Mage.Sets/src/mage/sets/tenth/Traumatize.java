@@ -35,7 +35,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,7 +49,7 @@ public class Traumatize extends CardImpl {
     public Traumatize(UUID ownerId) {
         super(ownerId, 119, "Traumatize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new TraumatizeEffect());
     }
@@ -79,17 +78,12 @@ class TraumatizeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        Card card;
-        int amount = player.getLibrary().size() / 2;
-        for (int i = 0; i < amount; i++) {
-            card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-            } else {
-                break;
-            }
+        if (player != null) {
+            int amount = player.getLibrary().size() / 2;
+            player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, amount), source, game, Zone.LIBRARY);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

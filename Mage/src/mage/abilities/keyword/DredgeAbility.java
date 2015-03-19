@@ -31,6 +31,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -98,12 +100,9 @@ class DredgeEffect extends ReplacementEffectImpl {
                 && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getName()).
                 append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
             game.informPlayers(new StringBuilder(player.getName()).append(" dreges ").append(sourceCard.getName()).toString());
-            for (int i = 0; i < amount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                }
-            }
+            Cards cardsToGrave = new CardsImpl();
+            cardsToGrave.addAll(player.getLibrary().getTopCards(game, amount));
+            player.moveCardsToGraveyardWithInfo(cardsToGrave, source, game, Zone.LIBRARY);
             player.moveCardToHandWithInfo(sourceCard, source.getSourceId(), game, Zone.GRAVEYARD);
             return true;
         }
