@@ -38,7 +38,7 @@ import mage.game.permanent.token.InsectToken;
 
 /**
  *
- * @author Temba
+ * @author Temba21
  */
 public class SymbioticBeast extends CardImpl {
 
