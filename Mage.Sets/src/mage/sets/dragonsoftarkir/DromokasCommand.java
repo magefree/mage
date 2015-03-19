@@ -58,8 +58,8 @@ import mage.target.common.TargetCreaturePermanent;
 public class DromokasCommand extends CardImpl {
 
     private static final FilterStackObject filterInstantOrSorcery = new FilterStackObject("instant or sorcery spell");
-    private static final FilterPermanent filterEnchantment = new FilterPermanent("enchantment");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to put the +1/+1 counter on");
+    private static final FilterPermanent filterEnchantment = new FilterPermanent("an enchantment");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to put a +1/+1 counter on it");
     private static final FilterCreaturePermanent filterUncontrolledCreature = new FilterCreaturePermanent("creature you don't control");
 
     static {
@@ -82,19 +82,23 @@ public class DromokasCommand extends CardImpl {
 
         // or Target player sacrifices an enchantment; 
         Mode mode = new Mode();
-        mode.getEffects().add(new SacrificeEffect(filterEnchantment, 1, "target player"));
+        Effect effect = new SacrificeEffect(filterEnchantment, 1, "target player");
+        effect.setText("Target player sacrifices an enchantment");
+        mode.getEffects().add(effect);
         mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().getModes().addMode(mode);
 
         // Put a +1/+1 counter on target creature;
         mode = new Mode();
-        mode.getEffects().add(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("Put a +1/+1 counter on target creature");
+        mode.getEffects().add(effect);
         mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);
 
         // or Target creature you control fights target creature you don't control.
         mode = new Mode();
-        Effect effect = new FightTargetsEffect();
+        effect = new FightTargetsEffect();
         effect.setText("Target creature you control fights target creature you don't control");
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetControlledCreaturePermanent());

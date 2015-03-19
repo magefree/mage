@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -75,10 +76,12 @@ public class DraconicRoar extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        if (controller != null) {
-            if (controller.getHand().count(filter, game) > 0) {
-                ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+            Player controller = game.getPlayer(ability.getControllerId());
+            if (controller != null) {
+                if (controller.getHand().count(filter, game) > 0) {
+                    ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+                }
             }
         }
     }
@@ -115,15 +118,7 @@ class DraconicRoarEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-            boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
-            if (!condition) {
-                for (Cost cost: source.getCosts()) {
-                    if (cost instanceof RevealTargetFromHandCost) {
-                        condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
-                    }
-                }
-            }
-            if (condition) {
+            if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
                 Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     Player player = game.getPlayer(permanent.getControllerId());

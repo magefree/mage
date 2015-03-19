@@ -29,12 +29,12 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -44,6 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInHand;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
 
 /**
@@ -71,6 +72,18 @@ public class FoulTongueInvocation extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "target player"));
         this.getSpellAbility().addEffect(new FoulTongueInvocationEffect());
         this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        if (ability.getAbilityType().equals(AbilityType.SPELL)) {
+            Player controller = game.getPlayer(ability.getControllerId());
+            if (controller != null) {
+                if (controller.getHand().count(filter, game) > 0) {
+                    ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+                }
+            }
+        }
     }
 
     public FoulTongueInvocation(final FoulTongueInvocation card) {
@@ -104,15 +117,7 @@ class FoulTongueInvocationEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-            boolean condition = watcher != null && watcher.castWithConditionTrue(source.getId());
-            if (!condition) {
-                for (Cost cost: source.getCosts()) {
-                    if (cost instanceof RevealTargetFromHandCost) {
-                        condition = ((RevealTargetFromHandCost)cost).getNumberRevealedCards() > 0;
-                    }
-                }
-            }
-            if (condition) {
+            if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
                 controller.gainLife(4, game);
             }
             return true;

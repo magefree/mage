@@ -37,6 +37,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.io.ObjectStreamException;
+import mage.constants.AsThoughEffectType;
 
 /**
  *
@@ -87,7 +88,9 @@ class FlyingEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId()) || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId());
+        return blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
+                || blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())
+                || (game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_DRAGON, source, blocker.getControllerId(), game) && attacker.hasSubtype("Dragon")) ;
     }
 
     @Override

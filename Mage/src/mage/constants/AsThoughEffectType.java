@@ -9,6 +9,7 @@ public enum AsThoughEffectType {
     ACTIVATE_HASTE,
     BLOCK_TAPPED,
     BLOCK_SHADOW,
+    BLOCK_DRAGON,
     BE_BLOCKED,    
     PLAY_FROM_NON_HAND_ZONE,
     CAST_AS_INSTANT,

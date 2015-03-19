@@ -75,7 +75,7 @@ public class EnduringScalelord extends CardImpl {
 class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
 
     EnduringScalelordTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
     }
 
     EnduringScalelordTriggeredAbility(final EnduringScalelordTriggeredAbility ability) {
@@ -88,9 +88,14 @@ class EnduringScalelordTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTERS_ADDED;
+    }
+
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER_ADDED
-                && event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
             return (!event.getTargetId().equals(this.getSourceId())
                     && permanent.getCardType().contains(CardType.CREATURE)
