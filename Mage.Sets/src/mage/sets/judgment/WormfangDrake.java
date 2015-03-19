@@ -60,16 +60,16 @@ import mage.util.CardUtil;
 
 /**
  *
- * @author Temba
+ * @author Temba21
  */
 public class WormfangDrake extends CardImpl {
     
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     
     static {
-      
         filter.add(Predicates.not(new NamePredicate("Wormfang Drake")));
     }
+    
     public WormfangDrake(UUID ownerId) {
         super(ownerId, 57, "Wormfang Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "JUD";
@@ -80,13 +80,9 @@ public class WormfangDrake extends CardImpl {
     
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-
-      
-        //When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
-        // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        
+        // When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
+        // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.       
         this.addAbility(new WormfangDrakeAbility(this, CardType.CREATURE));
-  
     }
 
     public WormfangDrake(final WormfangDrake card) {
@@ -98,13 +94,12 @@ public class WormfangDrake extends CardImpl {
         return new WormfangDrake(this);
     }
 }
-    class WormfangDrakeAbility extends StaticAbility {
+
+class WormfangDrakeAbility extends StaticAbility {
 
     protected CardType cardType;
     protected String objectDescription;
 
-
-    
     public WormfangDrakeAbility(Card card, CardType cardtypes) {
         super(Zone.BATTLEFIELD, null);
 
@@ -112,12 +107,9 @@ public class WormfangDrake extends CardImpl {
 
         StringBuilder sb = new StringBuilder("another ");
         ArrayList<Predicate<MageObject>> cardtypesPredicates = new ArrayList<>();
-       
-            cardtypesPredicates.add(new CardTypePredicate(cardType));
+        cardtypesPredicates.add(new CardTypePredicate(cardType));
+        sb.append(cardType);
 
-                sb.append(cardType);
-
-        
         this.objectDescription = sb.toString();
         FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
         filter.add(Predicates.or(cardtypesPredicates));
@@ -173,7 +165,7 @@ class WormfangDrakeExileCost extends CostImpl {
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + "exiled permanents", sourceId, game, Zone.BATTLEFIELD);
+                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + " exiled permanents", sourceId, game, Zone.BATTLEFIELD);
                 }
             }
         }
