@@ -66,7 +66,7 @@ public class OjutaisSummons extends CardImpl {
 
 class DjinnMonkToken extends Token {
     DjinnMonkToken() {
-        super("Djinn Monk", "2/2 blue Djinn Monk creature token");
+        super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Djinn");
