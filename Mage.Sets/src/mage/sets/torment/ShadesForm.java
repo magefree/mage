@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Temba
+ * @author Temba21
  */
 public class ShadesForm extends CardImpl {
 
@@ -58,8 +58,8 @@ public class ShadesForm extends CardImpl {
         this.subtype.add("Aura");
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);      
-	this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility)); //mikä on oikea outcome	+ tutki koodia
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
