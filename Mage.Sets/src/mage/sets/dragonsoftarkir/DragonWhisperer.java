@@ -68,7 +68,7 @@ public class DragonWhisperer extends CardImpl {
         // {1}{R}: Dragon Whisperer get +1/+0 until end of turn
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new ManaCostsImpl("{R}")));
+                new ManaCostsImpl("{1}{R}")));
         
         // <Formidable</i> - {4}{R}{R}: Put a 4/4 red Dragon creature token with flying onto the battlefield. Activate this ability only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(

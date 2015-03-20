@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -77,10 +78,11 @@ public class ArashinForemost extends CardImpl {
 
 class ArashinForemostAbility extends TriggeredAbilityImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Warrior creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Warrior creature you control");
 
     static {
         filter.add(new SubtypePredicate("Warrior"));
+        filter.add(new AnotherPredicate());
     }
 
     public ArashinForemostAbility() {
