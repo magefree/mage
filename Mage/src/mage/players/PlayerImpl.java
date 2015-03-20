@@ -2786,7 +2786,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     cards.add(card);
                 }
             }
-            allCards.removeAll(cards);
+            allCards.removeAll(cards.getCards(game));
             // move cards ot graveyard in order the owner decides
             if (cards.size() != 0) {
                 TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));

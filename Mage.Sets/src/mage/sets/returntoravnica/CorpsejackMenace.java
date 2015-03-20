@@ -101,10 +101,15 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ADD_COUNTERS;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTER && event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getData().equals(CounterType.P1P1.getName())) {
             Permanent target = game.getPermanent(event.getTargetId());
             if (target != null && target.getControllerId().equals(source.getControllerId())
                                && target.getCardType().contains(CardType.CREATURE)) {
