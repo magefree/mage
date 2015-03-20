@@ -80,16 +80,20 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn", this.getSourceId());
-            if (spell != null
-                    && watcher != null
-                    && watcher.conditionMet()) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getSourceId()));
-                return true;
-            }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn", this.getSourceId());
+        if (spell != null
+                && watcher != null
+                && watcher.conditionMet()) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getSourceId()));
+            return true;
         }
         return false;
     }
