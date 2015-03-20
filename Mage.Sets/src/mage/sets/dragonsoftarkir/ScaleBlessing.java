@@ -56,8 +56,9 @@ public class ScaleBlessing extends CardImpl {
 
         // Bolster 1, then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. <i.(To bolster 1, choose a creature with the least toughness among creatures you control and put +1/+1 counter on it.)</i>
         Effect effect = new BolsterEffect(1);
-        effect.setText("Bolster 1");
+        effect.setText("Bolster 1");        
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new ScaleBlessingEffect());
 
     }
 
