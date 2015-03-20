@@ -2910,7 +2910,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getLogName())
+                    .append(" puts ").append(facedown ? "a card face down ":card.getLogName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
                     .append("onto the Battlefield").toString());
             result = true;
