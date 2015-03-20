@@ -101,7 +101,7 @@ class DeathmistRaptorEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (controller != null && card != null) {
             controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false,
-                    controller.chooseUse(Outcome.Detriment, "Return " + card.getName() + " face down to battlefield?", game));
+                    controller.chooseUse(Outcome.Detriment, "Return " + card.getName() + " face down to battlefield (otherwise face up)?", game));
             return true;
         }
         return false;

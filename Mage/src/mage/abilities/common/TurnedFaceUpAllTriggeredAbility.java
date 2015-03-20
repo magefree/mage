@@ -28,8 +28,10 @@
 
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -82,9 +84,9 @@ public class TurnedFaceUpAllTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!event.getTargetId().equals(getSourceId())) {
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-            if (sourcePermanent != null) {
-                if (sourcePermanent.isFaceDown(game)) {
+            MageObject sourceObj = this.getSourceObject(game);
+            if (sourceObj != null) {
+                if (sourceObj instanceof  Card && ((Card)sourceObj).isFaceDown(game)) {
                     // if face down and it's not itself that is turned face up, it does not trigger
                     return false;
                 }
