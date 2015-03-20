@@ -47,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
@@ -124,9 +125,12 @@ class OratorOfOjutaiEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-            if (watcher != null && watcher.castWithConditionTrue(source.getId())) {
-                controller.drawCards(1, game);
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null) {
+                DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
+                if (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId())) {
+                    controller.drawCards(1, game);
+                }
             }
             return true;
         }

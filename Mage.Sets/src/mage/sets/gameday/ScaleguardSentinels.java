@@ -43,6 +43,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
@@ -110,7 +111,11 @@ class ScaleguardSentinelsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
-        return (watcher != null && watcher.castWithConditionTrue(source.getId()));
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null) {
+            DragonOnTheBattlefieldWhileSpellWasCastWatcher watcher = (DragonOnTheBattlefieldWhileSpellWasCastWatcher) game.getState().getWatchers().get("DragonOnTheBattlefieldWhileSpellWasCastWatcher");
+            return (watcher != null && watcher.castWithConditionTrue(sourcePermanent.getSpellAbility().getId()));
+        }
+        return false;
     }
 }
