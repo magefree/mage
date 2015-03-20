@@ -64,7 +64,7 @@ public class ElusiveSpellfist extends CardImpl {
 
         // Whenever you cast a noncreature spell, Elusive Spellfist gets +1/+0 until end of turn and can't be blocked this turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1,0,Duration.EndOfTurn), filterNonCreature, false);
-        Effect effect = new CantBeBlockedSourceEffect();
+        Effect effect = new CantBeBlockedSourceEffect(Duration.EndOfTurn);
         effect.setText("and can't be blocked this turn");
         ability.addEffect(effect);
         this.addAbility(ability);
