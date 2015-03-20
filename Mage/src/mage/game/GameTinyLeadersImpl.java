@@ -121,15 +121,17 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
      */
     public static Card getCommanderCard(String commanderName, UUID ownerId) {
         Card commander = null;
-        switch (commanderName) {
-            case "Sultai":
-                commander = new DefaultCommander(ownerId, commanderName, "{U}{B}{G}");
-                break;
-            default:
-                CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
-                if (cardInfo != null) {
-                    commander = cardInfo.getCard();
-                }
+        if (commanderName != null) {
+            switch (commanderName) {
+                case "Sultai":
+                    commander = new DefaultCommander(ownerId, commanderName, "{U}{B}{G}");
+                    break;
+                default:
+                    CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
+                    if (cardInfo != null) {
+                        commander = cardInfo.getCard();
+                    }
+            }
         }
         return commander;
     }
