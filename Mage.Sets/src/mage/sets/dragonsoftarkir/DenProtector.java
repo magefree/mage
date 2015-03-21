@@ -31,8 +31,10 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -41,6 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -61,6 +64,11 @@ public class DenProtector extends CardImpl {
 
         // Megamorph {1}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}"), true));
+
+        // When Den Protector is turned face up, return target card from your graveyard to your hand.
+        Ability ability = new TurnedFaceUpSourceTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
+        ability.addTarget(new TargetCardInYourGraveyard());
+        this.addAbility(ability);
 
     }
 
