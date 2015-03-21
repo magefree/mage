@@ -108,7 +108,7 @@ class DragonlordDromokaEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getActivePlayerId().equals(source.getSourceId()) &&
+        if (game.getActivePlayerId().equals(source.getControllerId()) &&
                 game.getPlayer(source.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
             return true;
         }
