@@ -54,11 +54,9 @@ import mage.target.targetpointer.FixedTarget;
 public class TheAbyss extends CardImpl {
 
     public TheAbyss(UUID ownerId) {
-        super(ownerId, 70, "The Abyss", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
+        super(ownerId, 34, "The Abyss", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "LEG";
         this.supertype.add("World");
-
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.
         this.addAbility(new TheAbyssTriggeredAbility());
