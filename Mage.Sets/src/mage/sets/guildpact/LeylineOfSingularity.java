@@ -27,9 +27,7 @@
  */
 package mage.sets.guildpact;
 
-import java.util.Iterator;
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,6 +43,8 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -54,16 +54,21 @@ import mage.game.permanent.Permanent;
  */
 public class LeylineOfSingularity extends CardImpl {
 
+    private static final FilterPermanent filter = new FilterPermanent("nonland permanents");
+
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
+
     public LeylineOfSingularity(UUID ownerId) {
         super(ownerId, 29, "Leyline of Singularity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "GPT";
-
-        this.color.setBlue(true);
-
+    
         // If Leyline of Singularity is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
+
         // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect(Duration.WhileOnBattlefield, new FilterControlledPermanent())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect(Duration.WhileOnBattlefield, filter)));
         
     }
 
