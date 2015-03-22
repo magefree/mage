@@ -33,6 +33,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,7 +60,7 @@ public class BloodChinRager extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Blood-Chin Rager attacks, each Warrior creature you control can't be blocked this turn except by two or more creatures.
-        this.addAbility(new AttacksTriggeredAbility(new CantBeBlockedByOneAllEffect(2, filter), false));
+        this.addAbility(new AttacksTriggeredAbility(new CantBeBlockedByOneAllEffect(2, filter, Duration.EndOfTurn), false));
     }
 
     public BloodChinRager(final BloodChinRager card) {
