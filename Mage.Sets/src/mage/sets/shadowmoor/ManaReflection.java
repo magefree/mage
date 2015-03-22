@@ -90,22 +90,22 @@ class ManaReflectionReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Mana mana = ((ManaEvent) event).getMana();
         if (mana.getBlack() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.BLACK, mana.getBlack()* 2);
+            mana.set(ManaType.BLACK, mana.getBlack()* 2);
         }
         if (mana.getBlue() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.BLUE, mana.getBlue() * 2);
+            mana.set(ManaType.BLUE, mana.getBlue() * 2);
         }
         if (mana.getWhite() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.WHITE, mana.getWhite() * 2);
+            mana.set(ManaType.WHITE, mana.getWhite() * 2);
         }
         if (mana.getGreen() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.GREEN, mana.getGreen() * 2);
+            mana.set(ManaType.GREEN, mana.getGreen() * 2);
         }
         if (mana.getRed() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.RED, mana.getRed() * 2);
+            mana.set(ManaType.RED, mana.getRed() * 2);
         }
         if (mana.getColorless() > 0) {
-            ((ManaEvent) event).getMana().set(ManaType.COLORLESS, mana.getColorless() * 2);
+            mana.set(ManaType.COLORLESS, mana.getColorless() * 2);
         }
         return false;
     }
