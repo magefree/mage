@@ -251,5 +251,40 @@ public class ManifestTest extends CardTestPlayerBase {
             }
         }
 
-    }       
+    }
+
+    // Qarsi High Priest went to manifest Illusory Gains,
+    // but it made me choose a target for gains, then enchanted the card to that creature.
+
+    @Test
+    public void testManifestAura() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        addCard(Zone.LIBRARY, playerB, "Illusory Gains", 1);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+
+        skipInitShuffling();
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        addTarget(playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Illusory Gains", 0);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+
+        // a facedown creature is on the battlefield
+        assertPermanentCount(playerB, "face down creature", 1);
+
+    }
 }

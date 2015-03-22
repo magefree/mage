@@ -499,7 +499,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override   
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList<UUID> appliedEffects){
         ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
+        if (facedown) {
+            this.setFaceDown(true, game);
+        }
         if (!game.replaceEvent(event)) {
+            if (facedown) {
+                this.setFaceDown(false, game);
+            }
             if (fromZone != null) {
                 boolean removed = false;
                 switch (fromZone) {
@@ -545,6 +551,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
             return true;
+        }
+        if (facedown) {
+            this.setFaceDown(false, game);
         }
         return false;
     }
