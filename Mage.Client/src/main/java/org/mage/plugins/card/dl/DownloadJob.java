@@ -50,6 +50,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
     /**
      * Sets the job's state. If the state is {@link State#ABORTED}, it instead sets the error to "ABORTED"
+     * @param state
      */
     public void setState(State state) {
         if (state == State.ABORTED) {
@@ -62,6 +63,7 @@ public class DownloadJob extends AbstractLaternaBean {
     /**
      * Sets the job's state to {@link State#ABORTED} and the error message to the given message. Logs a warning
      * with the given message.
+     * @param message
      */
     public void setError(String message) {
         setError(message, null);
@@ -70,6 +72,7 @@ public class DownloadJob extends AbstractLaternaBean {
     /**
      * Sets the job's state to {@link State#ABORTED} and the error to the given exception. Logs a warning with the
      * given exception.
+     * @param error
      */
     public void setError(Exception error) {
         setError(null, error);
@@ -78,6 +81,8 @@ public class DownloadJob extends AbstractLaternaBean {
     /**
      * Sets the job's state to {@link State#ABORTED} and the error to the given exception. Logs a warning with the
      * given message and exception.
+     * @param message
+     * @param error
      */
     public void setError(String message, Exception error) {
         if (message == null) {
@@ -91,6 +96,7 @@ public class DownloadJob extends AbstractLaternaBean {
 
     /**
      * Sets the job's message.
+     * @param message
      */
     public void setMessage(String message) {
         this.message.setValue(message);

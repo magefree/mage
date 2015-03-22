@@ -14,7 +14,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import org.apache.log4j.Logger;
 
 /**
  * @author Loki

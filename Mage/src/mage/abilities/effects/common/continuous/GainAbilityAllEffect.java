@@ -28,7 +28,10 @@
 
 package mage.abilities.effects.common.continuous;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.UUID;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -38,6 +41,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -103,7 +107,7 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
             for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent permanent = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (permanent != null) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, false);
                 } else {
                     it.remove(); // no longer on the battlefield, remove reference to object
                     if (affectedObjectList.isEmpty()) {
@@ -114,7 +118,19 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl {
         } else {
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    perm.addAbility(ability, source.getSourceId(), game);
+                    perm.addAbility(ability, source.getSourceId(), game, false);
+                }
+            }
+            // still as long as the prev. permanent is known to the LKI (e.g. Mikaeus, the Unhallowed) so gained dies triggered ability will trigger
+            HashMap<UUID, MageObject> LKIBattlefield = game.getLKI().get(Zone.BATTLEFIELD);
+            if (LKIBattlefield != null) {
+                for (MageObject mageObject: LKIBattlefield.values()) {
+                    Permanent perm = (Permanent) mageObject;
+                    if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
+                        if (filter.match(perm, source.getSourceId(), source.getControllerId(), game)) {
+                            perm.addAbility(ability, source.getSourceId(), game, false);
+                        }
+                    }
                 }
             }
         }

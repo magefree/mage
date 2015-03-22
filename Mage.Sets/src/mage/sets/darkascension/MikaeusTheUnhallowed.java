@@ -68,7 +68,6 @@ public class MikaeusTheUnhallowed extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Cleric");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -106,8 +105,14 @@ class MikaeusTheUnhallowedAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.controllerId)) {
+        if (event.getTargetId().equals(this.controllerId)) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && permanent.hasSubtype("Human")) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));

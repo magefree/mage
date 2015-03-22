@@ -6,7 +6,6 @@
 
 package org.mage.plugins.card.dl;
 
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -16,9 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javax.swing.BoundedRangeModel;
-
 import org.apache.log4j.Logger;
 import org.jetlang.channels.Channel;
 import org.jetlang.channels.MemoryChannel;
@@ -30,7 +27,6 @@ import org.mage.plugins.card.dl.DownloadJob.Destination;
 import org.mage.plugins.card.dl.DownloadJob.Source;
 import org.mage.plugins.card.dl.DownloadJob.State;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
-
 
 
 /**

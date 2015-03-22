@@ -90,6 +90,7 @@ public interface Game extends MageItem, Serializable {
     UUID getControllerId(UUID objectId);
     Permanent getPermanent(UUID permanentId);
     Permanent getPermanentOrLKIBattlefield(UUID permanentId);
+    Map<Zone,HashMap<UUID, MageObject>> getLKI();
     Card getCard(UUID cardId);
     Ability getAbility(UUID abilityId, UUID sourceId);
     void setZone(UUID objectId, Zone zone);

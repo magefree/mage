@@ -181,4 +181,30 @@ public class UndyingTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Butcher Ghoul", 0);
         assertExileCount("Butcher Ghoul", 1);
     }
+
+    /**
+     * Tests that the undying granted by Mikaeus, the Unhallowed works
+     *
+     */
+    @Test
+    public void testUndyingMikaeusTheUnhallowed() {
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // Other non-Human creatures you control get +1/+1 and have undying.
+        addCard(Zone.BATTLEFIELD, playerA, "Mikaeus, the Unhallowed", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Mikaeus, the Unhallowed", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 4, 4);
+
+    }
 }

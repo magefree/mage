@@ -2305,6 +2305,11 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
+    @Override
+    public Map<Zone,HashMap<UUID, MageObject>> getLKI() {
+        return lki;
+    }
+
     private void removeCards(Cards cards) {
         for (UUID card : cards) {
             removeCard(card);
