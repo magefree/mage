@@ -33,6 +33,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
@@ -63,6 +64,11 @@ public class ManaSpentToCastWatcher extends Watcher {
                payment = spell.getSpellAbility().getManaCostsToPay().getPayment();
             }
         }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && this.getSourceId().equals(event.getSourceId())) {
+             if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                 payment = null;
+             }
+        }
     }
 
     @Override
@@ -74,11 +80,15 @@ public class ManaSpentToCastWatcher extends Watcher {
         Mana returnPayment = null;
         if (payment != null) {
             returnPayment = payment.copy();
-            // reset payment for next check
-            payment = null;
         }
         return returnPayment;
 
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        payment = null;
     }
 
 }

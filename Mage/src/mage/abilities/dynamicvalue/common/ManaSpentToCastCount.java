@@ -34,7 +34,6 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 /**
  *
