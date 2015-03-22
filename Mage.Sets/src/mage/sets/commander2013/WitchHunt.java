@@ -59,8 +59,6 @@ public class WitchHunt extends CardImpl {
         super(ownerId, 133, "Witch Hunt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
-
         // Players can't gain life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
         // At the beginning of your upkeep, Witch Hunt deals 4 damage to you.
