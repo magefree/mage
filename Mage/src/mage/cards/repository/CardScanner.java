@@ -61,7 +61,7 @@ public class CardScanner {
             packages.add(set.getPackageName());
             ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
-        ExpansionRepository.instance.setContentVersion(CardRepository.instance.getContentVersionConstant());
+        ExpansionRepository.instance.setContentVersion(ExpansionRepository.instance.getContentVersionConstant());
 
         for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
             if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
