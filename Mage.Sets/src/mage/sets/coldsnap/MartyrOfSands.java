@@ -54,6 +54,7 @@ import mage.target.common.TargetCardInHand;
 public class MartyrOfSands extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("X white cards from your hand");
+
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
@@ -64,7 +65,6 @@ public class MartyrOfSands extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

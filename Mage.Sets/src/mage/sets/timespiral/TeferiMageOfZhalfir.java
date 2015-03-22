@@ -61,12 +61,12 @@ public class TeferiMageOfZhalfir extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+
         // Creature cards you own that aren't on the battlefield have flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferiMageOfZhalfirAddFlashEffect()));
 
@@ -152,13 +152,18 @@ class TeferiMageOfZhalfirReplacementEffect extends ContinuousRuleModifyingEffect
         }
         return null;
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
-                return !game.canPlaySorcery(event.getPlayerId());
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
+            return !game.canPlaySorcery(event.getPlayerId());
         }
         return false;
     }

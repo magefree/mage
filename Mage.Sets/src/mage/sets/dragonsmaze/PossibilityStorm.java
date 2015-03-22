@@ -29,17 +29,17 @@ package mage.sets.dragonsmaze;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -60,8 +60,6 @@ public class PossibilityStorm extends CardImpl {
     public PossibilityStorm(UUID ownerId) {
         super(ownerId, 34, "Possibility Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "DGM";
-
-        this.color.setRed(true);
 
         // Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from
         // the top of his or her library until he or she exiles a card that shares a card type with it. That
@@ -97,8 +95,13 @@ class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST && event.getZone() == Zone.HAND) {
+        if (event.getZone() == Zone.HAND) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 for (Effect effect : this.getEffects()) {
@@ -130,22 +133,24 @@ class PossibilityStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            if (spell.moveToExile(source.getSourceId(), "Possibility Storm Exile", source.getSourceId(), game)) {
-                Player player = game.getPlayer(spell.getControllerId());
-                if (player != null && player.getLibrary().size() > 0) {
-                    Library library = player.getLibrary();
+        MageObject sourceObject = source.getSourceObject(game);        
+        if (sourceObject != null && spell != null) {
+            Player spellController = game.getPlayer(spell.getControllerId());
+            if (spellController != null &&
+                spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.STACK)) {
+                if (spellController.getLibrary().size() > 0) {
+                    Library library = spellController.getLibrary();
                     Card card;
                     do {
                         card = library.removeFromTop(game);
                         if (card != null) {
-                            card.moveToExile(source.getSourceId(), "Possibility Storm Exile", source.getSourceId(), game);
+                            spellController.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY);
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())) {
-                        if(player.chooseUse(Outcome.PlayForFree, new StringBuilder("Cast ").append(card.getName()).append(" without paying cost?").toString(), game)) {
-                            player.cast(card.getSpellAbility(), game, true);
+                        if (spellController.chooseUse(Outcome.PlayForFree, new StringBuilder("Cast ").append(card.getName()).append(" without paying cost?").toString(), game)) {
+                            spellController.cast(card.getSpellAbility(), game, true);
                         }
                     }
 
@@ -154,7 +159,7 @@ class PossibilityStormEffect extends OneShotEffect {
                         while (exile.size() > 0) {
                             card = exile.getRandom(game);
                             exile.remove(card.getId());
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                            spellController.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, false, false);
                         }
                     }
 

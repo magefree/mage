@@ -49,7 +49,7 @@ public class RevealTargetFromHandCost extends CostImpl {
         this.text = (target.getNumberOfTargets() == 0 ?"you may ":"") + "reveal " + target.getTargetName();
     }
 
-    public RevealTargetFromHandCost(RevealTargetFromHandCost cost) {
+    public RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
         super(cost);
         this.convertedManaCosts = cost.convertedManaCosts;
         this.numberCardsRevealed = cost.numberCardsRevealed;
@@ -69,12 +69,12 @@ public class RevealTargetFromHandCost extends CostImpl {
                     numberCardsRevealed++;
                     cards.add(card);
                 }
-                player.revealCards("card cost", cards, game);
-                paid = true;
-                return paid;
             }
-            if (!paid && targets.get(0).getNumberOfTargets() == 0) {
-                paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative
+            if (numberCardsRevealed > 0 ) {
+                player.revealCards("card cost", cards, game);
+            }
+            if (targets.get(0).getNumberOfTargets() <= numberCardsRevealed) {
+                paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown
                 return paid;
             }
         }
