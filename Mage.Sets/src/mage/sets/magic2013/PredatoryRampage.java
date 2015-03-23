@@ -33,7 +33,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
@@ -45,13 +44,14 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.abilities.effects.common.combat.BlocksIfAbleAllEffect;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class PredatoryRampage extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature your opponents control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -66,7 +66,7 @@ public class PredatoryRampage extends CardImpl {
         // Creatures you control get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
         // Each creature your opponents control blocks this turn if able.
-        this.getSpellAbility().addEffect(new AddContinuousEffectToGame(new PredatoryRampageEffect(Duration.EndOfTurn)));
+        this.getSpellAbility().addEffect(new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, filter, ""));
     }
 
@@ -77,46 +77,5 @@ public class PredatoryRampage extends CardImpl {
     @Override
     public PredatoryRampage copy() {
         return new PredatoryRampage(this);
-    }
-}
-
-class PredatoryRampageEffect extends RequirementEffect {
-
-    public PredatoryRampageEffect(Duration duration) {
-        super(duration);
-        this.staticText = "Each creature your opponents control blocks this turn if able";
-    }
-
-    public PredatoryRampageEffect(final PredatoryRampageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PredatoryRampageEffect copy() {
-        return new PredatoryRampageEffect(this);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && game.getOpponents(controller.getId()).contains(permanent.getControllerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean mustBlockAny(Game game) {
-        return true;
     }
 }

@@ -69,15 +69,22 @@ public class BlocksIfAbleAllEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
-
+    
+    @Override
+    public boolean mustBlock(Game game) {
+        return true;
+    }
+    
+    @Override
+    public boolean mustBlockAny(Game game) {
+        return true;
+    }
+    
     @Override
     public boolean mustAttack(Game game) {
         return false;
     }
 
-    @Override
-    public boolean mustBlock(Game game) {
-        return true;
-    }
+
 
 }

@@ -61,7 +61,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
     // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
     private boolean useToughnessForDamage;
-    private List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
+    private final List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
@@ -447,6 +447,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     /**
      * Retrieves all requirements that apply and creates a Map with blockers and attackers
+     * it contains only records if attackers can be retrieved
      * // Map<creature that can block, Set< all attackers the creature can block and force it to block the attacker>>
      * 
      * @param attackingPlayer - attacker
@@ -565,14 +566,31 @@ public class Combat implements Serializable, Copyable<Combat> {
                             boolean mayBlock = false;
                             for (UUID attackingCreatureId : getAttackers()) {
                                 if (creature.canBlock(attackingCreatureId, game)) {
-                                    // check restrictions of the creature to block that prevent it can be blocked
                                     Permanent attackingCreature = game.getPermanent(attackingCreatureId);
-                                    if (attackingCreature != null && attackingCreature.getMinBlockedBy() > 1) {
-                                        // TODO: check if enough possible blockers are available, if true, mayBlock can be set to true
+                                    if (attackingCreature != null) {
+                                        // check if the attacker is already blocked by a max of blockers, so blocker can't block it also
+                                        if (attackingCreature.getMaxBlockedBy() != 0) { // 0 = no restriction about the number of possible blockers
+                                            int alreadyBlockingCreatures = 0;
+                                            for(CombatGroup group :getGroups()) {
+                                                if (group.getAttackers().contains(attackingCreatureId)) {
+                                                    alreadyBlockingCreatures = group.getBlockers().size();
+                                                    break;
+                                                }
+                                            }
+                                            if (attackingCreature.getMaxBlockedBy() <= alreadyBlockingCreatures) {
+                                                // Attacker can't be blocked by more blockers so check next attacker
+                                                continue;
+                                            }
+                                        }
+                                        // check restrictions of the creature to block that prevent it can be blocked
 
-                                    } else {
-                                        mayBlock = true;
-                                        break;
+                                        if (attackingCreature.getMinBlockedBy() > 1) {
+                                            // TODO: check if enough possible blockers are available, if true, mayBlock can be set to true
+
+                                        } else {
+                                            mayBlock = true;
+                                            break;
+                                        }
                                     }
                                 }
                             }
