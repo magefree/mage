@@ -25,41 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.championsofkamigawa;
+package mage.sets.darksteel;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class PartTheVeil extends CardImpl {
+public class Retract extends CardImpl {
 
-    public PartTheVeil(UUID ownerId) {
-        super(ownerId, 77, "Part the Veil", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
-        this.expansionSetCode = "CHK";
-        this.subtype.add("Arcane");
+    public Retract(UUID ownerId) {
+        super(ownerId, 32, "Retract", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "DST";
+
+        // Return all artifacts you control to their owner's hand.
+        Effect effect = new ReturnToHandFromBattlefieldAllEffect(new FilterControlledArtifactPermanent());
+        effect.setText("Return all artifacts you control to their owner's hand");
+        this.getSpellAbility().addEffect(effect);        
         
-        // Return all creatures you control to their owner's hand.
-        Effect effect = new ReturnToHandFromBattlefieldAllEffect(new FilterControlledCreaturePermanent());
-        effect.setText("Return all creatures you control to their owner's hand");
-        this.getSpellAbility().addEffect(effect);
     }
 
-    public PartTheVeil(final PartTheVeil card) {
+    public Retract(final Retract card) {
         super(card);
     }
 
     @Override
-    public PartTheVeil copy() {
-        return new PartTheVeil(this);
+    public Retract copy() {
+        return new Retract(this);
     }
-
 }
