@@ -53,7 +53,9 @@ public class PathToExile extends CardImpl {
     public PathToExile(UUID ownerId) {
         super(ownerId, 15, "Path to Exile", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "CON";        
-        
+
+        // Exile target creature. Its controller may search his or her library for a basic land card,
+        // put that card onto the battlefield tapped, then shuffle his or her library.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new PathToExileEffect());
     }
@@ -90,19 +92,19 @@ class PathToExileEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (controller != null && permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
-            if (controller.moveCardToExileWithInfo(permanent, null, "",  source.getSourceId(), game, Zone.BATTLEFIELD)) {
-                if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", game)) {
-                    TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-                    if (player.searchLibrary(target, game)) {
-                        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                        if (card != null) {
-                            player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
-                        }
+            // if the zone change to exile gets replaced does not prevent the target controller to be able to search
+            controller.moveCardToExileWithInfo(permanent, null, "",  source.getSourceId(), game, Zone.BATTLEFIELD);
+            if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", game)) {
+                TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
+                if (player.searchLibrary(target, game)) {
+                    Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+                    if (card != null) {
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
                     }
-                    player.shuffleLibrary(game);
                 }
-                return true;
+                player.shuffleLibrary(game);
             }
+            return true;
         }
         return false;
     }
