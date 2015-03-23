@@ -85,12 +85,7 @@ public class GainLifeEffect extends OneShotEffect {
         }
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
-
-        if (sb.length() > 0) {
-            sb.append("you gain ");
-        } else {
-            sb.append("You gain ");
-        }
+        sb.append("you gain ");
         if (message.isEmpty() || !message.equals("1")) {
             sb.append(life).append(" ");
         }

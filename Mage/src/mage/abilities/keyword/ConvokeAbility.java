@@ -115,7 +115,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AlternateMana
     public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && game.getBattlefield().contains(filterUntapped, controller.getId(), 1, game)) {
-            if (unpaid.getMana().getColorless() > 0 && source.getAbilityType().equals(AbilityType.SPELL)) {
+            if (source.getAbilityType().equals(AbilityType.SPELL)) {
                 SpecialAction specialAction = new ConvokeSpecialAction(unpaid);
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
