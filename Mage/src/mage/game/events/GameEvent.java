@@ -94,7 +94,16 @@ public class GameEvent {
         PLAY_LAND, LAND_PLAYED,
         CAST_SPELL, SPELL_CAST,
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
-        ADD_MANA, MANA_ADDED, MANA_PAYED,
+        ADD_MANA, MANA_ADDED, 
+        
+        /* MANA_PAYED
+            targetId    id if the ability the mana was paid for (not the sourceId)
+            sourceId    sourceId of the mana source
+            playerId    controller of the ability the mana was paid for 
+            amount      not used for this event
+            flag        indicates a special condition (e.g. TRUE if it's a colored mana from Cavern of Souls)
+        */
+        MANA_PAYED, 
         LOSES, LOST, WINS,
         TARGET, TARGETED,
         COUNTER, COUNTERED,

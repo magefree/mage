@@ -204,6 +204,7 @@ class CavernOfSoulsWatcher extends Watcher {
 
     public CavernOfSoulsWatcher(final CavernOfSoulsWatcher watcher) {
         super(watcher);
+        this.spells.addAll(watcher.spells);
     }
 
     @Override
@@ -260,14 +261,14 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher");
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && watcher.spells.contains(spell.getId())) {
-                return true;
-            }
-        }
-        return false;
+        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher");
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null && watcher.spells.contains(spell.getId());
     }
 }
