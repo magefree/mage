@@ -109,7 +109,16 @@ public class GameEvent {
         COUNTER, COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
         DECLARE_ATTACKER, ATTACKER_DECLARED,
-        DECLARING_BLOCKERS, DECLARED_BLOCKERS,
+        
+        /* DECLARING_BLOCKERS
+            targetId    attackerId
+            sourceId    not used for this event
+            playerId    attackerId
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        DECLARING_BLOCKERS,
+        DECLARED_BLOCKERS,
         DECLARE_BLOCKER, BLOCKER_DECLARED,
         CREATURE_BLOCKED,
         SEARCH_LIBRARY, LIBRARY_SEARCHED,

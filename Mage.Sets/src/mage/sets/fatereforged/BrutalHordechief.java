@@ -151,6 +151,17 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.hasOpponent(event.getPlayerId(), game);
+    }
+    
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player blockController = game.getPlayer(source.getControllerId());
         if (blockController != null) {
@@ -158,16 +169,5 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARING_BLOCKERS;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        // this won't work correctly if coop formats are supported someday
-        return event.getPlayerId().equals(source.getSourceId());
-    }
+    }    
 }

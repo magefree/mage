@@ -59,7 +59,6 @@ public class AshcloudPhoenix extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
