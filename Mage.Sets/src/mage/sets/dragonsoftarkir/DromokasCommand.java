@@ -40,9 +40,9 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.FilterStackObject;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,13 +58,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class DromokasCommand extends CardImpl {
 
     private static final FilterStackObject filterInstantOrSorcery = new FilterStackObject("instant or sorcery spell");
-    private static final FilterPermanent filterEnchantment = new FilterPermanent("an enchantment");
+    private static final FilterEnchantmentPermanent filterEnchantment = new FilterEnchantmentPermanent("an enchantment");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature to put a +1/+1 counter on it");
     private static final FilterCreaturePermanent filterUncontrolledCreature = new FilterCreaturePermanent("creature you don't control");
 
     static {
         filterInstantOrSorcery.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
+
         filterUncontrolledCreature.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
