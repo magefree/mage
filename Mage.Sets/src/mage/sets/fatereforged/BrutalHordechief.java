@@ -58,7 +58,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BrutalHordechief extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature your opponents control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
@@ -76,7 +76,7 @@ public class BrutalHordechief extends CardImpl {
         this.addAbility(new BrutalHordechiefTriggeredAbility());
 
         // {3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(filter), new ManaCostsImpl("{3}{R/W}{R/W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(filter, Duration.EndOfTurn), new ManaCostsImpl("{3}{R/W}{R/W}"));
         ability.addEffect(new BrutalHordechiefReplacementEffect());
         this.addAbility(ability);
     }
@@ -157,8 +157,7 @@ class BrutalHordechiefReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        return controller != null && controller.hasOpponent(event.getPlayerId(), game);
+        return event.getPlayerId().equals(source.getControllerId());
     }
     
     @Override
