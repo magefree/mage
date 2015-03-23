@@ -105,12 +105,12 @@ public class ChampionAbility extends StaticAbility {
         Ability ability1 = new EntersBattlefieldTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new ChampionExileCost(filter, new StringBuilder(card.getName()).append(" championed permanents").toString())),false);
         ability1.setRuleVisible(false);
-        card.addAbility(ability1);
+        addSubAbility(ability1);
 
         // When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         ability2.setRuleVisible(false);
-        card.addAbility(ability2);
+        addSubAbility(ability2);
     }
 
     public ChampionAbility(final ChampionAbility ability) {

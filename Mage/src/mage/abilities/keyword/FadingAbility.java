@@ -28,7 +28,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
         super(new AddCountersSourceEffect(CounterType.FADE.createInstance(fadeCounter)), "with");
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), TargetController.YOU, false);
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
         StringBuilder sb = new StringBuilder("Fading ");
         sb.append(fadeCounter);
         sb.append(" <i>(This permanent enters the battlefield with ")

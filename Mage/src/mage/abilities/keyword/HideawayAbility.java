@@ -68,11 +68,11 @@ public class HideawayAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
         Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
         // Allow controller to look at face down card
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new HideawayLookAtFaceDownCardEffect());
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
     }
 
     public HideawayAbility(final HideawayAbility ability) {

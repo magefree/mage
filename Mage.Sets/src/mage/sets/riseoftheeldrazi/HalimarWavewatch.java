@@ -62,10 +62,11 @@ public class HalimarWavewatch extends LevelerCard {
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(new IslandwalkAbility());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 0, 6),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 6, 6)
-        );
+        ));
+        setMaxLevelCounters(5);
     }
 
     public HalimarWavewatch(final HalimarWavewatch card) {

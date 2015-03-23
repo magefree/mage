@@ -144,7 +144,7 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
                     Card card = spell.getCard();
                     if (card != null) {
                         if (!card.getAbilities().contains(ability)) {
-                            card.addAbility(ability);
+                            game.getState().addOtherAbility(card, ability);
                             SoulfireGrandMasterLeavesStackWatcher watcher = (SoulfireGrandMasterLeavesStackWatcher) game.getState().getWatchers().get("SoulfireGrandMasterLeavesStackWatcher");
                             if (watcher != null) {
                                 watcher.addCardId(card.getId());

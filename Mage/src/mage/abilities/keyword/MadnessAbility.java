@@ -41,7 +41,7 @@ public class MadnessAbility extends StaticAbility {
     @SuppressWarnings("unchecked")
     public MadnessAbility(Card card, ManaCosts madnessCost) {
         super(Zone.HAND, new MadnessReplacementEffect((ManaCosts<ManaCost>)madnessCost));
-        card.addAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>)madnessCost));
+        addSubAbility(new MadnessTriggeredAbility((ManaCosts<ManaCost>)madnessCost));
         rule = "Madness " + madnessCost.getText() + " <i>(If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)<i/>";        
     }
 

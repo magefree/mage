@@ -361,6 +361,19 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canChooseTarget(Game game);
 
+    /**
+     * Gets the list of sub-abilities associated with this ability.
+     * @return 
+     */
+    List<Ability> getSubAbilities();
+
+    /**
+     * Adds a sub-ability to this ability.
+     * 
+     * @param ability The {@link Ability} to add.
+     */
+    void addSubAbility(Ability ability);
+
     List<Watcher> getWatchers();
     void addWatcher(Watcher watcher);
     

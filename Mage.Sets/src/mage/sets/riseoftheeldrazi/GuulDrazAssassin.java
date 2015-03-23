@@ -76,10 +76,11 @@ public class GuulDrazAssassin extends LevelerCard {
         ability2.addCost(new TapSourceCost());
         abilities2.add(ability2);
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
-        );
+        ));
+        setMaxLevelCounters(4);
     }
 
     public GuulDrazAssassin (final GuulDrazAssassin card) {

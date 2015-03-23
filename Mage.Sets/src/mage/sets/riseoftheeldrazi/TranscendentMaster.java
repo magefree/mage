@@ -70,10 +70,11 @@ public class TranscendentMaster extends LevelerCard {
                 LifelinkAbility.getInstance(),
                 IndestructibleAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(6, 11, abilities1, 6, 6),
                 new LevelerCardBuilder.LevelAbility(12, -1, abilities2, 9, 9)
-        );
+        ));
+        setMaxLevelCounters(12);
     }
 
     public TranscendentMaster(final TranscendentMaster card) {

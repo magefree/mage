@@ -69,10 +69,11 @@ public class KabiraVindicator extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 4, abilities1, 3, 6),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 4, 8)
-        );
+        ));
+        setMaxLevelCounters(5);
     }
 
     public KabiraVindicator(final KabiraVindicator card) {

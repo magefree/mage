@@ -58,7 +58,6 @@ import mage.watchers.Watchers;
 
 import java.io.Serializable;
 import java.util.*;
-import org.apache.log4j.Logger;
 
 /**
 *
@@ -80,7 +79,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final DelayedTriggeredAbilities delayed;
     private final SpecialActions specialActions;
-    private final Map<UUID, Abilities<Ability>> otherAbilities = new HashMap<>();
     private final TurnMods turnMods;
     private final Watchers watchers;
     
@@ -156,9 +154,6 @@ public class GameState implements Serializable, Copyable<GameState> {
                 this.values.put(entry.getKey(), entry.getValue());
         }
         this.zones.putAll(state.zones);
-        for (Map.Entry<UUID, Abilities<Ability>> entry: state.otherAbilities.entrySet()) {
-            otherAbilities.put(entry.getKey(), entry.getValue().copy());
-        }
         this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
@@ -601,6 +596,9 @@ public class GameState implements Serializable, Copyable<GameState> {
             watcher.setSourceId(attachedTo.getId());
             watchers.add(watcher);
         }
+        for (Ability sub: ability.getSubAbilities()) {
+            addAbility(sub, sourceId, attachedTo);
+        }
     }
 
     public void addCommandObject(CommandObject commandObject) {
@@ -678,27 +676,17 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @return
      */
     public Abilities<ActivatedAbility> getActivatedOtherAbilities(UUID objectId, Zone zone) {
-        if (otherAbilities.containsKey(objectId)) {
-            return otherAbilities.get(objectId).getActivatedAbilities(zone);
+        if (cardState.containsKey(objectId)) {
+            return cardState.get(objectId).getAbilities().getActivatedAbilities(zone);
         }
         return null;
     }
     
     public Abilities<Ability> getAllOtherAbilities(UUID objectId) {
-        if (otherAbilities.containsKey(objectId)) {
-            return otherAbilities.get(objectId);
+        if (cardState.containsKey(objectId)) {
+            return cardState.get(objectId).getAbilities();
         }
         return null;
-    }
-
-
-
-    public void addOtherAbility(UUID objectId, Ability ability) {
-        if (!otherAbilities.containsKey(objectId)) {
-            otherAbilities.put(objectId, new AbilitiesImpl(ability));
-        } else {
-            otherAbilities.get(objectId).add(ability);
-        }
     }
 
     /**
@@ -706,13 +694,14 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      * @param card
      */
-    public void addOtherAbility(Ability ability, Card card) {
-        addOtherAbility(card.getId(), ability);
-        addAbility(ability, card.getId(), card);
-    }
-
-    private void resetOtherAbilities() {
-        otherAbilities.clear();
+    public void addOtherAbility(Card attachedTo, Ability ability) {
+        ability.setSourceId(attachedTo.getId());
+        ability.setControllerId(attachedTo.getOwnerId());        
+        if (!cardState.containsKey(attachedTo.getId())) {
+            cardState.put(attachedTo.getId(), new CardState());
+        }
+        cardState.get(attachedTo.getId()).addAbility(ability);
+        addAbility(ability, attachedTo.getId(), attachedTo);
     }
 
     /**
@@ -734,7 +723,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         triggers.removeAllGainedAbilities();
         getContinuousEffects().removeAllTemporaryEffects();
         this.setLegendaryRuleActive(true);
-        this.resetOtherAbilities();
+        for (CardState state: cardState.values()) {
+            state.clearAbilities();
+        }
     }
 
     public void clear() {
@@ -754,7 +745,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         legendaryRuleActive = true;
         gameOver = false;
         specialActions.clear();
-        otherAbilities.clear();
         cardState.clear();
         combat.clear();
         turnMods.clear();

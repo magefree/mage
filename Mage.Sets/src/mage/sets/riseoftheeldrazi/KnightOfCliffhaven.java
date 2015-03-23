@@ -67,10 +67,11 @@ public class KnightOfCliffhaven extends LevelerCard {
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(VigilanceAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 2, 3),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
-        );
+        ));
+        setMaxLevelCounters(4);
     }
 
     public KnightOfCliffhaven(final KnightOfCliffhaven card) {

@@ -179,8 +179,8 @@ public class SuspendAbility extends ActivatedAbilityImpl {
             if (card.getManaCost().isEmpty()) {
                 setRuleAtTheTop(true);
             }
-            card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
-            card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
+            addSubAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
+            addSubAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
         }
         ruleText = sb.toString();
     }
@@ -196,18 +196,18 @@ public class SuspendAbility extends ActivatedAbilityImpl {
         SuspendAbility ability = new SuspendAbility(0, null, card, false);
         ability.setSourceId(card.getId());
         ability.setControllerId(card.getOwnerId());
-        game.getState().addOtherAbility(card.getId(), ability);
+        game.getState().addOtherAbility(card, ability);
 
         SuspendBeginningOfUpkeepTriggeredAbility ability1 = new SuspendBeginningOfUpkeepTriggeredAbility();
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
-        game.getState().addOtherAbility(card.getId(), ability1);
+        game.getState().addOtherAbility(card, ability1);
         game.getState().addAbility(ability1, source.getSourceId(), card);
 
         SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE));
         ability2.setSourceId(card.getId());
         ability2.setControllerId(card.getOwnerId());
-        game.getState().addOtherAbility(card.getId(), ability2);
+        game.getState().addOtherAbility(card, ability2);
         game.getState().addAbility(ability2, source.getSourceId(), card);
     }
 

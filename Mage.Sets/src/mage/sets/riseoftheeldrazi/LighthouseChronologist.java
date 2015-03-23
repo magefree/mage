@@ -75,10 +75,11 @@ public class LighthouseChronologist extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new LighthouseChronologistAbility());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 6, abilities1, 2, 4),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 3, 5)
-        );
+        ));
+        setMaxLevelCounters(7);
     }
 
     public LighthouseChronologist (final LighthouseChronologist card) {

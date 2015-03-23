@@ -44,6 +44,7 @@ import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardImpl;
+import mage.cards.LevelerCard;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +56,7 @@ import mage.target.TargetSpell;
  *
  * @author North
  */
-public class EchoMage extends CardImpl {
+public class EchoMage extends LevelerCard {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
@@ -94,9 +95,10 @@ public class EchoMage extends CardImpl {
         ability.addCost(new TapSourceCost());
         abilities2.add(ability);
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 2, 4),
-                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 2, 5));
+                new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 2, 5)));
+        setMaxLevelCounters(4);
     }
 
     public EchoMage(final EchoMage card) {

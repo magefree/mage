@@ -38,6 +38,8 @@ import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -244,6 +246,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
     }
 
+    @Override
+    public Abilities<Ability> getAbilities() {
+        return abilities;
+    }
+
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return abilities;
+    }
+    
     @Override
     @Deprecated
     public void addAbility(Ability ability) {

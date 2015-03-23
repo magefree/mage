@@ -146,6 +146,19 @@ public abstract class SplitCard extends CardImpl {
     }
 
     @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        Abilities<Ability> allAbilites = new AbilitiesImpl<>();
+        for (Ability ability : super.getAbilities(game)) {
+            if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
+                allAbilites.add(ability);
+            }
+        }
+        allAbilites.addAll(leftHalfCard.getAbilities(game));
+        allAbilites.addAll(rightHalfCard.getAbilities(game));                
+        return allAbilites;
+    }
+    
+    @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<>();
         if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {

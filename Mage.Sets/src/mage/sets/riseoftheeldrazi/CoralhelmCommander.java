@@ -78,10 +78,11 @@ public class CoralhelmCommander extends LevelerCard {
         abilities2.add(FlyingAbility.getInstance());
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 3, abilities1, 3, 3),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 4, 4)
-        );
+        ));
+        setMaxLevelCounters(4);
     }
 
     public CoralhelmCommander(final CoralhelmCommander card) {

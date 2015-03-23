@@ -70,10 +70,11 @@ public class ZulaportEnforcer extends LevelerCard {
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(ZulaportEnforcerAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, new AbilitiesImpl<Ability>(), 3, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, levelAbilities, 5, 5)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public ZulaportEnforcer(final ZulaportEnforcer card) {

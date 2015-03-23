@@ -66,7 +66,7 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
        this.additionalCost.setRepeatable(true);
        setRuleAtTheTop(true);
-       card.addAbility(new ReplicateTriggeredAbility());
+       addSubAbility(new ReplicateTriggeredAbility());
     }
 
     public ReplicateAbility(final ReplicateAbility ability) {

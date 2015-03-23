@@ -63,7 +63,7 @@ public class BeastbreakerOfBalaGed extends LevelerCard {
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(TrampleAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 // LEVEL 1-3
                 //      4/4
                 new LevelerCardBuilder.LevelAbility(1, 3, new AbilitiesImpl<Ability>(), 4, 4),
@@ -71,7 +71,8 @@ public class BeastbreakerOfBalaGed extends LevelerCard {
                 //      4/4
                 //      Trample
                 new LevelerCardBuilder.LevelAbility(4, -1, levelAbilities, 6, 6)
-        );
+        ));
+        setMaxLevelCounters(4);
     }
 
     public BeastbreakerOfBalaGed(final BeastbreakerOfBalaGed card) {

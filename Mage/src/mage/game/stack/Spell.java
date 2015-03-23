@@ -602,6 +602,11 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        return card.getAbilities(game);
+    }
+    
+    @Override
     public boolean hasAbility(UUID abilityId, Game game) {
         return card.hasAbility(abilityId, game);
     }
@@ -674,7 +679,6 @@ public class Spell implements StackObject, Card {
         spellAbilities.add(spellAbility);
     }
 
-    @Override
     public void addAbility(Ability ability) {}
 
     @Override

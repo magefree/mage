@@ -86,7 +86,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
     public ConspireAbility(Card card) {
         super(Zone.STACK, null);
         setRuleAtTheTop(false);
-        card.addAbility(new ConspireTriggeredAbility());
+        addSubAbility(new ConspireTriggeredAbility());
     }
 
     public ConspireAbility(final ConspireAbility ability) {

@@ -150,7 +150,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                     mageObject.getPower().setValue(2);
                     mageObject.getToughness().setValue(2);
                     if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(FlyingAbility.getInstance());
+                        game.getState().addOtherAbility((Card)mageObject, FlyingAbility.getInstance());
                     } else {
                         ((Token)mageObject).addAbility(FlyingAbility.getInstance());
                     }
@@ -159,7 +159,7 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                     mageObject.getPower().setValue(1);
                     mageObject.getToughness().setValue(6);
                     if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(DefenderAbility.getInstance());
+                        game.getState().addOtherAbility((Card)mageObject, DefenderAbility.getInstance());
                     } else {
                         ((Token)mageObject).addAbility(DefenderAbility.getInstance());
                     }

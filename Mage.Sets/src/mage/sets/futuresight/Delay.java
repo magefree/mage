@@ -112,7 +112,7 @@ class DelayEffect extends OneShotEffect {
                     // If the exiled card leaves exile by another way, the abilites won't be removed from the card
                     Abilities oldAbilities = card.getAbilities().copy();
                     SuspendAbility suspendAbility = new SuspendAbility(3, null, card);
-                    card.addAbility(suspendAbility);
+                    game.getState().addOtherAbility(card, suspendAbility);
 
                     for (Ability ability :card.getAbilities()) {
                         if (!oldAbilities.contains(ability)) {

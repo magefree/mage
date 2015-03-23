@@ -79,7 +79,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         Effect effect = new ReturnToHandTargetEffect();
         effect.setTargetPointer(new FixedTarget(card.getId()));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), false));
-        card.addAbility(ability);
+        addSubAbility(ability);
 
     }
 

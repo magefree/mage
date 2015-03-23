@@ -65,10 +65,11 @@ public class IkiralOutrider extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(VigilanceAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 3, abilities1, 2, 6),
                 new LevelerCardBuilder.LevelAbility(4, -1, abilities2, 3, 10)
-        );
+        ));
+        setMaxLevelCounters(4);
     }
 
     public IkiralOutrider (final IkiralOutrider card) {

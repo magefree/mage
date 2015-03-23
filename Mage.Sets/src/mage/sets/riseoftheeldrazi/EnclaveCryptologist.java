@@ -69,10 +69,11 @@ public class EnclaveCryptologist extends LevelerCard {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>(ability);
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 0, 1),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 0, 1)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public EnclaveCryptologist (final EnclaveCryptologist card) {

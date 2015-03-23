@@ -74,10 +74,11 @@ public class HadaSpyPatrol extends LevelerCard {
         abilities2.add(ShroudAbility.getInstance());
         abilities2.add(new CantBeBlockedSourceAbility());
         
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 3, 3)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public HadaSpyPatrol(final HadaSpyPatrol card) {

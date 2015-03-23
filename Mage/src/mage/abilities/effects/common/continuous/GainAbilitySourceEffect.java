@@ -107,8 +107,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
             }
             if (card != null) {
                 // add ability to card only once
-                card.addAbility(ability);
-                discard();
+                game.getState().addOtherAbility(card, ability);
                 return true;
             }
         } else {

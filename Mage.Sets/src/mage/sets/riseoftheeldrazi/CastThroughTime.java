@@ -68,7 +68,7 @@ public class CastThroughTime extends CardImpl {
 
         // Instant and sorcery spells you control have rebound.
         //  (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()), new LeavesBattlefieldWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
     }
 
     public CastThroughTime(final CastThroughTime card) {
@@ -131,52 +131,52 @@ class GainReboundEffect extends ContinuousEffectImpl {
                 }
             }
             if (!found) {
-                Ability ability = new AttachedReboundAbility();
-                card.addAbility(ability);
+                Ability ability = new ReboundAbility();
+//                card.addAbility(ability);
                 ability.setControllerId(source.getControllerId());
                 ability.setSourceId(card.getId());
-                game.getState().addAbility(ability, card);
+                game.getState().addOtherAbility(card, ability);
             }
         }
     }
 }
 
-class AttachedReboundAbility extends ReboundAbility {}
+//class AttachedReboundAbility extends ReboundAbility {}
 
-class LeavesBattlefieldWatcher extends Watcher {
-
-    public LeavesBattlefieldWatcher() {
-        super("LeavesBattlefieldWatcher", WatcherScope.CARD);
-    }
-
-    public LeavesBattlefieldWatcher(final LeavesBattlefieldWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                Player player = game.getPlayer(this.getControllerId());
-                if (player != null) {
-                    for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
-                        Iterator<Ability> it = card.getAbilities().iterator();
-                        while (it.hasNext()) {
-                            if (it.next() instanceof AttachedReboundAbility) {
-                                it.remove();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
-    public LeavesBattlefieldWatcher copy() {
-        return new LeavesBattlefieldWatcher(this);
-    }
-
-}
+//class LeavesBattlefieldWatcher extends Watcher {
+//
+//    public LeavesBattlefieldWatcher() {
+//        super("LeavesBattlefieldWatcher", WatcherScope.CARD);
+//    }
+//
+//    public LeavesBattlefieldWatcher(final LeavesBattlefieldWatcher watcher) {
+//        super(watcher);
+//    }
+//
+//    @Override
+//    public void watch(GameEvent event, Game game) {
+//        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+//            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+//            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+//                Player player = game.getPlayer(this.getControllerId());
+//                if (player != null) {
+//                    for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
+//                        Iterator<Ability> it = card.getAbilities().iterator();
+//                        while (it.hasNext()) {
+//                            if (it.next() instanceof AttachedReboundAbility) {
+//                                it.remove();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    @Override
+//    public LeavesBattlefieldWatcher copy() {
+//        return new LeavesBattlefieldWatcher(this);
+//    }
+//
+//}
 

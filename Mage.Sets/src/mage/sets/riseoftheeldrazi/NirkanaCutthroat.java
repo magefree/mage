@@ -66,10 +66,11 @@ public class NirkanaCutthroat extends LevelerCard {
         abilities2.add(FirstStrikeAbility.getInstance());
         abilities2.add(DeathtouchAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 4, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 5, 4)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public NirkanaCutthroat (final NirkanaCutthroat card) {

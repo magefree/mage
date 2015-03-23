@@ -103,7 +103,7 @@ class MycosynthGolemEffect extends ReplacementEffectImpl {
         if (object != null) {
             Card card = (Card) object;
             Ability ability = new AffinityForArtifactsAbility();
-            card.addAbility(ability);
+            game.getState().addOtherAbility(card, ability);
             ability.setControllerId(source.getControllerId());
             ability.setSourceId(card.getId());
             game.getState().addAbility(ability, source.getSourceId(), card);

@@ -59,10 +59,10 @@ public class CaravanEscort extends LevelerCard {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}")));
 
         AbilitiesImpl<Ability> levelAbilities = new AbilitiesImpl<Ability>(FirstStrikeAbility.getInstance());
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, new AbilitiesImpl<Ability>(), 2, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, levelAbilities, 5, 5)
-        );
+        ));
 
         setMaxLevelCounters(5);
     }

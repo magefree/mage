@@ -65,10 +65,11 @@ public class StudentOfWarfare extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(DoubleStrikeAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 6, abilities1, 3, 3),
                 new LevelerCardBuilder.LevelAbility(7, -1, abilities2, 4, 4)
-        );
+        ));
+        setMaxLevelCounters(7);
     }
 
     public StudentOfWarfare (final StudentOfWarfare card) {

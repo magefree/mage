@@ -72,10 +72,11 @@ public class KazanduTuskcaller extends LevelerCard {
                 new CreateTokenEffect(new ElephantToken(), 2),
                 new TapSourceCost()));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(2, 5, abilities1, 1, 1),
                 new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 1, 1)
-        );
+        ));
+        setMaxLevelCounters(6);
     }
 
     public KazanduTuskcaller(final KazanduTuskcaller card) {

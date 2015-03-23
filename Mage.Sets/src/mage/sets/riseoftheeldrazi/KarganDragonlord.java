@@ -72,10 +72,11 @@ public class KarganDragonlord extends LevelerCard {
         abilities2.add(TrampleAbility.getInstance());
         abilities2.add(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(4, 7, abilities1, 4, 4),
                 new LevelerCardBuilder.LevelAbility(8, -1, abilities2, 8, 8)
-        );
+        ));
+        setMaxLevelCounters(8);
     }
 
     public KarganDragonlord(final KarganDragonlord card) {

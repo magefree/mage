@@ -36,10 +36,11 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
-import mage.abilities.keyword.MorphAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -226,11 +227,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     for (String data : cardState.getInfo().values()) {
                         rules.add(data);
                     }
+                    for (Ability ability: cardState.getAbilities()) {
+                        rules.add(ability.getRule());
+                    }
                 }
             }
-//            for (Ability ability: state.getAbilities()) {
-//                rules.add(ability.getRule());
-//            }
             return rules;
         } catch (Exception e) {
             logger.error("Exception in rules generation for card: " + this.getName(), e);
@@ -238,12 +239,48 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         return rulesError;
     }
 
+    /**
+     * Gets all base abilities - does not include additional abilities added by
+     * other cards or effects
+     * @return A list of {@link Ability} - this collection is modifiable
+     */
     @Override
-    public void addAbility(Ability ability) {
-        ability.setSourceId(this.getId());
-        abilities.add(ability);
+    public Abilities<Ability> getAbilities() {
+        return super.getAbilities();
     }
 
+    /**
+     * Gets all current abilities - includes additional abilities added by
+     * other cards or effects
+     * @param game 
+     * @return A list of {@link Ability} - this collection is not modifiable
+     */
+    @Override
+    public Abilities<Ability> getAbilities(Game game) {
+        Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(objectId);
+        if (otherAbilities == null) {
+            return abilities;
+        }
+        Abilities<Ability> all = new AbilitiesImpl<>();
+        all.addAll(abilities);
+        all.addAll(otherAbilities);
+        return all;        
+    }
+
+    protected void addAbility(Ability ability) {
+        ability.setSourceId(this.getId());
+        abilities.add(ability);
+        for (Ability subAbility: ability.getSubAbilities()) {
+            abilities.add(subAbility);
+        }
+    }
+
+    protected void addAbilities(List<Ability> abilities) {
+        for (Ability ability: abilities) {
+            addAbility(ability);
+        }
+    }
+    
     protected void addAbility(Ability ability, Watcher watcher) {
         addAbility(ability);
         ability.addWatcher(watcher);

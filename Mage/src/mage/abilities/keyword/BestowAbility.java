@@ -116,7 +116,7 @@ public class BestowAbility extends SpellAbility {
         this.addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BestowTypeChangingEffect());
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
     }
 
     public BestowAbility(final BestowAbility ability) {

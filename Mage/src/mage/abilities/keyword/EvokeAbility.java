@@ -72,7 +72,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         this.addEvokeCost(manaString);
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.getInstance(), "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
 
     }
 

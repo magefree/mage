@@ -86,6 +86,7 @@ public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
     private static final List<Watcher> emptyWatchers = new ArrayList<>();
+    private static final List<Ability> emptyAbilities = new ArrayList<>();
 
     protected UUID id;
     protected UUID originalId;
@@ -110,6 +111,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
     protected List<Watcher> watchers = null;    
+    protected List<Ability> subAbilities = null;    
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -143,6 +145,12 @@ public abstract class AbilityImpl implements Ability {
             this.watchers = new ArrayList<>();
             for (Watcher watcher: ability.watchers) {
                 watchers.add(watcher.copy());
+            }
+        }
+        if (ability.subAbilities != null) {
+            this.subAbilities = new ArrayList<>();
+            for (Ability subAbility: ability.subAbilities) {
+                subAbilities.add(subAbility.copy());
             }
         }
         this.modes = ability.modes.copy();
@@ -562,6 +570,11 @@ public abstract class AbilityImpl implements Ability {
                 watcher.setControllerId(controllerId);
             }
         }
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setControllerId(controllerId);
+            }
+        }
     }
 
 
@@ -577,6 +590,11 @@ public abstract class AbilityImpl implements Ability {
         } else {
             if (!(this instanceof MageSingleton)) {
                 this.sourceId = sourceId;
+            }
+        }
+        if (subAbilities != null) {
+            for (Ability subAbility: subAbilities) {
+                subAbility.setSourceId(sourceId);
             }
         }
         if (watchers != null) {
@@ -658,6 +676,23 @@ public abstract class AbilityImpl implements Ability {
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);
+    }
+
+    @Override
+    public List<Ability> getSubAbilities() {
+        if (subAbilities != null)
+            return subAbilities;
+        else
+            return emptyAbilities;
+    }
+
+    @Override
+    public void addSubAbility(Ability ability) {
+        if (subAbilities == null)
+            subAbilities = new ArrayList<>();
+        ability.setSourceId(this.sourceId);
+        ability.setControllerId(this.controllerId);
+        subAbilities.add(ability);
     }
 
     @Override

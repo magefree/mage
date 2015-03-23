@@ -125,7 +125,6 @@ public interface Permanent extends Card, Controllable {
     String getValue();
 
     @Deprecated
-    @Override
     void addAbility(Ability ability);
     @Deprecated
     void addAbility(Ability ability, Game game);

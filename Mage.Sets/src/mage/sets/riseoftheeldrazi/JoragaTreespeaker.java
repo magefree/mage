@@ -92,10 +92,11 @@ public class JoragaTreespeaker extends LevelerCard {
                     new TapSourceCost()),
                 Duration.WhileOnBattlefield, filter)));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 2),
                 new LevelerCardBuilder.LevelAbility(5, -1, abilities2, 1, 4)
-        );
+        ));
+        setMaxLevelCounters(5);
     }
 
     public JoragaTreespeaker(final JoragaTreespeaker card) {

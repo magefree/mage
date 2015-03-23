@@ -65,10 +65,11 @@ public class SkywatcherAdept extends LevelerCard {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(FlyingAbility.getInstance());
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 4, 2)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public SkywatcherAdept(final SkywatcherAdept card) {

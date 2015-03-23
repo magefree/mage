@@ -148,7 +148,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesFaceDownCreatureEffect(morphCosts, (megamorph ? FaceDownType.MEGAMORPHED :FaceDownType.MORPHED)));
         ability.setWorksFaceDown(true);
         ability.setRuleVisible(false);
-        card.addAbility(ability);
+        addSubAbility(ability);
 
     }
 

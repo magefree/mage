@@ -42,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.CardImpl;
+import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -51,7 +52,7 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class LordOfShatterskullPass extends CardImpl {
+public class LordOfShatterskullPass extends LevelerCard {
 
     public LordOfShatterskullPass(UUID ownerId) {
         super(ownerId, 156, "Lord of Shatterskull Pass", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -74,9 +75,10 @@ public class LordOfShatterskullPass extends CardImpl {
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new AttacksTriggeredAbility(new LordOfShatterskullPassEffect(), false));
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 5, abilities1, 6, 6),
-                new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 6, 6));
+                new LevelerCardBuilder.LevelAbility(6, -1, abilities2, 6, 6)));
+        setMaxLevelCounters(6);
     }
 
     public LordOfShatterskullPass(final LordOfShatterskullPass card) {

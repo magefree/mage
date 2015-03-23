@@ -136,34 +136,20 @@ class PrimalPlasmaReplacementEffect extends ReplacementEffectImpl {
                     }
                 }
             }
-            MageObject mageObject;
-            if (permanent instanceof PermanentCard) {
-                mageObject = ((PermanentCard) permanent).getCard();
-            } else {
-                mageObject = ((PermanentToken) permanent).getToken();
-            }
             switch (choice.getChoice()) {
                 case choice33:
-                    mageObject.getPower().setValue(3);
-                    mageObject.getToughness().setValue(3);
+                    permanent.getPower().setValue(3);
+                    permanent.getToughness().setValue(3);
                     break;
                 case choice22:
-                    mageObject.getPower().setValue(2);
-                    mageObject.getToughness().setValue(2);
-                    if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(FlyingAbility.getInstance());
-                    } else {
-                        ((Token)mageObject).addAbility(FlyingAbility.getInstance());
-                    }
+                    permanent.getPower().setValue(2);
+                    permanent.getToughness().setValue(2);
+                    permanent.addAbility(FlyingAbility.getInstance(), source.getId(), game);
                     break;
                 case choice16:
-                    mageObject.getPower().setValue(1);
-                    mageObject.getToughness().setValue(6);
-                    if (mageObject instanceof Card) {
-                        ((Card)mageObject).addAbility(DefenderAbility.getInstance());
-                    } else {
-                        ((Token)mageObject).addAbility(DefenderAbility.getInstance());
-                    }
+                    permanent.getPower().setValue(1);
+                    permanent.getToughness().setValue(6);
+                    permanent.addAbility(DefenderAbility.getInstance(), source.getId(), game);
                     break;
             }
         }

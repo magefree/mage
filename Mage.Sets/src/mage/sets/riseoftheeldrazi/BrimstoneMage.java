@@ -72,10 +72,11 @@ public class BrimstoneMage extends LevelerCard {
         ability.addTarget(new TargetCreatureOrPlayer());
         abilities2.add(ability);
 
-        LevelerCardBuilder.construct(this,
+        this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 3),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 2, 4)
-        );
+        ));
+        setMaxLevelCounters(3);
     }
 
     public BrimstoneMage (final BrimstoneMage card) {

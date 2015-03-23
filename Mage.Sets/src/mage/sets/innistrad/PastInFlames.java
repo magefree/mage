@@ -124,7 +124,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                     if (ability != null) {
                         ability.setSourceId(cardId);
                         ability.setControllerId(card.getOwnerId());
-                        game.getState().addOtherAbility(cardId, ability);
+                        game.getState().addOtherAbility(card, ability);
                     }
                 }
             }

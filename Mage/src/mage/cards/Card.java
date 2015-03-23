@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.constants.Rarity;
@@ -47,7 +48,7 @@ public interface Card extends MageObject {
     int getCardNumber();
     Rarity getRarity();
     void setOwnerId(UUID ownerId);
-    void addAbility(Ability ability);
+    public Abilities<Ability> getAbilities(Game game);
     void setSpellAbility(SpellAbility ability);
     SpellAbility getSpellAbility();
     List<String> getRules(); // gets base card rules

@@ -488,6 +488,16 @@ public class StackAbility implements StackObject, Ability {
     }
     
     @Override
+    public List<Ability> getSubAbilities() {
+        return this.ability.getSubAbilities();
+    }
+
+    @Override
+    public void addSubAbility(Ability ability) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
     public MageObject getSourceObject(Game game) {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }

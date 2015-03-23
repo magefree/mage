@@ -53,7 +53,7 @@ public abstract class LevelerCard extends CardImpl {
         return maxLevelCounters;
     }
 
-    public void setMaxLevelCounters(int maxLevelCounters) {
+    protected void setMaxLevelCounters(int maxLevelCounters) {
         this.maxLevelCounters = maxLevelCounters;
     }
 
