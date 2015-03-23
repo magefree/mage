@@ -63,7 +63,7 @@ import mage.target.TargetCard;
 public class Evershrike extends CardImpl {
 
     public Evershrike(UUID ownerId) {
-        super(ownerId, 88, "Evershrike", Rarity.RARE, new CardType[]{CardType.CREATURE}, "3{W/B}{W/B}");
+        super(ownerId, 88, "Evershrike", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
