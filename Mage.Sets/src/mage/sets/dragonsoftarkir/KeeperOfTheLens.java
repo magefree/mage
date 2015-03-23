@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class KeeperOfTheLens extends CardImpl {
 
     public KeeperOfTheLens(UUID ownerId) {
-        super(ownerId, 240, "Keeper of the Lens", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
+        super(ownerId, 240, "Keeper of the Lens", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}");
         this.expansionSetCode = "DTK";
         this.subtype.add("Golem");
         this.power = new MageInt(1);
