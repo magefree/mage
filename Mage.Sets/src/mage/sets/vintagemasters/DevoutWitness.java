@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -63,13 +64,13 @@ public class DevoutWitness extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // {1}{W}, {tap}, Discard a card: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
+        ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
