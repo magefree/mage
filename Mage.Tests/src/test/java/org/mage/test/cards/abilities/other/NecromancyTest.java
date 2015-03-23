@@ -106,8 +106,8 @@ public class NecromancyTest extends CardTestPlayerBase {
 
     @Test
     public void testNecromancyLeaves() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
         addCard(Zone.HAND, playerA, "Necromancy");
         addCard(Zone.HAND, playerA, "Disenchant");
         addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
@@ -115,11 +115,12 @@ public class NecromancyTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Necromancy");
         
-        setStopAt(2, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, "Craw Wurm", 0);
+        assertGraveyardCount(playerA, "Disenchant", 1);
         assertPermanentCount(playerA, "Necromancy", 0);
+        assertPermanentCount(playerA, "Craw Wurm", 0);
         assertGraveyardCount(playerA, "Necromancy", 1);
         assertGraveyardCount(playerA, "Craw Wurm", 1);
     }
