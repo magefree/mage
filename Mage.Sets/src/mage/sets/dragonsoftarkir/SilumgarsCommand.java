@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SilumgarsCommand extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("creature spell");
+    private static final FilterSpell filter = new FilterSpell("noncreature spell");
     private static final FilterPermanent filter2 = new FilterPermanent("planeswalker");
 
     static {
