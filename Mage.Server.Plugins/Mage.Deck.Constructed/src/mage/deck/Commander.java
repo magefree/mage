@@ -127,7 +127,7 @@ public class Commander extends DeckValidator {
         if (deck.getSideboard().size() == 1) {
             Card commander = (Card) deck.getSideboard().toArray()[0];
             if (commander == null) {
-                invalid.put("Commander", "Commander invalide ");
+                invalid.put("Commander", "Commander invalid ");
                 return false;
             }
             if ((commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")) ||
@@ -135,7 +135,7 @@ public class Commander extends DeckValidator {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
-                        if (!cardHasValideColor(color, card)) {
+                        if (!cardHasValidColor(color, card)) {
                             invalid.put(card.getName(), "Invalid color (" + commander.getName() +")");
                             valid = false;
                         }
@@ -145,7 +145,7 @@ public class Commander extends DeckValidator {
                     valid = false;
                 }
             } else {
-                invalid.put("Commander", "Commander invalide (" + commander.getName() +")");
+                invalid.put("Commander", "Commander invalid (" + commander.getName() +")");
                 valid = false;
             }
         } else {
@@ -155,7 +155,7 @@ public class Commander extends DeckValidator {
         return valid;
     }
 
-    public boolean cardHasValideColor(FilterMana commander, Card card) {
+    public boolean cardHasValidColor(FilterMana commander, Card card) {
         FilterMana cardColor = CardUtil.getColorIdentity(card);
         if (cardColor.isBlack() && !commander.isBlack()
                 || cardColor.isBlue() && !commander.isBlue()

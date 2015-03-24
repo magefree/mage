@@ -40,7 +40,7 @@ public class KhansOfTarkirBlock extends Constructed {
         super("Constructed - Khans of Tarkir Block");
         setCodes.add("KTK");
         setCodes.add("FRF");
-        /*setCodes.add("DTK");*/
+        setCodes.add("DTK");
     }
 
 }

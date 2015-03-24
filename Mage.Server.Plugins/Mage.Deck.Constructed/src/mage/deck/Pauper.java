@@ -30,7 +30,6 @@ public class Pauper extends Constructed {
         banned.add("Grapeshot");
         banned.add("Invigorate");
         banned.add("Temporal Fissure");
-
-
+        banned.add("Treasure Cruise");
     }
 }

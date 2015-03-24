@@ -42,7 +42,9 @@ public class DuelCommander extends Commander {
         banned.add("Black Lotus");
         banned.add("Cataclysm");
         banned.add("Channel");
-        banned.add("Crucible of Worlds");
+        banned.add("Entomb");
+        banned.add("Fastbond");
+        banned.add("Food Chain");
         banned.add("Gifts Ungiven");
         banned.add("Grim Monolith");
         banned.add("Grindstone");
@@ -66,7 +68,6 @@ public class DuelCommander extends Commander {
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Protean Hulk");
-        banned.add("Sensei’s Divining Top");
         banned.add("Serra Ascendant");
         banned.add("Shahrazad");
         banned.add("Sol Ring");
@@ -77,10 +78,8 @@ public class DuelCommander extends Commander {
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Vampiric Tutor");
-        banned.add("Winter Orb");
         banned.add("Yawgmoth’s Bargain");
 
-        bannedCommander.add("Braids, Cabal Minion");
         bannedCommander.add("Derevi, Empyrial Tactician");
         bannedCommander.add("Edric, Spymaster of Trest");
         bannedCommander.add("Erayo, Soratami Ascendant");
