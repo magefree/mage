@@ -114,18 +114,16 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         if (you != null) {
             if (you.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", game)) {
                 xCost += playerPaysXGenericMana(you, source, game);
-                if (xCost > 0) {
-                    // save the x value to be available for ETB replacement effect
-                    Object object = game.getState().getValue("spellX" + source.getSourceId());
-                    Map<UUID, Integer> spellX;
-                    if (object != null && object instanceof Map) {
-                        spellX = (Map<UUID, Integer>) object;
-                    } else {
-                        spellX = new HashMap<>();
-                    }
-                    spellX.put(event.getSourceId(), xCost);
-                    game.getState().setValue("spellX" + source.getSourceId(), spellX);
+                // save the x value to be available for ETB replacement effect
+                Object object = game.getState().getValue("spellX" + source.getSourceId());
+                Map<UUID, Integer> spellX;
+                if (object != null && object instanceof Map) {
+                    spellX = (Map<UUID, Integer>) object;
+                } else {
+                    spellX = new HashMap<>();
                 }
+                spellX.put(event.getSourceId(), xCost);
+                game.getState().setValue("spellX" + source.getSourceId(), spellX);
             }
         }
         return false;
