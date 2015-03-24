@@ -48,6 +48,7 @@ public class TapTargetCost extends CostImpl {
 
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
+        this.target.setNotTarget(true); // costs are never targeted
         this.text = 
             new StringBuilder("Tap ")
                 .append(target.getTargetName().startsWith("a ") || target.getTargetName().startsWith("an ") ? "":CardUtil.numberToText(target.getMaxNumberOfTargets()))

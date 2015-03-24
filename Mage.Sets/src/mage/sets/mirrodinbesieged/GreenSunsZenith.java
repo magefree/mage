@@ -57,7 +57,7 @@ public class GreenSunsZenith extends CardImpl {
     public GreenSunsZenith(UUID ownerId) {
         super(ownerId, 81, "Green Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "MBS";
-        this.color.setGreen(true);
+
         // Search your library for a green creature card with converted mana cost X or less,
         // put it onto the battlefield, then shuffle your library.
         // Shuffle Green Sun's Zenith into its owner's library.
@@ -96,8 +96,7 @@ class GreenSunsZenithSearchEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX() + 1;
         FilterCard filter = new FilterCard("green creature card with converted mana cost " + xValue + " or less");
         filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        
+        filter.add(new CardTypePredicate(CardType.CREATURE));        
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xValue));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {

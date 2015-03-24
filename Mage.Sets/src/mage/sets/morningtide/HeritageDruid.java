@@ -28,14 +28,13 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -47,7 +46,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author Loki
  */
 public class HeritageDruid extends CardImpl {
-
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
 
@@ -61,10 +59,12 @@ public class HeritageDruid extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, false))));
+
+        // Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
     }
 
     public HeritageDruid(final HeritageDruid card) {

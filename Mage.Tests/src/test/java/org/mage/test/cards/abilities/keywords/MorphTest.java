@@ -27,9 +27,11 @@
  */
 package org.mage.test.cards.abilities.keywords;
 
+import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -428,6 +430,43 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Counterspell", 1);
         assertGraveyardCount(playerA, "Akroma, Angel of Fury", 1);
+
+    }
+    /**
+     * Check if a face down Morph creature gets exiled, it will
+     * be face up in exile zone.
+     */
+
+    @Test
+    public void testExileFaceDownCreature() {
+        addCard(Zone.HAND, playerA, "Birchlore Rangers", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.HAND, playerB, "Swords to Plowshares", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "face down creature");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 22); // + 2 from Swords to Plowshares
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Swords to Plowshares", 1);
+        assertExileCount("Birchlore Rangers", 1);
+
+
+        for (Card card: currentGame.getExile().getAllCards(currentGame)) {
+            if (card.getName().equals("Birchlore Rangers")) {
+                Assert.assertEquals("Birchlore Rangers has to be face up in exile", false, card.isFaceDown(currentGame));
+                break;
+            }
+        }
 
     }
 }
