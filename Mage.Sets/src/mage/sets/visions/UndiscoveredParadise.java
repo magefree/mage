@@ -28,9 +28,6 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -38,7 +35,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -104,6 +103,7 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
 
     public AtBeginningOfUntapDelayedTriggeredAbility(Effect effect) {
         super(effect);
+        this.usesStack = false;
     }
 
     public AtBeginningOfUntapDelayedTriggeredAbility(AtBeginningOfUntapDelayedTriggeredAbility ability) {
@@ -111,8 +111,14 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP_STEP_PRE ;
+    }
+
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE && game.getActivePlayerId().equals(controllerId)) {
+        if (game.getActivePlayerId().equals(controllerId)) {
             return true;
         }
         return false;
@@ -125,6 +131,6 @@ class AtBeginningOfUntapDelayedTriggeredAbility extends DelayedTriggeredAbility 
 
     @Override
     public String getRule() {
-        return "At the beginning of your untap step, return {this} to its owner's hand";
+        return "Return {this} to its owner's hand.";
     }
 }
