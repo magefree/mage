@@ -97,10 +97,10 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
             Map<String, UUID> exileIds;
-            String valueKey = CardUtil.getCardZoneString("exileIds", source.getSourceId(), game);
+            String valueKey = CardUtil.getObjectZoneString("exileIds", sourceObject, game);
             Object object = game.getState().getValue(valueKey);
             if (object != null && object instanceof Map) {
                 exileIds = (Map<String, UUID>) object;
@@ -114,9 +114,8 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
-                        Card card = player.getLibrary().removeFromTop(game);
-                        
-                        String exileKey = new StringBuilder(playerId.toString()).append(CardUtil.getCardExileZoneId(game, source)).toString();
+                        Card card = player.getLibrary().getFromTop(game);                        
+                        String exileKey = playerId.toString() + CardUtil.getObjectExileZoneId(game, sourceObject).toString();
                         UUID exileId = exileIds.get(exileKey);
                         if (exileId == null) {
                             exileId = UUID.randomUUID();
@@ -154,9 +153,10 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Map<String, UUID> exileIds;
-            String valueKey = CardUtil.getCardZoneString("exileIds", source.getSourceId(), game);
+            String valueKey = CardUtil.getObjectZoneString("exileIds", sourceObject, game);
             Object object = game.getState().getValue(valueKey);
             if (object != null && object instanceof Map) {
                 exileIds = (Map<String, UUID>) object;
@@ -167,13 +167,13 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    String exileKey = new StringBuilder(playerId.toString()).append(CardUtil.getCardExileZoneId(game, source)).toString();
+                    String exileKey = playerId.toString() + CardUtil.getObjectExileZoneId(game, sourceObject).toString();
                     UUID exileId = exileIds.get(exileKey);
                     if (exileId != null) {
                         ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                         if (exileZone != null) {
                             for(Card card: exileZone.getCards(game)) {
-//                                card.setFaceDown(false, game);
+                                card.setFaceDown(false, game);
                                 if (CardUtil.isPermanentCard(card)) {
                                     player.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
                                 }

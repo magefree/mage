@@ -531,6 +531,16 @@ public class CardUtil {
         return getObjectZoneString(text,cardId, game, zoneChangeCounter, previous);
     }
     
+    public static String getObjectZoneString(String text, MageObject mageObject, Game game) {
+        int zoneChangeCounter = 0;
+        if (mageObject instanceof Permanent) {
+            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter();
+        } else if (mageObject instanceof Card) {
+            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
+        }
+        return getObjectZoneString(text, mageObject.getId(), game, zoneChangeCounter, false);
+    }
+    
     public static String getObjectZoneString(String text, UUID objectId, Game game, int zoneChangeCounter, boolean previous) {
         StringBuilder uniqueString = new StringBuilder();
         if (text != null) {
