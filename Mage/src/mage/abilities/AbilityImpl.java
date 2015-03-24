@@ -110,8 +110,8 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
-    protected List<Watcher> watchers = null;    
-    protected List<Ability> subAbilities = null;    
+    protected List<Watcher> watchers = null;
+    protected List<Ability> subAbilities = null;
 
     public AbilityImpl(AbilityType abilityType, Zone zone) {
         this.id = UUID.randomUUID();
@@ -318,7 +318,7 @@ public abstract class AbilityImpl implements Ability {
                 if (variableManaCost != null || announceString != null) {
                     game.informPlayer(controller, new StringBuilder(sourceObject != null ? sourceObject.getLogName(): "").append(": no valid targets with this value of X").toString());
                 }
-                return false; // when activation of ability is canceled during target selection 
+                return false; // when activation of ability is canceled during target selection
             }
         } // end modes
 
@@ -353,12 +353,12 @@ public abstract class AbilityImpl implements Ability {
         } else {
             costModificationActive = true;
         }
-        
+
         UUID activatorId = controllerId;
         if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
              activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
         }
-        
+
         if (!useAlternativeCost(game)) { // old way still used?
 
             //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
@@ -405,7 +405,7 @@ public abstract class AbilityImpl implements Ability {
         }
         return true;
     }
-    
+
     @Override
     public boolean isActivated() {
         return activated;
@@ -479,7 +479,7 @@ public abstract class AbilityImpl implements Ability {
 
     /**
      * Handles X mana costs and sets manaCostsToPay.
-     * 
+     *
      * @param game
      * @param noMana
      * @param controller
@@ -617,7 +617,7 @@ public abstract class AbilityImpl implements Ability {
     /**
      * Should be used by {@link mage.abilities.effects.CostModificationEffect cost modification effects}
      * to manipulate what is actually paid before resolution.
-     * 
+     *
      * @return
      */
     @Override
@@ -663,18 +663,16 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Watcher> getWatchers() {
-        if (watchers != null) {
+        if (watchers != null)
             return watchers;
-        } else {
+        else
             return emptyWatchers;
-        }
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        if (watchers == null) {
+        if (watchers == null)
             watchers = new ArrayList<>();
-        }
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);
@@ -682,18 +680,16 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Ability> getSubAbilities() {
-        if (subAbilities != null) {
+        if (subAbilities != null)
             return subAbilities;
-        } else {
+        else
             return emptyAbilities;
-        }
     }
 
     @Override
     public void addSubAbility(Ability ability) {
-        if (subAbilities == null) {
+        if (subAbilities == null)
             subAbilities = new ArrayList<>();
-        }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
         subAbilities.add(ability);
@@ -711,7 +707,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public String getRule(boolean all) {
-        StringBuilder sbRule = new StringBuilder();       
+        StringBuilder sbRule = new StringBuilder();
         if (all || this.abilityType != AbilityType.SPELL) {
             if (manaCosts.size() > 0) {
                 sbRule.append(manaCosts.getText());
@@ -728,7 +724,7 @@ public abstract class AbilityImpl implements Ability {
         }
         if (abilityWord != null) {
             sbRule.insert(0, new StringBuilder("<i>").append(abilityWord.toString()).append("</i> &mdash; "));
-        }         
+        }
         String text = modes.getText();
         if (!text.isEmpty()) {
             if (sbRule.length() > 1) {
@@ -886,10 +882,10 @@ public abstract class AbilityImpl implements Ability {
             boolean found = false;
             // unfortunately we need to handle double faced cards separately and only this way
             if (object instanceof PermanentCard) {
-                if (((PermanentCard)object).canTransform()) {
-                    PermanentCard permanent = (PermanentCard)object;
-                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
-                }
+//                if (((PermanentCard)object).canTransform()) {
+//                    PermanentCard permanent = (PermanentCard)object;
+//                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+//                }
             } else {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
@@ -898,7 +894,7 @@ public abstract class AbilityImpl implements Ability {
             if (!found) {
                 return false;
             }
-        }   
+        }
         // else if (object instanceof PermanentCard) {
             // this check prevents Flying to work if assigned to a face down creature
             // Why is this neccessary??
@@ -916,7 +912,7 @@ public abstract class AbilityImpl implements Ability {
     public String toString() {
         return getRule();
     }
-    
+
     @Override
     public boolean getRuleAtTheTop() {
         return ruleAtTheTop;
@@ -948,7 +944,7 @@ public abstract class AbilityImpl implements Ability {
     public void setAdditionalCostsRuleVisible(boolean ruleAdditionalCostsVisible) {
         this.ruleAdditionalCostsVisible = ruleAdditionalCostsVisible;
     }
-    
+
     @Override
     public UUID getOriginalId() {
         return this.originalId;
@@ -1056,7 +1052,7 @@ public abstract class AbilityImpl implements Ability {
     public String getTargetDescription(Targets targets, Game game) {
         return getTargetDescriptionForLog(targets, game);
     }
-    
+
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
         StringBuilder sb = new StringBuilder();
         if (targets.size() > 0) {
@@ -1078,7 +1074,7 @@ public abstract class AbilityImpl implements Ability {
         }
         for (Choice choice :this.getChoices()) {
             sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
-        }        
+        }
         return sb.toString();
     }
 
