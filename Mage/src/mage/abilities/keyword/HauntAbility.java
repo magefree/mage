@@ -35,6 +35,7 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -64,15 +65,18 @@ import mage.target.targetpointer.FixedTarget;
 public class HauntAbility extends TriggeredAbilityImpl {
 
     private boolean usedFromExile = false;
-
+    private boolean creatureHaunt; 
+    
     public HauntAbility(Card card, Effect effect) {
         super(Zone.ALL, effect , false);
-        addSubAbility(new HauntExileAbility());
+        creatureHaunt = card.getCardType().contains(CardType.CREATURE);
+        addSubAbility(new HauntExileAbility(creatureHaunt));
     }
 
     public HauntAbility(final HauntAbility ability) {
         super(ability);
         this.usedFromExile = ability.usedFromExile;
+        this.creatureHaunt = ability.creatureHaunt;
     }
 
     @Override
@@ -80,6 +84,16 @@ public class HauntAbility extends TriggeredAbilityImpl {
         return new HauntAbility(this);
     }
 
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case ENTERS_THE_BATTLEFIELD:
+            case ZONE_CHANGE:
+                return true;
+        }
+        return false;
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
@@ -115,36 +129,49 @@ public class HauntAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or the creature it haunts dies, " + super.getRule();
+        return (creatureHaunt ? "When {this} enters the battlefield or the creature it haunts dies, " :
+                                "When the creature {this} haunts dies, ")
+                + super.getRule();
     }
 }
 
 class HauntExileAbility extends ZoneChangeTriggeredAbility {
 
     private final static String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
-    public HauntExileAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new HauntEffect(), null, false);
-        this.setRuleAtTheTop(true);
+    private final static String RULE_TEXT_SPELL = "Haunt <i>(When this spell card is put into a graveyard after resolving, exile it haunting target creature.)</i>";
+    
+    private boolean creatureHaunt;
+    
+    // TODO: It's not checked yet, if the Haunt spell was resoved (and not countered or removed from stack).
+    
+    public HauntExileAbility(boolean creatureHaunt) {
+        super(creatureHaunt ? Zone.BATTLEFIELD: Zone.STACK, Zone.GRAVEYARD, new HauntEffect(), null, false);
+        this.creatureHaunt = creatureHaunt;
+        this.setRuleAtTheTop(creatureHaunt);
         this.addTarget(new TargetCreaturePermanent());
 
     }
 
-    public HauntExileAbility(HauntExileAbility ability) {
+    public HauntExileAbility(final HauntExileAbility ability) {
         super(ability);
+        this.creatureHaunt = ability.creatureHaunt;
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
-        // check it was previously on battlefield
-        MageObject before = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {        
+        boolean fromOK = true;
+        if (creatureHaunt) {
+            // check it was previously on battlefield
+            fromOK = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) != null;
+        } 
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
-        return before != null && after != null && Zone.GRAVEYARD.match(after);
+        return fromOK && after != null && Zone.GRAVEYARD.match(after);
     }
 
     @Override
     public String getRule() {
-        return RULE_TEXT_CREATURE;
+        return creatureHaunt ? RULE_TEXT_CREATURE : RULE_TEXT_SPELL;
     }
 
     @Override

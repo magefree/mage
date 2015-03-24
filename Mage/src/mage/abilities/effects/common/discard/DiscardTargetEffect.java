@@ -102,7 +102,7 @@ public class DiscardTargetEffect extends OneShotEffect {
         if(mode.getTargets().isEmpty()){
             sb.append("that player");
         } else {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         }
         sb.append(" discards ");
         if (amount.toString().equals("1")) {
