@@ -22,16 +22,9 @@ public class CountersCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent p = game.getPermanent(sourceAbility.getSourceId());
-        // if permanent already leaves the battlefield, try to find counters count via last known information
-        if (p == null) {
-            MageObject o = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
-            if (o instanceof Permanent) {
-                p = (Permanent) o;
-            }
-        }
-        if (p != null) {
-            return p.getCounters().getCount(counter);
+        Permanent permanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
+        if (permanent != null) {
+            return permanent.getCounters().getCount(counter);
         }
         return 0;
     }
