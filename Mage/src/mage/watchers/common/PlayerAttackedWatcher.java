@@ -52,7 +52,7 @@ public class PlayerAttackedWatcher extends Watcher {
 
     public PlayerAttackedWatcher(final PlayerAttackedWatcher watcher) {
         super(watcher);
-        for (Map.Entry<UUID,Integer> entry: playerAttacked.entrySet()) {
+        for (Map.Entry<UUID,Integer> entry: watcher.playerAttacked.entrySet()) {
             this.playerAttacked.put(entry.getKey(), entry.getValue());
 
         }
