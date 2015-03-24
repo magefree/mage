@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ShuffleSpellEffect;
+import mage.abilities.effects.postresolve.ShuffleSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;

@@ -36,6 +36,8 @@ import mage.game.Game;
 
 import java.io.ObjectStreamException;
 import java.util.UUID;
+import mage.constants.Zone;
+import mage.players.Player;
 
 /**
  *
@@ -64,6 +66,9 @@ public class ExileSpellEffect extends PostResolveEffect implements MageSingleton
 
     @Override
     public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        card.moveToExile(null, "", source.getSourceId(), game);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {        
+            controller.moveCardToExileWithInfo(card, null, "", controllerId, game, Zone.STACK);
+        }
     }
 }

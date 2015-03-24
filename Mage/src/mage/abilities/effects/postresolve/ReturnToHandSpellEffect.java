@@ -1,4 +1,4 @@
-package mage.abilities.effects.common;
+package mage.abilities.effects.postresolve;
 
 import mage.constants.Zone;
 import mage.abilities.Ability;

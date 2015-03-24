@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.postresolve;
 
 import mage.constants.Zone;
 import mage.abilities.Ability;

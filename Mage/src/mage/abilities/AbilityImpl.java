@@ -663,16 +663,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Watcher> getWatchers() {
-        if (watchers != null)
+        if (watchers != null) {
             return watchers;
-        else
+        } else {
             return emptyWatchers;
+        }
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        if (watchers == null)
+        if (watchers == null) {
             watchers = new ArrayList<>();
+        }
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);
@@ -680,16 +682,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Ability> getSubAbilities() {
-        if (subAbilities != null)
+        if (subAbilities != null) {
             return subAbilities;
-        else
+        } else {
             return emptyAbilities;
+        }
     }
 
     @Override
     public void addSubAbility(Ability ability) {
-        if (subAbilities == null)
+        if (subAbilities == null) {
             subAbilities = new ArrayList<>();
+        }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
         subAbilities.add(ability);

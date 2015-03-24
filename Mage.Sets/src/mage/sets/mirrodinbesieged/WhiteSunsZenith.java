@@ -33,7 +33,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ShuffleSpellEffect;
+import mage.abilities.effects.postresolve.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

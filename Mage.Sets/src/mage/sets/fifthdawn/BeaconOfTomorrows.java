@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ShuffleSpellEffect;
+import mage.abilities.effects.postresolve.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
