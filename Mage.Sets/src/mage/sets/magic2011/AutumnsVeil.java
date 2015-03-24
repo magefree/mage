@@ -60,9 +60,10 @@ public class AutumnsVeil extends CardImpl {
     public AutumnsVeil(UUID ownerId) {
         super(ownerId, 162, "Autumn's Veil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         // Spells you control can't be countered by blue or black spells this turn
         this.getSpellAbility().addEffect(new CantBeCounteredControlledEffect(filterTarget1, filterSource, Duration.EndOfTurn));
+
         // and creatures you control can't be the targets of blue or black spells this turn.
         this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn));
     }

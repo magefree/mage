@@ -42,6 +42,7 @@ import mage.target.TargetSpell;
  * @author Loki
  */
 public class SpellSnare extends CardImpl {
+
     private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
 
     static {
@@ -51,8 +52,6 @@ public class SpellSnare extends CardImpl {
     public SpellSnare(UUID ownerId) {
         super(ownerId, 33, "Spell Snare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "DIS";
-
-        this.color.setBlue(true);
 
         // Counter target spell with converted mana cost 2.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

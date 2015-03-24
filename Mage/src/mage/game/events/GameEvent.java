@@ -104,6 +104,7 @@ public class GameEvent {
             flag        indicates a special condition (e.g. TRUE if it's a colored mana from Cavern of Souls)
         */
         MANA_PAYED, 
+
         LOSES, LOST, WINS,
         TARGET, TARGETED,
         COUNTER, COUNTERED,
