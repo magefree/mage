@@ -27,18 +27,17 @@
  */
 package mage.sets.commander;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -48,6 +47,8 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -63,8 +64,6 @@ public class ChorusOfTheConclave extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(8);
 
@@ -73,6 +72,7 @@ public class ChorusOfTheConclave extends CardImpl {
 
         // As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters the battlefield with that many additional +1/+1 counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChorusOfTheConclaveReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChorusOfTheConclaveReplacementEffect2()));
 
     }
 
@@ -90,7 +90,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
 
     public ChorusOfTheConclaveReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters the battlefield with that many additional +1/+1 counters on it";
+        staticText = "As an additional cost to cast creature spells, you may pay any amount of mana";
     }
 
     public ChorusOfTheConclaveReplacementEffect(final ChorusOfTheConclaveReplacementEffect effect) {
@@ -111,18 +111,20 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int xCost = 0;
         Player you = game.getPlayer(source.getControllerId());
-        MageObject object = game.getObject(event.getSourceId());
-        if (you != null && object != null) {
+        if (you != null) {
             if (you.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", game)) {
-                Card card = (Card) object;
                 xCost += playerPaysXGenericMana(you, source, game);
                 if (xCost > 0) {
-                    Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(xCost)));
-                    ability.setRuleVisible(false);
-                    game.getState().addOtherAbility(card, ability);
-                    ability.setControllerId(source.getControllerId());
-                    ability.setSourceId(card.getId());
-                    game.getState().addAbility(ability, source.getSourceId(), card);
+                    // save the x value to be available for ETB replacement effect
+                    Object object = game.getState().getValue("spellX" + source.getSourceId());
+                    Map<UUID, Integer> spellX;
+                    if (object != null && object instanceof Map) {
+                        spellX = (Map<UUID, Integer>) object;
+                    } else {
+                        spellX = new HashMap<>();
+                    }
+                    spellX.put(event.getSourceId(), xCost);
+                    game.getState().setValue("spellX" + source.getSourceId(), spellX);
                 }
             }
         }
@@ -159,6 +161,56 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         }
         game.informPlayers(new StringBuilder(player.getName()).append(" pays {").append(xValue).append("}.").toString());
         return xValue;
+    }
+
+}
+
+class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
+
+    public ChorusOfTheConclaveReplacementEffect2() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "If you do, that creature enters the battlefield with that many additional +1/+1 counters on it";
+    }
+
+    public ChorusOfTheConclaveReplacementEffect2(final ChorusOfTheConclaveReplacementEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public ChorusOfTheConclaveReplacementEffect2 copy() {
+        return new ChorusOfTheConclaveReplacementEffect2(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Map<UUID, Integer> spellX = (Map<UUID, Integer>) game.getState().getValue("spellX" + source.getSourceId());
+        return spellX != null && spellX.containsKey(event.getSourceId());
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent creature = game.getPermanent(event.getSourceId());
+        Map<UUID, Integer> spellX = (Map<UUID, Integer>) game.getState().getValue("spellX" + source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && creature != null && spellX != null) {
+            int xValue = spellX.get(event.getSourceId());
+            if (xValue > 0) {
+                creature.addCounters(CounterType.P1P1.createInstance(xValue), game);
+                game.informPlayers(sourceObject.getName() +": Added " + xValue +" +1/+1 counter" + (xValue > 1 ? "s":"") + "on " + creature.getName());
+            }
+            spellX.remove(event.getSourceId());
+        }
+        return false;
     }
 
 }
