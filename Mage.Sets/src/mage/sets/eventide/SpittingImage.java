@@ -30,6 +30,7 @@ package mage.sets.eventide;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
@@ -64,8 +65,8 @@ public class SpittingImage extends CardImpl {
         this.getSpellAbility().addEffect(new SpittingImageEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
-        // Retrace
-        this.addAbility(new RetraceAbility(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())), TimingRule.SORCERY));
+        // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+        this.addAbility(new RetraceAbility(getSpellAbility().getManaCosts(), TimingRule.SORCERY));
         
     }
 

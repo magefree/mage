@@ -39,7 +39,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 
 
@@ -70,6 +69,7 @@ public class RetraceAbility extends ActivatedAbilityImpl {
         return "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>";
     }
 }
+
 class RetraceEffect extends OneShotEffect {
 
     public RetraceEffect() {

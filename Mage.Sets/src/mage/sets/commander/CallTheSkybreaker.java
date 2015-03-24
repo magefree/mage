@@ -59,7 +59,7 @@ public class CallTheSkybreaker extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));
         
         // Retrace
-        this.addAbility(new RetraceAbility(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(getSpellAbility().getManaCosts(), TimingRule.SORCERY));
         
     }
 
