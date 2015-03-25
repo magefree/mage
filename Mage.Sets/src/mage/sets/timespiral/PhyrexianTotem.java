@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author FenrisulfrX
  */
 public class PhyrexianTotem extends mage.sets.phyrexiavsthecoalition.PhyrexianTotem {
 

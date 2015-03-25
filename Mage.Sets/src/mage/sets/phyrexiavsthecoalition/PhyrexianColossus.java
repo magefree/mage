@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author FenrisulfrX
  */
 public class PhyrexianColossus extends mage.sets.eighthedition.PhyrexianColossus {
 
