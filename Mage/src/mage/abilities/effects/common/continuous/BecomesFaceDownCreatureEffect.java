@@ -158,7 +158,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                     break;
                 case AbilityAddingRemovingEffects_6:
                     Card card = game.getCard(permanent.getId()); //
-                    List<Ability> abilities = new ArrayList<>();
+                    List<Ability> abilitiesToRemove = new ArrayList<>();
                     for (Ability ability : permanent.getAbilities()) {
                         if (card != null && !card.getAbilities().contains(ability)) {
                             // gained abilities from other sources won't be removed
@@ -174,9 +174,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                                 }
                             }
                         }
-                        abilities.add(ability);
+                        abilitiesToRemove.add(ability);
                     }
-                    permanent.getAbilities().removeAll(abilities);
+                    permanent.getAbilities().removeAll(abilitiesToRemove);
                     if (turnFaceUpAbility != null) {
                         permanent.addAbility(turnFaceUpAbility, source.getSourceId(), game);
                     }

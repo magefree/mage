@@ -116,7 +116,7 @@ public class MorphTest extends CardTestPlayerBase {
     
     /**
      * Test that the triggered "turned face up" ability of Pine Walker does not trigger
-     * aas long as Pine Walker is not turned face up.
+     * as long as Pine Walker is not turned face up.
      * 
      */
     @Test
@@ -366,7 +366,7 @@ public class MorphTest extends CardTestPlayerBase {
     }
 
     /**
-     * Check that an effect like "arget creature and all other creatures with the same name" does
+     * Check that an effect like "Target creature and all other creatures with the same name" does
      * only effect one face down creature, also if multiple on the battlefield. Because they have no
      * name, they don't have the same name.
      *
@@ -469,4 +469,41 @@ public class MorphTest extends CardTestPlayerBase {
         }
 
     }
+   /**
+     * Check that a DiesTriggeredAbility of a creature does not trigger
+     * if the creature dies face down
+     */
+
+    @Test
+    public void testDiesTriggeredDoesNotTriggerIfFaceDown() {
+        addCard(Zone.HAND, playerA, "Ashcloud Phoenix", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "face down creature");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
+
+
+        for (Card card: playerA.getGraveyard().getCards(currentGame)) {
+            if (card.getName().equals("Ashcloud Phoenix")) {
+                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                break;
+            }
+        }
+
+    }    
 }

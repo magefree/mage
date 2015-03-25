@@ -895,14 +895,6 @@ public abstract class AbilityImpl implements Ability {
                 return false;
             }
         }
-        // else if (object instanceof PermanentCard) {
-            // this check prevents Flying to work if assigned to a face down creature
-            // Why is this neccessary??
-//            if (((PermanentCard)object).isFaceDown(game)&& !this.getWorksFaceDown()) {
-//                return false;
-//            }
-//        }
-
         // check against current state
         Zone test = game.getState().getZone(parameterSourceId);
         return test != null && zone.match(test);

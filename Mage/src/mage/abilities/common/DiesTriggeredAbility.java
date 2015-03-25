@@ -34,6 +34,7 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -56,7 +57,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     @Override
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
         // check it was previously on battlefield
-        MageObject before = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
+        Permanent before = (Permanent) game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
         return before != null && after != null && Zone.GRAVEYARD.match(after);
