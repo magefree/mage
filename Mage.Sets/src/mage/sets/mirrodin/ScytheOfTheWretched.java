@@ -27,27 +27,24 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.HashSet;
 import java.util.UUID;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -55,12 +52,11 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 /**
  *
  * @author Jason E. Wall
-
+ *
  */
 public class ScytheOfTheWretched extends CardImpl {
 
@@ -71,8 +67,10 @@ public class ScytheOfTheWretched extends CardImpl {
 
         // Equipped creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield)));
+
         // Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.
-        this.addAbility(new ScytheOfTheWretchedAbility());
+        this.addAbility(new ScytheOfTheWretchedTriggeredAbility());
+
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
@@ -87,22 +85,22 @@ public class ScytheOfTheWretched extends CardImpl {
     }
 }
 
-class ScytheOfTheWretchedAbility extends TriggeredAbilityImpl {
+class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ScytheOfTheWretchedAbility() {
+    public ScytheOfTheWretchedTriggeredAbility() {
         super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
-        Effect attachToThatCreature = new AttachEffect(Outcome.AddAbility);
-        attachToThatCreature.setText("Attach {this} to that creature.");
-        addEffect(attachToThatCreature);
+        Effect effect = new AttachEffect(Outcome.AddAbility);
+        effect.setText("Attach {this} to that creature.");
+        addEffect(effect);
     }
 
-    public ScytheOfTheWretchedAbility(final ScytheOfTheWretchedAbility ability) {
+    public ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public ScytheOfTheWretchedAbility copy() {
-        return new ScytheOfTheWretchedAbility(this);
+    public ScytheOfTheWretchedTriggeredAbility copy() {
+        return new ScytheOfTheWretchedTriggeredAbility(this);
     }
 
     @Override
@@ -112,19 +110,19 @@ class ScytheOfTheWretchedAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equippedCreature = getEquippedCreature(game);
-        if(equippedCreature == null) { return false; }
-
         ZoneChangeEvent zoneChange = (ZoneChangeEvent) event;
-        if(zoneChange.isDiesEvent() && zoneChange.getTarget().getCardType().contains(CardType.CREATURE)) {
-            for(MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
-                if(mor.refersTo(equippedCreature)) {
+        if (zoneChange.isDiesEvent() && zoneChange.getTarget().getCardType().contains(CardType.CREATURE)) {
+            Permanent equippedCreature = getEquippedCreature(game);
+            if (equippedCreature == null) {
+                return false;
+            }
+            for (MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
+                if (mor.refersTo(equippedCreature)) {
                     setTarget(new FixedTarget(event.getTargetId()));
                     return true;
                 }
             }
         }
-
         return false;
     }
 
@@ -134,14 +132,14 @@ class ScytheOfTheWretchedAbility extends TriggeredAbilityImpl {
     }
 
     private void setTarget(TargetPointer target) {
-        for(Effect effect : getEffects()) {
+        for (Effect effect : getEffects()) {
             effect.setTargetPointer(target);
         }
     }
 
     private Permanent getEquippedCreature(Game game) {
         Permanent equipment = game.getPermanent(getSourceId());
-        if(equipment != null && equipment.getAttachedTo() != null) {
+        if (equipment != null && equipment.getAttachedTo() != null) {
             return game.getPermanent(equipment.getAttachedTo());
         }
         return null;
@@ -149,6 +147,7 @@ class ScytheOfTheWretchedAbility extends TriggeredAbilityImpl {
 }
 
 class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
+
     public ScytheOfTheWretchedReanimateEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return that card to the battlefield under your control";
@@ -161,12 +160,11 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if(card != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (card != null && controller != null) {
             Zone currentZone = game.getState().getZone(card.getId());
-            Player player = game.getPlayer(source.getControllerId());
-            if(player != null && player.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId())) {
-                return true;
-            }
+            controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+            return true;
         }
 
         return false;
