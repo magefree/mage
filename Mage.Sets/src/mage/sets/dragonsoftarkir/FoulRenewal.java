@@ -94,10 +94,13 @@ class FoulRenewalEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
+                int xValue = card.getToughness().getValue();
                 controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
-                ContinuousEffect effect = new BoostTargetEffect(-4,-4, Duration.EndOfTurn);
-                effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget()));
-                game.addEffect(effect, source);
+                if (xValue != 0) {
+                    ContinuousEffect effect = new BoostTargetEffect(xValue,xValue, Duration.EndOfTurn);
+                    effect.setTargetPointer(new FixedTarget(source.getTargets().get(1).getFirstTarget()));
+                    game.addEffect(effect, source);
+                }
             }
             return true;
         }
