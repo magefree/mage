@@ -50,8 +50,7 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * graveyard as it resolves.
      *
      */
-
-    @Ignore // at this time player.getPlayable() does not account for spells that gain abilities
+       
     @Test
     public void testSpellsGainLifelink() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -70,7 +69,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
     }
 
-    @Ignore // at this time player.getPlayable() does not account for spells that gain abilities
     @Test
     public void testSpellsReturnToHand() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
@@ -78,9 +76,10 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Lightning Bolt", 0);
@@ -89,5 +88,69 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
 
     }
+    /**
+     * Test with Searing Blood
+     * If the delayed triggered ability triggers, it has to give
+     * life from lifelink because the source is still Searing Blood
+     */
+    // @Ignore // Does not work because as the delayed triggered ability resolves, the source card is no longer on the stack and
+    @Test
+    public void testSearingBlood1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        // Searing Blood {R}{R}
+        // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Searing Blood");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blood", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Soulfire Grand Master", 1);
+        assertGraveyardCount(playerA, "Searing Blood", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertLife(playerB, 17); // -3 by Searing blood because Silvercoat Lion dies
+        assertLife(playerA, 25); // +2 from damage to Silvercoat Lion + 3 from damage to Player B
+
+    }
+
+    /**
+     * Test with Searing Blood
+     * If the delayed triggered ability triggers, it has to give
+     * life from lifelink because the source is still Searing Blood
+     */
+    @Test
+    public void testSearinBlood2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Searing Blood {R}{R}
+        // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
+        addCard(Zone.HAND, playerA, "Searing Blood");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blood", "Pillarfield Ox");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Pillarfield Ox");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Soulfire Grand Master", 1);
+        assertGraveyardCount(playerA, "Searing Blood", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Pillarfield Ox", 1);
+
+        assertLife(playerB, 17);
+        assertLife(playerA, 28); // +2 from damage to Silvercoat Lion + 3 from Lighning Bolt + 3 from damage to Player B from Searing Blood
+
+    }    
+    
+    // Test copied spell
+    
+    // Test damage of activated ability of a permanent does not gain lifelink
     
 }

@@ -39,7 +39,6 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -65,8 +64,8 @@ import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.game.CardState;
 import mage.game.Game;
+import mage.game.command.CommandObject;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
 import mage.game.events.DamagedCreatureEvent;
@@ -75,6 +74,7 @@ import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -741,23 +741,37 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             }
             if (damageDone > 0) {
                 UUID sourceControllerId = null;
+                Abilities sourceAbilities = null;
                 MageObject source = game.getPermanentOrLKIBattlefield(sourceId);
                 if (source == null) {
-                    source = game.getObject(sourceId);
+                    StackObject stackObject = game.getStack().getStackObject(sourceId);
+                    if (stackObject != null) {
+                        source = stackObject.getStackAbility().getSourceObject(game);
+                    } else {
+                        source = game.getObject(sourceId);
+                    }
                     if (source instanceof Spell) {
+                        sourceAbilities = ((Spell) source).getAbilities(game);
                         sourceControllerId = ((Spell) source).getControllerId();
+                    } else if (source instanceof Card) {
+                        sourceAbilities = ((Card) source).getAbilities(game);
+                        sourceControllerId = ((Card) source).getOwnerId();                        
+                    } else if (source instanceof CommandObject){
+                        sourceControllerId = ((CommandObject) source).getControllerId();
+                        sourceAbilities = ((CommandObject) source).getAbilities();
                     } else {
                         source = null;
                     }
                 } else {
+                    sourceAbilities = ((Permanent) source).getAbilities(game);
                     sourceControllerId = ((Permanent) source).getControllerId();
                 }
-                if (source != null) {
-                    if (source.getAbilities().containsKey(LifelinkAbility.getInstance().getId())) {
+                if (source != null && sourceAbilities!= null) {
+                    if (sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
                         Player player = game.getPlayer(sourceControllerId);
                         player.gainLife(damageAmount, game);
                     }
-                    if (source.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                    if (sourceAbilities.containsKey(DeathtouchAbility.getInstance().getId())) {
                         deathtouched = true;
                     }
                     if (dealtDamageByThisTurn == null) {

@@ -52,7 +52,7 @@ import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
+import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -71,11 +71,10 @@ import mage.watchers.Watcher;
  */
 public class SoulfireGrandMaster extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("instant and sorcery spells you control");
+    private static final FilterObject filter = new FilterObject("instant and sorcery spells you control");
 
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
-        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public SoulfireGrandMaster(UUID ownerId) {
@@ -112,9 +111,9 @@ public class SoulfireGrandMaster extends CardImpl {
 class GainAbilitySpellsEffect extends ContinuousEffectImpl {
 
     private final Ability ability;
-    private final FilterSpell filter;
+    private final FilterObject filter;
 
-    public GainAbilitySpellsEffect(Ability ability, FilterSpell filter) {
+    public GainAbilitySpellsEffect(Ability ability, FilterObject filter) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.filter = filter;
@@ -139,10 +138,9 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         if (player != null && permanent != null) {
             for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
                 StackObject stackObject = iterator.next();
-                if (stackObject instanceof Spell && filter.match(stackObject, source.getControllerId(), game)) {
-                    Spell spell = (Spell) stackObject;
-                    Card card = spell.getCard();
-                    if (card != null) {
+                if (stackObject.getControllerId().equals(source.getControllerId())) {                        
+                    Card card = game.getCard(stackObject.getSourceId());
+                    if (card != null && filter.match(card, game)) {
                         if (!card.getAbilities().contains(ability)) {
                             game.getState().addOtherAbility(card, ability);
                             SoulfireGrandMasterLeavesStackWatcher watcher = (SoulfireGrandMasterLeavesStackWatcher) game.getState().getWatchers().get("SoulfireGrandMasterLeavesStackWatcher");
