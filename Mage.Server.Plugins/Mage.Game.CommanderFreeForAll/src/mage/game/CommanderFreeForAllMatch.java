@@ -44,14 +44,14 @@ public class CommanderFreeForAllMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         int startLife = 40;
-        boolean alsoLibrary = false;
+        boolean alsoHand = true;
         if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 30;
-            alsoLibrary = true;
+            alsoHand = false;
         }
         CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());
-        game.setAlsoLibrary(alsoLibrary);
+        game.setAlsoHand(alsoHand);
         initGame(game);
         games.add(game);
     }

@@ -44,15 +44,15 @@ public class CommanderDuelMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         int startLife = 40;
-        boolean alsoLibrary = false;
+        boolean alsoHand = true;
         // Don't like it to compare but seems like it's complicated to do it in another way
         if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
             startLife = 30;
-            alsoLibrary = true;
+            alsoHand = false;
         }
         CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());
-        game.setAlsoLibrary(alsoLibrary);
+        game.setAlsoHand(alsoHand);
         initGame(game);
         games.add(game);
     }

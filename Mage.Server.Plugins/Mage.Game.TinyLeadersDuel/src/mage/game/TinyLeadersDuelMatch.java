@@ -50,7 +50,7 @@ public class TinyLeadersDuelMatch extends MatchImpl {
         game.setStartMessage(this.createGameStartMessage());
         
         //Tucking a Tiny Leader is legal
-        game.setAlsoLibrary(false);
+        game.setAlsoHand(true);
         this.initGame(game);
         games.add(game);
     }
