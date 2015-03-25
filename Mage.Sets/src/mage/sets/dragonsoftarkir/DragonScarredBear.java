@@ -52,7 +52,7 @@ public class DragonScarredBear extends CardImpl {
         super(ownerId, 183, "Dragon-Scarred Bear", Rarity.COMMON, new CardType[]{}, "{2}{G}");
         this.expansionSetCode = "DTK";
         this.supertype.add("Creature");
-        this.supertype.add("Bear");
+        this.subtype.add("Bear");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
