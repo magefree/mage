@@ -34,11 +34,9 @@ import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -49,19 +47,18 @@ import mage.constants.Zone;
 public class DragonScarredBear extends CardImpl {
 
     public DragonScarredBear(UUID ownerId) {
-        super(ownerId, 183, "Dragon-Scarred Bear", Rarity.COMMON, new CardType[]{}, "{2}{G}");
+        super(ownerId, 183, "Dragon-Scarred Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "DTK";
-        this.supertype.add("Creature");
         this.subtype.add("Bear");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
         // <i>Formidable</i> - {1}{G}: Regenerate Dragon-Scarred Bear. Activate this only if creatures you control have total power 8 or greater.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD,
-                new RegenerateSourceEffect(),
-                new ManaCostsImpl("{1}{G}"),
-                FormidableCondition.getInstance());
+            Zone.BATTLEFIELD,
+            new RegenerateSourceEffect(),
+            new ManaCostsImpl("{1}{G}"),
+            FormidableCondition.getInstance());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
         this.addAbility(ability);
     }
