@@ -110,6 +110,7 @@ class GerrardCapashenEffect extends OneShotEffect {
             Cards cardsInHand = targetOpponent.getHand();
             if(cardsInHand.size() > 0) {
                 controller.gainLife(cardsInHand.size(), game);
+                return true;
             }
         }
         return false;
