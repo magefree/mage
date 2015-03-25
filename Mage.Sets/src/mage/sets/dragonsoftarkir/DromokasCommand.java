@@ -93,6 +93,7 @@ public class DromokasCommand extends CardImpl {
         mode = new Mode();
         effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("Put a +1/+1 counter on target creature");
+        effect.applyEffectsAfter(); // so the counter is taken into account if the target is also used in mode 4
         mode.getEffects().add(effect);
         mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
         this.getSpellAbility().getModes().addMode(mode);
