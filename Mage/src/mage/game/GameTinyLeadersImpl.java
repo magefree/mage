@@ -60,6 +60,7 @@ import mage.watchers.common.CommanderInfoWatcher;
 public abstract class GameTinyLeadersImpl extends GameImpl{
     
     protected boolean alsoHand; // replace also commander going to library
+    protected boolean alsoLibrary; // replace also commander going to library
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
@@ -86,7 +87,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
                     this.loadCards(cards, playerId);
                     player.setCommanderId(commander.getId());
                     commander.moveToZone(Zone.COMMAND, null, this, true);
-                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand));
+                    ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                     ability.addEffect(new CommanderCostModification(commander.getId()));
                     ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                     getState().setValue(commander.getId() + "_castCount", 0);
@@ -155,7 +156,10 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
     public void setAlsoHand(boolean alsoHand) {
         this.alsoHand = alsoHand;
     }
-    
+
+    public void setAlsoLibrary(boolean alsoLibrary) {
+        this.alsoLibrary = alsoLibrary;
+    }
 }
 
 class DefaultCommander extends CardImpl {

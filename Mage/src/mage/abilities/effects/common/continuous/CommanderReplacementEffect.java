@@ -55,19 +55,22 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
 
     private final UUID commanderId;
     private final boolean alsoHand;
+    private final boolean alsoLibrary;
 
-    public CommanderReplacementEffect(UUID commanderId, boolean alsoHand) {
+    public CommanderReplacementEffect(UUID commanderId, boolean alsoHand, boolean alsoLibrary) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
         this.commanderId = commanderId;
         this.duration = Duration.EndOfGame;
         this.alsoHand = alsoHand;
+        this.alsoLibrary = alsoLibrary;
     }
 
     public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
         super(effect);
         this.commanderId = effect.commanderId;
         this.alsoHand = effect.alsoHand;
+        this.alsoLibrary = effect.alsoLibrary;
     }
 
     @Override
@@ -97,12 +100,15 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         switch(((ZoneChangeEvent)event).getToZone()) {
             case HAND:
-                if (!alsoHand) {
+                if (!alsoHand && ((ZoneChangeEvent)event).getToZone() == Zone.HAND) {
+                    return false;
+                }
+            case LIBRARY:
+                if (!alsoLibrary && ((ZoneChangeEvent)event).getToZone() == Zone.LIBRARY) {
                     return false;
                 }
             case GRAVEYARD:
-            case EXILED:
-            case LIBRARY:
+            case EXILED:            
                 if(commanderId.equals(event.getTargetId())){
                     return true;
                 }

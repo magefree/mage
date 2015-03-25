@@ -59,7 +59,8 @@ public abstract class GameCommanderImpl extends GameImpl {
     private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
     private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
     
-    protected boolean alsoHand; // replace also commander going to hand
+    protected boolean alsoHand;    // replace commander going to hand
+    protected boolean alsoLibrary; // replace commander going to library
     protected boolean startingPlayerSkipsDraw = true;
 
     public GameCommanderImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
@@ -69,6 +70,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     public GameCommanderImpl(final GameCommanderImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
+        this.alsoLibrary = game.alsoLibrary;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
     }
 
@@ -84,7 +86,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                     if (commander != null) {
                         player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
-                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand));
+                        ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                         getState().setValue(commander.getId() + "_castCount", 0);
@@ -215,4 +217,7 @@ public abstract class GameCommanderImpl extends GameImpl {
         this.alsoHand = alsoHand;
     }
 
+    public void setAlsoLibrary(boolean alsoLibrary) {
+        this.alsoLibrary = alsoLibrary;
+    }
 }

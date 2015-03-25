@@ -52,6 +52,7 @@ public class CommanderFreeForAllMatch extends MatchImpl {
         CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
         game.setStartMessage(this.createGameStartMessage());
         game.setAlsoHand(alsoHand);
+        game.setAlsoLibrary(true);
         initGame(game);
         games.add(game);
     }
