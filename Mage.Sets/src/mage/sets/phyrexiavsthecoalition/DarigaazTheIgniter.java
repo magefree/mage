@@ -27,7 +27,6 @@
  */
 package mage.sets.phyrexiavsthecoalition;
 
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -36,9 +35,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -64,7 +61,8 @@ public class DarigaazTheIgniter extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Whenever {this} deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
+
+        // Whenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
                 new DarigaazTheIgniterEffect(), new ManaCostsImpl("{2}{R}")), false, true));
     }
@@ -99,26 +97,30 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller != null) {
-            ChoiceColor choice = new ChoiceColor();
-            controller.choose(outcome, choice, game);
-            if(choice.getColor() != null) {
-                game.informPlayers(new StringBuilder(controller.getName()).append(" chooses ").append(choice.getColor()).toString());
+        if (controller != null) {
+            ChoiceColor choice = new ChoiceColor(true);
+            while (!choice.isChosen()) {
+                controller.choose(outcome, choice, game);
+                if (!controller.isInGame()) {
+                    return false;
+                }
+            }
+            
+            if (choice.getColor() != null) {
+                game.informPlayers(controller.getName() + " chooses " + choice.getColor());
                 Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-                if(damagedPlayer != null) {
+                if (damagedPlayer != null) {
                     damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);
-                    Cards cardsInHand = damagedPlayer.getHand();
-                    if(cardsInHand.size() > 0) {
-                        FilterCard  filter = new FilterCard();
-                        filter.add(new ColorPredicate(choice.getColor()));
-                        Set<Card> damage = cardsInHand.getCards(filter, game);
-                        if(damage.size() > 0) {
-                            damagedPlayer.damage(damage.size(), source.getSourceId(), game, false, true);
-                            return true;
-                        }
+                    FilterCard filter = new FilterCard();
+                    filter.add(new ColorPredicate(choice.getColor()));
+                    int damage = damagedPlayer.getHand().count(filter, source.getSourceId(), source.getControllerId(), game);
+                    if (damage > 0) {
+                        damagedPlayer.damage(damage, source.getSourceId(), game, false, true);
                     }
                 }
             }
+            return true;
+
         }
         return false;
     }

@@ -37,7 +37,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -68,7 +67,7 @@ public class GerrardCapashen extends CardImpl {
                 TargetController.YOU, false, true);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
-        
+
         // {3}{W}: Tap target creature. Activate this ability only if {this} is attacking.
         Ability ability2 = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
                 new ManaCostsImpl("{3}{W}"), new SourceAttackingCondition());
@@ -106,11 +105,12 @@ class GerrardCapashenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetOpponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if(controller != null && targetOpponent != null) {
-            Cards cardsInHand = targetOpponent.getHand();
-            if(cardsInHand.size() > 0) {
-                controller.gainLife(cardsInHand.size(), game);
+        if (controller != null && targetOpponent != null) {
+            int cardsInHand = targetOpponent.getHand().size();
+            if (cardsInHand > 0) {
+                controller.gainLife(cardsInHand, game);
             }
+            return true;
         }
         return false;
     }
