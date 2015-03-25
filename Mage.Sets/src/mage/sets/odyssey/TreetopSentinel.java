@@ -62,6 +62,7 @@ public class TreetopSentinel extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // protection from green
         this.addAbility(new ProtectionAbility(filter));
     }

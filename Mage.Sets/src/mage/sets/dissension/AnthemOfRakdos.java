@@ -45,7 +45,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
-
 /**
  *
  * @author JotaPeRL
@@ -60,12 +59,11 @@ public class AnthemOfRakdos extends CardImpl {
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("it gets +2/+0 until end of turn");
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(effect, false, true);
-        Effect dcEffect = new DamageControllerEffect(1);
-        dcEffect.setText("and {this} deals 1 damage to you");
-        ability.addEffect(dcEffect);
+        effect = new DamageControllerEffect(1);
+        effect.setText("and {this} deals 1 damage to you");
+        ability.addEffect(effect);
         this.addAbility(ability);
-       
-        
+
         // Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnthemOfRakdosHellbentEffect()));
     }
@@ -98,8 +96,8 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) ||
-                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
+                || event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
     }
 
     @Override
@@ -116,6 +114,5 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setAmount(event.getAmount() * 2);
         return false;
-    }    
+    }
 }
-
