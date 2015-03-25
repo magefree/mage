@@ -37,7 +37,6 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.BlackManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -46,8 +45,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -80,7 +79,7 @@ public class PhyrexianTotem extends CardImpl {
     
     private class PhyrexianTotemToken extends Token {
         PhyrexianTotemToken() {
-            super("", "a 5/5 black Horror artifact creature with trample");
+            super("Horror", "a 5/5 black Horror artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlack(true);
@@ -108,18 +107,25 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        if (permanent != null) {
+            return permanent.getCardType().contains(CardType.CREATURE);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-            UUID controller = game.getControllerId(event.getTargetId());
-            if(controller != null) {
-                Player player = game.getPlayer(controller);
-                Card card = game.getCard(event.getSourceId());
-                if(player != null && card.getCardType().contains(CardType.CREATURE)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    ((SacrificeEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
-                    return true;
-                }
-            }
+        if (event.getTargetId().equals(getSourceId())) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(getControllerId()));
+            ((SacrificeEffect) getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
+            return true;
         }
         return false;
     }

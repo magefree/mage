@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author FenrisulfrX
  */
 public class HornetCannon extends mage.sets.phyrexiavsthecoalition.HornetCannon {
 
