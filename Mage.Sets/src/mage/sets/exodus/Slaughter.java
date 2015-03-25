@@ -57,8 +57,8 @@ public class Slaughter extends CardImpl {
         this.expansionSetCode = "EXO";
 
         // Buyback-Pay 4 life.
-        BuybackAbility buybackAbility = new BuybackAbility(new PayLifeCost(4));
-        this.addAbility(buybackAbility);
+        this.addAbility(new BuybackAbility(new PayLifeCost(4)));
+        
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

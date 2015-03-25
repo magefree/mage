@@ -1,5 +1,6 @@
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -8,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,12 +34,15 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (player != null && permanent != null) { 
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && player != null && permanent != null) {
             StringBuilder sb = new StringBuilder(cost.getText()).append("?");
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ") ) {
                 sb.insert(0, "Pay ");
-            }
-            if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+            } 
+            String message = CardUtil.replaceSourceName(sb.toString(), sourceObject.getLogName());
+            message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
+            if (player.chooseUse(Outcome.Benefit, message, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

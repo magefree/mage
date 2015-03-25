@@ -59,11 +59,10 @@ public class PhantomTiger extends CardImpl {
         this.subtype.add("Spirit");
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
-        
-        
+
         // Phantom Tiger enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
-        
+
         // If damage would be dealt to Phantom Tiger, prevent that damage. Remove a +1/+1 counter from Phantom Tiger.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomTigerPreventionEffect()));
     }
@@ -77,6 +76,7 @@ public class PhantomTiger extends CardImpl {
         return new PhantomTiger(this);
     }
 }
+
 class PhantomTigerPreventionEffect extends PreventionEffectImpl {
 
     // remember turn and phase step to check if counter in this step was already removed
@@ -122,7 +122,7 @@ class PhantomTigerPreventionEffect extends PreventionEffectImpl {
                 }
             }
 
-            if(removeCounter && permanent.getCounters().containsKey(CounterType.P1P1)) {
+            if (removeCounter && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
                 StringBuilder sb = new StringBuilder(permanent.getName()).append(": ");
                 permanent.removeCounters(CounterType.P1P1.createInstance(), game);
                 sb.append("Removed a +1/+1 counter ");

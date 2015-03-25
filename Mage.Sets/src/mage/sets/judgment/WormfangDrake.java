@@ -27,35 +27,28 @@
  */
 package mage.sets.judgment;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.CostImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
 
 /**
@@ -64,11 +57,7 @@ import mage.util.CardUtil;
  */
 public class WormfangDrake extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-    
-    static {
-        filter.add(Predicates.not(new NamePredicate("Wormfang Drake")));
-    }
+
     
     public WormfangDrake(UUID ownerId) {
         super(ownerId, 57, "Wormfang Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -80,9 +69,13 @@ public class WormfangDrake extends CardImpl {
     
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.     
+
+        // When Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SacrificeSourceUnlessPaysEffect(new WormfangDrakeExileCost()), false));
+
         // When Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.       
-        this.addAbility(new WormfangDrakeAbility(this, CardType.CREATURE));
+        this.addAbility(new WormfangDrakeTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
     public WormfangDrake(final WormfangDrake card) {
@@ -95,62 +88,38 @@ public class WormfangDrake extends CardImpl {
     }
 }
 
-class WormfangDrakeAbility extends StaticAbility {
+class WormfangDrakeTriggeredAbility extends ZoneChangeTriggeredAbility {
 
-    protected CardType cardType;
-    protected String objectDescription;
-
-    public WormfangDrakeAbility(Card card, CardType cardtypes) {
-        super(Zone.BATTLEFIELD, null);
-
-        this.cardType = cardtypes;
-
-        StringBuilder sb = new StringBuilder("another ");
-        ArrayList<Predicate<MageObject>> cardtypesPredicates = new ArrayList<>();
-        cardtypesPredicates.add(new CardTypePredicate(cardType));
-        sb.append(cardType);
-
-        this.objectDescription = sb.toString();
-        FilterControlledPermanent filter = new FilterControlledPermanent(objectDescription);
-        filter.add(Predicates.or(cardtypesPredicates));
-        filter.add(new AnotherPredicate());
-
-        // When Wormfang Drake enters the battlefield, sacrifice it unless you exile another creature you control.
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new WormfangDrakeExileCost(filter, new StringBuilder(card.getName()).append(" WormfangDrakeed permanents").toString())),false);
-        ability1.setRuleVisible(false);
-        card.addAbility(ability1);
-
-        // When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
-        ability2.setRuleVisible(false);
-        card.addAbility(ability2);
+    public WormfangDrakeTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, null, effect, "When {this} leaves the battlefield, ", optional);
     }
 
-    public WormfangDrakeAbility(final WormfangDrakeAbility ability) {
+    public WormfangDrakeTriggeredAbility(WormfangDrakeTriggeredAbility ability) {
         super(ability);
-        this.cardType = ability.cardType;
-        this.objectDescription = ability.objectDescription;
     }
 
     @Override
-    public WormfangDrakeAbility copy() {
-        return new WormfangDrakeAbility(this);
+    public WormfangDrakeTriggeredAbility copy() {
+        return new WormfangDrakeTriggeredAbility(this);
     }
+
 }
 
 class WormfangDrakeExileCost extends CostImpl {
 
-    private String exileZone = null;
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
-    public WormfangDrakeExileCost(FilterControlledPermanent filter, String exileZone) {
-        this.addTarget(new TargetControlledPermanent(1,1,filter, true));
-        this.text = "exile " + filter.getMessage() + " you control";
-        this.exileZone = exileZone;
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
+    public WormfangDrakeExileCost() {
+        this.addTarget(new TargetControlledCreaturePermanent(1,1,filter, true));
+        this.text = "Exile a creature you control other than {this}";
     }
 
     public WormfangDrakeExileCost(WormfangDrakeExileCost cost) {
         super(cost);
-        this.exileZone = cost.exileZone;
     }
 
     @Override
