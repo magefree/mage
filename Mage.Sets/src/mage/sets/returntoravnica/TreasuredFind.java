@@ -30,7 +30,7 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCardInYourGraveyard;

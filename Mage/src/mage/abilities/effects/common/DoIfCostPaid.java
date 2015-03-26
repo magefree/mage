@@ -8,7 +8,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,9 +60,7 @@ public class DoIfCostPaid extends OneShotEffect {
                     for(Effect effect: executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
                         if (effect instanceof OneShotEffect) {
-                            if (!(effect instanceof PostResolveEffect)) {
-                                result &= effect.apply(game, source);
-                            }
+                            result &= effect.apply(game, source);
                         }
                         else {
                             game.addEffect((ContinuousEffect) effect, source);

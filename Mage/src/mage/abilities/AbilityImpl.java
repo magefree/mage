@@ -50,7 +50,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -195,20 +194,18 @@ public abstract class AbilityImpl implements Ability {
         if (checkIfClause(game)) {
             for (Effect effect: getEffects()) {
                 if (effect instanceof OneShotEffect) {
-                    if (!(effect instanceof PostResolveEffect)) {
-                        boolean effectResult = effect.apply(game, this);
-                        result &= effectResult;
-                        if (logger.isDebugEnabled()) {
-                            if (!this.getAbilityType().equals(AbilityType.MANA)) {
-                                if (!effectResult) {
-                                    if (this.getSourceId() != null) {
-                                        MageObject mageObject = game.getObject(this.getSourceId());
-                                        if (mageObject != null) {
-                                            logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
-                                        }
+                    boolean effectResult = effect.apply(game, this);
+                    result &= effectResult;
+                    if (logger.isDebugEnabled()) {
+                        if (!this.getAbilityType().equals(AbilityType.MANA)) {
+                            if (!effectResult) {
+                                if (this.getSourceId() != null) {
+                                    MageObject mageObject = game.getObject(this.getSourceId());
+                                    if (mageObject != null) {
+                                        logger.debug("AbilityImpl.resolve: object: " + mageObject.getName());
                                     }
-                                    logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                                 }
+                                logger.debug("AbilityImpl.resolve: effect returned false -" + effect.getText(this.getModes().getMode()));
                             }
                         }
                     }

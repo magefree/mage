@@ -25,12 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.postresolve;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.MageSingleton;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -39,35 +40,36 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ReturnToLibrarySpellEffect extends PostResolveEffect {
+public class ClashWinReturnToHandSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private final boolean toTop;
+    private static final ClashWinReturnToHandSpellEffect fINSTANCE = new ClashWinReturnToHandSpellEffect();
 
-    public ReturnToLibrarySpellEffect(boolean top) {
-        staticText = "Put {this} on "+ (top ? "top":"the bottom") + " of its owner's library";
-        this.toTop = top;
+    public static ClashWinReturnToHandSpellEffect getInstance() {
+        return fINSTANCE;
     }
 
-    public ReturnToLibrarySpellEffect(final ReturnToLibrarySpellEffect effect) {
-        super(effect);
-        this.toTop = effect.toTop;
+    private ClashWinReturnToHandSpellEffect() {
+        super(Outcome.ReturnToHand);
+        staticText = "Clash with an opponent. If you win, return {this} to its owner's hand";
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ReturnToLibrarySpellEffect copy() {
-        return new ReturnToLibrarySpellEffect(this);
-    }
-
-    @Override
-    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
+        Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.STACK, toTop, true);
+            if (ClashEffect.getInstance().apply(game, source)) {
+                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
+                if (spellCard != null) {
+                    controller.moveCardToHandWithInfo(spellCard, source.getSourceId(), game, Zone.STACK);
+                }
+            }
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public ClashWinReturnToHandSpellEffect copy() {
+        return fINSTANCE;
     }
 }

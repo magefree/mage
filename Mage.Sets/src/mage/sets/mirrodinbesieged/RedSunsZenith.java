@@ -30,7 +30,7 @@ package mage.sets.mirrodinbesieged;
 import java.util.UUID;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.postresolve.ShuffleSpellEffect;
+import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

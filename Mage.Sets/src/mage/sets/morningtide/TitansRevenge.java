@@ -27,22 +27,13 @@
  */
 package mage.sets.morningtide;
 
-import java.io.ObjectStreamException;
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.effects.common.ClashEffect;
+import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.postresolve.ClashWinReturnToHandSpellEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**

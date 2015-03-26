@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

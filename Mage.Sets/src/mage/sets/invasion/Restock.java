@@ -29,7 +29,7 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

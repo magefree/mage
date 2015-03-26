@@ -29,7 +29,7 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.postresolve.ClashWinReturnToHandSpellEffect;
+import mage.abilities.effects.common.ClashWinReturnToHandSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

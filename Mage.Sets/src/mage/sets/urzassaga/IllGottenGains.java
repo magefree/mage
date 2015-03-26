@@ -30,7 +30,7 @@ package mage.sets.urzassaga;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;

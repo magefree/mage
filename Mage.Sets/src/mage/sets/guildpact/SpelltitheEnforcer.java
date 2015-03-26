@@ -29,21 +29,12 @@ package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
@@ -51,7 +42,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -70,8 +60,7 @@ public class SpelltitheEnforcer extends CardImpl {
         // Whenever an opponent casts a spell, that player sacrifices a permanent unless he or she pays {1}.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new DoUnlessTargetPaysEffect(new SacrificeEffect(new FilterPermanent(), 1, "that player"), new GenericManaCost(1), 
-                        "Pay {1}? (otherwise sacrifice a permanent)"),
+                new SpelltitheEnforcerEffect(),
                 new FilterSpell(),
                 false, 
                 SetTargetPointer.PLAYER
@@ -88,87 +77,32 @@ public class SpelltitheEnforcer extends CardImpl {
     }
 }
 
-class DoUnlessTargetPaysEffect extends OneShotEffect {
-    protected Effects executingEffects = new Effects();
-    private final Cost cost;
-    private String chooseUseText;
-
-    public DoUnlessTargetPaysEffect(Effect effect, Cost cost) {
-        this(effect, cost, null);
+class SpelltitheEnforcerEffect extends SacrificeEffect {
+    
+    SpelltitheEnforcerEffect() {
+        super(new FilterPermanent("permanent to sacrifice"), 1, "that player");
+        this.staticText = "that player sacrifices a permanent unless he or she pays {1}";
     }
-
-    public DoUnlessTargetPaysEffect(Effect effect, Cost cost, String chooseUseText) {
-        super(Outcome.Benefit);
-        this.executingEffects.add(effect);
-        this.cost = cost;
-        this.chooseUseText = chooseUseText;
-    }
-
-    public DoUnlessTargetPaysEffect(final DoUnlessTargetPaysEffect effect) {
+    
+    SpelltitheEnforcerEffect(final SpelltitheEnforcerEffect effect) {
         super(effect);
-        this.executingEffects = effect.executingEffects.copy();
-        this.cost = effect.cost.copy();
-        this.chooseUseText = effect.chooseUseText;
     }
-
-    public void addEffect(Effect effect) {
-        executingEffects.add(effect);
+    
+    @Override
+    public SpelltitheEnforcerEffect copy() {
+        return new SpelltitheEnforcerEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null && targetPlayer != null) {
-            String message;
-            if (chooseUseText == null) {
-                String effectText = executingEffects.getText(source.getModes().getMode());
-                message = "Pay " + cost.getText() + " to prevent (" + effectText.substring(0, effectText.length() -1) + ")?";
-            } else {
-                message = chooseUseText;
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (player != null) {
+            GenericManaCost cost = new GenericManaCost(1);
+            if (!cost.pay(source, game, player.getId(), player.getId(), false)) {
+                super.apply(game, source);
             }
-            message = CardUtil.replaceSourceName(message, sourceObject.getLogName());
-            boolean result = true;
-            boolean doEffect = true;
-            // check if target player is willing to pay
-            if (cost.canPay(source, source.getSourceId(), targetPlayer.getId(), game) && targetPlayer.chooseUse(Outcome.Detriment, message, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), targetPlayer.getId(), false)) {
-                    game.informPlayers(targetPlayer.getName() + " pays the cost to prevent the effect");
-                    doEffect = false;
-                }
-            }
-            // do the effects player did not pay
-            if (doEffect) {
-                for(Effect effect: executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
-                    if (effect instanceof OneShotEffect) {
-                        if (!(effect instanceof PostResolveEffect)) {
-                            result &= effect.apply(game, source);
-                        }
-                    }
-                    else {
-                        game.addEffect((ContinuousEffect) effect, source);
-                    }
-                }
-            }
-            return result;
+            return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
-        String effectsText = executingEffects.getText(mode);
-        return  effectsText.substring(0, effectsText.length() -1) + " unless he or she pays " + cost.getText();
-    }
-
-    @Override
-    public DoUnlessTargetPaysEffect copy() {
-        return new DoUnlessTargetPaysEffect(this);
     }
 }

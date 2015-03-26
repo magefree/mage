@@ -26,49 +26,53 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.effects.postresolve;
+package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
-import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.game.Game;
-
-import java.io.ObjectStreamException;
-import java.util.UUID;
+import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author nantuko
  */
-public class ExileSpellEffect extends PostResolveEffect implements MageSingleton {
+public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
 
-    private static final ExileSpellEffect fINSTANCE =  new ExileSpellEffect();
+    private static final ShuffleSpellEffect fINSTANCE = new ShuffleSpellEffect();
 
-    private Object readResolve() throws ObjectStreamException {
+    public static ShuffleSpellEffect getInstance() {
         return fINSTANCE;
     }
 
-    private ExileSpellEffect() {
-        staticText = "Exile {this}";
-    }
-
-    public static ExileSpellEffect getInstance() {
-        return fINSTANCE;
+    private ShuffleSpellEffect() {
+        super(Outcome.Neutral);
+        staticText = "Shuffle {this} into its owner's library";
     }
 
     @Override
-    public ExileSpellEffect copy() {
-        return fINSTANCE;
-    }
-
-    @Override
-    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller != null) {        
-            controller.moveCardToExileWithInfo(card, null, "", controllerId, game, Zone.STACK);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
+            if (spellCard != null) {
+                Player owner = game.getPlayer(spellCard.getOwnerId());
+                if (owner != null) {
+                    controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, true, true);
+                    owner.shuffleLibrary(game);
+                }
+            }
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public ShuffleSpellEffect copy() {
+        return fINSTANCE;
     }
 }

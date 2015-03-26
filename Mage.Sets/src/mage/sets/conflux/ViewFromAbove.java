@@ -27,29 +27,31 @@
  */
 package mage.sets.conflux;
 
+import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.ReturnToHandSpellEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author North
  */
 public class ViewFromAbove extends CardImpl {
+    
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("white permanent you control");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
 
     public ViewFromAbove(UUID ownerId) {
         super(ownerId, 38, "View from Above", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
@@ -61,7 +63,10 @@ public class ViewFromAbove extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // If you control a white permanent, return View from Above to its owner's hand.
-        this.getSpellAbility().addEffect(new ViewFromAboveEffect());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                ReturnToHandSpellEffect.getInstance(), 
+                new PermanentsOnTheBattlefieldCondition(filter), 
+                "If you control a white permanent, return {this} to its owner's hand"));
     }
 
     public ViewFromAbove(final ViewFromAbove card) {
@@ -71,33 +76,5 @@ public class ViewFromAbove extends CardImpl {
     @Override
     public ViewFromAbove copy() {
         return new ViewFromAbove(this);
-    }
-}
-
-class ViewFromAboveEffect extends PostResolveEffect {
-
-    public ViewFromAboveEffect() {
-        this.staticText = "If you control a white permanent, return {this} to its owner's hand";
-    }
-
-    public ViewFromAboveEffect(final ViewFromAboveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ViewFromAboveEffect copy() {
-        return new ViewFromAboveEffect(this);
-    }
-
-    @Override
-    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        FilterPermanent filter = new FilterPermanent("white permanent");
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-
-        if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0) {
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-        } else {
-            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-        }
     }
 }

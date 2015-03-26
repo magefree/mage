@@ -44,8 +44,6 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
@@ -64,7 +62,6 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -204,18 +201,8 @@ public class Spell implements StackObject, Card {
                         index++;
                     }
                 }
-                if (!isCopiedSpell()) {
-                    for (Effect effect : ability.getEffects()) {
-                        if (effect instanceof PostResolveEffect) {
-                            if (((PostResolveEffect) effect).isActive(ability, game)) {
-                                ((PostResolveEffect) effect).postResolve(card, ability, controllerId, game);
-                                return result;
-                            }
-                        }
-                    }
-                    if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                        card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
-                    }
+                if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
+                    card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
                 }
                 return result;
             }

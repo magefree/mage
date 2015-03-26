@@ -29,17 +29,10 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -50,7 +43,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
 /**
  *
@@ -69,13 +61,7 @@ public class ShivanWumpus extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // When Shivan Wumpus enters the battlefield, any player may sacrifice a land. If a player does, put Shivan Wumpus on top of its owner's library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfAnyPlayerPaysEffect(
-                        new PutOnLibrarySourceEffect(true), 
-                        new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))), 
-                        "Sacrifice a land to return {this} to top of its owners library?"),
-                false
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ShivanWumpusEffect(), false));
     }
 
     public ShivanWumpus(final ShivanWumpus card) {
@@ -88,91 +74,42 @@ public class ShivanWumpus extends CardImpl {
     }
 }
 
-class DoIfAnyPlayerPaysEffect extends OneShotEffect {
-    protected Effects executingEffects = new Effects();
-    private final Cost cost;
-    private String chooseUseText;
-
-    public DoIfAnyPlayerPaysEffect(Effect effect, Cost cost) {
-        this(effect, cost, null);
+class ShivanWumpusEffect extends PutOnLibrarySourceEffect {
+        
+    ShivanWumpusEffect() {
+        super(true);
+        this.staticText = "any player may sacrifice a land. If a player does, put {this} on top of its owner's library";
     }
-
-    public DoIfAnyPlayerPaysEffect(Effect effect, Cost cost, String chooseUseText) {
-        super(Outcome.Benefit);
-        this.executingEffects.add(effect);
-        this.cost = cost;
-        this.chooseUseText = chooseUseText;
-    }
-
-    public DoIfAnyPlayerPaysEffect(final DoIfAnyPlayerPaysEffect effect) {
+    
+    ShivanWumpusEffect(final ShivanWumpusEffect effect) {
         super(effect);
-        this.executingEffects = effect.executingEffects.copy();
-        this.cost = effect.cost.copy();
-        this.chooseUseText = effect.chooseUseText;
     }
-
-    public void addEffect(Effect effect) {
-        executingEffects.add(effect);
+    
+    @Override
+    public ShivanWumpusEffect copy() {
+        return new ShivanWumpusEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            String message;
-            if (chooseUseText == null) {
-                String effectText = executingEffects.getText(source.getModes().getMode());
-                message = "Pay " + cost.getText() + " to prevent (" + effectText.substring(0, effectText.length() -1) + ")?";
-            } else {
-                message = chooseUseText;
-            }
-            message = CardUtil.replaceSourceName(message, sourceObject.getLogName());
-            boolean result = true;
-            boolean doEffect = false;
-            // check if any player is willing to pay
-            for (UUID playerId: controller.getInRange()) {
+        if (controller != null) {
+            boolean costPaid = false;
+            for (UUID playerId : controller.getInRange()) {
+                Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()));
                 Player player = game.getPlayer(playerId);
-                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, game)) {
-                    cost.clearPaid();
-                    if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                        game.informPlayers(sourceObject.getLogName() + ": " + player.getName() + " pays the cost");
-                        doEffect = true;
-                        break;
-                    }
+                if (player != null
+                        && cost.canPay(source, source.getSourceId(), playerId, game)
+                        && player.chooseUse(Outcome.Sacrifice, "Sacrifice a land?", game)
+                        && cost.pay(source, game, source.getSourceId(), playerId, true)) {
+                    costPaid = true;
                 }
             }
-            // do the effects if nobody paid
-            if (doEffect) {
-                for(Effect effect: executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
-                    if (effect instanceof OneShotEffect) {
-                        if (!(effect instanceof PostResolveEffect)) {
-                            result &= effect.apply(game, source);
-                        }
-                    }
-                    else {
-                        game.addEffect((ContinuousEffect) effect, source);
-                    }
-                }
+            if (costPaid) {
+                super.apply(game, source);
             }
-            return result;
+            return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
-        // any player may sacrifice a land. If a player does, put Shivan Wumpus on top of its owner's library.
-        String effectsText = executingEffects.getText(mode);
-        return  "any player may " + cost.getText() + ". If a player does, " + effectsText.substring(0, effectsText.length() -1) ;
-    }
-
-    @Override
-    public DoIfAnyPlayerPaysEffect copy() {
-        return new DoIfAnyPlayerPaysEffect(this);
     }
 }

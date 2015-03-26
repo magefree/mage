@@ -28,17 +28,11 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -46,7 +40,6 @@ import mage.constants.Rarity;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.util.CardUtil;
 
 /**
  *
@@ -62,7 +55,7 @@ public class Tyrannize extends CardImpl {
 
         // Target player discards his or her hand unless he or she pays 7 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DoUnlessTargetPaysEffect(new DiscardHandTargetEffect(), new PayLifeCost(7), rule));
+        this.getSpellAbility().addEffect(new TyrannizeEffect());
         
     }
 
@@ -76,87 +69,36 @@ public class Tyrannize extends CardImpl {
     }
 }
 
-class DoUnlessTargetPaysEffect extends OneShotEffect {
-    protected Effects executingEffects = new Effects();
-    private final Cost cost;
-    private String chooseUseText;
-
-    public DoUnlessTargetPaysEffect(Effect effect, Cost cost) {
-        this(effect, cost, null);
+class TyrannizeEffect extends OneShotEffect {
+    
+    TyrannizeEffect() {
+        super(Outcome.Discard);
+        this.staticText = "Target player discards his or her hand unless he or she pays 7 life";
     }
-
-    public DoUnlessTargetPaysEffect(Effect effect, Cost cost, String chooseUseText) {
-        super(Outcome.Benefit);
-        this.executingEffects.add(effect);
-        this.cost = cost;
-        this.chooseUseText = chooseUseText;
-    }
-
-    public DoUnlessTargetPaysEffect(final DoUnlessTargetPaysEffect effect) {
+    
+    TyrannizeEffect(final TyrannizeEffect effect) {
         super(effect);
-        this.executingEffects = effect.executingEffects.copy();
-        this.cost = effect.cost.copy();
-        this.chooseUseText = effect.chooseUseText;
     }
-
-    public void addEffect(Effect effect) {
-        executingEffects.add(effect);
+    
+    @Override
+    public TyrannizeEffect copy() {
+        return new TyrannizeEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null && targetPlayer != null) {
-            String message;
-            if (chooseUseText == null) {
-                String effectText = executingEffects.getText(source.getModes().getMode());
-                message = "Pay " + cost.getText() + " to prevent (" + effectText.substring(0, effectText.length() -1) + ")?";
-            } else {
-                message = chooseUseText;
-            }
-            message = CardUtil.replaceSourceName(message, sourceObject.getLogName());
-            boolean result = true;
-            boolean doEffect = true;
-            // check if target player is willing to pay
-            if (cost.canPay(source, source.getSourceId(), targetPlayer.getId(), game) && targetPlayer.chooseUse(Outcome.Detriment, message, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getSourceId(), targetPlayer.getId(), false)) {
-                    game.informPlayers(targetPlayer.getName() + " pays the cost to prevent the effect");
-                    doEffect = false;
+        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (player != null) {
+            Cost cost = new PayLifeCost(7);
+            if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
+                    || !player.chooseUse(Outcome.LoseLife, "Pay 7 life?", game)
+                    || !cost.pay(source, game, source.getSourceId(), player.getId(), true)) {
+                for (Card card : player.getHand().getCards(game)) {
+                    player.discard(card, source, game);
                 }
             }
-            // do the effects player did not pay
-            if (doEffect) {
-                for(Effect effect: executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
-                    if (effect instanceof OneShotEffect) {
-                        if (!(effect instanceof PostResolveEffect)) {
-                            result &= effect.apply(game, source);
-                        }
-                    }
-                    else {
-                        game.addEffect((ContinuousEffect) effect, source);
-                    }
-                }
-            }
-            return result;
+            return true;
         }
         return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (!staticText.isEmpty()) {
-            return staticText;
-        }
-        String effectsText = executingEffects.getText(mode);
-        return  effectsText.substring(0, effectsText.length() -1) + " unless he or she pays " + cost.getText();
-    }
-
-    @Override
-    public DoUnlessTargetPaysEffect copy() {
-        return new DoUnlessTargetPaysEffect(this);
     }
 }

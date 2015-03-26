@@ -31,7 +31,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.common.DiscardXTargetCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

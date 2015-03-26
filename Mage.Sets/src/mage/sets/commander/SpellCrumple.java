@@ -32,7 +32,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.postresolve.ReturnToLibrarySpellEffect;
+import mage.abilities.effects.common.ReturnToLibrarySpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

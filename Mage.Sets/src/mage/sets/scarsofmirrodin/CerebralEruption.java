@@ -27,25 +27,23 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-
-import java.util.UUID;
 
 /**
  *
@@ -57,9 +55,10 @@ public class CerebralEruption extends CardImpl {
         super(ownerId, 86, "Cerebral Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
         this.color.setRed(true);
+        
+        // Target opponent reveals the top card of his or her library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new CerebralEruptionEffect1());
-        this.getSpellAbility().addEffect(new CerebralEruptionEffect2());
+        this.getSpellAbility().addEffect(new CerebralEruptionEffect());
     }
 
     public CerebralEruption(final CerebralEruption card) {
@@ -70,19 +69,18 @@ public class CerebralEruption extends CardImpl {
     public CerebralEruption copy() {
         return new CerebralEruption(this);
     }
-
 }
 
-class CerebralEruptionEffect1 extends OneShotEffect {
+class CerebralEruptionEffect extends OneShotEffect {
 
     private static FilterPermanent filter = new FilterCreaturePermanent();
 
-    public CerebralEruptionEffect1() {
+    CerebralEruptionEffect() {
         super(Outcome.Damage);
-        staticText = "Target opponent reveals the top card of his or her library. {this} deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls.";
+        staticText = "Target opponent reveals the top card of his or her library. {this} deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return {this} to its owner's hand";
     }
 
-    public CerebralEruptionEffect1(final CerebralEruptionEffect1 effect) {
+    CerebralEruptionEffect(final CerebralEruptionEffect effect) {
         super(effect);
     }
 
@@ -100,42 +98,19 @@ class CerebralEruptionEffect1 extends OneShotEffect {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 perm.damage(damage, source.getSourceId(), game, false, true);
             }
+            if (card.getCardType().contains(CardType.LAND)) {
+                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
+                if (spellCard != null) {
+                    player.moveCardToHandWithInfo(spellCard, source.getSourceId(), game, Zone.STACK);
+                }
+            }
             return true;
         }
         return false;
     }
 
     @Override
-    public CerebralEruptionEffect1 copy() {
-        return new CerebralEruptionEffect1(this);
+    public CerebralEruptionEffect copy() {
+        return new CerebralEruptionEffect(this);
     }
-
-}
-
-class CerebralEruptionEffect2 extends PostResolveEffect {
-
-    public CerebralEruptionEffect2() {
-        staticText = "If a land card is revealed this way, return {this} to its owner's hand";
-    }
-
-    public CerebralEruptionEffect2(final CerebralEruptionEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
-        Card revealed = (Card) game.getState().getValue(source.getSourceId().toString());
-        if (revealed != null && revealed.getCardType().contains(CardType.LAND)) {
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-        }
-        else {
-            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-        }
-    }
-
-    @Override
-    public CerebralEruptionEffect2 copy() {
-        return new CerebralEruptionEffect2(this);
-    }
-
 }

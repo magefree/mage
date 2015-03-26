@@ -34,7 +34,6 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -91,9 +90,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
                         executingEffect.setTargetPointer(this.targetPointer);
                     }
                     if (executingEffect instanceof OneShotEffect) {
-                        if (!(executingEffect instanceof PostResolveEffect)) {
-                            return executingEffect.apply(game, source);
-                        }
+                        return executingEffect.apply(game, source);
                     }
                     else {
                         game.addEffect((ContinuousEffect) executingEffect, source);

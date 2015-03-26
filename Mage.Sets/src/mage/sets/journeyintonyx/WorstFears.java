@@ -28,7 +28,7 @@
 package mage.sets.journeyintonyx;
 
 import java.util.UUID;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

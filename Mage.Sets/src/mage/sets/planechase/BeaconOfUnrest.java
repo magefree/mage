@@ -29,7 +29,7 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.postresolve.ShuffleSpellEffect;
+import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

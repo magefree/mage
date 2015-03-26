@@ -29,7 +29,7 @@ package mage.sets.fatereforged;
 
 import java.util.UUID;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
-import mage.abilities.effects.postresolve.ExileSpellEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.keyword.DelveAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
