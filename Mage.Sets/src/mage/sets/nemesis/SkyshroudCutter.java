@@ -60,7 +60,7 @@ public class SkyshroudCutter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
-        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new PermanentsOnTheBattlefieldCondition(filter)));        
+        this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(5), new PermanentsOnTheBattlefieldCondition(filter)));
     }
 
     public SkyshroudCutter(final SkyshroudCutter card) {
