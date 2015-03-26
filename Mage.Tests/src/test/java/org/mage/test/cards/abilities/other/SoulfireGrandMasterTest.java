@@ -42,7 +42,7 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
     /** 
      * Soulfire Grand Master
-     * Creature — Human Monk 2/2, 1W (2)
+     * Creature â€” Human Monk 2/2, 1W (2)
      * Lifelink
      * Instant and sorcery spells you control have lifelink.
      * {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from 
@@ -149,8 +149,89 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
     }    
     
-    // Test copied spell
+    /**
+     * Test copied instant spell gives also life
+     * 
+     */    
+    @Test
+    public void testCopySpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        // {2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Nivix Guildmage", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U}{R}:");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Soulfire Grand Master", 1);
+        assertPermanentCount(playerA, "Nivix Guildmage", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertLife(playerB, 14);
+        assertLife(playerA, 26); 
+
+    }     
     
-    // Test damage of activated ability of a permanent does not gain lifelink
+    
+    /**
+     * Test damage of activated ability of a permanent does not gain lifelink
+     * 
+     */
+    
+    @Test
+    public void testActivatedAbility() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        // {3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
+        addCard(Zone.BATTLEFIELD, playerA, "Rod of Ruin", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3},{T}");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Soulfire Grand Master", 1);
+        assertPermanentCount(playerA, "Rod of Ruin", 1);
+
+        assertLife(playerB, 19);
+        assertLife(playerA, 20); 
+
+    }      
+    /**
+     * Test that if Soulfire Grand Master has left the battlefield 
+     * spell have no longer lifelink 
+     */
+    
+    @Test
+    public void testSoulfireLeft() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Soulfire Grand Master");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Soulfire Grand Master", 1);
+
+        assertLife(playerB, 17);
+        assertLife(playerA, 20); 
+
+    }      
     
 }
