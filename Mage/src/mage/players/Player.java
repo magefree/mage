@@ -434,6 +434,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone);
+    
+    /**
+     * @param card
+     * @param sourceId
+     * @param game
+     * @param withName show the card name in the log
+     * @param fromZone
+     * @return
+     * */
+    boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName);
 
     /**
      * Uses card.moveToExile and posts a inform message about moving the card to exile

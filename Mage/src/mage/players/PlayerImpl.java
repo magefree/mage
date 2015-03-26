@@ -2762,13 +2762,20 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
+        return this.moveCardToHandWithInfo(card, sourceId, game, fromZone, true);
+    }
+
+    @Override
+    public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean withName) {
         boolean result = false;
         if (card.moveToZone(Zone.HAND, sourceId, game, false)) {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }
             game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getLogName()).append(" ")
+                    .append(" puts ")
+                    .append(withName ? card.getLogName() : "a face down card")
+                    .append(" ")
                     .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
                     .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand").toString());
             result = true;
