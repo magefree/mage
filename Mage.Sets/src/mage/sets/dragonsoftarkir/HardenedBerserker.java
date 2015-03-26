@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.util.CardUtil;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
@@ -72,24 +73,42 @@ public class HardenedBerserker extends CardImpl {
 
 class HardenedBerserkerSpellsCostReductionEffect extends CostModificationEffectImpl {
 
+    int spellsCast;
+    
     public HardenedBerserkerSpellsCostReductionEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "the next spell you cast this turn costs {1} less to cast";
     }
 
-    protected HardenedBerserkerSpellsCostReductionEffect(HardenedBerserkerSpellsCostReductionEffect effect) {
+    protected HardenedBerserkerSpellsCostReductionEffect(final HardenedBerserkerSpellsCostReductionEffect effect) {
         super(effect);
+        this.spellsCast = effect.spellsCast;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        if (watcher != null) {
+            spellsCast =  watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+        }
     }
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         CardUtil.reduceCost(abilityToModify, 1);
-        discard(); // only one use
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        if (watcher != null) {
+            if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > spellsCast) {
+                discard(); // only one use 
+                return false;
+            }
+        }        
         if (abilityToModify instanceof SpellAbility) {
             return abilityToModify.getControllerId().equals(source.getControllerId());
         }
