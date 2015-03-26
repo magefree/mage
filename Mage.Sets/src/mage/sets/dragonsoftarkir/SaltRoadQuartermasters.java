@@ -50,15 +50,14 @@ import mage.target.common.TargetCreaturePermanent;
 public class SaltRoadQuartermasters extends CardImpl {
 
     public SaltRoadQuartermasters(UUID ownerId) {
-        super(ownerId, 199, "Salt Road Quartermasters", Rarity.UNCOMMON, new CardType[]{}, "{2}{G}");
+        super(ownerId, 199, "Salt Road Quartermasters", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "DTK";
-        this.supertype.add("Creautre");
-        this.supertype.add("Human");
-        this.supertype.add("Soldier");
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Salt Road QUartermasters enters the battlefield with two +1/+1 counters on it.
+        // Salt Road Quartermasters enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 "with two +1/+1 counters on it"));
 
