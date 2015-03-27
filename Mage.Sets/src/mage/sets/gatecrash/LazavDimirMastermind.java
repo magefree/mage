@@ -110,6 +110,7 @@ class LazavDimirEffect extends ContinuousEffectImpl {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (card == null || permanent == null) {
+            discard();
             return false;
         }
         if (IdOfCopiedCard == null || !IdOfCopiedCard.equals(card.getId())) {
