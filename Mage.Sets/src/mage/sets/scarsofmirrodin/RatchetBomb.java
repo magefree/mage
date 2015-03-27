@@ -54,7 +54,11 @@ public class RatchetBomb extends CardImpl {
     public RatchetBomb (UUID ownerId) {
         super(ownerId, 196, "Ratchet Bomb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
+        
+        // {T}: Put a charge counter on Ratchet Bomb.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        
+        // {T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with a converted mana cost equal to the number of charge counters on Ratchet Bomb.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RatchetBombEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
