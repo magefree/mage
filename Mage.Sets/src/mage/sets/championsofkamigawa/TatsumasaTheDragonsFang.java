@@ -123,7 +123,7 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
     protected FixedTarget fixedTarget;
 
     public TatsumaTheDragonsFangTriggeredAbility(FixedTarget fixedTarget) {
-        super(new ReturnToBattlefieldUnderYourControlSourceEffect(), Duration.OneUse);
+        super(new ReturnToBattlefieldUnderYourControlSourceEffect(Zone.EXILED), Duration.OneUse);
         this.fixedTarget = fixedTarget;
     }
 

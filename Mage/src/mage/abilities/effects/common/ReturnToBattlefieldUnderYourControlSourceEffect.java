@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObjectReference;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -41,13 +42,16 @@ import mage.game.Game;
  */
 public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffect {
 
-    public ReturnToBattlefieldUnderYourControlSourceEffect() {
+    private final Zone onlyFromZone;
+    public ReturnToBattlefieldUnderYourControlSourceEffect(Zone fromZone) {
         super(Outcome.Benefit);
+        this.onlyFromZone = fromZone;
         staticText = "return that card to the battlefield under your control";
     }
 
     public ReturnToBattlefieldUnderYourControlSourceEffect(final ReturnToBattlefieldUnderYourControlSourceEffect effect) {
         super(effect);
+        this.onlyFromZone = effect.onlyFromZone;
     }
 
     @Override
@@ -57,8 +61,9 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
 
     @Override
     public boolean apply(Game game, Ability source) {
+        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game));        
         Card card = game.getCard(source.getSourceId());
-        if (card != null) {
+        if (card != null && game.getState().getZone(source.getSourceId()) == onlyFromZone && mor.getZoneChangeCounter() == card.getZoneChangeCounter() + 1) {
             Zone currentZone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                 return true;
