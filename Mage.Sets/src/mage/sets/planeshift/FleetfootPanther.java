@@ -36,8 +36,8 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -49,8 +49,9 @@ public class FleetfootPanther extends CardImpl {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green or white creature you control");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        Predicates.or(
+            new ColorPredicate(ObjectColor.GREEN),
+            new ColorPredicate(ObjectColor.WHITE));
     }
 
     public FleetfootPanther(UUID ownerId) {
@@ -62,6 +63,7 @@ public class FleetfootPanther extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
+        
         // When Fleetfoot Panther enters the battlefield, return a green or white creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
