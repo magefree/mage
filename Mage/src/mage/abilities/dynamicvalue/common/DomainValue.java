@@ -1,5 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -11,18 +12,30 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class DomainValue implements DynamicValue {
+
     private Integer amount;
+    private boolean countTargetPlayer;
 
     public DomainValue() {
         this(1);
     }
 
-    public DomainValue(Integer amount){
+    public DomainValue(boolean countTargetPlayer) {
+        this(1, countTargetPlayer);
+    }
+
+    public DomainValue(Integer amount) {
+        this(amount, false);
+    }
+
+    public DomainValue(Integer amount, boolean countTargetPlayer) {
         this.amount = amount;
+        this.countTargetPlayer = countTargetPlayer;
     }
 
     public DomainValue(final DomainValue dynamicValue) {
         this.amount = dynamicValue.amount;
+        this.countTargetPlayer = dynamicValue.countTargetPlayer;
     }
 
     @Override
@@ -32,7 +45,13 @@ public class DomainValue implements DynamicValue {
         int haveMountains = 0;
         int haveSwamps = 0;
         int haveForests = 0;
-        for (Permanent p : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
+        UUID targetPlayer;
+        if (countTargetPlayer) {
+            targetPlayer = sourceAbility.getTargets().getFirstTarget();
+        } else {
+            targetPlayer = sourceAbility.getControllerId();
+        }
+        for (Permanent p : game.getBattlefield().getAllActivePermanents(targetPlayer)) {
             if (p.getCardType().contains(CardType.LAND)) {
                 if (havePlains == 0 && p.getSubtype().contains("Plains")) {
                     havePlains = 1;
