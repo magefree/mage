@@ -79,7 +79,7 @@ public class OratorOfOjutai extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand")));
 
         // When Orator of Ojutai enters the battlefield, if you revealed a Dragon card or controlled a Dragon as you cast Orator of Ojutai, draw a card.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new OratorOfOjutaiEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new OratorOfOjutaiEffect()), new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
     @Override
