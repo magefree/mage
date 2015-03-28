@@ -36,6 +36,7 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -61,7 +62,7 @@ public class ObscuringAEther extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {1}{G}: Turn Obscuring AEther face down.
-        Effect effect = new BecomesFaceDownCreatureEffect(null, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED);
+        Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANUAL);
         effect.setText("Turn Obscuring AEther face down. <i>(It becomes a 2/2 creature.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{G}")));
 

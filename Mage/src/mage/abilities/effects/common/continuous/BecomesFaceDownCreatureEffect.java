@@ -61,9 +61,10 @@ import mage.game.permanent.Permanent;
 public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implements SourceEffect {
 
     public enum FaceDownType {
-        MORPHED,
+        MANIFESTED,
+        MANUAL,
         MEGAMORPHED,
-        MANIFESTED
+        MORPHED
     }
 
     protected int zoneChangeCounter;
@@ -72,6 +73,9 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     protected boolean foundPermanent;
     protected FaceDownType faceDownType;
 
+    public BecomesFaceDownCreatureEffect(Duration duration, FaceDownType faceDownType){
+        this(null, null, duration, faceDownType);
+    }
 
     public BecomesFaceDownCreatureEffect(Costs<Cost> turnFaceUpCosts, FaceDownType faceDownType){
         this(turnFaceUpCosts, null, faceDownType);
@@ -124,6 +128,22 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (faceDownType.equals(FaceDownType.MANUAL)) {
+            Permanent permanent;
+            if (objectReference != null) {
+                permanent = objectReference.getPermanent(game);
+            } else {
+                permanent = game.getPermanent(source.getSourceId());
+            }
+            if (permanent != null) {
+                permanent.setFaceDown(true, game);
+            }
+        }
+    }
+
+    @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent;
         if (objectReference != null) {
@@ -137,6 +157,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
                 foundPermanent = true;
                 switch(faceDownType) {
                     case MANIFESTED:
+                    case MANUAL: // sets manifested image
                         permanent.setManifested(true);
                         break;
                     case MORPHED:
