@@ -33,8 +33,13 @@ Dragon's Maze|DGM|
 The Dark|DRK|
 Dragons of Tarkir|DTK|
 Duel Decks: Ajani vs. Nicol Bolas|DDH|
+Duel Decks: Anthology, Elves vs. Goblins|DD3|
+Duel Decks: Anthology, Divine vs. Demonic|DD3|
+Duel Decks: Anthology, Garruk vs. Liliana|DD3|
+Duel Decks: Anthology, Jace vs. Chandra|DD3|
 Duel Decks: Elves vs. Goblins|EVG|
 Duel Decks: Divine vs. Demonic|DDC|
+Duel Decks: Elspeth vs. Kiora|DDO|
 Duel Decks: Elspeth vs. Tezzeret|DDF|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Izzet vs. Golgari|DDJ|
@@ -81,6 +86,7 @@ Magic 2013|M13|
 Magic 2014|M14|
 Magic 2015|M15|
 Magic Origins|ORI|
+Magic Player Rewards|MPRP|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
