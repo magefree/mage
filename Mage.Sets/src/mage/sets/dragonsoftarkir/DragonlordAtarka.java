@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -47,11 +48,11 @@ import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
  * @author fireshoes
  */
 public class DragonlordAtarka extends CardImpl {
-    
+
     private static final FilterCreatureOrPlaneswalkerPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creatures and/or planeswalkers your opponents control");
-    
+
     static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public DragonlordAtarka(UUID ownerId) {
@@ -65,13 +66,13 @@ public class DragonlordAtarka extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
-        
+
         // When Dragonlord Atarka enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5), false);
-        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(5));
+        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(5, filter));
         this.addAbility(ability);
     }
 
