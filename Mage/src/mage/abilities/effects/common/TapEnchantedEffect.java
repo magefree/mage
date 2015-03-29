@@ -51,7 +51,7 @@ public class TapEnchantedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObject(game);
         if (permanent != null) {
             Permanent attach = game.getPermanent(permanent.getAttachedTo());
             if (attach != null) {
