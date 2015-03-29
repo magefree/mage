@@ -10,5 +10,6 @@ public interface CardImageSource {
 
     String generateURL(CardDownloadData card) throws Exception;
     String generateTokenUrl(CardDownloadData card);
+    String getSourceName();
     Float getAverageSize();
 }

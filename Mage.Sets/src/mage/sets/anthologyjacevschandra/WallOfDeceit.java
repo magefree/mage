@@ -37,6 +37,7 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 
@@ -57,7 +58,7 @@ public class WallOfDeceit extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         
         // {3}: Turn Wall of Deceit face down.
-        Effect effect = new BecomesFaceDownCreatureEffect(null, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED);
+        Effect effect = new BecomesFaceDownCreatureEffect(Duration.Custom, BecomesFaceDownCreatureEffect.FaceDownType.MANIFESTED);
         effect.setText("Turn Wall of Deceit face down. <i>(It becomes a 2/2 creature.)</i>");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}")));
         

@@ -96,6 +96,11 @@ public class MagicCardsImageSource implements CardImageSource {
         private static final long serialVersionUID = 1L;
     };
 
+    @Override
+    public String getSourceName() {
+        return "magiccards.info";
+    }
+
     public static CardImageSource getInstance() {
         if (instance == null) {
             instance = new MagicCardsImageSource();

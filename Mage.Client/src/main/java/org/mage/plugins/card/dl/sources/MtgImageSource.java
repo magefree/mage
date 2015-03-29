@@ -51,6 +51,11 @@ public class MtgImageSource implements CardImageSource {
     }
 
     @Override
+    public String getSourceName() {
+        return "mtgimage.com";
+    }
+
+    @Override
     public String generateURL(CardDownloadData card) throws Exception {
         Integer collectorId = card.getCollectorId();
         String cardSet = card.getSet();

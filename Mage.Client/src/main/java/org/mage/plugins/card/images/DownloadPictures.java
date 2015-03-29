@@ -58,7 +58,6 @@ import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
-import org.mage.plugins.card.dl.sources.MtgImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -85,7 +84,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private Proxy p = Proxy.NO_PROXY;
 
-    private final ExecutorService executor = Executors.newFixedThreadPool(10);
+    // private ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public static void main(String[] args) {
         startDownload(null, null);
@@ -445,6 +444,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
             update(0, cardsToDownload.size());
 
+            ExecutorService executor = Executors.newFixedThreadPool(10);
             for (int i = 0; i < cardsToDownload.size() && !cancel; i++) {
                 try {
 
@@ -466,6 +466,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
                         executor.execute(task);
                     } else {
+                        logger.info("Card not available on " + cardImageSource.getSourceName()+ ": " + card.getName() + " (" + card.getSet() + ")");
                         synchronized (sync) {
                             update(cardIndex + 1, cardsToDownload.size());
                         }
@@ -646,7 +647,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 bar.setString("0 cards remaining! Please close!");
             } else {
                 bar.setString(String.format("%d cards remaining! Please choose another source!", count));
-                //executor = Executors.newFixedThreadPool(10);
                 startDownloadButton.setEnabled(true);
             }
         }
