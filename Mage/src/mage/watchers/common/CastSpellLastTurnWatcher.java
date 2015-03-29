@@ -68,7 +68,7 @@ public class CastSpellLastTurnWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-           spellsCastThisTurnInOrder.add(new MageObjectReference(event.getSourceId(), game));
+           spellsCastThisTurnInOrder.add(new MageObjectReference(event.getTargetId(), game));
            UUID playerId = event.getPlayerId();
            if (playerId != null) {
                Integer amount = amountOfSpellsCastOnCurrentTurn.get(playerId);
@@ -115,11 +115,11 @@ public class CastSpellLastTurnWatcher extends Watcher {
        }
     }
 
-    public int getSpellOrder(Spell spell) {
+    public int getSpellOrder(Spell spell, Game game) {
        int index = 0;
        for (MageObjectReference mor : spellsCastThisTurnInOrder) {
            index++;
-           if (mor.refersTo(spell)) {
+           if (mor.refersTo(spell, game)) {
                return index;
            }
        }

@@ -124,7 +124,7 @@ class UnboostCreaturesTargetPlayerEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
-                affectedObjectList.add(new MageObjectReference(creature));
+                affectedObjectList.add(new MageObjectReference(creature, game));
             }
         }
     }

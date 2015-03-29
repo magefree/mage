@@ -145,7 +145,7 @@ class EchoEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObjectReference mor = new MageObjectReference(source.getSourceId(), game);
-        if (controller != null && mor.refersTo(source.getSourceObject(game))) {
+        if (controller != null && mor.refersTo(source.getSourceObject(game), game)) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {

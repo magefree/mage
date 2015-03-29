@@ -103,7 +103,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
                     && event.getTargetId() != this.getSourceId()) {
                 Effect effect = this.getEffects().get(0);
                 effect.setValue("lifeSource", event.getTargetId());
-                effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter());
+                effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
                 return true;
             }
         }
@@ -142,7 +142,7 @@ class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
         UUID creatureId = (UUID) getValue("lifeSource");
         Integer zoneChangeCounter = (Integer) getValue("zoneChangeCounter");
         Permanent creature = game.getPermanent(creatureId);
-        if (creature == null || creature.getZoneChangeCounter() != zoneChangeCounter) {
+        if (creature == null || creature.getZoneChangeCounter(game) != zoneChangeCounter) {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD, zoneChangeCounter);
         }
         if (creature != null) {

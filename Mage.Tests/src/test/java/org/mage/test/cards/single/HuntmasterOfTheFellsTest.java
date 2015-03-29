@@ -11,6 +11,28 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
 
+    /**
+     * Huntmaster of the Fells
+     * Creature — Human Werewolf 2/2, 2RG (4)
+     * Whenever this creature enters the battlefield or transforms into Huntmaster 
+     * of the Fells, put a 2/2 green Wolf creature token onto the battlefield and 
+     * you gain 2 life.
+     * At the beginning of each upkeep, if no spells were cast last turn, transform 
+     * Huntmaster of the Fells.
+     * 
+     */
+    
+    /** 
+     * Ravager of the Fells
+     * Creature — Werewolf 4/4
+     * Trample
+     * Whenever this creature transforms into Ravager of the Fells, it deals 2 
+     * damage to target opponent and 2 damage to up to one target creature that 
+     * player controls.
+     * At the beginning of each upkeep, if a player cast two or more spells last 
+     * turn, transform Ravager of the Fells.
+     */
+    
     @Test
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);

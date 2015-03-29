@@ -127,7 +127,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
             if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND)) {
                 card.addCounters(CounterType.TIME.createInstance(4), game);
                 if (!hasSuspend) {
-                    game.addEffect(new JhoiraGainSuspendEffect(new MageObjectReference(card)), source);
+                    game.addEffect(new JhoiraGainSuspendEffect(new MageObjectReference(card, game)), source);
                 }
                 game.informPlayers(controller.getName() + " suspends 4 - " + card.getName());
                 return true;
@@ -160,7 +160,7 @@ class JhoiraGainSuspendEffect extends ContinuousEffectImpl implements SourceEffe
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(mor.getSourceId());
-        if (card != null && mor.refersTo(card) && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
+        if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
             SuspendAbility.addSuspendTemporaryToCard(card, source, game);
         } else {
             discard();

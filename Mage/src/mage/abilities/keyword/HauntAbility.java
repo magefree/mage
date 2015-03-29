@@ -108,7 +108,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
                     if (zEvent.isDiesEvent()) {
                         Card card = game.getCard(getSourceId());
                         if (card != null) {
-                            String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append("_").append(card.getZoneChangeCounter()).toString();
+                            String key = new StringBuilder("Haunting_").append(getSourceId().toString()).append("_").append(card.getZoneChangeCounter(game)).toString();
                             Object object = game.getState().getValue(key);
                             if (object != null && object instanceof FixedTarget) {
                                 FixedTarget target = (FixedTarget) object;
@@ -205,7 +205,7 @@ class HauntEffect extends OneShotEffect {
             if (hauntedCreature != null) {
                 if (card.moveToExile(source.getSourceId(), "Haunting", source.getSourceId(), game)) {
                     // remember the haunted creature
-                    String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append("_").append(card.getZoneChangeCounter()).toString();
+                    String key = new StringBuilder("Haunting_").append(source.getSourceId().toString()).append("_").append(card.getZoneChangeCounter(game)).toString();
                     game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
                     card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
                     hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);

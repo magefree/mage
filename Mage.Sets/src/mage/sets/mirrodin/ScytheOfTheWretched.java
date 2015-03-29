@@ -117,7 +117,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
                 return false;
             }
             for (MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
-                if (mor.refersTo(equippedCreature)) {
+                if (mor.refersTo(equippedCreature, game)) {
                     setTarget(new FixedTarget(event.getTargetId()));
                     return true;
                 }

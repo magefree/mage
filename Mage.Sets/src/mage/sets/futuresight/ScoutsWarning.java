@@ -96,7 +96,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
          watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get("consumeScoutsWarningWatcher", source.getControllerId());
          Card card = game.getCard(source.getSourceId());
          if (watcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter();
+             zoneChangeCounter = card.getZoneChangeCounter(game);
              watcher.addScoutsWarningSpell(source.getSourceId(), zoneChangeCounter);
          }
     }

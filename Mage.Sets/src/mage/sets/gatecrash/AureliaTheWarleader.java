@@ -110,32 +110,32 @@ class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public void reset(Game game) {
         Card sourceCard = game.getCard(getSourceId());
-        game.getState().setValue(getValueKey(sourceCard), new Integer(0));
+        game.getState().setValue(getValueKey(sourceCard, game), new Integer(0));
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
        if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
            Card sourceCard = game.getCard(getSourceId());
-           Integer amountAttacks = (Integer) game.getState().getValue(getValueKey(sourceCard));
+           Integer amountAttacks = (Integer) game.getState().getValue(getValueKey(sourceCard, game));
            if (amountAttacks == null || amountAttacks.intValue() < 1) {
                if (amountAttacks == null) {
                    amountAttacks = new Integer(1);
                } else {
                    ++amountAttacks;
                }
-               game.getState().setValue(getValueKey(sourceCard), amountAttacks);
+               game.getState().setValue(getValueKey(sourceCard, game), amountAttacks);
                return true;
            }
        }
        return false;
     }
 
-    protected String getValueKey(Card sourceCard) {
+    protected String getValueKey(Card sourceCard, Game game) {
         if (sourceCard == null) {
             return "";
         }
-        return new StringBuilder(this.getId().toString()).append(sourceCard.getZoneChangeCounter()).append("amountAttacks").toString();
+        return new StringBuilder(this.getId().toString()).append(sourceCard.getZoneChangeCounter(game)).append("amountAttacks").toString();
     }
 
     @Override

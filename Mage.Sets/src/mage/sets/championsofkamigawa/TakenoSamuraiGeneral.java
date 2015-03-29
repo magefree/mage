@@ -103,7 +103,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl {
                 if (!perm.getId().equals(source.getSourceId())) {
                     for (Ability ability : perm.getAbilities()) {
                         if (ability instanceof BushidoAbility) {
-                            affectedObjectList.add(new MageObjectReference(perm));
+                            affectedObjectList.add(new MageObjectReference(perm, game));
                         }
                     }
                 }

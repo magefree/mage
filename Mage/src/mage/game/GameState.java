@@ -104,6 +104,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
 
     public GameState() {
         players = new Players();
@@ -159,6 +160,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
+        this.zoneChangeCounter.putAll(state.zoneChangeCounter);
     }
 
     @Override
@@ -495,6 +497,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
+        this.zoneChangeCounter = state.zoneChangeCounter;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -691,8 +694,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     /**
      * Adds the ability to continuous or triggered abilities
+     * @param attachedTo
      * @param ability
-     * @param card
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
         ability.setSourceId(attachedTo.getId());
@@ -792,6 +795,27 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addWatcher(Watcher watcher) {
         this.watchers.add(watcher);
+    }
+    
+    public int getZoneChangeCounter(UUID objectId) {
+        if (this.zoneChangeCounter.containsKey(objectId)) {
+            return this.zoneChangeCounter.get(objectId);
+        }
+        return 1;
+    }
+
+    public void updateZoneChangeCounter(UUID objectId) {
+        Integer value = getZoneChangeCounter(objectId);
+        value++;
+        this.zoneChangeCounter.put(objectId, value);
+        // card is changing zone so clear state
+        if (cardState.containsKey(objectId)) {
+            this.cardState.get(objectId).clear();
+        }
+    }
+
+    public void setZoneChangeCounter(UUID objectId, int value) {
+        this.zoneChangeCounter.put(objectId, value);
     }
     
 }

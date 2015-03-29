@@ -74,7 +74,7 @@ public class SwitchPowerToughnessAllEffect extends ContinuousEffectImpl {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 for (Permanent perm :game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    affectedObjectList.add(new MageObjectReference(perm));
+                    affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }            
         }

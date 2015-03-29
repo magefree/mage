@@ -137,7 +137,7 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Object object = game.getState().getValue(getSourceId().toString() + "returnedCreature");
-            if ((object instanceof MageObjectReference) && ((MageObjectReference)object).refersTo(zEvent.getTarget())) {
+            if ((object instanceof MageObjectReference) && ((MageObjectReference)object).refersTo(zEvent.getTarget(), game)) {
                 return true;
             }
         }

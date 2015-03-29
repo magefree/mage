@@ -777,7 +777,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     if (dealtDamageByThisTurn == null) {
                         dealtDamageByThisTurn = new HashSet<>();
                     }
-                    dealtDamageByThisTurn.add(new MageObjectReference(source));
+                    dealtDamageByThisTurn.add(new MageObjectReference(source, game));
                 }
             }
         }

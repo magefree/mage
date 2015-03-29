@@ -61,9 +61,9 @@ public class ReturnToBattlefieldUnderYourControlSourceEffect extends OneShotEffe
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game));        
+        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);        
         Card card = game.getCard(source.getSourceId());
-        if (card != null && game.getState().getZone(source.getSourceId()) == onlyFromZone && mor.getZoneChangeCounter() == card.getZoneChangeCounter() + 1) {
+        if (card != null && game.getState().getZone(source.getSourceId()) == onlyFromZone && mor.getZoneChangeCounter() == card.getZoneChangeCounter(game) + 1) {
             Zone currentZone = game.getState().getZone(card.getId());
             if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                 return true;

@@ -108,7 +108,7 @@ class DayEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game);
             for (Permanent creature : creatures) {
-                affectedObjectList.add(new MageObjectReference(creature));
+                affectedObjectList.add(new MageObjectReference(creature, game));
             }
         }
     }

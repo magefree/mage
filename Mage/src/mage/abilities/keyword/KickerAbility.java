@@ -164,7 +164,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     public boolean isKicked(Game game) {
         Card card = game.getCard(sourceId);
         // kicked status counts only if card not changed zone since it was kicked
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter +1) {
             for (OptionalAdditionalCost cost: kickerCosts) {
                 if(cost.isActivated()) {
                     return true;
@@ -186,7 +186,7 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
+                zoneChangeCounter = card.getZoneChangeCounter(game);
             } else {
                 throw new IllegalArgumentException("Kicker source card not found");
             }

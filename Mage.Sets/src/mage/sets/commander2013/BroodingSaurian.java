@@ -111,7 +111,7 @@ class BroodingSaurianControlEffect extends ContinuousEffectImpl {
                 FilterPermanent playerFilter = filter.copy();
                 playerFilter.add(new OwnerIdPredicate(playerId));
                 for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
-                    affectedObjectList.add(new MageObjectReference(permanent));
+                    affectedObjectList.add(new MageObjectReference(permanent, game));
                 }
             }
         }

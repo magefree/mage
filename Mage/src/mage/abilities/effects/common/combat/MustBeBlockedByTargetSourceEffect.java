@@ -63,7 +63,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
                 Permanent attacker = game.getPermanent(source.getSourceId());
                 if (attacker != null) {
                     BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
-                    if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker)) {
+                    if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
                         // has already blocked this turn, so no need to do again
                         return false;
                     }                

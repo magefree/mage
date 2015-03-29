@@ -130,7 +130,7 @@ class MythRealizedSetPTEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && new MageObjectReference(source.getSourceObject(game)).refersTo(permanent)) {
+            if (permanent != null && new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
                 int amount = permanent.getCounters().getCount(CounterType.LORE);
                 permanent.getPower().setValue(amount);
                 permanent.getToughness().setValue(amount);

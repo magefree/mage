@@ -198,4 +198,20 @@ public abstract class MageObjectImpl implements MageObject {
     public boolean isCopy() {
         return copy;
     }
+    
+    @Override
+    public int getZoneChangeCounter(Game game) {
+        return game.getState().getZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        game.getState().updateZoneChangeCounter(objectId);
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        game.getState().setZoneChangeCounter(objectId, value);
+    }
+    
 }

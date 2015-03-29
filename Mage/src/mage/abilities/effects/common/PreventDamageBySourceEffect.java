@@ -79,7 +79,7 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject != null && mageObjectReference.refersTo(mageObject)) {
+            if (mageObject != null && mageObjectReference.refersTo(mageObject, game)) {
                 return true;
             }
         }

@@ -48,21 +48,17 @@ public class PermanentCard extends PermanentImpl {
 
     protected int maxLevelCounters;
     protected Card card;
+    protected int zoneChangeCounter;
 
-    public PermanentCard(Card card, UUID controllerId) {
+    public PermanentCard(Card card, UUID controllerId, Game game) {
         super(card.getId(), card.getOwnerId(), controllerId, card.getName());
         this.card = card.copy();
-        init(card);
+        init(card, game);
     }
 
-    protected PermanentCard(UUID id, Card card, UUID controllerId) {
-        super(card.getId(), card.getOwnerId(), controllerId, card.getName());
-        this.card = card.copy();
-        init(card);
-    }
-
-    private void init(Card card) {
+    private void init(Card card, Game game) {
         copyFromCard(card);
+        this.zoneChangeCounter = card.getZoneChangeCounter(game);
         /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
               this.loyalty = new MageInt(card.getLoyalty().getValue());
           }*/
@@ -75,6 +71,7 @@ public class PermanentCard extends PermanentImpl {
         super(permanent);
         this.card = permanent.card.copy();
         this.maxLevelCounters = permanent.maxLevelCounters;
+        this.zoneChangeCounter = permanent.zoneChangeCounter;
     }
 
     @Override
@@ -99,6 +96,7 @@ public class PermanentCard extends PermanentImpl {
             this.abilities = card.getAbilities().copy();
         }
         this.abilities.setControllerId(this.controllerId);
+        this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
         this.color = card.getColor().copy();
@@ -116,7 +114,6 @@ public class PermanentCard extends PermanentImpl {
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
         this.usesVariousArt = card.getUsesVariousArt();
-        this.zoneChangeCounter = card.getZoneChangeCounter();
 
         canTransform = card.canTransform();
         if (canTransform) {
@@ -140,15 +137,12 @@ public class PermanentCard extends PermanentImpl {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            Card originalCard = game.getCard(this.getId());
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
-                    if (originalCard != null) {
-                        originalCard.updateZoneChangeCounter();
-                    }
+                    card.updateZoneChangeCounter(game);
                     switch (event.getToZone()) {
                         case GRAVEYARD:
                             owner.putInGraveyard(card, game, !flag);
@@ -196,7 +190,7 @@ public class PermanentCard extends PermanentImpl {
             if (!game.replaceEvent(event)) {
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 // update zone change counter of original card
-                game.getCard(this.getId()).updateZoneChangeCounter();
+                card.updateZoneChangeCounter(game);
                 if (exileId == null) {
                     game.getExile().getPermanentExile().add(card);
                 } else {
@@ -252,6 +246,20 @@ public class PermanentCard extends PermanentImpl {
         }
         return super.getManaCost();
     }
+    
+    @Override
+    public int getZoneChangeCounter(Game game) {
+        return this.zoneChangeCounter;
+    }
 
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        this.zoneChangeCounter++;
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        this.zoneChangeCounter = value;
+    }
 
 }

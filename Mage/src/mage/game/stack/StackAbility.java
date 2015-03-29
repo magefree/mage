@@ -507,5 +507,19 @@ public class StackAbility implements StackObject, Ability {
         throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
     }    
 
-    
+    @Override
+    public int getZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
 }

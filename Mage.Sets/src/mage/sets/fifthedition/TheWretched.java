@@ -137,7 +137,7 @@ class TheWretchedEffect extends OneShotEffect {
         BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
         if (watcher != null) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
-                if (watcher.creatureHasBlockedAttacker(theWretched, creature)
+                if (watcher.creatureHasBlockedAttacker(theWretched, creature, game)
                         && !creature.isRemovedFromCombat()) {
                     ContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom, source.getControllerId()), new SourceOnBattlefieldControlUnchangedCondition(), "test");
                     effect.setTargetPointer(new FixedTarget(creature.getId()));

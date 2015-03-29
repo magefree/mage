@@ -100,13 +100,13 @@ class CantBeBlockedByTokenEffect extends RestrictionEffect {
     public void init(Ability source, Game game) {
         affectedObjectsSet = true;
         for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            affectedObjectList.add(new MageObjectReference(perm));
+            affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (affectedObjectList.contains(new MageObjectReference(permanent))) {
+        if (affectedObjectList.contains(new MageObjectReference(permanent, game))) {
             return true;
         }
         return false;

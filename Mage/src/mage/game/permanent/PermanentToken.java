@@ -125,17 +125,6 @@ public class PermanentToken extends PermanentImpl {
     }
 
     @Override
-    public void addAbility(Ability ability, Game game) {
-        if (!abilities.containsKey(ability.getId())) {
-            Ability copyAbility = ability.copy();
-            copyAbility.setControllerId(controllerId);
-            copyAbility.setSourceId(objectId);
-            game.getState().addAbility(copyAbility, this);
-            abilities.add(copyAbility);
-        }
-    }
-
-    @Override
     public void adjustTargets(Ability ability, Game game) {
         if (getToken().getCopySourceCard() != null) {
             getToken().getCopySourceCard().adjustTargets(ability, game);

@@ -2239,10 +2239,10 @@ public abstract class GameImpl implements Game, Serializable {
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(this), copy);
                 } else {
                     lkiExtendedMap = new HashMap<>();
-                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(), copy);
+                    lkiExtendedMap.put(((Permanent) object).getZoneChangeCounter(this), copy);
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }
@@ -2349,7 +2349,7 @@ public abstract class GameImpl implements Game, Serializable {
             for (PermanentCard card : battlefield) {
                 card.setZone(Zone.BATTLEFIELD, this);
                 card.setOwnerId(ownerId);
-                PermanentCard permanent = new PermanentCard(card.getCard(), ownerId);
+                PermanentCard permanent = new PermanentCard(card.getCard(), ownerId, this);
                 getBattlefield().addPermanent(permanent);
                 permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
                 ((PermanentImpl)permanent).removeSummoningSickness();

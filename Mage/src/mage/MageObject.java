@@ -48,4 +48,9 @@ public interface MageObject extends MageItem, Serializable {
      * @return
      */
     boolean isCopy();
+    
+    int getZoneChangeCounter(Game game);
+    void updateZoneChangeCounter(Game game);
+    void setZoneChangeCounter(int value, Game game);
+
 }

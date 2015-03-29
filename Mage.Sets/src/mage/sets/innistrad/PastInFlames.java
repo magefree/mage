@@ -100,7 +100,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
                 for (UUID cardId: player.getGraveyard()) {
                     Card card = game.getCard(cardId);
                     if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-                        affectedObjectList.add(new MageObjectReference(card));
+                        affectedObjectList.add(new MageObjectReference(card, game));
                     }
                 }
              }

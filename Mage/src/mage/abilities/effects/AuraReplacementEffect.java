@@ -150,7 +150,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             }
             game.rememberLKI(card.getId(), fromZone, card);
 
-            PermanentCard permanent = new PermanentCard(card, card.getOwnerId());
+            PermanentCard permanent = new PermanentCard(card, card.getOwnerId(), game);
             game.getBattlefield().addPermanent(permanent);
             card.setZone(Zone.BATTLEFIELD, game);
             game.applyEffects();

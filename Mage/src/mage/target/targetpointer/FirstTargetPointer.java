@@ -34,7 +34,7 @@ public class FirstTargetPointer implements TargetPointer {
             for (UUID target : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(target);
                 if (card != null) {
-                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter());
+                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter(game));
                 }    
             }
         }
@@ -47,11 +47,10 @@ public class FirstTargetPointer implements TargetPointer {
             for (UUID targetId : source.getTargets().get(0).getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
-                    // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
+                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     // but no longer if new permanent is already on the battlefield
                     Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                    if (permanent == null || permanent.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                    if (permanent == null || permanent.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                         continue;
                     }
                 }
@@ -67,11 +66,11 @@ public class FirstTargetPointer implements TargetPointer {
         if (zoneChangeCounter.containsKey(targetId)) {
             Card card = game.getCard(targetId);
             if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     // because if dies trigger has to trigger as permanent has already moved zone, we have to check if target was on the battlefield immed. before
                     // but no longer if new permanent is already on the battlefield
                 Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                if (permanent == null || permanent.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                if (permanent == null || permanent.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     return null;
                 }
             }

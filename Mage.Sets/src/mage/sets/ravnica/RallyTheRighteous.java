@@ -123,12 +123,12 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         super.init(source, game); 
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));        
         if (target != null) {
-            affectedObjectList.add(new MageObjectReference(target));
+            affectedObjectList.add(new MageObjectReference(target, game));
             ObjectColor color = target.getColor();
             target.addPower(2);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
                 if (!permanent.getId().equals(target.getId()) && permanent.getColor().shares(color)) {
-                    affectedObjectList.add(new MageObjectReference(permanent));
+                    affectedObjectList.add(new MageObjectReference(permanent, game));
                 }
             }
         }        

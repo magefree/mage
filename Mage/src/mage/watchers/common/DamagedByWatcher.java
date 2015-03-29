@@ -80,12 +80,12 @@ public class DamagedByWatcher extends Watcher {
     public boolean wasDamaged(UUID sourceId, Game game) {
         MageObject mageObject = game.getObject(sourceId);
         if (mageObject instanceof Permanent) {
-            return wasDamaged((Permanent) mageObject);
+            return wasDamaged((Permanent) mageObject, game);
         }
         return false;
     }
 
-    public boolean wasDamaged(Permanent permanent) {
-        return damagedCreatures.contains(new MageObjectReference(permanent));
+    public boolean wasDamaged(Permanent permanent, Game game) {
+        return damagedCreatures.contains(new MageObjectReference(permanent, game));
     }
 }

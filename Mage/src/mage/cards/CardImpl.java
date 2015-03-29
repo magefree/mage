@@ -86,7 +86,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     protected SpellAbility spellAbility;
     protected boolean flipCard;
     protected String flipCardName;
-    protected int zoneChangeCounter = 1;
     protected boolean usesVariousArt = false;
     protected boolean splitCard;
     protected boolean morphCard;
@@ -150,7 +149,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
-        zoneChangeCounter = card.zoneChangeCounter;
         flipCard = card.flipCard;
         flipCardName = card.flipCardName;
         splitCard = card.splitCard;
@@ -377,7 +375,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
             
             setFaceDown(false, game);
-            updateZoneChangeCounter();
+            updateZoneChangeCounter(game);
             switch (event.getToZone()) {
                 case GRAVEYARD:
                     game.getPlayer(ownerId).putInGraveyard(this, game, !flag);
@@ -403,7 +401,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     }
                     break;
                 case BATTLEFIELD:
-                    PermanentCard permanent = new PermanentCard(this, event.getPlayerId()); // controller can be replaced (e.g. Gather Specimens)
+                    PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game); // controller can be replaced (e.g. Gather Specimens)
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
                     game.setScopeRelevant(true);
@@ -510,7 +508,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 game.getExile().createZone(exileId, name).add(this);
             }
             setFaceDown(false, game);
-            updateZoneChangeCounter();
+            updateZoneChangeCounter(game);
             game.setZone(objectId, event.getToZone());
             game.addSimultaneousEvent(event);
             return true;
@@ -574,8 +572,8 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                     logger.warn("Couldn't find card in fromZone, card=" + getName() + ", fromZone=" + fromZone);
                 }
             }
-            updateZoneChangeCounter();
-            PermanentCard permanent = new PermanentCard(this, event.getPlayerId());
+            updateZoneChangeCounter(game);
+            PermanentCard permanent = new PermanentCard(this, event.getPlayerId(), game);
             // make sure the controller of all continuous effects of this card are switched to the current controller
             game.getContinuousEffects().setController(objectId, event.getPlayerId());
             game.addPermanent(permanent);
@@ -660,20 +658,6 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public boolean isSplitCard() {
         return splitCard;
-    }
-
-
-    @Override
-    public int getZoneChangeCounter() {
-//        logger.info(name + " get= " + zoneChangeCounter + "  " + ((this instanceof Permanent) ? " Permanent":"Card"));
-        return zoneChangeCounter;
-
-    }
-
-    @Override
-    public void updateZoneChangeCounter() {
-        zoneChangeCounter++;
-//        logger.info(name + " set= " + zoneChangeCounter + "  " + ((this instanceof Permanent) ? " Permanent":"Card"));
     }
 
     @Override

@@ -131,7 +131,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
         String key = permanent.getId() + keyString;
 
         // Using a Map.Entry since there is no pair class
-        long zoneChangeCount = permanent.getZoneChangeCounter();
+        long zoneChangeCount = permanent.getZoneChangeCounter(game);
         long turnNum = game.getTurnNum();
         Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
 
@@ -170,7 +170,7 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
             String key = permanent.getId() + keyString;
             Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
             if (turnIgnoringPlayersPair != null) {
-                long zoneChangeCount = permanent.getZoneChangeCounter();
+                long zoneChangeCount = permanent.getZoneChangeCounter(game);
                 long turnNum = game.getTurnNum();
                 Long activationState =  zoneChangeCount << 32 | turnNum & 0xFFFFFFFFL;
                 if (activationState.equals(turnIgnoringPlayersPair.getKey())) {

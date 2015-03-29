@@ -873,8 +873,13 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public void updateZoneChangeCounter() {
+    public void updateZoneChangeCounter(Game game) {
         throw new UnsupportedOperationException("Unsupported operation"); 
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
@@ -888,8 +893,8 @@ public class Spell implements StackObject, Card {
     }
 
     @Override
-    public int getZoneChangeCounter() {
-        return card.getZoneChangeCounter();
+    public int getZoneChangeCounter(Game game) {
+        return card.getZoneChangeCounter(game);
     }
 
     @Override

@@ -41,7 +41,7 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
             if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
                 boolean damageDealt = false;
                 for (MageObjectReference mor : zEvent.getTarget().getDealtDamageByThisTurn()) {
-                    if (mor.refersTo(getSourceObject(game))) {
+                    if (mor.refersTo(getSourceObject(game), game)) {
                         damageDealt = true;
                         break;
                     }

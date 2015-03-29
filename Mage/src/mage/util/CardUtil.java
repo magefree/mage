@@ -485,9 +485,9 @@ public class CardUtil {
     public static UUID getObjectExileZoneId(Game game, MageObject mageObject, boolean previous) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
-            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter();
+            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter(game);
         } else if (mageObject instanceof Card) {
-            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
+            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter(game);
         }
         if (zoneChangeCounter > 0 && previous) {
             zoneChangeCounter--;
@@ -526,7 +526,7 @@ public class CardUtil {
         int zoneChangeCounter= 0;
         Card card = game.getCard(cardId); // if called for a token, the id is enough
         if (card != null) {
-            zoneChangeCounter = card.getZoneChangeCounter();
+            zoneChangeCounter = card.getZoneChangeCounter(game);
         }
         return getObjectZoneString(text,cardId, game, zoneChangeCounter, previous);
     }
@@ -534,9 +534,9 @@ public class CardUtil {
     public static String getObjectZoneString(String text, MageObject mageObject, Game game) {
         int zoneChangeCounter = 0;
         if (mageObject instanceof Permanent) {
-            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter();
+            zoneChangeCounter = ((Permanent) mageObject).getZoneChangeCounter(game);
         } else if (mageObject instanceof Card) {
-            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter();
+            zoneChangeCounter = ((Card) mageObject).getZoneChangeCounter(game);
         }
         return getObjectZoneString(text, mageObject.getId(), game, zoneChangeCounter, false);
     }

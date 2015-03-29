@@ -93,7 +93,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         this.affectedObjectsSet = true;
         for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            affectedObjectList.add(new MageObjectReference(perm));
+            affectedObjectList.add(new MageObjectReference(perm, game));
         }
     }
 

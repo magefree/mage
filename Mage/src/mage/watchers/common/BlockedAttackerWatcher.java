@@ -85,8 +85,8 @@ public class BlockedAttackerWatcher extends Watcher {
         blockData.clear();
     }
 
-    public boolean creatureHasBlockedAttacker(Permanent attacker, Permanent blocker) {
-        Set<MageObjectReference> blockedAttackers = blockData.get(new MageObjectReference(blocker));
-        return blockedAttackers != null && blockedAttackers.contains(new MageObjectReference(attacker));
+    public boolean creatureHasBlockedAttacker(Permanent attacker, Permanent blocker, Game game) {
+        Set<MageObjectReference> blockedAttackers = blockData.get(new MageObjectReference(blocker, game));
+        return blockedAttackers != null && blockedAttackers.contains(new MageObjectReference(attacker, game));
     }
 }
