@@ -80,12 +80,12 @@ public class DryadMilitantTest extends CardTestPlayerBase {
     
     /**
      * Tests if Dryad Militant dies by damage spell, the
-     * spell don't gets exiled
+     * spell don't get exiled
      */
     @Test
     public void testDiesByDestroy() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.HAND, playerA, "Terminate");
         addCard(Zone.BATTLEFIELD, playerB, "Dryad Militant");
 
@@ -95,7 +95,8 @@ public class DryadMilitantTest extends CardTestPlayerBase {
         execute();
         
         assertLife(playerB, 20);
-        
+
+        assertHandCount(playerA, "Terminate", 0);
         assertGraveyardCount(playerB, "Terminate", 1);
     }       
 }
