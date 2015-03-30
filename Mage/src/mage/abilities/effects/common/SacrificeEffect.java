@@ -32,9 +32,8 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -79,13 +78,14 @@ public class SacrificeEffect extends OneShotEffect{
             return false;
         }
 
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        FilterPermanent newFilter = filter.copy(); // filter can be static, so it's important to copy here
+        newFilter.add(new ControllerIdPredicate(player.getId()));
 
         int amount = count.calculate(game, source, this);
-        int realCount = game.getBattlefield().countAll(filter, player.getId(), game);
+        int realCount = game.getBattlefield().countAll(newFilter, player.getId(), game);
         amount = Math.min(amount, realCount);
 
-        Target target = new TargetPermanent(amount, amount, filter, true);
+        Target target = new TargetPermanent(amount, amount, newFilter, true);
 
         // A spell or ability could have removed the only legal target this player
         // had, if thats the case this ability should fizzle.

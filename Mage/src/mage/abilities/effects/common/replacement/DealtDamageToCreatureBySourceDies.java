@@ -94,7 +94,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
         if (zce.isDiesEvent()) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
-                return watcher.wasDamaged(zce.getTarget());
+                return watcher.wasDamaged(zce.getTarget(), game);
             }
         }
         return false;

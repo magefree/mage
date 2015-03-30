@@ -19,7 +19,12 @@ Dissension|dissension|
 Dragons of Tarkir|dragonsoftarkir|
 Dragon's Maze|dragonsmaze|
 Duel Decks: Ajani vs. Nicol Bolas|ajanivsnicolbolas|
+Duel Decks: Anthology, Divine vs. Demonic|anthologydivinevsdemonic|
+Duel Decks: Anthology, Elves vs. Goblins|anthologyelvesvsgoblins|
+Duel Decks: Anthology, Garruk vs. Liliana|anthologygarrukvsliliana|
+Duel Decks: Anthology, Jace vs. Chandra|anthologyjacevschandra|
 Duel Decks: Divine vs. Demonic|divinevsdemonic|
+Duel Decks: Elspeth vs. Kiora|elspethvskiora|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
 Duel Decks: Elves vs. Goblins|elvesvsgoblins|
 Duel Decks: Garruk vs. Liliana|garrukvsliliana|
@@ -67,6 +72,7 @@ Magic 2013|magic2013|
 Magic 2014|magic2014|
 Magic 2015|magic2015|
 Magic Origins|magicorigins|
+Magic Player Rewards|magicplayerrewards|
 Magic: The Gathering-Commander|commander|
 Media Inserts|mediainserts|
 Magic: The Gathering-Conspiracy|conspiracy|

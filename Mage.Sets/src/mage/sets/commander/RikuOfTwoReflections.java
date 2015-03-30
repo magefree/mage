@@ -49,9 +49,9 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.token.EmptyToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.game.permanent.token.EmptyToken;
 import mage.util.CardUtil;
 
 /**
@@ -78,9 +78,6 @@ public class RikuOfTwoReflections extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

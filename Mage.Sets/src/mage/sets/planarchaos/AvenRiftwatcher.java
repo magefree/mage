@@ -29,12 +29,8 @@ package mage.sets.planarchaos;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,7 +40,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.target.TargetPlayer;
 
 /**
  *
@@ -66,8 +61,8 @@ public class AvenRiftwatcher extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Vanishing 3
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(2))));
-        this.addAbility(new VanishingUpkeepAbility(2));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3))));
+        this.addAbility(new VanishingUpkeepAbility(3));
         this.addAbility(new VanishingSacrificeAbility());
 
         // When Aven Riftwatcher enters the battlefield or leaves the battlefield, you gain 2 life.

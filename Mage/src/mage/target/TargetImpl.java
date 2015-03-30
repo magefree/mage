@@ -252,7 +252,7 @@ public abstract class TargetImpl implements Target {
     private void rememberZoneChangeCounter(UUID id, Game game) {
         Card card = game.getCard(id);
         if (card != null) {
-            zoneChangeCounters.put(id, card.getZoneChangeCounter());
+            zoneChangeCounters.put(id, card.getZoneChangeCounter(game));
         }
     }
 
@@ -331,7 +331,7 @@ public abstract class TargetImpl implements Target {
         for (UUID targetId: targets.keySet()) {
             Card card = game.getCard(targetId);
             if (card != null) {
-                if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter()) {
+                if (zoneChangeCounters.containsKey(targetId) && zoneChangeCounters.get(targetId) != card.getZoneChangeCounter(game)) {
                     illegalTargets.add(targetId);
                     continue; // it's not legal so continue to have a look at other targeted objects
                 }

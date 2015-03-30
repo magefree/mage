@@ -143,7 +143,7 @@ class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = source.getSourceObject(game);
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && mageObject == null && new MageObjectReference(permanent).refersTo(mageObject)) {
+        if (permanent != null && mageObject == null && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
             discard();
             return false;
         }
@@ -190,7 +190,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
         if (controller != null) {
             MageObject mageObject = source.getSourceObject(game);
             Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null && mageObject != null && new MageObjectReference(permanent).refersTo(mageObject)) {
+            if (permanent != null && mageObject != null && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {
                 if (permanent.sacrifice(source.getSourceId(), game)) {
                     UUID exileId = CardUtil.getObjectExileZoneId(game, mageObject);
                     if (exileId != null) {

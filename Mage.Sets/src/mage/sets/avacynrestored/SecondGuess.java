@@ -79,7 +79,7 @@ class SecondSpellPredicate implements Predicate<Spell> {
     public boolean apply(Spell input, Game game) {
         CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
 
-        if (watcher.getSpellOrder(input) == 2) {
+        if (watcher.getSpellOrder(input, game) == 2) {
             return true;
         }
 

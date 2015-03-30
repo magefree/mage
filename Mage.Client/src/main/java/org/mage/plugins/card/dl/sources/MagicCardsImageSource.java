@@ -63,7 +63,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("LRW", "lorwyn");
             put("10E", "tenth-edition");
             put("CSP", "coldsnap");
-            put("CHK", "player-rewards-2004");
+            put("MPRP", "magic-player-rewards");
             put("POR", "portal");
             put("PO2", "portal-second-age");
             put("PTK", "portal-three-kingdoms");
@@ -75,6 +75,10 @@ public class MagicCardsImageSource implements CardImageSource {
             put("M10", "magic-2010");
             put("EVG", "duel-decks-elves-vs-goblins");
             put("DD2", "duel-decks-jace-vs-chandra");
+            put("DD3", "duel-decks-anthology-elves-vs-goblins");
+            put("DD3", "duel-decks-anthology-divine-vs-demonic");
+            put("DD3", "duel-decks-anthology-garruk-vs-liliana");
+            put("DD3", "duel-decks-anthology-jace-vs-chandra");
             put("DDC", "duel-decks-divine-vs-demonic");
             put("DDD", "duel-decks-garruk-vs-liliana");
             put("DDE", "duel-decks-phyrexia-vs-the-coalition");
@@ -87,10 +91,15 @@ public class MagicCardsImageSource implements CardImageSource {
             put("DDL", "duel-decks-heroes-vs-monsters");
             put("DDM", "duel-decks-jace-vs-vraska");
             put("DDN", "duel-decks-speed-vs-cunning");
-
+            put("DDO", "duel-decks-elspeth-vs-kiora");
         }
         private static final long serialVersionUID = 1L;
     };
+
+    @Override
+    public String getSourceName() {
+        return "magiccards.info";
+    }
 
     public static CardImageSource getInstance() {
         if (instance == null) {

@@ -35,11 +35,8 @@
     import mage.abilities.Ability;
     import mage.abilities.dynamicvalue.DynamicValue;
     import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.constants.TargetController;
     import mage.filter.Filter;
     import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
-    import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
     import mage.game.Game;
     import mage.game.permanent.Permanent;
     import mage.target.TargetAmount;
@@ -57,15 +54,21 @@ import mage.filter.predicate.permanent.ControllerPredicate;
             // any positive number or zero, unless something (such as damage or counters) is being divided
             // or distributed among “any number” of players and/or objects. In that case, a nonzero number
             // of players and/or objects must be chosen if possible.
-            this(new StaticValue(amount));
-            this.minNumberOfTargets = 1;
+            this(amount, new FilterCreatureOrPlaneswalkerPermanent());
         }
 
         public TargetCreatureOrPlaneswalkerAmount(DynamicValue amount) {
+            this(amount, new FilterCreatureOrPlaneswalkerPermanent());
+        }
+
+        public TargetCreatureOrPlaneswalkerAmount(int amount, FilterCreatureOrPlaneswalkerPermanent filter) {
+            this(new StaticValue(amount), filter);
+        }
+
+        public TargetCreatureOrPlaneswalkerAmount(DynamicValue amount, FilterCreatureOrPlaneswalkerPermanent filter) {
             super(amount);
             this.zone = Zone.ALL;
-            this.filter = new FilterCreatureOrPlaneswalkerPermanent();
-            this.filter.add(new ControllerPredicate(TargetController.OPPONENT));
+            this.filter = filter;
             this.targetName = filter.getMessage();
         }
 
@@ -80,8 +83,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         }
 
         @Override
-        public boolean canTarget(UUID id, Game game) {
-            Permanent permanent = game.getPermanent(id);
+        public boolean canTarget(UUID objectId, Game game) {
+            Permanent permanent = game.getPermanent(objectId);
             if (permanent != null) {
                 return filter.match(permanent, game);
             }
@@ -89,31 +92,29 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         }
 
         @Override
-        public boolean canTarget(UUID id, Ability source, Game game) {
-            Permanent permanent = game.getPermanent(id);
-            if (source != null) {
-                MageObject targetSource = game.getObject(source.getSourceId());
-                if (permanent != null) {
+        public boolean canTarget(UUID objectId, Ability source, Game game) {
+            Permanent permanent = game.getPermanent(objectId);
+            if (permanent != null) {
+                if (source != null) {
+                    MageObject targetSource = source.getSourceObject(game);
                     return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                } else {
+                    return filter.match(permanent, game);
                 }
             }
-
-            if (permanent != null) {
-                return filter.match(permanent, game);
-            }
             return false;
         }
 
         @Override
-        public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-            return canTarget(id, source, game);
+        public boolean canTarget(UUID playerId, UUID objectId, Ability source, Game game) {
+            return canTarget(objectId, source, game);
         }
 
         @Override
         public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
             int count = 0;
             MageObject targetSource = game.getObject(sourceId);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
@@ -127,7 +128,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         @Override
         public boolean canChoose(UUID sourceControllerId, Game game) {
             int count = 0;
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (filter.match(permanent, null, sourceControllerId, game)) {
                     count++;
                     if (count >= this.minNumberOfTargets) {
@@ -142,7 +143,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
             Set<UUID> possibleTargets = new HashSet<>();
             MageObject targetSource = game.getObject(sourceId);
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                     possibleTargets.add(permanent.getId());
                 }
@@ -153,7 +154,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         @Override
         public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
             Set<UUID> possibleTargets = new HashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreatureOrPlaneswalkerPermanent(), sourceControllerId, game)) {
                 if (filter.match(permanent, null, sourceControllerId, game)) {
                     possibleTargets.add(permanent.getId());
                 }

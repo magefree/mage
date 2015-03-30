@@ -39,7 +39,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,12 +80,18 @@ public class ElvishPioneer extends CardImpl {
 }
 
 class PutLandOnBattlefieldEffect extends OneShotEffect {
+    
+    private static final FilterCard filter = new FilterCard("card other than a basic land card");
 
-    private static final String choiceText = "Put a land card from your hand onto the battlefield?";
+    static {
+        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND), new SupertypePredicate("Basic")));
+    }
+
+    private static final String choiceText = "Put a basic land card from your hand onto the battlefield?";
 
     public PutLandOnBattlefieldEffect() {
         super(Outcome.PutLandInPlay);
-        this.staticText = "put a land card from your hand onto the battlefield";
+        this.staticText = "put a basic land card from your hand onto the battlefield";
     }
 
     public PutLandOnBattlefieldEffect(final PutLandOnBattlefieldEffect effect) {
@@ -100,7 +110,7 @@ class PutLandOnBattlefieldEffect extends OneShotEffect {
             return false;
         }
 
-        TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
+        TargetCardInHand target = new TargetCardInHand(filter);
         if (player.choose(Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {

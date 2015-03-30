@@ -54,6 +54,8 @@ public class GoblinFireslinger extends CardImpl {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        
+        // {tap}: Goblin Fireslinger deals 1 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

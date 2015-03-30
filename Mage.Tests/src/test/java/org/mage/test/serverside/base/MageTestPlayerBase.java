@@ -239,7 +239,7 @@ public abstract class MageTestPlayerBase {
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
                             if (gameZone.equals(Zone.BATTLEFIELD)) {
-                                PermanentCard p = new PermanentCard(card, null);
+                                PermanentCard p = new PermanentCard(card, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
                             } else {

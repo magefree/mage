@@ -33,7 +33,7 @@ public class SecondTargetPointer implements TargetPointer {
             for (UUID target : source.getTargets().get(1).getTargets()) {
                 Card card = game.getCard(target);
                 if (card != null) {
-                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter());
+                    this.zoneChangeCounter.put(target, card.getZoneChangeCounter(game));
                 }
             }
         }
@@ -46,7 +46,7 @@ public class SecondTargetPointer implements TargetPointer {
             for (UUID targetId : source.getTargets().get(1).getTargets()) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
-                        && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                        && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     continue;
                 }
                 target.add(targetId);
@@ -62,7 +62,7 @@ public class SecondTargetPointer implements TargetPointer {
             if (zoneChangeCounter.containsKey(targetId)) {
                 Card card = game.getCard(targetId);
                 if (card != null && zoneChangeCounter.containsKey(targetId)
-                            && card.getZoneChangeCounter() != zoneChangeCounter.get(targetId)) {
+                            && card.getZoneChangeCounter(game) != zoneChangeCounter.get(targetId)) {
                     return null;
                 }
             }

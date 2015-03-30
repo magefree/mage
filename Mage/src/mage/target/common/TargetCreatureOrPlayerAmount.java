@@ -79,12 +79,12 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canTarget(UUID id, Game game) {
-        Permanent permanent = game.getPermanent(id);
+    public boolean canTarget(UUID objectId, Game game) {
+        Permanent permanent = game.getPermanent(objectId);
         if (permanent != null) {
             return filter.match(permanent, game);
         }
-        Player player = game.getPlayer(id);
+        Player player = game.getPlayer(objectId);
         if (player != null) {
             return filter.match(player, game);
         }
@@ -92,12 +92,12 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(id);
-        Player player = game.getPlayer(id);
+    public boolean canTarget(UUID objectId, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(objectId);
+        Player player = game.getPlayer(objectId);
 
         if (source != null) {
-            MageObject targetSource = game.getObject(source.getSourceId());
+            MageObject targetSource = source.getSourceObject(game);
             if (permanent != null) {
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             }
@@ -116,8 +116,8 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        return canTarget(id, source, game);
+    public boolean canTarget(UUID playerId, UUID objectId, Ability source, Game game) {
+        return canTarget(objectId, source, game);
     }
 
     @Override

@@ -91,7 +91,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (affectedObjectsSet) {
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                affectedObjectList.add(new MageObjectReference(perm));
+                affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }
         if (lockedInPT) {

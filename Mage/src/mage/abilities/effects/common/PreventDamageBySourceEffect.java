@@ -54,7 +54,11 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
 
     public PreventDamageBySourceEffect(FilterObject filterObject) {
         super(Duration.EndOfTurn);
-        this.target = new TargetSource(filterObject);
+        if (filterObject.getMessage().equals("a")) {
+            this.target = new TargetSource(new FilterObject("source"));
+        } else {
+            this.target = new TargetSource(new FilterObject(filterObject.getMessage() + " source"));
+        }
         staticText = "Prevent all damage " + filterObject.getMessage() + " source of your choice would deal this turn";
     }
 
@@ -79,7 +83,7 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject != null && mageObjectReference.refersTo(mageObject)) {
+            if (mageObject != null && mageObjectReference.refersTo(mageObject, game)) {
                 return true;
             }
         }

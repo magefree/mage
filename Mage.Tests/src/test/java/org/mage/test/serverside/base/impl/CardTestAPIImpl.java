@@ -124,7 +124,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card, null);
+                PermanentCard p = new PermanentCard(card, null, currentGame);
                 p.setTapped(tapped);
                 if (player.equals(playerA)) {
                     battlefieldCardsA.add(p);

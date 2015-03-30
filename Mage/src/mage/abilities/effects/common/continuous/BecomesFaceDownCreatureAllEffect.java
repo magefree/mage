@@ -86,7 +86,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
         super.init(source, game);
         for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (!perm.isFaceDown(game) && !perm.canTransform()) {
-                affectedObjectList.add(new MageObjectReference(perm));
+                affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
                 // check for Morph
                 Card card = game.getCard(perm.getId());

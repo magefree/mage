@@ -103,7 +103,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter +1) {
             for (AlternativeCost2 cost: evokeCosts) {
                 if(cost.isActivated(game)) {
                     return true;
@@ -151,7 +151,7 @@ public class EvokeAbility extends StaticAbility implements AlternativeSourceCost
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
+                zoneChangeCounter = card.getZoneChangeCounter(game);
             } else {
                 throw new IllegalArgumentException("Evoke source card not found");
             }

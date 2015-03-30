@@ -123,9 +123,9 @@ class SoulflayerEffect extends ContinuousEffectImpl implements SourceEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (objectReference == null || !objectReference.refersTo(permanent)) {
+            if (objectReference == null || !objectReference.refersTo(permanent, game)) {
                 abilitiesToAdd = new HashSet<>();
-                this.objectReference = new MageObjectReference(permanent);
+                this.objectReference = new MageObjectReference(permanent, game);
                 String keyString = CardUtil.getCardZoneString("delvedCards", source.getSourceId(), game, true);
                 List<Card> delvedCards = (List<Card>) game.getState().getValue(keyString);
                 if (delvedCards != null) {

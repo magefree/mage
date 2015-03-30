@@ -132,9 +132,9 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
                     return;
                 }
                 this.lockedControllers.put(permanent1.getId(), permanent2.getControllerId());
-                this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter());
+                this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter(game));
                 this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
-                this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter());
+                this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));
                 
                 permanent1.changeControllerId(targetPlayer.getId(), game);
                 permanent2.changeControllerId(you.getId(), game);
@@ -153,7 +153,7 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
         Set<UUID> toDelete = new HashSet<>();
         for (Map.Entry<UUID, Integer> entry : zoneChangeCounter.entrySet()) {
             Permanent permanent = game.getPermanent(entry.getKey());
-            if (permanent == null || permanent.getZoneChangeCounter() != entry.getValue()) {
+            if (permanent == null || permanent.getZoneChangeCounter(game) != entry.getValue()) {
                 // controll effect cease if the same permanent is no longer on the battlefield
                 toDelete.add(entry.getKey());
                 continue;

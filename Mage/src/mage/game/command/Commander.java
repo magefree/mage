@@ -192,5 +192,20 @@ public class Commander implements CommandObject{
     public String getImageName() {
         return card.getImageName();
     }
+
+    @Override
+    public int getZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
     
 }

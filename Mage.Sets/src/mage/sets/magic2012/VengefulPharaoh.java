@@ -115,7 +115,7 @@ class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
         // even if Vengeful Pharaoh is put back into your graveyard before it tries to resolve, as it's a 
         // different Vengeful Pharaoh than the one that was there before.
         MageObjectReference mor = new MageObjectReference(getSourceId(), game);
-        return mor.refersTo(this.getSourceObject(game));
+        return mor.refersTo(this.getSourceObject(game), game);
     }
 
     @Override

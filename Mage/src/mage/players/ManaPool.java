@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.ConditionalMana;
+import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.constants.AsThoughEffectType;
@@ -110,8 +111,9 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
+        MageObject sourceObject = ability.getSourceObject(game);
         for (ManaPoolItem mana : manaItems) {
-            if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
+            if (filter == null || filter.match(sourceObject, game)) {
                 boolean spendAnyMana = spendAnyMana(ability, game);
                 if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
                     game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag()));

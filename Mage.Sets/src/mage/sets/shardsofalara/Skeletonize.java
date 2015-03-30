@@ -131,7 +131,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
             if (zce.isDiesEvent()) {
                 DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
                 if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget());
+                    return watcher.wasDamaged(zce.getTarget(), game);
                 }
             }
         }

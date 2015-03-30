@@ -116,7 +116,7 @@ public class BoostControlledEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
-                    affectedObjectList.add(new MageObjectReference(perm));
+                    affectedObjectList.add(new MageObjectReference(perm, game));
                 }
             }
         }

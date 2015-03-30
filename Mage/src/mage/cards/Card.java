@@ -69,9 +69,6 @@ public interface Card extends MageObject {
 
     void assignNewId();
 
-    int getZoneChangeCounter();
-    void updateZoneChangeCounter();
-
     void addInfo(String key, String value, Game game);
 
     /**

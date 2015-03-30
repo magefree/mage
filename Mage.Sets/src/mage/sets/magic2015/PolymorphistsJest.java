@@ -96,7 +96,7 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, getTargetPointer().getFirst(game, source), game)) {
-                affectedObjectList.add(new MageObjectReference(permanent));
+                affectedObjectList.add(new MageObjectReference(permanent, game));
             }
         }
     }

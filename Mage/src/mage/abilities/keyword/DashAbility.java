@@ -110,7 +110,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter +1) {
             for (AlternativeCost2 cost: alternativeSourceCosts) {
                 if(cost.isActivated(game)) {
                     return true;
@@ -158,7 +158,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
+                zoneChangeCounter = card.getZoneChangeCounter(game);
             } else {
                 throw new IllegalArgumentException("Dash source card not found");
             }

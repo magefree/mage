@@ -40,6 +40,7 @@ import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.players.Player;
 import org.apache.log4j.Logger;
 
 
@@ -54,6 +55,7 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     private static Random rnd = new Random();
     private UUID ownerId;
     private Zone zone;
+    private boolean errorLogged = false;
 
     public CardsImpl() { }
 
@@ -189,8 +191,17 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             if (card != null) {
                 cards.add(card);
             } else {
-                // seems like this can happen during the cancelation of a game
-                logger.error("Card not found  cardId: " + cardId + " gameId: " + game.getId() );
+                if (!errorLogged) { // this runs in iteration, so the flag helps to stop to fill the log file
+                    // seems like this can happen during the cancelation of a game
+                    logger.error("Card not found  cardId: " + cardId + " gameId: " + game.getId() );
+                    for (Player player :game.getPlayers().values()) {
+                        logger.error(player.getName() + " inGame=" + (player.isInGame() ? "true":"false"));
+                    }
+                    for (StackTraceElement stackTraceElement: Thread.currentThread().getStackTrace()) {
+                        logger.error(stackTraceElement.toString());
+                    }
+                    errorLogged = true;
+                }
             }
         }
         return cards;

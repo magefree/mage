@@ -127,7 +127,7 @@ class AggravateRequirementEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
         if (watcher != null) {
-            return watcher.wasDamaged(permanent);
+            return watcher.wasDamaged(permanent, game);
         }
         return false;
     }

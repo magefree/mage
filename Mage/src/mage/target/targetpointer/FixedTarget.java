@@ -25,7 +25,7 @@ public class FixedTarget implements TargetPointer {
     public void init(Game game, Ability source) {
         Card card = game.getCard(target);
         if (card != null) {
-            this.zoneChangeCounter = card.getZoneChangeCounter();
+            this.zoneChangeCounter = card.getZoneChangeCounter(game);
         }
     }
 
@@ -34,7 +34,7 @@ public class FixedTarget implements TargetPointer {
         // check target not changed zone
         if (this.zoneChangeCounter > 0) { // will be zero if not defined in init
             Card card = game.getCard(target);
-            if (card != null && card.getZoneChangeCounter() != this.zoneChangeCounter) {
+            if (card != null && card.getZoneChangeCounter(game) != this.zoneChangeCounter) {
                 return new ArrayList<>(); // return empty
             }
         }
@@ -49,7 +49,7 @@ public class FixedTarget implements TargetPointer {
         // check target not changed zone
         if (this.zoneChangeCounter > 0) { // will be zero if not defined in init
             Card card = game.getCard(target);
-            if (card != null && card.getZoneChangeCounter() != this.zoneChangeCounter) {
+            if (card != null && card.getZoneChangeCounter(game) != this.zoneChangeCounter) {
                 return null;
             }
         }

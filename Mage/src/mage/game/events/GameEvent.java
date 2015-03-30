@@ -267,7 +267,7 @@ public class GameEvent {
 
     public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
         if (appliedEffects == null) {
-            appliedEffects = new ArrayList<UUID>();
+            appliedEffects = new ArrayList<>();
         }
         this.appliedEffects = appliedEffects;
     }

@@ -128,7 +128,7 @@ public class ReturnToHandTargetEffect extends OneShotEffect {
             if (!target.getTargetName().startsWith("another")) {
                 sb.append("target ");
             }
-            sb.append(target.getTargetName()).append(" to it's owner's hand").toString();
+            sb.append(target.getTargetName()).append(" to its owner's hand").toString();
             return sb.toString();
         }
     }

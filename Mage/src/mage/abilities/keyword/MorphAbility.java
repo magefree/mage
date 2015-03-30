@@ -184,7 +184,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter +1) {
             return alternateCosts.isActivated(game);
         }
         return false;
@@ -261,7 +261,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         if (zoneChangeCounter == 0) {
             Card card = game.getCard(getSourceId());
             if (card != null) {
-                zoneChangeCounter = card.getZoneChangeCounter();
+                zoneChangeCounter = card.getZoneChangeCounter(game);
             } else {
                 throw new IllegalArgumentException("Morph source card not found");
             }

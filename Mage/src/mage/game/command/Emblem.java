@@ -198,5 +198,20 @@ public class Emblem implements CommandObject {
     public String getExpansionSetCodeForImage() {
         return expansionSetCodeForImage;
     }
+
+    @Override
+    public int getZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public void setZoneChangeCounter(int value, Game game) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
     
 }

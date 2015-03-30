@@ -30,17 +30,25 @@ package mage.cards;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import mage.cards.decks.DeckCardInfo;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import static mage.constants.ColoredManaSymbol.B;
+import static mage.constants.ColoredManaSymbol.G;
+import static mage.constants.ColoredManaSymbol.R;
+import static mage.constants.ColoredManaSymbol.U;
+import static mage.constants.ColoredManaSymbol.W;
 import mage.util.ClassScanner;
 import org.apache.log4j.Logger;
-
 
 /**
  *
@@ -57,7 +65,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     }
 
     private Sets() {
-        ArrayList<String> packages = new ArrayList<String>();
+        ArrayList<String> packages = new ArrayList<>();
         packages.add("mage.sets");
         for (Class c : ClassScanner.findClasses(packages, ExpansionSet.class)) {
             try {
@@ -130,8 +138,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(file);
-        Map<String, DeckCardInfo> deckCards = new HashMap<String, DeckCardInfo>();
-        Map<String, DeckCardInfo> sideboard = new HashMap<String, DeckCardInfo>();
+        Map<String, DeckCardInfo> deckCards = new HashMap<>();
+        Map<String, DeckCardInfo> sideboard = new HashMap<>();
         try {
             if (deck.getName() != null && deck.getName().length() > 0) {
                 out.println("NAME:" + deck.getName());

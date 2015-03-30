@@ -107,7 +107,7 @@ class MarshCasualtiesEffect extends ContinuousEffectImpl {
         super.init(source, game);
         if (this.affectedObjectsSet) {
             for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getFirstTarget(), game)) {
-                affectedObjectList.add(new MageObjectReference(creature));
+                affectedObjectList.add(new MageObjectReference(creature, game));
             }
         }
     }

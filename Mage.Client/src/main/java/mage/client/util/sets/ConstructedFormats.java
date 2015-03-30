@@ -28,26 +28,26 @@ public class ConstructedFormats {
     private static final String[] constructedFormats = {
             ALL, STANDARD, EXTENDED, MODERN,
             "* Khans of Tarkir Block", "Khans of Tarkir", "Fate Reforged", "Dragons of Tarkir",
-            "* Theros Block", "Journey into Nyx", "Born of the Gods", "Theros",
-            "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
-            "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad",
-            "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", 
-            "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar",
-            "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
+            "* Theros Block", "Theros", "Born of the Gods", "Journey into Nyx",
+            "* Return to Ravnica Block", "Return to Ravnica", "Gatecrash", "Dragon's Maze",
+            "* Innistrad Block", "Innistrad", "Dark Ascension", "Avacyn Restored",
+            "* Scars of Mirrodin Block", "Scars of Mirrodin", "Mirrodin Besieged", "New Phyrexia", 
+            "* Zendikar Block", "Zendikar", "Worldwake", "Rise of the Eldrazi",
+            "* Shards of Alara Block", "Shards of Alara", "Conflux", "Alara Reborn",
             "* Shadowmoor Block", "Shadowmoor", "Eventide",
             "* Lorwyn Block", "Lorwyn", "Morningtide",
-            "* Time Spiral Block", "Future Sight", "Planar Chaos", "Time Spiral",
-            "* Ravnica Block", "Dissension", "Guildpact", "Ravnica: City of Guilds",
-            "* Kamigawa Block", "Saviors of Kamigawa", "Betrayers of Kamigawa", "Champions of Kamigawa", 
-            "* Mirrodin Block", "Fifth Dawn", "Darksteel", "Mirrodin",
-            "* Onslaught Block", "Scourge", "Legions", "Onslaught", 
-            "* Odyssey Block", "Judgment", "Torment", "Odyssey",
-            "* Invasion Block", "Apocalypse", "Planeshift", "Invasion", 
-            "* Masquerade Block", "Prophecy", "Nemesis", "Mercadian Masques",
-            "* Urza Block", "Urza's Destiny", "Urza's Legacy", "Urza's Saga", 
-            "* Tempest Block", "Exodus", "Stronghold", "Tempest",
-            "* Mirage Block", "Weatherlight", "Visions", "Mirage", 
-            "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", 
+            "* Time Spiral Block", "Time Spiral", "Planar Chaos", "Future Sight",
+            "* Ravnica Block", "Ravnica: City of Guilds", "Guildpact", "Dissension",
+            "* Kamigawa Block", "Champions of Kamigawa", "Betrayers of Kamigawa", "Saviors of Kamigawa", 
+            "* Mirrodin Block", "Mirrodin", "Darksteel", "Fifth Dawn",
+            "* Onslaught Block", "Onslaught", "Legions", "Scourge", 
+            "* Odyssey Block", "Odyssey", "Torment", "Judgment",
+            "* Invasion Block", "Invasion", "Planeshift", "Apocalypse", 
+            "* Masquerade Block", "Mercadian Masques", "Nemesis", "Prophecy",
+            "* Urza Block", "Urza's Saga", "Urza's Legacy", "Urza's Destiny", 
+            "* Tempest Block", "Tempest", "Stronghold", "Exodus",
+            "* Mirage Block", "Mirage", "Visions", "Weatherlight", 
+            "* Ice Age Block", "Ice Age", "Alliances", "Coldsnap", 
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
             "Magic Origins",
             "Magic 2015",
@@ -66,8 +66,8 @@ public class ConstructedFormats {
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
             "Vintage Masters",
             "Conspiracy",
-            "Modern Masters",
             "Modern Masters 2015",
+            "Modern Masters",
             "Archenemy",
             "Commander 2014 Edition",
             "Commander 2013 Edition",
@@ -76,20 +76,26 @@ public class ConstructedFormats {
             "Planechase",
             "Portal", "Portal Second Age", "Portal Three Kingdoms","Starter 1999","Starter 2000",
 
-            "Duel Decks: Elves vs. Goblins",
-            "Duel Decks: Jace vs. Chandra",
-            "Duel Decks: Divine vs. Demonic",
-            "Duel Decks: Garruk vs. Liliana",
-            "Duel Decks: Phyrexia vs. the Coalition",
-            "Duel Decks: Elspeth vs. Tezzeret",
-            "Duel Decks: Knights vs. Dragons",
+            "Duel Decks: Anthology, Divine vs. Demonic",
+            "Duel Decks: Anthology, Elves vs. Goblins",
+            "Duel Decks: Anthology, Garruk vs. Liliana",
+            "Duel Decks: Anthology, Jace vs. Chandra",
             "Duel Decks: Ajani vs. Nicol Bolas",
-            "Duel Decks: Venser vs. Koth",
-            "Duel Decks: Izzet vs. Golgari",
-            "Duel Decks: Sorin vs. Tibalt",
+            "Duel Decks: Divine vs. Demonic",
+            "Duel Decks: Elspeth vs. Kiora",
+            "Duel Decks: Elspeth vs. Tezzeret",
+            "Duel Decks: Elves vs. Goblins",
+            "Duel Decks: Garruk vs. Liliana",
             "Duel Decks: Heroes vs. Monsters",
+            "Duel Decks: Izzet vs. Golgari",
+            "Duel Decks: Jace vs. Chandra",
             "Duel Decks: Jace vs. Vraska",
+            "Duel Decks: Knights vs. Dragons",
+            "Duel Decks: Phyrexia vs. the Coalition",
+            "Duel Decks: Sorin vs. Tibalt",
             "Duel Decks: Speed vs. Cunning",
+            "Duel Decks: Venser vs. Koth",
+
             "Friday Night Magic",
             "Game Day",
             "Grand Prix",
@@ -97,6 +103,7 @@ public class ConstructedFormats {
             "Judge Promo",
             "Launch Party",
             "Media Inserts",
+            "Magic Player Rewards",
             "Prerelease Events",
             "Unhinged",
             "World Magic Cup Qualifier",
@@ -116,7 +123,7 @@ public class ConstructedFormats {
 
     public static List<String> getSetsByFormat(String format) {
         if (format.equals("* Khans of Tarkir Block")) {
-            return Arrays.asList("KTK", "FRF","DTK");
+            return Arrays.asList("KTK", "FRF", "DTK");
         }
         if (format.equals("Dragons of Tarkir")) {
             return Arrays.asList("DTK");
@@ -128,7 +135,7 @@ public class ConstructedFormats {
             return Arrays.asList("KTK");
         }
         if (format.equals("* Theros Block")) {
-            return Arrays.asList("THS", "BNG","JOU");
+            return Arrays.asList("THS", "BNG", "JOU");
         }
         if (format.equals("Journey into Nyx")) {
             return Arrays.asList("JOU");
@@ -477,6 +484,9 @@ public class ConstructedFormats {
         if (format.equals("Launch Party")) {
             return Arrays.asList("MLP");
         }
+        if (format.equals("Magic Player Rewards")) {
+            return Arrays.asList("MPRP");
+        }
         if (format.equals("Media Inserts")) {
             return Arrays.asList("MBP");
         }
@@ -513,6 +523,18 @@ public class ConstructedFormats {
         if (format.equals("Starter 2000")) {
             return Arrays.asList("S00");
         }
+        if (format.equals("Duel Decks: Anthology, Elves vs. Goblins")) {
+            return Arrays.asList("DD3");
+        }
+        if (format.equals("Duel Decks: Anthology, Jace vs. Chandra")) {
+            return Arrays.asList("DD3");
+        }
+        if (format.equals("Duel Decks: Anthology, Divine vs. Demonic")) {
+            return Arrays.asList("DD3");
+        }
+        if (format.equals("Duel Decks: Anthology, Garruk vs. Liliana")) {
+            return Arrays.asList("DD3");
+        }
         if (format.equals("Duel Decks: Elves vs. Goblins")) {
             return Arrays.asList("EVG");
         }
@@ -527,6 +549,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Duel Decks: Phyrexia vs. the Coalition")) {
             return Arrays.asList("DDE");
+        }
+        if (format.equals("Duel Decks: Elspeth vs. Kiora")) {
+            return Arrays.asList("DDO");
         }
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");

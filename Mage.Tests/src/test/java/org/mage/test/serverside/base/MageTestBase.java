@@ -31,6 +31,7 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static org.mage.test.serverside.base.MageTestPlayerBase.currentGame;
 
 /**
  * Base class for all tests.
@@ -259,7 +260,7 @@ public abstract class MageTestBase {
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
                             if (gameZone.equals(Zone.BATTLEFIELD)) {
-                                PermanentCard p = new PermanentCard(card, null);
+                                PermanentCard p = new PermanentCard(card, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
                             } else {
