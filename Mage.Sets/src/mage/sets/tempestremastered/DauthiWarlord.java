@@ -25,64 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.tempestremastered;
 
-import mage.abilities.TriggeredAbilityImpl;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.Effect;
-import mage.constants.SetTargetPointer;
+import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.keyword.ShadowAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class ExploitCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class DauthiWarlord extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creatures with shadow");
 
-    private SetTargetPointer setTargetPointer;
-
-    public ExploitCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, SetTargetPointer.NONE);
+    static{
+        filter.add(new AbilityPredicate(ShadowAbility.class));
     }
 
-    public ExploitCreatureTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
-        super(Zone.ALL, effect, optional);
-        this.setTargetPointer = setTargetPointer;
+    public DauthiWarlord(UUID ownerId) {
+        super(ownerId, 98, "Dauthi Warlord", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "TPR";
+        this.subtype.add("Dauthi");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(1);
+
+        // Shadow
+        this.addAbility(ShadowAbility.getInstance());
+        
+        // Dauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
+        Effect effect = new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public ExploitCreatureTriggeredAbility(final ExploitCreatureTriggeredAbility ability) {
-        super(ability);
-        this.setTargetPointer = ability.setTargetPointer;
-    }
-
-    @Override
-    public ExploitCreatureTriggeredAbility copy() {
-        return new ExploitCreatureTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.EXPLOITED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(getSourceId())) {
-            for (Effect effect: getEffects()) {
-                if (setTargetPointer.equals(SetTargetPointer.PERMANENT)) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-            }
-            return true;
-        }
-        return false;
+    public DauthiWarlord(final DauthiWarlord card) {
+        super(card);
     }
 
     @Override
-    public String getRule() {
-        return "When {this} exploits a creature, " + super.getRule();
+    public DauthiWarlord copy() {
+        return new DauthiWarlord(this);
     }
 }
-
