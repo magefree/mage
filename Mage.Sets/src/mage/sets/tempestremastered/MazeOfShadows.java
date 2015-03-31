@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsoftarkir;
+package mage.sets.tempestremastered;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.ReachAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class AinokArtillerist extends CardImpl {
+public class MazeOfShadows extends mage.sets.tempest.MazeOfShadows {
 
-    public AinokArtillerist(UUID ownerId) {
-        super(ownerId, 171, "Ainok Artillerist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "DTK";
-        this.subtype.add("Hound");
-        this.subtype.add("Archer");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(1);
-
-        // Ainok Artillerist has reach as long as it has a +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance()),
-                new SourceHasCounterCondition(CounterType.P1P1),"{this} has reach as long as it has a +1/+1 counter on it")));
+    public MazeOfShadows(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 238;
+        this.expansionSetCode = "TPR";
     }
 
-    public AinokArtillerist(final AinokArtillerist card) {
+    public MazeOfShadows(final MazeOfShadows card) {
         super(card);
     }
 
     @Override
-    public AinokArtillerist copy() {
-        return new AinokArtillerist(this);
+    public MazeOfShadows copy() {
+        return new MazeOfShadows(this);
     }
 }
