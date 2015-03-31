@@ -32,9 +32,8 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -61,11 +60,11 @@ public class KavuTitan extends CardImpl {
         // Kicker {2}{G}
         this.addAbility(new KickerAbility("{2}{G}"));
         // If Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.
-        Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3))),
-                KickedCondition.getInstance(),"If Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.");
-		ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
-		this.addAbility(ability);
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
+                KickedCondition.getInstance(), true,
+                "If Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.", "");
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addAbility(ability);
     }
 
     public KavuTitan(final KavuTitan card) {
