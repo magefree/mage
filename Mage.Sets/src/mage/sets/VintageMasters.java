@@ -28,14 +28,12 @@
 
 package mage.sets;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 

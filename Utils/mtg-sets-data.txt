@@ -129,6 +129,7 @@ Starter 2000|S00|
 Starter 1999|S99|
 Stronghold|STH|
 Tempest|TMP|
+Tempest Remastered|TPR|
 Theros|THS|
 Torment|TOR|
 Time Spiral|TSP|

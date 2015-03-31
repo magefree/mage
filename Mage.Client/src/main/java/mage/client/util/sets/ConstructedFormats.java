@@ -64,6 +64,7 @@ public class ConstructedFormats {
             "Fifth Edition",
             "Fourth Edition",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
+            "Tempest Remastered",
             "Vintage Masters",
             "Conspiracy",
             "Modern Masters 2015",
@@ -459,6 +460,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Planechase 2012")) {
             return Arrays.asList("PC2");
+        }
+        if (format.equals("Tempest Remastered")) {
+            return Arrays.asList("TPR");
         }
         if (format.equals("Modern Masters")) {
             return Arrays.asList("MMA");

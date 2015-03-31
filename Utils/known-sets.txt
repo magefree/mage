@@ -111,6 +111,7 @@ Starter 1999|starter1999|
 Starter 2000|starter2000|
 Stronghold|stronghold|
 Tempest|tempest|
+Tempest Remastered|tempestremastered|
 Tenth Edition|tenth|
 The Dark|thedark|
 Theros|theros|

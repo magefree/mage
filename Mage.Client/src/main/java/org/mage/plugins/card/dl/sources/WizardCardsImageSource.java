@@ -164,6 +164,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("THS", "Theros");
         setsAliases.put("TMP", "Tempest");
         setsAliases.put("TOR", "Torment");
+        setsAliases.put("TPR", "Tempest Remastered");
         setsAliases.put("TSB", "Time Spiral 'Timeshifted'");
         setsAliases.put("TSP", "Time Spiral");
         setsAliases.put("UDS", "Urza's Destiny");
