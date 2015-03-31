@@ -312,7 +312,7 @@ public abstract class AbilityImpl implements Ability {
                 sourceObject.adjustTargets(this, game);
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-                if (variableManaCost != null || announceString != null) {
+                if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, new StringBuilder(sourceObject != null ? sourceObject.getLogName(): "").append(": no valid targets with this value of X").toString());
                 }
                 return false; // when activation of ability is canceled during target selection
@@ -370,13 +370,15 @@ public abstract class AbilityImpl implements Ability {
             logger.debug("activate failed - non mana costs");
             return false;
         }
-        // inform about x costs now, so canceled announcements are not shown in the log
-        if (announceString != null) {
-            game.informPlayers(announceString);
-        }
-        if (variableManaCost != null) {
-            int xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+        if (!game.isSimulation()) {
+            // inform about x costs now, so canceled announcements are not shown in the log
+            if (announceString != null) {
+                game.informPlayers(announceString);
+            }
+            if (variableManaCost != null) {
+                int xValue = getManaCostsToPay().getX();
+                game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+            }
         }
         activated = true;
         // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event

@@ -74,7 +74,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                         card.setFaceDown(false, game);
                         return controller.playLand(card, game);
                     }
-                } else {
+                } else if (!game.isSimulation()) {
                     game.informPlayer(controller, "You're not able to play the land now due to regular restrictions.");
                 }
             } else {

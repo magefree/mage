@@ -98,7 +98,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
             if (forceShuffle) {
                 controller.shuffleLibrary(game);
             }
-            if (cards.size() > 0) {
+            if (cards.size() > 0 && !game.isSimulation()) {
                 game.informPlayers(controller.getName() + " moves " + cards.size() + " card" + (cards.size() == 1 ? " ":"s ") + "on top of his or her library");
             }
             for (Card card: cards) {                

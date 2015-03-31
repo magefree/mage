@@ -207,7 +207,8 @@ public class Spell implements StackObject, Card {
                 return result;
             }
             //20091005 - 608.2b
-            game.informPlayers(getName() + " has been fizzled.");
+            if (!game.isSimulation())
+                game.informPlayers(getName() + " has been fizzled.");
             counter(null, game);
             return false;
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
@@ -248,7 +249,8 @@ public class Spell implements StackObject, Card {
                 return result;
             } else {
                 //20091005 - 608.2b
-                game.informPlayers(getName() + " has been fizzled.");
+                if (!game.isSimulation())
+                    game.informPlayers(getName() + " has been fizzled.");
                 counter(null, game);
                 return false;
             }
@@ -399,7 +401,7 @@ public class Spell implements StackObject, Card {
                 }
 
             }
-            if (newTargetDescription.length() > 0) {
+            if (newTargetDescription.length() > 0 && !game.isSimulation()) {
                 game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
             }
             return true;
@@ -430,7 +432,7 @@ public class Spell implements StackObject, Card {
                 if (forceChange && target.possibleTargets(this.getSourceId(), getControllerId(), game).size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
                     int iteration = 0;
                     do {
-                        if (iteration > 0) {
+                        if (iteration > 0 && !game.isSimulation()) {
                             game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
                         }
                         iteration++;

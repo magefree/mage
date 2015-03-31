@@ -61,14 +61,16 @@ public class RemoveCounterTargetEffect extends OneShotEffect {
         Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
         if (p != null && p.getCounters().getCount(counter.getName()) >= counter.getCount()) {
             p.removeCounters(counter.getName(), counter.getCount(), game);
-            game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
                     .append(" counter from ").append(p.getName()).toString());
             return true;
         }
         Card c = game.getCard(targetPointer.getFirst(game, source));
         if (c != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
             c.removeCounters(counter.getName(), counter.getCount(), game);
-            game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
                     .append(" counter from ").append(c.getName())
                     .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
             return true;

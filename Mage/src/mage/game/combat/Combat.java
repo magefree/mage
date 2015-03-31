@@ -229,7 +229,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-        game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
+        if (!game.isSimulation())
+            game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
     }
 
     protected void checkAttackRequirements(Player player, Game game) {
@@ -282,7 +283,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
-                        game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
+                        if (!game.isSimulation())
+                            game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                         count--;
                     }
@@ -299,7 +301,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
-                        game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
+                        if (!game.isSimulation())
+                            game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
                         tobeRemoved.add(attackingCreatureId);
                     }
                 }
@@ -357,7 +360,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
                 // add info about attacker blocked by blocker to the game log
-                this.logBlockerInfo(defender, game);
+                if (!game.isSimulation())
+                    this.logBlockerInfo(defender, game);
             }
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
@@ -597,7 +601,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                             // if so inform human player or set block for AI player
                             if (mayBlock) {
                                 if (controller.isHuman()) {
-                                    game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
+                                    if (!game.isSimulation()) {
+                                        game.informPlayer(controller, "Creature should block this turn: " + creature.getLogName());
+                                    }
                                 } else {
                                     Player defender = game.getPlayer(creature.getControllerId());
                                     if (defender != null) {
@@ -665,7 +671,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 }
                             }
                             if (possibleBlockerAvailable) {
-                                game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getLogName()).append(" has to be blocked by at least one creature.").toString());
+                                if (!game.isSimulation())
+                                    game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getLogName()).append(" has to be blocked by at least one creature.").toString());
                                 return false;
                             }
                         }
@@ -728,9 +735,11 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         if (sb.length() > 0) {
-            sb.insert(0, "Some creatures are forced to block certain attacker(s):\n");
-            sb.append("\nPlease block with each of these creatures an appropriate attacker.");
-            game.informPlayer(controller, sb.toString());
+            if (!game.isSimulation()) {
+                sb.insert(0, "Some creatures are forced to block certain attacker(s):\n");
+                sb.append("\nPlease block with each of these creatures an appropriate attacker.");
+                game.informPlayer(controller, sb.toString());
+            }
             return false;
         }
         return true;
@@ -871,7 +880,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         if (defenderAttackedBy.size() >= defendingPlayer.getMaxAttackedBy()) {
             Player attackingPlayer = game.getPlayer(game.getControllerId(attackerId));
-            if (attackingPlayer != null) {
+            if (attackingPlayer != null && !game.isSimulation()) {
                 game.informPlayer(attackingPlayer, new StringBuilder("No more than ")
                         .append(CardUtil.numberToText(defendingPlayer.getMaxAttackedBy()))
                         .append(" creatures can attack ")

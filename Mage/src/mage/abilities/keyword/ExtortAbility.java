@@ -111,7 +111,8 @@ class ExtortEffect extends OneShotEffect {
                     if (loseLife > 0) {
                         game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
                     }
-                    game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());
                 }
             }
             return true;

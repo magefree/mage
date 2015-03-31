@@ -64,7 +64,8 @@ public class FightTargetSourceEffect extends OneShotEffect {
                     }
                 }
             }
-            game.informPlayers(originalPermanent.getLogName() + ": Fighting effect has been fizzled.");
+            if (!game.isSimulation())
+                game.informPlayers(originalPermanent.getLogName() + ": Fighting effect has been fizzled.");
         }
         return false;
     }

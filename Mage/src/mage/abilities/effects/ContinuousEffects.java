@@ -668,11 +668,11 @@ public class ContinuousEffects implements Serializable {
                                     if (message != null && !message.isEmpty()) {
                                         if (effect.sendMessageToUser()) {
                                             Player player = game.getPlayer(event.getPlayerId());
-                                            if (player != null) {
+                                            if (player != null && !game.isSimulation()) {
                                                 game.informPlayer(player, message);
                                             }
                                         }
-                                        if (effect.sendMessageToGameLog()) {
+                                        if (effect.sendMessageToGameLog() && !game.isSimulation()) {
                                             game.informPlayers(message);
                                         }
                                     }

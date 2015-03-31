@@ -96,7 +96,8 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
             } else {
                 return false;
             }
-            game.informPlayers(controller.getName() + " has chosen the color: " + objectColor.toString());
+            if (!game.isSimulation())
+                game.informPlayers(controller.getName() + " has chosen the color: " + objectColor.toString());
         } else {
             objectColor = this.setColor;
         }

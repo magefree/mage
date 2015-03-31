@@ -82,7 +82,8 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
                         else {
                             player.choose(Outcome.Damage, redirectTarget, null, game);
                         }
-                        game.informPlayers(new StringBuilder(player.getName()).append(" redirects ")
+                        if (!game.isSimulation())
+                            game.informPlayers(new StringBuilder(player.getName()).append(" redirects ")
                                 .append(event.getAmount())
                                 .append(" damage to ")
                                 .append(game.getPermanent(redirectTarget.getFirstTarget()).getLogName()).toString());

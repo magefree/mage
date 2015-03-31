@@ -644,7 +644,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void discardToMax(Game game) {
         if (hand.size() > this.maxHandSize) {
-            game.informPlayers(new StringBuilder(getName()).append(" discards down to ").append(this.maxHandSize).append(this.maxHandSize == 1 ? " hand card" : " hand cards").toString());
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(getName()).append(" discards down to ").append(this.maxHandSize).append(this.maxHandSize == 1 ? " hand card" : " hand cards").toString());
             discard(hand.size() - this.maxHandSize, null, game);
         }
     }
@@ -735,7 +736,8 @@ public abstract class PlayerImpl implements Player, Serializable {
          */
         if (card != null) {
             // write info to game log first so game log infos from triggered or replacement effects follow in the game log
-            game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
              * when a card is discarded (such as madness) still work, even though that card never reaches
              * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
@@ -929,7 +931,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
-                    game.informPlayers(new StringBuilder(name).append(spell.getActivatedMessage(game)).toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(name).append(spell.getActivatedMessage(game)).toString());
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -1018,7 +1021,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-                    game.informPlayers(new StringBuilder(name).append(ability.getGameLogMessage(game)).toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(name).append(ability.getGameLogMessage(game)).toString());
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -1044,7 +1048,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getSourceId(), action.getId(), playerId));
-                game.informPlayers(new StringBuilder(name).append(action.getGameLogMessage(game)).toString());
+                if (!game.isSimulation())
+                    game.informPlayers(new StringBuilder(name).append(action.getGameLogMessage(game)).toString());
                 if (action.resolve(game)) {
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
@@ -1114,7 +1119,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
             if (ability.activate(game, false)) {
-                if (ability.isUsesStack() || ability.getRuleVisible()) {
+                if ((ability.isUsesStack() || ability.getRuleVisible()) && !game.isSimulation()) {
                     game.informPlayers(ability.getGameLogMessage(game));
                 }
                 if (!ability.isUsesStack()) {
@@ -1269,7 +1274,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void shuffleLibrary(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, playerId))) {
             this.library.shuffle();
-            game.informPlayers(new StringBuilder(this.name).append(" shuffles his or her library.").toString());
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(this.name).append(" shuffles his or her library.").toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, playerId));
         }
     }
@@ -1282,7 +1288,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void revealCards(String name, Cards cards, Game game, boolean postToLog) {
         game.getState().getRevealed().add(name, cards);
-        if (postToLog) {
+        if (postToLog && !game.isSimulation()) {
             StringBuilder sb = new StringBuilder(this.getName()).append(" reveals ");
             int current = 0, last = cards.size();
             for (Card card : cards.getCards(game)) {
@@ -1397,7 +1403,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                                 } else {
                                     // player selected an permanent that is restricted by another effect, disallow it (so AI can select another one)
                                     filter.add(Predicates.not(new PermanentIdPredicate(selectedPermanent.getId())));
-                                    if (this.isHuman()) {
+                                    if (this.isHuman() && !game.isSimulation()) {
                                         game.informPlayer(this, "This permanent can't be untapped because of other restricting effect.");
                                     }
                                 }
@@ -1408,9 +1414,11 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             } while (isInGame() && playerCanceledSelection);
 
-            // show in log which permanents were selected to untap
-            for (Permanent permanent : selectedToUntap) {
-                game.informPlayers(new StringBuilder(this.getName()).append(" untapped ").append(permanent.getName()).toString());
+            if (!game.isSimulation()) {
+                // show in log which permanents were selected to untap
+                for (Permanent permanent : selectedToUntap) {
+                    game.informPlayers(new StringBuilder(this.getName()).append(" untapped ").append(permanent.getName()).toString());
+                }
             }
             // untap if permanent is not concerned by notMoreThan effects or is included in the selectedToUntapList
             for (Permanent permanent : canBeUntapped) {
@@ -1559,7 +1567,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life -= event.getAmount();
-            game.informPlayers(new StringBuilder(this.getName()).append(" loses ").append(event.getAmount()).append(" life").toString());
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(this.getName()).append(" loses ").append(event.getAmount()).append(" life").toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
             return amount;
         }
@@ -1584,7 +1593,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life += event.getAmount();
-            game.informPlayers(new StringBuilder(this.getName()).append(" gains ").append(event.getAmount()).append(" life").toString());
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(this.getName()).append(" gains ").append(event.getAmount()).append(" life").toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, event.getAmount()));
             return event.getAmount();
         }
@@ -1995,7 +2005,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             group.addBlocker(blockerId, playerId, game);
             game.getCombat().addBlockingGroup(blockerId, attackerId, playerId, game);
         } else {
-            if (this.isHuman()) {
+            if (this.isHuman() && !game.isSimulation()) {
                 game.informPlayer(this, "You can't block this creature.");
             }
         }
@@ -2026,7 +2036,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
         if (!game.replaceEvent(event)) {
-            game.informPlayers(searchInfo);
+            if (!game.isSimulation())
+                game.informPlayers(searchInfo);
             TargetCardInLibrary newTarget = target.copy();
             int count;
             int librarySearchLimit = event.getAmount();
@@ -2066,7 +2077,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
         boolean result = rnd.nextBoolean();
-        game.informPlayers("[Flip a coin] " + getName() + (result ? " won (head)." : " lost (tail)."));
+        if (!game.isSimulation())
+            game.informPlayers("[Flip a coin] " + getName() + (result ? " won (head)." : " lost (tail)."));
         GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
         event.setAppliedEffects(appliedEffects);
         game.replaceEvent(event);
@@ -2772,7 +2784,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }
-            game.informPlayers(new StringBuilder(this.getName())
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ")
                     .append(withName ? card.getLogName() : "a face down card")
                     .append(" ")
@@ -2849,18 +2862,20 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToGraveyardWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
         if (card.moveToZone(Zone.GRAVEYARD, sourceId, game, fromZone != null ? fromZone.equals(Zone.BATTLEFIELD) : false)) {
-            if (card instanceof PermanentCard) {
-                card = game.getCard(card.getId());
+            if (!game.isSimulation()) {
+                if (card instanceof PermanentCard) {
+                    card = game.getCard(card.getId());
+                }
+                StringBuilder sb = new StringBuilder(this.getName())
+                        .append(" puts ").append(card.getLogName()).append(" ")
+                        .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
+                if (card.getOwnerId().equals(getId())) {
+                    sb.append("into his or her graveyard");
+                } else {
+                    sb.append("it into its owner's graveyard");
+                }
+                game.informPlayers(sb.toString());
             }
-            StringBuilder sb = new StringBuilder(this.getName())
-                    .append(" puts ").append(card.getLogName()).append(" ")
-                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
-            if (card.getOwnerId().equals(getId())) {
-                sb.append("into his or her graveyard");
-            } else {
-                sb.append("it into its owner's graveyard");
-            }
-            game.informPlayers(sb.toString());
             result = true;
         }
         return result;
@@ -2870,28 +2885,30 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToLibraryWithInfo(Card card, UUID sourceId, Game game, Zone fromZone, boolean toTop, boolean withName) {
         boolean result = false;
         if (card.moveToZone(Zone.LIBRARY, sourceId, game, toTop)) {
-            if (card instanceof PermanentCard) {
-                card = game.getCard(card.getId());
-            }
-            StringBuilder sb = new StringBuilder(this.getName())
-                    .append(" puts ").append(withName ? card.getLogName() : "a card").append(" ");
-            if (fromZone != null) {
-                if (fromZone.equals(Zone.PICK)) {
-                    sb.append("a picked card ");
+            if (!game.isSimulation()) {
+                if (card instanceof PermanentCard) {
+                    card = game.getCard(card.getId());
+                }
+                StringBuilder sb = new StringBuilder(this.getName())
+                        .append(" puts ").append(withName ? card.getLogName() : "a card").append(" ");
+                if (fromZone != null) {
+                    if (fromZone.equals(Zone.PICK)) {
+                        sb.append("a picked card ");
+                    } else {
+                        sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+                    }
+                }
+                sb.append("to the ").append(toTop ? "top" : "bottom");
+                if (card.getOwnerId().equals(getId())) {
+                    sb.append(" of his or her library");
                 } else {
-                    sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ");
+                    Player player = game.getPlayer(card.getOwnerId());
+                    if (player != null) {
+                        sb.append(" of ").append(player.getName()).append("'s library");
+                    }
                 }
+                game.informPlayers(sb.toString());
             }
-            sb.append("to the ").append(toTop ? "top" : "bottom");
-            if (card.getOwnerId().equals(getId())) {
-                sb.append(" of his or her library");
-            } else {
-                Player player = game.getPlayer(card.getOwnerId());
-                if (player != null) {
-                    sb.append(" of ").append(player.getName()).append("'s library");
-                }
-            }
-            game.informPlayers(sb.toString());
             result = true;
         }
         return result;
@@ -2901,13 +2918,15 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone) {
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
-            if (card instanceof PermanentCard) {
-                card = game.getCard(card.getId());
+            if (!game.isSimulation()) {
+                if (card instanceof PermanentCard) {
+                    card = game.getCard(card.getId());
+                }
+                game.informPlayers(new StringBuilder(this.getName())
+                        .append(" moves ").append(card.getLogName()).append(" ")
+                        .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
+                        .append("to exile").toString());
             }
-            game.informPlayers(new StringBuilder(this.getName())
-                    .append(" moves ").append(card.getLogName()).append(" ")
-                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
-                    .append("to exile").toString());
             result = true;
         }
         return result;
@@ -2927,7 +2946,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
-            game.informPlayers(new StringBuilder(this.getName())
+            if (!game.isSimulation())
+                game.informPlayers(new StringBuilder(this.getName())
                     .append(" puts ").append(facedown ? "a card face down ":card.getLogName())
                     .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
                     .append("onto the Battlefield").toString());

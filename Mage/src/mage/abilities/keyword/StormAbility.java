@@ -104,7 +104,8 @@ class StormEffect extends OneShotEffect {
 
             int stormCount = watcher.getSpellOrder(spell, game) - 1;
             if (stormCount > 0) {
-                game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
+                if (!game.isSimulation())
+                    game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
                 for (int i = 0; i < stormCount; i++) {
                     Spell copy = spell.copySpell();
                     copy.setControllerId(source.getControllerId());
