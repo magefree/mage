@@ -42,10 +42,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 
 /**
@@ -60,8 +58,6 @@ public class ArchitectsOfWill extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-
-        
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -102,37 +98,22 @@ class ArchitectsOfWillEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null || you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer == null
+                || controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 3);
+        Cards cards = new CardsImpl(Zone.LIBRARY);
+        int count = Math.min(targetPlayer.getLibrary().size(), 3);
         for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
+            Card card = targetPlayer.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
             }
         }
-        
-        you.lookAtCards("Architects of Will", cards, game);
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the top of target player's library"));
-        while (you.isInGame() && cards.size() > 1) {
-            you.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-        }
+        controller.lookAtCards("Architects of Will", cards, game);
+        controller.putCardsOnTopOfLibrary(cards, game, source, true);
         return true;
     }
 }
