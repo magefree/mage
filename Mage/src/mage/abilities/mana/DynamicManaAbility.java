@@ -89,7 +89,7 @@ public class DynamicManaAbility extends ManaAbility {
     public List<Mana> getNetMana(Game game) {
         List<Mana> newNetMana = new ArrayList<>();
         if (game != null) {
-            // TODO: effects from replacement effects like Mana Refelection are not considered yet
+            // TODO: effects from replacement effects like Mana Reflection are not considered yet
             newNetMana.add(manaEffect.computeMana(true, game, this));
         }        
         return newNetMana;        

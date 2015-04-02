@@ -137,7 +137,7 @@ class ShamanEnKorReplacementEffect extends ReplacementEffectImpl {
 
     ShamanEnKorReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
-        staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead.";
+        staticText = "The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to {this} instead";
     }
 
     ShamanEnKorReplacementEffect(final ShamanEnKorReplacementEffect effect) {

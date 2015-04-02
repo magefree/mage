@@ -25,46 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.tempest;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class NameACardEffect extends OneShotEffect {
+public class WoodSage extends CardImpl {
 
-    public static String INFO_KEY = "NAMED_CARD";
-    
-    public enum TypeOfName {
-        ALL,
-        NON_LAND_NAME,
-        NON_LAND_AND_NON_CREATURE_NAME,
-        CREATURE_NAME
-    }
-    
-    private final TypeOfName typeOfName;
-    
-    public NameACardEffect(TypeOfName typeOfName) {
-        super(Outcome.Detriment);
-        this.typeOfName = typeOfName;
-        staticText = setText();
+    public WoodSage(UUID ownerId) {
+        super(ownerId, 350, "Wood Sage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{U}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WoodSageEffect(), new TapSourceCost()));
+
     }
 
-    public NameACardEffect(final NameACardEffect effect) {
+    public WoodSage(final WoodSage card) {
+        super(card);
+    }
+
+    @Override
+    public WoodSage copy() {
+        return new WoodSage(this);
+    }
+}
+
+
+class WoodSageEffect extends OneShotEffect {
+
+    public WoodSageEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard";
+    }
+
+    public WoodSageEffect(final WoodSageEffect effect) {
         super(effect);
-        this.typeOfName = effect.typeOfName;
+    }
+
+    @Override
+    public WoodSageEffect copy() {
+        return new WoodSageEffect(this);
     }
 
     @Override
@@ -73,25 +100,8 @@ public class NameACardEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Choice cardChoice = new ChoiceImpl();
-            switch(typeOfName) {
-                case ALL:
-                    cardChoice.setChoices(CardRepository.instance.getNames());
-                    cardChoice.setMessage("Name a card");
-                    break;
-                case NON_LAND_AND_NON_CREATURE_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
-                    cardChoice.setMessage("Name a non land and non creature card");
-                    break;                    
-                case NON_LAND_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getNonLandNames());
-                    cardChoice.setMessage("Name a non land card");
-                    break;                    
-                case CREATURE_NAME:
-                    cardChoice.setChoices(CardRepository.instance.getCreatureNames());
-                    cardChoice.setMessage("Name a creature card");
-                    break;
-            }            
-            cardChoice.clearChoice();
+            cardChoice.setChoices(CardRepository.instance.getCreatureNames());
+            cardChoice.setMessage("Name a creature card");
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 if (!controller.isInGame()) {
                     return false;
@@ -101,33 +111,23 @@ public class NameACardEffect extends OneShotEffect {
             if (!game.isSimulation()) {
                 game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             }
-            game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
-            if (sourceObject instanceof Permanent) {
-                ((Permanent)sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);
+
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
+
+            if (!cards.isEmpty()) {
+                controller.revealCards(sourceObject.getLogName(), cards, game);
+                for (Card card: cards.getCards(game)) {
+                    if (card.getName().equals(cardName)) {
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true);
+                        cards.remove(card);
+                    }
+                }
+                controller.moveCardsToGraveyardWithInfo(cards, source, game, Zone.LIBRARY);
             }
             return true;
-        }        
+        }
+
         return false;
-    }
-
-    @Override
-    public NameACardEffect copy() {
-        return new NameACardEffect(this);
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder("name a ");
-        switch(typeOfName) {
-            case ALL:
-                sb.append("card");
-                break;
-            case NON_LAND_AND_NON_CREATURE_NAME:
-                sb.append("card other than a creature or a land card");
-                break;                    
-            case NON_LAND_NAME:
-                sb.append("nonland card");
-                break;                    
-        }        
-        return sb.toString();
     }
 }
