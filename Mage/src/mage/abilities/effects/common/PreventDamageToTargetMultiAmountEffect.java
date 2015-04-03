@@ -79,15 +79,16 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
                     player = game.getPlayer(targetId);
                 }
                 targetAmountMap.put(targetId, multiTarget.getTargetAmount(targetId));
-                StringBuilder sb = new StringBuilder(sourceObject.getName()).append(": Prevent the next ");
-                sb.append(multiTarget.getTargetAmount(targetId)).append(" damage to ");
-                if (player != null) {
-                    sb.append(player.getName());
-                } else if (permanent != null) {
-                    sb.append(permanent.getName());
+                if (!game.isSimulation()) {
+                    StringBuilder sb = new StringBuilder(sourceObject.getName()).append(": Prevent the next ");
+                    sb.append(multiTarget.getTargetAmount(targetId)).append(" damage to ");
+                    if (player != null) {
+                        sb.append(player.getName());
+                    } else if (permanent != null) {
+                        sb.append(permanent.getName());
+                    }
+                    game.informPlayers(sb.toString());
                 }
-                game.informPlayers(sb.toString());
-
             }
         }
     }

@@ -254,7 +254,8 @@ class ReplicateCopyEffect extends OneShotEffect {
                     copy.setCopiedSpell(true);
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, source.getControllerId());
-                    game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
                 }
                 return true;
             }

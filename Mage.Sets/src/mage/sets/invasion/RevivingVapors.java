@@ -54,9 +54,6 @@ public class RevivingVapors extends CardImpl {
         super(ownerId, 265, "Reviving Vapors", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
-
         // Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
         this.getSpellAbility().addEffect(new RevivingVaporsEffect());
     }

@@ -697,7 +697,8 @@ public abstract class GameImpl implements Game, Serializable {
                 if (extraPlayer != null && extraPlayer.isInGame()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
-                    informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    if (!this.isSimulation())
+                        informPlayers(extraPlayer.getName() + " takes an extra turn");
                     playTurn(extraPlayer);
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
@@ -822,7 +823,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             message.append(" takes the first turn");
 
-            this.informPlayers(message.toString());
+                this.informPlayers(message.toString());
         } else {
             // not possible to choose starting player, stop here
             return;
@@ -1709,7 +1710,8 @@ public abstract class GameImpl implements Game, Serializable {
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-            this.informPlayers(new StringBuilder(permanent.getLogName())
+            if (!this.isSimulation())
+                this.informPlayers(new StringBuilder(permanent.getLogName())
                     .append(" is put into graveyard from battlefield").toString());
             result = true;
         }
@@ -2118,12 +2120,14 @@ public abstract class GameImpl implements Game, Serializable {
             } else {
                 targetName = targetObject.getLogName();
             }
-            StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
-            message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
-            if (!targetName.isEmpty()) {
-                message.append(" to ").append(targetName);
+            if (!game.isSimulation()) {
+                StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
+                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
+                if (!targetName.isEmpty()) {
+                    message.append(" to ").append(targetName);
+                }
+                game.informPlayers(message.toString());
             }
-            game.informPlayers(message.toString());
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), result.getPreventedDamage()));
         return result;

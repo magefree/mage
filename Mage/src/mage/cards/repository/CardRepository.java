@@ -165,6 +165,27 @@ public enum CardRepository {
         }
         return names;
     }
+    
+    public Set<String> getCreatureNames() {
+        Set<String> names = new TreeSet<>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result+4));
+                } else {
+                    names.add(card.getName());
+                }
+            }
+        } catch (SQLException ex) {
+        }
+        return names;
+    }
 
     public Set<String> getNonLandAndNonCreatureNames() {
         Set<String> names = new TreeSet<>();
@@ -173,10 +194,6 @@ public enum CardRepository {
             qb.distinct().selectColumns("name");
             Where where = qb.where();
             where.and(where.not().like("types", '%' + CardType.CREATURE.name() +'%'),where.not().like("types", '%' + CardType.LAND.name() + '%'));
-//            qb.where()
-//                    .not().like("types", '%' + CardType.CREATURE.name() + '%')
-//                    .and()
-//                    .not().like("types", '%' + CardType.LAND.name() + '%');
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");

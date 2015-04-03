@@ -57,24 +57,16 @@ public class RiseFall extends SplitCard {
         super(ownerId, 156, "Rise", "Fall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{B}","{B}{R}", false );
         this.expansionSetCode = "DIS";
         
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setRed(true);
-
         // Rise
         // Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
         getLeftHalfCard().getSpellAbility().addEffect(new RiseEffect());
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getColor().setBlack(true);
 
         // Fall
         // Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
         getRightHalfCard().getSpellAbility().addEffect(new FallEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
-        getLeftHalfCard().getColor().setBlack(true);
-        getLeftHalfCard().getColor().setRed(true);
     }
 
     public RiseFall(final RiseFall card) {
@@ -156,7 +148,7 @@ class FallEffect extends OneShotEffect {
                     }
                     targetPlayer.revealCards(sourceObject.getLogName(), cards, game);
                     for (Card cardToDiscard: cards.getCards(game)) {
-                        if (!card.getCardType().contains(CardType.LAND)) {
+                        if (!cardToDiscard.getCardType().contains(CardType.LAND)) {
                             targetPlayer.discard(cardToDiscard, source, game);
                         }
                     }

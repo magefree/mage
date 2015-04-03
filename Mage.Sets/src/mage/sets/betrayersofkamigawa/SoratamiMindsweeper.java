@@ -28,9 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +36,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -56,7 +55,7 @@ public class SoratamiMindsweeper extends CardImpl {
     public SoratamiMindsweeper(UUID ownerId) {
         super(ownerId, 52, "Soratami Mindsweeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "BOK";
-        this.subtype.add("Moofolk");
+        this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
         this.color.setBlue(true);
         this.power = new MageInt(1);

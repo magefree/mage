@@ -100,9 +100,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 }
                 this.remove(stackObject);
                 stackObject.counter(sourceId, game); // tries to move to graveyard
-                game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
+                if (!game.isSimulation())
+                    game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));
-            } else {
+            } else if (!game.isSimulation()) {
                 game.informPlayers(counteredObjectName + " could not be countered by " + sourceObject.getLogName());
             }
             return true;

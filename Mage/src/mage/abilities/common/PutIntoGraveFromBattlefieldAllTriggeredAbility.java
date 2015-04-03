@@ -69,7 +69,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
             if (filter.match(zEvent.getTarget(), this.getSourceId(), this.getControllerId(), game)) {
                 if (setTargetPointer) {
                     for (Effect effect :this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
                 }
                 return true;

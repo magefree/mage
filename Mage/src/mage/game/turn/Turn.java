@@ -235,7 +235,7 @@ public class Turn implements Serializable {
         currentPhase = phase;
         game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, extraPhaseTurnMod.getId(), activePlayerId));
         Player activePlayer = game.getPlayer(activePlayerId);
-        if (activePlayer != null) {
+        if (activePlayer != null && !game.isSimulation()) {
             game.informPlayers(new StringBuilder(activePlayer.getName()).append(" starts an additional ").append(phase.getType().toString()).append(" phase").toString());
         }
         phase.play(game, activePlayerId);

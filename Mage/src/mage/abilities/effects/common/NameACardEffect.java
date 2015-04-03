@@ -50,7 +50,8 @@ public class NameACardEffect extends OneShotEffect {
     public enum TypeOfName {
         ALL,
         NON_LAND_NAME,
-        NON_LAND_AND_NON_CREATURE_NAME
+        NON_LAND_AND_NON_CREATURE_NAME,
+        CREATURE_NAME
     }
     
     private final TypeOfName typeOfName;
@@ -85,6 +86,10 @@ public class NameACardEffect extends OneShotEffect {
                     cardChoice.setChoices(CardRepository.instance.getNonLandNames());
                     cardChoice.setMessage("Name a non land card");
                     break;                    
+                case CREATURE_NAME:
+                    cardChoice.setChoices(CardRepository.instance.getCreatureNames());
+                    cardChoice.setMessage("Name a creature card");
+                    break;
             }            
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
@@ -93,7 +98,9 @@ public class NameACardEffect extends OneShotEffect {
                 }
             }
             String cardName = cardChoice.getChoice();
-            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+            if (!game.isSimulation()) {
+                game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+            }
             game.getState().setValue(source.getSourceId().toString() + INFO_KEY, cardName);
             if (sourceObject instanceof Permanent) {
                 ((Permanent)sourceObject).addInfo(INFO_KEY, CardUtil.addToolTipMarkTags("Named card: " + cardName), game);

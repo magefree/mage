@@ -31,7 +31,8 @@ public class MageLoseGameAction extends MageAction {
         if (oldLosingPlayer == null && player.canLose(game)) {
             setScore(player, ArtificialScoringSystem.inst.getLoseGameScore(game));
             game.setLosingPlayer(player);
-            game.informPlayer(player, reason);
+            if (!game.isSimulation())
+                game.informPlayer(player, reason);
         }
         return 0;
     }

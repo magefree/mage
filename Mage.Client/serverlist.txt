@@ -1,4 +1,5 @@
 woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
+Xmage.de 1    (Europe/Germany)      :xmage.de:17171
 XMage.info 1  (Europe/France)       :176.31.186.181:17171
 XMage.info 2  (Europe/France)       :176.31.186.181:17000
 IceMage       (Europe/Netherlands)  :ring0.cc:17171

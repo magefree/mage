@@ -209,7 +209,8 @@ class HauntEffect extends OneShotEffect {
                     game.getState().setValue(key, new FixedTarget(targetPointer.getFirst(game, source)));
                     card.addInfo("hauntinfo", new StringBuilder("Haunting ").append(hauntedCreature.getLogName()).toString(), game);
                     hauntedCreature.addInfo("hauntinfo", new StringBuilder("Haunted by ").append(card.getLogName()).toString(), game);
-                    game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(card.getName()).append(" haunting ").append(hauntedCreature.getLogName()).toString());
                 }
                 return true;
             }

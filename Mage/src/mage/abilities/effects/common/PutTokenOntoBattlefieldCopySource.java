@@ -69,8 +69,9 @@ public class PutTokenOntoBattlefieldCopySource extends OneShotEffect {
                 EmptyToken token = new EmptyToken();
                 CardUtil.copyTo(token).from((Permanent)thisCard);
                 if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-                    game.informPlayers(new StringBuilder(controller.getName())
-                    .append(" puts a ").append(token.getName()).append(" token ").append("onto the Battlefield").toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(controller.getName())
+                            .append(" puts a ").append(token.getName()).append(" token ").append("onto the Battlefield").toString());
                     return true;
                 }
             } else { // maybe it's token
@@ -79,8 +80,9 @@ public class PutTokenOntoBattlefieldCopySource extends OneShotEffect {
                     EmptyToken token = new EmptyToken();
                     CardUtil.copyTo(token).from(permanent);
                     if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
-                        game.informPlayers(new StringBuilder(controller.getName())
-                        .append(" puts a ").append(token.getName()).append(" token ").append("onto the Battlefield").toString());
+                        if (!game.isSimulation())
+                            game.informPlayers(new StringBuilder(controller.getName())
+                                .append(" puts a ").append(token.getName()).append(" token ").append("onto the Battlefield").toString());
                         return true;
                     }
                 }

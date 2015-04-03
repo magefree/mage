@@ -540,7 +540,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
                     blockWasLegal = false;
-                    game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
+                    if (!game.isSimulation())
+                        game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
                     toBeRemoved.add(blockerId);
                 }
             }
@@ -566,7 +567,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
+                if (!game.isSimulation())
+                    game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
                 blockWasLegal = false;
             }
             // Check if there are to many blockers (maxBlockedBy = 0 means no restrictions)
@@ -580,7 +582,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                game.informPlayers(new StringBuilder(attacker.getLogName())
+                if (!game.isSimulation())
+                    game.informPlayers(new StringBuilder(attacker.getLogName())
                         .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
                         .append(attacker.getMaxBlockedBy()==1?" creature.":" creatures.")
                         .append(" Blockers discarded.").toString());

@@ -50,7 +50,7 @@ public class AinokArtillerist extends CardImpl {
         super(ownerId, 171, "Ainok Artillerist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "DTK";
         this.subtype.add("Hound");
-        this.subtype.add("Arch");
+        this.subtype.add("Archer");
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

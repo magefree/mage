@@ -29,9 +29,9 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -57,8 +57,8 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getFirstTarget())) {
-            Permanent blocker = game.getPermanent(source.getFirstTarget());
+        if (permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
+            Permanent blocker = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {              
                 Permanent attacker = game.getPermanent(source.getSourceId());
                 if (attacker != null) {

@@ -94,7 +94,8 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
                 if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                        game.informPlayers(player.getName() + " pays the cost to prevent the effect");
+                        if (!game.isSimulation())
+                            game.informPlayers(player.getName() + " pays the cost to prevent the effect");
                         doEffect = false;
                         break;
                     }
