@@ -105,7 +105,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
-
+    private Map<UUID, Card> copiedCards = new HashMap<>();
+    
     public GameState() {
         players = new Players();
         playerList = new PlayerList();
@@ -161,6 +162,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
+        this.copiedCards.putAll(state.copiedCards);
     }
 
     @Override
@@ -499,6 +501,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
         this.zoneChangeCounter = state.zoneChangeCounter;
+        this.copiedCards = state.copiedCards;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -540,13 +543,18 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
     
-    public void removeCard(Card card) {
-        zones.remove(card.getId());
+    public void removeCopiedCard(Card card) {
+        if (copiedCards.containsKey(card.getId())) {
+            copiedCards.remove(card.getId());
+            cardState.remove(card.getId());
+            zones.remove(card.getId());
+            zoneChangeCounter.remove(card.getId());
+        }
         // TODO Watchers?
         // TODO Abilities?
         if (card.isSplitCard()) {
-            removeCard( ((SplitCard)card).getLeftHalfCard());
-            removeCard( ((SplitCard)card).getRightHalfCard());
+            removeCopiedCard( ((SplitCard)card).getLeftHalfCard());
+            removeCopiedCard( ((SplitCard)card).getRightHalfCard());
         }
     }
 
@@ -819,4 +827,29 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zoneChangeCounter.put(objectId, value);
     }
     
+    public Card getCopiedCard(UUID cardId) {
+        return copiedCards.get(cardId);
+    }
+    
+    public Collection<Card> getCopiedCards() {
+        return copiedCards.values();
+    }
+
+    public Card copyCard(Card cardToCopy, Ability source, Game game) {
+        Card copiedCard = cardToCopy.copy();
+        copiedCard.assignNewId();
+        copiedCard.setOwnerId(source.getControllerId());
+        copiedCard.setCopy(true);
+        copiedCards.put(copiedCard.getId(), copiedCard);
+        addCard(copiedCard);
+        if (copiedCard.isSplitCard()) {
+            Card leftCard = ((SplitCard)copiedCard).getLeftHalfCard();
+            copiedCards.put(leftCard.getId(), leftCard);
+            addCard(leftCard);
+            Card rightCard = ((SplitCard)copiedCard).getRightHalfCard();
+            copiedCards.put(rightCard.getId(), rightCard);
+            addCard(rightCard);
+        }
+        return copiedCard;
+    }
 }
