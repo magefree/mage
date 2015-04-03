@@ -37,7 +37,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,6 +52,10 @@ import mage.util.functions.EmptyApplyToPermanent;
  * @author LevelX2
  */
 public class PolymorphousRush extends CardImpl {
+    
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public PolymorphousRush(UUID ownerId) {
         super(ownerId, 46, "Polymorphous Rush", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
@@ -60,7 +66,7 @@ public class PolymorphousRush extends CardImpl {
         // Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
         // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
         this.getSpellAbility().addEffect(new PolymorphousRushCopyEffect());
 
     }
