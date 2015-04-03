@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.StriveAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -52,7 +51,9 @@ import mage.util.functions.EmptyApplyToPermanent;
  * @author LevelX2
  */
 public class PolymorphousRush extends CardImpl {
-    
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -61,10 +62,9 @@ public class PolymorphousRush extends CardImpl {
         super(ownerId, 46, "Polymorphous Rush", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
-
         // Strive - Polymorphous Rush costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));
+        
         // Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, false));
         this.getSpellAbility().addEffect(new PolymorphousRushCopyEffect());
