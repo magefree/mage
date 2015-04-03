@@ -91,15 +91,6 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            event.setPlayerId(controller.getId());
-        }
-        return false;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.CREATE_TOKEN;
     }
@@ -107,7 +98,7 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
+                && ((ZoneChangeEvent) event).getToZone().match(Zone.BATTLEFIELD)) {
             Card card = game.getCard(event.getTargetId());
             if (card.getCardType().contains(CardType.CREATURE)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 Player controller = game.getPlayer(source.getControllerId());
@@ -124,4 +115,13 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            event.setPlayerId(controller.getId());
+        }
+        return false;
+    }    
 }

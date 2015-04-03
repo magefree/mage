@@ -66,7 +66,7 @@ public class IcyPrison extends CardImpl {
                 new DoUnlessAnyPlayerPaysEffect(new SacrificeSourceEffect(), new GenericManaCost(3)), TargetController.YOU, false));
 
         // When Icy Prison leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD, false, true), false));
 
     }
 

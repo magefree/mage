@@ -41,6 +41,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -107,7 +108,8 @@ class ReturnExiledPermanentsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            UUID exileZone = CardUtil.getObjectExileZoneId(game, sourceObject);
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             if (exileZone != null) {
                 ExileZone exile = game.getExile().getExileZone(exileZone);
                 if (exile != null) {

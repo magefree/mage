@@ -19,6 +19,9 @@ public class CloudshiftTest extends CardTestPlayerBase {
 
     /**
      * Tests that casting Cloudshift makes targeting spell fizzling
+     *
+     * Cloudshift
+     * Exile target creature you control, then return that card to the battlefield under your control.
      */
     @Test
     public void testSpellFizzle() {
@@ -229,4 +232,38 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
         
     }
+    /**
+     * Test that if I cast cloudshift and it goes to the stack and another instant spell exiles the
+     * target creature as response, cloudshift does not bring back that creature from exile because it's
+     * a complete other object (400.7).
+     * 400.7g allows Cloudshift to bring it back only if it was exiled by cloudshift itself.
+     * 
+     */
+    @Test
+    public void testReturnIfExiledByAnotherSpell() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
+        // Exile target creature. Its controller gains life equal to its power.
+        addCard(Zone.HAND, playerB, "Swords to Plowshares");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "Silvercoat Lion", "Cloudshift");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Cloudshift", 1);
+        assertGraveyardCount(playerB, "Swords to Plowshares", 1);
+        
+        assertLife(playerA, 22);
+        assertLife(playerB, 20);
+        
+        assertPermanentCount(playerA,"Silvercoat Lion", 0);
+        assertExileCount("Silvercoat Lion", 1);
+        
+    }    
 }

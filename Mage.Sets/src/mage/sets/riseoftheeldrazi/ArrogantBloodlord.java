@@ -90,21 +90,23 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            Permanent blocked = game.getPermanent(event.getTargetId());
-            Permanent arrogantBloodlord = game.getPermanent(sourceId);
-            if (blocker != null && blocker != arrogantBloodlord
-                    && blocker.getPower().getValue() < 2
-                    && blocked == arrogantBloodlord) {
-                return true;
-            }
-            if (blocker != null && blocker == arrogantBloodlord
-                    && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
-                return true;
-            }
-            return false;
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocked = game.getPermanent(event.getTargetId());
+        Permanent arrogantBloodlord = game.getPermanent(sourceId);
+        if (blocker != null && blocker != arrogantBloodlord
+                && blocker.getPower().getValue() < 2
+                && blocked == arrogantBloodlord) {
+            return true;
+        }
+        if (blocker != null && blocker == arrogantBloodlord
+                && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
+            return true;
         }
         return false;
     }
@@ -133,7 +135,7 @@ class ArrogantBloodlordEffect extends OneShotEffect {
             AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(source.getSourceId()));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;

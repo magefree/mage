@@ -160,7 +160,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;

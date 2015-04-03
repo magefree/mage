@@ -25,41 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.urzasdestiny;
 
-package org.mage.test.cards.continuous;
-
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
-import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import java.util.UUID;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public class ElvishArchdruidTest extends CardTestPlayerBase {
+public class Flicker extends CardImpl {
 
-    /**
-     * Elvish Archdruid gives +1/+1 to Nettle Sentinel
-     * If Archdruid dies and Nettle Sentinel has got 2 damage
-     * Nettle Sentile must go to graveyard immedeately
-     */
-    @Test
-    public void testBoostWithUndying() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Zone.BATTLEFIELD, playerA, "Elvish Archdruid", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Nettle Sentinel", 1);
-        // Pyroclasm deals 2 damage to each creature.
-        addCard(Zone.HAND, playerA, "Pyroclasm");        
+    public Flicker(UUID ownerId) {
+        super(ownerId, 9, "Flicker", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
+        this.expansionSetCode = "UDS";
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyroclasm");
-
-        setStopAt(1, PhaseStep.PRECOMBAT_MAIN); // has to be the same phase as the cast spell to see if Nettle Sentinel dies in this phase
-        execute();
-
-        assertGraveyardCount(playerA, "Pyroclasm", 1);
-        assertPermanentCount(playerA, "Elvish Archdruid", 0);
-        assertPermanentCount(playerA, "Nettle Sentinel", 0);
+        // Exile target nontoken permanent, then return it to the battlefield under its owner's control.
     }
 
+    public Flicker(final Flicker card) {
+        super(card);
+    }
+
+    @Override
+    public Flicker copy() {
+        return new Flicker(this);
+    }
 }

@@ -95,7 +95,7 @@ class GhostwayEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
             int numberCreatures = 0;
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
                     controller.moveCardToExileWithInfo(creature, exileId,sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
@@ -107,7 +107,7 @@ class GhostwayEffect extends OneShotEffect {
                         new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game));
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
                 game.addDelayedTriggeredAbility(delayedAbility);                
             }
             return true;

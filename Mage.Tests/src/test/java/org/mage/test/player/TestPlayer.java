@@ -436,7 +436,7 @@ public class TestPlayer extends ComputerPlayer {
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         if (!choices.isEmpty()) {
             for(TriggeredAbility ability :abilities) {
-                if (choices.get(0).equals(ability.toString())) {
+                if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
                     return ability;
                 }

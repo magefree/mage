@@ -53,7 +53,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     
     /**
      * 
-     * @param fromExileZone - the card will only be retunred if it's still in the sour obect specific exile zone
+     * @param fromExileZone - the card will only be returned if it's still in the sour obect specific exile zone
      */
     public ReturnToBattlefieldUnderYourControlTargetEffect(boolean fromExileZone) {
         super(Outcome.Benefit);
@@ -74,11 +74,10 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {            
+        if (controller != null) {            
             Card card = null;        
             if (fromExileZone) {
-                UUID exilZoneId = CardUtil.getObjectExileZoneId(game, sourceObject);
+                UUID exilZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (exilZoneId != null) {
                 card = game.getExile().getExileZone(exilZoneId).get(getTargetPointer().getFirst(game, source), game);
                 }

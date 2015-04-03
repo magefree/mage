@@ -174,7 +174,7 @@ class BerserkDestroyEffect extends OneShotEffect {
             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

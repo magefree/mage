@@ -118,7 +118,7 @@ class PostmortemLungeEffect extends OneShotEffect {
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             game.addDelayedTriggeredAbility(delayedAbility);
 
             return true;

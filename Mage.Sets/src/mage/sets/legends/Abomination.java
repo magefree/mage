@@ -154,7 +154,7 @@ class AbominationEffect extends OneShotEffect {
             AtTheEndOfCombatDelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect());
             delayedAbility.setSourceId(permanent.getId());
             delayedAbility.setControllerId(event.getControllerId());
-            delayedAbility.setSourceObject(event.getSourceObject(game));
+            delayedAbility.setSourceObject(event.getSourceObject(game), game);
             delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;

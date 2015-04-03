@@ -499,12 +499,22 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    public MageObject getSourceObjectIfItStillExists(Game game) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        throw new UnsupportedOperationException("Not supported.");
     }    
 
     @Override

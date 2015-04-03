@@ -499,8 +499,9 @@ public interface Ability extends Controllable, Serializable {
      * an ability was activated.
      * 
      * @param mageObject 
+     * @param game 
      */
-    void setSourceObject(MageObject mageObject);
+    void setSourceObject(MageObject mageObject, Game game);
     
     /**
      * Returns the object that actually existed while a ability triggerd or 
@@ -511,4 +512,17 @@ public interface Ability extends Controllable, Serializable {
      * @return 
      */
     MageObject getSourceObject(Game game);
+
+    int getSourceObjectZoneChangeCounter();
+    
+    /**
+     * Returns the object that actually existed while a ability triggerd or 
+     * an ability was activated only if it has not changed zone meanwhile.
+     * If not set yet, the current object will be retrieved from the game.
+     * 
+     * @param game
+     * @return 
+     */
+    
+    MageObject getSourceObjectIfItStillExists(Game game);
 }

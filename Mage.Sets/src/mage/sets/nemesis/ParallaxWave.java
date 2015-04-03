@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -104,7 +105,8 @@ class ParallaxWaveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null) {
-            UUID exileZoneId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             if (exileZoneId != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileZoneId);
                 if (exileZone != null) {

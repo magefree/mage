@@ -29,6 +29,7 @@ package mage.sets.torment;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -43,6 +44,7 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -110,7 +112,7 @@ class MesmericFiendExileEffect extends OneShotEffect {
             if (controller.choose(Outcome.Exile, opponent.getHand(), target, game)) {
                 Card card = opponent.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getObjectExileZoneId(game, sourcePermanent), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                 }
             }
 
@@ -141,8 +143,10 @@ class MesmericFiendLeaveEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, source.getSourceObject(game)));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject !=null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
                 for (Card card : exZone.getCards(game)) {
                     if (card != null) {

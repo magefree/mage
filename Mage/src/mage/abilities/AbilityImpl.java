@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
@@ -109,6 +110,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
+    protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = null;
     protected List<Ability> subAbilities = null;
 
@@ -160,6 +162,7 @@ public abstract class AbilityImpl implements Ability {
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
         this.sourceObject = ability.sourceObject;
+        this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
     }
 
     @Override
@@ -213,6 +216,13 @@ public abstract class AbilityImpl implements Ability {
                 else {
                     game.addEffect((ContinuousEffect) effect, this);
                 }
+                 /** 
+                  * game.applyEffects() has to be done at least for every effect that moves cards/permanent between zones,
+                  * so Static effects work as intened if dependant from the moved objects zone it is in
+                  * Otherwise for example were static abilities with replacement effects deactivated to late
+                  * Example: {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
+                  */
+//                game.applyEffects(); 
                 // some effects must be applied before next effect is resolved, because effect is dependend.
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
@@ -236,6 +246,8 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        getSourceObject(game);
+        
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
          * or she reveals those cards in his or her hand.
@@ -243,13 +255,13 @@ public abstract class AbilityImpl implements Ability {
         if (this.abilityType.equals(AbilityType.SPELL)) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
-
-        // TODO: Because all (non targeted) choices have to be done during resolution
-        // this has to be removed, if all using effects are changed
-        sourceObject = this.getSourceObject(game);
+        
+        
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
         }
+        // TODO: Because all (non targeted) choices have to be done during resolution
+        // this has to be removed, if all using effects are changed
         for (UUID modeId :this.getModes().getSelectedModes()) {
             this.getModes().setMode(this.getModes().get(modeId));
             if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
@@ -660,16 +672,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Watcher> getWatchers() {
-        if (watchers != null)
+        if (watchers != null) {
             return watchers;
-        else
+        } else {
             return emptyWatchers;
+        }
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        if (watchers == null)
+        if (watchers == null) {
             watchers = new ArrayList<>();
+        }
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);
@@ -677,16 +691,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Ability> getSubAbilities() {
-        if (subAbilities != null)
+        if (subAbilities != null) {
             return subAbilities;
-        else
+        } else {
             return emptyAbilities;
+        }
     }
 
     @Override
     public void addSubAbility(Ability ability) {
-        if (subAbilities == null)
+        if (subAbilities == null) {
             subAbilities = new ArrayList<>();
+        }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
         subAbilities.add(ability);
@@ -842,8 +858,15 @@ public abstract class AbilityImpl implements Ability {
         return false;
     }
 
+    /**
+     * 
+     * @param game
+     * @param source
+     * @param checkShortLivingLKI if the object was in the needed zone as the effect that's currently applied started, the check returns true
+     * @return 
+     */
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkShortLivingLKI) {
         if (zone.equals(Zone.COMMAND)) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
@@ -855,10 +878,13 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        // try LKI first
-        if (checkLKI) {
-            MageObject lkiTest = game.getShortLivingLKI(getSourceId(), zone);
-            if (lkiTest != null) {
+        // try LKI first (was the object with the id in the needed zone before)
+        if (checkShortLivingLKI) {
+            if (game.getShortLivingLKI(getSourceId(), zone)) {
+                return true;
+            }
+        } else {
+            if (game.getLastKnownInformation(getSourceId(), zone) != null) {
                 return true;
             }
         }
@@ -1097,16 +1123,38 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        if (sourceObject != null) {
-            return sourceObject;
-        } else {
-            return game.getObject(sourceId);
+        if (sourceObject == null) {
+            setSourceObject(null, game);
         }
+        return sourceObject;
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
+    public MageObject getSourceObjectIfItStillExists(Game game) {
+        MageObject currentObject = game.getObject(getSourceId());
+        if (currentObject != null) {
+            MageObjectReference mor = new MageObjectReference(currentObject, game);
+            if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
+                // source object has meanwhile not changed zone
+                return sourceObject;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        return sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        if (sourceObject == null) {
+            this.sourceObject = game.getObject(sourceId);
+        } else {
+            this.sourceObject = sourceObject;
+        }
+        this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
     }
 
 

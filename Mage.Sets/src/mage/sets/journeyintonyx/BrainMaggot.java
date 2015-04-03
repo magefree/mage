@@ -30,6 +30,7 @@ package mage.sets.journeyintonyx;
 import java.util.LinkedList;
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -49,6 +50,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -117,7 +119,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
                     Card card = opponent.getHand().get(target.getFirstTarget(), game);
                     // If source permanent leaves the battlefield before its triggered ability resolves, the target card won't be exiled.
                     if (card != null && game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-                        controller.moveCardToExileWithInfo(card, CardUtil.getObjectExileZoneId(game, sourcePermanent), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), sourcePermanent.getName(), source.getSourceId(), game, Zone.HAND);
                     }
                 }
             }
@@ -152,8 +154,13 @@ class BrainMaggotReturnExiledCreatureAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
+        if (event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 return true;
@@ -182,8 +189,10 @@ class BrainMaggotReturnExiledCreatureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, source.getSourceObject(game)));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (exile != null && sourcePermanent != null) {
                 LinkedList<UUID> cards = new LinkedList<>(exile);

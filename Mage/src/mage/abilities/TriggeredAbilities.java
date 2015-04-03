@@ -1,32 +1,31 @@
 
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities;
 
 import java.util.ArrayList;
@@ -38,6 +37,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
+import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,17 +45,18 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
-*
-* @author BetaSteward_at_googlemail.com
-*/
+ *
+ * @author BetaSteward_at_googlemail.com
+ */
 public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 
-    public TriggeredAbilities() {}
+    public TriggeredAbilities() {
+    }
 
     public TriggeredAbilities(final TriggeredAbilities abilities) {
-        for (Map.Entry<String, TriggeredAbility> entry: abilities.entrySet()) {
+        for (Map.Entry<String, TriggeredAbility> entry : abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
         for (Map.Entry<String, List<UUID>> entry : abilities.sources.entrySet()) {
@@ -70,29 +71,34 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                 continue;
             }
             // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
-            if (ability.isInUseableZone(game, ability.getSourceObject(game), event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
-
+            MageObject object = game.getObject(ability.getSourceId());
+            if (ability.isInUseableZone(game, object, false)) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
-                    MageObject object = null;
-                    if (!ability.getZone().equals(Zone.COMMAND) && !game.getState().getZone(ability.getSourceId()).equals(ability.getZone())) {
-                        object = game.getShortLivingLKI(ability.getSourceId(), ability.getZone());
-                    }
-                    if (object == null) {
-                        object = getMageObject(event, game, ability);
+                    if (object != null) {
+                        boolean controllerSet = false;
+                        if (!ability.getZone().equals(Zone.COMMAND) && (event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT))) {
+                            // need to check if object was face down for dies and destroy events because the ability triggers in the new zone, zone counter -1 is used
+                            Permanent permanent = (Permanent) game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD, ability.getSourceObjectZoneChangeCounter() - 1);
+                            if (permanent != null) {
+                                if (!ability.getWorksFaceDown() && permanent.isFaceDown(game)) {
+                                    continue;
+                                }
+                                controllerSet = true;
+                                ability.setControllerId(permanent.getControllerId());
+                            }
+                        }
+                        if (!controllerSet) {
+                            if (object instanceof Permanent) {
+                                ability.setControllerId(((Permanent) object).getControllerId());
+                            } else if (object instanceof Card) {
+                                ability.setControllerId(((Card) object).getOwnerId());
+                            }
+                        }
                     }
 
-                    if (object != null) {
-                        if (object instanceof Permanent) {
-                            if (((Permanent)object).isFaceDown(game) && !ability.getWorksFaceDown()) {
-                                continue;
-                            }
-                            ability.setControllerId(((Permanent) object).getControllerId());
-                        }
-                        ability.setSourceObject(object);
-                        if (ability.checkTrigger(event, game)) {
-                            UUID controllerId = ability.getControllerId();
-                            ability.trigger(game, controllerId);
-                        }
+                    // ability.setSourceObject(object);
+                    if (ability.checkTrigger(event, game)) {
+                        ability.trigger(game, ability.getControllerId());
                     }
                 }
             }
@@ -120,8 +126,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
         if (sourceId == null) {
             add(ability, attachedTo);
-        }
-        else {
+        } else {
             this.add(ability, attachedTo);
             List<UUID> uuidList = new LinkedList<>();
             uuidList.add(sourceId);
@@ -145,18 +150,18 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
 
     public void removeAbilitiesOfSource(UUID sourceId) {
         List<String> keysToRemove = new ArrayList<>();
-        for (String key: this.keySet()) {
-            if(key.endsWith(sourceId.toString())) {
+        for (String key : this.keySet()) {
+            if (key.endsWith(sourceId.toString())) {
                 keysToRemove.add(key);
             }
         }
-        for(String key: keysToRemove) {
+        for (String key : keysToRemove) {
             remove(key);
         }
     }
 
     public void removeAllGainedAbilities() {
-        for(String key: sources.keySet()) {
+        for (String key : sources.keySet()) {
             this.remove(key);
         }
         sources.clear();

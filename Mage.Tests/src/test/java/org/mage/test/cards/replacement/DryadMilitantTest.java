@@ -79,7 +79,7 @@ public class DryadMilitantTest extends CardTestPlayerBase {
     }   
     
     /**
-     * Tests if Dryad Militant dies by damage spell, the
+     * Tests if Dryad Militant dies by destroy spell, the
      * spell don't get exiled
      */
     @Test
@@ -97,7 +97,7 @@ public class DryadMilitantTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertHandCount(playerA, "Terminate", 0);
-        assertGraveyardCount(playerB, "Terminate", 1);
+        assertGraveyardCount(playerA, "Terminate", 1);
     }       
 }
 

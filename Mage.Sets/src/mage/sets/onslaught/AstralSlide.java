@@ -97,7 +97,7 @@ class AstralSlideEffect extends OneShotEffect {
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD, false));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game));
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
                     game.addDelayedTriggeredAbility(delayedAbility);
                     return true;
                 }

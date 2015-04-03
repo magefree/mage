@@ -49,6 +49,7 @@ import mage.abilities.StaticAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.AbilityType;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -213,7 +214,7 @@ public class ContinuousEffects implements Serializable {
                     HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
                     for (Ability ability: abilities) {
                         // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
-                        if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                        if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, true)) {
                             layerEffects.add(effect);
                             break;
                         }
@@ -332,7 +333,7 @@ public class ContinuousEffects implements Serializable {
         if(auraReplacementEffect.checksEventType(event, game) && auraReplacementEffect.applies(event, null, game)){
             replaceEffects.put(auraReplacementEffect, null);
         }
-        boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
+        // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
         //get all applicable transient Replacement effects
         for (ReplacementEffect effect: replacementEffects) {
             if (!effect.checksEventType(event, game)) {
@@ -346,10 +347,11 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, checkLKI)) {
+                // for replacment effects of static abilities do not use LKI to check if to apply
+                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, true)) { 
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
-                            if (checkAbilityStillExists(ability, effect, event, game)) {
+                            if (checkAbilityStillExists(ability, effect, event, game)) { // TODO: This is really needed???
                                     if (effect.applies(event, ability, game)) {
                                     applicableAbilities.add(ability);
                                 }
@@ -374,7 +376,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = preventionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, true)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (effect.applies(event, ability, game)) {
                             applicableAbilities.add(ability);
@@ -658,7 +660,7 @@ public class ContinuousEffects implements Serializable {
                 continue;
             }
             for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
-                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, false)) {
+                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, true)) {
                     if (checkAbilityStillExists(sourceAbility, effect, event, game)) {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);

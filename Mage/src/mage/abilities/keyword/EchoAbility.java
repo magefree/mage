@@ -29,7 +29,6 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -53,7 +52,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
 
     protected UUID lastController;
     protected boolean echoPaid;
-    protected Costs echoCosts = new CostsImpl();
+    protected Costs<Cost> echoCosts = new CostsImpl<>();
     private boolean manaEcho = true;
 
     public EchoAbility(String manaString) {
@@ -94,6 +93,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
         // reset the echo paid state back, if creature enteres the battlefield
         if (event.getType().equals(GameEvent.EventType.ENTERS_THE_BATTLEFIELD) 
                 && event.getTargetId().equals(this.getSourceId())) {
+            
             this.echoPaid = false;
         }
         if (event.getType().equals(GameEvent.EventType.UPKEEP_STEP_PRE)) {
@@ -144,15 +144,17 @@ class EchoEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObjectReference mor = new MageObjectReference(source.getSourceId(), game);
-        if (controller != null && mor.refersTo(source.getSourceObject(game), game)) {
+        if (controller != null && source.getSourceObjectIfItStillExists(game) != null) {
                 if (controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                         return true;
                     }
                 }
-                mor.getPermanent(game).sacrifice(source.getSourceId(), game);
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.sacrifice(source.getSourceId(), game);
+                }
             return true;
         }
         return false;

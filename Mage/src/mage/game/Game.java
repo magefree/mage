@@ -142,7 +142,7 @@ public interface Game extends MageItem, Serializable {
     void setSimulation(boolean simulation);
     MageObject getLastKnownInformation(UUID objectId, Zone zone);
     MageObject getLastKnownInformation(UUID objectId, Zone zone, int zoneChangeCounter);
-    MageObject getShortLivingLKI(UUID objectId, Zone zone);
+    boolean getShortLivingLKI(UUID objectId, Zone zone);
     void rememberLKI(UUID objectId, Zone zone, MageObject object);
     void resetLKI();
     void resetShortLivingLKI();

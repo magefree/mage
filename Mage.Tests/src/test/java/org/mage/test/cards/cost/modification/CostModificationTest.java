@@ -58,12 +58,15 @@ public class CostModificationTest extends CardTestPlayerBase {
 
     @Test
     public void testCostReductionWithManaSourceRestrictionWorking() {
+        // Artifact spells you cast cost {1} less to cast
         addCard(Zone.BATTLEFIELD, playerA, "Etherium Sculptor");
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
+        // Myr Superion {2}
+        // Spend only mana produced by creatures to cast Myr Superion.
         addCard(Zone.HAND, playerA, "Myr Superion");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G} to your mana pool.");
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Add {G} to your mana pool.");
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Myr Superion");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();

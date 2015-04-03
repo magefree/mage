@@ -265,7 +265,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
         if (sourceObject == null || controller == null) {
             return false;
         }
-        UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
         if (exileId == null) {
             return false;
         }

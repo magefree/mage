@@ -133,7 +133,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
                             delayedAbility.setControllerId(source.getControllerId());
                             delayedAbility.setSourceId(source.getSourceId());
-                            delayedAbility.setSourceObject(source.getSourceObject(game));
+                            delayedAbility.setSourceObject(source.getSourceObject(game), game);
                             game.addDelayedTriggeredAbility(delayedAbility);
                         }
                     }
@@ -154,7 +154,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect2);
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setSourceObject(source.getSourceObject(game));
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
                         game.addDelayedTriggeredAbility(delayedAbility);
                     }
                 }

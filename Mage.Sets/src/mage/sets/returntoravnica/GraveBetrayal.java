@@ -114,7 +114,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
                     delayedAbility.setSourceId(this.getSourceId());
                     delayedAbility.setControllerId(this.getControllerId());
-                    delayedAbility.setSourceObject(this.getSourceObject(game));
+                    delayedAbility.setSourceObject(this.getSourceObject(game), game);
                     game.addDelayedTriggeredAbility(delayedAbility);
                     return true;
                 }

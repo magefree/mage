@@ -103,11 +103,11 @@ class BanisherPriestExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         // If Banisher Priest leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getObjectExileZoneId(game, permanent), permanent.getLogName()).apply(game, source);
+            return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getLogName()).apply(game, source);
         }
         return false;
     }

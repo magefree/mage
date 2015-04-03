@@ -95,7 +95,7 @@ class SearingBloodEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = new SearingBloodDelayedTriggeredAbility(source.getFirstTarget());
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         game.addDelayedTriggeredAbility(delayedAbility);
 
         return new DamageTargetEffect(2).apply(game, source);

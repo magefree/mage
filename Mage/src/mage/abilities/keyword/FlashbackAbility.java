@@ -35,10 +35,13 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -74,7 +77,6 @@ public class FlashbackAbility extends SpellAbility {
         this.timing = timingRule;
         this.usesStack = false;
         this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
-        this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
     }
 
     public FlashbackAbility(final FlashbackAbility ability) {
@@ -211,48 +213,59 @@ class FlashbackEffect extends OneShotEffect {
                 }
                 game.informPlayers(new StringBuilder(controller.getName()).append(" flashbacks ").append(card.getName()).toString());
                 spellAbility.setCostModificationActive(false); // prevents to apply cost modification twice for flashbacked spells
-                return controller.cast(spellAbility, game, true);
+                if (controller.cast(spellAbility, game, true)) {
+                    game.addEffect(new FlashbackReplacementEffect(), source);
+                    return true;
+                }
+                return false;
             }
         }
         return false;
     }
 }
 
-class FlashbackTriggeredAbility extends DelayedTriggeredAbility {
+class FlashbackReplacementEffect extends ReplacementEffectImpl {
 
-    public FlashbackTriggeredAbility() {
-        super(new ExileSourceEffect());
-        usesStack = false;
+    public FlashbackReplacementEffect() {
+        super(Duration.OneUse, Outcome.Exile);
+        staticText = "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
     }
 
-    public FlashbackTriggeredAbility(final FlashbackTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public FlashbackTriggeredAbility copy() {
-        return new FlashbackTriggeredAbility(this);
+    public FlashbackReplacementEffect(final FlashbackReplacementEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    public FlashbackReplacementEffect copy() {
+        return new FlashbackReplacementEffect(this);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.STACK) {
-                return true;
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()));
             }
         }
         return false;
     }
 
     @Override
-    public String getRule() {
-        return "(If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack)";
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId()) 
+                && ((ZoneChangeEvent)event).getFromZone() == Zone.STACK
+                && ((ZoneChangeEvent)event).getToZone() != Zone.EXILED;
+    }
 }

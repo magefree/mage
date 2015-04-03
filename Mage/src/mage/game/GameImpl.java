@@ -159,9 +159,11 @@ public abstract class GameImpl implements Game, Serializable {
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
     protected Map<UUID, Card> gameCards = new HashMap<>();
+    
     protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
-    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<>(Zone.class);
+    // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
+    protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
 
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
@@ -1131,6 +1133,9 @@ public abstract class GameImpl implements Game, Serializable {
                                 // 603.3. Once an ability has triggered, its controller puts it on the stack as an object thats not a card the next time a player would receive priority
                                 checkStateAndTriggered();
                                 applyEffects();
+                                if (state.getStack().isEmpty()) {
+                                    resetLKI();
+                                }                                
                                 saveState(false);
                                 if (isPaused() || gameOver(null)) {
                                     return;
@@ -1158,7 +1163,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 state.getPlayers().resetPassed();
                                 fireUpdatePlayersEvent();
                                 state.getRevealed().reset();
-                                resetShortLivingLKI();
+                                resetShortLivingLKI(); 
                                 break;
                             } else {
                                 resetLKI();
@@ -2195,15 +2200,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
-        Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
-        if (shortLivingLkiMap != null) {
-            MageObject object = shortLivingLkiMap.get(objectId);
-            if (object != null) {
-                return object.copy();
-            }
+    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+        Set<UUID> idSet = shortLivingLKI.get(zone);
+        if (idSet != null) {
+            return idSet.contains(objectId);
         }
-        return null;
+        return false;
     }
 
     /**
@@ -2226,16 +2228,15 @@ public abstract class GameImpl implements Game, Serializable {
                 newMap.put(objectId, copy);
                 lki.put(zone, newMap);
             }
-
-            Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
-            if (shortLivingLkiMap != null) {
-                shortLivingLkiMap.put(objectId, copy);
-            } else {
-                HashMap<UUID, MageObject> newMap = new HashMap<>();
-                newMap.put(objectId, copy);
-                shortLivingLKI.put(zone, newMap);
+            // remembers if a object was in a zone during the resolution of an effect
+            // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
+            // because it ahppens all at the same time the replcaement effect has still to be applied
+            Set<UUID> idSet = shortLivingLKI.get(zone);
+            if (idSet == null) {
+                idSet = new HashSet<>();
+                shortLivingLKI.put(zone, idSet);
             }
-
+            idSet.add(objectId);            
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {

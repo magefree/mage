@@ -54,7 +54,7 @@ public class PrimevalTitan extends CardImpl {
         super(ownerId, 192, "Primeval Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Giant");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -91,14 +91,16 @@ class PrimevalTitanAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

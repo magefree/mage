@@ -124,7 +124,7 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     public UnearthLeavesBattlefieldEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
+        super(Duration.OneUse, Outcome.Exile);
         staticText = "When {this} leaves the battlefield, exile it";
     }
 
@@ -144,7 +144,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+        if (source.getSourceObjectIfItStillExists(game) != null) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
                 return true;
@@ -154,13 +154,8 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        ExileSourceEffect effect = new ExileSourceEffect();
-        return effect.apply(game, source);
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        new ExileSourceEffect().apply(game, source);
+        return true;
     }
 }

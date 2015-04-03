@@ -394,6 +394,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void applyEffects(Game game) {
+        game.resetShortLivingLKI();
         for (Player player: players.values()) {
             player.reset();
         }

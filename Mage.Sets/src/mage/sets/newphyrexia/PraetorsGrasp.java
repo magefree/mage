@@ -103,7 +103,7 @@ class PraetorsGraspEffect extends OneShotEffect {
             if (controller.searchLibrary(target, game, opponent.getId())) {
                 UUID targetId = target.getFirstTarget();
                 Card card = opponent.getLibrary().getCard(targetId, game);
-                UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (card != null && exileId != null) {
                     game.informPlayers(controller.getName() + " moves the searched card face down to exile");
                     card.moveToExile(exileId, sourceObject.getName(), source.getSourceId(), game);

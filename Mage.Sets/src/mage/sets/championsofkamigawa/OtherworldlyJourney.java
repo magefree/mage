@@ -99,7 +99,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                             new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game));
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
                     AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
                     effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
                     delayedAbility.addEffect(effect);

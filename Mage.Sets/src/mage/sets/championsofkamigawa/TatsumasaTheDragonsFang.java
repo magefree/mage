@@ -70,7 +70,7 @@ public class TatsumasaTheDragonsFang extends CardImpl {
 
         // {6}, Exile Tatsumasa, the Dragon's Fang: Put a 5/5 blue Dragon Spirit creature token with flying onto the battlefield. Return Tatsumasa to the battlefield under its owner's control when that token dies.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TatsumaTheDragonsFangEffect(), new GenericManaCost(6));
-        ability.addCost(new ExileSourceCost());
+        ability.addCost(new ExileSourceCost(true));
         this.addAbility(ability);
         
         // Equip {3}
@@ -111,7 +111,7 @@ class TatsumaTheDragonsFangEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = new TatsumaTheDragonsFangTriggeredAbility(fixedTarget);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         game.addDelayedTriggeredAbility(delayedAbility);
 
         return true;
@@ -123,7 +123,7 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
     protected FixedTarget fixedTarget;
 
     public TatsumaTheDragonsFangTriggeredAbility(FixedTarget fixedTarget) {
-        super(new ReturnToBattlefieldUnderYourControlSourceEffect(Zone.EXILED), Duration.OneUse);
+        super(new ReturnToBattlefieldUnderYourControlSourceEffect(), Duration.OneUse);
         this.fixedTarget = fixedTarget;
     }
 

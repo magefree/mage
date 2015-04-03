@@ -66,7 +66,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     public void trigger(Game game, UUID controllerId) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            this.controllerId = controllerId;
+            setSourceObject(null, game); // set the source object the time the trigger goes off
             game.addTriggeredAbility(this);
         }
     }

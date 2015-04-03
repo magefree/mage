@@ -107,7 +107,7 @@ class AEherlingRemovingEffect extends OneShotEffect {
                         new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game));
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
                 game.addDelayedTriggeredAbility(delayedAbility);
                 return true;
             }

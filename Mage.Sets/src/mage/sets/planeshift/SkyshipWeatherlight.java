@@ -132,7 +132,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && controller != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, sourceObject));
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
             if (exZone != null) {
                 Card card = exZone.getRandom(game);
                 controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);

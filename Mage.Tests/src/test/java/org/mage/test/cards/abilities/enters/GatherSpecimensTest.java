@@ -101,6 +101,7 @@ public class GatherSpecimensTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1);
         addCard(Zone.LIBRARY, playerB, "Plains", 10);
 
+        // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
         castSpell(1, PhaseStep.UPKEEP, playerA, "Gather Specimens");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");

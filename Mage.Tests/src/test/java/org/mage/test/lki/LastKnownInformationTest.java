@@ -33,10 +33,12 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         // Creature - Elf Scout
         // 2/2
         // Persist
-
         addCard(Zone.BATTLEFIELD, playerA, "Safehold Elite");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Zone.HAND, playerA, "Murder Investigation",2);
+        // {1}{W}
+        // Enchant creature you control
+        // When enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
+        addCard(Zone.HAND, playerA, "Murder Investigation",1);
 
         addCard(Zone.HAND, playerB, "Lightning Bolt",2);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
@@ -45,16 +47,18 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
         // choose triggered ability order
-        playerA.addChoice("When enchanted creature dies, put X 1/1 red and white Soldier creature token with haste onto the battlefield, where X is its power.");
+        playerA.addChoice("When enchanted creature dies");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies, put X 1/1 red and white Soldier creature token with haste onto the battlefield, where X is its power");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertActionCount(playerB, 0);
+        assertGraveyardCount(playerB, "Lightning Bolt", 2);
         assertPermanentCount(playerA, "Safehold Elite", 0);
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
         assertPermanentCount(playerA, "Soldier", 2);
+        
+        assertActionCount(playerB, 0);        
 
     }
 

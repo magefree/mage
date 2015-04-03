@@ -69,8 +69,6 @@ public class BridgeFromBelow extends CardImpl {
         super(ownerId, 81, "Bridge from Below", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
         this.expansionSetCode = "FUT";
 
-        this.color.setBlack(true);
-
         // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new BridgeFromBelowAbility(new CreateTokenEffect(new ZombieToken()), filter1));
         // When a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
@@ -107,14 +105,17 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                return true;
             }
         }
         return false;
@@ -123,16 +124,11 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player controller = game.getPlayer(this.getControllerId());
-        if(controller != null && controller.getGraveyard().contains(this.getSourceId()))        {
-            return true;
-        }
-        return false;
+        return controller != null && controller.getGraveyard().contains(this.getSourceId());
     }
-    
-    
-
+        
     @Override
     public String getRule() {
-        return filter.getMessage() +", if Bridge from Below is in your graveyard, " + super.getRule();
+        return filter.getMessage() +", if {this} is in your graveyard, " + super.getRule();
     }
 }

@@ -44,8 +44,12 @@ public class FracturingGustTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Zone.HAND, playerA, "Fracturing Gust", 1);
 
+        // Players can't gain life.
+        // At the beginning of your upkeep, Witch Hunt deals 4 damage to you.
+        // At the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.
         addCard(Zone.BATTLEFIELD, playerB, "Witch Hunt", 1);
 
+        // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fracturing Gust");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

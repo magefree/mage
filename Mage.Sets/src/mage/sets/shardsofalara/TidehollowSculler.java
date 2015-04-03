@@ -44,6 +44,7 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
@@ -149,7 +150,8 @@ class TidehollowScullerLeaveEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            ExileZone exZone = game.getExile().getExileZone(CardUtil.getObjectExileZoneId(game, sourceObject));
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exZone != null) {
                 for (Card card : exZone.getCards(game)) {
                     if (card != null) {
