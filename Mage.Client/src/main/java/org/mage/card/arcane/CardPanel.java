@@ -194,30 +194,30 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 }
             });
         }
+        if (!newGameCard.isAbility()) {
+            // panel to show counters on the card
+            counterPanel = new JPanel();
+            counterPanel.setLayout(null);
+            counterPanel.setOpaque(false);
+            add(counterPanel);
 
-        // panel to show counters on the card
-        counterPanel = new JPanel();
-        counterPanel.setLayout(null);
-        counterPanel.setOpaque(false);
-        add(counterPanel);
+            plusCounterLabel = new JLabel("");
+            plusCounterLabel.setToolTipText("+1/+1");
+            counterPanel.add(plusCounterLabel);
 
-        plusCounterLabel = new JLabel("");
-        plusCounterLabel.setToolTipText("+1/+1");
-        counterPanel.add(plusCounterLabel);
+            minusCounterLabel = new JLabel("");
+            minusCounterLabel.setToolTipText("-1/-1");
+            counterPanel.add(minusCounterLabel);
 
-        minusCounterLabel = new JLabel("");
-        minusCounterLabel.setToolTipText("-1/-1");
-        counterPanel.add(minusCounterLabel);
+            loyaltyCounterLabel = new JLabel("");
+            loyaltyCounterLabel.setToolTipText("loyalty");
+            counterPanel.add(loyaltyCounterLabel);
 
-        loyaltyCounterLabel = new JLabel("");
-        loyaltyCounterLabel.setToolTipText("loyalty");
-        counterPanel.add(loyaltyCounterLabel);
+            otherCounterLabel = new JLabel("");
+            counterPanel.add(otherCounterLabel);
 
-        otherCounterLabel = new JLabel("");
-        counterPanel.add(otherCounterLabel);
-
-        counterPanel.setVisible(false);
-
+            counterPanel.setVisible(false);
+        }
         if (newGameCard.isAbility()) {
             if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
                 setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(),"Triggered Ability");
@@ -841,7 +841,14 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             }
         }
         
-        
+        if (counterPanel != null) {
+            updateCounters(card);
+        }
+
+        repaint();
+    }
+
+    private void updateCounters(CardView card) {
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
             String name = "";
             if (lastCardWidth != cardWidth) {
@@ -890,8 +897,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                             otherCounterLabel.setVisible(true);
                         }
                 }
-            }            
-            
+            }
+
             counterPanel.setVisible(true);
         } else {
             plusCounterLabel.setVisible(false);
@@ -899,8 +906,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             loyaltyCounterLabel.setVisible(false);
             otherCounterLabel.setVisible(false);
             counterPanel.setVisible(false);
-        }       
-        repaint();
+        }
+
     }
 
     private static ImageIcon getCounterImageWithAmount(int amount, BufferedImage image, int cardWidth) {
@@ -1064,7 +1071,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             }
         }
 
-        return sbType.toString();
+        return sbType.toString().trim();
     }
 
     protected final String getText(String cardType, CardView card) {
