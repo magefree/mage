@@ -1419,10 +1419,13 @@ public abstract class GameImpl implements Game, Serializable {
 
         // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
         // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
-        for (Card card: this.getState().getCopiedCards()) {
+        Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
+        while (copiedCards.hasNext()) {
+            Card card = copiedCards.next();
             Zone zone = state.getZone(card.getId());
-            if (zone != Zone.BATTLEFIELD && zone != Zone.STACK)
-                state.removeCopiedCard(card);
+            if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
+                copiedCards.remove();
+            }
         }
         
         List<Permanent> planeswalkers = new ArrayList<>();
