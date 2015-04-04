@@ -70,9 +70,14 @@ public class DynamicManaAbility extends ManaAbility {
     }
 
     public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost, String text) {
-        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount, text), cost);
+        this(mana, amount, cost, text, false);
+    }
+
+    public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost, String text, boolean oneChoice) {
+        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount, text, oneChoice), cost);
         manaEffect = (DynamicManaEffect) this.getEffects().get(0);
     }
+
 
     public DynamicManaAbility(final DynamicManaAbility ability) {
         super(ability);
