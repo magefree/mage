@@ -98,7 +98,7 @@ class ChordofCallingSearchEffect extends OneShotEffect {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xCost + 1));
-        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        TargetCardInLibrary target = new TargetCardInLibrary(0,1,filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
