@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -104,11 +103,15 @@ public class AmplifyEffect extends ReplacementEffectImpl {
             for (String subtype : sourceCreature.getSubtype()) {
                 filterSubtypes.add(new SubtypePredicate((subtype)));
             }
-            filter.add(Predicates.or(filterSubtypes));
+            if (filterSubtypes.size() > 1) {
+                filter.add(Predicates.or(filterSubtypes));
+            } else if (filterSubtypes.size() == 1) {
+                filter.add(filterSubtypes.get(0));
+            }
             if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0){
                 if (controller.chooseUse(outcome, "Reveal cards to Amplify?", game)) {
                     TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
-                    if (controller.choose(outcome, target, source.getSourceId(), game) && !target.getTargets().isEmpty()) {
+                    if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {
                         Cards cards = new CardsImpl();
                         cards.addAll(target.getTargets());
                         int amountCounters = cards.size() * amplifyFactor.getFactor();
