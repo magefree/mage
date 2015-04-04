@@ -119,10 +119,10 @@ public class TargetPermanent extends TargetObject {
      *
      * Takes into account notTarget parameter, in case it's true doesn't check for protection, shroud etc.
      *
-     * @param sourceId - the target event source
-     * @param sourceControllerId - controller of the target event source
+     * @param sourceId the target event source
+     * @param sourceControllerId controller of the target event source
      * @param game
-     * @return - true if enough valid {@link Permanent} exist
+     * @return true if enough valid {@link Permanent} exist
      */
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
