@@ -71,7 +71,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
     }
 
     public TargetPermanentOrPlayer(int minNumTargets, int maxNumTargets, boolean notTarget) {
-           this(minNumTargets, maxNumTargets);
+        this(minNumTargets, maxNumTargets);
         this.notTarget = notTarget;
     }
 
@@ -116,10 +116,21 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         if (source != null) {
             MageObject targetSource = game.getObject(source.getSourceId());
             if (permanent != null) {
-                return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+                if (!isNotTarget()) {
+                    if (!permanent.canBeTargetedBy(game.getObject(source.getId()), source.getControllerId(), game) ||
+                        !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), source.getControllerId(), game)) {
+                        return false;
+                    }
+                }
+                return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             }
             if (player != null) {
-                return player.canBeTargetedBy(targetSource, game) && filter.match(player, game);
+                if (!isNotTarget()) {
+                    if (!player.canBeTargetedBy(targetSource, game)) {
+                        return false;
+                    }
+                }
+                return filter.match(player, game);
             }
         }
 
@@ -202,12 +213,12 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && (notTarget || player.canBeTargetedBy(targetSource, game)) && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterPermanent(), sourceControllerId, game)) {
-            if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
+            if ((notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 possibleTargets.add(permanent.getId());
             }
         }
@@ -252,4 +263,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         return new TargetPermanentOrPlayer(this);
     }
 
+    public FilterPermanent getFilterPermanent() {
+        return filterPermanent.copy();
+    }
 }

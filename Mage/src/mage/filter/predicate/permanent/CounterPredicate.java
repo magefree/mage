@@ -40,13 +40,21 @@ public class CounterPredicate implements Predicate<Permanent> {
 
     private final CounterType counter;
 
+    /**
+     *
+     * @param counter if null any counter selects the permanent
+     */
     public CounterPredicate(CounterType counter) {
         this.counter = counter;
     }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.getCounters().containsKey(counter);
+        if (counter == null) {
+            return !input.getCounters().keySet().isEmpty();
+        } else {
+            return input.getCounters().containsKey(counter);
+        }
     }
 
     @Override

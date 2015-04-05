@@ -58,9 +58,13 @@ public class ContagionEngine extends CardImpl {
     public ContagionEngine (UUID ownerId) {
         super(ownerId, 145, "Contagion Engine", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
         this.expansionSetCode = "SOM";
+
+        // When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ContagionEngineEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+
+        // {4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ProliferateEffect());
@@ -90,10 +94,10 @@ class ContagionEngineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player target = game.getPlayer(source.getFirstTarget());
-        if (target != null) {
-            for (Permanent p : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), target.getId(), game)) {
-                p.addCounters(CounterType.M1M1.createInstance(), game);
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), targetPlayer.getId(), game)) {
+                creature.addCounters(CounterType.M1M1.createInstance(), game);
             }
             return true;
         }

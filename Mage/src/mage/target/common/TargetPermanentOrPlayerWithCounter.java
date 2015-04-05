@@ -34,6 +34,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import java.util.UUID;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
 
 /**
  *
@@ -52,15 +55,15 @@ public class TargetPermanentOrPlayerWithCounter extends TargetPermanentOrPlayer 
     }
 
     public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets) {
-        super(minNumTargets, maxNumTargets);
-        this.filter = new FilterPermanentOrPlayerWithCounter();
-        this.targetName = filter.getMessage();
-        super.setFilter(this.filter);
+        this(minNumTargets, maxNumTargets, false);
     }
 
     public TargetPermanentOrPlayerWithCounter(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        this(minNumTargets, maxNumTargets);
-        this.notTarget = notTarget;
+        super(minNumTargets, maxNumTargets, notTarget);
+        this.filter = new FilterPermanentOrPlayerWithCounter();
+        this.filterPermanent = new FilterPermanent();
+        this.filterPermanent.add(new CounterPredicate(null));
+        this.targetName = filter.getMessage();
     }
 
     public TargetPermanentOrPlayerWithCounter(final TargetPermanentOrPlayerWithCounter target) {

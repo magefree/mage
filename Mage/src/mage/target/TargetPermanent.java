@@ -89,7 +89,7 @@ public class TargetPermanent extends TargetObject {
                 // second for protection from sources (e.g. protection from artifacts + equip ability)
                 if (!isNotTarget()) {
                     if (!permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game) || 
-                            !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) { 
+                        !permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)) { 
                         return false;
                     }
                 }
