@@ -189,10 +189,10 @@ public class TraceUtil {
         for (RestrictionEffect effect: restrictionEffects) {
             log.error(uuid+"     effect=" + effect.toString() + " id=" + effect.getId());
             for (Ability ability : restrictionEffects.getAbility(effect.getId())) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, null)) {
                     log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
                 } else {
-                    boolean usable = ability.isInUseableZone(game, permanent, false);
+                    boolean usable = ability.isInUseableZone(game, permanent, null);
                     log.error(uuid+"        instanceof StaticAbility: " + (ability instanceof StaticAbility) + ", ability=" + ability);
                     log.error(uuid+"        usable zone: " + usable + ", ability=" + ability);
                     if (!usable) {

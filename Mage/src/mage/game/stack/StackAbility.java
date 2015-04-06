@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.constants.AbilityWord;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.watchers.Watcher;
 
@@ -100,8 +101,9 @@ public class StackAbility implements StackObject, Ability {
         if (ability.getTargets().stillLegal(ability, game)) {
             return ability.resolve(game);
         }
-        if (!game.isSimulation())
+        if (!game.isSimulation()) {
             game.informPlayers("Ability has been fizzled: " + getRule());
+        }
         counter(null, game);
         return false;
     }
@@ -400,7 +402,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

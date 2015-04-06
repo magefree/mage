@@ -214,7 +214,7 @@ public class ContinuousEffects implements Serializable {
                     HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
                     for (Ability ability: abilities) {
                         // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
-                        if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, true)) {
+                        if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
                             layerEffects.add(effect);
                             break;
                         }
@@ -268,7 +268,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = requirementEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
                     if (effect.applies(permanent, ability, game)) {
                         applicableAbilities.add(ability);
                     }
@@ -287,7 +287,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = restrictionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
                     if (effect.applies(permanent, ability, game)) {
                         applicableAbilities.add(ability);
                     }
@@ -306,7 +306,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = restrictionUntapNotMoreThanEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
                     if (effect.applies(player, ability, game)) {
                         applicableAbilities.add(ability);
                     }
@@ -348,7 +348,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
                 // for replacment effects of static abilities do not use LKI to check if to apply
-                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, true)) { 
+                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
                             if (checkAbilityStillExists(ability, effect, event, game)) { // TODO: This is really needed???
@@ -376,7 +376,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = preventionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<>();
             for (Ability ability : abilities) {
-                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, true)) {
+                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (effect.applies(event, ability, game)) {
                             applicableAbilities.add(ability);
@@ -443,7 +443,7 @@ public class ContinuousEffects implements Serializable {
         for (CostModificationEffect effect: costModificationEffects) {
             HashSet<Ability> abilities = costModificationEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         costEffects.add(effect);
                         break;
@@ -466,7 +466,7 @@ public class ContinuousEffects implements Serializable {
         for (SpliceCardEffect effect: spliceCardEffects) {
             HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (ability.getControllerId().equals(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false))) {
+                if (ability.getControllerId().equals(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         spliceEffects.add(effect);
                         break;
@@ -516,7 +516,7 @@ public class ContinuousEffects implements Serializable {
             for (AsThoughEffect effect: asThoughEffectsMap.get(type)) {
                 HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
-                    if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                    if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             asThoughEffectsList.add(effect);
                             break;
@@ -660,7 +660,7 @@ public class ContinuousEffects implements Serializable {
                 continue;
             }
             for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
-                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, true)) {
+                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, event)) {
                     if (checkAbilityStillExists(sourceAbility, effect, event, game)) {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             effect.setValue("targetAbility", targetAbility);

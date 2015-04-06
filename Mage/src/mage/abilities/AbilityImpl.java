@@ -67,6 +67,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -864,11 +865,10 @@ public abstract class AbilityImpl implements Ability {
      * 
      * @param game
      * @param source
-     * @param checkShortLivingLKI if the object was in the needed zone as the effect that's currently applied started, the check returns true
      * @return 
      */
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkShortLivingLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         if (zone.equals(Zone.COMMAND)) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
@@ -876,17 +876,6 @@ public abstract class AbilityImpl implements Ability {
             MageObject object = game.getObject(this.getSourceId());
             // emblem are always actual
             if (object != null && object instanceof Emblem) {
-                return true;
-            }
-        }
-
-        // try LKI first (was the object with the id in the needed zone before)
-        if (checkShortLivingLKI) {
-            if (game.getShortLivingLKI(getSourceId(), zone)) {
-                return true;
-            }
-        } else {
-            if (game.getLastKnownInformation(getSourceId(), zone) != null) {
                 return true;
             }
         }

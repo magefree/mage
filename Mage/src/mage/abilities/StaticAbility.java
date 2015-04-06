@@ -28,9 +28,13 @@
 
 package mage.abilities;
 
+import mage.MageObject;
+import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
-import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+
 
 /**
  *
@@ -47,6 +51,14 @@ public abstract class StaticAbility extends AbilityImpl {
         if (effect != null) {
             this.addEffect(effect);
         }
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (game.getShortLivingLKI(getSourceId(), zone)) {
+            return true;
+        }
+        return super.isInUseableZone(game, source, event);
     }
 
     public StaticAbility(StaticAbility ability) {

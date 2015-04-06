@@ -47,6 +47,7 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -382,10 +383,10 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param game
      * @param source
-     * @param checkLKI
+     * @param event
      * @return 
      */
-    boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
+    boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 
     /**
      * Returns true if this ability has to be shown as topmost of all the rules of the object

@@ -118,7 +118,7 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
         if (quickenWatcher.isQuickenSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.SORCERY) && source.getControllerId().equals(affectedControllerId)) {
-                    return card.getSpellAbility().isInUseableZone(game, card, false);
+                    return card.getSpellAbility().isInUseableZone(game, card, null);
             }
         }
         return false;

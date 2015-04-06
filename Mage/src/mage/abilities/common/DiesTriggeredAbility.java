@@ -55,7 +55,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         // check it was previously on battlefield
         Permanent before = (Permanent) game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
         // check now it is in graveyard

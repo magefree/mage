@@ -132,7 +132,7 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
         if (watcher.isSavageSummoningSpellActive()) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getOwnerId().equals(source.getControllerId())) {
-                    return card.getSpellAbility().isInUseableZone(game, card, false);
+                    return card.getSpellAbility().isInUseableZone(game, card, null);
             }
         }
         return false;

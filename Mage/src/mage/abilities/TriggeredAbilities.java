@@ -72,7 +72,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             }
             // for effects like when leaves battlefield or destroyed use ShortLKI to check if permanent was in the correct zone before (e.g. Oblivion Ring or Karmic Justice)
             MageObject object = game.getObject(ability.getSourceId());
-            if (ability.isInUseableZone(game, object, false)) {
+            if (ability.isInUseableZone(game, object, event)) {
                 if (!game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                     if (object != null) {
                         boolean controllerSet = false;
