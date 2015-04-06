@@ -149,12 +149,22 @@ public class GameEvent {
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
-        ADD_COUNTERS, COUNTERS_ADDED, /* COUNTERS_ADDED not implemented yet */
+        ADD_COUNTERS, COUNTERS_ADDED,
         COUNTER_REMOVED,
         LOSE_CONTROL, LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
         CREATE_TOKEN,
-        REGENERATE, REGENERATED,
+
+        /* REGENERATE
+            targetId    id of the creature to regenerate
+            sourceId    sourceId of the effect doing the regeneration
+            playerId    controller of the creature
+            amount      not used for this event
+            flag        not used for this event
+        */
+        REGENERATE,
+
+        REGENERATED,
         CHANGE_COLOR, COLOR_CHANGED,
 
         //combat events
