@@ -99,24 +99,31 @@ class PaladinOfPrahvTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            Permanent target = game.getPermanent(this.getFirstTarget());
-            if (target != null && event.getSourceId().equals(target.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
+    public boolean checkEventType(GameEvent event, Game game) {
+        switch(event.getType()) {
+            case DAMAGED_CREATURE:
+            case DAMAGED_PLAYER:
+            case DAMAGED_PLANESWALKER:
                 return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent target = game.getPermanent(this.getFirstTarget());
+        if (target != null && event.getSourceId().equals(target.getId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("damage", event.getAmount());
             }
+            return true;
         }
         return false;
     }
     
     @Override
     public String getRule() {
-        return "Whenever target creature deals damage, " + super.getRule();
+        return "Whenever target creature deals damage this turn, " + super.getRule();
     }
 }
 
@@ -138,13 +145,14 @@ class PaladinOfPrahvEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int amount = (Integer) getValue("damage");
+            if (amount > 0) {
                 controller.gainLife(amount, game);
                 return true;
             }
+            return true;
         }
         return false;
     }
