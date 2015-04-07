@@ -208,8 +208,9 @@ public class Spell implements StackObject, Card {
                 return result;
             }
             //20091005 - 608.2b
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(getName() + " has been fizzled.");
+            }
             counter(null, game);
             return false;
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
@@ -250,8 +251,9 @@ public class Spell implements StackObject, Card {
                 return result;
             } else {
                 //20091005 - 608.2b
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(getName() + " has been fizzled.");
+                }
                 counter(null, game);
                 return false;
             }

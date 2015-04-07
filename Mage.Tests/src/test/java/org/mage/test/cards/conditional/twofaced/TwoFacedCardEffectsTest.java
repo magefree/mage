@@ -112,4 +112,25 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Howlpack Alpha", 1);
     }
 
+    /**
+     * Tests that triggered abilities of the frontside do not trigger if the card is transformed
+     * 
+     */
+    @Test
+    public void testTransformedDOesNotTriggerFrontsideAbilities() {
+        addCard(Zone.BATTLEFIELD, playerA, "Loyal Cathar");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt",2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Loyal Cathar");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Unhallowed Cathar");
+
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 2);
+        assertPermanentCount(playerA, "Unhallowed Cathar", 0);
+        assertGraveyardCount(playerA, "Loyal Cathar", 1);
+    }
 }
