@@ -315,29 +315,18 @@ public class HumanPlayer extends PlayerImpl {
             game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
+                if (target.getTargets().contains(response.getUUID())) {
+                    target.remove(response.getUUID());
+                    continue;
+                }
                 if (possibleTargets.contains(response.getUUID())) {
-                    if (target instanceof TargetPermanent) {
-                        if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), source, game)) {
-                            if (target.getTargets().contains(response.getUUID())) { // if already included remove it with
-                                target.remove(response.getUUID());
-                            } else {
-                                target.addTarget(response.getUUID(), source, game);
-                                if(target.doneChosing()){
-                                    return true;
-                                }
-                            }
-                        }
-                    } else if (target.canTarget(playerId, response.getUUID(), source, game)) {
-                        if (target.getTargets().contains(response.getUUID())) { // if already included remove it with 
-                            target.remove(response.getUUID());
-                        } else {
-                            target.addTarget(response.getUUID(), source, game);
-                        }
+                    if (target.canTarget(playerId, response.getUUID(), source, game)) {
+                        target.addTarget(response.getUUID(), source, game);
                         if(target.doneChosing()){
                             return true;
                         }
                     }
-                } // else do nothing - allow to pick another target
+                } 
             } else {
                 if (target.getTargets().size() >= target.getNumberOfTargets()) {
                     return true;
