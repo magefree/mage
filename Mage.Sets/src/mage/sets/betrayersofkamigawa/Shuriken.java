@@ -199,7 +199,7 @@ class ShurikenControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = null;
+        Permanent equipment = null; // TODO: Meanwhile blinked object would be found regardless
         for(Cost cost : source.getCosts()) {
             if (cost instanceof ShurikenUnattachCost) {
                 equipment = ((ShurikenUnattachCost) cost).getEquipment();

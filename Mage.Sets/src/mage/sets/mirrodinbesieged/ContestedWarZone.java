@@ -132,7 +132,7 @@ class ContestedWarZoneAbility extends TriggeredAbilityImpl {
 class ContestedWarZoneEffect extends ContinuousEffectImpl {
 
     public ContestedWarZoneEffect() {
-        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
     public ContestedWarZoneEffect(final ContestedWarZoneEffect effect) {
@@ -146,10 +146,12 @@ class ContestedWarZoneEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         UUID controllerId = (UUID) game.getState().getValue(source.getSourceId().toString());
         if (permanent != null && controllerId != null) {
             return permanent.changeControllerId(controllerId, game);
+        } else {
+            discard();
         }
         return false;
     }

@@ -113,7 +113,7 @@ class MeasureOfWickednessControlSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null && targetOpponent != null) {
                 permanent.changeControllerId(targetOpponent.getId(), game);
         } else {

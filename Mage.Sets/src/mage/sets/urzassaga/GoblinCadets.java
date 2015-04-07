@@ -93,9 +93,11 @@ class GoblinCadetsChangeControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game);
+        } else {
+            discard();
         }
         return false;
     }

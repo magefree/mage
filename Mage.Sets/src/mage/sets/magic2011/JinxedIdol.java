@@ -53,7 +53,11 @@ public class JinxedIdol extends CardImpl {
     public JinxedIdol(UUID ownerId) {
         super(ownerId, 208, "Jinxed Idol", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "M11";
+        
+        // At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.        
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DamageControllerEffect(2)));
+        
+        // Sacrifice a creature: Target opponent gains control of Jinxed Idol.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JinxedIdolEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -88,9 +92,11 @@ class JinxedIdolEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(source.getFirstTarget(), game);
+        } else {
+            discard();
         }
         return false;
     }
