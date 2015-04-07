@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
 public class KuldothaForgemaster extends CardImpl {
 
     private static final FilterArtifactCard filterArtifactCard = new FilterArtifactCard();
-    private static final FilterControlledArtifactPermanent filterArtifactPermanent = new FilterControlledArtifactPermanent();
+    private static final FilterControlledArtifactPermanent filterArtifactPermanent = new FilterControlledArtifactPermanent("three artifacts you control");
 
     public KuldothaForgemaster(UUID ownerId) {
         super(ownerId, 169, "Kuldotha Forgemaster", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
