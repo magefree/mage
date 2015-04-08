@@ -892,20 +892,12 @@ public abstract class AbilityImpl implements Ability {
         }
 
         if (object != null && !object.getAbilities().contains(this)) {
-            boolean found = false;
-            // unfortunately we need to handle double faced cards separately and only this way
-            if (object instanceof PermanentCard) {
-                if (((PermanentCard)object).canTransform()) {
-                    PermanentCard permanent = (PermanentCard)object;
-                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
-                }
-            } else {
+            if (!(object instanceof Permanent)) {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                found = otherAbilities != null && otherAbilities.contains(this);
-            }
-            if (!found) {
-                return false;
+                if (otherAbilities == null || !otherAbilities.contains(this)) {
+                    return false;
+                }
             }
         }
         // check against current state
