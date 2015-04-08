@@ -115,7 +115,25 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl {
     public HuntmasterOfTheFellsAbility copy() {
         return new HuntmasterOfTheFellsAbility(this);
     }
+    
 
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (event.getType() == GameEvent.EventType.TRANSFORMED) {
+            Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
+            if (currentSourceObject != null && !currentSourceObject.isNightCard()) {
+                return true;
+            }
+        }
+        return super.isInUseableZone(game, source, event);
+    }
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TRANSFORMED || event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TRANSFORMED && event.getTargetId().equals(this.getSourceId())) {
@@ -158,8 +176,23 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TRANSFORMED;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        Permanent currentSourceObject = (Permanent) getSourceObjectIfItStillExists(game);
+        if (currentSourceObject != null && currentSourceObject.isNightCard()) {
+            return true;
+        }
+        return super.isInUseableZone(game, source, event);
+    }
+
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TRANSFORMED && event.getTargetId().equals(sourceId)) {
+        if (event.getTargetId().equals(sourceId)) {
             Permanent permanent = game.getPermanent(sourceId);
             if (permanent != null && permanent.isTransformed()) {
                 return true;
