@@ -44,7 +44,6 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -109,13 +108,13 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
         if (controller != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
+            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
             if (exileId != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (!permanent.getId().equals(source.getSourceId())) { // Another
-                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }
                 return true;
@@ -145,8 +144,7 @@ class WorldgorgerDragonLeavesEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            UUID exileId = source.getSourceId();
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() -1));
             if (exile != null) {
                 exile = exile.copy();
                 for (UUID cardId : exile) {
