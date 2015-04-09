@@ -128,7 +128,7 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
                 for (int i = 0; i < 3; i++) {
                     Card card = opponent.getLibrary().getFromTop(game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
                 return true;
@@ -277,7 +277,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
                 cards.clear();
@@ -285,7 +285,7 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
                 for (UUID cardId :cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
             }

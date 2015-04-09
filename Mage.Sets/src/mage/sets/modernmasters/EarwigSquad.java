@@ -111,7 +111,7 @@ class EarwigSquadEffect extends OneShotEffect {
                 for (UUID targetId : targets) {
                     Card card = opponent.getLibrary().remove(targetId, game);
                     if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }

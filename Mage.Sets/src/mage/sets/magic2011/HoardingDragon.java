@@ -107,7 +107,7 @@ class HoardingDragonEffect extends OneShotEffect {
                 if (target.getTargets().size() > 0) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, "Hoarding Dragon", source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToExileWithInfo(card, exileId, "Hoarding Dragon", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }

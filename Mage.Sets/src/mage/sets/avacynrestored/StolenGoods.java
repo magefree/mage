@@ -95,7 +95,7 @@ class StolenGoodsEffect extends OneShotEffect {
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
-                    opponent.moveCardToExileWithInfo(card, source.getSourceId(),  "Stolen Goods", source.getSourceId(), game, Zone.LIBRARY);
+                    opponent.moveCardToExileWithInfo(card, source.getSourceId(),  "Stolen Goods", source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
 

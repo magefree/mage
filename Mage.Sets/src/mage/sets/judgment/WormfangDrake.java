@@ -134,7 +134,7 @@ class WormfangDrakeExileCost extends CostImpl {
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + " exiled permanents", sourceId, game, Zone.BATTLEFIELD);
+                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + " exiled permanents", sourceId, game, Zone.BATTLEFIELD, true);
                 }
             }
         }

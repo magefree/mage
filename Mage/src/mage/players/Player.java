@@ -457,7 +457,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return
      */
-    boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone);
+    boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to graveyard

@@ -97,7 +97,7 @@ class CommuneWithLavaEffect extends OneShotEffect {
             List<Card> cards = controller.getLibrary().getTopCards(game, amount);
             for (Card card : cards) {
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new CommuneWithLavaMayPlayEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

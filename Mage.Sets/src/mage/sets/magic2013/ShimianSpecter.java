@@ -131,7 +131,7 @@ class ShimianSpecterEffect extends OneShotEffect {
             if (chosenCard != null) {
                 for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
                     if (checkCard.getName().equals(chosenCard.getName())) {
-                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
 
@@ -141,7 +141,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 for(UUID cardId:  targetHandCards.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
             }            
@@ -154,7 +154,7 @@ class ShimianSpecterEffect extends OneShotEffect {
                 for(UUID cardId:  targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
                 targetPlayer.shuffleLibrary(game);

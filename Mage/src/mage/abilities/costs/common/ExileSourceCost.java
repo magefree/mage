@@ -75,7 +75,7 @@ public class ExileSourceCost extends CostImpl {
                 exileZoneId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
                 exileZoneName = sourceObject.getLogName();                
             }        
-            paid = controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, sourceId, game, game.getState().getZone(sourceObject.getId()));
+            paid = controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, sourceId, game, game.getState().getZone(sourceObject.getId()), true);
         }
         return paid;
     }

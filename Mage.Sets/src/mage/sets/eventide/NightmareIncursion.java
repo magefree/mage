@@ -116,7 +116,7 @@ class NightmareIncursionEffect extends OneShotEffect {
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                         result = true;
                     }
                 }

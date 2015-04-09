@@ -107,11 +107,11 @@ class TheMimeoplasmEffect extends OneShotEffect {
                     if (player.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
                         Card cardToCopy = game.getCard(targetCopy.getFirstTarget());
                         if (cardToCopy != null) {
-                            player.moveCardToExileWithInfo(cardToCopy, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                            player.moveCardToExileWithInfo(cardToCopy, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                             if (player.choose(Outcome.Copy, targetCounters, source.getSourceId(), game)) {
                                 Card cardForCounters = game.getCard(targetCounters.getFirstTarget());
                                 if (cardForCounters != null) {
-                                    player.moveCardToExileWithInfo(cardForCounters, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                                    player.moveCardToExileWithInfo(cardForCounters, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, cardToCopy, source.getSourceId());
                                     game.addEffect(copyEffect, source);
                                     permanent.addCounters(CounterType.P1P1.createInstance(cardForCounters.getPower().getValue()), game);

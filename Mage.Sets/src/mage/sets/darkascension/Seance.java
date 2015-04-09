@@ -98,7 +98,7 @@ class SeanceEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD)) {
+            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
                 EmptyToken token = new EmptyToken();
                 CardUtil.copyTo(token).from(card);
 

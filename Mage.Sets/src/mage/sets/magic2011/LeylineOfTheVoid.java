@@ -102,13 +102,13 @@ class LeylineOfTheVoidEffect extends ReplacementEffectImpl {
             if (((ZoneChangeEvent)event).getFromZone().equals(Zone.BATTLEFIELD)) {
                 Permanent permanent = ((ZoneChangeEvent)event).getTarget();
                 if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
             }
             else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone());
+                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone(), true);
                 }
             }
         }

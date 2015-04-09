@@ -94,7 +94,7 @@ public class ExileFromGraveCost extends CostImpl {
                         return false;
                     }
                     exiledCards.add(card);
-                    paid |= controller.moveCardToExileWithInfo(card, null, null, sourceId, game, Zone.GRAVEYARD);
+                    paid |= controller.moveCardToExileWithInfo(card, null, null, sourceId, game, Zone.GRAVEYARD, true);
                 }
             }
 

@@ -136,7 +136,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         if (permanent != null) {
                             Player player = game.getPlayer(permanent.getControllerId());
                             if (player != null) {
-                                player.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+                                player.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                             }
                         }
                     } else if (game.getState().getZone(objectId).equals(Zone.HAND)) {
@@ -144,7 +144,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                         if (card != null) {
                             Player player = game.getPlayer(card.getOwnerId());
                             if (player != null) {
-                                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                                player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                             }
                         }                        
                     }

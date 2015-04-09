@@ -155,12 +155,12 @@ class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEff
             if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();
                 if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone());
+                    return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
                 }
             } else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone());
+                    return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
                 }
             }
             return false;

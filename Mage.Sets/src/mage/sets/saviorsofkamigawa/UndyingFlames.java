@@ -95,7 +95,7 @@ class UndyingFlamesEffect extends OneShotEffect {
                 && you.getLibrary().size() > 0 && you.isInGame()) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                you.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                you.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                 if (!card.getCardType().contains(CardType.LAND)) {
                     int damage = card.getManaCost().convertedManaCost();
                     if (damage > 0) {

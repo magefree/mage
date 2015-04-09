@@ -70,7 +70,7 @@ class ManaSeveranceEffect extends SearchEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                         }
                     }
                 }

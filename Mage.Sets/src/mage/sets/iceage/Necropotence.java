@@ -62,8 +62,6 @@ public class Necropotence extends CardImpl {
         super(ownerId, 42, "Necropotence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlack(true);
-
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));        
         // Whenever you discard a card, exile that card from your graveyard.
@@ -136,7 +134,7 @@ class NecropotenceEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.getLibrary().size() > 0) {
                 Card card = controller.getLibrary().removeFromTop(game);
-                if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY)) {
+                if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, false)) {
                     card.setFaceDown(true, game);
                     Effect returnToHandeffect = new ReturnToHandTargetEffect(false);
                     returnToHandeffect.setText("put that face down card into your hand");

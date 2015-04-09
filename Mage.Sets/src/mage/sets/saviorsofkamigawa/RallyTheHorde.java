@@ -111,7 +111,7 @@ class RallyTheHordeEffect extends OneShotEffect {
     private int checkIfNextLibCardIsNonLandAndExile(Player controller, Ability source, Game game) {
         Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
-            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
             return card.getCardType().contains(CardType.LAND) ? 0:1;
         }
         return 0;

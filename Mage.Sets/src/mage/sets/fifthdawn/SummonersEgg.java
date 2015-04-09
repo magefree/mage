@@ -97,7 +97,7 @@ class SummonersEggImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getLogName() +" (Imprint)", source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getLogName() +" (Imprint)", source.getSourceId(), game, Zone.HAND, true);
                         card.setFaceDown(true, game);
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {

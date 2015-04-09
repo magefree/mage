@@ -135,7 +135,7 @@ class VizkopaConfessorEffect extends OneShotEffect {
                     controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
                     Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
                 return true;

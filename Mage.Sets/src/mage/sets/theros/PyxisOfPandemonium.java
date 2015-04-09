@@ -123,7 +123,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                         }
                         player.moveCardToExileWithInfo(card, exileId, 
                                 new StringBuilder(sourceObject.getLogName() +" (").append(player.getName()).append(")").toString(),
-                                source.getSourceId(), game, Zone.LIBRARY);
+                                source.getSourceId(), game, Zone.LIBRARY, true);
                         card.setFaceDown(true, game);
                     }
                 }

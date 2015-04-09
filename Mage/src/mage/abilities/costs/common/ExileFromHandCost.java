@@ -85,7 +85,7 @@ public class ExileFromHandCost extends CostImpl {
                 }
                 cmc += card.getManaCost().convertedManaCost();
                 this.cards.add(card);
-                paid |= player.moveCardToExileWithInfo(card, null, null, ability.getSourceId(), game, Zone.HAND);
+                paid |= player.moveCardToExileWithInfo(card, null, null, ability.getSourceId(), game, Zone.HAND, true);
             }
             if (paid && setXFromCMC) {
                 VariableManaCost vmc = new VariableManaCost();

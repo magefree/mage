@@ -98,7 +98,7 @@ class MindsDesireEffect extends OneShotEffect {
             if (player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    player.moveCardToExileWithInfo(card, source.getSourceId(), "Mind's Desire", source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCardToExileWithInfo(card, source.getSourceId(), "Mind's Desire", source.getSourceId(), game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new MindsDesireCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

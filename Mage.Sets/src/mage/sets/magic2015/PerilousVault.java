@@ -95,7 +95,7 @@ class PerilousVaultEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.HAND);
+                controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.HAND, true);
             }
             return true;
         }

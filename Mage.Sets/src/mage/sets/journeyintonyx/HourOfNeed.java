@@ -97,7 +97,7 @@ class HourOfNeedExileEffect extends OneShotEffect {
             for(UUID creatureId: getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(creatureId);
                 if (creature != null) {
-                    controller.moveCardToExileWithInfo(creature, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCardToExileWithInfo(creature, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     Token token = new HourOfNeedSphinxToken();
                     token.putOntoBattlefield(1, game, source.getSourceId(), creature.getControllerId());
                 }

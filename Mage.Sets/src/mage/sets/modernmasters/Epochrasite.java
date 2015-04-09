@@ -111,7 +111,7 @@ class EpochrasiteEffect extends OneShotEffect {
         if (controller != null && card != null) {
             if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-                controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                 card.addCounters(CounterType.TIME.createInstance(3), game);
                 game.addEffect(new GainSuspendEffect(), source);
             }

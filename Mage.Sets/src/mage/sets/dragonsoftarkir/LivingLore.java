@@ -113,7 +113,7 @@ class LivingLoreExileEffect extends OneShotEffect {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
             }
             return true;

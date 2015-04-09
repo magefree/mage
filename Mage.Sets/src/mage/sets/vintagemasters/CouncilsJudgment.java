@@ -133,7 +133,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
             for (Entry<Permanent, Integer> entry : chosenCards.entrySet()) {
                 if (entry.getValue() == maxCount) {
                     Permanent permanent = entry.getKey();
-                    controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
             }
             return true;

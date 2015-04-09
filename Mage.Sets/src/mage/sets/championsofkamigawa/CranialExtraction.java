@@ -105,17 +105,17 @@ class CranialExtractionEffect extends OneShotEffect {
             game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
             for (Card card: player.getGraveyard().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
             }
             for (Card card: player.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                 }
             }
             for (Card card: player.getLibrary().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             controller.lookAtCards(sourceObject.getLogName() + " Hand", player.getHand(), game);

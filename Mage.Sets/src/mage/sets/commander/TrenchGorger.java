@@ -103,7 +103,7 @@ class TrenchGorgerEffect extends OneShotEffect {
             int count = 0;
             for (UUID cardId: target.getTargets()) {
                 Card card = game.getCard(cardId);
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 count++;
             }
             controller.shuffleLibrary(game);

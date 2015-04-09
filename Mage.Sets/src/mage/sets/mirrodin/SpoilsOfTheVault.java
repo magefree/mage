@@ -106,7 +106,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect {
                     break;
                 }
                 else{
-                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             else{

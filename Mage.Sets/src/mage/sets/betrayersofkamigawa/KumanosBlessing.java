@@ -117,7 +117,7 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return false;
     }

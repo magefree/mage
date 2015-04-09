@@ -105,7 +105,7 @@ class PuresightMerrowEffect extends OneShotEffect {
                 cards.add(card);
                 controller.lookAtCards("Puresight Merrow", cards, game);
                 if (controller.chooseUse(Outcome.Removal, "Do you wish to exile the card from the top of your library?", game)) {
-                    controller.moveCardToExileWithInfo(card, source.getSourceId(), "Puresight Merrow", source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, source.getSourceId(), "Puresight Merrow", source.getSourceId(), game, Zone.LIBRARY, true);
                 } else {
                     game.informPlayers(controller.getName() + " puts the card back on top of their library.");
                 }

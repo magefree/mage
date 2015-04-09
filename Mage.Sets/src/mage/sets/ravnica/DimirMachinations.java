@@ -105,7 +105,7 @@ class DimirMachinationsEffect extends OneShotEffect {
                     for (UUID cardId : targetExile.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
-                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                             cards.remove(card);
                         }
                     }

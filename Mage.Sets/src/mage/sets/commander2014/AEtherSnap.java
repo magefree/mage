@@ -91,7 +91,7 @@ class AEtherSnapEffect extends OneShotEffect {
         if (controller != null) {
             for (Permanent permanent :game.getBattlefield().getActivePermanents(new FilterPermanent(), controller.getId(), source.getSourceId(), game)) {
                 if (permanent instanceof PermanentToken) {
-                    controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 } else if (!permanent.getCounters().isEmpty()){
                     Counters counters = permanent.getCounters().copy();
                     for (Counter counter: counters.values()) {

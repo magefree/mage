@@ -76,7 +76,7 @@ public class ExileTargetCost extends CostImpl {
                 // Even if they are, meaning the actions that are performed don't match the actions 
                 // that are called for, the cost has still been paid.
                 // so return state here is not important because the user indended to exile the target anyway
-                game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD);
+                game.getPlayer(ability.getControllerId()).moveCardToExileWithInfo(permanent, null, null, sourceId, game, Zone.BATTLEFIELD, true);
             }
             paid = true;
         }

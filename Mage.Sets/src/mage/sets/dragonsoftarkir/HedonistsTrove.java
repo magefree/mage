@@ -106,7 +106,7 @@ class HedonistsTroveExileEffect extends OneShotEffect {
             for (UUID cardId : graveyard) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
             }
             return true;

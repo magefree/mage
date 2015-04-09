@@ -157,7 +157,7 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+            controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return true;
     }

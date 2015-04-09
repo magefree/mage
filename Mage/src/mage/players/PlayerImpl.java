@@ -2784,13 +2784,19 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (card instanceof PermanentCard) {
                 card = game.getCard(card.getId());
             }
-            if (!game.isSimulation())
-                game.informPlayers(new StringBuilder(this.getName())
-                    .append(" puts ")
-                    .append(withName ? card.getLogName() : "a face down card")
-                    .append(" ")
-                    .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
-                    .append(card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand").toString());
+            if (!game.isSimulation()) {
+                StringBuilder sb = new StringBuilder(this.getName()).append(" puts ").append(withName ? card.getLogName() : "a face down card ");
+                switch(fromZone) {
+                    case EXILED:
+                        sb.append("from exile zone ");
+                        break;
+                    default:
+                        sb.append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
+                        break;
+                }                
+                sb.append(card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand");
+                game.informPlayers(sb.toString());
+            }
             result = true;
         }
         return result;
@@ -2915,7 +2921,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone) {
+    public boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName) {
         boolean result = false;
         if (card.moveToExile(exileId, exileName, sourceId, game)) {
             if (!game.isSimulation()) {
@@ -2923,9 +2929,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 game.informPlayers(new StringBuilder(this.getName())
-                        .append(" moves ").append(card.getLogName()).append(" ")
+                        .append(" moves ").append(withName ? card.getLogName() : "a card face down ")
                         .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
-                        .append("to exile").toString());
+                        .append("to the exile zone").toString());
             }
             result = true;
         }
