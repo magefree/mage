@@ -32,7 +32,9 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -49,7 +51,6 @@ public class LightkeeperOfEmeria extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
@@ -60,7 +61,9 @@ public class LightkeeperOfEmeria extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new MultikickerCount())));
+        Effect effect = new GainLifeEffect(new MultipliedValue(new MultikickerCount(), 2));
+        effect.setText("you gain 2 life for each time it was kicked");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
     public LightkeeperOfEmeria(final LightkeeperOfEmeria card) {
