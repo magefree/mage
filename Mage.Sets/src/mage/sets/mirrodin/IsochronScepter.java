@@ -62,7 +62,7 @@ public class IsochronScepter extends CardImpl {
         this.expansionSetCode = "MRD";
 
         // Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new IsochronScepterImprintEffect(), true, "<i>Imprint - </i>"));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new IsochronScepterImprintEffect(), true, "<i>Imprint &mdash; </i>"));
 
         // {2}, {tap}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IsochronScepterCopyEffect(), new GenericManaCost(2));

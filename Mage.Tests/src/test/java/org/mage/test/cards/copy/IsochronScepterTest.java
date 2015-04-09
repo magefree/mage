@@ -111,4 +111,35 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         
     }
     
+    @Test
+    public void testAngelsGrace() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Angel's Grace");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Dross Crocodile", 4);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        addTarget(playerA, "Angel's Grace");
+        
+        attack(2, playerB, "Dross Crocodile");
+        attack(2, playerB, "Dross Crocodile");
+        attack(2, playerB, "Dross Crocodile");
+        attack(2, playerB, "Dross Crocodile");
+
+        activateAbility(2, PhaseStep.DECLARE_BLOCKERS, playerA, "{2},{T}:");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Isochron Scepter", 1);
+        assertExileCount("Angel's Grace", 1);
+        assertGraveyardCount(playerA, "Angel's Grace", 0);
+
+        assertLife(playerA, 1);
+        assertLife(playerB, 20);
+
+    }
 }

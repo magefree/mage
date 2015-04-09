@@ -351,10 +351,8 @@ public class ContinuousEffects implements Serializable {
                 if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
-                            if (checkAbilityStillExists(ability, effect, event, game)) { // TODO: This is really needed???
-                                    if (effect.applies(event, ability, game)) {
-                                    applicableAbilities.add(ability);
-                                }
+                            if (effect.applies(event, ability, game)) {
+                                applicableAbilities.add(ability);
                             }
                         }
                     }

@@ -1424,6 +1424,35 @@ public abstract class GameImpl implements Game, Serializable {
             Card card = copiedCards.next();
             Zone zone = state.getZone(card.getId());
             if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
+                switch (zone) {
+                    case GRAVEYARD:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getGraveyard().contains(card.getId())) {
+                                player.getGraveyard().remove(card);
+                                break;
+                            }
+                        }
+                        break;
+                    case HAND:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getHand().contains(card.getId())) {
+                                player.getHand().remove(card);
+                                break;
+                            }
+                        }
+                        break;
+                    case LIBRARY:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getLibrary().getCard(card.getId(), this) != null) {
+                                player.getLibrary().remove(card.getId(), this);
+                                break;
+                            }
+                        }
+                        break;
+                    case EXILED:
+                        getExile().removeCard(card, this);
+                        break;
+                }
                 copiedCards.remove();
             }
         }
