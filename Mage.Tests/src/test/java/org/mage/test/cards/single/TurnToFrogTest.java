@@ -19,8 +19,10 @@ public class TurnToFrogTest extends CardTestPlayerBase {
     public void testCard() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        // {2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
         addCard(Zone.BATTLEFIELD, playerA, "Raging Ravine");
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
         addCard(Zone.HAND, playerB, "Turn to Frog");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn, {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
