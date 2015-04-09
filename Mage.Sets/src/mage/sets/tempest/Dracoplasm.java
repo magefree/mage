@@ -25,18 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.championsofkamigawa;
+package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -48,48 +58,57 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author LevelX2
  */
-public class ShimatsuTheBloodcloaked extends CardImpl {
+public class Dracoplasm extends CardImpl {
 
-    public ShimatsuTheBloodcloaked(UUID ownerId) {
-        super(ownerId, 186, "Shimatsu the Bloodcloaked", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "CHK";
-        this.supertype.add("Legendary");
-        this.subtype.add("Demon");
-        this.subtype.add("Spirit");
-
+    public Dracoplasm(UUID ownerId) {
+        super(ownerId, 341, "Dracoplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}{R}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShimatsuTheBloodcloakedEffect()));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // As Dracoplasm enters the battlefield, sacrifice any number of creatures. Dracoplasm's power becomes the total power of those creatures and its toughness becomes their total toughness.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DracoplasmEffect()));
+        
+        // {R}: Dracoplasm gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public ShimatsuTheBloodcloaked(final ShimatsuTheBloodcloaked card) {
+    public Dracoplasm(final Dracoplasm card) {
         super(card);
     }
 
     @Override
-    public ShimatsuTheBloodcloaked copy() {
-        return new ShimatsuTheBloodcloaked(this);
+    public Dracoplasm copy() {
+        return new Dracoplasm(this);
     }
 }
 
-class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
+class DracoplasmEffect extends ReplacementEffectImpl {
     
-    public ShimatsuTheBloodcloakedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
-        this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    
+    static {
+        filter.add(new AnotherPredicate());
     }
     
-    public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
+    public DracoplasmEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        this.staticText = "As {this} enters the battlefield, sacrifice any number of creatures. {this}'s power becomes the total power of those creatures and its toughness becomes their total toughness";
+    }
+    
+    public DracoplasmEffect(final DracoplasmEffect effect) {
         super(effect);
     }
     
     @Override
-    public ShimatsuTheBloodcloakedEffect copy() {
-        return new ShimatsuTheBloodcloakedEffect(this);
+    public DracoplasmEffect copy() {
+        return new DracoplasmEffect(this);
     }
-
+    
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
@@ -98,6 +117,7 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());        
+
     }
     
     @Override
@@ -105,21 +125,23 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         Permanent creature = game.getPermanent(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledPermanent(), true);
+            Target target = new TargetControlledPermanent(0, Integer.MAX_VALUE, filter, true);
             if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }
             controller.chooseTarget(Outcome.Detriment, target, source, game);
             if (target.getTargets().size() > 0) {
-                int sacrificedCreatures = target.getTargets().size();
-                game.informPlayers(new StringBuilder(controller.getName()).append(" sacrifices ").append(sacrificedCreatures).append(" creatures for ").append(creature.getName()).toString());
+                int power = 0;
+                int toughness = 0;
                 for (UUID targetId: target.getTargets()) {
                     Permanent targetCreature = game.getPermanent(targetId);
-                    if (targetCreature == null || !targetCreature.sacrifice(source.getSourceId(), game)) {
-                        return false;
+                    if (targetCreature != null && targetCreature.sacrifice(source.getSourceId(), game)) {
+                        power += targetCreature.getPower().getValue();
+                        toughness += targetCreature.getToughness().getValue();
                     }
                 }
-                creature.addCounters(CounterType.P1P1.createInstance(sacrificedCreatures), game);
+                ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.Custom);
+                game.addEffect(effect, source);
             }
         }
         return false;

@@ -25,46 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.tempestremastered;
 
 import java.util.UUID;
 
-import mage.constants.*;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class SandstoneWarrior extends CardImpl {
+public class Dracoplasm extends mage.sets.tempest.Dracoplasm {
 
-    public SandstoneWarrior(UUID ownerId) {
-        super(ownerId, 199, "Sandstone Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-        
-        // First strike (This creature deals combat damage before creatures without first strike.)        
-        this.addAbility(FirstStrikeAbility.getInstance());
-        
-        // {R}: Sandstone Warrior gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+    public Dracoplasm(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 208;
+        this.expansionSetCode = "TPR";
     }
 
-    public SandstoneWarrior(final SandstoneWarrior card) {
+    public Dracoplasm(final Dracoplasm card) {
         super(card);
     }
 
     @Override
-    public SandstoneWarrior copy() {
-        return new SandstoneWarrior(this);
+    public Dracoplasm copy() {
+        return new Dracoplasm(this);
     }
 }

@@ -77,6 +77,9 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         MageObject mageObject = game.getObject(source.getSourceId()); // there are character definig abilities (e.g. P/T Nightmare) that have to work also for P/T of cards
         if (mageObject == null) {
+            if (duration.equals(Duration.Custom)) {
+                discard();
+            }
             return false;
         }
         if (amount != null) {

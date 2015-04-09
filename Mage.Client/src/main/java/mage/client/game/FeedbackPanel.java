@@ -64,7 +64,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
     }
 
-    private boolean selected = false;
     private UUID gameId;
     private Session session;
     private FeedbackMode mode;
@@ -96,7 +95,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         this.lblMessage.setText(message);
         this.helper.setMessage(message);
-        this.selected = false;
         this.mode = mode;
         switch (this.mode) {
             case INFORM:
@@ -270,7 +268,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private void btnRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRightActionPerformed
-        this.selected = true;
         if (connectedDialog != null) {
             connectedDialog.removeDialog();
             connectedDialog = null;
@@ -289,7 +286,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-        this.selected = true;
         session.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
