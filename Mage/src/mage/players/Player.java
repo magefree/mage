@@ -565,7 +565,6 @@ public interface Player extends MageItem, Copyable<Player> {
     void addPermissionToShowHandCards(UUID watcherUserId);
     boolean hasUserPermissionToSeeHand(UUID userId);
     void revokePermissionToSeeHandCards();
-    void setRequestToShowHandCardsAllowed(boolean requestAllowed);
     boolean isRequestToShowHandCardsAllowed();
     Set<UUID> getUsersAllowedToSeeHandCards();
 

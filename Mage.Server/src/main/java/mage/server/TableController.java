@@ -300,6 +300,7 @@ public class TableController {
         logger.trace(player.getName() + " joined tableId: " + table.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
+            seat.getPlayer().setUserData(user.getUserData());
             if (!table.isTournamentSubTable()) {
                 user.addTable(player.getId(), table);
             }
@@ -552,14 +553,11 @@ public class TableController {
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
             StringBuilder opponent = new StringBuilder();
-//            int activePlayers = 0;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) { // no AI players
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
-//                        activePlayers++;
                         Player player = match.getPlayer(entry.getValue()).getPlayer();
-                        player.setRequestToShowHandCardsAllowed(user.getUserData().allowRequestShowHandCards());
                         user.ccGameStarted(match.getGame().getId(), entry.getValue());
                         
                         if (creator == null) {
@@ -582,16 +580,12 @@ public class TableController {
             // Append AI opponents to the log file
             for (MatchPlayer mPlayer :match.getPlayers()) {
                 if (!mPlayer.getPlayer().isHuman()) {
-//                    activePlayers++;
                     if (opponent.length() > 0) {
                         opponent.append(" - ");
                     }
                     opponent.append(mPlayer.getName());
                 }
             }
-//            if (activePlayers < 2) {
-//                throw new MageException("Can't start game - Less than two players active - " +activePlayers);
-//            }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
 

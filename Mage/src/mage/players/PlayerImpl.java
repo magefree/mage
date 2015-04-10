@@ -306,7 +306,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.playersUnderYourControl.clear();
         this.playersUnderYourControl.addAll(player.playersUnderYourControl);
         this.usersAllowedToSeeHandCards.addAll(player.usersAllowedToSeeHandCards);
-        this.requestsAllowedToSeeHandCards = player.requestsAllowedToSeeHandCards;
 
         this.isTestMode = player.isTestMode;
         this.isGameUnderControl = player.isGameUnderControl;
@@ -386,7 +385,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithoutMana = player.getCastSourceIdWithoutMana();
 
         this.usersAllowedToSeeHandCards.addAll(player.getUsersAllowedToSeeHandCards());
-        this.requestsAllowedToSeeHandCards = player.isRequestToShowHandCardsAllowed();
     }
 
     @Override
@@ -1864,10 +1862,10 @@ public abstract class PlayerImpl implements Player, Serializable {
                 passedUntilStackResolved = false;
                 break;
             case PERMISSION_REQUESTS_ALLOWED_OFF:
-                this.setRequestToShowHandCardsAllowed(false);
+                userData.setAllowRequestShowHandCards(false);
                 break;
             case PERMISSION_REQUESTS_ALLOWED_ON:
-                this.setRequestToShowHandCardsAllowed(true);
+                userData.setAllowRequestShowHandCards(true);
                 break;
         }
         logger.trace("PASS Priority: " + playerAction.toString());
@@ -3007,14 +3005,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         usersAllowedToSeeHandCards.add(watcherUserId);
     }
 
-    @Override
-    public void setRequestToShowHandCardsAllowed(boolean requestAllowed) {
-        this.requestsAllowedToSeeHandCards = requestAllowed;
-    }
 
     @Override
     public boolean isRequestToShowHandCardsAllowed() {
-        return requestsAllowedToSeeHandCards;
+        return userData.allowRequestShowHandCards();
     }
 
     @Override

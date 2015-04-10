@@ -43,6 +43,10 @@ public class UserData implements Serializable {
         return showAbilityPickerForced;
     }
 
+    public boolean isAllowRequestShowHandCards() {
+        return allowRequestShowHandCards;
+    }
+
     public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
         this.showAbilityPickerForced = showAbilityPickerForced;
     }

@@ -70,8 +70,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
-    private UserData userData;
-
     public GameSessionPlayer(Game game, UUID userId, UUID playerId) {
         super(userId, game, true);
         this.playerId = playerId;
@@ -214,7 +212,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
     @Override
     public GameView getGameView() {
         Player player = game.getPlayer(playerId);
-        player.setUserData(this.userData);
         GameView gameView = new GameView(game.getState(), game, playerId, null);
         gameView.setHand(new CardsView(player.getHand().getCards(game)));
         if (gameView.getPriorityPlayerName().equals(player.getName())) {
@@ -298,7 +295,4 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-    }
 }

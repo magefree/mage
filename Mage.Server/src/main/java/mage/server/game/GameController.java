@@ -331,7 +331,6 @@ public class GameController implements GameCallback {
         if (gameSession == null) {
             gameSession = new GameSessionPlayer(game, userId, playerId);
             gameSessions.put(playerId, gameSession);
-            gameSession.setUserData(user.getUserData());
             joinType = "joined";
         } else {
             joinType = "rejoined";
