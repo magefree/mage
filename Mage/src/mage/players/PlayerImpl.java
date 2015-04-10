@@ -2783,13 +2783,13 @@ public abstract class PlayerImpl implements Player, Serializable {
                 card = game.getCard(card.getId());
             }
             if (!game.isSimulation()) {
-                StringBuilder sb = new StringBuilder(this.getName()).append(" puts ").append(withName ? card.getLogName() : "a face down card ");
+                StringBuilder sb = new StringBuilder(this.getName()).append(" puts ").append(withName ? card.getLogName() : "a face down card");
                 switch(fromZone) {
                     case EXILED:
-                        sb.append("from exile zone ");
+                        sb.append(" from exile zone ");
                         break;
                     default:
-                        sb.append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
+                        sb.append(fromZone != null ? new StringBuilder(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "");
                         break;
                 }                
                 sb.append(card.getOwnerId().equals(this.getId()) ? "into his or her hand" : "into its owner's hand");
@@ -2927,7 +2927,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 game.informPlayers(new StringBuilder(this.getName())
-                        .append(" moves ").append(withName ? card.getLogName() : "a card face down ")
+                        .append(" moves ").append(withName ? card.getLogName() : "a card face down").append(" ")
                         .append(fromZone != null ? new StringBuilder("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ") : "")
                         .append("to the exile zone").toString());
             }

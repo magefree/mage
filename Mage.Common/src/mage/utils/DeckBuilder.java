@@ -44,8 +44,8 @@ public class DeckBuilder {
         deckSize = deckCardSize;
         deck = new Deck();
 
-        final Collection<MageScoredCard> remainingCards = new ArrayList<MageScoredCard>();
-        Set<String> names = new HashSet<String>();
+        final Collection<MageScoredCard> remainingCards = new ArrayList<>();
+        Set<String> names = new HashSet<>();
         for (final Card card : spellCardPool) {
             if (names.contains(card.getName())) {
                 continue;
@@ -155,7 +155,7 @@ public class DeckBuilder {
     private static void addLandsToDeck(List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, RateCallback callback) {
 
         // Calculate statistics per color.
-        final Map<String, Integer> colorCount = new HashMap<String, Integer>();
+        final Map<String, Integer> colorCount = new HashMap<>();
         for (final Card card : deck.getCards()) {
 
             for (String symbol : card.getManaCost().getSymbols()) {
@@ -170,7 +170,7 @@ public class DeckBuilder {
                     if (count > 0) {
                         Integer typeCount = colorCount.get(symbol);
                         if (typeCount == null) {
-                            typeCount = new Integer(0);
+                            typeCount = 0;
                         }
                         typeCount += 1;
                         colorCount.put(symbol, typeCount);
@@ -180,7 +180,7 @@ public class DeckBuilder {
         }
 
         // Add suitable non basic lands to deck in order of pack.
-        final Map<String, Integer> colorSource = new HashMap<String, Integer>();
+        final Map<String, Integer> colorSource = new HashMap<>();
         for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
             colorSource.put(color.toString(), 0);
         }
@@ -236,7 +236,7 @@ public class DeckBuilder {
     private static class MageScoredCard {
 
         private Card card;
-        private int score;
+        private final int score;
 
         private static final int SINGLE_PENALTY[] = {0, 1, 1, 3, 6, 9};
         //private static final int DOUBLE_PENALTY[] = { 0, 0, 1, 2, 4, 6 };
@@ -266,10 +266,10 @@ public class DeckBuilder {
 
         private int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
             int converted = card.getManaCost().convertedManaCost();
-            final Map<String, Integer> singleCount = new HashMap<String, Integer>();
+            final Map<String, Integer> singleCount = new HashMap<>();
             int maxSingleCount = 0;
             int multicolor = 0;
-            Set<String> colors = new HashSet<String>();
+            Set<String> colors = new HashSet<>();
             for (String symbol : card.getManaCost().getSymbols()) {
                 int count = 0;
                 symbol = symbol.replace("{", "").replace("}", "");
@@ -289,7 +289,7 @@ public class DeckBuilder {
                     }
                     Integer typeCount = singleCount.get(symbol);
                     if (typeCount == null) {
-                        typeCount = new Integer(0);
+                        typeCount = 0;
                     }
                     typeCount += 1;
                     singleCount.put(symbol, typeCount);
