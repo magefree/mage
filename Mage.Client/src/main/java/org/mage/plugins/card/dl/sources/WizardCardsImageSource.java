@@ -1,9 +1,19 @@
 package org.mage.plugins.card.dl.sources;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.Preferences;
+import mage.client.MageFrame;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -189,24 +199,63 @@ public class WizardCardsImageSource implements CardImageSource {
         Map<String, String> setLinks = new HashMap<>();
         try {
             String setNames = setsAliases.get(cardSet);
+            Preferences prefs = MageFrame.getPreferences();
+            Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
             for (String setName : setNames.split("\\^")) {
                 String URLSetName = URLEncoder.encode(setName, "UTF-8");
                 String urlDocument;
-                urlDocument = "http://gatherer.wizards.com/Pages/Search/Default.aspx?output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
-                Document doc = Jsoup.connect(urlDocument).get();
-                Elements cardsImages = doc.select("img[src^=../../Handlers/]");
-                for (int i = 0; i < cardsImages.size(); i++) {
-                    String cardName = normalizeName(cardsImages.get(i).attr("alt"));
-                    if (cardName != null && !cardName.isEmpty()) {
-                        if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                            int landNumber = 1;
-                            while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
-                                landNumber++;
-                            }
-                            cardName += landNumber;
+                int page = 0;
+                int firstMultiverseIdLastPage = 0;
+                Pages:
+                while (page < 999) {
+                    Document doc;
+                    if (proxyType.equals(ProxyType.NONE)) {
+                        urlDocument = "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]";
+                        doc = Jsoup.connect(urlDocument).get();
+                    } else {
+                        String proxyServer = prefs.get("proxyAddress", "");
+                        int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
+                        URL url = new URL("http://gatherer.wizards.com/Pages/Search/Default.aspx?page=" + page +"&output=spoiler&method=visual&action=advanced&set=+[%22" + URLSetName + "%22]");
+                        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort)); 
+                        HttpURLConnection uc = (HttpURLConnection)url.openConnection(proxy);
+
+                        uc.connect();
+
+                        String line = null;
+                        StringBuffer tmp = new StringBuffer();
+                        BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+                        while ((line = in.readLine()) != null) {
+                          tmp.append(line);
                         }
-                        setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
+                        doc = Jsoup.parse(String.valueOf(tmp));
                     }
+                    
+                    Elements cardsImages = doc.select("img[src^=../../Handlers/]");
+                    if (cardsImages.isEmpty()) {
+                        break;
+                    }
+                        
+                    for (int i = 0; i < cardsImages.size(); i++) {
+                        if (i == 0) {
+                            Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
+                            if (multiverseId == firstMultiverseIdLastPage) {
+                                break Pages;
+                            }
+                            firstMultiverseIdLastPage = multiverseId;
+                        }
+                        String cardName = normalizeName(cardsImages.get(i).attr("alt"));
+                        if (cardName != null && !cardName.isEmpty()) {
+                            if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                                int landNumber = 1;
+                                while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
+                                    landNumber++;
+                                }
+                                cardName += landNumber;
+                            }
+                            setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
+                        }
+                    }
+                    page++;
                 }
             }
         } catch (IOException ex) {
