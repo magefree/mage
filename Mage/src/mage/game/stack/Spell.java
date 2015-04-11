@@ -190,7 +190,7 @@ public class Spell implements StackObject, Card {
                 for(SpellAbility spellAbility: this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
-                            spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                            spellAbility.getModes().setActiveMode(modeId);
                             if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
@@ -269,7 +269,7 @@ public class Spell implements StackObject, Card {
             boolean targetedMode = false;
             boolean legalTargetedMode = false;
             for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
-                spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                spellAbility.getModes().setActiveMode(modeId);
                 if (spellAbility.getTargets().size() > 0) {
                     targetedMode = true;
                     if (spellAbility.getTargets().stillLegal(spellAbility, game)) {

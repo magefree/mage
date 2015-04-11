@@ -69,7 +69,6 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -263,7 +262,7 @@ public abstract class AbilityImpl implements Ability {
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
         for (UUID modeId :this.getModes().getSelectedModes()) {
-            this.getModes().setMode(this.getModes().get(modeId));
+            this.getModes().setActiveMode(modeId);
             if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
                 logger.debug("activate failed - choice");
                 return false;
@@ -302,7 +301,7 @@ public abstract class AbilityImpl implements Ability {
         String announceString = handleOtherXCosts(game, controller);
 
         for (UUID modeId :this.getModes().getSelectedModes()) {
-            this.getModes().setMode(this.getModes().get(modeId));
+            this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -1037,7 +1036,7 @@ public abstract class AbilityImpl implements Ability {
             for (Mode mode : spellModes.values()) {
                 item++;
                 if (spellModes.getSelectedModes().contains(mode.getId())) {
-                    spellModes.setMode(mode);
+                    spellModes.setActiveMode(mode.getId());
                     sb.append(" (mode ").append(item).append(")");
                     sb.append(getTargetDescriptionForLog(getTargets(), game));
                 }

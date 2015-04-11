@@ -27,11 +27,14 @@
  */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import static mage.constants.Zone.BATTLEFIELD;
+import static mage.constants.Zone.GRAVEYARD;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -67,9 +70,9 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                switch (game.getState().getZone(card.getId())) {
+            MageObject mageObject = source.getSourceObjectIfItStillExists(game);
+            if (mageObject != null) {
+                switch (game.getState().getZone(mageObject.getId())) {
                     case BATTLEFIELD:
                         Permanent permanent = game.getPermanent(source.getSourceId());
                         if (permanent != null) {
@@ -77,12 +80,13 @@ public class ReturnToHandSourceEffect extends OneShotEffect {
                         }
                         break;
                     case GRAVEYARD:
+                        Card card = (Card) mageObject;
                         if (!fromBattlefieldOnly) {
                             return controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD);
                         }
-
                 }
-            }            
+            }
+            return true;
         }
         return false;
     }

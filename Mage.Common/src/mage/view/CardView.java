@@ -280,7 +280,7 @@ public class CardView extends SimpleCardView {
             Spell spell = (Spell) card;
             for (SpellAbility spellAbility: spell.getSpellAbilities()) {
                 for(UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                    spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                    spellAbility.getModes().setActiveMode(modeId);
                     if (spellAbility.getTargets().size() > 0) {
                         setTargets(spellAbility.getTargets());
                     }
@@ -290,7 +290,7 @@ public class CardView extends SimpleCardView {
             if (spell.getSpellAbility().isModal()) {
                 Modes modes = spell.getSpellAbility().getModes();
                 for(UUID modeId : modes.getSelectedModes()) {
-                    modes.setMode(modes.get(modeId));
+                    modes.setActiveMode(modeId);
                     this.rules.add("<span color='green'><i>Chosen mode: " + spell.getSpellAbility().getEffects().getText(modes.get(modeId))+"</i></span>");
                 }
             }
