@@ -212,6 +212,7 @@ public class TableController {
             logger.debug("Player " + player.getName() + " id: "+ player.getId() + " joined tableId: " + table.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
+                seat.getPlayer().setUserData(user.getUserData());
                 user.addTable(player.getId(), table);
                 user.ccJoinedTable(table.getRoomId(), table.getId(), true);
                 userPlayerMap.put(userId, player.getId());
