@@ -51,14 +51,15 @@ public class LatchkeyFaerie extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Prowl {2}{U}
         this.addAbility(new ProwlAbility(this, "{2}{U}"));
+
         // When Latchkey Faerie enters the battlefield, if its prowl cost was paid, draw a card.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.addAbility(new ConditionalTriggeredAbility(ability, ProwlCondition.getInstance(),
