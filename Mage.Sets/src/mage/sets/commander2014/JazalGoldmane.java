@@ -55,7 +55,6 @@ public class JazalGoldmane extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -65,7 +64,7 @@ public class JazalGoldmane extends CardImpl {
         DynamicValue xValue = new AttackingCreatureCount("the number of attacking creatures");
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BoostControlledEffect(xValue, xValue , Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false),
+                new BoostControlledEffect(xValue, xValue , Duration.EndOfTurn, new FilterAttackingCreature("Attacking creatures"), false),
                 new ManaCostsImpl("{3}{W}{W}")));
     }
 
