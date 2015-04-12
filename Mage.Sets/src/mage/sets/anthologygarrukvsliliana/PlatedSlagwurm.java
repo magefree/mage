@@ -38,7 +38,7 @@ public class PlatedSlagwurm extends mage.sets.mirrodin.PlatedSlagwurm {
     public PlatedSlagwurm(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public PlatedSlagwurm(final PlatedSlagwurm card) {

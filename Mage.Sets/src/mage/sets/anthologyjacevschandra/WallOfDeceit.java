@@ -49,7 +49,7 @@ public class WallOfDeceit extends CardImpl {
 
     public WallOfDeceit(UUID ownerId) {
         super(ownerId, 5, "Wall of Deceit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
         this.subtype.add("Wall");
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);

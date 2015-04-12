@@ -527,17 +527,17 @@ public class ConstructedFormats {
         if (format.equals("Starter 2000")) {
             return Arrays.asList("S00");
         }
-        if (format.equals("Duel Decks: Anthology, Elves vs. Goblins")) {
-            return Arrays.asList("DD3");
-        }
-        if (format.equals("Duel Decks: Anthology, Jace vs. Chandra")) {
-            return Arrays.asList("DD3");
-        }
         if (format.equals("Duel Decks: Anthology, Divine vs. Demonic")) {
-            return Arrays.asList("DD3");
+            return Arrays.asList("DD3A");
+        }
+        if (format.equals("Duel Decks: Anthology, Elves vs. Goblins")) {
+            return Arrays.asList("DD3B");
         }
         if (format.equals("Duel Decks: Anthology, Garruk vs. Liliana")) {
-            return Arrays.asList("DD3");
+            return Arrays.asList("DD3C");
+        }
+        if (format.equals("Duel Decks: Anthology, Jace vs. Chandra")) {
+            return Arrays.asList("DD3D");
         }
         if (format.equals("Duel Decks: Elves vs. Goblins")) {
             return Arrays.asList("EVG");

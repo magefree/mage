@@ -38,7 +38,7 @@ public class AlbinoTroll extends mage.sets.urzassaga.AlbinoTroll {
     public AlbinoTroll(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 3;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public AlbinoTroll(final AlbinoTroll card) {

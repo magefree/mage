@@ -76,10 +76,10 @@ public class MagicCardsImageSource implements CardImageSource {
             put("M10", "magic-2010");
             put("EVG", "duel-decks-elves-vs-goblins");
             put("DD2", "duel-decks-jace-vs-chandra");
-            put("DD3", "duel-decks-anthology-elves-vs-goblins");
-            put("DD3", "duel-decks-anthology-divine-vs-demonic");
-            put("DD3", "duel-decks-anthology-garruk-vs-liliana");
-            put("DD3", "duel-decks-anthology-jace-vs-chandra");
+            put("DD3A", "duel-decks-anthology-divine-vs-demonic");
+            put("DD3B", "duel-decks-anthology-elves-vs-goblins");
+            put("DD3C", "duel-decks-anthology-garruk-vs-liliana");
+            put("DD3D", "duel-decks-anthology-jace-vs-chandra");
             put("DDC", "duel-decks-divine-vs-demonic");
             put("DDD", "duel-decks-garruk-vs-liliana");
             put("DDE", "duel-decks-phyrexia-vs-the-coalition");

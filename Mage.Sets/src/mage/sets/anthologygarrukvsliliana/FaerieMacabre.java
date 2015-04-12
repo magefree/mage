@@ -38,7 +38,7 @@ public class FaerieMacabre extends mage.sets.shadowmoor.FaerieMacabre {
     public FaerieMacabre(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 42;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public FaerieMacabre(final FaerieMacabre card) {

@@ -38,7 +38,7 @@ public class SylvanMessenger extends mage.sets.apocalypse.SylvanMessenger {
     public SylvanMessenger(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public SylvanMessenger(final SylvanMessenger card) {

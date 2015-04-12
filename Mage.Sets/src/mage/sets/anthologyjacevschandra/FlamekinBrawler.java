@@ -38,7 +38,7 @@ public class FlamekinBrawler extends mage.sets.lorwyn.FlamekinBrawler {
     public FlamekinBrawler(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 35;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public FlamekinBrawler(final FlamekinBrawler card) {

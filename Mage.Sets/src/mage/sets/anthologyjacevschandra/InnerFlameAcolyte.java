@@ -38,7 +38,7 @@ public class InnerFlameAcolyte extends mage.sets.lorwyn.InnerFlameAcolyte {
     public InnerFlameAcolyte(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 41;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public InnerFlameAcolyte(final InnerFlameAcolyte card) {

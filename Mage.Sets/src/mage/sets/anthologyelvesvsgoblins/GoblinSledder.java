@@ -38,7 +38,7 @@ public class GoblinSledder extends mage.sets.onslaught.GoblinSledder {
     public GoblinSledder(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 41;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public GoblinSledder(final GoblinSledder card) {

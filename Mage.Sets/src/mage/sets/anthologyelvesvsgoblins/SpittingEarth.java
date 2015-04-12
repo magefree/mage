@@ -38,7 +38,7 @@ public class SpittingEarth extends mage.sets.tenth.SpittingEarth {
     public SpittingEarth(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 55;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public SpittingEarth(final SpittingEarth card) {

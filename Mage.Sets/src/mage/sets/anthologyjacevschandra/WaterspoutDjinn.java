@@ -38,7 +38,7 @@ public class WaterspoutDjinn extends mage.sets.jacevschandra.WaterspoutDjinn {
     public WaterspoutDjinn(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 11;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public WaterspoutDjinn(final WaterspoutDjinn card) {

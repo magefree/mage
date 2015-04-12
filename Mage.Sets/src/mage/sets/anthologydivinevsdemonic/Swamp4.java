@@ -37,7 +37,7 @@ public class Swamp4 extends mage.cards.basiclands.Swamp {
 
     public Swamp4(UUID ownerId) {
         super(ownerId, 62);
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public Swamp4(final Swamp4 card) {

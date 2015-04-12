@@ -16,6 +16,7 @@ import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mage.plugins.card.images.CardDownloadData;
 
@@ -76,7 +77,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("CON", "Conflux");
         setsAliases.put("CSP", "Coldsnap");
         setsAliases.put("DD2", "Duel Decks: Jace vs. Chandra");
-        setsAliases.put("DD3", "Duel Decks Anthology, Divine vs. Demonic^Duel Decks Anthology, Elves vs. Goblins^Duel Decks Anthology, Garruk vs. Liliana^Duel Decks Anthology, Jace vs. Chandra");
+        setsAliases.put("DD3A", "Duel Decks Anthology, Divine vs. Demonic");
+        setsAliases.put("DD3B", "Duel Decks Anthology, Elves vs. Goblins");
+        setsAliases.put("DD3C", "Duel Decks Anthology, Garruk vs. Liliana");
+        setsAliases.put("DD3D", "Duel Decks Anthology, Jace vs. Chandra");
         setsAliases.put("DDC", "Duel Decks: Divine vs. Demonic");
         setsAliases.put("DDD", "Duel Decks: Garruk vs. Liliana");
         setsAliases.put("DDE", "Duel Decks: Phyrexia vs. the Coalition");
@@ -221,7 +225,7 @@ public class WizardCardsImageSource implements CardImageSource {
 
                         uc.connect();
 
-                        String line = null;
+                        String line;
                         StringBuffer tmp = new StringBuffer();
                         BufferedReader in = new BufferedReader(new InputStreamReader(uc.getInputStream()));
                         while ((line = in.readLine()) != null) {
@@ -246,13 +250,20 @@ public class WizardCardsImageSource implements CardImageSource {
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
                             if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                                Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
+                                String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
+                                Document landDoc = Jsoup.connect(urlLandDocument).get();
+                                Elements variations = landDoc.select("a.variationlink");
                                 int landNumber = 1;
-                                while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
+                                for (Element variation : variations) {
+                                    Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
+                                     // ""
+                                    setLinks.put((cardName + landNumber).toLowerCase(), "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card");
                                     landNumber++;
                                 }
-                                cardName += landNumber;
+                            } else {
+                                setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
                             }
-                            setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
                         }
                     }
                     page++;

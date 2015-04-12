@@ -38,7 +38,7 @@ public class BottleGnomes extends mage.sets.tempest.BottleGnomes {
     public BottleGnomes(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 7;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public BottleGnomes(final BottleGnomes card) {

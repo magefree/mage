@@ -38,7 +38,7 @@ public class Overrun extends mage.sets.magic2010.Overrun {
     public Overrun(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 24;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public Overrun(final Overrun card) {

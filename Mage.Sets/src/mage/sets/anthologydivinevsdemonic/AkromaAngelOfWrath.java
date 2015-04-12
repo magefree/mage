@@ -39,7 +39,7 @@ public class AkromaAngelOfWrath extends mage.sets.timeshifted.AkromaAngelOfWrath
     public AkromaAngelOfWrath(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 1;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
         this.rarity = Rarity.MYTHIC;
     }
 

@@ -38,7 +38,7 @@ public class RecklessOne extends mage.sets.onslaught.RecklessOne {
     public RecklessOne(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 48;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public RecklessOne(final RecklessOne card) {

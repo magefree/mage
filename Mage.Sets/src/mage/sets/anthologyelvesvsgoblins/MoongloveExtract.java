@@ -38,7 +38,7 @@ public class MoongloveExtract extends mage.sets.elspethvstezzeret.MoongloveExtra
     public MoongloveExtract(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 24;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public MoongloveExtract(final MoongloveExtract card) {

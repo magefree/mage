@@ -38,7 +38,7 @@ public class Duress extends mage.sets.magic2010.Duress {
     public Duress(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 46;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public Duress(final Duress card) {

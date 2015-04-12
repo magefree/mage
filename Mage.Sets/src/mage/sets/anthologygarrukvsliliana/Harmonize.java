@@ -38,7 +38,7 @@ public class Harmonize extends mage.sets.planarchaos.Harmonize {
     public Harmonize(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 21;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public Harmonize(final Harmonize card) {

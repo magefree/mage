@@ -38,7 +38,7 @@ public class Windstorm extends mage.sets.magic2010.Windstorm {
     public Windstorm(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 25;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public Windstorm(final Windstorm card) {

@@ -34,7 +34,8 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "POR", "PO2", "PTK"};
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "M14", "M15", "ORI",
-                                                 "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN", "DD3", "DDO",
+                                                 "DDF", "DDG", "DDH", "DDI", "DDJ", "DDK", "DDL", "DDM", "DDN", 
+                                                 "DD3", "DD3B", "DDO",
                                                  "ALA", "CON", "ARB",
                                                  "ZEN", "WWK", "ROE", 
                                                  "SOM", "MBS", "NPH",
@@ -80,6 +81,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("2ED", "2U");
         symbolsReplacements.put("LEB", "2E");
         symbolsReplacements.put("LEA", "1E");
+        symbolsReplacements.put("DD3A", "DD3");
+        symbolsReplacements.put("DD3B", "DD3");
+        symbolsReplacements.put("DD3C", "DD3");
+        symbolsReplacements.put("DD3D", "DD3");
     }
 
     public GathererSets(String path) {

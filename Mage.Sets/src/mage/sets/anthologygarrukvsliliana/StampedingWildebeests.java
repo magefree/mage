@@ -38,7 +38,7 @@ public class StampedingWildebeests extends mage.sets.tenth.StampedingWildebeests
     public StampedingWildebeests(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 9;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public StampedingWildebeests(final StampedingWildebeests card) {

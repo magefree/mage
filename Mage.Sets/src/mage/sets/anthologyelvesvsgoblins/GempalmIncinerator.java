@@ -38,7 +38,7 @@ public class GempalmIncinerator extends mage.sets.legions.GempalmIncinerator {
     public GempalmIncinerator(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 37;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public GempalmIncinerator(final GempalmIncinerator card) {

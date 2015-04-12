@@ -38,7 +38,7 @@ public class ErrantEphemeron extends mage.sets.timespiral.ErrantEphemeron {
     public ErrantEphemeron(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 20;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public ErrantEphemeron(final ErrantEphemeron card) {

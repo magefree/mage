@@ -38,7 +38,7 @@ public class TreetopVillage extends mage.sets.tenth.TreetopVillage {
     public TreetopVillage(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 27;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public TreetopVillage(final TreetopVillage card) {

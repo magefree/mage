@@ -38,7 +38,7 @@ public class UnholyStrength extends mage.sets.tenth.UnholyStrength {
     public UnholyStrength(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 47;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public UnholyStrength(final UnholyStrength card) {

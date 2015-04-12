@@ -38,7 +38,7 @@ public class BarrenMoor extends mage.sets.onslaught.BarrenMoor {
     public BarrenMoor(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 58;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public BarrenMoor(final BarrenMoor card) {

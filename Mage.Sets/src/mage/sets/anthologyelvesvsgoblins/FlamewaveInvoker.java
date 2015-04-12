@@ -38,7 +38,7 @@ public class FlamewaveInvoker extends mage.sets.tenth.FlamewaveInvoker {
     public FlamewaveInvoker(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 36;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public FlamewaveInvoker(final FlamewaveInvoker card) {
