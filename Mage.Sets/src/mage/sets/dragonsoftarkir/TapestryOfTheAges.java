@@ -88,12 +88,12 @@ class PlayerCastNonCreatureSpellCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         PlayerCastNonCreatureSpellWatcher watcher = (PlayerCastNonCreatureSpellWatcher) game.getState().getWatchers().get("PlayerCastNonCreatureSpell");
-        return watcher != null && !watcher.playerDidCastNonCreatureSpellThisTurn(source.getControllerId());
+        return watcher != null && watcher.playerDidCastNonCreatureSpellThisTurn(source.getControllerId());
     }
     
     @Override
     public String toString() {
-	return "you've cast a noncreature spell this turn";
+        return "you've cast a noncreature spell this turn";
     }
 }
 
