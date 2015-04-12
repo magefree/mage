@@ -112,6 +112,8 @@ class CommuneWithLavaEffect extends OneShotEffect {
 
 class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
 
+    int castOnTurn = 0;
+
     public CommuneWithLavaMayPlayEffect() {
         super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play that card.";
@@ -119,6 +121,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
 
     public CommuneWithLavaMayPlayEffect(final CommuneWithLavaMayPlayEffect effect) {
         super(effect);
+        castOnTurn = effect.castOnTurn;
     }
 
     @Override
@@ -127,8 +130,14 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        castOnTurn = game.getTurnNum();
+    }
+
+    @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
+        if (castOnTurn != game.getTurnNum() && game.getPhase().getStep().getType() == PhaseStep.END_TURN) {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;
             }
