@@ -60,7 +60,7 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
         if (permanent.getId().equals(this.getTargetPointer().getFirst(game, source))) {
             Permanent blocker = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {              
-                Permanent attacker = game.getPermanent(source.getSourceId());
+                Permanent attacker = (Permanent) source.getSourceObjectIfItStillExists(game);
                 if (attacker != null) {
                     BlockedAttackerWatcher blockedAttackerWatcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
                     if (blockedAttackerWatcher != null && blockedAttackerWatcher.creatureHasBlockedAttacker(attacker, blocker, game)) {
@@ -68,6 +68,8 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect {
                         return false;
                     }                
                     return true;
+                } else {
+                    discard();
                 }
             }
         }
