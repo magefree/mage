@@ -229,8 +229,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-        if (!game.isSimulation())
+        if (!game.isSimulation()) {
             game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
+        }
     }
 
     protected void checkAttackRequirements(Player player, Game game) {
@@ -283,8 +284,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (count > 1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(attacker.getLogName() + " can only attack alone. Removing it from combat.");
+                        }
                         tobeRemoved.add(attackingCreatureId);
                         count--;
                     }
@@ -301,8 +303,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 for (UUID attackingCreatureId : group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(attacker.getLogName() + " can't attack alone. Removing it from combat.");
+                        }
                         tobeRemoved.add(attackingCreatureId);
                     }
                 }
@@ -360,8 +363,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
                 // add info about attacker blocked by blocker to the game log
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     this.logBlockerInfo(defender, game);
+                }
             }
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
@@ -467,7 +471,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : requirementEntry.getValue()) {
                         UUID attackingCreatureId = requirementEntry.getKey().mustBlockAttacker(ability, game);
                         Player defender = game.getPlayer(possibleBlocker.getControllerId());
-                        if (attackingCreatureId != null && defender != null) {
+                        if (attackingCreatureId != null && defender != null && possibleBlocker.canBlock(attackingCreatureId, game)) {
                             if (creatureMustBlockAttackers.containsKey(possibleBlocker.getId())) {
                                 creatureMustBlockAttackers.get(possibleBlocker.getId()).add(attackingCreatureId);
                             } else {
@@ -671,8 +675,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 }
                             }
                             if (possibleBlockerAvailable) {
-                                if (!game.isSimulation())
+                                if (!game.isSimulation()) {
                                     game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getLogName()).append(" has to be blocked by at least one creature.").toString());
+                                }
                                 return false;
                             }
                         }
