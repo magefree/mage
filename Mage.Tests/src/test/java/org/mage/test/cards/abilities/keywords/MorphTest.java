@@ -476,6 +476,10 @@ public class MorphTest extends CardTestPlayerBase {
 
     @Test
     public void testDiesTriggeredDoesNotTriggerIfFaceDown() {
+        // Flying
+        // When Ashcloud Phoenix dies, return it to the battlefield face down.
+        // Morph (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
         addCard(Zone.HAND, playerA, "Ashcloud Phoenix", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
 
@@ -504,6 +508,48 @@ public class MorphTest extends CardTestPlayerBase {
                 break;
             }
         }
+
+    }    
+   /**
+     * Check that a DiesTriggeredAbility of a creature does not trigger
+     * if the creature dies face down in combat
+     */
+
+    @Test
+    public void testDiesTriggeredDoesNotTriggerInCombatIfFaceDown() {
+        // Flying
+        // When Ashcloud Phoenix dies, return it to the battlefield face down.
+        // Morph (You may cast this card face down as a 2/2 creature for . Turn it face up any time for its morph cost.)
+        // When Ashcloud Phoenix is turned face up, it deals 2 damage to each player.
+        addCard(Zone.HAND, playerA, "Ashcloud Phoenix", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // First strike, forestwalk, vigilance 
+        // (This creature deals combat damage before creatures without first strike, it can't be blocked as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)
+        addCard(Zone.BATTLEFIELD, playerB, "Mirri, Cat Warrior");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        attack(2, playerB, "Mirri, Cat Warrior");
+        block(2, playerA, "face down creature", "Mirri, Cat Warrior"); 
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
+
+
+        for (Card card: playerA.getGraveyard().getCards(currentGame)) {
+            if (card.getName().equals("Ashcloud Phoenix")) {
+                Assert.assertEquals("Ashcloud Phoenix has to be face up in graveyard", false, card.isFaceDown(currentGame));
+                break;
+            }
+        }
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
 
     }    
 }
