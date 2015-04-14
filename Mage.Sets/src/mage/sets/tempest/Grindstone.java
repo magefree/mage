@@ -106,17 +106,23 @@ class GrindstoneEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                if (card1 != null) {
-                    targetPlayer.moveCardToGraveyardWithInfo(card1, source.getSourceId(), game, Zone.LIBRARY);
-                    Card card2 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (card2 != null) {
-                        targetPlayer.moveCardToGraveyardWithInfo(card2, source.getSourceId(), game, Zone.LIBRARY);  
+                Card card1 = null;
+                Card card2 = null;
+                if (targetPlayer.getLibrary().size() > 0) {
+                    card1 = targetPlayer.getLibrary().removeFromTop(game);                    
+                    if (targetPlayer.getLibrary().size() > 0) {
+                        card2 = targetPlayer.getLibrary().removeFromTop(game);                                        
                         if (card1.getColor().hasColor() && card2.getColor().hasColor()) {
                             colorShared = card1.getColor().shares(card2.getColor());
-                        }
-                    }                    
-                }                
+                        }                    
+                    }
+                }
+                if (card1 != null) {
+                    targetPlayer.moveCardToGraveyardWithInfo(card1, source.getSourceId(), game, Zone.LIBRARY);
+                }
+                if (card2 != null) {
+                    targetPlayer.moveCardToGraveyardWithInfo(card2, source.getSourceId(), game, Zone.LIBRARY);  
+                }
             } while (colorShared && targetPlayer.isInGame());
             return true;
         }
