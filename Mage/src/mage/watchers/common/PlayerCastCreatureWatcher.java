@@ -25,43 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.watchers.common;
 
-import mage.MageObject;
-import mage.cards.SplitCard;
-import mage.constants.SpellAbilityType;
-import mage.filter.predicate.Predicate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.WatcherScope;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.watchers.Watcher;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class NamePredicate implements Predicate<MageObject> {
+public class PlayerCastCreatureWatcher extends Watcher {
 
-    private final String name;
+    Set<UUID> playerIds = new HashSet<>();
 
-    public NamePredicate(String name) {
-        this.name = name;
+    public PlayerCastCreatureWatcher() {
+        super("PlayerCastCreature", WatcherScope.GAME);
+    }
+
+    public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {
+        super(watcher);
+        this.playerIds.addAll(watcher.playerIds);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        // If a player names a card, the player may name either half of a split card, but not both. 
-        // A split card has the chosen name if one of its two names matches the chosen name.
-        if (input instanceof SplitCard) {
-            return name.equals(((SplitCard)input).getLeftHalfCard().getName()) || name.equals(((SplitCard)input).getRightHalfCard().getLogName());
-        } else if (input instanceof Spell && ((Spell)input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)){
-            SplitCard card = (SplitCard) ((Spell)input).getCard();
-            return name.equals(card.getLeftHalfCard().getName()) || name.equals(card.getRightHalfCard().getLogName());
-        } else {
-            return name.equals(input.getLogName());
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = (Spell) game.getObject(event.getTargetId());
+            if (spell.getCardType().contains(CardType.CREATURE)) {
+                playerIds.add(spell.getControllerId());
+            }
         }
     }
 
     @Override
-    public String toString() {
-        return "Name(" + name + ')';
+    public PlayerCastCreatureWatcher copy() {
+        return new PlayerCastCreatureWatcher(this);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerIds.clear();
+    }
+
+    public boolean playerDidCastCreatureThisTurn(UUID playerId) {
+        return playerIds.contains(playerId);
     }
 }

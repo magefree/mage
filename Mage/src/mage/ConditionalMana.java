@@ -66,16 +66,22 @@ public class ConditionalMana extends Mana implements Serializable {
      */
     private UUID manaProducerId;
 
+    /**
+     * UUID originalId of source ability for mana.
+     */
+    private UUID manaProducerOriginalId;
+
     public ConditionalMana(Mana mana) {
         super(mana);
     }
 
-    public ConditionalMana(ConditionalMana conditionalMana) {
+    public ConditionalMana(final ConditionalMana conditionalMana) {
         super(conditionalMana);
         conditions = conditionalMana.conditions;
         scope = conditionalMana.scope;
         staticText = conditionalMana.staticText;
         manaProducerId = conditionalMana.manaProducerId;
+        manaProducerOriginalId = conditionalMana.manaProducerOriginalId;
     }
 
     public void addCondition(Condition condition) {
@@ -153,6 +159,14 @@ public class ConditionalMana extends Mana implements Serializable {
 
     public void setManaProducerId(UUID manaProducerId) {
         this.manaProducerId = manaProducerId;
+    }
+
+    public UUID getManaProducerOriginalId() {
+        return manaProducerOriginalId;
+    }
+
+    public void setManaProducerOriginalId(UUID manaProducerOriginalId) {
+        this.manaProducerOriginalId = manaProducerOriginalId;
     }
     
     public void clear(ManaType manaType) {
