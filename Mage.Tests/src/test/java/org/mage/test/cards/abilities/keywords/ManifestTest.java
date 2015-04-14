@@ -287,4 +287,42 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "face down creature", 1);
 
     }
+
+    // Check if a Megamorph card is manifested and truned by their megamorph ability
+    // it gets the +1/+1 counter.
+
+    @Test
+    public void testManifestMegamorph() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        addCard(Zone.LIBRARY, playerB, "Sandstorm Charger", 1);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 1);
+
+        skipInitShuffling();
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        addTarget(playerB, "Silvercoat Lion");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{4}{W}: Turn");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerB, "face down creature", 0);
+        assertPermanentCount(playerB, "Sandstorm Charger", 1);
+        assertPowerToughness(playerB, "Sandstorm Charger", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
+
+    }
+    
 }
