@@ -48,12 +48,13 @@ public class ManaPoolItem implements Serializable {
     private int colorless = 0;
     private ConditionalMana conditionalMana;
     private UUID sourceId;
+    private UUID originalId; // originalId of the mana producing ability
     private boolean flag = false;
     private Duration duration;
 
     public ManaPoolItem() {}
 
-    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId, boolean flag) {
+    public ManaPoolItem(int red, int green, int blue, int white, int black, int colorless, UUID sourceId, UUID originalId, boolean flag) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -61,14 +62,17 @@ public class ManaPoolItem implements Serializable {
         this.black = black;
         this.colorless = colorless;
         this.sourceId = sourceId;
+        this.originalId = originalId;
         this.flag = flag;
         this.duration = Duration.EndOfStep;
     }
 
-    public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId) {
+    public ManaPoolItem(ConditionalMana conditionalMana, UUID sourceId, UUID originalId) {
         this.conditionalMana = conditionalMana;
         this.sourceId = sourceId;
+        this.originalId = originalId;
         this.conditionalMana.setManaProducerId(sourceId);
+        this.conditionalMana.setManaProducerOriginalId(originalId);
         this.flag = conditionalMana.getFlag();
         this.duration = Duration.EndOfStep;        
     }
@@ -84,6 +88,7 @@ public class ManaPoolItem implements Serializable {
             this.conditionalMana = item.conditionalMana.copy();
         }
         this.sourceId = item.sourceId;
+        this.originalId = item.originalId;
         this.flag = item.flag;
         this.duration = item.duration;
     }
@@ -94,6 +99,10 @@ public class ManaPoolItem implements Serializable {
 
     public UUID getSourceId() {
         return sourceId;
+    }
+
+    public UUID getOriginalId() {
+        return originalId;
     }
 
     public boolean getFlag() {
