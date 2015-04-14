@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -100,9 +101,11 @@ class ServantOfTheScaleEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null && controller != null && sourceObject instanceof Permanent) {
-            int amount = ((Permanent)sourceObject).getCounters().getCount(CounterType.P1P1);
+        Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        if (sourcePermanent != null && controller != null &&
+            (sourcePermanent.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()  // Token
+                || sourcePermanent.getZoneChangeCounter(game) + 1 == source.getSourceObjectZoneChangeCounter())) { // PermanentCard
+            int amount = sourcePermanent.getCounters().getCount(CounterType.P1P1);
             if (amount > 0) {
                 Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(amount));
                 effect.setTargetPointer(targetPointer);
