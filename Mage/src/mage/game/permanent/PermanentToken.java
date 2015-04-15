@@ -95,8 +95,8 @@ public class PermanentToken extends PermanentImpl {
             game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
             if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
                 game.setZone(objectId, zone); // needed for triggered dies abilities
-                game.fireEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone));
-                game.getState().removeTriggersOfSourceId(this.getId());// if token is gone endless triggered abilities have to be removed
+                game.addSimultaneousEvent(new ZoneChangeEvent(this, this.getControllerId(), Zone.BATTLEFIELD, zone)); // causes maybe a problem with Dies trigger of Tokens
+                // game.getState().removeTriggersOfSourceId(this.getId());// if token is gone endless triggered abilities have to be removed
                 return true;
             }
         }

@@ -901,6 +901,10 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
+        // check agains shortLKI for effects that move multiple object at the same time (e.g. destroy all)
+        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+            return true;
+        }
         // check against current state
         Zone test = game.getState().getZone(parameterSourceId);
         return test != null && zone.match(test);

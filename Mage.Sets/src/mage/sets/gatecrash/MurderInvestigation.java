@@ -86,7 +86,7 @@ class AttachedPermanentPowerCount implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent attachmentPermanent = game.getPermanent(sourceAbility.getSourceId());
         if (attachmentPermanent == null) {
-            attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
+            attachmentPermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD, sourceAbility.getSourceObjectZoneChangeCounter());
         }
         if (attachmentPermanent != null && attachmentPermanent.getAttachedTo() != null) {
             if (effect.getValue("attachedTo") != null) {

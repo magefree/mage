@@ -262,6 +262,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
     }
 
+    /**
+     *
+     * @param ability
+     * @param game
+     */
     @Override
     public void addAbility(Ability ability, Game game) {
         if (!abilities.containsKey(ability.getId())) {

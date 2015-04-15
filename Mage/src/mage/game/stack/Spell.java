@@ -198,6 +198,7 @@ public class Spell implements StackObject, Card {
                                 result |= spellAbility.resolve(game);
                             }
                         }
+                        game.getState().handleSimultaneousEvent(game);
                         game.resetShortLivingLKI();
                         index++;
                     }

@@ -22,7 +22,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
      * http://www.slightlymagic.net/forum/viewtopic.php?f=116&t=14516
      * 
      * Tests Safehold Elite with persist returns to battlefield with -1/-1 counter
-     * Murder Investigation puts 2 tokens onto battlefield because enchanted Safehold Elite
+     * Murder Investigation has to put 2 tokens onto battlefield because enchanted Safehold Elite
      * was 2/2
      *
      * @author LevelX

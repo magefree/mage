@@ -26,7 +26,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean diesRuleText) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(Zone.ALL, effect, optional); // because the trigger only triggers if the object was attached, it doesn't matter where the Attachment was moved to (e.g. by replacement effect) after the trigger triggered, so Zone.all
         this.attachedDescription = attachedDescription;
         this.diesRuleText = diesRuleText;
     }
@@ -51,10 +51,10 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (((ZoneChangeEvent)event).isDiesEvent()) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.getAttachments().contains(this.getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
                 for (Effect effect : getEffects()) {
-                    effect.setValue("attachedTo", p);
+                    effect.setValue("attachedTo", zEvent.getTarget());
                 }
                 return true;
             }

@@ -684,8 +684,9 @@ public abstract class GameImpl implements Game, Serializable {
                 if (extraPlayer != null && extraPlayer.isInGame()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
-                    if (!this.isSimulation())
+                    if (!this.isSimulation()) {
                         informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    }
                     playTurn(extraPlayer);
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
@@ -1705,9 +1706,10 @@ public abstract class GameImpl implements Game, Serializable {
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-            if (!this.isSimulation())
+            if (!this.isSimulation()) {
                 this.informPlayers(new StringBuilder(permanent.getLogName())
-                    .append(" is put into graveyard from battlefield").toString());
+                        .append(" is put into graveyard from battlefield").toString());
+            }
             result = true;
         }
         return result;
