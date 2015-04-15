@@ -85,18 +85,18 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         target.clearChosen();
-        if (player.searchLibrary(target, game)) {
+        if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
                 for (UUID cardId: target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
+                    Card card = controller.getLibrary().remove(cardId, game);
                     if (card != null){
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, revealCards);
                         if (revealCards) {
                             cards.add(card);
                         }
@@ -108,14 +108,14 @@ public class SearchLibraryPutInHandEffect extends SearchEffect {
                     if (sourceCard != null) {
                         name = sourceCard.getName();
                     }
-                    player.revealCards(name, cards, game);
+                    controller.revealCards(name, cards, game);
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         if (forceShuffle) {
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
         }
         return false;
     }
