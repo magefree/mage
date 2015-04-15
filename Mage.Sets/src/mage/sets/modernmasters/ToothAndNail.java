@@ -55,11 +55,9 @@ public class ToothAndNail extends CardImpl {
         super(ownerId, 170, "Tooth and Nail", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
         this.expansionSetCode = "MMA";
 
-        this.color.setGreen(true);
-
         // Choose one - 
         // Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle your library;
-        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard())));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), true));
         // or put up to two creature cards from your hand onto the battlefield.
         Mode mode = new Mode();
         mode.getEffects().add(new ToothAndNailPutCreatureOnBattlefieldEffect());
