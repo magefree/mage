@@ -79,6 +79,13 @@ public class GameEvent {
         AT_END_OF_TURN,
 
         //player events
+        /* ZONE_CHANGE
+            targetId    id of the zone chaning object
+            sourceId    sourceId of the ability with the object moving effect
+            playerId    controller of the moved object
+            amount      not used for this event
+            flag        not used for this event
+        */
         ZONE_CHANGE,
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,
@@ -142,7 +149,17 @@ public class GameEvent {
         TURNFACEDOWN, TURNEDFACEDOWN,
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
-        DESTROY_PERMANENT, DESTROYED_PERMANENT,
+        DESTROY_PERMANENT, 
+        
+        /* DESTROYED_PERMANENT
+            targetId    id of the destroyed creature
+            sourceId    sourceId of the ability with the destroy effect
+            playerId    controller of the creature
+            amount      not used for this event
+            flag        true if no regeneration is allowed
+        */
+        DESTROYED_PERMANENT,
+        
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
         EXPLOITED_CREATURE,

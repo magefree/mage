@@ -787,7 +787,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /** 
-     * Onl used for diagnostic purposes of tests
+     * Only used for diagnostic purposes of tests
      * @return 
      */
     public TriggeredAbilities getTriggers() {

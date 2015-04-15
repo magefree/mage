@@ -72,7 +72,6 @@ public class ServantOfTheScaleTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 3,3);
 
-        assertGraveyardCount(playerB, "Lightning Bolt", 1);
     }  
 
 }

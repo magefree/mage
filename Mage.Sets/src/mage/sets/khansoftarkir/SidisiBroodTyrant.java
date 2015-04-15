@@ -58,9 +58,6 @@ public class SidisiBroodTyrant extends CardImpl {
         this.subtype.add("Naga");
         this.subtype.add("Shaman");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -123,8 +120,7 @@ class SidisiBroodTyrantTriggeredAbility extends ZoneChangeTriggeredAbility {
     UUID lastStackObjectId = null;
 
     public SidisiBroodTyrantTriggeredAbility() {
-        super(Zone.LIBRARY, Zone.GRAVEYARD, new CreateTokenEffect(new ZombieToken("KTK")), "",  false);
-        this.zone = Zone.BATTLEFIELD;
+        super(Zone.BATTLEFIELD, Zone.LIBRARY, Zone.GRAVEYARD, new CreateTokenEffect(new ZombieToken("KTK")), "",  false);
     }
 
     public SidisiBroodTyrantTriggeredAbility(final SidisiBroodTyrantTriggeredAbility ability) {

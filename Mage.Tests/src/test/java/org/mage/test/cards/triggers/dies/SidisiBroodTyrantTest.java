@@ -25,62 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.triggers.dies;
 
-package mage.abilities.effects.common;
-
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
-
-import mage.util.CardUtil;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
+ *
  * @author LevelX2
  */
 
-public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect {
+public class SidisiBroodTyrantTest extends CardTestPlayerBase {
 
-    private final int numberCards;
+    /**
+     * Tests that if Sidisi, Brood Tyrant leaves the battlefield
+     * before it's first ability resolves, there will be no Zombie token added to the battlefield
+     *
+     */
+    @Test
+    public void testDiesTriggeredAbility() {
+        // {1}{B}{G}{U}
+        // Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, put the top three cards of your library into your graveyard
+        // Whenever one or more creature cards are put into your graveyard from your library, put a 2/2 black Zombie creature token onto the battlefield.
+        addCard(Zone.HAND, playerA, "Sidisi, Brood Tyrant");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 2);
+        skipInitShuffling();
 
-    public PutTopCardOfLibraryIntoGraveControllerEffect(int numberCards) {
-        super(Outcome.Discard);
-        this.numberCards = numberCards;
-        this.staticText = setText();
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sidisi, Brood Tyrant");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Sidisi, Brood Tyrant", "Whenever {this} enters the battlefield");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Sidisi, Brood Tyrant", 1);
+
+        assertGraveyardCount(playerA, 4);
+        assertPermanentCount(playerA, "Zombie", 0);
+
     }
 
-    public PutTopCardOfLibraryIntoGraveControllerEffect(final PutTopCardOfLibraryIntoGraveControllerEffect effect) {
-        super(effect);
-        this.numberCards = effect.numberCards;
-    }
-
-    @Override
-    public PutTopCardOfLibraryIntoGraveControllerEffect copy() {
-        return new PutTopCardOfLibraryIntoGraveControllerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.moveCardsToGraveyardWithInfo(controller.getLibrary().getTopCards(game, numberCards), source, game, Zone.LIBRARY);
-            return true;
-        }
-        return false;
-    }
-
-    private String setText() {
-        StringBuilder sb = new StringBuilder("put the top ");
-        if (numberCards == 1) {
-            sb.append(" card");
-        } else {
-            sb.append(CardUtil.numberToText(numberCards));
-            sb.append(" cards");
-        }
-        sb.append(" of your library into your graveyard");
-        return sb.toString();
-    }
 }

@@ -48,7 +48,7 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
         // choose triggered ability order
         playerA.addChoice("When enchanted creature dies");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies, put X 1/1 red and white Soldier creature token with haste onto the battlefield, where X is its power");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

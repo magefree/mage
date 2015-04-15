@@ -43,7 +43,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class DeflectingPalmTest extends CardTestPlayerBase {
 
     /**
-     * Tests if a damage spell is selected as source the damge is prevented and is dealt to the controller of the damage spell
+     * Tests if a damage spell is selected as source the damage is prevented and is dealt to the controller of the damage spell
      */
     @Test
     public void testPreventDamageFromSpell() {

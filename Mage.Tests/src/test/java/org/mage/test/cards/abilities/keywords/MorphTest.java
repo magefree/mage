@@ -99,7 +99,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
         
-        attack(3, playerA, "");
+        attack(3, playerA, "face down creature");
         
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -133,8 +133,8 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
         
-        attack(3, playerA, "");
-        attack(3, playerA, "");
+        attack(3, playerA, "face down creature");
+        attack(3, playerA, "face down creature");
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
         setChoice(playerA, "No"); // Don't use return permanent to hand effect
         

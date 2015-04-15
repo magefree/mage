@@ -173,7 +173,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          *        leaves the zone and returns again before the ability resolves.) The most common zone-change
          *        triggers are enters-the-battlefield triggers and leaves-the-battlefield triggers.
          */
-        if (event != null) {
+        if (event != null && event.getTargetId() != null && event.getTargetId().equals(getSourceId())) {
             switch (event.getType()) {
                 case ZONE_CHANGE:
                     if (source == null && ((ZoneChangeEvent)event).getTarget() != null) {
