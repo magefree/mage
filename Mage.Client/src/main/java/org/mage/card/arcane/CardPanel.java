@@ -381,7 +381,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             imagePanel.setImage(srcImage);
             repaint();
         }
-        layout();
+        doLayout();
     }
 
     public void setImage(final CardPanel panel) {
