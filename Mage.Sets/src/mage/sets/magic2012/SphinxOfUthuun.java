@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -60,7 +61,6 @@ public class SphinxOfUthuun extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
@@ -97,7 +97,8 @@ class SphinxOfUthuunEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player == null || sourceObject == null) {
             return false;
         }
 
@@ -110,7 +111,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
                 game.setZone(card.getId(), Zone.PICK);
             }
         }
-        player.revealCards("Sphinx of Uthuun", cards, game);
+        player.revealCards(sourceObject.getLogName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {
@@ -148,7 +149,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
                 pile2Zone = Zone.GRAVEYARD;
             }
 
-            StringBuilder sb = new StringBuilder("Sphinx of Uthuun: Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
+            StringBuilder sb = new StringBuilder(sourceObject.getLogName()).append(": Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
             int i = 0;
             for (UUID cardUuid : pile1CardsIds) {
                 i++;
@@ -163,7 +164,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
             }
             game.informPlayers(sb.toString());
 
-            sb = new StringBuilder("Sphinx of Uthuun: Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
+            sb = new StringBuilder(sourceObject.getLogName()).append(": Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
             i = 0;
             for (UUID cardUuid : pile2CardsIds) {
                 Card card = game.getCard(cardUuid);
