@@ -162,11 +162,15 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.SEARCH_LIBRARY.equals(event.getType());
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean applies = false;
-        if (EventType.SEARCH_LIBRARY.equals(event.getType())) {
-            applies = true;
-            Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            boolean applies = true;        
             String key = permanent.getId() + keyString;
             Map.Entry<Long, Set<UUID>> turnIgnoringPlayersPair = (Map.Entry<Long, Set<UUID>>) game.getState().getValue(key);
             if (turnIgnoringPlayersPair != null) {
@@ -177,8 +181,9 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
                     applies = !turnIgnoringPlayersPair.getValue().contains(event.getPlayerId());
                 }
             }
+            return applies;
         }
-        return applies;
+        return false;
     }
 
     @Override
