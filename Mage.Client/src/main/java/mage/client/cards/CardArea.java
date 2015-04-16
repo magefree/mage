@@ -50,6 +50,7 @@ public class CardArea extends JPanel {
     private boolean reloaded = false;
     private final javax.swing.JLayeredPane cardArea;
     private final javax.swing.JScrollPane scrollPane;
+    private int yTextOffset; 
 
     /**
      * Create the panel.
@@ -62,6 +63,7 @@ public class CardArea extends JPanel {
 
         cardArea = new JLayeredPane();
         scrollPane.setViewportView(cardArea);
+        yTextOffset = 10;
 
     }
 
@@ -82,9 +84,11 @@ public class CardArea extends JPanel {
         this.reloaded = true;
         cardArea.removeAll();
         if (showCards != null && showCards.size() < 10) {
+            yTextOffset = 10;
             loadCardsFew(showCards, bigCard, gameId, listener);
         }
         else {
+            yTextOffset = 0;
             loadCardsMany(showCards, bigCard, gameId, listener, dimension);
         }
         cardArea.revalidate();
@@ -96,6 +100,7 @@ public class CardArea extends JPanel {
     public void loadCardsNarrow(CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, MouseListener listener) {
         this.reloaded = true;
         cardArea.removeAll();
+        yTextOffset = 0;        
         loadCardsMany(showCards, bigCard, gameId, listener, dimension);
         cardArea.revalidate();
 
@@ -132,6 +137,7 @@ public class CardArea extends JPanel {
         cardArea.moveToFront(cardImg);
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
+        cardImg.setTextOffset(yTextOffset);
         cardImg.showCardTitle();
     }
 

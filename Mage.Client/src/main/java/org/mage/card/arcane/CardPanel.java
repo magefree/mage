@@ -150,6 +150,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private JPanel cardArea;
 
+    private int yTextOffset = 10;
+    
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
         this.gameCard = newGameCard;
         this.callback = callback;
@@ -583,7 +585,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         ptText.setVisible(showText);
 
         int titleX = Math.round(cardWidth * (20f / 480));
-        int titleY = Math.round(cardHeight * (9f / 680)) + 10; // TODO: Set to 0 if it's a card selection with small card offset (ike library search)
+        int titleY = Math.round(cardHeight * (9f / 680)) + yTextOffset;
         titleText.setBounds(cardXOffset + titleX, cardYOffset + titleY, cardWidth - titleX, cardHeight - titleY);
 
         Dimension ptSize = ptText.getPreferredSize();
@@ -1201,6 +1203,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void componentHidden(ComponentEvent ce) {
+    }
+
+    @Override
+    public void setTextOffset(int yOffset) {
+        yTextOffset = yOffset;
     }
 
 
