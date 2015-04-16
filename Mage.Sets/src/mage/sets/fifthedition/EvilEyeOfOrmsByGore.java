@@ -64,7 +64,6 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Eye");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 
@@ -97,32 +96,30 @@ class EvilEyeOfOrmsByGoreEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public EvilEyeOfOrmsByGoreEffect copy() {
         return new EvilEyeOfOrmsByGoreEffect(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
+    }    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                if (permanent.getControllerId().equals(source.getControllerId())) {
-                    if (!permanent.hasSubtype("Eye")) {
-                        return true;
-                    }
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent != null) {
+            if (permanent.getControllerId().equals(source.getControllerId())) {
+                if (!permanent.hasSubtype("Eye")) {
+                    return true;
                 }
             }
         }
         return false;
     }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }    
 }

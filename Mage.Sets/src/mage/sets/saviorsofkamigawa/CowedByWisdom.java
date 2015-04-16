@@ -98,6 +98,17 @@ class CowedByWisdomEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(event.getSourceId());
+        return enchantment != null && enchantment.getAttachments().contains(source.getSourceId());
+    }
+    
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         Player controller = game.getPlayer(source.getControllerId());
@@ -123,20 +134,7 @@ class CowedByWisdomEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            return attacker != null && attacker.getAttachments().contains(source.getSourceId());
-        }
-        if (event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER)) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            return blocker != null && blocker.getAttachments().contains(source.getSourceId());
-        }
-        return false;
-    }
-
+    
     @Override
     public CowedByWisdomEffect copy() {
         return new CowedByWisdomEffect(this);

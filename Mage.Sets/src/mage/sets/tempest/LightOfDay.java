@@ -81,33 +81,32 @@ class LightOfDayEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public LightOfDayEffect copy() {
+        return new LightOfDayEffect(this);
     }
 
     @Override
-    public LightOfDayEffect copy() {
-        return new LightOfDayEffect(this);
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
+    }
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent != null) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (player.getInRange().contains(permanent.getControllerId())) {
+                if (permanent.getColor().isBlack()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (player.getInRange().contains(permanent.getControllerId())) {
-                    if (permanent.getColor().isBlack()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    
 }

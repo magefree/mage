@@ -51,8 +51,6 @@ public class ElephantGrass extends CardImpl {
         super(ownerId, 54, "Elephant Grass", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "VIS";
 
-        this.color.setGreen(true);
-
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
         // Black creatures can't attack you.
@@ -85,18 +83,13 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
+        if (event.getTargetId().equals(source.getControllerId()) ) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if(creature != null && creature.getColor().isBlack()){
                 return true;
@@ -104,6 +97,12 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+    
 
     @Override
     public ElephantGrassReplacementEffect copy() {

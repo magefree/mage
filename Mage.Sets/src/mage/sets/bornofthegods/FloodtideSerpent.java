@@ -58,7 +58,6 @@ public class FloodtideSerpent extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -93,11 +92,6 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
 
     FloodtideSerpentReplacementEffect ( FloodtideSerpentReplacementEffect effect ) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override

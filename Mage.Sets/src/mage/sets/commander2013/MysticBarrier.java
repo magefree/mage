@@ -65,8 +65,6 @@ public class MysticBarrier extends CardImpl {
         super(ownerId, 18, "Mystic Barrier", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
-
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
         this.addAbility(new MysticBarrierTriggeredAbility());
 
@@ -98,16 +96,19 @@ class MysticBarrierTriggeredAbility extends TriggeredAbilityImpl {
     public MysticBarrierTriggeredAbility copy() {
         return new MysticBarrierTriggeredAbility(this);
     }
-
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) || event.getType().equals(EventType.UPKEEP_STEP_PRE);
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) && event.getTargetId().equals(this.getSourceId())) {
-            return true;
+        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD)) {
+            return event.getTargetId().equals(this.getSourceId());
+        } else {
+            return event.getPlayerId().equals(this.getControllerId());
         }
-        if (event.getType().equals(EventType.UPKEEP_STEP_PRE) && event.getPlayerId().equals(this.getControllerId())) {
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -171,18 +172,18 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && game.getPlayers().size() > 2) {
+        if (game.getPlayers().size() > 2) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 if (controller.getInRange().contains(event.getPlayerId())) {

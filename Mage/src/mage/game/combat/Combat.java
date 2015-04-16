@@ -182,6 +182,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     /**
      * Add an additional attacker to the combat (e.g. token of Geist of Saint
      * Traft) This method doesn't trigger ATTACKER_DECLARED event (as intended).
+     * If the creature has to be tapped that won't do this method.
      *
      * @param creatureId - creature that shall be added to the combat
      * @param game
@@ -190,14 +191,14 @@ public class Combat implements Serializable, Copyable<Combat> {
     public boolean addAttackingCreature(UUID creatureId, Game game) {
         Player player = game.getPlayer(attackerId);
         if (defenders.size() == 1) {
-            declareAttacker(creatureId, defenders.iterator().next(), game);
+            addAttackerToCombat(creatureId, defenders.iterator().next(), game);
             return true;
         } else {
             TargetDefender target = new TargetDefender(defenders, creatureId);
             target.setRequired(true);
             player.chooseTarget(Outcome.Damage, target, null, game);
             if (target.getFirstTarget() != null) {
-                declareAttacker(creatureId, target.getFirstTarget(), game);
+                addAttackerToCombat(creatureId, target.getFirstTarget(), game);
                 return true;
             }
         }
@@ -844,7 +845,20 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean declareAttacker(UUID attackerId, UUID defenderId, Game game) {
+    public boolean declareAttacker(UUID attackerId, UUID defenderId, UUID playerId, Game game) {
+        Permanent attacker = game.getPermanent(attackerId);
+        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
+            if (!attacker.isTapped()) {
+                attacker.tap(game);
+            }
+        }
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
+            return addAttackerToCombat(attackerId, defenderId, game);
+        }
+        return false;
+    }
+
+    public boolean addAttackerToCombat(UUID attackerId, UUID defenderId, Game game) {
         if (!defenders.contains(defenderId)) {
             return false;
         }
@@ -853,16 +867,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (!canDefenderBeAttacked(attackerId, defenderId, game)) {
             return false;
         }
-
         CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId() : defenderId);
         newGroup.attackers.add(attackerId);
         Permanent attacker = game.getPermanent(attackerId);
-        if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
-            attacker.tap(game);
-        }
         attacker.setAttacking(true);
         groups.add(newGroup);
-        return true;
+        return true;        
     }
 
     public boolean canDefenderBeAttacked(UUID attackerId, UUID defenderId, Game game) {

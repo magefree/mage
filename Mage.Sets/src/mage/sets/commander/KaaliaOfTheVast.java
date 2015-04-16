@@ -159,7 +159,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
                         player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);
                         Permanent creature = game.getPermanent(cardId);
                         if (creature != null) {
-                            game.getCombat().declareAttacker(card.getId(), defenderId, game);
+                            game.getCombat().addAttackerToCombat(card.getId(), defenderId, game);
                             return true;
                         }
 

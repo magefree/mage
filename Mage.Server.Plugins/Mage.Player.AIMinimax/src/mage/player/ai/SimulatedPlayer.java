@@ -177,8 +177,12 @@ public class SimulatedPlayer extends ComputerPlayer {
                 binary.insert(0, "0");
             }
             for (int j = 0; j < attackersList.size(); j++) {
-                if (binary.charAt(j) == '1')
-                    sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, sim);
+                if (binary.charAt(j) == '1') {
+                    setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
+                    if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
+                        sim.undo(playerId);
+                    }                    
+                }
             }
             if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                 logger.debug("simulating -- found redundant attack combination");

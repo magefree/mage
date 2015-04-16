@@ -1989,8 +1989,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         Permanent attacker = game.getPermanent(attackerId);
         if (attacker != null && attacker.canAttack(defenderId, game) && attacker.getControllerId().equals(playerId)) {
-            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
-                game.getCombat().declareAttacker(attackerId, defenderId, game);
+            if(!game.getCombat().declareAttacker(attackerId, defenderId, playerId, game)) {
+                game.undo(playerId);
             }
         }
     }

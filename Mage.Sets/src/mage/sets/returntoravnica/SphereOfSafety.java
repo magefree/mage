@@ -54,8 +54,6 @@ public class SphereOfSafety extends CardImpl {
         super(ownerId, 24, "Sphere of Safety", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyReplacementEffect()));
 
@@ -79,7 +77,7 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    private PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
+    private final PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
 
     
     SphereOfSafetyReplacementEffect ( ) {
@@ -90,48 +88,43 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
     SphereOfSafetyReplacementEffect ( SphereOfSafetyReplacementEffect effect ) {
         super(effect);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            Player player = game.getPlayer(event.getPlayerId());
-            if ( player != null ) {
-                int ce = countEnchantments.calculate(game, source, this);
-                ManaCostsImpl safetyCosts = new ManaCostsImpl("{"+ ce +"}");
-                if ( safetyCosts.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) )
-                {
-                    if (safetyCosts.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                        return false;
-                    }
-                }
-            }
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getControllerId()) ) {
+            return true;
+        }
+        // planeswalker
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                              && permanent.getCardType().contains(CardType.PLANESWALKER)) {
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            if (event.getTargetId().equals(source.getControllerId()) ) {
-                return true;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(event.getPlayerId());
+        if ( player != null ) {
+            int ce = countEnchantments.calculate(game, source, this);
+            ManaCostsImpl safetyCosts = new ManaCostsImpl("{"+ ce +"}");
+            if ( safetyCosts.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
+                 player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) ) {
+                if (safetyCosts.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                    return false;
+                }
             }
-            // planeswalker
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                                  && permanent.getCardType().contains(CardType.PLANESWALKER)) {
-                return true;
-            }
+            return true;
         }
         return false;
     }
-
+    
     @Override
     public SphereOfSafetyReplacementEffect copy() {
         return new SphereOfSafetyReplacementEffect(this);
