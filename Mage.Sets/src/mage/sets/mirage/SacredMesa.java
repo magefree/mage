@@ -52,9 +52,9 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SacredMesa extends CardImpl {
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Pegasus");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Pegasus");
     static {
-        filter.add(new SubtypePredicate("a Pegasus"));
+        filter.add(new SubtypePredicate("Pegasus"));
     }
 
     public SacredMesa(UUID ownerId) {
