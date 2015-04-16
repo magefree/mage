@@ -109,10 +109,15 @@ class RakdosLordOfRiotsCantCastEffect extends ContinuousRuleModifyingEffectImpl 
     public RakdosLordOfRiotsCantCastEffect copy() {
         return new RakdosLordOfRiotsCantCastEffect(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             if (new OpponentsLostLifeCount().calculate(game, source, this) == 0) {
                 return true;
             }

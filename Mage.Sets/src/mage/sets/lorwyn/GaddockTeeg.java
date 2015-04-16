@@ -96,14 +96,17 @@ class GaddockTeegReplacementEffect4 extends ContinuousRuleModifyingEffectImpl {
     public GaddockTeegReplacementEffect4 copy() {
         return new GaddockTeegReplacementEffect4(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getManaCost().convertedManaCost() >= 4) {  
-                return true;
-            }
+        Card card = game.getCard(event.getSourceId());
+        if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getManaCost().convertedManaCost() >= 4) {  
+            return true;
         }
         return false;
     }
@@ -130,14 +133,17 @@ class GaddockTeegReplacementEffectX extends ContinuousRuleModifyingEffectImpl {
     public GaddockTeegReplacementEffectX copy() {
         return new GaddockTeegReplacementEffectX(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getManaCost().getText().contains("X")) {  
-                return true;
-            }
+        Card card = game.getCard(event.getSourceId());
+        if (card != null && !card.getCardType().contains(CardType.CREATURE) && card.getManaCost().getText().contains("X")) {  
+            return true;
         }
         return false;
     }

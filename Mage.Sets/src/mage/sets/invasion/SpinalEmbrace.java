@@ -106,10 +106,15 @@ class SpinalEmbraceEffect extends ContinuousRuleModifyingEffectImpl {
     SpinalEmbraceEffect(final SpinalEmbraceEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             return !TurnPhase.COMBAT.equals(game.getTurn().getPhaseType());
         }
         return false;

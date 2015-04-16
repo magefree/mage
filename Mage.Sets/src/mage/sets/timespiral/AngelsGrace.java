@@ -89,17 +89,14 @@ class AngelsGraceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.WINS || event.getType() == EventType.LOSES;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) ||
-            (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId()))) {
-            return true;
-        }
-        return false;
+        return (event.getType() == EventType.WINS && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) ||
+                (event.getType() == EventType.LOSES && event.getPlayerId().equals(source.getControllerId()));
     }
 
 }

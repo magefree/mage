@@ -134,11 +134,6 @@ class EtherswornCanonistReplacementEffect extends ContinuousRuleModifyingEffectI
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public EtherswornCanonistReplacementEffect copy() {
         return new EtherswornCanonistReplacementEffect(this);
     }

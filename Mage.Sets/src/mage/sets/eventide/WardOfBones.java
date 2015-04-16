@@ -102,12 +102,16 @@ class WardOfBonesEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND || event.getType() == GameEvent.EventType.CAST_SPELL;
+                
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND
-                || event.getType() == GameEvent.EventType.CAST_SPELL
-                && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             final Card card = game.getCard(event.getSourceId());
             final Player opponent = game.getPlayer(event.getPlayerId());
             if (card == null || opponent == null) {

@@ -108,11 +108,6 @@ class NecrologiaTimingEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public NecrologiaTimingEffect copy() {
         return new NecrologiaTimingEffect(this);
     }

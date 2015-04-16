@@ -123,7 +123,14 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean apply(Game game, Ability source) {
         return false;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.LOST_CONTROL || 
+                event.getType() == GameEvent.EventType.ZONE_CHANGE || 
+                event.getType() == GameEvent.EventType.UNTAP;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter

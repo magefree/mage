@@ -114,7 +114,16 @@ public class GameEvent {
 
         LOSES, LOST, WINS,
         TARGET, TARGETED,
-        COUNTER, COUNTERED,
+        
+        /* COUNTER
+            targetId    id of the spell or id of stack ability
+            sourceId    sourceId of the ability countering the spell or stack ability
+            playerId    controller of the countered spell or stack ability
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        COUNTER,
+        COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
         DECLARE_ATTACKER, ATTACKER_DECLARED,
         

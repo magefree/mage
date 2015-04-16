@@ -117,18 +117,21 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            Card card = game.getCard(event.getSourceId());
-            if (sourcePermanent != null && card != null) {
-                if (sourcePermanent.getImprinted().size() > 0) {
-                    Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                    if (imprintedCard != null) {
-                        return card.getName().equals(imprintedCard.getName());
-                    }
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Card card = game.getCard(event.getSourceId());
+        if (sourcePermanent != null && card != null) {
+            if (sourcePermanent.getImprinted().size() > 0) {
+                Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+                if (imprintedCard != null) {
+                    return card.getName().equals(imprintedCard.getName());
                 }
             }
         }

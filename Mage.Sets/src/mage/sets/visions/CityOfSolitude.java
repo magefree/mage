@@ -77,10 +77,15 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
     CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL || event.getType() == EventType.ACTIVATE_ABILITY;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return (event.getType() == EventType.CAST_SPELL || event.getType() == EventType.ACTIVATE_ABILITY) && !game.getActivePlayerId().equals(event.getPlayerId());
+        return !game.getActivePlayerId().equals(event.getPlayerId());
     }
 
     @Override

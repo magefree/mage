@@ -401,15 +401,15 @@ class CityInABottleCantPlayEffect extends ContinuousRuleModifyingEffectImpl {
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         return "You can't play cards originally printed in the Arabian Nights expansion";
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PLAY_LAND || event.getType() == EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PLAY_LAND || event.getType() == EventType.CAST_SPELL) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
-                return true;
-            }
-        }
-        return false;
+        Card card = game.getCard(event.getSourceId());
+        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 }

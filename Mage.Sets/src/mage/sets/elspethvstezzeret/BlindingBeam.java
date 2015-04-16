@@ -154,9 +154,14 @@ class BlindingBeamEffect2 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.UNTAP);
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // prevent untap event of creatures of target player
-        if (game.getTurn().getStepType().equals(PhaseStep.UNTAP) && event.getType().equals(EventType.UNTAP)) {
+        if (game.getTurn().getStepType().equals(PhaseStep.UNTAP)) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
                 return true;
