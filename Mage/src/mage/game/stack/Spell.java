@@ -55,6 +55,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -319,7 +320,7 @@ public class Spell implements StackObject, Card {
      * @return
      */
     public boolean chooseNewTargets(Game game, UUID playerId) {
-        return chooseNewTargets(game, playerId, false, false);
+        return chooseNewTargets(game, playerId, false, false, null);
     }
 
     /**
@@ -377,13 +378,13 @@ public class Spell implements StackObject, Card {
      *
      * @param game
      * @param playerId - player that can/has to change the taregt of the spell
-     * @param forceChange - does only work for targets with maximum of one
-     * targetId
-     * @param onlyOneTarget - 114.6b one target must be changed to another
-     * target
+     * @param forceChange - does only work for targets with maximum of one targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @param filterNewTarget restriction for the new target, if null nothing is cheched
      * @return
      */
-    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
+    @Override
+    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             StringBuilder newTargetDescription = new StringBuilder();
@@ -393,7 +394,7 @@ public class Spell implements StackObject, Card {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
-                        Target newTarget = chooseNewTarget(player, spellAbility, mode, target, forceChange, game);
+                        Target newTarget = chooseNewTarget(player, spellAbility, mode, target, forceChange, filterNewTarget, game);
                         // clear the old target and copy all targets from new target
                         target.clearChosen();
                         for (UUID targetId : newTarget.getTargets()) {
@@ -424,7 +425,7 @@ public class Spell implements StackObject, Card {
      * @param game
      * @return 
      */
-    private Target chooseNewTarget(Player player, SpellAbility spellAbility, Mode mode, Target target, boolean forceChange, Game game) {
+    private Target chooseNewTarget(Player player, SpellAbility spellAbility, Mode mode, Target target, boolean forceChange, FilterPermanent filterNewTarget, Game game) {
         Target newTarget = target.copy();
         newTarget.clearChosen();
         for (UUID targetId : target.getTargets()) {
@@ -443,6 +444,14 @@ public class Spell implements StackObject, Card {
                         newTarget.clearChosen();
                         // TODO: Distinction between "spell controller" and "player that can change the target" - here player is used for both 
                         newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game); 
+                        // check target restriction 
+                        if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                game.informPlayer(player, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                newTarget.clearChosen();
+                            }
+                        }                        
                     } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 // choose a new target
                 } else {
@@ -473,6 +482,12 @@ public class Spell implements StackObject, Card {
                                 } else {
                                     newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
                                 }
+                            } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                    game.informPlayer(player, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                    again = true;
+                                }                                
                             } else {
                                 // valid target was selected, add it to the new target definition
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), spellAbility, game, false);

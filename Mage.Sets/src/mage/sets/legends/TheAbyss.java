@@ -86,24 +86,27 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
     public TheAbyssTriggeredAbility copy() {
         return new TheAbyssTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            Player player = game.getPlayer(event.getPlayerId());
-            if (player != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature you control");
-                filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-                filter.add(new ControllerIdPredicate(player.getId()));
-                Target target = new TargetCreaturePermanent(filter);
-                if (target.canChoose(this.getSourceId(), this.getControllerId(), game) && player.chooseTarget(Outcome.DestroyPermanent, target, this, game)) {
-                    for (Effect effect: this.getEffects()) {
-                        if (effect instanceof DestroyTargetEffect) {
-                            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                        }
+        Player player = game.getPlayer(event.getPlayerId());
+        if (player != null) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature you control");
+            filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+            filter.add(new ControllerIdPredicate(player.getId()));
+            Target target = new TargetCreaturePermanent(filter);
+            if (target.canChoose(this.getSourceId(), this.getControllerId(), game) && player.chooseTarget(Outcome.DestroyPermanent, target, this, game)) {
+                for (Effect effect: this.getEffects()) {
+                    if (effect instanceof DestroyTargetEffect) {
+                        effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;

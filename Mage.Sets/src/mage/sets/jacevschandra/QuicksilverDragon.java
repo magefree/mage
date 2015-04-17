@@ -107,7 +107,7 @@ class QuicksilverDragonEffect extends OneShotEffect {
                 numTargets += target.getTargets().size();
             }
             if (numTargets == 1 && spell.getSpellAbility().getTargets().getFirstTarget().equals(source.getSourceId())) {
-                spell.chooseNewTargets(game, source.getControllerId(), true, false);
+                spell.chooseNewTargets(game, source.getControllerId(), true, false, null);
             }
             return true;
         }
