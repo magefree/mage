@@ -53,7 +53,7 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
     
     /**
      * 
-     * @param fromExileZone - the card will only be returned if it's still in the sour obect specific exile zone
+     * @param fromExileZone - the card will only be returned if it's still in the source object specific exile zone
      */
     public ReturnToBattlefieldUnderYourControlTargetEffect(boolean fromExileZone) {
         super(Outcome.Benefit);

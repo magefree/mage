@@ -266,4 +266,67 @@ public class CloudshiftTest extends CardTestPlayerBase {
         assertExileCount("Silvercoat Lion", 1);
         
     }    
+    
+    /**
+     * Test that if a creature returns from cloudshift it returns
+     * under the control of the controller of Cloudshift.
+     */
+    @Test
+    public void testReturnOfOwnerIsAnotherPlayer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains",3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain",3);
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerA, "Act of Treason");
+        
+        addCard(Zone.HAND, playerA, "Cloudshift");
+
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Silvercoat Lion");
+        
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Cloudshift", 1);
+        assertGraveyardCount(playerA, "Act of Treason", 1);
+        
+        assertPermanentCount(playerA,"Silvercoat Lion", 1);
+        assertPermanentCount(playerB,"Silvercoat Lion", 0);
+        
+    }    
+    
+ /**
+     * Test that if a creature returns from Conjurer's Closet it returns
+     * under the control of the controller of Conjurer's Closet.
+     */
+    @Test
+    public void testReturnOfOwnerIsAnotherPlayerConjurersCloset() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain",3);
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+        addCard(Zone.HAND, playerA, "Act of Treason");
+        
+        // At the beginning of your end step, you may exile target creature you control, then return that card to the battlefield under your control
+        addCard(Zone.BATTLEFIELD, playerA, "Conjurer's Closet");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Act of Treason", "Silvercoat Lion");
+
+        addTarget(playerA, "Silvercoat Lion");
+        
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA,"Conjurer's Closet", 1);
+        assertGraveyardCount(playerA, "Act of Treason", 1);
+        
+        assertPermanentCount(playerA,"Silvercoat Lion", 1);
+        assertPermanentCount(playerB,"Silvercoat Lion", 0);
+        
+    }        
 }
