@@ -29,6 +29,7 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
@@ -37,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -52,7 +54,9 @@ public class TrumpetingArmodon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{G}: Target creature blocks Trumpeting Armodon this turn if able.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfCombat), new ManaCostsImpl("{1}{G}")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
     public TrumpetingArmodon(final TrumpetingArmodon card) {
