@@ -86,4 +86,32 @@ public class SuspendTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         
     }
+    /**
+     * Tests that a spell countered with delay goes to exile with 3 time counters
+     * and can be cast after the 3 counters are removed
+     *
+     */
+    @Test
+    public void testDelay() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+
+        addCard(Zone.HAND, playerA, "Silvercoat Lion",1);
+
+        // Instant {1}{U}
+        // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
+        addCard(Zone.HAND, playerB, "Delay",1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Delay", "Silvercoat Lion");
+        setChoice(playerA, "Silvercoat Lion");
+
+        setStopAt(7, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Delay", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        
+    }    
 }
