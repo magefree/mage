@@ -82,6 +82,7 @@ public class Spell implements StackObject, Card {
     private UUID controllerId;
     private boolean copiedSpell;
     private boolean faceDown;
+    private boolean countered;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -100,6 +101,7 @@ public class Spell implements StackObject, Card {
         }
         this.controllerId = controllerId;
         this.fromZone = fromZone;
+        this.countered = false;
     }
 
     public Spell(final Spell spell) {
@@ -521,6 +523,7 @@ public class Spell implements StackObject, Card {
     
     @Override
     public void counter(UUID sourceId, Game game) {
+        this.countered = true;
         if (!isCopiedSpell()) {
             card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
         }
@@ -1000,6 +1003,10 @@ public class Spell implements StackObject, Card {
     @Override
     public void setSpellAbility(SpellAbility ability) {
         throw new UnsupportedOperationException("Not supported."); 
+    }
+
+    public boolean isCountered() {
+        return countered;
     }
 
 }

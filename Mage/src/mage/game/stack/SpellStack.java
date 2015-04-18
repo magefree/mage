@@ -97,9 +97,10 @@ public class SpellStack extends ArrayDeque<StackObject> {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, sourceId, stackObject.getControllerId()))) {
                 if ( stackObject instanceof Spell ) {
                     game.rememberLKI(objectId, Zone.STACK, (Spell)stackObject);
+                } else {
+                    this.remove(stackObject);                    
                 }
-                this.remove(stackObject);
-                stackObject.counter(sourceId, game); // tries to move to graveyard
+                stackObject.counter(sourceId, game); 
                 if (!game.isSimulation())
                     game.informPlayers(counteredObjectName + " is countered by " + sourceObject.getLogName());
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, objectId, sourceId, stackObject.getControllerId()));

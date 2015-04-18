@@ -30,7 +30,6 @@ package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -42,7 +41,7 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
     /** 
      * Soulfire Grand Master
-     * Creature â€” Human Monk 2/2, 1W (2)
+     * Creature - Human Monk 2/2, 1W (2)
      * Lifelink
      * Instant and sorcery spells you control have lifelink.
      * {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from 
@@ -233,5 +232,67 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertLife(playerA, 20); 
 
     }      
+    /**
+     * I activated the ability of Soulfire grand master, it resolved, then i cast Stoke the Flames 
+     * on Whisperwood Elemental, my opponenet sacrificed the elemental, so stoke didnt resolve, 
+     * but i still got the life from lifelink.
+     */
     
+    @Test
+    public void testSoulfireStokeTheFlames() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        
+        addCard(Zone.HAND, playerA, "Stoke the Flames");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Stoke the Flames", "Whisperwood Elemental");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}", null ,"{this} deals 4 damage");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Stoke the Flames", 1); // no legal target left so the spell is countered and goes to graveyard
+        assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 20); 
+
+    }   
+    
+   /**
+     * Check if second ability resolved, the next spell that is counterer 
+     * won't go to hand back because it did not resolve
+     * 
+     */
+    
+    @Test
+    public void testSoulfireCounteredSpellDontGoesBack() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        
+        addCard(Zone.HAND, playerA, "Stoke the Flames");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Counterspell", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Stoke the Flames", "Whisperwood Elemental");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Counterspell", "Stoke the Flames");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Counterspell", 1);
+        assertGraveyardCount(playerA, "Stoke the Flames", 1); // no legal target left so the spell is countered and goes to graveyard
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 20); 
+
+    }      
 }
