@@ -42,7 +42,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
@@ -71,7 +70,7 @@ import mage.watchers.common.BlockedAttackerWatcher;
 public class TheWretched extends CardImpl {
 
     public TheWretched(UUID ownerId) {
-        super(ownerId, 239, "The Wretched", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        super(ownerId, 59, "The Wretched", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "5ED";
         this.subtype.add("Demon");
         this.power = new MageInt(2);
@@ -160,19 +159,6 @@ class TheWretchedEffect extends OneShotEffect {
             }
         }
         return true;
-//        BlockedAttackerWatcher watcher = (BlockedAttackerWatcher) game.getState().getWatchers().get("BlockedAttackerWatcher");
-//        if (watcher != null) {
-//            for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
-//                if (watcher.creatureHasBlockedAttacker(theWretched, creature, game)
-//                        && !creature.isRemovedFromCombat()) {
-//                    ContinuousEffect effect = new ConditionalContinuousEffect(new GainControlTargetEffect(Duration.Custom, source.getControllerId()), new SourceOnBattlefieldControlUnchangedCondition(), "test");
-//                    effect.setTargetPointer(new FixedTarget(creature.getId()));
-//                    game.addEffect(effect, source);
-//                }
-//            }
-//            return true;
-//        }
-//        return false;
     }
 
     @Override
