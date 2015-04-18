@@ -60,7 +60,6 @@ public class VinesOfVastwood extends CardImpl {
     public VinesOfVastwood(UUID ownerId) {
         super(ownerId, 193, "Vines of Vastwood", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ZEN";
-        this.color.setGreen(true);
 
         // Kicker {G} (You may pay an additional {G} as you cast this spell.)
         this.addAbility(new KickerAbility("{G}"));
