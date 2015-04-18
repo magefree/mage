@@ -36,7 +36,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
@@ -106,22 +105,19 @@ class MirrorMockeryEffect extends OneShotEffect {
         }
         Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
         if (enchanted != null) {
-            Card card = game.getCard(enchanted.getId());
-            if (card != null) {
-                EmptyToken token = new EmptyToken();
-                CardUtil.copyTo(token).from(card);
+            EmptyToken token = new EmptyToken();
+            CardUtil.copyTo(token).from(enchanted);
 
-                token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+            token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
-                ExileTargetEffect exileEffect = new ExileTargetEffect();
-                exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-                DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
-            }
+            ExileTargetEffect exileEffect = new ExileTargetEffect();
+            exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
+            DelayedTriggeredAbility delayedAbility = new AtTheEndOfCombatDelayedTriggeredAbility(exileEffect);
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
+            game.addDelayedTriggeredAbility(delayedAbility);
+            return true;
         }
         return false;
     }
