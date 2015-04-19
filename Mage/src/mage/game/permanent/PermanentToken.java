@@ -108,7 +108,7 @@ public class PermanentToken extends PermanentImpl {
         if (!game.replaceEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED))) {
             game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
             if (game.getPlayer(controllerId).removeFromBattlefield(this, game)) {
-                game.fireEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED));
+                game.addSimultaneousEvent(new ZoneChangeEvent(this, sourceId, this.getControllerId(), Zone.BATTLEFIELD, Zone.EXILED)); 
                 return true;
             }
         }
