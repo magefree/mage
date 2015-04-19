@@ -33,24 +33,16 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.filter.FilterAbility;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
@@ -59,10 +51,10 @@ import mage.util.CardUtil;
 
  */
 public class AuriokSteelshaper extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent soldiersOrKnights = new FilterCreaturePermanent();
 
     static {
-        filter.add(Predicates.or(
+        soldiersOrKnights.add(Predicates.or(
                 new SubtypePredicate("Soldier"),
                 new SubtypePredicate("Knight")
         ));
@@ -81,7 +73,7 @@ public class AuriokSteelshaper extends CardImpl {
 
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false),
+                new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, soldiersOrKnights, false),
                 EquippedCondition.getInstance(),
                 "As long as {this} is equipped, each creature you control that's a Soldier or a Knight gets +1/+1"
         )));
