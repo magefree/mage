@@ -502,6 +502,18 @@ public class TestPlayer extends ComputerPlayer {
         return super.announceXCost(min, max, message, game, ability, null);
     }
 
+    @Override
+    public int getAmount(int min, int max, String message, Game game) {
+        if (!choices.isEmpty()) {
+            if (choices.get(0).startsWith("X=")) {
+                int xValue = Integer.parseInt(choices.get(0).substring(2));
+                choices.remove(0);
+                return xValue;
+            }
+        }
+        return super.getAmount(min, max, message, game);    
+    }
+
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
         if (permanents.size() > 0) {
