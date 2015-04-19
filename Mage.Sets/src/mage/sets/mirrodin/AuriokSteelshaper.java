@@ -89,59 +89,11 @@ public class AuriokSteelshaper extends CardImpl {
     }
 }
 
-class AbilityCostReductionAllEffect extends CostModificationEffectImpl {
-    private FilterAbility filter;
-    private int amount;
-
-    public AbilityCostReductionAllEffect(int amount) {
-        this(new FilterAbility(), amount);
-    }
-
-    public AbilityCostReductionAllEffect(FilterAbility filter, int amount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
-        this.amount = amount;
-        this.staticText = new StringBuilder(filter.getMessage()).append(" cost {").append(amount).append("} less.").toString();
-    }
-
-    public AbilityCostReductionAllEffect(AbilityCostReductionAllEffect other) {
-        super(other);
-        this.filter = other.filter;
-        this.amount = other.amount;
-    }
-
-    @Override
-    public AbilityCostReductionAllEffect copy() {
-        return new AbilityCostReductionAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, 1);
-        return true;
-    }
-
-    @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return filter.match(abilityToModify, game);
-    }
-}
-
-class AuriokSteelshaperCostReductionEffect extends AbilityCostReductionAllEffect {
-    private static final FilterAbility equipCosts = new FilterAbility() {
-        @Override
-        public boolean match(Ability ability, Game game) {
-            return super.match(ability, game) && (ability instanceof EquipAbility);
-        }
-
-        @Override
-        public String getMessage() {
-            return "Equip costs you pay";
-        }
-    };
+class AuriokSteelshaperCostReductionEffect extends CostModificationEffectImpl {
 
     public AuriokSteelshaperCostReductionEffect() {
-        super(equipCosts, 1);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "Equip costs you pay cost {1} less";
     }
 
     public AuriokSteelshaperCostReductionEffect(AuriokSteelshaperCostReductionEffect effect) {
@@ -154,7 +106,14 @@ class AuriokSteelshaperCostReductionEffect extends AbilityCostReductionAllEffect
     }
 
     @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        CardUtil.reduceCost(abilityToModify, 1);
+        return true;
+    }
+
+    @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return super.applies(abilityToModify, source, game) && abilityToModify.getControllerId().equals(source.getControllerId());
+        return abilityToModify.getControllerId().equals(source.getControllerId()) &&
+                (abilityToModify instanceof EquipAbility);
     }
 }
