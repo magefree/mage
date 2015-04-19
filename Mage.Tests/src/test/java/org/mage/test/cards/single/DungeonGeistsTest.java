@@ -74,16 +74,20 @@ public class DungeonGeistsTest extends CardTestPlayerBase {
     public void testWithBlink() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        // When Dungeon Geists enters the battlefield, tap target creature an opponent controls. 
+        // That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists.
         addCard(Zone.HAND, playerA, "Dungeon Geists");
         addCard(Zone.HAND, playerA, "Cloudshift");
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
         addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
-        addTarget(playerA, "Craw Wurm"); // first target Craw Wurm
-        addTarget(playerA, "Elite Vanguard"); // after Cloudshift effect (return back to battlefield) target Elite Vanguard
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Dungeon Geists");
+        addTarget(playerA, "Craw Wurm"); // first target Craw Wurm
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Dungeon Geists");
+        addTarget(playerA, "Elite Vanguard"); // after Cloudshift effect (return back to battlefield) target Elite Vanguard
+        
         setStopAt(2, PhaseStep.DRAW);
         execute();
 
