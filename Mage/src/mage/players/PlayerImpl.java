@@ -709,8 +709,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
                 Card card = this.getHand().get(cardId, game);
-                discardedCards.add(card);
-                discard(card, source, game);
+                if (card != null) { // can happen if user is removed (session expires)
+                    discardedCards.add(card);
+                    discard(card, source, game);
+                }
             }
         }
         return discardedCards;

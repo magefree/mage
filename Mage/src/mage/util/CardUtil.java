@@ -208,7 +208,7 @@ public class CardUtil {
      * @param ability
      * @param reduceCount
      */
-    public static void adjustAbilityCost(Ability ability, int reduceCount) {
+    private static void adjustAbilityCost(Ability ability, int reduceCount) {
         ManaCosts<ManaCost> adjustedCost = adjustCost(ability.getManaCostsToPay(), reduceCount);
         ability.getManaCostsToPay().clear();
         ability.getManaCostsToPay().addAll(adjustedCost);

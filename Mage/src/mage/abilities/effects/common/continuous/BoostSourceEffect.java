@@ -39,6 +39,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -87,7 +88,11 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            try {
+                affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(BoostSourceEffect.class).error("Could not get sourceId reference: " + source.getRule());
+            }
         }
         if (lockedIn) {
             power = new StaticValue(power.calculate(game, source, this));

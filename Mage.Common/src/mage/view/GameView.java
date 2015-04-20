@@ -95,8 +95,8 @@ public class GameView implements Serializable {
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
-                // Stack Ability
-                MageObject object = game.getObject(stackObject.getSourceId());
+                // Stack Ability                
+                MageObject object = ((StackAbility)stackObject).getSourceObject(game);
                 Card card = game.getCard(stackObject.getSourceId());
                 if (card != null) {
                     if (object != null) {

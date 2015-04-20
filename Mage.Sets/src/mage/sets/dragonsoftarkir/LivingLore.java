@@ -196,9 +196,11 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                     if (exileId != null) {
                         ExileZone exileZone = game.getExile().getExileZone(exileId);
                         Card exiledCard = null;
-                        for (Card card :exileZone.getCards(game)) {
-                            exiledCard = card;
-                            break;
+                        if (exileZone != null) {
+                            for (Card card :exileZone.getCards(game)) {
+                                exiledCard = card;
+                                break;
+                            }
                         }
                         if (exiledCard != null) {
                             if (exiledCard.getSpellAbility().canChooseTarget(game)) {

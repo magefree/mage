@@ -173,7 +173,9 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
         HashSet<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
-        abilities.removeAll(abilitiesToRemove);
+        if (abilitiesToRemove != null) {
+            abilities.removeAll(abilitiesToRemove);
+        }
         if (abilities.isEmpty()) {
             for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
                 ContinuousEffect effect = iterator.next();

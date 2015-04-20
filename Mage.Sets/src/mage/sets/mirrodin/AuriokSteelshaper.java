@@ -38,7 +38,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
-import mage.filter.FilterAbility;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
