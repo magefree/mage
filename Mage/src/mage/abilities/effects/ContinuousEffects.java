@@ -390,7 +390,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean checkAbilityStillExists(Ability ability, ContinuousEffect effect, GameEvent event, Game game) {
-        if (effect.getDuration().equals(Duration.OneUse) || ability.getSourceId() == null) { // needed for some special replacment effects (e.g. Undying) or commander replacement effect
+        if (effect.getDuration().equals(Duration.OneUse) || effect.getDuration().equals(Duration.Custom) || ability.getSourceId() == null) { // needed for some special replacment effects (e.g. Undying) or commander replacement effect
             return true;
         }
         MageObject object;
