@@ -48,14 +48,12 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -230,7 +228,10 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
             if (zEvent.getFromZone() == Zone.STACK &&
                     zEvent.getToZone() == Zone.GRAVEYARD &&
                     event.getTargetId().equals(spellId)) {
-                return true;
+                Spell spell = game.getStack().getSpell(spellId);               
+                if (spell != null && !spell.isCountered()) {
+                    return true;
+                }
             }
         }
         return false;

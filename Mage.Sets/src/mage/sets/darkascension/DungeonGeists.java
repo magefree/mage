@@ -70,7 +70,6 @@ public class DungeonGeists extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -112,40 +111,52 @@ class DungeonGeistsEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP || event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.LOST_CONTROL;
     }
+
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // Source must be on the battlefield (it's neccessary to check here because if as response to the enter
         // the battlefield triggered ability the source dies (or will be exiled), then the ZONE_CHANGE or LOST_CONTROL
         // event will happen before this effect is applied ever)
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
-            this.used = true;
+            discard();
             return false;
         }
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                discard();
-                return false;
-            }
+        switch(event.getType()) {
+            case ZONE_CHANGE:
+                // end effect if source does a zone move
+                if (event.getTargetId().equals(source.getSourceId())) {
+                    ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+                    if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                        discard();
+                        return false;
+                    }
+                }
+                break;
+            case UNTAP:
+                // prevent to untap the target creature
+                if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
+                    Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+                    if (targetCreature != null) {
+                        return targetCreature.getControllerId().equals(game.getActivePlayerId());
+                    } else {
+                        discard();
+                        return false;
+                    }
+                }                
+                break;
+            case LOST_CONTROL:
+                // end effect if source control is changed
+                if (event.getTargetId().equals(source.getSourceId())) {
+                    discard();
+                    return false;
+                }                
+                break;
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                discard();
-                return false;
-            }
-        }
-
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
-            if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
-                return true;
-            }
-        }
-
         return false;
     }
 }

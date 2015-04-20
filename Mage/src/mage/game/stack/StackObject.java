@@ -31,6 +31,7 @@ package mage.game.stack;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.filter.FilterPermanent;
 import mage.game.Controllable;
 import mage.game.Game;
 
@@ -41,6 +42,7 @@ public interface StackObject extends MageObject, Controllable {
     void counter(UUID sourceId, Game game);
     Ability getStackAbility();
     int getConvertedManaCost();
+    boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
     @Override
     StackObject copy();
 }

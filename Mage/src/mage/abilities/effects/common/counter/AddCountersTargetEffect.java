@@ -95,9 +95,10 @@ public class AddCountersTargetEffect extends OneShotEffect {
                         permanent.addCounters(newCounter, game);
                         int numberAdded = permanent.getCounters().getCount(counter.getName()) - before;
                         affectedTargets ++;
-                        if (!game.isSimulation())
+                        if (!game.isSimulation()) {
                             game.informPlayers(sourceObject.getLogName() +": "+ controller.getName()+ " puts " +
                                 numberAdded + " " + counter.getName().toLowerCase() + " counter on " + permanent.getLogName());
+                        }
                     }
                 } else {
                     Player player = game.getPlayer(uuid);

@@ -107,7 +107,7 @@ class CommandeerEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (controller != null && spell != null) {
             spell.setControllerId(controller.getId());
-            spell.chooseNewTargets(game, controller.getId(), false, false);
+            spell.chooseNewTargets(game, controller.getId(), false, false, null);
             return true;
         }
         return false;

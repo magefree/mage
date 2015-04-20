@@ -106,30 +106,24 @@ class GrandAbolisherEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        boolean spell = event.getType() == GameEvent.EventType.CAST_SPELL;
-        boolean activated = event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
-        if ((spell || activated) && game.getActivePlayerId().equals(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-
-            if (spell) {
-                return true;
-            }
-
-            // check source of activated ability
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                return permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE)
-                        || permanent.getCardType().contains(CardType.ENCHANTMENT);
-            } else {
-                MageObject object = game.getObject(event.getSourceId());
-                if (object != null) {
-                    return object.getCardType().contains(CardType.ARTIFACT) || object.getCardType().contains(CardType.CREATURE)
-                        || object.getCardType().contains(CardType.ENCHANTMENT);
-                }
-            }
-        }
-
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (game.getActivePlayerId().equals(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            switch(event.getType()) {
+                case CAST_SPELL:
+                    return true;
+                case ACTIVATE_ABILITY:
+                    Permanent permanent = game.getPermanent(event.getSourceId());
+                    if (permanent != null) {
+                        return permanent.getCardType().contains(CardType.ARTIFACT) || permanent.getCardType().contains(CardType.CREATURE)
+                                || permanent.getCardType().contains(CardType.ENCHANTMENT);
+                    }            
+            }   
+        }
+        return false;
+    }
 }

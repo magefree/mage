@@ -54,8 +54,6 @@ public class OozeFlux extends CardImpl {
         super(ownerId, 128, "Ooze Flux", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
-
         // {1}{G}, Remove one or more +1/+1 counters from among creatures you control: Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl("{1}{G}"));
         ability.addCost(new RemoveVariableCountersTargetCost(new FilterControlledCreaturePermanent("creatures you control"), CounterType.P1P1, "one or more", 1));
@@ -74,7 +72,7 @@ public class OozeFlux extends CardImpl {
 
 class OozeFluxCreateTokenEffect extends OneShotEffect {
 
-    private Token token;
+    private final Token token;
 
     public OozeFluxCreateTokenEffect(Token token) {
         super(Outcome.PutCreatureInPlay);

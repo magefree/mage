@@ -177,7 +177,16 @@ public class GameEvent {
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
         COUNTER_REMOVED,
-        LOSE_CONTROL, LOST_CONTROL,
+        LOSE_CONTROL, 
+        
+        /* LOST_CONTROL
+            targetId    id of the creature that lost control
+            sourceId    id of the creature that lost control
+            playerId    player that controlles the creature before
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
         CREATE_TOKEN,
 

@@ -89,27 +89,26 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl {
     public CurseOfInertiaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);
     }
-
-    public CurseOfInertiaTriggeredAbility(Effect effect, boolean optional, String text) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
+    
     public CurseOfInertiaTriggeredAbility(final CurseOfInertiaTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(EventType.DECLARED_ATTACKERS);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.DECLARED_ATTACKERS)) {
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment != null
-                    && enchantment.getAttachedTo() != null
-                    && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
-                for (Effect effect: this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackerId()));
-                }
-                return true;
-            }
+        Permanent enchantment = game.getPermanent(this.getSourceId());
+        if (enchantment != null
+                && enchantment.getAttachedTo() != null
+                && game.getCombat().getPlayerDefenders(game).contains(enchantment.getAttachedTo())) {
+            TargetPermanent target = new TargetPermanent();
+            target.setTargetController(game.getCombat().getAttackerId());
+            addTarget(target);
+            return true;
         }
         return false;
     }
@@ -138,24 +137,20 @@ class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        Player player = game.getPlayer(source.getTargets().get(0).getTargetController());
         if (player != null) {
-            Target target = new TargetPermanent();
-            if (target.canChoose(source.getSourceId(), player.getId(), game)
-                    && player.choose(outcome, target, source.getSourceId(), game)) {
-                Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
-                if (targetPermanent != null) {
-                    if (targetPermanent.isTapped()) {
-                        if (player.chooseUse(Outcome.Untap, "Untap that permanent?", game)) {
-                            targetPermanent.untap(game);
-                        }
-                    } else {
-                        if (player.chooseUse(Outcome.Tap, "Tap that permanent?", game)) {
-                            targetPermanent.tap(game);
-                        }
+            Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetPermanent != null) {
+                if (targetPermanent.isTapped()) {
+                    if (player.chooseUse(Outcome.Untap, "Untap that permanent?", game)) {
+                        targetPermanent.untap(game);
                     }
-                    return true;
+                } else {
+                    if (player.chooseUse(Outcome.Tap, "Tap that permanent?", game)) {
+                        targetPermanent.tap(game);
+                    }
                 }
+                return true;
             }
         }
         return false;

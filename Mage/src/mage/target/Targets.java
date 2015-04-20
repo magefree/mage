@@ -97,7 +97,11 @@ public class Targets extends ArrayList<Target> {
             }
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
-                if (!target.chooseTarget(outcome, playerId, source, game)) {
+                UUID targetController = playerId;
+                if (target.getTargetController() != null) { // some targets can have controller different than ability controller
+                    targetController = target.getTargetController();
+                }
+                if (!target.chooseTarget(outcome, targetController, source, game)) {
                     return false;
                 }
             }

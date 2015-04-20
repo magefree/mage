@@ -52,8 +52,6 @@ public class MimingSlime extends CardImpl {
         super(ownerId, 126, "Miming Slime", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
-
         // Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new MimingSlimeEffect());
     }

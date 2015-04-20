@@ -25,54 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Sir-Speshkitty
  */
-public class SpinedFluke extends CardImpl {
+public class BonesplitterSliver extends CardImpl {
 
-    public SpinedFluke(UUID ownerId) {
-        super(ownerId, 160, "Spined Fluke", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "USG";
-        this.subtype.add("Worm");
-        this.subtype.add("Horror");
+    public BonesplitterSliver(UUID ownerId) {
+        super(ownerId, 149, "Bonesplitter Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Sliver");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(1);
+        // All Sliver creatures get +2/+0.
+        this.addAbility(
+                new SimpleStaticAbility(
+                        Zone.BATTLEFIELD,
+                        new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"), false)
+                )
+        );
     }
 
-    @Override
-    public void build() {
-        // When Spined Fluke enters the battlefield, sacrifice a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent("a creature"), 1, "")));
-        // {B}: Regenerate Spined Fluke.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
-    }
-
-    public SpinedFluke(final SpinedFluke card) {
+    public BonesplitterSliver(final BonesplitterSliver card) {
         super(card);
     }
 
     @Override
-    public SpinedFluke copy() {
-        return new SpinedFluke(this);
+    public BonesplitterSliver copy() {
+        return new BonesplitterSliver(this);
     }
 }

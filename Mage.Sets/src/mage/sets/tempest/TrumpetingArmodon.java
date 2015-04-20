@@ -25,54 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.SacrificeControllerEffect;
-import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.ColoredManaSymbol;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author Sir-Speshkitty
  */
-public class SpinedFluke extends CardImpl {
+public class TrumpetingArmodon extends CardImpl {
 
-    public SpinedFluke(UUID ownerId) {
-        super(ownerId, 160, "Spined Fluke", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "USG";
-        this.subtype.add("Worm");
-        this.subtype.add("Horror");
+    public TrumpetingArmodon(UUID ownerId) {
+        super(ownerId, 156, "Trumpeting Armodon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Elephant");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(1);
+        // {1}{G}: Target creature blocks Trumpeting Armodon this turn if able.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    @Override
-    public void build() {
-        // When Spined Fluke enters the battlefield, sacrifice a creature.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent("a creature"), 1, "")));
-        // {B}: Regenerate Spined Fluke.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
-    }
-
-    public SpinedFluke(final SpinedFluke card) {
+    public TrumpetingArmodon(final TrumpetingArmodon card) {
         super(card);
     }
 
     @Override
-    public SpinedFluke copy() {
-        return new SpinedFluke(this);
+    public TrumpetingArmodon copy() {
+        return new TrumpetingArmodon(this);
     }
 }

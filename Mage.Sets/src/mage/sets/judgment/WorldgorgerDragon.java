@@ -48,6 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -143,8 +144,10 @@ class WorldgorgerDragonLeavesEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter() -1));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            int zoneChangeCounter = (sourceObject instanceof PermanentToken) ? source.getSourceObjectZoneChangeCounter() : source.getSourceObjectZoneChangeCounter() -1;
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exile != null) {
                 exile = exile.copy();
                 for (UUID cardId : exile) {
