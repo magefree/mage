@@ -38,7 +38,6 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
-        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
         setStopAt(3, PhaseStep.DRAW);
@@ -49,7 +48,6 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wolf", 1);
         assertPermanentCount(playerA, "Huntmaster of the Fells", 0);
         assertPermanentCount(playerA, "Ravager of the Fells", 1);
-        assertPermanentCount(playerB, "Ornithopter", 0);
     }
 
     /**
@@ -60,7 +58,6 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
-        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter");
 
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
@@ -76,6 +73,5 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wolf", 2);
         assertPermanentCount(playerA, "Ravager of the Fells", 0); // transformed back
         assertPermanentCount(playerA, "Huntmaster of the Fells", 1);
-        assertPermanentCount(playerB, "Ornithopter", 0);
     }
 }

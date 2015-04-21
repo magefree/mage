@@ -29,7 +29,6 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;

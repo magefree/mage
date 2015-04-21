@@ -59,7 +59,7 @@ public class PhyrexianMetamorph extends CardImpl {
         super(ownerId, 42, "Phyrexian Metamorph", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Shapeshifter");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

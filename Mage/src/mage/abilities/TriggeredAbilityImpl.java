@@ -183,7 +183,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 // case LOST_CONTROL:
                 case PHASED_OUT:
                 case PHASED_IN:
-                if (game.getLastKnownInformation(getSourceId(), zone) != null) {
+                if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
                     return true;
                 }
             }
