@@ -37,7 +37,7 @@ public class PhyrexianColossus extends mage.sets.eighthedition.PhyrexianColossus
 
     public PhyrexianColossus(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 306;
+        this.cardNumber = 305;
         this.expansionSetCode = "USG";
     }
 
