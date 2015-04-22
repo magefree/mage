@@ -42,7 +42,7 @@ public class BronzeSable extends CardImpl {
     public BronzeSable(UUID ownerId) {
         super(ownerId, 212, "Bronze Sable", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
         this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
+        this.subtype.add("Sable");
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
