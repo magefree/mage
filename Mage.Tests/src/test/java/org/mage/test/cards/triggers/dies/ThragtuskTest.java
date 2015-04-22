@@ -29,6 +29,7 @@ package org.mage.test.cards.triggers.dies;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -75,4 +76,44 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Beast", 1);                
 
     }
+    /**
+     * Test if a Thragtusk is copied by a Phyrexian Metamorph
+     * that leave battlefield ability does not work, if 
+     * the copy left all abilities by Turn to Frog
+     */
+    
+    @Test
+    @Ignore  // test fails because of bug
+    public void testPhyrexianMetamorphTurnToFrog() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
+        addCard(Zone.HAND, playerB, "Public Execution", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        setChoice(playerA, "Yes");        
+        setChoice(playerA, "Thragtusk");
+        
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Turn to Frog", "Thragtusk");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Public Execution", "Thragtusk");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerB, "Thragtusk", 1);
+
+        assertGraveyardCount(playerA,"Phyrexian Metamorph", 1);
+        assertGraveyardCount(playerB,"Public Execution", 1);
+
+        assertLife(playerA, 25);
+        assertLife(playerB, 20); // Thragtusk ETB ability does not trigger if set to battlefield on test game start 
+        
+        assertPermanentCount(playerA, "Beast", 0);                
+
+    }  
+    
 }
