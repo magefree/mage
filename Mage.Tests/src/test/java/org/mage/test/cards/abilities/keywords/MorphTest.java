@@ -552,4 +552,37 @@ public class MorphTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }    
+    /**
+     * Supplant Form does not work correctly with morph creatures. If you bounce and copy
+     * a face-down morph, the created token should be a colorless 2/2, but the token created
+     * is instead the face-up of what the morph creature was.
+     */
+
+    @Test
+    public void testSupplantFormWithMorphedCreature() {
+        addCard(Zone.HAND, playerA, "Akroma, Angel of Fury", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // Return target creature to its owner's hand. You put a token onto the battlefield that's a copy of that creature
+        addCard(Zone.HAND, playerB, "Supplant Form", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Supplant Form", "face down creature");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Supplant Form", 1);
+        assertHandCount(playerA, "Akroma, Angel of Fury", 1);
+        
+        assertPermanentCount(playerB, "Akroma, Angel of Fury", 0);
+        assertPermanentCount(playerB, "a creature without name", 1);
+        assertPowerToughness(playerB, "a creature without name", 2, 2);
+
+    }    
 }

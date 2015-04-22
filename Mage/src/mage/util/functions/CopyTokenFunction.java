@@ -29,6 +29,7 @@ package mage.util.functions;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.game.permanent.PermanentCard;
@@ -64,10 +65,15 @@ public class CopyTokenFunction implements Function<Token, Card> {
             target.setOriginalCardNumber(((Token)sourceObj).getOriginalCardNumber());
             target.setCopySourceCard(((PermanentToken)source).getToken().getCopySourceCard());
         } else if (source instanceof PermanentCard) {
+            if (((PermanentCard)source).isMorphed() || ((PermanentCard)source).isManifested()) {
+                MorphAbility.setPermanentToFaceDownCreature(target);
+                return target;
+            } else {
             sourceObj = ((PermanentCard) source).getCard();
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());
             target.setCopySourceCard((Card)sourceObj);
+            }
         } else {
             target.setOriginalExpansionSetCode(source.getExpansionSetCode());
             target.setOriginalCardNumber(source.getCardNumber());

@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -292,19 +293,21 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         return alternateCosts;
     }
     
-    public static void setPermanentToFaceDownCreature(Permanent permanent) {
-        permanent.getPower().initValue(2);
-        permanent.getToughness().initValue(2);
-        permanent.getAbilities().clear();
-        permanent.getColor().setColor(new ObjectColor());
-        permanent.setName("");
-        permanent.getCardType().clear();
-        permanent.getCardType().add(CardType.CREATURE);
-        permanent.getSubtype().clear();
-        permanent.getSupertype().clear();
-        permanent.getManaCost().clear();
-//        permanent.setExpansionSetCode("KTK");
-        permanent.setRarity(Rarity.NA);
+    public static void setPermanentToFaceDownCreature(MageObject mageObject) {
+        mageObject.getPower().initValue(2);
+        mageObject.getToughness().initValue(2);
+        mageObject.getAbilities().clear();
+        mageObject.getColor().setColor(new ObjectColor());
+        mageObject.setName("");
+        mageObject.getCardType().clear();
+        mageObject.getCardType().add(CardType.CREATURE);
+        mageObject.getSubtype().clear();
+        mageObject.getSupertype().clear();
+        mageObject.getManaCost().clear();
+        if (mageObject instanceof Permanent) {
+            ((Permanent)mageObject).setExpansionSetCode("");
+            ((Permanent)mageObject).setRarity(Rarity.NA);
+        }
         
     }
 }
