@@ -219,6 +219,8 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 subtypes.addAll(card.getSubTypes());
             }
+            // Some creature types are not directly included in card types and are added here manually
+            subtypes.add("Blinkmoth");
         } catch (SQLException ex) {
         }
         return subtypes;
