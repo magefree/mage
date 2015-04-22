@@ -219,8 +219,30 @@ public enum CardRepository {
             for (CardInfo card : results) {
                 subtypes.addAll(card.getSubTypes());
             }
+            // Removing Forest because of Dryad Arbor
+            subtypes.remove("Forest");
             // Some creature types are not directly included in card types and are added here manually
             subtypes.add("Blinkmoth");
+            subtypes.add("Camarid");
+            subtypes.add("Caribou");
+            subtypes.add("Citizen");
+            subtypes.add("Coward");
+            subtypes.add("Deserter");
+            subtypes.add("Germ");
+            subtypes.add("Graveborn");
+            subtypes.add("Orb");
+            subtypes.add("Pentavite");
+            subtypes.add("Pincher");
+            subtypes.add("Prism");
+            subtypes.add("Reflection");
+            subtypes.add("Sand");
+            subtypes.add("Saproling");
+            subtypes.add("Serf");
+            subtypes.add("Splinter");
+            subtypes.add("Survivor");
+            subtypes.add("Tetravite");
+            subtypes.add("Triskelavite");
+
         } catch (SQLException ex) {
         }
         return subtypes;
