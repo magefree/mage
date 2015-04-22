@@ -29,11 +29,15 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -45,6 +49,7 @@ import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -63,8 +68,10 @@ public class VoiceOfAll extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // As Voice of All enters the battlefield, choose a color.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Protect)));
+       
         // Voice of All has protection from the chosen color.
-        this.getSpellAbility().addEffect(new EntersBattlefieldEffect(new VoiceOfAllEffect()));
+        this.getSpellAbility().addEffect(new VoiceOfAllEffect());
     }
 
     public VoiceOfAll(final VoiceOfAll card) {
@@ -98,6 +105,7 @@ class VoiceOfAllEffect extends OneShotEffect {
         ChoiceColor choice = new ChoiceColor();
         choice.setMessage("Choose color to get protection from");
         Player controller = game.getPlayer(source.getControllerId());
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (controller != null && controller.choose(outcome, choice, game)) {
             FilterCard protectionFilter = new FilterCard();
             protectionFilter.add(new ColorPredicate(choice.getColor()));
