@@ -61,10 +61,11 @@ public class PastInFlamesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertExileCount("Lightning Bolt", 1);
-        assertGraveyardCount(playerA, "Lightning Bolt", 0);
         assertLife(playerB, 17);
         assertLife(playerA, 20);
+
+        assertExileCount("Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 0);
 
     }
     

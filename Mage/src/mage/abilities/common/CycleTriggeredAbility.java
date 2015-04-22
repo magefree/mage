@@ -34,6 +34,7 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
@@ -55,7 +56,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
     
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return true;
     }
     

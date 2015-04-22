@@ -77,16 +77,19 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
     TorporOrbEffect(final TorporOrbEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Ability ability = (Ability) getValue("targetAbility");
-            if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
-                Permanent p = game.getPermanent(event.getTargetId());
-                if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-                    return true;
-                }
+        Ability ability = (Ability) getValue("targetAbility");
+        if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
+            Permanent p = game.getPermanent(event.getTargetId());
+            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+                return true;
             }
         }
         return false;

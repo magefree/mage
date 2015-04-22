@@ -101,7 +101,7 @@ class ManaDrainCounterEffect extends OneShotEffect {
                     new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, false, TargetController.YOU, PhaseSelection.NEXT_MAIN);
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

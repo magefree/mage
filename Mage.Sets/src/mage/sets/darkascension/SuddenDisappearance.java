@@ -92,12 +92,12 @@ class SuddenDisappearanceEffect extends OneShotEffect {
             List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
             if (perms.size() > 0) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-                    controller.moveCardToExileWithInfo(permanent, source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game, Zone.BATTLEFIELD);
+                    controller.moveCardToExileWithInfo(permanent, source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game));
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
                 game.addDelayedTriggeredAbility(delayedAbility);
 
             }

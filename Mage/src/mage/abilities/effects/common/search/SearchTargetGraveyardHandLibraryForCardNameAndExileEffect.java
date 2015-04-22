@@ -104,7 +104,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                             Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
                                 targetPlayer.getGraveyard().remove(targetCard);
-                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.GRAVEYARD);
+                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.GRAVEYARD, true);
                             }
                         }
                     }
@@ -121,7 +121,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                             Card targetCard = targetPlayer.getHand().get(targetId, game);
                             if (targetCard != null) {
                                 targetPlayer.getHand().remove(targetCard);
-                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.HAND);
+                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.HAND, true);
                             }
                         }
                     }
@@ -143,7 +143,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
                             if (targetCard != null) {
-                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                             }
                         }
                     }

@@ -126,13 +126,13 @@ class NorinTheWaryRemovingEffect extends OneShotEffect {
         if (controller != null) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
-                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD)) {
+                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                     //create delayed triggered ability
                     AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                             new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game));
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
                     game.addDelayedTriggeredAbility(delayedAbility);
                 }
             }

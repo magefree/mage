@@ -103,7 +103,7 @@ class ScatteringStrokeEffect extends OneShotEffect {
                         new AtTheBeginOMainPhaseDelayedTriggeredAbility(effect, true, TargetController.YOU, AtTheBeginOMainPhaseDelayedTriggeredAbility.PhaseSelection.NEXT_MAIN);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game));
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
                 game.addDelayedTriggeredAbility(delayedAbility);
             }
             return true;

@@ -50,24 +50,41 @@ import mage.util.CardUtil;
  */
 public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
-    private Zone zone;
+    private Zone returnToZone;
     private boolean tapped;
+    private boolean previousZone;
 
+    /**
+     * 
+     * @param zone Zone the card should return to
+     */
     public ReturnFromExileForSourceEffect(Zone zone) {
         this(zone, false);
     }
 
     public ReturnFromExileForSourceEffect(Zone zone, boolean tapped) {
+        this(zone, tapped, true);
+    }
+    
+    /**
+     * 
+     * @param zone
+     * @param tapped
+     * @param previousZone if this is used from a dies leave battlefield or destroyed trigger, the exile zone is based on previous zone of the object
+     */
+    public ReturnFromExileForSourceEffect(Zone zone, boolean tapped, boolean previousZone) {
         super(Outcome.PutCardInPlay);
-        this.zone = zone;
+        this.returnToZone = zone;
         this.tapped = tapped;
+        this.previousZone = previousZone;
         setText();
     }
 
     public ReturnFromExileForSourceEffect(final ReturnFromExileForSourceEffect effect) {
         super(effect);
-        this.zone = effect.zone;
+        this.returnToZone = effect.returnToZone;
         this.tapped = effect.tapped;
+        this.previousZone = effect.previousZone;
     }
 
     @Override
@@ -78,9 +95,9 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());        
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+        if (controller != null) {
+            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter() - (previousZone ? 1:0);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
             ExileZone exile = game.getExile().getExileZone(exileId);
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
                 LinkedList<UUID> cards = new LinkedList<>(exile);
@@ -89,8 +106,10 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
                     if (card == null) {
                         return false;
                     }
-                    game.informPlayers(controller.getName() + " moves " + card.getLogName() + " from exile to " + zone.toString().toLowerCase());
-                    card.moveToZone(zone, source.getSourceId(), game, tapped);
+                    if (!game.isSimulation()) {
+                    game.informPlayers(controller.getName() + " moves " + card.getLogName() + " from exile to " + returnToZone.toString().toLowerCase());
+                    }
+                    card.moveToZone(returnToZone, source.getSourceId(), game, tapped);
                 }
                 exile.clear();
             }
@@ -102,7 +121,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("return the exiled cards ");
-        switch(zone) {
+        switch(returnToZone) {
             case BATTLEFIELD:
                 sb.append("to the battlefield under its owner's control");
                 if (tapped) {

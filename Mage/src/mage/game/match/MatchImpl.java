@@ -400,6 +400,7 @@ public abstract class MatchImpl implements Match {
         if (player != null) {
             // make sure the deck name (needed for Tiny Leaders) won't get lost by sideboarding
             deck.setName(player.getDeck().getName());
+            deck.setDeckHashCode(player.getDeck().getDeckHashCode());
             player.submitDeck(deck);
         }
         synchronized (this) {
@@ -425,6 +426,7 @@ public abstract class MatchImpl implements Match {
                 sb.append(" QUITTED");
             }
             sb.append("<br/>");
+            sb.append("DeckHash: ").append(mp.getDeck().getDeckHashCode()).append("<br/>");
         }
         if (getDraws() > 0) {
             sb.append("   Draws: ").append(getDraws()).append("<br/>");

@@ -72,9 +72,6 @@ public class AnafenzaTheForemost extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -125,13 +122,13 @@ class AnafenzaTheForemostEffect extends ReplacementEffectImpl {
             if (((ZoneChangeEvent)event).getFromZone().equals(Zone.BATTLEFIELD)) {
                 Permanent permanent = ((ZoneChangeEvent)event).getTarget();
                 if (permanent != null) {
-                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD);
+                    return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
             }
             else {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone());
+                    return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, ((ZoneChangeEvent)event).getFromZone(), true);
                 }
             }
         }

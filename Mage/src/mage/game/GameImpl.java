@@ -159,9 +159,11 @@ public abstract class GameImpl implements Game, Serializable {
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
     protected Map<UUID, Card> gameCards = new HashMap<>();
+    
     protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
     protected Map<UUID, Map<Integer, MageObject>> lkiExtended = new HashMap<>();
-    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<>(Zone.class);
+    // Used to check if an object was moved by the current effect in resolution (so Wrath like effect can be handled correctly)
+    protected Map<Zone, Set<UUID>> shortLivingLKI = new EnumMap<>(Zone.class);
 
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
@@ -218,10 +220,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.freeMulligans = game.freeMulligans;
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
-        // Ai simulation modifies e.g. zoneChangeCounter so copy is needed if AI active
-        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.gameCards = game.gameCards;
         this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
@@ -290,20 +289,6 @@ public abstract class GameImpl implements Game, Serializable {
                 state.addCard(rightCard);
             }
         }
-    }
-
-    @Override
-    public void unloadCard(Card card) {
-        gameCards.remove(card.getId());
-        state.removeCard(card);
-        if (card.isSplitCard()) {
-            Card leftCard = ((SplitCard)card).getLeftHalfCard();
-            gameCards.remove(leftCard.getId());
-            state.removeCard(leftCard);
-            Card rightCard = ((SplitCard)card).getRightHalfCard();
-            gameCards.remove(rightCard.getId());
-            state.removeCard(rightCard);
-        }                
     }
 
     @Override
@@ -426,7 +411,11 @@ public abstract class GameImpl implements Game, Serializable {
         if (cardId == null) {
             return null;
         }
-        return gameCards.get(cardId);
+        Card card = gameCards.get(cardId);
+        if (card == null) {
+            return state.getCopiedCard(cardId);
+        }
+        return card;
     }
 
     @Override
@@ -695,7 +684,9 @@ public abstract class GameImpl implements Game, Serializable {
                 if (extraPlayer != null && extraPlayer.isInGame()) {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
-                    informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    if (!this.isSimulation()) {
+                        informPlayers(extraPlayer.getName() + " takes an extra turn");
+                    }
                     playTurn(extraPlayer);
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
@@ -820,7 +811,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             message.append(" takes the first turn");
 
-            this.informPlayers(message.toString());
+                this.informPlayers(message.toString());
         } else {
             // not possible to choose starting player, stop here
             return;
@@ -1131,6 +1122,9 @@ public abstract class GameImpl implements Game, Serializable {
                                 // 603.3. Once an ability has triggered, its controller puts it on the stack as an object thats not a card the next time a player would receive priority
                                 checkStateAndTriggered();
                                 applyEffects();
+                                if (state.getStack().isEmpty()) {
+                                    resetLKI();
+                                }                                
                                 saveState(false);
                                 if (isPaused() || gameOver(null)) {
                                     return;
@@ -1158,7 +1152,7 @@ public abstract class GameImpl implements Game, Serializable {
                                 state.getPlayers().resetPassed();
                                 fireUpdatePlayersEvent();
                                 state.getRevealed().reset();
-                                resetShortLivingLKI();
+                                resetShortLivingLKI(); 
                                 break;
                             } else {
                                 resetLKI();
@@ -1322,14 +1316,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
-        Card copiedCard = cardToCopy.copy();
-        copiedCard.assignNewId();
-        copiedCard.setCopy(true);
-        Set<Card> cards = new HashSet<>();
-        cards.add(copiedCard);
-        loadCards(cards, source.getControllerId());
-
-        return copiedCard;
+        return state.copyCard(cardToCopy, source, this);
     }
 
     @Override
@@ -1431,30 +1418,45 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        // 704.5e
-        for (Player player: getPlayers().values()) {
-            for (Card card: player.getHand().getCards(this)) {
-                if (card.isCopy()) {
-                    player.getHand().remove(card);
-                    this.unloadCard(card);
+        // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
+        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
+        Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
+        while (copiedCards.hasNext()) {
+            Card card = copiedCards.next();
+            Zone zone = state.getZone(card.getId());
+            if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
+                switch (zone) {
+                    case GRAVEYARD:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getGraveyard().contains(card.getId())) {
+                                player.getGraveyard().remove(card);
+                                break;
+                            }
+                        }
+                        break;
+                    case HAND:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getHand().contains(card.getId())) {
+                                player.getHand().remove(card);
+                                break;
+                            }
+                        }
+                        break;
+                    case LIBRARY:
+                        for(Player player: getPlayers().values()) {
+                            if (player.getLibrary().getCard(card.getId(), this) != null) {
+                                player.getLibrary().remove(card.getId(), this);
+                                break;
+                            }
+                        }
+                        break;
+                    case EXILED:
+                        getExile().removeCard(card, this);
+                        break;
                 }
-            }
-            for (Card card: player.getGraveyard().getCards(this)) {
-                if (card.isCopy()) {
-                    player.getGraveyard().remove(card);
-                    this.unloadCard(card);
-                }
+                copiedCards.remove();
             }
         }
-        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
-        for (Card card: this.getState().getExile().getAllCards(this)) {
-            if (card.isCopy()) {
-                this.getState().getExile().removeCard(card, this);
-                this.unloadCard(card);                
-            }
-        }   
-        // TODO Library + graveyard
-        
         
         List<Permanent> planeswalkers = new ArrayList<>();
         List<Permanent> legendary = new ArrayList<>();
@@ -1704,8 +1706,10 @@ public abstract class GameImpl implements Game, Serializable {
     private boolean movePermanentToGraveyardWithInfo(Permanent permanent) {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-            this.informPlayers(new StringBuilder(permanent.getLogName())
-                    .append(" is put into graveyard from battlefield").toString());
+            if (!this.isSimulation()) {
+                this.informPlayers(new StringBuilder(permanent.getLogName())
+                        .append(" is put into graveyard from battlefield").toString());
+            }
             result = true;
         }
         return result;
@@ -2113,12 +2117,14 @@ public abstract class GameImpl implements Game, Serializable {
             } else {
                 targetName = targetObject.getLogName();
             }
-            StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
-            message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
-            if (!targetName.isEmpty()) {
-                message.append(" to ").append(targetName);
+            if (!game.isSimulation()) {
+                StringBuilder message = new StringBuilder(preventionSource.getLogName()).append(": Prevented ");
+                message.append(Integer.toString(result.getPreventedDamage())).append(" damage from ").append(damageSource.getName());
+                if (!targetName.isEmpty()) {
+                    message.append(" to ").append(targetName);
+                }
+                game.informPlayers(message.toString());
             }
-            game.informPlayers(message.toString());
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, damageEvent.getTargetId(), source.getSourceId(), source.getControllerId(), result.getPreventedDamage()));
         return result;
@@ -2195,15 +2201,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
-        Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
-        if (shortLivingLkiMap != null) {
-            MageObject object = shortLivingLkiMap.get(objectId);
-            if (object != null) {
-                return object.copy();
-            }
+    public boolean getShortLivingLKI(UUID objectId, Zone zone) {
+        Set<UUID> idSet = shortLivingLKI.get(zone);
+        if (idSet != null) {
+            return idSet.contains(objectId);
         }
-        return null;
+        return false;
     }
 
     /**
@@ -2226,16 +2229,15 @@ public abstract class GameImpl implements Game, Serializable {
                 newMap.put(objectId, copy);
                 lki.put(zone, newMap);
             }
-
-            Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
-            if (shortLivingLkiMap != null) {
-                shortLivingLkiMap.put(objectId, copy);
-            } else {
-                HashMap<UUID, MageObject> newMap = new HashMap<>();
-                newMap.put(objectId, copy);
-                shortLivingLKI.put(zone, newMap);
+            // remembers if a object was in a zone during the resolution of an effect
+            // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
+            // because it ahppens all at the same time the replcaement effect has still to be applied
+            Set<UUID> idSet = shortLivingLKI.get(zone);
+            if (idSet == null) {
+                idSet = new HashSet<>();
+                shortLivingLKI.put(zone, idSet);
             }
-
+            idSet.add(objectId);            
             if (object instanceof Permanent) {
                 Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
                 if (lkiExtendedMap != null) {
@@ -2272,14 +2274,11 @@ public abstract class GameImpl implements Game, Serializable {
                     switch (command.getKey()) {
                         case HAND:
                             if (command.getValue().equals("clear")) {
-                                removeCards(player.getHand());
+                                player.getHand().clear();
                             }
                             break;
                         case LIBRARY:
                             if (command.getValue().equals("clear")) {
-                                for (UUID card : player.getLibrary().getCardList()) {
-                                    removeCard(card);
-                                }
                                 player.getLibrary().clear();
                             }
                             break;
@@ -2308,22 +2307,6 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public Map<Zone,HashMap<UUID, MageObject>> getLKI() {
         return lki;
-    }
-
-    private void removeCards(Cards cards) {
-        for (UUID card : cards) {
-            removeCard(card);
-        }
-        cards.clear();
-    }
-
-    private void removeCard(UUID cardId) {
-        Card card = this.getCard(cardId);
-        if(card != null && card.isSplitCard()) {
-            gameCards.remove(((SplitCard)card).getLeftHalfCard().getId());
-            gameCards.remove(((SplitCard)card).getRightHalfCard().getId());
-        }
-        gameCards.remove(cardId);
     }
 
     @Override
@@ -2367,25 +2350,6 @@ public abstract class GameImpl implements Game, Serializable {
         }
         Set<Card> set = new HashSet<>(cards);
         loadCards(set, ownerId);
-    }
-
-    public void replaceLibrary(List<Card> cardsDownToTop, UUID ownerId) {
-        Player player = getPlayer(ownerId);
-        if (player != null) {
-            for (UUID card : player.getLibrary().getCardList()) {
-                removeCard(card);
-            }
-            player.getLibrary().clear();
-            Set<Card> cards = new HashSet<>();
-            for (Card card : cardsDownToTop) {
-                cards.add(card);
-            }
-            loadCards(cards, ownerId);
-
-            for (Card card : cards) {
-                player.getLibrary().putOnTop(card, this);
-            }
-        }
     }
 
     @Override

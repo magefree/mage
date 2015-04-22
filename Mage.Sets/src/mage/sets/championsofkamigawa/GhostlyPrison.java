@@ -80,36 +80,35 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            Player player = game.getPlayer(event.getPlayerId());
-            if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-                ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
-                if ( attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
-                    if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                        return false;
-                    }
-                }
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getControllerId()) ) {
+            Player attackedPlayer = game.getPlayer(event.getTargetId());
+            if (attackedPlayer != null) {
+                // only if a player is attacked. Attacking a planeswalker is free
                 return true;
             }
         }
         return false;
     }
 
+
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId()) ) {
-            Player attackedPlayer = game.getPlayer(event.getTargetId());
-            if (attackedPlayer != null) {
-                // only if a player is attacked. Attacking a planeswalker is free
-                return true;
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(event.getPlayerId());
+        if ( player != null && event.getTargetId().equals(source.getControllerId())) {
+            ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
+            if (attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
+                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
+                if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                    return false;
+                }
             }
+            return true;
         }
         return false;
     }

@@ -119,11 +119,13 @@ class TributeEffect extends OneShotEffect {
                     sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
                     sb.append(tributeValue > 1 ? "s":"").append(" to it)?");
                     if (opponent.chooseUse(outcome, sb.toString(), game)) {
-                        game.informPlayers(new StringBuilder(opponent.getName()).append(" pays tribute to ").append(sourcePermanent.getName()).toString());
+                        if (!game.isSimulation())
+                            game.informPlayers(new StringBuilder(opponent.getName()).append(" pays tribute to ").append(sourcePermanent.getName()).toString());
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "yes");
                         return new AddCountersSourceEffect(CounterType.P1P1.createInstance(tributeValue), true).apply(game, source);
                     } else {
-                        game.informPlayers(new StringBuilder(opponent.getName()).append(" does not pay tribute to ").append(sourcePermanent.getName()).toString());
+                        if (!game.isSimulation())
+                            game.informPlayers(new StringBuilder(opponent.getName()).append(" does not pay tribute to ").append(sourcePermanent.getName()).toString());
                         game.getState().setValue(new StringBuilder("tributeValue").append(source.getSourceId()).toString(), "no");
                     }
                     return true;

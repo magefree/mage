@@ -38,7 +38,7 @@ public class FlameJavelin extends mage.sets.shadowmoor.FlameJavelin {
     public FlameJavelin(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 53;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public FlameJavelin(final FlameJavelin card) {

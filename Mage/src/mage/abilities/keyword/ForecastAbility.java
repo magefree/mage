@@ -78,7 +78,7 @@ public class ForecastAbility extends LimitedTimesPerTurnActivatedAbility {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("<i>Forecast</i> - ");
+        StringBuilder sb = new StringBuilder("<i>Forecast</i> &mdash; ");
         sb.append(super.getRule()).append(" <i>Activate this ability only during your upkeep.</i>");
         return sb.toString();
     }

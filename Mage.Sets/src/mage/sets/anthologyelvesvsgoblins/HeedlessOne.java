@@ -38,7 +38,7 @@ public class HeedlessOne extends mage.sets.onslaught.HeedlessOne {
     public HeedlessOne(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 7;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public HeedlessOne(final HeedlessOne card) {

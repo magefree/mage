@@ -121,7 +121,7 @@ class InameAsOneEffect extends OneShotEffect {
                 // exile it, not that it actually gets to the exile zone. This is similar to how destroying a creature 
                 // (with, for example, Rest in Peace) doesn't necessarily ensure that creature will end up in the graveyard;
                 // it just so happens that the action of exiling something and the exile zone both use the same word: "exile".
-                new ExileSourceEffect(Zone.GRAVEYARD).apply(game, source);
+                new ExileSourceEffect().apply(game, source);
                 return new ReturnFromGraveyardToBattlefieldTargetEffect().apply(game, source);
             }
             return true;

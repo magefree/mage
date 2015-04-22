@@ -90,6 +90,7 @@ public class MatchPlayer {
         if (this.deck != null) {
             // preserver deck name, important for Tiny Leaders format
             deck.setName(this.getDeck().getName());
+            deck.setDeckHashCode(this.getDeck().getDeckHashCode());
         }
         this.deck = deck;
     }

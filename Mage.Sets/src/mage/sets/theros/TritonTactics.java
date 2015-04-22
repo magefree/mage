@@ -65,8 +65,6 @@ public class TritonTactics extends CardImpl {
         super(ownerId, 71, "Triton Tactics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
-
         // Up to two target creatures each get +0/+3 until end of turn. Untap those creatures.
         // At this turn's next end of combat, tap each creature that was blocked by one of those
         // creatures this turn and it doesn't untap during its controller's next untap step.
@@ -127,7 +125,7 @@ class TritonTacticsUntapTargetEffect extends OneShotEffect {
             } else {
                 targetMap = new HashMap<>();
             }
-            targetMap.put(new Integer(game.getCard(source.getSourceId()).getZoneChangeCounter(game)), targets);
+            targetMap.put(game.getCard(source.getSourceId()).getZoneChangeCounter(game), targets);
             if (object == null) {
                 game.getState().setValue("targets" + source.getSourceId().toString(), targetMap);
             }

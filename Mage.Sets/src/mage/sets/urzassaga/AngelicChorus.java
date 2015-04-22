@@ -53,10 +53,8 @@ public class AngelicChorus extends CardImpl {
         super(ownerId, 3, "Angelic Chorus", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "USG";
 
-        this.color.setWhite(true);
-
-        Ability ability = new AngelicChorusTriggeredAbility();
-        this.addAbility(ability);
+        // Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
+        this.addAbility(new AngelicChorusTriggeredAbility());
     }
 
     public AngelicChorus(final AngelicChorus card) {
@@ -80,15 +78,17 @@ class AngelicChorusTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.CREATURE)
-                    && permanent.getControllerId().equals(this.controllerId)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("lifeSource", event.getTargetId());
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent.getCardType().contains(CardType.CREATURE)
+                && permanent.getControllerId().equals(this.controllerId)) {
+            this.getEffects().get(0).setValue("lifeSource", event.getTargetId());
+            return true;
         }
         return false;
     }
@@ -123,15 +123,12 @@ class AngelicChorusEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         UUID creatureId = (UUID) getValue("lifeSource");
-        Permanent creature = game.getPermanent(creatureId);
-        if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
-        }
+        Permanent creature = game.getPermanentOrLKIBattlefield(creatureId);
         if (creature != null) {
             int amount = creature.getToughness().getValue();
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-        player.gainLife(amount, game);
+                player.gainLife(amount, game);
             }
             return true;
         }

@@ -30,6 +30,7 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -61,8 +62,8 @@ public class HarabazDruid extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
-        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter),
-                "Add X mana of any one color to your mana pool, where X is the number of Allies you control"));
+        this.addAbility(new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+                "Add X mana of any one color to your mana pool, where X is the number of Allies you control", true));
     }
 
     public HarabazDruid(final HarabazDruid card) {

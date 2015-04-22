@@ -47,6 +47,7 @@ import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
@@ -382,10 +383,10 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param game
      * @param source
-     * @param checkLKI
+     * @param event
      * @return 
      */
-    boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
+    boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 
     /**
      * Returns true if this ability has to be shown as topmost of all the rules of the object
@@ -499,8 +500,9 @@ public interface Ability extends Controllable, Serializable {
      * an ability was activated.
      * 
      * @param mageObject 
+     * @param game 
      */
-    void setSourceObject(MageObject mageObject);
+    void setSourceObject(MageObject mageObject, Game game);
     
     /**
      * Returns the object that actually existed while a ability triggerd or 
@@ -511,4 +513,17 @@ public interface Ability extends Controllable, Serializable {
      * @return 
      */
     MageObject getSourceObject(Game game);
+
+    int getSourceObjectZoneChangeCounter();
+    
+    /**
+     * Returns the object that actually existed while a ability triggerd or 
+     * an ability was activated only if it has not changed zone meanwhile.
+     * If not set yet, the current object will be retrieved from the game.
+     * 
+     * @param game
+     * @return 
+     */
+    
+    MageObject getSourceObjectIfItStillExists(Game game);
 }

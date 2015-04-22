@@ -38,7 +38,7 @@ public class Wildsize extends mage.sets.guildpact.Wildsize {
     public Wildsize(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 23;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public Wildsize(final Wildsize card) {

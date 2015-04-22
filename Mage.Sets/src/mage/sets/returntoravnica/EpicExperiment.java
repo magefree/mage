@@ -101,7 +101,7 @@ class EpicExperimentEffect extends OneShotEffect {
             for (int i = 0; i < source.getManaCostsToPay().getX(); i++) {
                 if (controller.getLibrary().size() > 0) {
                     Card topCard = controller.getLibrary().getFromTop(game);
-                    controller.moveCardToExileWithInfo(topCard, source.getSourceId(), "Cards exiled by Epic Experiment",  source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(topCard, source.getSourceId(), "Cards exiled by Epic Experiment",  source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             // cast the possible cards without paying the mana

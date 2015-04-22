@@ -52,11 +52,6 @@ public class Progenitus extends CardImpl {
         this.subtype.add("Hydra");
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 

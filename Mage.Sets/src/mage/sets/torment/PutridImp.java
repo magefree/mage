@@ -35,6 +35,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -57,7 +59,6 @@ public class PutridImp extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -68,8 +69,9 @@ public class PutridImp extends CardImpl {
                 new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new CardsInControllerGraveCondition(7),
                 "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} gets +1/+1"));
-        ability.addEffect(new ConditionalContinuousEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7),
-                "and can't block"));
+        Effect effect = new ConditionalRestrictionEffect(new CantBlockSourceEffect(Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7));
+        effect.setText("and can't block");
+        ability.addEffect(effect);
         this.addAbility(ability);
         
     }

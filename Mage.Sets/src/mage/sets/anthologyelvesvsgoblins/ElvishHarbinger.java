@@ -38,7 +38,7 @@ public class ElvishHarbinger extends mage.sets.lorwyn.ElvishHarbinger {
     public ElvishHarbinger(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 4;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public ElvishHarbinger(final ElvishHarbinger card) {

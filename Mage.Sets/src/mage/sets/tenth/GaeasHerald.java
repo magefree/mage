@@ -93,14 +93,17 @@ class CantCounterEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean apply(Game game, Ability source) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
-                return true;
-            }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
+            return true;
         }
         return false;
     }

@@ -32,7 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.CostImpl;
+import mage.constants.AbilityType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +67,11 @@ public class SacrificeTargetCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
+        UUID activator = controllerId;
+        if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+            activator = ((ActivatedAbilityImpl)ability).getActivatorId();
+        }
+        if (targets.choose(Outcome.Sacrifice, activator, sourceId, game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
@@ -83,10 +89,19 @@ public class SacrificeTargetCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
-        if (!game.getPlayer(controllerId).canPaySacrificeCost()) {
+        UUID activator = controllerId;
+        if (ability.getAbilityType().equals(AbilityType.ACTIVATED) || ability.getAbilityType().equals(AbilityType.SPECIAL_ACTION)) {
+            if (((ActivatedAbilityImpl)ability).getActivatorId() != null) {
+                activator = ((ActivatedAbilityImpl)ability).getActivatorId();
+            } else {
+                // Aktivator not filled?
+                activator = controllerId;
+            }
+        }
+        if (!game.getPlayer(activator).canPaySacrificeCost()) {
             return false;
         }
-        return targets.canChoose(controllerId, game);
+        return targets.canChoose(activator, game);
     }
 
     @Override

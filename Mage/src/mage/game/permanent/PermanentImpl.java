@@ -262,6 +262,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
     }
 
+    /**
+     *
+     * @param ability
+     * @param game
+     */
     @Override
     public void addAbility(Ability ability, Game game) {
         if (!abilities.containsKey(ability.getId())) {
@@ -508,7 +513,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)) {
                 this.phasedIn = true;
-                game.informPlayers(getLogName() + " phased in");
+                if (!game.isSimulation())
+                    game.informPlayers(getLogName() + " phased in");
                 fireEvent(EventType.PHASED_IN, game);
                 return true;
             }
@@ -521,7 +527,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (phasedIn) {
             if (!replaceEvent(EventType.PHASE_OUT, game)) {
                 this.phasedIn = false;
-                game.informPlayers(getLogName() + " phased out");
+                if (!game.isSimulation())
+                    game.informPlayers(getLogName() + " phased out");
                 fireEvent(EventType.PHASED_OUT, game);
                 return true;
             }
@@ -955,17 +962,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
-                String logName;
-                Card card = game.getCard(this.getId());
-                if (card != null) {
-                    logName = card.getLogName();
-                } else {
-                    logName = this.getLogName();
-                }
-                if (this.getCardType().contains(CardType.CREATURE)) {
-                    game.informPlayers(logName +" died");
-                } else {
-                    game.informPlayers(logName + " was destroyed");
+                if (!game.isSimulation()) {
+                    String logName;
+                    Card card = game.getCard(this.getId());
+                    if (card != null) {
+                        logName = card.getLogName();
+                    } else {
+                        logName = this.getLogName();
+                    }
+                    if (this.getCardType().contains(CardType.CREATURE)) {
+                        game.informPlayers(logName +" died");
+                    } else {
+                        game.informPlayers(logName + " was destroyed");
+                    }
                 }
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));
                 return true;
@@ -982,7 +991,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // so the return value of the moveToZone is not taken into account here
             moveToZone(Zone.GRAVEYARD, sourceId, game, false);
             Player player = game.getPlayer(getControllerId());
-            if (player != null) {
+            if (player != null && !game.isSimulation()) {
                 game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getLogName()).toString());
             }
             game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
@@ -1181,7 +1190,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
-            if (game.getCombat().removeFromCombat(objectId, game) && withInfo) {
+            if (game.getCombat().removeFromCombat(objectId, game) && withInfo && !game.isSimulation()) {
                 game.informPlayers(new StringBuilder(this.getLogName()).append(" removed from combat").toString());
             }
         }

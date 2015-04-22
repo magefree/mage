@@ -29,18 +29,25 @@
 package mage.cards.decks;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.game.GameException;
+import mage.util.DeckUtil;
 
 public class Deck implements Serializable {
 
     private String name;
     private final Set<Card> cards = new LinkedHashSet<>();
     private final Set<Card> sideboard = new LinkedHashSet<>();
+    private long deckHashCode = 0;
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
         return Deck.load(deckCardLists, false);
@@ -53,23 +60,39 @@ public class Deck implements Serializable {
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
         Deck deck = new Deck();
         deck.setName(deckCardLists.getName());
+        List<String> deckCardNames = new ArrayList<>();
         for (DeckCardInfo deckCardInfo: deckCardLists.getCards()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
                 deck.cards.add(card);
+                deckCardNames.add(card.getName());
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
         }
+        List<String> sbCardNames = new ArrayList<>();
         for (DeckCardInfo deckCardInfo: deckCardLists.getSideboard()) {
             Card card = createCard(deckCardInfo, mockCards);
             if (card != null) {
                 deck.sideboard.add(card);
+                sbCardNames.add(card.getName());
             } else if (!ignoreErrors) {
                 throw createCardNotFoundGameException(deckCardInfo, deckCardLists.getName());
             }
         }
-
+        Collections.sort(deckCardNames);
+        Collections.sort(sbCardNames);
+        String deckString = deckCardNames.toString() + sbCardNames.toString();
+        deck.setDeckHashCode(DeckUtil.fixedHash(deckString));
+//        try{
+//            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+//            messageDigest.update(deckString.getBytes());
+//            String encryptedString = new String(messageDigest.digest());
+//            deck.setDeckHashCode(encryptedString.hashCode());
+//        }
+//        catch (NoSuchAlgorithmException e) {
+//            // nothing
+//        }
         return deck;
     }
 
@@ -137,4 +160,13 @@ public class Deck implements Serializable {
     public Set<Card> getSideboard() {
         return sideboard;
     }
+
+    public long getDeckHashCode() {
+        return deckHashCode;
+    }
+
+    public void setDeckHashCode(long deckHashCode) {
+        this.deckHashCode = deckHashCode;
+    }
+
 }

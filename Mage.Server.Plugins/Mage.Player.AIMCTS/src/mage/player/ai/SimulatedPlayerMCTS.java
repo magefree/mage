@@ -187,7 +187,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         }
         for (int i = 0; i < attackersList.size(); i++) {
             if (binary.charAt(i) == '1') {
-                game.getCombat().declareAttacker(attackersList.get(i).getId(), defenderId, game);
+                setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
+                if (!game.getCombat().declareAttacker(attackersList.get(i).getId(), defenderId, playerId, game)) {
+                    game.undo(playerId);
+                }
             }
         }
         actionCount++;

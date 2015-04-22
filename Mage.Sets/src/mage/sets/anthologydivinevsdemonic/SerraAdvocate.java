@@ -38,7 +38,7 @@ public class SerraAdvocate extends mage.sets.urzasdestiny.SerraAdvocate {
     public SerraAdvocate(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 7;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public SerraAdvocate(final SerraAdvocate card) {

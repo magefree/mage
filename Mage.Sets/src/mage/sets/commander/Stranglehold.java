@@ -100,14 +100,15 @@ class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectI
         return null;
     }
 
-
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.SEARCH_LIBRARY.equals(event.getType());
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (EventType.SEARCH_LIBRARY.equals(event.getType())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            return controller != null && controller.hasOpponent(event.getPlayerId(), game);
-        }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && controller.hasOpponent(event.getPlayerId(), game);
     }
 }
 

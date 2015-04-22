@@ -142,21 +142,19 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }    
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
-                ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-                Card card = game.getCard(event.getSourceId());
-                if (chosenColor != null && card != null && card.getColor().contains(chosenColor)) {
-                    return true;
-                }
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
+            ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            Card card = game.getCard(event.getSourceId());
+            if (chosenColor != null && card != null && card.getColor().contains(chosenColor)) {
+                return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

@@ -106,7 +106,7 @@ class DemonicConsultationEffect extends OneShotEffect {
             for (int i = 0; i < num; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             
@@ -123,7 +123,7 @@ class DemonicConsultationEffect extends OneShotEffect {
                     }
                     // and exile all other cards revealed this way.
                     else {
-                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }

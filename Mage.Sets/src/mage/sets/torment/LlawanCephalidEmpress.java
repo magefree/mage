@@ -133,14 +133,17 @@ class LlawanCephalidRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
     }
     
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
-                Card card = game.getCard(event.getSourceId());
-                if (card != null && filter.match(card, source.getControllerId(), game)) {
-                    return true;
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
+            Card card = game.getCard(event.getSourceId());
+            if (card != null && filter.match(card, source.getControllerId(), game)) {
+                return true;
             }
         }
         return false;

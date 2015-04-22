@@ -1681,9 +1681,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         try {
             MageFrame.getSession().updatePreferencesForServer(
-                        getSelectedAvatar(),
-                        dialog.cbAllowRequestToShowHandCards.isSelected(),
+                        getSelectedAvatar(),                        
                         dialog.showAbilityPickerForced.isSelected(),
+                        dialog.cbAllowRequestToShowHandCards.isSelected(),
                         getUserSkipPrioritySteps());
 
             prefs.flush();
@@ -2235,6 +2235,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, checkBox, propName, PHASE_ON, PHASE_OFF, false);
     }
 
+    public static void setPrefValue(String key, boolean value) {
+        switch(key) {
+            case KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS:
+                dialog.cbAllowRequestToShowHandCards.setSelected(value);
+                save(MageFrame.getPreferences(), dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+                break;
+        }                
+    }
     private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String noValue, boolean updateCache) {
         prefs.put(propName, checkBox.isSelected() ? yesValue : noValue);
         if (updateCache) {

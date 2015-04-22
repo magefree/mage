@@ -64,7 +64,7 @@ public class VortexElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {U}: Put Vortex Elemental and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle their libraries.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new VortexElementaöEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new VortexElementalEffect(), new ManaCostsImpl("{U}")));
 
         // {3}{U}{U}: Target creature blocks Vortex Elemental this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(), new ManaCostsImpl("{3}{U}{U}"));
@@ -82,20 +82,20 @@ public class VortexElemental extends CardImpl {
     }
 }
 
-class VortexElementaöEffect extends OneShotEffect {
+class VortexElementalEffect extends OneShotEffect {
 
-    public VortexElementaöEffect() {
+    public VortexElementalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Put {this} and each creature blocking or blocked by it on top of their owners' libraries, then those players shuffle their libraries";
     }
 
-    public VortexElementaöEffect(final VortexElementaöEffect effect) {
+    public VortexElementalEffect(final VortexElementalEffect effect) {
         super(effect);
     }
 
     @Override
-    public VortexElementaöEffect copy() {
-        return new VortexElementaöEffect(this);
+    public VortexElementalEffect copy() {
+        return new VortexElementalEffect(this);
     }
 
     @Override
@@ -103,8 +103,8 @@ class VortexElementaöEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Combat combat = game.getState().getCombat();
-            Set<UUID> creaturesToReturn = new HashSet<UUID>();
-            Set<UUID> playersToShuffle = new HashSet<UUID>();
+            Set<UUID> creaturesToReturn = new HashSet<>();
+            Set<UUID> playersToShuffle = new HashSet<>();
             creaturesToReturn.add(source.getSourceId());
             if (combat != null) {
                 for(CombatGroup combatGroup: combat.getGroups()) {

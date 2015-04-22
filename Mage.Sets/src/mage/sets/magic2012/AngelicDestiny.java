@@ -28,11 +28,10 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
@@ -42,6 +41,12 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,19 +61,27 @@ public class AngelicDestiny extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
-
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Angel", Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        // Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
+        effect.setText(", has flying");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and first strike");
+        ability.addEffect(effect);
+        effect = new AddCardSubtypeAttachedEffect("Angel", Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect.setText(", and is an Angel in addition to its other types");
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
+        // When enchanted creature dies, return Angelic Destiny to its owner's hand.
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted creature"));
     }
 

@@ -35,7 +35,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ShadowAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -92,19 +91,21 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
     public NetherTraitorTriggeredAbility copy(){
         return new NetherTraitorTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null &&
-                        card.getOwnerId().equals(this.getControllerId()) &&
-                        card.getCardType().contains(CardType.CREATURE)&&
-                        !card.getId().equals(this.getSourceId())) {
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {            
+            if (zEvent.getTarget() != null &&
+                    zEvent.getTarget().getOwnerId().equals(this.getControllerId()) &&
+                    zEvent.getTarget().getCardType().contains(CardType.CREATURE)&&
+                    !zEvent.getTarget().getId().equals(this.getSourceId())) {
+                return true;
             }
         }
         return false;

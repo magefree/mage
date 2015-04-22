@@ -92,11 +92,8 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
             if (Zone.BATTLEFIELD.equals(zce.getFromZone()) && Zone.GRAVEYARD.equals(zce.getToZone())) {
                 Permanent targetPermanent = zce.getTarget();
                 if (targetPermanent.getCardType().contains(CardType.LAND) && targetPermanent.getControllerId().equals(getControllerId())) {
-                    MageObject mageObject = game.getShortLivingLKI(event.getSourceId(), Zone.STACK);
-                    if (mageObject instanceof StackObject) {
-                        getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId()));
-                        return true;
-                    }
+                    getEffects().get(0).setTargetPointer(new FixedTarget(targetPermanent.getId()));
+                    return true;
                 }
             }
         }

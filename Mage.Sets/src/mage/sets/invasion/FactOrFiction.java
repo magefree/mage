@@ -27,9 +27,11 @@
  */
 package mage.sets.invasion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -57,8 +59,7 @@ public class FactOrFiction extends CardImpl {
         super(ownerId, 57, "Fact or Fiction", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
-
+        // Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new FactOrFictionEffect());
     }
 
@@ -90,28 +91,21 @@ class FactOrFictionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 5);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-            }
-        }
-        player.revealCards("Fact or Fiction", cards, game);
+        Cards cards = new CardsImpl();
+        cards.addAll(controller.getLibrary().getTopCards(game, 5));
+        controller.revealCards(sourceObject.getLogName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {
             Player opponent = game.getPlayer(opponents.iterator().next());
-            TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
-            target.setRequired(false);
-            Cards pile1 = new CardsImpl();
+            TargetCard target = new TargetCard(0, cards.size(), Zone.LIBRARY, new FilterCard("cards to put in the first pile"));
+            List<Card> pile1 = new ArrayList<>();
             if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
@@ -122,54 +116,41 @@ class FactOrFictionEffect extends OneShotEffect {
                     }
                 }
             }
-
-            player.revealCards("Pile 1 (Fact or Fiction)", pile1, game);
-            player.revealCards("Pile 2 (Fact or Fiction)", cards, game);
-
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Select a pile of cards to put into your hand:");
-
-            StringBuilder sb = new StringBuilder("Pile 1: ");
-            for (UUID cardId : pile1) {
-                Card card = pile1.get(cardId, game);
-                if (card != null) {
-                    sb.append(card.getName()).append("; ");
-                }
-            }
-            sb.delete(sb.length() - 2, sb.length());
-            choice.getChoices().add(sb.toString());
-
-            sb = new StringBuilder("Pile 2: ");
-            for (UUID cardId : cards) {
-                Card card = cards.get(cardId, game);
-                if (card != null) {
-                    sb.append(card.getName()).append("; ");
-                }
-            }
-            sb.delete(sb.length() - 2, sb.length());
-            choice.getChoices().add(sb.toString());
-
+            List<Card> pile2 = new ArrayList<>();
+            pile2.addAll(cards.getCards(game));
+            
+            boolean choice = controller.choosePile(outcome, "Choose a pile to put into your hand.", pile1, pile2, game);            
+            
             Zone pile1Zone = Zone.GRAVEYARD;
             Zone pile2Zone = Zone.HAND;
-            if (player.choose(Outcome.Neutral, choice, game)) {
-                if (choice.getChoice().startsWith("Pile 1")) {
-                    pile1Zone = Zone.HAND;
-                    pile2Zone = Zone.GRAVEYARD;
-                }
+            if (choice) {
+                pile1Zone = Zone.HAND;
+                pile2Zone = Zone.GRAVEYARD;
             }
 
-            for (UUID cardUuid : pile1) {
-                Card card = pile1.get(cardUuid, game);
-                if (card != null) {
-                    card.moveToZone(pile1Zone, source.getSourceId(), game, false);
+            StringBuilder sb = new StringBuilder("Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
+            int i = 0;
+            for (Card card : pile1) {
+                i++;
+                    sb.append(card.getName());
+                if (i < pile1.size()) {
+                        sb.append(", ");
                 }
+                card.moveToZone(pile1Zone, source.getSourceId(), game, false);
             }
-            for (UUID cardUuid : cards) {
-                Card card = cards.get(cardUuid, game);
-                if (card != null) {
-                    card.moveToZone(pile2Zone, source.getSourceId(), game, false);
+            game.informPlayers(sb.toString());
+
+            sb = new StringBuilder("Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
+            i = 0;
+            for (Card card: pile2) {
+                i++;
+                sb.append(" ").append(card.getName());
+                if (i < pile2.size()) {
+                    sb.append(", ");
                 }
+                card.moveToZone(pile2Zone, source.getSourceId(), game, false);
             }
+            game.informPlayers(sb.toString());
         }
 
         return true;

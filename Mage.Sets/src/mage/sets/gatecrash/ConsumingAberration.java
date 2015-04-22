@@ -27,6 +27,7 @@
  */
 package mage.sets.gatecrash;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,11 +40,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  *
@@ -55,7 +58,7 @@ public class ConsumingAberration extends CardImpl {
         super(ownerId, 152, "Consuming Aberration", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "GTC";
         
-        this.subtype.add("horror");
+        this.subtype.add("Horror");
 
         this.color.setBlack(true);
         this.color.setBlue(true);

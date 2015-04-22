@@ -97,7 +97,12 @@ class MoltenDisasterSplitSecondEffect extends ContinuousRuleModifyingEffectImpl 
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
         return "You can't cast spells or activate abilities that aren't mana abilities (Split second).";
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL) {

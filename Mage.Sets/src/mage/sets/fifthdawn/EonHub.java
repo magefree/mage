@@ -56,10 +56,15 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
     public SkipUpkeepStepEffect copy() {
         return new SkipUpkeepStepEffect(this);
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP;
+    }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        return event.getType() == EventType.UPKEEP_STEP && controller != null && controller.getInRange().contains(event.getPlayerId());
+        return  controller != null && controller.getInRange().contains(event.getPlayerId());
     }
 }

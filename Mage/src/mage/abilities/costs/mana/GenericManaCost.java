@@ -78,7 +78,11 @@ public class GenericManaCost extends ManaCostImpl {
 
     @Override
     public GenericManaCost getUnpaid() {
-        return new GenericManaCost(mana - this.payment.count());
+        GenericManaCost unpaid = new GenericManaCost(mana - this.payment.count());
+        if (sourceFilter != null) {
+            unpaid.setSourceFilter(sourceFilter);
+        }
+        return unpaid;
     }
 
     @Override

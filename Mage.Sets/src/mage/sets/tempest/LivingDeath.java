@@ -94,7 +94,7 @@ class LivingDeathEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     for (Card card :player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
-                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
             }

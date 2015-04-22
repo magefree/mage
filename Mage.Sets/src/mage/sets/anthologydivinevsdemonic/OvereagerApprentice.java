@@ -38,7 +38,7 @@ public class OvereagerApprentice extends mage.sets.odyssey.OvereagerApprentice {
     public OvereagerApprentice(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 35;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public OvereagerApprentice(final OvereagerApprentice card) {

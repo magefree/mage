@@ -38,7 +38,7 @@ public class ChartoothCougar extends mage.sets.scourge.ChartoothCougar {
     public ChartoothCougar(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 47;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public ChartoothCougar(final ChartoothCougar card) {

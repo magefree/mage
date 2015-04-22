@@ -70,7 +70,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = ability.copy();
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         if (this.copyTargets) {
             if (source.getTargets().isEmpty()) {
                 for(Effect effect : delayedAbility.getEffects()) {

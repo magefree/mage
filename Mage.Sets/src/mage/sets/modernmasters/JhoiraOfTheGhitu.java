@@ -37,18 +37,14 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SourceEffect;
+import mage.abilities.effects.common.continuous.GainSuspendEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandCard;
@@ -124,10 +120,10 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
             boolean hasSuspend = card.getAbilities().containsClass(SuspendAbility.class);
 
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND)) {
+            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
                 card.addCounters(CounterType.TIME.createInstance(4), game);
                 if (!hasSuspend) {
-                    game.addEffect(new JhoiraGainSuspendEffect(new MageObjectReference(card, game)), source);
+                    game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
                 }
                 game.informPlayers(controller.getName() + " suspends 4 - " + card.getName());
                 return true;
@@ -137,34 +133,3 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
     }
 }
 
-class JhoiraGainSuspendEffect extends ContinuousEffectImpl implements SourceEffect {
-
-    MageObjectReference mor;
-
-    public JhoiraGainSuspendEffect(MageObjectReference mor) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-        this.mor = mor;
-        staticText = "{this} gains suspend";
-    }
-
-    public JhoiraGainSuspendEffect(final JhoiraGainSuspendEffect effect) {
-        super(effect);
-        this.mor = effect.mor;
-    }
-
-    @Override
-    public JhoiraGainSuspendEffect copy() {
-        return new JhoiraGainSuspendEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(mor.getSourceId());
-        if (card != null && mor.refersTo(card, game) && game.getState().getZone(card.getId()).equals(Zone.EXILED)) {
-            SuspendAbility.addSuspendTemporaryToCard(card, source, game);
-        } else {
-            discard();
-        }
-        return true;
-    }
-}

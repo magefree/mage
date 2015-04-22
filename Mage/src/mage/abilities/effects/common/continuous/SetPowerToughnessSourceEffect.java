@@ -36,6 +36,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -75,8 +76,11 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId()); // there are character definig abilities (e.g. P/T Nightmare) that have to work also for P/T of cards
+        MageObject mageObject = game.getObject(source.getSourceId());
         if (mageObject == null) {
+            if (duration.equals(Duration.Custom)) {
+                discard();
+            }
             return false;
         }
         if (amount != null) {

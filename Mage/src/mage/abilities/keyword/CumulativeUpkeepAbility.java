@@ -105,7 +105,7 @@ class CumulativeUpkeepEffect extends OneShotEffect {
             if(cumulativeCost instanceof ManaCost){
                 ManaCostsImpl totalCost = new ManaCostsImpl();
                 for(int i = 0 ; i < ageCounter; i++){
-                    totalCost.add(cumulativeCost.copy());
+                    totalCost.add((ManaCost) cumulativeCost.copy());
                 }
                 if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + "?", game)) {
                     totalCost.clearPaid();

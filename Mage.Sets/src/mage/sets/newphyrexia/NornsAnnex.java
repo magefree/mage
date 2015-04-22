@@ -79,30 +79,12 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
     NornsAnnexReplacementEffect(NornsAnnexReplacementEffect effect) {
         super(effect);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            Player player = game.getPlayer(event.getPlayerId());
-            if (player != null && event.getTargetId().equals(source.getControllerId())) {
-                ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
-                if (propagandaTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                        player.chooseUse(Outcome.Benefit, "Pay {WP} to declare attacker?", game)) {
-                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
@@ -118,6 +100,24 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(event.getPlayerId());
+        if (player != null && event.getTargetId().equals(source.getControllerId())) {
+            ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
+            if (propagandaTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
+                    player.chooseUse(Outcome.Benefit, "Pay {WP} to declare attacker?", game)) {
+                if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public NornsAnnexReplacementEffect copy() {

@@ -38,7 +38,7 @@ public class Angelsong extends mage.sets.shardsofalara.Angelsong {
     public Angelsong(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 15;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public Angelsong(final Angelsong card) {

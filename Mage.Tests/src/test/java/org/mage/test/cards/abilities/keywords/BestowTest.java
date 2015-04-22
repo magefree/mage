@@ -278,4 +278,34 @@ public class BestowTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 3,3);
 
     }
+    
+  /**
+     * 
+     * 
+     * 
+     */
+    @Test
+    public void bestowMogissWarhound() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Enchantment Creature — Hound
+        // 2/2
+        // Bestow 2R (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
+        // Mogis's Warhound attacks each turn if able.
+        // Enchanted creature gets +2/+2 and attacks each turn if able.
+        addCard(Zone.HAND, playerA, "Mogis's Warhound");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mogis's Warhound using bestow", "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        //
+        assertHandCount(playerA, "Mogis's Warhound", 0);
+
+        // because cast with bestow, Boon Satyr may not be tapped
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Silvercoat Lion", 4,4);
+
+    }    
 }

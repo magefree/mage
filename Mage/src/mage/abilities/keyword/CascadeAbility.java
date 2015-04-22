@@ -109,7 +109,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
             if (card == null) {
                 break;
             }
-            player.moveCardToExileWithInfo(card, exile.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY);
+            player.moveCardToExileWithInfo(card, exile.getId(), exile.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
         } while (player.isInGame() && card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
         player.getLibrary().reset();
 

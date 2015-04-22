@@ -132,17 +132,18 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                         message.append(" no card");
                     }
                     message.append(" - ");
-                    if (cmcController > cmcOpponent) {
-                        message.append(controller.getName()).append(" won the clash");
-                        game.informPlayer(controller, "You won the clash!");
-                    } else if (cmcController < cmcOpponent) {
-                        message.append(opponent.getName()).append(" won the clash");
-                        game.informPlayer(controller, opponent.getName() + " won the clash!");
-                    } else {
-                        message.append(" no winner ");
-                    }                                       
-                    game.informPlayers(message.toString());
-                    
+                    if (!game.isSimulation()) {
+                        if (cmcController > cmcOpponent) {
+                            message.append(controller.getName()).append(" won the clash");
+                            game.informPlayer(controller, "You won the clash!");
+                        } else if (cmcController < cmcOpponent) {
+                            message.append(opponent.getName()).append(" won the clash");
+                            game.informPlayer(controller, opponent.getName() + " won the clash!");
+                        } else {
+                            message.append(" no winner ");
+                        }                                       
+                        game.informPlayers(message.toString());
+                    }                    
                     // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
                     PlayerList playerList = game.getPlayerList().copy();
                     playerList.setCurrent(game.getActivePlayerId());

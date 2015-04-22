@@ -68,27 +68,34 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         for ( Ability ability : abilities ) {
             MageObject sourceObject = null;
             AbilityView abilityView = null;
+            boolean isCard = false;
+            boolean isPermanent = false;
             switch ( ability.getZone() ) {
                 case ALL:
                 case EXILED:
                 case GRAVEYARD:
                     sourceObject = game.getCard(ability.getSourceId());
+                    isCard = true;
                     break;
                 case BATTLEFIELD:
                     sourceObject = game.getPermanent(ability.getSourceId());
                     if (sourceObject == null) {
                         sourceObject = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
                     }
+                    isPermanent = true;
                     break;
                 case STACK:
                     sourceObject = game.getObject(ability.getSourceId());
+                    if (sourceObject instanceof Card) {
+                        isCard = true;
+                    }
                     break;
                 case COMMAND:
                     sourceObject = game.getObject(ability.getSourceId());
-                    if (sourceObject instanceof Emblem) {                            
+                    if (sourceObject instanceof Emblem) {
                         Card planeswalkerCard = game.getCard(((Emblem)sourceObject).getSourceId());
                         if (planeswalkerCard != null) {
-                            abilityView = new AbilityView(ability, "Emblem " + planeswalkerCard.getName(), new CardView(sourceObject));
+                            abilityView = new AbilityView(ability, "Emblem " + planeswalkerCard.getName(), new CardView(new EmblemView((Emblem)sourceObject, planeswalkerCard)));
                             abilityView.setName("Emblem " + planeswalkerCard.getName());
                             abilityView.setExpansionSetCode(planeswalkerCard.getExpansionSetCode());
                         } else {
@@ -99,7 +106,15 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
             }
             if (sourceObject != null) {
                 if (abilityView == null) {
-                    abilityView = new AbilityView(ability, sourceObject.getLogName(), new CardView(sourceObject));
+                    CardView sourceCardView;
+                    if (isPermanent) {
+                        sourceCardView = new CardView((Permanent)sourceObject);
+                    } else if (isCard) {
+                        sourceCardView = new CardView((Card)sourceObject);
+                    } else {
+                        sourceCardView = new CardView(sourceObject);
+                    }
+                    abilityView = new AbilityView(ability, sourceObject.getLogName(), sourceCardView);
                 }
                 if (ability.getTargets().size() > 0) {
                     abilityView.setTargets(ability.getTargets());

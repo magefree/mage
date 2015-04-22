@@ -126,7 +126,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                         for (UUID targetId : targets) {
                             Card targetCard = owner.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
-                                controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                                controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                             }
                         }
                     }
@@ -140,7 +140,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                     for (UUID targetId : targets) {
                         Card targetCard = owner.getHand().get(targetId, game);
                         if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND);                                
+                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.HAND, true);                                
                         }
                     }
                 }
@@ -153,7 +153,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                     for (UUID targetId : targets) {
                         Card targetCard = owner.getLibrary().getCard(targetId, game);
                         if (targetCard != null) {
-                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY);                                
+                            controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.LIBRARY, true);                                
                         }
                     }
                 }

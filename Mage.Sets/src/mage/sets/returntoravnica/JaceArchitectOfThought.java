@@ -309,7 +309,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
                 UUID targetId = target.getFirstTarget();
                 Card card = player.getLibrary().remove(targetId, game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourcePermanent.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             player.shuffleLibrary(game);

@@ -49,7 +49,7 @@ public class ZoneChangeTriggeredAbility extends TriggeredAbilityImpl {
     protected String rule;
 
     public ZoneChangeTriggeredAbility(Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {
-        this(fromZone, fromZone, toZone, effect, rule, optional);
+        this(toZone == null ? Zone.ALL : toZone, fromZone, toZone, effect, rule, optional);
     }
     
     public ZoneChangeTriggeredAbility(Zone worksInZone, Zone fromZone, Zone toZone, Effect effect, String rule, boolean optional) {

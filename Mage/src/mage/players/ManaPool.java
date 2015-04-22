@@ -111,20 +111,25 @@ public class ManaPool implements Serializable {
             lockManaType(); // pay only one mana if mana payment is set to manually
             return true;
         }
-        MageObject sourceObject = ability.getSourceObject(game);
         for (ManaPoolItem mana : manaItems) {
-            if (filter == null || filter.match(sourceObject, game)) {
-                boolean spendAnyMana = spendAnyMana(ability, game);
-                if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag()));
-                    if (spendAnyMana) {
-                        mana.removeAny();
-                    } else {
-                        mana.remove(manaType);
-                    }
-                    lockManaType(); // pay only one mana if mana payment is set to manually
-                    return true;
+            if (filter != null) {
+                MageObject sourceObject = game.getObject(mana.getSourceId());
+                if (!filter.match(sourceObject, game)) {
+                    continue;
                 }
+            }            
+            boolean spendAnyMana = spendAnyMana(ability, game);
+            if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
+                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
+                event.setData(mana.getOriginalId().toString());
+                game.fireEvent(event);
+                if (spendAnyMana) {
+                    mana.removeAny();
+                } else {
+                    mana.remove(manaType);
+                }
+                lockManaType(); // pay only one mana if mana payment is set to manually
+                return true;
             }
         }
         return false;
@@ -351,13 +356,13 @@ public class ManaPool implements Serializable {
         Mana mana = manaToAdd.copy();
         if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), source.getControllerId(), mana))) {
             if (mana instanceof ConditionalMana) {
-                ManaPoolItem item = new ManaPoolItem((ConditionalMana)mana, source.getSourceId());
+                ManaPoolItem item = new ManaPoolItem((ConditionalMana)mana, source.getSourceId(), source.getOriginalId());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }
                 this.manaItems.add(item);
             } else {
-                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), mana.getFlag());
+                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getColorless(), source.getSourceId(), source.getOriginalId(), mana.getFlag());
                 if (emptyOnTurnsEnd) {
                     item.setDuration(Duration.EndOfTurn);
                 }                
@@ -395,7 +400,9 @@ public class ManaPool implements Serializable {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId())) {
                 mana.set(manaType, mana.get(manaType) - 1);
-                game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag()));
+                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());
+                event.setData(mana.getManaProducerOriginalId().toString());
+                game.fireEvent(event);
                 break;
             }
         }

@@ -93,7 +93,7 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
                 for (int i = 0; i < cardsCount; i++) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                     } else {
                         break;
                     }

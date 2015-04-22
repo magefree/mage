@@ -37,6 +37,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.UUID;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -50,6 +51,8 @@ import javax.swing.event.ChangeListener;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
+import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
 
@@ -68,6 +71,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private final boolean playerItself;
 
     private JCheckBoxMenuItem manaPoolMenuItem;
+    private JCheckBoxMenuItem allowViewHandCardsMenuItem;
     
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
@@ -248,16 +252,17 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             });
         } else {
-            menuItem = new JCheckBoxMenuItem("Allow requests to show your hand cards", allowRequestToShowHandCards);
-            menuItem.setMnemonic(KeyEvent.VK_A);
-            menuItem.setToolTipText("If activated watchers or other players can request to see your hand cards. If you grant this to a user, it's valid for the complete match.");
-            popupMenu.add(menuItem);
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow requests to show your hand cards", allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
+            allowViewHandCardsMenuItem.setToolTipText("If activated watchers or other players can request to see your hand cards. If you grant this to a user, it's valid for the complete match.");
+            popupMenu.add(allowViewHandCardsMenuItem);
 
             // Requests allowed
-            menuItem.addActionListener(new ActionListener() {
+            allowViewHandCardsMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     boolean requestsAllowed = ((JCheckBoxMenuItem)e.getSource()).getState();
+                    PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
                     gamePanel.getSession().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON: PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
                 }
             });
@@ -391,6 +396,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public final void update(PlayerView player) {
         this.playerPanel.update(player);
         this.battlefieldPanel.update(player.getBattlefield());
+        if (this.allowViewHandCardsMenuItem != null) {
+            this.allowViewHandCardsMenuItem.setSelected(player.getUserData().allowRequestShowHandCards());
+        }
     }
 
     public mage.client.game.BattlefieldPanel getBattlefieldPanel() {

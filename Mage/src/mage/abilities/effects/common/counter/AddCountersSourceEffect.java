@@ -103,7 +103,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
                         }
                         newCounter.add(countersToAdd);
                         card.addCounters(newCounter, game);
-                        if (informPlayers) {
+                        if (informPlayers && !game.isSimulation()) {
                             Player player = game.getPlayer(source.getControllerId());
                             if (player != null) {
                                 game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(card.getLogName()).toString());
@@ -125,8 +125,8 @@ public class AddCountersSourceEffect extends OneShotEffect {
                             newCounter.add(countersToAdd);
                             int before = permanent.getCounters().getCount(newCounter.getName());
                             permanent.addCounters(newCounter, game);
-                            int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
-                            if (informPlayers) {
+                            if (informPlayers && !game.isSimulation()) {
+                                int amountAdded = permanent.getCounters().getCount(newCounter.getName()) - before;
                                 Player player = game.getPlayer(source.getControllerId());
                                 if (player != null) {
                                     game.informPlayers(player.getName()+" puts "+amountAdded+" "+newCounter.getName().toLowerCase()+" counter on "+permanent.getLogName());

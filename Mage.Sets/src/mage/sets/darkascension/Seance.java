@@ -98,7 +98,7 @@ class SeanceEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && card != null) {
-            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD)) {
+            if (controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
                 EmptyToken token = new EmptyToken();
                 CardUtil.copyTo(token).from(card);
 
@@ -112,7 +112,7 @@ class SeanceEffect extends OneShotEffect {
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game));
+                delayedAbility.setSourceObject(source.getSourceObject(game), game);
                 game.addDelayedTriggeredAbility(delayedAbility);
             }
 

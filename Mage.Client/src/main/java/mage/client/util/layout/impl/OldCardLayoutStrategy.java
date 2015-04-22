@@ -1,15 +1,15 @@
 package mage.client.util.layout.impl;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.client.game.BattlefieldPanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.layout.CardLayoutStrategy;
 import mage.view.PermanentView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Card layout for client version 1.3.0 and earlier.
@@ -54,14 +54,14 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
         }
         int position = jLayeredPane.getPosition(perm);
         perm.getLinks().clear();
-        Rectangle r = perm.getBounds();
+        Rectangle rectangleBaseCard = perm.getBounds();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
             for (UUID attachmentId: permanent.getAttachments()) {
                 MagePermanent link = permanents.get(attachmentId);
                 if (link != null) {
                     perm.getLinks().add(link);
-                    r.translate(20, 20);
-                    link.setBounds(r);
+                    rectangleBaseCard.translate(20, 20);
+                    link.setBounds(rectangleBaseCard);
                     jLayeredPane.setPosition(link, ++position);
                 }
             }
@@ -70,14 +70,14 @@ public class OldCardLayoutStrategy implements CardLayoutStrategy {
             for (UUID attachmentId: permanent.getAttachments()) {
                 MagePermanent link = permanents.get(attachmentId);
                 if (link != null) {
-                    link.setBounds(r);
+                    link.setBounds(rectangleBaseCard);
                     perm.getLinks().add(link);
                     if (index == 1) {
-                        r.translate(ATTACHMENTS_DX_OFFSET, ATTACHMENT_DY_OFFSET); // do it once
+                        rectangleBaseCard.translate(ATTACHMENTS_DX_OFFSET, ATTACHMENT_DY_OFFSET); // do it once
                     } else {
-                        r.translate(ATTACHMENT_DX_OFFSET, ATTACHMENT_DY_OFFSET);
+                        rectangleBaseCard.translate(ATTACHMENT_DX_OFFSET, ATTACHMENT_DY_OFFSET);
                     }
-                    perm.setBounds(r);
+                    perm.setBounds(rectangleBaseCard);
                     jLayeredPane.moveToFront(link);
                     jLayeredPane.moveToFront(perm);
                     jPanel.setComponentZOrder(link, index);

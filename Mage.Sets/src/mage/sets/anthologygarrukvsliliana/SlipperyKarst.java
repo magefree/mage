@@ -38,7 +38,7 @@ public class SlipperyKarst extends mage.sets.urzassaga.SlipperyKarst {
     public SlipperyKarst(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 26;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public SlipperyKarst(final SlipperyKarst card) {

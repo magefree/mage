@@ -146,7 +146,7 @@ class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShot
         DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         delayedAbility.getTargets().addAll(source.getTargets());
         for(Effect effect : delayedAbility.getEffects()) {
             effect.getTargetPointer().init(game, source);

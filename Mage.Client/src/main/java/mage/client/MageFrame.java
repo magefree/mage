@@ -712,6 +712,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         String proxyPassword = prefs.get("proxyPassword", "");
         int avatarId = PreferencesDialog.getSelectedAvatar();
         boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
+            
+        
         try {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Connection connection = new Connection();
@@ -725,6 +727,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setProxyPassword(proxyPassword);
             connection.setAvatarId(avatarId);
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
+            connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
             connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
             if (MageFrame.connect(connection)) {  

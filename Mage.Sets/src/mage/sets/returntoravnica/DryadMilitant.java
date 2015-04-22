@@ -56,8 +56,6 @@ public class DryadMilitant extends CardImpl {
         this.subtype.add("Dryad");
         this.subtype.add("Soldier");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
@@ -102,15 +100,20 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()));
+                return controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, game.getState().getZone(card.getId()), true);
             }
         }
         return false;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && (card.getCardType().contains(CardType.SORCERY) || card.getCardType().contains(CardType.INSTANT))) {
                 return true;

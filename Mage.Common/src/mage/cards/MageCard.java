@@ -17,6 +17,8 @@ public abstract class MageCard extends JPanel {
     public abstract void setAlpha(float transparency);
     public abstract float getAlpha();
     public abstract CardView getOriginal();
+    // sets the vertical text offset for the card name on the image
+    public abstract void setTextOffset(int yOffset);
     public abstract void setCardBounds(int x, int y, int width, int height);
     public abstract void update(CardView card);
     public abstract void updateImage();

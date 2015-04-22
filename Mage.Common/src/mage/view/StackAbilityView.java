@@ -98,7 +98,7 @@ public class StackAbilityView extends CardView {
     private void updateTargets(Game game, StackAbility ability) {
         List<String> names = new ArrayList<>();
         for(UUID modeId : ability.getModes().getSelectedModes()) {
-            ability.getModes().setMode(ability.getModes().get(modeId));
+            ability.getModes().setActiveMode(modeId);
             if (ability.getTargets().size() > 0) {
                 setTargets(ability.getTargets());
             } else {
@@ -129,7 +129,7 @@ public class StackAbilityView extends CardView {
         if (ability.isModal()) {
             Modes modes = ability.getModes();
             for(UUID modeId : modes.getSelectedModes()) {
-                modes.setMode(modes.get(modeId));
+                modes.setActiveMode(modeId);
                 this.rules.add("<span color='green'><i>Chosen mode: " + ability.getEffects().getText(modes.get(modeId))+"</i></span>");
             }
         }

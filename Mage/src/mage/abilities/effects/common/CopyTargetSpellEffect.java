@@ -69,7 +69,8 @@ public class CopyTargetSpellEffect extends OneShotEffect {
             if (activateMessage.startsWith(" casts ")) {
                 activateMessage = activateMessage.substring(6);
             }
-            game.informPlayers(player.getName() + " copies " + activateMessage);
+            if (!game.isSimulation())
+                game.informPlayers(player.getName() + " copies " + activateMessage);
             return true;
         }
         return false;

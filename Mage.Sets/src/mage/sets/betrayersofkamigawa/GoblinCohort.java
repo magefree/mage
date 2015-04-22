@@ -27,8 +27,6 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -38,13 +36,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.watchers.Watcher;
+import mage.watchers.common.PlayerCastCreatureWatcher;
 
 /**
  *
@@ -110,41 +105,3 @@ class GoblinCohortEffect extends RestrictionEffect {
     }
 }
 
-class PlayerCastCreatureWatcher extends Watcher {
-
-    Set<UUID> playerIds = new HashSet<>();
-
-    public PlayerCastCreatureWatcher() {
-        super("PlayerCastCreature", WatcherScope.GAME);
-    }
-
-    public PlayerCastCreatureWatcher(final PlayerCastCreatureWatcher watcher) {
-        super(watcher);
-        this.playerIds.addAll(watcher.playerIds);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (spell.getCardType().contains(CardType.CREATURE)) {
-                playerIds.add(spell.getControllerId());
-            }
-        }
-    }
-
-    @Override
-    public PlayerCastCreatureWatcher copy() {
-        return new PlayerCastCreatureWatcher(this);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        playerIds.clear();
-    }
-
-    public boolean playerDidCastCreatureThisTurn(UUID playerId) {
-        return playerIds.contains(playerId);
-    }
-}

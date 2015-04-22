@@ -38,7 +38,7 @@ public class GoblinRingleader extends mage.sets.apocalypse.GoblinRingleader {
     public GoblinRingleader(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 40;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public GoblinRingleader(final GoblinRingleader card) {

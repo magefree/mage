@@ -38,7 +38,7 @@ public class DarkRitual extends mage.sets.planechase.DarkRitual {
     public DarkRitual(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 45;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public DarkRitual(final DarkRitual card) {

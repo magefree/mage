@@ -61,7 +61,6 @@ public class OrissSamiteGuardian extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
@@ -104,19 +103,14 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImp
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL) {
-            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            if (player != null && player.getId().equals(event.getPlayerId())) {
-                return true;
-            }
-        }
-        return false;
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 }
 
@@ -135,20 +129,15 @@ class OrissSamiteGuardianCantAttackEffect extends ContinuousRuleModifyingEffectI
     public OrissSamiteGuardianCantAttackEffect copy() {
         return new OrissSamiteGuardianCantAttackEffect(this);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER) {
-            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            if (player != null && player.getId().equals(event.getPlayerId())) {
-                return true;
-            }
-        }
-        return false;
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        return player != null && player.getId().equals(event.getPlayerId());
     }
 }

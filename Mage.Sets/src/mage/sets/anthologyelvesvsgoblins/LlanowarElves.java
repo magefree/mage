@@ -38,7 +38,7 @@ public class LlanowarElves extends mage.sets.tenth.LlanowarElves {
     public LlanowarElves(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 9;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public LlanowarElves(final LlanowarElves card) {

@@ -30,10 +30,8 @@ package mage.sets.invasion;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.KickedCondition;;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FearAbility;
@@ -62,11 +60,11 @@ public class Duskwalker extends CardImpl {
         this.addAbility(new KickerAbility("{3}{B}"));
         
         // If Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.
-        Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))),
-                KickedCondition.getInstance(),"If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.");
-		ability.addEffect(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield));
-		this.addAbility(ability);
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+                KickedCondition.getInstance(), true,
+                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.", "");
+        ability.addEffect(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addAbility(ability);
     }
 
     public Duskwalker(final Duskwalker card) {

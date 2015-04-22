@@ -88,7 +88,8 @@ public class CommanderInfoWatcher extends Watcher {
                     Player player = game.getPlayer(playerUUID);
                     MageObject commander = game.getObject(sourceId);
                     if (player != null && commander != null){
-                        game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
+                        if (!game.isSimulation())
+                            game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
                         this.addCardInfoToCommander(game);
                     }
                 }

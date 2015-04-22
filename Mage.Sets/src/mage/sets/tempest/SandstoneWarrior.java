@@ -49,10 +49,13 @@ public class SandstoneWarrior extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
+        
+        // First strike (This creature deals combat damage before creatures without first strike.)        
         this.addAbility(FirstStrikeAbility.getInstance());
+        
+        // {R}: Sandstone Warrior gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 

@@ -38,7 +38,7 @@ public class LordOfThePit extends mage.sets.divinevsdemonic.LordOfThePit {
     public LordOfThePit(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 30;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public LordOfThePit(final LordOfThePit card) {

@@ -90,14 +90,14 @@ public class ExileTargetEffect extends OneShotEffect {
                 if (permanent != null) {
                     Zone currentZone = game.getState().getZone(permanent.getId());
                     if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(Zone.BATTLEFIELD))) {
-                        controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, currentZone);
+                        controller.moveCardToExileWithInfo(permanent, exileId, exileZone, source.getSourceId(), game, currentZone, true);
                     }
                 } else {
                     Card card = game.getCard(targetId);
                     if (card != null) {
                         Zone currentZone = game.getState().getZone(card.getId());
                         if (!currentZone.equals(Zone.EXILED) && (onlyFromZone == null || onlyFromZone.equals(currentZone))) {
-                            controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, currentZone);
+                            controller.moveCardToExileWithInfo(card, exileId, exileZone, source.getSourceId(), game, currentZone, true);
                         }
                     }
                 }

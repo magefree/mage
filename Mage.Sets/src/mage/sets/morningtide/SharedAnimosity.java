@@ -62,8 +62,6 @@ public class SharedAnimosity extends CardImpl {
         super(ownerId, 104, "Shared Animosity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "MOR";
 
-        this.color.setRed(true);
-
         // Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new SharedAnimosityEffect(), false, true));
     }
@@ -102,17 +100,21 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
         super.init(source, game);
         Permanent permanent = game.getPermanent(this.targetPointer.getFirst(game, source));
         if (permanent != null) {
-            
+                        
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
             filter.add(new AttackingPredicate());
-            boolean isChangeling = false;
-            for(Ability ability : permanent.getAbilities()){
-                if(ability instanceof ChangelingAbility){
-                    isChangeling = true;
-                }
-            }   
-            if(!isChangeling){
+            boolean allCreatureTypes = false;
+            if (permanent.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
+                allCreatureTypes = true;
+            } else {
+                for(Ability ability : permanent.getAbilities()){
+                    if(ability instanceof ChangelingAbility){
+                        allCreatureTypes = true;
+                    }
+                }   
+            }
+            if(!allCreatureTypes){
                 ArrayList<Predicate<MageObject>> predicateList = new ArrayList<>();
                 for(String subtype : permanent.getSubtype()){
                     predicateList.add(new SubtypePredicate(subtype));

@@ -116,7 +116,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 // search cards in graveyard
                 for (Card checkCard : targetPlayer.getGraveyard().getCards(game)) {
                     if (checkCard.getName().equals(cardName)) {
-                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                        controller.moveCardToExileWithInfo(checkCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                 }
 
@@ -126,7 +126,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 for(UUID cardId:  targetCardsHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND);
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.HAND, true);
                     }
                 }
 
@@ -137,7 +137,7 @@ class ThoughtHemorrhageEffect extends OneShotEffect {
                 for(UUID cardId:  targetCardsLibrary.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
                 targetPlayer.shuffleLibrary(game);

@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -62,6 +63,7 @@ public class LurkingArynx extends CardImpl {
                 new ManaCostsImpl("{2}{G}"),
                 FormidableCondition.getInstance());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 

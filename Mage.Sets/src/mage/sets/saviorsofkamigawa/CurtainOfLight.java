@@ -104,8 +104,13 @@ class CurtainOfLightRuleModifyingEffect extends ContinuousRuleModifyingEffectImp
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.CAST_SPELL);
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.CAST_SPELL) && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             return !game.getPhase().getType().equals(TurnPhase.COMBAT) ||
                     game.getStep().getType().equals(PhaseStep.BEGIN_COMBAT) ||
                     game.getStep().getType().equals(PhaseStep.DECLARE_ATTACKERS);

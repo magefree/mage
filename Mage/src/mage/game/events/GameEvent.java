@@ -79,6 +79,13 @@ public class GameEvent {
         AT_END_OF_TURN,
 
         //player events
+        /* ZONE_CHANGE
+            targetId    id of the zone chaning object
+            sourceId    sourceId of the ability with the object moving effect
+            playerId    controller of the moved object
+            amount      not used for this event
+            flag        not used for this event
+        */
         ZONE_CHANGE,
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,
@@ -107,7 +114,16 @@ public class GameEvent {
 
         LOSES, LOST, WINS,
         TARGET, TARGETED,
-        COUNTER, COUNTERED,
+        
+        /* COUNTER
+            targetId    id of the spell or id of stack ability
+            sourceId    sourceId of the ability countering the spell or stack ability
+            playerId    controller of the countered spell or stack ability
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        COUNTER,
+        COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
         DECLARE_ATTACKER, ATTACKER_DECLARED,
         
@@ -142,19 +158,48 @@ public class GameEvent {
         TURNFACEDOWN, TURNEDFACEDOWN,
         DAMAGE_CREATURE, DAMAGED_CREATURE,
         DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER,
-        DESTROY_PERMANENT, DESTROYED_PERMANENT,
+        DESTROY_PERMANENT, 
+        
+        /* DESTROYED_PERMANENT
+            targetId    id of the destroyed creature
+            sourceId    sourceId of the ability with the destroy effect
+            playerId    controller of the creature
+            amount      not used for this event
+            flag        true if no regeneration is allowed
+        */
+        DESTROYED_PERMANENT,
+        
         SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
         FIGHTED_PERMANENT,
-        EXPLOIDED_CREATURE,
+        EXPLOITED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
-        ADD_COUNTERS, COUNTERS_ADDED, /* COUNTERS_ADDED not implemented yet */
+        ADD_COUNTERS, COUNTERS_ADDED,
         COUNTER_REMOVED,
-        LOSE_CONTROL, LOST_CONTROL,
+        LOSE_CONTROL, 
+        
+        /* LOST_CONTROL
+            targetId    id of the creature that lost control
+            sourceId    id of the creature that lost control
+            playerId    player that controlles the creature before
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        LOST_CONTROL,
         GAIN_CONTROL, GAINED_CONTROL,
         CREATE_TOKEN,
-        REGENERATE, REGENERATED,
+
+        /* REGENERATE
+            targetId    id of the creature to regenerate
+            sourceId    sourceId of the effect doing the regeneration
+            playerId    controller of the creature
+            amount      not used for this event
+            flag        not used for this event
+        */
+        REGENERATE,
+
+        REGENERATED,
         CHANGE_COLOR, COLOR_CHANGED,
 
         //combat events

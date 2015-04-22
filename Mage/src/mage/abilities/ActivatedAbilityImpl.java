@@ -43,6 +43,7 @@ import mage.cards.Card;
 import mage.constants.AsThoughEffectType;
 import mage.constants.TargetController;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 
 /**
@@ -174,13 +175,21 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 if (! game.getPlayer(controllerId).hasOpponent(playerId, game)){
                     return false;
                 }
-                break;
-                
+                break;                
             case YOU:
                 if(!controlsAbility(playerId, game)){
                     return false;
                 }
                 break;
+            case CONTROLLER_ATTACHED_TO:
+                Permanent enchantment = game.getPermanent(getSourceId());
+                if (enchantment != null && enchantment.getAttachedTo() != null) {
+                    Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+                    if (enchanted != null && enchanted.getControllerId().equals(playerId)) {
+                        break;
+                    }
+                }
+                return false;
         }
         //20091005 - 602.5d/602.5e
         if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId) ||

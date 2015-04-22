@@ -65,7 +65,8 @@ public class FightTargetsEffect extends OneShotEffect {
                     }
                 }
             }
-            game.informPlayers(card.getName() + " has been fizzled.");
+            if (!game.isSimulation())
+                game.informPlayers(card.getName() + " has been fizzled.");
         }
         return false;
     }

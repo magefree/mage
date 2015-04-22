@@ -38,7 +38,7 @@ public class Tarfire extends mage.sets.lorwyn.Tarfire {
     public Tarfire(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 56;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public Tarfire(final Tarfire card) {

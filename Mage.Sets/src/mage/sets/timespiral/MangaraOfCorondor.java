@@ -58,7 +58,7 @@ public class MangaraOfCorondor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Exile Mangara of Corondor and target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(Zone.BATTLEFIELD), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(), new TapSourceCost());
         ability.addEffect(new ExileTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
@@ -68,7 +69,6 @@ import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
@@ -109,6 +109,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean activated = false;
     protected boolean worksFaceDown = false;
     protected MageObject sourceObject;
+    protected int sourceObjectZoneChangeCounter;
     protected List<Watcher> watchers = null;
     protected List<Ability> subAbilities = null;
 
@@ -160,6 +161,7 @@ public abstract class AbilityImpl implements Ability {
         this.worksFaceDown = ability.worksFaceDown;
         this.abilityWord = ability.abilityWord;
         this.sourceObject = ability.sourceObject;
+        this.sourceObjectZoneChangeCounter = ability.sourceObjectZoneChangeCounter;
     }
 
     @Override
@@ -213,7 +215,20 @@ public abstract class AbilityImpl implements Ability {
                 else {
                     game.addEffect((ContinuousEffect) effect, this);
                 }
-                // some effects must be applied before next effect is resolved, because effect is dependend.
+                /**
+                 * All restrained trigger events are fired now.
+                 * To restrain the events is mainly neccessary because of the movement of multiple object at once.
+                 * If the event is fired directly as one object moved, other objects are not already in the correct zone
+                 * to check for their effects. (e.g. Valakut, the Molten Pinnacle)
+                 */
+                game.getState().handleSimultaneousEvent(game);
+                game.resetShortLivingLKI();                
+                 /** 
+                  * game.applyEffects() has to be done at least for every effect that moves cards/permanent between zones,
+                  * so Static effects work as intened if dependant from the moved objects zone it is in
+                  * Otherwise for example were static abilities with replacement effects deactivated to late
+                  * Example: {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
+                  */
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
                 }
@@ -236,6 +251,8 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
 
+        getSourceObject(game);
+        
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
          * or she reveals those cards in his or her hand.
@@ -243,15 +260,15 @@ public abstract class AbilityImpl implements Ability {
         if (this.abilityType.equals(AbilityType.SPELL)) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
-
-        // TODO: Because all (non targeted) choices have to be done during resolution
-        // this has to be removed, if all using effects are changed
-        sourceObject = this.getSourceObject(game);
+        
+        
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
         }
+        // TODO: Because all (non targeted) choices have to be done during resolution
+        // this has to be removed, if all using effects are changed
         for (UUID modeId :this.getModes().getSelectedModes()) {
-            this.getModes().setMode(this.getModes().get(modeId));
+            this.getModes().setActiveMode(modeId);
             if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
                 logger.debug("activate failed - choice");
                 return false;
@@ -290,7 +307,7 @@ public abstract class AbilityImpl implements Ability {
         String announceString = handleOtherXCosts(game, controller);
 
         for (UUID modeId :this.getModes().getSelectedModes()) {
-            this.getModes().setMode(this.getModes().get(modeId));
+            this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
             // each target the spell requires. A spell may require some targets only if an alternative or
@@ -312,9 +329,9 @@ public abstract class AbilityImpl implements Ability {
                 sourceObject.adjustTargets(this, game);
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-                if (variableManaCost != null || announceString != null) {
+                if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
                     game.informPlayer(controller, new StringBuilder(sourceObject != null ? sourceObject.getLogName(): "").append(": no valid targets with this value of X").toString());
-                }
+                } 
                 return false; // when activation of ability is canceled during target selection
             }
         } // end modes
@@ -370,13 +387,15 @@ public abstract class AbilityImpl implements Ability {
             logger.debug("activate failed - non mana costs");
             return false;
         }
-        // inform about x costs now, so canceled announcements are not shown in the log
-        if (announceString != null) {
-            game.informPlayers(announceString);
-        }
-        if (variableManaCost != null) {
-            int xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+        if (!game.isSimulation()) {
+            // inform about x costs now, so canceled announcements are not shown in the log
+            if (announceString != null) {
+                game.informPlayers(announceString);
+            }
+            if (variableManaCost != null) {
+                int xValue = getManaCostsToPay().getX();
+                game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+            }
         }
         activated = true;
         // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event
@@ -660,16 +679,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Watcher> getWatchers() {
-        if (watchers != null)
+        if (watchers != null) {
             return watchers;
-        else
+        } else {
             return emptyWatchers;
+        }
     }
 
     @Override
     public void addWatcher(Watcher watcher) {
-        if (watchers == null)
+        if (watchers == null) {
             watchers = new ArrayList<>();
+        }
         watcher.setSourceId(this.sourceId);
         watcher.setControllerId(this.controllerId);
         watchers.add(watcher);
@@ -677,16 +698,18 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public List<Ability> getSubAbilities() {
-        if (subAbilities != null)
+        if (subAbilities != null) {
             return subAbilities;
-        else
+        } else {
             return emptyAbilities;
+        }
     }
 
     @Override
     public void addSubAbility(Ability ability) {
-        if (subAbilities == null)
+        if (subAbilities == null) {
             subAbilities = new ArrayList<>();
+        }
         ability.setSourceId(this.sourceId);
         ability.setControllerId(this.controllerId);
         subAbilities.add(ability);
@@ -842,8 +865,14 @@ public abstract class AbilityImpl implements Ability {
         return false;
     }
 
+    /**
+     * 
+     * @param game
+     * @param source
+     * @return 
+     */
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         if (zone.equals(Zone.COMMAND)) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
@@ -851,14 +880,6 @@ public abstract class AbilityImpl implements Ability {
             MageObject object = game.getObject(this.getSourceId());
             // emblem are always actual
             if (object != null && object instanceof Emblem) {
-                return true;
-            }
-        }
-
-        // try LKI first
-        if (checkLKI) {
-            MageObject lkiTest = game.getShortLivingLKI(getSourceId(), zone);
-            if (lkiTest != null) {
                 return true;
             }
         }
@@ -876,21 +897,19 @@ public abstract class AbilityImpl implements Ability {
         }
 
         if (object != null && !object.getAbilities().contains(this)) {
-            boolean found = false;
-            // unfortunately we need to handle double faced cards separately and only this way
-            if (object instanceof PermanentCard) {
-                if (((PermanentCard)object).canTransform()) {
-                    PermanentCard permanent = (PermanentCard)object;
-                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
-                }
+            if (object instanceof Permanent) {
+                return false;
             } else {
                 // check if it's an ability that is temporary gained to a card
                 Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(this.getSourceId());
-                found = otherAbilities != null && otherAbilities.contains(this);
+                if (otherAbilities == null || !otherAbilities.contains(this)) {
+                    return false;
+                }
             }
-            if (!found) {
-                return false;
-            }
+        }
+        // check agains shortLKI for effects that move multiple object at the same time (e.g. destroy all)
+        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+            return true;
         }
         // check against current state
         Zone test = game.getState().getZone(parameterSourceId);
@@ -1027,7 +1046,7 @@ public abstract class AbilityImpl implements Ability {
             for (Mode mode : spellModes.values()) {
                 item++;
                 if (spellModes.getSelectedModes().contains(mode.getId())) {
-                    spellModes.setMode(mode);
+                    spellModes.setActiveMode(mode.getId());
                     sb.append(" (mode ").append(item).append(")");
                     sb.append(getTargetDescriptionForLog(getTargets(), game));
                 }
@@ -1097,16 +1116,38 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        if (sourceObject != null) {
-            return sourceObject;
-        } else {
-            return game.getObject(sourceId);
+        if (sourceObject == null) {
+            setSourceObject(null, game);
         }
+        return sourceObject;
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
-        this.sourceObject = sourceObject;
+    public MageObject getSourceObjectIfItStillExists(Game game) {
+        MageObject currentObject = game.getObject(getSourceId());
+        if (currentObject != null) {
+            MageObjectReference mor = new MageObjectReference(currentObject, game);
+            if (mor.getZoneChangeCounter() == getSourceObjectZoneChangeCounter()) {
+                // source object has meanwhile not changed zone
+                return sourceObject;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        return sourceObjectZoneChangeCounter;
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        if (sourceObject == null) {
+            this.sourceObject = game.getObject(sourceId);
+        } else {
+            this.sourceObject = sourceObject;
+        }
+        this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
     }
 
 

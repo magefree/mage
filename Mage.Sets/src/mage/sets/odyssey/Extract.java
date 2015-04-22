@@ -97,7 +97,7 @@ class ExtractEffect extends OneShotEffect {
             if (player.searchLibrary(target, game, targetPlayer.getId())) {
                 Card card = targetPlayer.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
-                    player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             targetPlayer.shuffleLibrary(game);

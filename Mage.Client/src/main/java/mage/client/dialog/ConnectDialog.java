@@ -54,6 +54,7 @@ import java.io.InputStreamReader;
 import java.io.Writer;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -331,6 +332,7 @@ public class ConnectDialog extends MageDialog {
             int avatarId = PreferencesDialog.getSelectedAvatar();
             connection.setAvatarId(avatarId);
             boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
+            connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
             connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
             logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
@@ -442,7 +444,7 @@ public class ConnectDialog extends MageDialog {
             boolean URLNotFound = false;
             try {
                 in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-            } catch (FileNotFoundException| UnknownHostException ex ) {
+            } catch (SocketTimeoutException |FileNotFoundException | UnknownHostException ex ) {
                 logger.warn("Could not read serverlist from: " + serverListURL.toString());
                 File f = new File("serverlist.txt");
                 if (f.exists() && !f.isDirectory()) {

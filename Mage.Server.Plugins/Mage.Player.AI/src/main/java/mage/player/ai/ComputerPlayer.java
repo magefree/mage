@@ -28,25 +28,84 @@
 
 package mage.player.ai;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.*;
+import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.HybridManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.MonoHybridManaCost;
+import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlashAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
-import mage.cards.repository.*;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
+import static mage.constants.PhaseStep.DECLARE_ATTACKERS;
+import static mage.constants.PhaseStep.DECLARE_BLOCKERS;
+import static mage.constants.PhaseStep.DRAW;
+import static mage.constants.PhaseStep.END_COMBAT;
+import static mage.constants.PhaseStep.POSTCOMBAT_MAIN;
+import static mage.constants.PhaseStep.PRECOMBAT_MAIN;
+import static mage.constants.PhaseStep.UPKEEP;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Rarity;
+import static mage.constants.SpellAbilityType.SPLIT;
+import static mage.constants.SpellAbilityType.SPLIT_FUSED;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.common.*;
+import mage.filter.common.FilterCreatureForCombatBlock;
+import mage.filter.common.FilterCreatureOrPlayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterLandCard;
+import mage.filter.common.FilterNonlandCard;
+import mage.filter.common.FilterPermanentOrPlayer;
+import mage.filter.common.FilterPlaneswalkerPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
@@ -65,19 +124,30 @@ import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import mage.target.*;
-import mage.target.common.*;
+import mage.target.Target;
+import mage.target.TargetAmount;
+import mage.target.TargetCard;
+import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
+import mage.target.TargetSource;
+import mage.target.TargetSpell;
+import mage.target.common.TargetCardInASingleGraveyard;
+import mage.target.common.TargetCardInExile;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreatureOrPlayerAmount;
+import mage.target.common.TargetDefender;
+import mage.target.common.TargetDiscard;
+import mage.target.common.TargetPermanentOrPlayer;
+import mage.target.common.TargetSpellOrPermanent;
 import mage.util.Copier;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
-
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import mage.filter.Filter;
-import mage.filter.predicate.other.PlayerIdPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 
 
 /**
@@ -119,10 +189,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
-        if (lands.size() < 2 || lands.size() > hand.size() - 2) {
-            return true;
-        }
-        return false;
+        return lands.size() < 2 || lands.size() > hand.size() - 2;
     }
 
     @Override
@@ -1975,7 +2042,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     protected void logState(Game game) {
         if (log.isTraceEnabled()) {
-            logList("Computer player " + name + " hand: ", new ArrayList(hand.getCards(game)));
+            logList("Computer player " + name + " hand: ", new ArrayList<MageObject>(hand.getCards(game)));
         }
     }
 

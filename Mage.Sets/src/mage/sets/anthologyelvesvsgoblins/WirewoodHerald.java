@@ -38,7 +38,7 @@ public class WirewoodHerald extends mage.sets.onslaught.WirewoodHerald {
     public WirewoodHerald(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 16;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public WirewoodHerald(final WirewoodHerald card) {

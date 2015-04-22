@@ -97,10 +97,15 @@ class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean apply(Game game, Ability source) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE);
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE);
+        return true;
     }
 }
 
@@ -139,7 +144,13 @@ class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return (event.getType() == EventType.DAMAGE_CREATURE);
+        return true;
     }
 }

@@ -54,9 +54,15 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
 import mage.constants.AbilityWord;
+import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetAmount;
 import mage.watchers.Watcher;
 
 /**
@@ -100,7 +106,9 @@ public class StackAbility implements StackObject, Ability {
         if (ability.getTargets().stillLegal(ability, game)) {
             return ability.resolve(game);
         }
-        game.informPlayers("Ability has been fizzled: " + getRule());
+        if (!game.isSimulation()) {
+            game.informPlayers("Ability has been fizzled: " + getRule());
+        }
         counter(null, game);
         return false;
     }
@@ -399,7 +407,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -499,12 +507,22 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public MageObject getSourceObject(Game game) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
-        throw new UnsupportedOperationException("Not supported."); //To change body of generated methods, choose Tools | Templates.
+    public MageObject getSourceObjectIfItStillExists(Game game) {
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setSourceObject(MageObject sourceObject, Game game) {
+        throw new UnsupportedOperationException("Not supported.");
     }    
 
     @Override
@@ -522,4 +540,197 @@ public class StackAbility implements StackObject, Ability {
         throw new UnsupportedOperationException("Not supported.");
     }
 
+  /**
+     * 114.6. Some effects allow a player to change the target(s) of a spell or
+     * ability, and other effects allow a player to choose new targets for a
+     * spell or ability. 
+     * 
+     * 114.6a If an effect allows a player to "change the
+     * target(s)" of a spell or ability, each target can be changed only to
+     * another legal target. If a target can't be changed to another legal
+     * target, the original target is unchanged, even if the original target is
+     * itself illegal by then. If all the targets aren't changed to other legal
+     * targets, none of them are changed. 
+     * 
+     * 114.6b If an effect allows a player to "change a target" of a 
+     * spell or ability, the process described in rule 114.6a
+     * is followed, except that only one of those targets may be changed
+     * (rather than all of them or none of them). 
+     * 
+     * 114.6c If an effect allows a
+     * player to "change any targets" of a spell or ability, the process
+     * described in rule 114.6a is followed, except that any number of those
+     * targets may be changed (rather than all of them or none of them). 
+     * 
+     * 114.6d If an effect allows a player to "choose new targets" for a spell or
+     * ability, the player may leave any number of the targets unchanged, even
+     * if those targets would be illegal. If the player chooses to change some
+     * or all of the targets, the new targets must be legal and must not cause
+     * any unchanged targets to become illegal. 
+     * 
+     * 114.6e When changing targets or
+     * choosing new targets for a spell or ability, only the final set of
+     * targets is evaluated to determine whether the change is legal.
+     *
+     * Example: Arc Trail is a sorcery that reads "Arc Trail deals 2 damage to
+     * target creature or player and 1 damage to another target creature or
+     * player." The current targets of Arc Trail are Runeclaw Bear and Llanowar
+     * Elves, in that order. You cast Redirect, an instant that reads "You may
+     * choose new targets for target spell," targeting Arc Trail. You can change
+     * the first target to Llanowar Elves and change the second target to
+     * Runeclaw Bear.
+     *
+     * 114.7. Modal spells and abilities may have different targeting
+     * requirements for each mode. An effect that allows a player to change the
+     * target(s) of a modal spell or ability, or to choose new targets for a
+     * modal spell or ability, doesn't allow that player to change its mode.
+     * (See rule 700.2.)
+     *
+     * 706.10c Some effects copy a spell or ability and state that its
+     * controller may choose new targets for the copy. The player may leave any
+     * number of the targets unchanged, even if those targets would be illegal.
+     * If the player chooses to change some or all of the targets, the new
+     * targets must be legal. Once the player has decided what the copy's
+     * targets will be, the copy is put onto the stack with those targets.
+     *
+     * @param game
+     * @param playerId - player that can/has to change the target of the ability
+     * @param forceChange - does only work for targets with maximum of one targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @param filterNewTarget restriction for the new target, if null nothing is cheched
+     * @return
+     */
+    @Override
+    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            StringBuilder newTargetDescription = new StringBuilder();
+            // Some abilities can have more than one mode
+            for (UUID modeId : ability.getModes().getSelectedModes()) {
+                Mode mode = ability.getModes().get(modeId);
+                for (Target target : mode.getTargets()) {
+                    Target newTarget = chooseNewTarget(player, getStackAbility(), mode, target, forceChange, filterNewTarget, game);
+                    // clear the old target and copy all targets from new target
+                    target.clearChosen();
+                    for (UUID targetId : newTarget.getTargets()) {
+                        target.addTarget(targetId, newTarget.getTargetAmount(targetId), ability, game, false);                            
+                    }
+
+                }
+                newTargetDescription.append(((AbilityImpl)ability).getTargetDescription(mode.getTargets(), game));
+            }
+
+            if (newTargetDescription.length() > 0 && !game.isSimulation()) {
+                game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Handles the change of one target instance of a mode
+     * 
+     * @param player - player that can choose the new target
+     * @param ability
+     * @param mode
+     * @param target
+     * @param forceChange
+     * @param game
+     * @return 
+     */
+    private Target chooseNewTarget(Player player, Ability ability, Mode mode, Target target, boolean forceChange, FilterPermanent filterNewTarget, Game game) {
+        Target newTarget = target.copy();
+        newTarget.clearChosen();
+        for (UUID targetId : target.getTargets()) {
+            String targetNames = getNamesOfTargets(targetId, game);
+            // change the target?
+            if (targetNames != null
+                    && (forceChange || player.chooseUse(mode.getEffects().get(0).getOutcome(), "Change this target: " + targetNames + "?", game))) {               
+                // choose exactly one other target
+                if (forceChange && target.possibleTargets(this.getSourceId(), getControllerId(), game).size() > 1) { // controller of ability must be used (e.g. TargetOpponent)
+                    int iteration = 0;
+                    do {
+                        if (iteration > 0 && !game.isSimulation()) {
+                            game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
+                        }
+                        iteration++;
+                        newTarget.clearChosen();
+                        // TODO: Distinction between "ability controller" and "player that can change the target" - here player is used for both 
+                        newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), ability, game); 
+                        // check target restriction 
+                        if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                game.informPlayer(player, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                newTarget.clearChosen();
+                            }
+                        }
+                    } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
+                // choose a new target
+                } else {
+                    // build a target definition with exactly one possible target to select that replaces old target
+                    Target tempTarget = target.copy();
+                    if (target instanceof TargetAmount) {
+                        ((TargetAmount)tempTarget).setAmountDefinition(new StaticValue(target.getTargetAmount(targetId)));
+                    }
+                    tempTarget.setMinNumberOfTargets(1);
+                    tempTarget.setMaxNumberOfTargets(1);
+                    boolean again;
+                    do {
+                        again = false;
+                        tempTarget.clearChosen();
+                        if (!tempTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), ability, game)) {
+                            if (player.chooseUse(Outcome.Benefit, "No target object selected. Reset to original target?", game)) {
+                                // use previous target no target was selected
+                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                            } else {
+                                again = true;
+                            }
+                        } else {
+                            // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
+                            if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {
+                                if (player.isHuman()) {
+                                    game.informPlayer(player, "This target was already selected from origin ability. You can only keep this target!");
+                                    again = true;
+                                } else {
+                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+                                }
+                            } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                    game.informPlayer(player, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                    again = true;
+                                }
+                            } else {
+                                // valid target was selected, add it to the new target definition
+                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);
+                            }
+                        }
+                    } while (again && player.isInGame());
+                }            
+            }
+            // keep the target
+            else { 
+                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);
+            }
+        }    
+        return newTarget;
+    }
+    
+    
+    private String getNamesOfTargets(UUID targetId, Game game) {
+        MageObject object = game.getObject(targetId);
+        String targetNames = null;
+        if (object == null) {
+            Player targetPlayer = game.getPlayer(targetId);
+            if (targetPlayer != null) {
+                targetNames = targetPlayer.getName();
+            }
+        } else {
+            targetNames = object.getName();
+        }
+        return targetNames;
+    }    
+    
 }

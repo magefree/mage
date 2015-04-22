@@ -38,7 +38,7 @@ public class RavenousBaloth extends mage.sets.onslaught.RavenousBaloth {
     public RavenousBaloth(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 8;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public RavenousBaloth(final RavenousBaloth card) {

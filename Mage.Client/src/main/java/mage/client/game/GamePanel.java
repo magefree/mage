@@ -602,8 +602,8 @@ public final class GamePanel extends javax.swing.JPanel {
         if (game.getStep() != null) {
             updatePhases(game.getStep());
             this.txtStep.setText(game.getStep().toString());
-        }
-        else {
+        } else {
+            logger.debug("Step is empty");
             this.txtStep.setText("");
         }
         if (game.getSpellsCastCurrentTurn() > 0 && PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, "true").equals("true")) {
@@ -749,18 +749,40 @@ public final class GamePanel extends javax.swing.JPanel {
             currentStep.setLocation(prevPoint);
         }
         switch (step) {
-            case UNTAP: updateButton("Untap"); break;
-            case UPKEEP: updateButton("Upkeep"); break;
-            case DRAW: updateButton("Draw"); break;
-            case PRECOMBAT_MAIN: updateButton("Main1"); break;
-            case BEGIN_COMBAT: updateButton("Combat_Start"); break;
-            case DECLARE_ATTACKERS: updateButton("Combat_Attack"); break;
-            case DECLARE_BLOCKERS: updateButton("Combat_Block"); break;
+            case UNTAP:
+                updateButton("Untap");
+                break;
+            case UPKEEP:
+                updateButton("Upkeep");
+                break;
+            case DRAW:
+                updateButton("Draw");
+                break;
+            case PRECOMBAT_MAIN:
+                updateButton("Main1");
+                break;
+            case BEGIN_COMBAT:
+                updateButton("Combat_Start");
+                break;
+            case DECLARE_ATTACKERS:
+                updateButton("Combat_Attack");
+                break;
+            case DECLARE_BLOCKERS:
+                updateButton("Combat_Block");
+                break;
             case FIRST_COMBAT_DAMAGE:
-            case COMBAT_DAMAGE: updateButton("Combat_Damage"); break;
-            case END_COMBAT: updateButton("Combat_End"); break;
-            case POSTCOMBAT_MAIN: updateButton("Main2"); break;
-            case END_TURN: updateButton("Cleanup"); break;
+            case COMBAT_DAMAGE:
+                updateButton("Combat_Damage");
+                break;
+            case END_COMBAT:
+                updateButton("Combat_End");
+                break;
+            case POSTCOMBAT_MAIN:
+                updateButton("Main2");
+                break;
+            case END_TURN:
+                updateButton("Cleanup");
+                break;
         }
     }
 

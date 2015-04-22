@@ -276,12 +276,13 @@ class SuspendExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
             UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND)) {
+            if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
                 if (suspend == Integer.MAX_VALUE) {
                     suspend = source.getManaCostsToPay().getX();
                 }
                 card.addCounters(CounterType.TIME.createInstance(suspend), game);
-                game.informPlayers(new StringBuilder(controller.getName()).append(" suspends (").append(suspend).append(") ").append(card.getName()).toString());
+                if (!game.isSimulation())
+                    game.informPlayers(new StringBuilder(controller.getName()).append(" suspends (").append(suspend).append(") ").append(card.getName()).toString());
                 return true;
             }
         }

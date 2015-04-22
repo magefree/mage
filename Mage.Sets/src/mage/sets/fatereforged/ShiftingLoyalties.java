@@ -55,7 +55,7 @@ public class ShiftingLoyalties extends CardImpl {
 
         // Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, "Exchange control of two target permanents that share a card type. <i>(Artifact, creature, enchantment, land, and planeswalker are card types.)</i>"));
-        this.getSpellAbility().addTarget(new TargetpermanentsThatShareCardType());
+        this.getSpellAbility().addTarget(new TargetPermanentsThatShareCardType());
 
     }
 
@@ -69,14 +69,14 @@ public class ShiftingLoyalties extends CardImpl {
     }
 }
 
-class TargetpermanentsThatShareCardType extends TargetPermanent {
+class TargetPermanentsThatShareCardType extends TargetPermanent {
 
-    public TargetpermanentsThatShareCardType() {
+    public TargetPermanentsThatShareCardType() {
         super(2, 2, new FilterPermanent(), false);
         targetName = "permanents that share a card type";
     }
 
-    public TargetpermanentsThatShareCardType(final TargetpermanentsThatShareCardType target) {
+    public TargetPermanentsThatShareCardType(final TargetPermanentsThatShareCardType target) {
         super(target);
     }
 
@@ -114,7 +114,7 @@ class TargetpermanentsThatShareCardType extends TargetPermanent {
     }
 
     @Override
-    public TargetpermanentsThatShareCardType copy() {
-        return new TargetpermanentsThatShareCardType(this);
+    public TargetPermanentsThatShareCardType copy() {
+        return new TargetPermanentsThatShareCardType(this);
     }
 }

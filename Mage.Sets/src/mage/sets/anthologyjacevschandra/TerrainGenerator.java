@@ -58,7 +58,7 @@ public class TerrainGenerator extends CardImpl {
 
     public TerrainGenerator(UUID ownerId) {
         super(ownerId, 29, "Terrain Generator", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
 
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());

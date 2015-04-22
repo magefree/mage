@@ -584,7 +584,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);
             game.applyEffects();
-            game.fireEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));
+            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, event.getPlayerId(), fromZone, Zone.BATTLEFIELD));            
             return true;
         }
         if (facedown) {

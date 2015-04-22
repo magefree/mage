@@ -69,6 +69,7 @@ import mage.cards.Card;
 import mage.constants.Zone;
 import mage.target.TargetSource;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetPermanentOrPlayer;
 
 /**
  *
@@ -301,22 +302,39 @@ public class TestPlayer extends ComputerPlayer {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
-            if (target instanceof TargetPermanent) {
-                for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
-                    for (String choose2: choices) {
-                        if (permanent.getName().equals(choose2)) {
-                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
-                                target.add(permanent.getId(), game);
-                                choices.remove(choose2);
-                                return true;
+            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) { // player target not implemted yet
+                FilterPermanent filterPermanent;
+                if (target instanceof TargetPermanentOrPlayer) {
+                    filterPermanent = ((TargetPermanentOrPlayer) target).getFilterPermanent();
+                } else {
+                    filterPermanent = ((TargetPermanent) target).getFilter();
+                }
+                for (String choose2: choices) {
+                    String[] targetList = choose2.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName: targetList) {
+                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterPermanent, game)) {
+                            if (target.getTargets().contains(permanent.getId())) {
+                                continue;
                             }
-                        } else if ((permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(choose2)) {
-                            if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
-                                target.add(permanent.getId(), game);
-                                choices.remove(choose2);
-                                return true;
+                            if (permanent.getName().equals(targetName)) {
+                                if (target.isNotTarget() || ((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game)) {
+                                    target.add(permanent.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
+                            } else if ((permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(targetName)) {
+                                if (target.isNotTarget() || ((TargetPermanent)target).canTarget(playerId, permanent.getId(), null, game)) {
+                                    target.add(permanent.getId(), game);
+                                    targetFound = true;
+                                    break;
+                                }
                             }
                         }
+                    }
+                    if (targetFound) {
+                        choices.remove(choose2);
+                        return true;
                     }
                 }
             }
@@ -362,7 +380,7 @@ public class TestPlayer extends ComputerPlayer {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (!targets.isEmpty()) {
-            if (target instanceof TargetPermanent) {
+            if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) {
                 for (String targetDefinition: targets) {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
@@ -436,7 +454,7 @@ public class TestPlayer extends ComputerPlayer {
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
         if (!choices.isEmpty()) {
             for(TriggeredAbility ability :abilities) {
-                if (choices.get(0).equals(ability.toString())) {
+                if (ability.toString().startsWith(choices.get(0))) {
                     choices.remove(0);
                     return ability;
                 }
@@ -482,6 +500,18 @@ public class TestPlayer extends ComputerPlayer {
             }
         }
         return super.announceXCost(min, max, message, game, ability, null);
+    }
+
+    @Override
+    public int getAmount(int min, int max, String message, Game game) {
+        if (!choices.isEmpty()) {
+            if (choices.get(0).startsWith("X=")) {
+                int xValue = Integer.parseInt(choices.get(0).substring(2));
+                choices.remove(0);
+                return xValue;
+            }
+        }
+        return super.getAmount(min, max, message, game);    
     }
 
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {

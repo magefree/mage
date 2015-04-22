@@ -28,18 +28,19 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -53,12 +54,14 @@ public class ChainedThroatseeker extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainedThroatseekerEffect()));
+
+        // Chained Throatseeker can't attack unless defending player is poisoned.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainedThroatseekerCantAttackEffect()));
     }
 
     public ChainedThroatseeker(final ChainedThroatseeker card) {
@@ -71,43 +74,36 @@ public class ChainedThroatseeker extends CardImpl {
     }
 }
 
-class ChainedThroatseekerEffect extends ReplacementEffectImpl {
+class ChainedThroatseekerCantAttackEffect extends RestrictionEffect {
 
-    public ChainedThroatseekerEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+    public ChainedThroatseekerCantAttackEffect() {
+        super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless defending player is poisoned";
     }
 
-    public ChainedThroatseekerEffect(final ChainedThroatseekerEffect effect) {
+    public ChainedThroatseekerCantAttackEffect(final ChainedThroatseekerCantAttackEffect effect) {
         super(effect);
     }
 
     @Override
-    public ChainedThroatseekerEffect copy() {
-        return new ChainedThroatseekerEffect(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER && source.getSourceId().equals(event.getSourceId())) {
-            Player targetPlayer = game.getPlayer(event.getTargetId());
-            if (targetPlayer != null) {
-                if (targetPlayer.getCounters().containsKey(CounterType.POISON)) {
-                    return true;
-                }
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        Player targetPlayer = game.getPlayer(defenderId);
+        if (targetPlayer != null) {
+            if (targetPlayer.getCounters().containsKey(CounterType.POISON)) {
+                return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public ChainedThroatseekerCantAttackEffect copy() {
+        return new ChainedThroatseekerCantAttackEffect(this);
     }
 
 }

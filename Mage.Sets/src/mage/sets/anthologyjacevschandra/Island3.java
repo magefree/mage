@@ -37,7 +37,7 @@ public class Island3 extends mage.cards.basiclands.Island {
 
     public Island3(UUID ownerId) {
         super(ownerId, 32);
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3D";
     }
 
     public Island3(final Island3 card) {

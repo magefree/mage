@@ -27,6 +27,9 @@ public class UserDataView implements Serializable {
     public UserDataView(UserData userData) {
         this.avatarId = userData.getAvatarId();
         this.userGroup = userData.getGroupId();
+        this.allowRequestShowHandCards = userData.isAllowRequestShowHandCards();
+        this.showAbilityPickerForced = userData.isShowAbilityPickerForced();
+        this.userSkipPrioritySteps = userData.getUserSkipPrioritySteps();
     }
 
     public int getAvatarId() {

@@ -136,9 +136,10 @@ public class PermanentCard extends PermanentImpl {
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
-        if (controller != null && controller.removeFromBattlefield(this, game)) {
+        if (controller != null) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
+                controller.removeFromBattlefield(this, game);
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {

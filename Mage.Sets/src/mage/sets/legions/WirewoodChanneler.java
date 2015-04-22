@@ -30,6 +30,7 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -61,8 +62,8 @@ public class WirewoodChanneler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
-        DynamicManaAbility ability = new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter),
-                "Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield");
+        DynamicManaAbility ability = new DynamicManaAbility(new Mana(0,0,0,0,0,0,1), new PermanentsOnBattlefieldCount(filter), new TapSourceCost(),
+                "Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield", true);
         this.addAbility(ability);
     }
 

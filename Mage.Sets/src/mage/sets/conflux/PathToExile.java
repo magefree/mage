@@ -93,7 +93,7 @@ class PathToExileEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             // if the zone change to exile gets replaced does not prevent the target controller to be able to search
-            controller.moveCardToExileWithInfo(permanent, null, "",  source.getSourceId(), game, Zone.BATTLEFIELD);
+            controller.moveCardToExileWithInfo(permanent, null, "",  source.getSourceId(), game, Zone.BATTLEFIELD, true);
             if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for a basic land card?", game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
                 if (player.searchLibrary(target, game)) {

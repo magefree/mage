@@ -43,7 +43,7 @@ public class AnthologyElvesVsGoblins extends ExpansionSet {
     }
 
     private AnthologyElvesVsGoblins() {
-        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3", "mage.sets.anthologyelvesvsgoblins", new GregorianCalendar(2014, 12, 5).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Anthology, Elves vs. Goblins", "DD3B", "mage.sets.anthologyelvesvsgoblins", new GregorianCalendar(2014, 12, 5).getTime(), SetType.DUEL_DECK);
         this.hasBasicLands = false;
     }
 }

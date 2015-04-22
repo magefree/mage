@@ -1,8 +1,8 @@
 package mage.utils;
 
-import mage.constants.CardType;
 import mage.cards.Card;
 import mage.cards.MagePermanent;
+import mage.constants.CardType;
 import mage.view.CardView;
 
 /**

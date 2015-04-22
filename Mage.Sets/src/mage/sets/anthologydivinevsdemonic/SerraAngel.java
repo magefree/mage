@@ -38,7 +38,7 @@ public class SerraAngel extends mage.sets.tenth.SerraAngel {
     public SerraAngel(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 10;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public SerraAngel(final SerraAngel card) {

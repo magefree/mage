@@ -107,12 +107,12 @@ class GibberingDescentSkipUpkeepEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.UPKEEP_STEP && (event.getPlayerId().equals(source.getControllerId()));
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

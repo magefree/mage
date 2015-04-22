@@ -4,10 +4,10 @@
  */
 package mage.abilities.common;
 
-import mage.constants.CardType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -18,12 +18,19 @@ import mage.game.permanent.Permanent;
  */
 public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAbilityImpl{
     
+    FilterControlledCreaturePermanent filter;
+    
     public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, new FilterControlledCreaturePermanent("a creature you control"));
+    }
+    public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
     }
 
     public BecomesTappedCreatureControlledTriggeredAbility(final BecomesTappedCreatureControlledTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
@@ -39,15 +46,11 @@ public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAb
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getControllerId().equals(this.controllerId) 
-                && permanent.getCardType().contains(CardType.CREATURE)) {
-            return true;
-        }
-        return false;
+        return permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game);
     }
 
     @Override
     public String getRule() {
-        return "When a creature you control becomes tapped, " + super.getRule();
+        return "When " + filter.getMessage() + " becomes tapped, " + super.getRule();
     }    
 }

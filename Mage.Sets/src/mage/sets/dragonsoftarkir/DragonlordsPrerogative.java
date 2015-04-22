@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffect;
@@ -114,9 +115,11 @@ class DragonlordsPrerogativeCondition implements Condition {
         boolean applies = false;
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
-            RevealTargetFromHandCost cost = (RevealTargetFromHandCost) spell.getSpellAbility().getCosts().get(0);
-            if (cost != null) {
-                applies = !cost.getTargets().isEmpty();
+            for(Cost cost: spell.getSpellAbility().getCosts()) {
+                if (cost instanceof RevealTargetFromHandCost) {
+                    applies = !((RevealTargetFromHandCost)cost).getTargets().isEmpty();
+                    break;
+                }
             }
         }
         if (!applies) {

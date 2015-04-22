@@ -142,16 +142,19 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
     public boolean apply(Game game, Ability source) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if(event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && card.getId().equals(source.getSourceId())) {
-                Zone zone = game.getState().getZone(card.getId());
-                if (zone != null && (zone != Zone.GRAVEYARD)) {
-                    return true;
-                }
+        Card card = game.getCard(event.getSourceId());
+        if (card != null && card.getId().equals(source.getSourceId())) {
+            Zone zone = game.getState().getZone(card.getId());
+            if (zone != null && (zone != Zone.GRAVEYARD)) {
+                return true;
             }
         }
         return false;

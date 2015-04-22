@@ -100,7 +100,7 @@ class ScrapMasteryEffect extends OneShotEffect {
                     Set<UUID> cards = new HashSet<>();
                     for (Card card: player.getGraveyard().getCards(new FilterArtifactCard(), game)) {
                         cards.add(card.getId());
-                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                     }
                     exiledCards.put(player.getId(), cards);
                 }

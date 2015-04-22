@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -52,7 +53,6 @@ public class Gigapede extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
 
@@ -76,8 +76,7 @@ public class Gigapede extends CardImpl {
 class GigapedeTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
     
     public GigapedeTriggerdAbility(){
-        super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), TargetController.YOU, true);
-        this.addCost(new DiscardCardCost());
+        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()), TargetController.YOU, false);
     }
 
     public GigapedeTriggerdAbility(GigapedeTriggerdAbility ability) {
@@ -103,7 +102,5 @@ class GigapedeTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
     public String getRule() {
         return "At the beginning of your upkeep, if {source} is in your graveyard, you may discard a card. If you do, return {source} to your hand";
     }
-    
-    
     
 }

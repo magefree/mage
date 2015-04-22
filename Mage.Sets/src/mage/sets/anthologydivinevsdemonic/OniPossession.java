@@ -38,7 +38,7 @@ public class OniPossession extends mage.sets.championsofkamigawa.OniPossession {
     public OniPossession(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 51;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public OniPossession(final OniPossession card) {

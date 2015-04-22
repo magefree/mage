@@ -115,7 +115,7 @@ class AdarkarValkyrieEffect extends OneShotEffect {
         DelayedTriggeredAbility delayedAbility = new AdarkarValkyrieDelayedTriggeredAbility(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         game.addDelayedTriggeredAbility(delayedAbility);
         return false;
     }

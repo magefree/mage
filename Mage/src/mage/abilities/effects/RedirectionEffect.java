@@ -37,7 +37,7 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.Target;
 
 /**
  *
@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  */
 public abstract class RedirectionEffect extends ReplacementEffectImpl {
 
-    protected TargetPermanent redirectTarget;
+    protected Target redirectTarget;
 
     public RedirectionEffect(Duration duration) {
         super(duration, Outcome.RedirectDamage);

@@ -55,9 +55,9 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         // check it was previously on battlefield
-        Permanent before = (Permanent) game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
+        Permanent before = ((ZoneChangeEvent) event).getTarget();
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
         return before != null && after != null && Zone.GRAVEYARD.match(after);
@@ -72,6 +72,11 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getTarget().canTransform()) {
+                if (!zEvent.getTarget().getAbilities().contains(this)) {
+                    return false;
+                }
+            }
             for (Effect effect: getEffects()) {
                 effect.setValue("diedPermanent", zEvent.getTarget());
             }

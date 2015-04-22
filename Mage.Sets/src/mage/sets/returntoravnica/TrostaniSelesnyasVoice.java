@@ -28,6 +28,8 @@
 
 package mage.sets.returntoravnica;
 
+import java.util.UUID;
+import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,8 +49,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.util.UUID;
-
 /**
  *
  * @author LevelX2
@@ -60,8 +60,7 @@ public class TrostaniSelesnyasVoice extends CardImpl {
         this.expansionSetCode = "RTR";
         this.supertype.add("Legendary");
         this.subtype.add("Dryad");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
@@ -102,6 +101,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
                     && permanent.getControllerId().equals(this.controllerId)
                     && event.getTargetId() != this.getSourceId()) {
                 Effect effect = this.getEffects().get(0);
+                // life is determined during resolution so it has to be retrieved there (e.g. Giant Growth before resolution)
                 effect.setValue("lifeSource", event.getTargetId());
                 effect.setValue("zoneChangeCounter", permanent.getZoneChangeCounter(game));
                 return true;
@@ -112,7 +112,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.";
+        return "Whenever another creature enters the battlefield under your control, " + super.getRule();
     }
 
     @Override
@@ -125,7 +125,7 @@ class TrostaniSelesnyasVoiceEffect extends OneShotEffect {
 
     public TrostaniSelesnyasVoiceEffect() {
         super(Outcome.GainLife);
-        staticText = "you gain life equal to its toughness";
+        staticText = "you gain life equal to that creature's toughness";
     }
 
     public TrostaniSelesnyasVoiceEffect(final TrostaniSelesnyasVoiceEffect effect) {

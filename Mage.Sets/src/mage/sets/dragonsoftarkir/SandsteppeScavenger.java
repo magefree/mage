@@ -45,7 +45,7 @@ public class SandsteppeScavenger extends CardImpl {
         super(ownerId, 200, "Sandsteppe Scavenger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "DTK";
         this.subtype.add("Hound");
-        this.subtype.add("Scount");
+        this.subtype.add("Scout");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

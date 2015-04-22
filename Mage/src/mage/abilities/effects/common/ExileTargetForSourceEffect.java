@@ -69,13 +69,13 @@ public class ExileTargetForSourceEffect extends OneShotEffect {
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (permanent != null) {
-                return controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                return controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
             } else {
                 Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (card != null) {
-                    return controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, game.getState().getZone(card.getId()));
+                    return controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(), source.getSourceId(), game, game.getState().getZone(card.getId()), true);
                 }
             }
         }

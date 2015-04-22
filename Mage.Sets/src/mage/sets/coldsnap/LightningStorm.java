@@ -142,7 +142,7 @@ class LightningStormAddCounterEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(source.getSourceId());
         if (spell != null) {
             spell.addCounters(CounterType.CHARGE.createInstance(2), game);
-            return spell.chooseNewTargets(game, source.getControllerId(), false, false);
+            return spell.chooseNewTargets(game, source.getControllerId(), false, false, null);
         }
         return false;
     }

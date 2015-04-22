@@ -111,7 +111,7 @@ class AncestralKnowledgeEffect extends OneShotEffect {
                 for (UUID cardId : target.getTargets()) {
                     Card card = cards.get(cardId, game);
                     if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                         cards.remove(card);
                     }
                 }

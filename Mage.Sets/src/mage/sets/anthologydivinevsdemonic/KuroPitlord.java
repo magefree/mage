@@ -38,7 +38,7 @@ public class KuroPitlord extends mage.sets.championsofkamigawa.KuroPitlord {
     public KuroPitlord(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 44;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public KuroPitlord(final KuroPitlord card) {

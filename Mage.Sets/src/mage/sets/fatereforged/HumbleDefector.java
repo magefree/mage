@@ -98,11 +98,11 @@ class HumbleDefectorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent humbleDefector = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());        
         if (controller != null) {
             controller.drawCards(2, game);
         }
+        Permanent humbleDefector = (Permanent) source.getSourceObjectIfItStillExists(game);
         Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetOpponent != null && humbleDefector != null) {
             ContinuousEffect effect = new HumbleDefectorControlSourceEffect();

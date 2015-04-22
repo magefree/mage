@@ -57,7 +57,6 @@ public class ShimatsuTheBloodcloaked extends CardImpl {
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -90,15 +89,15 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
     public ShimatsuTheBloodcloakedEffect copy() {
         return new ShimatsuTheBloodcloakedEffect(this);
     }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-         && event.getTargetId().equals(source.getSourceId())) {
-                return true;
-        }
-        return false;        
-
+        return event.getTargetId().equals(source.getSourceId());        
     }
     
     @Override
@@ -125,9 +124,5 @@ class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }    
+     
 }

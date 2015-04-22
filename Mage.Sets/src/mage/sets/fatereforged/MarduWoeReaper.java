@@ -133,7 +133,7 @@ class MarduWoeReaperEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (player != null && card != null) {
-            if (player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD)) {
+            if (player.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true)) {
                 player.gainLife(1, game);
             }
             return true;

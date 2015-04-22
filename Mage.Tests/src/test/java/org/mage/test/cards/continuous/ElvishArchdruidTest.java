@@ -49,11 +49,12 @@ public class ElvishArchdruidTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Elvish Archdruid", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Nettle Sentinel", 1);
+        // Pyroclasm deals 2 damage to each creature.
         addCard(Zone.HAND, playerA, "Pyroclasm");        
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Pyroclasm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pyroclasm");
 
-        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(1, PhaseStep.PRECOMBAT_MAIN); // has to be the same phase as the cast spell to see if Nettle Sentinel dies in this phase
         execute();
 
         assertGraveyardCount(playerA, "Pyroclasm", 1);

@@ -59,7 +59,7 @@ public class ArashinSovereign extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // When Arashin Sovereign dies, you may put it on the top or bottom of its owner's library.
-        this.addAbility(new DiesTriggeredAbility(new ArashinSovereignEffect()));
+        this.addAbility(new DiesTriggeredAbility(new ArashinSovereignEffect(), true));
     }
 
     public ArashinSovereign(final ArashinSovereign card) {

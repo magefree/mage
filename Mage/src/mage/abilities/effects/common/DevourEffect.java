@@ -141,7 +141,8 @@ public class DevourEffect extends ReplacementEffectImpl {
                 if (target.getTargets().size() > 0) {
                     List<ArrayList<String>> cardSubtypes = new ArrayList<>();
                     int devouredCreatures = target.getTargets().size();
-                    game.informPlayers(new StringBuilder(creature.getName()).append(" devours ").append(devouredCreatures).append(" creatures").toString());
+                    if (!game.isSimulation())
+                        game.informPlayers(new StringBuilder(creature.getName()).append(" devours ").append(devouredCreatures).append(" creatures").toString());
                     for (UUID targetId: target.getTargets()) {
                         Permanent targetCreature = game.getPermanent(targetId);
                         if (targetCreature != null) {

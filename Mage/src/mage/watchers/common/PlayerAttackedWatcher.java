@@ -65,9 +65,9 @@ public class PlayerAttackedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
+        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             int numberAttackers = playerAttacked.containsKey(event.getPlayerId()) ? playerAttacked.get(event.getPlayerId()) : 0;
-            playerAttacked.put(event.getPlayerId(), numberAttackers + game.getCombat().getAttackers().size());
+            playerAttacked.put(event.getPlayerId(), numberAttackers + 1);
         }
     }
 

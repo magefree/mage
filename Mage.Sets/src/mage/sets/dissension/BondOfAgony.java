@@ -46,8 +46,6 @@ public class BondOfAgony extends CardImpl {
         super(ownerId, 38, "Bond of Agony", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
         this.expansionSetCode = "DIS";
 
-        this.color.setBlack(true);
-
         DynamicValue xValue = new ManacostVariableValue();
 
         // As an additional cost to cast Bond of Agony, pay X life.

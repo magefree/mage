@@ -534,4 +534,11 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void setChoosable(boolean isChoosable) {
     }
+
+    @Override
+    public void setTextOffset(int yOffset) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

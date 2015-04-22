@@ -53,7 +53,6 @@ public class RuinousMinotaur extends CardImpl {
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 
@@ -76,7 +75,7 @@ class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public RuinousMinotaurTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SacrificeTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new SacrificeTargetEffect(), false);
         this.addTarget(new TargetControlledPermanent(filter));
     }
 
@@ -90,12 +89,14 @@ class RuinousMinotaurTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
-                && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(this.sourceId)
+                && game.getOpponents(this.getControllerId()).contains(event.getTargetId());
     }
 
     @Override

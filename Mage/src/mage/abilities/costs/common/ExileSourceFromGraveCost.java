@@ -56,7 +56,7 @@ public class ExileSourceFromGraveCost extends CostImpl {
         if (controller != null) {
             Card card = game.getCard(sourceId);
             if (card != null && game.getState().getZone(sourceId).equals(Zone.GRAVEYARD)) {
-                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.GRAVEYARD);
+                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.GRAVEYARD, true);
             }
         }
         return paid;

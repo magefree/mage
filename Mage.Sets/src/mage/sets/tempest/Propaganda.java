@@ -81,8 +81,20 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getTargetId().equals(source.getControllerId())) {
+            Player attackedPlayer = game.getPlayer(event.getTargetId());
+            if (attackedPlayer != null) {
+                // only if a player is attacked. Attacking a planeswalker is free
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -101,19 +113,7 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId())) {
-            Player attackedPlayer = game.getPlayer(event.getTargetId());
-            if (attackedPlayer != null) {
-                // only if a player is attacked. Attacking a planeswalker is free
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     @Override
     public PropagandaReplacementEffect copy() {
         return new PropagandaReplacementEffect(this);

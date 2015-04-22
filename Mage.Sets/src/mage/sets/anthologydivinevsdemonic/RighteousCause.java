@@ -38,7 +38,7 @@ public class RighteousCause extends mage.sets.commander.RighteousCause {
     public RighteousCause(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 22;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public RighteousCause(final RighteousCause card) {

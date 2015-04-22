@@ -127,7 +127,7 @@ class UginTheSpiritDragonEffect2 extends OneShotEffect {
         filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, cmc + 1));
         filter.add(Predicates.not(new ColorlessPredicate()));
         for(Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+            controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return true;
     }

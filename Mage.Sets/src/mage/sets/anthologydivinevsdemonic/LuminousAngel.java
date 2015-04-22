@@ -38,7 +38,7 @@ public class LuminousAngel extends mage.sets.mirrodin.LuminousAngel {
     public LuminousAngel(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 12;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public LuminousAngel(final LuminousAngel card) {

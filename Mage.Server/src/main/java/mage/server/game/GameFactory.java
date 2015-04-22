@@ -48,9 +48,9 @@ public class GameFactory {
     private static final GameFactory INSTANCE = new GameFactory();
     private static final Logger logger = Logger.getLogger(GameFactory.class);
 
-    private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
-    private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();
-    private List<GameTypeView> gameTypeViews = new ArrayList<GameTypeView>();
+    private final Map<String, Class<Match>> games = new HashMap<>();
+    private final Map<String, MatchType> gameTypes = new HashMap<>();
+    private final List<GameTypeView> gameTypeViews = new ArrayList<>();
 
 
     public static GameFactory getInstance() {

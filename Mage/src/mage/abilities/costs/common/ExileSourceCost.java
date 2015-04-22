@@ -29,11 +29,14 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -41,19 +44,38 @@ import mage.game.permanent.Permanent;
  */
 public class ExileSourceCost extends CostImpl {
 
+    private boolean toUniqueExileZone;
+    
     public ExileSourceCost() {
         this.text = "Exile {this}";
+    }
+    /**
+     * 
+     * @param toUniqueExileZone moves the card to a source object dependant unique exile zone, so another 
+     *                          effect of the same source object (e.g. Deadeye Navigator) can identify the card 
+     */
+    public ExileSourceCost(boolean toUniqueExileZone) {
+        this.text = "Exile {this}";
+        this.toUniqueExileZone = toUniqueExileZone;
     }
 
     public ExileSourceCost(ExileSourceCost cost) {
         super(cost);
+        this.toUniqueExileZone = cost.toUniqueExileZone;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            paid = permanent.moveToExile(null, "", sourceId, game);
+        MageObject sourceObject = ability.getSourceObject(game);
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null && sourceObject != null && (sourceObject instanceof Card)) { 
+            UUID exileZoneId = null;
+            String exileZoneName = "";
+            if (toUniqueExileZone) {
+                exileZoneId = CardUtil.getExileZoneId(game, ability.getSourceId(), ability.getSourceObjectZoneChangeCounter());
+                exileZoneName = sourceObject.getLogName();                
+            }        
+            paid = controller.moveCardToExileWithInfo((Card) sourceObject, exileZoneId, exileZoneName, sourceId, game, game.getState().getZone(sourceObject.getId()), true);
         }
         return paid;
     }
@@ -61,10 +83,7 @@ public class ExileSourceCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent != null) {
-            return true;
-        }
-        return false;
+        return permanent != null;
     }
 
     @Override

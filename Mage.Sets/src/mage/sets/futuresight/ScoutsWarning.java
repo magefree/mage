@@ -56,8 +56,6 @@ public class ScoutsWarning extends CardImpl {
         super(ownerId, 16, "Scout's Warning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "FUT";
 
-        this.color.setWhite(true);
-
         // The next creature card you play this turn can be played as though it had flash.
         this.getSpellAbility().addEffect(new ScoutsWarningAsThoughEffect());
         this.getSpellAbility().addWatcher(new ScoutsWarningWatcher());
@@ -117,7 +115,7 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
         if (watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.CREATURE) && source.getControllerId().equals(affectedControllerId)) {
-                    return card.getSpellAbility().isInUseableZone(game, card, false);
+                    return card.getSpellAbility().isInUseableZone(game, card, null);
             }
         }
         return false;

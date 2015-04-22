@@ -134,7 +134,7 @@ class NinjutsuEffect extends OneShotEffect {
                     }
                 }
                 if (defendingPlayerId != null) {
-                    game.getCombat().declareAttacker(permanent.getId(), defendingPlayerId, game);
+                    game.getCombat().addAttackerToCombat(permanent.getId(), defendingPlayerId, game);
                     permanent.setTapped(true);
                     return true;
                 }

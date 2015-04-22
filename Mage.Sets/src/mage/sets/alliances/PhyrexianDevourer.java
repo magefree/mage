@@ -170,7 +170,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         if (controller != null) {
             card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.LIBRARY);
+                paid = controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.LIBRARY, true);
             }
         }
         return paid;

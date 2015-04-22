@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 
 /**
  * A object reference that takes zone changes into account.
@@ -65,10 +64,11 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
     public MageObjectReference(UUID sourceId, Game game) {
         this.sourceId = sourceId;
         MageObject mageObject = game.getObject(sourceId);
-        if (mageObject != null)
+        if (mageObject != null) {
             this.zoneChangeCounter = mageObject.getZoneChangeCounter(game);
-        else
-            this.zoneChangeCounter = 0;
+        } else {
+            throw new IllegalArgumentException("The provided sourceId is not connected to an object in the game");
+        }
     }
 
     public UUID getSourceId() {
@@ -109,7 +109,10 @@ public class MageObjectReference implements Comparable<MageObjectReference> {
     }
 
     public boolean refersTo(MageObject mageObject, Game game) {
-        return mageObject.getId().equals(sourceId) && this.zoneChangeCounter == mageObject.getZoneChangeCounter(game);
+        if (mageObject != null) {
+            return mageObject.getId().equals(sourceId) && this.zoneChangeCounter == mageObject.getZoneChangeCounter(game);
+        }
+        return false;
     }
 
     public Permanent getPermanent(Game game) {

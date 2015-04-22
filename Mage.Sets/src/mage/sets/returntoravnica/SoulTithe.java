@@ -29,6 +29,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -64,7 +65,6 @@ public class SoulTithe extends CardImpl {
         super(ownerId, 23, "Soul Tithe", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
 
         // Enchant nonland permanent
         TargetPermanent auraTarget = new TargetNonlandPermanent();
@@ -106,12 +106,12 @@ class SoulTitheSacrificeSourceUnlessPaysEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player != null && permanent != null && sourceObject != null) {
             int cmc = permanent.getManaCost().convertedManaCost();
-            if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "? (otherwise you sacrifice it)", game)) {
                 Cost cost = new GenericManaCost(cmc);
-                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false))
-                {
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
                 }
             }

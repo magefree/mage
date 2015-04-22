@@ -114,17 +114,17 @@ class OvermasterEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
-            if (spell != null && watcher != null && watcher.isUncounterable(spell.getId())) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        OvermasterWatcher watcher = (OvermasterWatcher) game.getState().getWatchers().get("overmasterWatcher", source.getControllerId());
+        return spell != null && watcher != null && watcher.isUncounterable(spell.getId());
     }
 }
 

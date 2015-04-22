@@ -63,7 +63,7 @@ public class ExileFromStackCost extends CostImpl {
                     return false;
                 }
                 paid |= spellToExile.moveToExile(null, "", ability.getSourceId(), game);
-                if (paid) {
+                if (paid && !game.isSimulation()) {
                     game.informPlayers(player.getName() + " exiles " + spellToExile.getName() +" (as costs)");
                 }
             }

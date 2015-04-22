@@ -31,7 +31,7 @@ public class ShadowAbility extends EvasionAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Shadow";
+        return "Shadow <i>(This creature can block or be blocked by only creatures with shadow.)</i>";
     }
 
     @Override
@@ -53,10 +53,7 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(ShadowAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
+        return permanent.getAbilities().containsKey(ShadowAbility.getInstance().getId());
     }
 
     @Override
@@ -66,11 +63,8 @@ class ShadowEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
-                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game)) {
-            return true;
-        }
-        return false;
+        return blocker.getAbilities().containsKey(ShadowAbility.getInstance().getId())
+                || game.getContinuousEffects().asThough(blocker.getId(), AsThoughEffectType.BLOCK_SHADOW, source, blocker.getControllerId(), game);
     }
 
     @Override

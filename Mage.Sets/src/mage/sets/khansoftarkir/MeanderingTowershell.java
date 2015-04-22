@@ -42,7 +42,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -70,12 +69,12 @@ public class MeanderingTowershell extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Turtle");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(9);
 
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
+
         // Whenever Meandering Towershell attacks, exile it. 
         // Return it to the battlefield under your control tapped and attacking
         // at the beginning of the next declare attackers step on your next turn.
@@ -114,11 +113,11 @@ class MeanderingTowershellEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            controller.moveCardToExileWithInfo(sourcePermanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+            controller.moveCardToExileWithInfo(sourcePermanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
             DelayedTriggeredAbility delayedAbility = new AtBeginningNextDeclareAttackersStepNextTurnDelayedTriggeredAbility();
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
-            delayedAbility.setSourceObject(source.getSourceObject(game));
+            delayedAbility.setSourceObject(source.getSourceObject(game), game);
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

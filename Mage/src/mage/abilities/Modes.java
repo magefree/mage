@@ -109,10 +109,24 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return this.modeChooser;
     }
 
+    public void setActiveMode(UUID modeId) {
+        if (selectedModes.contains(modeId)) {
+            this.modeId = modeId;
+        }
+    }
+
     public void setMode(Mode mode) {
         if (this.containsKey(mode.getId())) {
             this.modeId = mode.getId();
             this.selectedModes.add(mode.getId());
+            Set<UUID> copySelectedModes = new LinkedHashSet<>();
+            copySelectedModes.addAll(selectedModes);
+            selectedModes.clear();
+            for (UUID basicModeId: this.keySet()) {
+                if (copySelectedModes.contains(basicModeId)) {
+                    selectedModes.add(basicModeId);
+                }
+            }
         }
     }
 
@@ -167,7 +181,6 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
                     return this.selectedModes.size() >= this.getMinModes();
                 }
                 setMode(choice);
-                this.selectedModes.add(choice.getId());
             }
             return true;
         }

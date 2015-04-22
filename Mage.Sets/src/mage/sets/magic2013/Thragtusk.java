@@ -50,7 +50,7 @@ public class Thragtusk extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

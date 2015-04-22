@@ -63,7 +63,7 @@ public class BanisherPriestTest extends CardTestPlayerBase {
 
 
     /**
-     * Check if the returning target did not trigger the die Event of
+     * Check that the returning target did not trigger the dies Event of
      * the dying Banisher Priest
      */
     @Test

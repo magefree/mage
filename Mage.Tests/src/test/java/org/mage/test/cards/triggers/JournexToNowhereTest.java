@@ -114,9 +114,9 @@ public class JournexToNowhereTest extends CardTestPlayerBase {
 
     /*
         Journey is played and targets the creature as it enters the battlefield. 
-        The Journey will be returned to hand before the ability reolves.
+        The Journey will be returned to hand before the ability resolves.
         The Journey will be played again targeting another creature.
-        The journey will be disencahnted later, so only the second creatufre has to return to battlefield.
+        The Journey will be disenchanted later, so only the second creature has to return to battlefield.
     
     */
     @Test

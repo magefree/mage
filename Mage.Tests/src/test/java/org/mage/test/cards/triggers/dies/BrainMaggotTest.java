@@ -88,7 +88,7 @@ public class BrainMaggotTest extends CardTestPlayerBase {
     public void testCardFromHandWillBeExiledAndReturnMesmericFiend() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.HAND, playerA, "Mesmeric Fiend", 2);
-
+        // Sacrifice a creature: Put a +1/+1 counter on Bloodflow Connoisseur.
         addCard(Zone.HAND, playerB, "Bloodflow Connoisseur", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);

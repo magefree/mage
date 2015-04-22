@@ -38,7 +38,7 @@ public class AkkiCoalflinger extends mage.sets.championsofkamigawa.AkkiCoalfling
     public AkkiCoalflinger(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 33;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public AkkiCoalflinger(final AkkiCoalflinger card) {

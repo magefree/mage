@@ -101,7 +101,7 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
                                 controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.STACK, flag, true);
                                 break;
                             case EXILED:
-                                controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.STACK);
+                                controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.STACK, true);
                                 break;
                             default:
                                 card.moveToZone(targetZone, sourceId, game, flag);

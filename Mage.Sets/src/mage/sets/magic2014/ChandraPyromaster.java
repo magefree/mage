@@ -215,7 +215,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Chandra Pyromaster <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY);
+                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Chandra Pyromaster <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
                 ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect(); 
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);

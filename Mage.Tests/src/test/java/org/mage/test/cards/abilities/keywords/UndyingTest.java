@@ -164,6 +164,7 @@ public class UndyingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
         // Destroy all creatures. They can't be regenerated.
         addCard(Zone.HAND, playerB, "Wrath of God");
+
         // Anafenza, the Foremost
         // Whenever Anafenza, the Foremost attacks, put a +1/+1 counter on another target tapped creature you control.
         // If a creature card would be put into an opponent's graveyard from anywhere, exile it instead.

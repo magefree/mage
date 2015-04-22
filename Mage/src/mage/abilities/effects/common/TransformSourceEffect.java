@@ -80,10 +80,12 @@ public class TransformSourceEffect extends OneShotEffect {
                     } else {
                         permanent.transform(game);
                     }
-                    if (fromDayToNight) {
-                        game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
-                    } else {
-                        game.informPlayers(new StringBuilder(permanent.getSecondCardFace().getName()).append(" transforms into ").append(permanent.getName()).toString());                    
+                    if (!game.isSimulation()) {
+                        if (fromDayToNight) {
+                            game.informPlayers(new StringBuilder(permanent.getName()).append(" transforms into ").append(permanent.getSecondCardFace().getName()).toString());                    
+                        } else {
+                            game.informPlayers(new StringBuilder(permanent.getSecondCardFace().getName()).append(" transforms into ").append(permanent.getName()).toString());                    
+                        }
                     }
                 }
             }

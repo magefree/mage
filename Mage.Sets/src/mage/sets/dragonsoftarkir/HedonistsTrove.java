@@ -101,12 +101,12 @@ class HedonistsTroveExileEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && targetPlayer != null && sourceObject != null) {
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             ArrayList<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
             for (UUID cardId : graveyard) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
             }
             return true;
@@ -141,7 +141,7 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
         Card card = game.getCard(objectId);
         MageObject sourceObject = source.getSourceObject(game);
         if (card != null && card.getCardType().contains(CardType.LAND) && sourceObject != null) {
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileId != null) {
                 ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                 return exileZone != null && exileZone.contains(objectId);
@@ -182,7 +182,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
         Card card = game.getCard(objectId);
         MageObject sourceObject = source.getSourceObject(game);
         if (card != null && !card.getCardType().contains(CardType.LAND) && sourceObject != null) {
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileId != null) {                
                 ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(objectId)) {

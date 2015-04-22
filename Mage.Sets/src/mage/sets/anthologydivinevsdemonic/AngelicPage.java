@@ -38,7 +38,7 @@ public class AngelicPage extends mage.sets.urzassaga.AngelicPage {
     public AngelicPage(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 3;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public AngelicPage(final AngelicPage card) {

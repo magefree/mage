@@ -45,6 +45,7 @@ public class DynamicManaEffect extends BasicManaEffect {
     private final Mana computedMana;
     private final DynamicValue amount;
     private String text = null;
+    private boolean oneChoice;
 
     public DynamicManaEffect(Mana mana, DynamicValue amount) {
         super(mana);
@@ -53,10 +54,22 @@ public class DynamicManaEffect extends BasicManaEffect {
     }
 
     public DynamicManaEffect(Mana mana, DynamicValue amount, String text) {
+        this(mana, amount, text, false);
+    }
+
+    /**
+     *
+     * @param mana
+     * @param amount
+     * @param text
+     * @param oneChoice is all mana from the same colour or if false the player can choose different colours
+     */
+    public DynamicManaEffect(Mana mana, DynamicValue amount, String text, boolean oneChoice) {
         super(mana);
         this.amount = amount;
         computedMana = new Mana();
         this.text = text;
+        this.oneChoice = oneChoice;
     }
 
     public DynamicManaEffect(final DynamicManaEffect effect) {
@@ -64,6 +77,7 @@ public class DynamicManaEffect extends BasicManaEffect {
         this.computedMana = effect.computedMana.copy();
         this.amount = effect.amount.copy();
         this.text = effect.text;
+        this.oneChoice = effect.oneChoice;
     }
 
     @Override
@@ -111,11 +125,13 @@ public class DynamicManaEffect extends BasicManaEffect {
             } else {
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
+                    ChoiceColor choiceColor = new ChoiceColor();
                     for(int i = 0; i < count; i++){
-                        ChoiceColor choiceColor = new ChoiceColor();
-                        while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
-                            if (!controller.isInGame()) {
-                                return computedMana;
+                        if (!choiceColor.isChosen()) {
+                            while (!controller.choose(Outcome.Benefit, choiceColor, game)) {
+                                if (!controller.isInGame()) {
+                                    return computedMana;
+                                }
                             }
                         }
                         if (choiceColor.getColor().isBlack()) {
@@ -128,6 +144,9 @@ public class DynamicManaEffect extends BasicManaEffect {
                             computedMana.addGreen();
                         } else if (choiceColor.getColor().isWhite()) {
                             computedMana.addWhite();
+                        }
+                        if (!oneChoice) {
+                            choiceColor.clearChoice();
                         }
                     }
                 }

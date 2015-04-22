@@ -28,14 +28,15 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -43,21 +44,26 @@ import mage.players.Player;
  */
 public class ExileSourceEffect extends OneShotEffect {
 
-    private Zone onlyfromZone;
+    private boolean toUniqueExileZone;
 
     public ExileSourceEffect() {
-        this(Zone.ALL);
+        this(false);
     }
     
-    public ExileSourceEffect(Zone onlyFromZone) {
+    /**
+     * 
+     * @param toUniqueExileZone moves the card to a source object dependant unique exile zone, so another 
+     *                          effect of the same source object (e.g. Deadeye Navigator) can identify the card 
+     */
+    public ExileSourceEffect(boolean toUniqueExileZone) {
         super(Outcome.Exile);
         staticText = "Exile {this}";
-        this.onlyfromZone = onlyFromZone;
+        this.toUniqueExileZone = toUniqueExileZone;
     }
 
     public ExileSourceEffect(final ExileSourceEffect effect) {
         super(effect);
-        this.onlyfromZone = effect.onlyfromZone;
+        this.toUniqueExileZone = effect.toUniqueExileZone;
     }
 
     @Override
@@ -66,22 +72,22 @@ public class ExileSourceEffect extends OneShotEffect {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Zone zone = game.getState().getZone(source.getSourceId());
-        if (!zone.match(onlyfromZone)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+    public boolean apply(Game game, Ability source) {        
         Player controller = game.getPlayer(source.getControllerId());
-        if (permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, zone);
-        } else {
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                return controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, zone);
+        if (controller != null) {
+            MageObject sourceObject = source.getSourceObjectIfItStillExists(game);        
+            if (sourceObject instanceof Card) {
+                UUID exileZoneId = null;
+                String exileZoneName = "";
+                if (toUniqueExileZone) {
+                    exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+                    exileZoneName = sourceObject.getLogName();
+                }
+                Card sourceCard = (Card) sourceObject;
+                return controller.moveCardToExileWithInfo(sourceCard, exileZoneId, exileZoneName, source.getSourceId(), game, game.getState().getZone(sourceCard.getId()), true);
             }
+            return true;
         }
         return false;
     }
-
 }

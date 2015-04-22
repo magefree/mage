@@ -107,7 +107,7 @@ class RallyTheAncestorsEffect extends OneShotEffect {
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(exileEffect);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game));
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
                     game.addDelayedTriggeredAbility(delayedAbility);
                 }
             }

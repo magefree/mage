@@ -88,8 +88,13 @@ class IllusoryAngelEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-       if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
+       if (event.getSourceId().equals(source.getSourceId())) {
            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) == 0) {
                return true;
@@ -97,11 +102,6 @@ class IllusoryAngelEffect extends ContinuousRuleModifyingEffectImpl {
        }
        return false;
 
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-       return true;
     }
 
     @Override

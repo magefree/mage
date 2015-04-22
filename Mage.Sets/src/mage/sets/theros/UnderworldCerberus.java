@@ -59,15 +59,15 @@ public class UnderworldCerberus extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Hound");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
         // Underworld Cerberus can't be blocked except by three or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        
         // Cards in graveyards can't be the targets of spells or abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnderworldCerberusEffect()));
+        
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new ReturnToHandFromGraveyardAllEffect(new FilterCreatureCard("creature cards")));
@@ -113,10 +113,10 @@ class UnderworldCerberusEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card targetCard = game.getCard(event.getTargetId());
-        StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (targetCard != null && stackObject != null) {
             Zone zone = game.getState().getZone(targetCard.getId());
-            if (zone != null && (zone == Zone.GRAVEYARD)) {
+            if (zone != null && zone == Zone.GRAVEYARD) {
                 return true;
             }
         }

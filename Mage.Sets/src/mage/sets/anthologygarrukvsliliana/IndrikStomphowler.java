@@ -38,7 +38,7 @@ public class IndrikStomphowler extends mage.sets.dissension.IndrikStomphowler {
     public IndrikStomphowler(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 10;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3C";
     }
 
     public IndrikStomphowler(final IndrikStomphowler card) {

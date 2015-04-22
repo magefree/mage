@@ -115,7 +115,7 @@ class ThoughtpickerWitchEffect extends OneShotEffect {
                 controller.choose(Outcome.Exile, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 cards.remove(card);
-                opponent.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY);
+                opponent.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 if (cards.size() == 1) {
                     card = cards.get(cards.iterator().next(), game);
                     opponent.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true, false);

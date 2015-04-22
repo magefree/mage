@@ -154,16 +154,19 @@ class BoseijuWhoSheltersAllCantCounterEffect extends ContinuousRuleModifyingEffe
         }
         return null;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.COUNTER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER) {
-            BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && watcher.spells.contains(spell.getId())) {
-                if (filter.match(spell.getCard(), game)) {
-                    return true;
-                }
+        BoseijuWhoSheltersAllWatcher watcher = (BoseijuWhoSheltersAllWatcher) game.getState().getWatchers().get("ManaPaidFromBoseijuWhoSheltersAllWatcher");
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && watcher.spells.contains(spell.getId())) {
+            if (filter.match(spell.getCard(), game)) {
+                return true;
             }
         }
         return false;

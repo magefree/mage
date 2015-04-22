@@ -1,3 +1,14 @@
+#Generate|TOK:TPR|Goblin|
+#Generate|TOK:TPR|Pegasus|
+#Generate|TOK:TPR|Rat|
+#Generate|TOK:TPR|Reflection|
+#Generate|TOK:TPR|Saproling|
+#Generate|TOK:TPR|Sliver|
+#Generate|TOK:TPR|Spike|
+#Generate|TOK:TPR|Spirit|
+#Generate|TOK:TPR|Thopter|
+#Generate|TOK:TPR|Zombie|
+
 #|Generate|TOK:ORI|Zombie|
 
 #|Generate|TOK:PTC|Angel|

@@ -38,7 +38,7 @@ public class IcatianPriest extends mage.sets.tenth.IcatianPriest {
     public IcatianPriest(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 2;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3A";
     }
 
     public IcatianPriest(final IcatianPriest card) {

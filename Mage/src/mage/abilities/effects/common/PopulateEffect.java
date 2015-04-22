@@ -94,7 +94,8 @@ public class PopulateEffect extends OneShotEffect {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent tokenToCopy = game.getPermanent(target.getFirstTarget());
                 if (tokenToCopy != null) {
-                    game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
+                    if (!game.isSimulation())
+                        game.informPlayers("Token selected for populate: " + tokenToCopy.getLogName());
                     Effect effect = new PutTokenOntoBattlefieldCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                     return effect.apply(game, source);

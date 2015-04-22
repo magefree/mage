@@ -34,6 +34,7 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -80,8 +81,9 @@ public class CavernOfSouls extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
-        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new CavernOfSoulsManaBuilder(), true), new CavernOfSoulsWatcher());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
+        Ability ability = new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new CavernOfSoulsManaBuilder(), true);
+        this.addAbility(ability, new CavernOfSoulsWatcher(ability.getOriginalId()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));        
     }
 
     public CavernOfSouls(final CavernOfSouls card) {
@@ -146,14 +148,12 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
         if (controller != null && sourceObject != null) {
             game.informPlayers(controller.getName() + " produces " + mana.toString() + " with " + sourceObject.getLogName() +
                     " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
-        }
-        
+        }        
         return super.setMana(mana, source, game); 
     }
 
     @Override
     public ConditionalMana build(Object... options) {
-        this.mana.setFlag(true); // indicates that the mana is from second ability
         return new CavernOfSoulsConditionalMana(this.mana, creatureType);
     }
 
@@ -196,15 +196,18 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 
 class CavernOfSoulsWatcher extends Watcher {
 
-    public List<UUID> spells = new ArrayList<>();
-
-    public CavernOfSoulsWatcher() {
-        super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.GAME);
+    private List<UUID> spells = new ArrayList<>();
+    private final String originalId;
+    
+    public CavernOfSoulsWatcher(UUID originalId) {
+        super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.CARD);
+        this.originalId = originalId.toString();
     }
 
     public CavernOfSoulsWatcher(final CavernOfSoulsWatcher watcher) {
         super(watcher);
         this.spells.addAll(watcher.spells);
+        this.originalId = watcher.originalId;
     }
 
     @Override
@@ -215,12 +218,14 @@ class CavernOfSoulsWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
-            MageObject object = game.getObject(event.getSourceId());
-            // TODO: Replace identification by name by better method that also works if ability is copied from other land with other name
-            if (object != null && object.getName().equals("Cavern of Souls") && event.getFlag()) {
+            if (event.getData() != null && event.getData().equals(originalId)) {
                 spells.add(event.getTargetId());
             }
         }
+    }
+    
+    public boolean spellCantBeCountered(UUID spellId) {
+        return spells.contains(spellId);
     }
 
     @Override
@@ -267,8 +272,8 @@ class CavernOfSoulsCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher");
+        CavernOfSoulsWatcher watcher = (CavernOfSoulsWatcher) game.getState().getWatchers().get("ManaPaidFromCavernOfSoulsWatcher", source.getSourceId());
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && watcher.spells.contains(spell.getId());
+        return spell != null && watcher != null && watcher.spellCantBeCountered(spell.getId());
     }
 }

@@ -113,20 +113,23 @@ class FiendslayerPaladinEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return null;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.TARGET;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGET) {
-            Card targetCard = game.getCard(event.getTargetId());
-            StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
-            if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
-                if (stackObject.getColor().contains(ObjectColor.BLACK)
-                        || stackObject.getColor().contains(ObjectColor.RED)) {
-                    if (!stackObject.getControllerId().equals(source.getControllerId())
-                            && stackObject.getCardType().contains(CardType.INSTANT)
-                            || stackObject.getCardType().contains(CardType.SORCERY)) {
-                        return true;
-                    }
+        Card targetCard = game.getCard(event.getTargetId());
+        StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
+        if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
+            if (stackObject.getColor().contains(ObjectColor.BLACK)
+                    || stackObject.getColor().contains(ObjectColor.RED)) {
+                if (!stackObject.getControllerId().equals(source.getControllerId())
+                        && stackObject.getCardType().contains(CardType.INSTANT)
+                        || stackObject.getCardType().contains(CardType.SORCERY)) {
+                    return true;
                 }
             }
         }

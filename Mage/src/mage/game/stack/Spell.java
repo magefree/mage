@@ -55,6 +55,7 @@ import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -81,6 +82,7 @@ public class Spell implements StackObject, Card {
     private UUID controllerId;
     private boolean copiedSpell;
     private boolean faceDown;
+    private boolean countered;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -99,6 +101,7 @@ public class Spell implements StackObject, Card {
         }
         this.controllerId = controllerId;
         this.fromZone = fromZone;
+        this.countered = false;
     }
 
     public Spell(final Spell spell) {
@@ -190,7 +193,7 @@ public class Spell implements StackObject, Card {
                 for(SpellAbility spellAbility: this.spellAbilities) {
                     if (spellAbilityHasLegalParts(spellAbility, game)) {
                         for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
-                            spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                            spellAbility.getModes().setActiveMode(modeId);
                             if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
                                 if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
                                     updateOptionalCosts(index);
@@ -198,6 +201,8 @@ public class Spell implements StackObject, Card {
                                 result |= spellAbility.resolve(game);
                             }
                         }
+//                        game.getState().handleSimultaneousEvent(game);
+//                        game.resetShortLivingLKI();
                         index++;
                     }
                 }
@@ -207,7 +212,9 @@ public class Spell implements StackObject, Card {
                 return result;
             }
             //20091005 - 608.2b
-            game.informPlayers(getName() + " has been fizzled.");
+            if (!game.isSimulation()) {
+                game.informPlayers(getName() + " has been fizzled.");
+            }
             counter(null, game);
             return false;
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
@@ -248,7 +255,9 @@ public class Spell implements StackObject, Card {
                 return result;
             } else {
                 //20091005 - 608.2b
-                game.informPlayers(getName() + " has been fizzled.");
+                if (!game.isSimulation()) {
+                    game.informPlayers(getName() + " has been fizzled.");
+                }
                 counter(null, game);
                 return false;
             }
@@ -264,7 +273,7 @@ public class Spell implements StackObject, Card {
             boolean targetedMode = false;
             boolean legalTargetedMode = false;
             for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
-                spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                spellAbility.getModes().setActiveMode(modeId);
                 if (spellAbility.getTargets().size() > 0) {
                     targetedMode = true;
                     if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
@@ -313,7 +322,7 @@ public class Spell implements StackObject, Card {
      * @return
      */
     public boolean chooseNewTargets(Game game, UUID playerId) {
-        return chooseNewTargets(game, playerId, false, false);
+        return chooseNewTargets(game, playerId, false, false, null);
     }
 
     /**
@@ -371,13 +380,13 @@ public class Spell implements StackObject, Card {
      *
      * @param game
      * @param playerId - player that can/has to change the taregt of the spell
-     * @param forceChange - does only work for targets with maximum of one
-     * targetId
-     * @param onlyOneTarget - 114.6b one target must be changed to another
-     * target
+     * @param forceChange - does only work for targets with maximum of one targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @param filterNewTarget restriction for the new target, if null nothing is cheched
      * @return
      */
-    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
+    @Override
+    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             StringBuilder newTargetDescription = new StringBuilder();
@@ -387,7 +396,7 @@ public class Spell implements StackObject, Card {
                 for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
                     Mode mode = spellAbility.getModes().get(modeId);
                     for (Target target : mode.getTargets()) {
-                        Target newTarget = chooseNewTarget(player, spellAbility, mode, target, forceChange, game);
+                        Target newTarget = chooseNewTarget(player, spellAbility, mode, target, forceChange, filterNewTarget, game);
                         // clear the old target and copy all targets from new target
                         target.clearChosen();
                         for (UUID targetId : newTarget.getTargets()) {
@@ -399,7 +408,7 @@ public class Spell implements StackObject, Card {
                 }
 
             }
-            if (newTargetDescription.length() > 0) {
+            if (newTargetDescription.length() > 0 && !game.isSimulation()) {
                 game.informPlayers(this.getName() + " is now " + newTargetDescription.toString());
             }
             return true;
@@ -418,7 +427,7 @@ public class Spell implements StackObject, Card {
      * @param game
      * @return 
      */
-    private Target chooseNewTarget(Player player, SpellAbility spellAbility, Mode mode, Target target, boolean forceChange, Game game) {
+    private Target chooseNewTarget(Player player, SpellAbility spellAbility, Mode mode, Target target, boolean forceChange, FilterPermanent filterNewTarget, Game game) {
         Target newTarget = target.copy();
         newTarget.clearChosen();
         for (UUID targetId : target.getTargets()) {
@@ -430,13 +439,21 @@ public class Spell implements StackObject, Card {
                 if (forceChange && target.possibleTargets(this.getSourceId(), getControllerId(), game).size() > 1) { // controller of spell must be used (e.g. TargetOpponent)
                     int iteration = 0;
                     do {
-                        if (iteration > 0) {
+                        if (iteration > 0 && !game.isSimulation()) {
                             game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
                         }
                         iteration++;
                         newTarget.clearChosen();
                         // TODO: Distinction between "spell controller" and "player that can change the target" - here player is used for both 
                         newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), player.getId(), spellAbility, game); 
+                        // check target restriction 
+                        if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                game.informPlayer(player, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                newTarget.clearChosen();
+                            }
+                        }                        
                     } while (player.isInGame() && (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));
                 // choose a new target
                 } else {
@@ -467,6 +484,12 @@ public class Spell implements StackObject, Card {
                                 } else {
                                     newTarget.addTarget(targetId, target.getTargetAmount(targetId), spellAbility, game, false);
                                 }
+                            } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
+                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
+                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
+                                    game.informPlayer(player, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() +")");
+                                    again = true;
+                                }                                
                             } else {
                                 // valid target was selected, add it to the new target definition
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), spellAbility, game, false);
@@ -500,6 +523,7 @@ public class Spell implements StackObject, Card {
     
     @Override
     public void counter(UUID sourceId, Game game) {
+        this.countered = true;
         if (!isCopiedSpell()) {
             card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
         }
@@ -979,6 +1003,10 @@ public class Spell implements StackObject, Card {
     @Override
     public void setSpellAbility(SpellAbility ability) {
         throw new UnsupportedOperationException("Not supported."); 
+    }
+
+    public boolean isCountered() {
+        return countered;
     }
 
 }

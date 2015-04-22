@@ -115,7 +115,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                 if (player != null) {
                     if (player.getLibrary().size() > 0) {
                         Card card = player.getLibrary().getFromTop(game);                        
-                        String exileKey = playerId.toString() + CardUtil.getObjectExileZoneId(game, sourceObject).toString();
+                        String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
                         UUID exileId = exileIds.get(exileKey);
                         if (exileId == null) {
                             exileId = UUID.randomUUID();
@@ -123,7 +123,7 @@ class PyxisOfPandemoniumExileEffect extends OneShotEffect {
                         }
                         player.moveCardToExileWithInfo(card, exileId, 
                                 new StringBuilder(sourceObject.getLogName() +" (").append(player.getName()).append(")").toString(),
-                                source.getSourceId(), game, Zone.LIBRARY);
+                                source.getSourceId(), game, Zone.LIBRARY, true);
                         card.setFaceDown(true, game);
                     }
                 }
@@ -167,7 +167,7 @@ class PyxisOfPandemoniumPutOntoBattlefieldEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    String exileKey = playerId.toString() + CardUtil.getObjectExileZoneId(game, sourceObject).toString();
+                    String exileKey = playerId.toString() + CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()).toString();
                     UUID exileId = exileIds.get(exileKey);
                     if (exileId != null) {
                         ExileZone exileZone = game.getState().getExile().getExileZone(exileId);

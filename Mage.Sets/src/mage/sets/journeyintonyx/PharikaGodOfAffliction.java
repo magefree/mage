@@ -113,7 +113,7 @@ class PharikaExileEffect extends OneShotEffect {
             Card targetCard = game.getCard(source.getFirstTarget());
             if (targetCard != null) {
                 if (game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
-                    controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD);
+                    controller.moveCardToExileWithInfo(targetCard, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
                 }
                 Player tokenController = game.getPlayer(targetCard.getOwnerId());
                 if (tokenController != null) {

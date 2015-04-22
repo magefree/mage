@@ -1,6 +1,6 @@
 package mage.client.util.layout;
 
-import javax.swing.*;
+import javax.swing.JLayeredPane;
 
 /**
  * Interface for operations that modify cards' layout

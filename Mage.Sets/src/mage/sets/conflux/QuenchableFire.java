@@ -96,7 +96,7 @@ class QuenchableFireEffect extends OneShotEffect {
         QuenchableFireDelayedTriggeredAbility delayedAbility = new QuenchableFireDelayedTriggeredAbility();
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game));
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
         delayedAbility.getTargets().addAll(source.getTargets());
         game.addDelayedTriggeredAbility(delayedAbility);
 

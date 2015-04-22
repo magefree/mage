@@ -38,7 +38,7 @@ public class TarPitcher extends mage.sets.lorwyn.TarPitcher {
     public TarPitcher(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 53;
-        this.expansionSetCode = "DD3";
+        this.expansionSetCode = "DD3B";
     }
 
     public TarPitcher(final TarPitcher card) {

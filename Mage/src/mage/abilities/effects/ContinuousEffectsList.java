@@ -117,10 +117,15 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                 return false;
             } else  if (effect.isDiscarded()) {
                 it.remove();
-            } else  if (ability.getSourceId() != null && game.getObject(ability.getSourceId()) == null) { // Commander effects have no sourceId
-                it.remove(); // if the related source object does no longer exist  the effect has to be removed
             } else {
                 switch(effect.getDuration()) {
+                    case WhileOnBattlefield:
+                    case WhileInGraveyard:
+                    case WhileOnStack:
+                        if (ability.getSourceId() != null && game.getObject(ability.getSourceId()) == null) { // Commander effects have no sourceId
+                            it.remove(); // if the related source object does no longer exist in game - the effect has to be removed
+                        }
+                        break;
                     case OneUse:
                         if (effect.isUsed()) {
                             it.remove();
@@ -168,7 +173,9 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
     public void removeEffects(UUID effectIdToRemove, Set<Ability> abilitiesToRemove) {
         HashSet<Ability> abilities = effectAbilityMap.get(effectIdToRemove);
-        abilities.removeAll(abilitiesToRemove);
+        if (abilitiesToRemove != null) {
+            abilities.removeAll(abilitiesToRemove);
+        }
         if (abilities.isEmpty()) {
             for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) {
                 ContinuousEffect effect = iterator.next();

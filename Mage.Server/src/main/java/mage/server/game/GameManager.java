@@ -135,19 +135,6 @@ public class GameManager {
         }
     }
 
-//    public void removeSession(UUID userId) {
-//        for (GameController controller: gameControllers.values()) {
-//            controller.kill(userId);
-//        }
-//    }
-
-//    public void kill(UUID gameId, UUID userId) {
-//        GameController gameController = gameControllers.get(gameId);
-//        if (gameController != null) {
-//            gameController.kill(userId);
-//        }
-//    }
-
     public void cheat(UUID gameId, UUID userId, UUID playerId, DeckCardLists deckList) {
         GameController gameController = gameControllers.get(gameId);
         if (gameController != null) {

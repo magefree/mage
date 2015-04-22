@@ -114,12 +114,12 @@ class DetentionSphereEntersEffect extends OneShotEffect {
         if (sourceObject != null && exileId != null && targetPermanent != null && controller != null) {
 
             if (targetPermanent.getName().isEmpty()) { // face down creature
-                controller.moveCardToExileWithInfo(targetPermanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                controller.moveCardToExileWithInfo(targetPermanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
             } else {
                 String name = targetPermanent.getLogName();
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
                     if (permanent != null && permanent.getLogName().equals(name)) {
-                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD);
+                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }
             }

@@ -78,7 +78,7 @@ public class DealtDamageToCreatureBySourceDies extends ReplacementEffectImpl {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && permanent != null) {
-            return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD);
+            return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return false;
     }
