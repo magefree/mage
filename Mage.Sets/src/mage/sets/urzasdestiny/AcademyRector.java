@@ -60,7 +60,6 @@ public class AcademyRector extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
@@ -101,17 +100,15 @@ class AcademyRectorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", game)) {
-                new ExileSourceEffect().apply(game, source);
-                TargetCardInLibrary target = new TargetCardInLibrary(filter);
-                target.setNotTarget(true);
-                controller.searchLibrary(target, game);
-                Card targetCard = game.getCard(target.getFirstTarget());
-                if (targetCard != null) {
-                    controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
-                }
-                controller.shuffleLibrary(game);
+            new ExileSourceEffect().apply(game, source);
+            TargetCardInLibrary target = new TargetCardInLibrary(filter);
+            target.setNotTarget(true);
+            controller.searchLibrary(target, game);
+            Card targetCard = game.getCard(target.getFirstTarget());
+            if (targetCard != null) {
+                controller.putOntoBattlefieldWithInfo(targetCard, game, Zone.LIBRARY, source.getSourceId());
             }
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;
