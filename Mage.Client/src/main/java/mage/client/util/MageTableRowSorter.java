@@ -37,7 +37,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author LevelX2
  */
-public class MageTableRowSorter extends TableRowSorter {
+public class MageTableRowSorter extends TableRowSorter<TableModel> {
 
     public MageTableRowSorter(TableModel m) {
         super(m);

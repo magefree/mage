@@ -135,6 +135,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // Size of frame to check if divider locations should be used
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
     
+    // pref settings of table settings and filtering
+    public static final String KEY_TABLES_SHOW_COMPLETED = "tablePanelShowCompleted";
+    
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";

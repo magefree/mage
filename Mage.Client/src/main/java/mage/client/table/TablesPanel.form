@@ -101,6 +101,7 @@
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Show Completed"/>
+            <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;Toggles the visibility of the table of completed&#xa;&lt;br&gt;matches and tournaments in the lower area"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkShowCompletedActionPerformed"/>

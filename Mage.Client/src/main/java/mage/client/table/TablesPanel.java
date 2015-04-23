@@ -136,7 +136,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
         jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
-
+     
         Action openTableAction;
         openTableAction = new AbstractAction()
         {
@@ -247,9 +247,10 @@ public class TablesPanel extends javax.swing.JPanel {
         };
                 
              
-        // adds action buttons to the table panel (don't delete this)
+        // !!!! adds action buttons to the table panel (don't delete this)
         new ButtonColumn(tableTables, openTableAction, TableTableModel.ACTION_COLUMN);
         new ButtonColumn(tableCompleted, closedTableAction, MatchesTableModel.ACTION_COLUMN);
+        // !!!!
     }
 
 
@@ -274,10 +275,16 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (location != null && jSplitPane1 != null) {
                     jSplitPane1.setDividerLocation(Integer.parseInt(location));
                 }
-                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
-                if (location != null && jSplitPane2 != null) {
-                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
+                this.chkShowCompleted.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, "Yes").equals("Yes"));
+                if (this.chkShowCompleted.isSelected()) {
+                    this.jSplitPane2.setDividerLocation(-1);
                 }
+                else {
+                    location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
+                    if (location != null && jSplitPane2 != null) {
+                        jSplitPane2.setDividerLocation(Integer.parseInt(location));
+                    }
+                }                
                 location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
                 if (location != null && chatPanel != null) {
                     chatPanel.setSplitDividerLocation(Integer.parseInt(location));
@@ -486,6 +493,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
         chkShowCompleted.setSelected(true);
         chkShowCompleted.setText("Show Completed");
+        chkShowCompleted.setToolTipText("<HTML>Toggles the visibility of the table of completed\n<br>matches and tournaments in the lower area");
         chkShowCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkShowCompletedActionPerformed(evt);
@@ -677,6 +685,7 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
     else {
         this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
     }
+    PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, (chkShowCompleted.isSelected()?"Yes":"No"));
     this.startTasks();
 }//GEN-LAST:event_chkShowCompletedActionPerformed
 
