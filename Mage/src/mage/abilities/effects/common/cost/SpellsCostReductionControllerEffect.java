@@ -27,17 +27,22 @@
  */
 package mage.abilities.effects.common.cost;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
+import mage.choices.ChoiceImpl;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 import mage.util.CardUtil;
 
 /**
@@ -48,6 +53,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
 
     private final FilterCard filter;
     private final int amount;
+    private final boolean upTo;
     private ManaCosts<ManaCost> manaCostsToReduce = null;
 
 
@@ -56,7 +62,8 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.filter = filter;
         this.amount = 0;
         this.manaCostsToReduce = manaCostsToReduce;
-
+        this.upTo = false;
+        
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append(" you cast cost ");
         for (String manaSymbol :manaCostsToReduce.getSymbols()) {
@@ -66,15 +73,16 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.staticText = sb.toString();
     }
 
-
     public SpellsCostReductionControllerEffect(FilterCard filter, int amount) {
+        this(filter, amount, false);
+    }
+
+    public SpellsCostReductionControllerEffect(FilterCard filter, int amount, boolean upTo) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" you cast cost {").append(amount).append("} less to cast");
-        this.staticText = sb.toString();
+        this.upTo = upTo;        
+        this.staticText = filter.getMessage() + " you cast cost " + (upTo ?"up to " :"") + "{" +amount + "} less to cast";
     }
 
     protected SpellsCostReductionControllerEffect(final SpellsCostReductionControllerEffect effect) {
@@ -82,6 +90,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         this.filter = effect.filter;
         this.amount = effect.amount;
         this.manaCostsToReduce = effect.manaCostsToReduce;
+        this.upTo = effect.upTo;
     }
 
     @Override
@@ -89,7 +98,32 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
         if (manaCostsToReduce != null){
             CardUtil.adjustCost((SpellAbility) abilityToModify, manaCostsToReduce, false);
         } else {
-            CardUtil.reduceCost(abilityToModify, this.amount);
+            if (upTo) {
+                Mana mana = abilityToModify.getManaCostsToPay().getMana();
+                int reduceMax = mana.getColorless();
+                if (reduceMax > 2){
+                    reduceMax = 2;
+                }
+                if (reduceMax > 0) {
+                    Player controller = game.getPlayer(abilityToModify.getControllerId());
+                    if (controller == null){                    
+                        return false;
+                    }
+                    ChoiceImpl choice = new ChoiceImpl(true);
+                    Set<String> set = new LinkedHashSet<>();
+                    for(int i = 0; i <= reduceMax; i++){
+                        set.add(String.valueOf(i));
+                    }
+                    choice.setChoices(set);
+                    choice.setMessage("Reduce cost of " + filter);
+                    if(controller.choose(Outcome.Benefit, choice, game)){
+                        int reduce = Integer.parseInt(choice.getChoice());
+                        CardUtil.reduceCost(abilityToModify, reduce);
+                    }
+                }
+            } else {
+                CardUtil.reduceCost(abilityToModify, this.amount);
+            }
         }
         return true;
     }

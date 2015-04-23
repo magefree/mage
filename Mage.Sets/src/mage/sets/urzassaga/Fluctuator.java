@@ -25,21 +25,26 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.cost;
+package mage.sets.urzassaga;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.cards.Card;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.keyword.CyclingAbility;
+import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -47,85 +52,76 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
+public class Fluctuator extends CardImpl {
 
-    private FilterCard filter;
-    private int amount;
-    private final boolean upTo;
+    public Fluctuator(UUID ownerId) {
+        super(ownerId, 295, "Fluctuator", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "USG";
 
-    public SpellsCostReductionAllEffect(int amount) {
-        this(new FilterCard("All Spells "), amount);
+        // Cycling abilities you activate cost you up to {2} less to activate.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FluctuatorEffect()));
     }
 
-    public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
-        this(filter, amount, false);
-    }
-    
-    public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        this.filter = filter;
-        this.amount = amount;
-        this.upTo = upTo;
-        
-        this.staticText = filter.getMessage() + " cost " + (upTo ?"up to " :"") + "{" +amount + "} less to cast";
-    }
-
-    protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-        this.amount = effect.amount;
-        this.upTo = effect.upTo;
+    public Fluctuator(final Fluctuator card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (upTo) {
-            Mana mana = abilityToModify.getManaCostsToPay().getMana();
-            int reduceMax = mana.getColorless();
-            if (reduceMax > 2) {
-                reduceMax = 2;
-            }
-            if (reduceMax > 0) {
-                Player controller = game.getPlayer(abilityToModify.getControllerId());
-                if (controller == null) {
-                    return false;
-                }
-                ChoiceImpl choice = new ChoiceImpl(true);
-                Set<String> set = new LinkedHashSet<>();
-                for (int i = 0; i <= reduceMax; i++) {
-                    set.add(String.valueOf(i));
-                }
-                choice.setChoices(set);
-                choice.setMessage("Reduce cost of " + filter);
-                if (controller.choose(Outcome.Benefit, choice, game)) {
-                    int reduce = Integer.parseInt(choice.getChoice());
-                    CardUtil.reduceCost(abilityToModify, reduce);
-                }
-            }
-        } else {
+    public Fluctuator copy() {
+        return new Fluctuator(this);
+    }
+}
 
-            CardUtil.reduceCost(abilityToModify, this.amount);
-        }
-        return true;
+class FluctuatorEffect extends CostModificationEffectImpl {
+    
+    private static final String effectText = "Cycling abilities you activate cost you up to {2} less to activate";
+
+    public FluctuatorEffect() {
+        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = effectText;
+    }
+
+    public FluctuatorEffect(final FluctuatorEffect effect) {
+        super(effect);
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Spell spell = (Spell) game.getStack().getStackObject(abilityToModify.getId());
-            if (spell != null) {
-                return this.filter.match(spell, game);
-            } else {
-                // used at least for flashback ability because Flashback ability doesn't use stack
-                Card sourceCard = game.getCard(abilityToModify.getSourceId());
-                return sourceCard != null && this.filter.match(sourceCard, game);
+        return abilityToModify.getControllerId().equals(source.getControllerId()) && 
+                abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED) &&
+                (abilityToModify instanceof CyclingAbility);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player controller = game.getPlayer(abilityToModify.getControllerId());
+        if (controller != null){
+            Mana mana = abilityToModify.getManaCostsToPay().getMana();
+            int reduceMax = mana.getColorless();
+            if (reduceMax > 2){
+                reduceMax = 2;
             }
+            if (reduceMax > 0) {
+                ChoiceImpl choice = new ChoiceImpl(true);
+                Set<String> set = new LinkedHashSet<>();
+
+                for(int i = 0; i <= reduceMax; i++){
+                    set.add(String.valueOf(i));
+                }
+                choice.setChoices(set);
+                choice.setMessage("Reduce cycling cost");
+                if(controller.choose(Outcome.Benefit, choice, game)){
+                    int reduce = Integer.parseInt(choice.getChoice());
+                    CardUtil.reduceCost(abilityToModify, reduce);
+                }
+            }
+            return true;
         }
-        return false;
+         return false;
     }
 
     @Override
-    public SpellsCostReductionAllEffect copy() {
-        return new SpellsCostReductionAllEffect(this);
+    public FluctuatorEffect copy() {
+        return new FluctuatorEffect(this);
     }
 }
