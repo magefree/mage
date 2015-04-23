@@ -90,10 +90,10 @@ Magic Player Rewards|MPRP|
 Magic: The Gathering-Commander|CMD|
 Magic: The Gathering-Conspiracy|CNS|
 Media Inserts|MBP|
+Masters Edition|MED|
 Masters Edition II|ME2|
 Masters Edition III|ME3|
 Masters Edition IV|ME4|
-Masters Edition|MED|
 Game Day|MGDC|
 Mirage|MIR|
 Mercadian Masques|MMQ|

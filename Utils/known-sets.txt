@@ -76,6 +76,10 @@ Magic Player Rewards|magicplayerrewards|
 Magic: The Gathering-Commander|commander|
 Media Inserts|mediainserts|
 Magic: The Gathering-Conspiracy|conspiracy|
+Masters Edition|mastersedition|
+Masters Edition II|masterseditionii|
+Masters Edition III|masterseditioniii|
+Masters Edition IV|masterseditioniv|
 Mercadian Masques|mercadianmasques|
 Mirage|mirage|
 Mirrodin Besieged|mirrodinbesieged|

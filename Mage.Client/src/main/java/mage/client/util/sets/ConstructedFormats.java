@@ -69,6 +69,10 @@ public class ConstructedFormats {
             "Conspiracy",
             "Modern Masters 2015",
             "Modern Masters",
+            "Masters Edition",
+            "Masters Edition II",
+            "Masters Edition III",
+            "Masters Edition IV",
             "Archenemy",
             "Commander 2014 Edition",
             "Commander 2013 Edition",
@@ -469,6 +473,18 @@ public class ConstructedFormats {
         }
         if (format.equals("Modern Masters 2015")) {
             return Arrays.asList("MMB");
+        }
+        if (format.equals("Masters Edition")) {
+            return Arrays.asList("MED");
+        }
+        if (format.equals("Masters Edition II")) {
+            return Arrays.asList("ME2");
+        }
+        if (format.equals("Masters Edition III")) {
+            return Arrays.asList("ME3");
+        }
+        if (format.equals("Masters Edition IV")) {
+            return Arrays.asList("ME4");
         }
         if (format.equals("Conspiracy")) {
             return Arrays.asList("CNS");
