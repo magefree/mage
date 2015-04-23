@@ -127,7 +127,7 @@ public class TestPlayer extends ComputerPlayer {
                     String command = action.getAction();
                     command = command.substring(command.indexOf("activate:") + 9);
                     String[] groups = command.split("\\$");
-                    if (!checkSpellOnStackCondition(groups, game) || !checkSpellOnTopOfStackCondition(groups, game)) {
+                    if (groups.length > 2 && !checkExecuteCondition(groups, game)) {
                         break;
                     }
                     for (Ability ability: this.getPlayable(game, true)) {
@@ -522,8 +522,8 @@ public class TestPlayer extends ComputerPlayer {
         return null;
     }
 
-    private boolean checkSpellOnStackCondition(String[] groups, Game game) {
-        if (groups.length > 2 && groups[2].startsWith("spellOnStack=")) {
+    private boolean checkExecuteCondition(String[] groups, Game game) {
+        if (groups[2].startsWith("spellOnStack=")) {
             String spellOnStack = groups[2].substring(13);
             for (StackObject stackObject: game.getStack()) {
                 if (stackObject.getStackAbility().toString().contains(spellOnStack)) {
@@ -531,7 +531,7 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return false;
-        } else if (groups.length > 2 && groups[2].startsWith("!spellOnStack=")) {
+        } else if (groups[2].startsWith("!spellOnStack=")) {
             String spellNotOnStack = groups[2].substring(14);
             for (StackObject stackObject: game.getStack()) {
                 if (stackObject.getStackAbility().toString().contains(spellNotOnStack)) {
@@ -539,12 +539,7 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return true;
-        }
-        return true;
-    }
-
-    private boolean checkSpellOnTopOfStackCondition(String[] groups, Game game) {
-        if (groups.length > 2 && groups[2].startsWith("spellOnTopOfStack=")) {
+        } else if (groups[2].startsWith("spellOnTopOfStack=")) {
             String spellOnTopOFStack = groups[2].substring(18);
             if (game.getStack().size() > 0) {
                 StackObject stackObject = game.getStack().getFirst();
@@ -553,15 +548,33 @@ public class TestPlayer extends ComputerPlayer {
                 }
             }
             return false;
+        } else if (groups[2].startsWith("manaInPool=")) {
+            String manaInPool = groups[2].substring(11);
+            int amountOfMana = Integer.parseUnsignedInt(manaInPool);            
+            return this.getManaPool().getMana().count() >= amountOfMana;
         }
         return true;
     }
+
+//    private boolean checkSpellOnTopOfStackCondition(String[] groups, Game game) {
+//        if (groups.length > 2 && groups[2].startsWith("spellOnTopOfStack=")) {
+//            String spellOnTopOFStack = groups[2].substring(18);
+//            if (game.getStack().size() > 0) {
+//                StackObject stackObject = game.getStack().getFirst();
+//                if (stackObject != null && stackObject.getStackAbility().toString().contains(spellOnTopOFStack)) {
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
+//        return true;
+//    }
     
     private boolean addTargets(Ability ability, String[] groups, Game game) {
         boolean result = true;
         for (int i = 1; i < groups.length; i++) {
             String group = groups[i];
-            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack") || group.startsWith("target=null") ) {
+            if (group.startsWith("spellOnStack") || group.startsWith("spellOnTopOfStack") || group.startsWith("!spellOnStack") || group.startsWith("target=null") || group.startsWith("manaInPool=")) {
                 break;
             }
             if (ability instanceof SpellAbility && ((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {

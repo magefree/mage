@@ -47,6 +47,7 @@ import java.util.UUID;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.game.stack.Spell;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  * Cards with the Aura subtype don't change the zone they are in, if there is no
@@ -100,7 +101,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
 
         UUID targetId = null;
         MageObject sourceObject = game.getObject(sourceId);
-
+        boolean enchantCardInGraveyard = false;
         if (sourceObject instanceof Spell) {
             if (fromZone.equals(Zone.EXILED)) {
                 // cast from exile (e.g. Neightveil Spector) -> no replacement
@@ -116,6 +117,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
+            enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             Player player = game.getPlayer(card.getOwnerId());
             Outcome auraOutcome = Outcome.BoostCreature;
             Ability: for (Ability ability:card.getAbilities()) {
@@ -128,15 +130,24 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
                     }
                 }
             }
-            if (player != null && player.choose(auraOutcome, target, card.getId(), game)) {
+            if (target != null && player != null && player.choose(auraOutcome, target, card.getId(), game)) {
                 targetId = target.getFirstTarget();
             }
         }
 
-        Permanent targetPermanent = game.getPermanent(targetId);
+        Card targetCard = null;
+        Permanent targetPermanent = null;
+        if (enchantCardInGraveyard) {
+            targetCard = game.getCard(targetId);
+        } else {
+            targetPermanent = game.getPermanent(targetId);
+        }
         Player targetPlayer = game.getPlayer(targetId);
-        if (targetPermanent != null || targetPlayer != null) {
+        if (targetCard != null || targetPermanent != null || targetPlayer != null) {
             switch (fromZone) {
+                case EXILED:
+                    game.getExile().removeCard(card, game);
+                    break;
                 case GRAVEYARD:
                     game.getPlayer(card.getOwnerId()).removeFromGraveyard(card, game);
                     break;
@@ -158,6 +169,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 
+            if (targetCard != null) {
+                permanent.attachTo(targetCard.getId(), game);
+            }            
             if (targetPermanent != null) {
                 targetPermanent.addAttachment(permanent.getId(), game);
             }

@@ -56,7 +56,8 @@ public class Cultivate extends CardImpl {
     public Cultivate(UUID ownerId) {
         super(ownerId, 168, "Cultivate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
+        // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new CultivateEffect());
 
     }
@@ -103,7 +104,7 @@ class CultivateEffect extends OneShotEffect {
                 }
                 player.revealCards("Cultivate", revealed, game);
                 if (target.getTargets().size() == 2) {
-                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
+                    TargetCard target2 = new TargetCard(Zone.LIBRARY, filter);
                     player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
                     if (card != null) {
