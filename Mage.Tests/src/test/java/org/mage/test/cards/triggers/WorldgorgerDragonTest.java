@@ -15,7 +15,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 
-public class WorlgorgerDragonTest extends CardTestPlayerBase {
+public class WorldgorgerDragonTest extends CardTestPlayerBase {
 
     /**
      * Tests that exiled permanents return to battlefield
