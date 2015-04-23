@@ -278,6 +278,7 @@ public class WizardCardsImageSource implements CardImageSource {
     private String normalizeName(String name) {
         return name.replace("\u2014", "-").replace("\u2019", "'")
                 .replace("\u00C6", "AE").replace("\u00E6", "ae")
+                .replace("\u00C3\u2020", "AE")                
                 .replace("\u00C1", "A").replace("\u00E1", "a")
                 .replace("\u00C2", "A").replace("\u00E2", "a")
                 .replace("\u00D6", "O").replace("\u00F6", "o")
