@@ -492,6 +492,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         game.getExile().removeCard(this, game);
                         break;
                     case STACK:
+                        StackObject stackObject = game.getStack().getSpell(getId());
+                        if (stackObject != null) {
+                            game.getStack().remove(stackObject);
+                        }
+                        break;
                     case PICK:
                         // nothing to do
                         break;
