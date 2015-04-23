@@ -61,12 +61,14 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.RowFilter;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
+import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.NewTournamentDialog;
@@ -107,7 +109,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private Session session;
     private List<String> messages;
     private int currentMessage;
-      
+    private MageTableRowSorter activeTablesSorter;
+    
     /** Creates new form TablesPanel */
     public TablesPanel() {
 
@@ -119,10 +122,11 @@ public class TablesPanel extends javax.swing.JPanel {
         tableModel.setSession(session);
 
         chkShowCompleted.setVisible(true);
-
+                
         tableTables.createDefaultColumnsFromModel();
-        tableTables.setRowSorter(new MageTableRowSorter(tableModel));
-
+        activeTablesSorter = new MageTableRowSorter(tableModel);
+        tableTables.setRowSorter(activeTablesSorter);
+        
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
@@ -442,7 +446,15 @@ public class TablesPanel extends javax.swing.JPanel {
         return this.chatPanel;
     }
 
-
+    private void activeTablesFilter() {
+        if (cbStatusFilter.getSelectedItem().toString().equals("All tables")) {
+            activeTablesSorter.setRowFilter(null);
+        } else {
+            activeTablesSorter.setRowFilter(RowFilter.regexFilter("Waiting for players", 4));
+        }
+        
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -457,6 +469,7 @@ public class TablesPanel extends javax.swing.JPanel {
         btnQuickStart = new javax.swing.JButton();
         btnNewTournament = new javax.swing.JButton();
         chkShowCompleted = new javax.swing.JCheckBox();
+        cbStatusFilter = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -500,6 +513,13 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
 
+        cbStatusFilter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All tables", "Waiting for players" }));
+        cbStatusFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStatusFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -513,7 +533,9 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addComponent(btnQuickStart)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkShowCompleted)
-                .addContainerGap(434, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbStatusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +545,8 @@ public class TablesPanel extends javax.swing.JPanel {
                     .addComponent(btnNewTable)
                     .addComponent(btnQuickStart)
                     .addComponent(btnNewTournament)
-                    .addComponent(chkShowCompleted))
+                    .addComponent(chkShowCompleted)
+                    .addComponent(cbStatusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -689,16 +712,21 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
     this.startTasks();
 }//GEN-LAST:event_chkShowCompletedActionPerformed
 
+    private void cbStatusFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusFilterActionPerformed
+        activeTablesFilter();
+    }//GEN-LAST:event_cbStatusFilterActionPerformed
+
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck: ", ex);
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
+    private javax.swing.JComboBox cbStatusFilter;
     private mage.client.chat.ChatPanel chatPanel;
     private javax.swing.JCheckBox chkShowCompleted;
     private javax.swing.JButton jButton1;
