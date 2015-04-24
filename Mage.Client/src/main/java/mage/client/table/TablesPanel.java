@@ -121,8 +121,19 @@ public class TablesPanel extends javax.swing.JPanel {
         initComponents();
         tableModel.setSession(session);
 
-        chkShowCompleted.setVisible(true);
-                
+        
+        filterStateBar.setBackground(new Color(250, 250, 250, 150));
+        filterStateBar.setOpaque(true); // false = transparent
+
+        filterTypeBar.setBackground(new Color(250, 250, 250, 150));
+        filterTypeBar.setOpaque(true); // false = transparent
+
+        filterFormatBar1.setBackground(new Color(250, 250, 250, 150));
+        filterFormatBar1.setOpaque(true); // false = transparent
+
+        filterFormatBar2.setBackground(new Color(250, 250, 250, 150));
+        filterFormatBar2.setOpaque(true); // false = transparent
+
         tableTables.createDefaultColumnsFromModel();
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
@@ -279,8 +290,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (location != null && jSplitPane1 != null) {
                     jSplitPane1.setDividerLocation(Integer.parseInt(location));
                 }
-                this.chkShowCompleted.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, "Yes").equals("Yes"));
-                if (this.chkShowCompleted.isSelected()) {
+                this.btnStateFinished.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, "Yes").equals("Yes"));
+                if (this.btnStateFinished.isSelected()) {
                     this.jSplitPane2.setDividerLocation(-1);
                 }
                 else {
@@ -336,7 +347,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
                 updatePlayersTask.execute();
             }
-            if (this.chkShowCompleted.isSelected()) {
+            if (this.btnStateFinished.isSelected()) {
                 if (updateMatchesTask == null || updateMatchesTask.isDone()) {
                     updateMatchesTask = new UpdateMatchesTask(session, roomId, this);
                     updateMatchesTask.execute();
@@ -447,12 +458,19 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     private void activeTablesFilter() {
-        if (cbStatusFilter.getSelectedItem().toString().equals("All tables")) {
-            activeTablesSorter.setRowFilter(null);
-        } else {
-            activeTablesSorter.setRowFilter(RowFilter.regexFilter("Waiting for players", 4));
+        // state
+        StringBuilder stateFilter = new StringBuilder();
+        if (btnStateWaiting.isSelected()) {
+            stateFilter.append("Waiting");
         }
-        
+        if (btnStateActive.isSelected()) {
+            if (stateFilter.length() > 0) {
+                stateFilter.append("|");
+            }            
+            stateFilter.append("Dueling|Constructing|Drafting|Sideboard");
+        }        
+        RowFilter rf = RowFilter.regexFilter(stateFilter.toString(), 4);
+        activeTablesSorter.setRowFilter(rf);        
     }
     
     /** This method is called from within the constructor to
@@ -466,10 +484,26 @@ public class TablesPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnNewTable = new javax.swing.JButton();
-        btnQuickStart = new javax.swing.JButton();
         btnNewTournament = new javax.swing.JButton();
-        chkShowCompleted = new javax.swing.JCheckBox();
-        cbStatusFilter = new javax.swing.JComboBox();
+        filterStateBar = new javax.swing.JToolBar();
+        btnStateWaiting = new javax.swing.JToggleButton();
+        btnStateActive = new javax.swing.JToggleButton();
+        btnStateFinished = new javax.swing.JToggleButton();
+        filterTypeBar = new javax.swing.JToolBar();
+        btnTypeMatch = new javax.swing.JToggleButton();
+        btnTypeTourneyConstructed = new javax.swing.JToggleButton();
+        btnTypeTourneyLimited = new javax.swing.JToggleButton();
+        filterFormatBar1 = new javax.swing.JToolBar();
+        btnFormatBlock = new javax.swing.JToggleButton();
+        btnFormatStandard = new javax.swing.JToggleButton();
+        btnFormatModern = new javax.swing.JToggleButton();
+        btnFormatCommander = new javax.swing.JToggleButton();
+        filterFormatBar2 = new javax.swing.JToolBar();
+        btnFormatLegacy = new javax.swing.JToggleButton();
+        btnFormatVintage = new javax.swing.JToggleButton();
+        btnFormatOther = new javax.swing.JToggleButton();
+        btnFormatTinyLeader = new javax.swing.JToggleButton();
+        btnQuickStart = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -483,40 +517,182 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCompleted = new javax.swing.JTable();
 
-        btnNewTable.setText("New Match");
+        btnNewTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/match_new.png"))); // NOI18N
+        btnNewTable.setToolTipText("Creates a new match table.");
+        btnNewTable.setMargin(new java.awt.Insets(10, 10, 10, 10));
         btnNewTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewTableActionPerformed(evt);
             }
         });
 
-        btnQuickStart.setText("Quick Start");
-        btnQuickStart.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuickStartActionPerformed(evt);
-            }
-        });
-
-        btnNewTournament.setText("New Tournament");
+        btnNewTournament.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/tourney_new.png"))); // NOI18N
+        btnNewTournament.setToolTipText("Creates a new tourney table.");
+        btnNewTournament.setMargin(new java.awt.Insets(10, 10, 10, 10));
         btnNewTournament.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewTournamentActionPerformed(evt);
             }
         });
 
-        chkShowCompleted.setSelected(true);
-        chkShowCompleted.setText("Show Completed");
-        chkShowCompleted.setToolTipText("<HTML>Toggles the visibility of the table of completed\n<br>matches and tournaments in the lower area");
-        chkShowCompleted.addActionListener(new java.awt.event.ActionListener() {
+        filterStateBar.setFloatable(false);
+        filterStateBar.setForeground(new java.awt.Color(102, 102, 255));
+        filterStateBar.setFocusable(false);
+
+        btnStateWaiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_waiting_off.png"))); // NOI18N
+        btnStateWaiting.setSelected(true);
+        btnStateWaiting.setToolTipText("Show tables waiting for players.");
+        btnStateWaiting.setActionCommand("stateWait");
+        btnStateWaiting.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnStateWaiting.setFocusPainted(false);
+        btnStateWaiting.setFocusable(false);
+        btnStateWaiting.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStateWaiting.setMaximumSize(new java.awt.Dimension(27, 27));
+        btnStateWaiting.setMinimumSize(new java.awt.Dimension(27, 27));
+        btnStateWaiting.setPreferredSize(new java.awt.Dimension(23, 23));
+        btnStateWaiting.setRequestFocusEnabled(false);
+        btnStateWaiting.setRolloverEnabled(false);
+        btnStateWaiting.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_waiting.png"))); // NOI18N
+        btnStateWaiting.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStateWaiting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkShowCompletedActionPerformed(evt);
+                btnStateWaitingActionPerformed(evt);
             }
         });
+        filterStateBar.add(btnStateWaiting);
 
-        cbStatusFilter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All tables", "Waiting for players" }));
-        cbStatusFilter.addActionListener(new java.awt.event.ActionListener() {
+        btnStateActive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
+        btnStateActive.setSelected(true);
+        btnStateActive.setToolTipText("Show tables with active matches.");
+        btnStateActive.setActionCommand("stateActive");
+        btnStateActive.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnStateActive.setFocusPainted(false);
+        btnStateActive.setFocusable(false);
+        btnStateActive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStateActive.setMaximumSize(new java.awt.Dimension(27, 27));
+        btnStateActive.setMinimumSize(new java.awt.Dimension(27, 27));
+        btnStateActive.setPreferredSize(new java.awt.Dimension(23, 23));
+        btnStateActive.setRequestFocusEnabled(false);
+        btnStateActive.setRolloverEnabled(false);
+        btnStateActive.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_active.png"))); // NOI18N
+        btnStateActive.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStateActive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbStatusFilterActionPerformed(evt);
+                btnStateActiveActionPerformed(evt);
+            }
+        });
+        filterStateBar.add(btnStateActive);
+
+        btnStateFinished.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnStateFinished.setSelected(true);
+        btnStateFinished.setToolTipText("<HTML>Toggles the visibility of the table of completed <br>matches and tournaments in the lower area.\n<br>Showing the last 50 finished matches.");
+        btnStateFinished.setActionCommand("stateFinished");
+        btnStateFinished.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnStateFinished.setFocusPainted(false);
+        btnStateFinished.setFocusable(false);
+        btnStateFinished.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnStateFinished.setMaximumSize(new java.awt.Dimension(27, 27));
+        btnStateFinished.setMinimumSize(new java.awt.Dimension(27, 27));
+        btnStateFinished.setPreferredSize(new java.awt.Dimension(23, 23));
+        btnStateFinished.setRequestFocusEnabled(false);
+        btnStateFinished.setRolloverEnabled(false);
+        btnStateFinished.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/state_finished.png"))); // NOI18N
+        btnStateFinished.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStateFinished.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStateFinishedActionPerformed(evt);
+            }
+        });
+        filterStateBar.add(btnStateFinished);
+
+        filterTypeBar.setFloatable(false);
+        filterTypeBar.setFocusable(false);
+
+        btnTypeMatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_match.png"))); // NOI18N
+        btnTypeMatch.setSelected(true);
+        btnTypeMatch.setActionCommand("typeMatch");
+        btnTypeMatch.setFocusable(false);
+        btnTypeMatch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTypeMatch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterTypeBar.add(btnTypeMatch);
+
+        btnTypeTourneyConstructed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_tourney_construced.png"))); // NOI18N
+        btnTypeTourneyConstructed.setSelected(true);
+        btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
+        btnTypeTourneyConstructed.setFocusable(false);
+        btnTypeTourneyConstructed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTypeTourneyConstructed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterTypeBar.add(btnTypeTourneyConstructed);
+
+        btnTypeTourneyLimited.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_tourney_limited.png"))); // NOI18N
+        btnTypeTourneyLimited.setSelected(true);
+        btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
+        btnTypeTourneyLimited.setFocusable(false);
+        btnTypeTourneyLimited.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTypeTourneyLimited.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterTypeBar.add(btnTypeTourneyLimited);
+
+        filterFormatBar1.setFloatable(false);
+        filterFormatBar1.setFocusable(false);
+
+        btnFormatBlock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_block.png"))); // NOI18N
+        btnFormatBlock.setSelected(true);
+        btnFormatBlock.setFocusable(false);
+        btnFormatBlock.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatBlock.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterFormatBar1.add(btnFormatBlock);
+
+        btnFormatStandard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_standard.png"))); // NOI18N
+        btnFormatStandard.setSelected(true);
+        btnFormatStandard.setFocusable(false);
+        btnFormatStandard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatStandard.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterFormatBar1.add(btnFormatStandard);
+
+        btnFormatModern.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_modern.png"))); // NOI18N
+        btnFormatModern.setSelected(true);
+        filterFormatBar1.add(btnFormatModern);
+
+        btnFormatCommander.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_commander.png"))); // NOI18N
+        btnFormatCommander.setSelected(true);
+        btnFormatCommander.setFocusable(false);
+        btnFormatCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterFormatBar1.add(btnFormatCommander);
+
+        filterFormatBar2.setFloatable(false);
+        filterFormatBar2.setToolTipText("All tables with active matches");
+        filterFormatBar2.setFocusable(false);
+
+        btnFormatLegacy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_legacy.png"))); // NOI18N
+        btnFormatLegacy.setSelected(true);
+        btnFormatLegacy.setFocusable(false);
+        btnFormatLegacy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatLegacy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterFormatBar2.add(btnFormatLegacy);
+
+        btnFormatVintage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_vintage.png"))); // NOI18N
+        btnFormatVintage.setSelected(true);
+        btnFormatVintage.setFocusable(false);
+        btnFormatVintage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatVintage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filterFormatBar2.add(btnFormatVintage);
+
+        btnFormatOther.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_other.png"))); // NOI18N
+        btnFormatOther.setSelected(true);
+        filterFormatBar2.add(btnFormatOther);
+
+        btnFormatTinyLeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/format_tiny_leader.png"))); // NOI18N
+        btnFormatTinyLeader.setSelected(true);
+        filterFormatBar2.add(btnFormatTinyLeader);
+
+        btnQuickStart.setText("Quick Start");
+        btnQuickStart.setFocusable(false);
+        btnQuickStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuickStart.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuickStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuickStartActionPerformed(evt);
             }
         });
 
@@ -530,24 +706,37 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addComponent(btnNewTournament)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filterStateBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(filterTypeBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(filterFormatBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterFormatBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnQuickStart)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkShowCompleted)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbStatusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewTable)
-                    .addComponent(btnQuickStart)
-                    .addComponent(btnNewTournament)
-                    .addComponent(chkShowCompleted)
-                    .addComponent(cbStatusFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNewTable)
+                        .addComponent(btnNewTournament))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(filterStateBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(filterTypeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(filterFormatBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnQuickStart))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filterFormatBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -626,7 +815,7 @@ public class TablesPanel extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -643,13 +832,13 @@ public class TablesPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSplitPane1)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 584, Short.MAX_VALUE))
+                .addGap(0, 598, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -701,20 +890,24 @@ public class TablesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkShowCompletedActionPerformed
-    if (this.chkShowCompleted.isSelected()) {
-        this.jSplitPane2.setDividerLocation(-1);
-    }
-    else {
-        this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
-    }
-    PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, (chkShowCompleted.isSelected()?"Yes":"No"));
-    this.startTasks();
-}//GEN-LAST:event_chkShowCompletedActionPerformed
-
-    private void cbStatusFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusFilterActionPerformed
+    private void btnStateWaitingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStateWaitingActionPerformed
         activeTablesFilter();
-    }//GEN-LAST:event_cbStatusFilterActionPerformed
+    }//GEN-LAST:event_btnStateWaitingActionPerformed
+
+    private void btnStateActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStateActiveActionPerformed
+        activeTablesFilter();
+    }//GEN-LAST:event_btnStateActiveActionPerformed
+
+    private void btnStateFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStateFinishedActionPerformed
+        if (this.btnStateFinished.isSelected()) {
+            this.jSplitPane2.setDividerLocation(-1);
+        }
+        else {
+            this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, (btnStateFinished.isSelected()?"Yes":"No"));
+        this.startTasks();
+    }//GEN-LAST:event_btnStateFinishedActionPerformed
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck: ", ex);
@@ -723,12 +916,28 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnFormatBlock;
+    private javax.swing.JToggleButton btnFormatCommander;
+    private javax.swing.JToggleButton btnFormatLegacy;
+    private javax.swing.JToggleButton btnFormatModern;
+    private javax.swing.JToggleButton btnFormatOther;
+    private javax.swing.JToggleButton btnFormatStandard;
+    private javax.swing.JToggleButton btnFormatTinyLeader;
+    private javax.swing.JToggleButton btnFormatVintage;
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
-    private javax.swing.JComboBox cbStatusFilter;
+    private javax.swing.JToggleButton btnStateActive;
+    private javax.swing.JToggleButton btnStateFinished;
+    private javax.swing.JToggleButton btnStateWaiting;
+    private javax.swing.JToggleButton btnTypeMatch;
+    private javax.swing.JToggleButton btnTypeTourneyConstructed;
+    private javax.swing.JToggleButton btnTypeTourneyLimited;
     private mage.client.chat.ChatPanel chatPanel;
-    private javax.swing.JCheckBox chkShowCompleted;
+    private javax.swing.JToolBar filterFormatBar1;
+    private javax.swing.JToolBar filterFormatBar2;
+    private javax.swing.JToolBar filterStateBar;
+    private javax.swing.JToolBar filterTypeBar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
