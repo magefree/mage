@@ -550,7 +550,7 @@ public class TestPlayer extends ComputerPlayer {
             return false;
         } else if (groups[2].startsWith("manaInPool=")) {
             String manaInPool = groups[2].substring(11);
-            int amountOfMana = Integer.parseUnsignedInt(manaInPool);            
+            int amountOfMana = Integer.parseInt(manaInPool);            
             return this.getManaPool().getMana().count() >= amountOfMana;
         }
         return true;
