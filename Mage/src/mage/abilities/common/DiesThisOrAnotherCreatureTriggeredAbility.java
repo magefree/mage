@@ -27,6 +27,7 @@
  */
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -66,7 +67,12 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
-
+    
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD || game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD) != null; 
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

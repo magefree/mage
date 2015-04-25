@@ -85,7 +85,7 @@ public class CursesTest extends CardTestPlayerBase {
     }
 
     /**
-     * Checks if Copy Enchantment works for palyer auras
+     * Checks if Copy Enchantment works for player auras
      */
     @Test
     public void testCurseOfExhaustion3() {        
@@ -94,6 +94,8 @@ public class CursesTest extends CardTestPlayerBase {
         
         addCard(Zone.BATTLEFIELD, playerB, "Island", 3);        
         
+        // Enchant player
+        // Enchanted player can't cast more than one spell each turn.
         addCard(Zone.HAND, playerA, "Curse of Exhaustion");
         addCard(Zone.HAND, playerA, "Lightning Bolt", 2);        
         
