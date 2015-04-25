@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,7 +21,9 @@ import java.util.List;
 public enum ExpansionRepository {
 
     instance;
-
+    
+    private static final Logger logger = Logger.getLogger(ExpansionRepository.class);      
+    
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 3;
@@ -63,6 +66,8 @@ public enum ExpansionRepository {
                 setCodes.add(expansion.getCode());
             }
         } catch (SQLException ex) {
+            logger.error("Can't get the expansion set codes from database.", ex);
+            return setCodes;
         }
         return setCodes;
     }

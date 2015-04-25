@@ -1,6 +1,5 @@
 package org.mage.card.arcane;
 
-import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageHelper;
@@ -51,6 +50,11 @@ public class ManaSymbols {
             }
         }
         List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+        if (setCodes == null) {
+            // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
+            log.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
+            return;
+        }
         for (String set : setCodes) {
             File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + "-C.jpg");
             try {
