@@ -218,8 +218,9 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
                                         // use only first variable cost
                                         xManaValue = game.getPlayer(this.controllerId).announceXMana(varCosts.get(0).getMinX(), Integer.MAX_VALUE, "Announce kicker value for " + varCosts.get(0).getText(), game, this);
                                         // kicker variable X costs handled internally as multikicker with {1} cost (no multikicker on card)
-                                        if (!game.isSimulation())
+                                        if (!game.isSimulation()) {
                                             game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xManaValue).append(" for ").append(" kicker X ").toString());
+                                        }
                                         ability.getManaCostsToPay().add(new GenericManaCost(xManaValue));
                                     } else {
                                         ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());                                        
