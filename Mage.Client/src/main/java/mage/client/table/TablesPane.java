@@ -27,6 +27,10 @@
 */
 package mage.client.table;
 
+import java.awt.Component;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.UUID;
 import javax.swing.JComponent;
 import mage.client.MageFrame;
@@ -55,6 +59,10 @@ public class TablesPane extends MagePane {
         if (!initialized) {
             initComponents();
         }
+    }
+    
+    public void cleanUp() {
+        tablesPanel.cleanUp();
     }
 
     public void showTables() {

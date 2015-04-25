@@ -968,6 +968,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
         CardRepository.instance.closeDB();
+        tablesPane.cleanUp();                
         Plugins.getInstance().shutdown();
         dispose();
         System.exit(0);

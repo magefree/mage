@@ -62,6 +62,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JToggleButton;
 import javax.swing.RowFilter;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
@@ -111,6 +112,8 @@ public class TablesPanel extends javax.swing.JPanel {
     private int currentMessage;
     private MageTableRowSorter activeTablesSorter;
     
+    JToggleButton[] filterButtons;
+    
     /** Creates new form TablesPanel */
     public TablesPanel() {
 
@@ -131,6 +134,11 @@ public class TablesPanel extends javax.swing.JPanel {
         chatPanel.setBorder(null);
         chatPanel.setChatType(ChatPanel.ChatType.TABLES);
 
+        filterButtons = new JToggleButton[] 
+            {btnStateWaiting, btnStateActive, btnStateFinished,
+             btnTypeMatch, btnTypeTourneyConstructed, btnTypeTourneyLimited,  
+             btnFormatBlock, btnFormatStandard, btnFormatModern, btnFormatCommander, btnFormatTinyLeader, btnFormatLegacy, btnFormatVintage, btnFormatOther};
+        
         JComponent[] components = new JComponent[] {chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, topPanel, jPanel3};
         for (JComponent component : components) {
             component.setOpaque(false);
@@ -138,7 +146,8 @@ public class TablesPanel extends javax.swing.JPanel {
 
         jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
         jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
-        topPanel.setBackground(new Color(255,255,255,50));
+        
+        restoreSettings();
         
         Action openTableAction;
         openTableAction = new AbstractAction()
@@ -248,29 +257,16 @@ public class TablesPanel extends javax.swing.JPanel {
                 }
             }
         };
-                
-//        filterBar1.setBackground(new Color(250, 250, 250, 150));
-//        filterBar1.setOpaque(true); // false = transparent
-//
-//        filterBar2.setBackground(new Color(250, 250, 250, 150));
-//        filterBar2.setOpaque(true); // false = transparent
-//
-//        JComponent container = filterBar1;
-//        while (container.getParent() != null) {
-//            if (container.getParent() instanceof JComponent) {
-//                container = (JComponent) container.getParent();
-//                container.setBackground(new Color(250, 250, 250, 150));
-//                container.setOpaque(true);
-//            }
-//            
-//        }
                      
         // !!!! adds action buttons to the table panel (don't delete this)
         new ButtonColumn(tableTables, openTableAction, TableTableModel.ACTION_COLUMN);
         new ButtonColumn(tableCompleted, closedTableAction, MatchesTableModel.ACTION_COLUMN);
         // !!!!
     }
-
+    
+    public void cleanUp() {
+        saveSettings();
+    }
 
     private void saveDividerLocations() {
         // save panel sizes and divider locations.
@@ -280,6 +276,30 @@ public class TablesPanel extends javax.swing.JPanel {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanel.getSplitDividerLocation()));
+    }
+    
+    private void restoreSettings() {
+        // filter settings
+        String formatSettings = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_FILTER_FORMATS, "");
+        int i = 0;
+        for (JToggleButton component : filterButtons) {
+            if (formatSettings.length() > i) {
+                component.setSelected(formatSettings.substring(i,i+1).equals("x"));
+            } else {
+                component.setSelected(true);
+            }
+            i++;
+        }               
+        setTableFilter();
+    }
+        
+    private void saveSettings() {
+        // Formats
+        StringBuilder formatSettings = new StringBuilder();
+        for (JToggleButton component : filterButtons) {
+            formatSettings.append(component.isSelected() ? "x":"-");
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_FORMATS, formatSettings.toString());
     }
 
     private void restoreDividerLocations() {
@@ -293,7 +313,6 @@ public class TablesPanel extends javax.swing.JPanel {
                 if (location != null && jSplitPane1 != null) {
                     jSplitPane1.setDividerLocation(Integer.parseInt(location));
                 }
-                this.btnStateFinished.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, "Yes").equals("Yes"));
                 if (this.btnStateFinished.isSelected()) {
                     this.jSplitPane2.setDividerLocation(-1);
                 }
@@ -460,7 +479,7 @@ public class TablesPanel extends javax.swing.JPanel {
         return this.chatPanel;
     }
 
-    private void activeTablesFilter() {
+    private void setTableFilter() {
         // state
         List<RowFilter<Object, Object>> stateFilterList = new ArrayList<>();
         if (btnStateWaiting.isSelected()) {
@@ -622,6 +641,8 @@ public class TablesPanel extends javax.swing.JPanel {
         btnStateWaiting.setMinimumSize(new java.awt.Dimension(27, 27));
         btnStateWaiting.setPreferredSize(new java.awt.Dimension(23, 23));
         btnStateWaiting.setRequestFocusEnabled(false);
+        btnStateWaiting.setRolloverEnabled(false);
+        btnStateWaiting.setVerifyInputWhenFocusTarget(false);
         btnStateWaiting.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnStateWaiting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -641,6 +662,8 @@ public class TablesPanel extends javax.swing.JPanel {
         btnStateActive.setMinimumSize(new java.awt.Dimension(27, 27));
         btnStateActive.setPreferredSize(new java.awt.Dimension(23, 23));
         btnStateActive.setRequestFocusEnabled(false);
+        btnStateActive.setRolloverEnabled(false);
+        btnStateActive.setVerifyInputWhenFocusTarget(false);
         btnStateActive.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnStateActive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -660,6 +683,8 @@ public class TablesPanel extends javax.swing.JPanel {
         btnStateFinished.setMinimumSize(new java.awt.Dimension(27, 27));
         btnStateFinished.setPreferredSize(new java.awt.Dimension(23, 23));
         btnStateFinished.setRequestFocusEnabled(false);
+        btnStateFinished.setRolloverEnabled(false);
+        btnStateFinished.setVerifyInputWhenFocusTarget(false);
         btnStateFinished.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnStateFinished.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -669,14 +694,16 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnStateFinished);
         filterBar1.add(jSeparator1);
 
-        btnTypeMatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_match.png"))); // NOI18N
         btnTypeMatch.setSelected(true);
+        btnTypeMatch.setText("Matches");
         btnTypeMatch.setToolTipText("Shows all non tournament tables.");
         btnTypeMatch.setActionCommand("typeMatch");
+        btnTypeMatch.setFocusPainted(false);
         btnTypeMatch.setFocusable(false);
         btnTypeMatch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTypeMatch.setMaximumSize(new java.awt.Dimension(27, 27));
-        btnTypeMatch.setMinimumSize(new java.awt.Dimension(27, 27));
+        btnTypeMatch.setRequestFocusEnabled(false);
+        btnTypeMatch.setRolloverEnabled(false);
+        btnTypeMatch.setVerifyInputWhenFocusTarget(false);
         btnTypeMatch.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnTypeMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -685,15 +712,16 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar1.add(btnTypeMatch);
 
-        btnTypeTourneyConstructed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_tourney_construced.png"))); // NOI18N
         btnTypeTourneyConstructed.setSelected(true);
+        btnTypeTourneyConstructed.setText("Constructed tourneys");
         btnTypeTourneyConstructed.setToolTipText("Shows all constructed tournament tables.");
         btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
+        btnTypeTourneyConstructed.setFocusPainted(false);
         btnTypeTourneyConstructed.setFocusable(false);
-        btnTypeTourneyConstructed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTypeTourneyConstructed.setMaximumSize(new java.awt.Dimension(27, 27));
-        btnTypeTourneyConstructed.setMinimumSize(new java.awt.Dimension(27, 27));
-        btnTypeTourneyConstructed.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTypeTourneyConstructed.setMaximumSize(new java.awt.Dimension(115, 25));
+        btnTypeTourneyConstructed.setRequestFocusEnabled(false);
+        btnTypeTourneyConstructed.setRolloverEnabled(false);
+        btnTypeTourneyConstructed.setVerifyInputWhenFocusTarget(false);
         btnTypeTourneyConstructed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -701,15 +729,16 @@ public class TablesPanel extends javax.swing.JPanel {
         });
         filterBar1.add(btnTypeTourneyConstructed);
 
-        btnTypeTourneyLimited.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/type_tourney_limited.png"))); // NOI18N
         btnTypeTourneyLimited.setSelected(true);
+        btnTypeTourneyLimited.setText("Limited tourneys");
         btnTypeTourneyLimited.setToolTipText("Shows all limited tournament tables.");
         btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
+        btnTypeTourneyLimited.setFocusPainted(false);
         btnTypeTourneyLimited.setFocusable(false);
-        btnTypeTourneyLimited.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(27, 27));
-        btnTypeTourneyLimited.setMinimumSize(new java.awt.Dimension(27, 27));
-        btnTypeTourneyLimited.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(90, 25));
+        btnTypeTourneyLimited.setRequestFocusEnabled(false);
+        btnTypeTourneyLimited.setRolloverEnabled(false);
+        btnTypeTourneyLimited.setVerifyInputWhenFocusTarget(false);
         btnTypeTourneyLimited.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -724,8 +753,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatBlock.setSelected(true);
         btnFormatBlock.setText("Block");
         btnFormatBlock.setToolTipText("Block constructed formats.");
+        btnFormatBlock.setFocusPainted(false);
         btnFormatBlock.setFocusable(false);
         btnFormatBlock.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatBlock.setRequestFocusEnabled(false);
+        btnFormatBlock.setRolloverEnabled(false);
+        btnFormatBlock.setVerifyInputWhenFocusTarget(false);
         btnFormatBlock.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatBlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -737,8 +770,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatStandard.setSelected(true);
         btnFormatStandard.setText("Standard");
         btnFormatStandard.setToolTipText("Standard format.");
+        btnFormatStandard.setFocusPainted(false);
         btnFormatStandard.setFocusable(false);
         btnFormatStandard.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatStandard.setRequestFocusEnabled(false);
+        btnFormatStandard.setRolloverEnabled(false);
+        btnFormatStandard.setVerifyInputWhenFocusTarget(false);
         btnFormatStandard.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatStandard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -750,7 +787,11 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatModern.setSelected(true);
         btnFormatModern.setText("Modern");
         btnFormatModern.setToolTipText("Modern format.");
+        btnFormatModern.setFocusPainted(false);
         btnFormatModern.setFocusable(false);
+        btnFormatModern.setRequestFocusEnabled(false);
+        btnFormatModern.setRolloverEnabled(false);
+        btnFormatModern.setVerifyInputWhenFocusTarget(false);
         btnFormatModern.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -762,8 +803,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatCommander.setSelected(true);
         btnFormatCommander.setText("Commander");
         btnFormatCommander.setToolTipText("Commander format.");
+        btnFormatCommander.setFocusPainted(false);
         btnFormatCommander.setFocusable(false);
         btnFormatCommander.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatCommander.setRequestFocusEnabled(false);
+        btnFormatCommander.setRolloverEnabled(false);
+        btnFormatCommander.setVerifyInputWhenFocusTarget(false);
         btnFormatCommander.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatCommander.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -775,7 +820,11 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatTinyLeader.setSelected(true);
         btnFormatTinyLeader.setText("Tiny Leader");
         btnFormatTinyLeader.setToolTipText("Tiny Leader format.");
+        btnFormatTinyLeader.setFocusPainted(false);
         btnFormatTinyLeader.setFocusable(false);
+        btnFormatTinyLeader.setRequestFocusEnabled(false);
+        btnFormatTinyLeader.setRolloverEnabled(false);
+        btnFormatTinyLeader.setVerifyInputWhenFocusTarget(false);
         btnFormatTinyLeader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -787,8 +836,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatLegacy.setSelected(true);
         btnFormatLegacy.setText("Legacy");
         btnFormatLegacy.setToolTipText("Legacy format.");
+        btnFormatLegacy.setFocusPainted(false);
         btnFormatLegacy.setFocusable(false);
         btnFormatLegacy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatLegacy.setRequestFocusEnabled(false);
+        btnFormatLegacy.setRolloverEnabled(false);
+        btnFormatLegacy.setVerifyInputWhenFocusTarget(false);
         btnFormatLegacy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatLegacy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -800,8 +853,12 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatVintage.setSelected(true);
         btnFormatVintage.setText("Vintage");
         btnFormatVintage.setToolTipText("Vintage format.");
+        btnFormatVintage.setFocusPainted(false);
         btnFormatVintage.setFocusable(false);
         btnFormatVintage.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFormatVintage.setRequestFocusEnabled(false);
+        btnFormatVintage.setRolloverEnabled(false);
+        btnFormatVintage.setVerifyInputWhenFocusTarget(false);
         btnFormatVintage.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFormatVintage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -813,7 +870,11 @@ public class TablesPanel extends javax.swing.JPanel {
         btnFormatOther.setSelected(true);
         btnFormatOther.setText("Other");
         btnFormatOther.setToolTipText("Other formats (Pauper, Extended, etc.)");
+        btnFormatOther.setFocusPainted(false);
         btnFormatOther.setFocusable(false);
+        btnFormatOther.setRequestFocusEnabled(false);
+        btnFormatOther.setRolloverEnabled(false);
+        btnFormatOther.setVerifyInputWhenFocusTarget(false);
         btnFormatOther.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFilterActionPerformed(evt);
@@ -842,11 +903,10 @@ public class TablesPanel extends javax.swing.JPanel {
                 .addComponent(btnNewTournament)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(filterBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(223, 223, 223)
-                        .addComponent(btnQuickStart))
-                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(filterBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+                    .addComponent(filterBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnQuickStart)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
@@ -858,11 +918,11 @@ public class TablesPanel extends javax.swing.JPanel {
                         .addComponent(btnNewTable)
                         .addComponent(btnNewTournament))
                     .addGroup(topPanelLayout.createSequentialGroup()
-                        .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(filterBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnQuickStart))
+                        .addComponent(filterBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filterBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnQuickStart))))
                 .addContainerGap())
         );
 
@@ -1018,7 +1078,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFilterActionPerformed
-        activeTablesFilter();
+        setTableFilter();
     }//GEN-LAST:event_btnFilterActionPerformed
 
     private void btnStateFinishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStateFinishedActionPerformed
@@ -1028,7 +1088,6 @@ public class TablesPanel extends javax.swing.JPanel {
         else {
             this.jSplitPane2.setDividerLocation(this.jPanel3.getHeight());
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_SHOW_COMPLETED, (btnStateFinished.isSelected()?"Yes":"No"));
         this.startTasks();
     }//GEN-LAST:event_btnStateFinishedActionPerformed
 

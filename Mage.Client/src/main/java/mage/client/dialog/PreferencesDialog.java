@@ -136,7 +136,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
     
     // pref settings of table settings and filtering
-    public static final String KEY_TABLES_SHOW_COMPLETED = "tablePanelShowCompleted";
+    public static final String KEY_TABLES_FILTER_FORMATS = "tablePanelFilterFormats";
     
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
