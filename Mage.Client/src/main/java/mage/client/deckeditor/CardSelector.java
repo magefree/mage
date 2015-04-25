@@ -110,11 +110,13 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         setOpaque(false);
         
         cardGrid.setOpaque(false);
+        
         cardSelectorScrollPane.setOpaque(false);
         cardSelectorScrollPane.getViewport().setOpaque(false);
         cbSortBy.setModel(new DefaultComboBoxModel<>(SortBy.values()));
         cbSortBy.setSelectedItem(sortSetting.getSortBy());
         jTextFieldSearch.addActionListener(searchAction);
+
         // make the components more readable
         tbColor.setBackground(new Color(250, 250, 250, 150));
         tbColor.setOpaque(true); // false = transparent
