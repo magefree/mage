@@ -56,16 +56,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.RowFilter;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -125,8 +129,10 @@ public class TablesPanel extends javax.swing.JPanel {
         tableModel.setSession(session);
 
         tableTables.createDefaultColumnsFromModel();
+        
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
+        TableTableModel.setColumnWidth(tableTables);
         
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
@@ -1138,14 +1144,19 @@ public class TablesPanel extends javax.swing.JPanel {
 }
 
 class TableTableModel extends AbstractTableModel {
+    ImageIcon tourneyIcon = new javax.swing.ImageIcon(getClass().getResource("/tables/tourney_icon.png"));
+    ImageIcon matchIcon = new javax.swing.ImageIcon(getClass().getResource("/tables/match_icon.png"));
+    
+    public static final int COLUMN_ICON = 0; 
+    public static final int COLUMN_DECK_TYPE = 1; // column the deck type is located (starting with 0) Start string is used to check for Limited
+    public static final int COLUMN_GAME_TYPE = 3;
+    public static final int COLUMN_INFO = 4;
+    public static final int COLUMN_STATUS = 5;
+    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
 
-    public static final int COLUMN_DECK_TYPE = 0; // column the deck type is located (starting with 0) Start string is used to check for Limited
-    public static final int COLUMN_GAME_TYPE = 2;
-    public static final int COLUMN_INFO = 3;
-    public static final int COLUMN_STATUS = 4;
-    public static final int ACTION_COLUMN = 6; // column the action is located (starting with 0)
-
-    private final String[] columnNames = new String[]{"Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
+    private final String[] columnNames = new String[]{"Typ","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
+    private static final int[] columnsWidth = {15, 120, 120, 180, 80, 120, 80, 60};
+        
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
 
@@ -1156,6 +1167,20 @@ class TableTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
+    static public void setColumnWidth(JTable table) {
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        int i = 0;
+        for (int width : columnsWidth) {
+            TableColumn column = table.getColumnModel().getColumn(i++);
+            if (i == COLUMN_ICON) {
+                column.setMinWidth(width);
+                column.setMaxWidth(width);
+            }
+            column.setWidth(width);
+            column.setPreferredWidth(width);
+        }
+    }
+    
     @Override
     public int getRowCount() {
         return tables.length;
@@ -1174,18 +1199,20 @@ class TableTableModel extends AbstractTableModel {
     public Object getValueAt(int arg0, int arg1) {
         switch (arg1) {
             case 0:
-                return tables[arg0].getDeckType();
+                return tables[arg0].isTournament() ? tourneyIcon:matchIcon;
             case 1:
-                return tables[arg0].getControllerName();
+                return tables[arg0].getDeckType();
             case 2:
-                return tables[arg0].getGameType();
+                return tables[arg0].getControllerName();
             case 3:
-                return tables[arg0].getAdditionalInfo();
+                return tables[arg0].getGameType();
             case 4:
-                return tables[arg0].getTableStateText();
+                return tables[arg0].getAdditionalInfo();
             case 5:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getTableStateText();
             case 6:
+                return timeFormatter.format(tables[arg0].getCreateTime());
+            case 7:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1212,14 +1239,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 7:
-                return tables[arg0].isTournament();
             case 8:
+                return tables[arg0].isTournament();
+            case 9:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 9:
+            case 10:
                 return tables[arg0].getTableId();
         }
         return "";
@@ -1238,7 +1265,11 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex){
-        return String.class;
+        if (columnIndex == 0) {
+            return Icon.class;
+        } else {
+            return String.class;
+        }
     }
 
     @Override
