@@ -106,17 +106,6 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         }
     }
 
-//    private MageObject getMageObject(GameEvent event, Game game, TriggeredAbility ability) {
-//        MageObject object = game.getPermanent(ability.getSourceId());
-//        if (object == null) {
-//            object = game.getLastKnownInformation(ability.getSourceId(), event.getZone());
-//            if (object == null) {
-//                object = game.getObject(ability.getSourceId());
-//            }
-//        }
-//        return object;
-//    }
-
     /**
      * Adds a by sourceId gained triggered ability
      *

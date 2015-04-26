@@ -119,7 +119,8 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         Player player = game.getPlayer(controllerId);
-        assignPayment(game, ability, player.getManaPool());        
+        assignPayment(game, ability, player.getManaPool());
+        game.getState().getSpecialActions().removeManaActions();
         while (!isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);

@@ -27,7 +27,6 @@
  */
 package mage.abilities.keyword;
 
-import java.util.ArrayList;
 import java.util.List;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -106,8 +105,12 @@ import mage.util.CardUtil;
                 SpecialAction specialAction = new DelveSpecialAction();
                 specialAction.setControllerId(source.getControllerId());
                 specialAction.setSourceId(source.getSourceId());
+                int unpaidAmount = unpaid.getMana().getColorless();
+                if (!controller.getManaPool().isAutoPayment() && unpaidAmount > 1) {
+                    unpaidAmount = 1;
+                }
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                                0, Math.min(controller.getGraveyard().size(), unpaid.getMana().getColorless()), new FilterCard())));
+                                0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard())));
                 if (specialAction.canActivate(source.getControllerId(), game)) {
                     game.getState().getSpecialActions().add(specialAction);
                 }
