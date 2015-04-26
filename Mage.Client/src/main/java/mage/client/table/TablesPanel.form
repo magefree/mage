@@ -151,7 +151,6 @@
                   <Dimension value="[23, 23]"/>
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -180,7 +179,6 @@
                   <Dimension value="[23, 23]"/>
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -209,7 +207,6 @@
                   <Dimension value="[23, 23]"/>
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -229,7 +226,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -249,7 +245,6 @@
                   <Dimension value="[115, 25]"/>
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -268,7 +263,6 @@
                   <Dimension value="[90, 25]"/>
                 </Property>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -295,7 +289,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -312,7 +305,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -328,7 +320,6 @@
                 <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -346,7 +337,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -362,7 +352,6 @@
                 <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -380,7 +369,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -397,7 +385,6 @@
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -413,7 +400,6 @@
                 <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
-                <Property name="rolloverEnabled" type="boolean" value="false"/>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
               <Events>

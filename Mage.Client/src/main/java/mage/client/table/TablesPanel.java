@@ -132,6 +132,7 @@ public class TablesPanel extends javax.swing.JPanel {
         
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
+        
         TableTableModel.setColumnWidth(tableTables);
         
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
@@ -286,7 +287,7 @@ public class TablesPanel extends javax.swing.JPanel {
     
     private void restoreSettings() {
         // filter settings
-        String formatSettings = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_FILTER_FORMATS, "");
+        String formatSettings = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, "");
         int i = 0;
         for (JToggleButton component : filterButtons) {
             if (formatSettings.length() > i) {
@@ -300,12 +301,26 @@ public class TablesPanel extends javax.swing.JPanel {
     }
         
     private void saveSettings() {
-        // Formats
+        // Filters
         StringBuilder formatSettings = new StringBuilder();
         for (JToggleButton component : filterButtons) {
             formatSettings.append(component.isSelected() ? "x":"-");
         }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_FORMATS, formatSettings.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, formatSettings.toString());
+        
+        // Column width
+        StringBuilder columnWidthSettings = new StringBuilder();
+        boolean firstValue = true;
+        for (int i = 0; i < tableTables.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = tableTables.getColumnModel().getColumn(tableTables.convertColumnIndexToView(i));
+            if (!firstValue) {
+                columnWidthSettings.append(",");                
+            } else {
+                firstValue = false;
+            }
+            columnWidthSettings.append(column.getWidth());
+        }
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, columnWidthSettings.toString());
     }
 
     private void restoreDividerLocations() {
@@ -1154,8 +1169,8 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_STATUS = 5;
     public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"Typ","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
-    private static final int[] columnsWidth = {15, 120, 120, 180, 80, 120, 80, 60};
+    private final String[] columnNames = new String[]{"M/T","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
+    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60};
         
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
@@ -1169,13 +1184,31 @@ class TableTableModel extends AbstractTableModel {
 
     static public void setColumnWidth(JTable table) {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        int i = 0;
-        for (int width : columnsWidth) {
-            TableColumn column = table.getColumnModel().getColumn(i++);
-            if (i == COLUMN_ICON) {
-                column.setMinWidth(width);
-                column.setMaxWidth(width);
+        
+        // read the saved column width
+        String widthsString = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, null);
+        int[] widths = null;
+        int length = 0;
+        if (widthsString != null && !widthsString.isEmpty()) {
+            String[] items = widthsString.split(",");
+            length = items.length;
+            widths = new int[length];
+            for (int i = 0; i < length; i++) {
+                try {
+                    widths[i] = Integer.parseInt(items[i]);
+                    if (widths[i] > 500) {
+                        widths[i] = 300;
+                    }
+                } catch (NumberFormatException nfe) {}
             }
+        }        
+        // set the column width from saved value or defaults        
+        int i = 0;
+        for (int width : defaultColumnsWidth) {
+            if (length > i) {
+                width = widths[i];
+            }            
+            TableColumn column = table.getColumnModel().getColumn(i++);
             column.setWidth(width);
             column.setPreferredWidth(width);
         }
