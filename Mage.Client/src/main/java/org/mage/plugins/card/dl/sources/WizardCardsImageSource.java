@@ -69,11 +69,11 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("BRB", "Battle Royale Box Set");
         setsAliases.put("BTD", "Beatdown Box Set");
         setsAliases.put("C13", "Commander 2013 Edition");
-        setsAliases.put("C14", "Commander 2014 Edition");
+        setsAliases.put("C14", "Commander 2014");
         setsAliases.put("CHK", "Champions of Kamigawa");
         setsAliases.put("CHR", "Chronicles");
         setsAliases.put("CMD", "Magic: The Gathering-Commander");
-        setsAliases.put("CNS", "Magic: The Gathering-Conspiracy");
+        setsAliases.put("CNS", "Magic: The Gathering—Conspiracy");
         setsAliases.put("CON", "Conflux");
         setsAliases.put("CSP", "Coldsnap");
         setsAliases.put("DD2", "Duel Decks: Jace vs. Chandra");
@@ -179,7 +179,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("TMP", "Tempest");
         setsAliases.put("TOR", "Torment");
         setsAliases.put("TPR", "Tempest Remastered");
-        setsAliases.put("TSB", "Time Spiral 'Timeshifted'");
+        setsAliases.put("TSB", "Time Spiral \"Timeshifted\"");
         setsAliases.put("TSP", "Time Spiral");
         setsAliases.put("UDS", "Urza's Destiny");
         setsAliases.put("UGL", "Unglued");
@@ -250,17 +250,21 @@ public class WizardCardsImageSource implements CardImageSource {
                         String cardName = normalizeName(cardsImages.get(i).attr("alt"));
                         if (cardName != null && !cardName.isEmpty()) {
                             if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
-                                Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
-                                String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
-                                Document landDoc = Jsoup.connect(urlLandDocument).get();
-                                Elements variations = landDoc.select("a.variationlink");
-                                int landNumber = 1;
-                                for (Element variation : variations) {
-                                    Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
-                                     // ""
-                                    setLinks.put((cardName + landNumber).toLowerCase(), "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card");
-                                    landNumber++;
-                                }
+                            	Integer multiverseId = Integer.parseInt(cardsImages.get(i).attr("src").replaceAll("[^\\d]", ""));
+                            	String urlLandDocument = "http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=" + multiverseId;
+                            	Document landDoc = Jsoup.connect(urlLandDocument).get();
+                            	Elements variations = landDoc.select("a.variationlink");
+                            	if(!variations.isEmpty()) {
+                            		int landNumber = 1;
+                            		for (Element variation : variations) {
+                            			Integer landMultiverseId = Integer.parseInt(variation.attr("onclick").replaceAll("[^\\d]", ""));
+                            			// ""
+                            			setLinks.put((cardName + landNumber).toLowerCase(), "/Handlers/Image.ashx?multiverseid=" +landMultiverseId + "&type=card");
+                            			landNumber++;
+                            		}
+                            	} else {
+                            		setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
+                            	}
                             } else {
                                 setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src").substring(5));
                             }
@@ -276,6 +280,14 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     private String normalizeName(String name) {
+    	//Split card
+    	if(name.contains("//")) {
+    		name = name.substring(0, name.indexOf("(") - 1);
+    	}
+    	//Special timeshifted name
+    	if(name.startsWith("XX")) {
+    		name = name.substring(name.indexOf("(") + 1, name.length() - 1);
+    	}
         return name.replace("\u2014", "-").replace("\u2019", "'")
                 .replace("\u00C6", "AE").replace("\u00E6", "ae")
                 .replace("\u00C3\u2020", "AE")                
