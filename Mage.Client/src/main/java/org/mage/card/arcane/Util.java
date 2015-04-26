@@ -16,8 +16,8 @@ import javax.swing.SwingUtilities;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Util {
-    public static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
-    public static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
+    public static final boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
+    public static final boolean isWindows = !System.getProperty("os.name").toLowerCase().contains("windows");
 
     public static final ThreadPoolExecutor threadPool;
     static private int threadCount;
@@ -88,5 +88,20 @@ public class Util {
         } catch (Exception ex) {
             throw new RuntimeException("Error invoking runnable in UI thread.", ex);
         }
+    }
+    
+    public static int[] getIntArrayFromString(String stringData) {
+        int[] intArray = null;
+        if (stringData != null && !stringData.isEmpty()) {
+            String[] items = stringData.split(",");
+            int lengthW = items.length;
+            intArray = new int[lengthW];
+            for (int i = 0; i < lengthW; i++) {
+                try {
+                    intArray[i] = Integer.parseInt(items[i]);
+                } catch (NumberFormatException nfe) {}
+            }
+        } 
+        return intArray;
     }
 }

@@ -138,6 +138,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // pref settings of table settings and filtering
     public static final String KEY_TABLES_FILTER_SETTINGS = "tablePanelFilterSettings";
     public static final String KEY_TABLES_COLUMNS_WIDTH = "tablePanelColumnWidth";
+    public static final String KEY_TABLES_COLUMNS_ORDER = "tablePanelColumnSort";
     
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";

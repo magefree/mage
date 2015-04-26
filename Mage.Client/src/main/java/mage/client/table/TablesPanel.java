@@ -92,6 +92,7 @@ import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
+import org.mage.card.arcane.Util;
 
 /**
  *
@@ -133,7 +134,7 @@ public class TablesPanel extends javax.swing.JPanel {
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
         
-        TableTableModel.setColumnWidth(tableTables);
+        TableTableModel.setColumnWidthAndOrder(tableTables);
         
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
@@ -310,17 +311,21 @@ public class TablesPanel extends javax.swing.JPanel {
         
         // Column width
         StringBuilder columnWidthSettings = new StringBuilder();
+        StringBuilder columnOrderSettings = new StringBuilder();
         boolean firstValue = true;
         for (int i = 0; i < tableTables.getColumnModel().getColumnCount(); i++) {
             TableColumn column = tableTables.getColumnModel().getColumn(tableTables.convertColumnIndexToView(i));
             if (!firstValue) {
-                columnWidthSettings.append(",");                
+                columnWidthSettings.append(",");
+                columnOrderSettings.append(",");
             } else {
                 firstValue = false;
             }
             columnWidthSettings.append(column.getWidth());
+            columnOrderSettings.append(tableTables.convertColumnIndexToModel(i));
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, columnWidthSettings.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_COLUMNS_ORDER, columnOrderSettings.toString());
     }
 
     private void restoreDividerLocations() {
@@ -1182,36 +1187,30 @@ class TableTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    static public void setColumnWidth(JTable table) {
+    static public void setColumnWidthAndOrder(JTable table) {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
-        // read the saved column width
-        String widthsString = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, null);
-        int[] widths = null;
-        int length = 0;
-        if (widthsString != null && !widthsString.isEmpty()) {
-            String[] items = widthsString.split(",");
-            length = items.length;
-            widths = new int[length];
-            for (int i = 0; i < length; i++) {
-                try {
-                    widths[i] = Integer.parseInt(items[i]);
-                    if (widths[i] > 500) {
-                        widths[i] = 300;
-                    }
-                } catch (NumberFormatException nfe) {}
-            }
-        }        
         // set the column width from saved value or defaults        
+        int[] widths = Util.getIntArrayFromString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, null));
+        int lengthW = widths.length;
         int i = 0;
         for (int width : defaultColumnsWidth) {
-            if (length > i) {
+            if (lengthW > i) {
                 width = widths[i];
             }            
             TableColumn column = table.getColumnModel().getColumn(i++);
             column.setWidth(width);
             column.setPreferredWidth(width);
         }
+
+        // set the column order
+        int[] order = Util.getIntArrayFromString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_ORDER, null));
+        if (order != null && order.length == table.getColumnCount()) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                table.moveColumn(table.convertColumnIndexToView(order[j]), j);
+            }
+        }
+        
     }
     
     @Override
