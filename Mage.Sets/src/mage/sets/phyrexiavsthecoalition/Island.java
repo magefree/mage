@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ajanivsnicolbolas;
+package mage.sets.phyrexiavsthecoalition;
 
 import java.util.UUID;
 
@@ -33,21 +33,19 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
+public class Island extends mage.cards.basiclands.Island {
 
-
-public class Island1 extends mage.cards.basiclands.Island {
-
-    public Island1(UUID ownerId) {
-        super(ownerId, 79);
-        this.expansionSetCode = "DDH";
+    public Island(UUID ownerId) {
+        super(ownerId, 68);
+        this.expansionSetCode = "DDE";
     }
 
-    public Island1(final Island1 card) {
+    public Island(final Island card) {
         super(card);
     }
 
     @Override
-    public Island1 copy() {
-        return new Island1(this);
+    public Island copy() {
+        return new Island(this);
     }
 }

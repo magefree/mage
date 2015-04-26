@@ -33,19 +33,19 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Plains1 extends mage.cards.basiclands.Plains {
+public class Mountain extends mage.cards.basiclands.Mountain {
 
-    public Plains1(UUID ownerId) {
-        super(ownerId, 67);
+    public Mountain(UUID ownerId) {
+        super(ownerId, 69);
         this.expansionSetCode = "DDE";
     }
 
-    public Plains1(final Plains1 card) {
+    public Mountain(final Mountain card) {
         super(card);
     }
 
     @Override
-    public Plains1 copy() {
-        return new Plains1(this);
+    public Mountain copy() {
+        return new Mountain(this);
     }
 }

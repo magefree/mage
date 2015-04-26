@@ -35,19 +35,19 @@ import java.util.UUID;
  */
 
 
-public class Plains1 extends mage.cards.basiclands.Plains {
+public class Island extends mage.cards.basiclands.Island {
 
-    public Plains1(UUID ownerId) {
-        super(ownerId, 40);
+    public Island(UUID ownerId) {
+        super(ownerId, 79);
         this.expansionSetCode = "DDH";
     }
 
-    public Plains1(final Plains1 card) {
+    public Island(final Island card) {
         super(card);
     }
 
     @Override
-    public Plains1 copy() {
-        return new Plains1(this);
+    public Island copy() {
+        return new Island(this);
     }
 }
