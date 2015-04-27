@@ -27,21 +27,30 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import mage.constants.*;
+import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
+import mage.abilities.condition.common.SourceIsSpellCondition;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.DynamicCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -62,7 +71,7 @@ public class KentaroTheSmilingCat extends CardImpl {
         this.addAbility(new BushidoAbility(1));
         
         // You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KentaroTheSmilingCatCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KentaroTheSmilingCatCastingEffect()));
         
 
     }
@@ -75,50 +84,63 @@ public class KentaroTheSmilingCat extends CardImpl {
     public KentaroTheSmilingCat copy() {
         return new KentaroTheSmilingCat(this);
     }
+}  
 
-    //TODO : change CostModification to AlternativCost
-    private class KentaroTheSmilingCatCostReductionEffect extends CostModificationEffectImpl {
+class KentaroTheSmilingCatCastingEffect extends ContinuousEffectImpl {
+	
+	private static final FilterCard filterSamurai = new FilterCard();
+	
+	static {
+		filterSamurai.add(new SubtypePredicate("Samurai"));
+	}
+	
+    static final AlternativeCostSourceAbility alternativeCastingCostAbility = new AlternativeCostSourceAbility(
+    		SourceIsSpellCondition.getInstance(), null, filterSamurai, true, new ColorlessConvertedManaCost());
+	
+    public KentaroTheSmilingCatCastingEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost";
+    }
+    
+    public KentaroTheSmilingCatCastingEffect(final KentaroTheSmilingCatCastingEffect effect) {
+        super(effect);
+    }
 
-        private static final String effectText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost";
+    @Override
+    public KentaroTheSmilingCatCastingEffect copy() {
+        return new KentaroTheSmilingCatCastingEffect(this);
+    }
 
-        KentaroTheSmilingCatCostReductionEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
-            staticText = effectText;
-        }
-
-        KentaroTheSmilingCatCostReductionEffect(KentaroTheSmilingCatCostReductionEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source, Ability abilityToModify) {
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
             return true;
         }
-
-        @Override
-        public boolean applies(Ability abilityToModify, Ability source, Game game) {
-            if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
-                Ability spell = abilityToModify;
-                if (spell.getControllerId().equals(source.getControllerId())) {
-                    Card sourceCard = game.getCard(spell.getSourceId());
-                    if (sourceCard != null && sourceCard.hasSubtype("Samurai")) {
-                        String manaCostsString = "{" + sourceCard.getManaCost().convertedManaCost() + "}"; 
-                        Player player = game.getPlayer(spell.getControllerId());
-                        if (player != null && player.chooseUse(Outcome.Benefit, "Pay converted mana cost rather than pay the mana cost for Samurai creature?", game)) {
-                            spell.getManaCostsToPay().clear();
-                            spell.getManaCostsToPay().load(manaCostsString);
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public KentaroTheSmilingCatCostReductionEffect copy() {
-            return new KentaroTheSmilingCatCostReductionEffect(this);
-        }
-
+        return false;
     }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
+    }
+}
+
+class ColorlessConvertedManaCost implements DynamicCost {
+
+	@Override
+	public Cost getCost(Ability ability, Game game) {
+		return new GenericManaCost(ability.getManaCosts().convertedManaCost());
+	}
+
+	@Override
+	public String getText(Ability ability, Game game) {
+		return "Pay " + getCost(ability, game).getText() + " rather than " + ability.getManaCosts().getText() + " for Samurai?";
+	}
 }

@@ -131,13 +131,13 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetDash();
-                for (AlternativeCost2 evokeCost: alternativeSourceCosts) {
-                    if (evokeCost.canPay(ability, sourceId, controllerId, game) &&
-                        player.chooseUse(Outcome.Benefit, new StringBuilder(KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), game)) {
-                        activateDash(evokeCost, game);
+                for (AlternativeCost2 dashCost: alternativeSourceCosts) {
+                    if (dashCost.canPay(ability, sourceId, controllerId, game) &&
+                        player.chooseUse(Outcome.Benefit, new StringBuilder(KEYWORD).append(" the creature for ").append(dashCost.getText(true)).append(" ?").toString(), game)) {
+                        activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
-                        for (Iterator it = ((Costs) evokeCost).iterator(); it.hasNext();) {
+                        for (Iterator it = ((Costs) dashCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
                             if (cost instanceof ManaCostsImpl) {
                                 ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
@@ -170,12 +170,12 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
        StringBuilder sb = new StringBuilder();
        int numberCosts = 0;
        String remarkText = "";
-       for (AlternativeCost2 evokeCost: alternativeSourceCosts) {
+       for (AlternativeCost2 dashCost: alternativeSourceCosts) {
            if (numberCosts == 0) {
-               sb.append(evokeCost.getText(false));
-               remarkText = evokeCost.getReminderText();
+               sb.append(dashCost.getText(false));
+               remarkText = dashCost.getReminderText();
            } else {
-               sb.append(" and/or ").append(evokeCost.getText(true));
+               sb.append(" and/or ").append(dashCost.getText(true));
            }
            ++numberCosts;
        }
