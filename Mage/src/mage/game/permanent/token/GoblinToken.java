@@ -40,7 +40,7 @@ import mage.constants.CardType;
 public class GoblinToken extends Token {
 
     static List<String> imageSetCodes = Arrays.asList(
-        "M10", "C14", "KTK", "EVG"
+        "M10", "C14", "KTK", "EVG", "DTK"
     );
 
     public GoblinToken() {

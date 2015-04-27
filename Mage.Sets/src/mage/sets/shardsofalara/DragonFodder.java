@@ -44,8 +44,6 @@ public class DragonFodder extends CardImpl {
         super(ownerId, 97, "Dragon Fodder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-
         // Put two 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
     }
