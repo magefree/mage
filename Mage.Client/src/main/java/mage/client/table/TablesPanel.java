@@ -1199,17 +1199,14 @@ class TableTableModel extends AbstractTableModel {
         
         // set the column width from saved value or defaults        
         int[] widths = Util.getIntArrayFromString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, null));
-        if (widths != null) {
-            int lengthW = widths.length;
-            int i = 0;
-            for (int width : defaultColumnsWidth) {
-                if (lengthW > i) {
-                    width = widths[i];
-                }            
-                TableColumn column = table.getColumnModel().getColumn(i++);
-                column.setWidth(width);
-                column.setPreferredWidth(width);
-            }
+        int i = 0;
+        for (int width : defaultColumnsWidth) {
+            if (widths != null && widths.length > i) {
+                width = widths[i];
+            }            
+            TableColumn column = table.getColumnModel().getColumn(i++);
+            column.setWidth(width);
+            column.setPreferredWidth(width);
         }
 
         // set the column order
