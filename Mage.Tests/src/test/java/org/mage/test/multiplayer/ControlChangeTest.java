@@ -43,6 +43,7 @@ public class ControlChangeTest extends CardTestMultiPlayerBase {
     /**
      * Checks that the change of max hand size changes if the control
      * of Jin-Gitaxias, Core Augur changes.
+     * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=16910&p=177481#p177481
      */
     @Test
     public void testSimple() {
