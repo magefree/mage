@@ -51,6 +51,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
     protected String rule;
     protected FilterCard filter;
     protected boolean onlyMana;
+    protected DynamicCost dynamicCost;
 
     public AlternativeCostSourceAbility(Cost cost) {
         this(cost, null);
@@ -78,12 +79,22 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
      */
     public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter, boolean onlyMana) {
         super(Zone.ALL, null);
-        this.convertToAlternativeCostAndAdd(cost);
+        this.addCost(cost);
         this.setRuleAtTheTop(true);
         this.condition = condition;
         this.rule = rule;
         this.filter = filter;
         this.onlyMana = onlyMana;
+    }
+    
+    public AlternativeCostSourceAbility(Condition condition, String rule, FilterCard filter, boolean onlyMana, DynamicCost dynamicCost) {
+        super(Zone.ALL, null);
+        this.setRuleAtTheTop(true);
+        this.condition = condition;
+        this.rule = rule;
+        this.filter = filter;
+        this.onlyMana = onlyMana;
+        this.dynamicCost = dynamicCost;
     }
 
     public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
@@ -93,18 +104,19 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
         this.rule = ability.rule;
         this.filter = ability.filter;
         this.onlyMana = ability.onlyMana;
+        this.dynamicCost = ability.dynamicCost;
     }
 
     @Override
     public void addCost(Cost cost) {
-        this.convertToAlternativeCostAndAdd(cost);
+    	AlternativeCost2 alternativeCost = convertToAlternativeCost(cost);
+    	if(alternativeCost != null) {
+            this.alternateCosts.add(alternativeCost);	
+    	}
     }
 
-    private void convertToAlternativeCostAndAdd(Cost cost) {
-        if (cost != null) {
-            AlternativeCost2 alternativeCost = new AlternativeCost2Impl(null, null, cost);
-            this.alternateCosts.add(alternativeCost);
-        }
+    private AlternativeCost2 convertToAlternativeCost(Cost cost) {
+    	return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
     }
 
     @Override
@@ -131,13 +143,29 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
             }
             Player player = game.getPlayer(ability.getControllerId());
             if (player != null) {
-                if (alternateCosts.canPay(ability, ability.getSourceId(), ability.getControllerId(), game) &&
-                        player.chooseUse(Outcome.Detriment, alternateCosts.isEmpty() ? "Cast without paying its mana cost?":"Pay alternative costs? (" + alternateCosts.getText() +")", game)) {
+            	Costs<AlternativeCost2> alternativeCosts;
+            	if(dynamicCost != null) {
+            		alternativeCosts = new CostsImpl<>();
+            		alternativeCosts.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));
+            	} else {
+            		alternativeCosts = this.alternateCosts;
+            	}
+            	
+            	String costChoiceText;
+            	if(dynamicCost != null) {
+            		costChoiceText = dynamicCost.getText(ability, game);
+            	} else {
+            		costChoiceText = alternativeCosts.isEmpty() ? "Cast without paying its mana cost?" : "Pay alternative costs? (" + alternativeCosts.getText() +")";
+            	}
+            	
+            	
+                if (alternativeCosts.canPay(ability, ability.getSourceId(), ability.getControllerId(), game) &&
+                        player.chooseUse(Outcome.Benefit, costChoiceText, game)) {
                     ability.getManaCostsToPay().clear();
                     if(!onlyMana) {
                         ability.getCosts().clear();
                     }
-                    for (Cost cost : alternateCosts) {
+                    for (Cost cost : alternativeCosts) {
                         AlternativeCost2 alternateCost = (AlternativeCost2) cost;
                         alternateCost.activate();
                         for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {
@@ -161,7 +189,14 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public boolean isActivated(Ability source, Game game) {
-        for (AlternativeCost2 cost : alternateCosts) {
+    	Costs<AlternativeCost2> alternativeCosts;
+    	if(dynamicCost != null) {
+    		alternativeCosts = new CostsImpl<>();
+    		alternativeCosts.add(convertToAlternativeCost(dynamicCost.getCost(source, game)));
+    	} else {
+    		alternativeCosts = this.alternateCosts;
+    	}
+        for (AlternativeCost2 cost : alternativeCosts) {
             if (cost.isActivated(game)) {
                 return true;
             }
