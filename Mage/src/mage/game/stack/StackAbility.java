@@ -408,7 +408,12 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported.");
+    }
+
+    @Override
+    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+        throw new UnsupportedOperationException("Not supported.");
     }
 
     @Override

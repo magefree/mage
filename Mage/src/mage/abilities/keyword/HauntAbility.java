@@ -143,7 +143,7 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
     
     private boolean creatureHaunt;
     
-    // TODO: It's not checked yet, if the Haunt spell was resoved (and not countered or removed from stack).
+    // TODO: It's not checked yet, if the Haunt spell has resolved (and was not countered or removed from stack).
     
     public HauntExileAbility(boolean creatureHaunt) {
         super(creatureHaunt ? Zone.BATTLEFIELD: Zone.STACK, Zone.GRAVEYARD, new HauntEffect(), null, false);
@@ -159,12 +159,16 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {       
         boolean fromOK = true;
-        if (creatureHaunt) {
+        Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
+        if (creatureHaunt && sourcePermanent == null) {
             // check it was previously on battlefield
-            fromOK = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) != null;
+            fromOK = false;
         } 
+        if (!this.hasSourceObjectAbility(game, sourcePermanent, event)) {
+            return false;
+        }         
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
         return fromOK && after != null && Zone.GRAVEYARD.match(after);

@@ -57,7 +57,7 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
     
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return true;
+        return game.getState().getZone(getSourceId()).equals(Zone.HAND) && hasSourceObjectAbility(game, source, event);
     }
     
     @Override

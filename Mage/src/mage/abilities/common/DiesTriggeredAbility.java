@@ -58,6 +58,9 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility {
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         // check it was previously on battlefield
         Permanent before = ((ZoneChangeEvent) event).getTarget();
+        if (!this.hasSourceObjectAbility(game, before, event)) {
+            return false;
+        }        
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
         return before != null && after != null && Zone.GRAVEYARD.match(after);

@@ -389,6 +389,17 @@ public interface Ability extends Controllable, Serializable {
     boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 
     /**
+     * Returns true if the source object has currently the ability 
+     * (e.g. The object can have lost all or some abilities for some time  (e.g. Turn to Frog)
+     * 
+     * @param game
+     * @param source
+     * @param event
+     * @return 
+     */
+    boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+
+    /**
      * Returns true if this ability has to be shown as topmost of all the rules of the object
      *
      * @return

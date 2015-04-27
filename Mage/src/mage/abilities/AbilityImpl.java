@@ -873,6 +873,9 @@ public abstract class AbilityImpl implements Ability {
      */
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (!this.hasSourceObjectAbility(game, source, event)) {
+            return false;
+        }
         if (zone.equals(Zone.COMMAND)) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
@@ -884,18 +887,31 @@ public abstract class AbilityImpl implements Ability {
             }
         }
 
-        MageObject object;
         UUID parameterSourceId;
         // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
         if (this instanceof MageSingleton && source != null) {
-            object = source;
             parameterSourceId = source.getId();
         } else {
-            object = game.getObject(getSourceId());
             parameterSourceId = getSourceId();
         }
-
+        // check agains shortLKI for effects that move multiple object at the same time (e.g. destroy all)
+        if (game.getShortLivingLKI(getSourceId(), getZone())) {
+            return true;
+        }
+        // check against current state
+        Zone test = game.getState().getZone(parameterSourceId);
+        return test != null && zone.match(test);
+    }
+    
+    @Override
+    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
+        MageObject object = source;
+        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
+        // so will use the sourceId of the object itself that came as a parameter if it is not null
+        if (object == null) {
+            object = game.getObject(getSourceId());
+        }
         if (object != null && !object.getAbilities().contains(this)) {
             if (object instanceof Permanent) {
                 return false;
@@ -907,15 +923,9 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
-        // check agains shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.getShortLivingLKI(getSourceId(), getZone())) {
-            return true;
-        }
-        // check against current state
-        Zone test = game.getState().getZone(parameterSourceId);
-        return test != null && zone.match(test);
+        return true;
     }
-
+    
     @Override
     public String toString() {
         return getRule();

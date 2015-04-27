@@ -70,7 +70,16 @@ public class DiesThisOrAnotherCreatureTriggeredAbility extends TriggeredAbilityI
     
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD || game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD) != null; 
+        Permanent sourcePermanent;
+        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
+            sourcePermanent = game.getPermanent(getSourceId());
+        } else {
+            sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (sourcePermanent == null) {
+            return false;
+        }
+        return hasSourceObjectAbility(game, sourcePermanent, event);
     }
     
     @Override

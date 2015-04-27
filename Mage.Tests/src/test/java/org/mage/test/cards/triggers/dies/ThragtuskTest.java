@@ -83,7 +83,6 @@ public class ThragtuskTest extends CardTestPlayerBase {
      */
     
     @Test
-    @Ignore  // test fails because of bug
     public void testPhyrexianMetamorphTurnToFrog() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types
@@ -91,6 +90,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
+        addCard(Zone.HAND, playerB, "Turn to Frog", 1);
         addCard(Zone.HAND, playerB, "Public Execution", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
 
@@ -104,7 +104,10 @@ public class ThragtuskTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertGraveyardCount(playerB,"Turn to Frog", 1);
+        
         assertPermanentCount(playerB, "Thragtusk", 1);
+        assertPermanentCount(playerA, "Thragtusk", 0);
 
         assertGraveyardCount(playerA,"Phyrexian Metamorph", 1);
         assertGraveyardCount(playerB,"Public Execution", 1);

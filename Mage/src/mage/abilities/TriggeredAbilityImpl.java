@@ -35,8 +35,10 @@ import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -44,6 +46,8 @@ import mage.players.Player;
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
+    private static final transient Logger logger = Logger.getLogger(TriggeredAbilityImpl.class);
+    
     protected boolean optional;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
@@ -161,6 +165,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+      
         /**
          * 603.6. Trigger events that involve objects changing zones are called “zone-change triggers.”
          *        Many abilities with zone-change triggers attempt to do something to that object after it
@@ -176,15 +181,24 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (event != null && event.getTargetId() != null && event.getTargetId().equals(getSourceId())) {
             switch (event.getType()) {
                 case ZONE_CHANGE:
-                    if (source == null && ((ZoneChangeEvent)event).getTarget() != null) {
-                        source = ((ZoneChangeEvent)event).getTarget();
-                    }
                 case DESTROYED_PERMANENT:
-                // case LOST_CONTROL:
+                    if (event.getType().equals(EventType.DESTROYED_PERMANENT)) {
+                        source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
+                    } else {
+                        if (((ZoneChangeEvent)event).getTarget() != null) {
+                            source = ((ZoneChangeEvent)event).getTarget();
+                            if (source.getName().equals("Thragtusk")) {
+                                logger.info(source.getAbilities().toString());
+                            }
+                        } else {                   
+                            source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent)event).getZone());
+                        }
+                    }
+                        
                 case PHASED_OUT:
                 case PHASED_IN:
                 if (this.zone == Zone.ALL || game.getLastKnownInformation(getSourceId(), zone) != null) {
-                    return true;
+                    return this.hasSourceObjectAbility(game, source, event);
                 }
             }
         }
