@@ -137,7 +137,7 @@ class IcefallRegentEffect extends ContinuousRuleModifyingEffectImpl {
         // event will happen before this effect is applied ever)
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null || !sourcePermanent.getControllerId().equals(source.getControllerId())) {
-            this.used = true;
+            discard();
             return false;
         }
         if (event.getType() == GameEvent.EventType.LOST_CONTROL) {

@@ -99,11 +99,11 @@ class MirrorMockeryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment == null || enchantment.getAttachedTo() == null) {
             return false;
         }
-        Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+        Permanent enchanted = game.getPermanentOrLKIBattlefield(enchantment.getAttachedTo());
         if (enchanted != null) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(enchanted);
