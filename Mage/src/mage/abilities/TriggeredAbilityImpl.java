@@ -38,7 +38,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -46,8 +45,6 @@ import org.apache.log4j.Logger;
  */
 public abstract class TriggeredAbilityImpl extends AbilityImpl implements TriggeredAbility {
 
-    private static final transient Logger logger = Logger.getLogger(TriggeredAbilityImpl.class);
-    
     protected boolean optional;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
@@ -187,9 +184,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     } else {
                         if (((ZoneChangeEvent)event).getTarget() != null) {
                             source = ((ZoneChangeEvent)event).getTarget();
-                            if (source.getName().equals("Thragtusk")) {
-                                logger.info(source.getAbilities().toString());
-                            }
                         } else {                   
                             source = game.getLastKnownInformation(getSourceId(), ((ZoneChangeEvent)event).getZone());
                         }

@@ -46,7 +46,7 @@ public class ThragtuskTest extends CardTestPlayerBase {
      * Test if a Thragtusk is copied by a PhyrexianMetamorph
      * that both triggers cotrrect work
      */
-    @Test
+    @Test    
     public void testPhyrexianMetamorph() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types
@@ -88,8 +88,9 @@ public class ThragtuskTest extends CardTestPlayerBase {
         // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types
         addCard(Zone.HAND, playerA, "Phyrexian Metamorph", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
+        addCard(Zone.HAND, playerB, "Tortoise Formation", 1);
         addCard(Zone.HAND, playerB, "Turn to Frog", 1);
         addCard(Zone.HAND, playerB, "Public Execution", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Thragtusk", 1);
@@ -97,13 +98,17 @@ public class ThragtuskTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
         setChoice(playerA, "Yes");        
         setChoice(playerA, "Thragtusk");
+
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Tortoise Formation");
         
-        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Turn to Frog", "Thragtusk");
+        
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerB, "Turn to Frog", "Thragtusk");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Public Execution", "Thragtusk");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
+        assertGraveyardCount(playerB,"Tortoise Formation", 1);
         assertGraveyardCount(playerB,"Turn to Frog", 1);
         
         assertPermanentCount(playerB, "Thragtusk", 1);
@@ -118,5 +123,5 @@ public class ThragtuskTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Beast", 0);                
 
     }  
-    
+
 }
