@@ -34,15 +34,15 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -104,7 +104,7 @@ class PoxEffect extends OneShotEffect {
                 if (player != null) {
                     int cardsToDiscard = (int) Math.ceil(player.getHand().size() / 3.0);
                     if (cardsToDiscard > 0) {
-                        player.discard(cardsToDiscard, source, game);
+                        player.discard(cardsToDiscard, false, source, game);
                     }
                 }
             }
@@ -112,12 +112,11 @@ class PoxEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    filter.add(new ControllerIdPredicate(playerId));
-                    int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 3.0);
+                    FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+                    int creaturesToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 3.0);
                     if (creaturesToSacrifice > 0) {
-                        Target target = new TargetCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
-                        target.choose(Outcome.Sacrifice, playerId, source.getSourceId(), game);
+                        Target target = new TargetControlledCreaturePermanent(creaturesToSacrifice, creaturesToSacrifice, filter, true);
+                        target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {
@@ -131,12 +130,11 @@ class PoxEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    FilterLandPermanent filter = new FilterLandPermanent();
-                    filter.add(new ControllerIdPredicate(playerId));
-                    int landsToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) / 3.0);
+                    FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
+                    int landsToSacrifice = (int) Math.ceil(game.getBattlefield().count(filter, source.getSourceId(), player.getId(), game) / 3.0);
                     if (landsToSacrifice > 0) {
-                        Target target = new TargetLandPermanent(landsToSacrifice, landsToSacrifice, filter, true);
-                        target.choose(Outcome.Sacrifice, playerId, source.getSourceId(), game);
+                        Target target = new TargetControlledPermanent(landsToSacrifice, landsToSacrifice, filter, true);
+                        target.chooseTarget(Outcome.Sacrifice, playerId, source, game);
                         for (UUID permanentId : target.getTargets()) {
                             Permanent permanent = game.getPermanent(permanentId);
                             if (permanent != null) {

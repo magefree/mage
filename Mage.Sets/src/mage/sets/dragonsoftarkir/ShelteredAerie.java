@@ -31,11 +31,11 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -66,7 +66,9 @@ public class ShelteredAerie extends CardImpl {
 
         // Enchanted land has "{T}: Add two mana of any one color to your mana pool."
         Ability gainedAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
+        effect.setText("Enchanted land has \"{T}: Add two mana of any one color to your mana pool.\"");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
 
