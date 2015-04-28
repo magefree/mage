@@ -141,6 +141,6 @@ class ColorlessConvertedManaCost implements DynamicCost {
 
 	@Override
 	public String getText(Ability ability, Game game) {
-		return "Pay " + getCost(ability, game).getText() + " rather than " + ability.getManaCosts().getText() + " for Samurai?";
+		return "Pay " + getCost(ability, game).getText() + " rather than " + ability.getManaCosts().getText() + " for Samurai card?";
 	}
 }
