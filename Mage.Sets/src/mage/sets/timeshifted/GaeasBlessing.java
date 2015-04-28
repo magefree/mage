@@ -151,7 +151,6 @@ class GaeasBlessingTarget extends TargetCard {
 class GaeasBlessingTriggeredAbility extends ZoneChangeTriggeredAbility {
     public GaeasBlessingTriggeredAbility() {
         super(Zone.LIBRARY, Zone.GRAVEYARD, new GaeasBlessingGraveToLibraryEffect(), "",  false);
-        this.zone = Zone.ALL;
     }
 
     public GaeasBlessingTriggeredAbility(final GaeasBlessingTriggeredAbility ability) {

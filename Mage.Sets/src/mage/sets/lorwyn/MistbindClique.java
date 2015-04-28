@@ -63,7 +63,6 @@ public class MistbindClique extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -73,7 +72,6 @@ public class MistbindClique extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Champion a Faerie
         this.addAbility(new ChampionAbility(this, "Faerie"));
-
         // When a Faerie is championed with Mistbind Clique, tap all lands target player controls.
         this.addAbility(new MistbindCliqueAbility());
 
@@ -93,7 +91,8 @@ public class MistbindClique extends CardImpl {
 class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     public MistbindCliqueAbility() {
-        super(Zone.BATTLEFIELD, Zone.EXILED, new MistbindCliqueTapEffect(), "When a Faerie is championed with {this}, ", false);
+        // ability has to trigger independant where the source object is now
+        super(Zone.ALL, Zone.BATTLEFIELD, Zone.EXILED, new MistbindCliqueTapEffect(), "When a Faerie is championed with {this}, ", false);
         this.addTarget(new TargetPlayer());
     }
 
@@ -102,24 +101,22 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
     }
     
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD;
-    }
-
-    @Override
     public MistbindCliqueAbility copy() {
         return new MistbindCliqueAbility(this);
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getSourceId() != null && event.getSourceId().equals(getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.EXILED) {
-                if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie")) {
-                    return true;
-                }
-            }
+        if (event.getSourceId() != null && event.getSourceId().equals(getSourceId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;            
+            if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie")) {
+                return true;
+            }            
         }
         return false;
     }

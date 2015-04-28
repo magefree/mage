@@ -73,7 +73,6 @@ public class Narcomoeba extends CardImpl {
 class NarcomoebaAbility extends ZoneChangeTriggeredAbility {
     public NarcomoebaAbility() {
         super(Zone.LIBRARY, Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), "",  true);
-        this.zone = Zone.ALL;
     }
 
     public NarcomoebaAbility(final NarcomoebaAbility ability) {

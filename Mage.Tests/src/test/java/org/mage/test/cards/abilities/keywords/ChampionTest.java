@@ -100,4 +100,33 @@ public class ChampionTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Mistblind clique land tap ability does not work
+     */
+    
+    @Test
+    public void testMistbindClique() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Zephyr Sprite");
+        // Flash, Flying
+        // Champion a Faerie
+        // When a Faerie is championed with Mistbind Clique, tap all lands target player controls.
+        addCard(Zone.HAND, playerA, "Mistbind Clique");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
+        addTarget(playerA, playerB);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mistbind Clique");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Mistbind Clique", 1);
+        assertExileCount("Zephyr Sprite", 1);
+        
+        assertTapped("Plains", true);
+
+    }
+
+    
 }
