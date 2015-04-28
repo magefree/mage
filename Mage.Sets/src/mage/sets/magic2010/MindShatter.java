@@ -28,15 +28,12 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.TargetPlayer;
 
 /**
@@ -52,8 +49,8 @@ public class MindShatter extends CardImpl {
         this.color.setBlack(true);
 
         // Target player discards X cards at random.
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new MindShatterEffect());
     }
 
     public MindShatter(final MindShatter card) {
@@ -63,38 +60,5 @@ public class MindShatter extends CardImpl {
     @Override
     public MindShatter copy() {
         return new MindShatter(this);
-    }
-}
-
-class MindShatterEffect extends OneShotEffect {
-
-    public MindShatterEffect() {
-        super(Outcome.Discard);
-        this.staticText = "Target player discards X cards at random";
-    }
-
-    public MindShatterEffect(final MindShatterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MindShatterEffect copy() {
-        return new MindShatterEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            int amount = Math.min(source.getManaCostsToPay().getX(), player.getHand().size());
-            for (int i = 0; i < amount; i++) {
-                Card card = player.getHand().getRandom(game);
-                if (card != null) {
-                    player.discard(card, source, game);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
