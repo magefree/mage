@@ -138,7 +138,7 @@
                 <configuration>
                     <sources>
                         <source>
-                            <basedir>src/main/java</basedir>
+                            <basedir>${project.basedir}/src/main/java</basedir>
                         </source>
                     </sources>
                     <complianceLevel>1.6</complianceLevel>
