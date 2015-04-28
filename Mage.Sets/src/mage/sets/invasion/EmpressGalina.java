@@ -56,7 +56,7 @@ public class EmpressGalina extends CardImpl {
     }
 
     public EmpressGalina(UUID ownerId) {
-        super(ownerId, 54, "Empress Galina", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        super(ownerId, 54, "Empress Galina", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "INV";
         this.supertype.add("Legendary");
         this.subtype.add("Merfolk");
