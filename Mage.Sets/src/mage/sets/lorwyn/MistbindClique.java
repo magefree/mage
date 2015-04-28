@@ -29,11 +29,13 @@ package mage.sets.lorwyn;
 
 import java.util.List;
 import java.util.UUID;
+
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -97,6 +99,11 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     public MistbindCliqueAbility(MistbindCliqueAbility ability) {
         super(ability);
+    }
+    
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD;
     }
 
     @Override
