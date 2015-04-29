@@ -32,6 +32,8 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertLife(playerA, 20);
         assertLife(playerB, 14);
     }
 

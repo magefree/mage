@@ -34,6 +34,7 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -46,8 +47,10 @@ import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -76,9 +79,7 @@ public class NarsetTranscendent extends CardImpl {
         
         // -2: When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
         this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new NarsetTranscendentTriggeredAbility()), -2));
-        
-        
-        
+                       
         // -9:You get an emblem with "Your opponents can't cast noncreature spells."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NarsetTranscendentEmblem()), -9));
     }
@@ -132,11 +133,10 @@ class NarsetTranscendentEffect1 extends OneShotEffect {
     }
 }
 
-
 class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
 
     public NarsetTranscendentTriggeredAbility() {
-        super(new NarsetTranscendentGainAbilityEffect(), Duration.EndOfTurn, true);
+        super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
     }
 
     private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
@@ -175,33 +175,52 @@ class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
     }
 }
 
-class NarsetTranscendentGainAbilityEffect extends OneShotEffect {
+class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
 
-    private final Ability ability;
-
-    public NarsetTranscendentGainAbilityEffect() {
-        super(Outcome.AddAbility);
-        this.ability = new ReboundAbility();
+    public NarsetTranscendentGainReboundEffect() {
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "it gains rebound";
     }
 
-    public NarsetTranscendentGainAbilityEffect(final NarsetTranscendentGainAbilityEffect effect) {
+    public NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
         super(effect);
-        this.ability = effect.ability;
     }
 
     @Override
-    public NarsetTranscendentGainAbilityEffect copy() {
-        return new NarsetTranscendentGainAbilityEffect(this);
+    public NarsetTranscendentGainReboundEffect copy() {
+        return new NarsetTranscendentGainReboundEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getState().getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            ReboundAbility.addReboundEffectToSpellIfMissing(spell);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+            if (spell != null) {
+                Card card = spell.getCard();
+                if (card != null) {
+                    addReboundAbility(card, source, game);
+                }
+            } else {
+                discard();
+            }
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    private void addReboundAbility(Card card, Ability source, Game game) {
+        boolean found = false;
+        for (Ability ability : card.getAbilities()) {
+            if (ability instanceof ReboundAbility) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            Ability ability = new ReboundAbility();
+            game.getState().addOtherAbility(card, ability);
+        }
     }
 }
 

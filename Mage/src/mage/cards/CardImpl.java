@@ -461,6 +461,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 game.rememberLKI(mainCard.getId(), event.getFromZone(), this);
             }
             game.getStack().push(new Spell(this, ability.copy(), controllerId, event.getFromZone()));
+            updateZoneChangeCounter(game);
             setZone(event.getToZone(), game);
             game.fireEvent(event);
             return game.getState().getZone(mainCard.getId()) == Zone.STACK;

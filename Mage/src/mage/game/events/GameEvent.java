@@ -99,7 +99,17 @@ public class GameEvent {
         GAIN_LIFE, GAINED_LIFE,
         LOSE_LIFE, LOST_LIFE,
         PLAY_LAND, LAND_PLAYED,
-        CAST_SPELL, SPELL_CAST,
+        CAST_SPELL, 
+        
+        /* SPELL_CAST
+            targetId    id of the spell that's cast
+            sourceId    sourceId of the spell that's cast
+            playerId    player that casts the spell
+            amount      not used for this event
+            flag        not used for this event
+        */
+        SPELL_CAST,
+        
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         ADD_MANA, MANA_ADDED, 
         
@@ -108,7 +118,7 @@ public class GameEvent {
             sourceId    sourceId of the mana source
             playerId    controller of the ability the mana was paid for 
             amount      not used for this event
-            flag        indicates a special condition (e.g. TRUE if it's a colored mana from Cavern of Souls)
+            flag        indicates a special condition 
         */
         MANA_PAYED, 
 

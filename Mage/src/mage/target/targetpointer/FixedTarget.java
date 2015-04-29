@@ -65,4 +65,9 @@ public class FixedTarget implements TargetPointer {
     public UUID getTarget() {
         return target;
     }
+
+    public int getZoneChangeCounter() {
+        return zoneChangeCounter;
+    }
+    
 }

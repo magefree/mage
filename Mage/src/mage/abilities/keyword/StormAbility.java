@@ -28,6 +28,7 @@
 
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -73,6 +74,7 @@ public class StormAbility extends TriggeredAbilityImpl {
             if (spell instanceof Spell) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("StormSpell", spell);
+                    effect.setValue("StormSpellRef", new MageObjectReference(spell.getId(), game));
                 }
                 return true;
             }
@@ -98,20 +100,23 @@ class StormEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) this.getValue("StormSpell");
-        if (spell != null) {
+        MageObjectReference spellRef = (MageObjectReference) this.getValue("StormSpellRef");
+        if (spellRef != null) {
             CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-
-            int stormCount = watcher.getSpellOrder(spell, game) - 1;
+            int stormCount = watcher.getSpellOrder(spellRef, game) - 1;
             if (stormCount > 0) {
-                if (!game.isSimulation())
-                    game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
-                for (int i = 0; i < stormCount; i++) {
-                    Spell copy = spell.copySpell();
-                    copy.setControllerId(source.getControllerId());
-                    copy.setCopiedSpell(true);
-                    game.getStack().push(copy);
-                    copy.chooseNewTargets(game, source.getControllerId());
+                Spell spell = (Spell) this.getValue("StormSpell");
+                if (spell != null) {
+                    if (!game.isSimulation()) {
+                        game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
+                    }
+                    for (int i = 0; i < stormCount; i++) {
+                        Spell copy = spell.copySpell();
+                        copy.setControllerId(source.getControllerId());
+                        copy.setCopiedSpell(true);
+                        game.getStack().push(copy);
+                        copy.chooseNewTargets(game, source.getControllerId());
+                    }
                 }
             }
             return true;

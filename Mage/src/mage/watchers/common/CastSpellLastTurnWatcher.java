@@ -115,11 +115,11 @@ public class CastSpellLastTurnWatcher extends Watcher {
        }
     }
 
-    public int getSpellOrder(Spell spell, Game game) {
+    public int getSpellOrder(MageObjectReference spell, Game game) {
        int index = 0;
        for (MageObjectReference mor : spellsCastThisTurnInOrder) {
            index++;
-           if (mor.refersTo(spell, game)) {
+           if (mor.equals(spell)) {
                return index;
            }
        }

@@ -27,29 +27,30 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.Iterator;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.watchers.Watcher;
-
-import java.util.Iterator;
-import java.util.UUID;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.players.Player;
+
 
 /**
  * @author magenoxx_at_gmail.com
@@ -132,51 +133,8 @@ class GainReboundEffect extends ContinuousEffectImpl {
             }
             if (!found) {
                 Ability ability = new ReboundAbility();
-//                card.addAbility(ability);
-                ability.setControllerId(source.getControllerId());
-                ability.setSourceId(card.getId());
                 game.getState().addOtherAbility(card, ability);
             }
         }
     }
 }
-
-//class AttachedReboundAbility extends ReboundAbility {}
-
-//class LeavesBattlefieldWatcher extends Watcher {
-//
-//    public LeavesBattlefieldWatcher() {
-//        super("LeavesBattlefieldWatcher", WatcherScope.CARD);
-//    }
-//
-//    public LeavesBattlefieldWatcher(final LeavesBattlefieldWatcher watcher) {
-//        super(watcher);
-//    }
-//
-//    @Override
-//    public void watch(GameEvent event, Game game) {
-//        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-//            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-//            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-//                Player player = game.getPlayer(this.getControllerId());
-//                if (player != null) {
-//                    for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
-//                        Iterator<Ability> it = card.getAbilities().iterator();
-//                        while (it.hasNext()) {
-//                            if (it.next() instanceof AttachedReboundAbility) {
-//                                it.remove();
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public LeavesBattlefieldWatcher copy() {
-//        return new LeavesBattlefieldWatcher(this);
-//    }
-//
-//}
-

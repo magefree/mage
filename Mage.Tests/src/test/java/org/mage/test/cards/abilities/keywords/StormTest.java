@@ -30,7 +30,6 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -137,4 +136,32 @@ public class StormTest extends CardTestPlayerBase {
         assertLife(playerB, 19);
     }
     
+    /**
+     * If a spell with storm gets countered, the strom trigger is also stifled, which isn't how its supposed to work.
+     * For example a Chalic of the Void set to 1 counters Flusterstorm and also counters the storm trigger, which shouldn't happen
+     */
+    
+    
+    @Test
+    public void testStormSpellCountered() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        // Grapeshot deals 1 damage to target creature or player.
+        // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+        addCard(Zone.HAND, playerA, "Grapeshot");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+
+        addCard(Zone.HAND, playerB, "Counterspell");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grapeshot", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Counterspell", "Grapeshot");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 16);  // 3 (Lightning Bolt) + 1 from Storm copied Grapeshot
+    }
+            
 }
