@@ -27,7 +27,6 @@
  */
 package mage.abilities.condition.common;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
