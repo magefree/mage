@@ -29,7 +29,7 @@ package mage.sets.archenemy;
 
 import java.util.UUID;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.keyword.FatesealEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,10 +46,8 @@ public class SpinIntoMyth extends CardImpl {
         super(ownerId, 8, "Spin into Myth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "ARC";
 
-        this.color.setBlue(true);
-
         // Put target creature on top of its owner's library, then fateseal 2.
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         Effect effect = new FatesealEffect(2);
         effect.setText("then fateseal 2. <i>(To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)</i>");
