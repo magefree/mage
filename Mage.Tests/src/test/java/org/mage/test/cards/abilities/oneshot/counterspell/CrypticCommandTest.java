@@ -80,5 +80,44 @@ public class CrypticCommandTest extends CardTestPlayerBase {
         assertHandCount(playerB, 0); // Because Cryptic Command has no legal target playerB does not draw a card and has 0 cards in hand
         
     }
-    
+     /**
+     * Game is not letting me play Ricochet Trap targetting oponent's Cryptic Command,
+     * modes 1 and 4. It only has one target and should be allowed     
+     */
+    @Test
+    public void testCommandChangeTarget() {
+        addCard(Zone.HAND, playerA, "Thoughtseize");
+        // Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Ricochet Trap");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        
+        addCard(Zone.HAND, playerB, "Cryptic Command");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thoughtseize", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cryptic Command", "Thoughtseize");
+        setModeChoice(playerB, "1"); // Counter target spell
+        setModeChoice(playerB, "4"); // Draw a card
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ricochet Trap", "Cryptic Command");
+        addTarget(playerA, "Lightning Bolt");
+        
+        setStopAt(1, PhaseStep.CLEANUP);
+        execute();
+
+        assertLife(playerA, 18); // -2 from Thoughtseize
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Ricochet Trap", 1);
+        assertGraveyardCount(playerA, "Thoughtseize", 1);
+        assertGraveyardCount(playerB, "Cryptic Command", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+
+        assertHandCount(playerB, 1); // card drawn from Cryptic Command
+        
+    }
 }
