@@ -178,25 +178,15 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     protected boolean isColoredPaid(ColoredManaSymbol mana) {
         switch (mana) {
             case B:
-                if (this.payment.getBlack() > 0) {
-                    return true;
-                }
+                return this.payment.getBlack() > 0;
             case U:
-                if (this.payment.getBlue() > 0) {
-                    return true;
-                }
+                return this.payment.getBlue() > 0;
             case W:
-                if (this.payment.getWhite() > 0) {
-                    return true;
-                }
+                return this.payment.getWhite() > 0;
             case G:
-                if (this.payment.getGreen() > 0) {
-                    return true;
-                }
+                return this.payment.getGreen() > 0;
             case R:
-                if (this.payment.getRed() > 0) {
-                    return true;
-                }
+                return this.payment.getRed() > 0;
         }
         return false;
     }
