@@ -195,4 +195,38 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
         
         
     }
+    
+    /**
+     * Tests if Lazav remains a copy of the creature after it is exiled
+     */
+    @Test
+    public void testCopyCreatureExiled() {
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        // Codex Shredder - Artifact
+        // {T}: Target player puts the top card of his or her library into his or her graveyard.
+        // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        
+        addCard(Zone.HAND, playerA, "Rest in Peace", 1);
+
+        // Flying 3/2
+        addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
+        skipInitShuffling();
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rest in Peace");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
+        assertPowerToughness(playerA, "Lazav, Dimir Mastermind", 3, 2);
+
+        Permanent lazav = getPermanent("Lazav, Dimir Mastermind", playerA.getId());
+        Assert.assertTrue(lazav.getSubtype().contains("Griffin"));
+        Assert.assertTrue("Lazav, Dimir Mastermind must have flying",lazav.getAbilities().contains(FlyingAbility.getInstance()));
+    }
 }
