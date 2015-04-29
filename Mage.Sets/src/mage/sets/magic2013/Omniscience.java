@@ -29,6 +29,7 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.CompoundCondition;
@@ -36,6 +37,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceIsSpellCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -96,7 +98,7 @@ class OmniscienceCastingEffect extends ContinuousEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.getAlternativeSourceCosts().add(new AlternativeCostSourceAbility(
-                    null, new CompoundCondition(SourceIsSpellCondition.getInstance(), new SpellIsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
+                    null, new CompoundCondition(SourceIsSpellCondition.getInstance(), new IsBeingCastFromHandCondition()), null, new FilterNonlandCard(), true));
             return true;
         }
         return false;
@@ -113,12 +115,21 @@ class OmniscienceCastingEffect extends ContinuousEffectImpl {
     }
 }
 
-class SpellIsBeingCastFromHandCondition implements Condition {
+class IsBeingCastFromHandCondition implements Condition {
 
 	@Override
 	public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) game.getObject(source.getSourceId());
-        return spell != null && spell.getFromZone() == Zone.HAND;
+        MageObject object = game.getObject(source.getSourceId());
+		if(object instanceof Spell) {
+	        Spell spell = (Spell) object;
+	        return spell != null && spell.getFromZone() == Zone.HAND;
+		}
+		if(object instanceof Card) {
+			Card card = (Card)object;
+			return game.getPlayer(card.getOwnerId()).getHand().get(card.getId(), game) != null;
+		}
+		
+		return false;
 	}
 
 }

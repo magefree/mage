@@ -2238,36 +2238,64 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     protected boolean canPlayCardByAlternateCost(Card sourceObject, ManaOptions available, Ability ability, Game game) {
-        if (sourceObject != null && !(sourceObject instanceof Permanent)) {
-            for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
-                // if cast for noMana no Alternative costs are allowed
-                if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
-                    if (((AlternativeSourceCosts) alternateSourceCostsAbility).isAvailable(ability, game)) {
-                        if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
-                            ManaCostsImpl manaCosts = new ManaCostsImpl();
-                            for (Cost cost : alternateSourceCostsAbility.getCosts()) {
-                                if (cost instanceof ManaCost) {
-                                    manaCosts.add((ManaCost) cost);
-                                }
-                            }
+    	if (sourceObject != null && !(sourceObject instanceof Permanent)) {
+    		for (Ability alternateSourceCostsAbility : sourceObject.getAbilities()) {
+    			// if cast for noMana no Alternative costs are allowed
+    			if (alternateSourceCostsAbility instanceof AlternativeSourceCosts) {
+    				if (((AlternativeSourceCosts) alternateSourceCostsAbility).isAvailable(ability, game)) {
+    					if (alternateSourceCostsAbility.getCosts().canPay(ability, playerId, playerId, game)) {
+    						ManaCostsImpl manaCosts = new ManaCostsImpl();
+    						for (Cost cost : alternateSourceCostsAbility.getCosts()) {
+    							if (cost instanceof ManaCost) {
+    								manaCosts.add((ManaCost) cost);
+    							}
+    						}
 
-                            if (manaCosts.size() == 0) {
-                                return true;
-                            } else {
-                                for (Mana mana : manaCosts.getOptions()) {
-                                    for (Mana avail : available) {
-                                        if (mana.enough(avail)) {
-                                            return true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+    						if (manaCosts.size() == 0) {
+    							return true;
+    						} else {
+    							for (Mana mana : manaCosts.getOptions()) {
+    								for (Mana avail : available) {
+    									if (mana.enough(avail)) {
+    										return true;
+    									}
+    								}
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
+
+    		// controller specific alternate spell costs
+    		for (AlternativeSourceCosts alternativeSourceCosts: getAlternativeSourceCosts()) {
+    			if (alternativeSourceCosts instanceof Ability) {
+    				if (((AlternativeSourceCosts) alternativeSourceCosts).isAvailable(ability, game)) {
+    					if (((Ability) alternativeSourceCosts).getCosts().canPay(ability, playerId, playerId, game)) {
+    						ManaCostsImpl manaCosts = new ManaCostsImpl();
+    						for (Cost cost : ((Ability) alternativeSourceCosts).getCosts()) {
+    							if (cost instanceof ManaCost) {
+    								manaCosts.add((ManaCost) cost);
+    							}
+    						}
+
+    						if (manaCosts.size() == 0) {
+    							return true;
+    						} else {
+    							for (Mana mana : manaCosts.getOptions()) {
+    								for (Mana avail : available) {
+    									if (mana.enough(avail)) {
+    										return true;
+    									}
+    								}
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
+    	}
+    	return false;
     }
 
     protected boolean canLandPlayAlternateSourceCostsAbility(Card sourceObject, ManaOptions available, Ability ability, Game game) {
