@@ -38,7 +38,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -47,13 +48,19 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class SkullOfOrm extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("enchantment cards");
+    
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
+    
     public SkullOfOrm(UUID ownerId) {
         super(ownerId, 106, "Skull of Orm", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DRK";
 
         // {5}, {tap}: Return target enchantment card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{5}"));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInGraveyard(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
