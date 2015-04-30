@@ -51,14 +51,14 @@ import org.apache.log4j.Logger;
  */
 public class MCTSNode {
 
-    private static final double selectionCoefficient = 1.0;
+    private static final double selectionCoefficient = Math.sqrt(2.0);
     private static final double passRatioTolerance = 0.0;
-     private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
+    private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
 
     private int visits = 0;
     private int wins = 0;
     private MCTSNode parent;
-    private final List<MCTSNode> children = new ArrayList<MCTSNode>();
+    private final List<MCTSNode> children = new ArrayList<>();
     private Ability action;
     private Game game;
     private Combat combat;
@@ -74,6 +74,7 @@ public class MCTSNode {
         this.terminal = game.gameOver(null);
         setPlayer();
         nodeCount = 1;
+//        logger.info(this.stateValue);
     }    
 
     protected MCTSNode(MCTSNode parent, Game game, Ability action) {
@@ -84,6 +85,7 @@ public class MCTSNode {
         this.action = action;
         setPlayer();
         nodeCount++;
+//        logger.info(this.stateValue);
     }
 
     protected MCTSNode(MCTSNode parent, Game game, Combat combat) {
@@ -94,6 +96,7 @@ public class MCTSNode {
         this.parent = parent;
         setPlayer();
         nodeCount++;
+//        logger.info(this.stateValue);
     }
 
     private void setPlayer() {
@@ -356,11 +359,10 @@ public class MCTSNode {
      * performs a breadth first search for a matching game state
      * 
      * @param state - the game state that we are looking for
-     * @param nextAction - the next action that will be performed
      * @return the matching state or null if no match is found
      */
     public MCTSNode getMatchingState(String state) {
-        ArrayDeque<MCTSNode> queue = new ArrayDeque<MCTSNode>();
+        ArrayDeque<MCTSNode> queue = new ArrayDeque<>();
         queue.add(this);
 
         while (!queue.isEmpty()) {
@@ -376,14 +378,15 @@ public class MCTSNode {
 
     public void merge(MCTSNode merge) {
         if (!stateValue.equals(merge.stateValue)) {
-            logger.info("mismatched merge states");
+            logger.info("mismatched merge states at root");
             return;
         }
 
         this.visits += merge.visits;
         this.wins += merge.wins;
-
-        List<MCTSNode> mergeChildren = new ArrayList<MCTSNode>();
+        int mismatchCount = 0;
+        
+        List<MCTSNode> mergeChildren = new ArrayList<>();
         for (MCTSNode child: merge.children) {
             mergeChildren.add(child);
         }
@@ -393,8 +396,9 @@ public class MCTSNode {
                 if (mergeChild.action != null && child.action != null) {
                     if (mergeChild.action.toString().equals(child.action.toString())) {
                         if (!mergeChild.stateValue.equals(child.stateValue)) {
-                            logger.info("mismatched merge states");
-                            mergeChildren.remove(mergeChild);
+                            mismatchCount++;
+//                            logger.info("mismatched merge states");
+//                            mergeChildren.remove(mergeChild);
                         }
                         else {
                             child.merge(mergeChild);
@@ -406,8 +410,9 @@ public class MCTSNode {
                 else {
                     if (mergeChild.combat.getValue().equals(child.combat.getValue())) {
                         if (!mergeChild.stateValue.equals(child.stateValue)) {
-                            logger.info("mismatched merge states");
-                            mergeChildren.remove(mergeChild);
+                            mismatchCount++;
+//                            logger.info("mismatched merge states");
+//                            mergeChildren.remove(mergeChild);
                         }
                         else {
                             child.merge(mergeChild);
@@ -424,6 +429,8 @@ public class MCTSNode {
                 children.add(child);
             }
         }
+//        if (mismatchCount > 0)
+//            logger.info("mismatched merge states: " + mismatchCount);
     }
 
 //    public void print(int depth) {
