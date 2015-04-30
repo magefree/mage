@@ -28,6 +28,7 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -43,7 +44,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,7 +58,7 @@ import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
  */
 public class OratorOfOjutai extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand (you don't have to)");
+    private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));

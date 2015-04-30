@@ -28,6 +28,7 @@
 package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -39,7 +40,7 @@ import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -54,7 +55,7 @@ import mage.watchers.common.DragonOnTheBattlefieldWhileSpellWasCastWatcher;
  */
 public class SilumgarsScorn extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a Dragon card from your hand (you don't have to)");
+    private static final FilterCard filter = new FilterCard("a Dragon card from your hand (you don't have to)");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));
