@@ -293,4 +293,5 @@ public interface Game extends MageItem, Serializable {
     int getPriorityTime();
     void setPriorityTime(int priorityTime);
     UUID getStartingPlayerId();
+
 }

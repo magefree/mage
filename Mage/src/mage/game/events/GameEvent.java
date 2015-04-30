@@ -93,7 +93,17 @@ public class GameEvent {
         DISCARDED_CARD,
         CYCLE_CARD, CYCLED_CARD,
         CLASH, CLASHED,
-        DAMAGE_PLAYER, DAMAGED_PLAYER,
+        DAMAGE_PLAYER, 
+        
+        /* DAMAGED_PLAYER
+            targetId    the id of the damged player
+            sourceId    sourceId of the ability which caused the damage
+            playerId    the id of the damged player
+            amount      amount of damage
+            flag        true = comabat damage - other damage = false
+        */
+        DAMAGED_PLAYER,
+        
         DAMAGE_CAUSES_LIFE_LOSS,
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,

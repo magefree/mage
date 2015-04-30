@@ -382,9 +382,23 @@ public abstract class GameImpl implements Game, Serializable {
         }
         MageObject object = getObject(objectId);
         if (object != null) {
-            if (object instanceof Permanent) {
+            if (object instanceof StackObject) {
+                return ((StackObject)object).getControllerId();
+            } else if (object instanceof Permanent) {
                 return ((Permanent)object).getControllerId();
+            } else if (object instanceof CommandObject) {
+                return ((CommandObject)object).getControllerId();
+            }            
+            UUID controllerId = getContinuousEffects().getControllerOfSourceId(objectId);
+            if (controllerId != null) {
+                return controllerId;
             }
+            // TODO: When is a player the damage source itself? If not possible remove this
+            Player player = getPlayer(objectId);
+            if (player != null){
+                return player.getId();
+            }
+            // No object with controller found so return owner if possible
             if (object instanceof Card) {
                 return ((Card)object).getOwnerId();
             }
@@ -2499,5 +2513,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
     }
+
+
 
 }

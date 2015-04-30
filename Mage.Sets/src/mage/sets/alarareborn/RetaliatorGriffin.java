@@ -36,13 +36,14 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
+import mage.players.Player;
 
 /**
  *
@@ -54,9 +55,6 @@ public class RetaliatorGriffin extends CardImpl {
         super(ownerId, 123, "Retaliator Griffin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Griffin");
-
-
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -79,7 +77,7 @@ public class RetaliatorGriffin extends CardImpl {
 class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl {
 
     public RetaliatorGriffinTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RetaliatorGriffinEffect(), false);
+        super(Zone.BATTLEFIELD, new RetaliatorGriffinEffect(), true);
     }
 
     public RetaliatorGriffinTriggeredAbility(final RetaliatorGriffinTriggeredAbility ability) {
@@ -90,22 +88,19 @@ class RetaliatorGriffinTriggeredAbility extends TriggeredAbilityImpl {
     public RetaliatorGriffinTriggeredAbility copy() {
         return new RetaliatorGriffinTriggeredAbility(this);
     }
-
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)) {
-            UUID sourceControllerId = null;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                sourceControllerId = permanent.getControllerId();
-            } else {
-                StackObject sourceStackObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceStackObject != null) {
-                    sourceControllerId = sourceStackObject.getControllerId();
-                }
-            }
-            if (event.getTargetId().equals(controllerId) && game.getOpponents(controllerId).contains(sourceControllerId)) {
-                getEffects().get(0).setValue("RetaliatorGriffinAmount", event.getAmount());
+        if (event.getTargetId().equals(getControllerId())) {
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            if (sourceControllerId != null && 
+                    game.getOpponents(getControllerId()).contains(sourceControllerId)) {
+                getEffects().get(0).setValue("damageAmount", event.getAmount());
                 return true;
             }
         }
@@ -135,10 +130,13 @@ class RetaliatorGriffinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Integer amount = (Integer) this.getValue("RetaliatorGriffinAmount");
-        if (permanent != null && amount != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            Integer amount = (Integer) this.getValue("damageAmount");
+            if (permanent != null && amount != null && amount > 0) {
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount), true).apply(game, source);
+            }            
             return true;
         }
         return false;

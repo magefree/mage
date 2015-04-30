@@ -38,8 +38,6 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -55,7 +53,6 @@ public class MichikoKondaTruthSeeker extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -87,21 +84,18 @@ class MichikoKondaTruthSeekerAbility extends TriggeredAbilityImpl {
     public MichikoKondaTruthSeekerAbility copy() {
         return new MichikoKondaTruthSeekerAbility(this);
     }
-
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)) {
-            UUID sourceControllerId = null;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                sourceControllerId = permanent.getControllerId();
-            } else {
-                StackObject sourceStackObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceStackObject != null) {
-                    sourceControllerId = sourceStackObject.getControllerId();
-                }
-            }
-            if (event.getTargetId().equals(controllerId) && game.getOpponents(controllerId).contains(sourceControllerId)) {
+        if (event.getTargetId().equals(getControllerId())) {
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            if (sourceControllerId != null && 
+                    game.getOpponents(getControllerId()).contains(sourceControllerId)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(sourceControllerId));
                 return true;
             }

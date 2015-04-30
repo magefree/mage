@@ -40,10 +40,12 @@ import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.stack.StackObject;
 
@@ -82,7 +84,7 @@ public class BlazeCommando extends CardImpl {
 }
 class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
-    private List<UUID> handledStackObjects = new ArrayList<UUID>();
+    private final List<UUID> handledStackObjects = new ArrayList<>();
 
     public BlazeCommandoTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new BlazeCommandoSoldierToken(), 2), false);
@@ -99,18 +101,30 @@ class BlazeCommandoTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public void reset(Game game) {
+        /**
+         * Blaze Commando's ability triggers each time an instant or sorcery spell you control
+         * deals damage (or, put another way, the number of times the word “deals” appears in 
+         * its instructions), no matter how much damage is dealt or how many players or permanents
+         * are dealt damage. For example, if you cast Punish the Enemy and it “deals 3 damage to 
+         * target player and 3 damage to target creature,” Blaze Commando's ability will trigger 
+         * once and you'll get two Soldier tokens.
+         */
         handledStackObjects.clear();
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE || event.getType() == EventType.DAMAGED_PLANESWALKER || event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE || event.getType() == EventType.DAMAGED_PLANESWALKER || event.getType() == EventType.DAMAGED_PLAYER) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null && stackObject.getControllerId().equals(getControllerId())) {
-                MageObject object = game.getObject(stackObject.getSourceId());
-                if (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY)) {
-                    if (!handledStackObjects.contains(stackObject.getId())) {
-                        handledStackObjects.add(stackObject.getId());
+        if (getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+            MageObject damageSource = game.getObject(event.getSourceId());
+            if (damageSource != null) {
+                if (damageSource.getCardType().contains(CardType.INSTANT) || damageSource.getCardType().contains(CardType.SORCERY)) {
+                    if (!handledStackObjects.contains(damageSource.getId())) {
+                        handledStackObjects.add(damageSource.getId());
                         return true;
                     }
                 }

@@ -29,20 +29,14 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 
 /**
  *
@@ -71,7 +65,7 @@ public class FarsightMask extends CardImpl {
 class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
 
     public FarsightMaskTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new FarsightMaskCondition(), ""), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
     public FarsightMaskTriggeredAbility(final FarsightMaskTriggeredAbility ability) {
@@ -84,19 +78,21 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER);
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent permanent = game.getPermanent(getSourceId());
+        return permanent != null && !permanent.isTapped();
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)) {
-            UUID sourceControllerId = null;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                sourceControllerId = permanent.getControllerId();
-            } else {
-                StackObject sourceStackObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceStackObject != null) {
-                    sourceControllerId = sourceStackObject.getControllerId();
-                }
-            }
-            if (event.getTargetId().equals(controllerId) && game.getOpponents(controllerId).contains(sourceControllerId)) {
+        if (event.getTargetId().equals(controllerId)) {
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            if (sourceControllerId != null && game.getOpponents(getControllerId()).contains(sourceControllerId)) {
                 return true;
             }
         }
@@ -105,20 +101,6 @@ class FarsightMaskTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.";
-    }
-}
-
-class FarsightMaskCondition implements Condition {
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        Player player = game.getPlayer(source.getControllerId());
-        if (permanent != null && !permanent.isTapped()
-                && player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card?", game)) {
-            return true;
-        }
-        return false;
+        return "Whenever a source an opponent controls deals damage to you, if {this} is untapped, you may draw a card.";
     }
 }

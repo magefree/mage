@@ -54,8 +54,6 @@ public class PyromancersSwath extends CardImpl {
         super(ownerId, 125, "Pyromancer's Swath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "MMA";
 
-        this.color.setRed(true);
-
         // If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));
 
@@ -98,14 +96,10 @@ class PyromancersSwathReplacementEffect extends ReplacementEffectImpl {
     }
     
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
-        if (object != null && object instanceof Spell) {
-            if (((Spell) object).getControllerId().equals(source.getControllerId())
-                    && (object.getCardType().contains(CardType.INSTANT)
-                     || object.getCardType().contains(CardType.SORCERY))){
-                return true;
-            }
+    public boolean applies(GameEvent event, Ability source, Game game) {        
+        if (source.getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+            MageObject object = game.getObject(event.getSourceId());
+            return object != null && (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY));
         }
         return false;
     }

@@ -44,9 +44,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 
 /**
  *
@@ -95,27 +92,15 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                && game.getOpponents(controllerId).contains(event.getTargetId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            Player player = game.getPlayer(event.getSourceId());
-            StackObject spell = game.getStack().getStackObject(event.getSourceId());
-            if (permanent != null && permanent.getControllerId().equals(controllerId)) {
-                return true;
-            }
-            if (player != null && player.getId().equals(controllerId)) {
-                return true;
-            }
-            if (spell != null && spell.getControllerId().equals(controllerId)) {
-                return true;
-            }
-            return false;
+                && game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+            return getControllerId().equals(game.getControllerId(event.getSourceId()));
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.";
+        return "Whenever a source you control deals damage to an opponent, you may put a quest counter on {this}.";
     }
 }
 
@@ -143,24 +128,7 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
-            return true;
-        }
-        Player player = game.getPlayer(event.getSourceId());
-        if (player != null && player.getId().equals(source.getControllerId())) {
-            return true;
-        }
-        StackObject spell = game.getStack().getStackObject(event.getSourceId());
-        if (spell != null && spell.getControllerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+        return source.getControllerId().equals(game.getControllerId(event.getSourceId()));
     }
 
     @Override

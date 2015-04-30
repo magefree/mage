@@ -40,8 +40,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 
 /**
  *
@@ -54,11 +52,11 @@ public class GuardianSeraph extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
+        
         // If a source an opponent controls would deal damage to you, prevent 1 of that damage.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GuardianSeraphEffect()));
     }
@@ -76,47 +74,24 @@ public class GuardianSeraph extends CardImpl {
 class GuardianSeraphEffect extends PreventionEffectImpl {
 
     public GuardianSeraphEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source an opponent controls would deal damage to you, prevent 1 of that damage";
     }
 
-    public GuardianSeraphEffect(GuardianSeraphEffect effect) {
+    public GuardianSeraphEffect(final GuardianSeraphEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1, false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage > 0) {
-                event.setAmount(damage - 1);
-                game.informPlayers("1 damage has been prevented.");
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1));
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)) {
-            UUID sourceControllerId = null;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null) {
-                sourceControllerId = permanent.getControllerId();
-            } else {
-                StackObject sourceStackObject = game.getStack().getStackObject(event.getSourceId());
-                if (sourceStackObject != null) {
-                    sourceControllerId = sourceStackObject.getControllerId();
-                }
-            }
-            if (event.getTargetId().equals(source.getControllerId()) && game.getOpponents(source.getControllerId()).contains(sourceControllerId)) {
+        if (event.getTargetId().equals(source.getControllerId())) {
+            UUID sourceControllerId = game.getControllerId(event.getSourceId());
+            if (sourceControllerId != null && game.getOpponents(source.getControllerId()).contains(sourceControllerId)) {
                 return super.applies(event, source, game);
             }
         }

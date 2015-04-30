@@ -52,7 +52,6 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -65,7 +64,7 @@ public class NightDealings extends CardImpl {
     public NightDealings (UUID ownerId) {
         super(ownerId, 132, "Night Dealings", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
-        this.color.setBlack(true);
+
         // Whenever a source you control deals damage to another player, put that many theft counters on Night Dealings.
         this.addAbility((new NightDealingsTriggeredAbility()));
 
@@ -101,29 +100,23 @@ public class NightDealings extends CardImpl {
         }
 
         @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        }
+
+        @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                // to another player    
-                if (this.getControllerId() != event.getTargetId()) {
-                    // a source you control
-                    UUID sourceControllerId = null;
-                    Permanent permanent = game.getPermanent(event.getSourceId());
-                    if (permanent != null) {
-                        sourceControllerId = permanent.getControllerId();
-                    } else {
-                        StackObject sourceStackObject = game.getStack().getStackObject(event.getSourceId());
-                        if (sourceStackObject != null) {
-                            sourceControllerId = sourceStackObject.getControllerId();
-                        }
-                    }
-                    if (sourceControllerId != null && sourceControllerId == this.getControllerId()) {
-                        // save amount of damage to effect
-                        this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                        return true;
-                    }
+            // to another player    
+            if (this.getControllerId() != event.getTargetId()) {
+                // a source you control
+                UUID sourceControllerId = game.getControllerId(event.getSourceId());
+                if (sourceControllerId != null && sourceControllerId == this.getControllerId()) {
+                    // save amount of damage to effect
+                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+                    return true;
                 }
             }
-            return false;
+           return false;
         }
 
         @Override
@@ -136,7 +129,7 @@ public class NightDealings extends CardImpl {
 
         public NightDealingsEffect() {
             super(Outcome.Damage);
-            this.staticText = "put that many theft counters on Night Dealings";
+            this.staticText = "put that many theft counters on {this}";
         }
 
         public NightDealingsEffect(final NightDealingsEffect effect) {

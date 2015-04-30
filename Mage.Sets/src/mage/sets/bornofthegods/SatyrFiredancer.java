@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -63,7 +64,6 @@ public class SatyrFiredancer extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Satyr");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -95,7 +95,7 @@ public class SatyrFiredancer extends CardImpl {
 
 class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
 
-    private List<UUID> handledStackObjects = new ArrayList<UUID>();
+    private List<UUID> handledStackObjects = new ArrayList<>();
 
     public SatyrFiredancerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SatyrFiredancerDamageEffect(), false);
@@ -116,21 +116,25 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER) {
-            StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
-            if (stackObject != null && stackObject.getControllerId().equals(getControllerId())) {
-                MageObject object = game.getObject(stackObject.getSourceId());
-                if (object.getCardType().contains(CardType.INSTANT) || object.getCardType().contains(CardType.SORCERY)) {
-                    if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
-                        if (!handledStackObjects.contains(stackObject.getId())) {
-                            handledStackObjects.add(stackObject.getId());
-                            for (Effect effect: this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                effect.setValue("damage", event.getAmount());
-                            }
-                            return true;
+        if (getControllerId().equals(game.getControllerId(event.getSourceId()))) {
+            MageObject damageSource = game.getObject(event.getSourceId());
+            if (damageSource != null) {            
+                if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+                    if (!(damageSource instanceof StackObject) || !handledStackObjects.contains(damageSource.getId())) {
+                        if (damageSource instanceof StackObject) {
+                            handledStackObjects.add(damageSource.getId());
                         }
+                        for (Effect effect: this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId())); // used by adjust targets
+                            effect.setValue("damage", event.getAmount());
+                        }
+                        return true;
                     }
                 }
             }
