@@ -52,6 +52,7 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
     }
     public PutLandFromHandOntoBattlefieldEffect(boolean tapped) {
         super(Outcome.PutLandInPlay);
+        this.tapped = tapped;
         staticText = "you may put a land card from your hand onto the battlefield" + (tapped ? " tapped":"");
     }
 
