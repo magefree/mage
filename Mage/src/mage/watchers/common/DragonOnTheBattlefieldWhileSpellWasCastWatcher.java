@@ -30,10 +30,11 @@ package mage.watchers.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.constants.WatcherScope;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -45,7 +46,7 @@ import mage.watchers.Watcher;
  */
 public class DragonOnTheBattlefieldWhileSpellWasCastWatcher extends Watcher {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon", "Dragons");
+    private static final FilterPermanent filter = new FilterPermanent("Dragon", "Dragons");
 
     private final Set<UUID> castWithDragonOnTheBattlefield = new HashSet<>();
 
