@@ -51,9 +51,7 @@ public class ThoughtReflection extends CardImpl {
     public ThoughtReflection(UUID ownerId) {
         super(ownerId, 53, "Thought Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
         this.expansionSetCode = "SHM";
-
-        this.color.setBlue(true);
-
+                                   
         // If you would draw a card, draw two cards instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThoughtReflectionReplacementEffect()));
 
@@ -91,20 +89,21 @@ class ThoughtReflectionReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }   
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getControllerId());
+    }
+    
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player you = game.getPlayer(event.getPlayerId());
         if (you != null) {
             you.drawCards(2, game, event.getAppliedEffects());
         }
         return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_CARD
-                && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
-    }
+    }    
 }

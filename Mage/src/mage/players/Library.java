@@ -55,7 +55,7 @@ public class Library implements Serializable {
     private static Random rnd = new Random();
 
     private boolean emptyDraw;
-    private final Deque<UUID> library = new ArrayDeque<UUID>();
+    private final Deque<UUID> library = new ArrayDeque<>();
     private final UUID playerId;
 
     public Library(UUID playerId) {

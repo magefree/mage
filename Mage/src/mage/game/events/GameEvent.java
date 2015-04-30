@@ -87,6 +87,7 @@ public class GameEvent {
             flag        not used for this event
         */
         ZONE_CHANGE,
+        EMPTY_DRAW,
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,
         MADNESS_CARD_EXILED,

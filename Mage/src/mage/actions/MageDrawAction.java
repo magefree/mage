@@ -57,7 +57,10 @@ public class MageDrawAction extends MageAction {
             game.fireInformEvent(player.getName() + " draws " + CardUtil.numberToText(numDrawn, "a") + " card" + (numDrawn > 1 ? "s" : ""));
         }
         if (player.isEmptyDraw()) {
-            game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.EMPTY_DRAW, player.getId(), player.getId());
+            if (!game.replaceEvent(event)) {
+                game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));
+            }
         }
 
         setScore(player, score);

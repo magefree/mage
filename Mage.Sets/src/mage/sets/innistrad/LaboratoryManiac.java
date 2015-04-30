@@ -56,7 +56,6 @@ public class LaboratoryManiac extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -107,7 +106,7 @@ class LaboratoryManiacEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.LOSES;
+        return event.getType() == EventType.EMPTY_DRAW;
     }
 
     @Override
