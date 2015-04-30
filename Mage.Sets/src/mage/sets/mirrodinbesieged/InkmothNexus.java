@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.InfectAbility;
@@ -52,8 +53,14 @@ public class InkmothNexus extends CardImpl {
     public InkmothNexus (UUID ownerId) {
         super(ownerId, 145, "Inkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MBS";
+        
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new InkmothNexusToken(), "land", Duration.EndOfTurn), new GenericManaCost(1)));
+        
+        // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        Effect effect = new BecomesCreatureSourceEffect(new InkmothNexusToken(), "land", Duration.EndOfTurn);
+        effect.setText("{this} becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. <i>(It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1)));
     }
 
     public InkmothNexus (final InkmothNexus card) {

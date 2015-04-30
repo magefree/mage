@@ -87,4 +87,34 @@ public class InfectTest extends CardTestPlayerBase {
         assertLife(playerB, 20);        
         
     }    
+    
+    /**
+     * Inkmoth Nexus has no effect it he attacks becaus it has infect but there are no counters added
+     * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/296553-melira-sylvok-outcast-vs-inkmoth-nexus
+     */
+    @Test
+    public void testInkmothNexusLoseInfect() {
+        // Creatures your opponents control lose infect.        
+        addCard(Zone.BATTLEFIELD, playerA, "Melira, Sylvok Outcast"); 
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1); 
+        addCard(Zone.BATTLEFIELD, playerB, "Inkmoth Nexus"); 
+
+        // {1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. 
+        // (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}: {this} becomes");
+        attack(2, playerB, "Inkmoth Nexus");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertTapped("Plains", true);
+        assertTapped("Inkmoth Nexus", true);
+        assertCounterCount(playerA, CounterType.POISON, 0);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);        
+        
+    }        
+     
 }
