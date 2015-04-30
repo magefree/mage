@@ -68,6 +68,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.target.TargetSource;
+import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetPermanentOrPlayer;
 
@@ -445,6 +446,26 @@ public class TestPlayer extends ComputerPlayer {
                 }
 
             }
+            if (target instanceof TargetSpell) {
+                for (String targetDefinition: targets) {
+                    String[] targetList = targetDefinition.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName: targetList) {
+                        for(StackObject stackObject: game.getStack()) {
+                            if (stackObject.getName().equals(targetName)) {
+                                target.add(stackObject.getId(), game);
+                                targetFound = true;
+                                break;                                
+                            }                            
+                        }
+                    }   
+                    if (targetFound) {
+                        targets.remove(targetDefinition);
+                        return true;
+                    }                    
+                }                
+            }
+            
 
         }
         return super.chooseTarget(outcome, target, source, game);
