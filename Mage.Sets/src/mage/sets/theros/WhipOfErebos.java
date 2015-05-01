@@ -55,6 +55,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -69,8 +70,6 @@ public class WhipOfErebos extends CardImpl {
         super(ownerId, 110, "Whip of Erebos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.ARTIFACT}, "{2}{B}{B}");
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
-
-        this.color.setBlack(true);
 
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
@@ -154,10 +153,10 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
-            controller.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
+        if (permanent != null && controller != null) {
+            controller.moveCardToExileWithInfo(permanent, null, null, source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
         return true;
     }

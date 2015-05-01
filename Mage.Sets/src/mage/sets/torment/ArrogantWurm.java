@@ -48,7 +48,6 @@ public class ArrogantWurm extends CardImpl {
         this.expansionSetCode = "TOR";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -56,7 +55,7 @@ public class ArrogantWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Madness {2}{G}
-        this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{G}")));
+        this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{G}")));
     }
 
     public ArrogantWurm(final ArrogantWurm card) {

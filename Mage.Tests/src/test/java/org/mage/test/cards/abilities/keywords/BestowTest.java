@@ -295,17 +295,21 @@ public class BestowTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mogis's Warhound");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mogis's Warhound using bestow", "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
+        // Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.
+        addCard(Zone.HAND, playerB, "Chandra's Outrage");
 
-        setStopAt(3, PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mogis's Warhound using bestow", "Silvercoat Lion");
+        castSpell(1, PhaseStep.END_TURN, playerB, "Chandra's Outrage", "Silvercoat Lion");
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
+        assertLife(playerA, 18); // -2 from Chandra's Outrage
+        assertLife(playerB, 18); // -2 from attack of Mogis's Warhound
         //
         assertHandCount(playerA, "Mogis's Warhound", 0);
-
-        // because cast with bestow, Boon Satyr may not be tapped
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);
-        assertPowerToughness(playerA, "Silvercoat Lion", 4,4);
+        assertPermanentCount(playerA, "Mogis's Warhound", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
 
     }    
 }

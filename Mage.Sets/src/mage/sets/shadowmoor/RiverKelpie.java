@@ -39,7 +39,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -52,7 +51,6 @@ public class RiverKelpie extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -92,20 +90,19 @@ class RiverKelpieTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.GRAVEYARD && zEvent.getToZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                return permanent != null;
-            }
-        }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        return zEvent.getFromZone() == Zone.GRAVEYARD && zEvent.getToZone() == Zone.BATTLEFIELD;
     }
 
     @Override
     public String getRule() {
-        return "Whenever River Kelpie or another permanent is put onto the battlefield from a graveyard, draw a card.";
+        return "Whenever {this} or another permanent is put onto the battlefield from a graveyard, draw a card.";
     }
 }
 
@@ -125,8 +122,13 @@ class RiverKelpieTriggeredAbility2 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD);
+        return event.getZone() == Zone.GRAVEYARD;
     }
 
     @Override

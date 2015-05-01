@@ -30,7 +30,6 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -324,6 +323,41 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Legacy Weapon", 1);
         
     }
+    
+ /**
+   * Test that a returned creature of Whip of Erebos
+   * got exiled if it is destroyed by a spell
+   */
 
+    @Test
+    public void testWhipOfErebos() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
+        addCard(Zone.HAND, playerA, "Terror");        
+        
+        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. 
+        // It gains haste. Exile it at the beginning of the next end step.
+        // If it would leave the battlefield, exile it instead of putting it anywhere else.
+        // Activate this ability only any time you could cast a sorcery.
+        addCard(Zone.BATTLEFIELD, playerB, "Whip of Erebos");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
+        
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}: Return target creature", "Silvercoat Lion");
+        
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Terror", "Silvercoat Lion");
+        setStopAt(2, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Terror", 1);
+        assertExileCount("Silvercoat Lion", 1);
+        
+    }
+
+    
+    
 }
 

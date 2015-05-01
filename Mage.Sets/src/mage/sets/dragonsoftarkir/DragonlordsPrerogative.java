@@ -114,7 +114,7 @@ class DragonlordsPrerogativeCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         boolean applies = false;
         Spell spell = game.getStack().getSpell(source.getSourceId());
-        if (spell != null) {
+        if (spell != null && spell.getSpellAbility() != null) {
             for(Cost cost: spell.getSpellAbility().getCosts()) {
                 if (cost instanceof RevealTargetFromHandCost) {
                     applies = !((RevealTargetFromHandCost)cost).getTargets().isEmpty();

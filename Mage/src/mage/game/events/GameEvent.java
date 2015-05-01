@@ -118,6 +118,7 @@ public class GameEvent {
             playerId    player that casts the spell
             amount      not used for this event
             flag        not used for this event
+            zone        zone the spell is cast from
         */
         SPELL_CAST,
         

@@ -95,7 +95,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
                     getState().getWatchers().add(watcher);
                     watcher.addCardInfoToCommander(this);
                 } else {
-                    throw new UnknownError("Commander card could not be created");
+                    throw new UnknownError("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() +"]");
                 }
             }
 
