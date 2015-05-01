@@ -125,16 +125,19 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.SPELL_CAST){
-            Permanent chalice = game.getPermanent(this.sourceId);
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if(spell != null && chalice != null && spell.getConvertedManaCost() == chalice.getCounters().getCount(CounterType.CHARGE)){ 
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
+        Permanent chalice = game.getPermanent(getSourceId());
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if(spell != null && chalice != null && spell.getConvertedManaCost() == chalice.getCounters().getCount(CounterType.CHARGE)){ 
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
+            return true;
         }
         return false;
     }
