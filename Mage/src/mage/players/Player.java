@@ -28,9 +28,22 @@
 
 package mage.players;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
 import mage.MageItem;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -40,14 +53,18 @@ import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
+import mage.constants.PlayerAction;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.Graveyard;
 import mage.game.Table;
+import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
+import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.players.net.UserData;
@@ -56,12 +73,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-
-import java.io.Serializable;
-import java.util.*;
-import mage.constants.PlayerAction;
-import mage.game.combat.CombatGroup;
-import mage.game.match.MatchPlayer;
 
 /**
  *
@@ -74,7 +85,7 @@ public interface Player extends MageItem, Copyable<Player> {
     RangeOfInfluence getRange();
     Library getLibrary();
     Cards getSideboard();
-    Cards getGraveyard();
+    Graveyard getGraveyard();
     Abilities<Ability> getAbilities();
     void addAbility(Ability ability);
     Counters getCounters();

@@ -41,6 +41,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -88,14 +89,6 @@ import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.PlayerAction;
-import static mage.constants.PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS;
-import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN;
-import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE;
-import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN;
-import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED;
-import static mage.constants.PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP;
-import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF;
-import static mage.constants.PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON;
 import mage.constants.RangeOfInfluence;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
@@ -111,6 +104,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.Graveyard;
 import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
@@ -134,6 +128,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
+
 import org.apache.log4j.Logger;
 
 public abstract class PlayerImpl implements Player, Serializable {
@@ -156,7 +151,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Library library;
     protected Cards sideboard;
     protected Cards hand;
-    protected Cards graveyard;
+    protected Graveyard graveyard;
     protected UUID commanderId;
     protected Abilities<Ability> abilities;
     protected Counters counters;
@@ -245,7 +240,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.name = name;
         this.range = range;
         hand = new CardsImpl(Zone.HAND);
-        graveyard = new CardsImpl(Zone.GRAVEYARD);
+        graveyard = new Graveyard();
         abilities = new AbilitiesImpl<>();
         counters = new Counters();
         manaPool = new ManaPool(playerId);
@@ -1485,7 +1480,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public Cards getGraveyard() {
+    public Graveyard getGraveyard() {
         return graveyard;
     }
 

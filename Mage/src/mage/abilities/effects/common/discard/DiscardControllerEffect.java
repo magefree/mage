@@ -90,7 +90,7 @@ public class DiscardControllerEffect extends OneShotEffect {
                     }
                 }
             } else {
-                player.discard(amount.calculate(game, source, this), source, game);
+                player.discard(amount.calculate(game, source, this), false, source, game);
                 result = true;
             }
         }
