@@ -176,9 +176,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public String getValue(boolean useHidden) {
-        StringBuilder sb = new StringBuilder(1024);
+        StringBuilder sb = threadLocalBuilder.get();
 
-        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turn.getValue(turnNum));
+        sb.append(activePlayerId).append(priorityPlayerId);
 
         for (Player player: players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
@@ -214,9 +215,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public String getValue(boolean useHidden, Game game) {
-        StringBuilder sb = new StringBuilder(1024);
+        StringBuilder sb = threadLocalBuilder.get();
 
-        sb.append(turnNum).append(turn.getPhaseType()).append(turn.getStepType()).append(activePlayerId).append(priorityPlayerId);
+        sb.append(turn.getValue(turnNum));
+        sb.append(activePlayerId).append(priorityPlayerId);
 
         for (Player player: players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
@@ -272,6 +274,22 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         return sb.toString();
     }
+
+    // create a ThreadLocal StringBuilder
+    private transient ThreadLocal<StringBuilder> threadLocalBuilder = new ThreadLocal<StringBuilder>() {
+        @Override
+        protected StringBuilder initialValue() {
+            return new StringBuilder(1024);
+        }
+
+        @Override
+        public StringBuilder get() {
+            StringBuilder b = super.get();
+            b.setLength(0); // clear/reset the buffer
+            return b;
+        }
+
+    };
 
     public Players getPlayers() {
         return players;

@@ -311,4 +311,31 @@ public class Turn implements Serializable {
     public Turn copy() {
         return new Turn(this);
     }
+    
+    public String getValue(int turnNum) {
+        StringBuilder sb = threadLocalBuilder.get();
+        sb.append("[").append(turnNum)
+            .append(":").append(currentPhase.getType())
+            .append(":").append(currentPhase.getStep().getType())
+            .append("]");
+
+        return sb.toString();
+    }
+    
+    // create a ThreadLocal StringBuilder
+    private transient ThreadLocal<StringBuilder> threadLocalBuilder = new ThreadLocal<StringBuilder>() {
+        @Override
+        protected StringBuilder initialValue() {
+            return new StringBuilder(50);
+        }
+
+        @Override
+        public StringBuilder get() {
+            StringBuilder b = super.get();
+            b.setLength(0); // clear/reset the buffer
+            return b;
+        }
+
+    };
+
 }
