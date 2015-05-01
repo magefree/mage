@@ -60,8 +60,6 @@ public class SagesOfTheAnima extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
 
-
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
@@ -138,12 +136,14 @@ class SagesOfTheAnimaReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    } 
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_CARD && event.getPlayerId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 }

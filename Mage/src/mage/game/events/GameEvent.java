@@ -332,9 +332,11 @@ public class GameEvent {
     }
 
     public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
-        if (appliedEffects == null) {
-            appliedEffects = new ArrayList<>();
+        if (this.appliedEffects == null) {
+            this.appliedEffects = new ArrayList<>();
         }
-        this.appliedEffects = appliedEffects;
+        if (appliedEffects != null) {
+            this.appliedEffects.addAll(appliedEffects);
+        }
     }
 }

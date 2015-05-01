@@ -45,7 +45,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -57,8 +56,6 @@ public class Abundance extends CardImpl {
     public Abundance(UUID ownerId) {
         super(ownerId, 249, "Abundance", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "10E";
-
-        this.color.setGreen(true);
 
         // If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbundanceReplacementEffect()));
@@ -120,10 +117,15 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 return player.chooseUse(Outcome.Benefit, "Choose land or nonland?", game);

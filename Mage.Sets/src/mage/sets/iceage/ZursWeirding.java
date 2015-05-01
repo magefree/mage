@@ -130,13 +130,14 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }       
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD) {
-            return true;
-        }
-        return false;
+        return true;
     }
     
 }

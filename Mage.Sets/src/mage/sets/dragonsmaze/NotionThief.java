@@ -109,10 +109,15 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    } 
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             if (game.getActivePlayerId().equals(event.getPlayerId())) {
                 CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {

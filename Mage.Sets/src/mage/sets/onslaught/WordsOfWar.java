@@ -101,13 +101,13 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
             Player player = game.getPlayer(targetPointer.getFirst(game, source));
             if (player != null) {
                 player.damage(2, source.getSourceId(), game, false, true);
-                used = true;
+                discard();
                 return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(2, source.getSourceId(), game, false, true);
-                used = true;
+                discard();
                 return true;
             }
         }
@@ -115,7 +115,12 @@ class WordsOfWarEffect extends ReplacementEffectImpl {
     }
     
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.DRAW_CARD && source.getControllerId().equals(event.getPlayerId()) && used == false;
+        return source.getControllerId().equals(event.getPlayerId());
     }
 }

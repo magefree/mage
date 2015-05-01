@@ -42,7 +42,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
@@ -56,8 +55,6 @@ public class ChainsOfMephistopheles extends CardImpl {
     public ChainsOfMephistopheles(UUID ownerId) {
         super(ownerId, 5, "Chains of Mephistopheles", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "LEG";
-
-        this.color.setBlack(true);
 
         // If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
@@ -112,18 +109,20 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DRAW_CARD;
+    } 
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DRAW_CARD) {
-            if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
-                CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
-                if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
-                    return true;
-                }
-            } else {
+        if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
+            CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
+            if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                 return true;
             }
+        } else {
+            return true;
         }
         return false;
     }
