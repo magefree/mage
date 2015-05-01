@@ -29,8 +29,10 @@ package mage.sets.magic2010;
 
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -90,7 +92,11 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && (spell.getCardType().contains(CardType.INSTANT)
                     || spell.getCardType().contains(CardType.SORCERY))) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+            	for(Effect effect : getEffects()) {
+            		if(effect instanceof HiveMindEffect) {
+            			((HiveMindEffect)effect).setTargetPointer(new FixedTarget(spell.getId()));
+            		}
+            	}
                 return true;
             }
         }
@@ -104,6 +110,8 @@ class HiveMindTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class HiveMindEffect extends OneShotEffect {
+	
+	private Spell _spell;
 
     public HiveMindEffect() {
         super(Outcome.Benefit);
@@ -118,10 +126,10 @@ class HiveMindEffect extends OneShotEffect {
     public HiveMindEffect copy() {
         return new HiveMindEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = (Spell) game.getLastKnownInformation(((FixedTarget) getTargetPointer()).getTarget(), Zone.STACK);
         Player player = game.getPlayer(source.getControllerId());
         if (spell != null && player != null) {
             Set<UUID> players = player.getInRange();
