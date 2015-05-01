@@ -45,16 +45,7 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
         Permanent shapeshifter = getPermanent("Assault Griffin", playerA.getId());
         Assert.assertTrue(shapeshifter.getSubtype().contains("Griffin"));
         Assert.assertTrue("Volrath's Shapeshifter must have flying", shapeshifter.getAbilities().contains(FlyingAbility.getInstance()));
-        boolean hasShapeshifterOriginalAbility = false;
-        for (Ability ability : shapeshifter.getAbilities()) {
-			if(ability instanceof SimpleActivatedAbility) {
-				SimpleActivatedAbility simpleActivatedAbility = (SimpleActivatedAbility)ability;
-				hasShapeshifterOriginalAbility = simpleActivatedAbility.getZone() == Zone.BATTLEFIELD && simpleActivatedAbility.getEffects().size() == 1 &&
-					simpleActivatedAbility.getEffects().get(0) instanceof DiscardControllerEffect && simpleActivatedAbility.getManaCosts().size() == 1 
-							&& simpleActivatedAbility.getManaCosts().get(0) instanceof GenericManaCost && simpleActivatedAbility.getManaCosts().get(0).convertedManaCost() == 2;
-			}
-		}
-        Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshifterOriginalAbility);
+        Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
     }
     
     /**
@@ -83,15 +74,48 @@ public class VolrathsShapshifterTest extends CardTestPlayerBase {
 
         Permanent shapeshifter = getPermanent("Volrath's Shapeshifter", playerA.getId());
         Assert.assertTrue(shapeshifter.getSubtype().contains("Shapeshifter"));
-        boolean hasShapeshifterOriginalAbility = false;
+        Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
+    }
+    
+    @Test
+    public void testControlChange() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Mind Control", 1);
+        
+
+        addCard(Zone.LIBRARY, playerA, "Forest", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Dutiful Thrull", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Volrath's Shapeshifter", 1);
+        addCard(Zone.GRAVEYARD, playerB, "Assault Griffin", 1);
+        
+        skipInitShuffling();
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Control", "Assault Griffin");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        
+        assertPermanentCount(playerA, "Dutiful Thrull", 1);
+        assertPowerToughness(playerA, "Dutiful Thrull", 1, 1);
+
+        Permanent shapeshifter = getPermanent("Dutiful Thrull", playerA.getId());
+        Assert.assertTrue(shapeshifter.getSubtype().contains("Thrull"));
+        Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshiftersOriginalAbility(shapeshifter));
+        
+        
+    }
+    
+    private boolean hasShapeshiftersOriginalAbility(Permanent shapeshifter) {
         for (Ability ability : shapeshifter.getAbilities()) {
 			if(ability instanceof SimpleActivatedAbility) {
 				SimpleActivatedAbility simpleActivatedAbility = (SimpleActivatedAbility)ability;
-				hasShapeshifterOriginalAbility = simpleActivatedAbility.getZone() == Zone.BATTLEFIELD && simpleActivatedAbility.getEffects().size() == 1 &&
+				return simpleActivatedAbility.getZone() == Zone.BATTLEFIELD && simpleActivatedAbility.getEffects().size() == 1 &&
 					simpleActivatedAbility.getEffects().get(0) instanceof DiscardControllerEffect && simpleActivatedAbility.getManaCosts().size() == 1 
 							&& simpleActivatedAbility.getManaCosts().get(0) instanceof GenericManaCost && simpleActivatedAbility.getManaCosts().get(0).convertedManaCost() == 2;
 			}
 		}
-        Assert.assertTrue("Volrath's Shapeshifter must have {2} : Discard a card", hasShapeshifterOriginalAbility);
+        
+        return false;
     }
 }
