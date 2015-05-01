@@ -39,6 +39,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -65,6 +66,9 @@ public class RevealAndShuffleIntoLibrarySourceEffect extends OneShotEffect {
             Player owner = null;
             Cards cards = new CardsImpl();
             Permanent permanent = null;
+            if (sourceObject instanceof Spell) {
+                sourceObject = ((Spell)sourceObject).getCard();
+            }
             if (sourceObject instanceof Permanent) {
                 permanent = (Permanent) sourceObject;
                 owner = game.getPlayer(permanent.getOwnerId());

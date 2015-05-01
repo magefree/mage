@@ -30,6 +30,7 @@ package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -285,6 +286,43 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertExileCount("Pillarfield Ox", 0);
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
 
+    }
+  /**
+   * Test that a countered spell of a card that goes always to library back
+   * instead of into the graveyard.
+   */
+
+    @Test
+    public void testCounterAndMoveToLibrary() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
+        // Legacy Weapon - Artifact {7}
+        // {W}{U}{B}{R}{G}: Exile target permanent.
+        // If Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
+        addCard(Zone.HAND, playerA, "Legacy Weapon");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
+        addCard(Zone.HAND, playerB, "Mana Drain");
+        addCard(Zone.HAND, playerB, "Legacy Weapon");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Legacy Weapon");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Drain", "Legacy Weapon");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Legacy Weapon");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, "Legacy Weapon", 0);
+        assertPermanentCount(playerA, "Legacy Weapon", 0);
+        assertGraveyardCount(playerA, "Legacy Weapon", 0);
+        
+        assertGraveyardCount(playerB, "Mana Drain", 1);
+        
+        assertPermanentCount(playerB, "Legacy Weapon", 1);
+        
     }
 
 }
