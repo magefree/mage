@@ -55,7 +55,7 @@ public class FrostTitan extends CardImpl {
         super(ownerId, 55, "Frost Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Giant");
-        this.color.setBlue(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         
@@ -93,8 +93,13 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             this.getTargets().clear();
             TargetStackObject target = new TargetStackObject();
             target.add(event.getSourceId(), game);
@@ -106,7 +111,7 @@ class FrostTitanAbility1 extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}";
+        return "Whenever {this} becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.";
     }
 
 }
@@ -129,19 +134,21 @@ class FrostTitanAbility2 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
-            return true;
-        }
-        return false;
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step";
+        return "Whenever {this} enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.";
     }
 
 }

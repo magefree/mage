@@ -67,4 +67,45 @@ public class SpellskiteTest extends CardTestPlayerBase {
         
     }
 
+    /**
+     * If Spellskite changes controller, its activated ability can activate but doesn't resolve properly.
+     * 
+     * The specific instance was a Spellskite controlled by Vedalken Shackles. Land was targeted by Frost Titan,
+     * controller (not owner) of Spellskite paid the redirection cost, ability went on the stack, seemed to resolve,
+     * target never changed.
+     * 
+     */
+    @Test
+    public void testAfterChangeOfController() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Shackles", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 6);
+        // {UP}: Change a target of target spell or ability to Spellskite.
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);        
+        // {4}{U}{U}
+        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.        
+        // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+        addCard(Zone.HAND, playerB, "Frost Titan", 1);
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control", "Spellskite");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
+        addTarget(playerB, "Mountain");
+        
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{UP}: Change a target", "stack ability (Whenever {this} enters ");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Spellskite", 1);
+        assertPermanentCount(playerB, "Frost Titan", 1);
+        
+        assertTapped("Mountain", false);
+        assertTapped("Spellskite", true);
+        
+    }    
+    
 }
