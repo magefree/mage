@@ -126,7 +126,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
             }
             if (player != null) {
                 if (!isNotTarget()) {
-                    if (!player.canBeTargetedBy(targetSource, game)) {
+                    if (!player.canBeTargetedBy(targetSource, source.getControllerId(), game)) {
                         return false;
                     }
                 }
@@ -158,7 +158,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -213,7 +213,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && (notTarget || player.canBeTargetedBy(targetSource, game)) && filter.match(player, game)) {
+            if (player != null && (notTarget || player.canBeTargetedBy(targetSource, sourceControllerId, game)) && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }

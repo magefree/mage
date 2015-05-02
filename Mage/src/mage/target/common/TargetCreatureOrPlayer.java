@@ -106,7 +106,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             }
             if (player != null) {
-                return player.canBeTargetedBy(targetSource, game) && filter.match(player, game);
+                return player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game);
             }
         }
 
@@ -134,7 +134,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -189,7 +189,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }

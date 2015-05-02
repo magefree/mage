@@ -87,7 +87,7 @@ public class TargetDefender extends TargetImpl {
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
             // removed canBeTargeted because it's not correct to check it for attacking target
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 count++;
                 if (count >= this.minNumberOfTargets) {
                     return true;
@@ -135,7 +135,7 @@ public class TargetDefender extends TargetImpl {
         MageObject targetSource = game.getObject(sourceId);
         for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null && player.canBeTargetedBy(targetSource, game) && filter.match(player, game)) {
+            if (player != null && player.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(player, game)) {
                 possibleTargets.add(playerId);
             }
         }
@@ -198,7 +198,7 @@ public class TargetDefender extends TargetImpl {
         Player player = game.getPlayer(id);
         MageObject targetSource = game.getObject(attackerId);
         if (player != null) {
-            return notTarget || (player.canBeTargetedBy(targetSource, game) && filter.match(player, game));
+            return notTarget || (player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game));
         }
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {

@@ -74,4 +74,30 @@ public class DontUntapTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+    
+    /**
+     * I used Ajani Vengeant's +1 on a Sublime Archangel and it untap on it's controller's upkeep.
+     */
+    @Test
+    public void TestAjaniVengeantFirst() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Sublime Archangel", 1); // 4/3
+
+        // +1: Target permanent doesn't untap during its controller's next untap step.
+        addCard(Zone.BATTLEFIELD, playerB, "Ajani Vengeant", 1);
+        
+        attack(1, playerA, "Sublime Archangel");
+                
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Target permanent doesn't","Sublime Archangel");
+                
+        setStopAt(3, PhaseStep.DRAW);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 15); // 4 + 1 from Exalted
+        
+        assertTapped("Sublime Archangel", true);
+
+    }
+        
 }

@@ -432,24 +432,24 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         UUID opponentId = game.getOpponents(playerId).iterator().next();
         if (target instanceof TargetPlayer) {
             if (outcome.isGood()) {
-                if (target.canTarget(playerId, source, game)) {
+                if (target.canTarget(playerId, playerId, source, game)) {
                     target.addTarget(playerId, source, game);
                     return true;
                 }
                 if (target.isRequired(source)) {
-                    if (target.canTarget(opponentId, source, game)) {
+                    if (target.canTarget(playerId, opponentId, source, game)) {
                         target.addTarget(opponentId, source, game);
                         return true;
                     }
                 }
             }
             else {
-                if (target.canTarget(opponentId, source, game)) {
+                if (target.canTarget(playerId, opponentId, source, game)) {
                     target.addTarget(opponentId, source, game);
                     return true;
                 }
                 if (target.isRequired(source)) {
-                    if (target.canTarget(playerId, source, game)) {
+                    if (target.canTarget(playerId, playerId, source, game)) {
                         target.addTarget(playerId, source, game);
                         return true;
                     }

@@ -261,7 +261,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean playLand(Card card, Game game);
     boolean activateAbility(ActivatedAbility ability, Game game);
     boolean triggerAbility(TriggeredAbility ability, Game game);
-    boolean canBeTargetedBy(MageObject source, Game game);
+    boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game);
     boolean hasProtectionFrom(MageObject source, Game game);
     boolean flipCoin(Game game);
     boolean flipCoin(Game game, ArrayList<UUID> appliedEffects);

@@ -583,7 +583,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean canBeTargetedBy(MageObject source, Game game) {
+    public boolean canBeTargetedBy(MageObject source, UUID sourceControllerId, Game game) {
         if (this.hasLost() || this.hasLeft()) {
             return false;
         }
@@ -592,13 +592,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return false;
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
-                UUID controllerId = null;
-                if (source instanceof Permanent) {
-                    controllerId = ((Permanent) source).getControllerId();
-                } else if (source instanceof StackObject) {
-                    controllerId = ((StackObject) source).getControllerId();
-                }
-                if (controllerId != null && this.hasOpponent(controllerId, game)
+                if (sourceControllerId != null && this.hasOpponent(sourceControllerId, game)
                         && !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, this.getId(), game)) {
                     return false;
                 }
