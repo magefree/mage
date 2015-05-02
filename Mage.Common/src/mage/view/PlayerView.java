@@ -99,7 +99,7 @@ public class PlayerView implements Serializable {
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (player.getId().equals(card.getOwnerId())) {
-                    exile.put(card.getId(), new CardView(card));
+                    exile.put(card.getId(), new CardView(card, game, card.getId(), false)); // unnown if it's allowed to look under a face down card
                 }                
             }
         }
