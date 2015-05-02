@@ -40,7 +40,8 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardTypeTargetEffect extends ContinuousEffectImpl {
-    private CardType addedCardType;
+    
+    private final CardType addedCardType;
 
     public AddCardTypeTargetEffect(CardType addedCardType, Duration duration) {
         super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);

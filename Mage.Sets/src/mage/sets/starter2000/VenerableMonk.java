@@ -37,7 +37,7 @@ public class VenerableMonk extends mage.sets.tenth.VenerableMonk {
 
     public VenerableMonk(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 5;
+        this.cardNumber = 99; // TODO: FIX the number;
         this.expansionSetCode = "S00";
     }
 

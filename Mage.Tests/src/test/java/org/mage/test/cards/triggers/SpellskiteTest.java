@@ -103,8 +103,8 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Spellskite", 1);
         assertPermanentCount(playerB, "Frost Titan", 1);
         
-        assertTapped("Mountain", false);
         assertTapped("Spellskite", true);
+        assertTapped("Mountain", false);
         
     }    
     

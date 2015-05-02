@@ -37,7 +37,7 @@ public class Disenchant extends mage.sets.tempest.Disenchant {
 
     public Disenchant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 6;
+        this.cardNumber = 99; // TODO: FIX the number;
         this.expansionSetCode = "S00";
     }
 
