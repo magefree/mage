@@ -58,6 +58,7 @@ import mage.watchers.Watchers;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.util.ThreadLocalStringBuilder;
 
 /**
 *
@@ -70,6 +71,9 @@ import java.util.*;
 *
 */
 public class GameState implements Serializable, Copyable<GameState> {
+
+
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     private final Players players;
     private final PlayerList playerList;
@@ -222,17 +226,15 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Player player: players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
-            if (useHidden) {
-                sb.append(player.getHand());
+            if (useHidden && priorityPlayerId == player.getId()) {
+                sb.append(player.getHand().getValue(game));
             }
             else {
                 sb.append(player.getHand().size());
             }
             sb.append("library").append(player.getLibrary().size());
             sb.append("graveyard");
-            for (Card card: player.getGraveyard().getCards(game)) {
-                sb.append(card.getName());
-            }
+            sb.append(player.getGraveyard().getValue(game));
         }
 
         sb.append("permanents");
@@ -264,7 +266,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
 
         for (ExileZone zone: exile.getExileZones()) {
-            sb.append("exile").append(zone.getName()).append(zone);
+            sb.append("exile").append(zone.getName()).append(zone.getValue(game));
         }
 
         sb.append("combat");
@@ -274,22 +276,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         return sb.toString();
     }
-
-    // create a ThreadLocal StringBuilder
-    private transient ThreadLocal<StringBuilder> threadLocalBuilder = new ThreadLocal<StringBuilder>() {
-        @Override
-        protected StringBuilder initialValue() {
-            return new StringBuilder(1024);
-        }
-
-        @Override
-        public StringBuilder get() {
-            StringBuilder b = super.get();
-            b.setLength(0); // clear/reset the buffer
-            return b;
-        }
-
-    };
 
     public Players getPlayers() {
         return players;

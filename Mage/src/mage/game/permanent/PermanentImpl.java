@@ -76,11 +76,14 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.ThreadLocalStringBuilder;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PermanentImpl extends CardImpl implements Permanent {
+
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
 
     protected boolean tapped;
     protected boolean flipped;
@@ -179,8 +182,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(this.name);
-        sb.append("-").append(this.expansionSetCode);
+        StringBuilder sb = threadLocalBuilder.get();
+        sb.append(this.name).append("-").append(this.expansionSetCode);
         if (copy) {
             sb.append(" [Copy]");
         }
@@ -209,7 +212,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     @Override
     public String getValue() {
-        StringBuilder sb = new StringBuilder(1024);
+        StringBuilder sb = threadLocalBuilder.get();
         sb.append(controllerId).append(name).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());

@@ -41,6 +41,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.util.ThreadLocalStringBuilder;
 
 /**
  *
@@ -48,6 +49,8 @@ import mage.game.Game;
  * @param <T>
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
+
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     public AbilitiesImpl() {}
 
@@ -88,7 +91,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             }
             if (ability instanceof SpellAbility) {
                 if (ability.getAlternativeCosts().size() > 0) {
-                    StringBuilder sbRule = new StringBuilder();
+                    StringBuilder sbRule = threadLocalBuilder.get();
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
                         if (cost.getClass().getName().equals("mage.abilities.costs.AlternativeCostImpl")) 
                         { // if the template class is used, the rule is in the getName() instead in the getText()
@@ -102,7 +105,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     rules.add(sbRule.toString());
                 }
                 if (ability.getAdditionalCostsRuleVisible() && ability.getCosts().size() > 0) {
-                    StringBuilder sbRule = new StringBuilder();
+                    StringBuilder sbRule = threadLocalBuilder.get();
                     for (Cost cost: ability.getCosts()) {
                         if (cost.getText() != null && !cost.getText().isEmpty()) {
                             if (!cost.getText().startsWith("As an additional cost")) {
@@ -339,7 +342,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             }
         }
         Collections.sort(abilities);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = threadLocalBuilder.get();
         for (String s: abilities) {
             sb.append(s);
         }

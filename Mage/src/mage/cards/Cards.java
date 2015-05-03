@@ -46,6 +46,7 @@ public interface Cards extends Set<UUID>, Serializable {
     Set<Card> getCards(Game game);
     Set<Card> getCards(FilterCard filter, Game game);
     Set<Card> getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game);
+    String getValue(Game game);
     Collection<Card> getUniqueCards(Game game);
     Card getRandom(Game game);
     int count(FilterCard filter, Game game);

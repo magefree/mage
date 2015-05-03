@@ -36,11 +36,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.ThreadLocalStringBuilder;
 import org.apache.log4j.Logger;
 
 
@@ -51,6 +54,7 @@ import org.apache.log4j.Logger;
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
     
     private static final Logger logger = Logger.getLogger(CardsImpl.class);
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     private static Random rnd = new Random();
     private UUID ownerId;
@@ -205,6 +209,20 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
             }
         }
         return cards;
+    }
+
+    @Override
+    public String getValue(Game game) {
+        StringBuilder sb = threadLocalBuilder.get();
+        SortedSet<String> cards = new TreeSet<>();
+        for (UUID cardId: this) {
+            Card card = game.getCard(cardId);
+            cards.add(card.getName());
+        }
+        for (String name: cards) {
+            sb.append(name).append(":");
+        }
+        return sb.toString();
     }
 
     @Override

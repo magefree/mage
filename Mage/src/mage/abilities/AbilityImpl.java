@@ -74,6 +74,7 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
@@ -84,6 +85,7 @@ import org.apache.log4j.Logger;
 public abstract class AbilityImpl implements Ability {
 
     private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(100);
     private static final List<Watcher> emptyWatchers = new ArrayList<>();
     private static final List<Ability> emptyAbilities = new ArrayList<>();
 
@@ -519,7 +521,7 @@ public abstract class AbilityImpl implements Ability {
                 if (!noMana) {
                     xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getMultiplier();
-                    StringBuilder manaString = new StringBuilder();
+                    StringBuilder manaString = threadLocalBuilder.get();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isColorless()) {
                         manaString.append("{").append(amountMana).append("}");
                     } else {
@@ -727,7 +729,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public String getRule(boolean all) {
-        StringBuilder sbRule = new StringBuilder();
+        StringBuilder sbRule = threadLocalBuilder.get();
         if (all || this.abilityType != AbilityType.SPELL) {
             if (manaCosts.size() > 0) {
                 sbRule.append(manaCosts.getText());
@@ -989,7 +991,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     protected String getMessageText(Game game) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = threadLocalBuilder.get();
         MageObject object = game.getObject(this.sourceId);
         if (object != null) {
             if (object instanceof StackAbility) {
@@ -1072,7 +1074,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = threadLocalBuilder.get();
         if (targets.size() > 0) {
             String usedVerb = null;
             for (Target target : targets) {
@@ -1097,7 +1099,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = threadLocalBuilder.get();
         for (Ability ability : spell.getAbilities()) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());

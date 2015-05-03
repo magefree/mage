@@ -41,12 +41,15 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.ThreadLocalStringBuilder;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class Turn implements Serializable {
+
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(50);
 
     private Phase currentPhase;
     private UUID activePlayerId;
@@ -322,20 +325,4 @@ public class Turn implements Serializable {
         return sb.toString();
     }
     
-    // create a ThreadLocal StringBuilder
-    private transient ThreadLocal<StringBuilder> threadLocalBuilder = new ThreadLocal<StringBuilder>() {
-        @Override
-        protected StringBuilder initialValue() {
-            return new StringBuilder(50);
-        }
-
-        @Override
-        public StringBuilder get() {
-            StringBuilder b = super.get();
-            b.setLength(0); // clear/reset the buffer
-            return b;
-        }
-
-    };
-
 }

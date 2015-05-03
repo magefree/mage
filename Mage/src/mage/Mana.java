@@ -33,6 +33,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
+import mage.util.ThreadLocalStringBuilder;
 
 /**
  *
@@ -258,7 +259,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
 
     @Override
     public String toString() {
-        StringBuilder sbMana = new StringBuilder();
+        StringBuilder sbMana = threadLocalBuilder.get();
         if (colorless > 0) {
             sbMana.append("{").append(Integer.toString(colorless)).append("}");
         }
@@ -282,7 +283,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         return sbMana.toString();
     }
-
+    
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
+    
     @Override
     public Mana copy() {
         return new Mana(this);

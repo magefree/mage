@@ -32,8 +32,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import mage.util.Copyable;
+import mage.util.ThreadLocalStringBuilder;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
+
+    private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
 
     public static final ObjectColor WHITE = new ObjectColor("W");
     public static final ObjectColor BLUE = new ObjectColor("U");
@@ -184,7 +187,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = threadLocalBuilder.get();
         if (white) {
             sb.append("W");
         }
