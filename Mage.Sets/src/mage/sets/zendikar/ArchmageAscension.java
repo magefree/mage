@@ -38,7 +38,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -100,10 +99,7 @@ class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent archmage = game.getPermanent(super.getSourceId());
         CardsDrawnControllerWatcher watcher = (CardsDrawnControllerWatcher) game.getState().getWatchers().get("CardsControllerDrawn");
-        if (archmage != null && watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
+        return archmage != null && watcher != null && watcher.conditionMet();
     }
 
     @Override
@@ -194,13 +190,10 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent archmage = game.getPermanent(source.getSourceId());
         Player you = game.getPlayer(source.getControllerId());
-        if (event.getPlayerId().equals(source.getControllerId())
+        return event.getPlayerId().equals(source.getControllerId())
                 && archmage != null
                 && archmage.getCounters().getCount(CounterType.QUEST) >= 6
                 && you != null
-                && you.chooseUse(Outcome.Benefit, "Would you like to search you library instead of drawing a card?", game)) {
-            return true;
-        }
-        return false;
+                && you.chooseUse(Outcome.Benefit, "Would you like to search your library instead of drawing a card?", game);
     }
 }
