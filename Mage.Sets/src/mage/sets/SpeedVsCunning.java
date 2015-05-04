@@ -44,7 +44,8 @@ public class SpeedVsCunning extends ExpansionSet {
     }
 
     private SpeedVsCunning() {
-        super("Duel Decks: Speed vs. Cunning", "DDN", "mage.sets.speedvscunning", new GregorianCalendar(2014, 9, 5).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Speed vs. Cunning", "DDN", "mage.sets.speedvscunning", new GregorianCalendar(2014, 9, 5).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }

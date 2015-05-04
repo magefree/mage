@@ -50,7 +50,8 @@ public class PortalThreeKingdoms extends ExpansionSet {
     }
 
     private PortalThreeKingdoms() {
-        super("Portal Three Kingsdoms", "PTK", "mage.sets.portalthreekingdoms", new GregorianCalendar(1999, 5, 1).getTime(), SetType.REPRINT);
+        super("Portal Three Kingdoms", "PTK", "mage.sets.portalthreekingdoms", new GregorianCalendar(1999, 5, 1).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 2;

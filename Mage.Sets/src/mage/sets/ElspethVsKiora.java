@@ -43,7 +43,8 @@ public class ElspethVsKiora extends ExpansionSet {
     }
 
     private ElspethVsKiora() {
-        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", new GregorianCalendar(2015, 2, 27).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", new GregorianCalendar(2015, 2, 27).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }

@@ -36,15 +36,16 @@ import mage.constants.SetType;
  * @author LevelX2
  */
 
-public class Heroesvsmonsters extends ExpansionSet {
-    private static final Heroesvsmonsters fINSTANCE =  new Heroesvsmonsters();
+public class HeroesVsMonsters extends ExpansionSet {
+    private static final HeroesVsMonsters fINSTANCE =  new HeroesVsMonsters();
 
-    public static Heroesvsmonsters getInstance() {
+    public static HeroesVsMonsters getInstance() {
         return fINSTANCE;
     }
 
-    private Heroesvsmonsters() {
-        super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", new GregorianCalendar(2013, 9, 6).getTime(), SetType.DUEL_DECK);
+    private HeroesVsMonsters() {
+        super("Duel Decks: Heroes vs. Monsters", "DDL", "mage.sets.heroesvsmonsters", new GregorianCalendar(2013, 9, 6).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }

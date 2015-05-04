@@ -5,11 +5,10 @@ package mage.constants;
  * @author North
  */
 public enum SetType {
-    CORE("Core"),
-    DUEL_DECK("Duel Deck"),
     EXPANSION("Expansion"),
-    NON_STANDARD_LEGAL_SETS("Non-standard-legal sets"),
-    REPRINT("Reprint"),
+    CORE("Core"),
+    MAGIC_ONLINE("Magic Online"),
+    SUPPLEMENTAL("Supplemental"),
     PROMOTIONAL("Promotional"),
     JOKESET("Joke Set");
 

@@ -91,7 +91,7 @@ public final class CollectionViewerPanel extends JPanel {
         label1.setForeground(Color.white);
         jPanel1.add(label1);
 
-        formats = new JComboBox(ConstructedFormats.getTypes());
+        formats = new JComboBox<>(ConstructedFormats.getTypes());
         formats.setSelectedItem(ConstructedFormats.getDefault());
         formats.setPreferredSize(new Dimension(250, 25));
         formats.setMaximumSize(new Dimension(250, 25));

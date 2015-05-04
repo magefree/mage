@@ -43,7 +43,8 @@ public class AnthologyJaceVsChandra extends ExpansionSet {
     }
 
     private AnthologyJaceVsChandra() {
-        super("Duel Decks: Anthology, Jace vs. Chandra", "DD3D", "mage.sets.anthologyjacevschandra", new GregorianCalendar(2014, 12, 5).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Anthology, Jace vs. Chandra", "DD3D", "mage.sets.anthologyjacevschandra", new GregorianCalendar(2014, 12, 5).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = false;
     }
 }

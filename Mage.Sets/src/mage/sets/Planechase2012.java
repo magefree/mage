@@ -45,7 +45,8 @@ public class Planechase2012 extends ExpansionSet {
     }
 
     private Planechase2012() {
-        super("Planechase (2012 Edition)", "PC2", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.NON_STANDARD_LEGAL_SETS);
+        super("Planechase 2012 Edition", "PC2", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Command Zone";
     }
 
 }

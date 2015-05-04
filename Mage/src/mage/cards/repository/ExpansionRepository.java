@@ -97,13 +97,12 @@ public enum ExpansionRepository {
         return sets;
     }
     
-    public ExpansionInfo[] getSetsFromBlock(String blockName) {
-        ExpansionInfo[]  sets = new ExpansionInfo[0];
+    public List<ExpansionInfo> getSetsFromBlock(String blockName) {
+        List<ExpansionInfo>  sets = new LinkedList<>();
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.where().eq("blockName", new SelectArg(blockName));
-            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            sets = expansions.toArray(new ExpansionInfo[0]);
+            return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
         }
         return sets;
@@ -122,15 +121,46 @@ public enum ExpansionRepository {
         }
         return set;        
     }
+    
+    public ExpansionInfo getSetByName(String setName) {
+        ExpansionInfo set = null;
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.where().eq("name", new SelectArg(setName));
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            if (expansions.size() > 0) {
+                set = expansions.get(0);
+            }
+        } catch (SQLException ex) {
+        }
+        return set;        
+    }
 
     public List<ExpansionInfo> getAll() {
         try {
-            return expansionDao.queryForAll();
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.orderBy("releaseDate", true);
+            return expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
         }
         return new ArrayList<>();
     }
-
+    
+    public List<String> getAllSetNames() {
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.orderBy("releaseDate", true);
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            List<String> setNames = new LinkedList<>();
+            for (ExpansionInfo expansionInfo : expansions) {
+            	setNames.add(expansionInfo.getName());
+			}
+            return setNames;
+        } catch (SQLException ex) {
+        }
+        return new ArrayList<>();
+    }
+    
     public long getContentVersionFromDB() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);

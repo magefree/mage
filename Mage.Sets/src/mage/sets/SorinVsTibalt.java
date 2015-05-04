@@ -44,7 +44,8 @@ public class SorinVsTibalt extends ExpansionSet {
     }
 
     private SorinVsTibalt() {
-        super("Duel Decks: Sorin vs. Tibalt", "DDK", "mage.sets.sorinvstibalt", new GregorianCalendar(2013, 3, 15).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Sorin vs. Tibalt", "DDK", "mage.sets.sorinvstibalt", new GregorianCalendar(2013, 3, 15).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }

@@ -50,7 +50,8 @@ public class PortalSecondAge extends ExpansionSet {
     }
 
     private PortalSecondAge() {
-        super("Portal Second Age", "PO2", "mage.sets.portalsecondage", new GregorianCalendar(1998, 6, 24).getTime(), SetType.REPRINT);
+        super("Portal Second Age", "PO2", "mage.sets.portalsecondage", new GregorianCalendar(1998, 6, 24).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

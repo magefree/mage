@@ -45,7 +45,8 @@ public class Commander2014 extends ExpansionSet {
     }
 
     private Commander2014() {
-        super("Commander 2014 Edition", "C14", "mage.sets.commander2014", new GregorianCalendar(2014, 11, 07).getTime(), SetType.NON_STANDARD_LEGAL_SETS);
+        super("Commander 2014 Edition", "C14", "mage.sets.commander2014", new GregorianCalendar(2014, 11, 07).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Command Zone";
     }
 
 }
