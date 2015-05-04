@@ -31,12 +31,14 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -65,7 +67,6 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     public PreventDamageBySourceEffect(final PreventDamageBySourceEffect effect) {
         super(effect);
         this.target = effect.target.copy();
-        this.mageObjectReference = effect.mageObjectReference;
     }
 
     @Override
@@ -76,15 +77,15 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-        mageObjectReference = new MageObjectReference(target.getFirstTarget(), game);
+        setTargetPointer(new FixedTarget(target.getFirstTarget()));
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            MageObject mageObject = game.getObject(event.getSourceId());
-            if (mageObject != null && mageObjectReference.refersTo(mageObject, game)) {
-                return true;
+            Card card = game.getCard(((FixedTarget)getTargetPointer()).getTarget());
+            if(card != null) {
+            	return card.getId().equals(event.getSourceId());
             }
         }
         return false;
