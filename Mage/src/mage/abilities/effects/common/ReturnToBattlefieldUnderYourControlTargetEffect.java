@@ -29,6 +29,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -37,6 +38,7 @@ import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -85,7 +87,12 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
                     }                
                 }
             } else {
-                card = game.getCard(targetPointer.getFirst(game, source));
+            	if(targetPointer instanceof FixedTarget) {
+                    card = game.getCard(((FixedTarget) targetPointer).getTarget());
+            	} else {
+                    card = game.getCard(targetPointer.getFirst(game, source));
+            	}
+
             }
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());
