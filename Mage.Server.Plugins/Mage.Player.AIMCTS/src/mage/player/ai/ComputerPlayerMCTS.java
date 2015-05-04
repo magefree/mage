@@ -92,6 +92,11 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             if (!lastPhase.equals(game.getTurn().getValue(game.getTurnNum()))) {
                 logList(game.getTurn().getValue(game.getTurnNum()) + name + " hand: ", new ArrayList(hand.getCards(game)));
                 lastPhase = game.getTurn().getValue(game.getTurnNum());
+                if (MCTSNode.USE_ACTION_CACHE) {
+                    int count = MCTSNode.cleanupCache(game.getTurnNum());
+                    if (count > 0)
+                        logger.info("Removed " + count + " cache entries");
+                }
             }
         }
         game.getState().setPriorityPlayerId(playerId);
@@ -113,7 +118,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             Game sim = createMCTSGame(game);
             MCTSPlayer player = (MCTSPlayer) sim.getPlayer(playerId);
             player.setNextAction(action);
-            root = new MCTSNode(sim);
+            root = new MCTSNode(playerId, sim);
         }
         applyMCTS(game, action);
         root = root.bestChild();
@@ -123,7 +128,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     protected void getNextAction(Game game, NextAction nextAction) {
         if (root != null) {
             MCTSNode newRoot;
-            newRoot = root.getMatchingState(game.getState().getValue(false, game));
+            newRoot = root.getMatchingState(game.getState().getValue(game, playerId));
             if (newRoot != null) {
                 newRoot.emancipate();
             }
@@ -213,6 +218,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             sb.append(game.getPermanent(attackerId).getName()).append(",");
         }
         logger.info(sb.toString());
+        MCTSNode.logHitMiss();
     }
 
     @Override
@@ -233,6 +239,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
             }
         }
         logger.info(sb.toString());
+        MCTSNode.logHitMiss();
     }
 
 //    @Override
@@ -273,6 +280,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
     protected long totalThinkTime = 0;
     protected long totalSimulations = 0;
     protected void applyMCTS(final Game game, final NextAction action) {
+        
         int thinkTime = calculateThinkTime(game, action);
         
         if (thinkTime > 0) {
@@ -306,6 +314,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer implements Player {
                 totalSimulations += simCount;
                 logger.info("Player: " + name + " Simulated " + simCount + " games in " + thinkTime + " seconds - nodes in tree: " + root.size());
                 logger.info("Total: Simulated " + totalSimulations + " games in " + totalThinkTime + " seconds - Average: " + totalSimulations/totalThinkTime);
+                MCTSNode.logHitMiss();
             }
             else {
                 long startTime = System.nanoTime();
