@@ -30,7 +30,6 @@ package mage.sets.dissension;
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.ForecastAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
