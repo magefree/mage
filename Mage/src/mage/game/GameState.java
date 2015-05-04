@@ -226,7 +226,66 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Player player: players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
-            if (useHidden && priorityPlayerId == player.getId()) {
+            if (useHidden) {
+                sb.append(player.getHand().getValue(game));
+            }
+            else {
+                sb.append(player.getHand().size());
+            }
+            sb.append("library").append(player.getLibrary().size());
+            sb.append("graveyard");
+            sb.append(player.getGraveyard().getValue(game));
+        }
+
+        sb.append("permanents");
+        List<String> perms = new ArrayList<>();
+        for (Permanent permanent: battlefield.getAllPermanents()) {
+            perms.add(permanent.getValue());
+        }
+        Collections.sort(perms);
+        sb.append(perms);
+
+        sb.append("spells");
+        for (StackObject spell: stack) {
+            sb.append(spell.getControllerId()).append(spell.getName());
+            sb.append(spell.getStackAbility().toString());
+            for (Mode mode: spell.getStackAbility().getModes().values()) {
+                if (!mode.getTargets().isEmpty()) {
+                    sb.append("targets");
+                    for (Target target: mode.getTargets()) {
+                        sb.append(target.getTargets());
+                    }
+                }
+                if (!mode.getChoices().isEmpty()) {
+                    sb.append("choices");
+                    for (Choice choice: mode.getChoices()) {
+                        sb.append(choice.getChoice());
+                    }
+                }
+            }
+        }
+
+        for (ExileZone zone: exile.getExileZones()) {
+            sb.append("exile").append(zone.getName()).append(zone.getValue(game));
+        }
+
+        sb.append("combat");
+        for (CombatGroup group: combat.getGroups()) {
+            sb.append(group.getDefenderId()).append(group.getAttackers()).append(group.getBlockers());
+        }
+
+        return sb.toString();
+    }
+
+    public String getValue(Game game, UUID playerId) {
+        StringBuilder sb = threadLocalBuilder.get();
+
+        sb.append(turn.getValue(turnNum));
+        sb.append(activePlayerId).append(priorityPlayerId);
+
+        for (Player player: players.values()) {
+            sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
+            if (playerId == player.getId()) {
                 sb.append(player.getHand().getValue(game));
             }
             else {
@@ -856,4 +915,4 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         return copiedCard;
     }
-}
+    }

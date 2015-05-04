@@ -48,7 +48,7 @@ public class MCTSExecutor implements Callable<Boolean> {
     public MCTSExecutor(Game sim, UUID playerId, int thinkTime) {
         this.playerId = playerId;
         this.thinkTime = thinkTime;
-        root = new MCTSNode(sim);
+        root = new MCTSNode(playerId, sim);
     }
 
     @Override
