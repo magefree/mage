@@ -28,6 +28,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -37,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,8 +55,6 @@ public class DestroyTheEvidence extends CardImpl {
     public DestroyTheEvidence(UUID ownerId) {
         super(ownerId, 64, "Destroy the Evidence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "RTR";
-
-        this.color.setBlack(true);
 
         // Destroy target land. Its controller reveals cards from the top of his
         // or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
@@ -91,25 +92,29 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID landTarget = source.getFirstTarget();
-        Permanent landPermanent = (Permanent) game.getLastKnownInformation(landTarget, Zone.BATTLEFIELD);
-        Card landCard = game.getCard(landTarget);
-        if (landPermanent != null && landCard != null) {
+        Permanent landPermanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && landPermanent != null) {
             Player player = game.getPlayer(landPermanent.getControllerId());
             if (player == null) {
                 return false;
             }
-
             boolean landFound = false;
+            Cards cards = new CardsImpl();            
             while (player.getLibrary().size() > 0 && !landFound) {
+                if (!player.isInGame()) {
+                    return false;
+                }
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    cards.add(card);
                     if (card.getCardType().contains(CardType.LAND)) {
                         landFound = true;
                     }
                 }
             }
+            player.revealCards(sourceObject.getName(), cards, game, true);
+            player.moveCardsToGraveyardWithInfo(cards, source, game, Zone.LIBRARY);
             return true;
         }
         return false;
