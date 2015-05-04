@@ -87,7 +87,7 @@
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
         <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
         <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
-        <deckType name="Block Constructed - Shadowmoore" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmooreBlock"/>
+        <deckType name="Block Constructed - Shadowmoor" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmoorBlock"/>
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>       
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
