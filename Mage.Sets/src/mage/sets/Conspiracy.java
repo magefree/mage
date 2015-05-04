@@ -47,7 +47,8 @@ import mage.constants.SetType;
     }
 
     private Conspiracy() {
-        super("Magic: The Gathering-Conspiracy", "CNS", "mage.sets.conspiracy", new GregorianCalendar(2014, 6, 6).getTime(), SetType.NON_STANDARD_LEGAL_SETS);
+        super("Conspiracy", "CNS", "mage.sets.conspiracy", new GregorianCalendar(2014, 6, 6).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

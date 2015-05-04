@@ -45,7 +45,7 @@ public class TempestRemastered extends ExpansionSet {
     }
 
     private TempestRemastered() {
-        super("Tempest Remastered", "TPR", "mage.sets.tempestremastered", new GregorianCalendar(2015, 5, 6).getTime(), SetType.REPRINT);
+        super("Tempest Remastered", "TPR", "mage.sets.tempestremastered", new GregorianCalendar(2015, 5, 6).getTime(), SetType.MAGIC_ONLINE);
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

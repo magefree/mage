@@ -36,16 +36,16 @@ import mage.cards.ExpansionSet;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Tenth extends ExpansionSet {
+public class TenthEdition extends ExpansionSet {
 
-    private static final Tenth fINSTANCE =  new Tenth();
+    private static final TenthEdition fINSTANCE =  new TenthEdition();
 
-    public static Tenth getInstance() {
+    public static TenthEdition getInstance() {
         return fINSTANCE;
     }
 
-    private Tenth() {
-        super("Tenth Edition", "10E", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
+    private TenthEdition() {
+        super("Tenth Edition", "10E", "mage.sets.tenthedition", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

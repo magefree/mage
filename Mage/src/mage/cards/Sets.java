@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardCriteria;
@@ -42,12 +43,8 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import static mage.constants.ColoredManaSymbol.B;
-import static mage.constants.ColoredManaSymbol.G;
-import static mage.constants.ColoredManaSymbol.R;
-import static mage.constants.ColoredManaSymbol.U;
-import static mage.constants.ColoredManaSymbol.W;
 import mage.util.ClassScanner;
+
 import org.apache.log4j.Logger;
 
 /**

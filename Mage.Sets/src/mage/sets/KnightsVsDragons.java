@@ -45,7 +45,8 @@ public class KnightsVsDragons extends ExpansionSet {
     }
 
     private KnightsVsDragons() {
-        super("Duel Decks: Knights vs. Dragons", "DDG", "mage.sets.knightsvsdragons", new GregorianCalendar(2011, 4, 1).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Knights vs. Dragons", "DDG", "mage.sets.knightsvsdragons", new GregorianCalendar(2011, 4, 1).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }

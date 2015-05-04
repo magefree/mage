@@ -76,7 +76,7 @@ public class AddLandDialog extends MageDialog {
             for (String setCode :deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 if (expansionInfo != null) {
-                    ExpansionInfo [] blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
+                    List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
                     for (ExpansionInfo blockSet: blockSets) {
                         if (blockSet.hasBasicLands()) {
                             this.setCodesland.add(blockSet.getCode());

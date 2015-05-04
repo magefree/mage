@@ -52,7 +52,7 @@ public class VintageMasters extends ExpansionSet {
     }
 
     private VintageMasters() {
-        super("Vintage Masters", "VMA", "mage.sets.vintagemasters", new GregorianCalendar(2014, 6, 16).getTime(), SetType.REPRINT);
+        super("Vintage Masters", "VMA", "mage.sets.vintagemasters", new GregorianCalendar(2014, 6, 16).getTime(), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;

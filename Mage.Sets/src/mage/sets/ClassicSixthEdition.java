@@ -36,16 +36,16 @@ import mage.constants.SetType;
  *
  * @author North
  */
-public class SixthEdition extends ExpansionSet {
+public class ClassicSixthEdition extends ExpansionSet {
 
-    private static final SixthEdition fINSTANCE = new SixthEdition();
+    private static final ClassicSixthEdition fINSTANCE = new ClassicSixthEdition();
 
-    public static SixthEdition getInstance() {
+    public static ClassicSixthEdition getInstance() {
         return fINSTANCE;
     }
 
-    private SixthEdition() {
-        super("Sixth Edition", "6ED", "mage.sets.sixthedition", new GregorianCalendar(1999, 3, 28).getTime(), SetType.CORE);
+    private ClassicSixthEdition() {
+        super("Classic Sixth Edition", "6ED", "mage.sets.classicsixthedition", new GregorianCalendar(1999, 3, 28).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

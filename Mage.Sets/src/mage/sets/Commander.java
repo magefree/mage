@@ -47,7 +47,8 @@ public class Commander extends ExpansionSet {
     }
 
     private Commander() {
-        super("Magic: The Gathering-Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.NON_STANDARD_LEGAL_SETS);
+        super("Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Command Zone";
     }
 
 }

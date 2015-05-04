@@ -44,7 +44,8 @@ public class AjaniVsNicolBolas extends ExpansionSet {
     }
 
     private AjaniVsNicolBolas() {
-        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", "mage.sets.ajanivsnicolbolas", new GregorianCalendar(2011, 9, 2).getTime(), SetType.DUEL_DECK);
+        super("Duel Decks: Ajani vs. Nicol Bolas", "DDH", "mage.sets.ajanivsnicolbolas", new GregorianCalendar(2011, 9, 2).getTime(), SetType.SUPPLEMENTAL);
+        this.blockName = "Duel Decks";
         this.hasBasicLands = false;
     }
 }
