@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class SpawningPool extends mage.sets.tenth.SpawningPool {
+public class SpawningPool extends mage.sets.tenthedition.SpawningPool {
 
     public SpawningPool(UUID ownerId) {
         super(ownerId);

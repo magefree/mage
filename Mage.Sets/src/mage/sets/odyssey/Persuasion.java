@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author cbt33
  */
-public class Persuasion extends mage.sets.tenth.Persuasion {
+public class Persuasion extends mage.sets.tenthedition.Persuasion {
 
     public Persuasion(UUID ownerId) {
         super(ownerId);

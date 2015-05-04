@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WurmsTooth extends mage.sets.tenth.WurmsTooth {
+public class WurmsTooth extends mage.sets.tenthedition.WurmsTooth {
 
     public WurmsTooth(UUID ownerId) {
         super(ownerId);

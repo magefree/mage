@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CreepingMold extends mage.sets.tenth.CreepingMold {
+public class CreepingMold extends mage.sets.tenthedition.CreepingMold {
 
     public CreepingMold(UUID ownerId) {
         super(ownerId);

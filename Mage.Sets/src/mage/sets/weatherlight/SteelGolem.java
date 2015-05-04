@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class SteelGolem extends mage.sets.tenth.SteelGolem {
+public class SteelGolem extends mage.sets.tenthedition.SteelGolem {
 
     public SteelGolem(UUID ownerId) {
         super(ownerId);

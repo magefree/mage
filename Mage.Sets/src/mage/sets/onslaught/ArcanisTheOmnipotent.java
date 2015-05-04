@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ArcanisTheOmnipotent extends mage.sets.tenth.ArcanisTheOmnipotent {
+public class ArcanisTheOmnipotent extends mage.sets.tenthedition.ArcanisTheOmnipotent {
 
     public ArcanisTheOmnipotent(UUID ownerId) {
         super(ownerId);

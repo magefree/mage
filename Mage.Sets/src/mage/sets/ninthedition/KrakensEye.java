@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KrakensEye extends mage.sets.tenth.KrakensEye {
+public class KrakensEye extends mage.sets.tenthedition.KrakensEye {
 
     public KrakensEye(UUID ownerId) {
         super(ownerId);

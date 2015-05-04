@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class Clone extends mage.sets.tenth.Clone {
+public class Clone extends mage.sets.tenthedition.Clone {
 
     public Clone(UUID ownerId) {
         super(ownerId);

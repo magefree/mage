@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class WallOfSwords extends mage.sets.tenth.WallOfSwords {
+public class WallOfSwords extends mage.sets.tenthedition.WallOfSwords {
 
     public WallOfSwords(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RelentlessRats extends mage.sets.tenth.RelentlessRats {
+public class RelentlessRats extends mage.sets.tenthedition.RelentlessRats {
 
     public RelentlessRats(UUID ownerId) {
         super(ownerId);

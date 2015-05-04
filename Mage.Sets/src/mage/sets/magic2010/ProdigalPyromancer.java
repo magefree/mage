@@ -35,7 +35,7 @@ import mage.constants.Rarity;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ProdigalPyromancer extends mage.sets.tenth.ProdigalPyromancer {
+public class ProdigalPyromancer extends mage.sets.tenthedition.ProdigalPyromancer {
 
     public ProdigalPyromancer(UUID ownerId) {
         super(ownerId);

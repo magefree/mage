@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HorseshoeCrab extends mage.sets.tenth.HorseshoeCrab {
+public class HorseshoeCrab extends mage.sets.tenthedition.HorseshoeCrab {
 
     public HorseshoeCrab(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class JoinerAdept extends mage.sets.tenth.JoinerAdept {
+public class JoinerAdept extends mage.sets.tenthedition.JoinerAdept {
 
     public JoinerAdept(UUID ownerId) {
         super(ownerId);

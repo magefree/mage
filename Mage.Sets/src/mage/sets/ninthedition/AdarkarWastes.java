@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AdarkarWastes extends mage.sets.tenth.AdarkarWastes {
+public class AdarkarWastes extends mage.sets.tenthedition.AdarkarWastes {
 
     public AdarkarWastes(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class VenerableMonk extends mage.sets.tenth.VenerableMonk {
+public class VenerableMonk extends mage.sets.tenthedition.VenerableMonk {
 
     public VenerableMonk(UUID ownerId) {
         super(ownerId);

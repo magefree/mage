@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Incinerate extends mage.sets.tenth.Incinerate {
+public class Incinerate extends mage.sets.tenthedition.Incinerate {
 
     public Incinerate(UUID ownerId) {
         super(ownerId);

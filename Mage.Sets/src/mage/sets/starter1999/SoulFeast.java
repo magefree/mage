@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SoulFeast extends mage.sets.tenth.SoulFeast {
+public class SoulFeast extends mage.sets.tenthedition.SoulFeast {
 
     public SoulFeast(UUID ownerId) {
         super(ownerId);

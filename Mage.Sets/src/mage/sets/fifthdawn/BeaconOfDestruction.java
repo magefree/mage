@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BeaconOfDestruction extends mage.sets.tenth.BeaconOfDestruction {
+public class BeaconOfDestruction extends mage.sets.tenthedition.BeaconOfDestruction {
 
     public BeaconOfDestruction(UUID ownerId) {
         super(ownerId);

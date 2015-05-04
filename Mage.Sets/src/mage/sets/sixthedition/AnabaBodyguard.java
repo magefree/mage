@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AnabaBodyguard extends mage.sets.tenth.AnabaBodyguard {
+public class AnabaBodyguard extends mage.sets.tenthedition.AnabaBodyguard {
 
     public AnabaBodyguard(UUID ownerId) {
         super(ownerId);

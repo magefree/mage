@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class ThunderingGiant extends mage.sets.tenth.ThunderingGiant {
+public class ThunderingGiant extends mage.sets.tenthedition.ThunderingGiant {
 
     public ThunderingGiant(UUID ownerId) {
         super(ownerId);

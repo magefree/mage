@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ElvishChampion extends mage.sets.tenth.ElvishChampion {
+public class ElvishChampion extends mage.sets.tenthedition.ElvishChampion {
 
     public ElvishChampion(UUID ownerId) {
         super(ownerId);

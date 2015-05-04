@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DemonsHorn extends mage.sets.tenth.DemonsHorn {
+public class DemonsHorn extends mage.sets.tenthedition.DemonsHorn {
 
     public DemonsHorn(UUID ownerId) {
         super(ownerId);

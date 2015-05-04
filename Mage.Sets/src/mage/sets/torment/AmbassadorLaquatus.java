@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AmbassadorLaquatus extends mage.sets.tenth.AmbassadorLaquatus {
+public class AmbassadorLaquatus extends mage.sets.tenthedition.AmbassadorLaquatus {
 
     public AmbassadorLaquatus(UUID ownerId) {
         super(ownerId);

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class StarlightInvoker extends mage.sets.tenth.StarlightInvoker {
+public class StarlightInvoker extends mage.sets.tenthedition.StarlightInvoker {
 
     public StarlightInvoker(UUID ownerId) {
         super(ownerId);

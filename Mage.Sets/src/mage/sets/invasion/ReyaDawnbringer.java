@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ReyaDawnbringer extends mage.sets.tenth.ReyaDawnbringer {
+public class ReyaDawnbringer extends mage.sets.tenthedition.ReyaDawnbringer {
 
     public ReyaDawnbringer(UUID ownerId) {
         super(ownerId);

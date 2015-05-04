@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ViashinoRunner extends mage.sets.tenth.ViashinoRunner {
+public class ViashinoRunner extends mage.sets.tenthedition.ViashinoRunner {
 
     public ViashinoRunner(UUID ownerId) {
         super(ownerId);

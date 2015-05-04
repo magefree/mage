@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DoomedNecromancer extends mage.sets.tenth.DoomedNecromancer {
+public class DoomedNecromancer extends mage.sets.tenthedition.DoomedNecromancer {
 
     public DoomedNecromancer(UUID ownerId) {
         super(ownerId);

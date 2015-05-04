@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class StalkingTiger extends mage.sets.tenth.StalkingTiger {
+public class StalkingTiger extends mage.sets.tenthedition.StalkingTiger {
 
     public StalkingTiger(UUID ownerId) {
         super(ownerId);

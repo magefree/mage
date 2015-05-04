@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class SculptingSteel extends mage.sets.tenth.SculptingSteel {
+public class SculptingSteel extends mage.sets.tenthedition.SculptingSteel {
 
     public SculptingSteel(UUID ownerId) {
         super(ownerId);

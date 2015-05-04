@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class FaerieConclave extends mage.sets.tenth.FaerieConclave {
+public class FaerieConclave extends mage.sets.tenthedition.FaerieConclave {
 
     public FaerieConclave(UUID ownerId) {
         super(ownerId);

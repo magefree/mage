@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class AngelicWall extends mage.sets.tenth.AngelicWall {
+public class AngelicWall extends mage.sets.tenthedition.AngelicWall {
 
     public AngelicWall(UUID ownerId) {
         super(ownerId);

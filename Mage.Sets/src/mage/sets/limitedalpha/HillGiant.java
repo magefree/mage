@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HillGiant extends mage.sets.tenth.HillGiant {
+public class HillGiant extends mage.sets.tenthedition.HillGiant {
 
     public HillGiant(UUID ownerId) {
         super(ownerId);

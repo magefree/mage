@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class Distress extends mage.sets.tenth.Distress {
+public class Distress extends mage.sets.tenthedition.Distress {
 
     public Distress(UUID ownerId) {
         super(ownerId);

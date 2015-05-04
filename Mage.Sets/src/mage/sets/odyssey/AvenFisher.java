@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AvenFisher extends mage.sets.tenth.AvenFisher {
+public class AvenFisher extends mage.sets.tenthedition.AvenFisher {
 
     public AvenFisher(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class TellingTime extends mage.sets.tenth.TellingTime {
+public class TellingTime extends mage.sets.tenthedition.TellingTime {
 
     public TellingTime(UUID ownerId) {
         super(ownerId);

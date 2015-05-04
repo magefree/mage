@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GrizzlyBears extends mage.sets.tenth.GrizzlyBears {
+public class GrizzlyBears extends mage.sets.tenthedition.GrizzlyBears {
 
     public GrizzlyBears(UUID ownerId) {
         super(ownerId);

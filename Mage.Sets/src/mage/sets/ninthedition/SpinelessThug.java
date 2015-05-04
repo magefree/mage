@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SpinelessThug extends mage.sets.tenth.SpinelessThug {
+public class SpinelessThug extends mage.sets.tenthedition.SpinelessThug {
 
     public SpinelessThug(UUID ownerId) {
         super(ownerId);

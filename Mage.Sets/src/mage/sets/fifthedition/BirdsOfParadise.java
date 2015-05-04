@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BirdsOfParadise extends mage.sets.tenth.BirdsOfParadise {
+public class BirdsOfParadise extends mage.sets.tenthedition.BirdsOfParadise {
 
     public BirdsOfParadise(UUID ownerId) {
         super(ownerId);

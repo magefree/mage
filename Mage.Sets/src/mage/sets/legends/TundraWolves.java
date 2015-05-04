@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class TundraWolves extends mage.sets.tenth.TundraWolves {
+public class TundraWolves extends mage.sets.tenthedition.TundraWolves {
 
     public TundraWolves(UUID ownerId) {
         super(ownerId);

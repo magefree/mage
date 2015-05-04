@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class Pyroclasm extends mage.sets.tenth.Pyroclasm {
+public class Pyroclasm extends mage.sets.tenthedition.Pyroclasm {
 
     public Pyroclasm(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class Abundance extends mage.sets.tenth.Abundance {
+public class Abundance extends mage.sets.tenthedition.Abundance {
 
     public Abundance(UUID ownerId) {
         super(ownerId);

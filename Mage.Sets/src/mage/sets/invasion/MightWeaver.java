@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MightWeaver extends mage.sets.tenth.MightWeaver {
+public class MightWeaver extends mage.sets.tenthedition.MightWeaver {
 
     public MightWeaver(UUID ownerId) {
         super(ownerId);

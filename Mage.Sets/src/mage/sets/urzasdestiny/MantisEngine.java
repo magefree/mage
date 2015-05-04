@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MantisEngine extends mage.sets.tenth.MantisEngine {
+public class MantisEngine extends mage.sets.tenthedition.MantisEngine {
 
     public MantisEngine(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class MindRot extends mage.sets.tenth.MindRot {
+public class MindRot extends mage.sets.tenthedition.MindRot {
 
     public MindRot(UUID ownerId) {
         super(ownerId);

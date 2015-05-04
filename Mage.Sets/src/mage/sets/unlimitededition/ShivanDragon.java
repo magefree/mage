@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ShivanDragon extends mage.sets.tenth.ShivanDragon {
+public class ShivanDragon extends mage.sets.tenthedition.ShivanDragon {
 
     public ShivanDragon(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Condemn extends mage.sets.tenth.Condemn {
+public class Condemn extends mage.sets.tenthedition.Condemn {
 
     public Condemn(UUID ownerId) {
         super(ownerId);

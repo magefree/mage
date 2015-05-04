@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AncestorsChosen extends mage.sets.tenth.AncestorsChosen {
+public class AncestorsChosen extends mage.sets.tenthedition.AncestorsChosen {
 
     public AncestorsChosen(UUID ownerId) {
         super(ownerId);

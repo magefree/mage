@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Recollect extends mage.sets.tenth.Recollect {
+public class Recollect extends mage.sets.tenthedition.Recollect {
 
     public Recollect(UUID ownerId) {
         super(ownerId);

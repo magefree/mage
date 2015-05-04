@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TreetopVillage extends mage.sets.tenth.TreetopVillage {
+public class TreetopVillage extends mage.sets.tenthedition.TreetopVillage {
 
     public TreetopVillage(UUID ownerId) {
         super(ownerId);

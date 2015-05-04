@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class WhispersilkCloak extends mage.sets.tenth.WhispersilkCloak {
+public class WhispersilkCloak extends mage.sets.tenthedition.WhispersilkCloak {
 
     public WhispersilkCloak(UUID ownerId) {
         super(ownerId);

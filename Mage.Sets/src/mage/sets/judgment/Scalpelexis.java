@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Scalpelexis extends mage.sets.tenth.Scalpelexis {
+public class Scalpelexis extends mage.sets.tenthedition.Scalpelexis {
 
     public Scalpelexis(UUID ownerId) {
         super(ownerId);

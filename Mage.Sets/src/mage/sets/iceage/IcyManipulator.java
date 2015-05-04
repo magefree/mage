@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class IcyManipulator extends mage.sets.tenth.IcyManipulator {
+public class IcyManipulator extends mage.sets.tenthedition.IcyManipulator {
 
     public IcyManipulator(UUID ownerId) {
         super(ownerId);

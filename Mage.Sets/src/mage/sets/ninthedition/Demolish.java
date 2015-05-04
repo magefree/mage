@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class Demolish extends mage.sets.tenth.Demolish {
+public class Demolish extends mage.sets.tenthedition.Demolish {
 
     public Demolish(UUID ownerId) {
         super(ownerId);

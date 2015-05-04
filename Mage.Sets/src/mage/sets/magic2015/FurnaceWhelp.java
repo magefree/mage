@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FurnaceWhelp extends mage.sets.tenth.FurnaceWhelp {
+public class FurnaceWhelp extends mage.sets.tenthedition.FurnaceWhelp {
 
     public FurnaceWhelp(UUID ownerId) {
         super(ownerId);

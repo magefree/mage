@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class LordOfTheUndead extends mage.sets.tenth.LordOfTheUndead {
+public class LordOfTheUndead extends mage.sets.tenthedition.LordOfTheUndead {
 
     public LordOfTheUndead(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class DoublingCube extends mage.sets.tenth.DoublingCube {
+public class DoublingCube extends mage.sets.tenthedition.DoublingCube {
 
     public DoublingCube(UUID ownerId) {
         super(ownerId);

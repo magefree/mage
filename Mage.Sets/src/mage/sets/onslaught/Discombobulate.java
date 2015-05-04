@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Discombobulate extends mage.sets.tenth.Discombobulate {
+public class Discombobulate extends mage.sets.tenthedition.Discombobulate {
 
     public Discombobulate(UUID ownerId) {
         super(ownerId);

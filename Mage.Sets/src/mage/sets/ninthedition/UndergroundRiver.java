@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class UndergroundRiver extends mage.sets.tenth.UndergroundRiver {
+public class UndergroundRiver extends mage.sets.tenthedition.UndergroundRiver {
 
     public UndergroundRiver(UUID ownerId) {
         super(ownerId);

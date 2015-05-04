@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class RockBadger extends mage.sets.tenth.RockBadger {
+public class RockBadger extends mage.sets.tenthedition.RockBadger {
 
     public RockBadger(UUID ownerId) {
         super(ownerId);

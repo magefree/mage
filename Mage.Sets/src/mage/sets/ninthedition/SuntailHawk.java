@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SuntailHawk extends mage.sets.tenth.SuntailHawk {
+public class SuntailHawk extends mage.sets.tenthedition.SuntailHawk {
 
     public SuntailHawk(UUID ownerId) {
         super(ownerId);

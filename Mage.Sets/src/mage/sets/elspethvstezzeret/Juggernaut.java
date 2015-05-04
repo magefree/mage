@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Juggernaut extends mage.sets.tenth.Juggernaut {
+public class Juggernaut extends mage.sets.tenthedition.Juggernaut {
 
     public Juggernaut (UUID ownerId) {
         super(ownerId);

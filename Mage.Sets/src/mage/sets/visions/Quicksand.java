@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Quicksand extends mage.sets.tenth.Quicksand {
+public class Quicksand extends mage.sets.tenthedition.Quicksand {
 
     public Quicksand(UUID ownerId) {
         super(ownerId);

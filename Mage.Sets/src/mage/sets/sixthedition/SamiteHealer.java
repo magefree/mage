@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SamiteHealer extends mage.sets.tenth.SamiteHealer {
+public class SamiteHealer extends mage.sets.tenthedition.SamiteHealer {
 
     public SamiteHealer(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class DuskImp extends mage.sets.tenth.DuskImp {
+public class DuskImp extends mage.sets.tenthedition.DuskImp {
 
     public DuskImp(UUID ownerId) {
         super(ownerId);

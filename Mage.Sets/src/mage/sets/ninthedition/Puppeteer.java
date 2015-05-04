@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Puppeteer extends mage.sets.tenth.Puppeteer {
+public class Puppeteer extends mage.sets.tenthedition.Puppeteer {
 
     public Puppeteer(UUID ownerId) {
         super(ownerId);

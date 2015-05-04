@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class CrucibleOfWorlds extends mage.sets.tenth.CrucibleOfWorlds {
+public class CrucibleOfWorlds extends mage.sets.tenthedition.CrucibleOfWorlds {
 
     public CrucibleOfWorlds(UUID ownerId) {
         super(ownerId);

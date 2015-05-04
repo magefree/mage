@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ProdigalPyromancer extends mage.sets.tenth.ProdigalPyromancer {
+public class ProdigalPyromancer extends mage.sets.tenthedition.ProdigalPyromancer {
 
     public ProdigalPyromancer(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class TheHive extends mage.sets.tenth.TheHive {
+public class TheHive extends mage.sets.tenthedition.TheHive {
 
     public TheHive(UUID ownerId) {
         super(ownerId);

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class Righteousness extends mage.sets.tenth.Righteousness {
+public class Righteousness extends mage.sets.tenthedition.Righteousness {
 
     public Righteousness(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Shunt extends mage.sets.tenth.Shunt {
+public class Shunt extends mage.sets.tenthedition.Shunt {
 
     public Shunt(UUID ownerId) {
         super(ownerId);

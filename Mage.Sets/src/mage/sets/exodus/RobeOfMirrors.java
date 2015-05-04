@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RobeOfMirrors extends mage.sets.tenth.RobeOfMirrors {
+public class RobeOfMirrors extends mage.sets.tenthedition.RobeOfMirrors {
 
     public RobeOfMirrors(UUID ownerId) {
         super(ownerId);

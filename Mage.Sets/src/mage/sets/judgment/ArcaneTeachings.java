@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class ArcaneTeachings extends mage.sets.tenth.ArcaneTeachings {
+public class ArcaneTeachings extends mage.sets.tenthedition.ArcaneTeachings {
 
     public ArcaneTeachings(UUID ownerId) {
         super(ownerId);

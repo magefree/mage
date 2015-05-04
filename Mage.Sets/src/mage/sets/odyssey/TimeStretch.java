@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class TimeStretch extends mage.sets.tenth.TimeStretch {
+public class TimeStretch extends mage.sets.tenthedition.TimeStretch {
 
     public TimeStretch(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class LlanowarElves extends mage.sets.tenth.LlanowarElves {
+public class LlanowarElves extends mage.sets.tenthedition.LlanowarElves {
 
     public LlanowarElves(UUID ownerId) {
         super(ownerId);

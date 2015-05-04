@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class GaeasHerald extends mage.sets.tenth.GaeasHerald {
+public class GaeasHerald extends mage.sets.tenthedition.GaeasHerald {
 
     public GaeasHerald(UUID ownerId) {
         super(ownerId);

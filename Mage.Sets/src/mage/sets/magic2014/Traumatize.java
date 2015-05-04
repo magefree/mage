@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Traumatize extends mage.sets.tenth.Traumatize {
+public class Traumatize extends mage.sets.tenthedition.Traumatize {
 
     public Traumatize(UUID ownerId) {
         super(ownerId);

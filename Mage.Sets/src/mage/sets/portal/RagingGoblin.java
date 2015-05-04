@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class RagingGoblin extends mage.sets.tenth.RagingGoblin {
+public class RagingGoblin extends mage.sets.tenthedition.RagingGoblin {
 
     public RagingGoblin(UUID ownerId) {
         super(ownerId);

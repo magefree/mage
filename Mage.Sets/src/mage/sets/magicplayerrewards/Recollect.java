@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class Recollect extends mage.sets.tenth.Recollect {
+public class Recollect extends mage.sets.tenthedition.Recollect {
 
     public Recollect(UUID ownerId) {
         super(ownerId);

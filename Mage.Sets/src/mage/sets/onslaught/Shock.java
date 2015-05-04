@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Shock extends mage.sets.tenth.Shock {
+public class Shock extends mage.sets.tenthedition.Shock {
 
     public Shock(UUID ownerId) {
         super(ownerId);

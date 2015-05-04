@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CloudSprite extends mage.sets.tenth.CloudSprite {
+public class CloudSprite extends mage.sets.tenthedition.CloudSprite {
 
     public CloudSprite(UUID ownerId) {
         super(ownerId);

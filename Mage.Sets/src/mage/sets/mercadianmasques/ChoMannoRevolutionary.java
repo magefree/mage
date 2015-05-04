@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ChoMannoRevolutionary extends mage.sets.tenth.ChoMannoRevolutionary {
+public class ChoMannoRevolutionary extends mage.sets.tenthedition.ChoMannoRevolutionary {
 
     public ChoMannoRevolutionary(UUID ownerId) {
         super(ownerId);

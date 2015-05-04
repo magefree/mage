@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Deathmark extends mage.sets.tenth.Deathmark {
+public class Deathmark extends mage.sets.tenthedition.Deathmark {
 
     public Deathmark(UUID ownerId) {
         super(ownerId);

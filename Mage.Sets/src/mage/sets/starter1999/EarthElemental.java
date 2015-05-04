@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class EarthElemental extends mage.sets.tenth.EarthElemental {
+public class EarthElemental extends mage.sets.tenthedition.EarthElemental {
 
     public EarthElemental(UUID ownerId) {
         super(ownerId);

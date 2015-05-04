@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class QuirionDryad extends mage.sets.tenth.QuirionDryad {
+public class QuirionDryad extends mage.sets.tenthedition.QuirionDryad {
 
     public QuirionDryad(UUID ownerId) {
         super(ownerId);

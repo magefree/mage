@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author emerald000
  */
-public class AcademyResearchers extends mage.sets.tenth.AcademyResearchers {
+public class AcademyResearchers extends mage.sets.tenthedition.AcademyResearchers {
 
     public AcademyResearchers(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author jeff
  */
-public class TimeStop extends mage.sets.tenth.TimeStop {
+public class TimeStop extends mage.sets.tenthedition.TimeStop {
 
     public TimeStop(UUID ownerId) {
         super(ownerId);

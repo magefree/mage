@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author cbt33
  */
-public class Deluge extends mage.sets.tenth.Deluge {
+public class Deluge extends mage.sets.tenthedition.Deluge {
 
     public Deluge(UUID ownerId) {
         super(ownerId);

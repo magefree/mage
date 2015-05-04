@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Peek extends mage.sets.tenth.Peek {
+public class Peek extends mage.sets.tenthedition.Peek {
 
     public Peek(UUID ownerId) {
         super(ownerId);

@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class PlagueBeetle extends mage.sets.tenth.PlagueBeetle {
+public class PlagueBeetle extends mage.sets.tenthedition.PlagueBeetle {
 
     public PlagueBeetle(UUID ownerId) {
         super(ownerId);

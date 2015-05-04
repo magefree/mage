@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class SqueeGoblinNabob extends mage.sets.tenth.SqueeGoblinNabob {
+public class SqueeGoblinNabob extends mage.sets.tenthedition.SqueeGoblinNabob {
 
     public SqueeGoblinNabob(UUID ownerId) {
         super(ownerId);

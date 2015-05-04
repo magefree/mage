@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Tidings extends mage.sets.tenth.Tidings {
+public class Tidings extends mage.sets.tenthedition.Tidings {
 
     public Tidings(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SkyWeaver extends mage.sets.tenth.SkyWeaver {
+public class SkyWeaver extends mage.sets.tenthedition.SkyWeaver {
 
     public SkyWeaver(UUID ownerId) {
         super(ownerId);

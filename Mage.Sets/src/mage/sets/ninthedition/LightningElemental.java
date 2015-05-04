@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LightningElemental extends mage.sets.tenth.LightningElemental {
+public class LightningElemental extends mage.sets.tenthedition.LightningElemental {
 
     public LightningElemental(UUID ownerId) {
         super(ownerId);

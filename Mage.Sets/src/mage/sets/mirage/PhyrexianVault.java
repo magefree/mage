@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PhyrexianVault extends mage.sets.tenth.PhyrexianVault {
+public class PhyrexianVault extends mage.sets.tenthedition.PhyrexianVault {
 
     public PhyrexianVault(UUID ownerId) {
         super(ownerId);

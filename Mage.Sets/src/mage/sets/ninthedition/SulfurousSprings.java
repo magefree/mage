@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SulfurousSprings extends mage.sets.tenth.SulfurousSprings {
+public class SulfurousSprings extends mage.sets.tenthedition.SulfurousSprings {
 
     public SulfurousSprings(UUID ownerId) {
         super(ownerId);

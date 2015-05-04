@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BenalishKnight extends mage.sets.tenth.BenalishKnight {
+public class BenalishKnight extends mage.sets.tenthedition.BenalishKnight {
 
     public BenalishKnight(UUID ownerId) {
         super(ownerId);

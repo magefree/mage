@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Rhox extends mage.sets.tenth.Rhox {
+public class Rhox extends mage.sets.tenthedition.Rhox {
 
     public Rhox(UUID ownerId) {
         super(ownerId);

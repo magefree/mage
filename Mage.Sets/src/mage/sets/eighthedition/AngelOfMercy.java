@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AngelOfMercy extends mage.sets.tenth.AngelOfMercy {
+public class AngelOfMercy extends mage.sets.tenthedition.AngelOfMercy {
 
     public AngelOfMercy(UUID ownerId) {
         super(ownerId);

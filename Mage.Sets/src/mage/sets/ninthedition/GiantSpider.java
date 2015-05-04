@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GiantSpider extends mage.sets.tenth.GiantSpider {
+public class GiantSpider extends mage.sets.tenthedition.GiantSpider {
 
     public GiantSpider(UUID ownerId) {
         super(ownerId);

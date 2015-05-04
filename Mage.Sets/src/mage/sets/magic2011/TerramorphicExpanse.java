@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TerramorphicExpanse extends mage.sets.tenth.TerramorphicExpanse {
+public class TerramorphicExpanse extends mage.sets.tenthedition.TerramorphicExpanse {
 
     public TerramorphicExpanse(UUID ownerId) {
         super(ownerId);

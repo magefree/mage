@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class LeoninScimitar extends mage.sets.tenth.LeoninScimitar {
+public class LeoninScimitar extends mage.sets.tenthedition.LeoninScimitar {
 
     public LeoninScimitar(UUID ownerId) {
         super(ownerId);

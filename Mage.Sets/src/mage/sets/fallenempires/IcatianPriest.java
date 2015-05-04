@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class IcatianPriest extends mage.sets.tenth.IcatianPriest {
+public class IcatianPriest extends mage.sets.tenthedition.IcatianPriest {
 
     public IcatianPriest(UUID ownerId) {
         super(ownerId);

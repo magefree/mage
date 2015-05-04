@@ -35,7 +35,7 @@ import mage.constants.Rarity;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class PlatinumAngel extends mage.sets.tenth.PlatinumAngel {
+public class PlatinumAngel extends mage.sets.tenthedition.PlatinumAngel {
 
     public PlatinumAngel(UUID ownerId) {
         super(ownerId);

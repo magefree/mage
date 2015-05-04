@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class RuleOfLaw extends mage.sets.tenth.RuleOfLaw {
+public class RuleOfLaw extends mage.sets.tenthedition.RuleOfLaw {
 
     public RuleOfLaw(UUID ownerId) {
         super(ownerId);

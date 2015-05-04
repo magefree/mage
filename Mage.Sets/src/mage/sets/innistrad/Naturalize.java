@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author nantuko
  */
-public class Naturalize extends mage.sets.tenth.Naturalize {
+public class Naturalize extends mage.sets.tenthedition.Naturalize {
 
     public Naturalize(UUID ownerId) {
         super(ownerId);

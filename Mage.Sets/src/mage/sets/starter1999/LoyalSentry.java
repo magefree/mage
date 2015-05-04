@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class LoyalSentry extends mage.sets.tenth.LoyalSentry {
+public class LoyalSentry extends mage.sets.tenthedition.LoyalSentry {
 
     public LoyalSentry(UUID ownerId) {
         super(ownerId);

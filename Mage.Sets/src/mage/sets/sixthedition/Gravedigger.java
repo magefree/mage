@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Gravedigger extends mage.sets.tenth.Gravedigger {
+public class Gravedigger extends mage.sets.tenthedition.Gravedigger {
 
     public Gravedigger(UUID ownerId) {
         super(ownerId);

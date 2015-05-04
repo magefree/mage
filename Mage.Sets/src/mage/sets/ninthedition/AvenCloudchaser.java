@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class AvenCloudchaser extends mage.sets.tenth.AvenCloudchaser {
+public class AvenCloudchaser extends mage.sets.tenthedition.AvenCloudchaser {
 
     public AvenCloudchaser(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class HolyStrength extends mage.sets.tenth.HolyStrength {
+public class HolyStrength extends mage.sets.tenthedition.HolyStrength {
 
     public HolyStrength(UUID ownerId) {
         super(ownerId);

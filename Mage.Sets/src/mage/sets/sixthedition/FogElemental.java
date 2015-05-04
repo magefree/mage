@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class FogElemental extends mage.sets.tenth.FogElemental {
+public class FogElemental extends mage.sets.tenthedition.FogElemental {
 
     public FogElemental(UUID ownerId) {
         super(ownerId);

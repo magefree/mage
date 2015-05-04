@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HateWeaver extends mage.sets.tenth.HateWeaver {
+public class HateWeaver extends mage.sets.tenthedition.HateWeaver {
 
     public HateWeaver(UUID ownerId) {
         super(ownerId);

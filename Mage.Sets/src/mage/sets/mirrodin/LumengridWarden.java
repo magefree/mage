@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class LumengridWarden extends mage.sets.tenth.LumengridWarden {
+public class LumengridWarden extends mage.sets.tenthedition.LumengridWarden {
 
     public LumengridWarden(UUID ownerId) {
         super(ownerId);

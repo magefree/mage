@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author  * @author LevelX2
  */
-public class Cancel extends mage.sets.tenth.Cancel {
+public class Cancel extends mage.sets.tenthedition.Cancel {
 
     public Cancel(UUID ownerId) {
         super(ownerId);

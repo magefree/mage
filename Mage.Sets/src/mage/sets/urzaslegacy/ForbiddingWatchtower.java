@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class ForbiddingWatchtower extends mage.sets.tenth.ForbiddingWatchtower {
+public class ForbiddingWatchtower extends mage.sets.tenthedition.ForbiddingWatchtower {
 
     public ForbiddingWatchtower(UUID ownerId) {
         super(ownerId);

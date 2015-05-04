@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class FlamewaveInvoker extends mage.sets.tenth.FlamewaveInvoker {
+public class FlamewaveInvoker extends mage.sets.tenthedition.FlamewaveInvoker {
 
     public FlamewaveInvoker(UUID ownerId) {
         super(ownerId);

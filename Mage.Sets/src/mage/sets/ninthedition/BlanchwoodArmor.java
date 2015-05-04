@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class BlanchwoodArmor extends mage.sets.tenth.BlanchwoodArmor {
+public class BlanchwoodArmor extends mage.sets.tenthedition.BlanchwoodArmor {
 
     public BlanchwoodArmor(UUID ownerId) {
         super(ownerId);

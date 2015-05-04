@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SeveredLegion extends mage.sets.tenth.SeveredLegion {
+public class SeveredLegion extends mage.sets.tenthedition.SeveredLegion {
 
     public SeveredLegion(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ViridianShaman extends mage.sets.tenth.ViridianShaman {
+public class ViridianShaman extends mage.sets.tenthedition.ViridianShaman {
 
     public ViridianShaman(UUID ownerId) {
         super(ownerId);

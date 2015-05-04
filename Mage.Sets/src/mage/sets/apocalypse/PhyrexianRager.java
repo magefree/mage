@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PhyrexianRager extends mage.sets.tenth.PhyrexianRager {
+public class PhyrexianRager extends mage.sets.tenthedition.PhyrexianRager {
 
     public PhyrexianRager(UUID ownerId) {
         super(ownerId);

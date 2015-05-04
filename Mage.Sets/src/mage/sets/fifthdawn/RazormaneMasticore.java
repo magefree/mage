@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author jeffwadsworth
  */
-public class RazormaneMasticore extends mage.sets.tenth.RazormaneMasticore {
+public class RazormaneMasticore extends mage.sets.tenthedition.RazormaneMasticore {
 
     public RazormaneMasticore(UUID ownerId) {
         super(ownerId);

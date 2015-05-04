@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class LoyalSentry extends mage.sets.tenth.LoyalSentry {
+public class LoyalSentry extends mage.sets.tenthedition.LoyalSentry {
 
     public LoyalSentry (UUID ownerId) {
         super(ownerId);

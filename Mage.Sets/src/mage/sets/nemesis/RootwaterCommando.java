@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RootwaterCommando extends mage.sets.tenth.RootwaterCommando {
+public class RootwaterCommando extends mage.sets.tenthedition.RootwaterCommando {
 
     public RootwaterCommando(UUID ownerId) {
         super(ownerId);

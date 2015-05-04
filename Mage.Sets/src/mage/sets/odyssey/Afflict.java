@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Afflict extends mage.sets.tenth.Afflict {
+public class Afflict extends mage.sets.tenthedition.Afflict {
 
     public Afflict(UUID ownerId) {
         super(ownerId);

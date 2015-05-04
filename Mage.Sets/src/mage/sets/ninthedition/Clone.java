@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Clone extends mage.sets.tenth.Clone {
+public class Clone extends mage.sets.tenthedition.Clone {
 
     public Clone(UUID ownerId) {
         super(ownerId);

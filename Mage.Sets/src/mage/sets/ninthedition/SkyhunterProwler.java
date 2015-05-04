@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SkyhunterProwler extends mage.sets.tenth.SkyhunterProwler {
+public class SkyhunterProwler extends mage.sets.tenthedition.SkyhunterProwler {
 
     public SkyhunterProwler(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class HighwayRobber extends mage.sets.tenth.HighwayRobber {
+public class HighwayRobber extends mage.sets.tenthedition.HighwayRobber {
 
     public HighwayRobber(UUID ownerId) {
         super(ownerId);

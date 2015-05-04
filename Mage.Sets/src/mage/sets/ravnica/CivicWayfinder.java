@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class CivicWayfinder extends mage.sets.tenth.CivicWayfinder {
+public class CivicWayfinder extends mage.sets.tenthedition.CivicWayfinder {
 
     public CivicWayfinder(UUID ownerId) {
         super(ownerId);

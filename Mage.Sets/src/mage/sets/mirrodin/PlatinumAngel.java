@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PlatinumAngel extends mage.sets.tenth.PlatinumAngel {
+public class PlatinumAngel extends mage.sets.tenthedition.PlatinumAngel {
 
     public PlatinumAngel(UUID ownerId) {
         super(ownerId);

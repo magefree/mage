@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class StampedingWildebeests extends mage.sets.tenth.StampedingWildebeests {
+public class StampedingWildebeests extends mage.sets.tenthedition.StampedingWildebeests {
 
     public StampedingWildebeests(UUID ownerId) {
         super(ownerId);

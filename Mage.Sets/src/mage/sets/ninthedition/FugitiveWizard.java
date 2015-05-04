@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FugitiveWizard extends mage.sets.tenth.FugitiveWizard {
+public class FugitiveWizard extends mage.sets.tenthedition.FugitiveWizard {
 
     public FugitiveWizard(UUID ownerId) {
         super(ownerId);

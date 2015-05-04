@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class PrimalRage extends mage.sets.tenth.PrimalRage {
+public class PrimalRage extends mage.sets.tenthedition.PrimalRage {
 
     public PrimalRage(UUID ownerId) {
         super(ownerId);

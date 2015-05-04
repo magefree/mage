@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FountainOfYouth extends mage.sets.tenth.FountainOfYouth {
+public class FountainOfYouth extends mage.sets.tenthedition.FountainOfYouth {
 
     public FountainOfYouth(UUID ownerId) {
         super(ownerId);

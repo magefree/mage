@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Threaten extends mage.sets.tenth.Threaten {
+public class Threaten extends mage.sets.tenthedition.Threaten {
 
     public Threaten(UUID ownerId) {
         super(ownerId);

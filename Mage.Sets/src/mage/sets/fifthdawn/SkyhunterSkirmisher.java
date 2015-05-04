@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SkyhunterSkirmisher extends mage.sets.tenth.SkyhunterSkirmisher {
+public class SkyhunterSkirmisher extends mage.sets.tenthedition.SkyhunterSkirmisher {
 
     public SkyhunterSkirmisher(UUID ownerId) {
         super(ownerId);

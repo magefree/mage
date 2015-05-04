@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HonorGuard extends mage.sets.tenth.HonorGuard {
+public class HonorGuard extends mage.sets.tenthedition.HonorGuard {
 
     public HonorGuard(UUID ownerId) {
         super(ownerId);

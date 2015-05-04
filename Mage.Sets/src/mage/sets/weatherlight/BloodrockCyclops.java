@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author noxx
  */
-public class BloodrockCyclops extends mage.sets.tenth.BloodrockCyclops {
+public class BloodrockCyclops extends mage.sets.tenthedition.BloodrockCyclops {
 
     public BloodrockCyclops(UUID ownerId) {
         super(ownerId);

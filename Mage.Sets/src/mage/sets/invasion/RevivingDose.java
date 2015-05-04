@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RevivingDose extends mage.sets.tenth.RevivingDose {
+public class RevivingDose extends mage.sets.tenthedition.RevivingDose {
 
     public RevivingDose(UUID ownerId) {
         super(ownerId);

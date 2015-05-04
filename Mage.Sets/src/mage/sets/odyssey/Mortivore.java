@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Mortivore extends mage.sets.tenth.Mortivore {
+public class Mortivore extends mage.sets.tenthedition.Mortivore {
 
     public Mortivore(UUID ownerId) {
         super(ownerId);

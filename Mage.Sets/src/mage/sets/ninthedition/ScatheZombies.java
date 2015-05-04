@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ScatheZombies extends mage.sets.tenth.ScatheZombies {
+public class ScatheZombies extends mage.sets.tenthedition.ScatheZombies {
 
     public ScatheZombies(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class YavimayaEnchantress extends mage.sets.tenth.YavimayaEnchantress {
+public class YavimayaEnchantress extends mage.sets.tenthedition.YavimayaEnchantress {
 
     public YavimayaEnchantress(UUID ownerId) {
         super(ownerId);

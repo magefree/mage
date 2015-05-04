@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DragonRoost extends mage.sets.tenth.DragonRoost {
+public class DragonRoost extends mage.sets.tenthedition.DragonRoost {
 
     public DragonRoost(UUID ownerId) {
         super(ownerId);

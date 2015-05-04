@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class SparkElemental extends mage.sets.tenth.SparkElemental {
+public class SparkElemental extends mage.sets.tenthedition.SparkElemental {
 
     public SparkElemental(UUID ownerId) {
         super(ownerId);

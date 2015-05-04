@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author fireshoes
  */
-public class Bandage extends mage.sets.tenth.Bandage {
+public class Bandage extends mage.sets.tenthedition.Bandage {
 
     public Bandage(UUID ownerId) {
         super(ownerId);

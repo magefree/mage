@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GloriousAnthem extends mage.sets.tenth.GloriousAnthem {
+public class GloriousAnthem extends mage.sets.tenthedition.GloriousAnthem {
 
     public GloriousAnthem(UUID ownerId) {
         super(ownerId);

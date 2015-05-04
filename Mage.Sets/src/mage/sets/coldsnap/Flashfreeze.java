@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Flashfreeze extends mage.sets.tenth.Flashfreeze {
+public class Flashfreeze extends mage.sets.tenthedition.Flashfreeze {
 
     public Flashfreeze(UUID ownerId) {
         super(ownerId);

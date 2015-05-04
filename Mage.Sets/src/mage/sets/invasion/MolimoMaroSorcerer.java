@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MolimoMaroSorcerer extends mage.sets.tenth.MolimoMaroSorcerer {
+public class MolimoMaroSorcerer extends mage.sets.tenthedition.MolimoMaroSorcerer {
 
     public MolimoMaroSorcerer(UUID ownerId) {
         super(ownerId);

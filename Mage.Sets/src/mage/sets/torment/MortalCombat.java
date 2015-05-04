@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author daagar
  */
-public class MortalCombat extends mage.sets.tenth.MortalCombat {
+public class MortalCombat extends mage.sets.tenthedition.MortalCombat {
 
     public MortalCombat(UUID ownerId) {
         super(ownerId);

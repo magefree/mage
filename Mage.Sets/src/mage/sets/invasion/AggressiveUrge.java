@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AggressiveUrge extends mage.sets.tenth.AggressiveUrge {
+public class AggressiveUrge extends mage.sets.tenthedition.AggressiveUrge {
 
     public AggressiveUrge(UUID ownerId) {
         super(ownerId);

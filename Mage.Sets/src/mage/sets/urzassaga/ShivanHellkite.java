@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class ShivanHellkite extends mage.sets.tenth.ShivanHellkite {
+public class ShivanHellkite extends mage.sets.tenthedition.ShivanHellkite {
 
     public ShivanHellkite(UUID ownerId) {
         super(ownerId);

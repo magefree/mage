@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SteadfastGuard extends mage.sets.tenth.SteadfastGuard {
+public class SteadfastGuard extends mage.sets.tenthedition.SteadfastGuard {
 
     public SteadfastGuard(UUID ownerId) {
         super(ownerId);

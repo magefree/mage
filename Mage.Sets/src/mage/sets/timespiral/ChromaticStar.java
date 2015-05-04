@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Loki
  */
-public class ChromaticStar extends mage.sets.tenth.ChromaticStar {
+public class ChromaticStar extends mage.sets.tenthedition.ChromaticStar {
 
     public ChromaticStar(UUID ownerId) {
         super(ownerId);

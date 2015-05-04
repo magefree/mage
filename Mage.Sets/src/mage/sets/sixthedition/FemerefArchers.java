@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FemerefArchers extends mage.sets.tenth.FemerefArchers {
+public class FemerefArchers extends mage.sets.tenthedition.FemerefArchers {
 
     public FemerefArchers(UUID ownerId) {
         super(ownerId);

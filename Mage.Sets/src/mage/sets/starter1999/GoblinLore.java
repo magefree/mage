@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GoblinLore extends mage.sets.tenth.GoblinLore {
+public class GoblinLore extends mage.sets.tenthedition.GoblinLore {
 
     public GoblinLore(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RoyalAssassin extends mage.sets.tenth.RoyalAssassin {
+public class RoyalAssassin extends mage.sets.tenthedition.RoyalAssassin {
 
     public RoyalAssassin(UUID ownerId) {
         super(ownerId);

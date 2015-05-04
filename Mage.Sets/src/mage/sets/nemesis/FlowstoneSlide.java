@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author chrisasanford
  */
-public class FlowstoneSlide extends mage.sets.tenth.FlowstoneSlide {
+public class FlowstoneSlide extends mage.sets.tenthedition.FlowstoneSlide {
 
     public FlowstoneSlide(UUID ownerId) {
         super(ownerId);

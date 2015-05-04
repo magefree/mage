@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Dehydration extends mage.sets.tenth.Dehydration {
+public class Dehydration extends mage.sets.tenthedition.Dehydration {
 
     public Dehydration(UUID ownerId) {
         super(ownerId);

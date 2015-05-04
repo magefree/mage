@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SengirVampire extends mage.sets.tenth.SengirVampire {
+public class SengirVampire extends mage.sets.tenthedition.SengirVampire {
 
     public SengirVampire(UUID ownerId) {
         super(ownerId);

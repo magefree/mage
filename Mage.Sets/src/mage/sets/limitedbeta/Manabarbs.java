@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Manabarbs extends mage.sets.tenth.Manabarbs {
+public class Manabarbs extends mage.sets.tenthedition.Manabarbs {
 
     public Manabarbs(UUID ownerId) {
         super(ownerId);

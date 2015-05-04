@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Sift extends mage.sets.tenth.Sift {
+public class Sift extends mage.sets.tenthedition.Sift {
 
     public Sift(UUID ownerId) {
         super(ownerId);

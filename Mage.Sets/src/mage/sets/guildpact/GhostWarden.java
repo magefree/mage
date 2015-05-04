@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GhostWarden extends mage.sets.tenth.GhostWarden {
+public class GhostWarden extends mage.sets.tenthedition.GhostWarden {
 
     public GhostWarden(UUID ownerId) {
         super(ownerId);

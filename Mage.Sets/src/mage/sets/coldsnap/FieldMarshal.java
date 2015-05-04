@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class FieldMarshal extends mage.sets.tenth.FieldMarshal {
+public class FieldMarshal extends mage.sets.tenthedition.FieldMarshal {
 
     public FieldMarshal(UUID ownerId) {
         super(ownerId);

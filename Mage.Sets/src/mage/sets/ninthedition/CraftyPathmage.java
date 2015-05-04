@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class CraftyPathmage extends mage.sets.tenth.CraftyPathmage {
+public class CraftyPathmage extends mage.sets.tenthedition.CraftyPathmage {
 
     public CraftyPathmage(UUID ownerId) {
         super(ownerId);

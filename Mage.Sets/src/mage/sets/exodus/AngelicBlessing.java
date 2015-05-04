@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class AngelicBlessing extends mage.sets.tenth.AngelicBlessing {
+public class AngelicBlessing extends mage.sets.tenthedition.AngelicBlessing {
 
     public AngelicBlessing(UUID ownerId) {
         super(ownerId);

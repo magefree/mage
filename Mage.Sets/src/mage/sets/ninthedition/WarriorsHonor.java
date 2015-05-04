@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class WarriorsHonor extends mage.sets.tenth.WarriorsHonor {
+public class WarriorsHonor extends mage.sets.tenthedition.WarriorsHonor {
 
     public WarriorsHonor(UUID ownerId) {
         super(ownerId);

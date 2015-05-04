@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Soulblast extends mage.sets.tenth.Soulblast {
+public class Soulblast extends mage.sets.tenthedition.Soulblast {
 
     public Soulblast(UUID ownerId) {
         super(ownerId);

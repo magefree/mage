@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class GoblinEliteInfantry extends mage.sets.tenth.GoblinEliteInfantry {
+public class GoblinEliteInfantry extends mage.sets.tenthedition.GoblinEliteInfantry {
 
     public GoblinEliteInfantry(UUID ownerId) {
         super(ownerId);

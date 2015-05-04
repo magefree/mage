@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SerrasEmbrace extends mage.sets.tenth.SerrasEmbrace {
+public class SerrasEmbrace extends mage.sets.tenthedition.SerrasEmbrace {
 
     public SerrasEmbrace(UUID ownerId) {
         super(ownerId);

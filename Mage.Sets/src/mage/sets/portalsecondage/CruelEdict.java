@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class CruelEdict extends mage.sets.tenth.CruelEdict {
+public class CruelEdict extends mage.sets.tenthedition.CruelEdict {
 
     public CruelEdict(UUID ownerId) {
         super(ownerId);

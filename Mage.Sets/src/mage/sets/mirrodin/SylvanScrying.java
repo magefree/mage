@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class SylvanScrying extends mage.sets.tenth.SylvanScrying {
+public class SylvanScrying extends mage.sets.tenthedition.SylvanScrying {
 
     public SylvanScrying(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class MarchOfTheMachines extends mage.sets.tenth.MarchOfTheMachines {
+public class MarchOfTheMachines extends mage.sets.tenthedition.MarchOfTheMachines {
 
     public MarchOfTheMachines(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class GravebornMuse extends mage.sets.tenth.GravebornMuse {
+public class GravebornMuse extends mage.sets.tenthedition.GravebornMuse {
 
     public GravebornMuse(UUID ownerId) {
         super(ownerId);

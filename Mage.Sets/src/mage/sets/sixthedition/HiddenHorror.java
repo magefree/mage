@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class HiddenHorror extends mage.sets.tenth.HiddenHorror {
+public class HiddenHorror extends mage.sets.tenthedition.HiddenHorror {
 
     public HiddenHorror(UUID ownerId) {
         super(ownerId);

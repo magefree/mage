@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CompositeGolem extends mage.sets.tenth.CompositeGolem {
+public class CompositeGolem extends mage.sets.tenthedition.CompositeGolem {
 
     public CompositeGolem(UUID ownerId) {
         super(ownerId);

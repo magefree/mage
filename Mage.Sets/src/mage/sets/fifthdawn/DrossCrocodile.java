@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class DrossCrocodile extends mage.sets.tenth.DrossCrocodile {
+public class DrossCrocodile extends mage.sets.tenthedition.DrossCrocodile {
 
     public DrossCrocodile(UUID ownerId) {
         super(ownerId);

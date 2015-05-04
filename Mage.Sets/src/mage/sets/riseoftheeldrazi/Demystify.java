@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Demystify extends mage.sets.tenth.Demystify {
+public class Demystify extends mage.sets.tenthedition.Demystify {
 
     public Demystify (UUID ownerId) {
         super(ownerId);

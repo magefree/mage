@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author dustinconrad
  */
-public class Cryoclasm extends mage.sets.tenth.Cryoclasm {
+public class Cryoclasm extends mage.sets.tenthedition.Cryoclasm {
 
     public Cryoclasm(UUID ownerId) {
         super(ownerId);

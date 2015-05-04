@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class Brushland extends mage.sets.tenth.Brushland {
+public class Brushland extends mage.sets.tenthedition.Brushland {
 
     public Brushland(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class Upwelling extends mage.sets.tenth.Upwelling {
+public class Upwelling extends mage.sets.tenthedition.Upwelling {
 
     public Upwelling(UUID ownerId) {
         super(ownerId);

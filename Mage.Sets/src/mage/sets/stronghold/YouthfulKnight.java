@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class YouthfulKnight extends mage.sets.tenth.YouthfulKnight {
+public class YouthfulKnight extends mage.sets.tenthedition.YouthfulKnight {
 
     public YouthfulKnight(UUID ownerId) {
         super(ownerId);

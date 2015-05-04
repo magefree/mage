@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class WindbornMuse extends mage.sets.tenth.WindbornMuse {
+public class WindbornMuse extends mage.sets.tenthedition.WindbornMuse {
 
     public WindbornMuse(UUID ownerId) {
         super(ownerId);

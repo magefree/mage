@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class KavuClimber extends mage.sets.tenth.KavuClimber {
+public class KavuClimber extends mage.sets.tenthedition.KavuClimber {
 
     public KavuClimber(UUID ownerId) {
         super(ownerId);

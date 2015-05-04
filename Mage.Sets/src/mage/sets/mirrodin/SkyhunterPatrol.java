@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SkyhunterPatrol extends mage.sets.tenth.SkyhunterPatrol {
+public class SkyhunterPatrol extends mage.sets.tenthedition.SkyhunterPatrol {
 
     public SkyhunterPatrol(UUID ownerId) {
         super(ownerId);

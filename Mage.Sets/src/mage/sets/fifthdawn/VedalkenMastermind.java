@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class VedalkenMastermind extends mage.sets.tenth.VedalkenMastermind {
+public class VedalkenMastermind extends mage.sets.tenthedition.VedalkenMastermind {
 
     public VedalkenMastermind(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MirriCatWarrior extends mage.sets.tenth.MirriCatWarrior {
+public class MirriCatWarrior extends mage.sets.tenthedition.MirriCatWarrior {
 
     public MirriCatWarrior(UUID ownerId) {
         super(ownerId);

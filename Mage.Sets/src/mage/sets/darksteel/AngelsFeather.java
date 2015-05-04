@@ -36,7 +36,7 @@ import java.util.UUID;
  * @author Loki
  */
 
-public class AngelsFeather extends mage.sets.tenth.AngelsFeather {
+public class AngelsFeather extends mage.sets.tenthedition.AngelsFeather {
 
     public AngelsFeather(UUID ownerId) {
         super(ownerId);

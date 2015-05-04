@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RemoveSoul extends mage.sets.tenth.RemoveSoul {
+public class RemoveSoul extends mage.sets.tenthedition.RemoveSoul {
 
     public RemoveSoul(UUID ownerId) {
         super(ownerId);

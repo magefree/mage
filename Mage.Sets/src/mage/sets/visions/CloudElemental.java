@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class CloudElemental extends mage.sets.tenth.CloudElemental {
+public class CloudElemental extends mage.sets.tenthedition.CloudElemental {
 
     public CloudElemental(UUID ownerId) {
         super(ownerId);

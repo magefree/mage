@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class KamahlPitFighter extends mage.sets.tenth.KamahlPitFighter {
+public class KamahlPitFighter extends mage.sets.tenthedition.KamahlPitFighter {
 
     public KamahlPitFighter(UUID ownerId) {
         super(ownerId);

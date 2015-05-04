@@ -34,7 +34,7 @@ import java.util.UUID;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GoblinPiker extends mage.sets.tenth.GoblinPiker {
+public class GoblinPiker extends mage.sets.tenthedition.GoblinPiker {
 
     public GoblinPiker(UUID ownerId) {
         super(ownerId);

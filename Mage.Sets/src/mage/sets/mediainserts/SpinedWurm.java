@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class SpinedWurm extends mage.sets.tenth.SpinedWurm {
+public class SpinedWurm extends mage.sets.tenthedition.SpinedWurm {
 
     public SpinedWurm(UUID ownerId) {
         super(ownerId);

@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class DragonsClaw extends mage.sets.tenth.DragonsClaw {
+public class DragonsClaw extends mage.sets.tenthedition.DragonsClaw {
 
     public DragonsClaw(UUID ownerId) {
         super(ownerId);

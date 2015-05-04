@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NantukoHusk extends mage.sets.tenth.NantukoHusk {
+public class NantukoHusk extends mage.sets.tenthedition.NantukoHusk {
 
     public NantukoHusk(UUID ownerId) {
         super(ownerId);

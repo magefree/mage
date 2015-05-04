@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class SpiketailHatchling extends mage.sets.tenth.SpiketailHatchling {
+public class SpiketailHatchling extends mage.sets.tenthedition.SpiketailHatchling {
 
     public SpiketailHatchling(UUID ownerId) {
         super(ownerId);

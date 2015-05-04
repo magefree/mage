@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class PhageTheUntouchable extends mage.sets.tenth.PhageTheUntouchable {
+public class PhageTheUntouchable extends mage.sets.tenthedition.PhageTheUntouchable {
 
     public PhageTheUntouchable(UUID ownerId) {
         super(ownerId);

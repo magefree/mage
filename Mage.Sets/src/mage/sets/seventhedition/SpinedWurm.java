@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SpinedWurm extends mage.sets.tenth.SpinedWurm {
+public class SpinedWurm extends mage.sets.tenthedition.SpinedWurm {
 
     public SpinedWurm(UUID ownerId) {
         super(ownerId);

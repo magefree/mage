@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class RodOfRuin extends mage.sets.tenth.RodOfRuin {
+public class RodOfRuin extends mage.sets.tenthedition.RodOfRuin {
 
     public RodOfRuin(UUID ownerId) {
         super(ownerId);

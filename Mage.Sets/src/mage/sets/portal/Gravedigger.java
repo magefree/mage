@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Plopman
  */
-public class Gravedigger extends mage.sets.tenth.Gravedigger {
+public class Gravedigger extends mage.sets.tenthedition.Gravedigger {
 
     public Gravedigger(UUID ownerId) {
         super(ownerId);

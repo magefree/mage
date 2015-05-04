@@ -35,7 +35,7 @@ import mage.constants.Rarity;
  * @author jeffwadsworth
 
  */
-public class ThrullSurgeon extends mage.sets.tenth.ThrullSurgeon {
+public class ThrullSurgeon extends mage.sets.tenthedition.ThrullSurgeon {
 
     public ThrullSurgeon(UUID ownerId) {
         super(ownerId);

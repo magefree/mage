@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SpiritWeaver extends mage.sets.tenth.SpiritWeaver {
+public class SpiritWeaver extends mage.sets.tenthedition.SpiritWeaver {
 
     public SpiritWeaver(UUID ownerId) {
         super(ownerId);

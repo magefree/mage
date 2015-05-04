@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class Megrim extends mage.sets.tenth.Megrim {
+public class Megrim extends mage.sets.tenthedition.Megrim {
 
     public Megrim(UUID ownerId) {
         super(ownerId);

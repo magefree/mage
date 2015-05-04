@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class GhituEncampment extends mage.sets.tenth.GhituEncampment {
+public class GhituEncampment extends mage.sets.tenthedition.GhituEncampment {
 
     public GhituEncampment(UUID ownerId) {
         super(ownerId);

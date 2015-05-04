@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class SpittingEarth extends mage.sets.tenth.SpittingEarth {
+public class SpittingEarth extends mage.sets.tenthedition.SpittingEarth {
 
     public SpittingEarth(UUID ownerId) {
         super(ownerId);

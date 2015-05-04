@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class TreasureHunter extends mage.sets.tenth.TreasureHunter {
+public class TreasureHunter extends mage.sets.tenthedition.TreasureHunter {
 
     public TreasureHunter(UUID ownerId) {
         super(ownerId);

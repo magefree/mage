@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class FistsOfTheAnvil extends mage.sets.tenth.FistsOfTheAnvil {
+public class FistsOfTheAnvil extends mage.sets.tenthedition.FistsOfTheAnvil {
 
     public FistsOfTheAnvil(UUID ownerId) {
         super(ownerId);

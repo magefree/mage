@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Loki
  */
-public class ScionOfTheWild extends mage.sets.tenth.ScionOfTheWild {
+public class ScionOfTheWild extends mage.sets.tenthedition.ScionOfTheWild {
 
     public ScionOfTheWild(UUID ownerId) {
         super(ownerId);

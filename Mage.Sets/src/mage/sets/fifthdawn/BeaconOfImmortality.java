@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class BeaconOfImmortality extends mage.sets.tenth.BeaconOfImmortality {
+public class BeaconOfImmortality extends mage.sets.tenthedition.BeaconOfImmortality {
 
     public BeaconOfImmortality(UUID ownerId) {
         super(ownerId);

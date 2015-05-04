@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class MassOfGhouls extends mage.sets.tenth.MassOfGhouls {
+public class MassOfGhouls extends mage.sets.tenthedition.MassOfGhouls {
 
     public MassOfGhouls(UUID ownerId) {
         super(ownerId);

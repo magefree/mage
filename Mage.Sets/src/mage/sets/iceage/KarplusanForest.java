@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author North
  */
-public class KarplusanForest extends mage.sets.tenth.KarplusanForest {
+public class KarplusanForest extends mage.sets.tenthedition.KarplusanForest {
 
     public KarplusanForest(UUID ownerId) {
         super(ownerId);
