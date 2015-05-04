@@ -78,7 +78,7 @@ public class RiteOfReplication extends CardImpl {
 
 class RiteOfReplicationEffect extends OneShotEffect {
 
-    private int amount;
+    private final int amount;
 
     public RiteOfReplicationEffect(int amount) {
         super(Outcome.PutCreatureInPlay);

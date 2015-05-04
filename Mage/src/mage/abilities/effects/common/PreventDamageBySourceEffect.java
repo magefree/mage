@@ -67,6 +67,7 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     public PreventDamageBySourceEffect(final PreventDamageBySourceEffect effect) {
         super(effect);
         this.target = effect.target.copy();
+        this.mageObjectReference = effect.mageObjectReference;
     }
 
     @Override
@@ -77,16 +78,16 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
-        setTargetPointer(new FixedTarget(target.getFirstTarget()));
+        mageObjectReference = new MageObjectReference(target.getFirstTarget(), game);        
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            Card card = game.getCard(((FixedTarget)getTargetPointer()).getTarget());
-            if(card != null) {
-            	return card.getId().equals(event.getSourceId());
-            }
+            MageObject mageObject = game.getObject(event.getSourceId());
+            if (mageObject != null && mageObjectReference.refersTo(mageObject, game)) {
+                return true;
+            }            
         }
         return false;
     }
