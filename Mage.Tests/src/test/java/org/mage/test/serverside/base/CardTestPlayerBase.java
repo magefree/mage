@@ -31,6 +31,8 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
  */
 public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
+    public static final String NO_TARGET = "NO_TARGET";
+    
     protected enum ExpectedType {
         TURN_NUMBER,
         RESULT,
@@ -39,7 +41,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         GRAVEYARD,
         UNKNOWN
     }
-
+    
     protected GameOptions gameOptions;
 
     public CardTestPlayerBase() {

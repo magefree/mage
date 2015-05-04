@@ -71,6 +71,7 @@ import mage.target.TargetSource;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetPermanentOrPlayer;
+import static org.mage.test.serverside.base.CardTestPlayerBase.NO_TARGET;
 
 /**
  *
@@ -134,7 +135,7 @@ public class TestPlayer extends ComputerPlayer {
                     for (Ability ability: this.getPlayable(game, true)) {
                         if (ability.toString().startsWith(groups[0])) {
                             Ability newAbility = ability.copy();
-                            if (groups.length > 1) {
+                            if (groups.length > 1 && !groups[1].equals("target=NO_TARGET")) {
                                 if (!addTargets(newAbility, groups, game)) {
                                     // targets could not be set -> try next priority
                                     break;
@@ -543,7 +544,7 @@ public class TestPlayer extends ComputerPlayer {
         return null;
     }
 
-    private boolean checkExecuteCondition(String[] groups, Game game) {
+    private boolean checkExecuteCondition(String[] groups, Game game) {        
         if (groups[2].startsWith("spellOnStack=")) {
             String spellOnStack = groups[2].substring(13);
             for (StackObject stackObject: game.getStack()) {
