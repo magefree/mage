@@ -123,6 +123,12 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Soldier of the Pantheon");
         // Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to target creature or player.
         addCard(Zone.BATTLEFIELD, playerA, "Mogg Fanatic");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Choose one - Return target creature you control and all Auras you control attached to it to their owner's hand; 
+        // or destroy target creature and you lose life equal to its toughness; 
+        // or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
+        addCard(Zone.HAND, playerA, "Orzhov Charm");
 
         // Kicker {5} (You may pay an additional as you cast this spell.)
         // Put a token onto the battlefield that's a copy of target creature. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
@@ -132,8 +138,9 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Rite of Replication", "Mogg Fanatic");
         setChoice(playerB, "No"); // no kicker
         
-        activateAbility(2, PhaseStep.BEGIN_COMBAT, playerA, "Sacrifice {this}: {source} deals 1 damage to target creature or player.",playerB);
-
+        castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Orzhov Charm", "Mogg Fanatic");
+        setModeChoice(playerA, "1");
+        
         activateAbility(2, PhaseStep.END_COMBAT, playerA, "Sacrifice {this}: Prevent all damage a red source of your choice would deal this turn.");
         playerA.addChoice("Mogg Fanatic");
 
@@ -141,11 +148,10 @@ public class BurrentonForgeTenderTest extends CardTestPlayerBase {
         
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-
-        assertLife(playerB, 19);
         
         assertPermanentCount(playerB, "Mogg Fanatic", 0);
-        assertGraveyardCount(playerA, "Mogg Fanatic", 1);
+        assertGraveyardCount(playerA, "Orzhov Charm", 1);
+        assertHandCount(playerA, "Mogg Fanatic", 1);
         assertGraveyardCount(playerB, "Rite of Replication", 1);
         
         assertGraveyardCount(playerA, "Burrenton Forge-Tender", 1);

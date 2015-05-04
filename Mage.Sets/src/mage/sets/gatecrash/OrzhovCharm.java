@@ -116,7 +116,7 @@ class OrzhovCharmReturnToHandEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
-            LinkedList<UUID> attachments = new LinkedList<UUID>();
+            LinkedList<UUID> attachments = new LinkedList<>();
             attachments.addAll(target.getAttachments());
             for (UUID attachmentId : attachments) {
                 Permanent attachment = game.getPermanent(attachmentId);

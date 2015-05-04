@@ -31,14 +31,12 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
