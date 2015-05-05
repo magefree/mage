@@ -1,5 +1,6 @@
-woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
 XMage.de 1    (Europe/Germany) fast :xmage.de:17171
+woogerworks   (North America/USA)       :xmage.woogerworks.com:17171
+XMage.info 1  (Europe/France) slow  :176.31.186.181:17171
 XMage.info 2  (Europe/France) slow  :176.31.186.181:17000
 IceMage       (Europe/Netherlands)  :ring0.cc:17171
 Seedds Server (Asia)                :115.29.203.80:17171
