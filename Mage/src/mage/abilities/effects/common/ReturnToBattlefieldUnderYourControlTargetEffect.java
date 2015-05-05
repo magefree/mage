@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -87,12 +88,18 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
                     }                
                 }
             } else {
+            	UUID cardId = targetPointer.getFirst(game, source);
             	if(targetPointer instanceof FixedTarget) {
-                    card = game.getCard(((FixedTarget) targetPointer).getTarget());
-            	} else {
-                    card = game.getCard(targetPointer.getFirst(game, source));
+                    UUID fixedTargetCardId = ((FixedTarget) targetPointer).getTarget();
+                    //Moved zones from battlefield to graveyard
+                    if(fixedTargetCardId != null && cardId == null) {
+                		Permanent permanent = game.getPermanentOrLKIBattlefield(fixedTargetCardId);
+                		if(permanent != null) {
+                			cardId = fixedTargetCardId;
+                		}
+                    }
             	}
-
+                    card = game.getCard(cardId);
             }
             if (card != null) {
                 Zone currentZone = game.getState().getZone(card.getId());

@@ -67,4 +67,25 @@ public class ItThatBetraysTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Flooded Strand", 1);
     }
 
+    //It That Betrays doesn't care what zone the card is when the effect resolves. It will return the card regardless.
+    @Test
+    public void testExileItThatBetraysEffect() {
+        addCard(Zone.BATTLEFIELD, playerA, "Flooded Strand", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "It That Betrays");
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life, Sacrifice");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 19);
+        assertLife(playerB, 20);
+        
+        // Player B now controls a Flooded Strand, even though it went to exile
+        assertPermanentCount(playerB, "Flooded Strand", 1);
+    }
+
 }
