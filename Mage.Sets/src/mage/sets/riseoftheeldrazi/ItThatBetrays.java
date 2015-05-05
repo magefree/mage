@@ -29,26 +29,16 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.OpponentSacrificesNonTokenPermanentTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 
 /**
@@ -74,7 +64,7 @@ public class ItThatBetrays extends CardImpl {
         this.addAbility(new AnnihilatorAbility(2));
 
         // Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
-        this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ItThatBetraysReturnEffect()));
+        this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
     }
 
     public ItThatBetrays(final ItThatBetrays card) {
@@ -86,38 +76,4 @@ public class ItThatBetrays extends CardImpl {
         return new ItThatBetrays(this);
     }
     
-    class ItThatBetraysReturnEffect extends OneShotEffect {
-
-		public ItThatBetraysReturnEffect() {
-			super(Outcome.Benefit);
-		}
-
-		public ItThatBetraysReturnEffect(ItThatBetraysReturnEffect effect) {
-			super(effect);
-		}
-
-		@Override
-		public boolean apply(Game game, Ability source) {
-	        Player controller = game.getPlayer(source.getControllerId());
-	        if (controller != null) {
-	        	//The effect doesn't care what zone the card is currently in
-	            Card card = game.getCard(((FixedTarget) targetPointer).getTarget());
-                    
-	            if (card != null) {
-	                Zone currentZone = game.getState().getZone(card.getId());
-	                controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
-	            }
-	            
-	            return true;
-	        }
-	        
-	        return false;
-		}
-
-		@Override
-		public Effect copy() {
-			return new ItThatBetraysReturnEffect(this);
-		}
-    	
-    }
 }
