@@ -35,6 +35,8 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,8 +51,6 @@ public class EarlyHarvest extends CardImpl {
     public EarlyHarvest(UUID ownerId) {
         super(ownerId, 235, "Early Harvest", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
         this.expansionSetCode = "9ED";
-
-        this.color.setGreen(true);
 
         // Target player untaps all basic lands he or she controls.
         this.getSpellAbility().addEffect(new UntapAllLandsTargetEffect());
@@ -68,7 +68,12 @@ public class EarlyHarvest extends CardImpl {
 }
 
 class UntapAllLandsTargetEffect extends OneShotEffect {
-
+    
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    static {
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+    }
+    
     public UntapAllLandsTargetEffect() {
         super(Outcome.Untap);
         staticText = "Target player untaps all basic lands he or she controls";
@@ -82,7 +87,7 @@ class UntapAllLandsTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(), player.getId(), game)) {
+            for (Permanent land: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
                 land.untap(game);
             }
             return true;
