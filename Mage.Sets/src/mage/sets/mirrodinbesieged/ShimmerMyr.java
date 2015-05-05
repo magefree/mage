@@ -38,8 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactCard;
 
 /**
  *
@@ -47,10 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class ShimmerMyr extends CardImpl {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("artifact cards");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
+    private static final FilterArtifactCard filter = new FilterArtifactCard("artifact cards");
 
     public ShimmerMyr (UUID ownerId) {
         super(ownerId, 129, "Shimmer Myr", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -61,8 +57,9 @@ public class ShimmerMyr extends CardImpl {
         
         // Flash
         this.addAbility(FlashAbility.getInstance());
+        
         // You may cast artifact cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
     }
 
     public ShimmerMyr (final ShimmerMyr card) {
