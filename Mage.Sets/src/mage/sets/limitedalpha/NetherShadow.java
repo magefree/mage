@@ -30,6 +30,7 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
@@ -54,7 +55,7 @@ public class NetherShadow extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -75,12 +76,16 @@ public class NetherShadow extends CardImpl {
 }
 
 class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
-    private static final FilterCard filter = new FilterCreatureCard();
+  
     
     public NetherShadowTriggerdAbility(){
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), TargetController.YOU, true);
     }
 
+    public NetherShadowTriggerdAbility(final NetherShadowTriggerdAbility effect) {
+        super(effect);
+    }    
+    
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player controller = game.getPlayer(controllerId);
@@ -94,7 +99,7 @@ class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
                 }
                 else{
                     Card card = game.getCard(uuid);
-                    if(card != null && filter.match(card, game)){
+                    if(card != null && card.getCardType().contains(CardType.CREATURE)){
                         count++;
                     }
                 }
@@ -105,8 +110,13 @@ class NetherShadowTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
     }
 
     @Override
+    public NetherShadowTriggerdAbility copy() {
+        return new NetherShadowTriggerdAbility(this);
+    }
+
+    @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {source} is in your graveyard with three or more creature cards above it, you may put {source} onto the battlefield";
+        return "At the beginning of your upkeep, if {source} is in your graveyard with three or more creature cards above it, you may put {source} onto the battlefield.";
     }
     
     
