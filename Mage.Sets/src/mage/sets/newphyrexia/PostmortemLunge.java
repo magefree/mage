@@ -35,11 +35,14 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
@@ -58,8 +61,6 @@ public class PostmortemLunge extends CardImpl {
     public PostmortemLunge(UUID ownerId) {
         super(ownerId, 70, "Postmortem Lunge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{BP}");
         this.expansionSetCode = "NPH";
-
-        this.color.setBlack(true);
 
         // Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new PostmortemLungeEffect());
@@ -110,9 +111,12 @@ class PostmortemLungeEffect extends OneShotEffect {
             if (player == null) {
                 return false;
             }
-            game.getState().addOtherAbility(card, HasteAbility.getInstance());
             card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
 
+            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+            effect.setTargetPointer(new FixedTarget(card.getId()));
+            game.addEffect(effect, source);
+            
             ExileTargetEffect exileEffect = new ExileTargetEffect();
             exileEffect.setTargetPointer(new FixedTarget(card.getId()));
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
