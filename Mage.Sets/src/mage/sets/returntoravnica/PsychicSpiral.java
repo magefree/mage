@@ -83,8 +83,9 @@ class PsychicSpiralEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int cardsInGraveyard = player.getGraveyard().size();
-            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-            player.getGraveyard().clear();
+            for (Card card: player.getGraveyard().getCards(game)) {
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            }                           
             player.shuffleLibrary(game);
 
             if (cardsInGraveyard > 0) {

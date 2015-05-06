@@ -35,7 +35,9 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -83,11 +85,13 @@ class TimeSpiralEffect extends OneShotEffect {
         for (UUID playerId: sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.getLibrary().addAll(player.getHand().getCards(game), game);
-                player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+                for (Card card: player.getHand().getCards(game)) {
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                }                    
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                }                  
                 player.shuffleLibrary(game);
-                player.getHand().clear();
-                player.getGraveyard().clear();
                 player.drawCards(7, game);
             }
         }

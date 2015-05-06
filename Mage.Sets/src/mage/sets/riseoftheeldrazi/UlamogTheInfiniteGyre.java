@@ -144,8 +144,9 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(ownerId);
         if (player != null) {
-            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-            player.getGraveyard().clear();
+            for (Card cardToMove: player.getGraveyard().getCards(game)) {
+                cardToMove.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            }                           
             player.shuffleLibrary(game);
             return true;
         }

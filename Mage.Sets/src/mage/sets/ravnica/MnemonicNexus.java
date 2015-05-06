@@ -30,10 +30,12 @@ package mage.sets.ravnica;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -78,9 +80,10 @@ class MnemonicNexusEffect extends OneShotEffect {
         for (UUID playerId: sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                }                               
                 player.shuffleLibrary(game);
-                player.getGraveyard().clear();
             }
         }
         return true;

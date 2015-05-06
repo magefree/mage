@@ -42,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -142,8 +143,9 @@ class EmrakulTheAeonsTornEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-            player.getGraveyard().clear();
+            for (Card card: player.getGraveyard().getCards(game)) {
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            }                           
             player.shuffleLibrary(game);
             return true;
         }

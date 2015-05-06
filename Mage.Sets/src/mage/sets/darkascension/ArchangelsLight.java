@@ -35,8 +35,10 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -49,8 +51,6 @@ public class ArchangelsLight extends CardImpl {
     public ArchangelsLight(UUID ownerId) {
         super(ownerId, 1, "Archangel's Light", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{W}");
         this.expansionSetCode = "DKA";
-
-        this.color.setWhite(true);
 
         // You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
         this.getSpellAbility().addEffect(new ArchangelsLightEffect());
@@ -80,13 +80,14 @@ class ArchangelsLightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         DynamicValue value = new CardsInControllerGraveyardCount();
-        if (player != null) {
-            player.gainLife(value.calculate(game, source, this) * 2, game);
-            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-            player.getGraveyard().clear();
-            player.shuffleLibrary(game);
+        if (controller != null) {
+            controller.gainLife(value.calculate(game, source, this) * 2, game);
+            for (Card card: controller.getGraveyard().getCards(game)) {
+                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+            }            
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

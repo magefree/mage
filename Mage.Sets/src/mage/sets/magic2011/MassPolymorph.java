@@ -105,7 +105,9 @@ class MassPolymorphEffect extends OneShotEffect {
         for (Card creatureCard: creatureCards.getCards(game)) {
             creatureCard.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
         }
-        player.getLibrary().addAll(nonCreatureCards.getCards(game), game);
+        for (Card card: nonCreatureCards.getCards(game)) {
+            player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+        }             
         player.shuffleLibrary(game);
         return true;
     }

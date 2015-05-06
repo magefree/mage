@@ -35,6 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -47,8 +48,6 @@ public class DiminishingReturns extends CardImpl {
     public DiminishingReturns(UUID ownerId) {
         super(ownerId, 39, "Diminishing Returns", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "ALL";
-
-        this.color.setBlue(true);
 
         // Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.
         this.getSpellAbility().addEffect(new DiminishingReturnsEffect());
@@ -77,27 +76,26 @@ class DiminishingReturnsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        if (sourcePlayer != null) {
-            for (UUID playerId : sourcePlayer.getInRange()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    player.getLibrary().addAll(player.getHand().getCards(game), game);
-                    player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+                    for (Card card: player.getHand().getCards(game)) {
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    }                    
+                    for (Card card: player.getGraveyard().getCards(game)) {
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    }                    
                     player.shuffleLibrary(game);
-                    player.getHand().clear();
-                    player.getGraveyard().clear();
                 }
             }
 
-            for (int i = 0; i < 10; i++) {
-                Card card = sourcePlayer.getLibrary().getFromTop(game);
-                if (card != null) {
-                    card.moveToExile(null, null, source.getSourceId(), game);
-                }
+            for (Card card: controller.getLibrary().getTopCards(game, 10)) {
+                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
             }
 
-            for (UUID playerId : sourcePlayer.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     int cardsToDrawCount = player.getAmount(0, 7, "How many cards to draw (up to 7)?", game);

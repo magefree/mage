@@ -117,7 +117,9 @@ class RiptideShapeshifterEffect extends OneShotEffect {
                 revealedCards.add(card);
             }
             player.revealCards("Riptide Shapeshifter", revealedCards, game);
-            player.getLibrary().addAll(revealedCards.getCards(game), game);
+            for (Card card: revealedCards.getCards(game)) {
+                card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+            }                           
             player.shuffleLibrary(game);
             return true;
         }

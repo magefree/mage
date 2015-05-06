@@ -41,6 +41,7 @@ import mage.abilities.common.PutIntoGraveFromAnywhereSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -60,8 +61,14 @@ public class KozilekButcherOfTruth extends CardImpl {
         this.subtype.add("Eldrazi");
         this.power = new MageInt(12);
         this.toughness = new MageInt(12);
+        
+        // When you cast Kozilek, Butcher of Truth, draw four cards.        
         this.addAbility(new KozilekButcherOfTruthOnCastAbility());
+        
+        // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
         this.addAbility(new AnnihilatorAbility(4));
+        
+        // When Kozilek is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new KozilekButcherOfTruthEffect(), false));
     }
 
@@ -89,14 +96,14 @@ class KozilekButcherOfTruthOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (this.getSourceId().equals(spell.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = (Spell) game.getObject(event.getTargetId());
+        return this.getSourceId().equals(spell.getSourceId());
     }
 
     @Override
@@ -122,11 +129,12 @@ class KozilekButcherOfTruthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
-            player.getGraveyard().clear();
-            player.shuffleLibrary(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (Card card: controller.getGraveyard().getCards(game)) {
+                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.GRAVEYARD, true, true);
+            }
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;
