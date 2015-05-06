@@ -63,7 +63,6 @@ public class Ichorid extends CardImpl {
         this.expansionSetCode = "TOR";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
@@ -118,7 +117,7 @@ class IchoridTriggerdAbility extends BeginningOfUpkeepTriggeredAbility{
 
     @Override
     public String getRule() {
-        return "At the beginning of your upkeep, if {source} is in your graveyard, you may exile a black creature card other than {source} from your graveyard. If you do, return {source} to the battlefield";
+        return "At the beginning of your upkeep, if {source} is in your graveyard, you may exile a black creature card other than {source} from your graveyard. If you do, return {source} to the battlefield.";
     }
     
 }

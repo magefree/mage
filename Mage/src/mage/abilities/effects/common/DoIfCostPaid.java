@@ -47,7 +47,11 @@ public class DoIfCostPaid extends OneShotEffect {
         if (player != null && mageObject != null) {
             String message;
             if (chooseUseText == null) {
-                message = new StringBuilder(getCostText()).append(" and ").append(executingEffects.getText(source.getModes().getMode())).append("?").toString();
+                String effectText = executingEffects.getText(source.getModes().getMode());
+                if (effectText.length() > 0 && effectText.charAt(effectText.length()-1)=='.') {
+                     effectText = effectText.substring(0, effectText.length()-1);
+                }
+                message = getCostText() +" and " + effectText + "?";
             } else {
                 message = chooseUseText;
             }
@@ -82,13 +86,14 @@ public class DoIfCostPaid extends OneShotEffect {
         if (!staticText.isEmpty()) {
             return staticText;
         }
-        return new StringBuilder("you may ").append(getCostText()).append(". If you do, ").append(executingEffects.getText(mode)).toString();
+        return "you may " + getCostText() + ". If you do, " + executingEffects.getText(mode);
     }
 
     protected String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
         if (costText != null
+                && !costText.toLowerCase().startsWith("exile")
                 && !costText.toLowerCase().startsWith("discard")
                 && !costText.toLowerCase().startsWith("sacrifice")
                 && !costText.toLowerCase().startsWith("remove")

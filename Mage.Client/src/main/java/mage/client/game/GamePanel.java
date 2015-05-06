@@ -99,6 +99,7 @@ import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.gui.MageDialogState;
 import mage.constants.Constants;
 import mage.constants.EnlargeMode;
 import mage.constants.PhaseStep;
@@ -154,15 +155,16 @@ public final class GamePanel extends javax.swing.JPanel {
     private String chosenHandKey = "You";
     private boolean smallMode = false;
     private boolean initialized = false;
-    private int lastUpdatedTurn;
+    
     private boolean menuNameSet = false;
     private boolean handCardsOfOpponentAvailable = false;
     
     private Map<String, Card> loadedCards = new HashMap<>();
 
-    private int storedHeight;
-    
+    private int storedHeight;    
     private Map<String, HoverButton> hoverButtons;
+    
+    private MageDialogState choiceWindowState;
 
     public GamePanel() {
         initComponents();
@@ -455,7 +457,6 @@ public final class GamePanel extends javax.swing.JPanel {
     public synchronized void init(GameView game) {
         addPlayers(game);
         updateGame(game);
-        lastUpdatedTurn = game.getTurn();
     }
 
     private void addPlayers(GameView game) {
@@ -795,27 +796,13 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     private void showRevealed(GameView game) {
-//        List<String> toRemove = new ArrayList<String>();
-//        toRemove.addAll(revealed.keySet());
-//        for (ShowCardsDialog reveal: revealed.values()) {
-//            reveal.clearReloaded(); // seems not to be used
-//        }
         for (RevealedView reveal: game.getRevealed()) {
             if (!revealed.containsKey(reveal.getName())) {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 revealed.put(reveal.getName(), newReveal);
             }
             revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), CardsViewUtil.convertSimple(reveal.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
-//            toRemove.add(reveal.getName());
         }
-//        for (String revealName: toRemove) {
-//            ShowCardsDialog revealDialog = revealed.get(revealName);
-//            if (revealDialog != null) {
-//                revealed.remove(revealName);
-//                revealDialog.cleanUp();
-//                revealDialog.removeDialog();
-//            }
-//        }
     }
 
     private void showLookedAt(GameView game) {
@@ -967,7 +954,7 @@ public final class GamePanel extends javax.swing.JPanel {
     public void getChoice(Choice choice, UUID objectId) {
         hideAll();
         PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, objectId);
+        pickChoice.showDialog(choice, objectId,choiceWindowState);
         if (choice.isKeyChoice()) {
             if (pickChoice.isAutoSelect()) {
                 session.sendPlayerString(gameId, "#" + choice.getChoiceKey());
@@ -977,6 +964,7 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             session.sendPlayerString(gameId, choice.getChoice());
         }
+        choiceWindowState = new MageDialogState(pickChoice);        
         pickChoice.removeDialog();
     }
 

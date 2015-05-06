@@ -42,6 +42,7 @@ import mage.choices.Choice;
 import mage.client.MageFrame;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.MageDialogState;
 
 /**
  *
@@ -57,7 +58,7 @@ public class PickChoiceDialog extends MageDialog {
     Choice choice;
     boolean autoSelect;
 
-    public void showDialog(Choice choice, UUID objectId) {
+    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
         this.lblMessage.setText("<html>" + choice.getMessage());
         this.choice = choice;
         this.autoSelect = false;
@@ -77,10 +78,15 @@ public class PickChoiceDialog extends MageDialog {
         }
         
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-
-        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
-        this.setLocation(centered.x, centered.y);
-        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+        if (mageDialogState != null) {
+            mageDialogState.setStateToDialog(this);
+            
+        } else {
+            Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+            this.setLocation(centered.x, centered.y);
+            GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+        }
+        
 
         this.setVisible(true);
     }

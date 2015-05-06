@@ -96,7 +96,7 @@ public class ReturnSourceFromGraveyardToBattlefieldEffect extends OneShotEffect 
     }
 
     private void setText() {
-        StringBuilder sb = new StringBuilder("Return {this} from your graveyard to the battlefield");
+        StringBuilder sb = new StringBuilder("return {this} from your graveyard to the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }        

@@ -33,6 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +57,6 @@ public class BalustradeSpy extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -97,24 +97,25 @@ class BalustradeSpyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player == null) {
+        Player controller = game.getPlayer(getTargetPointer().getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
         CardsImpl cards = new CardsImpl();
         boolean landFound = false;
-        while (player.getLibrary().size() > 0 && !landFound) {
-            Card card = player.getLibrary().removeFromTop(game);
+        while (controller.getLibrary().size() > 0 && !landFound) {
+            Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 if (card.getCardType().contains(CardType.LAND)) {
                     landFound = true;
                 }
             }
         }
         if (!cards.isEmpty()) {
-            player.revealCards("Balustrade Spy", cards, game);
+            controller.moveCardsToGraveyardWithInfo(cards, source, game, Zone.LIBRARY);
+            controller.revealCards(sourceObject.getLogName(), cards, game);
             return true;
         }
         return true;

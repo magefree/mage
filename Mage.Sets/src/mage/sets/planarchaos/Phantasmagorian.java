@@ -66,7 +66,7 @@ public class Phantasmagorian extends CardImpl {
         // When you cast Phantasmagorian, any player may discard three cards. If a player does, counter Phantasmagorian.
         this.addAbility(new CastSourceTriggeredAbility(new CounterSourceEffect()));
         // Discard three cards: Return Phantasmagorian from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard("three cards")))));
     }
 
     public Phantasmagorian(final Phantasmagorian card) {

@@ -12,10 +12,9 @@ import org.mage.card.arcane.UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.net.URL;
 import java.util.ArrayList;
+import mage.client.dialog.MageDialog;
 import mage.constants.Rarity;
-import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 public class GuiDisplayUtil {
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
@@ -27,7 +26,7 @@ public class GuiDisplayUtil {
         public int basicTextLength;
         public ArrayList<String> lines;
     }
-
+   
     public static JXPanel getDescription(CardView card, int width, int height) {
         JXPanel descriptionPanel = new JXPanel();
 

@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.view.TournamentView;
-import org.jboss.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  *

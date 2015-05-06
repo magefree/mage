@@ -197,7 +197,7 @@ public class TargetDefender extends TargetImpl {
     public boolean canTarget(UUID id, Ability source, Game game) {
         Player player = game.getPlayer(id);
         MageObject targetSource = game.getObject(attackerId);
-        if (player != null) {
+        if (player != null && source != null) {
             return notTarget || (player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game));
         }
         Permanent permanent = game.getPermanent(id);
