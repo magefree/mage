@@ -58,7 +58,6 @@ public class KuonOgreAscendant extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Monk");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -27,6 +27,7 @@
  */
 package mage.watchers.common;
 
+import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,25 +38,27 @@ import mage.watchers.Watcher;
  *
  * @author LevelX2
  */
-
 public class CreaturesDiedWatcher extends Watcher {
 
     private int amountOfCreaturesThatDied;
 
     public CreaturesDiedWatcher() {
-       super("CreaturesDiedWatcher", WatcherScope.GAME);
+        super("CreaturesDiedWatcher", WatcherScope.GAME);
     }
 
     public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
-       super(watcher);
-       this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;
+        super(watcher);
+        this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-       if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-           amountOfCreaturesThatDied++;
-       }
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.isDiesEvent() && zEvent.getTarget() != null && zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+                amountOfCreaturesThatDied++;
+            }
+        }
     }
 
     @Override
@@ -64,12 +67,12 @@ public class CreaturesDiedWatcher extends Watcher {
     }
 
     public int getAmountOfCreaturesDiesThisTurn() {
-       return amountOfCreaturesThatDied;
+        return amountOfCreaturesThatDied;
     }
 
     @Override
     public CreaturesDiedWatcher copy() {
-       return new CreaturesDiedWatcher(this);
+        return new CreaturesDiedWatcher(this);
     }
 
 }
