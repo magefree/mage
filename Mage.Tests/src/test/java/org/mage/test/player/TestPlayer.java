@@ -387,15 +387,22 @@ public class TestPlayer extends ComputerPlayer {
                     String[] targetList = targetDefinition.split("\\^");
                     boolean targetFound = false;
                     for (String targetName: targetList) {
-                        boolean allowCopy = true;
-                        if (targetName.endsWith("[no copy]")) {
-                            allowCopy = false;
-                            targetName = targetName.substring(0, targetName.length()-9);
+                        boolean originOnly = false;
+                        boolean copyOnly = false;
+                        if (targetName.endsWith("]")) {
+                            if (targetName.endsWith("[no copy]")) {
+                                originOnly = true;
+                                targetName = targetName.substring(0, targetName.length()-9);
+                            }
+                            if (targetName.endsWith("[only copy]")) {
+                                copyOnly = true;
+                                targetName = targetName.substring(0, targetName.length()-11);
+                            }
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(targetName)) {
                                 if (((TargetPermanent)target).canTarget(source == null ? this.getId(): source.getControllerId(), permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
-                                    if (!permanent.isCopy() || allowCopy) {
+                                    if ((permanent.isCopy() &&  !originOnly) || (!permanent.isCopy() && !copyOnly )) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
                                         break;

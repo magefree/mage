@@ -24,9 +24,12 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Day of Judgment", 1);        
         addCard(Zone.HAND, playerA, "Thatcher Revolt", 1);
 
+        // Creature - Demon  5/5   {4}{B}{B}
+        // Deathtouch
         // Whenever another nontoken creature dies, you may draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Harvester of Souls", 1);
         
+        // Creature - Wurm  6/4   {4}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm", 1);
         // Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less, destroy Arrogant Bloodlord at end of combat.
         addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 1);
@@ -42,7 +45,7 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
-        assertHandCount(playerA, 2);
+        assertHandCount(playerA, 2); // draw a card for Harvester and Craw Wurm
         assertHandCount(playerB, 0);
     }
 

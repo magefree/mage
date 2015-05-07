@@ -1207,7 +1207,6 @@ public abstract class GameImpl implements Game, Serializable {
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
                         state.handleSimultaneousEvent(this);
-                        checkTriggered();
                     }
                 }                
             }
@@ -1356,6 +1355,15 @@ public abstract class GameImpl implements Game, Serializable {
         state.addDelayedTriggeredAbility(newAbility);
     }
 
+    /**
+    * 116.5. Each time a player would get priority, the game first performs all applicable state-based actions as a single event (see rule 704,
+    * “State-Based Actions”), then repeats this process until no state-based actions are performed. Then triggered abilities are put on the stack
+    * (see rule 603, “Handling Triggered Abilities”). These steps repeat in order until no further state-based actions are performed and no abilities
+    * trigger. Then the player who would have received priority does so. 
+    * 
+    * @return 
+    */
+    
     @Override
     public boolean checkStateAndTriggered() {
         boolean trigger = !getTurn().isEndTurnRequested();
@@ -1419,6 +1427,13 @@ public abstract class GameImpl implements Game, Serializable {
         return played;
     }
 
+    /**
+    * 116.5. Each time a player would get priority, the game first performs all applicable state-based actions as a single event (see rule 704,
+    * “State-Based Actions”), then repeats this process until no state-based actions are performed. Then triggered abilities are put on the stack
+    * (see rule 603, “Handling Triggered Abilities”). These steps repeat in order until no further state-based actions are performed and no abilities
+    * trigger. Then the player who would have received priority does so.
+     * @return 
+     */
     protected boolean checkStateBasedActions() {
         boolean somethingHappened = false;
 

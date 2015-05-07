@@ -7,7 +7,6 @@ package org.mage.test.cards.triggers.state;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -51,6 +50,7 @@ public class SynodCenturionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
         addCard(Zone.BATTLEFIELD, playerA, "Bottle Gnomes");
         addCard(Zone.HAND, playerA, "Cloudshift");
+        // When you control no other artifacts, sacrifice Synod Centurion.
         addCard(Zone.HAND, playerA, "Synod Centurion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Synod Centurion");

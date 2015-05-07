@@ -240,7 +240,6 @@ public class Spell implements StackObject, Card {
                         card.getCardType().add(CardType.CREATURE);
                         card.getSubtype().remove("Aura");
                     }                
-                    game.getState().handleSimultaneousEvent(game);
                     return ability.resolve(game);
                 }
                 if (bestow) { 
