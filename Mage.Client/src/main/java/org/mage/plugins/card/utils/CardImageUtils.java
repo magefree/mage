@@ -4,13 +4,14 @@ import java.util.HashMap;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import net.java.truevfs.access.TFile;
+import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
     private static final HashMap<CardDownloadData, String> pathCache = new HashMap<>();
-
+    private static final Logger log = Logger.getLogger(CardImageUtils.class);
 
     /**
      *
@@ -35,7 +36,7 @@ public class CardImageUtils {
                 return filePath;
             }
         }
-
+        log.warn("Token image file not found: " + card.getTokenSetCode() + " - " + card.getName());            
         return null;
     }
 
