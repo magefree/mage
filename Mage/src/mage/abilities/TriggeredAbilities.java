@@ -48,7 +48,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
+public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 
