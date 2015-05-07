@@ -1132,7 +1132,7 @@ public class ContinuousEffects implements Serializable {
     }
 }
 
-class ContinuousEffectSorter implements Comparator<ContinuousEffect> {
+class ContinuousEffectSorter implements Comparator<ContinuousEffect>, Serializable {
     @Override
     public int compare(ContinuousEffect one, ContinuousEffect two) {
         return Long.compare(one.getOrder(), two.getOrder());

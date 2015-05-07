@@ -28,6 +28,7 @@
 
 package mage;
 
+import java.io.Serializable;
 import java.util.UUID;
 import mage.cards.Card;
 import mage.game.Game;
@@ -40,7 +41,7 @@ import mage.game.stack.Spell;
  * @author LevelX2
  */
 
-public class MageObjectReference implements Comparable<MageObjectReference> {
+public class MageObjectReference implements Comparable<MageObjectReference>, Serializable {
 
     private final UUID sourceId;
     private final int zoneChangeCounter;

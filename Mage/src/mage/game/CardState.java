@@ -1,5 +1,6 @@
 package mage.game;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import mage.abilities.Abilities;
@@ -10,7 +11,7 @@ import mage.counters.Counters;
  *
  * @author BetaSteward
  */
-public class CardState {
+public class CardState implements Serializable {
     
     protected boolean faceDown;
     protected Map<String, String> info;

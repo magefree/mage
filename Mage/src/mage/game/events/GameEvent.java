@@ -28,6 +28,7 @@
 
 package mage.game.events;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.constants.Zone;
@@ -36,7 +37,7 @@ import mage.constants.Zone;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class GameEvent {
+public class GameEvent implements Serializable {
 
     protected EventType type;
     protected UUID targetId;
