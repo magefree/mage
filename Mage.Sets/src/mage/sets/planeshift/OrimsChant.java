@@ -55,8 +55,8 @@ public class OrimsChant extends CardImpl {
     public OrimsChant(UUID ownerId) {
         super(ownerId, 11, "Orim's Chant", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "PLS";
-        this.color.setWhite(true);
 
+        
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.addAbility(new KickerAbility("{W}"));
 
@@ -77,6 +77,33 @@ public class OrimsChant extends CardImpl {
         return new OrimsChant(this);
     }
 
+}
+
+class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
+
+   public OrimsChantCantCastEffect() {
+        super(Duration.EndOfTurn, Outcome.Benefit);
+        staticText = "Target player can't cast spells this turn";
+    }
+
+    public OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OrimsChantCantCastEffect copy() {
+        return new OrimsChantCantCastEffect(this);
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId() == getTargetPointer().getFirst(game, source);
+    }
 }
 
 class OrimsChantEffect extends OneShotEffect {
@@ -100,39 +127,7 @@ class OrimsChantEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && KickedCondition.getInstance().apply(game, source)) {
             game.addEffect(new CantAttackAllAnyPlayerEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creatures")), source);
-        }
-        return false;
-    }
-}
-
-class OrimsChantCantCastEffect extends ContinuousRuleModifyingEffectImpl {
-
-    public OrimsChantCantCastEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Target player can't cast spells this turn";
-    }
-
-    public OrimsChantCantCastEffect(final OrimsChantCantCastEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OrimsChantCantCastEffect copy() {
-        return new OrimsChantCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL ) {
-            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-            if (player != null && player.getId().equals(event.getPlayerId())) {
-                return true;
-            }
+            return true;
         }
         return false;
     }

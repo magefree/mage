@@ -47,7 +47,16 @@ public class CantAttackAllAnyPlayerEffect extends RestrictionEffect {
     public CantAttackAllAnyPlayerEffect(Duration duration, FilterCreaturePermanent filter) {
         super(duration);
         this.filter = filter;
-        staticText = new StringBuilder(filter.getMessage()).append(" can't attack").toString();
+        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ");
+            if (duration.equals(Duration.EndOfTurn)) {
+                sb.append(" this turn");
+            } else {
+                sb.append(" ").append(duration.toString());
+            }
+        }
+        staticText = sb.toString();        
     }
 
     public CantAttackAllAnyPlayerEffect(final CantAttackAllAnyPlayerEffect effect) {

@@ -169,5 +169,38 @@ public class KickerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA,  "Apex Hawks", 2, 2);
         
     }
-    
+ 
+    /**
+     * When I cast Orim's Chant with Kicker cost, the player can play spells anyway during the turn. 
+     * It seems like the kicker cost trigger an "instead" creatures can't attack.
+     */
+    @Test
+    public void testOrimsChantskicker() {        
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin", 1); // Haste   1/1
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        // Kicker {W} (You may pay an additional {W} as you cast this spell.)
+        // Target player can't cast spells this turn.
+        // If Orim's Chant was kicked, creatures can't attack this turn.
+        addCard(Zone.HAND, playerA, "Orim's Chant");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orim's Chant", playerB);
+        setChoice(playerA, "Yes");
+        
+        attack(1, playerA, "Raging Goblin");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Orim's Chant", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 0);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+    }    
 }
