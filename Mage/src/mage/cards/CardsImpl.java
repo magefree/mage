@@ -29,15 +29,15 @@
 package mage.cards;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -214,11 +214,12 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public String getValue(Game game) {
         StringBuilder sb = threadLocalBuilder.get();
-        SortedSet<String> cards = new TreeSet<>();
+        List<String> cards = new ArrayList<>();
         for (UUID cardId: this) {
             Card card = game.getCard(cardId);
             cards.add(card.getName());
         }
+        Collections.sort(cards);
         for (String name: cards) {
             sb.append(name).append(":");
         }
