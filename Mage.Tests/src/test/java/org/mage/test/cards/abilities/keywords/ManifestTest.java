@@ -324,5 +324,42 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "Sandstorm Charger", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
 
     }
-    
+ 
+    /**
+     * When a Forest came manifested into play my Courser of Kruphix gained me a life.
+     * 
+     */
+    @Test
+    public void testManifestForest() {
+
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        // Play with the top card of your library revealed.
+        // You may play the top card of your library if it's a land card.
+        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Courser of Kruphix", 1);
+
+        // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
+        addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+
+        addCard(Zone.LIBRARY, playerB, "Forest", 1);
+
+        skipInitShuffling();
+
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
+        addTarget(playerB, "Silvercoat Lion");
+
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertPermanentCount(playerB, "face down creature", 1);
+
+    }    
 }

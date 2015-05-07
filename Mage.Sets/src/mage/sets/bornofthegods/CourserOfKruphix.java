@@ -52,7 +52,6 @@ public class CourserOfKruphix extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Centaur");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

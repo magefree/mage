@@ -39,7 +39,7 @@ import mage.game.Game;
  */
 public class AddContinuousEffectToGame extends OneShotEffect {
 
-    private ContinuousEffect effect;
+    private final ContinuousEffect effect;
 
     public AddContinuousEffectToGame(ContinuousEffect effect) {
         super(Outcome.Benefit);
