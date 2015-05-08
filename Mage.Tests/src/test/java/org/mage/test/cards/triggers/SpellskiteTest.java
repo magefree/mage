@@ -75,6 +75,9 @@ public class SpellskiteTest extends CardTestPlayerBase {
      * target never changed.
      * 
      */
+    /**
+     * TODO: This test fails sometimes when building the complete Tets Project -> Find reason
+     */
     @Test
     public void testAfterChangeOfController() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
