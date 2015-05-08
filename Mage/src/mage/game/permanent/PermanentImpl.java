@@ -209,7 +209,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = 0;
         this.copy = false;
     }
-
+    
     @Override
     public String getValue() {
         StringBuilder sb = threadLocalBuilder.get();
@@ -516,8 +516,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (!phasedIn) {
             if (!replaceEvent(EventType.PHASE_IN, game)) {
                 this.phasedIn = true;
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + " phased in");
+                }
                 fireEvent(EventType.PHASED_IN, game);
                 return true;
             }
@@ -1345,4 +1346,4 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         fightTarget.damage(getPower().getValue(), getId(), game, false, true);
         return true;
     }
-}
+    }

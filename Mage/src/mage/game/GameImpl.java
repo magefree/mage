@@ -1285,46 +1285,47 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
-        Permanent permanent = copyFromPermanent.copy();
-
-        //getState().addCard(permanent);
-        permanent.reset(this);
-        if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()) {
-            MorphAbility.setPermanentToFaceDownCreature(permanent);
-        }
-        permanent.assignNewId();
-        if (copyFromPermanent.isTransformed()) {
-            TransformAbility.transform(permanent, copyFromPermanent.getSecondCardFace(), this);
-        }
-        applier.apply(this, permanent);
-
-        CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
-        newEffect.newId();
-        newEffect.setApplier(applier);
-        Ability newAbility = source.copy();
-        newEffect.init(newAbility, this);
-        
+        Permanent newBluePrint = null;
         // handle copies of copies
         for (Effect effect : getState().getContinuousEffects().getLayeredEffects(this)) {
             if (effect instanceof CopyEffect) {
                 CopyEffect copyEffect = (CopyEffect) effect;
                 // there is another copy effect that our targetPermanent copies stats from
                 if (copyEffect.getSourceId().equals(copyFromPermanent.getId())) {
-                    MageObject object = ((CopyEffect) effect).getTarget();
-                    if (object instanceof Permanent) {
-                        // so we will use original card instead of target
-                        Permanent original = (Permanent)object;
-                        // copy it and apply changes we need
-                        original = original.copy();
-                        applier.apply(this, original);
-                        newEffect.setTarget(object);
+                    MageObject oldBluePrint = ((CopyEffect) effect).getTarget();
+                    if (oldBluePrint instanceof Permanent) {
+                        // copy it and apply the applier if any
+                        newBluePrint = ((Permanent)oldBluePrint).copy();
                     }
                 }
             }
         }
+        // if it was no copy of copy take the target itself
+        if (newBluePrint == null) {
+            newBluePrint  = copyFromPermanent.copy();
+            newBluePrint.reset(this);
+            //getState().addCard(permanent);
+            if (copyFromPermanent.isMorphed() || copyFromPermanent.isManifested()) {
+                MorphAbility.setPermanentToFaceDownCreature(newBluePrint);
+            }
+            newBluePrint.assignNewId();
+            if (copyFromPermanent.isTransformed()) {
+                TransformAbility.transform(newBluePrint, copyFromPermanent.getSecondCardFace(), this);
+            }            
+        }
+        if (applier != null) {
+            applier.apply(this, newBluePrint);
+        }
+
+        CopyEffect newEffect = new CopyEffect(duration, newBluePrint, copyToPermanent.getId());
+        newEffect.newId();
+        newEffect.setApplier(applier);
+        Ability newAbility = source.copy();
+        newEffect.init(newAbility, this);
+        
 
         state.addEffect(newEffect, newAbility);
-        return permanent;
+        return newBluePrint;
     }
 
     @Override

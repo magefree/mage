@@ -66,8 +66,6 @@ public class ProgenitorMimic extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
@@ -97,6 +95,7 @@ class ProgenitorMimicApplyToPermanent extends ApplyToPermanent {
     static {
         filter.add(Predicates.not(new TokenPredicate()));
     }
+    
     @Override
     public Boolean apply(Game game, Permanent permanent) {
         Ability ability = new ConditionalTriggeredAbility(
@@ -127,26 +126,32 @@ class ProgenitorMimicCopyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent copyFromPermanent = null;
-        // retrieve the copied permanent of Progenitor Mimic
+        // handle copies of copies
         for (Effect effect : game.getState().getContinuousEffects().getLayeredEffects(game)) {
             if (effect instanceof CopyEffect) {
                 CopyEffect copyEffect = (CopyEffect) effect;
-                // take the exiting copy effect of Progenitor Mimic
+                // there is another copy effect that our targetPermanent copies stats from
                 if (copyEffect.getSourceId().equals(source.getSourceId())) {
-                    MageObject object = ((CopyEffect) effect).getTarget();
-                    if (object instanceof Permanent) {
-                        copyFromPermanent = (Permanent)object;
+                    MageObject oldBluePrint = ((CopyEffect) effect).getTarget();
+                    if (oldBluePrint instanceof Permanent) {
+                        // copy it and apply the applier if any
+                        copyFromPermanent = (Permanent) oldBluePrint;
                     }
                 }
             }
         }
-        if (copyFromPermanent != null) {
-            EmptyToken token = new EmptyToken();
+        if (copyFromPermanent == null) {
+            // if it was no copy of copy take the target itself
+            copyFromPermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        }
+        
+        if (copyFromPermanent != null) {                        
+            EmptyToken token = new EmptyToken();            
             CardUtil.copyTo(token).from(copyFromPermanent); // needed so that entersBattlefied triggered abilities see the attributes (e.g. Master Biomancer)
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            Permanent sourcePermanent = game.getPermanent(token.getLastAddedToken());
-            if (sourcePermanent != null) {
-                game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ProgenitorMimicApplyToPermanent());
+            Permanent newPermanentToken = game.getPermanent(token.getLastAddedToken());
+            if (newPermanentToken != null) {
+                game.copyPermanent(copyFromPermanent, newPermanentToken, source, null);                
                 return true;
             }
         }
