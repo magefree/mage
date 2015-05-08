@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -45,8 +45,9 @@ public class NarrowEscape extends CardImpl {
     public NarrowEscape (UUID ownerId) {
         super(ownerId, 27, "Narrow Escape", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
+        // Return target permanent you control to its owner's hand. You gain 4 life.
+        this.getSpellAbility().addTarget(new TargetControlledPermanent());
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
