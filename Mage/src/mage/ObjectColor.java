@@ -340,4 +340,13 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         return o1 - o2;
     }
 
+    public static List<ObjectColor> getAllColors() {
+        List<ObjectColor> colors = new ArrayList<>();
+        colors.add(ObjectColor.WHITE);
+        colors.add(ObjectColor.BLUE);
+        colors.add(ObjectColor.BLACK);
+        colors.add(ObjectColor.RED);
+        colors.add(ObjectColor.GREEN);
+        return colors;
+    }
 }
