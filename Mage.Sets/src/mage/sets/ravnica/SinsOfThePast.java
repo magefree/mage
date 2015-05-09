@@ -136,7 +136,7 @@ class SinsOfThePastCastFromGraveyardEffect extends AsThoughEffectImpl {
         
         if (sourceId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
             Player player = game.getPlayer(affectedControllerId);
-            player.setCastSourceIdWithoutMana(sourceId);
+            player.setCastSourceIdWithAlternateMana(sourceId, null);
             return true;
         }
         return false;

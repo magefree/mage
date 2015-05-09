@@ -139,7 +139,7 @@ class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
                 Card card = game.getCard(sourceId);
                 if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
                     Player player = game.getPlayer(affectedControllerId);
-                    player.setCastSourceIdWithoutMana(sourceId);
+                    player.setCastSourceIdWithAlternateMana(sourceId, null);
                     return true;
                 }
             }

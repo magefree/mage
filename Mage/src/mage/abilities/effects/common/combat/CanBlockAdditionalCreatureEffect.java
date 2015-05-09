@@ -102,7 +102,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl {
                 sb.append("any number of creatures");
                 break;
             default:
-                sb.append(CardUtil.numberToText(amount, "an")).append(" additional creatures");
+                sb.append(CardUtil.numberToText(amount, "an")).append(" additional creature").append(amount > 1 ? "s":"");
         }
         return sb.toString();
     }

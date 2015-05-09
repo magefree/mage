@@ -162,7 +162,7 @@ class KheruSpellsnatcherCastFromExileEffect extends AsThoughEffectImpl {
                 if (card != null) {
                     if (game.getState().getZone(sourceId) == Zone.EXILED) {
                         Player player = game.getPlayer(affectedControllerId);
-                        player.setCastSourceIdWithoutMana(sourceId);
+                        player.setCastSourceIdWithAlternateMana(sourceId, null);
                         return true;
                     }
                     else {

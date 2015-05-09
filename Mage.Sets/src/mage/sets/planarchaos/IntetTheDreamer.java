@@ -154,7 +154,7 @@ class IntetTheDreamerEffect extends AsThoughEffectImpl {
                         controller.lookAtCards(sourceObject.getName(), cards, game);
                         return false;
                     } 
-                    controller.setCastSourceIdWithoutMana(objectId);
+                    controller.setCastSourceIdWithAlternateMana(objectId, null);
                     return true;                    
                 }
             }

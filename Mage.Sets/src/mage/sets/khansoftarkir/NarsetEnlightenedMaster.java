@@ -155,7 +155,7 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
             Card card = game.getCard(objectId);
             if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithoutMana(objectId);
+                player.setCastSourceIdWithAlternateMana(objectId, null);
                 return true;
             }
         }

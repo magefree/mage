@@ -47,6 +47,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -569,9 +570,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * be cast without mana.
      *
      * @param sourceId the source that can be cast without mana
+     * @param manaCosts alternate ManaCost, null if it can be cast without mana cost
      */
-    void setCastSourceIdWithoutMana(UUID sourceId);
-    UUID getCastSourceIdWithoutMana();
+    void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts);
+    UUID getCastSourceIdWithAlternateMana();
+    ManaCosts getCastSourceIdManaCosts();
 
     // permission handling to show hand cards
     void addPermissionToShowHandCards(UUID watcherUserId);

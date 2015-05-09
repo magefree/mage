@@ -113,7 +113,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
             // Alternate spell abilities (Flashback, Overload) can't be cast with no mana to pay option
             if (getSpellAbilityType().equals(SpellAbilityType.BASE_ALTERNATE)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && getSourceId().equals(player.getCastSourceIdWithoutMana())) {
+                if (player != null && getSourceId().equals(player.getCastSourceIdWithAlternateMana())) {
                     return false;
                 }
             }

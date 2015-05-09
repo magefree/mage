@@ -33,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;

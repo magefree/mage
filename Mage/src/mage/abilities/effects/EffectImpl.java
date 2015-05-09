@@ -46,7 +46,7 @@ import java.util.UUID;
 public abstract class EffectImpl implements Effect {
 
     protected UUID id;
-    protected final Outcome outcome;
+    protected Outcome outcome;
     protected EffectType effectType;
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
@@ -92,6 +92,11 @@ public abstract class EffectImpl implements Effect {
     @Override
     public Outcome getOutcome() {
         return outcome;
+    }
+
+    @Override
+    public void setOutcome(Outcome outcome) {
+        this.outcome = outcome;
     }
 
     @Override

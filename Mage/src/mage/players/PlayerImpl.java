@@ -63,6 +63,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
@@ -219,8 +220,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     // They neither expire immediately nor last indefinitely.
     protected boolean reachedNextTurnAfterLeaving = false;
 
-    // indicates that a sourceId will be cast without paying mana
-    protected UUID castSourceIdWithoutMana;
+    // indicates that the spell with the set sourceId can be cast with an alternate mana costs (can also be no mana costs)
+    protected UUID castSourceIdWithAlternateMana;
+    protected ManaCosts castSourceIdManaCosts;
+    
     // indicates that the player is in mana payment phase
     protected boolean payManaMode = false;
 
@@ -320,7 +323,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
 
-        this.castSourceIdWithoutMana = player.castSourceIdWithoutMana;
+        this.castSourceIdWithAlternateMana = player.castSourceIdWithAlternateMana;
+        this.castSourceIdManaCosts = player.castSourceIdManaCosts;
         this.payManaMode = player.payManaMode;
     }
 
@@ -378,7 +382,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.passed = player.isPassed();
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
-        this.castSourceIdWithoutMana = player.getCastSourceIdWithoutMana();
+        this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
+        this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
 
         this.usersAllowedToSeeHandCards.addAll(player.getUsersAllowedToSeeHandCards());
     }
@@ -439,7 +444,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
-        this.castSourceIdWithoutMana = null;
+        this.castSourceIdWithAlternateMana = null;
+        this.castSourceIdManaCosts = null;
     }
 
     /**
@@ -461,7 +467,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlayCardsFromGraveyard = false;
         this.topCardRevealed = false;
         this.alternativeSourceCosts.clear();
-        this.castSourceIdWithoutMana = null;
+        this.castSourceIdWithAlternateMana = null;
+        this.castSourceIdManaCosts = null;
         this.getManaPool().clearEmptyManaPoolRules();
     }
 
@@ -885,15 +892,22 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setCastSourceIdWithoutMana(UUID sourceId) {
-        castSourceIdWithoutMana = sourceId;
+    public void setCastSourceIdWithAlternateMana(UUID sourceId, ManaCosts manaCosts) {
+        castSourceIdWithAlternateMana = sourceId;
+        castSourceIdManaCosts = manaCosts;
     }
 
     @Override
-    public UUID getCastSourceIdWithoutMana() {
-        return castSourceIdWithoutMana;
+    public UUID getCastSourceIdWithAlternateMana() {
+        return castSourceIdWithAlternateMana;
     }
 
+    @Override
+    public ManaCosts getCastSourceIdManaCosts() {
+        return castSourceIdManaCosts;
+    }
+
+    
     @Override
     public boolean isInPayManaMode() {
         return payManaMode;
@@ -913,16 +927,19 @@ public abstract class PlayerImpl implements Player, Serializable {
                 card.cast(game, fromZone, ability, playerId);
                 Spell spell = game.getStack().getSpell(ability.getId());
                 // some effects set sourceId to cast without paying mana costs
-                if (ability.getSourceId().equals(getCastSourceIdWithoutMana())) {
-                    noMana = true;
+                if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
+                    ManaCosts alternateCosts = getCastSourceIdManaCosts();
+                    if (alternateCosts == null) {
+                        noMana = true;
+                    } else {
+                        ability.getManaCosts().clear();
+                        ability.getManaCosts().add(alternateCosts.copy());
+                        ability.getManaCostsToPay().clear();
+                        ability.getManaCostsToPay().add(alternateCosts.copy());
+                    }                    
                 }
-                setCastSourceIdWithoutMana(null);
+                setCastSourceIdWithAlternateMana(null, null);
                 if (spell.activate(game, noMana)) {
-//                    for (Ability spellAbility: spell.getSpellAbilities()) {
-//                        for (Effect effect: spellAbility.getEffects()) {
-//                            effect.getTargetPointer().init(game, ability);
-//                        }
-//                    }
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
@@ -2959,8 +2976,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     card = game.getCard(card.getId());
                 }
                 game.informPlayers(this.getLogName() + " moves " + (withName ? card.getLogName() : "a card face down") + " " +
-                        (fromZone != null ? new StringBuilder("from ") + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") +
-                        "to the exile zone");
+                        (fromZone != null ? "from " + fromZone.toString().toLowerCase(Locale.ENGLISH) + " " : "") + "to the exile zone");
             }
             result = true;
         }
