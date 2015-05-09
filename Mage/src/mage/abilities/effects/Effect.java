@@ -49,6 +49,7 @@ public interface Effect extends Serializable {
     void setText(String staticText);
     boolean apply(Game game, Ability source);
     Outcome getOutcome();
+    void setOutcome(Outcome outcome);
     EffectType getEffectType();
     void setTargetPointer(TargetPointer targetPointer);
     TargetPointer getTargetPointer();
