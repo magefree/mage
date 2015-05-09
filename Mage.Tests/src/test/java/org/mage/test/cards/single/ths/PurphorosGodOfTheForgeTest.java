@@ -75,7 +75,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         
         assertGraveyardCount(playerB, "Reach of Shadows", 1);
         assertPermanentCount(playerA, "Ashcloud Phoenix", 0);
-        assertPermanentCount(playerA, "face down creature", 1);
+        assertPermanentCount(playerA, "", 1);
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
         Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.getCardType().contains(CardType.CREATURE));
@@ -107,7 +107,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Ashcloud Phoenix", 0);
-        assertPermanentCount(playerA, "face down creature", 1);
+        assertPermanentCount(playerA, "", 1);
 
         assertLife(playerA, 18); // 2 damage from Eidolon of the Great Revel
         assertLife(playerB, 18); // 2 damage from Purphoros for the morphed Phoenix

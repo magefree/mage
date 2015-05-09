@@ -120,7 +120,7 @@ class CavernOfSoulsEffect extends OneShotEffect {
                     return false;
                 }
             }
-            game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
+            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
             permanent.addInfo("chosen type", CardUtil.addToolTipMarkTags("Chosen type: " + typeChoice.getChoice()), game);
         }
@@ -146,7 +146,7 @@ class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            game.informPlayers(controller.getName() + " produces " + mana.toString() + " with " + sourceObject.getLogName() +
+            game.informPlayers(controller.getLogName() + " produces " + mana.toString() + " with " + sourceObject.getLogName() +
                     " (can only be spend to cast for creatures of type " + creatureType + " and that spell can't be countered)");
         }        
         return super.setMana(mana, source, game); 

@@ -107,7 +107,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
                 copy.setCopiedSpell(true);
                 game.getStack().push(copy);
                 copy.chooseNewTargets(game, source.getControllerId());
-                game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
                 Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
                 if (sourceSpell != null) {
                     if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
@@ -116,7 +116,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
                         copy.setCopiedSpell(true);
                         game.getStack().push(copy);
                         copy.chooseNewTargets(game, source.getControllerId());
-                        game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                        game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
                     }
                 }
                 return true;

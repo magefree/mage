@@ -89,7 +89,7 @@ public class CommanderInfoWatcher extends Watcher {
                     MageObject commander = game.getObject(sourceId);
                     if (player != null && commander != null){
                         if (!game.isSimulation())
-                            game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getName() + " during the game.");
+                            game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getLogName() + " during the game.");
                         this.addCardInfoToCommander(game);
                     }
                 }
@@ -119,7 +119,7 @@ public class CommanderInfoWatcher extends Watcher {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                     Player damagedPlayer = game.getPlayer(entry.getKey());
                     sb.setLength(0);
-                    sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getName()).append(".");
+                    sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append(".");
                     this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString(), game);
                 }
             }

@@ -111,7 +111,7 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
 
             FilterCard filter = new FilterCard("up to two target cards from that player's graveyard");
             filter.add(new OwnerIdPredicate(event.getPlayerId()));
-            filter.setMessage("up to two cards in " + game.getPlayer(event.getTargetId()).getName() + "'s graveyard");
+            filter.setMessage("up to two cards in " + game.getPlayer(event.getTargetId()).getLogName() + "'s graveyard");
             this.getTargets().clear();
             this.addTarget(new TargetCardInOpponentsGraveyard(0,2,filter));
             return true;

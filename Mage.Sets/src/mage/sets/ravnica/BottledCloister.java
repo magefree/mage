@@ -104,7 +104,7 @@ class BottledCloisterExileEffect extends OneShotEffect {
                     card.moveToExile(exileId, sourcePermanent.getName(), source.getSourceId(), game);
                     card.setFaceDown(true, game);
                 }
-                game.informPlayers(sourcePermanent.getName() + ": " + controller.getName() + " exiles his or her hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ?"s":"") +")");
+                game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " exiles his or her hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ?"s":"") +")");
             }
             return true;
         }
@@ -146,7 +146,7 @@ class BottledCloisterReturnEffect extends OneShotEffect {
                 }
             }
             if (numberOfCards > 0) {
-                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getName() + " returns "+ numberOfCards + " card" + (numberOfCards > 1 ?"s":"") + " from exile to hand");
+                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " returns "+ numberOfCards + " card" + (numberOfCards > 1 ?"s":"") + " from exile to hand");
             }
             return true;
         }

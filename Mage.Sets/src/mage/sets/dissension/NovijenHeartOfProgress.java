@@ -99,7 +99,7 @@ class NovijenHeartOfProgressEffect extends OneShotEffect {
             for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (permanent.getTurnsOnBattlefield() == 0) {
                     permanent.addCounters(CounterType.P1P1.createInstance(), game);
-                    game.informPlayers(sourceObject.getLogName()+ ": " + controller.getName() + " puts a +1/+1 counter on " + permanent.getLogName());
+                    game.informPlayers(sourceObject.getLogName()+ ": " + controller.getLogName() + " puts a +1/+1 counter on " + permanent.getLogName());
                 }
             }
             return true;

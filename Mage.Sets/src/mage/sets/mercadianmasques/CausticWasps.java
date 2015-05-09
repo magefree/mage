@@ -99,7 +99,7 @@ class CausticWaspsTriggeredAbility extends TriggeredAbilityImpl {
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
-                FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getName());
+                FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getLogName());
                 filter.add(Predicates.or(
                     new CardTypePredicate(CardType.ARTIFACT)));
                 filter.add(new ControllerIdPredicate(event.getTargetId()));

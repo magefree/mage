@@ -42,7 +42,7 @@ import mage.game.Game;
 public class CastCommanderAbility extends SpellAbility {
 
     public CastCommanderAbility(Card card) {
-        super(card.getManaCost(), card.getLogName(), Zone.COMMAND, SpellAbilityType.BASE);
+        super(card.getManaCost(), card.getName(), Zone.COMMAND, SpellAbilityType.BASE);
         this.timing = TimingRule.SORCERY;
         this.usesStack = true;
         this.controllerId = card.getOwnerId();

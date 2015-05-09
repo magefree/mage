@@ -103,7 +103,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
             player.revealCards("Covenant of Minds", cards, game);
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Put the revealed cards into ").append(player.getName()).append("'s hand?");
+            sb.append("Put the revealed cards into ").append(player.getLogName()).append("'s hand?");
             sb.append(" If you don't, those cards are put into his graveyard and he will draw five cards.");
 
             Zone zone = Zone.GRAVEYARD;
@@ -118,7 +118,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
             }
         } else {
             StringBuilder sb = new StringBuilder();
-            sb.append(player.getName()).append("'s library is empty? Do you want him to draw five cards?");
+            sb.append(player.getLogName()).append("'s library is empty? Do you want him to draw five cards?");
             if (!opponent.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                 player.drawCards(5, game);
             }

@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -106,22 +107,21 @@ class MindclawShamanEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        if (targetOpponent != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (targetOpponent != null && sourceObject != null) {        
             if (targetOpponent.getHand().size() > 0) {
-                targetOpponent.revealCards("Mindclaw Shaman", targetOpponent.getHand(), game);
-                Player you = game.getPlayer(source.getControllerId());
-                if (you != null) {
-                    TargetCard target = new TargetCard(Zone.PICK, filter);
+                targetOpponent.revealCards(sourceObject.getName(), targetOpponent.getHand(), game);
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    TargetCard target = new TargetCard(Zone.HAND, filter);
                     target.setNotTarget(true);
-                    if (you.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
+                    if (controller.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
-                            if (targetOpponent != null) {
-                                if (you.chooseUse(Outcome.Benefit, "Cast the chosen card?", game)) {
-                                    you.cast(chosenCard.getSpellAbility(), game, true);
-                                } else {
-                                        game.informPlayers("Mindclaw Shaman: " + you.getName() + " canceled casting the card.");
-                                }
+                            if (controller.chooseUse(Outcome.Benefit, "Cast the chosen card?", game)) {
+                                controller.cast(chosenCard.getSpellAbility(), game, true);
+                            } else {
+                                    game.informPlayers(sourceObject.getLogName() +": " + controller.getLogName() + " canceled casting the card.");
                             }
                         }
                     }

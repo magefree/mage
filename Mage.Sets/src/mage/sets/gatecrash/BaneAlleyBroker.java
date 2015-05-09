@@ -146,7 +146,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
               Card card = game.getCard(target.getFirstTarget());
               MageObject sourceObject = game.getObject(source.getSourceId());              
               if (card != null && sourceObject != null) {
-                  if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getLogName()).toString(), source.getSourceId(), game)) {
+                  if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), new StringBuilder(sourceObject.getName()).toString(), source.getSourceId(), game)) {
                       card.setFaceDown(true, game);
                       return true;
                   }
@@ -258,7 +258,7 @@ class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl {
                     Cards cards = new CardsImpl(card);
                     Player controller = game.getPlayer(source.getControllerId());
                     if (controller != null) {
-                        controller.lookAtCards("Exiled with " + sourceObject.getLogName(), cards, game);
+                        controller.lookAtCards("Exiled with " + sourceObject.getName(), cards, game);
                     }
                 }
             }

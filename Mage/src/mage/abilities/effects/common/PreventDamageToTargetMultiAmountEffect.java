@@ -83,7 +83,7 @@ public class PreventDamageToTargetMultiAmountEffect extends PreventionEffectImpl
                     StringBuilder sb = new StringBuilder(sourceObject.getName()).append(": Prevent the next ");
                     sb.append(multiTarget.getTargetAmount(targetId)).append(" damage to ");
                     if (player != null) {
-                        sb.append(player.getName());
+                        sb.append(player.getLogName());
                     } else if (permanent != null) {
                         sb.append(permanent.getName());
                     }

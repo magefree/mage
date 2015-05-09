@@ -66,8 +66,8 @@ public class TidehollowScullerTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tidehollow Sculler");
         addTarget(playerA, "Bloodflow Connoisseur");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Boomerang", "Tidehollow Sculler");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scout's Warning", "", "Boomerang");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tidehollow Sculler", "", "", "When {this} leaves the battlefield, return the exiled card to its owner's hand.");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scout's Warning", null, "Boomerang");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tidehollow Sculler", null, "", "When {this} leaves the battlefield, return the exiled card to its owner's hand.");
         addTarget(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

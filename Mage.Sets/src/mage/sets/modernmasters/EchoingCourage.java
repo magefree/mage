@@ -95,7 +95,7 @@ class EchoingCourageEffect extends OneShotEffect {
             if (targetPermanent.getName().isEmpty()) {
                 filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
-                filter.add(new NamePredicate(targetPermanent.getLogName()));
+                filter.add(new NamePredicate(targetPermanent.getName()));
             }
             ContinuousEffect effect = new BoostAllEffect(2,2, Duration.EndOfTurn, filter, false);
             game.addEffect(effect, source);

@@ -98,7 +98,7 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
                 }
                 controller.drawCards(cardsHand, game);
             }
-            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getName()).append(" exiles hand and draws ").append(cardsHand).append(" card(s)").toString());
+            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getLogName()).append(" exiles hand and draws ").append(cardsHand).append(" card(s)").toString());
             return true;
         }
         return false;

@@ -131,7 +131,7 @@ class AthreosGodOfPassageReturnEffect extends OneShotEffect {
                 if (opponent != null) {
                     Cost cost = new PayLifeCost(3);
                     if (cost.canPay(source, source.getSourceId(), opponent.getId(), game)
-                            && opponent.chooseUse(outcome, new StringBuilder("Pay 3 live to prevent that ").append(creature.getLogName()).append(" returns to ").append(controller.getName()).append("'s hand?").toString(), game)) {
+                            && opponent.chooseUse(outcome, new StringBuilder("Pay 3 live to prevent that ").append(creature.getLogName()).append(" returns to ").append(controller.getLogName()).append("'s hand?").toString(), game)) {
                         if (cost.pay(source, game, source.getSourceId(), opponent.getId(), false)) {
                             paid = true;
                         }

@@ -84,7 +84,7 @@ public class DiluvianPrimordial extends CardImpl {
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    FilterCard filter = new FilterCard(new StringBuilder("instant or sorcery card from ").append(opponent.getName()).append("'s graveyard").toString());
+                    FilterCard filter = new FilterCard("instant or sorcery card from " + opponent.getLogName() + "'s graveyard");
                     filter.add(new OwnerIdPredicate(opponentId));
                     filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),new CardTypePredicate(CardType.SORCERY)));
                     TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0,1, filter);

@@ -101,7 +101,7 @@ class ScrollRackEffect extends OneShotEffect {
                     for (UUID targetId : targets) {
                         Card card = game.getCard(targetId);
                         if (card != null) {
-                            if (card.moveToExile(source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game)) {
+                            if (card.moveToExile(source.getSourceId(), sourceObject.getName(), source.getSourceId(), game)) {
                                 card.setFaceDown(true, game);
                                 amountExiled++;
                             }
@@ -109,7 +109,7 @@ class ScrollRackEffect extends OneShotEffect {
                     }
                 }
             }
-            game.informPlayers(controller.getName() + " exiles " + amountExiled + " card" + (amountExiled == 1 ? " ":"s ") + "face down from his or her hand");
+            game.informPlayers(controller.getLogName() + " exiles " + amountExiled + " card" + (amountExiled == 1 ? " ":"s ") + "face down from his or her hand");
             if (amountExiled > 0) {
                 int count = Math.min(controller.getLibrary().size(), amountExiled);
                 for (int i = 0; i < count; i++) {
@@ -119,13 +119,13 @@ class ScrollRackEffect extends OneShotEffect {
                     }
                 }
             }
-            game.informPlayers(controller.getName() + " moves " + amountExiled + " card" + (amountExiled == 1 ? " ":"s ") + "from library to hand");
+            game.informPlayers(controller.getLogName() + " moves " + amountExiled + " card" + (amountExiled == 1 ? " ":"s ") + "from library to hand");
 
             TargetCardInExile target2 = new TargetCardInExile(filter2, source.getSourceId());
             ExileZone scrollRackExileZone = game.getExile().getExileZone(source.getSourceId());
             if (scrollRackExileZone != null) {
                 while (controller.isInGame() && scrollRackExileZone.count(filter, game) > 1) {
-                    controller.lookAtCards("exiled cards with " + sourceObject.getLogName(), scrollRackExileZone, game);
+                    controller.lookAtCards("exiled cards with " + sourceObject.getName(), scrollRackExileZone, game);
                     controller.choose(Outcome.Neutral, scrollRackExileZone, target2, game);
                     Card card = game.getCard(target2.getFirstTarget());
                     if (card != null) {

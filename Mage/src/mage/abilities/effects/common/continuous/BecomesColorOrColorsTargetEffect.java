@@ -82,7 +82,7 @@ public class BecomesColorOrColorsTargetEffect extends OneShotEffect {
                     return false;
                 }
                 if (!game.isSimulation())
-                    game.informPlayers(target.getName() + ": " + controller.getName() + " has chosen " + choiceColor.getChoice());
+                    game.informPlayers(target.getName() + ": " + controller.getLogName() + " has chosen " + choiceColor.getChoice());
                 if (choiceColor.getColor().isBlack()) {
                     sb.append("B");
                 } else if (choiceColor.getColor().isBlue()) {

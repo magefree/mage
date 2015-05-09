@@ -93,14 +93,14 @@ class BloodClockEffect extends OneShotEffect {
         }
         if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", game)) {
             player.loseLife(2, game);
-            game.informPlayers(player.getName() + " pays 2 life. He will not return a permanent he or she controls.");
+            game.informPlayers(player.getLogName() + " pays 2 life. He will not return a permanent he or she controls.");
             return true;
         } else {
             Target target = new TargetControlledPermanent();
             if (target.canChoose(source.getSourceId(), player.getId(), game) && player.chooseTarget(outcome, target, source, game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    game.informPlayers(player.getName() + " returns " + permanent.getName() + " to hand.");
+                    game.informPlayers(player.getLogName() + " returns " + permanent.getName() + " to hand.");
                     return permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }

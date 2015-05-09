@@ -103,7 +103,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (opponent != null && sourceObject != null) {
-            opponent.revealCards(sourceObject.getLogName(), opponent.getHand(), game);
+            opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 int cardsGraveyard = opponent.getGraveyard().count(filter, game);
@@ -137,7 +137,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getLogName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD, true);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD, true);
                     // allow to cast the card
                     ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));

@@ -103,7 +103,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
                 && controller != null) {
 
             // reveal hand of target player 
-            targetPlayer.revealCards(sourceObject.getLogName(), targetPlayer.getHand(), game);
+            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
 
             // You choose a card from it
             TargetCardInHand target = new TargetCardInHand(new FilterCard());

@@ -109,7 +109,7 @@ class CounterSourceEffect extends OneShotEffect {
                 if(player.chooseUse(Outcome.Detriment, "Discard three cards to counter " + spell.getName() + "?", game)){
                     DiscardTargetCost cost = new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard()));
                     if(cost.pay(source, game, source.getSourceId(), uuid, false)){
-                        game.informPlayers(player.getName() + " discards 3 cards to counter " + spell.getName() + ".");
+                        game.informPlayers(player.getLogName() + " discards 3 cards to counter " + spell.getName() + ".");
                         game.getStack().counter(spell.getId(), source.getSourceId(), game);
                         return true;
                     }

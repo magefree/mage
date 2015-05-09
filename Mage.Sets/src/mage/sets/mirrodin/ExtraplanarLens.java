@@ -107,7 +107,7 @@ class ExtraplanarLensImprintEffect extends OneShotEffect {
                         && controller.choose(Outcome.Neutral, target, source.getSourceId(), game)) {
                     Permanent targetLand = game.getPermanent(target.getFirstTarget());
                     if (targetLand != null) {
-                        targetLand.moveToExile(null, extraplanarLens.getLogName() + " (Imprint)", source.getSourceId(), game);
+                        targetLand.moveToExile(null, extraplanarLens.getName() + " (Imprint)", source.getSourceId(), game);
                         extraplanarLens.imprint(targetLand.getId(), game);
                         extraplanarLens.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + targetLand.getLogName() + "]"), game);
                     }

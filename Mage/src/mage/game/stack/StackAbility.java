@@ -63,6 +63,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
+import mage.util.GameLog;
 import mage.watchers.Watcher;
 
 /**
@@ -131,7 +132,7 @@ public class StackAbility implements StackObject, Ability {
 
     @Override
     public String getLogName() {
-        return name;
+        return GameLog.getColoredObjectName(this);
     }
     
     @Override
@@ -730,7 +731,7 @@ public class StackAbility implements StackObject, Ability {
         if (object == null) {
             Player targetPlayer = game.getPlayer(targetId);
             if (targetPlayer != null) {
-                targetNames = targetPlayer.getName();
+                targetNames = targetPlayer.getLogName();
             }
         } else {
             targetNames = object.getName();

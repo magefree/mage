@@ -130,7 +130,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl {
             }
             Player player = game.getPlayer(dealDamageTo);
             if (player != null) {
-                game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
+                game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
                 player.damage(prevented, source.getSourceId(), game, false, true);
             }
         }

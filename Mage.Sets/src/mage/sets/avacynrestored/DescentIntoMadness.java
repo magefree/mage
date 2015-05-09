@@ -180,7 +180,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
                             Permanent chosen = game.getPermanent(targetId);
                             if (chosen != null) {
                                 amount--;
-                                game.informPlayers(player.getName() + " selects " + chosen.getLogName() + " from battlefield");
+                                game.informPlayers(player.getLogName() + " selects " + chosen.getLogName() + " from battlefield");
                                 selectedObjects.add(targetId);
                             }
                         }
@@ -213,7 +213,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
             }
         }
         if (cardsFromHand > 0) {
-            game.informPlayers(player.getName() + " selects " + cardsFromHand + (cardsFromHand == 1?" card":" cards") + " from his or her hand");
+            game.informPlayers(player.getLogName() + " selects " + cardsFromHand + (cardsFromHand == 1?" card":" cards") + " from his or her hand");
         }
     }
 }

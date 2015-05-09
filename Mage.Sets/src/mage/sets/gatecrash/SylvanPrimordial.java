@@ -80,7 +80,7 @@ public class SylvanPrimordial extends CardImpl {
             for(UUID opponentId : game.getOpponents(ability.getControllerId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    FilterPermanent filter = new FilterPermanent(new StringBuilder("noncreature permanent from opponent ").append(opponent.getName()).toString());
+                    FilterPermanent filter = new FilterPermanent("noncreature permanent from opponent " + opponent.getLogName());
                     filter.add(new ControllerIdPredicate(opponentId));
                     filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
                     TargetPermanent target = new TargetPermanent(0,1, filter,false);

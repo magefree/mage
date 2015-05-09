@@ -101,12 +101,12 @@ class DelayEffect extends OneShotEffect {
             if (card != null && effect.apply(game, source) && Zone.EXILED.equals(game.getState().getZone(card.getId()))) {
                 boolean hasSuspend = card.getAbilities().containsClass(SuspendAbility.class);
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
-                if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getName(), source.getSourceId(), game, Zone.HAND, true)) {
+                if (controller.moveCardToExileWithInfo(card, exileId, "Suspended cards of " + controller.getLogName(), source.getSourceId(), game, Zone.HAND, true)) {
                     card.addCounters(CounterType.TIME.createInstance(3), game);
                     if (!hasSuspend) {
                         game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
                     }
-                    game.informPlayers(controller.getName() + " suspends 3 - " + card.getName());
+                    game.informPlayers(controller.getLogName() + " suspends 3 - " + card.getName());
                 }                
             }
             return true;

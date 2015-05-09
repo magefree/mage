@@ -148,7 +148,7 @@ class EnigmaSphinxEffect extends OneShotEffect {
             Player owner = game.getPlayer(card.getOwnerId());
             if (owner != null && card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true)) {
                 // Move Sphinx to third position
-                game.informPlayers(card.getName() + " is put into " + owner.getName() +"'s library third from the top");
+                game.informPlayers(card.getLogName() + " is put into " + owner.getLogName() +"'s library third from the top");
                 Library lib = owner.getLibrary();
                 if (lib != null) {
                     Card card1 = lib.removeFromTop(game);

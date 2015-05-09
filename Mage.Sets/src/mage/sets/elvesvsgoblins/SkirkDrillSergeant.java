@@ -119,7 +119,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
             Card card = player.getLibrary().getFromTop(game);
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.revealCards(sourceObject.getLogName(), cards, game);
+            player.revealCards(sourceObject.getName(), cards, game);
 
             if (card != null) {
                 if (filter.match(card, game)) {

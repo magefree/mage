@@ -124,7 +124,7 @@ class SokenzanRenegadeEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(newController.getId()));
                 game.addEffect(effect, source);
                 if (!source.getControllerId().equals(newController.getId())) {
-                    game.informPlayers(newController.getName() + " got controll of " + sourcePermanent.getLogName());
+                    game.informPlayers(newController.getLogName() + " got controll of " + sourcePermanent.getLogName());
                 }
                 return true;
             }

@@ -99,7 +99,7 @@ class TaigamsSchemingEffect extends OneShotEffect {
             int count = Math.min(controller.getLibrary().size(), 5);
             if (count > 0) {
                 cards.addAll(controller.getLibrary().getTopCards(game, count));
-                controller.lookAtCards(sourceObject.getLogName(), cards, game);
+                controller.lookAtCards(sourceObject.getName(), cards, game);
                 // pick cards going to graveyard
                 TargetCard target = new TargetCard(0,5, Zone.LIBRARY, new FilterCard("cards to put into your graveyard"));
                 if (controller.choose(Outcome.Detriment, cards, target, game)) {
@@ -113,7 +113,7 @@ class TaigamsSchemingEffect extends OneShotEffect {
                 }
                 // The rest goes back to library in any order
                 if (cards.size() > 0) {
-                    game.informPlayers(controller.getName() + " puts " + cards.size() + " card" + (cards.size() ==1 ? "":"s")  + " back to his or her library");
+                    game.informPlayers(controller.getLogName() + " puts " + cards.size() + " card" + (cards.size() ==1 ? "":"s")  + " back to his or her library");
                     target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on your library (last chosen will be on top)"));
                     while (controller.isInGame() && cards.size() > 1) {
                         controller.choose(Outcome.Neutral, cards, target, game);

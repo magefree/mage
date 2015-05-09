@@ -111,7 +111,7 @@ class SphinxOfUthuunEffect extends OneShotEffect {
                 game.setZone(card.getId(), Zone.PICK);
             }
         }
-        player.revealCards(sourceObject.getLogName(), cards, game);
+        player.revealCards(sourceObject.getName(), cards, game);
 
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {

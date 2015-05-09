@@ -103,7 +103,7 @@ class ElderPineOfJukaiEffect extends OneShotEffect {
         }        
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 3));
-        controller.revealCards(sourceObject.getLogName(), cards, game);
+        controller.revealCards(sourceObject.getName(), cards, game);
         for (Card card: cards.getCards(game)) {
             if (card.getCardType().contains(CardType.LAND)) {
                 controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);

@@ -121,13 +121,13 @@ class TariffEffect extends OneShotEffect {
             if (player.chooseUse(Outcome.Benefit, message, game)) {
                 if (manaCost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
-                            .append(": ").append(player.getName()).append(" has paid").toString());
+                            .append(": ").append(player.getLogName()).append(" has paid").toString());
                     return;
                 }
             }
 
             game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
-                    .append(": ").append(player.getName()).append(" hasn't paid").toString());
+                    .append(": ").append(player.getLogName()).append(" hasn't paid").toString());
             creatureToPayFor.sacrifice(source.getSourceId(), game);
         }
     }

@@ -103,7 +103,7 @@ class VassalsDutyPreventDamageTargetEffect extends PreventionEffectImpl {
             UUID redirectTo = source.getControllerId();
             Player player = game.getPlayer(redirectTo);
             if (player != null) {
-                game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + player.getName() + " instead");
+                game.informPlayers("Dealing " + preventionResult.getPreventedDamage() + " to " + player.getLogName() + " instead");
                 // keep the original source id as it is redirecting
                 player.damage(preventionResult.getPreventedDamage(), event.getSourceId(), game, false, true);
             }

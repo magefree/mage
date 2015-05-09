@@ -102,8 +102,8 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         assertExileCount("Secret Plans", 0);
         assertPermanentCount(playerA, "Secret Plans", 1);
         
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 3);        
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 3);        
     }    
 
 }

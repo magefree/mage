@@ -88,11 +88,11 @@ class PleaForPowerEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player.chooseUse(Outcome.ExtraTurn, "Choose time?", game)) {
                     timeCount++;
-                    game.informPlayers(player.getName() + " has chosen: time");
+                    game.informPlayers(player.getLogName() + " has chosen: time");
                 }
                 else {
                     knowledgeCount++;
-                    game.informPlayers(player.getName() + " has chosen: knowledge");
+                    game.informPlayers(player.getLogName() + " has chosen: knowledge");
                 }
             }
             if (timeCount > knowledgeCount) {

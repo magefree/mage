@@ -96,7 +96,7 @@ class PhyrexianProcessorEffect extends OneShotEffect {
             Card sourceCard = game.getCard(source.getSourceId());
             int payAmount = controller.getAmount(0, controller.getLife(), staticText, game);
             controller.loseLife(payAmount, game);
-            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getName())
+            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getLogName())
                 .append(" pays ").append(payAmount).append(" life.").toString());
             String key = CardUtil.getCardZoneString("lifePaid", source.getSourceId(), game);
             game.getState().setValue(key, payAmount);

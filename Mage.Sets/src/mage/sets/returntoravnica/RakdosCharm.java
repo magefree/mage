@@ -105,7 +105,7 @@ public class RakdosCharm extends CardImpl {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
                     controller.damage(1, permanent.getId(), game, false, true);
-                    game.informPlayers("1 damage to " + controller.getName() + " from " + permanent.getName());
+                    game.informPlayers("1 damage to " + controller.getLogName() + " from " + permanent.getName());
                 }
             }
             return true;

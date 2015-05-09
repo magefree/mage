@@ -29,6 +29,7 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -101,7 +102,8 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             int cmc = 0;
             for (UUID playerId :controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
@@ -109,13 +111,13 @@ class NayaSoulbeastCastEffect extends OneShotEffect {
                     if (player.getLibrary().size() > 0) {
                         Card card = player.getLibrary().getFromTop(game);
                         cmc += card.getManaCost().convertedManaCost();
-                        player.revealCards(new StringBuilder("Naya Soulbeast (").append(player.getName()).append(")").toString(), new CardsImpl(card), game);
+                        player.revealCards(sourceObject.getName() + " " + player.getName() + ")", new CardsImpl(card), game);
                     }
                 }
             }
             for (Effect effect : source.getEffects()) {
                 if (effect instanceof NayaSoulbeastReplacementEffect) {
-                    effect.setValue("NayaSoulbeastCounters", new Integer(cmc));
+                    effect.setValue("NayaSoulbeastCounters", cmc);
                 }
             }
             return true;

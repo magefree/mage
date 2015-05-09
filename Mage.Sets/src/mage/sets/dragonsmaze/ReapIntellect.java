@@ -105,7 +105,7 @@ class ReapIntellectEffect extends OneShotEffect {
         if (targetPlayer != null && sourceObject != null && controller != null) {
             
             // reveal hand of target player 
-            targetPlayer.revealCards(sourceObject.getLogName(), targetPlayer.getHand(), game);
+            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
             
             // Chose cards to exile from hand
             Cards exiledCards = new CardsImpl();

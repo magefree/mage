@@ -135,7 +135,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
                     boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                     if (!game.isSimulation())
-                        game.informPlayers(player.getName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
                     return result;
                 }
             }
@@ -155,7 +155,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
                 if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){                    
                     boolean result = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                     if (!game.isSimulation())
-                        game.informPlayers(player.getName() + " has moved his or her commander to the command zone");
+                        game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
                     return result;
                 }
             }

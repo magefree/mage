@@ -106,17 +106,17 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         DamageEvent damageEvent = (DamageEvent) event;
-        if (you != null && targetCreature != null) {
+        if (controller != null && targetCreature != null) {
             this.used = true;
-            you.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
+            controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
             
-            StringBuilder sb = new StringBuilder(sourceObject != null ? sourceObject.getName() : "");
-            sb.append(": ").append(damageEvent.getAmount()).append(" damage redirected from ").append(targetCreature.getName());
-            sb.append(" to ").append(you.getName());
+            StringBuilder sb = new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "");
+            sb.append(": ").append(damageEvent.getAmount()).append(" damage redirected from ").append(targetCreature.getLogName());
+            sb.append(" to ").append(controller.getLogName());
             game.informPlayers(sb.toString());
             
             return true;

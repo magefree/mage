@@ -231,7 +231,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
         if (!game.isSimulation()) {
-            game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
+            game.informPlayers(new StringBuilder(player.getLogName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature":" creatures").toString());
         }
     }
 
@@ -382,7 +382,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : this.getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
-                    game.informPlayers(new StringBuilder("Attacked player: ").append(defender.getName()).toString());
+                    game.informPlayers("Attacked player: " + defender.getLogName());
                     shownDefendingPlayer = true;
                 }
                 StringBuilder sb = new StringBuilder();
@@ -899,7 +899,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.informPlayer(attackingPlayer, new StringBuilder("No more than ")
                         .append(CardUtil.numberToText(defendingPlayer.getMaxAttackedBy()))
                         .append(" creatures can attack ")
-                        .append(defendingPlayer.getName()).toString());
+                        .append(defendingPlayer.getLogName()).toString());
             }
             return false;
         }

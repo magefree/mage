@@ -93,7 +93,7 @@ public class ReturnFromExileEffect extends OneShotEffect {
                         case BATTLEFIELD:
                             card.moveToZone(zone, source.getSourceId(), game, tapped);
                             if (!game.isSimulation()) {
-                                game.informPlayers(controller.getName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
+                                game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
                             }
                             break;
                         case HAND:
@@ -108,7 +108,7 @@ public class ReturnFromExileEffect extends OneShotEffect {
                         default:
                             card.moveToZone(zone, source.getSourceId(), game, tapped);
                             if (!game.isSimulation()) {
-                                game.informPlayers(controller.getName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
+                                game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
                             }
                     }
                 }

@@ -99,7 +99,7 @@ class NeedleSpecterEffect extends OneShotEffect {
             if (targetPlayer != null) {
                 int damage = (Integer)getValue("damage");
                 targetPlayer.discard(damage, source, game);
-                game.informPlayers(targetPlayer.getName() + "discards " + damage + " card(s)");
+                game.informPlayers(targetPlayer.getLogName() + "discards " + damage + " card(s)");
                 return true;
             }
             return false;

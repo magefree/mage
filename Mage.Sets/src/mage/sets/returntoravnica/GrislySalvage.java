@@ -109,7 +109,7 @@ class GrislySalvageEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getLogName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());

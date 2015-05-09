@@ -117,10 +117,10 @@ class UnexpectedlyAbsentEffect extends OneShotEffect {
                         cardIds.push(card.getId());
                     }
                     // return cards back to library
-                    game.informPlayers(new StringBuilder(controller.getName())
+                    game.informPlayers(new StringBuilder(controller.getLogName())
                             .append(" puts ").append(permanent.getName())
                             .append(" beneath the top ").append(xValue)
-                            .append(" cards of ").append(owner.getName()).append("'s library").toString());
+                            .append(" cards of ").append(owner.getLogName()).append("'s library").toString());
                     permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     while(!cardIds.isEmpty()) {
                         UUID cardId = cardIds.poll();

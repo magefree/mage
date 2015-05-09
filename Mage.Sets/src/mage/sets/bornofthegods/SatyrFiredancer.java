@@ -80,7 +80,7 @@ public class SatyrFiredancer extends CardImpl {
         if (ability instanceof SatyrFiredancerTriggeredAbility) {
             Player opponent = game.getPlayer(ability.getEffects().get(0).getTargetPointer().getFirst(game, ability));
             if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature controlled by ").append(opponent.getName()).toString());
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + opponent.getLogName());
                 filter.add(new ControllerIdPredicate(opponent.getId()));
                 ability.getTargets().add(new TargetCreaturePermanent(filter));
             }

@@ -173,7 +173,7 @@ class SpellCrumpleReplacementEffect extends ReplacementEffectImpl {
             if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false, event.getAppliedEffects())) {            
                 Player controller = game.getPlayer(source.getControllerId());
                 if (controller != null) {
-                    game.informPlayers(controller.getName() + " has put " + card.getName() + " on the bottom of the library.");
+                    game.informPlayers(controller.getLogName() + " has put " + card.getName() + " on the bottom of the library.");
                 }
                 return true;
             }

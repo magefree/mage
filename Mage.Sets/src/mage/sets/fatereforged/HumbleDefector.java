@@ -107,7 +107,7 @@ class HumbleDefectorEffect extends OneShotEffect {
         if (targetOpponent != null && humbleDefector != null) {
             ContinuousEffect effect = new HumbleDefectorControlSourceEffect();
             game.addEffect(effect, source);
-            game.informPlayers(humbleDefector.getName() + " is now controlled by " + targetOpponent.getName());
+            game.informPlayers(humbleDefector.getName() + " is now controlled by " + targetOpponent.getLogName());
             return true;
         }
         return false;

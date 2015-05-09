@@ -115,7 +115,7 @@ class SmokeTellerLookFaceDownEffect extends OneShotEffect {
             copyFaceDown.setFaceDown(false, game);
             Cards cards = new CardsImpl();
             cards.add(copyFaceDown);
-            player.lookAtCards("face down card - " + mageObject.getLogName(), cards, game);
+            player.lookAtCards("face down card - " + mageObject.getName(), cards, game);
         } else {
             return false;
         }

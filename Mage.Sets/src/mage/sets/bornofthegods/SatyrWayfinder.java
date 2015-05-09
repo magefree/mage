@@ -102,7 +102,7 @@ class SatyrWayfinderEffect extends OneShotEffect {
             cards.addAll(player.getLibrary().getTopCards(game, 4));
             boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), game) > 0;
             if (!cards.isEmpty()) {
-                player.revealCards(sourceObject.getLogName(), cards, game);
+                player.revealCards(sourceObject.getName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound && 
                         player.chooseUse(outcome, "Put a land card into your hand?", game) &&

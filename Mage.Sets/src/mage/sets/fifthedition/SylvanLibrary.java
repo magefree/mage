@@ -123,7 +123,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                                     && controller.getLife() >= 4
                                     && controller.chooseUse(outcome, new StringBuilder("Pay 4 life for ").append(card.getName()).append("? (Otherwise it's put on top of your library)").toString(), game)) {
                                 controller.loseLife(4, game);
-                                game.informPlayers(new StringBuilder(controller.getName()).append(" pays 4 life to keep a card on hand").toString());
+                                game.informPlayers(new StringBuilder(controller.getLogName()).append(" pays 4 life to keep a card on hand").toString());
                             } else {
                                 cardsPutBack.add(card);
                             }
@@ -147,7 +147,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                     if (numberOfCardsToPutBack > 0) {
-                        game.informPlayers(new StringBuilder(controller.getName()).append(" puts ").append(numberOfCardsToPutBack).append(" card(s) back to library").toString());
+                        game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(numberOfCardsToPutBack).append(" card(s) back to library").toString());
                     }
                 }
             }

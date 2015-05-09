@@ -141,7 +141,7 @@ public ChaosWarpRevealEffect() {
             if (card != null) {
                 Cards cards = new CardsImpl();
                 cards.add(card);
-                owner.revealCards(sourceObject.getLogName(), cards, game);
+                owner.revealCards(sourceObject.getName(), cards, game);
             	if (new FilterPermanentCard().match(card, game)) {
                     owner.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 }

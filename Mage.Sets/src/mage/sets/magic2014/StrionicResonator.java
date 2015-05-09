@@ -109,7 +109,7 @@ class StrionicResonatorEffect extends OneShotEffect {
                         }
                     }
                 }
-                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getName()).append(" copied activated ability").toString());
+                game.informPlayers(new StringBuilder(sourcePermanent.getName()).append(": ").append(controller.getLogName()).append(" copied activated ability").toString());
                 return true;
             }
         }

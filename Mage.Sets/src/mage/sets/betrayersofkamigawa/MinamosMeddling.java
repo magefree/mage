@@ -99,7 +99,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
                     game.getStack().counter(targetId, source.getSourceId(), game);
                     Player spellController = game.getPlayer(spell.getControllerId());
                     if (spellController != null) {
-                        spellController.revealCards(sourceObject.getLogName(), spellController.getHand(), game);
+                        spellController.revealCards(sourceObject.getName(), spellController.getHand(), game);
                         Cards cardsToDiscard = new CardsImpl();
                         for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                             if (spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {

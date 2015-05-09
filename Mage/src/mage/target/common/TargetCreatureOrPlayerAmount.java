@@ -212,7 +212,7 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount {
             }
             else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getName()).append("(").append(getTargetAmount(targetId)).append(") ");
+                sb.append(player.getLogName()).append("(").append(getTargetAmount(targetId)).append(") ");
             }
         }
         return sb.toString();

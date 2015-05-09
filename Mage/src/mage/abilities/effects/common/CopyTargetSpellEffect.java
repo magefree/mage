@@ -70,7 +70,7 @@ public class CopyTargetSpellEffect extends OneShotEffect {
                 activateMessage = activateMessage.substring(6);
             }
             if (!game.isSimulation())
-                game.informPlayers(player.getName() + " copies " + activateMessage);
+                game.informPlayers(player.getLogName() + " copies " + activateMessage);
             return true;
         }
         return false;

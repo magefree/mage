@@ -131,7 +131,7 @@ class VenserTheSojournerEffect extends OneShotEffect {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
-                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                         //create delayed triggered ability
                         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                         delayedAbility.setSourceId(source.getSourceId());

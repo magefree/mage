@@ -55,7 +55,7 @@ public class DeflectingPalmTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
         
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Deflecting Palm", "", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Deflecting Palm", null, "Lightning Bolt");
         setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);

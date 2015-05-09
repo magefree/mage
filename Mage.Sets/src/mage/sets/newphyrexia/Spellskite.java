@@ -125,7 +125,7 @@ class SpellskiteEffect extends OneShotEffect {
                         String name;
                         if (object == null) {
                             Player targetPlayer = game.getPlayer(targetId);
-                            name = targetPlayer.getName();
+                            name = targetPlayer.getLogName();
                         } else {
                             name = object.getName();
                         }

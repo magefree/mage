@@ -111,7 +111,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                             // player has to choose
                         }
                         String choosenType = choiceImpl.getChoice();
-                        game.informPlayers(new StringBuilder(storageMatrix.getName()).append(": ").append(player.getName()).append(" chose to untap ").append(choosenType).toString());
+                        game.informPlayers(new StringBuilder(storageMatrix.getName()).append(": ").append(player.getLogName()).append(" chose to untap ").append(choosenType).toString());
 
                         if(choosenType.equals(CardType.ARTIFACT.toString())){
                             type = CardType.ARTIFACT;

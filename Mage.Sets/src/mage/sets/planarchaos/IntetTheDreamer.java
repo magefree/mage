@@ -104,7 +104,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
           MageObject sourceObject = source.getSourceObject(game);
           if (card != null && sourceObject != null) {
               UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-              player.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY, false);
+              player.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, false);
               card.setFaceDown(true, game);
               return true;
           }
@@ -151,7 +151,7 @@ class IntetTheDreamerEffect extends AsThoughEffectImpl {
                     if (controller.chooseUse(outcome, "Look at the card?", game)) {
                         Cards cards = new CardsImpl();
                         cards.add(card);
-                        controller.lookAtCards(sourceObject.getLogName(), cards, game);
+                        controller.lookAtCards(sourceObject.getName(), cards, game);
                         return false;
                     } 
                     controller.setCastSourceIdWithoutMana(objectId);

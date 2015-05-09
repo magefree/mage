@@ -128,7 +128,7 @@ class RikuOfTwoReflectionsCopyEffect extends OneShotEffect {
             if (activateMessage.startsWith(" casts ")) {
                 activateMessage = activateMessage.substring(6);
             }
-            game.informPlayers(player.getName() + " copies " + activateMessage);
+            game.informPlayers(player.getLogName() + " copies " + activateMessage);
             return true;
         }
         return false;

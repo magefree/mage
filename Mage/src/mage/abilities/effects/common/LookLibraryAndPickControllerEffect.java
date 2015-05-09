@@ -142,7 +142,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                             } else {
                                 card.moveToZone(targetPickedCards, source.getSourceId(), game, false);
                                 if (!game.isSimulation())
-                                    game.informPlayers(player.getName() + " moves a card to " + targetPickedCards.toString().toLowerCase());
+                                    game.informPlayers(player.getLogName() + " moves a card to " + targetPickedCards.toString().toLowerCase());
                             }
                             if (revealPickedCards) {
                                 reveal.add(card);

@@ -130,7 +130,7 @@ class KavuPredatorEffect extends OneShotEffect {
                 permanent.addCounters(CounterType.P1P1.createInstance(gainedLife.intValue()), game);
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(gainedLife).append(" +1/+1 counter on ").append(permanent.getName()).toString());
+                    game.informPlayers(new StringBuilder(player.getLogName()).append(" puts ").append(gainedLife).append(" +1/+1 counter on ").append(permanent.getName()).toString());
                 }
             }
             return true;

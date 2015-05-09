@@ -104,7 +104,7 @@ class OrnateKanzashiEffect extends OneShotEffect {
                 Library library = opponent.getLibrary();
                 Card card = library.getFromTop(game);
                 if (card != null) {
-                    opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    opponent.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new OrnateKanzashiCastFromExileEffect(card.getId());
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

@@ -114,7 +114,7 @@ class DescendantsPathEffect extends OneShotEffect {
                         if (player.chooseUse(Outcome.Benefit, "Cast the card?", game)) {
                             player.cast(card.getSpellAbility(), game, true);
                         } else {
-                            game.informPlayers("DescendantsPath: " + player.getName() + " canceled casting the card.");
+                            game.informPlayers("DescendantsPath: " + player.getLogName() + " canceled casting the card.");
                             player.getLibrary().putOnBottom(card, game);
                         }
                     } else {

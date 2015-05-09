@@ -420,7 +420,7 @@ public abstract class MatchImpl implements Match {
         StringBuilder sb = new StringBuilder();
         sb.append("<br/><b>Match score:</b><br/>");
         for (MatchPlayer mp :this.getPlayers()) {
-            sb.append("   ").append(mp.getName());
+            sb.append("   ").append(mp.getPlayer().getLogName());
             sb.append(" - ").append(mp.getWins()).append(mp.getWins()==1?" win":" wins");
             if (mp.hasQuit()) {
                 sb.append(" QUITTED");

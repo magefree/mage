@@ -96,7 +96,7 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
             if (permanent.getName().isEmpty()) {
                 filter.add(new PermanentIdPredicate(permanent.getId()));  // if no name (face down creature) only the creature itself is selected
             } else {
-                filter.add(new NamePredicate(permanent.getLogName()));        
+                filter.add(new NamePredicate(permanent.getName()));        
             }
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 controller.moveCardToHandWithInfo(perm, source.getSourceId(), game, Zone.BATTLEFIELD);

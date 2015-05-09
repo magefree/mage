@@ -99,7 +99,7 @@ class RevivingVaporsEffect extends OneShotEffect {
         }
 
         if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getLogName(), cards, game);
+            controller.revealCards(sourceObject.getName(), cards, game);
             Card card = null;
             if (cards.size() == 1) {
                 card = cards.getRandom(game);

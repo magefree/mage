@@ -135,7 +135,7 @@ class ShriekingAfflictionTargetEffect extends OneShotEffect {
         if (player != null && player.getHand().size() < 2) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (sourcePermanent != null) {
-                game.informPlayers(sourcePermanent.getName() + ": " + player.getName() + " loses 3 life");
+                game.informPlayers(sourcePermanent.getName() + ": " + player.getLogName() + " loses 3 life");
             }
             player.loseLife(3, game);
             return true;

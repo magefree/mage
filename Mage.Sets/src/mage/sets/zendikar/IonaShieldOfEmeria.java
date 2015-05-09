@@ -105,7 +105,7 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect {
         if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.Detriment, colorChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
                 permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + colorChoice.getColor().getDescription()), game);
             }

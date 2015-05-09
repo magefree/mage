@@ -92,7 +92,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    choices.add(new StringBuilder(Integer.toString(player.getLife())).append(" life of ").append(player.getName()).toString());
+                    choices.add(new StringBuilder(Integer.toString(player.getLife())).append(" life of ").append(player.getLogName()).toString());
                 }
             }
             lifeChoice.setChoices(choices);
@@ -101,7 +101,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
                 if (player != null) {
                     String selectedChoice;
                     if (choices.size() > 1) {
-                        lifeChoice.setMessage("Which players life should get player " + player.getName());
+                        lifeChoice.setMessage("Which players life should get player " + player.getLogName());
                         controller.choose(Outcome.Detriment, lifeChoice, game);
                         selectedChoice = lifeChoice.getChoice();
                     } else {
@@ -113,7 +113,7 @@ class ReverseTheSandsEffect extends OneShotEffect {
                         int life = Integer.parseInt(lifeString);
                         player.setLife(life, game);
                         choices.remove(selectedChoice);
-                        game.informPlayers(new StringBuilder("Player ").append(player.getName()).append(" life set to ").append(life).toString());
+                        game.informPlayers(new StringBuilder("Player ").append(player.getLogName()).append(" life set to ").append(life).toString());
                     }
                 }
             }

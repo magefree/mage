@@ -98,7 +98,7 @@ class LobotomyEffect extends OneShotEffect {
         if (targetPlayer != null && sourceObject != null && controller != null) {
             
             // reveal hand of target player 
-            targetPlayer.revealCards(sourceObject.getLogName(), targetPlayer.getHand(), game);
+            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
             
             // You choose card other than a basic land card
             TargetCardInHand target = new TargetCardInHand(filter);

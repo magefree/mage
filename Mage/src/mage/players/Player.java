@@ -82,6 +82,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isHuman();
     String getName();
+    String getLogName();
     RangeOfInfluence getRange();
     Library getLibrary();
     Cards getSideboard();

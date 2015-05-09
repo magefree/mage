@@ -89,7 +89,7 @@ class FossilFindEffect extends OneShotEffect {
             Card card = player.getGraveyard().getRandom(game);
             if (card != null) {
                 card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                game.informPlayers(card.getName() + "returned to the hand of" + player.getName());
+                game.informPlayers(card.getName() + "returned to the hand of" + player.getLogName());
                 return true;
             }
         }

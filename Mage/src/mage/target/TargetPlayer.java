@@ -198,7 +198,7 @@ public class TargetPlayer extends TargetImpl {
         for (UUID targetId: getTargets()) {
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                sb.append(player.getName()).append(" ");
+                sb.append(player.getLogName()).append(" ");
             } else {
                 sb.append("[target missing]");
             }

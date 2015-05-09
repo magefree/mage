@@ -109,23 +109,23 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     boolean topOpponent = true;
                     // Reveal top cards of involved players
                     StringBuilder message = new StringBuilder("Clash: ");
-                    message.append(controller.getName());
+                    message.append(controller.getLogName());
                     if (controller.getLibrary().size() > 0) {                        
                         Cards cards = new CardsImpl();
                         cardController = controller.getLibrary().getFromTop(game);
                         cards.add(cardController);
-                        controller.revealCards("for clash by " + controller.getName(), cards, game);
+                        controller.revealCards("for clash by " + controller.getLogName(), cards, game);
                         cmcController = cardController.getManaCost().convertedManaCost();
                         message.append(" (").append(cmcController).append(")");
                     } else {
                         message.append(" no card");
                     }
-                    message.append(" vs. ").append(opponent.getName());
+                    message.append(" vs. ").append(opponent.getLogName());
                     if (opponent.getLibrary().size() > 0) {
                         Cards cards = new CardsImpl();
                         cardOpponent = opponent.getLibrary().getFromTop(game);
                         cards.add(cardOpponent);
-                        opponent.revealCards("for clash by " + opponent.getName(), cards, game);
+                        opponent.revealCards("for clash by " + opponent.getLogName(), cards, game);
                         cmcOpponent = cardOpponent.getManaCost().convertedManaCost();
                         message.append(" (").append(cmcOpponent).append(")");
                     } else {
@@ -134,11 +134,11 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
                     message.append(" - ");
                     if (!game.isSimulation()) {
                         if (cmcController > cmcOpponent) {
-                            message.append(controller.getName()).append(" won the clash");
+                            message.append(controller.getLogName()).append(" won the clash");
                             game.informPlayer(controller, "You won the clash!");
                         } else if (cmcController < cmcOpponent) {
-                            message.append(opponent.getName()).append(" won the clash");
-                            game.informPlayer(controller, opponent.getName() + " won the clash!");
+                            message.append(opponent.getLogName()).append(" won the clash");
+                            game.informPlayer(controller, opponent.getLogName() + " won the clash!");
                         } else {
                             message.append(" no winner ");
                         }                                       

@@ -24,7 +24,7 @@ import java.util.*;
 public class RateCard {
 
     private static Map<String, Integer> ratings;
-    private static Map<String, Integer> rated = new HashMap<String, Integer>();
+    private static final Map<String, Integer> rated = new HashMap<>();
     private static Integer min = Integer.MAX_VALUE, max = 0;
 
     /**
@@ -47,16 +47,17 @@ public class RateCard {
      * If allowedColors is null then the rating is retrieved from the cache
      *
      * @param card
+     * @param allowedColors
      * @return
      */
     public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors) {
         if (allowedColors == null && rated.containsKey(card.getName())) {
             return rated.get(card.getName());
         }
-        int type = 0;
+        int type;
         if (card.getCardType().contains(CardType.PLANESWALKER)) {
             type = 15;
-        } if (card.getCardType().contains(CardType.CREATURE)) {
+        } else if (card.getCardType().contains(CardType.CREATURE)) {
             type = 10;
         } else if (card.getSubtype().contains("Equipment")) {
             type = 8;

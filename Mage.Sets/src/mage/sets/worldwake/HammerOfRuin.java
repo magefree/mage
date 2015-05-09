@@ -104,7 +104,7 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
                 FilterPermanent filter = new FilterPermanent("Equipment that player controls");
                 filter.add(new SubtypePredicate("Equipment"));
                 filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getName());
+                filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getLogName());
 
                 this.getTargets().clear();
                 this.addTarget(new TargetPermanent(filter));

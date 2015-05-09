@@ -114,10 +114,10 @@ class QuarryColossusReturnLibraryEffect extends OneShotEffect {
                 }
                 // return cards back to library
                 permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                game.informPlayers(new StringBuilder(controller.getName())
+                game.informPlayers(new StringBuilder(controller.getLogName())
                         .append(" puts ").append(permanent.getName())
                         .append(" beneath the top ").append(xValue)
-                        .append(" cards of ").append(owner.getName()).append("'s library").toString());
+                        .append(" cards of ").append(owner.getLogName()).append("'s library").toString());
                 while(!cardIds.isEmpty()) {
                     UUID cardId = cardIds.poll();
                     Card card = cards.get(cardId, game);

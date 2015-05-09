@@ -117,7 +117,7 @@ class SuturedGhoulEffect extends OneShotEffect {
                 }
 
                 String msg = count == 1 ? "1 card" : count + "cards";
-                game.informPlayers("Sutured Ghoul: " + player.getName() + " exiled " + msg);
+                game.informPlayers("Sutured Ghoul: " + player.getLogName() + " exiled " + msg);
             }
 
         } else {

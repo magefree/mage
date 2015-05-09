@@ -51,12 +51,12 @@ public class NamePredicate implements Predicate<MageObject> {
         // If a player names a card, the player may name either half of a split card, but not both. 
         // A split card has the chosen name if one of its two names matches the chosen name.
         if (input instanceof SplitCard) {
-            return name.equals(((SplitCard)input).getLeftHalfCard().getName()) || name.equals(((SplitCard)input).getRightHalfCard().getLogName());
+            return name.equals(((SplitCard)input).getLeftHalfCard().getName()) || name.equals(((SplitCard)input).getRightHalfCard().getName());
         } else if (input instanceof Spell && ((Spell)input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)){
             SplitCard card = (SplitCard) ((Spell)input).getCard();
-            return name.equals(card.getLeftHalfCard().getName()) || name.equals(card.getRightHalfCard().getLogName());
+            return name.equals(card.getLeftHalfCard().getName()) || name.equals(card.getRightHalfCard().getName());
         } else {
-            return name.equals(input.getLogName());
+            return name.equals(input.getName());
         }
     }
 

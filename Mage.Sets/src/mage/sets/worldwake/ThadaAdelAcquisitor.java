@@ -108,7 +108,7 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
             if (target.getTargets().size() > 0) {
                 Card card = damagedPlayer.getLibrary().remove(target.getFirstTarget(), game);
                 if (card != null) {
-                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new ThadaAdelPlayFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

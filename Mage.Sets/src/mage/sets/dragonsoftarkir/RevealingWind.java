@@ -112,7 +112,7 @@ class RevealingWindEffect extends OneShotEffect {
                         Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards(sourceObject.getName(), cards, game);
-                        game.informPlayers(controller.getName() + " look at a face-down attacking creature");
+                        game.informPlayers(controller.getLogName() + " look at a face-down attacking creature");
                     }
                 }
             }

@@ -126,7 +126,7 @@ class AngelicSkirmisherEffect extends OneShotEffect {
                 game.addEffect(effect, source);
                 game.informPlayers(new StringBuilder(sourcePermanent.getName())
                         .append(": ")
-                        .append(controller.getName())
+                        .append(controller.getLogName())
                         .append(" has chosen ")
                         .append(abilityChoice.getChoice().toLowerCase()).toString());
                 return true;

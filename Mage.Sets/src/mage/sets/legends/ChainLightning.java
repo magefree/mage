@@ -114,7 +114,7 @@ class ChainLightningEffect extends OneShotEffect {
                             copy.setCopiedSpell(true);
                             game.getStack().push(copy);
                             copy.chooseNewTargets(game, affectedPlayer.getId());
-                            game.informPlayers(affectedPlayer.getName() + " copies " + copy.getName() + ".");
+                            game.informPlayers(affectedPlayer.getLogName() + " copies " + copy.getName() + ".");
                         }
                     }
                 }

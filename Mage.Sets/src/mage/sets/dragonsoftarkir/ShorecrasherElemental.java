@@ -109,7 +109,7 @@ class ShorecrasherElementalEffect extends OneShotEffect {
         if (shorecrasherElemental != null &&
                 sourceObject != null &&
                 new MageObjectReference(sourceObject, game).refersTo(shorecrasherElemental, game)) {
-            if (shorecrasherElemental.moveToExile(source.getSourceId(), sourceObject.getLogName(), source.getSourceId(), game)) {
+            if (shorecrasherElemental.moveToExile(source.getSourceId(), sourceObject.getName(), source.getSourceId(), game)) {
                 Card card = game.getExile().getCard(source.getSourceId(), game);
                 if (card != null) {
                     game.addEffect(new BecomesFaceDownCreatureEffect(Duration.Custom, FaceDownType.MEGAMORPHED), source);

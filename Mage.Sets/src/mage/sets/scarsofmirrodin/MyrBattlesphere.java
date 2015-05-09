@@ -130,7 +130,7 @@ class MyrBattlesphereEffect extends OneShotEffect {
                 }
             }
             if (tappedAmount > 0) {
-                game.informPlayers(new StringBuilder(controller.getName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(" taps ").append(tappedAmount).append(" Myrs").toString());
                 // boost effect
                 game.addEffect(new BoostSourceEffect(tappedAmount, 0, Duration.EndOfTurn), source);
                 // damage to defender

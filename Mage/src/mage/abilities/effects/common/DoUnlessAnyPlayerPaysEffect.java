@@ -85,7 +85,7 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             } else {
                 message = chooseUseText;
             }
-            message = CardUtil.replaceSourceName(message, sourceObject.getLogName());
+            message = CardUtil.replaceSourceName(message, sourceObject.getName());
             boolean result = true;
             boolean doEffect = true;
             // check if any player is willing to pay
@@ -95,7 +95,7 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                         if (!game.isSimulation())
-                            game.informPlayers(player.getName() + " pays the cost to prevent the effect");
+                            game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                         doEffect = false;
                         break;
                     }

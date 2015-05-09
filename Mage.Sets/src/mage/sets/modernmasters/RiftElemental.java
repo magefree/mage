@@ -180,7 +180,7 @@ class RemoveCounterFromCardCost extends CostImpl {
                                 card.getCounters(game).removeCounter(counterName);
                             }
                             this.paid = true;
-                            game.informPlayers(new StringBuilder(controller.getName()).append(" removes a ").append(counterName).append(" counter from ").append(card.getName()).toString());
+                            game.informPlayers(new StringBuilder(controller.getLogName()).append(" removes a ").append(counterName).append(" counter from ").append(card.getName()).toString());
                         }
                     }
                 }

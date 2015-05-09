@@ -137,7 +137,7 @@ class ButcherOfTheHordeEffect extends OneShotEffect {
             }
 
             if (ability != null) {
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getName() + " has chosen: " + chosen);
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen: " + chosen);
                 ContinuousEffect effect = new GainAbilitySourceEffect(ability, Duration.EndOfTurn);
                 game.addEffect(effect, source);
                 return true;

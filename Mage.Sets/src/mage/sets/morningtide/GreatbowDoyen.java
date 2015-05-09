@@ -154,7 +154,7 @@ class GreatbowDoyenEffect extends OneShotEffect {
                 Player player = game.getPlayer(controllerId);
                 if (player != null) {
                     player.damage(damageAmount, sourceOfDamage, game, false, true);
-                    game.informPlayers(new StringBuilder(permanent.getName()).append(" deals ").append(damageAmount).append(" damage to ").append(player.getName()).toString());
+                    game.informPlayers(new StringBuilder(permanent.getName()).append(" deals ").append(damageAmount).append(" damage to ").append(player.getLogName()).toString());
                     return true;
                 }
             }

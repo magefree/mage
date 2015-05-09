@@ -235,7 +235,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
                 cardsToHand = pile1;
                 cardsToLibrary = cards;
             }
-            game.informPlayers(player.getName() +" chose pile" + (pileChoice?"1":"2"));
+            game.informPlayers(player.getLogName() +" chose pile" + (pileChoice?"1":"2"));
 
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
@@ -300,7 +300,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         }
         for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
-            String playerName = new StringBuilder(player.getName()).append("'s").toString();
+            String playerName = new StringBuilder(player.getLogName()).append("'s").toString();
             if (source.getControllerId().equals(player.getId())) {
                 playerName = "your";
             }

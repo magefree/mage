@@ -229,7 +229,7 @@ public class TargetCreatureOrPlayer extends TargetImpl {
             else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getName()).append(" ");
+                    sb.append(player.getLogName()).append(" ");
                 }
             }
         }

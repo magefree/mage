@@ -111,7 +111,7 @@ class ImpromptuRaidEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             if (card != null) {
                 cards.add(card);
-                controller.revealCards(sourceObject.getLogName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 if (filterPutInGraveyard.match(card, source.getSourceId(), source.getControllerId(), game)) {
                     controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     return true;

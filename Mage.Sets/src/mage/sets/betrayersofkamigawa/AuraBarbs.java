@@ -88,7 +88,7 @@ public class AuraBarbs extends CardImpl {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
                     controller.damage(2, permanent.getId(), game, false, true);
-                    game.informPlayers("2 damage assigned to " + controller.getName() + " from " + permanent.getName());
+                    game.informPlayers("2 damage assigned to " + controller.getLogName() + " from " + permanent.getName());
                 }
             }
 

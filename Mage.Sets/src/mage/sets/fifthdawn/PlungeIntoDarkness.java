@@ -168,7 +168,7 @@ class PlungeIntoDarknessSearchEffect extends OneShotEffect {
                 if (card != null) {
                     cards.remove(card);
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                    game.informPlayers("Plunge into Darkness: " + player.getName() + " puts a card into his or her hand");
+                    game.informPlayers("Plunge into Darkness: " + player.getLogName() + " puts a card into his or her hand");
                 }
             }
             for (UUID cardId : cards) {

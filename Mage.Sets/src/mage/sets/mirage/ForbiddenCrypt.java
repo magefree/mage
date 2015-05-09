@@ -112,7 +112,7 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
                 }
             }
             if (!cardReturned) {
-                game.informPlayers(new StringBuilder(player.getName()).append(" can't return a card from graveyard to hand.").toString());
+                game.informPlayers(new StringBuilder(player.getLogName()).append(" can't return a card from graveyard to hand.").toString());
                 player.lost(game);
             }
             return true;

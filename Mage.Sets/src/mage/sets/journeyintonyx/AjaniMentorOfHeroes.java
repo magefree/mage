@@ -128,7 +128,7 @@ class AjaniMentorOfHeroesAddCountersEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target);
                 if (permanent != null) {
                     permanent.addCounters(CounterType.P1P1.createInstance(multiTarget.getTargetAmount(target)), game);
-                    game.informPlayers(new StringBuilder(controller.getName()).append(" puts ").append(multiTarget.getTargetAmount(target)).append(" ").append(CounterType.P1P1.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
+                    game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(multiTarget.getTargetAmount(target)).append(" ").append(CounterType.P1P1.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
                 }
             }
             return true;

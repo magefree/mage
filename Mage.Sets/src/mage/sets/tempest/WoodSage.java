@@ -116,7 +116,7 @@ class WoodSageEffect extends OneShotEffect {
             cards.addAll(controller.getLibrary().getTopCards(game, 4));
 
             if (!cards.isEmpty()) {
-                controller.revealCards(sourceObject.getLogName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 for (Card card: cards.getCards(game)) {
                     if (card.getName().equals(cardName)) {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, true);

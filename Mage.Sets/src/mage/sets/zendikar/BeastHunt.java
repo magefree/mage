@@ -103,7 +103,7 @@ class BeastHuntEffect extends OneShotEffect {
         }
 
         if (!cards.isEmpty()) {
-            controller.revealCards(sourceObject.getLogName(), cards, game);
+            controller.revealCards(sourceObject.getName(), cards, game);
         }
 
         return true;

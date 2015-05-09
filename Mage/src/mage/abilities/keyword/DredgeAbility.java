@@ -100,7 +100,7 @@ class DredgeEffect extends ReplacementEffectImpl {
                 && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getName()).
                 append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(player.getName()).append(" dreges ").append(sourceCard.getName()).toString());
+                game.informPlayers(new StringBuilder(player.getLogName()).append(" dreges ").append(sourceCard.getName()).toString());
             }
             Cards cardsToGrave = new CardsImpl();
             cardsToGrave.addAll(player.getLibrary().getTopCards(game, amount));

@@ -111,7 +111,7 @@ class GuildFeudEffect extends OneShotEffect {
                         }
                     }
                 }
-                player.revealCards(player.getName() + " top three library cards", topThreeCards, game);
+                player.revealCards(player.getLogName() + " top three library cards", topThreeCards, game);
                 Card creatureToBattlefield;
                 if (!topThreeCards.isEmpty()) {
                     if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", game)) {
@@ -124,7 +124,7 @@ class GuildFeudEffect extends OneShotEffect {
                                 topThreeCards.remove(creatureToBattlefield);
                                 if (creatureToBattlefield.putOntoBattlefield(game, Zone.PICK,
                                         source.getSourceId(), player.getId())) {
-                                    game.informPlayers("Guild Feud: " + player.getName() + " put " + creatureToBattlefield.getName() + " to the battlefield");
+                                    game.informPlayers("Guild Feud: " + player.getLogName() + " put " + creatureToBattlefield.getName() + " to the battlefield");
                                     if (activePlayer == 0) {
                                         opponentCreature = game.getPermanent(creatureToBattlefield.getId());
                                     } else {

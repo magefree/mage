@@ -143,7 +143,7 @@ public class TournamentController {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
             }
         }
         checkStart();
@@ -173,7 +173,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setJoined();
             logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
-            ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
+            ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
             checkStart();
         } else {
             logger.error("User not found  userId: " + userId  + "   tournamentId: " + tournament.getId());
@@ -296,7 +296,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK, true, MessageType.STATUS,  SoundToPlay.PlayerSubmittedDeck);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted his tournament deck", MessageColor.BLACK, true, MessageType.STATUS,  SoundToPlay.PlayerSubmittedDeck);
             }            
         }
     }
@@ -380,7 +380,7 @@ public class TournamentController {
             tournamentPlayer.setQuit(info);
             tournament.quit(playerId);
             tournamentSession.quit();
-            ChatManager.getInstance().broadcast(chatId, "", tournamentPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
+            ChatManager.getInstance().broadcast(chatId, "", tournamentPlayer.getPlayer().getLogName() + " has quit the tournament", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerQuitTournament);
         }
     }
 
@@ -407,7 +407,7 @@ public class TournamentController {
                     user.removeTable(leavingPlayer.getPlayer().getId());
                     user.removeTournament(leavingPlayer.getPlayer().getId());
                 }
-                ChatManager.getInstance().broadcast(chatId, "", leavingPlayer.getPlayer().getName() + " was replaced by draftbot", MessageColor.BLACK, true, MessageType.STATUS);
+                ChatManager.getInstance().broadcast(chatId, "", leavingPlayer.getPlayer().getLogName() + " was replaced by draftbot", MessageColor.BLACK, true, MessageType.STATUS);
             }
             return true;
         }

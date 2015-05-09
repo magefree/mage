@@ -174,7 +174,7 @@ public class TargetDefender extends TargetImpl {
             }
             else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getName()).append(" ");
+                sb.append(player.getLogName()).append(" ");
             }
         }
         return sb.toString();

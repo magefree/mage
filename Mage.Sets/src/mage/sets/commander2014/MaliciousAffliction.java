@@ -122,7 +122,7 @@ class CopySourceSpellEffect extends OneShotEffect {
                 if (activateMessage.startsWith(" casts ")) {
                     activateMessage = activateMessage.substring(6);
                 }
-                game.informPlayers(controller.getName() + " copies " + activateMessage);
+                game.informPlayers(controller.getLogName() + " copies " + activateMessage);
                 return true;
             }
         }

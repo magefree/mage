@@ -106,7 +106,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect {
             }
             game.getState().setValue(permanent.getId() + "_color2", colorChoice.getColor().toString());
             colors = colors + colorChoice.getChoice().toLowerCase();
-            game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colors);
+            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colors);
         }
         return false;
     }

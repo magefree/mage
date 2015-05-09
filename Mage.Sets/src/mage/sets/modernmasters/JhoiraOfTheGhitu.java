@@ -125,7 +125,7 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect {
                 if (!hasSuspend) {
                     game.addEffect(new GainSuspendEffect(new MageObjectReference(card, game)), source);
                 }
-                game.informPlayers(controller.getName() + " suspends 4 - " + card.getName());
+                game.informPlayers(controller.getLogName() + " suspends 4 - " + card.getName());
                 return true;
             }
         }

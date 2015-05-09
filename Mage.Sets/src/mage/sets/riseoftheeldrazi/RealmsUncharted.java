@@ -108,7 +108,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
                         cards.add(card);
                     }
                 }
-                controller.revealCards(sourceObject.getLogName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
 
                 CardsImpl cardsToKeep = new CardsImpl();
                 if (cards.size() > 2) {

@@ -125,7 +125,7 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards(sourceObject.getLogName(), cards, game);
+                player.revealCards(sourceObject.getName(), cards, game);
                 if (creatureCardsFound > 0 && player.chooseUse(outcome, "Put creature(s) into play?", game)) {
                     int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound); 
                     TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);

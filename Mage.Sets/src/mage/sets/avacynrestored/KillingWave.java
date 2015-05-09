@@ -108,10 +108,10 @@ class KillingWaveEffect extends OneShotEffect {
                 for (Permanent creature : creatures) {
                     String message = "Pay " + amount + " life? If you don't, " + creature.getName() + " will be sacrificed.";
                     if (playerLife - amount - lifePaid >= 0 && player != null && player.chooseUse(Outcome.Neutral, message, game)) {
-                        game.informPlayers(player.getName() + " pays " + amount + " life. He will not sacrifice " + creature.getName());
+                        game.informPlayers(player.getLogName() + " pays " + amount + " life. He will not sacrifice " + creature.getName());
                         lifePaid += amount;
                     } else {
-                        game.informPlayers(player.getName() + " will sacrifice " + creature.getName());
+                        game.informPlayers(player.getLogName() + " will sacrifice " + creature.getName());
                         sacrifices.add(creature);
                     }
                 }

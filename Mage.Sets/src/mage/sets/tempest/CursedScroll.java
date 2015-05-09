@@ -99,7 +99,7 @@ class CursedScrollEffect extends OneShotEffect {
                 Cards revealed = new CardsImpl();
                 Card card = you.getHand().getRandom(game);
                 revealed.add(card);
-                you.revealCards(sourceObject.getLogName(), revealed, game);
+                you.revealCards(sourceObject.getName(), revealed, game);
                 if (card.getName().equals(cardName)) {
                     Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
                     if (creature != null) {

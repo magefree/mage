@@ -39,7 +39,7 @@ public class FlipSourceEffect extends OneShotEffect {
                 ContinuousEffect effect = new ConditionalContinuousEffect(new CopyTokenEffect(flipToken), FlippedCondition.getInstance(), "");
                 game.addEffect(effect, source);
                 if (!game.isSimulation())
-                    game.informPlayers(new StringBuilder(controller.getName()).append(" flips ").append(permanent.getName()).toString());
+                    game.informPlayers(new StringBuilder(controller.getLogName()).append(" flips ").append(permanent.getName()).toString());
                 return true;
             }
         }

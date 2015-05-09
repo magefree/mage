@@ -140,7 +140,7 @@ class GoblinRecruiterEffect extends OneShotEffect {
                 }
             }
 
-            game.informPlayers(new StringBuilder(player.getName()).append(" puts ")
+            game.informPlayers(new StringBuilder(player.getLogName()).append(" puts ")
                     .append(numberOfGoblins).append(" Goblin").append(numberOfGoblins == 1 ? " card" : " cards")
                     .append(" on top of his library").toString());
 

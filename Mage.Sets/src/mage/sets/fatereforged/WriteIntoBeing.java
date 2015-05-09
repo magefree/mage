@@ -92,7 +92,7 @@ class WriteIntoBeingEffect extends OneShotEffect {
         if (sourceObject != null && controller != null) {
             Cards cards = new CardsImpl();
             cards.addAll(controller.getLibrary().getTopCards(game, 2));
-            controller.lookAtCards(sourceObject.getLogName(), cards, game);
+            controller.lookAtCards(sourceObject.getName(), cards, game);
             Card cardToManifest = null;
             if (cards.size() > 1) {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to manifest"));
@@ -116,7 +116,7 @@ class WriteIntoBeingEffect extends OneShotEffect {
                     cardToPutBack.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     position = "on bottom";
                 }
-                game.informPlayers(sourceObject.getLogName() + ": " + controller.getName() + " puts the other card " + position + " of his or her library");
+                game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " puts the other card " + position + " of his or her library");
             }
             return true;
         }

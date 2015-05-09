@@ -67,7 +67,7 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
             if (card != null) {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
-                player.lookAtCards(sourceObject.getLogName(), cards, game);
+                player.lookAtCards(sourceObject.getName(), cards, game);
             }
             return true;
         }

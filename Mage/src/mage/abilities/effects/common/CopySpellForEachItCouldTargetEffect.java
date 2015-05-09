@@ -465,7 +465,7 @@ class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    sb.append(player.getName()).append(" ");
+                    sb.append(player.getLogName()).append(" ");
                 }
             }
         }

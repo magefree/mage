@@ -100,7 +100,7 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
-            game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getName() + " skipped");
+            game.informPlayers(sourceObject.getLogName() + ": Extra turn of " + player.getLogName() + " skipped");
         }
         return true;
     }

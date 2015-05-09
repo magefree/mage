@@ -89,7 +89,7 @@ public class SoulbondWatcher extends Watcher {
                                         chosen.setPairedCard(permanent.getId());
                                         permanent.setPairedCard(chosen.getId());
                                         if (!game.isSimulation())
-                                            game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
+                                            game.informPlayers(new StringBuilder(controller.getLogName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
                                     }
                                 }
                             }
@@ -114,7 +114,7 @@ public class SoulbondWatcher extends Watcher {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
                                     if (!game.isSimulation())
-                                        game.informPlayers(new StringBuilder(controller.getName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
+                                        game.informPlayers(new StringBuilder(controller.getLogName()).append(" souldbonds ").append(permanent.getLogName()).append(" with ").append(chosen.getName()).toString());
                                     break;
                                 }
                             }

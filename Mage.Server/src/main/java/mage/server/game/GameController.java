@@ -336,8 +336,8 @@ public class GameController implements GameCallback {
             joinType = "rejoined";
         }
         user.addGame(playerId, gameSession);
-        logger.debug("Player " + player.getName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
-        ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
+        logger.debug("Player " + player.getLogName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
+        ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }
 
@@ -361,19 +361,19 @@ public class GameController implements GameCallback {
                                 // join the game because player has not joined are was removed because of disconnect
                                 user.removeConstructing(player.getId());
                                 GameManager.getInstance().joinGame(game.getId(), user.getId());
-                                logger.debug("Player " + user.getName() + " (disconnected) has joined gameId: " +game.getId());
+                                logger.debug("Player " + player.getLogName() + " (disconnected) has joined gameId: " +game.getId());
                         }
                         ChatManager.getInstance().broadcast(chatId, player.getName(), user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
                         if (user.getSecondsDisconnected() > 240) {
                             // Cancel player join possibility lately after 4 minutes
-                            logger.debug("Player " + user.getName() + " - canceled game (after 240 seconds) gameId: " +game.getId());
+                            logger.debug("Player " + player.getLogName() + " - canceled game (after 240 seconds) gameId: " +game.getId());
                             player.leave();
                         }
 
                     }
                 } else {
                     if (!player.hasLeft()) {
-                        logger.debug("Player " + player.getName() + " canceled game (no user) gameId: " + game.getId());
+                        logger.debug("Player " + player.getLogName() + " canceled game (no user) gameId: " + game.getId());
                         player.leave();
                     }
                 }
@@ -581,7 +581,7 @@ public class GameController implements GameCallback {
     public void idleTimeout(UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            String sb = player.getName() +
+            String sb = player.getLogName() +
                     " has timed out (player had priority and was not active for " +
                     ConfigSettings.getInstance().getMaxSecondsIdle() + " seconds ) - Auto concede.";
             ChatManager.getInstance().broadcast(chatId, "", sb, MessageColor.BLACK, true, MessageType.STATUS);
@@ -800,7 +800,7 @@ public class GameController implements GameCallback {
         if (game.getStep() != null) {
             message.append(game.getStep().getType().toString()).append(" - ");
         }
-        message.append("Waiting for ").append(game.getPlayer(playerId).getName());
+        message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
             if (!entry.getKey().equals(playerId)) {
                 entry.getValue().inform(message.toString());

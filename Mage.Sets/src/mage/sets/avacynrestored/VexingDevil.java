@@ -90,14 +90,14 @@ class VexingDevilEffect extends OneShotEffect {
         if (controller != null && permanent != null) {
             for (UUID opponentUuid : game.getOpponents(source.getControllerId())) {
                 Player opponent = game.getPlayer(opponentUuid);
-                if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getName() + " deal 4 damage to you?", game)) {
-                    game.informPlayers(opponent.getName() + " has chosen to receive 4 damage from " + permanent.getName());
+                if (opponent != null && opponent.chooseUse(Outcome.LoseLife, "Make " + permanent.getLogName() + " deal 4 damage to you?", game)) {
+                    game.informPlayers(opponent.getLogName() + " has chosen to receive 4 damage from " + permanent.getLogName());
                     opponent.damage(4, permanent.getId(), game, false, true);
                     permanent.sacrifice(source.getSourceId(), game);
                     return true;
                 }
             }
-            game.informPlayers("4 damage wasn't dealt so " + permanent.getName() + " won't be sacrificed.");
+            game.informPlayers("4 damage wasn't dealt so " + permanent.getLogName() + " won't be sacrificed.");
             return true;
         }
         return false;

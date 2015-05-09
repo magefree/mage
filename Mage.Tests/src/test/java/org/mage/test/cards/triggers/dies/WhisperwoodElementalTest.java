@@ -66,7 +66,7 @@ public class WhisperwoodElementalTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
 
         // Manifested creature from dying Silvercoat Lion
-        assertPermanentCount(playerA, "face down creature", 1);
+        assertPermanentCount(playerA, "", 1);
     }
 
 }

@@ -107,7 +107,7 @@ class DarigaazTheIgniterEffect extends OneShotEffect {
             }
             
             if (choice.getColor() != null) {
-                game.informPlayers(controller.getName() + " chooses " + choice.getColor());
+                game.informPlayers(controller.getLogName() + " chooses " + choice.getColor());
                 Player damagedPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                 if (damagedPlayer != null) {
                     damagedPlayer.revealCards("hand of " + damagedPlayer.getName(), damagedPlayer.getHand(), game);

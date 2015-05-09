@@ -149,7 +149,7 @@ class RemoveCounterTargetEffect extends OneShotEffect {
                             permanent.getCounters().removeCounter(counterName);
                         }
                         result |= true;
-                        game.informPlayers(new StringBuilder(controller.getName()).append(" removes a ").append(counterName).append(" counter from ").append(permanent.getName()).toString());
+                        game.informPlayers(new StringBuilder(controller.getLogName()).append(" removes a ").append(counterName).append(" counter from ").append(permanent.getName()).toString());
                     }
                 }
             }

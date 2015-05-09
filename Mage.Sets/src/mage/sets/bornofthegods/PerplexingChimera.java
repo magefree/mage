@@ -179,7 +179,7 @@ class PerplexingChimeraControlExchangeEffect extends OneShotEffect {
             spell.setControllerId(controller.getId());
             // and chooses new targets
             spell.chooseNewTargets(game, controller.getId());
-            game.informPlayers(new StringBuilder(controller.getName()).append(" got control of ").append(spell.getName()).append(" spell.").toString());
+            game.informPlayers(new StringBuilder(controller.getLogName()).append(" got control of ").append(spell.getName()).append(" spell.").toString());
             // and spell controller get control of Perplexing Chimera
             if (spellCaster != null) {
                 ContinuousEffect effect = new PerplexingChimeraControlEffect();

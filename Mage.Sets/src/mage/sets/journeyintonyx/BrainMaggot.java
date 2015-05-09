@@ -111,7 +111,7 @@ class BrainMaggotExileEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && opponent != null && sourcePermanent != null) {
             if (!opponent.getHand().isEmpty()) {
-                opponent.revealCards(sourcePermanent.getLogName(), opponent.getHand(), game);
+                opponent.revealCards(sourcePermanent.getName(), opponent.getHand(), game);
 
                 FilterCard filter = new FilterNonlandCard("nonland card to exile");
                 TargetCard target = new TargetCard(Zone.HAND, filter);

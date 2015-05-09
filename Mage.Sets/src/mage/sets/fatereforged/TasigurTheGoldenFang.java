@@ -114,7 +114,7 @@ class TasigurTheGoldenFangEffect extends OneShotEffect {
             if (opponentId != null) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    FilterNonlandCard filter = new FilterNonlandCard("nonland card from " + controller.getName() + " graveyard");
+                    FilterNonlandCard filter = new FilterNonlandCard("nonland card from " + controller.getLogName() + " graveyard");
                     filter.add(new OwnerIdPredicate(controller.getId()));
                     Target target = new TargetCardInGraveyard(filter);
                     opponent.chooseTarget(outcome, target, source, game);

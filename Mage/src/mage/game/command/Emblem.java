@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.util.GameLog;
 
 /**
  * @author nantuko
@@ -100,7 +101,7 @@ public class Emblem implements CommandObject {
 
     @Override
     public String getLogName() {
-        return name;
+        return GameLog.getColoredObjectName(this);
     }
 
     @Override

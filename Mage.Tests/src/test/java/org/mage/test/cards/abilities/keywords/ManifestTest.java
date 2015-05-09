@@ -66,10 +66,10 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
         // not tapped
-        assertTapped("face down creature", false);
+        assertTapped("", false);
     }
 
     /**
@@ -97,8 +97,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
         // PlayerB's Silvercoat Lion should not have get -1/-1/
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
@@ -132,8 +132,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion" , 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
         // PlayerA's Pillarfield Ox should not have get -1/-1/
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPowerToughness(playerB, "Pillarfield Ox", 2, 4);
@@ -166,8 +166,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion" , 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
 
     }
     
@@ -202,8 +202,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion" , 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 1);
-        assertPowerToughness(playerA, "face down creature", 2, 2);
+        assertPermanentCount(playerA, "", 1);
+        assertPowerToughness(playerA, "", 2, 2);
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }    
@@ -220,7 +220,7 @@ public class ManifestTest extends CardTestPlayerBase {
         // Strive — Silence the Believers costs more to cast for each target beyond the first.
         // Exile any number of target creatures and all Auras attached to them.
         addCard(Zone.HAND, playerB, "Silence the Believers");
-        addTarget(playerB, "face down creature");
+        addTarget(playerB, "");
         // Gore Swine {2}{R}
         // 4/1
         addCard(Zone.LIBRARY, playerA, "Gore Swine");
@@ -231,7 +231,7 @@ public class ManifestTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Silence the Believers", "face down creature");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Silence the Believers", "");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -243,7 +243,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertExileCount("Silvercoat Lion" , 1);
         assertExileCount("Gore Swine" , 1);
         // no facedown creature is on the battlefield
-        assertPermanentCount(playerA, "face down creature", 0);
+        assertPermanentCount(playerA, "", 0);
         
         for (Card card :currentGame.getExile().getAllCards(currentGame)){
             if (card.getName().equals("Gore Swine")) {
@@ -284,7 +284,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
 
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerB, "face down creature", 1);
+        assertPermanentCount(playerB, "", 1);
 
     }
 
@@ -319,7 +319,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, "face down creature", 0);
+        assertPermanentCount(playerB, "", 0);
         assertPermanentCount(playerB, "Sandstorm Charger", 1);
         assertPowerToughness(playerB, "Sandstorm Charger", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
 
@@ -359,7 +359,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, "face down creature", 1);
+        assertPermanentCount(playerB, "", 1);
 
     }    
 }

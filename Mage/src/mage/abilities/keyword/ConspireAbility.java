@@ -246,7 +246,7 @@ class ConspireEffect extends OneShotEffect {
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, source.getControllerId());
                     if (!game.isSimulation())
-                        game.informPlayers(new StringBuilder(controller.getName()).append(copy.getActivatedMessage(game)).toString());
+                        game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
                     return true;
                 }
             }

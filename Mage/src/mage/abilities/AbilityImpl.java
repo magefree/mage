@@ -74,6 +74,7 @@ import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
+import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
@@ -396,7 +397,7 @@ public abstract class AbilityImpl implements Ability {
             }
             if (variableManaCost != null) {
                 int xValue = getManaCostsToPay().getX();
-                game.informPlayers(new StringBuilder(controller.getName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(" announces a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
             }
         }
         activated = true;
@@ -483,7 +484,7 @@ public abstract class AbilityImpl implements Ability {
                 // set the xcosts to paid
                 variableCost.setAmount(xValue);
                 ((Cost) variableCost).setPaid();
-                String message = new StringBuilder(controller.getName())
+                String message = new StringBuilder(controller.getLogName())
                         .append(" announces a value of ").append(xValue).append(" (").append(variableCost.getActionText()).append(")").toString();
                 if (announceString == null) {
                     announceString = message;
@@ -997,9 +998,9 @@ public abstract class AbilityImpl implements Ability {
             if (object instanceof StackAbility) {
                 Card card = game.getCard(((StackAbility) object).getSourceId());
                 if (card != null) {
-                    sb.append(card.getLogName());
+                    sb.append(GameLog.getColoredObjectName(card));
                 } else {
-                    sb.append(object.getName());
+                    sb.append(GameLog.getColoredObjectName(object));
                 }
             } else {
                 if (object instanceof Spell) {
@@ -1011,7 +1012,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     sb.append(getOptionalTextSuffix(game, spell));
                 } else {
-                    sb.append(object.getLogName());
+                    sb.append(GameLog.getColoredObjectName(object));
                 }
             }
         } else {
@@ -1074,7 +1075,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     protected String getTargetDescriptionForLog(Targets targets, Game game) {
-        StringBuilder sb = threadLocalBuilder.get();
+        StringBuilder sb = new StringBuilder(); // threadLocal StringBuilder can't be used because calling method already uses it
         if (targets.size() > 0) {
             String usedVerb = null;
             for (Target target : targets) {
@@ -1099,7 +1100,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     private String getOptionalTextSuffix(Game game, Spell spell) {
-        StringBuilder sb = threadLocalBuilder.get();
+        StringBuilder sb = new StringBuilder();
         for (Ability ability : spell.getAbilities()) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());

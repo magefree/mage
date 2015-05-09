@@ -59,7 +59,6 @@ public class AshlingThePilgrim extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -93,7 +92,7 @@ class AshlingThePilgrimEffect extends OneShotEffect {
     }
 
     public AshlingThePilgrimEffect(final AshlingThePilgrimEffect effect) {
-        super(effect);
+        super(effect);        
     }
 
     @Override

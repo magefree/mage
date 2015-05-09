@@ -538,7 +538,7 @@ public abstract class GameImpl implements Game, Serializable {
         if (winnerId == null) {
             return "Game is a draw";
         }
-        return new StringBuilder("Player ").append(state.getPlayer(winnerId).getName()).append(" is the winner").toString();
+        return "Player "+ state.getPlayer(winnerId).getName() + " is the winner";
     }
 
     @Override
@@ -699,7 +699,7 @@ public abstract class GameImpl implements Game, Serializable {
                     state.setExtraTurn(true);
                     state.setTurnId(extraTurn.getId());
                     if (!this.isSimulation()) {
-                        informPlayers(extraPlayer.getName() + " takes an extra turn");
+                        informPlayers(extraPlayer.getLogName() + " takes an extra turn");
                     }
                     playTurn(extraPlayer);
                     state.setTurnNum(state.getTurnNum() + 1);
@@ -747,7 +747,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     private void logStartOfTurn(Player player) {
         StringBuilder sb = new StringBuilder("Turn ").append(state.getTurnNum()).append(" ");
-        sb.append(player.getName());
+        sb.append(player.getLogName());
         sb.append(" (");
         int delimiter = this.getPlayers().size() - 1;
         for (Player gamePlayer : this.getPlayers().values()) {
@@ -817,11 +817,11 @@ public abstract class GameImpl implements Game, Serializable {
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = targetPlayer.getTargets().get(0);
             Player startingPlayer = state.getPlayer(startingPlayerId);
-            StringBuilder message = new StringBuilder(choosingPlayer.getName()).append(" chooses that ");
+            StringBuilder message = new StringBuilder(choosingPlayer.getLogName()).append(" chooses that ");
             if (choosingPlayer.getId().equals(startingPlayerId)) {
                 message.append("he or she");
             } else {
-                message.append(startingPlayer.getName());
+                message.append(startingPlayer.getLogName());
             }
             message.append(" takes the first turn");
 
@@ -868,10 +868,10 @@ public abstract class GameImpl implements Game, Serializable {
                     if (keep) {
                         endMulligan(player.getId());
                         keepPlayers.add(playerId);
-                        fireInformEvent(player.getName() + " keeps hand");
+                        fireInformEvent(player.getLogName() + " keeps hand");
                     } else {
                         mulliganPlayers.add(playerId);
-                        fireInformEvent(player.getName() + " decides to take mulligan");
+                        fireInformEvent(player.getLogName() + " decides to take mulligan");
                     }
                 }
             }
@@ -959,7 +959,7 @@ public abstract class GameImpl implements Game, Serializable {
     protected UUID pickChoosingPlayer() {
         UUID[] players = getPlayers().keySet().toArray(new UUID[0]);
         UUID playerId = players[rnd.nextInt(players.length)];
-        fireInformEvent(state.getPlayer(playerId).getName() + " won the toss");
+        fireInformEvent(state.getPlayer(playerId).getLogName() + " won the toss");
         return playerId;
     }
 
@@ -1031,7 +1031,7 @@ public abstract class GameImpl implements Game, Serializable {
                 usedFreeMulligans.put(player.getId(), 1);
             }
         }
-        fireInformEvent(new StringBuilder(player.getName())
+        fireInformEvent(new StringBuilder(player.getLogName())
                 .append(" mulligans")
                 .append(deduction == 0 ? " for free and draws ":" down to ")
                 .append(Integer.toString(numCards - deduction))
@@ -1074,7 +1074,7 @@ public abstract class GameImpl implements Game, Serializable {
         Player player = state.getPlayer(playerId);
         if (player != null) {
             logger.debug(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
-            fireInformEvent(player.getName() + " has conceded.");
+            fireInformEvent(player.getLogName() + " has conceded.");
             player.concede(this);
         }
     }
@@ -2142,7 +2142,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (targetObject == null) {
                 Player targetPlayer = game.getPlayer(event.getTargetId());
                 if (targetPlayer != null) {
-                    targetName = targetPlayer.getName();
+                    targetName = targetPlayer.getLogName();
                 }
             } else {
                 targetName = targetObject.getLogName();

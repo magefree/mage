@@ -149,7 +149,7 @@ class RenownedWeaponsmithEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     Cards revealed = new CardsImpl();
                     revealed.add(card);
-                    controller.revealCards(sourceObject.getLogName(), revealed, game);
+                    controller.revealCards(sourceObject.getName(), revealed, game);
                     controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);                    
                 }
             }

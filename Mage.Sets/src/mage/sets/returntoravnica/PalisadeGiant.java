@@ -150,7 +150,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
             else {
                 Player targetPlayer = game.getPlayer(event.getTargetId());
                 if (targetPlayer != null) {
-                    message.append(targetPlayer.getName());
+                    message.append(targetPlayer.getLogName());
                 }
                 else {
                     message.append("unknown");

@@ -99,7 +99,7 @@ class MistbladeShinobiTriggeredAbility extends TriggeredAbilityImpl {
                 && event.getSourceId().equals(sourceId)) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getName() + " controls");
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
                 filter.add(new ControllerIdPredicate(opponent.getId()));
                 this.getTargets().clear();
                 this.addTarget(new TargetCreaturePermanent(filter));

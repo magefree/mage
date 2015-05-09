@@ -149,7 +149,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl {
                 }
                 Player player = game.getPlayer(redirectTo);
                 if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
+                    game.informPlayers("Dealing " + prevented + " to " + player.getLogName() + " instead");
                     // keep the original source id as it is redirecting
                     player.damage(prevented, event.getSourceId(), game, true, false, event.getAppliedEffects());
                 }

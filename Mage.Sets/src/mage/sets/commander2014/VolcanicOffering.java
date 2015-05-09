@@ -86,13 +86,13 @@ public class VolcanicOffering extends CardImpl {
         if (controller != null && (ability instanceof SpellAbility)) {
             ability.getTargets().clear();
             ability.addTarget(new TargetPermanent(filterLand));
-            FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getName());
+            FilterLandPermanent filterLandForOpponent = new FilterLandPermanent("nonbasic land not controlled by " + controller.getLogName());
             filterLandForOpponent.add(Predicates.not(new SupertypePredicate("Basic")));
             filterLandForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             ability.addTarget(new TargetOpponentsChoicePermanent(filterLandForOpponent));
 
             ability.addTarget(new TargetPermanent(filterCreature));
-            FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getName());
+            FilterCreaturePermanent filterCreatureForOpponent = new FilterCreaturePermanent("creature not controlled by " + controller.getLogName());
             filterCreatureForOpponent.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             ability.addTarget(new TargetOpponentsChoicePermanent(filterCreatureForOpponent));
         }

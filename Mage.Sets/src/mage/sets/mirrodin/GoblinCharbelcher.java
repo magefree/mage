@@ -116,7 +116,7 @@ class GoblinCharbelcherEffect extends OneShotEffect {
             }
         }
 
-        controller.revealCards(sourceObject.getLogName(), cards, game);
+        controller.revealCards(sourceObject.getName(), cards, game);
         int damage = cards.size();
         if (landFound) {
             damage--;

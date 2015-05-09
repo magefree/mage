@@ -107,7 +107,7 @@ class AkromasBlessingChooseColorEffect extends OneShotEffect {
             if (choice.getColor() == null) {
                 return false;
             }
-            game.informPlayers(sourceObject.getName() + ": " + controller.getName() + " has chosen " + choice.getChoice());
+            game.informPlayers(sourceObject.getName() + ": " + controller.getLogName() + " has chosen " + choice.getChoice());
             FilterCard filterColor = new FilterCard();
             filterColor.add(new ColorPredicate(choice.getColor()));
             filterColor.setMessage(choice.getChoice());

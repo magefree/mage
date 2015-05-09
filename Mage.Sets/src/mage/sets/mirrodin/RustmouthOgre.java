@@ -93,7 +93,7 @@ class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
             if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
                 FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact that player controls");
                 filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                filter.setMessage("artifact controlled by " + game.getPlayer(event.getTargetId()).getName());
+                filter.setMessage("artifact controlled by " + game.getPlayer(event.getTargetId()).getLogName());
 
                 this.getTargets().clear();
                 this.addTarget(new TargetPermanent(filter));

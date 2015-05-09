@@ -119,7 +119,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 // cards in Graveyard
                 int cardsCount = owner.getGraveyard().count(filterNamedCard, game);
                 if (cardsCount > 0) {
-                    filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the graveyard of " + owner.getName());
+                    filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the graveyard of " + owner.getLogName());
                     TargetCardInGraveyard target = new TargetCardInGraveyard(0, cardsCount, filterNamedCard);
                     if (controller.choose(Outcome.Exile, owner.getGraveyard(), target, game)) {
                         List<UUID> targets = target.getTargets();
@@ -133,7 +133,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 }
 
                 // cards in Hand
-                filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the hand of " + owner.getName());
+                filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the hand of " + owner.getLogName());
                 TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterNamedCard);
                 if (controller.choose(Outcome.Exile, owner.getHand(), targetCardInHand, game)) {
                     List<UUID> targets = targetCardInHand.getTargets();
@@ -146,7 +146,7 @@ class SurgicalExtractionEffect extends OneShotEffect {
                 }
 
                 // cards in Library
-                filterNamedCard.setMessage("card named " + chosenCard.getName() + " in the library of " + owner.getName());
+                filterNamedCard.setMessage("card named " + chosenCard.getLogName() + " in the library of " + owner.getLogName());
                 TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCard);
                 if (controller.searchLibrary(targetCardInLibrary, game, owner.getId())) {
                     List<UUID> targets = targetCardInLibrary.getTargets();

@@ -81,7 +81,7 @@ public class ExileSourceEffect extends OneShotEffect {
                 String exileZoneName = "";
                 if (toUniqueExileZone) {
                     exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                    exileZoneName = sourceObject.getLogName();
+                    exileZoneName = sourceObject.getName();
                 }
                 Card sourceCard = (Card) sourceObject;
                 return controller.moveCardToExileWithInfo(sourceCard, exileZoneId, exileZoneName, source.getSourceId(), game, game.getState().getZone(sourceCard.getId()), true);

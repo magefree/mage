@@ -54,7 +54,7 @@ public class RevealHandSourceControllerCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         MageObject sourceObject = game.getObject(sourceId);
         if (controller != null && sourceObject != null) {
-            controller.revealCards(sourceObject.getLogName(), controller.getHand(), game);
+            controller.revealCards(sourceObject.getName(), controller.getHand(), game);
             paid = true;
         }
         return paid;

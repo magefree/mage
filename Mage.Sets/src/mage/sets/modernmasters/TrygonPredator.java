@@ -100,7 +100,7 @@ class TrygonPredatorTriggeredAbility extends TriggeredAbilityImpl {
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
-                FilterPermanent filter = new FilterPermanent("an artifact or enchantment controlled by " + player.getName());
+                FilterPermanent filter = new FilterPermanent("an artifact or enchantment controlled by " + player.getLogName());
                 filter.add(Predicates.or(
                     new CardTypePredicate(CardType.ARTIFACT),
                     new CardTypePredicate(CardType.ENCHANTMENT)));

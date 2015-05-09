@@ -133,7 +133,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
             if (card != null) {
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                 Cards cards = new CardsImpl(card);
-                controller.revealCards(sourceObject.getLogName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, zEvent.getFromZone(), false, true);
                 return true;
             }

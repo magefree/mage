@@ -115,7 +115,7 @@ class BalustradeSpyEffect extends OneShotEffect {
         }
         if (!cards.isEmpty()) {
             controller.moveCardsToGraveyardWithInfo(cards, source, game, Zone.LIBRARY);
-            controller.revealCards(sourceObject.getLogName(), cards, game);
+            controller.revealCards(sourceObject.getName(), cards, game);
             return true;
         }
         return true;

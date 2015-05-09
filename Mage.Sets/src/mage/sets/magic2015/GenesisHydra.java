@@ -178,7 +178,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 }
                 target1.clearChosen();
             } else {
-                game.informPlayers(controller.getName() + " didn't choose anything");
+                game.informPlayers(controller.getLogName() + " didn't choose anything");
             }
         } else {
             game.informPlayers("No nonland permanent card with converted mana cost " + count + " or less to choose.");

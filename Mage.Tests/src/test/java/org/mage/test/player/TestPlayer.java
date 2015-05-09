@@ -213,7 +213,7 @@ public class TestPlayer extends ComputerPlayer {
                     if (group.startsWith("planeswalker=")) {
                         String planeswalkerName = group.substring(group.indexOf("planeswalker=") + 13);
                         for (Permanent permanent :game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), game)) {
-                            if (permanent.getLogName().equals(planeswalkerName)) {
+                            if (permanent.getName().equals(planeswalkerName)) {
                                 defenderId = permanent.getId();                                        
                             }
                         }
@@ -649,7 +649,7 @@ public class TestPlayer extends ComputerPlayer {
     
     private boolean handleNonPlayerTargetTarget(String target, Ability ability, Game game) {
         boolean result = true;
-        if (target.isEmpty()) {
+        if (target == null) {
             return true; // needed if spell has no target but waits until spell is on the stack
         }
         String[] targetList = target.split("\\^");
@@ -672,7 +672,8 @@ public class TestPlayer extends ComputerPlayer {
                 }
                 for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                     MageObject object = game.getObject(id);
-                    if (object != null && object.getLogName().startsWith(targetName)) {
+                    if (object != null && 
+                            ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
                         if (index >= ability.getTargets().size()) {
                             index--;
                         }

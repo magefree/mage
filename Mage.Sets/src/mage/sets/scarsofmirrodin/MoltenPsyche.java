@@ -99,7 +99,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                 }
-                game.informPlayers(player.getName() + " shuffles the cards from his or her hand into his or her library");
+                game.informPlayers(player.getLogName() + " shuffles the cards from his or her hand into his or her library");
                 player.shuffleLibrary(game);
                 player.drawCards(count, game);
                 if (MetalcraftCondition.getInstance().apply(game, source) && !playerId.equals(source.getControllerId())) {

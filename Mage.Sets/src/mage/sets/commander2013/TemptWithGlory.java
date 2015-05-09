@@ -95,10 +95,10 @@ class TemptWithGloryEffect extends OneShotEffect {
             for (UUID playerId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(playerId);
                 if (opponent != null) {
-                    if (opponent.chooseUse(outcome, new StringBuilder("Put a +1/+1 counter on each creature you control?").toString(), game)) {
+                    if (opponent.chooseUse(outcome, "Put a +1/+1 counter on each creature you control?", game)) {
                         opponentsAddedCounters++;
                         addCounterToEachCreature(playerId, counter, game);
-                        game.informPlayers(new StringBuilder(opponent.getName()).append(" added a +1/+1 counter on each of its creatures").toString());
+                        game.informPlayers(opponent.getLogName() + " added a +1/+1 counter on each of its creatures");
                     }
                 }
             }

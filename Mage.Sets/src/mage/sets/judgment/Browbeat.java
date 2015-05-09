@@ -102,7 +102,7 @@ class BrowbeatDrawEffect extends OneShotEffect {
                 if(player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getName() + " deal 5 damage to you?", game)){
                     drawCards = false;
                     player.damage(5, source.getSourceId(), game, false, true);
-                    game.informPlayers(player.getName() + " has " + spell.getName() + " deal 5 to him or her");
+                    game.informPlayers(player.getLogName() + " has " + spell.getName() + " deal 5 to him or her");
                 }
             }
             if (drawCards) {

@@ -119,7 +119,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect {
                         Card card = player.getLibrary().remove(cardId, game);
                         if (card != null){
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                            game.informPlayers(sourceCard.getName()+": " + player.getName() + " chose " + card.getName() );
+                            game.informPlayers(sourceCard.getName()+": " + player.getLogName() + " chose " + card.getName() );
                             cardsInLibrary.remove(card);
                             cardToReveal.add(card);
                             player.revealCards(sourceCard.getName(), cardToReveal, game);

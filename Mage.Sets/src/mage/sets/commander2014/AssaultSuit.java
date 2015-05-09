@@ -160,7 +160,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
             if (equipment.getAttachedTo() != null) {
                 Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());
                 if (equippedCreature != null && controller.chooseUse(outcome,
-                        "Let have " + activePlayer.getName() + " gain control of " + equippedCreature.getLogName() + "?", game)) {
+                        "Let have " + activePlayer.getLogName() + " gain control of " + equippedCreature.getLogName() + "?", game)) {
                     equippedCreature.untap(game);
                     ContinuousEffect effect = new GainControlTargetEffect(Duration.EndOfTurn, activePlayer.getId());
                     effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));

@@ -118,8 +118,8 @@ class CranialExtractionEffect extends OneShotEffect {
                     controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
-            controller.lookAtCards(sourceObject.getLogName() + " Hand", player.getHand(), game);
-            controller.lookAtCards(sourceObject.getLogName() + " Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
+            controller.lookAtCards(sourceObject.getName() + " Hand", player.getHand(), game);
+            controller.lookAtCards(sourceObject.getName() + " Library", new CardsImpl(Zone.PICK, player.getLibrary().getCards(game)), game);
             player.shuffleLibrary(game);
         }
         return true;

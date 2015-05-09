@@ -138,8 +138,8 @@ class JuxtaposeEffect extends ContinuousEffectImpl {
                 
                 permanent1.changeControllerId(targetPlayer.getId(), game);
                 permanent2.changeControllerId(you.getId(), game);
-                game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "").append(": ").append(you.getName())
-                        .append(" and ").append(targetPlayer.getName()).append(" exchange control of ").append(permanent1.getName())
+                game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "").append(": ").append(you.getLogName())
+                        .append(" and ").append(targetPlayer.getLogName()).append(" exchange control of ").append(permanent1.getLogName())
                         .append(" and ").append(permanent2.getName()).toString());
             } else {
                 // discard if there are less than 2 permanents

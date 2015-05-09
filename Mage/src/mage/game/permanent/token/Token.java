@@ -165,7 +165,7 @@ public class Token extends MageObjectImpl {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(controller.getName()).append(" puts ")
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ")
                         .append(CardUtil.numberToText(amount, "a")).append(" ").append(this.getName()).append(" token").append(amount==1?"":"s")
                         .append(" onto the battlefield").toString());
             }

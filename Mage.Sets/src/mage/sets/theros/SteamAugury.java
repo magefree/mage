@@ -104,7 +104,7 @@ class SteamAuguryEffect extends OneShotEffect {
 
         Cards cards = new CardsImpl();
         cards.addAll(controller.getLibrary().getTopCards(game, 5));
-        controller.revealCards(sourceObject.getLogName(), cards, game);
+        controller.revealCards(sourceObject.getName(), cards, game);
 
         Player opponent;
         Set<UUID> opponents = game.getOpponents(controller.getId());
@@ -140,7 +140,7 @@ class SteamAuguryEffect extends OneShotEffect {
                     pile2CardsIds.add(card.getId());
                 }
             }
-            boolean choice = opponent.choosePile(Outcome.Detriment, new StringBuilder("Choose a pile to put into ").append(controller.getName()).append("'s hand.").toString(), pile1, pile2, game);
+            boolean choice = opponent.choosePile(Outcome.Detriment, new StringBuilder("Choose a pile to put into ").append(controller.getLogName()).append("'s hand.").toString(), pile1, pile2, game);
 
             Zone pile1Zone = Zone.GRAVEYARD;
             Zone pile2Zone = Zone.HAND;

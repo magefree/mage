@@ -146,7 +146,7 @@ class ResearchEffect extends OneShotEffect {
                 }
             }
 
-            game.informPlayers(player.getName() + " has chosen " + count + " card(s) to shuffle into his or her library.");
+            game.informPlayers(player.getLogName() + " has chosen " + count + " card(s) to shuffle into his or her library.");
 
             if (count > 0) {
                 player.shuffleLibrary(game);
@@ -175,14 +175,13 @@ class DevelopmentEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             for (int i = 0; i < 3; i++) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("Allow ").append(player.getName()).append(" to draw a card instead? (" + Integer.toString(i+1) + ")");
                 Set<UUID> opponents = game.getOpponents(source.getControllerId());
                 boolean putToken = true;
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
-                    if (opponent != null && opponent.chooseUse(Outcome.Detriment, sb.toString(), game)) {
-                        game.informPlayers(opponent.getName() + " had chosen to let " + player.getName() + " draw a card.");
+                    if (opponent != null && opponent.chooseUse(Outcome.Detriment, 
+                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ")", game)) {
+                        game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, game);
                         putToken = false;
                         break;

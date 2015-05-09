@@ -96,7 +96,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
         if (controller != null) {
             Map<Permanent, Integer> chosenCards = new HashMap<>(2);
             int maxCount = 0;
-            FilterNonlandPermanent filter = new FilterNonlandPermanent("a nonland permanent " + controller.getName() + " doesn't control");
+            FilterNonlandPermanent filter = new FilterNonlandPermanent("a nonland permanent " + controller.getLogName() + " doesn't control");
             filter.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             //Players each choose a legal permanent
             PlayerList playerList = game.getState().getPlayerList().copy();
@@ -124,7 +124,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
                                 }
                                 chosenCards.put(permanent, 1);
                             }
-                            game.informPlayers(player.getName() + " has chosen: " + permanent.getName());
+                            game.informPlayers(player.getLogName() + " has chosen: " + permanent.getName());
                         }
                     }
                 }

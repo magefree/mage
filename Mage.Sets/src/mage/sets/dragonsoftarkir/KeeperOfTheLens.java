@@ -134,9 +134,9 @@ class KeeperOfTheLensLookFaceDownEffect extends OneShotEffect {
             Cards cards = new CardsImpl();
             cards.add(copyFaceDown);
             Player player = game.getPlayer(faceDownCreature.getControllerId());
-            controller.lookAtCards("face down card - " + mageObject.getLogName(), cards, game);
+            controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
             if (player != null) {
-                game.informPlayers(controller.getName() + " looks at a face down creature of " + player.getName());
+                game.informPlayers(controller.getLogName() + " looks at a face down creature of " + player.getLogName());
             }
         } else {
             return false;

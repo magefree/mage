@@ -74,7 +74,7 @@ public class AddCountersAllEffect extends OneShotEffect {
                         permanent.addCounters(counter.copy(), game);
                         if (!game.isSimulation())
                             game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                                .append(controller.getName()).append(" puts ")
+                                .append(controller.getLogName()).append(" puts ")
                                 .append(counter.getCount()).append(" ").append(counter.getName().toLowerCase())
                                 .append(" counter on ").append(permanent.getName()).toString());
                     }

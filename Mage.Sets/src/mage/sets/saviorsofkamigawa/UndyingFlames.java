@@ -109,7 +109,7 @@ class UndyingFlamesEffect extends OneShotEffect {
                         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
                         if (player != null) {
                             player.damage(card.getManaCost().convertedManaCost(), source.getSourceId(), game, false, true);
-                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(player.getName()).toString());
+                            game.informPlayers(new StringBuilder(sourceCard.getName()).append(" deals ").append(damage).append(" damage to ").append(player.getLogName()).toString());
                             applied = true;
                             break;
                         }

@@ -321,7 +321,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int foundToughness = 0;
         int found = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (permanent.getLogName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
+            if (permanent.getName().equals(cardName) && permanent.getControllerId().equals(player.getId())) {
                 count++;
                 if (scope.equals(Filter.ComparisonScope.All)) {
                     Assert.assertEquals("Power is not the same (" + power + " vs. " + permanent.getPower().getValue() + ")",
@@ -450,7 +450,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
             if (permanent.getControllerId().equals(player.getId())) {
-                if (permanent.getLogName().equals(cardName)) {
+                if (permanent.getName().equals(cardName)) {
                     actualCount++;
                 }
             }
@@ -561,7 +561,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertTapped(String cardName, boolean tapped) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getLogName().equals(cardName)) {
+            if (permanent.getName().equals(cardName)) {
                 found = permanent;
             }
         }
@@ -580,7 +580,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertAttacking(String cardName, boolean attacking) throws AssertionError {
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getLogName().equals(cardName)) {
+            if (permanent.getName().equals(cardName)) {
                 found = permanent;
             }
         }

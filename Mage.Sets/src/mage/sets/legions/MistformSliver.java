@@ -108,7 +108,7 @@ public class MistformSliver extends CardImpl {
                         return false;
                     }
                 }
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
+                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
                 ContinuousEffect effect = new AddCardSubTypeTargetEffect(typeChoice.getChoice(), Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 game.addEffect(effect, source);

@@ -67,6 +67,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
+import mage.util.GameLog;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
@@ -208,7 +209,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         try {
-            return abilities.getRules(this.getLogName());
+            return abilities.getRules(this.getName());
         } catch (Exception e) {
             logger.info("Exception in rules generation for card: " + this.getName(), e);
         }
@@ -741,10 +742,11 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
 
     @Override
     public String getLogName() {
-//        if (this.isFaceDown()) {
-//            return "facedown card";
-//        }
-        return name;
+        if (name.isEmpty()) {
+            return GameLog.getNeutralColoredText("face down card");
+        } else {
+            return GameLog.getColoredObjectName(this);
+        }
     }
 
     @Override

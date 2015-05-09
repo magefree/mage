@@ -117,7 +117,7 @@ class EyeOfDoomEffect extends OneShotEffect {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
                     permanents.add(permanent);
-                    game.informPlayers((new StringBuilder(player.getName()).append(" chooses ").append(permanent.getName()).toString()));
+                    game.informPlayers((new StringBuilder(player.getLogName()).append(" chooses ").append(permanent.getName()).toString()));
                 }
             }
             player = playerList.getNext(game);

@@ -130,7 +130,7 @@ class HermitDruidEffect extends OneShotEffect {
                 if (card != null) {
                     cards.add(card);
                 }
-                player.revealCards(sourceObject.getLogName(), cards, game);
+                player.revealCards(sourceObject.getName(), cards, game);
             }
             return true;
         }

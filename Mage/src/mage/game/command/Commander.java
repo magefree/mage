@@ -42,6 +42,7 @@ import mage.game.Game;
 
 import java.util.List;
 import java.util.UUID;
+import mage.util.GameLog;
 
 /**
  *
@@ -100,7 +101,7 @@ public class Commander implements CommandObject{
 
     @Override
     public String getLogName() {
-        return card.getName();
+        return GameLog.getColoredObjectName(this);
     }
 
     @Override

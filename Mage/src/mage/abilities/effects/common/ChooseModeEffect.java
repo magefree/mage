@@ -81,7 +81,7 @@ public class ChooseModeEffect extends OneShotEffect {
             }
             if (choice.isChosen()) {
                 if (!game.isSimulation())
-                    game.informPlayers(new StringBuilder(sourcePermanent.getLogName()).append(": ").append(controller.getName()).append(" has chosen ").append(choice.getChoice()).toString());
+                    game.informPlayers(new StringBuilder(sourcePermanent.getLogName()).append(": ").append(controller.getLogName()).append(" has chosen ").append(choice.getChoice()).toString());
                 game.getState().setValue(source.getSourceId() + "_modeChoice", choice.getChoice());
                 sourcePermanent.addInfo("_modeChoice", "<font color = 'blue'>Chosen mode: " + choice.getChoice() + "</font>", game);
             }

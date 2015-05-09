@@ -76,6 +76,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.util.GameLog;
 import mage.util.ThreadLocalStringBuilder;
 
 /**
@@ -996,7 +997,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             moveToZone(Zone.GRAVEYARD, sourceId, game, false);
             Player player = game.getPlayer(getControllerId());
             if (player != null && !game.isSimulation()) {
-                game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getLogName()).toString());
+                game.informPlayers(new StringBuilder(player.getLogName()).append(" sacrificed ").append(this.getLogName()).toString());
             }
             game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
             return true;
@@ -1280,12 +1281,12 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public String getLogName() {
         if (name.isEmpty()) {
             if (faceDown) {
-                return "face down creature";
+                return GameLog.getNeutralColoredText("face down creature");
             } else {
-                return "a creature without name";
+                return GameLog.getNeutralColoredText("a creature without name");
             }
         }
-        return name;
+        return GameLog.getColoredObjectName(this);
     }
 
     @Override

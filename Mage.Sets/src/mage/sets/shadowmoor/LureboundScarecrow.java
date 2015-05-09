@@ -98,7 +98,7 @@ class LureboundScarecrowChooseColorEffect extends OneShotEffect {
         if (player != null && sourceStackObject != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
-                game.informPlayers(sourceStackObject.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+                game.informPlayers(sourceStackObject.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
                 permanent.addInfo("chosen color", new StringBuilder("<font color='blue'>Chosen color: ").append(colorChoice.getColor().getDescription()).append("</font>").toString(), game);
             }

@@ -99,7 +99,7 @@ class PaleWayfarerEffect extends OneShotEffect {
             if (player != null) {
                 ChoiceColor colorChoice = new ChoiceColor();
                 if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                    game.informPlayers(targetCreature.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
+                    game.informPlayers(targetCreature.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
                     game.getState().setValue(targetCreature.getId() + "_color", colorChoice.getColor());
                 }
             }

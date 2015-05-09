@@ -252,7 +252,7 @@ class ConvokeEffect extends OneShotEffect {
                         manaName = "colorless";
                     }
                     if (!game.isSimulation())
-                        game.informPlayers("Convoke: " + controller.getName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
+                        game.informPlayers("Convoke: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay one " + manaName + " mana");
                 }
 
             }

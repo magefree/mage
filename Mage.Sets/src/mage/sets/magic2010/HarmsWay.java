@@ -106,7 +106,7 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
             }
             Player player = game.getPlayer(redirectTo);
             if (player != null) {
-                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getName() + " instead");
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName() + " instead");
                 // keep the original source id as it is redirecting
                 player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
             }

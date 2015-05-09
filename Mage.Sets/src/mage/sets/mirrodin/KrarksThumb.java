@@ -83,9 +83,9 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
             boolean secondCoinFlip = player.flipCoin(game, event.getAppliedEffects());
             if (player.chooseUse(outcome, "Ignore the first coin flip?", game)) {
                 event.setFlag(secondCoinFlip);
-                game.informPlayers(new StringBuilder(player.getName()).append(" ignores the first coin flip.").toString());
+                game.informPlayers(new StringBuilder(player.getLogName()).append(" ignores the first coin flip.").toString());
             } else {
-                game.informPlayers(new StringBuilder(player.getName()).append(" ignores the second coin flip.").toString());
+                game.informPlayers(new StringBuilder(player.getLogName()).append(" ignores the second coin flip.").toString());
             }
         }
         return false;

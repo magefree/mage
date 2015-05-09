@@ -115,7 +115,7 @@ class WorldgorgerDragonEntersEffect extends OneShotEffect {
             if (exileId != null) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     if (!permanent.getId().equals(source.getSourceId())) { // Another
-                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                        controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     }
                 }
                 return true;

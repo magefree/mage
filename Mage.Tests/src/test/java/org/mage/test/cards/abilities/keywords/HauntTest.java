@@ -71,7 +71,7 @@ public class HauntTest extends CardTestPlayerBase {
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Blind Hunter")) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunting Goblin Roughrider")) {
+                    if (rule.startsWith("Haunting") &&  rule.contains("Goblin Roughrider")) {
                         found = true;
                     }
                 }
@@ -83,7 +83,7 @@ public class HauntTest extends CardTestPlayerBase {
         for (Card card : currentGame.getBattlefield().getAllActivePermanents()) {
             if (card.getName().equals("Goblin Roughrider")) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunted by Blind Hunter")) {
+                    if (rule.startsWith("Haunted by") &&  rule.contains("Blind Hunter")) {
                         found = true;
                     }
                 }
@@ -117,7 +117,7 @@ public class HauntTest extends CardTestPlayerBase {
         for (Card card : currentGame.getPlayer(playerA.getId()).getGraveyard().getCards(currentGame)) {
             if (card.getName().equals("Goblin Roughrider")) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunted by Blind Hunter")) {
+                    if (rule.startsWith("Haunted by") &&  rule.contains("Blind Hunter")) {
                         found = true;
                     }
                 }

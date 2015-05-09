@@ -107,7 +107,7 @@ class GraveSifterEffect extends OneShotEffect {
                 if (player != null) {
                     typeChoice.clearChoice();
                     if (player.choose(outcome, typeChoice, game)) {
-                        game.informPlayers(player.getName() + " has chosen: " + typeChoice.getChoice());
+                        game.informPlayers(player.getLogName() + " has chosen: " + typeChoice.getChoice());
                         FilterCard filter = new FilterCreatureCard("creature cards with creature type " + typeChoice.getChoice()+ " from your graveyard");
                         filter.add(new SubtypePredicate(typeChoice.getChoice()));
                         Target target = new TargetCardInYourGraveyard(0,Integer.MAX_VALUE, filter);

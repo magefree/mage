@@ -118,7 +118,7 @@ class DevoutInvocationEffect extends OneShotEffect {
             if (tappedAmount > 0) {
                 AngelToken angelToken = new AngelToken();
                 angelToken.putOntoBattlefield(tappedAmount, game, source.getSourceId(), source.getControllerId());
-                game.informPlayers(new StringBuilder(controller.getName()).append(" puts ").append(tappedAmount).append(" token").append(tappedAmount != 1 ?"s":"").append(" onto the battlefield").toString());
+                game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(tappedAmount).append(" token").append(tappedAmount != 1 ?"s":"").append(" onto the battlefield").toString());
             }
             return true;
         }

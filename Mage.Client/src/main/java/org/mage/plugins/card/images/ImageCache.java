@@ -7,7 +7,6 @@ import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -105,8 +104,15 @@ public class ImageCache {
                                 thumbnailFile = new TFile(thumbnailPath);
                             } catch (Exception ex) {
                             }
-                            
-                            if (thumbnailFile != null && thumbnailFile.exists()) {
+                            boolean exists =false;
+                            if (thumbnailFile != null) {
+                                try {
+                                    exists = thumbnailFile.exists();
+                                } catch(Exception ex) {
+                                    exists = false;
+                                }
+                            }                            
+                            if (exists) {
                                 log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
                                 return loadImage(thumbnailFile);
                             } else {

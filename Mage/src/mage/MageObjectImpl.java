@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.util.GameLog;
 
 public abstract class MageObjectImpl implements MageObject {
 
@@ -97,7 +98,7 @@ public abstract class MageObjectImpl implements MageObject {
     
     @Override
     public String getLogName() {
-        return name;
+        return GameLog.getColoredObjectName(this);
     }
 
     @Override

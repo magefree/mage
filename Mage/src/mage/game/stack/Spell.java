@@ -63,6 +63,7 @@ import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
+import mage.util.GameLog;
 
 /**
  *
@@ -168,8 +169,7 @@ public class Spell implements StackObject, Card {
                 return "a card face down";
             }
         }
-        return getSpellAbility().toString();
-
+        return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());
     }
 
     @Override
@@ -512,7 +512,7 @@ public class Spell implements StackObject, Card {
         if (object == null) {
             Player targetPlayer = game.getPlayer(targetId);
             if (targetPlayer != null) {
-                name = targetPlayer.getName();
+                name = targetPlayer.getLogName();
             }
         } else {
             name = object.getName();
@@ -545,7 +545,7 @@ public class Spell implements StackObject, Card {
     
     @Override
     public String getLogName() {
-        return card.getName();
+        return GameLog.getColoredObjectName(card);
     }
 
     @Override
