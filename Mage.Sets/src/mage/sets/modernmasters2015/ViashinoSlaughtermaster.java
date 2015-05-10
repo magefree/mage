@@ -39,7 +39,7 @@ public class ViashinoSlaughtermaster extends mage.sets.conflux.ViashinoSlaughter
     public ViashinoSlaughtermaster(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 133;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

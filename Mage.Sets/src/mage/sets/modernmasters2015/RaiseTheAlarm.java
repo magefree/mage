@@ -38,7 +38,7 @@ public class RaiseTheAlarm extends mage.sets.mirrodin.RaiseTheAlarm {
     public RaiseTheAlarm(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 31;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public RaiseTheAlarm(final RaiseTheAlarm card) {

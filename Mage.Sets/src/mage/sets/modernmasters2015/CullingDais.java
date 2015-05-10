@@ -38,7 +38,7 @@ public class CullingDais extends mage.sets.scarsofmirrodin.CullingDais {
     public CullingDais(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 207;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public CullingDais(final CullingDais card) {

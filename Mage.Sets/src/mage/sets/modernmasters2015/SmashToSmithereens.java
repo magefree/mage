@@ -38,7 +38,7 @@ public class SmashToSmithereens extends mage.sets.shadowmoor.SmashToSmithereens 
     public SmashToSmithereens(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 124;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SmashToSmithereens(final SmashToSmithereens card) {

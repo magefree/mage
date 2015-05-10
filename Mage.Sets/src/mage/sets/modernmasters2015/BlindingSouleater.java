@@ -38,7 +38,7 @@ public class BlindingSouleater extends mage.sets.newphyrexia.BlindingSouleater {
     public BlindingSouleater(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 202;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public BlindingSouleater(final BlindingSouleater card) {

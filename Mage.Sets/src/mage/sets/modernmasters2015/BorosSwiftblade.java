@@ -38,7 +38,7 @@ public class BorosSwiftblade extends mage.sets.planechase.BorosSwiftblade {
     public BorosSwiftblade(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 172;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public BorosSwiftblade(final BorosSwiftblade card) {

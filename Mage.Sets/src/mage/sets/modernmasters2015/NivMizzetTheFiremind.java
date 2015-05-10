@@ -38,7 +38,7 @@ public class NivMizzetTheFiremind extends mage.sets.guildpact.NivMizzetTheFiremi
     public NivMizzetTheFiremind(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 182;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public NivMizzetTheFiremind(final NivMizzetTheFiremind card) {

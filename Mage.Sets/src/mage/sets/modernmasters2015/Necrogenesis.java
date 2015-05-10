@@ -38,7 +38,7 @@ public class Necrogenesis extends mage.sets.shardsofalara.Necrogenesis {
     public Necrogenesis(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 181;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Necrogenesis(final Necrogenesis card) {

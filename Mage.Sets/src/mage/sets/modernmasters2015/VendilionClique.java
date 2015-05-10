@@ -39,7 +39,7 @@ public class VendilionClique extends mage.sets.morningtide.VendilionClique {
     public VendilionClique(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 67;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.MYTHIC;
     }
 

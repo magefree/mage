@@ -38,7 +38,7 @@ public class Frogmite extends mage.sets.elspethvstezzeret.Frogmite {
     public Frogmite(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 215;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Frogmite(final Frogmite card) {

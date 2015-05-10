@@ -39,7 +39,7 @@ public class EyeOfUgin extends mage.sets.worldwake.EyeOfUgin {
     public EyeOfUgin(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 242;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.RARE;
     }
 

@@ -39,7 +39,7 @@ public class RustedRelic extends mage.sets.scarsofmirrodin.RustedRelic {
     public RustedRelic(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 227;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

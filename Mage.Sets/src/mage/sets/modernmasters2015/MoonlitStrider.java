@@ -38,7 +38,7 @@ public class MoonlitStrider extends mage.sets.betrayersofkamigawa.MoonlitStrider
     public MoonlitStrider(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 27;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public MoonlitStrider(final MoonlitStrider card) {

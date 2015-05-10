@@ -39,7 +39,7 @@ public class Thrummingbird extends mage.sets.scarsofmirrodin.Thrummingbird {
     public Thrummingbird(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 65;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

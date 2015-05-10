@@ -38,7 +38,7 @@ public class SkyreachManta extends mage.sets.fifthdawn.SkyreachManta {
     public SkyreachManta(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 229;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SkyreachManta(final SkyreachManta card) {

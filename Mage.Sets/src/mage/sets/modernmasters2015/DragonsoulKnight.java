@@ -39,7 +39,7 @@ public class DragonsoulKnight extends mage.sets.conflux.DragonsoulKnight {
     public DragonsoulKnight(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 112;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

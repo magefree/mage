@@ -38,7 +38,7 @@ public class VampireLacerator extends mage.sets.zendikar.VampireLacerator {
     public VampireLacerator(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 101;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public VampireLacerator(final VampireLacerator card) {

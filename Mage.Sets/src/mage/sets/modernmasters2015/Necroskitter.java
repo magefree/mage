@@ -38,7 +38,7 @@ public class Necroskitter extends mage.sets.eventide.Necroskitter {
     public Necroskitter(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 88;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Necroskitter(final Necroskitter card) {

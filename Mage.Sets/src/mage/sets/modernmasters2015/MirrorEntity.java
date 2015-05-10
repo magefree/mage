@@ -38,7 +38,7 @@ public class MirrorEntity extends mage.sets.lorwyn.MirrorEntity {
     public MirrorEntity(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 26;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public MirrorEntity(final MirrorEntity card) {

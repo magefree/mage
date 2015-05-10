@@ -38,7 +38,7 @@ public class WaterServant extends mage.sets.magic2011.WaterServant {
     public WaterServant(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 69;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public WaterServant(final WaterServant card) {

@@ -38,7 +38,7 @@ public class Mortarpod extends mage.sets.mirrodinbesieged.Mortarpod {
     public Mortarpod(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 222;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Mortarpod(final Mortarpod card) {

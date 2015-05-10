@@ -38,7 +38,7 @@ public class SunspearShikari extends mage.sets.scarsofmirrodin.SunspearShikari {
     public SunspearShikari(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 35;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SunspearShikari(final SunspearShikari card) {

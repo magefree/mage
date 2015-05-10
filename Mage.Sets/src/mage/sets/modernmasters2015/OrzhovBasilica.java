@@ -39,7 +39,7 @@ public class OrzhovBasilica extends mage.sets.guildpact.OrzhovBasilica {
     public OrzhovBasilica(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 246;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

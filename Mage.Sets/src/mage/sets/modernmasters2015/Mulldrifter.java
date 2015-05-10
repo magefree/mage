@@ -39,7 +39,7 @@ public class Mulldrifter extends mage.sets.commander.Mulldrifter {
     public Mulldrifter(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 51;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -39,7 +39,7 @@ public class AgonyWarp extends mage.sets.shardsofalara.AgonyWarp {
     public AgonyWarp(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 170;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

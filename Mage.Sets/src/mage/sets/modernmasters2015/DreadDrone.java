@@ -38,7 +38,7 @@ public class DreadDrone extends mage.sets.riseoftheeldrazi.DreadDrone {
     public DreadDrone(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 80;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public DreadDrone(final DreadDrone card) {

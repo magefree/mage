@@ -38,7 +38,7 @@ public class CommuneWithNature extends mage.sets.championsofkamigawa.CommuneWith
     public CommuneWithNature(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 142;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public CommuneWithNature(final CommuneWithNature card) {

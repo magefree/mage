@@ -38,7 +38,7 @@ public class SurrakarSpellblade extends mage.sets.riseoftheeldrazi.SurrakarSpell
     public SurrakarSpellblade(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 60;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SurrakarSpellblade(final SurrakarSpellblade card) {

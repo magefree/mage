@@ -38,7 +38,7 @@ public class Guile extends mage.sets.lorwyn.Guile {
     public Guile(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 46;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Guile(final Guile card) {

@@ -38,7 +38,7 @@ public class Thunderblust extends mage.sets.eventide.Thunderblust {
     public Thunderblust(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 131;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Thunderblust(final Thunderblust card) {

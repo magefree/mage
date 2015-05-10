@@ -39,7 +39,7 @@ public class ApocalypseHydra extends mage.sets.conflux.ApocalypseHydra {
     public ApocalypseHydra(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 171;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.RARE;
     }
 

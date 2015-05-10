@@ -38,7 +38,7 @@ public class RootKinAlly extends mage.sets.ravnica.RootKinAlly {
     public RootKinAlly(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 158;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public RootKinAlly(final RootKinAlly card) {

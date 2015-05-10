@@ -99,7 +99,7 @@ Mirage|MIR|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
 Modern Masters|MMA|
-Modern Masters 2015|MMB|
+Modern Masters 2015|MM2|
 Mirrodin|MRD|
 Mirrodin Besieged|MBS|
 MTGO Vanguard|VGO|

@@ -38,7 +38,7 @@ public class EtchedChampion extends mage.sets.scarsofmirrodin.EtchedChampion {
     public EtchedChampion(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 209;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public EtchedChampion(final EtchedChampion card) {

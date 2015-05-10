@@ -38,7 +38,7 @@ public class KamiOfAncientLaw extends mage.sets.championsofkamigawa.KamiOfAncien
     public KamiOfAncientLaw(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 21;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public KamiOfAncientLaw(final KamiOfAncientLaw card) {

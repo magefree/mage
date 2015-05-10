@@ -38,7 +38,7 @@ public class Wildfire extends mage.sets.urzassaga.Wildfire {
     public Wildfire(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 134;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Wildfire(final Wildfire card) {

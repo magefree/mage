@@ -38,7 +38,7 @@ public class MoxOpal extends mage.sets.scarsofmirrodin.MoxOpal {
     public MoxOpal(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 223;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public MoxOpal(final MoxOpal card) {

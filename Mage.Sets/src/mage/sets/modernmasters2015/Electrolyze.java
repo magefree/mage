@@ -38,7 +38,7 @@ public class Electrolyze extends mage.sets.guildpact.Electrolyze {
     public Electrolyze(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 174;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Electrolyze(final Electrolyze card) {

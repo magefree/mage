@@ -38,7 +38,7 @@ public class GustSkimmer extends mage.sets.mirrodinbesieged.GustSkimmer {
     public GustSkimmer(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 217;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public GustSkimmer(final GustSkimmer card) {

@@ -38,7 +38,7 @@ public class EtchedOracle extends mage.sets.planechase.EtchedOracle {
     public EtchedOracle(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 211;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public EtchedOracle(final EtchedOracle card) {

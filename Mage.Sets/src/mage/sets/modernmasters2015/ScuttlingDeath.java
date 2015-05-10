@@ -38,7 +38,7 @@ public class ScuttlingDeath extends mage.sets.championsofkamigawa.ScuttlingDeath
     public ScuttlingDeath(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 94;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public ScuttlingDeath(final ScuttlingDeath card) {

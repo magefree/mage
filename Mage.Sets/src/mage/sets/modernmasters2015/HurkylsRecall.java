@@ -38,7 +38,7 @@ public class HurkylsRecall extends mage.sets.fifthedition.HurkylsRecall {
     public HurkylsRecall(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 48;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public HurkylsRecall(final HurkylsRecall card) {

@@ -38,7 +38,7 @@ public class SunderingVitae extends mage.sets.ravnica.SunderingVitae {
     public SunderingVitae(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 163;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SunderingVitae(final SunderingVitae card) {

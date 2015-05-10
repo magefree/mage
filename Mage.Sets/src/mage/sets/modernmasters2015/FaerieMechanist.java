@@ -38,7 +38,7 @@ public class FaerieMechanist extends mage.sets.conflux.FaerieMechanist {
     public FaerieMechanist(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 44;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public FaerieMechanist(final FaerieMechanist card) {

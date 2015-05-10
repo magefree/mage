@@ -39,7 +39,7 @@ public class GlassdustHulk extends mage.sets.alarareborn.GlassdustHulk {
     public GlassdustHulk(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 177;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -38,7 +38,7 @@ public class Remand extends mage.sets.ravnica.Remand {
     public Remand(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 55;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Remand(final Remand card) {

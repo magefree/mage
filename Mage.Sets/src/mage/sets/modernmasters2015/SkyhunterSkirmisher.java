@@ -39,7 +39,7 @@ public class SkyhunterSkirmisher extends mage.sets.tenthedition.SkyhunterSkirmis
     public SkyhunterSkirmisher(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 32;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

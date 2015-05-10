@@ -39,7 +39,7 @@ public class PilloryOfTheSleepless extends mage.sets.guildpact.PilloryOfTheSleep
     public PilloryOfTheSleepless(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 183;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

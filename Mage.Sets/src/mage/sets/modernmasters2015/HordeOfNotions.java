@@ -38,7 +38,7 @@ public class HordeOfNotions extends mage.sets.lorwyn.HordeOfNotions {
     public HordeOfNotions(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 178;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public HordeOfNotions(final HordeOfNotions card) {

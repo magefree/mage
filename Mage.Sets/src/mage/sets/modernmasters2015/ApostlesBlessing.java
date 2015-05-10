@@ -38,7 +38,7 @@ public class ApostlesBlessing extends mage.sets.newphyrexia.ApostlesBlessing {
     public ApostlesBlessing(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 8;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public ApostlesBlessing(final ApostlesBlessing card) {

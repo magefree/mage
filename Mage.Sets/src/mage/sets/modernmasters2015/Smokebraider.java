@@ -38,7 +38,7 @@ public class Smokebraider extends mage.sets.planechase.Smokebraider {
     public Smokebraider(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 125;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Smokebraider(final Smokebraider card) {

@@ -38,7 +38,7 @@ public class Narcolepsy extends mage.sets.riseoftheeldrazi.Narcolepsy {
     public Narcolepsy(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 52;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public Narcolepsy(final Narcolepsy card) {

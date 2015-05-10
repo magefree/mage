@@ -38,7 +38,7 @@ public class PelakkaWurm extends mage.sets.riseoftheeldrazi.PelakkaWurm {
     public PelakkaWurm(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 154;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public PelakkaWurm(final PelakkaWurm card) {

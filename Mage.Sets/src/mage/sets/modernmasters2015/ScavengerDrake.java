@@ -38,7 +38,7 @@ public class ScavengerDrake extends mage.sets.shardsofalara.ScavengerDrake {
     public ScavengerDrake(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 93;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public ScavengerDrake(final ScavengerDrake card) {

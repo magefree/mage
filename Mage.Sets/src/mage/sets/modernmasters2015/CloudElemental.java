@@ -38,7 +38,7 @@ public class CloudElemental extends mage.sets.tenthedition.CloudElemental {
     public CloudElemental(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 42;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public CloudElemental(final CloudElemental card) {

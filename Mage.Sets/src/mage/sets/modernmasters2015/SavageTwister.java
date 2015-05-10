@@ -38,7 +38,7 @@ public class SavageTwister extends mage.sets.commander2013.SavageTwister {
     public SavageTwister(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 185;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SavageTwister(final SavageTwister card) {

@@ -38,7 +38,7 @@ public class SpectralProcession extends mage.sets.shadowmoor.SpectralProcession 
     public SpectralProcession(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 33;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SpectralProcession(final SpectralProcession card) {

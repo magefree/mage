@@ -38,7 +38,7 @@ public class VampireOutcasts extends mage.sets.magic2012.VampireOutcasts {
     public VampireOutcasts(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 102;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public VampireOutcasts(final VampireOutcasts card) {

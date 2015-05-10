@@ -39,7 +39,7 @@ public class DevouringGreed extends mage.sets.championsofkamigawa.DevouringGreed
     public DevouringGreed(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 78;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -38,7 +38,7 @@ public class PrecursorGolem extends mage.sets.scarsofmirrodin.PrecursorGolem {
     public PrecursorGolem(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 225;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public PrecursorGolem(final PrecursorGolem card) {

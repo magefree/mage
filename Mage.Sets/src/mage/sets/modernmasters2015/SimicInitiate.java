@@ -38,7 +38,7 @@ public class SimicInitiate extends mage.sets.dissension.SimicInitiate {
     public SimicInitiate(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 162;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public SimicInitiate(final SimicInitiate card) {

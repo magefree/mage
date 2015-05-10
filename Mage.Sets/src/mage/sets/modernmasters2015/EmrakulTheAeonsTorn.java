@@ -38,7 +38,7 @@ public class EmrakulTheAeonsTorn extends mage.sets.riseoftheeldrazi.EmrakulTheAe
     public EmrakulTheAeonsTorn(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 3;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public EmrakulTheAeonsTorn(final EmrakulTheAeonsTorn card) {

@@ -38,7 +38,7 @@ public class WingsOfVelisVel extends mage.sets.lorwyn.WingsOfVelisVel {
     public WingsOfVelisVel(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 70;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public WingsOfVelisVel(final WingsOfVelisVel card) {

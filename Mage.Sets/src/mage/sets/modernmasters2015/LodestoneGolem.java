@@ -38,7 +38,7 @@ public class LodestoneGolem extends mage.sets.worldwake.LodestoneGolem {
     public LodestoneGolem(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 219;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public LodestoneGolem(final LodestoneGolem card) {

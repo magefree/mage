@@ -39,7 +39,7 @@ public class SkarrganFirebird extends mage.sets.heroesvsmonsters.SkarrganFirebir
     public SkarrganFirebird(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 123;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

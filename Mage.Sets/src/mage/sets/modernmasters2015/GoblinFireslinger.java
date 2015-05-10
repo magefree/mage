@@ -38,7 +38,7 @@ public class GoblinFireslinger extends mage.sets.magic2012.GoblinFireslinger {
     public GoblinFireslinger(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 114;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public GoblinFireslinger(final GoblinFireslinger card) {

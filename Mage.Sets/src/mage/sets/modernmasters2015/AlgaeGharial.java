@@ -38,7 +38,7 @@ public class AlgaeGharial extends mage.sets.shardsofalara.AlgaeGharial {
     public AlgaeGharial(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 137;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public AlgaeGharial(final AlgaeGharial card) {

@@ -18,7 +18,7 @@ public class MagicCardsImageSource implements CardImageSource {
         {
             put("TPR", "tempest-remastered");
             put("ORI", "magic-origins");
-            put("MMB", "modern-masters-2015");
+            put("MM2", "modern-masters-2015");
             put("PTC", "prerelease-events");
             put("DTK", "dragons-of-tarkir");
             put("GRC","wpngateway");

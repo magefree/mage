@@ -38,7 +38,7 @@ public class NestInvader extends mage.sets.riseoftheeldrazi.NestInvader {
     public NestInvader(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 150;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public NestInvader(final NestInvader card) {

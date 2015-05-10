@@ -38,7 +38,7 @@ public class KozileksPredator extends mage.sets.riseoftheeldrazi.KozileksPredato
     public KozileksPredator(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 147;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public KozileksPredator(final KozileksPredator card) {

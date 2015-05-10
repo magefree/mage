@@ -39,7 +39,7 @@ public class NovijenSages extends mage.sets.dissension.NovijenSages {
     public NovijenSages(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 53;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

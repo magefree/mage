@@ -38,7 +38,7 @@ public class KavuPrimarch extends mage.sets.futuresight.KavuPrimarch {
     public KavuPrimarch(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 146;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public KavuPrimarch(final KavuPrimarch card) {

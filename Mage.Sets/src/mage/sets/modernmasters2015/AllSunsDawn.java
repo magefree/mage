@@ -67,7 +67,7 @@ public class AllSunsDawn extends CardImpl {
             
     public AllSunsDawn(UUID ownerId) {
         super(ownerId, 138, "All Suns' Dawn", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
 
         // For each color, return up to one target card of that color from your graveyard to your hand. 
         this.getSpellAbility().addEffect(new AllSunsDawnEffect());

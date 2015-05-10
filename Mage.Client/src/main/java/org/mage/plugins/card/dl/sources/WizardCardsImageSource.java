@@ -145,7 +145,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("MIR", "Mirage");
         setsAliases.put("MLP", "Launch Party");
         setsAliases.put("MMA", "Modern Masters");
-        setsAliases.put("MMB", "Modern Masters 2015");
+        setsAliases.put("MM2", "Modern Masters 2015");
         setsAliases.put("MMQ", "Mercadian Masques");
         setsAliases.put("MOR", "Morningtide");
         setsAliases.put("MPRP", "Magic Player Rewards");

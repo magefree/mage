@@ -39,7 +39,7 @@ public class Bitterblossom extends mage.sets.morningtide.Bitterblossom {
     public Bitterblossom(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 71;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.MYTHIC;
     }
 

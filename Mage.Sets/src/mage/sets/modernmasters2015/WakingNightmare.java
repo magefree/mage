@@ -38,7 +38,7 @@ public class WakingNightmare extends mage.sets.championsofkamigawa.WakingNightma
     public WakingNightmare(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 103;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public WakingNightmare(final WakingNightmare card) {

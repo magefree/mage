@@ -39,7 +39,7 @@ public class EtchedMonstrosity extends mage.sets.newphyrexia.EtchedMonstrosity {
     public EtchedMonstrosity(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 210;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.RARE;
     }
 

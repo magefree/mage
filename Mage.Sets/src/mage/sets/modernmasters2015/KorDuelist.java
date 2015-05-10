@@ -38,7 +38,7 @@ public class KorDuelist extends mage.sets.zendikar.KorDuelist {
     public KorDuelist(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 22;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public KorDuelist(final KorDuelist card) {

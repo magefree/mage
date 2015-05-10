@@ -39,7 +39,7 @@ public class TumbleMagnet extends mage.sets.scarsofmirrodin.TumbleMagnet {
     public TumbleMagnet(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 233;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.UNCOMMON;
     }
 

@@ -38,7 +38,7 @@ public class TellingTime extends mage.sets.tenthedition.TellingTime {
     public TellingTime(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 61;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public TellingTime(final TellingTime card) {

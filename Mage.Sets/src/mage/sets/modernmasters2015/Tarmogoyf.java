@@ -39,7 +39,7 @@ public class Tarmogoyf extends mage.sets.futuresight.Tarmogoyf {
     public Tarmogoyf(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 165;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.MYTHIC;
     }
 

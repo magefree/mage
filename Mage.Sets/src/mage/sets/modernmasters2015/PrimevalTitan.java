@@ -38,7 +38,7 @@ public class PrimevalTitan extends mage.sets.magic2011.PrimevalTitan {
     public PrimevalTitan(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 156;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public PrimevalTitan(final PrimevalTitan card) {

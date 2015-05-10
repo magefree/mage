@@ -38,7 +38,7 @@ public class HeliumSquirter extends mage.sets.dissension.HeliumSquirter {
     public HeliumSquirter(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 47;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public HeliumSquirter(final HeliumSquirter card) {

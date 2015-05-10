@@ -51,7 +51,7 @@ public class KarplusanStrider extends CardImpl {
 
     public KarplusanStrider(UUID ownerId) {
         super(ownerId, 145, "Karplusan Strider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.subtype.add("Yeti");
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);

@@ -39,7 +39,7 @@ public class AllIsDust extends mage.sets.riseoftheeldrazi.AllIsDust {
     public AllIsDust(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 1;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.RARE;
     }
 

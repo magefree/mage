@@ -38,7 +38,7 @@ public class MidnightBanshee extends mage.sets.shadowmoor.MidnightBanshee {
     public MidnightBanshee(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 86;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public MidnightBanshee(final MidnightBanshee card) {

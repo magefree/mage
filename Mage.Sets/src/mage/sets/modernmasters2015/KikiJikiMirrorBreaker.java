@@ -39,7 +39,7 @@ public class KikiJikiMirrorBreaker extends mage.sets.championsofkamigawa.KikiJik
     public KikiJikiMirrorBreaker(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 121;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.MYTHIC;
     }
 

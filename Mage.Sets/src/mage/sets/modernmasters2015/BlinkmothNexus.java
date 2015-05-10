@@ -38,7 +38,7 @@ public class BlinkmothNexus extends mage.sets.darksteel.BlinkmothNexus {
     public BlinkmothNexus(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 236;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public BlinkmothNexus(final BlinkmothNexus card) {

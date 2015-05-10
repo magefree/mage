@@ -38,7 +38,7 @@ public class DeathDenied extends mage.sets.saviorsofkamigawa.DeathDenied {
     public DeathDenied(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 76;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public DeathDenied(final DeathDenied card) {

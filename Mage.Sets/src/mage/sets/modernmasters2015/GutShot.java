@@ -39,7 +39,7 @@ public class GutShot extends mage.sets.newphyrexia.GutShot {
     public GutShot(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 117;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

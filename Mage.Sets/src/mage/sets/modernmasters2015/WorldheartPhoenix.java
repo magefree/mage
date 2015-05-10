@@ -59,7 +59,7 @@ public class WorldheartPhoenix extends CardImpl {
 
     public WorldheartPhoenix(UUID ownerId) {
         super(ownerId, 135, "Worldheart Phoenix", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.subtype.add("Phoenix");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

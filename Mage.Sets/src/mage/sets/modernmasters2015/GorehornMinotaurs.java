@@ -38,7 +38,7 @@ public class GorehornMinotaurs extends mage.sets.magic2012.GorehornMinotaurs {
     public GorehornMinotaurs(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 116;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public GorehornMinotaurs(final GorehornMinotaurs card) {

@@ -39,7 +39,7 @@ public class GhostlyChangeling extends mage.sets.lorwyn.GhostlyChangeling {
     public GhostlyChangeling(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 83;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
         this.rarity = Rarity.COMMON;
     }
 

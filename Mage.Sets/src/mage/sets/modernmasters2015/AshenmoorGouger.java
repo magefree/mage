@@ -38,7 +38,7 @@ public class AshenmoorGouger extends mage.sets.shadowmoor.AshenmoorGouger {
     public AshenmoorGouger(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 190;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public AshenmoorGouger(final AshenmoorGouger card) {

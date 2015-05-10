@@ -38,7 +38,7 @@ public class InstillInfection extends mage.sets.scarsofmirrodin.InstillInfection
     public InstillInfection(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 85;
-        this.expansionSetCode = "MMB";
+        this.expansionSetCode = "MM2";
     }
 
     public InstillInfection(final InstillInfection card) {
