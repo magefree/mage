@@ -115,7 +115,7 @@ public class StackAbilityView extends CardView {
                     for (UUID uuid : targetList) {
                         MageObject mageObject = game.getObject(uuid);
                         if (mageObject != null) {
-                            names.add(mageObject.getLogName());
+                            names.add(mageObject.getName());
                         }
                     }
 
@@ -123,7 +123,7 @@ public class StackAbilityView extends CardView {
             }
         }
         if (!names.isEmpty()) {
-            getRules().add("<i>Targets: " + names.toString() + "</i>");
+            getRules().add("<i>Related objects: " + names.toString() + "</i>");
         }
         // show for modal ability, which mode was choosen
         if (ability.isModal()) {

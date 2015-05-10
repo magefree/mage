@@ -151,7 +151,7 @@ class GraftStaticAbility extends StaticAbility {
 class GraftDistributeCounterEffect extends OneShotEffect {
 
     public GraftDistributeCounterEffect() {
-        super(Outcome.BoostCreature);
+        super(Outcome.Detriment); // because you can move ot also to opponents creature
         this.staticText = "you may move a +1/+1 counter from this permanent onto it";
     }
 
@@ -175,8 +175,7 @@ class GraftDistributeCounterEffect extends OneShotEffect {
                     sourcePermanent.removeCounters(CounterType.P1P1.getName(), 1, game);
                     targetCreature.addCounters(CounterType.P1P1.createInstance(1), game);
                     if (!game.isSimulation()) {
-                        StringBuilder sb = new StringBuilder("Moved one +1/+1 counter from ").append(sourcePermanent.getName()).append(" to ").append(targetCreature.getName());
-                        game.informPlayers(sb.toString());
+                        game.informPlayers("Moved one +1/+1 counter from " + sourcePermanent.getLogName() + " to " + targetCreature.getLogName());
                     }
                     return true;
                 }
