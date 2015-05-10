@@ -29,7 +29,6 @@ package mage.sets.modernmasters2015;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -108,12 +107,11 @@ class KarplusanStriderEffect extends ContinuousRuleModifyingEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent targettedPermanent = game.getPermanent(event.getTargetId());
-        Spell sourceSpell = game.getStack().getSpell(event.getSourceId());
-        if (targettedPermanent != null && sourceSpell != null && targettedPermanent.getId().equals(source.getSourceId())) {
-            if (sourceSpell.getColor().contains(ObjectColor.BLUE)
-                    || sourceSpell.getColor().contains(ObjectColor.BLACK)) {
-                return true;
+        if (event.getTargetId().equals(source.getSourceId())) {
+            Permanent targettedPermanent = game.getPermanent(event.getTargetId());
+            Spell sourceSpell = game.getStack().getSpell(event.getSourceId());
+            if (targettedPermanent != null && sourceSpell != null) {
+                return sourceSpell.getColor().isBlue() || sourceSpell.getColor().isBlack();
             }
         }
         return false;
