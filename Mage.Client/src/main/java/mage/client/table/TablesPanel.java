@@ -170,10 +170,10 @@ public class TablesPanel extends javax.swing.JPanel {
                 String deckType = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_DECK_TYPE);
                 String status = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_STATUS);
                 boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
-                String owner = (String)tableModel.getValueAt(modelRow, 1);
+                String owner = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
                 switch (action) {
                     case "Join":
-                        if (owner.equals(session.getUserName())) {
+                        if (owner.equals(session.getUserName()) || owner.startsWith(session.getUserName() + ",")) {
                             try {
                                 JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                                 JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -267,8 +267,8 @@ public class TablesPanel extends javax.swing.JPanel {
         };
                      
         // !!!! adds action buttons to the table panel (don't delete this)
-        new ButtonColumn(tableTables, openTableAction, TableTableModel.ACTION_COLUMN);
-        new ButtonColumn(tableCompleted, closedTableAction, MatchesTableModel.ACTION_COLUMN);
+        new ButtonColumn(tableTables, openTableAction, tableTables.convertColumnIndexToView(TableTableModel.ACTION_COLUMN));
+        new ButtonColumn(tableCompleted, closedTableAction, tableCompleted.convertColumnIndexToView(MatchesTableModel.ACTION_COLUMN));
         // !!!!
     }
     
@@ -1176,6 +1176,7 @@ class TableTableModel extends AbstractTableModel {
     
     public static final int COLUMN_ICON = 0; 
     public static final int COLUMN_DECK_TYPE = 1; // column the deck type is located (starting with 0) Start string is used to check for Limited
+    public static final int COLUMN_OWNER = 2;
     public static final int COLUMN_GAME_TYPE = 3;
     public static final int COLUMN_INFO = 4;
     public static final int COLUMN_STATUS = 5;

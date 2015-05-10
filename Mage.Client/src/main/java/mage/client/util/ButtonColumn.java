@@ -48,10 +48,10 @@ import javax.swing.table.TableColumnModel;
  */
 public class ButtonColumn extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener, MouseListener {
 
-    private JTable table;
-    private Action action;
-    private JButton renderButton;
-    private JButton editButton;
+    private final JTable table;
+    private final Action action;
+    private final JButton renderButton;
+    private final JButton editButton;
     private String text;
     private boolean isButtonColumnEditor;
 
@@ -71,10 +71,12 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         table.addMouseListener(this);
     }
 
+    @Override
     public Object getCellEditorValue() {
         return text;
     }
 
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         if (hasFocus)
         {
@@ -96,12 +98,14 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         return renderButton;
     }
 
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         text = (value == null) ? "" : value.toString();
         editButton.setText( text );
         return editButton;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         int row = table.convertRowIndexToModel( table.getEditingRow() );
         fireEditingStopped();
@@ -110,11 +114,13 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
 
     }
 
+    @Override
     public void mousePressed(MouseEvent arg0) {
         if (table.isEditing() && table.getCellEditor() == this)
             isButtonColumnEditor = true;
     }
 
+    @Override
     public void mouseReleased(MouseEvent arg0) {
         if (isButtonColumnEditor && table.isEditing())
             table.getCellEditor().stopCellEditing();
@@ -122,10 +128,13 @@ public class ButtonColumn extends AbstractCellEditor implements TableCellRendere
         isButtonColumnEditor = false;
     }
 
+    @Override
     public void mouseClicked(MouseEvent arg0) {}
 
+    @Override
     public void mouseEntered(MouseEvent arg0) {}
 
+    @Override
     public void mouseExited(MouseEvent arg0) {}
 
 
