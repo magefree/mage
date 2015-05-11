@@ -31,11 +31,14 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -47,9 +50,10 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -58,6 +62,8 @@ import mage.players.Player;
  * @author anonymous
  */
 public class EnduringRenewal extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
 
     public EnduringRenewal(UUID ownerId) {
         super(ownerId, 247, "Enduring Renewal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
@@ -68,7 +74,7 @@ public class EnduringRenewal extends CardImpl {
         // If you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnduringRenewalReplacementEffect()));
         // Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
-        this.addAbility(new EnduringRenewalTriggeredAbility());
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false, filter, true, true));
     }
 
     public EnduringRenewal(final EnduringRenewal card) {
@@ -109,21 +115,19 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
             return false;
         } else if (you.getLibrary().size() > 0){
             
-            Card top = you.getLibrary().removeFromTop(game);
+            Card top = you.getLibrary().getFromTop(game);
 
-            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl();
 
             cards.add(top);
 
             you.revealCards("Top card of " + you.getName() + "'s library", cards, game);
 
             if (top.getCardType().contains(CardType.CREATURE)) {
-                top.moveToZone(Zone.GRAVEYARD, top.getId(), game, true);
+                you.moveCardToGraveyardWithInfo(top, source.getSourceId(), game, Zone.LIBRARY);
             } else {
-                top.moveToZone(Zone.HAND, top.getId(), game, false);
+                you.moveCardToHandWithInfo(top, source.getSourceId(), game, Zone.LIBRARY);
             }
-            
-            cards.clear();
             
             return true;
         }
@@ -197,42 +201,5 @@ class EnduringRenewalEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class EnduringRenewalTriggeredAbility extends TriggeredAbilityImpl {
-
-    public EnduringRenewalTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new EnduringRenewalEffect(), false);
-    }
-
-    public EnduringRenewalTriggeredAbility(EnduringRenewalTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).isDiesEvent()
-                && ((ZoneChangeEvent) event).getPlayerId().equals(this.getControllerId())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.CREATURE)
-                    && permanent.getControllerId().equals(this.controllerId)) {
-                Effect effect = this.getEffects().get(0);
-                effect.setValue("returningCreature", event.getTargetId());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature is put into your graveyard from the battlefield, " + super.getRule();
-    }
-
-    @Override
-    public EnduringRenewalTriggeredAbility copy() {
-        return new EnduringRenewalTriggeredAbility(this);
     }
 }
