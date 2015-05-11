@@ -148,7 +148,16 @@ public class GameEvent implements Serializable {
         COUNTER,
         COUNTERED,
         DECLARING_ATTACKERS, DECLARED_ATTACKERS,
-        DECLARE_ATTACKER, ATTACKER_DECLARED,
+        DECLARE_ATTACKER,
+        
+        /* ATTACKER_DECLARED
+            targetId    id of the defending player or planeswalker attacked
+            sourceId    id of the attacking creature
+            playerId    player defining the attacking creatures
+            amount      not used for this event
+            flag        not used for this event
+        */        
+        ATTACKER_DECLARED,
         
         /* DECLARING_BLOCKERS
             targetId    attackerId
