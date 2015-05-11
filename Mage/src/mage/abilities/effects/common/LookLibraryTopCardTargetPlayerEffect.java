@@ -30,26 +30,34 @@ package mage.abilities.effects.common;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-
 public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
 
-    public LookLibraryTopCardTargetPlayerEffect() {
+    protected int amount;
+    
+    public LookLibraryTopCardTargetPlayerEffect(int amount) {
         super(Outcome.Benefit);
-        this.staticText = "look at the top card of target player's library";
+        this.amount = amount;
+        setText();
+    }
+
+    public LookLibraryTopCardTargetPlayerEffect() {
+        this(1);
     }
 
     public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
         super(effect);
+        amount = effect.amount;
     }
 
     @Override
@@ -63,14 +71,24 @@ public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && targetPlayer != null && sourceObject != null) {
-            Card card = targetPlayer.getLibrary().getFromTop(game);
-            if (card != null) {
-                CardsImpl cards = new CardsImpl();
-                cards.add(card);
-                player.lookAtCards(sourceObject.getName(), cards, game);
-            }
+            Cards cards = new CardsImpl();
+            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
+            player.lookAtCards(sourceObject.getName(), cards, game);
             return true;
         }
         return false;
+    }
+    
+    private void setText() {
+        StringBuilder sb = new StringBuilder("look at the top ");        
+        if (amount > 1) {
+            sb.append(CardUtil.numberToText(amount));
+            sb.append(" cards ");
+        }
+        else {
+            sb.append(" card ");
+        }
+        sb.append("of target player's library");
+        this.staticText = sb.toString();
     }
 }

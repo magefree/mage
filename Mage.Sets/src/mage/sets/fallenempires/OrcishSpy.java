@@ -27,25 +27,16 @@
  */
 package mage.sets.fallenempires;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
-import mage.abilities.effects.common.RevealTargetPlayerLibraryEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -62,7 +53,7 @@ public class OrcishSpy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Look at the top three cards of target player's library.
-        Ability ability = new SimpleActivatedAbility(Zone.LIBRARY, new LookLibraryTopXCardsTargetPlayerEffect(3, "look at the top three cards of target player's library"), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.LIBRARY, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
         this.addAbility(ability);
     }
 
@@ -73,39 +64,5 @@ public class OrcishSpy extends CardImpl {
     @Override
     public OrcishSpy copy() {
         return new OrcishSpy(this);
-    }
-}
-
-class LookLibraryTopXCardsTargetPlayerEffect extends OneShotEffect {
-
-    protected int number;
-
-    public LookLibraryTopXCardsTargetPlayerEffect(int number, String text) {
-        super(Outcome.Benefit);
-        this.number = number;
-        this.staticText = text;
-    }
-
-    public LookLibraryTopXCardsTargetPlayerEffect(final LookLibraryTopXCardsTargetPlayerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LookLibraryTopXCardsTargetPlayerEffect copy() {
-        return new LookLibraryTopXCardsTargetPlayerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && targetPlayer != null && sourceObject != null) {
-            CardsImpl cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, number));            
-            player.lookAtCards(sourceObject.getName(), cards, game);
-            return true;
-        }
-        return false;
     }
 }
