@@ -139,12 +139,12 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
      * @param ability
      * @param game
      * @param sourceId
-     * @param controllerId
+     * @param payingPlayerId
      * @return true if the cost was paid
      */
-    public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID controllerId) {
+    public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
         int bookmark = game.bookmarkState();
-        if (pay(ability, game, sourceId, controllerId, false)) {
+        if (pay(ability, game, sourceId, payingPlayerId, false)) {
             game.removeBookmark(bookmark);
             return true;
         }

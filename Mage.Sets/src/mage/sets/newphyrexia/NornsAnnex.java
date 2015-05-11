@@ -52,7 +52,9 @@ public class NornsAnnex extends CardImpl {
     public NornsAnnex(UUID ownerId) {
         super(ownerId, 17, "Norn's Annex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{WP}{WP}");
         this.expansionSetCode = "NPH";
-        this.color.setWhite(true);
+        
+        // {WP} ({WP} can be paid with either or 2 life.)
+        // Creatures can't attack you or a planeswalker you control unless their controller pays for each of those creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NornsAnnexReplacementEffect()));
     }
 
@@ -87,29 +89,24 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            if (event.getTargetId().equals(source.getControllerId()) ) {
-                return true;
-            }
-            // planeswalker
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                                  && permanent.getCardType().contains(CardType.PLANESWALKER)) {
-                return true;
-            }
+        if (event.getTargetId().equals(source.getControllerId()) ) {
+            return true;
         }
-        return false;
+        // planeswalker
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                && permanent.getCardType().contains(CardType.PLANESWALKER);
     }
 
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if (player != null && event.getTargetId().equals(source.getControllerId())) {
+        if (player != null) {
             ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
             if (propagandaTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                     player.chooseUse(Outcome.Benefit, "Pay {WP} to declare attacker?", game)) {
-                if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
+                if (propagandaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                     return false;
                 }
             }
@@ -125,5 +122,3 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
     }
 
 }
-
-
