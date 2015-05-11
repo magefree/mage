@@ -160,7 +160,7 @@ class HomingSliverEffect extends ContinuousEffectImpl {
                     if (affectedObjectList.contains(new MageObjectReference(cardId, game))) {
                         Card card = game.getCard(cardId);
                         CyclingAbility ability = null;
-                        if (card.getSubtype().contains("Sliver")) {
+                        if (card.hasSubtype("Sliver")) {
                             ability = new CyclingAbility(new ManaCostsImpl("{3}"), filter2, "Slivercycling");
                         }
                         if (ability != null) {
