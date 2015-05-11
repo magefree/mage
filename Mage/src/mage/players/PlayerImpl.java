@@ -639,8 +639,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void discardToMax(Game game) {
         if (hand.size() > this.maxHandSize) {
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " discards down to " + this.maxHandSize + (this.maxHandSize == 1 ? " hand card" : " hand cards"));
+            }
             discard(hand.size() - this.maxHandSize, null, game);
         }
     }
@@ -733,8 +734,9 @@ public abstract class PlayerImpl implements Player, Serializable {
          */
         if (card != null) {
             // write info to game log first so game log infos from triggered or replacement effects follow in the game log
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " discards " + card.getLogName());
+            }
             /* If a card is discarded while Rest in Peace is on the battlefield, abilities that function
              * when a card is discarded (such as madness) still work, even though that card never reaches
              * a graveyard. In addition, spells or abilities that check the characteristics of a discarded
@@ -1034,8 +1036,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 game.getStack().push(new StackAbility(ability, playerId));
                 if (ability.activate(game, false)) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(getLogName() + ability.getGameLogMessage(game));
+                    }
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -1061,8 +1064,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (action.activate(game, false)) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, action.getSourceId(), action.getId(), playerId));
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(getLogName() + action.getGameLogMessage(game));
+                }
                 if (action.resolve(game)) {
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
@@ -1287,8 +1291,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void shuffleLibrary(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SHUFFLE_LIBRARY, playerId, playerId))) {
             this.library.shuffle();
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(getLogName() + " shuffles his or her library.");
+            }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LIBRARY_SHUFFLED, playerId, playerId));
         }
     }
@@ -1585,8 +1590,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life -= event.getAmount();
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " loses " + event.getAmount() + " life");
+            }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST_LIFE, playerId, playerId, playerId, amount));
             return amount;
         }
@@ -2055,8 +2061,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId, playerId, Integer.MAX_VALUE);
         if (!game.replaceEvent(event)) {
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(searchInfo);
+            }
             TargetCardInLibrary newTarget = target.copy();
             int count;
             int librarySearchLimit = event.getAmount();
@@ -2096,8 +2103,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
         boolean result = rnd.nextBoolean();
-        if (!game.isSimulation())
+        if (!game.isSimulation()) {
             game.informPlayers("[Flip a coin] " + getLogName() + (result ? " won (head)." : " lost (tail)."));
+        }
         GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
         event.setAppliedEffects(appliedEffects);
         game.replaceEvent(event);
@@ -2287,12 +2295,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     		}
 
     		// controller specific alternate spell costs
-    		for (AlternativeSourceCosts alternativeSourceCosts: getAlternativeSourceCosts()) {
-    			if (alternativeSourceCosts instanceof Ability) {
-    				if (((AlternativeSourceCosts) alternativeSourceCosts).isAvailable(ability, game)) {
-    					if (((Ability) alternativeSourceCosts).getCosts().canPay(ability, playerId, playerId, game)) {
+    		for (AlternativeSourceCosts alternateSourceCosts: getAlternativeSourceCosts()) {
+    			if (alternateSourceCosts instanceof Ability) {
+    				if (alternateSourceCosts.isAvailable(ability, game)) {
+    					if (((Ability) alternateSourceCosts).getCosts().canPay(ability, playerId, playerId, game)) {
     						ManaCostsImpl manaCosts = new ManaCostsImpl();
-    						for (Cost cost : ((Ability) alternativeSourceCosts).getCosts()) {
+    						for (Cost cost : ((Ability) alternateSourceCosts).getCosts()) {
     							if (cost instanceof ManaCost) {
     								manaCosts.add((ManaCost) cost);
     							}
@@ -2884,7 +2892,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
                 boolean chooseOrder = true;
                 if (cards.size() > 2) {
-                    chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Do you like to choose the order the cards go to graveyard?", game);
+                    chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
                 }
                 if (chooseOrder) {
                     while (choosingPlayer.isInGame() && cards.size() > 1) {
@@ -2997,11 +3005,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     public boolean putOntoBattlefieldWithInfo(Card card, Game game, Zone fromZone, UUID sourceId, boolean tapped, boolean facedown) {
         boolean result = false;
         if (card.putOntoBattlefield(game, fromZone, sourceId, this.getId(), tapped, facedown)) {
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder(this.getLogName())
-                    .append(" puts ").append(facedown ? "a card face down ":card.getLogName())
-                    .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
-                    .append("onto the Battlefield").toString());
+                        .append(" puts ").append(facedown ? "a card face down ":card.getLogName())
+                        .append(" from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(" ")
+                        .append("onto the Battlefield").toString());
+            }
             result = true;
         }
         return result;

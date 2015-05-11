@@ -46,7 +46,7 @@ import java.util.UUID;
  */
 public class DiscipleOfGrace extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -57,10 +57,14 @@ public class DiscipleOfGrace extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+        
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
+        
+        // Protection from black        
         this.addAbility(new ProtectionAbility(filter));
+        
+        // Cycling {2} ({2}, Discard this card: Draw a card.)        
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
