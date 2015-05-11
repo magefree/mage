@@ -25,70 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.eighthedition;
 
-import mage.MageObject;
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
+import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author LevelX2
+ * @author anonymous
  */
-public class LookLibraryTopCardTargetPlayerEffect extends OneShotEffect {
+public class DistortingLens extends CardImpl {
 
-    protected int amount;
-    
-    public LookLibraryTopCardTargetPlayerEffect(int amount) {
-        super(Outcome.Benefit);
-        this.amount = amount;
-        setText();
+    public DistortingLens(UUID ownerId) {
+        super(ownerId, 299, "Distorting Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
+        this.expansionSetCode = "8ED";
+
+        // {tap}: Target permanent becomes the color of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPermanent());
+        this.addAbility(ability);
     }
 
-    public LookLibraryTopCardTargetPlayerEffect() {
-        this(1);
-    }
-
-    public LookLibraryTopCardTargetPlayerEffect(final LookLibraryTopCardTargetPlayerEffect effect) {
-        super(effect);
-        amount = effect.amount;
+    public DistortingLens(final DistortingLens card) {
+        super(card);
     }
 
     @Override
-    public LookLibraryTopCardTargetPlayerEffect copy() {
-        return new LookLibraryTopCardTargetPlayerEffect(this);
+    public DistortingLens copy() {
+        return new DistortingLens(this);
+    }
+}
+
+class ChangeColorEffect extends OneShotEffect {
+
+    public ChangeColorEffect() {
+        super(Outcome.Neutral);
+        staticText = "Target permanent becomes the color of your choice until end of turn";
+    }
+
+    public ChangeColorEffect(final ChangeColorEffect effect) {
+        super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && targetPlayer != null && sourceObject != null) {
-            Cards cards = new CardsImpl();
-            cards.addAll(targetPlayer.getLibrary().getTopCards(game, amount));
-            player.lookAtCards(sourceObject.getName(), cards, game);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent chosen = game.getPermanent(targetPointer.getFirst(game, source));
+        if (player != null && permanent != null) {
+            ContinuousEffect effect = new BecomesColorTargetEffect(null, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(chosen.getId()));
+            game.addEffect(effect, source);
             return true;
         }
         return false;
     }
-    
-    private void setText() {
-        StringBuilder sb = new StringBuilder("look at the top ");        
-        if (amount > 1) {
-            sb.append(CardUtil.numberToText(amount));
-            sb.append(" cards ");
-        }
-        else {
-            sb.append(" card ");
-        }
-        sb.append("of target player's library");
-        this.staticText = sb.toString();
+
+    @Override
+    public ChangeColorEffect copy() {
+        return new ChangeColorEffect(this);
     }
 }
