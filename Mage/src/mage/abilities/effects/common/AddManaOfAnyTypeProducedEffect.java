@@ -111,8 +111,9 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
                         newMana.setColorless(1);
                         break;
                 }                
-                targetController.getManaPool().addMana(newMana, game, source);
                 checkToFirePossibleEvents(newMana, game, source);
+                targetController.getManaPool().addMana(newMana, game, source);
+                
             }
             return true;
         }

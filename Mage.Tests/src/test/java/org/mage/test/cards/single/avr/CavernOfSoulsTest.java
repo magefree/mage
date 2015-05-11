@@ -223,4 +223,31 @@ public class CavernOfSoulsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 0);
 
     }
+    
+    /**
+     * Cavern of Souls can produce any colour of mana with its second ability when Contamination is in play.
+     */
+   @Test
+    public void testUseWithConversionInPlay() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Cavern of Souls");
+        // Creature - Drake {3}{R}
+        addCard(Zone.HAND, playerA, "Desert Drake");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Contamination", 1);
+        
+
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cavern of Souls");
+        setChoice(playerA, "Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Desert Drake");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Cavern of Souls", 1);
+        assertPermanentCount(playerA, "Desert Drake", 0);
+
+    }
+        
 }

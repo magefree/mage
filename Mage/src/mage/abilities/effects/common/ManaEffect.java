@@ -56,7 +56,7 @@ public abstract class ManaEffect extends OneShotEffect {
     public abstract Mana getMana(Game game, Ability source);
 
     /**
-     * Only used for mana effects that decide which mana is produced during resolution of the effect.
+     * Only used for mana effects that decide which kind of mana is produced during resolution of the effect.
      * 
      * @param mana
      * @param game
