@@ -35,7 +35,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -44,7 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -59,7 +58,7 @@ public class DistortingLens extends CardImpl {
 
         // {tap}: Target permanent becomes the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
 
@@ -90,14 +89,10 @@ class ChangeColorEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         Permanent chosen = game.getPermanent(targetPointer.getFirst(game, source));
         if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect = new BecomesColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
-                effect.setTargetPointer(new FixedTarget(chosen.getId()));
-                game.addEffect(effect, source);
-                return true;
-            }
+            ContinuousEffect effect = new BecomesColorTargetEffect(null, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(chosen.getId()));
+            game.addEffect(effect, source);
+            return true;
         }
         return false;
     }
