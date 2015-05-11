@@ -58,6 +58,7 @@ import net.java.truevfs.kernel.spec.FsSyncException;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
+import org.mage.plugins.card.dl.sources.MythicspoilerComSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -139,7 +140,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         p0.add(jLabel1);
         p0.add(Box.createVerticalStrut(5));
-        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com"/*, "mtgimage.com (HQ)" , "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
+        ComboBoxModel jComboBox1Model = new DefaultComboBoxModel(new String[] { "magiccards.info", "wizards.com", "mythicspoiler.com" /*, "mtgimage.com (HQ)" , "mtgathering.ru HQ", "mtgathering.ru MQ", "mtgathering.ru LQ"*/});
         jComboBox1 = new JComboBox();
 
         cardImageSource = MagicCardsImageSource.getInstance();
@@ -156,6 +157,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 1:
                         cardImageSource = WizardCardsImageSource.getInstance();
+                        break;
+                    case 2:
+                        cardImageSource = MythicspoilerComSource.getInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();
