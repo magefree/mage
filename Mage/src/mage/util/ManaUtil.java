@@ -13,6 +13,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.cards.Card;
 import mage.game.Game;
 
 /**
@@ -351,8 +352,8 @@ public class ManaUtil {
     public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
         // check for special mana payment possibilities
         MageObject mageObject = source.getSourceObject(game);        
-        if (mageObject != null) {            
-            for (Ability ability :mageObject.getAbilities()) {
+        if (mageObject instanceof Card) {            
+            for (Ability ability :((Card)mageObject).getAbilities(game)) {
                 if (ability instanceof AlternateManaPaymentAbility) {
                     ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, unpaid);
                 }
