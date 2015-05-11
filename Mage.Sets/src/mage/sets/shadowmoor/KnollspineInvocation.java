@@ -30,21 +30,20 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,14 +52,34 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class KnollspineInvocation extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("a card with converted mana cost X");
+
     public KnollspineInvocation(UUID ownerId) {
         super(ownerId, 99, "Knollspine Invocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "SHM";
 
         // {X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to target creature or player.
-        Ability ability = new KnollspineInvocationAbility();
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new ManacostVariableValue(), true), new ManaCostsImpl<>("{X}"));
+        ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
+    }
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            for (Cost cost : ability.getCosts()) {
+                if (cost instanceof DiscardTargetCost) {
+                    DiscardTargetCost discardCost = (DiscardTargetCost) cost;
+                    discardCost.getTargets().clear();
+                    FilterCard adjustedFilter = filter.copy(); // don't use it directly, it's static!!!!
+                    adjustedFilter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+                    discardCost.addTarget(new TargetCardInHand(adjustedFilter));
+                    return;
+                }
+            }
+        }
     }
 
     public KnollspineInvocation(final KnollspineInvocation card) {
@@ -70,97 +89,5 @@ public class KnollspineInvocation extends CardImpl {
     @Override
     public KnollspineInvocation copy() {
         return new KnollspineInvocation(this);
-    }
-}
-
-class KnollspineInvocationAbility extends SimpleActivatedAbility {
-    public KnollspineInvocationAbility() {
-        super(Zone.BATTLEFIELD, new KnollspineInvocationEffect(), new ManaCostsImpl("{0}"));
-        //If cost gets added by ManaCostsImpl.add from ActivatedAbilityImpl constructor, this will destroy our custom mana cost
-        //Here comes the hack
-        //A less hacky solution would be to implement this as a ManaCost proper, 
-        //using ManaCostImpl (but it would involve duplicating code from ManaCostsImpl
-        //and, of course, it would deny access to ManaCostsImpl's API)
-        this.manaCosts = new KnollspineInvocationAbilityCost("{X}");
-        this.manaCostsToPay = this.manaCosts.copy();
-    }
-}
-
-class KnollspineInvocationEffect extends OneShotEffect {
-    //See DrainLife for this class' implementation
-
-    public KnollspineInvocationEffect() {
-        super(Outcome.Damage);
-        staticText = "Knollspine Invocation deals X damage to target creature or player";
-    }
-
-    public KnollspineInvocationEffect(final KnollspineInvocationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
-        if (amount > 0) {            
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null ) {
-                permanent.damage(amount, source.getSourceId(), game, false, true);
-            } else {
-                Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-                if (player != null) {
-                    player.damage(amount, source.getSourceId(), game, false, true);
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public KnollspineInvocationEffect copy() {
-        return new KnollspineInvocationEffect(this);
-    }
-}
-
-class KnollspineInvocationAbilityCost extends ManaCostsImpl {
-    protected DiscardCardCost additional;
-    
-    public KnollspineInvocationAbilityCost(final KnollspineInvocationAbilityCost cost) {
-        super(cost);
-        this.additional = cost.additional;
-    }
-    
-    public KnollspineInvocationAbilityCost (String s) {
-        super(s);
-        //we can only apply the additional discard cost AFTER we resolve this one!
-        FilterCard filter = new FilterOwnedCard("a card with converted mana cost " + super.getText());
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, super.getX()));
-        additional = new DiscardCardCost(filter);
-    }
-    
-    @Override
-    public KnollspineInvocationAbilityCost copy() {
-        return new KnollspineInvocationAbilityCost(this);
-    }
-    
-    @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (super.pay(ability, game, sourceId, controllerId, noMana)) {
-            //Now we get the real deal
-            FilterCard filter = new FilterOwnedCard("a card with converted mana cost " + this.getX());
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, this.getX()));
-            return new DiscardCardCost(filter).pay(ability, game, sourceId, controllerId, noMana);
-        }
-        return false;
-    }
-    
-    @Override
-    public String getText() {
-        StringBuilder sb = new StringBuilder(super.getText());
-        sb.append(", ");
-        sb.append(additional.getText());
-        System.out.println("Knollspine Invocation tooltip: " + sb.toString());
-        return sb.toString();
     }
 }
