@@ -568,10 +568,18 @@ public class HumanPlayer extends PlayerImpl {
                             revealFaceDownCard((Card) object, game);
                             result = true;
                         }
-                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(object, zone, game);
-                        if (useableAbilities != null && useableAbilities.size() > 0) {
-                            activateAbility(useableAbilities, object, game);
-                            result = true;
+                        Player actingPlayer = null;
+                        if (game.getPriorityPlayerId().equals(playerId)) {
+                            actingPlayer = this;
+                        } else if (getPlayersUnderYourControl().contains(game.getPriorityPlayerId())) {
+                            actingPlayer = game.getPlayer(game.getPriorityPlayerId());                            
+                        }
+                        if (actingPlayer != null) {
+                            LinkedHashMap<UUID, ActivatedAbility> useableAbilities = actingPlayer.getUseableActivatedAbilities(object, zone, game);
+                            if (useableAbilities != null && useableAbilities.size() > 0) {
+                                activateAbility(useableAbilities, object, game);
+                                result = true;
+                            }
                         }
                     }
                 }

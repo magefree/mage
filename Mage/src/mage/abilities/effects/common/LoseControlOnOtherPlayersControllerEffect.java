@@ -40,8 +40,9 @@ import mage.players.Player;
  */
 public class LoseControlOnOtherPlayersControllerEffect extends OneShotEffect {
 
-    public LoseControlOnOtherPlayersControllerEffect() {
+    public LoseControlOnOtherPlayersControllerEffect(String controllingPlayerName, String controlledPlayerName) {
         super(Outcome.Detriment);
+        staticText = controlledPlayerName + " lost control over " + controlledPlayerName;
     }
 
     public LoseControlOnOtherPlayersControllerEffect(final LoseControlOnOtherPlayersControllerEffect effect) {

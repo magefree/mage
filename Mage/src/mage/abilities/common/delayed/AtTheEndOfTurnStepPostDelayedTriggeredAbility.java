@@ -38,7 +38,7 @@ import mage.game.events.GameEvent;
 public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect) {
-        super(effect);
+        this(effect, false);
     }
 
     public AtTheEndOfTurnStepPostDelayedTriggeredAbility(Effect effect, boolean usesStack) {
@@ -68,6 +68,6 @@ public class AtTheEndOfTurnStepPostDelayedTriggeredAbility extends DelayedTrigge
 
     @Override
     public String getRule() {
-        return "At end of turn " + modes.getText();
+        return "At end of turn " + super.getRule();
     }
 }

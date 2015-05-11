@@ -30,6 +30,7 @@ package mage.players;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -379,7 +380,8 @@ public interface Player extends MageItem, Copyable<Player> {
     List<Ability> getPlayableOptions(Ability ability, Game game);
 
     Set<UUID> getPlayableInHand(Game game);
-
+    LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);
+    
     void addCounters(Counter counter, Game game);
     List<UUID> getAttachments();
     boolean addAttachment(UUID permanentId, Game game);

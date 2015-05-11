@@ -55,7 +55,7 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
         if (!controlsAbility(playerId, game)) {
             return false;
         }
-        //20091005 - 114.2a
+        //20091005 - 114.2a 
         return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
     }
 

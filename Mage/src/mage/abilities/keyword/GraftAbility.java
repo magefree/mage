@@ -76,7 +76,7 @@ public class GraftAbility extends TriggeredAbilityImpl {
         addSubAbility(new GraftStaticAbility(amount));
     }
 
-    public GraftAbility(GraftAbility ability) {
+    public GraftAbility(final GraftAbility ability) {
         super(ability);
         this.amount = ability.amount;
         this.cardtype = ability.cardtype;
