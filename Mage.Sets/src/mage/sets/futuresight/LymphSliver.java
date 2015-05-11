@@ -57,7 +57,7 @@ public class LymphSliver extends CardImpl {
 
         // All Sliver creatures have absorb 1.
         Ability absorb = new SimpleStaticAbility(Zone.BATTLEFIELD, new SliverAbsorbEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb, Duration.WhileOnBattlefield, filter, "If a source would deal damage to a Sliver, prevent 1 of that damage")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb, Duration.WhileOnBattlefield, filter, "absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
     }
 
     public LymphSliver(final LymphSliver card) {
