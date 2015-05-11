@@ -39,8 +39,6 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -59,7 +57,7 @@ public class LymphSliver extends CardImpl {
 
         // All Sliver creatures have absorb 1.
         Ability absorb = new SimpleStaticAbility(Zone.BATTLEFIELD, new SliverAbsorbEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(absorb, Duration.WhileOnBattlefield, filter, "If a source would deal damage to a Sliver, prevent 1 of that damage")));
     }
 
     public LymphSliver(final LymphSliver card) {
@@ -73,41 +71,13 @@ public class LymphSliver extends CardImpl {
 }
 
 class SliverAbsorbEffect extends PreventionEffectImpl {
-    //From Urza's Armor
     public SliverAbsorbEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source would deal damage to a Sliver, prevent 1 of that damage";
     }
 
     public SliverAbsorbEffect(SliverAbsorbEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1, false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage > 0) {
-                event.setAmount(damage - 1);
-                game.informPlayers("1 damage has been prevented.");
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER) && event.getTargetId().equals(source.getControllerId())) {
-			return super.applies(event, source, game);
-        }
-        return false;
     }
 
     @Override
