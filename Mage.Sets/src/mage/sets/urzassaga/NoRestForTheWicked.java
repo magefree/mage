@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
 /**
@@ -86,14 +87,18 @@ class NoRestForTheWickedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         NoRestForTheWickedWatcher watcher = (NoRestForTheWickedWatcher) game.getState().getWatchers().get("NoRestForTheWickedWatcher");
         if (watcher != null) {
-            for (UUID id : watcher.cards) {
-                Card c = game.getCard(id);
+            for (UUID cardId : watcher.cards) {
+                Card c = game.getCard(cardId);
                 if (c != null) {
-                    if (game.getState().getZone(id) == Zone.GRAVEYARD) {
-                        if (c.getCardType().contains(CardType.CREATURE) && c.getOwnerId().equals(source.getControllerId())) {
-                            //400.3
-                            c.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                        }
+                    if (game.getState().getZone(cardId) == Zone.GRAVEYARD
+                            && c.getCardType().contains(CardType.CREATURE)
+                            && c.getOwnerId().equals(source.getControllerId())) {
+                        //400.3
+                       Player p = game.getPlayer(source.getControllerId());
+                       if (p != null) {
+                           p.moveCardToHandWithInfo(c, source.getSourceId(), game, Zone.GRAVEYARD);
+                       }
+                       return false;
                     }
                 }
             }
@@ -105,27 +110,29 @@ class NoRestForTheWickedEffect extends OneShotEffect {
     @Override
     public NoRestForTheWickedEffect copy() {
         return new NoRestForTheWickedEffect(this);
+
     }
 }
 
 class NoRestForTheWickedWatcher extends Watcher {
 
-    ArrayList<UUID> cards = new ArrayList<UUID>();
+    ArrayList<UUID> cards;
 
     public NoRestForTheWickedWatcher() {
         super("NoRestForTheWickedWatcher", WatcherScope.GAME);
+        this.cards = new ArrayList();
     }
 
     public NoRestForTheWickedWatcher(final NoRestForTheWickedWatcher watcher) {
         super(watcher);
+        this.cards = new ArrayList();
         this.cards.addAll(watcher.cards);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).isDiesEvent()
-                && ((ZoneChangeEvent) event).getPlayerId().equals(this.getControllerId())) {
+                && ((ZoneChangeEvent) event).isDiesEvent()) {
             //400.3 Intercept only the controller's events
             cards.add(event.getTargetId());
         }
