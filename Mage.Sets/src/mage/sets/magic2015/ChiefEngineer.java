@@ -27,41 +27,56 @@
  */
 package mage.sets.magic2015;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
 public class ChiefEngineer extends CardImpl {
+    
+    private static final FilterSpell filter = new FilterSpell("Artifact spells you cast");
 
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+    
     public ChiefEngineer(UUID ownerId) {
         super(ownerId, 47, "Chief Engineer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M15";
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
         // Artifact spells you cast have convoke.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChiefEngineerEffect()));
+        this.addAbility(new SimpleStaticAbility(
+            Zone.BATTLEFIELD, new ChiefEngineerGainAbilitySpellsEffect(new ConvokeAbility(), filter)));
+        
     }
 
     public ChiefEngineer(final ChiefEngineer card) {
@@ -74,54 +89,49 @@ public class ChiefEngineer extends CardImpl {
     }
 }
 
-class ChiefEngineerEffect extends ReplacementEffectImpl {
+class ChiefEngineerGainAbilitySpellsEffect extends ContinuousEffectImpl {
 
-    public ChiefEngineerEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Artifact spells you cast have convoke";
+    private final Ability ability;
+    private final FilterSpell filter;
+
+    public ChiefEngineerGainAbilitySpellsEffect(Ability ability, FilterSpell filter) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.filter = filter;
+        staticText = filter.getMessage() + " have " + ability.getRule();
     }
 
-    public ChiefEngineerEffect(final ChiefEngineerEffect effect) {
+    public ChiefEngineerGainAbilitySpellsEffect(final ChiefEngineerGainAbilitySpellsEffect effect) {
         super(effect);
+        this.ability = effect.ability;
+        this.filter = effect.filter;
     }
 
     @Override
-    public ChiefEngineerEffect copy() {
-        return new ChiefEngineerEffect(this);
+    public ChiefEngineerGainAbilitySpellsEffect copy() {
+        return new ChiefEngineerGainAbilitySpellsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
-        if (object != null) {
-            Card card = (Card) object;
-            Ability ability = new ConvokeAbility();
-            game.getState().addOtherAbility(card, ability);
-            ability.setControllerId(source.getControllerId());
-            ability.setSourceId(card.getId());
-            game.getState().addAbility(ability, source.getSourceId(), card);
-        }
-        return false;
-    }
-    
-    @Override    
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }    
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == GameEvent.EventType.CAST_SPELL)
-                && event.getPlayerId() == source.getControllerId()) {
-            MageObject spellObject = game.getObject(event.getSourceId());
-            if (spellObject != null && spellObject.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
+                StackObject stackObject = iterator.next();
+                // only cast spells, so no copies
+                if (!stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+                    if (stackObject instanceof Spell) {
+                        Spell spell = (Spell) stackObject;
+                        if (filter.match(spell, game)) {
+                            if (!spell.getAbilities().contains(ability)) {
+                                game.getState().addOtherAbility(spell.getCard(), ability);
+                            }
+                        }
+                    }
+                }
             }
+            return true;
         }
         return false;
     }
