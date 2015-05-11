@@ -38,7 +38,6 @@ import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 
 /**
