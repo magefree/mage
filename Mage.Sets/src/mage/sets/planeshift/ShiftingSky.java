@@ -28,45 +28,47 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author anonymous
  */
 public class ShiftingSky extends CardImpl {
-    
+
     public ShiftingSky(UUID ownerId) {
         super(ownerId, 32, "Shifting Sky", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "PLS";
 
         // As Shifting Sky enters the battlefield, choose a color.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ShiftingSkyEffect());
-        // All nonland permanents are the chosen color.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ChooseColorEffect(Outcome.Benefit));
         this.addAbility(ability);
+        // All nonland permanents are the chosen color.
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new ShiftingSkyEffect());
+        this.addAbility(ability2);
     }
-    
+
     public ShiftingSky(final ShiftingSky card) {
         super(card);
     }
-    
+
     @Override
     public ShiftingSky copy() {
         return new ShiftingSky(this);
@@ -74,53 +76,74 @@ public class ShiftingSky extends CardImpl {
 }
 
 class ShiftingSkyEffect extends OneShotEffect {
+    private static final FilterPermanent filter = new FilterPermanent("All nonland permanents");
     
-    public ShiftingSkyEffect() {
-        super(Outcome.Neutral);
-        staticText = "All nonland permanents are the chosen color";
-    }
-    
-    public ShiftingSkyEffect(final ShiftingSkyEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        
-        FilterPermanent filter = new FilterPermanent("All nonland permanents");
-        
+    static {
         filter.add(
                 Predicates.not(
                         new CardTypePredicate(CardType.LAND)
                 )
         );
-        
+    }
+
+    public ShiftingSkyEffect() {
+        super(Outcome.Benefit);
+        staticText = "All nonland permanents are the chosen color";
+    }
+
+    public ShiftingSkyEffect(final ShiftingSkyEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+
         if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect;
-                
-                for (UUID playerId : player.getInRange()) {
-                    Player p = game.getPlayer(playerId);
-                    if (p != null) {
-                        for (Permanent chosen : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                            effect = new BecomesColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
-                            effect.setTargetPointer(new FixedTarget(chosen.getId()));
-                            game.addEffect(effect, source);
-                        }
+            ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            
+            if (color == null) {
+                return false;
+            }
+            
+            String colorString = color.toString();
+
+            for (UUID playerId : player.getInRange()) {
+                Player p = game.getPlayer(playerId);
+                if (p != null) {
+                    for (Permanent chosen : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
+                        setObject(chosen, colorString);
                     }
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }
-    
+
     @Override
     public ShiftingSkyEffect copy() {
         return new ShiftingSkyEffect(this);
+    }
+
+    private void setObject(Permanent chosen, String colorString) {
+       switch (colorString) {
+            case "W":
+                chosen.getColor().setWhite(true);
+                break;
+            case "B":
+                chosen.getColor().setBlack(true);
+                break;
+            case "U":
+                chosen.getColor().setBlue(true);
+                break;
+            case "G":
+                chosen.getColor().setGreen(true);
+                break;
+            case "R":
+                chosen.getColor().setRed(true);
+                break;
+        }
     }
 }
