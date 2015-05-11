@@ -58,7 +58,7 @@ public class RancidEarth extends CardImpl {
                 new RancidEarthEffect(),
                 new DestroyTargetEffect(),
                 new CardsInControllerGraveCondition(7),
-                "Destroy target land.<br/><br/><i>Threshold<i/> - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player"));
+                "Destroy target land.<br/><br/><i>Threshold<i/> - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player."));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
@@ -91,10 +91,7 @@ class RancidEarthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Effect effect1 = new DestroyTargetEffect("destroy that land");
-        if (effect1.apply(game, source)) {
-            return new DamageEverythingEffect(1).apply(game, source);
-        }
-
-        return false;
+        effect1.apply(game, source);
+        return new DamageEverythingEffect(1).apply(game, source);
     }
 }
