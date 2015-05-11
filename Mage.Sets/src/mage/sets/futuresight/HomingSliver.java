@@ -29,23 +29,30 @@ package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInLibrary;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -59,12 +66,6 @@ public class HomingSliver extends CardImpl {
         filter.add(new SubtypePredicate("Sliver"));
     }
 
-    private static final FilterPermanent filter2 = new FilterPermanent("Sliver card");
-
-    static {
-        filter2.add(new SubtypePredicate("Sliver"));
-    }
-
     public HomingSliver(UUID ownerId) {
         super(ownerId, 118, "Homing Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "FUT";
@@ -75,7 +76,7 @@ public class HomingSliver extends CardImpl {
         // Each Sliver card in each player's hand has slivercycling {3}.
         Ability ability = new CyclingAbility(new ManaCostsImpl("{3}"), filter, "Slivercycling");
         ability.addCost(new DiscardSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.HAND, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter2)));
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new HomingSliverEffect()));
         // Slivercycling {3}
         this.addAbility(ability);
         /**
@@ -91,7 +92,6 @@ public class HomingSliver extends CardImpl {
          * Brighthearth) will interact with Slivercycling. Effects that interact
          * with spells (such as Remove Soul or Faerie Tauntings) will not.
          */
-        
         /**
          * 01/02/2009	You can choose to find any card with the Sliver creature
          * type, even if it isn't a creature card. This includes, for example,
@@ -108,5 +108,71 @@ public class HomingSliver extends CardImpl {
     @Override
     public HomingSliver copy() {
         return new HomingSliver(this);
+    }
+}
+
+class HomingSliverEffect extends ContinuousEffectImpl {
+
+    private static final FilterCard filter2 = new FilterCard("Sliver card");
+
+    static {
+        filter2.add(new SubtypePredicate("Sliver"));
+    }
+
+    public HomingSliverEffect() {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.staticText = "Each Sliver card in each player's hand has slivercycling {3}";
+    }
+
+    public HomingSliverEffect(final HomingSliverEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public HomingSliverEffect copy() {
+        return new HomingSliverEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        if (this.affectedObjectsSet) {
+            for (UUID p : game.getPlayerList()) {
+                Player player = game.getPlayer(p);
+                if (player != null) {
+                    for (UUID cardId : player.getHand()) {
+                        Card card = game.getCard(cardId);
+                        if (card.getSubtype().contains("Sliver")) {
+                            affectedObjectList.add(new MageObjectReference(card, game));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID p : game.getPlayerList()) {
+            Player player = game.getPlayer(p);
+            if (player != null) {
+                for (UUID cardId : player.getHand()) {
+                    if (affectedObjectList.contains(new MageObjectReference(cardId, game))) {
+                        Card card = game.getCard(cardId);
+                        CyclingAbility ability = null;
+                        if (card.getSubtype().contains("Sliver")) {
+                            ability = new CyclingAbility(new ManaCostsImpl("{3}"), filter2, "Slivercycling");
+                        }
+                        if (ability != null) {
+                            ability.setSourceId(cardId);
+                            ability.setControllerId(card.getOwnerId());
+                            game.getState().addOtherAbility(card, ability);
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }
