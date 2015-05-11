@@ -45,15 +45,21 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
 
     private final FilterPermanent filter;
     private boolean setTargetPointer;
+    private boolean onlyToControllerGraveyard;
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer) {
+        this(effect, optional, filter, setTargetPointer, false);
+    }
+    public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer, boolean onlyToControllerGraveyard) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.onlyToControllerGraveyard = onlyToControllerGraveyard;
     }
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;        
     }
 
     @Override
@@ -80,7 +86,8 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
 
     @Override
     public String getRule() {
-        return new StringBuilder("Whenever ").append(filter.getMessage()).append(" is put into a graveyard from the battlefield, ").append(super.getRule()).toString();
+        return "Whenever " + filter.getMessage() + " is put into " + (onlyToControllerGraveyard ? "your":"a") +
+                " graveyard from the battlefield, " + super.getRule();
     }
 
     @Override
