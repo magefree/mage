@@ -106,6 +106,7 @@ public class AddConditionalManaOfAnyColorEffect extends ManaEffect {
             }
 
             if (mana != null) {
+                checkToFirePossibleEvents(mana, game, source);
                 controller.getManaPool().addMana(mana, game, source);
                 result = true;
             }

@@ -88,8 +88,8 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
                     createdMana = Mana.WhiteMana(amount);
                 }
                 if (createdMana != null) {
-                    controller.getManaPool().addMana(createdMana, game, source);
                     checkToFirePossibleEvents(createdMana, game, source);
+                    controller.getManaPool().addMana(createdMana, game, source);                    
                 }
                 return true;
             }
