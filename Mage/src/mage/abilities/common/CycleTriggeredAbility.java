@@ -28,13 +28,11 @@
 
 package mage.abilities.common;
 
-import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
 /**
@@ -53,11 +51,6 @@ public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     public CycleTriggeredAbility(CycleTriggeredAbility ability) {
         super(ability);
-    }
-    
-    @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return game.getState().getZone(getSourceId()).equals(Zone.HAND) && hasSourceObjectAbility(game, source, event);
     }
     
     @Override
