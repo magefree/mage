@@ -197,10 +197,10 @@ public class TargetDefender extends TargetImpl {
     public boolean canTarget(UUID id, Ability source, Game game) {
         Player player = game.getPlayer(id);
         MageObject targetSource = game.getObject(attackerId);
-        if (player != null && source != null) {
-            return notTarget || (player.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(player, game));
+        if (player != null) {
+            return notTarget || (player.canBeTargetedBy(targetSource, source == null ? null : source.getControllerId(), game) && filter.match(player, game));
         }
-        Permanent permanent = game.getPermanent(id);
+        Permanent permanent = game.getPermanent(id); // planeswalker
         if (permanent != null) {
             //Could be targeting due to combat decision to attack a player or planeswalker.
             UUID controllerId = null;
