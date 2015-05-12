@@ -367,6 +367,14 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             if (!target.isRequired(sourceId, game)) {
                 return false;
             }
+            if (target.canTarget(opponentId, null, game)) {
+                target.add(opponentId, game);
+                return true;
+            }            
+            if (target.canTarget(playerId, null, game)) {
+                target.add(playerId, game);
+                return true;
+            }
             throw new IllegalStateException("TargetPermanentOrPlayer wasn't handled. class:" + target.getClass().toString());
         }
         if (target instanceof TargetCardInGraveyard) {

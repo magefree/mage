@@ -115,6 +115,7 @@ public class CardView extends SimpleCardView {
     protected boolean isChoosable;
     protected boolean selected;
     protected boolean canAttack;
+    protected boolean gameObject;
 
     public CardView(Card card) {
         this(card, null, null, false);
@@ -141,6 +142,8 @@ public class CardView extends SimpleCardView {
         super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode());
         // no information available for face down cards as long it's not a controlled face down morph card
         // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
+        this.gameObject = game != null;
+        
         if (game != null && card.isFaceDown(game)) {
             this.fillEmpty(card, controlled);
             if (card instanceof Spell) {
@@ -733,4 +736,8 @@ public class CardView extends SimpleCardView {
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
     }
+
+    public boolean isGameObject() {
+        return gameObject;
+    }        
 }

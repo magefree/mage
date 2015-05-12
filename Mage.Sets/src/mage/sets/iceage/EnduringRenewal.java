@@ -30,8 +30,6 @@ package mage.sets.iceage;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -71,10 +69,14 @@ public class EnduringRenewal extends CardImpl {
 
         // Play with your hand revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect()));
+        
         // If you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnduringRenewalReplacementEffect()));
+        
         // Whenever a creature is put into your graveyard from the battlefield, return it to your hand.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false, filter, true, true));
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("return it to your hand");
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, filter, true, true));
     }
 
     public EnduringRenewal(final EnduringRenewal card) {

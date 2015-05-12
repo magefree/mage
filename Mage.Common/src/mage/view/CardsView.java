@@ -64,6 +64,12 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
         }
     }
 
+    public CardsView(Game game, Collection<? extends Card> cards) {
+        for (Card card: cards) {
+            this.put(card.getId(), new CardView(card, game, null, false));
+        }
+    }
+
     public CardsView ( Collection<? extends Ability> abilities, Game game ) {
         for ( Ability ability : abilities ) {
             MageObject sourceObject = null;

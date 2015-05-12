@@ -735,7 +735,7 @@ public class GameController implements GameCallback {
             @Override
             public void execute(UUID playerId) {
                 if (cards != null) {
-                    getGameSession(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
+                    getGameSession(playerId).target(question, new CardsView(game, cards.getCards(game)), targets, required, options);
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();
                     for (Permanent perm: perms) {

@@ -26,8 +26,8 @@ public enum ExpansionRepository {
     
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
-    private static final long EXPANSION_DB_VERSION = 3;
-    private static final long EXPANSION_CONTENT_VERSION = 5;
+    private static final long EXPANSION_DB_VERSION = 4;
+    private static final long EXPANSION_CONTENT_VERSION = 6;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 

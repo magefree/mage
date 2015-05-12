@@ -23,8 +23,8 @@ public class CombatManager {
 
     private static CombatManager combatManager;
 
-    private Map<UUID, Integer> combatAttackers = new HashMap<UUID, Integer>();
-    private Map<UUID, Integer> combatBlockers = new HashMap<UUID, Integer>();
+    private final Map<UUID, Integer> combatAttackers = new HashMap<>();
+    private final Map<UUID, Integer> combatBlockers = new HashMap<>();
     private int globalBlockersCount; // we need global counter as there are several combat groups
 
     public static CombatManager getInstance() {

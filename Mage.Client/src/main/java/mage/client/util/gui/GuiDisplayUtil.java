@@ -192,7 +192,10 @@ public class GuiDisplayUtil {
         buffer.append("pt;margin:0px 1px 0px 1px'>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
         buffer.append("<tr><td valign='top'><b>");
-        buffer.append(card.getDisplayName()).append(" [").append(card.getId().toString().substring(0,3)).append("]");
+        buffer.append(card.getDisplayName());
+        if (card.isGameObject()) {
+            buffer.append(" [").append(card.getId().toString().substring(0,3)).append("]");
+        }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
         buffer.append(symbolCount * 11 + 1);
         buffer.append("px'>");

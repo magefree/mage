@@ -1132,6 +1132,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public static void main(final String args[]) {
          // Workaround for #451
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        logger.info("Starting MAGE client version " + version);
+        logger.info("Logging level: " + logger.getEffectiveLevel());
 
         startTime = System.currentTimeMillis();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
