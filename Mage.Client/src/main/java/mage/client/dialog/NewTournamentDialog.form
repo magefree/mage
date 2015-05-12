@@ -28,13 +28,6 @@
                   <Component id="pnlPlayers" alignment="0" max="32767" attributes="0"/>
                   <Component id="pnlPacks" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnOk" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblNbrPlayers" min="-2" max="-2" attributes="0"/>
@@ -67,60 +60,63 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnOk" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtName" min="-2" pref="205" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbTimeLimit" max="32767" attributes="1"/>
+                              <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblGameType" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblDraftCube" max="-2" attributes="0"/>
+                                          <Component id="lblTournamentType" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbDeckType" max="-2" attributes="0"/>
+                                          <Component id="lblGameType" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbGameType" min="-2" pref="290" max="-2" attributes="1"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cbDraftCube" min="-2" pref="290" max="-2" attributes="0"/>
+                                          <Component id="cbDeckType" alignment="0" min="-2" pref="290" max="-2" attributes="1"/>
+                                          <Component id="cbGameType" min="-2" pref="290" max="-2" attributes="1"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="spnFreeMulligans" min="-2" pref="41" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lbDeckType" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblName" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbDeckType" min="-2" pref="290" max="-2" attributes="1"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblDraftCube" max="-2" attributes="0"/>
+                                      <Component id="txtName" min="-2" pref="124" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbDraftCube" min="-2" pref="290" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lblTournamentType" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbTournamentType" min="-2" pref="290" max="-2" attributes="0"/>
+                                      <Component id="cbTimeLimit" min="-2" pref="89" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lbSkillLevel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbSkillLevel" min="-2" pref="112" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtPassword" min="-2" pref="56" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="spnFreeMulligans" min="-2" pref="41" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="txtPassword" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -137,6 +133,8 @@
                   <Component id="cbTimeLimit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -188,7 +186,7 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="player1Panel" pref="59" max="32767" attributes="0"/>
+              <Component id="player1Panel" pref="62" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlPlayers" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -221,6 +219,17 @@
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbSkillLevel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Skill Level:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The time a player has for the whole match. If a player runs out of time during a game, he loses the complete match. "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbSkillLevel">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;This option can be used to make it easier to find matches&lt;br&gt;&#xa;with opponents of the appropriate skill level."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPassword">
@@ -437,6 +446,11 @@
       </Properties>
     </Component>
     <Component class="mage.client.table.NewPlayerPanel" name="player1Panel">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[400, 44]"/>
+        </Property>
+      </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlPlayers">
 
@@ -448,7 +462,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pnlOtherPlayers" alignment="0" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" alignment="0" pref="5" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

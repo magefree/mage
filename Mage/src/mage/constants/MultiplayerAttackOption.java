@@ -9,7 +9,7 @@ public enum MultiplayerAttackOption {
     LEFT("Attack Left"),
     RIGHT("Attack Right");
 
-    private String text;
+    private final String text;
 
     MultiplayerAttackOption(String text) {
         this.text = text;

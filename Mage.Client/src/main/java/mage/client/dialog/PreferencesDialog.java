@@ -163,6 +163,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_DECK_FILE = "newTableDeckFile";
     public static final String KEY_NEW_TABLE_RANGE = "newTableRange";
     public static final String KEY_NEW_TABLE_ATTACK_OPTION = "newTableAttackOption";
+    public static final String KEY_NEW_TABLE_SKILL_LEVEL = "newTableSkillLevel";
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
 

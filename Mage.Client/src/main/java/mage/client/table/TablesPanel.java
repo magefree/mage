@@ -85,6 +85,7 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
@@ -557,8 +558,19 @@ public class TablesPanel extends javax.swing.JPanel {
             formatFilterList.add(RowFilter.regexFilter("Pauper|Extended", TableTableModel.COLUMN_DECK_TYPE));
         }
 
-        if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty()) { // no selection
-            activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_GAME_TYPE));
+        List<RowFilter<Object, Object>> skillFilterList = new ArrayList<>();
+        if (btnSkillBeginner.isSelected()) {
+            skillFilterList.add(RowFilter.regexFilter(SkillLevel.BEGINNER.toString(), TableTableModel.COLUMN_SKILL));
+        }
+        if (btnSkillCasual.isSelected()) {
+            skillFilterList.add(RowFilter.regexFilter(SkillLevel.CASUAL.toString(), TableTableModel.COLUMN_SKILL));
+        }
+        if (btnSkillSerious.isSelected()) {
+            skillFilterList.add(RowFilter.regexFilter(SkillLevel.SERIOUS.toString(), TableTableModel.COLUMN_SKILL));
+        }
+        
+        if (stateFilterList.isEmpty() || typeFilterList.isEmpty() || formatFilterList.isEmpty() || skillFilterList.isEmpty()) { // no selection
+            activeTablesSorter.setRowFilter(RowFilter.regexFilter("Nothing", TableTableModel.COLUMN_SKILL));
         } else {
             List<RowFilter<Object, Object>> filterList = new ArrayList<>();
 
@@ -578,6 +590,12 @@ public class TablesPanel extends javax.swing.JPanel {
                 filterList.add(RowFilter.orFilter(formatFilterList));
             } else if (formatFilterList.size() == 1) {
                 filterList.addAll(formatFilterList);
+            }
+
+            if (skillFilterList.size() > 1) {
+                filterList.add(RowFilter.orFilter(skillFilterList));
+            } else if (skillFilterList.size() == 1) {
+                filterList.addAll(skillFilterList);
             }
             
             if (filterList.size() == 1) {
@@ -608,6 +626,10 @@ public class TablesPanel extends javax.swing.JPanel {
         btnTypeMatch = new javax.swing.JToggleButton();
         btnTypeTourneyConstructed = new javax.swing.JToggleButton();
         btnTypeTourneyLimited = new javax.swing.JToggleButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        btnSkillBeginner = new javax.swing.JToggleButton();
+        btnSkillCasual = new javax.swing.JToggleButton();
+        btnSkillSerious = new javax.swing.JToggleButton();
         filterBar2 = new javax.swing.JToolBar();
         btnFormatBlock = new javax.swing.JToggleButton();
         btnFormatStandard = new javax.swing.JToggleButton();
@@ -739,12 +761,11 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeMatch);
 
         btnTypeTourneyConstructed.setSelected(true);
-        btnTypeTourneyConstructed.setText("Constructed tourneys");
+        btnTypeTourneyConstructed.setText("Constructed tourn.");
         btnTypeTourneyConstructed.setToolTipText("Shows all constructed tournament tables.");
         btnTypeTourneyConstructed.setActionCommand("typeTourneyConstructed");
         btnTypeTourneyConstructed.setFocusPainted(false);
         btnTypeTourneyConstructed.setFocusable(false);
-        btnTypeTourneyConstructed.setMaximumSize(new java.awt.Dimension(115, 25));
         btnTypeTourneyConstructed.setRequestFocusEnabled(false);
         btnTypeTourneyConstructed.setVerifyInputWhenFocusTarget(false);
         btnTypeTourneyConstructed.addActionListener(new java.awt.event.ActionListener() {
@@ -755,12 +776,12 @@ public class TablesPanel extends javax.swing.JPanel {
         filterBar1.add(btnTypeTourneyConstructed);
 
         btnTypeTourneyLimited.setSelected(true);
-        btnTypeTourneyLimited.setText("Limited tourneys");
+        btnTypeTourneyLimited.setText("Limited tourn.");
         btnTypeTourneyLimited.setToolTipText("Shows all limited tournament tables.");
         btnTypeTourneyLimited.setActionCommand("typeTourneyLimited");
         btnTypeTourneyLimited.setFocusPainted(false);
         btnTypeTourneyLimited.setFocusable(false);
-        btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(90, 25));
+        btnTypeTourneyLimited.setMaximumSize(new java.awt.Dimension(72, 20));
         btnTypeTourneyLimited.setRequestFocusEnabled(false);
         btnTypeTourneyLimited.setVerifyInputWhenFocusTarget(false);
         btnTypeTourneyLimited.addActionListener(new java.awt.event.ActionListener() {
@@ -769,6 +790,58 @@ public class TablesPanel extends javax.swing.JPanel {
             }
         });
         filterBar1.add(btnTypeTourneyLimited);
+        filterBar1.add(jSeparator4);
+
+        btnSkillBeginner.setSelected(true);
+        btnSkillBeginner.setText("Beginner");
+        btnSkillBeginner.setToolTipText("Shows all tables with skill level beginner.");
+        btnSkillBeginner.setActionCommand("typeMatch");
+        btnSkillBeginner.setFocusPainted(false);
+        btnSkillBeginner.setFocusable(false);
+        btnSkillBeginner.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSkillBeginner.setRequestFocusEnabled(false);
+        btnSkillBeginner.setVerifyInputWhenFocusTarget(false);
+        btnSkillBeginner.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSkillBeginner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar1.add(btnSkillBeginner);
+
+        btnSkillCasual.setSelected(true);
+        btnSkillCasual.setText("Casual");
+        btnSkillCasual.setToolTipText("Shows all tables with skill level casual.");
+        btnSkillCasual.setActionCommand("typeMatch");
+        btnSkillCasual.setFocusPainted(false);
+        btnSkillCasual.setFocusable(false);
+        btnSkillCasual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSkillCasual.setRequestFocusEnabled(false);
+        btnSkillCasual.setVerifyInputWhenFocusTarget(false);
+        btnSkillCasual.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSkillCasual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar1.add(btnSkillCasual);
+
+        btnSkillSerious.setSelected(true);
+        btnSkillSerious.setText("Serious");
+        btnSkillSerious.setToolTipText("Shows all tables with skill level serious.");
+        btnSkillSerious.setActionCommand("typeMatch");
+        btnSkillSerious.setFocusPainted(false);
+        btnSkillSerious.setFocusable(false);
+        btnSkillSerious.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSkillSerious.setRequestFocusEnabled(false);
+        btnSkillSerious.setVerifyInputWhenFocusTarget(false);
+        btnSkillSerious.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSkillSerious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFilterActionPerformed(evt);
+            }
+        });
+        filterBar1.add(btnSkillSerious);
 
         filterBar2.setFloatable(false);
         filterBar2.setFocusable(false);
@@ -1142,6 +1215,9 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnNewTable;
     private javax.swing.JButton btnNewTournament;
     private javax.swing.JButton btnQuickStart;
+    private javax.swing.JToggleButton btnSkillBeginner;
+    private javax.swing.JToggleButton btnSkillCasual;
+    private javax.swing.JToggleButton btnSkillSerious;
     private javax.swing.JToggleButton btnStateActive;
     private javax.swing.JToggleButton btnStateFinished;
     private javax.swing.JToggleButton btnStateWaiting;
@@ -1161,6 +1237,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JTable tableCompleted;
@@ -1180,10 +1257,11 @@ class TableTableModel extends AbstractTableModel {
     public static final int COLUMN_GAME_TYPE = 3;
     public static final int COLUMN_INFO = 4;
     public static final int COLUMN_STATUS = 5;
-    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
+    public static final int COLUMN_SKILL = 7;
+    public static final int ACTION_COLUMN = 8; // column the action is located (starting with 0)
 
-    private final String[] columnNames = new String[]{"M/T","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Action"};
-    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60};
+    private final String[] columnNames = new String[]{"M/T","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Action"};
+    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 60};
         
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
@@ -1252,6 +1330,8 @@ class TableTableModel extends AbstractTableModel {
             case 6:
                 return timeFormatter.format(tables[arg0].getCreateTime());
             case 7:
+                return tables[arg0].getSkillLevel();
+            case 8:
                 switch (tables[arg0].getTableState()) {
 
                     case WAITING:
@@ -1278,14 +1358,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 8:
-                return tables[arg0].isTournament();
             case 9:
+                return tables[arg0].isTournament();
+            case 10:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 10:
+            case 11:
                 return tables[arg0].getTableId();
         }
         return "";

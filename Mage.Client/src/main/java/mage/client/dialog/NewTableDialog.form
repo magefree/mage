@@ -37,7 +37,7 @@
                               <Component id="cbGameType" min="-2" pref="398" max="-2" attributes="1"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -74,14 +74,22 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblRange" min="-2" max="-2" attributes="1"/>
-                          <Component id="cbRange" min="-2" pref="143" max="-2" attributes="1"/>
+                          <Component id="cbRange" min="-2" pref="117" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbAttackOption" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="lblSkillLevel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="cbAttackOption" min="-2" pref="177" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cbSkillLevel" min="-2" pref="148" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -97,7 +105,7 @@
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator3" pref="642" max="32767" attributes="0"/>
+                  <Component id="jSeparator3" pref="606" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -131,29 +139,27 @@
                       <Component id="lblGameType" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="spnNumPlayers" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lblRange" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="cbRange" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                          <Component id="cbAttackOption" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <Component id="lblNumWins" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                      <Component id="spnNumWins" min="-2" max="-2" attributes="0"/>
+                      <Component id="spnNumPlayers" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblRange" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAttack" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSkillLevel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="cbRange" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbAttackOption" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbSkillLevel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnNumWins" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -162,24 +168,24 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               <Component id="player1Panel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="244" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="113" max="32767" attributes="0"/>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnOK" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="335" max="32767" attributes="0"/>
+                  <EmptySpace pref="178" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -265,6 +271,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;An option for multiplayer games.&#xa;A player&apos;s range of influence is the maximum distance from that player, measured in player seats,&lt;br&gt;&#xa;that the player can affect. Players within that many seats of the player are within that player&apos;s range&lt;br&gt;&#xa;of influence. Objects controlled by players within a player&apos;s range of influence are also within that&lt;br&gt;&#xa;player&apos;s range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,&lt;nr&gt;&#xa;making choices, and winning the game."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAttack">
@@ -280,6 +287,23 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;An option for multiplayer games that defines&lt;br&gt;&#xa;which opponents can be attacked from a player."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSkillLevel">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="cbAttackOption"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Skill Level"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbSkillLevel">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="&lt;HTML&gt;This option can be used to make it easier to find matches&lt;br&gt;&#xa;with opponents of the appropriate skill level."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumWins">

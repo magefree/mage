@@ -46,6 +46,7 @@ import mage.client.util.Listener;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
 import mage.remote.Session;
 import mage.view.GameTypeView;
@@ -108,6 +109,8 @@ public class NewTableDialog extends MageDialog {
         cbRange = new javax.swing.JComboBox();
         lblAttack = new javax.swing.JLabel();
         cbAttackOption = new javax.swing.JComboBox();
+        lblSkillLevel = new javax.swing.JLabel();
+        cbSkillLevel = new javax.swing.JComboBox();
         lblNumWins = new javax.swing.JLabel();
         spnNumWins = new javax.swing.JSpinner();
         jSeparator2 = new javax.swing.JSeparator();
@@ -156,8 +159,17 @@ public class NewTableDialog extends MageDialog {
         lblRange.setLabelFor(cbRange);
         lblRange.setText("Range of Influence");
 
+        cbRange.setToolTipText("<HTML>An option for multiplayer games.\nA player's range of influence is the maximum distance from that player, measured in player seats,<br>\nthat the player can affect. Players within that many seats of the player are within that player's range<br>\nof influence. Objects controlled by players within a player's range of influence are also within that<br>\nplayer's range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,<nr>\nmaking choices, and winning the game.");
+
         lblAttack.setLabelFor(cbAttackOption);
         lblAttack.setText("Attack Option");
+
+        cbAttackOption.setToolTipText("<HTML>An option for multiplayer games that defines<br>\nwhich opponents can be attacked from a player.");
+
+        lblSkillLevel.setLabelFor(cbAttackOption);
+        lblSkillLevel.setText("Skill Level");
+
+        cbSkillLevel.setToolTipText("<HTML>This option can be used to make it easier to find matches<br>\nwith opponents of the appropriate skill level.");
 
         lblNumWins.setLabelFor(spnNumWins);
         lblNumWins.setText("Wins");
@@ -209,7 +221,7 @@ public class NewTableDialog extends MageDialog {
                                 .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblFreeMulligans)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -237,12 +249,18 @@ public class NewTableDialog extends MageDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblRange)
-                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAttack)
-                            .addComponent(cbAttackOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAttack)
+                                .addGap(116, 116, 116)
+                                .addComponent(lblSkillLevel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNumWins)))
@@ -254,7 +272,7 @@ public class NewTableDialog extends MageDialog {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -280,47 +298,46 @@ public class NewTableDialog extends MageDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblGameType)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblNumPlayers)
-                            .addGap(0, 0, 0)
-                            .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblRange)
-                            .addGap(0, 0, 0)
-                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblAttack)
-                            .addGap(0, 0, 0)
-                            .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNumWins)
+                        .addGap(6, 6, 6)
+                        .addComponent(lblNumPlayers)
                         .addGap(0, 0, 0)
-                        .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblRange)
+                            .addComponent(lblAttack)
+                            .addComponent(lblSkillLevel)
+                            .addComponent(lblNumWins))
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(0, 0, 0)
                 .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnOK))
-                .addContainerGap())
+                .addGap(0, 0, 0))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(201, 201, 201)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(335, Short.MAX_VALUE)))
+                    .addContainerGap(178, Short.MAX_VALUE)))
         );
 
         pack();
@@ -343,6 +360,7 @@ public class NewTableDialog extends MageDialog {
         options.setLimited(false);
         options.setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
         options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
+        options.setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer)this.spnNumWins.getValue());
         options.setFreeMulligans((Integer)this.spnFreeMulligans.getValue());
@@ -472,6 +490,7 @@ public class NewTableDialog extends MageDialog {
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
             cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
             cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
+            cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
             // Update the existing player panels (neccessary if server was changes = new session)
             int i=2;
             for (TablePlayerPanel tablePlayerPanel :players) {
@@ -550,6 +569,13 @@ public class NewTableDialog extends MageDialog {
                 break;
             }
         }
+        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, "Casual");
+        for (SkillLevel skillLevel :SkillLevel.values()) {
+            if (skillLevel.toString().equals(skillLevelDefault)) {
+                this.cbSkillLevel.setSelectedItem(skillLevel);
+                break;
+            }
+        }        
     }
 
     /**
@@ -569,6 +595,7 @@ public class NewTableDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, options.getSkillLevel().toString());
         StringBuilder playerTypesString = new StringBuilder();
         ListIterator iterator = players.listIterator();
         while (iterator.hasNext()) {
@@ -588,6 +615,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JComboBox cbDeckType;
     private javax.swing.JComboBox cbGameType;
     private javax.swing.JComboBox cbRange;
+    private javax.swing.JComboBox cbSkillLevel;
     private javax.swing.JComboBox cbTimeLimit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -604,6 +632,7 @@ public class NewTableDialog extends MageDialog {
     private javax.swing.JLabel lblNumWins;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblRange;
+    private javax.swing.JLabel lblSkillLevel;
     private mage.client.table.NewPlayerPanel player1Panel;
     private javax.swing.JPanel pnlOtherPlayers;
     private javax.swing.JSpinner spnFreeMulligans;

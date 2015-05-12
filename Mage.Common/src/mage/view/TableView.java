@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import mage.constants.SkillLevel;
 import mage.constants.TableState;
 import mage.game.Game;
 import mage.game.Seat;
@@ -56,6 +57,7 @@ public class TableView implements Serializable {
     private final String additionalInfo;
     private Date createTime;
     private TableState tableState;
+    private final SkillLevel skillLevel;
     private final String tableStateText;
     private boolean isTournament;
     private List<SeatView> seats = new ArrayList<>();
@@ -127,6 +129,7 @@ public class TableView implements Serializable {
                 addInfo.append(sbScore.toString());
             }
             this.additionalInfo = addInfo.toString();
+            this.skillLevel = table.getMatch().getOptions().getSkillLevel();
         } else {
         // TOURNAMENT
             if (table.getTournament().getOptions().getNumberRounds() > 0) {
@@ -172,6 +175,7 @@ public class TableView implements Serializable {
             this.additionalInfo = infoText.toString();
             this.tableStateText = stateText.toString();
             this.deckType =  table.getDeckType() + " " + table.getTournament().getBoosterInfo() + (tableNameInfo != null ? tableNameInfo : "");
+            this.skillLevel = table.getTournament().getOptions().getMatchOptions().getSkillLevel();
         }
     }
 
@@ -220,6 +224,10 @@ public class TableView implements Serializable {
 
     public String getTableStateText() {
         return tableStateText;
+    }
+
+    public SkillLevel getSkillLevel() {
+        return skillLevel;
     }
 
 }

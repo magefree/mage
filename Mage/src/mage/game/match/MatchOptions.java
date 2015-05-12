@@ -34,6 +34,7 @@ import java.util.List;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
+import mage.constants.SkillLevel;
 
 /**
  *
@@ -51,6 +52,7 @@ public class MatchOptions implements Serializable {
     protected boolean limited;
     protected List<String> playerTypes = new ArrayList<>();
     protected String password;
+    protected SkillLevel skillLevel;
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -134,7 +136,6 @@ public class MatchOptions implements Serializable {
         return matchTimeLimit.getTimeLimit();
     }
 
-
     public MatchTimeLimit getMatchTimeLimit() {
         return this.matchTimeLimit;
     }
@@ -151,4 +152,11 @@ public class MatchOptions implements Serializable {
         this.password = password;
     }
 
+    public SkillLevel getSkillLevel() {
+        return skillLevel;
+    }
+
+    public void setSkillLevel(SkillLevel skillLevel) {
+        this.skillLevel = skillLevel;
+    }
 }
