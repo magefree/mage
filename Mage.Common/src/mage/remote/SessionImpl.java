@@ -269,6 +269,7 @@ public class SessionImpl implements Session {
                 logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
             }
 
+            logger.info("Trying to connect as " + (this.getUserName() == null ? "":this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());            
             callbackClient.invoke(null);
 
             this.sessionId = callbackClient.getSessionId();
@@ -342,7 +343,7 @@ public class SessionImpl implements Session {
                 }
                 client.showMessage(sb.toString());
             }
-        }
+        } 
         return false;
     }
 
@@ -1367,7 +1368,9 @@ public class SessionImpl implements Session {
 
     private void handleThrowable(Throwable t) {
         logger.fatal("Communication error", t);
-        disconnect(true);
+        // Probably this can cause hanging the client under certain circumstances as the disconnect method is synchronized
+        // so check if it's needed
+        // disconnect(true);
     }
 
     private void handleMageException(MageException ex) {
@@ -1413,7 +1416,7 @@ public class SessionImpl implements Session {
             if (isConnected()) {
                 long startTime = System.nanoTime();
                 if (!server.ping(sessionId, pingInfo)) {
-                    logger.error(new StringBuilder("Ping failed: ").append(this.getUserName()).append(" Session: ").append(sessionId).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() +":" + connection.getPort());
                     throw new MageException("Ping failed");
                 }
                 pingTime.add(System.nanoTime() - startTime);
