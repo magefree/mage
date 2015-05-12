@@ -54,7 +54,7 @@ public class GameLog {
     }
 
     public static String getColoredObjectName(MageObject mageObject) {        
-        return "<font color=\'" + getColorName(mageObject.getColor()) + "\'>" + mageObject.getName() + "</font>";
+        return "<font color=\'" + getColorName(mageObject.getColor()) + "\'>" + mageObject.getName() + " ["+mageObject.getId().toString().substring(0,3) + "]</font>";
     }
 
     public static String getNeutralColoredText(String text) {        
