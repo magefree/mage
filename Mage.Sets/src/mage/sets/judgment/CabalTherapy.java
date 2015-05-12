@@ -28,6 +28,7 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -57,11 +58,10 @@ public class CabalTherapy extends CardImpl {
         super(ownerId, 62, "Cabal Therapy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlack(true);
-
         // Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
+        
         // Flashback-Sacrifice a creature.
         this.addAbility(new FlashbackAbility(
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), 
@@ -91,10 +91,12 @@ class CabalTherapyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            Choice cardChoice = new ChoiceImpl();
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (targetPlayer != null && controller != null && sourceObject != null) {
+            Choice cardChoice = new ChoiceImpl(true);
+            cardChoice.setMessage("Name a nonland card.");
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
 
@@ -105,14 +107,14 @@ class CabalTherapyEffect extends OneShotEffect {
             }
 
             String cardName = cardChoice.getChoice();
-            game.informPlayers("Cabal Therapy, named card: [" + cardName + "]");
-            for (Card card : player.getHand().getCards(game)) {
+            game.informPlayers(sourceObject.getLogName() + ", named card: [" + cardName + "]");
+            for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (card.getName().equals(cardName)) {
-                    player.discard(card, source, game);
+                    targetPlayer.discard(card, source, game);
                 }
             }
 
-            controller.lookAtCards("Cabal Therapy Hand", player.getHand(), game);
+            controller.lookAtCards(sourceObject.getLogName() + " Hand", targetPlayer.getHand(), game);
         }
         return true;
     }

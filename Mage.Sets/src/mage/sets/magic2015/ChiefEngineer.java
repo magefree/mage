@@ -117,16 +117,13 @@ class ChiefEngineerGainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
-                StackObject stackObject = iterator.next();
-                // only cast spells, so no copies
-                if (!stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
-                    if (stackObject instanceof Spell) {
-                        Spell spell = (Spell) stackObject;
-                        if (filter.match(spell, game)) {
-                            if (!spell.getAbilities().contains(ability)) {
-                                game.getState().addOtherAbility(spell.getCard(), ability);
-                            }
+            for (StackObject stackObject : game.getStack()) {
+                // only spells cast, so no copies of spells
+                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+                    Spell spell = (Spell) stackObject;
+                    if (filter.match(spell, game)) {
+                        if (!spell.getAbilities().contains(ability)) {
+                            game.getState().addOtherAbility(spell.getCard(), ability);
                         }
                     }
                 }

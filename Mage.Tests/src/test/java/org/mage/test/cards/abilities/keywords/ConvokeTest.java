@@ -138,4 +138,34 @@ public class ConvokeTest extends CardTestPlayerBase {
         }
     }
 
+    @Test
+    @Ignore
+    public void testConvokeFromChiefEngineer() {
+        /**
+         * Chief Engineer   {1}{U}
+         * Creature - Vedalken, Artificer
+         * Artifact spells you cast have convoke.
+         */
+
+        // THIS TEST IS NOT FINISHED
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2); 
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1); // creatures to use for convoek
+        addCard(Zone.BATTLEFIELD, playerA, "Chief Engineer", 1);
+        
+        addCard(Zone.HAND, playerA, "ARTIFACT TO CAST", 1);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "ARTIFACT TO CAST");
+        setChoice(playerA, "Yes");
+        addTarget(playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+
+    }
+
 }
