@@ -76,11 +76,12 @@ public class SpellskiteTest extends CardTestPlayerBase {
      * 
      */
     /**
-     * TODO: This test fails sometimes when building the complete Tets Project -> Find reason
+     * TODO: This test fails sometimes when building the complete Test Project -> Find the reason
      */
     @Test
     public void testAfterChangeOfController() {
-        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         // {2}, {tap}: Gain control of target creature with power less than or equal to the number of Islands you control for as long as Vedalken Shackles remains tapped.
         addCard(Zone.BATTLEFIELD, playerA, "Vedalken Shackles", 1);
@@ -96,7 +97,7 @@ public class SpellskiteTest extends CardTestPlayerBase {
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},{T}: Gain control", "Spellskite");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Frost Titan");
-        addTarget(playerB, "Mountain");
+        addTarget(playerB, "Silvercoat Lion");
         
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{UP}: Change a target", "stack ability (Whenever {this} enters ");
 
@@ -107,7 +108,8 @@ public class SpellskiteTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Frost Titan", 1);
         
         assertTapped("Spellskite", true);
-        assertTapped("Mountain", false);
+        // (Battlefield) Tapped state is not equal (Silvercoat Lion) expected:<false> but was:<true>
+        assertTapped("Silvercoat Lion", false);
         
     }    
     
