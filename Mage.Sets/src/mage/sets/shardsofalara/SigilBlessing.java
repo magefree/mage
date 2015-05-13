@@ -27,14 +27,21 @@
  */
 package mage.sets.shardsofalara;
 
+import java.util.Iterator;
 import java.util.UUID;
-
+import mage.MageObjectReference;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -48,13 +55,9 @@ public class SigilBlessing extends CardImpl {
         super(ownerId, 195, "Sigil Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-
         // Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new SigilBlessingBoostControlledEffect());
     }
 
     public SigilBlessing(final SigilBlessing card) {
@@ -65,4 +68,47 @@ public class SigilBlessing extends CardImpl {
     public SigilBlessing copy() {
         return new SigilBlessing(this);
     }
+}
+
+class SigilBlessingBoostControlledEffect extends ContinuousEffectImpl {
+    public SigilBlessingBoostControlledEffect() {
+        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        staticText = "Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1";
+    }
+
+    public SigilBlessingBoostControlledEffect(final SigilBlessingBoostControlledEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SigilBlessingBoostControlledEffect copy() {
+        return new SigilBlessingBoostControlledEffect(this);
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            affectedObjectList.add(new MageObjectReference(perm, game));
+        }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { 
+            Permanent permanent = it.next().getPermanent(game);
+            if (permanent != null) {
+                int boost = 1;
+                if (getTargetPointer().getFirst(game, source).equals(permanent.getId())) {
+                    boost = 3;
+                }
+                permanent.addPower(boost);
+                permanent.addToughness(boost);
+            } else {
+                it.remove(); // no longer on the battlefield, remove reference to object
+            }
+        }
+        return true;
+    }
+
 }
