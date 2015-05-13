@@ -109,9 +109,6 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                        AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-                        effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                        delayedAbility.addEffect(effect);
                         game.addDelayedTriggeredAbility(delayedAbility);                    
                     }
                 }
