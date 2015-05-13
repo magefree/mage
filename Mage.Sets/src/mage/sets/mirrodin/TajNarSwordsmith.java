@@ -34,7 +34,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -101,7 +101,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
                 FilterCard filter = new FilterCard("Equipment card with converted mana cost " + costX + " or less");
                 filter.add(new SubtypePredicate("Equipment"));
                 filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, costX + 1));
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true).apply(game, source);
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter), false, true).apply(game, source);
                 return true;
             }
         }
