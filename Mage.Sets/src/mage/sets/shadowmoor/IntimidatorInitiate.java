@@ -30,6 +30,7 @@ package mage.sets.shadowmoor;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -40,6 +41,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -53,7 +55,7 @@ public class IntimidatorInitiate extends CardImpl {
         filter.add(new ColorPredicate(ObjectColor.RED));
     }
     
-    private static final String rule = "Whenever a player casts a red spell, you may pay {1}. If you do, target creature can't block this turn";
+    private static final String rule = "Whenever a player casts a red spell, you may pay {1}. If you do, target creature can't block this turn.";
 
     public IntimidatorInitiate(UUID ownerId) {
         super(ownerId, 96, "Intimidator Initiate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -64,7 +66,9 @@ public class IntimidatorInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts a red spell, you may pay {1}. If you do, target creature can't block this turn.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1)), filter, true, rule));
+        Ability ability = new SpellCastAllTriggeredAbility(new DoIfCostPaid(new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1)), filter, true, rule);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
         
     }
 
