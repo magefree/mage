@@ -295,12 +295,12 @@ public class ManifestTest extends CardTestPlayerBase {
     public void testManifestMegamorph() {
 
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
-        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 6);
         // {1}{B}, {T}, Sacrifice another creature: Manifest the top card of your library.
         addCard(Zone.BATTLEFIELD, playerB, "Qarsi High Priest", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
-        addCard(Zone.LIBRARY, playerB, "Sandstorm Charger", 1);
+        addCard(Zone.LIBRARY, playerB, "Aerie Bowmasters", 1);
         addCard(Zone.LIBRARY, playerB, "Mountain", 1);
 
         skipInitShuffling();
@@ -308,7 +308,7 @@ public class ManifestTest extends CardTestPlayerBase {
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B},{T}, Sacrifice another creature");
         addTarget(playerB, "Silvercoat Lion");
 
-        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{4}{W}: Turn");
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{5}{G}: Turn");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -320,8 +320,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
         assertPermanentCount(playerB, "", 0);
-        assertPermanentCount(playerB, "Sandstorm Charger", 1);
-        assertPowerToughness(playerB, "Sandstorm Charger", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
+        assertPermanentCount(playerB, "Aerie Bowmasters", 1);
+        assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
 
     }
  
