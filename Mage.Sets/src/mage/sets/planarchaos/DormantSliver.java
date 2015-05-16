@@ -51,7 +51,7 @@ public class DormantSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
 
-    private static final FilterPermanent filterSlivers = new FilterPermanent("Sliver", "All Slivers);
+    private static final FilterPermanent filterSlivers = new FilterPermanent("Sliver", "All Slivers");
 
     public DormantSliver(UUID ownerId) {
         super(ownerId, 156, "Dormant Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{U}");
