@@ -49,14 +49,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class PulmonicSliver extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
 
-    private static final FilterPermanent filterSlivers = new FilterPermanent("All Slivers");
-
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-        filterSlivers.add(new SubtypePredicate("Sliver"));
-    }
+    private static final FilterPermanent filterSlivers = new FilterPermanent("Sliver", "All Slivers");
 
     public PulmonicSliver(UUID ownerId) {
         super(ownerId, 36, "Pulmonic Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
