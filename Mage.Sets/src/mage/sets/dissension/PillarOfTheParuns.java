@@ -54,7 +54,7 @@ public class PillarOfTheParuns extends CardImpl {
         super(ownerId, 176, "Pillar of the Paruns", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "DIS";
 
-        // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new PillarOfTheParunsManaBuilder()));
     }
 
@@ -92,17 +92,11 @@ class PillarOfTheParunsConditionalMana extends ConditionalMana {
 
 class MultiColoredSpellCastManaCondition extends ManaCondition implements Condition {
 
-    private static final MulticoloredPredicate multicolored = new MulticoloredPredicate();
-
-    private static class LazyHolder {
-        private static final MulticoloredPredicate multicolored = new MulticoloredPredicate();
-    }
-
     @Override
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && LazyHolder.multicolored.apply(object, game)) {
+            if (object != null && object.getColor().getColorCount() > 1) {
                 return true;
             }
         }

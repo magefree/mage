@@ -82,7 +82,7 @@ public class AngelicDestiny extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, return Angelic Destiny to its owner's hand.
-        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted creature"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted creature"));
     }
 
     public AngelicDestiny(final AngelicDestiny card) {

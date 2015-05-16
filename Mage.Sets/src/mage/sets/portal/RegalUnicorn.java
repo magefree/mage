@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Plopman
  */
-public class RegalUnicorn extends mage.sets.sixthedition.RegalUnicorn {
+public class RegalUnicorn extends mage.sets.classicsixthedition.RegalUnicorn {
 
     public RegalUnicorn(UUID ownerId) {
         super(ownerId);

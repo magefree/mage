@@ -28,17 +28,15 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -68,7 +66,7 @@ public class Narcolepsy extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, if enchanted creature is untapped, tap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NarcolepsyEffect(), TargetController.ANY, false));
+        this.addAbility(new NarcolepsyTriggeredAbility());
     }
 
     public Narcolepsy(final Narcolepsy card) {
@@ -81,14 +79,46 @@ public class Narcolepsy extends CardImpl {
     }
 }
 
-class NarcolepsyEffect extends OneShotEffect {
-
-    public NarcolepsyEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "if enchanted creature is untapped, tap it";
+class NarcolepsyTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
+    
+    NarcolepsyTriggeredAbility() {
+        super(new NarcolepsyEffect(), TargetController.ANY, false);
+    }
+    
+    NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
+        super(ability);
     }
 
-    public NarcolepsyEffect(final NarcolepsyEffect effect) {
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        Permanent narcolepsy = game.getPermanent(this.getSourceId());
+        if (narcolepsy != null) {
+            Permanent enchanted = game.getPermanent(narcolepsy.getAttachedTo());
+            if (enchanted != null && !enchanted.isTapped()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public NarcolepsyTriggeredAbility copy() {
+        return new NarcolepsyTriggeredAbility(this);
+    }
+    
+    @Override
+    public String getRule() {
+        return "At the beginning of each upkeep, if enchanted creature is untapped, tap it.";
+    }
+}
+
+class NarcolepsyEffect extends OneShotEffect {
+
+    NarcolepsyEffect() {
+        super(Outcome.Tap);
+    }
+
+    NarcolepsyEffect(final NarcolepsyEffect effect) {
         super(effect);
     }
 
@@ -97,7 +127,7 @@ class NarcolepsyEffect extends OneShotEffect {
         Permanent narcolepsy = game.getPermanent(source.getSourceId());
         if (narcolepsy != null) {
             Permanent enchanted = game.getPermanent(narcolepsy.getAttachedTo());
-            if (enchanted != null && !enchanted.isTapped()) {
+            if (enchanted != null) {
                 enchanted.tap(game);
                 return true;
             }

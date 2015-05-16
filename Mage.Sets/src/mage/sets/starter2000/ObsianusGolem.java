@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ObsianusGolem extends mage.sets.sixthedition.ObsianusGolem {
+public class ObsianusGolem extends mage.sets.classicsixthedition.ObsianusGolem {
 
     public ObsianusGolem(UUID ownerId) {
         super(ownerId);

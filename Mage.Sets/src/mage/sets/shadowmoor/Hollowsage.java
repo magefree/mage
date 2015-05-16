@@ -54,7 +54,6 @@ public class Hollowsage extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
         
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -95,11 +94,13 @@ class BecomesUntappedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TAPPED && event.getTargetId().equals(sourceId)) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(sourceId);
     }
 
     @Override

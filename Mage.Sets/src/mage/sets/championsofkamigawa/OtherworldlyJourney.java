@@ -29,21 +29,28 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.MageObjectReference;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -56,7 +63,7 @@ public class OtherworldlyJourney extends CardImpl {
         super(ownerId, 37, "Otherworldly Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+        
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -94,16 +101,16 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 // only if permanent is in exile (tokens would be stop to exist)
                 if (exile != null && !exile.isEmpty()) {
-                    //create delayed triggered ability
-                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-                    effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
-                    delayedAbility.addEffect(effect);
-                    game.addDelayedTriggeredAbility(delayedAbility);
+                    Card card = game.getCard(permanent.getId());
+                    if (card != null) {
+                        //create delayed triggered ability
+                        DelayedTriggeredAbility delayedAbility = 
+                                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OtherworldlyJourneyReturnFromExileEffect(new MageObjectReference(card, game)));
+                        delayedAbility.setSourceId(source.getSourceId());
+                        delayedAbility.setControllerId(source.getControllerId());
+                        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                        game.addDelayedTriggeredAbility(delayedAbility);                    
+                    }
                 }
                 return true;
             }
@@ -114,6 +121,86 @@ class OtherworldlyJourneyEffect extends OneShotEffect {
     @Override
     public OtherworldlyJourneyEffect copy() {
         return new OtherworldlyJourneyEffect(this);
+    }
+
+}
+
+class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
+
+    MageObjectReference objectToReturn;
+    public OtherworldlyJourneyReturnFromExileEffect(MageObjectReference objectToReturn) {
+        super(Outcome.PutCardInPlay);
+        this.objectToReturn = objectToReturn;
+        staticText = "return that card to the battlefield under its owner's control with a +1/+1 counter on it";
+    }
+
+    public OtherworldlyJourneyReturnFromExileEffect(final OtherworldlyJourneyReturnFromExileEffect effect) {
+        super(effect);
+        this.objectToReturn = effect.objectToReturn;
+    }
+
+    @Override
+    public OtherworldlyJourneyReturnFromExileEffect copy() {
+        return new OtherworldlyJourneyReturnFromExileEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Card card = game.getCard(objectToReturn.getSourceId());
+            if (card != null && objectToReturn.refersTo(card, game)) {
+                game.addEffect(new OtherworldlyJourneyEntersBattlefieldEffect(objectToReturn), source);                
+                controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+            }
+            return true;
+        }
+        return false;
+    }
+}
+
+
+class OtherworldlyJourneyEntersBattlefieldEffect extends ReplacementEffectImpl {
+    
+    MageObjectReference objectToReturn;
+    
+    public OtherworldlyJourneyEntersBattlefieldEffect(MageObjectReference objectToReturn) {
+        super(Duration.Custom, Outcome.BoostCreature);
+        this.objectToReturn = objectToReturn;
+        staticText = "that card returns to the battlefield with a +1/+1 counter on it";
+    }
+
+    public OtherworldlyJourneyEntersBattlefieldEffect(OtherworldlyJourneyEntersBattlefieldEffect effect) {
+        super(effect);
+        this.objectToReturn = effect.objectToReturn;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.ENTERS_THE_BATTLEFIELD.equals(event.getType());
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
+            return event.getTargetId().equals(objectToReturn.getSourceId());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            permanent.addCounters(CounterType.P1P1.createInstance(), game);
+            discard(); // use only once
+        }
+        return false;
+    }
+
+    @Override
+    public OtherworldlyJourneyEntersBattlefieldEffect copy() {
+        return new OtherworldlyJourneyEntersBattlefieldEffect(this);
     }
 
 }
