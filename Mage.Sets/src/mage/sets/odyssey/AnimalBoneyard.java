@@ -70,7 +70,7 @@ public class AnimalBoneyard extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted land has "{tap}, Sacrifice a creature: You gain life equal to that creature's toughness."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, null, new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AnimalBoneyardEffect(), new TapSourceCost());
         gainedAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted land has \"{tap}, Sacrifice a creature: You gain life equal to that creature's toughness.\"");
