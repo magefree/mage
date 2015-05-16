@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -64,7 +64,7 @@ public class MindwhipSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "{2}, Sacrifice this permanent: Target player discards a card at random. Activate this ability only any time you could cast a sorcery."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new GenericManaCost(2));
+        Ability gainedAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new GenericManaCost(2));
         gainedAbility.addCost(new SacrificeSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
