@@ -39,10 +39,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -82,6 +84,8 @@ public class OpalineSliver extends CardImpl {
 
 class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
 
+    private static final FilterSpell spellCard = new FilterSpell("a spell");
+
     public OpalineSliverTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
@@ -96,12 +100,21 @@ class OpalineSliverTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
+        StackObject spell = game.getStack().getStackObject(event.getSourceId());
+
+        if (spell == null) {
+            return false;
+        } else {
+            return event.getTargetId().equals(this.getSourceId())
+                    && game.getOpponents(this.controllerId).contains(event.getPlayerId())
+                    && spellCard.match(spell, event.getPlayerId(), game);
         }
-        return false;
     }
 
     @Override
