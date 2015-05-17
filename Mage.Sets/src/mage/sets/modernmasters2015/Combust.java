@@ -28,6 +28,7 @@
 package mage.sets.modernmasters2015;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -39,6 +40,7 @@ public class Combust extends mage.sets.magic2011.Combust {
         super(ownerId);
         this.cardNumber = 110;
         this.expansionSetCode = "MM2";
+        this.rarity = Rarity.UNCOMMON;
     }
 
     public Combust(final Combust card) {

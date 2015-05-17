@@ -59,7 +59,7 @@ public class Combust extends CardImpl {
     public Combust(UUID ownerId) {
         super(ownerId, 130, "Combust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
