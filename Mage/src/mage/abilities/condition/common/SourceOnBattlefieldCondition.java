@@ -38,11 +38,11 @@ import mage.game.Game;
  *
  * @author LevelX2
  */
-public class SourceOnBattelfieldCondition implements Condition {
+public class SourceOnBattlefieldCondition implements Condition {
 
-    private static final SourceOnBattelfieldCondition fInstance = new SourceOnBattelfieldCondition();
+    private static final SourceOnBattlefieldCondition fInstance = new SourceOnBattlefieldCondition();
 
-    public static SourceOnBattelfieldCondition getInstance() {
+    public static SourceOnBattlefieldCondition getInstance() {
         return fInstance;
     }
     

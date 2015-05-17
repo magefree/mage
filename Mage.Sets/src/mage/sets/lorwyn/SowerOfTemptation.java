@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.SourceOnBattelfieldCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
@@ -66,7 +66,7 @@ public class SowerOfTemptation extends CardImpl {
         //            remains on the battlefield, even if a different player gains control of Sower of Temptation itself.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
-                new SourceOnBattelfieldCondition(),
+                new SourceOnBattlefieldCondition(),
                 "gain control of target creature for as long as {this} remains on the battlefield");
         Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent());
@@ -104,7 +104,7 @@ class SowerOfTemptationGainControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom),
-                new SourceOnBattelfieldCondition(),
+                new SourceOnBattlefieldCondition(),
                 "gain control of target creature for as long as {this} remains on the battlefield");
         game.addEffect(effect, source);
         return false;
