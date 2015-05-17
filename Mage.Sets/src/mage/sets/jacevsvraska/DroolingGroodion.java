@@ -43,9 +43,11 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -58,14 +60,14 @@ public class DroolingGroodion extends CardImpl {
         this.expansionSetCode = "DDM";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
         // {2}{B}{G}, Sacrifice a creature: Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DroolingGroodionEffect(), new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (first target)")));
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (second target)")));
         this.addAbility(ability);
     }
 
@@ -102,7 +104,7 @@ class DroolingGroodionEffect extends ContinuousEffectImpl {
             permanent.addPower(2);
             permanent.addToughness(2);
         }
-        permanent = game.getPermanent(source.getTargets().get(0).getTargets().get(1));
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
             permanent.addPower(-2);
             permanent.addToughness(-2);
