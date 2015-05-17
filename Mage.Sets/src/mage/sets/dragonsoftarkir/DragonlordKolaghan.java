@@ -45,6 +45,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -114,12 +115,12 @@ class DragonlordKolaghanTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Player controller = game.getPlayer(getControllerId());
         if (controller != null && controller.hasOpponent(event.getPlayerId(), game)) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.PLANESWALKER))) {
+            Spell spell = game.getStack().getSpell(event.getSourceId());
+            if (spell != null && !spell.isFaceDown(game) && (spell.getCardType().contains(CardType.CREATURE) || spell.getCardType().contains(CardType.PLANESWALKER))) {
                 Player opponent = game.getPlayer(event.getPlayerId());
                 boolean sameName = false;
                 for (Card graveCard :opponent.getGraveyard().getCards(game)) {
-                    if (graveCard.getName().equals(card.getName())) {
+                    if (graveCard.getName().equals(spell.getName())) {
                         sameName = true;
                         break;
                     }

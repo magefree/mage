@@ -585,4 +585,33 @@ public class MorphTest extends CardTestPlayerBase {
         assertPowerToughness(playerB, "", 2, 2);
 
     }    
+    
+    /**
+     * Dragonlord Kolaghan passive of 10 damage works when you play a morph creature 
+     * and it isn't suposed to. Because it is nameless.
+     */
+
+    @Test
+    public void testDragonlordKolaghan() {
+        addCard(Zone.GRAVEYARD, playerA, "Akroma, Angel of Fury", 1);
+        addCard(Zone.HAND, playerA, "Akroma, Angel of Fury", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+
+        // Flying, haste
+        // Other creatures you control have haste.
+        // Whenever an opponent casts a creature or planeswalker spell with the same name as a card in his or her graveyard, that player loses 10 life.
+        addCard(Zone.BATTLEFIELD, playerB, "Dragonlord Kolaghan", 1);
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        
+        assertPermanentCount(playerA, "", 1);
+
+    }           
 }
