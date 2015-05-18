@@ -52,10 +52,9 @@ public class Stranglehold extends CardImpl {
         super(ownerId, 136, "Stranglehold", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
-
         // Your opponents can't search libraries.
         this.getSpellAbility().addEffect(new OpponentsCantSearchLibarariesEffect());
+        
         // If an opponent would begin an extra turn, that player skips that turn instead.
         this.getSpellAbility().addEffect(new StrangleholdSkipExtraTurnsEffect());
     }
@@ -73,7 +72,7 @@ public class Stranglehold extends CardImpl {
 class OpponentsCantSearchLibarariesEffect extends ContinuousRuleModifyingEffectImpl {
 
     public OpponentsCantSearchLibarariesEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit, true, false);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, true, false);
         staticText = "Your opponents can't search libraries";
     }
 
