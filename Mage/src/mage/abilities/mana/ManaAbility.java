@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
@@ -46,10 +47,12 @@ import mage.game.Game;
 public abstract class ManaAbility extends ActivatedAbilityImpl {
 
     protected List<Mana> netMana = new ArrayList<>();
-
+    protected boolean undoPossible;
+    
     public ManaAbility(Zone zone, ManaEffect effect, Cost cost) {
         super(AbilityType.MANA, zone);
         this.usesStack = false;
+        this.undoPossible = true;
         if (effect != null) {
             this.addEffect(effect);
         }
@@ -92,4 +95,13 @@ public abstract class ManaAbility extends ActivatedAbilityImpl {
     public boolean definesMana() {
         return netMana.size() > 0;
     }
+
+    public boolean isUndoPossible() {
+        return undoPossible;
+    }
+
+    public void setUndoPossible(boolean undoPossible) {
+        this.undoPossible = undoPossible;
+    }
+    
 }

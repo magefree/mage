@@ -33,6 +33,8 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -65,16 +67,10 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getLibrary().size() >= numberOfCards) {
-            int i = 0;
             paid = true;
-            while (player.isInGame() && i < numberOfCards) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    // all cards must reach the graveyard to pay the costs
-                    paid &= card.moveToZone(Zone.GRAVEYARD, sourceId, game, true);
-                }
-                ++i;
-            }
+            Cards cards = new CardsImpl();
+            cards.addAll(player.getLibrary().getTopCards(game, numberOfCards));
+            player.moveCardsToGraveyardWithInfo(cards, ability, game, Zone.LIBRARY);
         }
         return paid;
     }
@@ -82,10 +78,7 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
     @Override
     public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        if (player != null && player.getLibrary().size() >= numberOfCards) {
-            return true;
-        }
-        return false;
+        return player != null && player.getLibrary().size() >= numberOfCards;
     }
 
     @Override
