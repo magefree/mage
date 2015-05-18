@@ -108,7 +108,7 @@ class OozeGardenCreateTokenEffect extends OneShotEffect {
         }
         ArrayList<String> list = new ArrayList<>();
         list.add("Ooze");
-        Token token = new Token("Ooze", "X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power", ObjectColor.GREEN, list, value, value, new AbilitiesImpl()) {
+        Token token = new Token("Ooze", "X/X green Ooze creature token onto the battlefield, where X is the sacrificed creature's power", ObjectColor.GREEN, list, value, value, new AbilitiesImpl<>()) {
            
       
         };

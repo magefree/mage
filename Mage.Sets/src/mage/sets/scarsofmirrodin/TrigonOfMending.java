@@ -45,6 +45,7 @@ import mage.counters.CounterType;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 
 /**
@@ -58,7 +59,7 @@ public class TrigonOfMending extends CardImpl {
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), ""));
 
-        Costs costs = new CostsImpl();
+        Costs<Cost> costs = new CostsImpl<>();
         costs.add(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         costs.add(new TapSourceCost());
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), costs);

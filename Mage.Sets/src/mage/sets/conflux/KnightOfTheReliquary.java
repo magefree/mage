@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -81,7 +82,7 @@ public class KnightOfTheReliquary extends CardImpl {
 
         // {T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        Costs costs = new CostsImpl();
+        Costs<Cost> costs = new CostsImpl<>();
         costs.add(new TapSourceCost());
         costs.add(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));

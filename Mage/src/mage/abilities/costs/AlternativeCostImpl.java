@@ -3,7 +3,7 @@ package mage.abilities.costs;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-public class AlternativeCostImpl extends CostsImpl implements AlternativeCost {
+public class AlternativeCostImpl<T extends Cost> extends CostsImpl<T> implements AlternativeCost {
 
     protected String name;
 
@@ -13,7 +13,7 @@ public class AlternativeCostImpl extends CostsImpl implements AlternativeCost {
 
     public AlternativeCostImpl(String name, Cost cost) {
         this.name = name;
-        this.add(cost);
+        this.add((T)cost);
     }
 
     public AlternativeCostImpl(final AlternativeCostImpl cost) {

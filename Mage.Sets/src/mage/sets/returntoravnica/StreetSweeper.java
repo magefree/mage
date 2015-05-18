@@ -104,7 +104,7 @@ class StreetSweeperDestroyEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if(permanent != null)
         {
-            LinkedList<UUID> attachments = new LinkedList();
+            LinkedList<UUID> attachments = new LinkedList<>();
             attachments.addAll(permanent.getAttachments());
             for(UUID uuid : attachments)
             {

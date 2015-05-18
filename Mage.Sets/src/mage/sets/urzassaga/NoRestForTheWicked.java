@@ -120,12 +120,12 @@ class NoRestForTheWickedWatcher extends Watcher {
 
     public NoRestForTheWickedWatcher() {
         super("NoRestForTheWickedWatcher", WatcherScope.GAME);
-        this.cards = new ArrayList();
+        this.cards = new ArrayList<>();
     }
 
     public NoRestForTheWickedWatcher(final NoRestForTheWickedWatcher watcher) {
         super(watcher);
-        this.cards = new ArrayList();
+        this.cards = new ArrayList<>();
         this.cards.addAll(watcher.cards);
     }
 
