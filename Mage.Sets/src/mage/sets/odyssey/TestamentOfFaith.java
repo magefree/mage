@@ -137,7 +137,7 @@ class TestamentOfFaithBecomesCreatureSourceEffect extends ContinuousEffectImpl i
                     if (sublayer == SubLayer.NA) {
                         if (token.getAbilities().size() > 0) {
                             for (Ability ability: token.getAbilities()) {
-                                permanent.addAbility(ability, game);
+                                permanent.addAbility(ability, source.getSourceId(), game, false);
                             }
                         }
                     }

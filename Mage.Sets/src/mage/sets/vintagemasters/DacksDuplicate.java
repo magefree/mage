@@ -53,17 +53,15 @@ public class DacksDuplicate extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Shapeshifter");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
         // You may have Dack's Duplicate enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone.
         this.addAbility(new SimpleStaticAbility(
-            Zone.BATTLEFIELD,
-            new EntersBattlefieldEffect(new CopyPermanentEffect(new DacksDuplicateApplyToPermanent()),
-            "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone",
-            true)));
+                Zone.BATTLEFIELD,
+                new EntersBattlefieldEffect(new CopyPermanentEffect(new DacksDuplicateApplyToPermanent()),
+                        "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains haste and dethrone",
+                        true)));
     }
 
     public DacksDuplicate(final DacksDuplicate card) {
@@ -77,8 +75,13 @@ public class DacksDuplicate extends CardImpl {
 }
 
 class DacksDuplicateApplyToPermanent extends ApplyToPermanent {
+
     @Override
     public Boolean apply(Game game, Permanent permanent) {
+        /**
+         * 29/05/2014	The ability of Dack’s Duplicate doesn’t target the
+         * creature.
+         */
         permanent.addAbility(new DethroneAbility(), game);
         permanent.addAbility(HasteAbility.getInstance(), game);
         return true;

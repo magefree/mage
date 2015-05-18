@@ -167,7 +167,7 @@ class MemoryJarDelayedEffect extends OneShotEffect {
                 Player player = game.getPlayer(playerId);
                 if (player != null)
                 {
-                    player.discard(player.getHand().size(), source, game);
+                    player.discard(player.getHand().size(), false, source, game);
                 }
             }
             //Return to hand

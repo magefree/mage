@@ -110,7 +110,7 @@ public class SkullmaneBaku extends CardImpl {
             }
             Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
             if (creature != null && numberToUnboost != 0) {
-                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(numberToUnboost, numberToUnboost, Duration.EndOfTurn)), game);
+                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(numberToUnboost, numberToUnboost, Duration.EndOfTurn)), source.getSourceId(), game, false);
             }
             return true;
         }

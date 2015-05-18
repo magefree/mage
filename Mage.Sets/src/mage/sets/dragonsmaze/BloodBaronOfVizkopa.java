@@ -126,7 +126,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
                             break;
                         case AbilityAddingRemovingEffects_6:
                             if (sublayer == SubLayer.NA) {
-                                creature.addAbility(FlyingAbility.getInstance(), game);
+                                creature.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);
                             }
                             break;
                         default:

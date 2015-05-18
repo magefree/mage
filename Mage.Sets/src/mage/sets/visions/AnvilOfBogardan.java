@@ -90,7 +90,7 @@ class AnvilOfBogardanEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.drawCards(1, game);
-            targetPlayer.discard(1, source, game);
+            targetPlayer.discard(1, false, source, game);
             return true;
         }
         return false;

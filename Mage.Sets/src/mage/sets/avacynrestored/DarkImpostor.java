@@ -105,7 +105,7 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
                 if (card != null) {
                     for (Ability ability: card.getAbilities()) {
                         if (ability instanceof ActivatedAbility) {
-                            perm.addAbility(ability, game);
+                            perm.addAbility(ability, source.getSourceId(), game);
                         }
                     }
                 }
