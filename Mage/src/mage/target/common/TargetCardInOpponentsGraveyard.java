@@ -8,6 +8,8 @@ import mage.game.Game;
 import mage.target.TargetCard;
 
 import java.util.UUID;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 
 
 public class TargetCardInOpponentsGraveyard extends TargetCard {
@@ -52,9 +54,37 @@ public class TargetCardInOpponentsGraveyard extends TargetCard {
 
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        return true;
+        return canChoose(null, sourceControllerId, game);
     }
-
+    
+   /**
+     * Checks if there are enough {@link Card} that can be chosen.
+     *
+     * @param sourceId - the target event source
+     * @param sourceControllerId - controller of the target event source
+     * @param game
+     * @return - true if enough valid {@link Card} exist
+     */
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        int possibleTargets = 0;
+        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+            if (!playerId.equals(sourceControllerId)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (Card card : player.getGraveyard().getCards(filter, sourceId, sourceControllerId, game)) {
+                        if (sourceId == null || isNotTarget() || !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.TARGET, card.getId(), sourceId, sourceControllerId))) {
+                            possibleTargets++;
+                            if (possibleTargets >= this.minNumberOfTargets) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     @Override
     public TargetCardInOpponentsGraveyard copy() {
         return new TargetCardInOpponentsGraveyard(this);

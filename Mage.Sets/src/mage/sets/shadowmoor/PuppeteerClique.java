@@ -69,7 +69,6 @@ public class PuppeteerClique extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
@@ -115,7 +114,7 @@ class PuppeteerCliqueEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        Card card = game.getCard(source.getFirstTarget());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
@@ -125,7 +124,7 @@ class PuppeteerCliqueEffect extends OneShotEffect {
                         ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                         hasteEffect.setTargetPointer(new FixedTarget(permanent.getId()));
                         game.addEffect(hasteEffect, source);
-                        ExileTargetEffect exileEffect = new ExileTargetEffect(new StringBuilder("exile ").append(permanent.getName()).toString());
+                        ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
                         exileEffect.setTargetPointer(new FixedTarget(card.getId()));
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
                         delayedAbility.setSourceId(source.getSourceId());

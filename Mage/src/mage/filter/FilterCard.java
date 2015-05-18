@@ -95,7 +95,6 @@ public class FilterCard extends FilterObject<Card> {
         if (!this.match(card, game)) {
             return false;
         }
-
         return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(card, sourceId, playerId), game);
     }
 
