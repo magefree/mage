@@ -34,7 +34,6 @@ import java.util.UUID;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;
 import mage.constants.Zone;

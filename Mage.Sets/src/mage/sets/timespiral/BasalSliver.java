@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.AddManaToManaPoolSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -64,7 +65,7 @@ public class BasalSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "Sacrifice this permanent: Add {B}{B} to your mana pool."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddManaToManaPoolSourceControllerEffect(Mana.BlackMana(2)), new SacrificeSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
                 filter, "All Slivers have \"Sacrifice this permanent: Add {B}{B} to your mana pool.\"")));
