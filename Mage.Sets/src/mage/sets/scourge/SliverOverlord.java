@@ -65,16 +65,12 @@ public class SliverOverlord extends CardImpl {
         this.subtype.add("Sliver");
         this.subtype.add("Mutant");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 
         // {3}: Search your library for a Sliver card, reveal that card, and put it into your hand. Then shuffle your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ManaCostsImpl("{3}")));
+        
         // {3}: Gain control of target Sliver.
         Ability ability = (new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame), new ManaCostsImpl("{3}")));
         Target target = new TargetPermanent(new FilterCreaturePermanent("Sliver","Sliver"));

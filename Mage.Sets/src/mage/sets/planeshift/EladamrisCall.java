@@ -52,9 +52,6 @@ public class EladamrisCall extends CardImpl {
         super(ownerId, 106, "Eladamri's Call", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "PLS";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-
         // Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
