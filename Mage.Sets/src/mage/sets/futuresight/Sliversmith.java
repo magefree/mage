@@ -25,69 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.futuresight;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.keyword.GraftAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.Token;
 
 /**
  *
- * @author JotaPeRL
+ * @author anonymous
  */
-public class CytoplastManipulator extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
-    static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
-    }    
+public class Sliversmith extends CardImpl {
 
-    public CytoplastManipulator(UUID ownerId) {
-        super(ownerId, 23, "Cytoplast Manipulator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.subtype.add("Mutant");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+    public Sliversmith(UUID ownerId) {
+        super(ownerId, 163, "Sliversmith", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "FUT";
+        this.subtype.add("Spellshaper");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Graft 2
-        this.addAbility(new GraftAbility(this, 2));
-        
-        // {U}, {tap}: Gain control of target creature with a +1/+1 counter on it for as long as Cytoplast Manipulator remains on the battlefield.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom, true),
-                new SourceOnBattlefieldCondition(),
-                "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
+        // {1}, {tap}, Discard a card: Put a 1/1 colorless Sliver artifact creature token named Metallic Sliver onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.HAND, new CreateTokenEffect(new MetallicSliverToken()), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
-        
     }
 
-    public CytoplastManipulator(final CytoplastManipulator card) {
+    public Sliversmith(final Sliversmith card) {
         super(card);
     }
 
     @Override
-    public CytoplastManipulator copy() {
-        return new CytoplastManipulator(this);
+    public Sliversmith copy() {
+        return new Sliversmith(this);
+    }
+}
+
+class MetallicSliverToken extends Token {
+
+    MetallicSliverToken() {
+        super("Metallic Sliver", "a 1/1 colorless Sliver creature token");
+        cardType.add(CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
+        subtype.add("Sliver");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        this.setOriginalExpansionSetCode("FUT");
     }
 }

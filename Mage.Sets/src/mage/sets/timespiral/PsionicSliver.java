@@ -25,69 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dissension;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.GainControlTargetEffect;
-import mage.abilities.keyword.GraftAbility;
+import mage.abilities.effects.common.DamageSelfEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.CounterPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author JotaPeRL
+ * @author anonymous
+ * @see mage.sets.seventhedition.RecklessEmbermage
  */
-public class CytoplastManipulator extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
-    static {
-        filter.add(new CounterPredicate(CounterType.P1P1));
-    }    
+public class PsionicSliver extends CardImpl {
 
-    public CytoplastManipulator(UUID ownerId) {
-        super(ownerId, 23, "Cytoplast Manipulator", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "DIS";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
-        this.subtype.add("Mutant");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
 
-        // Graft 2
-        this.addAbility(new GraftAbility(this, 2));
-        
-        // {U}, {tap}: Gain control of target creature with a +1/+1 counter on it for as long as Cytoplast Manipulator remains on the battlefield.
-        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
-                new GainControlTargetEffect(Duration.Custom, true),
-                new SourceOnBattlefieldCondition(),
-                "gain control of target creature with a +1/+1 counter on it for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
-        
+    public PsionicSliver(UUID ownerId) {
+        super(ownerId, 72, "Psionic Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Sliver");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // All Sliver creatures have "{tap}: This creature deals 2 damage to target creature or player and 3 damage to itself."
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        ability.addEffect(new DamageSelfEffect(3));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
+                        filter, "All Sliver creatures have \"{tap}: This creature deals 2 damage to target creature or player and 3 damage to itself.\"")));
     }
 
-    public CytoplastManipulator(final CytoplastManipulator card) {
+    public PsionicSliver(final PsionicSliver card) {
         super(card);
     }
 
     @Override
-    public CytoplastManipulator copy() {
-        return new CytoplastManipulator(this);
+    public PsionicSliver copy() {
+        return new PsionicSliver(this);
     }
 }
