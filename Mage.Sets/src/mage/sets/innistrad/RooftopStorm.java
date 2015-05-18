@@ -34,7 +34,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -42,7 +41,6 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.abilities.ActivatedAbility;
 
 /**
  *
@@ -53,8 +51,6 @@ public class RooftopStorm extends CardImpl {
     public RooftopStorm(UUID ownerId) {
         super(ownerId, 71, "Rooftop Storm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
         this.expansionSetCode = "ISD";
-
-        this.color.setBlue(true);
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
@@ -95,7 +91,7 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Ability spell = abilityToModify;
             if (spell.getControllerId().equals(source.getControllerId())) {
                 Card sourceCard = game.getCard(spell.getSourceId());

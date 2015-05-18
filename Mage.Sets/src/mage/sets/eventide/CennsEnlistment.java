@@ -48,12 +48,11 @@ public class CennsEnlistment extends CardImpl {
         super(ownerId, 3, "Cenn's Enlistment", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setWhite(true);
-
         // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KithkinToken(), 2));
+        
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{W}"), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public CennsEnlistment(final CennsEnlistment card) {

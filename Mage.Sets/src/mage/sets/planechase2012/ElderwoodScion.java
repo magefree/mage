@@ -37,7 +37,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -60,8 +59,6 @@ public class ElderwoodScion extends CardImpl {
         this.expansionSetCode = "PC2";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
@@ -107,7 +104,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 for (Target target :abilityToModify.getTargets()) {
                     for (UUID targetUUID :target.getTargets()) {

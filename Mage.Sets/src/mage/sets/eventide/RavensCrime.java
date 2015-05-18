@@ -31,11 +31,9 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**
@@ -48,13 +46,12 @@ public class RavensCrime extends CardImpl {
         super(ownerId, 41, "Raven's Crime", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
-
         // Target player discards a card.
         this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));
         this.getSpellAbility().getTargets().add(new TargetPlayer());
+
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{B}"), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public RavensCrime(final RavensCrime card) {

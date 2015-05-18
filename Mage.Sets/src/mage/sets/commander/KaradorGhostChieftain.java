@@ -36,8 +36,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -72,9 +70,6 @@ public class KaradorGhostChieftain extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

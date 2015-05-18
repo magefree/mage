@@ -27,32 +27,31 @@
  */
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.Cost;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
+import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class RetraceAbility extends ActivatedAbilityImpl {
 
-    public RetraceAbility(Cost cost, TimingRule timingRule) {
-        super(Zone.GRAVEYARD, new RetraceEffect(), cost);
-        super.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
-        this.timing = timingRule;
-        this.usesStack = false;
+public class RetraceAbility extends SpellAbility {
+
+    public RetraceAbility(Card card) {
+        super(card.getManaCost(), card.getName() + " with retrace", Zone.GRAVEYARD, SpellAbilityType.BASE_ALTERNATE);
+        this.getCosts().addAll(card.getSpellAbility().getCosts().copy());
+        this.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
+        this.getEffects().addAll(card.getSpellAbility().getEffects().copy());
+        this.getTargets().addAll(card.getSpellAbility().getTargets().copy());
+        this.getChoices().addAll(card.getSpellAbility().getChoices().copy());
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+        this.timing = card.getSpellAbility().getTiming();
+        
     }
 
     public RetraceAbility(final RetraceAbility ability) {
@@ -65,40 +64,12 @@ public class RetraceAbility extends ActivatedAbilityImpl {
     }
 
     @Override
+    public String getRule(boolean all) {
+        return getRule();
+    }
+
+    @Override
     public String getRule() {
         return "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>";
     }
 }
-
-class RetraceEffect extends OneShotEffect {
-
-    public RetraceEffect() {
-        super(Outcome.Benefit);
-        staticText = "";
-    }
-
-    public RetraceEffect(final RetraceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RetraceEffect copy() {
-        return new RetraceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = (Card) game.getObject(source.getSourceId());
-        if (card != null) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                card.getSpellAbility().clear();
-                int amount = source.getManaCostsToPay().getX();
-                card.getSpellAbility().getManaCostsToPay().setX(amount);
-                return controller.cast(card.getSpellAbility(), game, true);
-            }
-        }
-        return false;
-    }
-}
-

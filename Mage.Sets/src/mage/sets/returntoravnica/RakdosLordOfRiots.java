@@ -37,7 +37,6 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -63,8 +62,7 @@ public class RakdosLordOfRiots extends CardImpl {
         this.expansionSetCode = "RTR";
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
@@ -153,7 +151,7 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.getCardType().contains(CardType.CREATURE))) {
                 return true;

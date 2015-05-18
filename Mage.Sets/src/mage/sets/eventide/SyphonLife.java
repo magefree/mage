@@ -56,7 +56,7 @@ public class SyphonLife extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{1}{B}{B}"), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public SyphonLife(final SyphonLife card) {

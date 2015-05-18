@@ -33,7 +33,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -50,8 +49,6 @@ public class ArcaneMelee extends CardImpl {
     public ArcaneMelee(UUID ownerId) {
         super(ownerId, 44, "Arcane Melee", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "AVR";
-
-        this.color.setBlue(true);
 
         // Instant and sorcery spells cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArcaneMeleeCostReductionEffect()));
@@ -87,7 +84,7 @@ class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ( abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if ( abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
             if ( sourceCard != null && (sourceCard.getCardType().contains(CardType.INSTANT) || sourceCard.getCardType().contains(CardType.SORCERY))) {
                 return true;

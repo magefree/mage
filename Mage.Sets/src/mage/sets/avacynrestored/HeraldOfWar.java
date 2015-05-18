@@ -37,7 +37,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -57,7 +56,6 @@ public class HeraldOfWar extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
@@ -107,7 +105,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.hasSubtype("Angel") || sourceCard.hasSubtype("Human"))) {
                 return true;

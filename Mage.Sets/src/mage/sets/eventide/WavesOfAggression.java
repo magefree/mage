@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
@@ -39,7 +38,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,15 +56,12 @@ public class WavesOfAggression extends CardImpl {
         super(ownerId, 148, "Waves of Aggression", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R/W}{R/W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new WavesOfAggressionUntapEffect());
         this.getSpellAbility().addEffect(new WavesOfAggressionAddPhasesEffect());        
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{R/W}{R/W}"), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public WavesOfAggression(final WavesOfAggression card) {

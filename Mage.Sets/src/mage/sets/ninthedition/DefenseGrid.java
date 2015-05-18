@@ -34,7 +34,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 
@@ -85,7 +84,7 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             if(!abilityToModify.getControllerId().equals(game.getActivePlayerId())) {
                 return true;
             }

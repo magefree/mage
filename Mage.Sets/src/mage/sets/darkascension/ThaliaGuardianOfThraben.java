@@ -27,7 +27,7 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -35,13 +35,16 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.util.CardUtil;
-
-import java.util.UUID;
 
 /**
  *
@@ -56,7 +59,6 @@ public class ThaliaGuardianOfThraben extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
@@ -96,7 +98,7 @@ class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectI
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
                 return true;

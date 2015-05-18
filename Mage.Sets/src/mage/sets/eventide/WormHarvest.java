@@ -29,14 +29,12 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.Token;
 
@@ -50,15 +48,12 @@ public class WormHarvest extends CardImpl {
         super(ownerId, 131, "Worm Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B/G}{B/G}{B/G}");
         this.expansionSetCode = "EVE";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
         // Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WormHarvestToken(), value));
 
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{2}{B/G}{B/G}{B/G}"), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public WormHarvest(final WormHarvest card) {
