@@ -53,7 +53,8 @@ import mage.target.TargetPermanent;
  */
 public class Flickerwisp extends CardImpl {
 
-    private static final FilterPermanent filter  = new FilterPermanent();
+    private static final FilterPermanent filter  = new FilterPermanent("another target permanent");
+    
     static{
         filter.add(new AnotherPredicate());
     }
@@ -63,15 +64,15 @@ public class Flickerwisp extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // When Flickerwisp enters the battlefield, exile another target permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new EntersBattlefieldTriggeredAbility(new FlickerwispEffect());
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
