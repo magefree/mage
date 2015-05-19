@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author anonymous
  */
 public class VolcanicStrength extends mage.sets.magic2011.VolcanicStrength {
 

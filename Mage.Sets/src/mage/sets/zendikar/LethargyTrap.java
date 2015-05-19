@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -78,7 +79,7 @@ public class LethargyTrap extends CardImpl {
     }
 }
 
-class LethargyTrapAlternativeCost extends AlternativeCostImpl {
+class LethargyTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public LethargyTrapAlternativeCost() {
         super("you may pay {U} rather than pay Lethargy Trap's mana cost");

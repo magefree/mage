@@ -59,7 +59,7 @@ public class DeepAnalysis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback-{1}{U}, Pay 3 life.
-        CostsImpl costs = new CostsImpl();
+        Costs<Cost> costs = new CostsImpl<>();
         costs.add(new ManaCostsImpl("{1}{U}"));
         costs.add(new PayLifeCost(3));
         this.addAbility(new FlashbackAbility(costs, TimingRule.SORCERY));

@@ -103,7 +103,7 @@ class ChainsOfMephistophelesReplacementEffect extends ReplacementEffectImpl {
                 return true;
             } else  {
                 // discards a card instead. If the player discards a card this way, he or she draws a card.
-                player.discard(1, source, game);
+                player.discard(1, false, source, game);
                 return false; // because player draws a card, the draw event is kept
             }
         }

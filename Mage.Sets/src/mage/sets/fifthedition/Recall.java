@@ -93,7 +93,7 @@ class RecallEffect extends OneShotEffect {
             // Discard X cards
             int amount = source.getManaCostsToPay().getX();
             int discarded = Math.min(amount, player.getHand().size());
-            player.discard(amount, source, game);
+            player.discard(amount, false, source, game);
             
             // then return a card from your graveyard to your hand for each card discarded this way
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(discarded, new FilterCard());

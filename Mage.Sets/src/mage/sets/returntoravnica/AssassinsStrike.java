@@ -92,7 +92,7 @@ class AssassinsStrikeEffect extends OneShotEffect {
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
-                player.discard(1, source, game);
+                player.discard(1, false, source, game);
                 return true;
             }
         }

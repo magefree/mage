@@ -36,6 +36,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -126,7 +127,7 @@ class SummoningTrapWatcher extends Watcher {
     }
 }
 
-class SummoningTrapAlternativeCost extends AlternativeCostImpl {
+class SummoningTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public SummoningTrapAlternativeCost() {
         super("you may pay {0} rather than pay Summoning Trap's mana cost");

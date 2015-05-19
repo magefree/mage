@@ -35,6 +35,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -113,7 +114,7 @@ class CobraTrapWatcher extends Watcher {
     }
 }
 
-class CobraTrapAlternativeCost extends AlternativeCostImpl {
+class CobraTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public CobraTrapAlternativeCost() {
         super("you may pay {G} rather than pay Cobra Trap's mana cost");
