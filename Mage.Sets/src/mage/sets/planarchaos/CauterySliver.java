@@ -71,8 +71,8 @@ public class CauterySliver extends CardImpl {
                         "All Slivers have \"{1}, Sacrifice this permanent: This permanent deals 1 damage to target creature or player.\"")));
         // All Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn."
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("1"));
-        ability1.addCost(new SacrificeSourceCost());
-        ability1.addTarget(new TargetSliverCreatureOrPlayer());
+        ability2.addCost(new SacrificeSourceCost());
+        ability2.addTarget(new TargetSliverCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn.\"")));
