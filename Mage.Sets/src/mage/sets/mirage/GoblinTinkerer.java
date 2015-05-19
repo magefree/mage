@@ -30,12 +30,16 @@ package mage.sets.mirage;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -56,8 +60,11 @@ public class GoblinTinkerer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, {T}: Destroy target artifact. That artifact deals damage equal to its converted mana cost to Goblin Tinkerer.
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addEffect(new GoblinTinkererDamageEffect());
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
         
     }
 
