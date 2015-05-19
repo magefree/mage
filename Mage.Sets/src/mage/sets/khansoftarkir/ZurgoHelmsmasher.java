@@ -58,9 +58,6 @@ public class ZurgoHelmsmasher extends CardImpl {
         this.subtype.add("Orc");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(2);
 

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.SourceOnBattelfieldCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -63,7 +63,7 @@ public class MyrServitor extends CardImpl {
         // At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new MyrServitorReturnEffect(), TargetController.YOU, false),
-                SourceOnBattelfieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.getInstance(),
                 "At the beginning of your upkeep, if {this} is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield"
         ));
         

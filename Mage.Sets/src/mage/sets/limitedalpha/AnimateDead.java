@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.SourceOnBattelfieldCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -83,7 +83,7 @@ public class AnimateDead extends CardImpl {
         // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AnimateDeadReAttachEffect(), false),
-                SourceOnBattelfieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.getInstance(),
                 "When {this} enters the battlefield, if it's on the battlefield, it loses \"enchant creature card in a graveyard\" and gains \"enchant creature put onto the battlefield with {this}.\" Return enchanted creature card to the battlefield under your control and attach {this} to it.");
         ability.addEffect(new AnimateDeadChangeAbilityEffect());
         this.addAbility(ability);

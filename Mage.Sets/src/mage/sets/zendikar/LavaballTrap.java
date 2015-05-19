@@ -35,6 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -83,7 +84,7 @@ public class LavaballTrap extends CardImpl {
 
 class LavaballTrapWatcher extends Watcher {
 
-    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<>();
 
     public LavaballTrapWatcher() {
         super("LavaballTrapWatcher", WatcherScope.GAME);
@@ -108,7 +109,7 @@ class LavaballTrapWatcher extends Watcher {
             if (perm.getCardType().contains(CardType.LAND)) {
                 Integer amount = amountOfLandsPlayedThisTurn.get(perm.getControllerId());
                 if (amount == null) {
-                    amount = Integer.valueOf(1);
+                    amount = 1;
                 } else {
                     ++amount;
                 }
@@ -121,8 +122,8 @@ class LavaballTrapWatcher extends Watcher {
         int maxLands = 0;
         for (UUID opponentId : game.getOpponents(playerId)) {
             Integer amount = amountOfLandsPlayedThisTurn.get(opponentId);
-            if (amount != null && amount.intValue() > maxLands) {
-                maxLands = amount.intValue();
+            if (amount != null && amount > maxLands) {
+                maxLands = amount;
             }
         }
         return maxLands;
@@ -135,7 +136,7 @@ class LavaballTrapWatcher extends Watcher {
     }
 }
 
-class LavaballTrapAlternativeCost extends AlternativeCostImpl {
+class LavaballTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public LavaballTrapAlternativeCost() {
         super("you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost");

@@ -40,7 +40,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -63,7 +62,6 @@ public class AvatarOfHope extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(9);
 
@@ -146,7 +144,7 @@ class AdjustingCostsEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
+        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
                 && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return true;
         }

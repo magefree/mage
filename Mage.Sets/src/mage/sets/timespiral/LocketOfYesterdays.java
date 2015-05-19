@@ -36,7 +36,6 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -100,7 +99,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getControllerId().equals(source.getControllerId()) &&
-            (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)) {
+            (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)) {
                 return true;
         }
         return false;

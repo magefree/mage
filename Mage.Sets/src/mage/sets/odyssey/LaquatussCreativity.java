@@ -87,7 +87,7 @@ class LaquatussCreativityEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         int handCount = player.getHand().count(new FilterCard(), game);
         player.drawCards(handCount, game);
-        player.discard(handCount, source, game);
+        player.discard(handCount, false, source, game);
         return false;
     }
 }

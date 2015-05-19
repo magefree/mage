@@ -47,13 +47,13 @@ public class DerangedAssistant extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {tap}, Put the top card of your library into your graveyard: Add {1} to your mana pool.
+        // {T}, Put the top card of your library into your graveyard: Add {1} to your mana pool.
         ColorlessManaAbility ability = new ColorlessManaAbility();
         ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        ability.setUndoPossible(false);
         this.addAbility(ability);
     }
 

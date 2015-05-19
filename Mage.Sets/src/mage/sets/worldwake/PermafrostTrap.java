@@ -34,6 +34,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
@@ -115,7 +116,7 @@ class PermafrostTrapWatcher extends Watcher {
     }
 }
 
-class PermafrostTrapAlternativeCost extends AlternativeCostImpl {
+class PermafrostTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public PermafrostTrapAlternativeCost() {
         super("you may pay {U} rather than pay Permafrost Trap's mana cost");

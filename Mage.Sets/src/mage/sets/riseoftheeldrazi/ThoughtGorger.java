@@ -104,7 +104,7 @@ class ThoughtGorgerEffectEnters extends OneShotEffect {
         if (player != null && player.getHand().size() > 0 && thoughtGorger != null ) {
             int cardsInHand = player.getHand().size();
             thoughtGorger.addCounters(CounterType.P1P1.createInstance(cardsInHand), game);
-            player.discard(cardsInHand, source, game);
+            player.discard(cardsInHand, false, source, game);
             return true;
         }
         return false;

@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -80,7 +81,7 @@ public class SlingbowTrap extends CardImpl {
     }
 }
 
-class SlingbowTrapAlternativeCost extends AlternativeCostImpl {
+class SlingbowTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public SlingbowTrapAlternativeCost() {
         super("you may pay {G} rather than pay {this}'s mana cost");

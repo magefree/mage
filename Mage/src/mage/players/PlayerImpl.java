@@ -1016,7 +1016,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
                 if (ability.resolve(game)) {
-                    if (storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
+                    if (ability.isUndoPossible() && storedBookmark == -1 || storedBookmark > bookmark) { // e.g. usefull for undo Nykthos, Shrine to Nyx
                         setStoredBookmark(bookmark);
                     }
                     return true;

@@ -29,21 +29,16 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EmptyToken;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
@@ -58,15 +53,12 @@ public class SpittingImage extends CardImpl {
         super(ownerId, 162, "Spitting Image", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-
         // Put a token that's a copy of target creature onto the battlefield.
         this.getSpellAbility().addEffect(new SpittingImageEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         
         // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-        this.addAbility(new RetraceAbility(getSpellAbility().getManaCosts(), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
         
     }
 

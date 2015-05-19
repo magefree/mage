@@ -35,7 +35,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
-import mage.abilities.condition.common.SourceOnBattelfieldCondition;
+import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -87,7 +87,7 @@ public class Necromancy extends CardImpl {
         // When Necromancy leaves the battlefield, that creature's controller sacrifices it.
         Ability ability = new ConditionalTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new NecromancyReAttachEffect(), false),
-                SourceOnBattelfieldCondition.getInstance(),
+                SourceOnBattlefieldCondition.getInstance(),
                 "When {this} enters the battlefield, if it's on the battlefield,  it becomes an Aura with \"enchant creature put onto the battlefield with {this}.\" Put target creature card from a graveyard onto the battlefield under your control and attach {this} to it.");
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);

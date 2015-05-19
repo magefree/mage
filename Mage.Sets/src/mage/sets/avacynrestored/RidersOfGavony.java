@@ -110,7 +110,7 @@ class RidersOfGavonyEffect extends OneShotEffect {
             if (typeChoice.getChoice() != null) {
                 game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>", game);
+                permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>", game);
             }
         }
         return false;
@@ -162,7 +162,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
         }
         if (protectionFilter != null) {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                perm.addAbility(new ProtectionAbility(protectionFilter), game);
+                perm.addAbility(new ProtectionAbility(protectionFilter), source.getSourceId(), game);
             }
             return true;
         }

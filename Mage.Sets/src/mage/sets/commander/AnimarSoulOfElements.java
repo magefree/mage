@@ -38,7 +38,6 @@ import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -78,9 +77,6 @@ public class AnimarSoulOfElements extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
@@ -132,7 +128,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.getCardType().contains(CardType.CREATURE))) {
                 return true;

@@ -30,6 +30,7 @@ package mage.sets.prophecy;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -49,7 +50,9 @@ public class Thrive extends CardImpl {
         this.expansionSetCode = "PCY";
 
         // Put a +1/+1 counter on each of X target creatures.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setText("Put a +1/+1 counter on each of X target creatures");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 

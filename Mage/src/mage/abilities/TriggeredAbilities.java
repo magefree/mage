@@ -47,8 +47,11 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * 
+ * This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
+ * See ticket https://github.com/magefree/mage/issues/966 and https://github.com/magefree/mage/issues/473
  */
-public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
+public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 

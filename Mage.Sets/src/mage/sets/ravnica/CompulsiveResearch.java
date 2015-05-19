@@ -94,7 +94,7 @@ class CompulsiveResearchDiscardEffect extends OneShotEffect {
             if (card != null) {
                 targetPlayer.discard(card, source, game);
                 if (!card.getCardType().contains(CardType.LAND) && !targetPlayer.getHand().isEmpty()) {
-                    targetPlayer.discard(1, source, game);
+                    targetPlayer.discard(1, false, source, game);
                 }
                 return true;
             }            

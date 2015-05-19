@@ -44,6 +44,7 @@ import mage.target.TargetPlayer;
 import mage.watchers.Watcher;
 
 import java.util.UUID;
+import mage.abilities.costs.Cost;
 
 /**
  *
@@ -142,7 +143,7 @@ class CardsDrawnOpponentWatcher extends Watcher {
     }
 }
 
-class RuneflareTrapAlternativeCost extends AlternativeCostImpl {
+class RuneflareTrapAlternativeCost extends AlternativeCostImpl<Cost> {
 
     public RuneflareTrapAlternativeCost() {
         super("you may pay {R} rather than pay Runeflare Trap's mana cost");

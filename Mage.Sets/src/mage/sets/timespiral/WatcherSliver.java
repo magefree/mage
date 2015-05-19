@@ -25,36 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.timespiral;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
-
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
- * As long as the sourceId permanent is
- * on the battlefield, the condition is true.
  *
- * @author LevelX2
+ * @author anonymous
  */
-public class SourceOnBattelfieldCondition implements Condition {
-
-    private static final SourceOnBattelfieldCondition fInstance = new SourceOnBattelfieldCondition();
-
-    public static SourceOnBattelfieldCondition getInstance() {
-        return fInstance;
-    }
+public class WatcherSliver extends CardImpl {
     
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return (game.getPermanent(source.getSourceId()) != null);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver", "All Sliver creatures");
+
+    public WatcherSliver(UUID ownerId) {
+        super(ownerId, 45, "Watcher Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Sliver");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // All Sliver creatures get +0/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
+    }
+
+    public WatcherSliver(final WatcherSliver card) {
+        super(card);
     }
 
     @Override
-    public String toString() {
-        return "if {this} is on the battlefield";
+    public WatcherSliver copy() {
+        return new WatcherSliver(this);
     }
-
-    
 }

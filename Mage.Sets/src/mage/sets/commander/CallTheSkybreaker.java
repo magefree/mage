@@ -29,17 +29,13 @@ package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TimingRule;
-import mage.filter.common.FilterLandCard;
 import mage.game.permanent.token.Token;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -52,14 +48,11 @@ public class CallTheSkybreaker extends CardImpl {
         super(ownerId, 188, "Call the Skybreaker", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U/R}{U/R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-
         // Put a 5/5 blue and red Elemental creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElementalToken()));
         
         // Retrace
-        this.addAbility(new RetraceAbility(getSpellAbility().getManaCosts(), TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(this));
         
     }
 

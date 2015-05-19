@@ -91,7 +91,7 @@ class InduceDespairEffect extends OneShotEffect {
         if (cost != null) {
             int CMC = -1 * cost.convertedManaCosts;
             if (creature != null) {
-                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(CMC, CMC, Duration.EndOfTurn)), game);
+                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(CMC, CMC, Duration.EndOfTurn)), source.getSourceId(), game, false);
             }
         }
         return true;

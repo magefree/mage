@@ -31,11 +31,9 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
-import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**
@@ -48,13 +46,11 @@ public class OonasGrace extends CardImpl {
         super(ownerId, 27, "Oona's Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
-
         // Target player draws a card.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
+        this.addAbility(new RetraceAbility(this));
     }
 
     public OonasGrace(final OonasGrace card) {

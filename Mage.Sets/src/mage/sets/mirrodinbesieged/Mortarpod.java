@@ -28,6 +28,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -37,6 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -56,13 +58,21 @@ public class Mortarpod extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Equipment");
 
+        // Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)
         this.addAbility(new LivingWeaponAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 1)));
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        
+        // Equipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to target creature or player."
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 1));
+        SimpleActivatedAbility abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new SacrificeSourceCost());
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
+        abilityToGain.addTarget(new TargetCreatureOrPlayer());
+        Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.EQUIPMENT);
+        effect.setText("and has \"Sacrifice this creature: This creature deals 1 damage to target creature or player.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+        
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 

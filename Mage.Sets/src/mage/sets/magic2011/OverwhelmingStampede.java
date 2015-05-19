@@ -28,16 +28,21 @@
 
 package mage.sets.magic2011;
 
+import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -48,8 +53,9 @@ public class OverwhelmingStampede extends CardImpl {
     public OverwhelmingStampede(UUID ownerId) {
         super(ownerId, 189, "Overwhelming Stampede", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new OverwhelmingStampedeEffect());
+        
+        // Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.
+        this.getSpellAbility().addEffect(new OverwhelmingStampedeInitEffect());
     }
 
     public OverwhelmingStampede(final OverwhelmingStampede card) {
@@ -62,55 +68,36 @@ public class OverwhelmingStampede extends CardImpl {
     }
 }
 
-class OverwhelmingStampedeEffect extends ContinuousEffectImpl {
-
-    public OverwhelmingStampedeEffect() {
-        super(Duration.EndOfTurn, Outcome.AddAbility);
-        staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.";
+class OverwhelmingStampedeInitEffect extends OneShotEffect {
+    
+    public OverwhelmingStampedeInitEffect() {
+        super(Outcome.BoostCreature);
+        this.staticText = "Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control";
     }
-
-    public OverwhelmingStampedeEffect(final OverwhelmingStampedeEffect effect) {
+    
+    public OverwhelmingStampedeInitEffect(final OverwhelmingStampedeInitEffect effect) {
         super(effect);
     }
-
+    
     @Override
-    public OverwhelmingStampedeEffect copy() {
-        return new OverwhelmingStampedeEffect(this);
+    public OverwhelmingStampedeInitEffect copy() {
+        return new OverwhelmingStampedeInitEffect(this);
     }
-
+    
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         int maxPower = 0;
         for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-            if (perm.getPower().getValue() > maxPower)
+            if (perm.getPower().getValue() > maxPower) {
                 maxPower = perm.getPower().getValue();
-        }
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-            switch (layer) {
-                case PTChangingEffects_7:
-                    if (sublayer == SubLayer.ModifyPT_7c) {
-                        perm.addPower(maxPower);
-                        perm.addToughness(maxPower);
-                    }
-                    break;
-                case AbilityAddingRemovingEffects_6:
-                    if (sublayer == SubLayer.NA) {
-                        perm.addAbility(TrampleAbility.getInstance(), game);
-                    }
-                    break;
             }
+        }
+        ContinuousEffect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfStep, new FilterCreaturePermanent());
+        game.addEffect(effect, source);
+        if (maxPower != 0) {
+            effect = new BoostControlledEffect(maxPower, maxPower, Duration.EndOfTurn);
+            game.addEffect(effect, source);
         }
         return true;
     }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
-    }
-
 }

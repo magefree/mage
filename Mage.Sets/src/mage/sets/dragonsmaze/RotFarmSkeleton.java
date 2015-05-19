@@ -53,13 +53,13 @@ public class RotFarmSkeleton extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Plant");
         this.subtype.add("Skeleton");
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
         // Rot Farm Skeleton can't block.
         this.addAbility(new CantBlockAbility());
+        
         // 2{B}{G}, Put the top four cards of your library into your graveyard: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost(4));
