@@ -51,12 +51,9 @@ public class Necrogenesis extends CardImpl {
         super(ownerId, 181, "Necrogenesis", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
         // {2}: Exile target creature card from a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(2));
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard()));
+        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         ability.addEffect(new CreateTokenEffect(new SaprolingToken()));
         this.addAbility(ability);
     }
