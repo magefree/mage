@@ -51,7 +51,6 @@ public class LeechingBite extends CardImpl {
         super(ownerId, 113, "Leeching Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "NPH";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new LeechingBiteEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));

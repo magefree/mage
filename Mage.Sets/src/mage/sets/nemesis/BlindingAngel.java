@@ -55,7 +55,6 @@ public class BlindingAngel extends CardImpl {
         this.expansionSetCode = "NMS";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

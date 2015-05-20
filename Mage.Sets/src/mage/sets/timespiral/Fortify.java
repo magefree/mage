@@ -46,7 +46,6 @@ public class Fortify extends CardImpl {
         super(ownerId, 19, "Fortify", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "TSP";
 
-        this.color.setWhite(true);
 
         // Choose one - Creatures you control get +2/+0 until end of turn; or creatures you control get +0/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));

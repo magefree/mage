@@ -49,7 +49,6 @@ public class EngulfingFlames extends CardImpl {
         super(ownerId, 191, "Engulfing Flames", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

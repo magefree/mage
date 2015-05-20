@@ -45,7 +45,6 @@ public class TriplicateSpirits extends CardImpl {
         super(ownerId, 40, "Triplicate Spirits", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

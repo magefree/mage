@@ -57,7 +57,6 @@ public class SigilOfSleep extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

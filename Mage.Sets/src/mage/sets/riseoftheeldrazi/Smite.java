@@ -52,7 +52,6 @@ public class Smite extends CardImpl {
         super(ownerId, 43, "Smite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Destroy target blocked creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

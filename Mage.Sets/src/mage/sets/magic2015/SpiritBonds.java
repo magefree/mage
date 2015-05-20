@@ -72,7 +72,6 @@ public class SpiritBonds extends CardImpl {
         super(ownerId, 37, "Spirit Bonds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Whenever a nontoken creature enters the battlefield under your control, you may pay {W}. If you do, but a 1/1 white Spirit creature token with flying into play.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new SpiritWhiteToken("M15")), new ManaCostsImpl("{W}")), filterNontoken, false));

@@ -48,7 +48,6 @@ public class LightningRift extends CardImpl {
         super(ownerId, 217, "Lightning Rift", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // Whenever a player cycles a card, you may pay {1}. If you do, Lightning Rift deals 2 damage to target creature or player.
         Ability ability = new CycleAllTriggeredAbility(new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(1)), false);

@@ -47,7 +47,6 @@ public class CarvenCaryatid extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

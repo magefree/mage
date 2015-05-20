@@ -51,7 +51,6 @@ public class CityOfSolitude extends CardImpl {
         super(ownerId, 52, "City of Solitude", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "VIS";
 
-        this.color.setGreen(true);
 
         // Players can cast spells and activate abilities only during their own turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityOfSolitudeEffect()));

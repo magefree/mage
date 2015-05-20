@@ -66,7 +66,6 @@ public class SpiritMirror extends CardImpl {
         super(ownerId, 260, "Spirit Mirror", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "TMP";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(

@@ -48,7 +48,6 @@ public class MinotaurExplorer extends CardImpl {
         this.subtype.add("Minotaur");
         this.subtype.add("Scout");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -51,7 +51,7 @@ public class NecraDisciple extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability firstAbility = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G));

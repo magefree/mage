@@ -46,7 +46,6 @@ public class Remand extends CardImpl {
         super(ownerId, 63, "Remand", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.HAND));

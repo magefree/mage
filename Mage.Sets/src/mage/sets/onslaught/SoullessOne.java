@@ -58,7 +58,6 @@ public class SoullessOne extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Avatar");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

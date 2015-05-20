@@ -51,7 +51,6 @@ public class TaintedPact extends CardImpl {
         super(ownerId, 164, "Tainted Pact", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.
         this.getSpellAbility().addEffect(new TaintedPactEffect());

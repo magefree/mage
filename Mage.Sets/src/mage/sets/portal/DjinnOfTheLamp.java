@@ -45,7 +45,6 @@ public class DjinnOfTheLamp extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Djinn");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

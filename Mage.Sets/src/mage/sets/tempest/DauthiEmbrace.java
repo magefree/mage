@@ -50,7 +50,6 @@ public class DauthiEmbrace extends CardImpl {
         super(ownerId, 14, "Dauthi Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // {B}{B}: Target creature gains shadow until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}{B}"));

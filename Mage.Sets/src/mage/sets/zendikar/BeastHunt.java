@@ -52,7 +52,6 @@ public class BeastHunt extends CardImpl {
         super(ownerId, 158, "Beast Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new BeastHuntEffect());
     }

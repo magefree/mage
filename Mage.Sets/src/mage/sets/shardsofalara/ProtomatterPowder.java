@@ -52,7 +52,6 @@ public class ProtomatterPowder extends CardImpl {
         super(ownerId, 53, "Protomatter Powder", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // {4}{W}, {tap}, Sacrifice Protomatter Powder: Return target artifact card from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{W}"));

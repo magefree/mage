@@ -49,7 +49,6 @@ public class Subversion extends CardImpl {
         super(ownerId, 68, "Subversion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SubversionEffect(), TargetController.YOU, false));

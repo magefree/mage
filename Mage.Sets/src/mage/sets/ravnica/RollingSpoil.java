@@ -49,7 +49,6 @@ public class RollingSpoil extends CardImpl {
         super(ownerId, 179, "Rolling Spoil", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
         
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

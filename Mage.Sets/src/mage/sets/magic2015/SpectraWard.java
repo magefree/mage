@@ -71,7 +71,6 @@ public class SpectraWard extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

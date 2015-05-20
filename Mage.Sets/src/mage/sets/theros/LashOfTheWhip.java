@@ -45,7 +45,6 @@ public class LashOfTheWhip extends CardImpl {
         super(ownerId, 94, "Lash of the Whip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Target creature gets -4/-4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4,-4, Duration.EndOfTurn));

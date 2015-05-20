@@ -59,7 +59,6 @@ public class Massacre extends CardImpl {
         super(ownerId, 58, "Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlack(true);
 
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Plains and you control a Swamp", 

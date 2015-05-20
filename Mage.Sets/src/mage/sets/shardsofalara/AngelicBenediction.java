@@ -50,7 +50,6 @@ public class AngelicBenediction extends CardImpl {
         super(ownerId, 3, "Angelic Benediction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         this.addAbility(new ExaltedAbility());
         // Whenever a creature you control attacks alone, you may tap target creature.

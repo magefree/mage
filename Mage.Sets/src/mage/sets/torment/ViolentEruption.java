@@ -47,7 +47,6 @@ public class ViolentEruption extends CardImpl {
         super(ownerId, 117, "Violent Eruption", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}{R}");
         this.expansionSetCode = "TOR";
 
-        this.color.setRed(true);
 
         // Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));

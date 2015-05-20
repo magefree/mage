@@ -61,7 +61,6 @@ public class Crash extends CardImpl {
         super(ownerId, 186, "Crash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setRed(true);
 
         // You may sacrifice a Mountain rather than pay Crash's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, alternativeCostFilter, true))));

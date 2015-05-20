@@ -60,7 +60,6 @@ public class Scourglass extends CardImpl {
         super(ownerId, 25, "Scourglass", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{W}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         // {tap}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,

@@ -59,7 +59,6 @@ public class ExecutionersCapsule extends CardImpl {
         super(ownerId, 75, "Executioner's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlack(true);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());

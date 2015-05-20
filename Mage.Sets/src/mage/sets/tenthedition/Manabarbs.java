@@ -48,7 +48,6 @@ public class Manabarbs extends CardImpl {
         super(ownerId, 218, "Manabarbs", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         // Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(

@@ -47,7 +47,6 @@ public class HorncallersChant extends CardImpl {
         super(ownerId, 128, "Horncaller's Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{7}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
 
         // Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

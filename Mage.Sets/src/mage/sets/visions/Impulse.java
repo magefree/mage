@@ -46,7 +46,6 @@ public class Impulse extends CardImpl {
         super(ownerId, 34, "Impulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "VIS";
 
-        this.color.setBlue(true);
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(4), false, new StaticValue(1), new FilterCard(), Zone.LIBRARY, false, false));

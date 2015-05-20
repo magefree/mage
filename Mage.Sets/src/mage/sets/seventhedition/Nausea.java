@@ -45,7 +45,6 @@ public class Nausea extends CardImpl {
         super(ownerId, 148, "Nausea", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // All creatures get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));

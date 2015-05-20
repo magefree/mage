@@ -57,7 +57,6 @@ public class ConsumingVapors extends CardImpl {
         super(ownerId, 101, "Consuming Vapors", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Target player sacrifices a creature. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new ConsumingVaporsEffect());

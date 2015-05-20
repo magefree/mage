@@ -60,7 +60,6 @@ public class GloomwidowsFeast extends CardImpl {
         super(ownerId, 118, "Gloomwidow's Feast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // Destroy target creature with flying. If that creature was blue or black, put a 1/2 green Spider creature token with reach onto the battlefield.
         this.getSpellAbility().addEffect(new GloomwidowsFeastEffect());

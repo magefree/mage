@@ -54,7 +54,6 @@ public class PrimordialSage extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

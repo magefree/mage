@@ -45,7 +45,6 @@ public class CrashOfRhinos extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Rhino");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(4);
 

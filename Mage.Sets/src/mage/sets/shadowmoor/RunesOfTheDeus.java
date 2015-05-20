@@ -59,8 +59,6 @@ public class RunesOfTheDeus extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

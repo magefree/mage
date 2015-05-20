@@ -58,7 +58,6 @@ public class CausticWasps extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

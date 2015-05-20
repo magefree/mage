@@ -51,7 +51,6 @@ public class GoreVassal extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

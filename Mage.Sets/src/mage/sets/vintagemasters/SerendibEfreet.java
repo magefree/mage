@@ -48,7 +48,6 @@ public class SerendibEfreet extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Efreet");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

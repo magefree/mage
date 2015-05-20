@@ -51,7 +51,6 @@ public class DeathsShadow extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Avatar");
 
-        this.color.setBlack(true);
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);
 

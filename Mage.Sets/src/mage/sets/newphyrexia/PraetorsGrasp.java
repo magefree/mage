@@ -59,7 +59,6 @@ public class PraetorsGrasp extends CardImpl {
         super(ownerId, 71, "Praetor's Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         // Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());

@@ -59,7 +59,6 @@ public class CelestialKirin extends CardImpl {
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

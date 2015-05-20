@@ -54,7 +54,6 @@ public class AncestralMemories extends CardImpl {
         super(ownerId, 59, "Ancestral Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}{U}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlue(true);
 
         // Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new AncestralMemoriesEffect());

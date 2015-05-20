@@ -58,7 +58,6 @@ public class Downsize extends CardImpl {
         super(ownerId, 38, "Downsize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // Target creature you don't control gets -4/-0 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

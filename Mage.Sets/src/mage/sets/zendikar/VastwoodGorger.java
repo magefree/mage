@@ -44,7 +44,6 @@ public class VastwoodGorger extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
     }

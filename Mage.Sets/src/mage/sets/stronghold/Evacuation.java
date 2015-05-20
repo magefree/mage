@@ -50,7 +50,6 @@ public class Evacuation extends CardImpl {
         super(ownerId, 30, "Evacuation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlue(true);
 
         // Return all creatures to their owners' hands.
         this.getSpellAbility().addEffect(new EvacuationEffect());

@@ -48,7 +48,6 @@ public class BashToBits extends CardImpl {
         super(ownerId, 176, "Bash to Bits", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

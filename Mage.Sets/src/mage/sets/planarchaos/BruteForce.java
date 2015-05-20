@@ -45,7 +45,6 @@ public class BruteForce extends CardImpl {
         super(ownerId, 116, "Brute Force", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().getEffects().add(new BoostTargetEffect(3,3, Duration.EndOfTurn));

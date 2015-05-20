@@ -54,7 +54,6 @@ public class SplittingHeadache extends CardImpl {
         super(ownerId, 79, "Splitting Headache", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // Choose one - Target player discards two cards; or target player reveals his or her hand, you choose a card from it, then that player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

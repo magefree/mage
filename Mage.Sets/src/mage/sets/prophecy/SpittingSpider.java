@@ -59,7 +59,6 @@ public class SpittingSpider extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

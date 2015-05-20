@@ -56,7 +56,6 @@ public class Scapeshift extends CardImpl {
         super(ownerId, 136, "Scapeshift", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "MOR";
 
-        this.color.setGreen(true);
 
         // Sacrifice any number of lands. Search your library for that many land cards, put them onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ScapeshiftEffect());

@@ -49,7 +49,6 @@ public class Worship extends CardImpl {
         super(ownerId, 57, "Worship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "USG";
 
-        this.color.setWhite(true);
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));

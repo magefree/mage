@@ -47,7 +47,6 @@ public class Firebolt extends CardImpl {
         super(ownerId, 193, "Firebolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Firebolt deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

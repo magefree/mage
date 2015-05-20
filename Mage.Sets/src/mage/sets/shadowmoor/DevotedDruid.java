@@ -51,7 +51,6 @@ public class DevotedDruid extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

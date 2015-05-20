@@ -60,7 +60,6 @@ public class Gomazoa extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Jellyfish");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

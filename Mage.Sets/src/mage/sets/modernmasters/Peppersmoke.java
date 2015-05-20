@@ -56,7 +56,6 @@ public class Peppersmoke extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Faerie");
 
-        this.color.setBlack(true);
 
         // Target creature gets -1/-1 until end of turn. If you control a Faerie, draw a card.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));

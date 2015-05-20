@@ -48,7 +48,6 @@ public class UktabiOrangutan extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Ape");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

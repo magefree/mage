@@ -52,7 +52,6 @@ public class GreaterGood extends CardImpl {
         super(ownerId, 245, "Greater Good", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "9ED";
 
-        this.color.setGreen(true);
 
         // Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
         Effect effect = new DrawCardSourceControllerEffect(new SacrificeCostCreaturesPower());

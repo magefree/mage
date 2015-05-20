@@ -57,8 +57,6 @@ public class IzzetCharm extends CardImpl {
         super(ownerId, 172, "Izzet Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Choose one — Counter target noncreature spell unless its controller pays {2};
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));

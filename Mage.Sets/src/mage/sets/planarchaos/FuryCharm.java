@@ -73,7 +73,6 @@ public class FuryCharm extends CardImpl {
         super(ownerId, 100, "Fury Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

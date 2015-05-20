@@ -58,8 +58,6 @@ public class DimirDoppelganger extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

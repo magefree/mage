@@ -46,7 +46,6 @@ public class SungracePegasus extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Pegasus");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

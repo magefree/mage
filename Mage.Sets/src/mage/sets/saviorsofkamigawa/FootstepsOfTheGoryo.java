@@ -62,7 +62,6 @@ public class FootstepsOfTheGoryo extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to the battlefield. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FootstepsOfTheGoryoEffect());

@@ -52,7 +52,6 @@ public class FledglingImp extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -59,7 +59,6 @@ public class UnifyingTheory extends CardImpl {
         super(ownerId, 112, "Unifying Theory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
         this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, true));

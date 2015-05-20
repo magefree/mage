@@ -60,7 +60,6 @@ public class LuminarchAscension extends CardImpl {
         super(ownerId, 25, "Luminarch Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setWhite(true);
 
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
         this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.getInstance(), rule, true));

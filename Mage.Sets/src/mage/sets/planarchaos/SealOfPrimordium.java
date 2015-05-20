@@ -60,7 +60,6 @@ public class SealOfPrimordium extends CardImpl {
         super(ownerId, 153, "Seal of Primordium", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "PLC";
 
-        this.color.setGreen(true);
 
         // Sacrifice Seal of Primordium: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());

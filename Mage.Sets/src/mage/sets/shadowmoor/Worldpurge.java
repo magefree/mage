@@ -55,8 +55,6 @@ public class Worldpurge extends CardImpl {
         super(ownerId, 156, "Worldpurge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W/U}{W/U}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
         this.getSpellAbility().addEffect(new WorldpurgeEffect());

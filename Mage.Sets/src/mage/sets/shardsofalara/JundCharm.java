@@ -51,9 +51,6 @@ public class JundCharm extends CardImpl {
         super(ownerId, 175, "Jund Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Choose one - Exile all cards from target player's graveyard;
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());

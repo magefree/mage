@@ -51,7 +51,6 @@ public class InfernalGenesis extends CardImpl {
         super(ownerId, 68, "Infernal Genesis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "PCY";
 
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));

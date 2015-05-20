@@ -55,7 +55,6 @@ public class SparkMage extends CardImpl {
         this.subtype.add("Dwarf");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

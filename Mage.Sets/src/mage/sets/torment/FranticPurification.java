@@ -55,7 +55,6 @@ public class FranticPurification extends CardImpl {
         super(ownerId, 6, "Frantic Purification", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "TOR";
 
-        this.color.setWhite(true);
 
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

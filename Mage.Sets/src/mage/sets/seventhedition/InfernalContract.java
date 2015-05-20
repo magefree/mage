@@ -45,7 +45,6 @@ public class InfernalContract extends CardImpl {
         super(ownerId, 143, "Infernal Contract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // Draw four cards. You lose half your life, rounded up.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

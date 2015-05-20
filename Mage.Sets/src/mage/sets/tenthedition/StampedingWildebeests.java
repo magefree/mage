@@ -59,7 +59,6 @@ public class StampedingWildebeests extends CardImpl {
         this.subtype.add("Antelope");
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

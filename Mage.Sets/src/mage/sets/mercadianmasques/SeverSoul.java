@@ -62,7 +62,6 @@ public class SeverSoul extends CardImpl {
         super(ownerId, 159, "Sever Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(nonBlackCreature));

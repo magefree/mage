@@ -51,7 +51,6 @@ public class CephalidLooter extends CardImpl {
         this.subtype.add("Cephalid");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

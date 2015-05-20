@@ -63,7 +63,6 @@ public class SphinxOfTheChimes extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

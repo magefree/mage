@@ -53,7 +53,6 @@ public class ArtisansSorrow extends CardImpl {
         super(ownerId, 151, "Artisan's Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment. Scry 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

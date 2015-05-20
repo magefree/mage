@@ -60,7 +60,6 @@ public class SlowMotion extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

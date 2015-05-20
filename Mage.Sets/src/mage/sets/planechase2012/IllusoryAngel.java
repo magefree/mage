@@ -56,7 +56,6 @@ public class IllusoryAngel extends CardImpl {
        this.subtype.add("Angel");
        this.subtype.add("Illusion");
 
-       this.color.setBlue(true);
        this.power = new MageInt(4);
        this.toughness = new MageInt(4);
 

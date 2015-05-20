@@ -50,7 +50,6 @@ public class IncrementalGrowth extends CardImpl {
         super(ownerId, 149, "Incremental Growth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "MMA";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature, two +1/+1 counters on another target creature, and three +1/+1 counters on a third target creature.
         this.getSpellAbility().addEffect(new IncrementalGrowthEffect());

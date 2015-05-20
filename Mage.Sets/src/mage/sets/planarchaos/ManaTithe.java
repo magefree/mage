@@ -45,7 +45,6 @@ public class ManaTithe extends CardImpl {
         super(ownerId, 25, "Mana Tithe", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "PLC";
 
-        this.color.setWhite(true);
 
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());

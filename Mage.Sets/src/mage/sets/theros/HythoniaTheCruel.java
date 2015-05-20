@@ -58,7 +58,6 @@ public class HythoniaTheCruel extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Gorgon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

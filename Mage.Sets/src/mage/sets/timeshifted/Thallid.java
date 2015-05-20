@@ -54,7 +54,6 @@ public class Thallid extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

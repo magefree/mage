@@ -49,7 +49,6 @@ public class FleetingImage extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

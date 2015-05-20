@@ -48,7 +48,6 @@ public class PithDriller extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

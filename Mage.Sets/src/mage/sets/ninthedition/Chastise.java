@@ -51,7 +51,6 @@ public class Chastise extends CardImpl {
         super(ownerId, 9, "Chastise", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "9ED";
 
-        this.color.setWhite(true);
 
         // Destroy target attacking creature. You gain life equal to its power.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());

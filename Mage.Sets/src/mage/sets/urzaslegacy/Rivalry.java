@@ -52,7 +52,6 @@ public class Rivalry extends CardImpl {
         super(ownerId, 90, "Rivalry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ULG";
 
-        this.color.setRed(true);
 
         // At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to him or her.
         this.addAbility(new RivalryTriggeredAbility());

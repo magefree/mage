@@ -56,7 +56,6 @@ public class MetallicMastery extends CardImpl {
         super(ownerId, 71, "Metallic Mastery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "MBS";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

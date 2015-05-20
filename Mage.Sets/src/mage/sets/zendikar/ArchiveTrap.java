@@ -56,8 +56,6 @@ public class ArchiveTrap extends CardImpl {
         super(ownerId, 41, "Archive Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.subtype.add("Trap");
-        this.color.setBlue(true);
 
         // If an opponent searched his or her library this turn, you may pay {0} rather than pay Archive Trap's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new GenericManaCost(0), OpponentSearchesLibCondition.getInstance()), new ArchiveTrapWatcher());

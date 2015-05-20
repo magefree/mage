@@ -55,7 +55,6 @@ public class Parch extends CardImpl {
         super(ownerId, 86, "Parch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ULG";
 
-        this.color.setRed(true);
 
         // Choose one - Parch deals 2 damage to target creature or player; or Parch deals 4 damage to target blue creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

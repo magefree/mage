@@ -48,7 +48,6 @@ public class Sangrophage extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

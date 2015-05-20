@@ -48,7 +48,6 @@ public class MorbidHunger extends CardImpl {
         super(ownerId, 150, "Morbid Hunger", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Morbid Hunger deals 3 damage to target creature or player. You gain 3 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

@@ -54,8 +54,6 @@ public class EnchantedEvening extends CardImpl {
         super(ownerId, 140, "Enchanted Evening", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // All permanents are enchantments in addition to their other types.
         Effect effect = new EnchangedEveningEffect(CardType.ENCHANTMENT, Duration.WhileOnBattlefield, new FilterPermanent());

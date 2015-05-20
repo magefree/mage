@@ -47,7 +47,6 @@ public class AngerOfTheGods extends CardImpl {
         super(ownerId, 112, "Anger of the Gods", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Anger of the Gods deals 3 damage to each creature. 
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));

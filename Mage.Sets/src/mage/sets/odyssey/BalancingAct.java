@@ -55,7 +55,6 @@ public class BalancingAct extends CardImpl {
         super(ownerId, 10, "Balancing Act", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
         this.getSpellAbility().addEffect(new BalancingActEffect());

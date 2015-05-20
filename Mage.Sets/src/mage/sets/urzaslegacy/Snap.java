@@ -45,7 +45,6 @@ public class Snap extends CardImpl {
         super(ownerId, 43, "Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand. Untap up to two lands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

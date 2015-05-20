@@ -45,7 +45,7 @@ public class LastCaress extends CardImpl {
     public LastCaress(UUID ownerId) {
         super(ownerId, 41, "Last Caress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "APC";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(1));

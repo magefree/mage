@@ -56,7 +56,6 @@ public class BogRats extends CardImpl {
         this.expansionSetCode = "DRK";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

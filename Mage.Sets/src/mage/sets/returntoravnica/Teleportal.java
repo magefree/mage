@@ -67,8 +67,6 @@ public class Teleportal extends CardImpl {
         super(ownerId, 202, "Teleportal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

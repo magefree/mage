@@ -54,7 +54,6 @@ public class HazeFrog extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Frog");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

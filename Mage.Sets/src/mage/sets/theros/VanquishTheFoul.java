@@ -54,7 +54,6 @@ public class VanquishTheFoul extends CardImpl {
         super(ownerId, 35, "Vanquish the Foul", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Destroy target creature with power 4 or greater. Scry 1.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

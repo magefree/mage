@@ -63,7 +63,6 @@ public class KhalniHydra extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new KhalniHydraCostReductionEffect()));

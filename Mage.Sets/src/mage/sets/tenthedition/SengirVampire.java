@@ -48,7 +48,6 @@ public class SengirVampire extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

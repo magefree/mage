@@ -56,7 +56,6 @@ public class Sluggishness extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

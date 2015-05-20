@@ -58,7 +58,6 @@ public class CouncilsJudgment extends CardImpl {
         super(ownerId, 20, "Council's Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
         this.expansionSetCode = "VMA";
 
-        this.color.setWhite(true);
 
         // Will of the council - Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
         this.getSpellAbility().addEffect(new CouncilsJudgmentEffect());

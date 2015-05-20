@@ -49,7 +49,6 @@ public class SlimeMolding extends CardImpl {
         super(ownerId, 135, "Slime Molding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
 
         // Put an X/X green Ooze creature token onto the battlefield.
         this.getSpellAbility().addEffect(new SlimeMoldingEffect());

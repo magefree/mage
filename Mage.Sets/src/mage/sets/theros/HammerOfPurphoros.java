@@ -60,7 +60,6 @@ public class HammerOfPurphoros extends CardImpl {
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
 
-        this.color.setRed(true);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

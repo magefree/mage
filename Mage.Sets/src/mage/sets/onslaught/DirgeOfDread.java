@@ -52,7 +52,6 @@ public class DirgeOfDread extends CardImpl {
         super(ownerId, 138, "Dirge of Dread", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // All creatures gain fear until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FearAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("All creatures")));

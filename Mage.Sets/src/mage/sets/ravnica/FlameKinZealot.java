@@ -53,8 +53,6 @@ public class FlameKinZealot extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Berserker");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

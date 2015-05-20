@@ -49,7 +49,6 @@ public class TerraEternal extends CardImpl {
         super(ownerId, 22, "Terra Eternal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "WWK";
 
-        this.color.setWhite(true);
 
         // All lands are indestructible.
         FilterLandPermanent filter = new FilterLandPermanent("All lands");

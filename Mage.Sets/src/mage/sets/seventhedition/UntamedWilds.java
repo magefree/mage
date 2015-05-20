@@ -45,7 +45,6 @@ public class UntamedWilds extends CardImpl {
         super(ownerId, 279, "Untamed Wilds", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard())));

@@ -62,7 +62,6 @@ public class SensorSplicer extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Artificer");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

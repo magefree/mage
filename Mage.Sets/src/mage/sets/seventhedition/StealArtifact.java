@@ -52,7 +52,6 @@ public class StealArtifact extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant artifact
          TargetPermanent auraTarget = new TargetArtifactPermanent();

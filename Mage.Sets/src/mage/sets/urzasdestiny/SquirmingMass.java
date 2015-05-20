@@ -45,7 +45,6 @@ public class SquirmingMass extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

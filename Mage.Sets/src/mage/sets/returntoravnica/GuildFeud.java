@@ -59,7 +59,6 @@ public class GuildFeud extends CardImpl {
         super(ownerId, 97, "Guild Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // At the beginning of your upkeep, target opponent reveals the top three cards
         // of his or her library, may put a creature card from among them onto the battlefield,

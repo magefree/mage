@@ -52,7 +52,6 @@ public class TempestOwl extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

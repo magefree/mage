@@ -60,8 +60,6 @@ public class SwansOfBrynArgoll extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

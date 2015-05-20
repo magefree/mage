@@ -52,7 +52,6 @@ public class GlareOfHeresy extends CardImpl {
         super(ownerId, 15, "Glare of Heresy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Exile target white permanent.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

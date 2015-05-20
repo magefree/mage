@@ -45,7 +45,6 @@ public class Solidarity extends CardImpl {
         super(ownerId, 20, "Solidarity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "UDS";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +0/+5 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 5, Duration.EndOfTurn));

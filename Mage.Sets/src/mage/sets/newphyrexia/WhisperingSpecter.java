@@ -55,7 +55,6 @@ public class WhisperingSpecter extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Specter");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -47,7 +47,6 @@ public class GaeasMight extends CardImpl {
         super(ownerId, 81, "Gaea's Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "PLS";
 
-        this.color.setGreen(true);
 
         // Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(), new DomainValue(), Duration.EndOfTurn));

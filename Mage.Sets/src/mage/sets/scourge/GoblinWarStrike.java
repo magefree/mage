@@ -56,7 +56,6 @@ public class GoblinWarStrike extends CardImpl {
         super(ownerId, 96, "Goblin War Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "SCG";
 
-        this.color.setRed(true);
 
         // Goblin War Strike deals damage equal to the number of Goblins you control to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));

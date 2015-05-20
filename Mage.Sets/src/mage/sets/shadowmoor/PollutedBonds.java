@@ -61,7 +61,6 @@ public class PollutedBonds extends CardImpl {
         super(ownerId, 74, "Polluted Bonds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PollutedBondsEffect(), filter, false, SetTargetPointer.PLAYER, rule, true));

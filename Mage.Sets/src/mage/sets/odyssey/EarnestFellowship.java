@@ -60,7 +60,6 @@ public class EarnestFellowship extends CardImpl {
         super(ownerId, 21, "Earnest Fellowship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Each creature has protection from its colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));

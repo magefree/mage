@@ -50,7 +50,6 @@ public class SecondSunrise extends CardImpl {
         super(ownerId, 20, "Second Sunrise", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "MRD";
 
-        this.color.setWhite(true);
 
         // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new SecondSunriseEffect());

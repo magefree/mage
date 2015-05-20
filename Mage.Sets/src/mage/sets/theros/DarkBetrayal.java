@@ -53,7 +53,6 @@ public class DarkBetrayal extends CardImpl {
         super(ownerId, 83, "Dark Betrayal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Destroy target black creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

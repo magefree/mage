@@ -44,7 +44,6 @@ public class ScaledWurm extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
     }

@@ -67,8 +67,6 @@ public class SarkhanTheMad extends CardImpl {
         this.subtype.add("Sarkhan");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), false));
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
 
         this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
 

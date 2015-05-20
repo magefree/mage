@@ -56,7 +56,6 @@ public class SavageFirecat extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -55,7 +55,6 @@ public class Abduction extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

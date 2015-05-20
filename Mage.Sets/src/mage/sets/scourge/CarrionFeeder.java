@@ -51,7 +51,6 @@ public class CarrionFeeder extends CardImpl {
         this.expansionSetCode = "SCG";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -45,7 +45,6 @@ public class DeadlyInsect extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
 

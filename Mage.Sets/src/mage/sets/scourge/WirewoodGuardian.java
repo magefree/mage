@@ -47,7 +47,6 @@ public class WirewoodGuardian extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Mutant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

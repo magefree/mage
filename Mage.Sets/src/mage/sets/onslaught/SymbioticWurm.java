@@ -47,7 +47,6 @@ public class SymbioticWurm extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

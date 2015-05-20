@@ -54,7 +54,6 @@ public class UndyingFlames extends CardImpl {
         super(ownerId, 119, "Undying Flames", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new UndyingFlamesEffect());

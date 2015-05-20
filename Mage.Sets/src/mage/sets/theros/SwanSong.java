@@ -61,7 +61,6 @@ public class SwanSong extends CardImpl {
         super(ownerId, 65, "Swan Song", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Counter target enchantment, instant or sorcery spell. Its controller puts a 2/2 blue Bird creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new SwanSongEffect());

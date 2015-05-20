@@ -44,7 +44,6 @@ public class FlameRift extends CardImpl {
         super(ownerId, 80, "Flame Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "NMS";
 
-        this.color.setRed(true);
 
         // Flame Rift deals 4 damage to each player.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(4, TargetController.ANY));

@@ -51,8 +51,6 @@ public class AzoriusCharm extends CardImpl {
         super(ownerId, 145, "Azorius Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // Choose one — Creatures you control gain lifelink until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));

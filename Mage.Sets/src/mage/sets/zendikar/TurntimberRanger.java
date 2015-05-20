@@ -52,7 +52,6 @@ public class TurntimberRanger extends CardImpl {
         this.subtype.add("Scout");
         this.subtype.add("Ally");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -58,7 +58,6 @@ public class AncestralKnowledge extends CardImpl {
         super(ownerId, 32, "Ancestral Knowledge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "WTH";
 
-        this.color.setBlue(true);
 
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));

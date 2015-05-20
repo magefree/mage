@@ -54,9 +54,6 @@ public class PhyrexianTyranny extends CardImpl {
         super(ownerId, 118, "Phyrexian Tyranny", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
         this.expansionSetCode = "PLS";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Whenever a player draws a card, that player loses 2 life unless he or she pays {2}.
         this.addAbility(new PhyrexianTyrannyTriggeredAbility());

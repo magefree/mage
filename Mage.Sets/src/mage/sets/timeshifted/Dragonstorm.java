@@ -54,7 +54,6 @@ public class Dragonstorm extends CardImpl {
         super(ownerId, 60, "Dragonstorm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{8}{R}");
         this.expansionSetCode = "TSB";
 
-        this.color.setRed(true);
 
         // Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false));

@@ -56,7 +56,6 @@ public class Unearth extends CardImpl {
         super(ownerId, 72, "Unearth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

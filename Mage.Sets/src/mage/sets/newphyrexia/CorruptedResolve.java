@@ -51,7 +51,6 @@ public class CorruptedResolve extends CardImpl {
         super(ownerId, 32, "Corrupted Resolve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         // Counter target spell if its controller is poisoned.
         this.getSpellAbility().addTarget(new TargetSpell());

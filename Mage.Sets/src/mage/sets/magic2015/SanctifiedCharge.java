@@ -56,7 +56,6 @@ public class SanctifiedCharge extends CardImpl {
         super(ownerId, 30, "Sanctified Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +2/+1 until end of turn.  White creatures you control also gain first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));

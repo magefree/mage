@@ -54,8 +54,6 @@ public class SpitefulVisions extends CardImpl {
         super(ownerId, 198, "Spiteful Visions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B/R}{B/R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // At the beginning of each player's draw step, that player draws an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.ANY, false));

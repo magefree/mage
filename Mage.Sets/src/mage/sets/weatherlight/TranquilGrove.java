@@ -55,7 +55,6 @@ public class TranquilGrove extends CardImpl {
         super(ownerId, 84, "Tranquil Grove", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "WTH";
 
-        this.color.setGreen(true);
 
         // {1}{G}{G}: Destroy all other enchantments.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl("{1}{G}{G}")));

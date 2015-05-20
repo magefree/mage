@@ -54,7 +54,6 @@ public class Tanglesap extends CardImpl {
         super(ownerId, 186, "Tanglesap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn by creatures without trample.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));

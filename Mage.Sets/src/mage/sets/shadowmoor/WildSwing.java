@@ -57,7 +57,6 @@ public class WildSwing extends CardImpl {
         super(ownerId, 108, "Wild Swing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Choose three target nonenchantment permanents. Destroy one of them at random.
         this.getSpellAbility().addEffect(new WildSwingEffect());

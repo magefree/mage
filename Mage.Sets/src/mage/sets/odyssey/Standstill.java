@@ -52,7 +52,6 @@ public class Standstill extends CardImpl {
         super(ownerId, 102, "Standstill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.
         this.addAbility(new SpellCastTriggeredAbility());

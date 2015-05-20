@@ -53,7 +53,6 @@ public class PhyrexianDebaser extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Carrier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

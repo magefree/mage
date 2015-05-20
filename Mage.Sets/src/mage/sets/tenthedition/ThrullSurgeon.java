@@ -59,7 +59,6 @@ public class ThrullSurgeon extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Thrull");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

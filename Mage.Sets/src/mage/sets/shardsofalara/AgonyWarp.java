@@ -49,8 +49,6 @@ public class AgonyWarp extends CardImpl {
         super(ownerId, 153, "Agony Warp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target creature gets -3/-0 until end of turn.
         Effect effect = new BoostTargetEffect(-3,0, Duration.EndOfTurn);

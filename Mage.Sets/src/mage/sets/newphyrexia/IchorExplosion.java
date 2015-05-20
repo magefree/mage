@@ -55,7 +55,6 @@ public class IchorExplosion extends CardImpl {
         super(ownerId, 64, "Ichor Explosion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

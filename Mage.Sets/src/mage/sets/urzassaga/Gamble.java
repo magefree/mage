@@ -46,7 +46,6 @@ public class Gamble extends CardImpl {
         super(ownerId, 188, "Gamble", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // Search your library for a card, put that card into your hand, discard a card at random, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false, true);

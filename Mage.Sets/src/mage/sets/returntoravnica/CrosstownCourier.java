@@ -54,7 +54,6 @@ public class CrosstownCourier extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Vedalken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

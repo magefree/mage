@@ -59,8 +59,6 @@ public class ArchonOfTheTriumvirate extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Archon");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

@@ -57,7 +57,6 @@ public class Provoke extends CardImpl {
         super(ownerId, 63, "Provoke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "STH";
 
-        this.color.setGreen(true);
 
         // Untap target creature you don't control. That creature blocks this turn if able.
         this.getSpellAbility().addEffect(new UntapTargetEffect());

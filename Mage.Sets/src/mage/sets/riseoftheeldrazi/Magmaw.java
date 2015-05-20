@@ -61,7 +61,6 @@ public class Magmaw extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

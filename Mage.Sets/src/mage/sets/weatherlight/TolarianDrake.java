@@ -46,7 +46,6 @@ public class TolarianDrake extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

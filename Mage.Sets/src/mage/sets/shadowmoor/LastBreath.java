@@ -59,7 +59,6 @@ public class LastBreath extends CardImpl {
         super(ownerId, 11, "Last Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Exile target creature with power 2 or less. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

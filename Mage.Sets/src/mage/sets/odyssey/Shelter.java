@@ -46,7 +46,6 @@ public class Shelter extends CardImpl {
         super(ownerId, 46, "Shelter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

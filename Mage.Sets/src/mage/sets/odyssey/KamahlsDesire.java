@@ -58,7 +58,6 @@ public class KamahlsDesire extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

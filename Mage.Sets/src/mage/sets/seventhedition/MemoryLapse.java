@@ -46,7 +46,6 @@ public class MemoryLapse extends CardImpl {
         super(ownerId, 88, "Memory Lapse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, true));

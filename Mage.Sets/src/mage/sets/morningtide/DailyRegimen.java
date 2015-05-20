@@ -54,7 +54,6 @@ public class DailyRegimen extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

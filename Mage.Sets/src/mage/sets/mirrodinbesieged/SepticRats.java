@@ -54,7 +54,6 @@ public class SepticRats extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

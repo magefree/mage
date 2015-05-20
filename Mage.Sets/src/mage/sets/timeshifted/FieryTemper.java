@@ -47,7 +47,6 @@ public class FieryTemper extends CardImpl {
         super(ownerId, 62, "Fiery Temper", Rarity.SPECIAL, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "TSB";
 
-        this.color.setRed(true);
 
         // Fiery Temper deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

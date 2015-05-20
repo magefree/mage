@@ -50,7 +50,6 @@ public class RageReflection extends CardImpl {
         super(ownerId, 104, "Rage Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Creatures you control have double strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));

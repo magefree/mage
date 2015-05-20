@@ -50,7 +50,6 @@ public class PearlDragon extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Dragon");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

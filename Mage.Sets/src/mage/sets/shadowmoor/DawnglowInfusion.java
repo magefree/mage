@@ -52,8 +52,6 @@ public class DawnglowInfusion extends CardImpl {
         super(ownerId, 225, "Dawnglow Infusion", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G/W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it.
         DynamicValue xValue = new ManacostVariableValue();

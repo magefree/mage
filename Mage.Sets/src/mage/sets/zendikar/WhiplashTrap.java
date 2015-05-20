@@ -56,7 +56,6 @@ public class WhiplashTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setBlue(true);
 
         // If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new WhiplashAlternativeCost());

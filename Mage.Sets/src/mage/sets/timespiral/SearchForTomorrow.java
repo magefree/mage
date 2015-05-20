@@ -48,7 +48,6 @@ public class SearchForTomorrow extends CardImpl {
         super(ownerId, 216, "Search for Tomorrow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "TSP";
 
-        this.color.setGreen(true);
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());

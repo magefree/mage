@@ -53,7 +53,6 @@ public class LightOfDay extends CardImpl {
         super(ownerId, 239, "Light of Day", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "TMP";
 
-        this.color.setWhite(true);
 
         // Black creatures can't attack or block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfDayEffect()));

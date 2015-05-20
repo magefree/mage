@@ -47,7 +47,6 @@ public class ThermalBlast extends CardImpl {
         super(ownerId, 224, "Thermal Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Thermal Blast deals 3 damage to target creature.
         // Threshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.

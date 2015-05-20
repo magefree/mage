@@ -61,7 +61,6 @@ public class MizziumSkin extends CardImpl {
         super(ownerId, 45, "Mizzium Skin", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // Target creature you control gets +0/+1 and gains hexproof until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

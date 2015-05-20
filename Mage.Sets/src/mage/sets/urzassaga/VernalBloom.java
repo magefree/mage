@@ -54,7 +54,6 @@ public class VernalBloom extends CardImpl {
         super(ownerId, 281, "Vernal Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "USG";
 
-        this.color.setGreen(true);
 
         // Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool.
         this.addAbility(new TapForManaAllTriggeredManaAbility(

@@ -48,7 +48,6 @@ public class SinkIntoTakenuma extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // Sweep - Return any number of Swamps you control to their owner's hand. Target player discards a card for each Swamp returned this way.
         this.getSpellAbility().addEffect(new SweepEffect("Swamp"));

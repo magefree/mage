@@ -46,7 +46,6 @@ public class WildColos extends CardImpl {
         this.subtype.add("Goat");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

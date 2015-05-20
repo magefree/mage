@@ -62,8 +62,6 @@ public class TattermungeDuo extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

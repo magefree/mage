@@ -57,7 +57,6 @@ public class SpiritLink extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

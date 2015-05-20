@@ -51,7 +51,6 @@ public class AEtherFlash extends CardImpl {
         super(ownerId, 172, "AEther Flash", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
         this.addAbility(new AEtherFlashTriggeredAbility());

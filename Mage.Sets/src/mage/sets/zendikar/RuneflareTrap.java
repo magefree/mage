@@ -57,7 +57,6 @@ public class RuneflareTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setRed(true);
 
         // If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new RuneflareTrapAlternativeCost());

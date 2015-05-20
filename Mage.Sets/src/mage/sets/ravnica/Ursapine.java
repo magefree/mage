@@ -49,7 +49,6 @@ public class Ursapine extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

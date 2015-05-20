@@ -49,7 +49,6 @@ public class OranRiefSurvivalist extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Ally");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

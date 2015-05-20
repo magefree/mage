@@ -50,7 +50,6 @@ public class EtherealChampion extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

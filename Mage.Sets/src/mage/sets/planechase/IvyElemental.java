@@ -55,7 +55,6 @@ public class IvyElemental extends CardImpl {
         this.expansionSetCode = "HOP";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -52,7 +52,6 @@ public class FatalBlow extends CardImpl {
         super(ownerId, 9, "Fatal Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "WTH";
 
-        this.color.setBlack(true);
 
         // Destroy target creature that was dealt damage this turn. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

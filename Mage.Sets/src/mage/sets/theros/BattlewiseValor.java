@@ -46,7 +46,6 @@ public class BattlewiseValor extends CardImpl {
         super(ownerId, 1, "Battlewise Valor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Target creature gets +2/+2 until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));

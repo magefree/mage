@@ -56,7 +56,6 @@ public class MistmeadowSkulk extends CardImpl {
         this.subtype.add("Kithkin");
         this.subtype.add("Rogue");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

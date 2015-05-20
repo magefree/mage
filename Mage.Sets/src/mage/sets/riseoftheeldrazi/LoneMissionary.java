@@ -47,7 +47,6 @@ public class LoneMissionary extends CardImpl {
         this.subtype.add("Kor");
         this.subtype.add("Monk");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -59,7 +59,6 @@ public class TowerAbove extends CardImpl {
         super(ownerId, 131, "Tower Above", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/G}{2/G}{2/G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // <i>({2G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)</i>
         // Until end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able."

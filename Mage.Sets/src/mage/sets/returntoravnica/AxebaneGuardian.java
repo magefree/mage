@@ -59,7 +59,6 @@ public class AxebaneGuardian extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

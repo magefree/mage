@@ -48,7 +48,6 @@ public class ValakutFireboar extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Boar");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(7);
 

@@ -50,7 +50,6 @@ public class LeadTheStampede extends CardImpl {
         super(ownerId, 82, "Lead the Stampede", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "MBS";
 
-        this.color.setGreen(true);
         // Look at the top five cards of your library. You may reveal any number of creature cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 5, filter, true));
     }

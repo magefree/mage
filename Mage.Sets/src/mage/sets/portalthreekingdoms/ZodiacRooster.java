@@ -45,7 +45,6 @@ public class ZodiacRooster extends CardImpl {
         this.expansionSetCode = "PTK";
         this.subtype.add("Bird");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

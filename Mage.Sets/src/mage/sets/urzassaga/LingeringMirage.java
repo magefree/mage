@@ -55,7 +55,6 @@ public class LingeringMirage extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

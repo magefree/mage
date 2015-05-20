@@ -55,7 +55,6 @@ public class SulfuricVortex extends CardImpl {
         super(ownerId, 106, "Sulfuric Vortex", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "SCG";
 
-        this.color.setRed(true);
 
         // At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), TargetController.ANY, false, true));        

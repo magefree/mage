@@ -57,7 +57,6 @@ public class StatuteOfDenial extends CardImpl {
         super(ownerId, 79, "Statute of Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // Counter target spell.  If you control a blue creature, draw a card, then discard a card.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

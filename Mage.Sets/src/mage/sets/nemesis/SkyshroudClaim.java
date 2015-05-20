@@ -50,7 +50,6 @@ public class SkyshroudClaim extends CardImpl {
         super(ownerId, 117, "Skyshroud Claim", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "NMS";
 
-        this.color.setGreen(true);
 
         // Search your library for up to two Forest cards and put them onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter ), false));

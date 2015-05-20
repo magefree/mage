@@ -55,7 +55,6 @@ public class ArchmageAscension extends CardImpl {
         super(ownerId, 42, "Archmage Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         // At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.
         this.addAbility(new ArchmageAscensionTriggeredAbility(), new CardsDrawnControllerWatcher());

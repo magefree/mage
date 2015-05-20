@@ -58,7 +58,6 @@ public class SporolothAncient extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

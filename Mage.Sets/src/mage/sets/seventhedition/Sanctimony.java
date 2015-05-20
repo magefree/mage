@@ -56,7 +56,6 @@ public class Sanctimony extends CardImpl {
         super(ownerId, 39, "Sanctimony", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "7ED";
 
-        this.color.setWhite(true);
 
         // Whenever an opponent taps a Mountain for mana, you may gain 1 life.
         this.addAbility(new TapForManaAllTriggeredAbility(new GainLifeEffect(1), filter, SetTargetPointer.NONE));

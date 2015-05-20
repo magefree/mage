@@ -49,7 +49,6 @@ public class NomadsAssembly extends CardImpl {
         super(ownerId, 39, "Nomads' Assembly", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(new ReboundAbility());

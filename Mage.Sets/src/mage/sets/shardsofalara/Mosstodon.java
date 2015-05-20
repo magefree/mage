@@ -61,7 +61,6 @@ public class Mosstodon extends CardImpl {
         this.subtype.add("Plant");
         this.subtype.add("Elephant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

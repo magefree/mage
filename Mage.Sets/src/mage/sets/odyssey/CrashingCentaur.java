@@ -58,7 +58,6 @@ public class CrashingCentaur extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Centaur");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

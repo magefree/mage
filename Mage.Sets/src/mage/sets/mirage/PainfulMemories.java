@@ -52,7 +52,6 @@ public class PainfulMemories extends CardImpl {
         super(ownerId, 31, "Painful Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlack(true);
 
         // Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.
         this.getSpellAbility().addEffect(new PainfulMemoriesEffect());

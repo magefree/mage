@@ -46,7 +46,6 @@ public class AcceptableLosses extends CardImpl {
         super(ownerId, 172, "Acceptable Losses", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Acceptable Losses, discard a card at random.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand(), true));

@@ -55,7 +55,6 @@ public class FelidarSovereign extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Beast");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

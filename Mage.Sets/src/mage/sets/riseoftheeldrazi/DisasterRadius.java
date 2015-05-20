@@ -54,7 +54,6 @@ public class DisasterRadius extends CardImpl {
         super(ownerId, 141, "Disaster Radius", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Disaster Radius, reveal a creature card from your hand.
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCreatureCard("a creature card"));

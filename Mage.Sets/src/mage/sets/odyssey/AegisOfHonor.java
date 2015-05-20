@@ -58,7 +58,6 @@ public class AegisOfHonor extends CardImpl{
 	super(ownerId, 1, "Aegis of Honor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 	this.expansionSetCode = "ODY";
 
-	this.color.setWhite(true);
 
 	// {1}: The next time an instant or sorcery spell would deal damage to you this
 	//turn, that spell deals that damage to its controller instead.

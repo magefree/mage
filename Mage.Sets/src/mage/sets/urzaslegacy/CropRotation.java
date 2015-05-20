@@ -52,7 +52,6 @@ public class CropRotation extends CardImpl {
         super(ownerId, 98, "Crop Rotation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ULG";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Crop Rotation, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

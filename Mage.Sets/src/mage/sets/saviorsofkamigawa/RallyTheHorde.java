@@ -52,7 +52,6 @@ public class RallyTheHorde extends CardImpl {
         super(ownerId, 110, "Rally the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.
         this.getSpellAbility().addEffect(new RallyTheHordeEffect());

@@ -47,7 +47,6 @@ public class MultanisAcolyte extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -74,7 +74,6 @@ public class Aluren extends CardImpl {
         super(ownerId, 107, "Aluren", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "TMP";
 
-        this.color.setGreen(true);
 
         // Any player may play creature cards with converted mana cost 3 or less without paying their mana cost
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AlurenRuleEffect());

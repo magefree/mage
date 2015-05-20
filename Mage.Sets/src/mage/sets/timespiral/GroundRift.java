@@ -57,7 +57,6 @@ public class GroundRift extends CardImpl {
         super(ownerId, 162, "Ground Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Target creature without flying can't block this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

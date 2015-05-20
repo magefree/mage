@@ -54,7 +54,6 @@ public class RollingStones extends CardImpl {
         super(ownerId, 111, "Rolling Stones", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "STH";
 
-        this.color.setWhite(true);
 
         // Wall creatures can attack as though they didn't have defender.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughtItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));

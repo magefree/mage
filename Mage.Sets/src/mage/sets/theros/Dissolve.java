@@ -47,7 +47,6 @@ public class Dissolve extends CardImpl {
         super(ownerId, 47, "Dissolve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
         this.getSpellAbility().addEffect(new CounterTargetEffect());

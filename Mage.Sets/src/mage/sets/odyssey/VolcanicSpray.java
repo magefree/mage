@@ -55,7 +55,6 @@ public class VolcanicSpray extends CardImpl {
         super(ownerId, 226, "Volcanic Spray", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Volcanic Spray deals 1 damage to each creature without flying and each player.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));

@@ -46,7 +46,6 @@ public class MysteriesOfTheDeep extends CardImpl {
         super(ownerId, 33, "Mysteries of the Deep", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // Draw two cards.
         // Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead.

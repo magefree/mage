@@ -47,7 +47,6 @@ public class EyesInTheSkies extends CardImpl {
         super(ownerId, 10, "Eyes in the Skies", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // Put a 1/1 white Bird creature token with flying onto the battlefield, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

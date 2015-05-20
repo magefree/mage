@@ -45,7 +45,6 @@ public class Shadowfeed extends CardImpl {
         super(ownerId, 86, "Shadowfeed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlack(true);
 
         // Exile target card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -52,7 +52,6 @@ public class DeepAnalysis extends CardImpl {
         super(ownerId, 36, "Deep Analysis", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "TOR";
 
-        this.color.setBlue(true);
 
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));

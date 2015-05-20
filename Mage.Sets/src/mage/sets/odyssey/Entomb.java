@@ -54,7 +54,6 @@ public class Entomb extends CardImpl {
         super(ownerId, 132, "Entomb", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Search your library for a card and put that card into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyard());

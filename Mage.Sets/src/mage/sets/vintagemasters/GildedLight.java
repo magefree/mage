@@ -47,7 +47,6 @@ public class GildedLight extends CardImpl {
         super(ownerId, 29, "Gilded Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "VMA";
 
-        this.color.setWhite(true);
 
         // You gain shroud until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));

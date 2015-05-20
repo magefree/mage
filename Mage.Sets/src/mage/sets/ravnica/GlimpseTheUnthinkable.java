@@ -44,8 +44,6 @@ public class GlimpseTheUnthinkable extends CardImpl {
         super(ownerId, 208, "Glimpse the Unthinkable", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target player puts the top ten cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(10));

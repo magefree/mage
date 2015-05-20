@@ -61,7 +61,6 @@ public class DawnCharm extends CardImpl {
         super(ownerId, 4, "Dawn Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "PLC";
 
-        this.color.setWhite(true);
 
         // Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn));

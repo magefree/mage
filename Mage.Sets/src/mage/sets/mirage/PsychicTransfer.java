@@ -48,7 +48,6 @@ public class PsychicTransfer extends CardImpl {
         super(ownerId, 85, "Psychic Transfer", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlue(true);
 
         // If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
         this.getSpellAbility().addEffect(new PsychicTransferEffect());

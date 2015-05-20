@@ -60,7 +60,6 @@ public class KingCrab extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Crab");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

@@ -54,7 +54,6 @@ public class RapaciousOne extends CardImpl {
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

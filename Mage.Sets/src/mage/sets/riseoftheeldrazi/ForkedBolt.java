@@ -45,7 +45,6 @@ public class ForkedBolt extends CardImpl {
         super(ownerId, 146, "Forked Bolt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Forked Bolt deals 2 damage divided as you choose among one or two target creatures and/or players.
         Effect effect = new DamageMultiEffect(2);

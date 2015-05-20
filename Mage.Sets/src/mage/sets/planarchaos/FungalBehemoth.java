@@ -61,7 +61,6 @@ public class FungalBehemoth extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

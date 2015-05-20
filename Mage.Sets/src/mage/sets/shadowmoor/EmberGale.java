@@ -59,7 +59,6 @@ public class EmberGale extends CardImpl {
         super(ownerId, 91, "Ember Gale", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());

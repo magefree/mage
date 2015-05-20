@@ -75,7 +75,6 @@ public class DecayingSoil extends CardImpl {
         super(ownerId, 127, "Decaying Soil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // At the beginning of your upkeep, exile a card from your graveyard.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), TargetController.YOU, false);

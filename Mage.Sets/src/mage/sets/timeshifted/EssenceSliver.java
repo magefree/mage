@@ -54,7 +54,6 @@ public class EssenceSliver extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Sliver");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -53,7 +53,6 @@ public class SurrealMemoir extends CardImpl {
         super(ownerId, 167, "Surreal Memoir", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Return an instant card at random from your graveyard to your hand.
         this.getSpellAbility().addEffect(new SurrealMemoirEffect());

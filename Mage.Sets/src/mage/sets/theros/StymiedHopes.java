@@ -46,7 +46,6 @@ public class StymiedHopes extends CardImpl {
         super(ownerId, 64, "Stymied Hopes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1}. Scry 1.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));

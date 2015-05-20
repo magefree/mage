@@ -62,7 +62,6 @@ public class Sunweb extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Wall");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

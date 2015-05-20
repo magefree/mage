@@ -64,7 +64,6 @@ public class CabalInquisitor extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Minion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

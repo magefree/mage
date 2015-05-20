@@ -46,8 +46,6 @@ public class TidehollowStrix extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

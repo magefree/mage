@@ -62,7 +62,6 @@ public class LorthosTheTidemaker extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Octopus");
 
-        this.color.setBlue(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

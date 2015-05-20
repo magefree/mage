@@ -51,7 +51,6 @@ public class Vengeance extends CardImpl {
         super(ownerId, 54, "Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "7ED";
 
-        this.color.setWhite(true);
 
         // Destroy target tapped creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

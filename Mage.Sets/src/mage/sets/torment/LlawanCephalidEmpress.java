@@ -73,7 +73,6 @@ public class LlawanCephalidEmpress extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Cephalid");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

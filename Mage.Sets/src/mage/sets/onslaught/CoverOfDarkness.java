@@ -53,7 +53,6 @@ public class CoverOfDarkness extends CardImpl {
         super(ownerId, 133, "Cover of Darkness", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // As Cover of Darkness enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.AddAbility)));

@@ -61,7 +61,6 @@ public class MysticalTeachings extends CardImpl {
         super(ownerId, 69, "Mystical Teachings", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Search your library for an instant card or a card with flash, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));

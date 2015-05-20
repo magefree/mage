@@ -47,7 +47,6 @@ public class SpellSnip extends CardImpl {
         super(ownerId, 57, "Spell Snip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());

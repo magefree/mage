@@ -52,7 +52,6 @@ public class Rowen extends CardImpl {
         super(ownerId, 266, "Rowen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Reveal the first card you draw each turn. Whenever you reveal a basic land card this way, draw a card.
         this.addAbility(new RowenAbility());

@@ -49,7 +49,6 @@ public class NobleTemplar extends CardImpl {
         this.subtype.add("Cleric");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

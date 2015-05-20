@@ -54,7 +54,6 @@ public class DramaticEntrance extends CardImpl {
         super(ownerId, 111, "Dramatic Entrance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // You may put a green creature card from your hand onto the battlefield.
         this.getSpellAbility().addEffect(new DramaticEntranceEffect());

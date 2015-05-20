@@ -60,7 +60,6 @@ public class StoneshockGiant extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

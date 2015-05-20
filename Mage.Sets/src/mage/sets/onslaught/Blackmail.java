@@ -45,7 +45,6 @@ public class Blackmail extends CardImpl {
         super(ownerId, 127, "Blackmail", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // Target player reveals three cards from his or her hand and you choose one of them. That player discards that card.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(TargetController.ANY, 3));

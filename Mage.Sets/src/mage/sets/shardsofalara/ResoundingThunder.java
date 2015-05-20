@@ -48,7 +48,6 @@ public class ResoundingThunder extends CardImpl {
         super(ownerId, 110, "Resounding Thunder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Resounding Thunder deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

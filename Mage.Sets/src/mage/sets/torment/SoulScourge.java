@@ -55,7 +55,6 @@ public class SoulScourge extends CardImpl {
         this.subtype.add("Nightmare");
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

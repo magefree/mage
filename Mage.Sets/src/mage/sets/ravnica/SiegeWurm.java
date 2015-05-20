@@ -46,7 +46,6 @@ public class SiegeWurm extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

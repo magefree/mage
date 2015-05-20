@@ -59,7 +59,6 @@ public class QuirionRanger extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

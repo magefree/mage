@@ -44,7 +44,6 @@ public class Boulderfall extends CardImpl {
         super(ownerId, 115, "Boulderfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{6}{R}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));

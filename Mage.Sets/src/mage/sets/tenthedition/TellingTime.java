@@ -55,7 +55,6 @@ public class TellingTime extends CardImpl {
         super(ownerId, 114, "Telling Time", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Look at the top three cards of your library.
         // Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.

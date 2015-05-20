@@ -55,7 +55,6 @@ public class Swat extends CardImpl {
         super(ownerId, 174, "Swat", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // Destroy target creature with power 2 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

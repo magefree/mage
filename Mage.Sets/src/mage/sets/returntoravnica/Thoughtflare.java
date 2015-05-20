@@ -42,8 +42,6 @@ public class Thoughtflare extends CardImpl {
         super(ownerId, 203, "Thoughtflare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Draw four cards, then discard two cards.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(4, 2));

@@ -58,7 +58,6 @@ public class ArenaAthlete extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Human");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

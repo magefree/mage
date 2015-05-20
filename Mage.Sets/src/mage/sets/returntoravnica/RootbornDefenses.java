@@ -48,7 +48,6 @@ public class RootbornDefenses extends CardImpl {
         super(ownerId, 19, "Rootborn Defenses", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // Populate. Creatures you control are indestructible this turn. 
         // (To populate, put a token onto the battlefield that's a copy of a creature 

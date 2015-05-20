@@ -60,7 +60,6 @@ public class Misdirection extends CardImpl {
         super(ownerId, 87, "Misdirection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlue(true);
 
         // You may exile a blue card from your hand rather than pay Misdirection's mana cost.
         FilterOwnedCard filterCardInHand = new FilterOwnedCard("a blue card from your hand");

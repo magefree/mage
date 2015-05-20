@@ -55,7 +55,6 @@ public class PhyrexianObliterator extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

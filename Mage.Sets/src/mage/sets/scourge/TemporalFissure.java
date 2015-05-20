@@ -45,7 +45,6 @@ public class TemporalFissure extends CardImpl {
         super(ownerId, 53, "Temporal Fissure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetPermanent());

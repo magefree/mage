@@ -51,7 +51,6 @@ public class StonefareCrocodile extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Crocodile");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

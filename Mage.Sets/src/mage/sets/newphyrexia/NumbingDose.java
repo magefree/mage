@@ -68,7 +68,6 @@ public class NumbingDose extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);

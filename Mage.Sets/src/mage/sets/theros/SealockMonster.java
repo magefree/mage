@@ -61,7 +61,6 @@ public class SealockMonster extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Octopus");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

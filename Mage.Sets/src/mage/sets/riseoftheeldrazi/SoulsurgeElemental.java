@@ -56,7 +56,6 @@ public class SoulsurgeElemental extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

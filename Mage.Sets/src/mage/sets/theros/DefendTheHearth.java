@@ -44,7 +44,6 @@ public class DefendTheHearth extends CardImpl {
         super(ownerId, 156, "Defend the Hearth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt to players this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, true));

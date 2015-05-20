@@ -56,7 +56,6 @@ public class Narcolepsy extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetPermanent(filter);

@@ -45,7 +45,6 @@ public class Shrivel extends CardImpl {
         super(ownerId, 126, "Shrivel", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
     }

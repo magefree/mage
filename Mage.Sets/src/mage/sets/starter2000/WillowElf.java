@@ -44,7 +44,6 @@ public class WillowElf extends CardImpl {
         this.expansionSetCode = "S00";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

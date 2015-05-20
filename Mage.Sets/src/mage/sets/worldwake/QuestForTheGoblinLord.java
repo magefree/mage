@@ -67,7 +67,6 @@ public class QuestForTheGoblinLord extends CardImpl {
         super(ownerId, 86, "Quest for the Goblin Lord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "WWK";
 
-        this.color.setRed(true);
 
         // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));

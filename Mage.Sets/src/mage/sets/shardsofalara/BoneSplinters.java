@@ -46,7 +46,6 @@ public class BoneSplinters extends CardImpl {
         super(ownerId, 67, "Bone Splinters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Bone Splinters, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

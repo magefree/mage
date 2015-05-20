@@ -58,7 +58,6 @@ public class Kindle extends CardImpl {
         super(ownerId, 184, "Kindle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "TMP";
 
-        this.color.setRed(true);
 
         // Kindle deals X damage to target creature or player, where X is 2 plus the number of cards named Kindle in all graveyards.
         Effect effect = new DamageTargetEffect(new KindleCardsInAllGraveyardsCount(filter));

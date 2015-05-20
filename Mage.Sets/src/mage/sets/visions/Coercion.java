@@ -44,7 +44,6 @@ public class Coercion extends CardImpl {
         super(ownerId, 4, "Coercion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "VIS";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());

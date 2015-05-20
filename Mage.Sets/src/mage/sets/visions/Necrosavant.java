@@ -54,7 +54,6 @@ public class Necrosavant extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

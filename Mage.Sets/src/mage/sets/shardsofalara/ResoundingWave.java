@@ -49,7 +49,6 @@ public class ResoundingWave extends CardImpl {
         super(ownerId, 54, "Resounding Wave", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

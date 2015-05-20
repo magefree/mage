@@ -66,7 +66,6 @@ public class ScrybRanger extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Faerie");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

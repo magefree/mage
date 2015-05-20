@@ -57,7 +57,6 @@ public class Anthroplasm extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -61,7 +61,6 @@ public class SurrakarSpellblade extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Surrakar");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

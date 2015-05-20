@@ -49,7 +49,6 @@ public class NoblePurpose extends CardImpl {
         super(ownerId, 32, "Noble Purpose", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setWhite(true);
 
         // Whenever a creature you control deals combat damage, you gain that much life.
         this.addAbility(new NoblePurposeTriggeredAbility());

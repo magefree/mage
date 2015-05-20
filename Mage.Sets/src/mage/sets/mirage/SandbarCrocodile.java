@@ -45,7 +45,6 @@ public class SandbarCrocodile extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Crocodile");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

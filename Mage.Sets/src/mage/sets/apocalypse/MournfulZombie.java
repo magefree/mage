@@ -52,7 +52,7 @@ public class MournfulZombie extends CardImpl {
         super(ownerId, 43, "Mournful Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "APC";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.W));

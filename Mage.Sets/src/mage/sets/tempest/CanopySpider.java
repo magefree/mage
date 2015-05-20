@@ -45,7 +45,6 @@ public class CanopySpider extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

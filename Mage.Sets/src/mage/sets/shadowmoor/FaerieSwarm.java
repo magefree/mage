@@ -59,7 +59,6 @@ public class FaerieSwarm extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Faerie");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

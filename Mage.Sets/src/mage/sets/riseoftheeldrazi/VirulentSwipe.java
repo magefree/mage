@@ -49,7 +49,6 @@ public class VirulentSwipe extends CardImpl {
         super(ownerId, 131, "Virulent Swipe", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Target creature gets +2/+0 and gains deathtouch until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());        

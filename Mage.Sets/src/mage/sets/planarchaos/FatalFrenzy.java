@@ -57,7 +57,6 @@ public class FatalFrenzy extends CardImpl {
         super(ownerId, 98, "Fatal Frenzy", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
 
         // Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));

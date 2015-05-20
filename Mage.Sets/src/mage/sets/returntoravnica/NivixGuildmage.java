@@ -65,8 +65,6 @@ public class NivixGuildmage extends CardImpl {
         this.subtype.add("Wizard");
 
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

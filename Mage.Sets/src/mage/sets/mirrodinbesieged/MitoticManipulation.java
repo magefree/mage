@@ -57,7 +57,6 @@ public class MitoticManipulation extends CardImpl {
         super(ownerId, 27, "Mitotic Manipulation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new MitoticManipulationEffect());
     }

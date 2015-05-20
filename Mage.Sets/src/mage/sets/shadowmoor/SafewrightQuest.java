@@ -53,8 +53,6 @@ public class SafewrightQuest extends CardImpl {
         super(ownerId, 240, "Safewright Quest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G/W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

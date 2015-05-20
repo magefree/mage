@@ -54,7 +54,6 @@ public class Predict extends CardImpl {
         super(ownerId, 94, "Predict", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));

@@ -57,8 +57,6 @@ public class CongregationAtDawn extends CardImpl {
         super(ownerId, 198, "Congregation at Dawn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{G}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Search your library for up to three creature cards and reveal them. Shuffle your library, then put those cards on top of it in any order.
         this.getSpellAbility().addEffect(new CongregationAtDawnEffect());

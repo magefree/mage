@@ -68,7 +68,6 @@ public class PhyrexianIngester extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

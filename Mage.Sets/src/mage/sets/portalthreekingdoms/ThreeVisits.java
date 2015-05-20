@@ -51,7 +51,6 @@ public class ThreeVisits extends CardImpl {
         super(ownerId, 153, "Three Visits", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "PTK";
 
-        this.color.setGreen(true);
 
         // Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)));

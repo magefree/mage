@@ -77,7 +77,6 @@ public class BowOfNylea extends CardImpl {
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
 
-        this.color.setGreen(true);
 
         // Attacking creatures you control have deathtouch.
         GainAbilityControlledEffect gainEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);

@@ -65,7 +65,6 @@ public class ElementalMastery extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

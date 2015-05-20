@@ -52,7 +52,6 @@ public class BrilliantHalo extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

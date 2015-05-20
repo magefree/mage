@@ -61,7 +61,6 @@ public class PorphyryNodes extends CardImpl {
         super(ownerId, 28, "Porphyry Nodes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "PLC";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PorphyryNodesEffect(), TargetController.YOU, false));

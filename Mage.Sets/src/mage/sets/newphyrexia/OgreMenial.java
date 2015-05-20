@@ -50,7 +50,6 @@ public class OgreMenial extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Ogre");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
         // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

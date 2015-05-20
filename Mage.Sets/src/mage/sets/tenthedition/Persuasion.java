@@ -52,7 +52,6 @@ public class Persuasion extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

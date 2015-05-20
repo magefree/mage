@@ -45,7 +45,6 @@ public class SecondThoughts extends CardImpl {
         super(ownerId, 45, "Second Thoughts", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Exile target attacking creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -55,7 +55,6 @@ public class UrabraskTheHidden extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

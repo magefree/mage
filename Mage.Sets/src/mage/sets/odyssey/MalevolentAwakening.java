@@ -58,7 +58,6 @@ public class MalevolentAwakening extends CardImpl {
         super(ownerId, 147, "Malevolent Awakening", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // {1}{B}{B}, Sacrifice a creature: Return target creature card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{1}{B}{B}"));

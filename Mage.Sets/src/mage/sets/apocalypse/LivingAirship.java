@@ -48,7 +48,7 @@ public class LivingAirship extends CardImpl {
         super(ownerId, 28, "Living Airship", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "APC";
         this.subtype.add("Metathran");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

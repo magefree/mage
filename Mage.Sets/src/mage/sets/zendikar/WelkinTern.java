@@ -47,7 +47,6 @@ public class WelkinTern extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2 );
         this.toughness = new MageInt( 1);
 

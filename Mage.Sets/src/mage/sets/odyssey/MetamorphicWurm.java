@@ -52,7 +52,6 @@ public class MetamorphicWurm extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

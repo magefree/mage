@@ -54,7 +54,6 @@ public class BearUmbra extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

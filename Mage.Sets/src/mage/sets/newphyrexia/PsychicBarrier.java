@@ -53,7 +53,6 @@ public class PsychicBarrier extends CardImpl {
         super(ownerId, 43, "Psychic Barrier", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
         // Counter target creature spell. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

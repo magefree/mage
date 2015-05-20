@@ -62,8 +62,6 @@ public class SafeholdDuo extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -67,7 +67,6 @@ public class NissaRevane extends CardImpl {
         this.subtype.add("Nissa");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
 
-        this.color.setGreen(true);
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, nissasChosenFilter)), 1);
         this.addAbility(ability1);

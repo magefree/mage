@@ -44,7 +44,7 @@ public class TemporalSpring extends CardImpl {
         super(ownerId, 125, "Temporal Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{U}");
         this.expansionSetCode = "APC";
         this.color.setBlue(true);
-        this.color.setGreen(true);
+
 
         // Put target permanent on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

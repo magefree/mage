@@ -48,7 +48,6 @@ public class RoarOfTheWurm extends CardImpl {
         super(ownerId, 266, "Roar of the Wurm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Put a 6/6 green Wurm creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));

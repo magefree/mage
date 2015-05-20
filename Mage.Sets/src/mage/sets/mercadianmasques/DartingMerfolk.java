@@ -48,7 +48,6 @@ public class DartingMerfolk extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

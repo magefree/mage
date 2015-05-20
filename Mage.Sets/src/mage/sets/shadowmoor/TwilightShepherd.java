@@ -57,7 +57,6 @@ public class TwilightShepherd extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

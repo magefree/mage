@@ -59,7 +59,6 @@ public class UrgeToFeed extends CardImpl {
         super(ownerId, 70, "Urge to Feed", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));

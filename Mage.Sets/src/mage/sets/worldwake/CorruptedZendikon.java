@@ -54,7 +54,6 @@ public class CorruptedZendikon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant land
         // Enchanted land is a 3/3 black Ooze creature. It's still a land.

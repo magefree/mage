@@ -53,7 +53,6 @@ public class Gainsay extends CardImpl {
         super(ownerId, 49, "Gainsay", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Counter target blue spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

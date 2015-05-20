@@ -67,7 +67,6 @@ public class TajuruArcher extends CardImpl {
         this.subtype.add("Archer");
         this.subtype.add("Ally");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), true);

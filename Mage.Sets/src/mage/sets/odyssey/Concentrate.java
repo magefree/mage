@@ -43,7 +43,6 @@ public class Concentrate extends CardImpl {
         super(ownerId, 78, "Concentrate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

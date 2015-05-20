@@ -45,7 +45,6 @@ public class GiantScorpion extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Scorpion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

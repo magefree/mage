@@ -51,7 +51,6 @@ public class MoltenRain extends CardImpl {
         super(ownerId, 101, "Molten Rain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "MRD";
 
-        this.color.setRed(true);
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

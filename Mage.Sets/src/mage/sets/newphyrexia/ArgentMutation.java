@@ -46,7 +46,6 @@ public class ArgentMutation extends CardImpl {
         super(ownerId, 27, "Argent Mutation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetPermanent());

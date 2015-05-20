@@ -51,7 +51,7 @@ public class SoldierOfFortune extends CardImpl {
         this.expansionSetCode = "ALL";
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 		

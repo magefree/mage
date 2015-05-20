@@ -51,7 +51,6 @@ public class PunishingFire extends CardImpl {
         super(ownerId, 142, "Punishing Fire", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Punishing Fire deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

@@ -52,7 +52,6 @@ public class RoilingTerrain extends CardImpl {
         super(ownerId, 88, "Roiling Terrain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "WWK";
 
-        this.color.setRed(true);
 
         // Destroy target land, then Roiling Terrain deals damage to that land's controller equal to the number of land cards in that player's graveyard.
         this.getSpellAbility().addEffect(new RoilingTerrainEffect());

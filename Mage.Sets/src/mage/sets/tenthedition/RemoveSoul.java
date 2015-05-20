@@ -52,7 +52,6 @@ public class RemoveSoul extends CardImpl {
         super(ownerId, 100, "Remove Soul", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

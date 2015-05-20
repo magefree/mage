@@ -57,7 +57,6 @@ public class BatteringSliver extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

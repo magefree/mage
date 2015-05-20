@@ -54,7 +54,6 @@ public class NaturesRuin extends CardImpl {
         super(ownerId, 129, "Nature's Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlack(true);
 
         // Destroy all green creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

@@ -54,7 +54,6 @@ public class WaitingInTheWeeds extends CardImpl {
         super(ownerId, 150, "Waiting in the Weeds", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
         this.expansionSetCode = "MIR";
 
-        this.color.setGreen(true);
 
         // Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls.
         this.getSpellAbility().addEffect(new WaitingInTheWeedsEffect());

@@ -53,7 +53,6 @@ public class ConqueringManticore extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Manticore");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

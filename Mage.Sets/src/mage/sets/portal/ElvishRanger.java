@@ -44,7 +44,6 @@ public class ElvishRanger extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
     }

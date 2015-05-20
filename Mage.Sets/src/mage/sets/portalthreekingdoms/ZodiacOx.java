@@ -45,7 +45,6 @@ public class ZodiacOx extends CardImpl {
         this.expansionSetCode = "PTK";
         this.subtype.add("Ox");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

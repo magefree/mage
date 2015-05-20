@@ -55,7 +55,6 @@ public class Tinker extends CardImpl {
         super(ownerId, 45, "Tinker", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // As an additional cost to cast Tinker, sacrifice an artifact.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

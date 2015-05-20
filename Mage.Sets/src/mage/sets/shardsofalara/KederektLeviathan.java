@@ -55,7 +55,6 @@ public class KederektLeviathan extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Leviathan");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

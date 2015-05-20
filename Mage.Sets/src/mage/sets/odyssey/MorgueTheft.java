@@ -48,7 +48,6 @@ public class MorgueTheft extends CardImpl {
         super(ownerId, 151, "Morgue Theft", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

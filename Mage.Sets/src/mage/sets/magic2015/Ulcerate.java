@@ -46,7 +46,6 @@ public class Ulcerate extends CardImpl {
         super(ownerId, 119, "Ulcerate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Target creature gets -3/-3 until end of turn. You lose 3 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

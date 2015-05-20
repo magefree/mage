@@ -57,7 +57,6 @@ public class AspectOfMongoose extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

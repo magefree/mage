@@ -53,7 +53,6 @@ public class MoldervineCloak extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

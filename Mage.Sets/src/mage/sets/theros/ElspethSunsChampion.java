@@ -67,7 +67,6 @@ public class ElspethSunsChampion extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Elspeth");
 
-        this.color.setWhite(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

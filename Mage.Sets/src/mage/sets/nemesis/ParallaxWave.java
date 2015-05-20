@@ -60,7 +60,6 @@ public class ParallaxWave extends CardImpl {
         super(ownerId, 17, "Parallax Wave", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "NMS";
 
-        this.color.setWhite(true);
 
         // Fading 5
         this.addAbility(new FadingAbility(5, this));

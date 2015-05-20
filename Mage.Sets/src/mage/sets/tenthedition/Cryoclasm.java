@@ -64,7 +64,6 @@ public class Cryoclasm extends CardImpl {
         super(ownerId, 195, "Cryoclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         // Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

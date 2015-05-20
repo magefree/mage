@@ -48,8 +48,6 @@ public class SluicewayScorpion extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Scorpion");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -48,7 +48,6 @@ public class YawgmothsBargain extends CardImpl {
         super(ownerId, 147, "Yawgmoth's Bargain", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlack(true);
 
         // Skip your draw step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect())); 

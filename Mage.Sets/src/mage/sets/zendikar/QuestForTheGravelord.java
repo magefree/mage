@@ -53,7 +53,6 @@ public class QuestForTheGravelord extends CardImpl {
         super(ownerId, 108, "Quest for the Gravelord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Whenever a creature dies, you may put a quest counter on Quest for the Gravelord.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

@@ -59,7 +59,6 @@ public class WirewoodSymbiote extends CardImpl {
         this.expansionSetCode = "SCG";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

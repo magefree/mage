@@ -55,8 +55,6 @@ public class RockBasilisk extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Basilisk");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

@@ -53,7 +53,6 @@ public class Donate extends CardImpl {
         super(ownerId, 31, "Donate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "UDS";
 
-        this.color.setBlue(true);
 
         // Target player gains control of target permanent you control.
         this.getSpellAbility().addEffect(new DonateEffect());

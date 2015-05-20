@@ -45,7 +45,6 @@ public class WallOfGranite extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

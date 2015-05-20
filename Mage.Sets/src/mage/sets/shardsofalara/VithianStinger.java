@@ -53,7 +53,6 @@ public class VithianStinger extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

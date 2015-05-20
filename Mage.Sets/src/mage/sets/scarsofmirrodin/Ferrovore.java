@@ -60,7 +60,6 @@ public class Ferrovore extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));

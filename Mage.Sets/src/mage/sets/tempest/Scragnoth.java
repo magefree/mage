@@ -54,7 +54,6 @@ public class Scragnoth extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

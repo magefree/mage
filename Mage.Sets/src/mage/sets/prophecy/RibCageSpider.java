@@ -45,7 +45,6 @@ public class RibCageSpider extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

@@ -53,8 +53,6 @@ public class OracleOfNectars extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Cleric");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

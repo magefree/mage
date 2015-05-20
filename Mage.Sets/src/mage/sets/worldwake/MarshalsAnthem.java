@@ -66,7 +66,6 @@ public class MarshalsAnthem extends CardImpl {
         super(ownerId, 15, "Marshal's Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "WWK";
 
-        this.color.setWhite(true);
 
         // Multikicker {1}{W}
         this.addAbility(new MultikickerAbility("{1}{W}"));

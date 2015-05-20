@@ -45,7 +45,6 @@ public class PlatedSpider extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

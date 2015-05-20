@@ -53,7 +53,6 @@ public class SphinxOfLostTruths extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

@@ -45,7 +45,6 @@ public class ImperialSeal extends CardImpl {
         super(ownerId, 78, "Imperial Seal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "PTK";
 
-        this.color.setBlack(true);
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary()));

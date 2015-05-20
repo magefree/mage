@@ -63,7 +63,6 @@ public class AuraFinesse extends CardImpl {
         super(ownerId, 54, "Aura Finesse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // Attach target Aura you control to target creature.
         this.getSpellAbility().addEffect(new AuraFinesseEffect());

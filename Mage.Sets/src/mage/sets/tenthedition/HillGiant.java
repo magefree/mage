@@ -44,7 +44,6 @@ public class HillGiant extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

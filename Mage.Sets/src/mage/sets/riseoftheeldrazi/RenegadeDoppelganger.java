@@ -57,7 +57,6 @@ public class RenegadeDoppelganger extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

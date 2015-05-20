@@ -58,8 +58,6 @@ public class IndrikUmbra extends CardImpl {
         this.expansionSetCode = "PC2";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -51,7 +51,6 @@ public class TrompTheDomains extends CardImpl {
         super(ownerId, 230, "Tromp the Domains", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "TSP";
 
-        this.color.setGreen(true);
 
         // Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);

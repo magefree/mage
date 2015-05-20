@@ -59,7 +59,6 @@ public class CloudhoofKirin extends CardImpl {
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

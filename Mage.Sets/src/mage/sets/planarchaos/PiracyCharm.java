@@ -51,7 +51,6 @@ public class PiracyCharm extends CardImpl {
         super(ownerId, 58, "Piracy Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlue(true);
 
         // Choose one - Target creature gains islandwalk until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new IslandwalkAbility(), Duration.EndOfTurn));

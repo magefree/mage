@@ -50,7 +50,6 @@ public class GreaterForgeling extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

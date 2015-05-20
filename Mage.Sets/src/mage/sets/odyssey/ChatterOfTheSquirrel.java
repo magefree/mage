@@ -47,7 +47,6 @@ public class ChatterOfTheSquirrel extends CardImpl {
         super(ownerId, 233, "Chatter of the Squirrel", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Put a 1/1 green Squirrel creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken()));

@@ -49,7 +49,6 @@ public class BeaconOfImmortality extends CardImpl {
         super(ownerId, 10, "Beacon of Immortality", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{W}");
         this.expansionSetCode = "10E";
 
-        this.color.setWhite(true);
 
         // Double target player's life total.
         this.getSpellAbility().addTarget(new TargetPlayer());

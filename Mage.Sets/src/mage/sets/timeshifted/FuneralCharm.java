@@ -51,7 +51,6 @@ public class FuneralCharm extends CardImpl {
         super(ownerId, 44, "Funeral Charm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "TSB";
 
-        this.color.setBlack(true);
 
         // Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));

@@ -48,7 +48,6 @@ public class CalciteSnapper extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Turtle");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

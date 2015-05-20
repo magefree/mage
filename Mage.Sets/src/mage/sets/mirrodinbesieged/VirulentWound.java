@@ -57,7 +57,6 @@ public class VirulentWound extends CardImpl {
         super(ownerId, 57, "Virulent Wound", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlack(true);
 
         // Put a -1/-1 counter on target creature.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.UnboostCreature));

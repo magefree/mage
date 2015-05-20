@@ -50,7 +50,6 @@ public class PhyrexianReclamation extends CardImpl {
         super(ownerId, 63, "Phyrexian Reclamation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // {1}{B}, Pay 2 life: Return target creature card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{B}"));

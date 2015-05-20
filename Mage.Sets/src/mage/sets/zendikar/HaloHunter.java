@@ -57,7 +57,6 @@ public class HaloHunter extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

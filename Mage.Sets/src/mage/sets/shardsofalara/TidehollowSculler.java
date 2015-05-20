@@ -61,8 +61,6 @@ public class TidehollowSculler extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

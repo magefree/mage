@@ -53,7 +53,6 @@ public class Reprisal extends CardImpl {
         super(ownerId, 33, "Reprisal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "7ED";
 
-        this.color.setWhite(true);
 
         // Destroy target creature with power 4 or greater. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

@@ -50,7 +50,6 @@ public class MoltensteelDragon extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

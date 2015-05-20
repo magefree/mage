@@ -44,7 +44,6 @@ public class SpectralProcession extends CardImpl {
         super(ownerId, 23, "Spectral Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/W}{2/W}{2/W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));

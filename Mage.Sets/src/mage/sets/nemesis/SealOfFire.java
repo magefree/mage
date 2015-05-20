@@ -49,7 +49,6 @@ public class SealOfFire extends CardImpl {
         super(ownerId, 98, "Seal of Fire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "NMS";
 
-        this.color.setRed(true);
 
         // Sacrifice Seal of Fire: Seal of Fire deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());

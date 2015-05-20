@@ -53,7 +53,6 @@ public class AquusSteed extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

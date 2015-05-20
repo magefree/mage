@@ -44,7 +44,6 @@ public class MarshGas extends CardImpl {
         super(ownerId, 10, "Marsh Gas", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "DRK";
 
-        this.color.setBlack(true);
 
         // All creatures get -2/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn));

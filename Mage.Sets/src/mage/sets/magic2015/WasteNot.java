@@ -52,7 +52,6 @@ public class WasteNot extends CardImpl {
         super(ownerId, 122, "Waste Not", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Whenever an opponent discards a creature card, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new WasteNotCreatureTriggeredAbility());

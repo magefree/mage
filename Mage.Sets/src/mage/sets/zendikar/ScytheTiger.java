@@ -53,7 +53,6 @@ public class ScytheTiger extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

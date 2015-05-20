@@ -51,7 +51,6 @@ public class ConsignToDream extends CardImpl {
         super(ownerId, 32, "Consign to Dream", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
         this.getSpellAbility().addEffect(new ConsignToDreamEffect());

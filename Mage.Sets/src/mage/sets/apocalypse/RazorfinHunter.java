@@ -52,7 +52,7 @@ public class RazorfinHunter extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Goblin");
         this.color.setRed(true);
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

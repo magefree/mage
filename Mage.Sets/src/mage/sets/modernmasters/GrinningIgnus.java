@@ -50,7 +50,6 @@ public class GrinningIgnus extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

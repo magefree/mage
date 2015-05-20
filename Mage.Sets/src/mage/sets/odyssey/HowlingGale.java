@@ -56,7 +56,6 @@ public class HowlingGale extends CardImpl {
         super(ownerId, 244, "Howling Gale", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Howling Gale deals 1 damage to each creature with flying and each player.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));

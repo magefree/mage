@@ -48,8 +48,6 @@ public class SearchWarrant extends CardImpl {
         super(ownerId, 193, "Search Warrant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.
         this.getSpellAbility().addTarget(new TargetPlayer());

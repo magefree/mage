@@ -47,7 +47,6 @@ public class LotusCobra extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

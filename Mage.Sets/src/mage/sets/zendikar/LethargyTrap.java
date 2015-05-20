@@ -59,7 +59,6 @@ public class LethargyTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setBlue(true);
 
         // If three or more creatures are attacking, you may pay {U} rather than pay Lethargy Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new LethargyTrapAlternativeCost());

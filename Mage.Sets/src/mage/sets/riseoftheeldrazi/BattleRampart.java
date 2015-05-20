@@ -52,7 +52,6 @@ public class BattleRampart extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

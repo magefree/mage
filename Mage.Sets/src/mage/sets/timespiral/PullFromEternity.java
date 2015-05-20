@@ -59,7 +59,6 @@ public class PullFromEternity extends CardImpl {
         super(ownerId, 35, "Pull from Eternity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "TSP";
 
-        this.color.setWhite(true);
 
         // Put target face-up exiled card into its owner's graveyard.
         this.getSpellAbility().addEffect(new PullFromEternityEffect());

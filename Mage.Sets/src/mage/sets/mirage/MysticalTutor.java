@@ -54,7 +54,6 @@ public class MysticalTutor extends CardImpl {
         super(ownerId, 80, "Mystical Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlue(true);
 
         // Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));

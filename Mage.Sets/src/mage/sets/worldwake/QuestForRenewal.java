@@ -53,7 +53,6 @@ public class QuestForRenewal extends CardImpl {
         super(ownerId, 110, "Quest for Renewal", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "WWK";
 
-        this.color.setGreen(true);
 
         // Whenever a creature you control becomes tapped, you may put a quest counter on Quest for Renewal.
         this.addAbility(new BecomesTappedCreatureControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

@@ -50,7 +50,6 @@ public class Peek extends CardImpl {
         super(ownerId, 94, "Peek", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new PeekEffect());

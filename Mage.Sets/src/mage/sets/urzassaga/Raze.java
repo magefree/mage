@@ -47,7 +47,6 @@ public class Raze extends CardImpl {
         super(ownerId, 207, "Raze", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Raze, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1,1, new FilterControlledLandPermanent(), true)));

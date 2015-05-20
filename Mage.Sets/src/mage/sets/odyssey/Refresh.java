@@ -45,7 +45,6 @@ public class Refresh extends CardImpl {
         super(ownerId, 264, "Refresh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Regenerate target creature.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());

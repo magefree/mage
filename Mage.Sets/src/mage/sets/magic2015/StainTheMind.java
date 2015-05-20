@@ -54,7 +54,6 @@ public class StainTheMind extends CardImpl {
         super(ownerId, 117, "Stain the Mind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

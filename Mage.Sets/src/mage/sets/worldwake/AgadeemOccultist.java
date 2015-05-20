@@ -60,7 +60,6 @@ public class AgadeemOccultist extends CardImpl {
         this.subtype.add("Shaman");
         this.subtype.add("Ally");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

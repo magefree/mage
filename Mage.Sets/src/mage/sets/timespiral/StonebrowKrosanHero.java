@@ -58,8 +58,6 @@ public class StonebrowKrosanHero extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

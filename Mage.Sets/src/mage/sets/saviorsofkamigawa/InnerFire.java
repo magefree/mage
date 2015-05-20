@@ -45,7 +45,6 @@ public class InnerFire extends CardImpl {
         super(ownerId, 105, "Inner Fire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // Add {R} to your mana pool for each card in your hand.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, new CardsInControllerHandCount()));

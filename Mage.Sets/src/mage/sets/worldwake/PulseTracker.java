@@ -52,7 +52,6 @@ public class PulseTracker extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

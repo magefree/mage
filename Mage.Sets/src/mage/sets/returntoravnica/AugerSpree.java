@@ -45,8 +45,6 @@ public class AugerSpree extends CardImpl {
         super(ownerId, 144, "Auger Spree", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Target creature gets +4/-4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, -4, Duration.EndOfTurn));

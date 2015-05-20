@@ -49,7 +49,7 @@ public class TranquilPath extends CardImpl {
     public TranquilPath(UUID ownerId) {
         super(ownerId, 89, "Tranquil Path", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "APC";
-        this.color.setGreen(true);
+
 
         // Destroy all enchantments.
         this.getSpellAbility().addEffect(new TranquilPathEffect());

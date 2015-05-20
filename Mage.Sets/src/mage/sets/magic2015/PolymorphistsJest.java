@@ -55,7 +55,6 @@ public class PolymorphistsJest extends CardImpl {
         super(ownerId, 75, "Polymorphist's Jest", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1.
         this.getSpellAbility().addEffect(new PolymorphistsJestEffect());

@@ -45,7 +45,6 @@ public class PlatedSlagwurm extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

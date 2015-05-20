@@ -61,7 +61,6 @@ public class GriffinGuide extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

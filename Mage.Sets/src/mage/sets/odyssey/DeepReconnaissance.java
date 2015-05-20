@@ -48,7 +48,6 @@ public class DeepReconnaissance extends CardImpl {
         super(ownerId, 236, "Deep Reconnaissance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true));

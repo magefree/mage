@@ -46,8 +46,6 @@ public class ClutchOfTheUndercity extends CardImpl {
         super(ownerId, 197, "Clutch of the Undercity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Return target permanent to its owner's hand. Its controller loses 3 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

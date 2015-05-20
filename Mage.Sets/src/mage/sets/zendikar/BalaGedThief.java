@@ -66,7 +66,6 @@ public class BalaGedThief extends CardImpl {
         this.subtype.add("Rogue");
         this.subtype.add("Ally");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -50,7 +50,7 @@ public class EbonyTreefolk extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Treefolk");
         this.color.setGreen(true);
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));

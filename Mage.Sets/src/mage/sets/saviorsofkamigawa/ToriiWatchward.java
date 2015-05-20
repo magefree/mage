@@ -46,7 +46,6 @@ public class ToriiWatchward extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

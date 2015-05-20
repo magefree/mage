@@ -51,7 +51,6 @@ public class DeathDenied extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // Return X target creature cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();

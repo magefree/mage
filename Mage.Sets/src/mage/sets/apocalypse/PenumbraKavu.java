@@ -46,7 +46,7 @@ public class PenumbraKavu extends CardImpl {
         super(ownerId, 83, "Penumbra Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Kavu");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraKavuToken(), 1), false));

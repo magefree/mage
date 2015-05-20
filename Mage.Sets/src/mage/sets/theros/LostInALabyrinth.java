@@ -46,7 +46,6 @@ public class LostInALabyrinth extends CardImpl {
         super(ownerId, 52, "Lost in a Labyrinth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Target creature gets -3/-0 until end of turn. Scry 1.</i>
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3,-0, Duration.EndOfTurn));

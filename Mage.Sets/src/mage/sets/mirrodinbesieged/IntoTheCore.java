@@ -52,7 +52,6 @@ public class IntoTheCore extends CardImpl {
         super(ownerId, 67, "Into the Core", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "MBS";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

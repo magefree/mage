@@ -45,7 +45,6 @@ public class SpottedGriffin extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

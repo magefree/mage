@@ -53,7 +53,6 @@ public class SoulStairExpedition extends CardImpl {
         super(ownerId, 112, "Soul Stair Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Soul Stair Expedition.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

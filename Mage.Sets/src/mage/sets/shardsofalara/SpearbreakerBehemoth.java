@@ -60,7 +60,6 @@ public class SpearbreakerBehemoth extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

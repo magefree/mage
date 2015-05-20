@@ -48,7 +48,6 @@ public class TerraStomper extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

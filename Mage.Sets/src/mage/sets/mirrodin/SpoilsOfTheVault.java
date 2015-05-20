@@ -53,7 +53,6 @@ public class SpoilsOfTheVault extends CardImpl {
         super(ownerId, 78, "Spoils of the Vault", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "MRD";
 
-        this.color.setBlack(true);
 
         // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
         this.getSpellAbility().addEffect(new NameACardEffect(NameACardEffect.TypeOfName.ALL));

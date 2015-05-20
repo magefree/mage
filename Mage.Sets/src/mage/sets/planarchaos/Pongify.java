@@ -54,7 +54,6 @@ public class Pongify extends CardImpl {
         super(ownerId, 44, "Pongify", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlue(true);
 
         // Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token onto the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

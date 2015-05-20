@@ -48,7 +48,6 @@ public class CoffinPurge extends CardImpl {
         super(ownerId, 124, "Coffin Purge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Exile target card from a graveyard.
         

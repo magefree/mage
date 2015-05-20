@@ -54,7 +54,6 @@ public class GravePact extends CardImpl {
         super(ownerId, 135, "Grave Pact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}{B}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlack(true);
 
         // Whenever a creature you control dies, each other player sacrifices a creature.
         this.addAbility(new GravePactTriggeredAbility());

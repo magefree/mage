@@ -55,7 +55,6 @@ public class SimianSpiritGuide extends CardImpl {
         this.subtype.add("Ape");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

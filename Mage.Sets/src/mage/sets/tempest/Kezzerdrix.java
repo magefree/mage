@@ -53,7 +53,6 @@ public class Kezzerdrix extends CardImpl {
         this.subtype.add("Rabbit");
         this.subtype.add("Beast");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -55,7 +55,6 @@ public class QuestForTheNihilStone extends CardImpl {
         super(ownerId, 64, "Quest for the Nihil Stone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         // Whenever an opponent discards a card, you may put a quest counter on Quest for the Nihil Stone.
         this.addAbility(new QuestForTheNihilStoneTriggeredAbility());

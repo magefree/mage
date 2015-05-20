@@ -61,8 +61,6 @@ public class ThistledownLiege extends CardImpl {
         this.subtype.add("Kithkin");
         this.subtype.add("Knight");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

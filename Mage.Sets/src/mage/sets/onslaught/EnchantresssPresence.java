@@ -53,7 +53,6 @@ public class EnchantresssPresence extends CardImpl {
         super(ownerId, 261, "Enchantress's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ONS";
 
-        this.color.setGreen(true);
 
         // Whenever you cast an enchantment spell, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));

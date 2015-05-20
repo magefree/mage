@@ -56,7 +56,6 @@ public class Humility extends CardImpl {
         super(ownerId, 236, "Humility", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "TMP";
 
-        this.color.setWhite(true);
 
         // All creatures lose all abilities and have base power and toughness 1/1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HumilityEffect(Duration.WhileOnBattlefield)));

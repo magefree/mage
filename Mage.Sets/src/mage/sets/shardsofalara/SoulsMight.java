@@ -49,7 +49,6 @@ public class SoulsMight extends CardImpl {
         super(ownerId, 149, "Soul's Might", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
 
         // Put X +1/+1 counters on target creature, where X is that creature's power.
         this.getSpellAbility().addEffect(new SoulsMightEffect());

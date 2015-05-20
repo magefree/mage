@@ -56,7 +56,6 @@ public class WitherscaleWurm extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

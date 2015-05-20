@@ -59,7 +59,6 @@ public class GoblinWarPaint extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

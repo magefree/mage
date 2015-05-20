@@ -55,7 +55,6 @@ public class GoblinAssault extends CardImpl {
         super(ownerId, 101, "Goblin Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinAssaultToken()), TargetController.YOU, false));

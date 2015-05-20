@@ -50,7 +50,6 @@ public class DeathPitsOfRath extends CardImpl {
         super(ownerId, 21, "Death Pits of Rath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // Whenever a creature is dealt damage, destroy it. It can't be regenerated.
         this.addAbility(new DeathPitsOfRathTriggeredAbility());

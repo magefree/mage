@@ -55,7 +55,6 @@ public class AuraFlux extends CardImpl {
         super(ownerId, 27, "Aura Flux", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)), TargetController.YOU, false);

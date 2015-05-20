@@ -45,7 +45,6 @@ public class SylvanTutor extends CardImpl {
         super(ownerId, 114, "Sylvan Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "POR";
 
-        this.color.setGreen(true);
 
         // Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterCreatureCard()), true, true));

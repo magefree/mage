@@ -53,7 +53,6 @@ public class RiteOfConsumption extends CardImpl {
         super(ownerId, 76, "Rite of Consumption", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Rite of Consumption, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false)));

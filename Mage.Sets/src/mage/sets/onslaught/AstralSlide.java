@@ -54,7 +54,6 @@ public class AstralSlide extends CardImpl {
         super(ownerId, 4, "Astral Slide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-        this.color.setWhite(true);
 
         // Whenever a player cycles a card, you may exile target creature. If you do, return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new CycleAllTriggeredAbility(new AstralSlideEffect(), true);

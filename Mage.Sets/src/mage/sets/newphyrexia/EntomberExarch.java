@@ -62,7 +62,6 @@ public class EntomberExarch extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -64,7 +64,6 @@ public class WarrenWeirding extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Goblin");
 
-        this.color.setBlack(true);
 
         // Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn.
         this.getSpellAbility().addEffect(new WarrenWeirdingEffect());

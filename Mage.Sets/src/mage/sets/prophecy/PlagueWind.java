@@ -52,7 +52,6 @@ public class PlagueWind extends CardImpl {
         super(ownerId, 74, "Plague Wind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
         this.expansionSetCode = "PCY";
 
-        this.color.setBlack(true);
 
         // Destroy all creatures you don't control. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));

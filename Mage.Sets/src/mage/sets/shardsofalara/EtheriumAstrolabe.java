@@ -59,7 +59,6 @@ public class EtheriumAstrolabe extends CardImpl {
         super(ownerId, 41, "Etherium Astrolabe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

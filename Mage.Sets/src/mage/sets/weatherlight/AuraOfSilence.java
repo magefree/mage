@@ -67,7 +67,6 @@ public class AuraOfSilence extends CardImpl {
         super(ownerId, 123, "Aura of Silence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "WTH";
 
-        this.color.setWhite(true);
 
         // Artifact and enchantment spells your opponents cast cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AuraOfSilenceCostModificationEffect()));

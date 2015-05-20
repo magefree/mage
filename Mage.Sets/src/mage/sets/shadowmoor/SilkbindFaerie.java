@@ -53,8 +53,6 @@ public class SilkbindFaerie extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

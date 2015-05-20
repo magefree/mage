@@ -46,7 +46,6 @@ public class SomberHoverguard extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Drone");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

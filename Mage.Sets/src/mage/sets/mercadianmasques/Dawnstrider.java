@@ -54,7 +54,6 @@ public class Dawnstrider extends CardImpl {
         this.subtype.add("Dryad");
         this.subtype.add("Spellshaper");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

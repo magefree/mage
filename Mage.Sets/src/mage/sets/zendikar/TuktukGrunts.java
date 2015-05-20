@@ -50,7 +50,6 @@ public class TuktukGrunts extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Ally");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

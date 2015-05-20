@@ -51,7 +51,6 @@ public class Phthisis extends CardImpl {
         super(ownerId, 122, "Phthisis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}{B}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. Its controller loses life equal to its power plus its toughness.
         this.getSpellAbility().addEffect(new PhthisisEffect());

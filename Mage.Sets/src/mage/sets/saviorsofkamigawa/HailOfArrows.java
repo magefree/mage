@@ -46,7 +46,6 @@ public class HailOfArrows extends CardImpl {
         super(ownerId, 11, "Hail of Arrows", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");
         this.expansionSetCode = "SOK";
 
-        this.color.setWhite(true);
 
         // Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(new ManacostVariableValue()));

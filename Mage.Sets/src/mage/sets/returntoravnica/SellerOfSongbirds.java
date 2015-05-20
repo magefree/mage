@@ -47,7 +47,6 @@ public class SellerOfSongbirds extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

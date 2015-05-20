@@ -57,7 +57,6 @@ public class SpinneretSliver extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Sliver");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

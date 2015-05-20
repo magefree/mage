@@ -44,7 +44,6 @@ public class Tremble extends CardImpl {
         super(ownerId, 225, "Tremble", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Each player sacrifices a land.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledLandPermanent("land")));

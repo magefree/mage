@@ -53,7 +53,6 @@ public class BelltowerSphinx extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

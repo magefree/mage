@@ -58,7 +58,6 @@ public class VorinclexVoiceOfHunger extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

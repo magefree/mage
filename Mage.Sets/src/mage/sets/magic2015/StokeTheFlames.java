@@ -45,7 +45,6 @@ public class StokeTheFlames extends CardImpl {
         super(ownerId, 164, "Stoke the Flames", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

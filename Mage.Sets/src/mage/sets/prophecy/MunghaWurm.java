@@ -53,7 +53,6 @@ public class MunghaWurm extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

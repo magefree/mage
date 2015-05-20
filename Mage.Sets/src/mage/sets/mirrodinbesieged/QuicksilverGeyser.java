@@ -44,7 +44,6 @@ public class QuicksilverGeyser extends CardImpl {
         super(ownerId, 30, "Quicksilver Geyser", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlue(true);
 
         // Return up to two target nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -58,8 +58,6 @@ public class HinderingLight extends CardImpl {
         super(ownerId, 173, "Hindering Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Counter target spell that targets you or a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -64,7 +64,6 @@ public class ErebosGodOfTheDead extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

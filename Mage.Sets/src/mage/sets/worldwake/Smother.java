@@ -53,7 +53,6 @@ public class Smother extends CardImpl {
         super(ownerId, 68, "Smother", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

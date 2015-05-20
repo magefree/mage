@@ -55,7 +55,6 @@ public class SquirrelMob extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Squirrel");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

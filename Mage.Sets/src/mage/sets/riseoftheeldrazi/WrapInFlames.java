@@ -46,7 +46,6 @@ public class WrapInFlames extends CardImpl {
         super(ownerId, 173, "Wrap in Flames", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Wrap in Flames deals 1 damage to each of up to three target creatures. Those creatures can't block this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

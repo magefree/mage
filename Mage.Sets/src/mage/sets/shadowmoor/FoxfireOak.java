@@ -50,7 +50,6 @@ public class FoxfireOak extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

@@ -50,7 +50,6 @@ public class DeathCloud extends CardImpl {
         super(ownerId, 76, "Death Cloud", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");
         this.expansionSetCode = "MMA";
 
-        this.color.setBlack(true);
 
         // Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.
         DynamicValue xValue = new ManacostVariableValue();

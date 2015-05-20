@@ -48,7 +48,6 @@ public class ChargeAcrossTheAraba extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setWhite(true);
 
         // Sweep - Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect("Plains"));

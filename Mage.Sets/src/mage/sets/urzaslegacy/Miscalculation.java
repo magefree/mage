@@ -47,7 +47,6 @@ public class Miscalculation extends CardImpl {
         super(ownerId, 36, "Miscalculation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {2}.
         this.getSpellAbility().addTarget(new TargetSpell());

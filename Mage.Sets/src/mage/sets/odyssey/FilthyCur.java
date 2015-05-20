@@ -50,7 +50,6 @@ public class FilthyCur extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Hound");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

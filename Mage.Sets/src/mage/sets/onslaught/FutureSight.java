@@ -47,7 +47,6 @@ public class FutureSight extends CardImpl {
         super(ownerId, 84, "Future Sight", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlue(true);
 
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));

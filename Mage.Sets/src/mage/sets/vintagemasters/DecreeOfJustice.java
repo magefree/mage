@@ -58,7 +58,6 @@ public class DecreeOfJustice extends CardImpl {
         super(ownerId, 22, "Decree of Justice", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{2}{W}{W}");
         this.expansionSetCode = "VMA";
 
-        this.color.setWhite(true);
 
         // Put X 4/4 white Angel creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken("C14"), new ManacostVariableValue()));

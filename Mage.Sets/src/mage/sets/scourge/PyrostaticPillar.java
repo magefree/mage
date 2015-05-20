@@ -51,7 +51,6 @@ public class PyrostaticPillar extends CardImpl {
         super(ownerId, 100, "Pyrostatic Pillar", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "SCG";
 
-        this.color.setRed(true);
 
         // Whenever a player casts a spell with converted mana cost 3 or less, Pyrostatic Pillar deals 2 damage to that player.
         this.addAbility(new PyrostaticPillarTriggeredAbility());

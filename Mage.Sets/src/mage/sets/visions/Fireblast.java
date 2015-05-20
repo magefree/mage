@@ -56,7 +56,6 @@ public class Fireblast extends CardImpl {
         super(ownerId, 79, "Fireblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
         this.expansionSetCode = "VIS";
 
-        this.color.setRed(true);
                 
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));

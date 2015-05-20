@@ -58,7 +58,6 @@ public class Opalescence extends CardImpl {
         super(ownerId, 13, "Opalescence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "UDS";
 
-        this.color.setWhite(true);
 
         // Each other non-Aura enchantment is a creature with power and toughness each equal to its converted mana cost. It's still an enchantment.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpalescenceEffect()));

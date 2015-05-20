@@ -49,7 +49,6 @@ public class IrresistiblePrey extends CardImpl {
         super(ownerId, 188, "Irresistible Prey", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         // Target creature must be blocked this turn if able.
         // Draw a card.

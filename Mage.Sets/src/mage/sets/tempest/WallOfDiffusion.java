@@ -53,7 +53,6 @@ public class WallOfDiffusion extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

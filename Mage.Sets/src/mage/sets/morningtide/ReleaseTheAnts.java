@@ -45,7 +45,6 @@ public class ReleaseTheAnts extends CardImpl {
         super(ownerId, 98, "Release the Ants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MOR";
 
-        this.color.setRed(true);
 
         // Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return Release the Ants to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

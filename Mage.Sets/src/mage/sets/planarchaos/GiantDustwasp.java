@@ -47,7 +47,6 @@ public class GiantDustwasp extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

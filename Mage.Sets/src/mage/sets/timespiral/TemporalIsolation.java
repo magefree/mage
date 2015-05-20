@@ -57,7 +57,6 @@ public class TemporalIsolation extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

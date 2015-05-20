@@ -59,7 +59,6 @@ public class Submerge extends CardImpl {
         super(ownerId, 48, "Submerge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlue(true);
 
         // If an opponent controls a Forest and you control an Island, you may cast Submerge without paying its mana cost.
         Condition condition = new CompoundCondition("If an opponent controls a Forest and you control an Island", 

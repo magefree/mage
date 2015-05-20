@@ -53,7 +53,6 @@ public class FadeIntoAntiquity extends CardImpl {
         super(ownerId, 157, "Fade into Antiquity", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Exile target artifact or enchantment.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

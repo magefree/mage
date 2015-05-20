@@ -43,7 +43,6 @@ public class SacredNectar extends CardImpl {
         super(ownerId, 38, "Sacred Nectar", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "9ED";
 
-        this.color.setWhite(true);
 
         // You gain 4 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(4));

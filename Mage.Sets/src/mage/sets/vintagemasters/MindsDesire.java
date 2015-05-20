@@ -55,7 +55,6 @@ public class MindsDesire extends CardImpl {
         super(ownerId, 80, "Mind's Desire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlue(true);
 
         // Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
         this.getSpellAbility().addEffect(new MindsDesireEffect());

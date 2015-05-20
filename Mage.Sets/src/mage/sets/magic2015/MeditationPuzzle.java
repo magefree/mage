@@ -44,7 +44,6 @@ public class MeditationPuzzle extends CardImpl {
         super(ownerId, 19, "Meditation Puzzle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

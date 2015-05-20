@@ -45,8 +45,6 @@ public class KissOfTheAmesha extends CardImpl {
         super(ownerId, 177, "Kiss of the Amesha", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{W}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Target player gains 7 life and draws two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());

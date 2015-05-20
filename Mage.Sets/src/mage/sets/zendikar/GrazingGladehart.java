@@ -46,7 +46,6 @@ public class GrazingGladehart extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Antelope");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

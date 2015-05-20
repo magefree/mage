@@ -48,7 +48,7 @@ public class PhyrexianGargantua extends CardImpl {
         super(ownerId, 48, "Phyrexian Gargantua", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "APC";
         this.subtype.add("Horror");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2), false);

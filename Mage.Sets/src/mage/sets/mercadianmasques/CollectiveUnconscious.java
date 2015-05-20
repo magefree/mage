@@ -45,7 +45,6 @@ public class CollectiveUnconscious extends CardImpl {
         super(ownerId, 236, "Collective Unconscious", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setGreen(true);
 
         // Draw a card for each creature you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));

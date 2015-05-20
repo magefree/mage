@@ -54,7 +54,6 @@ public class EternitySnare extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

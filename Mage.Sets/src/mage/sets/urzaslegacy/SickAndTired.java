@@ -45,7 +45,6 @@ public class SickAndTired extends CardImpl {
         super(ownerId, 66, "Sick and Tired", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // Two target creatures each get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));

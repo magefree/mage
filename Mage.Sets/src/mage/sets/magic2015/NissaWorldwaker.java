@@ -79,7 +79,6 @@ public class NissaWorldwaker extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Nissa");
 
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         

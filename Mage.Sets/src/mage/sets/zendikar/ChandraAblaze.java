@@ -65,7 +65,6 @@ public class ChandraAblaze extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Chandra");
 
-        this.color.setRed(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 

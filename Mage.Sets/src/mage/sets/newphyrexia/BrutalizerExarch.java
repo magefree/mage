@@ -68,7 +68,6 @@ public class BrutalizerExarch extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

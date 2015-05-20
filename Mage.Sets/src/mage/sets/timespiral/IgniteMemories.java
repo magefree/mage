@@ -53,7 +53,6 @@ public class IgniteMemories extends CardImpl {
         super(ownerId, 164, "Ignite Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost.
         this.getSpellAbility().addTarget(new TargetPlayer());

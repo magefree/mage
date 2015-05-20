@@ -44,7 +44,6 @@ public class BurstOfEnergy extends CardImpl {
         super(ownerId, 3, "Burst of Energy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Untap target permanent.
         this.getSpellAbility().addEffect(new UntapTargetEffect());

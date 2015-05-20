@@ -51,7 +51,6 @@ public class RakingCanopy extends CardImpl {
         super(ownerId, 127, "Raking Canopy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // Whenever a creature with flying attacks you, Raking Canopy deals 4 damage to it.
         this.addAbility(new RakingCanopyTriggeredAbility());

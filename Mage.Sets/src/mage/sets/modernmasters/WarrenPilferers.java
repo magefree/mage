@@ -61,7 +61,6 @@ public class WarrenPilferers extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

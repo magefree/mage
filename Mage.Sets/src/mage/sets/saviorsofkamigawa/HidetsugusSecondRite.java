@@ -48,7 +48,6 @@ public class HidetsugusSecondRite extends CardImpl {
         super(ownerId, 102, "Hidetsugu's Second Rite", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.
         this.getSpellAbility().addEffect(new HidetsugusSecondRiteEffect());

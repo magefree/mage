@@ -51,7 +51,6 @@ public class Demoralize extends CardImpl {
         super(ownerId, 184, "Demoralize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Each creature can't be blocked this turn except by two or more creatures.
         this.getSpellAbility().addEffect(new CantBeBlockedByOneAllEffect(2, new FilterCreaturePermanent(), Duration.EndOfTurn));

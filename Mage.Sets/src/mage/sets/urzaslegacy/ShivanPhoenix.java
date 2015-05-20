@@ -47,7 +47,6 @@ public class ShivanPhoenix extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

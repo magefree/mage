@@ -56,7 +56,6 @@ public class BalothCageTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setGreen(true);
 
         // If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new BalothCageTrapAlternativeCost());

@@ -68,7 +68,6 @@ public class MightMakesRight extends CardImpl {
         super(ownerId, 156, "Might Makes Right", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control
         // of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.

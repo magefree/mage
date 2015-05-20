@@ -46,7 +46,6 @@ public class JhovallRider extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

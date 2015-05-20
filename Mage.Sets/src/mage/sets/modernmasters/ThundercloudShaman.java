@@ -62,7 +62,6 @@ public class ThundercloudShaman extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

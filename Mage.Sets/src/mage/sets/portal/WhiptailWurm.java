@@ -44,7 +44,6 @@ public class WhiptailWurm extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(5);
     }

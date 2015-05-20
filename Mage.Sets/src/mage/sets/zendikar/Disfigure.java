@@ -45,7 +45,6 @@ public class Disfigure extends CardImpl {
         super(ownerId, 87, "Disfigure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

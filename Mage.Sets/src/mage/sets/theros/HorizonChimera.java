@@ -49,8 +49,6 @@ public class HorizonChimera extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Chimera");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

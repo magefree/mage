@@ -57,7 +57,6 @@ public class Intuition extends CardImpl {
         super(ownerId, 70, "Intuition", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new IntuitionEffect());

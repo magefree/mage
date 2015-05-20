@@ -47,7 +47,7 @@ public class Smash extends CardImpl {
     public Smash(UUID ownerId) {
         super(ownerId, 69, "Smash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "APC";
-        this.color.setRed(true);
+
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

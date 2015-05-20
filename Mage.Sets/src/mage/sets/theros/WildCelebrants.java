@@ -49,7 +49,6 @@ public class WildCelebrants extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Satyr");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

@@ -77,7 +77,6 @@ public class RescueFromTheUnderworld extends CardImpl {
         super(ownerId, 102, "Rescue from the Underworld", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false)));

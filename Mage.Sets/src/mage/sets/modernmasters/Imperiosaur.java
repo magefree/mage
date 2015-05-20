@@ -53,7 +53,6 @@ public class Imperiosaur extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Lizard");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

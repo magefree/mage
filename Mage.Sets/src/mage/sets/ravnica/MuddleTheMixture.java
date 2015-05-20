@@ -55,7 +55,6 @@ public class MuddleTheMixture extends CardImpl {
         super(ownerId, 60, "Muddle the Mixture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // Counter target instant or sorcery spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

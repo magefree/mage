@@ -57,7 +57,6 @@ public class BidentOfThassa extends CardImpl {
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
 
-        this.color.setBlue(true);
 
         // Whenever a creature you control deals combat damage to a player, you may draw a card.
         this.addAbility(new BidentOfThassaTriggeredAbility());

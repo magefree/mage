@@ -56,7 +56,6 @@ public class SummonersBane extends CardImpl {
         super(ownerId, 71, "Summoner's Bane", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());

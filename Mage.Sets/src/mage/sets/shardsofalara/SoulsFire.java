@@ -52,7 +52,6 @@ public class SoulsFire extends CardImpl {
         super(ownerId, 115, "Soul's Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Target creature you control on the battlefield deals damage equal to its power to target creature or player.
         this.getSpellAbility().addEffect(new SoulsFireEffect());

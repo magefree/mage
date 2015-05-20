@@ -45,7 +45,6 @@ public class Convolute extends CardImpl {
         super(ownerId, 41, "Convolute", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {4}.
         this.getSpellAbility().addTarget(new TargetSpell());

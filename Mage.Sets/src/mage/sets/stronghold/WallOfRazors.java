@@ -46,7 +46,6 @@ public class WallOfRazors extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

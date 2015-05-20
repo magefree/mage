@@ -47,7 +47,6 @@ public class IvoryMask extends CardImpl {
         super(ownerId, 23, "Ivory Mask", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "9ED";
 
-        this.color.setWhite(true);
 
         // You have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));

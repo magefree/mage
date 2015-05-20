@@ -46,7 +46,6 @@ public class GlacialRay extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Glacial Ray deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

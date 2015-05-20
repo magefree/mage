@@ -50,7 +50,6 @@ public class KrosanCloudscraper extends CardImpl {
         this.subtype.add("Beast");
         this.subtype.add("Mutant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(13);
         this.toughness = new MageInt(13);
 

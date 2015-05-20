@@ -54,7 +54,6 @@ public class FeralInvocation extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

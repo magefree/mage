@@ -50,7 +50,6 @@ public class SilvosRogueElemental extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(5);
 

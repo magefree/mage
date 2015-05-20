@@ -49,8 +49,6 @@ public class PrivilegedPosition extends CardImpl {
         super(ownerId, 251, "Privileged Position", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}{G/W}{G/W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Other permanents you control have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(), true)));

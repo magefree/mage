@@ -46,7 +46,6 @@ public class LastGasp extends CardImpl {
         super(ownerId, 93, "Last Gasp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlack(true);
 
         // Target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));

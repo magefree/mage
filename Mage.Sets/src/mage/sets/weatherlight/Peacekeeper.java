@@ -56,7 +56,6 @@ public class Peacekeeper extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Human");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

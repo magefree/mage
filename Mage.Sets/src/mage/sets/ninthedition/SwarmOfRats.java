@@ -57,7 +57,6 @@ public class SwarmOfRats extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

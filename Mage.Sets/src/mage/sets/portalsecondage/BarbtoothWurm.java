@@ -44,7 +44,6 @@ public class BarbtoothWurm extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
     }

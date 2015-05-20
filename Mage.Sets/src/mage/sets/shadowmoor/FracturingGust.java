@@ -51,8 +51,6 @@ public class FracturingGust extends CardImpl {
         super(ownerId, 227, "Fracturing Gust", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G/W}{G/W}{G/W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         this.getSpellAbility().addEffect(new FracturingGustDestroyEffect());

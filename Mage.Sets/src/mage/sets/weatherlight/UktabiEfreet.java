@@ -46,7 +46,6 @@ public class UktabiEfreet extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Efreet");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

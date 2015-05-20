@@ -60,7 +60,6 @@ public class FeralHydra extends CardImpl {
         this.subtype.add("Hydra");
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

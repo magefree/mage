@@ -48,7 +48,6 @@ public class OneWithNothing extends CardImpl {
         super(ownerId, 84, "One with Nothing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // Discard your hand.
         this.getSpellAbility().addEffect(new OneWithNothingEffect());

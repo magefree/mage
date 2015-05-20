@@ -53,7 +53,6 @@ public class Chainflinger extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

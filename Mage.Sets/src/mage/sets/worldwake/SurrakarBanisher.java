@@ -56,7 +56,6 @@ public class SurrakarBanisher extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Surrakar");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

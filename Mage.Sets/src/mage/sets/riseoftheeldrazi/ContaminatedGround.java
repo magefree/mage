@@ -58,7 +58,6 @@ public class ContaminatedGround extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -56,7 +56,6 @@ public class ClawsOfWirewood extends CardImpl {
         super(ownerId, 201, "Claws of Wirewood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "VMA";
 
-        this.color.setGreen(true);
 
         // Claws of Wirewood deals 3 damage to each creature with flying and each player.
         this.getSpellAbility().addEffect(new DamageAllEffect(3, filter));

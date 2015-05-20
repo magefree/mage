@@ -65,8 +65,6 @@ public class GlareOfSubdual extends CardImpl {
         super(ownerId, 207, "Glare of Subdual", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Tap an untapped creature you control: Tap target artifact or creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCost, true)));

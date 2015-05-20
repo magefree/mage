@@ -57,7 +57,6 @@ public class RuneTailKitsuneAscendant extends CardImpl {
         this.subtype.add("Fox");
         this.subtype.add("Monk");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.flipCard = true;

@@ -55,8 +55,6 @@ public class HavocFestival extends CardImpl {
         super(ownerId, 166, "Havoc Festival", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
 
         // Players can't gain life.
        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));

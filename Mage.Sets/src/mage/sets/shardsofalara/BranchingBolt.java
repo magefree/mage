@@ -62,8 +62,6 @@ public class BranchingBolt extends CardImpl {
         super(ownerId, 158, "Branching Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);

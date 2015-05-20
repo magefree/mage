@@ -47,7 +47,6 @@ public class HuntingPack extends CardImpl {
         super(ownerId, 121, "Hunting Pack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}{G}");
         this.expansionSetCode = "SCG";
 
-        this.color.setGreen(true);
 
         // Put a 4/4 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new HuntingPackToken(), 1));

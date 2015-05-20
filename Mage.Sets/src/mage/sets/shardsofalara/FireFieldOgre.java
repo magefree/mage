@@ -48,9 +48,6 @@ public class FireFieldOgre extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Mutant");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

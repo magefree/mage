@@ -57,7 +57,6 @@ public class RushingRiver extends CardImpl {
         super(ownerId, 30, "Rushing River", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "PLS";
 
-        this.color.setBlue(true);
 
         // Kicker-Sacrifice a land.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));

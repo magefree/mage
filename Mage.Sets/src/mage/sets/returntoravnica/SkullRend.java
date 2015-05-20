@@ -49,8 +49,6 @@ public class SkullRend extends CardImpl {
         super(ownerId, 195, "Skull Rend", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
 
         // Skull Rend deals 2 damage to each opponent. Those players each discard two cards at random.
         this.getSpellAbility().addEffect(new SkullRendEffect());

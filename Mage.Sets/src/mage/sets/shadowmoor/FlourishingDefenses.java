@@ -50,7 +50,6 @@ public class FlourishingDefenses extends CardImpl {
         super(ownerId, 114, "Flourishing Defenses", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // Whenever a -1/-1 counter is placed on a creature, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
         this.addAbility(new FlourishingDefensesTriggeredAbility());

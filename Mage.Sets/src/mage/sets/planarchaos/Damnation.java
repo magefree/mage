@@ -44,7 +44,6 @@ public class Damnation extends CardImpl {
         super(ownerId, 85, "Damnation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlack(true);
 
         // Destroy all creatures. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures"), true));

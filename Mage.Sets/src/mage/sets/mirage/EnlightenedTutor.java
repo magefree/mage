@@ -54,7 +54,6 @@ public class EnlightenedTutor extends CardImpl {
         super(ownerId, 218, "Enlightened Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "MIR";
 
-        this.color.setWhite(true);
 
         // Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));

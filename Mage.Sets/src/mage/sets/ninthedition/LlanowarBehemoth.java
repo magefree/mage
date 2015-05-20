@@ -59,7 +59,6 @@ public class LlanowarBehemoth extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

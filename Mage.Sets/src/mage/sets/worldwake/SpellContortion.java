@@ -50,7 +50,6 @@ public class SpellContortion extends CardImpl {
         super(ownerId, 38, "Spell Contortion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // Multikicker {1}{U}
         this.addAbility(new MultikickerAbility("{1}{U}"));

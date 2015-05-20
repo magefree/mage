@@ -46,7 +46,6 @@ public class ChainReaction extends CardImpl {
         super(ownerId, 74, "Chain Reaction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "WWK";
 
-        this.color.setRed(true);
 
         // Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
         Effect effect = new DamageAllEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent()), new FilterCreaturePermanent());

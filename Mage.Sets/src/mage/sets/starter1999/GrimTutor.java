@@ -45,7 +45,6 @@ public class GrimTutor extends CardImpl {
         super(ownerId, 79, "Grim Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "S99";
 
-        this.color.setBlack(true);
 
         // Search your library for a card and put that card into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary();

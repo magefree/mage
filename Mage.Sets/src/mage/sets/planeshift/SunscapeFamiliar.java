@@ -61,7 +61,6 @@ public class SunscapeFamiliar extends CardImpl {
         this.expansionSetCode = "PLS";
         this.subtype.add("Wall");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

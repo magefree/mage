@@ -45,7 +45,6 @@ public class Grapeshot extends CardImpl {
         super(ownerId, 160, "Grapeshot", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Grapeshot deals 1 damage to target creature or player.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

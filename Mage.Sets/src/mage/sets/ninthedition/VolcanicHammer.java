@@ -44,7 +44,6 @@ public class VolcanicHammer extends CardImpl {
         super(ownerId, 226, "Volcanic Hammer", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "9ED";
 
-        this.color.setRed(true);
 
         // Volcanic Hammer deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

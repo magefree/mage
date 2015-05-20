@@ -53,7 +53,6 @@ public class Deathgazer extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Lizard");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -50,7 +50,6 @@ public class BarrelDownSokenzan extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Sweep - Return any number of Mountains you control to their owner's hand. Barrel Down Sokenzan deals damage to target creature equal to twice the number of Mountains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect("Mountain"));

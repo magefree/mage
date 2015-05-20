@@ -59,7 +59,6 @@ public class Vandalblast extends CardImpl {
         super(ownerId, 111, "Vandalblast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // Destroy target artifact you don't control.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(filter));

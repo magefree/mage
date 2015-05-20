@@ -55,7 +55,6 @@ public class LandbindRitual extends CardImpl {
         super(ownerId, 24, "Landbind Ritual", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)));
     }

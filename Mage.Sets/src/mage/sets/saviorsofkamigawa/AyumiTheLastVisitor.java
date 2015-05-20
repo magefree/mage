@@ -53,7 +53,6 @@ public class AyumiTheLastVisitor extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(3);
 

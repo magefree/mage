@@ -50,7 +50,6 @@ public class DreadReturn extends CardImpl {
         super(ownerId, 104, "Dread Return", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

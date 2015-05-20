@@ -57,7 +57,6 @@ public class CinderhazeWretch extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -53,7 +53,6 @@ public class AnthousaSetessanHero extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

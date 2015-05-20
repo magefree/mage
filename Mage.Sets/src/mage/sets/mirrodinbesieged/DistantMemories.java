@@ -51,7 +51,6 @@ public class DistantMemories extends CardImpl {
         super(ownerId, 24, "Distant Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new DistantMemoriesEffect());
     }

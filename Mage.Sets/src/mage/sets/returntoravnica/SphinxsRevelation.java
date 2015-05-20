@@ -46,8 +46,6 @@ public class SphinxsRevelation extends CardImpl {
         super(ownerId, 200, "Sphinx's Revelation", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{W}{U}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // You gain X life and draw X cards.
         ManacostVariableValue manaX = new ManacostVariableValue();

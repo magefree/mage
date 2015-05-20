@@ -62,7 +62,6 @@ public class Vendetta extends CardImpl {
         super(ownerId, 130, "Vendetta", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -54,7 +54,6 @@ public class TidalSurge extends CardImpl {
         super(ownerId, 46, "Tidal Surge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlue(true);
 
         // Tap up to three target creatures without flying.
         this.getSpellAbility().addEffect(new TapTargetEffect("Tap up to three target creatures without flying"));

@@ -57,7 +57,6 @@ public class VolcanicSubmersion extends CardImpl {
         super(ownerId, 121, "Volcanic Submersion", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Destroy target artifact or land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

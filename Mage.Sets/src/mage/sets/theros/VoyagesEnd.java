@@ -45,7 +45,6 @@ public class VoyagesEnd extends CardImpl {
         super(ownerId, 73, "Voyage's End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand. Scry 1.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

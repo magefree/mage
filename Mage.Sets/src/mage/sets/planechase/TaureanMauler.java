@@ -48,7 +48,6 @@ public class TaureanMauler extends CardImpl {
         this.expansionSetCode = "HOP";
         this.subtype.add("Shapeshifter");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

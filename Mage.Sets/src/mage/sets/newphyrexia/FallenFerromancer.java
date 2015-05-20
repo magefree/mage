@@ -51,7 +51,6 @@ public class FallenFerromancer extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

@@ -56,7 +56,6 @@ public class BackToBasics extends CardImpl {
         super(ownerId, 62, "Back to Basics", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Nonbasic lands don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));

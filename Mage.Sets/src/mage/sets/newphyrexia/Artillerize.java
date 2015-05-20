@@ -57,7 +57,6 @@ public class Artillerize extends CardImpl {
         super(ownerId, 79, "Artillerize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

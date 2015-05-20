@@ -62,7 +62,6 @@ public class StreetSpasm extends CardImpl {
         super(ownerId, 106, "Street Spasm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // Street Spasm deals X damage to target creature without flying you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

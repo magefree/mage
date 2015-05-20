@@ -56,7 +56,6 @@ public class DeathforgeShaman extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

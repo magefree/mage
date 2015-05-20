@@ -52,7 +52,6 @@ public class DimirHouseGuard extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Skeleton");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

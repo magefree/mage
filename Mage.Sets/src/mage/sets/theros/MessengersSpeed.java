@@ -57,7 +57,6 @@ public class MessengersSpeed extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

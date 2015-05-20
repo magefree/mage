@@ -47,7 +47,6 @@ public class SliceAndDice extends CardImpl {
         super(ownerId, 232, "Slice and Dice", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // Slice and Dice deals 4 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));

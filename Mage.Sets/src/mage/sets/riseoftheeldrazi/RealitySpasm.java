@@ -51,7 +51,6 @@ public class RealitySpasm extends CardImpl {
         super(ownerId, 81, "Reality Spasm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // Choose one - Tap X target permanents; or untap X target permanents.
         this.getSpellAbility().addEffect(new RealitySpasmTapEffect());

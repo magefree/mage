@@ -62,7 +62,6 @@ public class WaywardAngel extends CardImpl {
         this.subtype.add("Angel");
         this.subtype.add("Horror");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

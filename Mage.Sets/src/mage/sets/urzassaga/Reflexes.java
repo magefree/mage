@@ -51,7 +51,6 @@ public class Reflexes extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

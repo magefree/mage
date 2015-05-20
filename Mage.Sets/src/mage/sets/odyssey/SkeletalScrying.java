@@ -56,7 +56,6 @@ public class SkeletalScrying extends CardImpl {
         super(ownerId, 161, "Skeletal Scrying", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard.
         Ability ability = new SimpleStaticAbility(Zone.ALL,new SkeletalScryingRuleEffect());

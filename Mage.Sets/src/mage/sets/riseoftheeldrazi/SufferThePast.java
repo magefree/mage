@@ -53,7 +53,6 @@ public class SufferThePast extends CardImpl {
         super(ownerId, 128, "Suffer the Past", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new SufferThePastEffect());

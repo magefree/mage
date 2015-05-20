@@ -62,7 +62,6 @@ public class PrismaticOmen extends CardImpl {
         super(ownerId, 126, "Prismatic Omen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // Lands you control are every basic land type in addition to their other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandTypeAllEffect("Swamp", "Mountain", "Forest", "Island", "Plains")));

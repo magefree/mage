@@ -54,7 +54,6 @@ public class Sarcomancy extends CardImpl {
         super(ownerId, 48, "Sarcomancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // When Sarcomancy enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1), false));

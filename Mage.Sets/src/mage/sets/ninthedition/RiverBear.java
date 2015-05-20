@@ -45,7 +45,6 @@ public class RiverBear extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Bear");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

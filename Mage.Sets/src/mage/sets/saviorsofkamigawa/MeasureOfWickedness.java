@@ -67,7 +67,6 @@ public class MeasureOfWickedness extends CardImpl {
         super(ownerId, 82, "Measure of Wickedness", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.        
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, null, false);

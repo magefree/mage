@@ -47,8 +47,6 @@ public class SegmentedWurm extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Wurm");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

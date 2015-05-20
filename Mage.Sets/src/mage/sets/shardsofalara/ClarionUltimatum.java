@@ -56,9 +56,6 @@ public class ClarionUltimatum extends CardImpl {
         super(ownerId, 163, "Clarion Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}{W}{W}{W}{U}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
         this.getSpellAbility().addEffect(new ClarionUltimatumEffect());

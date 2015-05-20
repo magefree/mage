@@ -59,7 +59,6 @@ public class PitfallTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setWhite(true);
 
         // If exactly one creature is attacking, you may pay {W} rather than pay Pitfall Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new PitfallTrapAlternativeCost());

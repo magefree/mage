@@ -52,7 +52,6 @@ public class Larceny extends CardImpl {
         super(ownerId, 143, "Larceny", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlack(true);
 
         // Whenever a creature you control deals combat damage to a player, that player discards a card.
         this.addAbility(new LarcenyTriggeredAbility());

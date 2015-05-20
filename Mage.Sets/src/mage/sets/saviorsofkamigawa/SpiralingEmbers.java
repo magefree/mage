@@ -47,7 +47,6 @@ public class SpiralingEmbers extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Spiraling Embers deals damage to target creature or player equal to the number of cards in your hand.
         Effect effect = new DamageTargetEffect(new CardsInControllerHandCount());

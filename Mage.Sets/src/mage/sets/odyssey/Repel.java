@@ -44,7 +44,6 @@ public class Repel extends CardImpl {
         super(ownerId, 98, "Repel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

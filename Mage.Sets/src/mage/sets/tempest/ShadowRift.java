@@ -47,7 +47,6 @@ public class ShadowRift extends CardImpl {
         super(ownerId, 86, "Shadow Rift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Target creature gains shadow until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ShadowAbility.getInstance(), Duration.EndOfTurn));

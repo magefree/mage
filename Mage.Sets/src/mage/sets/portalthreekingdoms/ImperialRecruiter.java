@@ -57,7 +57,6 @@ public class ImperialRecruiter extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

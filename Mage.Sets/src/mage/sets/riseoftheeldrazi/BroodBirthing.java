@@ -49,7 +49,6 @@ public class BroodBirthing extends CardImpl {
         super(ownerId, 138, "Brood Birthing", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new BroodBirthingEffect());
     }

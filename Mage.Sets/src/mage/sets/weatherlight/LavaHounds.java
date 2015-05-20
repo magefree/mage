@@ -47,7 +47,6 @@ public class LavaHounds extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Hound");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

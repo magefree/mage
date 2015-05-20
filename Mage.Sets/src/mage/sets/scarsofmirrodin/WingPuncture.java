@@ -59,7 +59,6 @@ public class WingPuncture extends CardImpl {
         super(ownerId, 133, "Wing Puncture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOM";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

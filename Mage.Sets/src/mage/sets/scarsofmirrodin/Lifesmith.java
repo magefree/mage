@@ -62,7 +62,6 @@ public class Lifesmith extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

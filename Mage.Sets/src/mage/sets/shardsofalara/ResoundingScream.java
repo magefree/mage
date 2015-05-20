@@ -48,7 +48,6 @@ public class ResoundingScream extends CardImpl {
         super(ownerId, 83, "Resounding Scream", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlack(true);
 
         // Target player discards a card at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));

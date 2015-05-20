@@ -44,7 +44,6 @@ public class Sift extends CardImpl {
         super(ownerId, 108, "Sift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Draw three cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3,1));

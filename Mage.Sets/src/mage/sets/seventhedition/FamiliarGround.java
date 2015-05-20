@@ -46,7 +46,6 @@ public class FamiliarGround extends CardImpl {
         super(ownerId, 243, "Familiar Ground", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Each creature you control can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));

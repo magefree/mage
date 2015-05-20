@@ -60,7 +60,6 @@ public class KorLineSlinger extends CardImpl {
         this.subtype.add("Kor");
         this.subtype.add("Scout");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

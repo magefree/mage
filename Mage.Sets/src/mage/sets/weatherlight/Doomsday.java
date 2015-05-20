@@ -54,7 +54,6 @@ public class Doomsday extends CardImpl {
         super(ownerId, 8, "Doomsday", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
         this.expansionSetCode = "WTH";
 
-        this.color.setBlack(true);
 
         // Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.
         this.getSpellAbility().addEffect(new DoomsdayEffect());

@@ -56,7 +56,6 @@ public class SpellSyphon extends CardImpl {
         super(ownerId, 52, "Spell Syphon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1} for each blue permanent you control.
         this.getSpellAbility().addEffect(new SpellSyphonEffect());

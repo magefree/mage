@@ -45,7 +45,6 @@ public class ThassasBounty extends CardImpl {
         super(ownerId, 67, "Thassa's Bounty", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Draw three cards. Target player puts the top three cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

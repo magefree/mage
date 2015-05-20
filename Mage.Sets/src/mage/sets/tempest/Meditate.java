@@ -49,7 +49,6 @@ public class Meditate extends CardImpl {
         super(ownerId, 76, "Meditate", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Draw four cards. You skip your next turn.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

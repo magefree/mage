@@ -57,7 +57,6 @@ public class ParasiticImplant extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

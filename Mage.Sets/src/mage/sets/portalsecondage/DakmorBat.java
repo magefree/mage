@@ -45,7 +45,6 @@ public class DakmorBat extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Bat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

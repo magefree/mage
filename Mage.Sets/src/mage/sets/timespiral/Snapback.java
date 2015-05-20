@@ -52,7 +52,6 @@ public class Snapback extends CardImpl {
         super(ownerId, 78, "Snapback", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // You may exile a blue card from your hand rather than pay Snapback's mana cost.
         FilterOwnedCard filterCardInHand = new FilterOwnedCard("a blue card from your hand");

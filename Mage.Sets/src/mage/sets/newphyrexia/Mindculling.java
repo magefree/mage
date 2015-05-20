@@ -45,7 +45,6 @@ public class Mindculling extends CardImpl {
         super(ownerId, 39, "Mindculling", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addTarget(new TargetOpponent());

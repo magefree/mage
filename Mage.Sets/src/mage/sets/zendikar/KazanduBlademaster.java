@@ -51,7 +51,6 @@ public class KazanduBlademaster extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Ally");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

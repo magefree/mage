@@ -60,9 +60,6 @@ public class RakeclawGargantuan extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

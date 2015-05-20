@@ -54,7 +54,6 @@ public class CradleOfVitality extends CardImpl {
         super(ownerId, 7, "Cradle of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         // Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained.
         Ability ability = new CradleOfVitalityGainLifeTriggeredAbility();

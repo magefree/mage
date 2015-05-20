@@ -55,7 +55,6 @@ public class Phytotitan extends CardImpl {
         this.subtype.add("Plant");
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(2);
 

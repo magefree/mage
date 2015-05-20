@@ -45,7 +45,6 @@ public class MirrisGuile extends CardImpl {
         super(ownerId, 130, "Mirri's Guile", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "TMP";
 
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, you may look at the top three cards of your library, then put them back in any order.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryControllerEffect(3), TargetController.YOU, true));

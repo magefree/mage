@@ -49,7 +49,6 @@ public class WordsOfWisdom extends CardImpl {
         super(ownerId, 114, "Words of Wisdom", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // You draw two cards, then each other player draws a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

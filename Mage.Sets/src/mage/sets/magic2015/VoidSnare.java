@@ -44,7 +44,6 @@ public class VoidSnare extends CardImpl {
         super(ownerId, 82, "Void Snare", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // Return target nonland permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

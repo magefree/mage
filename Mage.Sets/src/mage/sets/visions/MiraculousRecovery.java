@@ -52,7 +52,6 @@ public class MiraculousRecovery extends CardImpl {
         super(ownerId, 113, "Miraculous Recovery", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "VIS";
 
-        this.color.setWhite(true);
 
         // Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

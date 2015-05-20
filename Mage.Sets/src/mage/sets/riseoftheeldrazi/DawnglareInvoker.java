@@ -58,7 +58,6 @@ public class DawnglareInvoker extends CardImpl {
         this.subtype.add("Kor");
         this.subtype.add("Wizard");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

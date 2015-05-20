@@ -61,7 +61,6 @@ public class ToilToRenown extends CardImpl {
         super(ownerId, 130, "Toil to Renown", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // You gain 1 life for each tapped artifact, creature, and land you control.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));

@@ -45,7 +45,6 @@ public class NeedlepeakSpider extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Spider");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

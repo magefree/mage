@@ -45,7 +45,6 @@ public class FlyingMen extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Human");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

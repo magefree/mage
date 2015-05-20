@@ -59,8 +59,6 @@ public class PsychicIntrusion extends CardImpl {
         super(ownerId, 200, "Psychic Intrusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it.
         // You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color

@@ -50,7 +50,6 @@ public class SavorTheMoment extends CardImpl {
         super(ownerId, 50, "Savor the Moment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Take an extra turn after this one. Skip the untap step of that turn.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

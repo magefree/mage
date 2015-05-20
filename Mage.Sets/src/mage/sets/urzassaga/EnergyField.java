@@ -52,7 +52,6 @@ public class EnergyField extends CardImpl {
         super(ownerId, 73, "Energy Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Prevent all damage that would be dealt to you by sources you don't control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnergyFieldEffect()));

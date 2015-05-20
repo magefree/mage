@@ -50,7 +50,6 @@ public class TestOfFaith extends CardImpl {
         super(ownerId, 33, "Test of Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "MMA";
 
-        this.color.setWhite(true);
 
         // Prevent the next 3 damage that would be dealt to target creature this turn, and put a +1/+1 counter on that creature for each 1 damage prevented this way.
         this.getSpellAbility().addEffect(new TestOfFaithPreventDamageTargetEffect(Duration.EndOfTurn));

@@ -47,7 +47,6 @@ public class FlamebornHellion extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Hellion");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());

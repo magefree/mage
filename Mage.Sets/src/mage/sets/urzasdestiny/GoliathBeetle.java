@@ -45,7 +45,6 @@ public class GoliathBeetle extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

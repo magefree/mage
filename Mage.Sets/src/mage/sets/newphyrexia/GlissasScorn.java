@@ -45,7 +45,6 @@ public class GlissasScorn extends CardImpl {
         super(ownerId, 110, "Glissa's Scorn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "NPH";
 
-        this.color.setGreen(true);
         // Destroy target artifact. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

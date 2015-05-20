@@ -52,7 +52,6 @@ public class TrapmakersSnare extends CardImpl {
         super(ownerId, 74, "Trapmaker's Snare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         // Search your library for a Trap card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

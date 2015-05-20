@@ -44,7 +44,6 @@ public class GiantCockroach extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
     }

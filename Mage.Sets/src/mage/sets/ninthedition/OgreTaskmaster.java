@@ -45,7 +45,6 @@ public class OgreTaskmaster extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Ogre");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

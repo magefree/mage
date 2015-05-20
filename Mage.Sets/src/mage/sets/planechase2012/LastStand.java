@@ -54,11 +54,6 @@ public class LastStand extends CardImpl {
         super(ownerId, 100, "Last Stand", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "PC2";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Target opponent loses 2 life for each Swamp you control. Last Stand deals damage equal to the number of Mountains you control to target creature. Put a 1/1 green Saproling creature token onto the battlefield for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
         this.getSpellAbility().addEffect(new LastStandEffect());

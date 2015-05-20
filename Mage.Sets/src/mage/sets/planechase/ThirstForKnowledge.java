@@ -54,7 +54,6 @@ public class ThirstForKnowledge extends CardImpl {
         super(ownerId, 14, "Thirst for Knowledge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "HOP";
 
-        this.color.setBlue(true);
 
         // Draw three cards. Then discard two cards unless you discard an artifact card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

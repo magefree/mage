@@ -59,7 +59,6 @@ public class Foratog extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Atog");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

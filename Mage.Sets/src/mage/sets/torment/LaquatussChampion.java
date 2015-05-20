@@ -58,7 +58,6 @@ public class LaquatussChampion extends CardImpl {
         this.subtype.add("Nightmare");
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

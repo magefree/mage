@@ -50,11 +50,6 @@ public class SliverQueen extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

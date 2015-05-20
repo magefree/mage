@@ -45,7 +45,6 @@ public class TravelingPhilosopher extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

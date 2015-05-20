@@ -45,7 +45,6 @@ public class StreamOfLife extends CardImpl {
         super(ownerId, 272, "Stream of Life", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Target player gains X life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new ManacostVariableValue()));

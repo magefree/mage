@@ -56,7 +56,6 @@ public class NeverendingTorment extends CardImpl {
         super(ownerId, 83, "Neverending Torment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new NeverendingTormentEffect());

@@ -57,7 +57,6 @@ public class ErraticMutation extends CardImpl {
         super(ownerId, 41, "Erratic Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlue(true);
 
         // Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

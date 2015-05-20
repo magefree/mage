@@ -58,8 +58,6 @@ public class DemigodOfRevenge extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

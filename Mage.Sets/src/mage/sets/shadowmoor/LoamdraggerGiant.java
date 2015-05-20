@@ -45,8 +45,6 @@ public class LoamdraggerGiant extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
     }

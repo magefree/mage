@@ -52,7 +52,6 @@ public class StealEnchantment extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant enchantment
         TargetPermanent auraTarget = new TargetEnchantmentPermanent();

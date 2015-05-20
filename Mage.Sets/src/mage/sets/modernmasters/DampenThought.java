@@ -46,7 +46,6 @@ public class DampenThought extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Target player puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(4));

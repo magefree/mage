@@ -49,7 +49,6 @@ public class NaturesResurgence extends CardImpl {
         super(ownerId, 259, "Nature's Resurgence", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Each player draws a card for each creature card in his or her graveyard.
         this.getSpellAbility().addEffect(new NaturesResurgenceEffect());

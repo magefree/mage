@@ -57,7 +57,6 @@ public class JaddiLifestrider extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(8);
 

@@ -50,7 +50,6 @@ public class RecurringInsight extends CardImpl {
         super(ownerId, 82, "Recurring Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
         
         // Rebound
         this.addAbility(new ReboundAbility());

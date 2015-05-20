@@ -49,7 +49,6 @@ public class Soothsaying extends CardImpl {
         super(ownerId, 104, "Soothsaying", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlue(true);
 
         // {3}{U}{U}: Shuffle your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleLibrarySourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));

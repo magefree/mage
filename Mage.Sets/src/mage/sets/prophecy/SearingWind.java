@@ -44,7 +44,6 @@ public class SearingWind extends CardImpl {
         super(ownerId, 103, "Searing Wind", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{8}{R}");
         this.expansionSetCode = "PCY";
 
-        this.color.setRed(true);
 
         // Searing Wind deals 10 damage to target creature or player.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

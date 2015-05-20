@@ -55,7 +55,6 @@ public class LifesFinale extends CardImpl {
         super(ownerId, 65, "Life's Finale", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new LifesFinaleEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());

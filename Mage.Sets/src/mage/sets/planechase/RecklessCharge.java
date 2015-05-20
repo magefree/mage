@@ -51,7 +51,6 @@ public class RecklessCharge extends CardImpl {
         super(ownerId, 61, "Reckless Charge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "HOP";
 
-        this.color.setRed(true);
 
         // Target creature gets +3/+0 and gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

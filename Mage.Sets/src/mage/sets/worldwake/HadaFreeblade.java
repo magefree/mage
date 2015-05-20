@@ -49,7 +49,6 @@ public class HadaFreeblade extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Ally");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

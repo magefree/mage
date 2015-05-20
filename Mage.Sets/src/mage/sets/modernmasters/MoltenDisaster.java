@@ -60,7 +60,6 @@ public class MoltenDisaster extends CardImpl {
         super(ownerId, 123, "Molten Disaster", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
         this.expansionSetCode = "MMA";
 
-        this.color.setRed(true);
 
         // If Molten Disaster was kicked, it has split second.
         Ability ability = new SimpleStaticAbility(Zone.STACK,  new MoltenDisasterSplitSecondEffect());

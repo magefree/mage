@@ -48,7 +48,6 @@ public class CausticCrawler extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

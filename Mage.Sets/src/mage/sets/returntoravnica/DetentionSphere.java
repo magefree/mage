@@ -67,8 +67,6 @@ public class DetentionSphere extends CardImpl {
         super(ownerId, 155, "Detention Sphere", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // When Detention Sphere enters the battlefield, you may exile
         // target nonland permanent not named Detention Sphere and all

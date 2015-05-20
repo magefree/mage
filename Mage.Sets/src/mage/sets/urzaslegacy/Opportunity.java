@@ -44,7 +44,6 @@ public class Opportunity extends CardImpl {
         super(ownerId, 37, "Opportunity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Target player draws four cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(4));

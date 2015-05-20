@@ -53,8 +53,6 @@ public class GrowingRanks extends CardImpl {
         super(ownerId, 217, "Growing Ranks", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G/W}{G/W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), TargetController.YOU, false));

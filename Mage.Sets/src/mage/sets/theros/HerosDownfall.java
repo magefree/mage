@@ -53,7 +53,6 @@ public class HerosDownfall extends CardImpl {
         super(ownerId, 90, "Hero's Downfall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

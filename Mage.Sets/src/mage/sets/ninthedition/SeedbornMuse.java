@@ -48,7 +48,6 @@ public class SeedbornMuse extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -59,7 +59,6 @@ public class Necroplasm extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Ooze");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -45,7 +45,6 @@ public class Redeem extends CardImpl {
         super(ownerId, 33, "Redeem", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "USG";
 
-        this.color.setWhite(true);
 
         // Prevent all damage that would be dealt this turn to up to two target creatures.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn));

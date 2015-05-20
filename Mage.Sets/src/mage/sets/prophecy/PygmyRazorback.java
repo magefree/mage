@@ -45,7 +45,6 @@ public class PygmyRazorback extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

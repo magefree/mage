@@ -53,8 +53,6 @@ public class FateTransfer extends CardImpl {
         super(ownerId, 161, "Fate Transfer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Move all counters from target creature onto another target creature.
         this.getSpellAbility().addEffect(new FateTransferEffect());

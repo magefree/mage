@@ -48,7 +48,6 @@ public class MilitaryIntelligence extends CardImpl {
         super(ownerId, 69, "Military Intelligence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // Whenever you attack with two or more creatures, draw a card.
         this.addAbility(new MilitaryIntelligenceTriggeredAbility(new DrawCardSourceControllerEffect(1)));

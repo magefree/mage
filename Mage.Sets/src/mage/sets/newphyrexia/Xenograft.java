@@ -60,7 +60,6 @@ public class Xenograft extends CardImpl {
         super(ownerId, 51, "Xenograft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         // As Xenograft enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new XenograftEffect()));

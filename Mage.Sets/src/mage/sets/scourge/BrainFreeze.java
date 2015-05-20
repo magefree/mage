@@ -45,7 +45,6 @@ public class BrainFreeze extends CardImpl {
         super(ownerId, 29, "Brain Freeze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // Target player puts the top three cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());

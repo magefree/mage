@@ -53,7 +53,6 @@ public class Distress extends CardImpl {
         super(ownerId, 136, "Distress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

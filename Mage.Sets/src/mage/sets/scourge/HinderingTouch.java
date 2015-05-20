@@ -46,7 +46,6 @@ public class HinderingTouch extends CardImpl {
         super(ownerId, 37, "Hindering Touch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {2}.
         this.getSpellAbility().addTarget(new TargetSpell());

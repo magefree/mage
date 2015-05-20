@@ -58,7 +58,6 @@ public class OrdealOfHeliod extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

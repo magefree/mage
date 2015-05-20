@@ -56,7 +56,6 @@ public class HarmonicConvergence extends CardImpl {
         super(ownerId, 103, "Harmonic Convergence", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "ULG";
 
-        this.color.setGreen(true);
 
         // Put all enchantments on top of their owners' libraries.
         this.getSpellAbility().addEffect(new HarmonicConvergenceEffect());

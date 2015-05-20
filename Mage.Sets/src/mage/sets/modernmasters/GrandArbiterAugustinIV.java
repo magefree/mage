@@ -67,8 +67,6 @@ public class GrandArbiterAugustinIV extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

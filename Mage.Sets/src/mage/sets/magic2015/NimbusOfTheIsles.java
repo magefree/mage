@@ -45,7 +45,6 @@ public class NimbusOfTheIsles extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

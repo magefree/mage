@@ -56,7 +56,6 @@ public class Corpsehatch extends CardImpl {
         super(ownerId, 103, "Corpsehatch", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

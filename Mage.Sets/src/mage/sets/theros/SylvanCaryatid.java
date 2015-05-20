@@ -47,7 +47,6 @@ public class SylvanCaryatid extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Plant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

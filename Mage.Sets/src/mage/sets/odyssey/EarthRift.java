@@ -47,7 +47,6 @@ public class EarthRift extends CardImpl {
         super(ownerId, 189, "Earth Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

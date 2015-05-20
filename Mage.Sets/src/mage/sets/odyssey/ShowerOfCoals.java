@@ -47,7 +47,6 @@ public class ShowerOfCoals extends CardImpl {
         super(ownerId, 221, "Shower of Coals", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Shower of Coals deals 2 damage to each of up to three target creatures and/or players.
         // Threshold - Shower of Coals deals 4 damage to each of those creatures and/or players instead if seven or more cards are in your graveyard.

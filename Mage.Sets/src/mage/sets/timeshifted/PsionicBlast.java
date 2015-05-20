@@ -50,7 +50,6 @@ public class PsionicBlast extends CardImpl {
         super(ownerId, 30, "Psionic Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TSB";
 
-        this.color.setBlue(true);
 
         // Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

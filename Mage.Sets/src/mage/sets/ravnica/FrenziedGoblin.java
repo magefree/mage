@@ -53,7 +53,6 @@ public class FrenziedGoblin extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

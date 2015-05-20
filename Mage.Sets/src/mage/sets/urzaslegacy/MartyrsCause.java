@@ -51,7 +51,6 @@ public class MartyrsCause extends CardImpl {
         super(ownerId, 13, "Martyr's Cause", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Sacrifice a creature: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToTargetEffect(Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

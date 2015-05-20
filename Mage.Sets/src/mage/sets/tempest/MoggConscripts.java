@@ -52,7 +52,6 @@ public class MoggConscripts extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

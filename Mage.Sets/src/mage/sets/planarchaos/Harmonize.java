@@ -43,7 +43,6 @@ public class Harmonize extends CardImpl {
         super(ownerId, 149, "Harmonize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "PLC";
 
-        this.color.setGreen(true);
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

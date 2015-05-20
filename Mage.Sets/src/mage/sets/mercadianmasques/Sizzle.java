@@ -47,7 +47,6 @@ public class Sizzle extends CardImpl {
         super(ownerId, 213, "Sizzle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setRed(true);
 
         // Sizzle deals 3 damage to each opponent.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT));

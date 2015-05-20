@@ -57,7 +57,6 @@ public class TotemGuideHartebeest extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Antelope");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

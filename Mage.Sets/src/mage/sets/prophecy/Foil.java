@@ -55,7 +55,6 @@ public class Foil extends CardImpl {
         super(ownerId, 34, "Foil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "PCY";
 
-        this.color.setBlue(true);
 
         // You may discard an Island card and another card rather than pay Foil's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filter)));

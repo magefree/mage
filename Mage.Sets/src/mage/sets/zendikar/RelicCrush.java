@@ -59,7 +59,6 @@ public class RelicCrush extends CardImpl {
         super(ownerId, 179, "Relic Crush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
         this.getSpellAbility().addEffect(new RelicCrushEffect());

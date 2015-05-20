@@ -55,7 +55,6 @@ public class ChainOfVapor extends CardImpl {
         super(ownerId, 73, "Chain of Vapor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlue(true);
 
         // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainOfVaporEffect());

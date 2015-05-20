@@ -45,7 +45,6 @@ public class ZodiacDog extends CardImpl {
         this.expansionSetCode = "PTK";
         this.subtype.add("Hound");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

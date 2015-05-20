@@ -65,7 +65,6 @@ public class WorldQueller extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

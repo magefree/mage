@@ -48,7 +48,6 @@ import mage.filter.common.FilterLandPermanent;
         this.expansionSetCode = "TMP";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

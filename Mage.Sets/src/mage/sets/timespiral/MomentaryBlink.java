@@ -48,7 +48,6 @@ public class MomentaryBlink extends CardImpl {
         super(ownerId, 29, "Momentary Blink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "TSP";
 
-        this.color.setWhite(true);
 
         // Exile target creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

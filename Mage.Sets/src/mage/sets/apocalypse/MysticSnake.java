@@ -49,7 +49,7 @@ public class MysticSnake extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Snake");
         this.color.setBlue(true);
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlashAbility.getInstance());

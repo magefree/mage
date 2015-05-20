@@ -52,7 +52,6 @@ public class Sicken extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

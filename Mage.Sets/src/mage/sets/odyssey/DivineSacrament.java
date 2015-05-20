@@ -58,7 +58,6 @@ public class DivineSacrament extends CardImpl {
         super(ownerId, 19, "Divine Sacrament", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // White creatures get +1/+1.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));

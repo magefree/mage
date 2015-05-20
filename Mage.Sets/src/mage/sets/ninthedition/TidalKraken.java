@@ -45,7 +45,6 @@ public class TidalKraken extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

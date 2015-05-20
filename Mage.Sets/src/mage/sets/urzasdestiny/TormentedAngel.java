@@ -45,7 +45,6 @@ public class TormentedAngel extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

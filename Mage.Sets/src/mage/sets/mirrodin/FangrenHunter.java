@@ -45,7 +45,6 @@ public class FangrenHunter extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

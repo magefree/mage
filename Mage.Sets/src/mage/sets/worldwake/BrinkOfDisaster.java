@@ -66,7 +66,6 @@ public class BrinkOfDisaster extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature or land
         TargetPermanent auraTarget = new TargetPermanent();

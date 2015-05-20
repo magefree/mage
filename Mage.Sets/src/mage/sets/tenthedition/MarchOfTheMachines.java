@@ -52,7 +52,6 @@ public class MarchOfTheMachines extends CardImpl {
         super(ownerId, 91, "March of the Machines", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));

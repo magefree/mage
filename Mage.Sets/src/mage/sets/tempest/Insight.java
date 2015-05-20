@@ -53,7 +53,6 @@ public class Insight extends CardImpl {
         super(ownerId, 68, "Insight", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Whenever an opponent casts a green spell, you draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));

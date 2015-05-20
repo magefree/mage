@@ -51,7 +51,6 @@ public class ParalyzingGrasp extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

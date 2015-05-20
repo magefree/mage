@@ -59,7 +59,6 @@ public class Cantivore extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Lhurgoyf");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
       

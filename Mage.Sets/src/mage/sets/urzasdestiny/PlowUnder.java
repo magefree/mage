@@ -45,7 +45,6 @@ public class PlowUnder extends CardImpl {
         super(ownerId, 117, "Plow Under", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "UDS";
 
-        this.color.setGreen(true);
 
         // Put two target lands on top of their owners' libraries.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

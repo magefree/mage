@@ -57,7 +57,6 @@ public class SpireBarrage extends CardImpl {
         super(ownerId, 150, "Spire Barrage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Spire Barrage deals damage to target creature or player equal to the number of Mountains you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));

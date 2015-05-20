@@ -44,8 +44,6 @@ public class ScarwoodGoblins extends CardImpl {
         this.expansionSetCode = "DRK";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

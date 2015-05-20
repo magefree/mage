@@ -48,9 +48,6 @@ public class KederektCreeper extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Horror");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

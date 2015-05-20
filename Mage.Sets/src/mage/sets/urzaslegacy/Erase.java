@@ -51,7 +51,6 @@ public class Erase extends CardImpl {
         super(ownerId, 7, "Erase", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
     }
 
     @Override

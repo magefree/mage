@@ -49,7 +49,6 @@ public class KikusShadow extends CardImpl {
         super(ownerId, 77, "Kiku's Shadow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // Target creature deals damage to itself equal to its power.
         this.getSpellAbility().addEffect(new KikusShadowEffect());

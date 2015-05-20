@@ -54,7 +54,6 @@ public class MistmoonGriffin extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

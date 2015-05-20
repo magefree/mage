@@ -55,7 +55,6 @@ public class ReverentSilence extends CardImpl {
         super(ownerId, 111, "Reverent Silence", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "NMS";
 
-        this.color.setGreen(true);
 
         // If you control a Forest, rather than pay Reverent Silence's mana cost, you may have each other player gain 6 life.
         this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(6), new PermanentsOnTheBattlefieldCondition(filter)));

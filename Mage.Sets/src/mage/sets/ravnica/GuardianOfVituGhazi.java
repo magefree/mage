@@ -46,8 +46,6 @@ public class GuardianOfVituGhazi extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

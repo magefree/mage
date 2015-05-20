@@ -51,8 +51,6 @@ public class SearingMeditation extends CardImpl {
         super(ownerId, 226, "Searing Meditation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to target creature or player.
         Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.GAINED_LIFE, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), "Whenever you gain life, ", true);

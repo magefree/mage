@@ -54,7 +54,6 @@ public class VastwoodZendikon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         // Enchanted land is a 6/4 green Elemental creature. It's still a land.

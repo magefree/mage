@@ -52,7 +52,7 @@ public class RakaDisciple extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Minotaur");
         this.subtype.add("Wizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));

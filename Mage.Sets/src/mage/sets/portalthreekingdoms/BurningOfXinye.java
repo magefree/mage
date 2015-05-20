@@ -54,7 +54,6 @@ public class BurningOfXinye extends CardImpl {
         super(ownerId, 104, "Burning of Xinye", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "PTK";
 
-        this.color.setRed(true);
 
         // You destroy four lands you control, then target opponent destroys four lands he or she controls. Then Burning of Xinye deals 4 damage to each creature.
         this.getSpellAbility().addTarget(new TargetOpponent());

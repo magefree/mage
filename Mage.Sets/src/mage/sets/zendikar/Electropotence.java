@@ -54,7 +54,6 @@ public class Electropotence extends CardImpl {
         super(ownerId, 122, "Electropotence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Whenever a creature enters the battlefield under your control, you may pay {2}{R}. If you do, that creature deals damage equal to its power to target creature or player.
         Ability ability = new ElectropotenceTriggeredAbility();

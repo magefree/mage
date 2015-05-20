@@ -52,7 +52,6 @@ public class PriceOfGlory extends CardImpl {
         super(ownerId, 214, "Price of Glory", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.
         this.addAbility(new PriceOfGloryAbility());

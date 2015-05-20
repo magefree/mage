@@ -74,7 +74,6 @@ public class PalisadeGiant extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 

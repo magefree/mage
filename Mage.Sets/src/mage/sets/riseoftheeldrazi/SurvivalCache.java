@@ -50,7 +50,6 @@ public class SurvivalCache extends CardImpl {
         super(ownerId, 48, "Survival Cache", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // You gain 2 life. Then if you have more life than an opponent, draw a card.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));

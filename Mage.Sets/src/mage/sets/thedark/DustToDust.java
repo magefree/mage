@@ -44,7 +44,6 @@ public class DustToDust extends CardImpl {
         super(ownerId, 78, "Dust to Dust", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
         this.expansionSetCode = "DRK";
 
-        this.color.setWhite(true);
 
         // Exile two target artifacts.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

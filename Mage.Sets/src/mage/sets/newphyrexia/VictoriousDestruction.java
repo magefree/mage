@@ -56,7 +56,6 @@ public class VictoriousDestruction extends CardImpl {
         super(ownerId, 99, "Victorious Destruction", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         // Destroy target artifact or land. Its controller loses 1 life.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

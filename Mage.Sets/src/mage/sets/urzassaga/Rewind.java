@@ -45,7 +45,6 @@ public class Rewind extends CardImpl {
         super(ownerId, 93, "Rewind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Untap up to four lands.
         this.getSpellAbility().addTarget(new TargetSpell());

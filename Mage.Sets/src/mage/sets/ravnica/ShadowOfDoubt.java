@@ -50,8 +50,6 @@ public class ShadowOfDoubt extends CardImpl {
         super(ownerId, 253, "Shadow of Doubt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U/B}{U/B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // <i>({UB} can be paid with either {U} or {B}.)</i>
         // Players can't search libraries this turn.

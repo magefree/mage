@@ -46,7 +46,6 @@ public class EmergeUnscathed extends CardImpl {
         super(ownerId, 20, "Emerge Unscathed", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Target creature you control gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));

@@ -45,7 +45,6 @@ public class SparkJolt extends CardImpl {
         super(ownerId, 140, "Spark Jolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Spark Jolt deals 1 damage to target creature or player. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

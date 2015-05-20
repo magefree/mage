@@ -80,7 +80,6 @@ public class RiftElemental extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

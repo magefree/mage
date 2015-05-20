@@ -44,7 +44,6 @@ public class GutShot extends CardImpl {
         super(ownerId, 86, "Gut Shot", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{RP}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }

@@ -56,8 +56,6 @@ public class Dreadbore extends CardImpl {
         super(ownerId, 157, "Dreadbore", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Destroy target creature or planeswalker.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -55,7 +55,6 @@ public class FreewindFalcon extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

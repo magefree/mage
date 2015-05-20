@@ -45,7 +45,6 @@ public class MarshBoa extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

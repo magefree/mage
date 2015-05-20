@@ -62,7 +62,6 @@ public class SoulOfShandalar extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

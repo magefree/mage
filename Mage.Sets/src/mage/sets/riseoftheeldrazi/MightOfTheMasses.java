@@ -47,7 +47,6 @@ public class MightOfTheMasses extends CardImpl {
         super(ownerId, 196, "Might of the Masses", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

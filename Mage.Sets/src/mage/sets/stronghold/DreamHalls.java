@@ -58,7 +58,6 @@ public class DreamHalls extends CardImpl {
         super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlue(true);
 
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));

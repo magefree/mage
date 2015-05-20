@@ -47,7 +47,6 @@ public class ChokingFumes extends CardImpl {
         super(ownerId, 4, "Choking Fumes", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "MBS";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter));
     }

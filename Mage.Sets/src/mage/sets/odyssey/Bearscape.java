@@ -52,7 +52,6 @@ public class Bearscape extends CardImpl {
         super(ownerId, 229, "Bearscape", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // {1}{G}, Exile two cards from your graveyard: Put a 2/2 green Bear creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BearToken()), new ManaCostsImpl("{1}{G}"));

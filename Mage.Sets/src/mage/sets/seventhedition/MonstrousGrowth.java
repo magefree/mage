@@ -46,7 +46,6 @@ public class MonstrousGrowth extends CardImpl {
         super(ownerId, 258, "Monstrous Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Target creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));

@@ -46,7 +46,6 @@ public class BottomlessPit extends CardImpl {
         super(ownerId, 1, "Bottomless Pit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player discards a card at random.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1, true), TargetController.ANY, false));

@@ -43,8 +43,6 @@ public class TurnToMist extends CardImpl {
         super(ownerId, 155, "Turn to Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Exile target creature. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new MistmeadowWitchEffect());

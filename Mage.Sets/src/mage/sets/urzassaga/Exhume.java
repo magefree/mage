@@ -52,7 +52,6 @@ public class Exhume extends CardImpl {
         super(ownerId, 134, "Exhume", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Each player puts a creature card from his or her graveyard onto the battlefield.
         this.getSpellAbility().addEffect(new ExhumeEffect());

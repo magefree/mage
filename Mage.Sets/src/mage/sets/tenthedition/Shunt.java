@@ -52,7 +52,6 @@ public class Shunt extends CardImpl {
         super(ownerId, 233, "Shunt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));

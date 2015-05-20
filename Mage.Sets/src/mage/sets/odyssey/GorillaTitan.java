@@ -55,7 +55,6 @@ public class GorillaTitan extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Ape");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

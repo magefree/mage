@@ -44,7 +44,6 @@ public class ObsidianGiant extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }

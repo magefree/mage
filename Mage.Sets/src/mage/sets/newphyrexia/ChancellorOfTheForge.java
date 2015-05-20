@@ -64,7 +64,6 @@ public class ChancellorOfTheForge extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

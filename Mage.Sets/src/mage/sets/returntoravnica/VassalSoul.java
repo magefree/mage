@@ -45,8 +45,6 @@ public class VassalSoul extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

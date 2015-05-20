@@ -44,7 +44,6 @@ public class Stupor extends CardImpl {
         super(ownerId, 48, "Stupor", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "TSB";
 
-        this.color.setBlack(true);
 
         // Target opponent discards a card at random, then discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));

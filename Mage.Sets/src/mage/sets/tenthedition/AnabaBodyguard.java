@@ -45,7 +45,6 @@ public class AnabaBodyguard extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Minotaur");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

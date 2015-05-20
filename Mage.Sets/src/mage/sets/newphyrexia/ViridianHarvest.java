@@ -52,7 +52,6 @@ public class ViridianHarvest extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);

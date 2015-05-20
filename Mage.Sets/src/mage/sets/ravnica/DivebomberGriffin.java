@@ -54,7 +54,6 @@ public class DivebomberGriffin extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

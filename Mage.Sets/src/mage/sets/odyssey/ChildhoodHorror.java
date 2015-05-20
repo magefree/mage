@@ -55,7 +55,6 @@ public class ChildhoodHorror extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

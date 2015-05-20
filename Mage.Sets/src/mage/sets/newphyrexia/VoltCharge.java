@@ -45,7 +45,6 @@ public class VoltCharge extends CardImpl {
         super(ownerId, 100, "Volt Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

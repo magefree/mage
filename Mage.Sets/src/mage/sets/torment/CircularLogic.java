@@ -54,7 +54,6 @@ public class CircularLogic extends CardImpl {
         super(ownerId, 33, "Circular Logic", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TOR";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1} for each card in your graveyard.
         this.getSpellAbility().addEffect(new CircularLogicCounterUnlessPaysEffect());

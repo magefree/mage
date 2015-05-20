@@ -48,7 +48,6 @@ public class DistortionStrike extends CardImpl {
         super(ownerId, 60, "Distortion Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // Target creature gets +1/+0 until end of turn and can't be blocked this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

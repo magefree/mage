@@ -51,7 +51,6 @@ public class SlagFiend extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Construct");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

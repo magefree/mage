@@ -52,8 +52,6 @@ public class Swerve extends CardImpl {
         super(ownerId, 200, "Swerve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));

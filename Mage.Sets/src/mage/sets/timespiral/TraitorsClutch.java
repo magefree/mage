@@ -53,7 +53,6 @@ public class TraitorsClutch extends CardImpl {
         super(ownerId, 137, "Traitor's Clutch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlack(true);
 
         // Target creature gets +1/+0, becomes black, and gains shadow until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));

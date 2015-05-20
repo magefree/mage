@@ -60,7 +60,6 @@ public class RockcasterPlatoon extends CardImpl {
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

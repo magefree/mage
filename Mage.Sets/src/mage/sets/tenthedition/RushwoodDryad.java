@@ -45,7 +45,6 @@ public class RushwoodDryad extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

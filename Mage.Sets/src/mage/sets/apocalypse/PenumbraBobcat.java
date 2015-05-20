@@ -46,7 +46,7 @@ public class PenumbraBobcat extends CardImpl {
         super(ownerId, 82, "Penumbra Bobcat", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Cat");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));

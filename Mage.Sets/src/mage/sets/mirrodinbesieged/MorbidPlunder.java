@@ -45,7 +45,6 @@ public class MorbidPlunder extends CardImpl {
         super(ownerId, 47, "Morbid Plunder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlack(true);
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

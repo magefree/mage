@@ -57,7 +57,6 @@ public class QuestForAncientSecrets extends CardImpl {
         super(ownerId, 59, "Quest for Ancient Secrets", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         // Whenever a card is put into your graveyard from anywhere, you may put a quest counter on Quest for Ancient Secrets.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(

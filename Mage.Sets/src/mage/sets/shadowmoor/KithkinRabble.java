@@ -59,7 +59,6 @@ public class KithkinRabble extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Kithkin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

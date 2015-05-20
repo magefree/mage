@@ -61,7 +61,6 @@ public class OnduCleric extends CardImpl {
         this.subtype.add("Cleric");
         this.subtype.add("Ally");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -47,7 +47,6 @@ public class TriumphOfTheHordes extends CardImpl {
         super(ownerId, 123, "Triumph of the Hordes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "NPH";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));

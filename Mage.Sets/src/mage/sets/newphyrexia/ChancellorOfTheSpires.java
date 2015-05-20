@@ -71,7 +71,6 @@ public class ChancellorOfTheSpires extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

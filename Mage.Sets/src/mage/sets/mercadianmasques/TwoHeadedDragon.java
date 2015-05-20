@@ -53,7 +53,6 @@ public class TwoHeadedDragon extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

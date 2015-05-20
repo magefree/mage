@@ -51,7 +51,6 @@ public class SatyrHedonist extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Satyr");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

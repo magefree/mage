@@ -44,7 +44,6 @@ public class Hex extends CardImpl {
         super(ownerId, 89, "Hex", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlack(true);
 
         // Destroy six target creatures.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

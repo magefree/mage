@@ -49,7 +49,6 @@ public class SkeletalWurm extends CardImpl {
         this.subtype.add("Skeleton");
         this.subtype.add("Wurm");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

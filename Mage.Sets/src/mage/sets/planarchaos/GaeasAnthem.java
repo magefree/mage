@@ -48,7 +48,6 @@ public class GaeasAnthem extends CardImpl {
         super(ownerId, 147, "Gaea's Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "PLC";
 
-        this.color.setGreen(true);
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));

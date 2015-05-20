@@ -60,7 +60,6 @@ public class Bloodcurdler extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

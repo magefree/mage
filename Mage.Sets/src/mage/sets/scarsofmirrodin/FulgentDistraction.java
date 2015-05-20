@@ -52,7 +52,6 @@ public class FulgentDistraction extends CardImpl {
         super(ownerId, 7, "Fulgent Distraction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "SOM";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new FulgentDistractionEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));

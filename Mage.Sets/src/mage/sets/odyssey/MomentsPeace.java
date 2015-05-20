@@ -48,7 +48,6 @@ public class MomentsPeace extends CardImpl {
         super(ownerId, 251, "Moment's Peace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));

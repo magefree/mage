@@ -50,7 +50,6 @@ public class MemoryErosion extends CardImpl {
         super(ownerId, 50, "Memory Erosion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
         this.addAbility(new SpellCastTriggeredAbility());

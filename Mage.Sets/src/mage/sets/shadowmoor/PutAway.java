@@ -54,7 +54,6 @@ public class PutAway extends CardImpl {
         super(ownerId, 48, "Put Away", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Counter target spell. You may shuffle up to one target card from your graveyard into your library.
         this.getSpellAbility().addEffect(new PutAwayEffect());

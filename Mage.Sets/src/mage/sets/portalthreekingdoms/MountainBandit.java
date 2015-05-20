@@ -47,7 +47,6 @@ public class MountainBandit extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Rogue");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

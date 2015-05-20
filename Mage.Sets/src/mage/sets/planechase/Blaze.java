@@ -45,7 +45,6 @@ public class Blaze extends CardImpl {
         super(ownerId, 47, "Blaze", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "HOP";
 
-        this.color.setRed(true);
 
         // Blaze deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

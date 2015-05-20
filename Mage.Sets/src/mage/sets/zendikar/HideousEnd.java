@@ -55,7 +55,6 @@ public class HideousEnd extends CardImpl {
         super(ownerId, 98, "Hideous End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

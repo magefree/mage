@@ -59,7 +59,6 @@ public class Hammerhand extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

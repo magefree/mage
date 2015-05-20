@@ -51,7 +51,6 @@ public class Cowardice extends CardImpl {
         super(ownerId, 70, "Cowardice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlue(true);
 
         // Whenever a creature becomes the target of a spell or ability, return that creature to its owner's hand.
         this.addAbility(new CowardiceTriggeredAbility());

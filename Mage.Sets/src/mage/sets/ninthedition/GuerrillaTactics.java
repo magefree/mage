@@ -51,7 +51,6 @@ public class GuerrillaTactics extends CardImpl {
         super(ownerId, 196, "Guerrilla Tactics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "9ED";
 
-        this.color.setRed(true);
 
         // Guerrilla Tactics deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

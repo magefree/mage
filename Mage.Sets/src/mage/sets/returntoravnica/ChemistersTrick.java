@@ -66,8 +66,6 @@ public class ChemistersTrick extends CardImpl {
         super(ownerId, 149, "Chemister's Trick", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

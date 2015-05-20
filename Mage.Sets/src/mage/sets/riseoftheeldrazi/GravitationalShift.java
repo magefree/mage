@@ -58,7 +58,6 @@ public class GravitationalShift extends CardImpl {
         super(ownerId, 69, "Gravitational Shift", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // Creatures with flying get +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter1, false)));

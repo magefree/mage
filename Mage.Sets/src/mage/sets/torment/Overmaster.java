@@ -54,7 +54,6 @@ public class Overmaster extends CardImpl {
         super(ownerId, 104, "Overmaster", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "TOR";
 
-        this.color.setRed(true);
 
         // The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
         this.getSpellAbility().addEffect(new OvermasterEffect());

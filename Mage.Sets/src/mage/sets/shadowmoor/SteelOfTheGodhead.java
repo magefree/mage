@@ -62,8 +62,6 @@ public class SteelOfTheGodhead extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

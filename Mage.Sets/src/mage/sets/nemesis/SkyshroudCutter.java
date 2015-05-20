@@ -55,7 +55,6 @@ public class SkyshroudCutter extends CardImpl {
         this.expansionSetCode = "NMS";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -62,8 +62,6 @@ public class GlamerSpinners extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

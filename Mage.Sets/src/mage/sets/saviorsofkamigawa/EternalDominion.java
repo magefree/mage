@@ -56,7 +56,6 @@ public class EternalDominion extends CardImpl {
         super(ownerId, 36, "Eternal Dominion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{U}{U}{U}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlue(true);
 
         // Search target opponent's library for an artifact, creature, enchantment, or land card.
         // Put that card onto the battlefield under your control. Then that player shuffles his or her library.

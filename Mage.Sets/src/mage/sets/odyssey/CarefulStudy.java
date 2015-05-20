@@ -42,7 +42,6 @@ public class CarefulStudy extends CardImpl {
         super(ownerId, 70, "Careful Study", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Draw two cards, then discard two cards.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));

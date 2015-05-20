@@ -54,7 +54,6 @@ public class ShrapnelBlast extends CardImpl {
         super(ownerId, 106, "Shrapnel Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MRD";
 
-        this.color.setRed(true);
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

@@ -54,7 +54,6 @@ public class DistantMelody extends CardImpl {
         super(ownerId, 32, "Distant Melody", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "MOR";
 
-        this.color.setBlue(true);
 
         // Choose a creature type. Draw a card for each permanent you control of that type.
         this.getSpellAbility().addEffect(new DistantMelodyEffect());

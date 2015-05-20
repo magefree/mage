@@ -44,7 +44,6 @@ public class DakmorScorpion extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Scorpion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }

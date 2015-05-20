@@ -47,7 +47,6 @@ public class CruelTutor extends CardImpl {
         super(ownerId, 9, "Cruel Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "POR";
 
-        this.color.setBlack(true);
 
         // Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
         TargetCardInLibrary target = new TargetCardInLibrary();

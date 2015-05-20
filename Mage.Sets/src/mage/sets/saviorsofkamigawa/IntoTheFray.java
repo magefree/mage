@@ -47,7 +47,6 @@ public class IntoTheFray extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Target creature attacks this turn if able.
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));

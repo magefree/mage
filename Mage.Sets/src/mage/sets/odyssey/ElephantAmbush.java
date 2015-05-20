@@ -47,7 +47,6 @@ public class ElephantAmbush extends CardImpl {
         super(ownerId, 240, "Elephant Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setGreen(true);
 
         // Put a 3/3 green Elephant creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));

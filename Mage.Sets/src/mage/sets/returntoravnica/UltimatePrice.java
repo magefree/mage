@@ -53,7 +53,6 @@ public class UltimatePrice extends CardImpl {
         super(ownerId, 82, "Ultimate Price", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
 
         // Destroy target monocolored creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

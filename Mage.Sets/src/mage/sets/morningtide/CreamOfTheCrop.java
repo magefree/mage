@@ -58,7 +58,6 @@ public class CreamOfTheCrop extends CardImpl {
         super(ownerId, 117, "Cream of the Crop", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "MOR";
 
-        this.color.setGreen(true);
 
         // Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

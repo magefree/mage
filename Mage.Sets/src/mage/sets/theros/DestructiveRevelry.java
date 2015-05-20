@@ -58,8 +58,6 @@ public class DestructiveRevelry extends CardImpl {
         super(ownerId, 192, "Destructive Revelry", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new DestructiveRevelryEffect());

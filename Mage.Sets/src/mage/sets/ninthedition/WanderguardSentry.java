@@ -49,7 +49,6 @@ public class WanderguardSentry extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Drone");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

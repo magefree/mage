@@ -61,7 +61,6 @@ public class Unmask extends CardImpl {
         super(ownerId, 168, "Unmask", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlack(true);
 
         // You may exile a black card from your hand rather than pay Unmask's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));     

@@ -58,7 +58,6 @@ public class PrimalBellow extends CardImpl {
         super(ownerId, 176, "Primal Bellow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));

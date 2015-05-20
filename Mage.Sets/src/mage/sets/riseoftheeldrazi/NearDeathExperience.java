@@ -51,7 +51,6 @@ public class NearDeathExperience extends CardImpl {
         super(ownerId, 38, "Near-Death Experience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);

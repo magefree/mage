@@ -53,7 +53,6 @@ public class FeralContest extends CardImpl {
         super(ownerId, 100, "Feral Contest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "WWK";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature you control. 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

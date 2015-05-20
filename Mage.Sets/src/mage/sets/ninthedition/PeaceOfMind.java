@@ -49,7 +49,6 @@ public class PeaceOfMind extends CardImpl {
         super(ownerId, 33, "Peace of Mind", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "9ED";
 
-        this.color.setWhite(true);
 
         // {W}, Discard a card: You gain 3 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl("{W}"));

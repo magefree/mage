@@ -46,7 +46,6 @@ public class NissasExpedition extends CardImpl {
         super(ownerId, 188, "Nissa's Expedition", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "M15";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

@@ -59,8 +59,6 @@ public class CemeteryPuca extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

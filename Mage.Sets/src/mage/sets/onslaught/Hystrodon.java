@@ -49,7 +49,6 @@ public class Hystrodon extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

@@ -54,7 +54,6 @@ public class HuntersAmbush extends CardImpl {
         super(ownerId, 180, "Hunter's Ambush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "M15";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt by nongreen creatures this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));

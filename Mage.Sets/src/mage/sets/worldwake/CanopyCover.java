@@ -69,7 +69,6 @@ public class CanopyCover extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

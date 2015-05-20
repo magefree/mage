@@ -47,7 +47,6 @@ public class Starstorm extends CardImpl {
         super(ownerId, 238, "Starstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // Starstorm deals X damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));

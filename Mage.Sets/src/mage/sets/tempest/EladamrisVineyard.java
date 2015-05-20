@@ -47,7 +47,6 @@ public class EladamrisVineyard extends CardImpl {
         super(ownerId, 118, "Eladamri's Vineyard", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "TMP";
 
-        this.color.setGreen(true);
 
         // At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(

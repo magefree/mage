@@ -63,7 +63,6 @@ public class MoltenHydra extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Hydra");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

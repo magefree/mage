@@ -56,8 +56,6 @@ public class GrislySalvage extends CardImpl {
         super(ownerId, 165, "Grisly Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         // Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
         this.getSpellAbility().addEffect(new GrislySalvageEffect());

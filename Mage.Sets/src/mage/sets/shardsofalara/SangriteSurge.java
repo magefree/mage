@@ -47,8 +47,6 @@ public class SangriteSurge extends CardImpl {
         super(ownerId, 190, "Sangrite Surge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Target creature gets +3/+3 and gains double strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));

@@ -56,7 +56,6 @@ public class MindSludge extends CardImpl {
         super(ownerId, 102, "Mind Sludge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)));

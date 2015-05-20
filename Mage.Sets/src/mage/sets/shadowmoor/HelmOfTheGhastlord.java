@@ -60,8 +60,6 @@ public class HelmOfTheGhastlord extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

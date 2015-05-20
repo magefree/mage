@@ -55,7 +55,6 @@ public class MartialLaw extends CardImpl {
         super(ownerId, 14, "Martial Law", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, detain target creature an opponent controls. 
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)

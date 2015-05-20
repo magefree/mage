@@ -47,7 +47,6 @@ public class SlumReaper extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

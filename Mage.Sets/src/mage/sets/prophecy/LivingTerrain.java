@@ -53,7 +53,6 @@ public class LivingTerrain extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         

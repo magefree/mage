@@ -53,7 +53,6 @@ public class NostalgicDreams extends CardImpl {
         super(ownerId, 135, "Nostalgic Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{G}");
         this.expansionSetCode = "TOR";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Nostalgic Dreams, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));

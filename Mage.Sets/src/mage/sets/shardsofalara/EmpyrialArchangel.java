@@ -53,9 +53,6 @@ public class EmpyrialArchangel extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Angel");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(8);
 

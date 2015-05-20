@@ -52,7 +52,6 @@ public class GateHound extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

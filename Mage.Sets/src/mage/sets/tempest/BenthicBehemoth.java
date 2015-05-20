@@ -45,7 +45,6 @@ public class BenthicBehemoth extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

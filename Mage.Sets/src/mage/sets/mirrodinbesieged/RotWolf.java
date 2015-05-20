@@ -47,7 +47,6 @@ public class RotWolf extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

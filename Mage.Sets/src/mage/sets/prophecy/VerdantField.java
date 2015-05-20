@@ -54,7 +54,6 @@ public class VerdantField extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -60,7 +60,6 @@ public class ShorelineSalvager extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Surrakar");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

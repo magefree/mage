@@ -50,7 +50,6 @@ public class SetessanGriffin extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

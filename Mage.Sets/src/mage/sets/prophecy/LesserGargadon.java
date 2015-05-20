@@ -47,7 +47,6 @@ public class LesserGargadon extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

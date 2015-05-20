@@ -68,7 +68,6 @@ public class MossbridgeTroll extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Troll");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

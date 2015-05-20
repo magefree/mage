@@ -58,7 +58,6 @@ public class ParadoxHaze extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

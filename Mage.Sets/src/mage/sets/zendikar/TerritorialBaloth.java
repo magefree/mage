@@ -47,7 +47,6 @@ public class TerritorialBaloth extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

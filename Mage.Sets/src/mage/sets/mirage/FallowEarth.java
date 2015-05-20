@@ -44,7 +44,6 @@ public class FallowEarth extends CardImpl {
         super(ownerId, 112, "Fallow Earth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "MIR";
 
-        this.color.setGreen(true);
 
         // Put target land on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

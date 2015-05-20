@@ -53,7 +53,6 @@ public class PerishTheThought extends CardImpl {
         super(ownerId, 123, "Perish the Thought", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
         this.getSpellAbility().addEffect(new PerishTheThoughtEffect());

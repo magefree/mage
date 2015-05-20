@@ -54,7 +54,6 @@ public class ImpendingDisaster extends CardImpl {
         super(ownerId, 82, "Impending Disaster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ULG";
 
-        this.color.setRed(true);
 
         // At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice Impending Disaster and destroy all lands.
         TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);

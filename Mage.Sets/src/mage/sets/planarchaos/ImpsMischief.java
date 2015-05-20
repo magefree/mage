@@ -58,7 +58,6 @@ public class ImpsMischief extends CardImpl {
         super(ownerId, 72, "Imp's Mischief", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "PLC";
 
-        this.color.setBlack(true);
 
         // Change the target of target spell with a single target. You lose life equal to that spell's converted mana cost.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));

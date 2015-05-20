@@ -56,7 +56,6 @@ public class LeaveNoTrace extends CardImpl {
         super(ownerId, 23, "Leave No Trace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setWhite(true);
 
         // Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
         this.getSpellAbility().addEffect(new LeaveNoTraceEffect());

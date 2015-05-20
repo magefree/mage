@@ -52,7 +52,6 @@ public class Warmth extends CardImpl {
         super(ownerId, 263, "Warmth", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "TMP";
 
-        this.color.setWhite(true);
 
         // Whenever an opponent casts a red spell, you gain 2 life.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(2), filter, false));

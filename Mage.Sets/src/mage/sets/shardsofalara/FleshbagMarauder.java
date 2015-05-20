@@ -48,7 +48,6 @@ public class FleshbagMarauder extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

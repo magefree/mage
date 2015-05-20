@@ -59,7 +59,6 @@ public class AEtherBurst extends CardImpl {
         super(ownerId, 60, "AEther Burst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Return up to X target creatures to their owners' hands, where X is one plus the number of cards named AEther Burst in all graveyards as you cast AEther Burst.
         this.getSpellAbility().addEffect(new DynamicReturnToHandTargetEffect());

@@ -64,7 +64,6 @@ public class RumblingAftershocks extends CardImpl {
         super(ownerId, 89, "Rumbling Aftershocks", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "WWK";
 
-        this.color.setRed(true);
 
         // Whenever you cast a kicked spell, you may have Rumbling Aftershocks deal damage to target creature or player equal to the number of times that spell was kicked.
         Ability ability = new RumblingAftershocksTriggeredAbility();

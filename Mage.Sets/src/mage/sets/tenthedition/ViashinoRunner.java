@@ -47,7 +47,6 @@ public class ViashinoRunner extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Viashino");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

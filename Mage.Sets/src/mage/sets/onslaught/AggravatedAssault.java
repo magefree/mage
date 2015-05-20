@@ -53,7 +53,6 @@ public class AggravatedAssault extends CardImpl {
         super(ownerId, 185, "Aggravated Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // {3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "Untap all creatures you control"), new ManaCostsImpl<>("{3}{R}{R}"));

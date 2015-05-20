@@ -49,7 +49,6 @@ public class ThreeDreams extends CardImpl {
         super(ownerId, 13, "Three Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "PC2";
 
-        this.color.setWhite(true);
 
         // Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new ThreeDreamsTarget(), true, true));

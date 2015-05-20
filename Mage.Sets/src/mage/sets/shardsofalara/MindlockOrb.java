@@ -51,7 +51,6 @@ public class MindlockOrb extends CardImpl {
         super(ownerId, 51, "Mindlock Orb", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Players can't search libraries.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindlockRuleModifyingEffect()));

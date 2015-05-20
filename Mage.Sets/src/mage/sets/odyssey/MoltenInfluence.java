@@ -59,7 +59,6 @@ public class MoltenInfluence extends CardImpl {
         super(ownerId, 207, "Molten Influence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

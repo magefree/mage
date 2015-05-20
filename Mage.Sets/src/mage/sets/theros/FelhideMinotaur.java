@@ -44,7 +44,6 @@ public class FelhideMinotaur extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Minotaur");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

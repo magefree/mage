@@ -61,7 +61,6 @@ public class ImmobilizingInk extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

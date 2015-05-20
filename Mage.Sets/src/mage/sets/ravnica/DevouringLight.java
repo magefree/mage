@@ -45,7 +45,6 @@ public class DevouringLight extends CardImpl {
         super(ownerId, 13, "Devouring Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setWhite(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

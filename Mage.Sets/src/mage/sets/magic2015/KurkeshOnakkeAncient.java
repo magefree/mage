@@ -62,7 +62,6 @@ public class KurkeshOnakkeAncient extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

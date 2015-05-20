@@ -62,7 +62,6 @@ public class BludgeonBrawl extends CardImpl {
         super(ownerId, 80, "Bludgeon Brawl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         // Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
         this.addAbility(new BludgeonBrawlAbility());

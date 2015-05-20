@@ -58,7 +58,6 @@ public class Magnivore extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Lhurgoyf");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

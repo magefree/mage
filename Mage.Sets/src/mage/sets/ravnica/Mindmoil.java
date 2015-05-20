@@ -55,7 +55,6 @@ public class Mindmoil extends CardImpl {
         super(ownerId, 135, "Mindmoil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "RAV";
 
-        this.color.setRed(true);
 
         // Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
         this.addAbility(new SpellCastControllerTriggeredAbility(new MindmoilEffect(), false));

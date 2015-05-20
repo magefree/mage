@@ -54,7 +54,7 @@ public class BogGnarr extends CardImpl {
         super(ownerId, 76, "Bog Gnarr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new BogGnarrTriggeredAbility());

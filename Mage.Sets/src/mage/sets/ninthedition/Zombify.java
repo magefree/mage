@@ -45,7 +45,6 @@ public class Zombify extends CardImpl {
         super(ownerId, 171, "Zombify", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

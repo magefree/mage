@@ -54,7 +54,6 @@ public class EnduringIdeal extends CardImpl {
         super(ownerId, 9, "Enduring Ideal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "SOK";
 
-        this.color.setWhite(true);
 
         // Search your library for an enchantment card and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new EnduringIdealEffect());

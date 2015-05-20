@@ -52,7 +52,6 @@ public class GhostLitRaider extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

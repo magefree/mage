@@ -61,8 +61,6 @@ public class IridescentAngel extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Angel");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

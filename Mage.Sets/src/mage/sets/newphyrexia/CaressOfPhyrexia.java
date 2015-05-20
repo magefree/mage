@@ -46,7 +46,6 @@ public class CaressOfPhyrexia extends CardImpl {
         super(ownerId, 53, "Caress of Phyrexia", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));

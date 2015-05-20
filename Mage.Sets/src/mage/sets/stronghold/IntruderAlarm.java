@@ -51,7 +51,6 @@ public class IntruderAlarm extends CardImpl {
         super(ownerId, 34, "Intruder Alarm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlue(true);
 
         // Creatures don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, new FilterCreaturePermanent("Creatures"))));

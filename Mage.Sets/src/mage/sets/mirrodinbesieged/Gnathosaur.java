@@ -60,7 +60,6 @@ public class Gnathosaur extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

@@ -50,7 +50,6 @@ public class PatrolHound extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

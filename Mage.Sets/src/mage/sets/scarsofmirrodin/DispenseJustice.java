@@ -51,7 +51,6 @@ public class DispenseJustice extends CardImpl {
         super(ownerId, 5, "Dispense Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "SOM";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new DispenseJusticeEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -61,7 +61,7 @@ public class BloodfireDwarf extends CardImpl {
         super(ownerId, 56, "Bloodfire Dwarf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "APC";
         this.subtype.add("Dwarf");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ColoredManaCost(ColoredManaSymbol.R));

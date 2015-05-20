@@ -43,7 +43,6 @@ public class CaptureOfJingzhou extends CardImpl {
         super(ownerId, 38, "Capture of Jingzhou", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "PTK";
 
-        this.color.setBlue(true);
 
         // Take an extra turn after this one.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

@@ -47,7 +47,6 @@ public class SkyhunterProwler extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Knight");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

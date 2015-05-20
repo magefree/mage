@@ -57,9 +57,6 @@ public class BantCharm extends CardImpl {
         super(ownerId, 155, "Bant Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Choose one - Destroy target artifact;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

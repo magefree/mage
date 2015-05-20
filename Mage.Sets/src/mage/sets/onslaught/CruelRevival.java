@@ -66,7 +66,6 @@ public class CruelRevival extends CardImpl {
         super(ownerId, 135, "Cruel Revival", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CruelRevivalEffect());

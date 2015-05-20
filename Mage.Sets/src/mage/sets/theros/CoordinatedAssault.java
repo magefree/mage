@@ -48,7 +48,6 @@ public class CoordinatedAssault extends CardImpl {
         super(ownerId, 116, "Coordinated Assault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Up to two target creatures each get +1/+0 and gain first strike until end of turn.
         Effect effect = new BoostTargetEffect(1,0, Duration.EndOfTurn);

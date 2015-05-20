@@ -46,7 +46,6 @@ public class AngelOfRetribution extends CardImpl {
         this.expansionSetCode = "TOR";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

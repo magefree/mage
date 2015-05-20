@@ -67,7 +67,6 @@ public class GeneratorServant extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

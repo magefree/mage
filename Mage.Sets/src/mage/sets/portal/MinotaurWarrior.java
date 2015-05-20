@@ -45,7 +45,6 @@ public class MinotaurWarrior extends CardImpl {
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

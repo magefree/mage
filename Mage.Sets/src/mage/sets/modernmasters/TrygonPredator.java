@@ -58,8 +58,6 @@ public class TrygonPredator extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

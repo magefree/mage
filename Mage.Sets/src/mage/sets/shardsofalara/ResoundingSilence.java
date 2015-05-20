@@ -50,7 +50,6 @@ public class ResoundingSilence extends CardImpl {
         super(ownerId, 22, "Resounding Silence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         // Exile target attacking creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

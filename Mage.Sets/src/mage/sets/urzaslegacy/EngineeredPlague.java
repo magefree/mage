@@ -49,7 +49,6 @@ public class EngineeredPlague extends CardImpl {
         super(ownerId, 51, "Engineered Plague", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // As Engineered Plague enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));

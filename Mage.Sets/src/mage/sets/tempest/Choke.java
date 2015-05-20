@@ -55,7 +55,6 @@ public class Choke extends CardImpl {
         super(ownerId, 113, "Choke", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "TMP";
 
-        this.color.setGreen(true);
 
         // Islands don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));

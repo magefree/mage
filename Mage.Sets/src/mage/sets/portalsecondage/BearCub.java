@@ -44,7 +44,6 @@ public class BearCub extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Bear");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

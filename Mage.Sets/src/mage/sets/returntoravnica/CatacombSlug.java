@@ -44,7 +44,6 @@ public class CatacombSlug extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Slug");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
     }

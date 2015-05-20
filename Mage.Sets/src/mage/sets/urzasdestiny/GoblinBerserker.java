@@ -47,7 +47,6 @@ public class GoblinBerserker extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

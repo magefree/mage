@@ -57,7 +57,6 @@ public class Zoologist extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -48,7 +48,6 @@ public class Telepathy extends CardImpl {
         super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Your opponents play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsPlayWithTheTopCardRevealedEffect()));

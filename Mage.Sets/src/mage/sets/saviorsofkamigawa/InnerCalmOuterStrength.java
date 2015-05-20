@@ -49,7 +49,6 @@ public class InnerCalmOuterStrength extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
 
         // Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue= new CardsInControllerHandCount();

@@ -62,7 +62,6 @@ public class Skeletonize extends CardImpl {
         super(ownerId, 114, "Skeletonize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Skeletonize deals 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

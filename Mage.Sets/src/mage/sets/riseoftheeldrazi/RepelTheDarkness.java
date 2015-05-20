@@ -45,7 +45,6 @@ public class RepelTheDarkness extends CardImpl {
         super(ownerId, 42, "Repel the Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

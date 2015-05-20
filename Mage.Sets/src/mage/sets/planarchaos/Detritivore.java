@@ -66,7 +66,6 @@ public class Detritivore extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Lhurgoyf");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

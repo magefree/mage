@@ -51,7 +51,6 @@ public class LagonnaBandElder extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Advisor");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

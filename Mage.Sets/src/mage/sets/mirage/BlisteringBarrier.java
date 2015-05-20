@@ -45,7 +45,6 @@ public class BlisteringBarrier extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 

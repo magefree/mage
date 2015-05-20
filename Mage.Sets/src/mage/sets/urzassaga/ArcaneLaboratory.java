@@ -47,7 +47,6 @@ public class ArcaneLaboratory extends CardImpl {
         super(ownerId, 60, "Arcane Laboratory", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Each player can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));

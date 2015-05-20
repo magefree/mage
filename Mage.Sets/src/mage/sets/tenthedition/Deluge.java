@@ -54,7 +54,6 @@ public class Deluge extends CardImpl {
         super(ownerId, 79, "Deluge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Tap all creatures without flying.
         this.getSpellAbility().addEffect(new TapAllEffect(filter));

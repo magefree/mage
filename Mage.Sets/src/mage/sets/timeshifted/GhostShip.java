@@ -50,7 +50,6 @@ public class GhostShip extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

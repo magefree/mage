@@ -54,7 +54,6 @@ public class RoilElemental extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

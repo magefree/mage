@@ -59,7 +59,6 @@ public class ReachOfBranches extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
 
         // Put a 2/5 green Treefolk Shaman creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreefolkShamanToken()));

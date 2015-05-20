@@ -45,7 +45,6 @@ public class DevotedHero extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
     }

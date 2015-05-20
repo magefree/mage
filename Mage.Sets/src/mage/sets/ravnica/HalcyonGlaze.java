@@ -57,7 +57,6 @@ public class HalcyonGlaze extends CardImpl {
         super(ownerId, 54, "Halcyon Glaze", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying in addition to its other types until end of turn.
         Effect effect = new BecomesCreatureSourceEffect(new HalcyonGlazeToken(), "enchantment", Duration.EndOfTurn);

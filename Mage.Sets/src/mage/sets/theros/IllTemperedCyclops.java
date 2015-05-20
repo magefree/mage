@@ -46,7 +46,6 @@ public class IllTemperedCyclops extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Cyclops");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

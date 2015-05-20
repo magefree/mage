@@ -56,7 +56,6 @@ public class AEtherTradewinds extends CardImpl {
         super(ownerId, 24, "AEther Tradewinds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // Return target permanent you control and target permanent you don't control to their owners' hands.
         this.getSpellAbility().addTarget(new TargetControlledPermanent());

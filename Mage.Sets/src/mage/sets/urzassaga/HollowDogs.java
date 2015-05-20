@@ -49,7 +49,6 @@ public class HollowDogs extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Hound");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

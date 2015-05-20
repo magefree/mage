@@ -53,7 +53,6 @@ public class PillarOfLight extends CardImpl {
         super(ownerId, 24, "Pillar of Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Exile target creature with toughness 4 or greater.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -62,7 +62,6 @@ public class JwariShapeshifter extends CardImpl {
         this.subtype.add("Shapeshifter");
         this.subtype.add("Ally");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

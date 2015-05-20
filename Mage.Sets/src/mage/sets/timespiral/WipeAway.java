@@ -45,7 +45,6 @@ public class WipeAway extends CardImpl {
         super(ownerId, 94, "Wipe Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

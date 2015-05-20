@@ -55,7 +55,6 @@ public class SuppressionField extends CardImpl {
         super(ownerId, 31, "Suppression Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "RAV";
 
-        this.color.setWhite(true);
 
         // Activated abilities cost {2} more to activate unless they're mana abilities.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect() ));

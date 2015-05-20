@@ -51,7 +51,6 @@ public class DevastatingSummons extends CardImpl {
         super(ownerId, 140, "Devastating Summons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Devastating Summons, sacrifice X lands.
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledLandPermanent("lands"), true));

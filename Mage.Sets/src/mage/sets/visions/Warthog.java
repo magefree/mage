@@ -45,7 +45,6 @@ public class Warthog extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -48,7 +48,6 @@ public class HagraCrocodile extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Crocodile");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

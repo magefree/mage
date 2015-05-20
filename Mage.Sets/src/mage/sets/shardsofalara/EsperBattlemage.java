@@ -57,7 +57,6 @@ public class EsperBattlemage extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // {W}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.

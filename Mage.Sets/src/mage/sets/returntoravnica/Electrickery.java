@@ -57,7 +57,6 @@ public class Electrickery extends CardImpl {
         super(ownerId, 93, "Electrickery", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // Electrickery deals 1 damage to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

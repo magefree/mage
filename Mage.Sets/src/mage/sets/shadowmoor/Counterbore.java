@@ -44,7 +44,6 @@ public class Counterbore extends CardImpl {
         super(ownerId, 33, "Counterbore", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Counter target spell. 
         // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.

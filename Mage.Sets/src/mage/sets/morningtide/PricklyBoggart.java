@@ -46,7 +46,6 @@ public class PricklyBoggart extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -45,7 +45,6 @@ public class Stifle extends CardImpl {
         super(ownerId, 52, "Stifle", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // Counter target activated or triggered ability.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

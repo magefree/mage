@@ -46,8 +46,6 @@ public class UrzasGuilt extends CardImpl {
         super(ownerId, 130, "Urza's Guilt", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
         this.expansionSetCode = "PLS";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Each player draws two cards, then discards three cards, then loses 4 life.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));

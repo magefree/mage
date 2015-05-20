@@ -53,7 +53,6 @@ public class SafeholdSentry extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

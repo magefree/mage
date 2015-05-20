@@ -45,7 +45,6 @@ public class EmptyTheWarrens extends CardImpl {
         super(ownerId, 152, "Empty the Warrens", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Put two 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));

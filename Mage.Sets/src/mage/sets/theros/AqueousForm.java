@@ -55,7 +55,6 @@ public class AqueousForm extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

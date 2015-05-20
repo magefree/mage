@@ -45,7 +45,6 @@ public class SuddenShock extends CardImpl {
         super(ownerId, 179, "Sudden Shock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

@@ -49,7 +49,6 @@ public class AncestralTribute extends CardImpl {
         super(ownerId, 2, "Ancestral Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
                 
         // You gain 2 life for each card in your graveyard.
 	this.getSpellAbility().addEffect(new GainLifeEffect((new CardsInControllerGraveyardCount(new FilterCard(), 2))));

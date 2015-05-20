@@ -48,7 +48,6 @@ public class Enrage extends CardImpl {
         super(ownerId, 180, "Enrage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
         this.expansionSetCode = "9ED";
 
-        this.color.setRed(true);
 
         // Target creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));

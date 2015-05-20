@@ -57,8 +57,6 @@ public class MedomaiTheAgeless extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

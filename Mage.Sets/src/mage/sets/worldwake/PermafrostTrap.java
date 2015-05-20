@@ -58,7 +58,6 @@ public class PermafrostTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-        this.color.setBlue(true);
 
         // If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new PermafrostTrapAlternativeCost());

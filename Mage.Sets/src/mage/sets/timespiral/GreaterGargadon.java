@@ -60,7 +60,6 @@ public class GreaterGargadon extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(7);
 

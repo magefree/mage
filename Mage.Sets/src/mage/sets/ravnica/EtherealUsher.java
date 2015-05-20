@@ -52,7 +52,6 @@ public class EtherealUsher extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

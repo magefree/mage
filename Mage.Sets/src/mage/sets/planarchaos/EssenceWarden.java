@@ -55,7 +55,6 @@ public class EssenceWarden extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

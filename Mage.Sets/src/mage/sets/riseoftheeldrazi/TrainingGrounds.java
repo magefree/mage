@@ -60,7 +60,6 @@ public class TrainingGrounds extends CardImpl {
         super(ownerId, 91, "Training Grounds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsEffect()));
     }
 

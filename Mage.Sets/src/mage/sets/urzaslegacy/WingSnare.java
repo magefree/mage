@@ -53,7 +53,6 @@ public class WingSnare extends CardImpl {
         super(ownerId, 117, "Wing Snare", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "ULG";
 
-        this.color.setGreen(true);
 
         // Destroy target creature with flying.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

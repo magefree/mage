@@ -58,7 +58,6 @@ public class CopyEnchantment extends CardImpl {
         super(ownerId, 42, "Copy Enchantment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // You may have Copy Enchantment enter the battlefield as a copy of any enchantment on the battlefield.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(

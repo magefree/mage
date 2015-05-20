@@ -52,7 +52,6 @@ public class VampiresBite extends CardImpl {
         super(ownerId, 117, "Vampire's Bite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)
         this.addAbility(new KickerAbility("{2}{B}"));

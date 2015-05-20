@@ -59,7 +59,6 @@ public class SorinMarkov extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Sorin");
 
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

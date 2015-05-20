@@ -54,7 +54,6 @@ public class CorrosiveGale extends CardImpl {
         this.expansionSetCode = "NPH";
 
 
-        this.color.setGreen(true);
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));
     }
 

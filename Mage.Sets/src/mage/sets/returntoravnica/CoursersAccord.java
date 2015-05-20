@@ -45,8 +45,6 @@ public class CoursersAccord extends CardImpl {
         super(ownerId, 154, "Coursers' Accord", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Put a 3/3 green Centaur creature token onto the battlefield, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

@@ -49,7 +49,6 @@ public class VigilantDrake extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

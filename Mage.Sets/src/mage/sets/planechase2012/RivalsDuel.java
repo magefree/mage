@@ -49,7 +49,6 @@ public class RivalsDuel extends CardImpl {
         super(ownerId, 51, "Rivals' Duel", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "PC2";
 
-        this.color.setRed(true);
 
         // Choose two target creatures that share no creature types. Those creatures fight each other.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentWithDifferentTypes(2));

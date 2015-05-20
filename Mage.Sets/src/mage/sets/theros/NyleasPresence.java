@@ -68,7 +68,6 @@ public class NyleasPresence extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

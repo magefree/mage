@@ -51,7 +51,6 @@ public class GolgariDecoy extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Rogue");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -56,8 +56,6 @@ public class EpicExperiment extends CardImpl {
         super(ownerId, 159, "Epic Experiment", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Exile the top X cards of your library. For each instant and sorcery card with
         // converted mana cost X or less among them, you may cast that card without paying

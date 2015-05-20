@@ -52,7 +52,6 @@ public class DenseCanopy extends CardImpl {
         super(ownerId, 125, "Dense Canopy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "SOK";
 
-        this.color.setGreen(true);
 
         // Creatures with flying can block only creatures with flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DenseCanopyCantBlockEffect()));

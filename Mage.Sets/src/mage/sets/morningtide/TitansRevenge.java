@@ -46,7 +46,6 @@ public class TitansRevenge extends CardImpl {
         super(ownerId, 110, "Titan's Revenge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
         this.expansionSetCode = "MOR";
 
-        this.color.setRed(true);
 
         // Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

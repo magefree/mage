@@ -50,7 +50,6 @@ public class MomentousFall extends CardImpl {
         super(ownerId, 197, "Momentous Fall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Momentous Fall, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

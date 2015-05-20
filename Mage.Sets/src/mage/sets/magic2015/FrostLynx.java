@@ -59,7 +59,6 @@ public class FrostLynx extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

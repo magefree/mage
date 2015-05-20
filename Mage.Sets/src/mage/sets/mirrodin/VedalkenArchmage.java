@@ -56,7 +56,6 @@ public class VedalkenArchmage extends CardImpl {
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

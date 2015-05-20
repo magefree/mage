@@ -51,7 +51,6 @@ public class RainOfFilth extends CardImpl {
         super(ownerId, 151, "Rain of Filth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."
         ManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost());

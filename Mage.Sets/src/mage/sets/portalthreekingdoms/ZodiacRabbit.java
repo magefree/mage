@@ -45,7 +45,6 @@ public class ZodiacRabbit extends CardImpl {
         this.expansionSetCode = "PTK";
         this.subtype.add("Rabbit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

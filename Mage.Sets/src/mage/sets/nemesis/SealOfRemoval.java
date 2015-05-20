@@ -50,7 +50,6 @@ public class SealOfRemoval extends CardImpl {
         super(ownerId, 42, "Seal of Removal", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlue(true);
 
         // Sacrifice Seal of Removal: Return target creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new SacrificeSourceCost());

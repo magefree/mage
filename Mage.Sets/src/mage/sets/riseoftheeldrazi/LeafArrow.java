@@ -53,7 +53,6 @@ public class LeafArrow extends CardImpl {
         super(ownerId, 194, "Leaf Arrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

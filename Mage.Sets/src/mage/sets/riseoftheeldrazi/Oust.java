@@ -51,7 +51,6 @@ public class Oust extends CardImpl {
         super(ownerId, 40, "Oust", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Put target creature into its owner's library second from the top. Its controller gains 3 life.
         this.getSpellAbility().addEffect(new OustEffect());

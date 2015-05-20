@@ -46,7 +46,6 @@ public class RenewedFaith extends CardImpl {
         super(ownerId, 50, "Renewed Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-        this.color.setWhite(true);
 
         // You gain 6 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(6));

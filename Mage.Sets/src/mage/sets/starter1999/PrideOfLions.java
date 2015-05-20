@@ -45,7 +45,6 @@ public class PrideOfLions extends CardImpl {
         this.expansionSetCode = "S99";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

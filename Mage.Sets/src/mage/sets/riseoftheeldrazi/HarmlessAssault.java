@@ -46,7 +46,6 @@ public class HarmlessAssault extends CardImpl {
                 new CardType[] { CardType.INSTANT }, "{2}{W}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Prevent all combat damage that would be dealt this turn by attacking
         // creatures.

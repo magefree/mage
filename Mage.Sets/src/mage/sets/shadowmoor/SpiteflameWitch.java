@@ -49,8 +49,6 @@ public class SpiteflameWitch extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

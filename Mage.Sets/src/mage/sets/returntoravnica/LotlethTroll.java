@@ -58,8 +58,6 @@ public class LotlethTroll extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Troll");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

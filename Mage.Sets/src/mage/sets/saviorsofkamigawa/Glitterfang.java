@@ -48,7 +48,6 @@ public class Glitterfang extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

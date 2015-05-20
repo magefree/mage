@@ -45,7 +45,6 @@ public class Remedy extends CardImpl {
         super(ownerId, 117, "Remedy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "VIS";
 
-        this.color.setWhite(true);
 
         // Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
         this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));

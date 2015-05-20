@@ -54,7 +54,6 @@ public class DarkestHour extends CardImpl {
         super(ownerId, 128, "Darkest Hour", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // All creatures are black.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarkestHourEffect()));

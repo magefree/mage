@@ -59,7 +59,6 @@ public class HuntedTroll extends CardImpl {
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(4);
 

@@ -58,7 +58,6 @@ public class LandGrant extends CardImpl {
         super(ownerId, 255, "Land Grant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setGreen(true);
 
         // If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new LandGrantReavealCost(), new LandGrantCondition(),

@@ -60,7 +60,6 @@ public class ShipbreakerKraken extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -47,7 +47,6 @@ public class RabidElephant extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Elephant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

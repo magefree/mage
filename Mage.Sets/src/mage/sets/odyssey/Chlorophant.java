@@ -50,7 +50,6 @@ public class Chlorophant extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

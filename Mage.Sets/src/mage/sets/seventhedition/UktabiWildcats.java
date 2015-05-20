@@ -65,7 +65,6 @@ public class UktabiWildcats extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

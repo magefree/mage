@@ -48,7 +48,6 @@ public class SavageSurge extends CardImpl {
         super(ownerId, 133, "Savage Surge", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. Untap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

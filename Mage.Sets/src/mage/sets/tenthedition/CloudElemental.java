@@ -46,7 +46,6 @@ public class CloudElemental extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

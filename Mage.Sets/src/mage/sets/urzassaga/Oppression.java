@@ -53,7 +53,6 @@ public class Oppression extends CardImpl {
         super(ownerId, 143, "Oppression", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Whenever a player casts a spell, that player discards a card.
         this.addAbility(new OppressionTriggeredAbility());

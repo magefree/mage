@@ -47,7 +47,6 @@ public class Meltdown extends CardImpl {
         super(ownerId, 203, "Meltdown", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // Destroy each artifact with converted mana cost X or less.
         this.getSpellAbility().addEffect(new MeltdownEffect());

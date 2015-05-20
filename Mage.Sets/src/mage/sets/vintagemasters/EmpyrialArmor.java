@@ -55,7 +55,6 @@ public class EmpyrialArmor extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

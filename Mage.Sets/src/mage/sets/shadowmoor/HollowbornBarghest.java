@@ -61,7 +61,6 @@ public class HollowbornBarghest extends CardImpl {
         this.subtype.add("Demon");
         this.subtype.add("Hound");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

@@ -58,7 +58,6 @@ public class WordsOfWind extends CardImpl {
         super(ownerId, 122, "Words of Wind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlue(true);
 
         // {1}: The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl("{1}")));

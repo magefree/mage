@@ -47,7 +47,6 @@ public class HoverBarrier extends CardImpl {
         this.subtype.add("Illusion");
         this.subtype.add("Wall");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(6);
 

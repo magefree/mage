@@ -49,7 +49,6 @@ public class MycosynthFiend extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Horror");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

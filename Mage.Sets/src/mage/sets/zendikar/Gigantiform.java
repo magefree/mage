@@ -68,7 +68,6 @@ public class Gigantiform extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));

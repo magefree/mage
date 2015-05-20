@@ -53,7 +53,6 @@ public class Slay extends CardImpl {
         super(ownerId, 163, "Slay", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlack(true);
 
         // Destroy target green creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

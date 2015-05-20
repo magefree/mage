@@ -55,7 +55,6 @@ public class GaeasBlessing extends CardImpl {
         super(ownerId, 77, "Gaea's Blessing", Rarity.SPECIAL, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "TSB";
 
-        this.color.setGreen(true);
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new GaeasBlessingEffect());

@@ -47,8 +47,6 @@ public class Slitherhead extends CardImpl {
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

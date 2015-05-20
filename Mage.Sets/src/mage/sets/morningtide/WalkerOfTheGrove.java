@@ -48,7 +48,6 @@ public class WalkerOfTheGrove extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

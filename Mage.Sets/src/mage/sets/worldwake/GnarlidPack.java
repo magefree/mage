@@ -49,7 +49,6 @@ public class GnarlidPack extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

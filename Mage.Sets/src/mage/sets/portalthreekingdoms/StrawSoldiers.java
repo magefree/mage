@@ -45,7 +45,6 @@ public class StrawSoldiers extends CardImpl {
         this.subtype.add("Scarecrow");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
     }

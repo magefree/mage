@@ -48,7 +48,6 @@ public class SolarBlast extends CardImpl {
         super(ownerId, 234, "Solar Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // Solar Blast deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

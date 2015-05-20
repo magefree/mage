@@ -53,7 +53,6 @@ public class GaseousForm extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

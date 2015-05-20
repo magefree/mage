@@ -47,7 +47,6 @@ public class RayOfDissolution extends CardImpl {
         super(ownerId, 27, "Ray of Dissolution", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Destroy target enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

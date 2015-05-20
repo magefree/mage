@@ -60,7 +60,6 @@ public class WindbriskRaptor extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

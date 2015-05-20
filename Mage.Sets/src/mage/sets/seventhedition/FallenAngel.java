@@ -52,7 +52,6 @@ public class FallenAngel extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Angel");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

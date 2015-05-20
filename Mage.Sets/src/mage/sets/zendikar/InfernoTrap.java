@@ -54,7 +54,6 @@ public class InfernoTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setRed(true);
 
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new InfernoTrapAlternativeCost());

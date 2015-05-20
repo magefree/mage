@@ -52,7 +52,6 @@ public class PetalsOfInsight extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.
         this.getSpellAbility().addEffect(new PetalsOfInsightEffect());

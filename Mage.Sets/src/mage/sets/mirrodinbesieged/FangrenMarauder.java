@@ -48,7 +48,6 @@ public class FangrenMarauder extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

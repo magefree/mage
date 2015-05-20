@@ -54,7 +54,6 @@ public class ThrunTheLastTroll extends CardImpl {
         this.subtype.add("Troll");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

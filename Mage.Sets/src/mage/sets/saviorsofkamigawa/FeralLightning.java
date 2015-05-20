@@ -56,7 +56,6 @@ public class FeralLightning extends CardImpl {
         super(ownerId, 97, "Feral Lightning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
         this.getSpellAbility().addEffect(new FeralLightningEffect());

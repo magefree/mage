@@ -50,7 +50,6 @@ public class SyphonMind extends CardImpl {
         super(ownerId, 175, "Syphon Mind", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // Each other player discards a card. You draw a card for each card discarded this way.
         this.getSpellAbility().addEffect(new SyphonMindEffect());

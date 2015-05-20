@@ -59,7 +59,6 @@ public class CyclonicRift extends CardImpl {
         super(ownerId, 35, "Cyclonic Rift", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // Return target nonland permanent you don't control to its owner's hand.
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));

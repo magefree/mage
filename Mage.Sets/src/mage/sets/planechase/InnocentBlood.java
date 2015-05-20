@@ -45,7 +45,6 @@ public class InnocentBlood extends CardImpl {
         super(ownerId, 33, "Innocent Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "HOP";
 
-        this.color.setBlack(true);
 
         // Each player sacrifices a creature.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature")));

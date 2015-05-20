@@ -53,7 +53,6 @@ public class Chill extends CardImpl {
         super(ownerId, 56, "Chill", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Red spells cost {2} more to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasementAllEffect(filter, 2)));

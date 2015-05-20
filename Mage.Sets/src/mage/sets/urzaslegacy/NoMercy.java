@@ -51,7 +51,6 @@ public class NoMercy extends CardImpl {
         super(ownerId, 56, "No Mercy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // Whenever a creature deals damage to you, destroy it.
         this.addAbility(new NoMercyTriggeredAbility());

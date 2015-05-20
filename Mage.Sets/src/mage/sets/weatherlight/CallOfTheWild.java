@@ -54,7 +54,6 @@ public class CallOfTheWild extends CardImpl {
         super(ownerId, 64, "Call of the Wild", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "WTH";
 
-        this.color.setGreen(true);
 
         // {2}{G}{G}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CallOfTheWildEffect(), new ManaCostsImpl("{2}{G}{G}")));

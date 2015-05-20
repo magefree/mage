@@ -46,7 +46,6 @@ public class ObsessiveSearch extends CardImpl {
         super(ownerId, 43, "Obsessive Search", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "TOR";
 
-        this.color.setBlue(true);
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

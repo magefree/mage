@@ -45,8 +45,6 @@ public class FallOfTheGavel extends CardImpl {
         super(ownerId, 161, "Fall of the Gavel", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

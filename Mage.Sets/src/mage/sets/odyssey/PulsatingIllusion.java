@@ -51,7 +51,6 @@ public class PulsatingIllusion extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

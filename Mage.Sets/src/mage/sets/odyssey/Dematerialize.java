@@ -47,7 +47,6 @@ public class Dematerialize extends CardImpl {
         super(ownerId, 81, "Dematerialize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Return target permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

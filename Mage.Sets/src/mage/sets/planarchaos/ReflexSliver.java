@@ -57,7 +57,6 @@ public class ReflexSliver extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Sliver");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

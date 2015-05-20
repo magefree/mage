@@ -46,7 +46,6 @@ public class Mindstab extends CardImpl {
         super(ownerId, 119, "Mindstab", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlack(true);
 
         // Target player discards three cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));

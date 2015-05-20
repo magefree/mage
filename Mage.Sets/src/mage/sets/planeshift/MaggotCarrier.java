@@ -47,7 +47,6 @@ public class MaggotCarrier extends CardImpl {
         this.expansionSetCode = "PLS";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

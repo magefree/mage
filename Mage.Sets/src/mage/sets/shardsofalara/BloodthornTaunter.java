@@ -61,7 +61,6 @@ public class BloodthornTaunter extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

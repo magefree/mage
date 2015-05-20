@@ -54,7 +54,6 @@ public class GoblinBushwhacker extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

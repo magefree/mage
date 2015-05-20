@@ -56,7 +56,6 @@ public class BloodMoon extends CardImpl {
         super(ownerId, 176, "Blood Moon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "9ED";
 
-        this.color.setRed(true);
 
         // Nonbasic lands are Mountains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodMoonEffect()));

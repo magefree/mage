@@ -58,7 +58,6 @@ public class Reveillark extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

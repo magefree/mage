@@ -54,7 +54,6 @@ public class ThoughtsOfRuin extends CardImpl {
         super(ownerId, 118, "Thoughts of Ruin", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOK";
 
-        this.color.setRed(true);
 
         // Each player sacrifices a land for each card in your hand.
         this.getSpellAbility().addEffect(new ThoughtsOfRuinEffect());

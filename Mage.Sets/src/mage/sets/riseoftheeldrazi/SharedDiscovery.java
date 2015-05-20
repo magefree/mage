@@ -54,7 +54,6 @@ public class SharedDiscovery extends CardImpl {
         super(ownerId, 87, "Shared Discovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // As an additional cost to cast Shared Discovery, tap four untapped creatures you control.
         // Draw three cards.

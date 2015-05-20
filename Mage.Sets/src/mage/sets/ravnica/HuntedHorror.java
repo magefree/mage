@@ -56,7 +56,6 @@ public class HuntedHorror extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

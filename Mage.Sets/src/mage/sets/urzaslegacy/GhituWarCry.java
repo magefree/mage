@@ -49,7 +49,6 @@ public class GhituWarCry extends CardImpl {
         super(ownerId, 78, "Ghitu War Cry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ULG";
 
-        this.color.setRed(true);
 
         // {R}: Target creature gets +1/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"));

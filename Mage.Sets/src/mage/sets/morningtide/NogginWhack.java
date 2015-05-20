@@ -59,7 +59,6 @@ public class NogginWhack extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
 
         // Prowl {1}{B}
         this.addAbility(new ProwlAbility(this, "{1}{B}"));

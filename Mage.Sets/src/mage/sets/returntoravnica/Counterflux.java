@@ -69,8 +69,6 @@ public class Counterflux extends CardImpl {
         super(ownerId, 153, "Counterflux", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Counterflux can't be countered by spells or abilities.
         Effect effect =  new CantBeCounteredSourceEffect();

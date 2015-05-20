@@ -45,7 +45,6 @@ public class GoliathSpider extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

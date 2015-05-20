@@ -45,8 +45,6 @@ public class RisenSanctuary extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

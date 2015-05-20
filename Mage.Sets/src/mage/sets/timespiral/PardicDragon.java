@@ -65,7 +65,6 @@ public class PardicDragon extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

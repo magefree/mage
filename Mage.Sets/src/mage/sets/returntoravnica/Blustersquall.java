@@ -62,7 +62,6 @@ public class Blustersquall extends CardImpl {
         super(ownerId, 30, "Blustersquall", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // Tap target creature you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

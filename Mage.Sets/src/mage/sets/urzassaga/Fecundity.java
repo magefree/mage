@@ -50,7 +50,6 @@ public class Fecundity extends CardImpl {
         super(ownerId, 251, "Fecundity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "USG";
 
-        this.color.setGreen(true);
 
         // Whenever a creature dies, that creature's controller may draw a card.
         this.addAbility(new DiesCreatureTriggeredAbility(new FecundityEffect(), false, false, true));

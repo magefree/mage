@@ -54,7 +54,6 @@ public class SacredRites extends CardImpl {
         super(ownerId, 44, "Sacred Rites", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
         this.getSpellAbility().addTarget(new TargetCardInHand(0, Integer.MAX_VALUE, new FilterCard()));

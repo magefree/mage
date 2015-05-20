@@ -51,7 +51,6 @@ public class ShoalSerpent extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

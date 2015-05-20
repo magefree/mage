@@ -74,8 +74,6 @@ public class VraskaTheUnseen extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Vraska");
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 

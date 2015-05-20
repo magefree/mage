@@ -45,7 +45,6 @@ public class TreeMonkey extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Ape");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

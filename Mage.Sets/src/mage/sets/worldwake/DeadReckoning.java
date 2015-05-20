@@ -54,7 +54,6 @@ public class DeadReckoning extends CardImpl {
         super(ownerId, 56, "Dead Reckoning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         // You may put target creature card from your graveyard on top of your library. If you do, Dead Reckoning deals damage equal to that card's power to target creature.
         this.getSpellAbility().addEffect(new DeadReckoningEffect());

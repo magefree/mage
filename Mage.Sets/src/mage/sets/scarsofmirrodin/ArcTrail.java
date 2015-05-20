@@ -53,7 +53,6 @@ public class ArcTrail extends CardImpl {
         super(ownerId, 81, "Arc Trail", Rarity.UNCOMMON, new CardType[] { CardType.SORCERY }, "{1}{R}");
         this.expansionSetCode = "SOM";
 
-        this.color.setRed(true);
 
         Target target = new TargetCreatureOrPlayer(2);
         this.getSpellAbility().addTarget(target);

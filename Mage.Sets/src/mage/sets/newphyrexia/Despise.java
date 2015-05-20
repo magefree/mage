@@ -55,7 +55,6 @@ public class Despise extends CardImpl {
         super(ownerId, 56, "Despise", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());

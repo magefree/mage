@@ -53,7 +53,6 @@ public class TakePossession extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

@@ -56,7 +56,6 @@ public class XantidSwarm extends CardImpl {
         this.expansionSetCode = "SCG";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

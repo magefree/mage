@@ -63,7 +63,6 @@ public class MagmaVein extends CardImpl {
         super(ownerId, 203, "Magma Vein", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // {R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter1), new ManaCostsImpl("{R}"));

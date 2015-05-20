@@ -45,8 +45,6 @@ public class DramaticRescue extends CardImpl {
         super(ownerId, 156, "Dramatic Rescue", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
         
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

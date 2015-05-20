@@ -54,7 +54,6 @@ public class Compost extends CardImpl {
         super(ownerId, 235, "Compost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "7ED";
 
-        this.color.setGreen(true);
 
         // Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(

@@ -54,7 +54,6 @@ public class DeathRattle extends CardImpl {
         super(ownerId, 78, "Death Rattle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
         this.expansionSetCode = "MMA";
 
-        this.color.setBlack(true);
 
         // Delve
         this.addAbility(new DelveAbility());

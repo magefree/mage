@@ -59,7 +59,6 @@ public class CrowdOfCinders extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

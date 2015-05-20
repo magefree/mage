@@ -56,7 +56,6 @@ public class RavenousTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setBlack(true);
 
         // If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(

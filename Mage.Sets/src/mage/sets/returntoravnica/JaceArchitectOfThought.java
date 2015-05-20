@@ -82,7 +82,6 @@ public class JaceArchitectOfThought extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Jace");
 
-        this.color.setBlue(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

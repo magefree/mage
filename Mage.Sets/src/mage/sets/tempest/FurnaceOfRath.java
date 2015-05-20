@@ -52,7 +52,6 @@ public class FurnaceOfRath extends CardImpl {
         super(ownerId, 177, "Furnace of Rath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");
         this.expansionSetCode = "TMP";
 
-        this.color.setRed(true);
 
         // If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));

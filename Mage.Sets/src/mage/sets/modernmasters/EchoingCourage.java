@@ -54,7 +54,6 @@ public class EchoingCourage extends CardImpl {
         super(ownerId, 143, "Echoing Courage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "MMA";
 
-        this.color.setGreen(true);
 
         // Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new EchoingCourageEffect());

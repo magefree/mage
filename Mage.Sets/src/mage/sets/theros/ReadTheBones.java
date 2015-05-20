@@ -46,7 +46,6 @@ public class ReadTheBones extends CardImpl {
         super(ownerId, 101, "Read the Bones", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Scry 2, then draw two cards. You lose 2 life.
         this.getSpellAbility().addEffect(new ScryEffect(2));

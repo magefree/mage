@@ -48,7 +48,6 @@ public class RecklessWurm extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Wurm");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

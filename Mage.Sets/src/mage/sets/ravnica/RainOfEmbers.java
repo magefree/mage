@@ -43,7 +43,6 @@ public class RainOfEmbers extends CardImpl {
         super(ownerId, 138, "Rain of Embers", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "RAV";
 
-        this.color.setRed(true);
 
         // Rain of Embers deals 1 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));

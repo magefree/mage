@@ -56,7 +56,6 @@ public class Undertaker extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Spellshaper");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -47,7 +47,6 @@ public class VolleyOfBoulders extends CardImpl {
         super(ownerId, 227, "Volley of Boulders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Volley of Boulders deals 6 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(6));

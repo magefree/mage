@@ -47,7 +47,6 @@ public class Lunge extends CardImpl {
         super(ownerId, 203, "Lunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setRed(true);
 
         // Lunge deals 2 damage to target creature and 2 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

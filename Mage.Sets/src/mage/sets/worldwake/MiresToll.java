@@ -56,7 +56,6 @@ public class MiresToll extends CardImpl {
         super(ownerId, 60, "Mire's Toll", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         // Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

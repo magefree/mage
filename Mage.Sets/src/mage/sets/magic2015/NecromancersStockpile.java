@@ -60,7 +60,6 @@ public class NecromancersStockpile extends CardImpl {
         super(ownerId, 108, "Necromancer's Stockpile", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // {1}{B}, Discard a creature card: Draw a card.
         // If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped.

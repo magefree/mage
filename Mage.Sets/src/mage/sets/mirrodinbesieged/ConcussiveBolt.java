@@ -52,7 +52,6 @@ public class ConcussiveBolt extends CardImpl {
         super(ownerId, 60, "Concussive Bolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "MBS";
 
-        this.color.setRed(true);
 
         // Concussive Bolt deals 4 damage to target player.
         this.getSpellAbility().addTarget(new TargetPlayer());

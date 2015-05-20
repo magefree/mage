@@ -49,7 +49,6 @@ public class DeepcavernImp extends CardImpl {
         this.subtype.add("Imp");
         this.subtype.add("Rebel");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

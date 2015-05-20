@@ -48,7 +48,6 @@ public class MightOfOldKrosa extends CardImpl {
         super(ownerId, 204, "Might of Old Krosa", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "TSP";
 
-        this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(

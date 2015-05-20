@@ -46,7 +46,6 @@ public class WingShards extends CardImpl {
         super(ownerId, 25, "Wing Shards", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "SCG";
 
-        this.color.setWhite(true);
 
         // Target player sacrifices an attacking creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterAttackingCreature(), 1, "Target player"));

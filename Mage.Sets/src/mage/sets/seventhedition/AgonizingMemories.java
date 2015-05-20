@@ -53,7 +53,6 @@ public class AgonizingMemories extends CardImpl {
         super(ownerId, 117, "Agonizing Memories", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
         this.getSpellAbility().addEffect(new AgonizingMemoriesEffect());

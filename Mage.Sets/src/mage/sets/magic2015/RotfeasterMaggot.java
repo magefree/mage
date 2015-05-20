@@ -54,7 +54,6 @@ public class RotfeasterMaggot extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

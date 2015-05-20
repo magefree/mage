@@ -45,7 +45,6 @@ public class LightningHounds extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Hound");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

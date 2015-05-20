@@ -45,7 +45,6 @@ public class ScatterTheSeeds extends CardImpl {
         super(ownerId, 181, "Scatter the Seeds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

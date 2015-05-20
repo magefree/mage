@@ -52,7 +52,6 @@ public class Conflagrate extends CardImpl {
         super(ownerId, 151, "Conflagrate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.
         DynamicValue xValue = new ManacostVariableValue();

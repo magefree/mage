@@ -52,7 +52,6 @@ public class SharedTriumph extends CardImpl {
         super(ownerId, 53, "Shared Triumph", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ONS";
 
-        this.color.setWhite(true);
 
         // As Shared Triumph enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));

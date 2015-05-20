@@ -62,7 +62,6 @@ public class HighlandBerserker extends CardImpl {
         this.subtype.add("Berserker");
         this.subtype.add("Ally");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

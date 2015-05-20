@@ -50,7 +50,6 @@ public class MultanisDecree extends CardImpl {
         super(ownerId, 114, "Multani's Decree", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "UDS";
 
-        this.color.setGreen(true);
 
         // Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
         this.getSpellAbility().addEffect(new MultanisDecreeDestroyEffect());

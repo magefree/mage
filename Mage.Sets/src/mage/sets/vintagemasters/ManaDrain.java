@@ -55,7 +55,6 @@ public class ManaDrain extends CardImpl {
         super(ownerId, 78, "Mana Drain", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlue(true);
         
         // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

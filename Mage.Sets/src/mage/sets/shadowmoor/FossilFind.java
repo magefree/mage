@@ -49,8 +49,6 @@ public class FossilFind extends CardImpl {
         super(ownerId, 206, "Fossil Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R/G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
         this.getSpellAbility().addEffect(new FossilFindEffect());

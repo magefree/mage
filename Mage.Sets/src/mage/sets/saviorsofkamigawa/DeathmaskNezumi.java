@@ -55,7 +55,6 @@ public class DeathmaskNezumi extends CardImpl {
         this.subtype.add("Rat");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

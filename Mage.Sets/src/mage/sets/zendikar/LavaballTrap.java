@@ -59,7 +59,6 @@ public class LavaballTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setRed(true);
 
         // If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new LavaballTrapAlternativeCost());

@@ -46,7 +46,6 @@ public class SerraSphinx extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

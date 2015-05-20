@@ -51,7 +51,6 @@ public class SkyshroudRanger extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

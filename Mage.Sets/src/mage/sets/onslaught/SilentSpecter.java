@@ -49,7 +49,6 @@ public class SilentSpecter extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Specter");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -46,7 +46,6 @@ public class BreathOfLife extends CardImpl {
         super(ownerId, 2, "Breath of Life", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "S00";
 
-        this.color.setWhite(true);
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

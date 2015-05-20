@@ -62,7 +62,6 @@ public class DelayingShield extends CardImpl {
         super(ownerId, 17, "Delaying Shield", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // If damage would be dealt to you, put that many delay counters on Delaying Shield instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DelayingShieldReplacementEffect()));

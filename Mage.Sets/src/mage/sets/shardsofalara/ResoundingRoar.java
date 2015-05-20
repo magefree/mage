@@ -50,7 +50,6 @@ public class ResoundingRoar extends CardImpl {
         super(ownerId, 144, "Resounding Roar", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));

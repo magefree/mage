@@ -54,7 +54,6 @@ public class Firestorm extends CardImpl {
         super(ownerId, 101, "Firestorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "WTH";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Firestorm, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));

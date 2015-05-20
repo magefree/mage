@@ -45,7 +45,6 @@ public class RagingCougar extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

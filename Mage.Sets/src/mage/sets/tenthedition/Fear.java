@@ -51,7 +51,6 @@ public class Fear extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -47,7 +47,6 @@ public class AnuridMurkdiver extends CardImpl {
         this.subtype.add("Frog");
         this.subtype.add("Beast");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

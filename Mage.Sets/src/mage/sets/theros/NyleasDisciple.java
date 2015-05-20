@@ -50,7 +50,6 @@ public class NyleasDisciple extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Archer");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

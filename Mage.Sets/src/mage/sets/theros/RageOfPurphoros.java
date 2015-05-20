@@ -48,7 +48,6 @@ public class RageOfPurphoros extends CardImpl {
         super(ownerId, 137, "Rage of Purphoros", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Rage of Purphoros deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

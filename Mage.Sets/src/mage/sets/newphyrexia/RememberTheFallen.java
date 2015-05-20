@@ -58,7 +58,6 @@ public class RememberTheFallen extends CardImpl {
         super(ownerId, 21, "Remember the Fallen", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCreature));

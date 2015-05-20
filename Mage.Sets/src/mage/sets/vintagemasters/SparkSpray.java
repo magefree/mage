@@ -46,7 +46,6 @@ public class SparkSpray extends CardImpl {
         super(ownerId, 188, "Spark Spray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "VMA";
 
-        this.color.setRed(true);
 
         // Spark Spray deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

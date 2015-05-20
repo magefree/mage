@@ -50,8 +50,6 @@ public class ThoughtweftGambit extends CardImpl {
         super(ownerId, 154, "Thoughtweft Gambit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Tap all creatures your opponents control and untap all creatures you control.
         this.getSpellAbility().addEffect(new ThoughtweftGambitEffect());

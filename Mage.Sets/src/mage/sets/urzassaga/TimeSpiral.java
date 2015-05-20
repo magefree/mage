@@ -51,7 +51,6 @@ public class TimeSpiral extends CardImpl {
         super(ownerId, 103, "Time Spiral", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

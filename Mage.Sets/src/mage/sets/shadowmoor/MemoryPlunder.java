@@ -60,8 +60,6 @@ public class MemoryPlunder extends CardImpl {
         super(ownerId, 169, "Memory Plunder", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U/B}{U/B}{U/B}{U/B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
         this.getSpellAbility().addEffect(new MemoryPlunderEffect());

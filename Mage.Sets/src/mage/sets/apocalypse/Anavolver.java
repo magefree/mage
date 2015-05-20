@@ -56,7 +56,7 @@ public class Anavolver extends CardImpl {
         super(ownerId, 75, "Anavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Volver");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         

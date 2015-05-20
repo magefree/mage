@@ -49,7 +49,6 @@ public class LongTermPlans extends CardImpl {
         super(ownerId, 38, "Long-Term Plans", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // Search your library for a card, shuffle your library, then put that card third from the top.
         this.getSpellAbility().addEffect(new LongTermPlansEffect());

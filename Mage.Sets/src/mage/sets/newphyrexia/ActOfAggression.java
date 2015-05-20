@@ -48,7 +48,6 @@ public class ActOfAggression extends CardImpl {
         super(ownerId, 78, "Act of Aggression", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{RP}{RP}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

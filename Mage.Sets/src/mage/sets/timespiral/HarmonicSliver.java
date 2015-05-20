@@ -67,8 +67,6 @@ public class HarmonicSliver extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Sliver");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

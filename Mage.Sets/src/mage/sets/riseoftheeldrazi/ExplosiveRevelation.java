@@ -54,7 +54,6 @@ public class ExplosiveRevelation extends CardImpl {
         super(ownerId, 143, "Explosive Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new ExplosiveRevelationEffect());

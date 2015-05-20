@@ -50,7 +50,6 @@ public class Calciderm extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Beast");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -57,7 +57,7 @@ public class DiversionaryTactics extends CardImpl {
     public DiversionaryTactics(UUID ownerId) {
         super(ownerId, 7, "Diversionary Tactics", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "APC";
-        this.color.setWhite(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

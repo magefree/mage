@@ -47,7 +47,6 @@ public class TauntingElf extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

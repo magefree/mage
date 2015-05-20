@@ -55,8 +55,6 @@ public class GutturalResponse extends CardImpl {
         super(ownerId, 208, "Guttural Response", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R/G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Counter target blue instant spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -45,7 +45,6 @@ public class LoxodonConvert extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
     }

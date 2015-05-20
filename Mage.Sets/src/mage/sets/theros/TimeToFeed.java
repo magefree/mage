@@ -75,7 +75,6 @@ public class TimeToFeed extends CardImpl {
         super(ownerId, 181, "Time to Feed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. 
         this.getSpellAbility().addEffect(new TimeToFeedTextEffect());

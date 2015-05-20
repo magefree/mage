@@ -48,7 +48,6 @@ public class OrderOfYawgmoth extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

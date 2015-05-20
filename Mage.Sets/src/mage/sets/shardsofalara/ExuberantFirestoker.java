@@ -56,7 +56,6 @@ public class ExuberantFirestoker extends CardImpl {
         this.subtype.add("Druid");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

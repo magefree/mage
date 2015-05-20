@@ -54,7 +54,6 @@ public class DwarvenStrikeForce extends CardImpl {
         this.subtype.add("Dwarf");
         this.subtype.add("Berserker");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

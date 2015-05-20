@@ -48,8 +48,6 @@ public class OonasGatewarden extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

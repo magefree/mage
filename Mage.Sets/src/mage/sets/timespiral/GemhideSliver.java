@@ -53,7 +53,6 @@ public class GemhideSliver extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Sliver");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

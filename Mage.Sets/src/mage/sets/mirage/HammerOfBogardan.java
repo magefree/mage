@@ -52,7 +52,6 @@ public class HammerOfBogardan extends CardImpl {
         super(ownerId, 181, "Hammer of Bogardan", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "MIR";
 
-        this.color.setRed(true);
 
         // Hammer of Bogardan deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

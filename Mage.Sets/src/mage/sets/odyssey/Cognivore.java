@@ -59,7 +59,6 @@ public class Cognivore extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Lhurgoyf");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

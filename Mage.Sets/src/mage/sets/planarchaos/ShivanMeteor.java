@@ -47,7 +47,6 @@ public class ShivanMeteor extends CardImpl {
         super(ownerId, 106, "Shivan Meteor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
 
         // Shivan Meteor deals 13 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(13));

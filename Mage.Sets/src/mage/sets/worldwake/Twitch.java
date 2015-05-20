@@ -57,7 +57,6 @@ public class Twitch extends CardImpl {
         super(ownerId, 43, "Twitch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // You may tap or untap target artifact, creature, or land.
         // Draw a card.

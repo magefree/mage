@@ -96,7 +96,6 @@ public class ChainedToTheRocks extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant Mountain you control
         TargetPermanent auraTarget = new TargetPermanent(filter);

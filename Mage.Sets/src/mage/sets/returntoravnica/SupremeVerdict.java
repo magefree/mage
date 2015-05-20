@@ -51,8 +51,6 @@ public class SupremeVerdict extends CardImpl {
         super(ownerId, 201, "Supreme Verdict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // Supreme Verdict can't be countered.
         Ability ability = new CantBeCounteredAbility();

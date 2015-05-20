@@ -58,7 +58,6 @@ public class KilnFiend extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

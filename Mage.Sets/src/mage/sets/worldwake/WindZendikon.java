@@ -55,7 +55,6 @@ public class WindZendikon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         // Enchanted land is a 2/2 blue Elemental creature with flying. It's still a land.

@@ -46,7 +46,6 @@ public class SeismicSpike extends CardImpl {
         super(ownerId, 141, "Seismic Spike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "RAV";
 
-        this.color.setRed(true);
 
         // Destroy target land. Add {R}{R} to your mana pool.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

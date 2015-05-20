@@ -49,7 +49,6 @@ public class HealingSalve extends CardImpl {
         super(ownerId, 18, "Healing Salve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "7ED";
 
-        this.color.setWhite(true);
 
         // Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(3));

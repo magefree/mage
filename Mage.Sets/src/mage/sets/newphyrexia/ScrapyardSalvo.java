@@ -48,7 +48,6 @@ public class ScrapyardSalvo extends CardImpl {
         super(ownerId, 94, "Scrapyard Salvo", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));

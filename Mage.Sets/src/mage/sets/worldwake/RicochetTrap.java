@@ -65,7 +65,6 @@ public class RicochetTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-        this.color.setRed(true);
 
         // If an opponent cast a blue spell this turn, you may pay {R} rather than pay Ricochet Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new RicochetTrapAlternativeCost());

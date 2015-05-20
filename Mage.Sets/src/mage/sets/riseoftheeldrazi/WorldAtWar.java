@@ -55,7 +55,6 @@ public class WorldAtWar extends CardImpl {
         super(ownerId, 172, "World at War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
         this.getSpellAbility().addEffect(new WorldAtWarEffect());

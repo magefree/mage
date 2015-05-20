@@ -52,7 +52,6 @@ public class Afterlife extends CardImpl {
         super(ownerId, 205, "Afterlife", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "MIR";
 
-        this.color.setWhite(true);
 
         // Destroy target creature. It can't be regenerated. Its controller puts a
         // 1/1 white Spirit creature token with flying onto the battlefield.

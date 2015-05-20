@@ -55,7 +55,6 @@ public class CrushUnderfoot extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
 
         // Choose a Giant creature you control. It deals damage equal to its power to target creature.
         this.getSpellAbility().addEffect(new CrushUnderfootEffect());

@@ -53,7 +53,6 @@ public class InGarruksWake extends CardImpl {
         super(ownerId, 100, "In Garruk's Wake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Destroy all creatures you don't control and all planeswalkers you don't control.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

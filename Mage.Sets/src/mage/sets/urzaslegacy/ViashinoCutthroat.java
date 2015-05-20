@@ -47,7 +47,6 @@ public class ViashinoCutthroat extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Viashino");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

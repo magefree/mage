@@ -46,7 +46,6 @@ public class PunctureBolt extends CardImpl {
         super(ownerId, 102, "Puncture Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Puncture Bolt deals 1 damage to target creature. Put a -1/-1 counter on that creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

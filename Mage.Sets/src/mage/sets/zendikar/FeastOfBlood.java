@@ -50,7 +50,6 @@ public class FeastOfBlood extends CardImpl {
         super(ownerId, 88, "Feast of Blood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Cast Feast of Blood only if you control two or more Vampires.
         this.getSpellAbility().addCost(new FeastOfBloodCost());

@@ -58,7 +58,6 @@ public class YawgmothsWill extends CardImpl {
         super(ownerId, 171, "Yawgmoth's Will", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Until end of turn, you may play cards from your graveyard.
         this.getSpellAbility().addEffect(new CanPlayCardsFromGraveyardEffect());

@@ -54,7 +54,6 @@ public class IllGottenGains extends CardImpl {
         super(ownerId, 138, "Ill-Gotten Gains", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Exile Ill-Gotten Gains.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());

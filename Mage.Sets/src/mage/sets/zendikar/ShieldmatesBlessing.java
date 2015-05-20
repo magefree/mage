@@ -45,7 +45,6 @@ public class ShieldmatesBlessing extends CardImpl {
         super(ownerId, 35, "Shieldmate's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

@@ -47,7 +47,6 @@ public class DizzySpell extends CardImpl {
         super(ownerId, 43, "Dizzy Spell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
 
         // Target creature gets -3/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Duration.EndOfTurn));

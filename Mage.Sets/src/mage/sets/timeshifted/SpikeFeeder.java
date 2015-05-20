@@ -56,7 +56,6 @@ public class SpikeFeeder extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Spike");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

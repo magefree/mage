@@ -55,7 +55,6 @@ public class GuardianZendikon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant land
         // Enchanted land is a 2/6 white Wall creature with defender. It's still a land.

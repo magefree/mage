@@ -63,7 +63,6 @@ public class AvengerOfZendikar extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

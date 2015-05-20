@@ -45,7 +45,6 @@ public class SipOfHemlock extends CardImpl {
         super(ownerId, 106, "Sip of Hemlock", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Destroy target creature.  Its controller loses 2 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

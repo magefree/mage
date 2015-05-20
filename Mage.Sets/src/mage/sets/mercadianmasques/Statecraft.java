@@ -51,7 +51,6 @@ public class Statecraft extends CardImpl {
         super(ownerId, 106, "Statecraft", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlue(true);
 
         // Prevent all combat damage that would be dealt to and dealt by creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StatecraftPreventionEffect()));

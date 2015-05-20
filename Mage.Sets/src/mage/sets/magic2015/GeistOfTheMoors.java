@@ -45,7 +45,6 @@ public class GeistOfTheMoors extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

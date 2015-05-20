@@ -47,7 +47,6 @@ public class DriftOfPhantasms extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

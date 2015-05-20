@@ -51,8 +51,6 @@ public class GolgariCharm extends CardImpl {
         super(ownerId, 164, "Golgari Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         // Choose one — All creatures get -1/-1 until end of turn;
         this.getSpellAbility().addEffect(new BoostAllEffect(-1,-1, Duration.EndOfTurn,new FilterCreaturePermanent("All creatures"), false));

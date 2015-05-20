@@ -45,7 +45,6 @@ public class PharikasCure extends CardImpl {
         super(ownerId, 100, "Pharika's Cure", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Pharika's Cure deals 2 damage to target creature and you gain 2 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

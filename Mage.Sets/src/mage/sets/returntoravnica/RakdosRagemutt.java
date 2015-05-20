@@ -47,8 +47,6 @@ public class RakdosRagemutt extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Hound");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

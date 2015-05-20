@@ -47,7 +47,6 @@ public class RestForTheWeary extends CardImpl {
         super(ownerId, 18, "Rest for the Weary", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "WWK";
 
-        this.color.setWhite(true);
 
         // Target player gains 4 life.
         // Landfall - If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.

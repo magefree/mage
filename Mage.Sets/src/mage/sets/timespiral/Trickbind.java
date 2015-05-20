@@ -53,7 +53,6 @@ public class Trickbind extends CardImpl {
         super(ownerId, 88, "Trickbind", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

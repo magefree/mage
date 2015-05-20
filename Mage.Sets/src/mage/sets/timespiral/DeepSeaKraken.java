@@ -60,7 +60,6 @@ public class DeepSeaKraken extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -57,8 +57,6 @@ public class SkymarkRoc extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

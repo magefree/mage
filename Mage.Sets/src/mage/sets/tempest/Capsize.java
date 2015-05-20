@@ -45,7 +45,6 @@ public class Capsize extends CardImpl {
         super(ownerId, 55, "Capsize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));

@@ -47,8 +47,6 @@ public class Plumeveil extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

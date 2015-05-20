@@ -52,7 +52,6 @@ public class BlisteringFirecat extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(1);
 

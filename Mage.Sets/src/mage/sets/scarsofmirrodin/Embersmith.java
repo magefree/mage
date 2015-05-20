@@ -63,7 +63,6 @@ public class Embersmith extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

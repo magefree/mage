@@ -45,7 +45,6 @@ public class HeatRay extends CardImpl {
         super(ownerId, 150, "Heat Ray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

@@ -47,7 +47,6 @@ public class IdeasUnbound extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Draw three cards. Discard three cards at the beginning of the next end step.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

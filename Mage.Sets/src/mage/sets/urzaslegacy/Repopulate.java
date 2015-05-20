@@ -55,7 +55,6 @@ public class Repopulate extends CardImpl {
         super(ownerId, 111, "Repopulate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ULG";
 
-        this.color.setGreen(true);
 
         // Shuffle all creature cards from target player's graveyard into that player's library.
         this.getSpellAbility().addTarget(new TargetPlayer());

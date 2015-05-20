@@ -61,7 +61,6 @@ public class SlingbowTrap extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Trap");
 
-        this.color.setGreen(true);
 
         // If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new SlingbowTrapAlternativeCost());

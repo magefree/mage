@@ -53,7 +53,6 @@ public class CavernLampad extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Nymph");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

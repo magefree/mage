@@ -54,7 +54,6 @@ public class Purify extends CardImpl {
         super(ownerId, 19, "Purify", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Destroy all artifacts and enchantments.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

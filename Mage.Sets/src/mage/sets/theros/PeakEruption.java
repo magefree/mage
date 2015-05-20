@@ -59,7 +59,6 @@ public class PeakEruption extends CardImpl {
         super(ownerId, 132, "Peak Eruption", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Destroy target Mountain. Peak Eruption deals 3 damage to that land's controller.
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));

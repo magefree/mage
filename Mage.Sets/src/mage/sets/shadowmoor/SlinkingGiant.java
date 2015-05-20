@@ -49,7 +49,6 @@ public class SlinkingGiant extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Rogue");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

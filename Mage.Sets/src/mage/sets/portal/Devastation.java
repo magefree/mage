@@ -51,7 +51,6 @@ public class Devastation extends CardImpl {
         super(ownerId, 128, "Devastation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "POR";
 
-        this.color.setRed(true);
 
         // Destroy all creatures and lands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

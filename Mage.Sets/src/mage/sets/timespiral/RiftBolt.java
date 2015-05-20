@@ -46,7 +46,6 @@ public class RiftBolt extends CardImpl {
         super(ownerId, 176, "Rift Bolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Rift Bolt deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

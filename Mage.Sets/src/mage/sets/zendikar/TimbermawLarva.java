@@ -60,7 +60,6 @@ public class TimbermawLarva extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

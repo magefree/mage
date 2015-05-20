@@ -55,7 +55,6 @@ public class NaturalAffinity extends CardImpl {
         super(ownerId, 256, "Natural Affinity", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "9ED";
 
-        this.color.setGreen(true);
 
         // All lands become 2/2 creatures until end of turn. They're still lands.
         this.getSpellAbility().addEffect(new BecomesCreatureAllEffect());

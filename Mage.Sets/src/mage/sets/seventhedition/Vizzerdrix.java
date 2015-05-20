@@ -46,7 +46,6 @@ public class Vizzerdrix extends CardImpl {
         this.subtype.add("Rabbit");
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
     }

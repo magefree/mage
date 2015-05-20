@@ -51,7 +51,6 @@ public class ReadTheRunes extends CardImpl {
         super(ownerId, 104, "Read the Runes", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlue(true);
 
         // Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
         this.getSpellAbility().addEffect(new ReadTheRunesEffect());

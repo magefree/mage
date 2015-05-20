@@ -46,7 +46,6 @@ public class Archweaver extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

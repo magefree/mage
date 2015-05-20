@@ -56,7 +56,6 @@ public class KrosanGrip extends CardImpl {
         super(ownerId, 202, "Krosan Grip", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "TSP";
 
-        this.color.setGreen(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

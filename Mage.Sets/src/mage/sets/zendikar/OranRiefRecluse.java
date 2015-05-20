@@ -60,7 +60,6 @@ public class OranRiefRecluse extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

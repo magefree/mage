@@ -53,7 +53,6 @@ public class RustmouthOgre extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Ogre");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

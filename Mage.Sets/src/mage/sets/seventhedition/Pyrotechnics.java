@@ -44,7 +44,6 @@ public class Pyrotechnics extends CardImpl {
         super(ownerId, 210, "Pyrotechnics", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Pyrotechnics deals 4 damage divided as you choose among any number of target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));

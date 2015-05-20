@@ -51,7 +51,6 @@ public class TrapfindersTrick extends CardImpl {
         super(ownerId, 73, "Trapfinder's Trick", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         // Target player reveals his or her hand and discards all Trap cards.
         this.getSpellAbility().addEffect(new TrapfindersTrickEffect());

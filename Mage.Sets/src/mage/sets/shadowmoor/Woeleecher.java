@@ -57,7 +57,6 @@ public class Woeleecher extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Elemental");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

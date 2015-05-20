@@ -49,7 +49,6 @@ public class ChoArrimBruiser extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

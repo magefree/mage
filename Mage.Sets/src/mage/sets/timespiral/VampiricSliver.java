@@ -59,7 +59,6 @@ public class VampiricSliver extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Sliver");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

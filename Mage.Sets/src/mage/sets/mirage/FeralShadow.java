@@ -45,7 +45,6 @@ public class FeralShadow extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Nightstalker");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

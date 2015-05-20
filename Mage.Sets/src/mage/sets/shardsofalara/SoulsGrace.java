@@ -49,7 +49,6 @@ public class SoulsGrace extends CardImpl {
         super(ownerId, 28, "Soul's Grace", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         // You gain life equal to target creature's power.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

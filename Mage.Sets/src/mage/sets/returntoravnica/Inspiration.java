@@ -44,7 +44,6 @@ public class Inspiration extends CardImpl {
         super(ownerId, 42, "Inspiration", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // Target player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));

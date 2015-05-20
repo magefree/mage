@@ -49,7 +49,6 @@ public class ScreamsOfTheDamned extends CardImpl {
         super(ownerId, 160, "Screams of the Damned", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // {1}{B}, Exile a card from your graveyard: Screams of the Damned deals 1 damage to each creature and each player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{1}{B}"));

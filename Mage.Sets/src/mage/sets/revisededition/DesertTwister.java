@@ -44,7 +44,6 @@ public class DesertTwister extends CardImpl {
         super(ownerId, 99, "Desert Twister", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "3ED";
 
-        this.color.setGreen(true);
 
         // Destroy target permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -52,7 +52,6 @@ public class AssassinsStrike extends CardImpl {
         super(ownerId, 57, "Assassin's Strike", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. Its controller discards a card.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

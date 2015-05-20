@@ -51,7 +51,7 @@ public class BloodfireColossus extends CardImpl {
         super(ownerId, 55, "Bloodfire Colossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.expansionSetCode = "APC";
         this.subtype.add("Giant");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(6), new ColoredManaCost(ColoredManaSymbol.R));

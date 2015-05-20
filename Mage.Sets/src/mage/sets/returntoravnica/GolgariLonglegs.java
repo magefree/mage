@@ -44,8 +44,6 @@ public class GolgariLonglegs extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
     }

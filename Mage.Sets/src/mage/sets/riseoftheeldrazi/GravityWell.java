@@ -52,7 +52,6 @@ public class GravityWell extends CardImpl {
         super(ownerId, 185, "Gravity Well", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         // Whenever a creature with flying attacks, it loses flying until end of turn.
         this.addAbility(new GravityWellTriggeredAbility());

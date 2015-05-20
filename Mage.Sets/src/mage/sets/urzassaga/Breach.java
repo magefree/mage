@@ -48,7 +48,6 @@ public class Breach extends CardImpl {
         super(ownerId, 120, "Breach", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Target creature gets +2/+0 and gains fear until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));

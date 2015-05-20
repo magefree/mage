@@ -48,7 +48,6 @@ public class MerfolkObserver extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

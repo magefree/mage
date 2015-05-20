@@ -54,7 +54,7 @@ public class SavageGorilla extends CardImpl {
         super(ownerId, 85, "Savage Gorilla", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "APC";
         this.subtype.add("Ape");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new ManaCostsImpl("{U}{B}"));

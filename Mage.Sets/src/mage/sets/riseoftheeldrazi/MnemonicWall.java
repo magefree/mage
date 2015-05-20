@@ -60,7 +60,6 @@ public class MnemonicWall extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Wall");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

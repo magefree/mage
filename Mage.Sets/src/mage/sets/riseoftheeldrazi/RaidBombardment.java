@@ -50,7 +50,6 @@ public class RaidBombardment extends CardImpl {
         super(ownerId, 161, "Raid Bombardment", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to defending player.
         this.addAbility(new RaidBombardmentTriggeredAbility());

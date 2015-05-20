@@ -53,7 +53,6 @@ public class AccumulatedKnowledge extends CardImpl {
         super(ownerId, 26, "Accumulated Knowledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlue(true);
 
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

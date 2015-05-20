@@ -51,7 +51,6 @@ public class FinalFortune extends CardImpl {
         super(ownerId, 182, "Final Fortune", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
         this.getSpellAbility().addEffect(new FinalFortuneEffect());

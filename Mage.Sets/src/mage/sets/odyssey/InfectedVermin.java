@@ -50,7 +50,6 @@ public class InfectedVermin extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -54,7 +54,6 @@ public class LeechingSliver extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Sliver");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -51,7 +51,6 @@ public class Divert extends CardImpl {
         super(ownerId, 82, "Divert", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Change the target of target spell with a single target unless that spell's controller pays {2}.
         this.getSpellAbility().addTarget(new TargetSpell());

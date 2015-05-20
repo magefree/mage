@@ -50,7 +50,6 @@ public class BlisteringDieflyn extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Imp");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

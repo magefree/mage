@@ -55,7 +55,6 @@ public class InquisitorsSnare extends CardImpl {
         super(ownerId, 8, "Inquisitor's Snare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
         this.getSpellAbility().addEffect(new InquisitorsSnareEffect());

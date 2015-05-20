@@ -45,7 +45,6 @@ public class PeaceAndQuiet extends CardImpl {
         super(ownerId, 17, "Peace and Quiet", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Destroy two target enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

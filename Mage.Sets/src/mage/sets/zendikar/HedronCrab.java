@@ -47,7 +47,6 @@ public class HedronCrab extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Crab");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
         // Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.

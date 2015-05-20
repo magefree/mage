@@ -52,8 +52,6 @@ public class RepelIntruders extends CardImpl {
         super(ownerId, 147, "Repel Intruders", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders.
         TargetSpell target = new TargetSpell(0,1, new FilterCreatureSpell());

@@ -56,9 +56,6 @@ public class EsperCharm extends CardImpl {
         super(ownerId, 167, "Esper Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose one - Destroy target enchantment;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

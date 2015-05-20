@@ -63,7 +63,6 @@ public class MindbreakTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setBlue(true);
 
         // If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(

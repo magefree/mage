@@ -50,7 +50,6 @@ public class WarReport extends CardImpl {
         super(ownerId, 26, "War Report", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new WarReportEffect());
     }

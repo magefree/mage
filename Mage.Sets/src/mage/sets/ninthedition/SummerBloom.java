@@ -45,7 +45,6 @@ public class SummerBloom extends CardImpl {
         super(ownerId, 273, "Summer Bloom", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "9ED";
 
-        this.color.setGreen(true);
 
         // You may play up to three additional lands this turn.
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(3, Duration.EndOfTurn));

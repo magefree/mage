@@ -63,7 +63,6 @@ public class GatecreeperVine extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Plant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

@@ -46,7 +46,6 @@ public class AssertAuthority extends CardImpl {
         super(ownerId, 30, "Assert Authority", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{U}{U}");
         this.expansionSetCode = "MRD";
 
-        this.color.setBlue(true);
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());

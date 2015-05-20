@@ -49,7 +49,6 @@ public class PelakkaWurm extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

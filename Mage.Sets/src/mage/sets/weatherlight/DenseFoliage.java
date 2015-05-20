@@ -48,7 +48,6 @@ public class DenseFoliage extends CardImpl {
         super(ownerId, 66, "Dense Foliage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "WTH";
 
-        this.color.setGreen(true);
 
         // Creatures can't be the targets of spells.
         CantBeTargetedAllEffect cantTargetEffect = new CantBeTargetedAllEffect(new FilterCreaturePermanent("Creatures"), new FilterSpell("spells"), Duration.WhileOnBattlefield);

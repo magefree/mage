@@ -45,7 +45,6 @@ public class ZodiacPig extends CardImpl {
         this.expansionSetCode = "PTK";
         this.subtype.add("Boar");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

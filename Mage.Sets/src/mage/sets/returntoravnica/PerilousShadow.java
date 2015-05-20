@@ -51,7 +51,6 @@ public class PerilousShadow extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Shade");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

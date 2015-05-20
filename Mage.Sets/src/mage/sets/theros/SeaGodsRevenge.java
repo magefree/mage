@@ -45,7 +45,6 @@ public class SeaGodsRevenge extends CardImpl {
         super(ownerId, 61, "Sea God's Revenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Return up to three target creatures to their owners' hands. Scry 1.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

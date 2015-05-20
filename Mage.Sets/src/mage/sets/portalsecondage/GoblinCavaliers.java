@@ -44,7 +44,6 @@ public class GoblinCavaliers extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

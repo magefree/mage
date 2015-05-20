@@ -47,7 +47,6 @@ public class EndlessSwarm extends CardImpl {
         super(ownerId, 129, "Endless Swarm", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
         this.expansionSetCode = "SOK";
 
-        this.color.setGreen(true);
 
         // Put a 1/1 green Snake creature token onto the battlefield for each card in your hand.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), new CardsInControllerHandCount()));

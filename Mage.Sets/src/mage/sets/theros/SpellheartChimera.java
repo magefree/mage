@@ -52,8 +52,6 @@ public class SpellheartChimera extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Chimera");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

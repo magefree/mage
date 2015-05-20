@@ -52,7 +52,6 @@ public class MongrelPack extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Hound");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

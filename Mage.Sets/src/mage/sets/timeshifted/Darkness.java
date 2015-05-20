@@ -45,7 +45,6 @@ public class Darkness extends CardImpl {
         super(ownerId, 40, "Darkness", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "TSB";
 
-        this.color.setBlack(true);
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));

@@ -46,8 +46,6 @@ public class ShardlessAgent extends CardImpl {
        this.subtype.add("Human");
        this.subtype.add("Rogue");
 
-       this.color.setGreen(true);
-       this.color.setBlue(true);
        this.power = new MageInt(2);
        this.toughness = new MageInt(2);
 

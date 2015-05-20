@@ -51,7 +51,6 @@ public class SporeFrog extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Frog");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

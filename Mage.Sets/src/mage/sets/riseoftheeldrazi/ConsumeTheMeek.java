@@ -52,7 +52,6 @@ public class ConsumeTheMeek extends CardImpl {
         super(ownerId, 100, "Consume the Meek", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Destroy each creature with converted mana cost 3 or less. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));

@@ -50,7 +50,6 @@ public class IncrementalBlight extends CardImpl {
         super(ownerId, 70, "Incremental Blight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
         this.getSpellAbility().addEffect(new IncrementalBlightEffect());

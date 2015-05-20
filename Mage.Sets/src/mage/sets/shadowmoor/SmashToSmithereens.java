@@ -51,7 +51,6 @@ public class SmashToSmithereens extends CardImpl {
         super(ownerId, 107, "Smash to Smithereens", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

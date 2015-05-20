@@ -53,7 +53,6 @@ public class ShreddingWinds extends CardImpl {
         super(ownerId, 178, "Shredding Winds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Shredding Winds deals 7 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));

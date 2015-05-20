@@ -59,7 +59,6 @@ public class ComaVeil extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);

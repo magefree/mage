@@ -63,7 +63,6 @@ public class AkoumBattlesinger extends CardImpl {
         this.subtype.add("Berserker");
         this.subtype.add("Ally");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

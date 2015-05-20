@@ -51,7 +51,6 @@ public class ElandUmbra extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

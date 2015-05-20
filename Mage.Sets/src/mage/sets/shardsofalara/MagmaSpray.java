@@ -48,7 +48,6 @@ public class MagmaSpray extends CardImpl {
         super(ownerId, 108, "Magma Spray", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Magma Spray deals 2 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

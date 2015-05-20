@@ -61,8 +61,6 @@ public class GlenElendraLiege extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Knight");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

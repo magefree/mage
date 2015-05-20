@@ -56,7 +56,6 @@ public class SleepersGuile extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

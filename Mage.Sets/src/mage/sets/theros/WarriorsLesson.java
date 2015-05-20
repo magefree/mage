@@ -49,7 +49,6 @@ public class WarriorsLesson extends CardImpl {
         super(ownerId, 184, "Warriors' Lesson", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1),false);

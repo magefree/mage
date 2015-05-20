@@ -60,7 +60,6 @@ public class OrcishSettlers extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Orc");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

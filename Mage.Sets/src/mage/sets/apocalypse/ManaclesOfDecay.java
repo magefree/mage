@@ -52,7 +52,7 @@ public class ManaclesOfDecay extends CardImpl {
         super(ownerId, 14, "Manacles of Decay", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "APC";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

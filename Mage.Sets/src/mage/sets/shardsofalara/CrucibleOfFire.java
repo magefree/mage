@@ -53,7 +53,6 @@ public class CrucibleOfFire extends CardImpl {
         super(ownerId, 96, "Crucible of Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Dragon creatures you control get +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));

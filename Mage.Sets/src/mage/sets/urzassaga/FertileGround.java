@@ -58,7 +58,6 @@ public class FertileGround extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

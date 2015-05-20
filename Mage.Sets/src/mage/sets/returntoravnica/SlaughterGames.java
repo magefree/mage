@@ -58,8 +58,6 @@ public class SlaughterGames extends CardImpl {
         super(ownerId, 197, "Slaughter Games", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
 
         // Slaughter Games can't be countered by spells or abilities.
         Effect effect =  new CantBeCounteredSourceEffect();

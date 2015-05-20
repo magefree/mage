@@ -60,7 +60,6 @@ public class HeliodGodOfTheSun extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

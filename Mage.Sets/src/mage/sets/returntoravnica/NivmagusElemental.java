@@ -67,8 +67,6 @@ public class NivmagusElemental extends CardImpl {
         this.subtype.add("Elemental");
 
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

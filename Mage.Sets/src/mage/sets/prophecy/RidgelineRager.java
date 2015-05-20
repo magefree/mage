@@ -50,7 +50,6 @@ public class RidgelineRager extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

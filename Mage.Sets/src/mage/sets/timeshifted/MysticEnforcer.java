@@ -63,8 +63,6 @@ public class MysticEnforcer extends CardImpl {
         this.subtype.add("Nomad");
         this.subtype.add("Mystic");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

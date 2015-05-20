@@ -70,8 +70,6 @@ public class XenagosTheReveler extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Xenagos");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

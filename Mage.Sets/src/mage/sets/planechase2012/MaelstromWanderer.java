@@ -60,9 +60,6 @@ public class MaelstromWanderer extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 

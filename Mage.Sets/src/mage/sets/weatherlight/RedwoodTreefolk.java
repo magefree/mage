@@ -44,7 +44,6 @@ public class RedwoodTreefolk extends CardImpl {
         this.expansionSetCode = "WTH";
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
     }

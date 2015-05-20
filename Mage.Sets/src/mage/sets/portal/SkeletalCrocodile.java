@@ -45,7 +45,6 @@ public class SkeletalCrocodile extends CardImpl {
         this.subtype.add("Crocodile");
         this.subtype.add("Skeleton");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
     }

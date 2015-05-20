@@ -62,7 +62,6 @@ public class JoragaBard extends CardImpl {
         this.subtype.add("Rogue");
         this.subtype.add("Ally");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

@@ -52,7 +52,6 @@ public class Agility extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

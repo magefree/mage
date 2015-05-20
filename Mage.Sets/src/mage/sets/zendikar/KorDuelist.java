@@ -58,7 +58,6 @@ public class KorDuelist extends CardImpl {
         this.subtype.add("Kor");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         GainAbilitySourceEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);

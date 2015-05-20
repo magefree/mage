@@ -44,7 +44,6 @@ public class RowanTreefolk extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
     }

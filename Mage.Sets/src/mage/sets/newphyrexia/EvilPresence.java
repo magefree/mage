@@ -51,7 +51,6 @@ public class EvilPresence extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);

@@ -50,7 +50,6 @@ public class SanctumGargoyle extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Gargoyle");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

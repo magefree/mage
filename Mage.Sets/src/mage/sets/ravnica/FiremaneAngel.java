@@ -60,8 +60,6 @@ public class FiremaneAngel extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Angel");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

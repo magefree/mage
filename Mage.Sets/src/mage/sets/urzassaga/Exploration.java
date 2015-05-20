@@ -46,7 +46,6 @@ public class Exploration extends CardImpl {
         super(ownerId, 250, "Exploration", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "USG";
 
-        this.color.setGreen(true);
 
         // You may play an additional land on each of your turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

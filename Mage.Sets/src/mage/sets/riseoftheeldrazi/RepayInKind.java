@@ -48,7 +48,6 @@ public class RepayInKind extends CardImpl {
         super(ownerId, 125, "Repay in Kind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // Each player's life total becomes the lowest life total among all players.
         this.getSpellAbility().addEffect(new RepayInKindEffect());

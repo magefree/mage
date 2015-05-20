@@ -45,7 +45,6 @@ public class GiantMantis extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

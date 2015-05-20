@@ -61,7 +61,6 @@ public class KazuulWarlord extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Ally");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

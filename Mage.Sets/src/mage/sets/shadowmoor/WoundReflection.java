@@ -50,7 +50,6 @@ public class WoundReflection extends CardImpl {
         super(ownerId, 81, "Wound Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new WoundReflectionEffect(), TargetController.ANY, false));

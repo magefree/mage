@@ -45,8 +45,6 @@ public class MarshGoblins extends CardImpl {
         this.expansionSetCode = "DRK";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -58,7 +58,6 @@ public class CarpetOfFlowers extends CardImpl {
         super(ownerId, 240, "Carpet of Flowers", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "USG";
 
-        this.color.setGreen(true);
 
         // At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
         this.addAbility(new CarpetOfFlowersTriggeredAbility());

@@ -55,7 +55,6 @@ public class Exhaustion extends CardImpl {
         super(ownerId, 42, "Exhaustion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "PTK";
 
-        this.color.setBlue(true);
 
         // Creatures and lands target opponent controls don't untap during his or her next untap step.
         this.getSpellAbility().addEffect(new ExhaustionEffect());

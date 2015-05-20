@@ -47,7 +47,6 @@ public class InvincibleHymn extends CardImpl {
         super(ownerId, 14, "Invincible Hymn", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
 
         // Count the number of cards in your library. Your life total becomes that number.
         this.getSpellAbility().addEffect(new InvincibleHymnEffect());

@@ -53,7 +53,6 @@ public class Eureka extends CardImpl {
         super(ownerId, 208, "Eureka", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "VMA";
 
-        this.color.setGreen(true);
 
         // Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
         this.getSpellAbility().addEffect(new EurekaEffect());

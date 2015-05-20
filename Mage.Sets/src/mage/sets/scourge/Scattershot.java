@@ -45,7 +45,6 @@ public class Scattershot extends CardImpl {
         super(ownerId, 102, "Scattershot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "SCG";
 
-        this.color.setRed(true);
 
         // Scattershot deals 1 damage to target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

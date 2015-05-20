@@ -63,8 +63,6 @@ public class LoxodonHierarch extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Cleric");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

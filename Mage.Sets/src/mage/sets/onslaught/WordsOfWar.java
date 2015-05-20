@@ -55,7 +55,6 @@ public class WordsOfWar extends CardImpl {
         super(ownerId, 244, "Words of War", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWarEffect(), new GenericManaCost(1));

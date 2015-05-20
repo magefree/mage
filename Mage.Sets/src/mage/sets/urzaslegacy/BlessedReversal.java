@@ -49,7 +49,6 @@ public class BlessedReversal extends CardImpl {
         super(ownerId, 2, "Blessed Reversal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // You gain 3 life for each creature attacking you.
         this.getSpellAbility().addEffect(new GainLifeEffect(new BlessedReversalCount()));

@@ -51,7 +51,6 @@ public class BattleOfWits extends CardImpl {
         super(ownerId, 65, "Battle of Wits", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlue(true);
 
         // At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);

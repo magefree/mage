@@ -59,7 +59,6 @@ public class Broodstar extends CardImpl {
         this.expansionSetCode = "HOP";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

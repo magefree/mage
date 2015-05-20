@@ -58,7 +58,6 @@ public class NaturalOrder extends CardImpl {
         super(ownerId, 64, "Natural Order", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "VIS";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Natural Order, sacrifice a green creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true)));

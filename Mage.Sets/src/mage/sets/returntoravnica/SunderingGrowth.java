@@ -56,8 +56,6 @@ public class SunderingGrowth extends CardImpl {
         super(ownerId, 223, "Sundering Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G/W}{G/W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Destroy target artifact or enchantment, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

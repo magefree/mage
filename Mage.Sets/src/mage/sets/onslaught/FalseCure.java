@@ -51,7 +51,6 @@ public class FalseCure extends CardImpl {
         super(ownerId, 146, "False Cure", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "ONS";
 
-        this.color.setBlack(true);
 
         // Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new FalseCureTriggeredAbility()));

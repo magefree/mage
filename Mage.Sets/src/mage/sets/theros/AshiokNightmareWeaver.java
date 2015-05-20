@@ -73,8 +73,6 @@ public class AshiokNightmareWeaver extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Ashiok");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

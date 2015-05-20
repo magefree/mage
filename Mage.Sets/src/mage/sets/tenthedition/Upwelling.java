@@ -54,7 +54,6 @@ public class Upwelling extends CardImpl {
         super(ownerId, 306, "Upwelling", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "10E";
 
-        this.color.setGreen(true);
 
         // Mana pools don't empty as steps and phases end.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UpwellingRuleEffect()));

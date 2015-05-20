@@ -54,7 +54,6 @@ public class ObstinateFamiliar extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

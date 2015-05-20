@@ -52,7 +52,6 @@ public class HuntedLammasu extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Lammasu");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

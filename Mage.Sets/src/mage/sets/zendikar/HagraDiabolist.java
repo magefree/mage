@@ -63,7 +63,6 @@ public class HagraDiabolist extends CardImpl {
         this.subtype.add("Shaman");
         this.subtype.add("Ally");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

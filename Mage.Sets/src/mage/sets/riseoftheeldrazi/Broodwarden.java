@@ -58,7 +58,6 @@ public class Broodwarden extends CardImpl {
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // Eldrazi Spawn creatures you control get +2/+1.

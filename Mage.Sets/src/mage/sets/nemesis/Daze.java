@@ -58,7 +58,6 @@ public class Daze extends CardImpl {
         super(ownerId, 30, "Daze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlue(true);
 
         // You may return an Island you control to its owner's hand rather than pay Daze's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetCost(new TargetControlledPermanent(filter))));

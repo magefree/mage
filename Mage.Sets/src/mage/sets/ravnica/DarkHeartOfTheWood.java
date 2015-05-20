@@ -56,8 +56,6 @@ public class DarkHeartOfTheWood extends CardImpl {
         super(ownerId, 200, "Dark Heart of the Wood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Sacrifice a Forest: You gain 3 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

@@ -46,7 +46,6 @@ public class CarefulConsideration extends CardImpl {
         super(ownerId, 52, "Careful Consideration", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

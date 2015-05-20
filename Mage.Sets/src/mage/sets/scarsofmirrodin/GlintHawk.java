@@ -57,7 +57,6 @@ public class GlintHawk extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

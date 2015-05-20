@@ -48,7 +48,6 @@ public class ScavengerDrake extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Drake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

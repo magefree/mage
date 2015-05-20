@@ -49,7 +49,6 @@ public class GrotagThrasher extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -51,7 +51,6 @@ public class TwistedAbomination extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Mutant");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

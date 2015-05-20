@@ -50,7 +50,6 @@ public class SelectiveMemory extends CardImpl {
         super(ownerId, 37, "Selective Memory", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // Search your library for any number of nonland cards and exile them. Then shuffle your library.
         this.getSpellAbility().addEffect(new SelectiveMemoryEffect());

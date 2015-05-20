@@ -44,7 +44,6 @@ public class PlatedWurm extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
     }

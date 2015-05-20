@@ -52,7 +52,6 @@ public class AngelsGrace extends CardImpl {
         super(ownerId, 3, "Angel's Grace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "TSP";
 
-        this.color.setWhite(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

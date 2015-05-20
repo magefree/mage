@@ -50,7 +50,6 @@ public class PortentOfBetrayal extends CardImpl {
         super(ownerId, 133, "Portent of Betrayal", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

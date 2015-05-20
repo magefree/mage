@@ -48,7 +48,6 @@ public class ChainersEdict extends CardImpl {
         super(ownerId, 108, "Chainer's Edict", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlack(true);
 
         // Target player sacrifices a creature.        
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));

@@ -47,7 +47,6 @@ public class Upheaval extends CardImpl {
         super(ownerId, 113, "Upheaval", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Return all permanents to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));

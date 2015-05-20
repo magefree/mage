@@ -56,7 +56,6 @@ public class ElementalAppeal extends CardImpl {
         super(ownerId, 123, "Elemental Appeal", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Kicker {5}
         this.addAbility(new KickerAbility("{5}"));

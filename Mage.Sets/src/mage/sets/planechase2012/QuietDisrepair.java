@@ -67,7 +67,6 @@ public class QuietDisrepair extends CardImpl {
         this.expansionSetCode = "PC2";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant artifact or enchantment
         TargetPermanent auraTarget = new TargetPermanent(filter);

@@ -48,7 +48,6 @@ public class CallOfTheHerd extends CardImpl {
         super(ownerId, 74, "Call of the Herd", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "TSB";
 
-        this.color.setGreen(true);
 
         // Put a 3/3 green Elephant creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));

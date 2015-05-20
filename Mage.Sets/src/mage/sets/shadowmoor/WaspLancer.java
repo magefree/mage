@@ -46,8 +46,6 @@ public class WaspLancer extends CardImpl {
         this.subtype.add("Faerie");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

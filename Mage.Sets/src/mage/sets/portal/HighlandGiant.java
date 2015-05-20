@@ -44,7 +44,6 @@ public class HighlandGiant extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
     }

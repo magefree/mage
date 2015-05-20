@@ -53,7 +53,6 @@ public class SeismicShudder extends CardImpl {
         super(ownerId, 147, "Seismic Shudder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }

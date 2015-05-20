@@ -44,7 +44,6 @@ public class RavagesOfWar extends CardImpl {
         super(ownerId, 17, "Ravages of War", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "PTK";
 
-        this.color.setWhite(true);
 
         // Destroy all lands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterLandPermanent("lands")));

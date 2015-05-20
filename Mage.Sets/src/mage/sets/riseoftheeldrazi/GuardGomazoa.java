@@ -51,7 +51,6 @@ public class GuardGomazoa extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Jellyfish");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

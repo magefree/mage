@@ -45,7 +45,6 @@ public class ElvishLookout extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

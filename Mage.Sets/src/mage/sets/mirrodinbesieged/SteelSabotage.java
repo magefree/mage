@@ -55,7 +55,6 @@ public class SteelSabotage extends CardImpl {
         super(ownerId, 33, "Steel Sabotage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "MBS";
 
-        this.color.setBlue(true);
 
         // Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

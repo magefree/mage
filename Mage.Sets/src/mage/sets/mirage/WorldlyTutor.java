@@ -45,7 +45,6 @@ public class WorldlyTutor extends CardImpl {
         super(ownerId, 153, "Worldly Tutor", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MIR";
 
-        this.color.setGreen(true);
 
         // Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
        this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterCreatureCard()), true, true));

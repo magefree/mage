@@ -45,7 +45,6 @@ public class SatyrRambler extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Satyr");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

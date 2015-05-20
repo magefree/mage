@@ -53,7 +53,6 @@ public class SacredGround extends CardImpl {
         super(ownerId, 112, "Sacred Ground", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "STH";
 
-        this.color.setWhite(true);
 
         // Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.
         this.addAbility(new SacredGroundTriggeredAbility());

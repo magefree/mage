@@ -47,8 +47,6 @@ public class CollectiveBlessing extends CardImpl {
         super(ownerId, 150, "Collective Blessing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Creatures you control get +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Duration.WhileOnBattlefield)));

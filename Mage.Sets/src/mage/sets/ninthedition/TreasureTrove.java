@@ -47,7 +47,6 @@ public class TreasureTrove extends CardImpl {
         super(ownerId, 110, "Treasure Trove", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlue(true);
 
         // {2}{U}{U}: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}{U}{U}")));

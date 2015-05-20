@@ -50,7 +50,6 @@ public class DueRespect extends CardImpl {
         super(ownerId, 8, "Due Respect", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         // Permanents enter the battlefield tapped this turn.
         this.getSpellAbility().addEffect(new DueRespectEffect());

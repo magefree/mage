@@ -69,7 +69,6 @@ public class QuestForTheHolyRelic extends CardImpl {
         super(ownerId, 33, "Quest for the Holy Relic", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setWhite(true);
 
         // Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, true));

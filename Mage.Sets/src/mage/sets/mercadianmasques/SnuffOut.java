@@ -62,7 +62,6 @@ public class SnuffOut extends CardImpl {
         super(ownerId, 162, "Snuff Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setBlack(true);
 
         // If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(

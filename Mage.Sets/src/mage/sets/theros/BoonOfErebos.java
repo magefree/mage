@@ -47,7 +47,6 @@ public class BoonOfErebos extends CardImpl {
         super(ownerId, 80, "Boon of Erebos", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Target creature gets +2/+0 until end of turn.  Regenerate it.  You lose 2 life.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,0, Duration.EndOfTurn));

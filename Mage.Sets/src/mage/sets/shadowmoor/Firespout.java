@@ -59,8 +59,6 @@ public class Firespout extends CardImpl {
         super(ownerId, 205, "Firespout", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R/G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

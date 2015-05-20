@@ -52,7 +52,6 @@ public class DefensiveStance extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

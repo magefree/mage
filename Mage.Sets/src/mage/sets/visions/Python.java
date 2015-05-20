@@ -44,7 +44,6 @@ public class Python extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Snake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

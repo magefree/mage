@@ -54,7 +54,6 @@ public class ThallidShellDweller extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

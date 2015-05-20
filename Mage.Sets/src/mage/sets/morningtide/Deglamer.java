@@ -59,7 +59,6 @@ public class Deglamer extends CardImpl {
         super(ownerId, 118, "Deglamer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "MOR";
 
-        this.color.setGreen(true);
 
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new DeglamerShuffleIntoLibraryEffect());

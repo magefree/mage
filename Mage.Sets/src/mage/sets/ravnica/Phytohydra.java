@@ -53,8 +53,6 @@ public class Phytohydra extends CardImpl {
         this.subtype.add("Plant");
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

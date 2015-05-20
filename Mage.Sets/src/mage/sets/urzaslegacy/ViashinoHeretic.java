@@ -57,7 +57,6 @@ public class ViashinoHeretic extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Viashino");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

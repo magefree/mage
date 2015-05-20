@@ -54,7 +54,7 @@ public class DesolationAngel extends CardImpl {
         super(ownerId, 38, "Desolation Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "APC";
         this.subtype.add("Angel");
-        this.color.setBlack(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

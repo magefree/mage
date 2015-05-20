@@ -48,7 +48,6 @@ public class VinelasherKudzu extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Plant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

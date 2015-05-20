@@ -52,7 +52,7 @@ public class AnaDisciple extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));

@@ -46,7 +46,6 @@ public class CabalRitual extends CardImpl {
         super(ownerId, 51, "Cabal Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "TOR";
 
-        this.color.setBlack(true);
 
         // Add {B}{B}{B} to your mana pool.
         // Threshold — Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard.

@@ -53,7 +53,6 @@ public class MassCalcify extends CardImpl {
         super(ownerId, 12, "Mass Calcify", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Destroy all nonwhite creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

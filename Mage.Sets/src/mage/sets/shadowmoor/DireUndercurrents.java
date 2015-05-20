@@ -63,8 +63,6 @@ public class DireUndercurrents extends CardImpl {
         super(ownerId, 159, "Dire Undercurrents", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U/B}{U/B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), filterBlue, true, rule1);

@@ -58,7 +58,6 @@ public class PhyrexianUnlife extends CardImpl {
         super(ownerId, 18, "Phyrexian Unlife", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         // You don't lose the game for having 0 or less life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));

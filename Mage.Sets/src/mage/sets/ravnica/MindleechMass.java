@@ -57,8 +57,6 @@ public class MindleechMass extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

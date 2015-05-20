@@ -60,7 +60,6 @@ public class CephalidRetainer extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Cephalid");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

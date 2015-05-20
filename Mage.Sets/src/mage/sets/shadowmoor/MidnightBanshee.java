@@ -60,7 +60,6 @@ public class MidnightBanshee extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

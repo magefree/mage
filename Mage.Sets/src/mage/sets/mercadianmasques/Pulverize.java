@@ -54,7 +54,6 @@ public class Pulverize extends CardImpl {
         super(ownerId, 207, "Pulverize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setRed(true);
 
         // You may sacrifice two Mountains rather than pay Pulverize's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));

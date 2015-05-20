@@ -52,7 +52,6 @@ public class FlowOfIdeas extends CardImpl {
         super(ownerId, 38, "Flow of Ideas", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
 
         // Draw a card for each Island you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));

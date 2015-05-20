@@ -63,7 +63,6 @@ public class HuntTheHunter extends CardImpl {
         super(ownerId, 159, "Hunt the Hunter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "THS";
 
-        this.color.setGreen(true);
 
         // Target green creature you control gets +2/+2 until end of turn. It fights target green creature an opponent controls.
         Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);

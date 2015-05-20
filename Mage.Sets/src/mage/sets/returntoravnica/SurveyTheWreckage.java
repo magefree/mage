@@ -45,7 +45,6 @@ public class SurveyTheWreckage extends CardImpl {
         super(ownerId, 107, "Survey the Wreckage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // Destroy target land. Put a 1/1 red Goblin creature token onto the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

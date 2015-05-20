@@ -49,7 +49,6 @@ public class VisceraDragger extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -50,8 +50,6 @@ public class CrystallineSliver extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Sliver");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

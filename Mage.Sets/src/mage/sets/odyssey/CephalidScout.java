@@ -55,7 +55,6 @@ public class CephalidScout extends CardImpl {
         this.subtype.add("Wizard");
         this.subtype.add("Scout");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

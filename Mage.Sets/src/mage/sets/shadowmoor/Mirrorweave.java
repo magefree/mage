@@ -61,8 +61,6 @@ public class Mirrorweave extends CardImpl {
         super(ownerId, 143, "Mirrorweave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W/U}{W/U}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Each other creature becomes a copy of target nonlegendary creature until end of turn.
         this.getSpellAbility().addEffect(new MirrorWeaveEffect());

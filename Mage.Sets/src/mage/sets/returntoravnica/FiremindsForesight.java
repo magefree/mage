@@ -58,8 +58,6 @@ public class FiremindsForesight extends CardImpl {
         super(ownerId, 162, "Firemind's Foresight", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Search your library for an instant card with converted mana cost 3, reveal it,
         // and put it into your hand. Then repeat this process for instant cards with

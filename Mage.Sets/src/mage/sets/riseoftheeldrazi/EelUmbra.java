@@ -52,7 +52,6 @@ public class EelUmbra extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         this.addAbility(FlashAbility.getInstance());
         // Enchant creature

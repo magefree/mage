@@ -48,7 +48,6 @@ public class ThievesFortune extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
 
         // Prowl {U}
         this.addAbility(new ProwlAbility(this, "{U}"));

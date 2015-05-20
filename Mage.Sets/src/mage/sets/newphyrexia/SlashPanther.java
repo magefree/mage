@@ -45,7 +45,6 @@ public class SlashPanther extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

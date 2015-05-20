@@ -44,7 +44,6 @@ public class MarrowShards extends CardImpl {
         super(ownerId, 15, "Marrow Shards", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{WP}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }

@@ -53,7 +53,6 @@ public class RubblebackRhino extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Rhino");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

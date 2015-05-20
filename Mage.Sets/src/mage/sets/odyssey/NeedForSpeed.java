@@ -55,7 +55,6 @@ public class NeedForSpeed extends CardImpl {
         super(ownerId, 209, "Need for Speed", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Sacrifice a land: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 

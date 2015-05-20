@@ -58,7 +58,6 @@ public class DayOfTheDragons extends CardImpl {
         super(ownerId, 31, "Day of the Dragons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlue(true);
 
         // When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DayOfTheDragonsEntersEffect(), false));

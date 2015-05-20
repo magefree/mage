@@ -51,7 +51,6 @@ public class Metallurgeon extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Artificer");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

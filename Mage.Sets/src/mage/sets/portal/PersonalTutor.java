@@ -50,7 +50,6 @@ public class PersonalTutor extends CardImpl {
         super(ownerId, 65, "Personal Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "POR";
 
-        this.color.setBlue(true);
 
         // Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));

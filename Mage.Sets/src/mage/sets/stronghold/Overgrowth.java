@@ -57,7 +57,6 @@ public class Overgrowth extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

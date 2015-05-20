@@ -58,7 +58,6 @@ public class PredatoryUrge extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

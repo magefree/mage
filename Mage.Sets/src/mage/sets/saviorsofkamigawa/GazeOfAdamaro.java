@@ -49,7 +49,6 @@ public class GazeOfAdamaro extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Gaze of Adamaro deals damage to target player equal to the number of cards in that player's hand.
         this.getSpellAbility().addEffect(new GazeOfAdamaroEffect());

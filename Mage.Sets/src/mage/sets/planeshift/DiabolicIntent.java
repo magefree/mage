@@ -47,7 +47,6 @@ public class DiabolicIntent extends CardImpl {
         super(ownerId, 42, "Diabolic Intent", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "PLS";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Diabolic Intent, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

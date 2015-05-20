@@ -54,7 +54,6 @@ public class PatternOfRebirth extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

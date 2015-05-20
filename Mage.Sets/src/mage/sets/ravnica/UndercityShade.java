@@ -48,7 +48,6 @@ public class UndercityShade extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Shade");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

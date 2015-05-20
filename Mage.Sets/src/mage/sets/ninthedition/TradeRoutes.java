@@ -64,7 +64,6 @@ public class TradeRoutes extends CardImpl {
         super(ownerId, 108, "Trade Routes", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlue(true);
 
         // {1}: Return target land you control to its owner's hand.
         Effect returnToHand = new ReturnToHandTargetEffect();

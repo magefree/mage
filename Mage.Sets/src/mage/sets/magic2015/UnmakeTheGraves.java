@@ -46,7 +46,6 @@ public class UnmakeTheGraves extends CardImpl {
         super(ownerId, 120, "Unmake the Graves", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

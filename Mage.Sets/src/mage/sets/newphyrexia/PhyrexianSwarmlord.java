@@ -58,7 +58,6 @@ public class PhyrexianSwarmlord extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Horror");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

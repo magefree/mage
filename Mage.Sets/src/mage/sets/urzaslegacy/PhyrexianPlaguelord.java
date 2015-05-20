@@ -54,7 +54,6 @@ public class PhyrexianPlaguelord extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Carrier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

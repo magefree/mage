@@ -52,8 +52,6 @@ public class RakdosRingleader extends CardImpl {
         this.subtype.add("Skeleton");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

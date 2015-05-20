@@ -53,7 +53,6 @@ public class VirtuesRuin extends CardImpl {
         super(ownerId, 39, "Virtue's Ruin", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "POR";
 
-        this.color.setBlack(true);
 
         // Destroy all white creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

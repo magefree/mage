@@ -46,7 +46,6 @@ public class ReapingTheGraves extends CardImpl {
         super(ownerId, 72, "Reaping the Graves", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.        
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));

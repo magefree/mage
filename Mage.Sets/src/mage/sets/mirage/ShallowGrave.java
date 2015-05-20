@@ -57,7 +57,6 @@ public class ShallowGrave extends CardImpl {
         super(ownerId, 39, "Shallow Grave", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlack(true);
 
         // Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ShallowGraveEffect());

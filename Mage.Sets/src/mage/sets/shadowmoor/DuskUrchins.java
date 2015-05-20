@@ -50,7 +50,6 @@ public class DuskUrchins extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Ouphe");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

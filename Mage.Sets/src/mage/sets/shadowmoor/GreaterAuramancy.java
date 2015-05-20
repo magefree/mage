@@ -64,7 +64,6 @@ public class GreaterAuramancy extends CardImpl {
         super(ownerId, 7, "Greater Auramancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Other enchantments you control have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));

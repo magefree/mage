@@ -59,7 +59,6 @@ public class CavalryMaster extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Knight");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

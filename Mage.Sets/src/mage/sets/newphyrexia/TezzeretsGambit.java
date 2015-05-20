@@ -44,7 +44,6 @@ public class TezzeretsGambit extends CardImpl {
         super(ownerId, 47, "Tezzeret's Gambit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{UP}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new ProliferateEffect());
     }

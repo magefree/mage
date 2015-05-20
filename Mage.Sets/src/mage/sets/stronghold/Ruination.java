@@ -53,7 +53,6 @@ public class Ruination extends CardImpl {
         super(ownerId, 95, "Ruination", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "STH";
 
-        this.color.setRed(true);
 
         // Destroy all nonbasic lands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

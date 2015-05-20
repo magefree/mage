@@ -56,7 +56,6 @@ public class SunderingVitae extends CardImpl {
         super(ownerId, 185, "Sundering Vitae", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

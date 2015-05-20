@@ -46,7 +46,6 @@ public class SandbarSerpent extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

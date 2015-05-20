@@ -56,7 +56,6 @@ public class Intervene extends CardImpl {
         super(ownerId, 33, "Intervene", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Counter target spell that targets a creature.
         this.getSpellAbility().addTarget(new InterveneTargetSpell());

@@ -49,7 +49,6 @@ public class CloudOfFaeries extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Faerie");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

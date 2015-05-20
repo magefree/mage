@@ -52,7 +52,6 @@ public class StripBare extends CardImpl {
         super(ownerId, 24, "Strip Bare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // Destroy all Auras and Equipment attached to target creature.
         this.getSpellAbility().addEffect(new StripBareEffect());

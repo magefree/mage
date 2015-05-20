@@ -62,8 +62,6 @@ public class WheelOfSunAndMoon extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

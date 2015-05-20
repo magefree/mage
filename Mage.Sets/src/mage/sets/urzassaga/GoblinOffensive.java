@@ -46,7 +46,6 @@ public class GoblinOffensive extends CardImpl {
         super(ownerId, 192, "Goblin Offensive", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{R}{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // Put X 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), new ManacostVariableValue()));

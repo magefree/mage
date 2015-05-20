@@ -46,7 +46,6 @@ public class MarchOfTheReturned extends CardImpl {
         super(ownerId, 96, "March of the Returned", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

@@ -50,9 +50,6 @@ public class GrixisCharm extends CardImpl {
         super(ownerId, 171, "Grixis Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Choose one - Return target permanent to its owner's hand;
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

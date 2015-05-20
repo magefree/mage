@@ -45,7 +45,6 @@ public class GoblinLore extends CardImpl {
         super(ownerId, 208, "Goblin Lore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         // Draw four cards, then discard three cards at random.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

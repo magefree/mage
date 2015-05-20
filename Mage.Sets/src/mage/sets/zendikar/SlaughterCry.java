@@ -47,7 +47,6 @@ public class SlaughterCry extends CardImpl {
         super(ownerId, 149, "Slaughter Cry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));

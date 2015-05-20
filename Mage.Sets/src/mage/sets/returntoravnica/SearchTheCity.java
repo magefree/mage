@@ -60,7 +60,6 @@ public class SearchTheCity extends CardImpl {
         super(ownerId, 49, "Search the City", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
 
         // When Search the City enters the battlefield, exile the top five cards of your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchTheCityExileEffect()));

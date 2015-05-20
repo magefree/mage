@@ -51,7 +51,6 @@ public class FeudkillersVerdict extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Giant");
 
-        this.color.setWhite(true);
 
         // You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token onto the battlefield.
         this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());

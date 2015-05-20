@@ -51,7 +51,6 @@ public class AvengingArrow extends CardImpl {
         super(ownerId, 4, "Avenging Arrow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // Destroy target creature that dealt damage this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

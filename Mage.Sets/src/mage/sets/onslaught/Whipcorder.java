@@ -54,7 +54,6 @@ public class Whipcorder extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

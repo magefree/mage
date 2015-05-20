@@ -56,7 +56,6 @@ public class RayOfDistortion extends CardImpl {
         super(ownerId, 42, "Ray of Distortion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

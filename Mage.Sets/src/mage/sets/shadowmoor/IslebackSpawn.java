@@ -52,7 +52,6 @@ public class IslebackSpawn extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(8);
 

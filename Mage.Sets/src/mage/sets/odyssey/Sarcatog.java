@@ -54,8 +54,6 @@ public class Sarcatog extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Atog");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

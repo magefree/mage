@@ -45,7 +45,6 @@ public class FemerefScouts extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
     }

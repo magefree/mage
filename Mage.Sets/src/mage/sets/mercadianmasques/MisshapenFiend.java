@@ -46,7 +46,6 @@ public class MisshapenFiend extends CardImpl {
         this.subtype.add("Horror");
         this.subtype.add("Mercenary");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

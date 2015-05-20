@@ -51,7 +51,6 @@ public class SerraAvatar extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

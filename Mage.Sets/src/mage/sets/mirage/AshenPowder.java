@@ -45,7 +45,6 @@ public class AshenPowder extends CardImpl {
         super(ownerId, 2, "Ashen Powder", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlack(true);
 
         // Put target creature card from an opponent's graveyard onto the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(new FilterCreatureCard("creature card from an opponent's graveyard")));

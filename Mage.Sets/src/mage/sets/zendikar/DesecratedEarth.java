@@ -51,7 +51,6 @@ public class DesecratedEarth extends CardImpl {
         super(ownerId, 86, "Desecrated Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Destroy target land. Its controller discards a card.
         this.getSpellAbility().addTarget(new TargetLandPermanent());

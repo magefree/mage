@@ -52,8 +52,6 @@ public class Lithatog extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Atog");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -48,7 +48,6 @@ public class ShimmeringBarrier extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Wall");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

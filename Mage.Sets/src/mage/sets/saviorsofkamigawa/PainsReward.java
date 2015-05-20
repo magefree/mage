@@ -48,7 +48,6 @@ public class PainsReward extends CardImpl {
         super(ownerId, 85, "Pain's Reward", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // Each player may bid life. You start the bidding with a bid of any number. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and draws four cards.
         this.getSpellAbility().addEffect(new PainsRewardEffect());

@@ -62,7 +62,6 @@ public class SpearOfHeliod extends CardImpl {
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
 
-        this.color.setWhite(true);
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield)));

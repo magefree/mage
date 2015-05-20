@@ -54,7 +54,6 @@ public class SeraphOfTheMasses extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

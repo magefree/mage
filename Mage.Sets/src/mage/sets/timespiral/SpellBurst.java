@@ -51,7 +51,6 @@ public class SpellBurst extends CardImpl {
         super(ownerId, 79, "Spell Burst", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Buyback {3}
         this.addAbility(new BuybackAbility("{3}"));

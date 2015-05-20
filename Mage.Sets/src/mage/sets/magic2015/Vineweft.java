@@ -56,7 +56,6 @@ public class Vineweft extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

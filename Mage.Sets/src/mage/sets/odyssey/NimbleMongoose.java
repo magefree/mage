@@ -52,7 +52,6 @@ public class NimbleMongoose extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Mongoose");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

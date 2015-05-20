@@ -63,7 +63,6 @@ public class RunedHalo extends CardImpl {
         super(ownerId, 21, "Runed Halo", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setWhite(true);
 
         // As Runed Halo enters the battlefield, name a card.
         Ability ability = new AsEntersBattlefieldAbility(new NameACardEffect(NameACardEffect.TypeOfName.ALL));

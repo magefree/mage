@@ -46,7 +46,6 @@ public class DrudgeBeetle extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

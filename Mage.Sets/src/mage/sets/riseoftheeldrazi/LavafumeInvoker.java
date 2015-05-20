@@ -50,7 +50,6 @@ public class LavafumeInvoker extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

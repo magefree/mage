@@ -56,7 +56,6 @@ public class GrimDiscovery extends CardImpl {
         super(ownerId, 91, "Grim Discovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);

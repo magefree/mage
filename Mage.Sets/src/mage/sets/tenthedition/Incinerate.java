@@ -52,7 +52,6 @@ public class Incinerate extends CardImpl {
         super(ownerId, 213, "Incinerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

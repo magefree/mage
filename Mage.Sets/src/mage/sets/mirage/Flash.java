@@ -55,7 +55,6 @@ public class Flash extends CardImpl {
         super(ownerId, 66, "Flash", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlue(true);
 
         // You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to {2}.
         this.getSpellAbility().addEffect(new FlashEffect());

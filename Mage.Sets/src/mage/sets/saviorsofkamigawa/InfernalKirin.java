@@ -60,7 +60,6 @@ public class InfernalKirin extends CardImpl {
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

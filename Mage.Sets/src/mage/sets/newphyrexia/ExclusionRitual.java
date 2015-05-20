@@ -60,7 +60,6 @@ public class ExclusionRitual extends CardImpl {
         super(ownerId, 10, "Exclusion Ritual", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}{W}");
         this.expansionSetCode = "NPH";
 
-        this.color.setWhite(true);
 
         // Imprint - When Exclusion Ritual enters the battlefield, exile target nonland permanent.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExclusionRitualImprintEffect(), false);

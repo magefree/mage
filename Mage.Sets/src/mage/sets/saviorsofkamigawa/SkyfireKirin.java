@@ -67,7 +67,6 @@ public class SkyfireKirin extends CardImpl {
         this.subtype.add("Kirin");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -52,7 +52,6 @@ public class Persecute extends CardImpl {
         super(ownerId, 146, "Persecute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // Choose a color. Target player reveals his or her hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());

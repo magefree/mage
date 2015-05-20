@@ -46,7 +46,6 @@ public class NecrogenMists extends CardImpl {
         super(ownerId, 69, "Necrogen Mists", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "MRD";
 
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.ANY, false));

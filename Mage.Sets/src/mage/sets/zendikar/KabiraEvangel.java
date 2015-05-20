@@ -68,7 +68,6 @@ public class KabiraEvangel extends CardImpl {
         this.subtype.add("Cleric");
         this.subtype.add("Ally");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

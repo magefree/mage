@@ -58,7 +58,6 @@ public class InvaderParasite extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Insect");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

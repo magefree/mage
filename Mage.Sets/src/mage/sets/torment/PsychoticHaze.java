@@ -46,7 +46,6 @@ public class PsychoticHaze extends CardImpl {
         super(ownerId, 76, "Psychotic Haze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "TOR";
 
-        this.color.setBlack(true);
 
         // Psychotic Haze deals 1 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));

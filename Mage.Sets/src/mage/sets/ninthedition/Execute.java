@@ -53,7 +53,6 @@ public class Execute extends CardImpl {
         super(ownerId, 128, "Execute", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "9ED";
 
-        this.color.setBlack(true);
 
         // Destroy target white creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

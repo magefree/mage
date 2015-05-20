@@ -49,7 +49,6 @@ public class MoltenRavager extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

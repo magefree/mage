@@ -52,7 +52,6 @@ public class HellionEruption extends CardImpl {
         super(ownerId, 151, "Hellion Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         // Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new HellionEruptionEffect());

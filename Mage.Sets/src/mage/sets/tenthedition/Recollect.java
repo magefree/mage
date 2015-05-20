@@ -44,7 +44,6 @@ public class Recollect extends CardImpl {
         super(ownerId, 289, "Recollect", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "10E";
 
-        this.color.setGreen(true);
 
         // Return target card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

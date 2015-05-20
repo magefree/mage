@@ -59,8 +59,6 @@ public class OversoulOfDusk extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

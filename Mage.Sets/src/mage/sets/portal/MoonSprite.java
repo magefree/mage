@@ -45,7 +45,6 @@ public class MoonSprite extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Faerie");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

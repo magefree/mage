@@ -50,7 +50,6 @@ public class TombHex extends CardImpl {
         super(ownerId, 69, "Tomb Hex", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlack(true);
 
         // Target creature gets -2/-2 until end of turn.
         // Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.

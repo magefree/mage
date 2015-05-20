@@ -60,7 +60,6 @@ public class VedalkenEngineer extends CardImpl {
         this.subtype.add("Vedalken");
         this.subtype.add("Artificer");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -46,8 +46,6 @@ public class SafeholdElite extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Scout");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

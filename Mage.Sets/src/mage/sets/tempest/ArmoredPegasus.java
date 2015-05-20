@@ -45,7 +45,6 @@ public class ArmoredPegasus extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Pegasus");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -51,7 +51,6 @@ public class CallToHeel extends CardImpl {
         super(ownerId, 32, "Call to Heel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand. Its controller draws a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

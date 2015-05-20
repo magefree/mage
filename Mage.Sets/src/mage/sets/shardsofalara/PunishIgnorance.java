@@ -48,9 +48,6 @@ public class PunishIgnorance extends CardImpl {
         super(ownerId, 183, "Punish Ignorance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Counter target spell. Its controller loses 3 life and you gain 3 life.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));

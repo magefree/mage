@@ -46,7 +46,6 @@ public class FieryConclusion extends CardImpl {
         super(ownerId, 122, "Fiery Conclusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "RAV";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Fiery Conclusion, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

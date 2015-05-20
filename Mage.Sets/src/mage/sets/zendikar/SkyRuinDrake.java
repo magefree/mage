@@ -45,7 +45,6 @@ public class SkyRuinDrake extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

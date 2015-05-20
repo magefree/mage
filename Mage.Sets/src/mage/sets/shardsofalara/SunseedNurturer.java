@@ -55,7 +55,6 @@ public class SunseedNurturer extends CardImpl {
         this.subtype.add("Druid");
         this.subtype.add("Wizard");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

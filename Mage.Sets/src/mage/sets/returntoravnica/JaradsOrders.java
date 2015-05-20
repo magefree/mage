@@ -57,8 +57,6 @@ public class JaradsOrders extends CardImpl {
         super(ownerId, 175, "Jarad's Orders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         // Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new JaradsOrdersEffect());

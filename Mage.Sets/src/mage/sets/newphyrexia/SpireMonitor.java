@@ -46,7 +46,6 @@ public class SpireMonitor extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

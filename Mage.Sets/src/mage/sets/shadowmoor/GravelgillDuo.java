@@ -62,8 +62,6 @@ public class GravelgillDuo extends CardImpl {
         this.subtype.add("Rogue");
         this.subtype.add("Warrior");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

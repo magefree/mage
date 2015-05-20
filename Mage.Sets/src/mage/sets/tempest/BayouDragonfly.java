@@ -46,7 +46,6 @@ public class BayouDragonfly extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

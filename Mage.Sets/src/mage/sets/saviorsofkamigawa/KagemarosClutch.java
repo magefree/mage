@@ -57,7 +57,6 @@ public class KagemarosClutch extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

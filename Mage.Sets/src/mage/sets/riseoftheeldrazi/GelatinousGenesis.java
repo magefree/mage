@@ -49,7 +49,6 @@ public class GelatinousGenesis extends CardImpl {
         super(ownerId, 183, "Gelatinous Genesis", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         // Put X X/X green Ooze creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new GelatinousGenesisEffect());

@@ -50,7 +50,6 @@ public class Gloomlance extends CardImpl {
         super(ownerId, 67, "Gloomlance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. If that creature was green or white, its controller discards a card.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

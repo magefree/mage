@@ -49,7 +49,6 @@ public class ViashinoRacketeer extends CardImpl {
         this.subtype.add("Viashino");
         this.subtype.add("Rogue");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

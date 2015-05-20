@@ -56,7 +56,6 @@ public class TimeOfHeroes extends CardImpl {
         super(ownerId, 49, "Time of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Each creature you control with a level counter on it gets +2/+2.
         ContinuousEffect boost = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false);

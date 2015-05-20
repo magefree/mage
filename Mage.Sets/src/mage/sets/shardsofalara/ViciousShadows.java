@@ -51,7 +51,6 @@ public class ViciousShadows extends CardImpl {
         super(ownerId, 119, "Vicious Shadows", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.
         Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(new TargetPlayerCardsInHandCount()), true);

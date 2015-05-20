@@ -60,7 +60,6 @@ public class WildMongrel extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Hound");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -51,7 +51,6 @@ public class DeathHoodCobra extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

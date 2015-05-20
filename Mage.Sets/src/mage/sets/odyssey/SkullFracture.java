@@ -47,7 +47,6 @@ public class SkullFracture extends CardImpl {
         super(ownerId, 162, "Skull Fracture", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Target player discards a card.
         

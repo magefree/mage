@@ -58,7 +58,6 @@ public class MizziumMortars extends CardImpl {
         super(ownerId, 101, "Mizzium Mortars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // MizziumMortars deals 4 damage to target creature you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

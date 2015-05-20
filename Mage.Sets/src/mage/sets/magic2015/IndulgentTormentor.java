@@ -57,7 +57,6 @@ public class IndulgentTormentor extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

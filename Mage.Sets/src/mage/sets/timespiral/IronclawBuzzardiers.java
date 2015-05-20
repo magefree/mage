@@ -61,7 +61,6 @@ public class IronclawBuzzardiers extends CardImpl {
         this.subtype.add("Orc");
         this.subtype.add("Scout");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

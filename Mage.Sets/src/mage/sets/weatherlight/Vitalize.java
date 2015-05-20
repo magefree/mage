@@ -44,7 +44,6 @@ public class Vitalize extends CardImpl {
         super(ownerId, 87, "Vitalize", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WTH";
 
-        this.color.setGreen(true);
 
         // Untap all creatures you control.
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterCreaturePermanent(), "Untap all creatures you control"));

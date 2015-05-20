@@ -56,7 +56,6 @@ public class ChordOfCalling extends CardImpl {
         super(ownerId, 156, "Chord of Calling", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

@@ -55,7 +55,6 @@ public class PsychicSurgery extends CardImpl {
         super(ownerId, 44, "Psychic Surgery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         this.addAbility(new PsychicSurgeryTriggeredAbility());
     }

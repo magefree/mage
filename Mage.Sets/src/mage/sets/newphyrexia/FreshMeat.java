@@ -57,7 +57,6 @@ public class FreshMeat extends CardImpl {
         super(ownerId, 109, "Fresh Meat", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "NPH";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addWatcher(new FreshMeatWatcher());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));

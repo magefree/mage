@@ -60,7 +60,6 @@ public class StrandsOfNight extends CardImpl {
         super(ownerId, 165, "Strands of Night", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // {B}{B}, Pay 2 life, Sacrifice a Swamp: Return target creature card from your graveyard to the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{B}{B}"));

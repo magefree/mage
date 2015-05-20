@@ -44,8 +44,6 @@ public class CallOfTheConclave extends CardImpl {
         super(ownerId, 146, "Call of the Conclave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Put a 3/3 green Centaur creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));

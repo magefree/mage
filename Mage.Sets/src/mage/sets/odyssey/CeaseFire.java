@@ -55,7 +55,6 @@ public class CeaseFire extends CardImpl {
         super(ownerId, 14, "Cease-Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Target player can't cast creature spells this turn.
         this.getSpellAbility().addEffect(new CeaseFireEffect());

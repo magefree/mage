@@ -47,7 +47,6 @@ public class FitOfRage extends CardImpl {
         super(ownerId, 102, "Fit of Rage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "WTH";
 
-        this.color.setRed(true);
 
         // Target creature gets +3/+3 and gains first strike until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

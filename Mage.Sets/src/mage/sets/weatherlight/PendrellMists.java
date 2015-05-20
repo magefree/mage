@@ -52,7 +52,6 @@ public class PendrellMists extends CardImpl {
         super(ownerId, 47, "Pendrell Mists", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "WTH";
 
-        this.color.setBlue(true);
 
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);

@@ -47,7 +47,6 @@ public class ZanikevLocust extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

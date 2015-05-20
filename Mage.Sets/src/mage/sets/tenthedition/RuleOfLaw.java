@@ -46,7 +46,6 @@ public class RuleOfLaw extends CardImpl {
         super(ownerId, 37, "Rule of Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "10E";
 
-        this.color.setWhite(true);
 
         // Each player can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));

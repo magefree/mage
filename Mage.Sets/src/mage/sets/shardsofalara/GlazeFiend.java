@@ -59,7 +59,6 @@ public class GlazeFiend extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Illusion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

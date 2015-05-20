@@ -52,7 +52,6 @@ public class PhyrexianDefiler extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Carrier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

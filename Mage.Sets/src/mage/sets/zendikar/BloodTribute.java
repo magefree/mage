@@ -67,7 +67,6 @@ public class BloodTribute extends CardImpl {
         super(ownerId, 81, "Blood Tribute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlack(true);
 
         // Kicker - Tap an untapped Vampire you control.
         OptionalAdditionalCost cost = new OptionalAdditionalCostImpl("Kicker-","",new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));

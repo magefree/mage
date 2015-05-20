@@ -51,7 +51,6 @@ public class BaskingRootwalla extends CardImpl {
         this.expansionSetCode = "TOR";
         this.subtype.add("Lizard");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

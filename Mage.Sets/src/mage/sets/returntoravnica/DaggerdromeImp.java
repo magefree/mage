@@ -46,7 +46,6 @@ public class DaggerdromeImp extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

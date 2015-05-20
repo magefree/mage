@@ -57,7 +57,6 @@ public class CurseOfWizardry extends CardImpl {
         super(ownerId, 104, "Curse of Wizardry", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // As Curse of Wizardry enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new CurseOfWizardryChooseColorEffect()));

@@ -62,8 +62,6 @@ public class CorpsejackMenace extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Fungus");
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

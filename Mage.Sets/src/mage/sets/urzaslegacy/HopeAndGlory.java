@@ -47,7 +47,6 @@ public class HopeAndGlory extends CardImpl {
         super(ownerId, 9, "Hope and Glory", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Untap two target creatures. Each of them gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());

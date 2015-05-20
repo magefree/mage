@@ -45,7 +45,6 @@ public class LabRats extends CardImpl {
         super(ownerId, 11, "Lab Rats", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "STH";
 
-        this.color.setBlack(true);
 
         // Buyback {4}
         this.addAbility(new BuybackAbility("{4}"));

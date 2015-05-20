@@ -57,7 +57,6 @@ public class ForbiddenCrypt extends CardImpl {
         super(ownerId, 22, "Forbidden Crypt", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "MIR";
 
-        this.color.setBlack(true);
 
         // If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForbiddenCryptDrawCardReplacementEffect()));

@@ -58,9 +58,6 @@ public class CruelUltimatum extends CardImpl {
         super(ownerId, 164, "Cruel Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}{B}{B}{B}{R}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life.
         // You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.

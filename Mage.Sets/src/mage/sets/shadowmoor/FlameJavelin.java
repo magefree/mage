@@ -44,7 +44,6 @@ public class FlameJavelin extends CardImpl {
         super(ownerId, 92, "Flame Javelin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2/R}{2/R}{2/R}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
 
         // Flame Javelin deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

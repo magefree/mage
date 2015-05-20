@@ -45,7 +45,6 @@ public class DesertDrake extends CardImpl {
         this.expansionSetCode = "POR";
         this.subtype.add("Drake");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

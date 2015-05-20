@@ -50,7 +50,6 @@ public class Catastrophe extends CardImpl {
         super(ownerId, 6, "Catastrophe", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "USG";
 
-        this.color.setWhite(true);
 
         // Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.
         this.getSpellAbility().addEffect(new CatastropheEffect());

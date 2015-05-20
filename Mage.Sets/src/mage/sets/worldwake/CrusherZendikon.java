@@ -55,7 +55,6 @@ public class CrusherZendikon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

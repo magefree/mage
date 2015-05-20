@@ -52,7 +52,6 @@ public class UnseenWalker extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -47,7 +47,6 @@ public class WanderingGraybeard extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Wizard");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

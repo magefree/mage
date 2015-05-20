@@ -52,8 +52,6 @@ public class Psychatog extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Atog");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

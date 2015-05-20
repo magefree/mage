@@ -54,7 +54,6 @@ public class SakashimasStudent extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Ninja");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -60,8 +60,6 @@ public class SpinedSliver extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

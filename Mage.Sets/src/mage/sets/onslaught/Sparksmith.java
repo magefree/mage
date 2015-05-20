@@ -60,7 +60,6 @@ public class Sparksmith extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

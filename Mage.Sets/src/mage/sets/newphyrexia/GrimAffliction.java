@@ -46,7 +46,6 @@ public class GrimAffliction extends CardImpl {
         super(ownerId, 63, "Grim Affliction", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));

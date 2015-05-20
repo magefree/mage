@@ -61,7 +61,6 @@ public class ChamberOfManipulation extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

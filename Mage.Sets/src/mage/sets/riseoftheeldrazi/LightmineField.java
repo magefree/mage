@@ -52,7 +52,6 @@ public class LightmineField extends CardImpl {
         super(ownerId, 32, "Lightmine Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         // Whenever one or more creatures attack, Lightmine Field deals damage to each of those creatures equal to the number of attacking creatures.
         this.addAbility(new LightmineFieldTriggeredAbility());

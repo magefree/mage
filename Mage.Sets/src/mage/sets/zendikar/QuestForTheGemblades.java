@@ -55,7 +55,6 @@ public class QuestForTheGemblades extends CardImpl {
         super(ownerId, 177, "Quest for the Gemblades", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setGreen(true);
 
         // Whenever a creature you control deals combat damage to a creature, you may put a quest counter on Quest for the Gemblades.
         this.addAbility(new QuestForTheGembladesTriggeredAbility());

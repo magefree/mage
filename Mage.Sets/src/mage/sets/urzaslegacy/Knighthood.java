@@ -48,7 +48,6 @@ public class Knighthood extends CardImpl {
         super(ownerId, 12, "Knighthood", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Creatures you control have first strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));

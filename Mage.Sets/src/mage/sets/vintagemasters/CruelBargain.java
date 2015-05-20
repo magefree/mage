@@ -45,7 +45,6 @@ public class CruelBargain extends CardImpl {
         super(ownerId, 111, "Cruel Bargain", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
         this.expansionSetCode = "VMA";
 
-        this.color.setBlack(true);
 
         // Draw four cards. You lose half your life, rounded up.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

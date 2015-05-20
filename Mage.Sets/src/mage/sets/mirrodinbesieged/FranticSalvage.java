@@ -47,7 +47,6 @@ public class FranticSalvage extends CardImpl {
         super(ownerId, 6, "Frantic Salvage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "MBS";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

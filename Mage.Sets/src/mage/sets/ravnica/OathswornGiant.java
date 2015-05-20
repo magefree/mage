@@ -54,7 +54,6 @@ public class OathswornGiant extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

@@ -46,7 +46,6 @@ public class LogicKnot extends CardImpl {
         super(ownerId, 51, "Logic Knot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
         this.expansionSetCode = "MMA";
 
-        this.color.setBlue(true);
 
         // Delve
         this.addAbility(new DelveAbility());

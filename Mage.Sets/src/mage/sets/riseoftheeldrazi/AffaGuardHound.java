@@ -51,7 +51,6 @@ public class AffaGuardHound extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

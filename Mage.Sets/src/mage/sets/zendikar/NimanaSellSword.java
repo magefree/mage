@@ -49,7 +49,6 @@ public class NimanaSellSword extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Ally");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -49,7 +49,6 @@ public class AsphodelWanderer extends CardImpl {
         this.subtype.add("Skeleton");
         this.subtype.add("Soldier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

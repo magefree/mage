@@ -53,9 +53,6 @@ public class SolkanarTheSwampKing extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -56,7 +56,6 @@ import mage.target.common.TargetCreatureOrPlayer;
         super(ownerId, 122, "Where Ancients Tread", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
 
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to target creature or player.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), filter, true);

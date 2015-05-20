@@ -54,7 +54,6 @@ public class HandOfDeath extends CardImpl {
         super(ownerId, 6, "Hand of Death", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "S00";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

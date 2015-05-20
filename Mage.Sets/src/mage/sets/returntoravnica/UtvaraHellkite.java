@@ -56,7 +56,6 @@ public class UtvaraHellkite extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

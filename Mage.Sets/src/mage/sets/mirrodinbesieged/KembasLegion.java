@@ -57,7 +57,6 @@ public class KembasLegion extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

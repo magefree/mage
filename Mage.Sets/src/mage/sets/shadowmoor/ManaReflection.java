@@ -53,7 +53,6 @@ public class ManaReflection extends CardImpl {
         super(ownerId, 122, "Mana Reflection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // If you tap a permanent for mana, it produces twice as much of that mana instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));

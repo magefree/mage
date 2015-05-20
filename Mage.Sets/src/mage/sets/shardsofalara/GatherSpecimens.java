@@ -52,7 +52,6 @@ public class GatherSpecimens extends CardImpl {
         super(ownerId, 45, "Gather Specimens", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
         this.getSpellAbility().addEffect(new GatherSpecimensReplacementEffect());

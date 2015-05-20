@@ -53,7 +53,6 @@ public class FlightOfFancy extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

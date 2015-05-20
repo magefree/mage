@@ -54,7 +54,6 @@ public class Insurrection extends CardImpl {
         super(ownerId, 213, "Insurrection", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}{R}");
         this.expansionSetCode = "ONS";
 
-        this.color.setRed(true);
 
         // Untap all creatures and gain control of them until end of turn. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new InsurrectionEffect());

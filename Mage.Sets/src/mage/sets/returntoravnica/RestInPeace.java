@@ -71,7 +71,6 @@ public class RestInPeace extends CardImpl {
         super(ownerId, 18, "Rest in Peace", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // When Rest in Peace enters the battlefield, exile all cards from all graveyards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RestInPeaceExileAllEffect()));

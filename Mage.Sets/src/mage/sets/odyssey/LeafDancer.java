@@ -45,7 +45,6 @@ public class LeafDancer extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Centaur");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

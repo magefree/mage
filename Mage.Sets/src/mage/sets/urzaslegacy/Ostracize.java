@@ -45,7 +45,6 @@ public class Ostracize extends CardImpl {
         super(ownerId, 57, "Ostracize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());

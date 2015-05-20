@@ -62,8 +62,6 @@ public class AcidicSliver extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

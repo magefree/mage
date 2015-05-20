@@ -58,8 +58,6 @@ public class EssenceBacklash extends CardImpl {
         super(ownerId, 160, "Essence Backlash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

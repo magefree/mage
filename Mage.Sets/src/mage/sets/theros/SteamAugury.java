@@ -59,8 +59,6 @@ public class SteamAugury extends CardImpl {
         super(ownerId, 205, "Steam Augury", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
         this.getSpellAbility().addEffect(new SteamAuguryEffect());

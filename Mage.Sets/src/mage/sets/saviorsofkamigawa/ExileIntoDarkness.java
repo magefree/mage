@@ -59,7 +59,6 @@ public class ExileIntoDarkness extends CardImpl {
         super(ownerId, 67, "Exile into Darkness", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "SOK";
 
-        this.color.setBlack(true);
 
         // Target player sacrifices a creature with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "Target player"));

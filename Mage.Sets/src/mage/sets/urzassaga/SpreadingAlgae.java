@@ -66,7 +66,6 @@ public class SpreadingAlgae extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant Swamp
         

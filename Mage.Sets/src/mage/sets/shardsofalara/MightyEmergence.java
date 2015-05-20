@@ -58,7 +58,6 @@ public class MightyEmergence extends CardImpl {
         super(ownerId, 137, "Mighty Emergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
 
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may put two +1/+1 counters on it.
         this.addAbility(new MightyEmergenceTriggeredAbility());

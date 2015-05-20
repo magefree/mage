@@ -46,7 +46,6 @@ public class TitansStrength extends CardImpl {
         super(ownerId, 145, "Titan's Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "THS";
 
-        this.color.setRed(true);
 
         // Target creature gets +3/+1 until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3,1, Duration.EndOfTurn));

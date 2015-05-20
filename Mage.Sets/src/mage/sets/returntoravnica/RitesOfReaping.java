@@ -51,8 +51,6 @@ public class RitesOfReaping extends CardImpl {
         super(ownerId, 191, "Rites of Reaping", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         // Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new RitesOfReapingEffect());

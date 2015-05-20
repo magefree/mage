@@ -62,7 +62,6 @@ public class ZektarShrineExpedition extends CardImpl {
         super(ownerId, 155, "Zektar Shrine Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Zektar Shrine Expedition.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));

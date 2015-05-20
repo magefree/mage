@@ -53,7 +53,6 @@ public class Scald extends CardImpl {
         super(ownerId, 211, "Scald", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // Whenever a player taps an Island for mana, Scald deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(

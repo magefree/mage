@@ -56,9 +56,6 @@ public class NayaCharm extends CardImpl {
         super(ownerId, 180, "Naya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Choose one - Naya Charm deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

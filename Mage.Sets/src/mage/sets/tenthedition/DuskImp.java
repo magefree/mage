@@ -45,7 +45,6 @@ public class DuskImp extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -54,7 +54,6 @@ public class Falter extends CardImpl {
         super(ownerId, 184, "Falter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "USG";
 
-        this.color.setRed(true);
 
         // Creatures without flying can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));

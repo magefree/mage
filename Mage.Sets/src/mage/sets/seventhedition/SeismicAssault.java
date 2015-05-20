@@ -53,7 +53,6 @@ public class SeismicAssault extends CardImpl {
         super(ownerId, 216, "Seismic Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Discard a land card: Seismic Assault deals 2 damage to target creature or player.       
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new DiscardTargetCost(new TargetCardInHand(filter)));

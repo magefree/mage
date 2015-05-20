@@ -50,7 +50,6 @@ public class WrenchMind extends CardImpl {
         super(ownerId, 84, "Wrench Mind", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "MRD";
 
-        this.color.setBlack(true);
 
         // Target player discards two cards unless he or she discards an artifact card.
         this.getSpellAbility().addTarget(new TargetPlayer());

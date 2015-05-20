@@ -53,7 +53,6 @@ public class RageExtractor extends CardImpl {
         super(ownerId, 91, "Rage Extractor", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}{RP}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.addAbility(new RageExtractorTriggeredAbility());
     }

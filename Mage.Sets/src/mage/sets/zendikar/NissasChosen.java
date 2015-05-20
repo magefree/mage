@@ -56,7 +56,6 @@ public class NissasChosen extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

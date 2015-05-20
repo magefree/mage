@@ -51,7 +51,6 @@ public class CaveIn extends CardImpl {
         super(ownerId, 180, "Cave-In", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "MMQ";
 
-        this.color.setRed(true);
 
         // You may exile a red card from your hand rather than pay Cave-In's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a red card from your hand");

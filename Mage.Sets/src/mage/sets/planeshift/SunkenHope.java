@@ -55,7 +55,6 @@ public class SunkenHope extends CardImpl {
         super(ownerId, 37, "Sunken Hope", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "PLS";
 
-        this.color.setBlue(true);
 
         // At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandEffect(), TargetController.ANY, false, true));

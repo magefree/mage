@@ -52,7 +52,6 @@ public class PhyrexianBroodlings extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Minion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

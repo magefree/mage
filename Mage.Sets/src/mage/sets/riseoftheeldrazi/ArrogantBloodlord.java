@@ -56,7 +56,6 @@ public class ArrogantBloodlord extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Knight");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

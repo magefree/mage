@@ -54,7 +54,6 @@ public class Soulblast extends CardImpl {
         super(ownerId, 236, "Soulblast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}{R}");
         this.expansionSetCode = "10E";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Soulblast, sacrifice all creatures you control.
         this.getSpellAbility().addCost(new SacrificeAllCost(filter));

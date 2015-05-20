@@ -47,7 +47,6 @@ public class Bewilder extends CardImpl {
         super(ownerId, 49, "Bewilder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
 
         // Target creature gets -3/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Duration.EndOfTurn));

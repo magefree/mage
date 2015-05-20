@@ -45,7 +45,6 @@ public class VolcanicAwakening extends CardImpl {
         super(ownerId, 186, "Volcanic Awakening", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // Destroy target land.
         this.getSpellAbility().addTarget(new TargetLandPermanent());

@@ -48,7 +48,6 @@ public class Dynacharge extends CardImpl {
         super(ownerId, 92, "Dynacharge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "RTR";
 
-        this.color.setRed(true);
 
         // Target creature you control gets +2/+0 until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

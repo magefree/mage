@@ -44,7 +44,6 @@ public class FranticSearch extends CardImpl {
         super(ownerId, 32, "Frantic Search", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Draw two cards, then discard two cards. Untap up to three lands.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 2));

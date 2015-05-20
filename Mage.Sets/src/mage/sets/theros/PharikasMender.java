@@ -59,8 +59,6 @@ public class PharikasMender extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Gorgon");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

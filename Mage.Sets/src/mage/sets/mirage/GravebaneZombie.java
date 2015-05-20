@@ -55,7 +55,6 @@ public class GravebaneZombie extends CardImpl {
         this.expansionSetCode = "MIR";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

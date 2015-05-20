@@ -53,7 +53,6 @@ public class KarmicJustice extends CardImpl {
         super(ownerId, 26, "Karmic Justice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Whenever a spell or ability an opponent controls destroys a noncreature permanent you control, you may destroy target permanent that opponent controls.
         this.addAbility(new KarmicJusticeTriggeredAbility());

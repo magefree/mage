@@ -49,7 +49,6 @@ public class BattleStrain extends CardImpl {
         super(ownerId, 177, "Battle Strain", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
         this.addAbility(new BattleStrainTriggeredAbility());

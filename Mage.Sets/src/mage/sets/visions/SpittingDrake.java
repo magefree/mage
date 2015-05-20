@@ -50,7 +50,6 @@ public class SpittingDrake extends CardImpl {
         this.expansionSetCode = "VIS";
         this.subtype.add("Drake");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

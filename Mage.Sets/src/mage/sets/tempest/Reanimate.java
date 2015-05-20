@@ -48,7 +48,6 @@ public class Reanimate extends CardImpl {
         super(ownerId, 45, "Reanimate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
         getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));

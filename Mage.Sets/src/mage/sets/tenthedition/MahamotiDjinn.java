@@ -45,7 +45,6 @@ public class MahamotiDjinn extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Djinn");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

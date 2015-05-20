@@ -46,7 +46,6 @@ public class DesperateRitual extends CardImpl {
         this.expansionSetCode = "MMA";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Add {R}{R}{R} to your mana pool.
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0)));

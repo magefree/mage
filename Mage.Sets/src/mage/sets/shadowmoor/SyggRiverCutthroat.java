@@ -53,8 +53,6 @@ public class SyggRiverCutthroat extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

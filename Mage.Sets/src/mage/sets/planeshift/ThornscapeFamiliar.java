@@ -59,7 +59,6 @@ public class ThornscapeFamiliar extends CardImpl {
         this.expansionSetCode = "PLS";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

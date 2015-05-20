@@ -50,9 +50,6 @@ public class TitanicUltimatum extends CardImpl {
         super(ownerId, 204, "Titanic Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{G}{G}{G}{W}{W}");
         this.expansionSetCode = "ALA";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
         this.getSpellAbility().addEffect(new BoostControlledEffect(5, 5, Duration.EndOfTurn, filter));

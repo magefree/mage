@@ -46,7 +46,6 @@ public class Congregate extends CardImpl {
         super(ownerId, 8, "Congregate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "USG";
 
-        this.color.setWhite(true);
 
         // Target player gains 2 life for each creature on the battlefield.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creature on the battlefield"), 2)));

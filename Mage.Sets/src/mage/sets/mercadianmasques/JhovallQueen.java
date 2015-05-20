@@ -46,7 +46,6 @@ public class JhovallQueen extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

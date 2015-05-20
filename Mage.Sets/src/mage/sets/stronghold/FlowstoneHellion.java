@@ -51,7 +51,6 @@ public class FlowstoneHellion extends CardImpl {
         this.subtype.add("Hellion");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

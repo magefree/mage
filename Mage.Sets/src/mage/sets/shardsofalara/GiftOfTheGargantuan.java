@@ -55,7 +55,6 @@ public class GiftOfTheGargantuan extends CardImpl {
         super(ownerId, 132, "Gift of the Gargantuan", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "ALA";
 
-        this.color.setGreen(true);
 
         // Look at the top four cards of your library. You may reveal a creature card and/or a land card from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new GiftOfTheGargantuanEffect());

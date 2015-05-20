@@ -53,7 +53,6 @@ public class SeasClaim extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

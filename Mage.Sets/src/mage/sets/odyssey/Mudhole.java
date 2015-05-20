@@ -51,7 +51,6 @@ public class Mudhole extends CardImpl {
         super(ownerId, 208, "Mudhole", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Target player exiles all land cards from his or her graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());

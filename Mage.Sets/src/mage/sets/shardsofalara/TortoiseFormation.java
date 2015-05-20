@@ -47,7 +47,6 @@ public class TortoiseFormation extends CardImpl {
         super(ownerId, 61, "Tortoise Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlue(true);
 
         // Creatures you control gain shroud until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));

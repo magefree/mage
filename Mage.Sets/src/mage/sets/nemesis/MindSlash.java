@@ -51,7 +51,6 @@ public class MindSlash extends CardImpl {
         super(ownerId, 59, "Mind Slash", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlack(true);
 
         // {B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it.
         // That player discards that card. Activate this ability only any time you could cast a sorcery.

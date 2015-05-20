@@ -51,7 +51,6 @@ public class LivingDestiny extends CardImpl {
         super(ownerId, 195, "Living Destiny", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Living Destiny, reveal a creature card from your hand.
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCreatureCard("a creature card"));

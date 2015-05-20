@@ -49,7 +49,6 @@ public class Thrummingbird extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

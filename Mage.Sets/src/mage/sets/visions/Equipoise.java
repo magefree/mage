@@ -57,7 +57,6 @@ public class Equipoise extends CardImpl {
         super(ownerId, 103, "Equipoise", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "VIS";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, for each land target player controls in excess of the number you control, choose a land he or she controls, then the chosen permanents phase out. Repeat this process for artifacts and creatures.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new EquipoiseEffect(), TargetController.YOU, false);

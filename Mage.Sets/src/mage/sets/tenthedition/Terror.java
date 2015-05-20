@@ -56,7 +56,6 @@ public class Terror extends CardImpl {
         super(ownerId, 182, "Terror", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlack(true);
 
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

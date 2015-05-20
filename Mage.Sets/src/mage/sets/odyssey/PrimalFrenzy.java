@@ -54,7 +54,6 @@ public class PrimalFrenzy extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

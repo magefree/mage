@@ -53,8 +53,6 @@ public class SentryOfTheUnderworld extends CardImpl {
         this.subtype.add("Griffin");
         this.subtype.add("Skeleton");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

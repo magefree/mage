@@ -53,7 +53,6 @@ public class Muzzle extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

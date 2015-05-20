@@ -45,7 +45,6 @@ public class TenementCrasher extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

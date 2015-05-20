@@ -51,7 +51,6 @@ public class JinGitaxiasCoreAugur extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

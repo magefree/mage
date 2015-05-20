@@ -58,7 +58,6 @@ public class CorpseDance extends CardImpl {
         super(ownerId, 10, "Corpse Dance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // Buyback {2}
         this.addAbility(new BuybackAbility("{2}"));

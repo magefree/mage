@@ -46,7 +46,6 @@ public class TendrilsOfAgony extends CardImpl {
         super(ownerId, 75, "Tendrils of Agony", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlack(true);
 
         // Target player loses 2 life and you gain 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

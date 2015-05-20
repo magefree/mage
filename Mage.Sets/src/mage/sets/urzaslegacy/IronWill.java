@@ -47,7 +47,6 @@ public class IronWill extends CardImpl {
         super(ownerId, 10, "Iron Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Target creature gets +0/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(0, 4, Duration.EndOfTurn));

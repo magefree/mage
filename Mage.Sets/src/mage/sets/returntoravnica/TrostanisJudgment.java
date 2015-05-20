@@ -45,7 +45,6 @@ public class TrostanisJudgment extends CardImpl {
         super(ownerId, 28, "Trostani's Judgment", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setWhite(true);
 
         // Exile target creature, then populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

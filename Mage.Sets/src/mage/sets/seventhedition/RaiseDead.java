@@ -48,7 +48,6 @@ public class RaiseDead extends CardImpl {
         super(ownerId, 157, "Raise Dead", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));

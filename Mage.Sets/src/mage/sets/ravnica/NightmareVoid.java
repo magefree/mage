@@ -46,7 +46,6 @@ public class NightmareVoid extends CardImpl {
         super(ownerId, 100, "Nightmare Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

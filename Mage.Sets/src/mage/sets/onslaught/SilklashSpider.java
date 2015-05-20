@@ -59,7 +59,6 @@ public class SilklashSpider extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 

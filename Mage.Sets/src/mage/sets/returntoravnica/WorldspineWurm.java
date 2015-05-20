@@ -50,7 +50,6 @@ public class WorldspineWurm extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(15);
         this.toughness = new MageInt(15);
 

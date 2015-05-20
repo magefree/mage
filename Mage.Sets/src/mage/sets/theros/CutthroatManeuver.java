@@ -48,7 +48,6 @@ public class CutthroatManeuver extends CardImpl {
         super(ownerId, 82, "Cutthroat Maneuver", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlack(true);
 
         // Up to two target creatures each get +1/+1 and gain lifelink until end of turn.
         Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);

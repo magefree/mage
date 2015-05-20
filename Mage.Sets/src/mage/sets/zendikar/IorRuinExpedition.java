@@ -52,7 +52,6 @@ public class IorRuinExpedition extends CardImpl {
         super(ownerId, 49, "Ior Ruin Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setBlue(true);
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));

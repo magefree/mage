@@ -55,7 +55,6 @@ public class GleefulSabotage extends CardImpl {
         super(ownerId, 116, "Gleeful Sabotage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

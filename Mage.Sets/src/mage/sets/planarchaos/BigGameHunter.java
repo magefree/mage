@@ -61,7 +61,6 @@ public class BigGameHunter extends CardImpl {
         this.subtype.add("Rebel");
         this.subtype.add("Assassin");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

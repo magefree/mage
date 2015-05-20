@@ -56,7 +56,6 @@ public class Pillage extends CardImpl {
         super(ownerId, 207, "Pillage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Destroy target artifact or land. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

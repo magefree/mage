@@ -58,7 +58,6 @@ public class AshenFirebeast extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

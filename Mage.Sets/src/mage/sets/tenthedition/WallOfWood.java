@@ -45,7 +45,6 @@ public class WallOfWood extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Wall");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

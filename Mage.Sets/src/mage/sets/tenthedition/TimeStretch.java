@@ -48,7 +48,6 @@ public class TimeStretch extends CardImpl {
         super(ownerId, 118, "Time Stretch", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{U}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // Target player takes two extra turns after this one.
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -56,8 +56,6 @@ public class NovablastWurm extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

@@ -57,7 +57,6 @@ public class ShieldDancer extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

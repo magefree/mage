@@ -44,7 +44,6 @@ public class GoldenBear extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Bear");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
     }

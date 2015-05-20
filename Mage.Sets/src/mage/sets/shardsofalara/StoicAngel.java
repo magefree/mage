@@ -55,9 +55,6 @@ public class StoicAngel extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Angel");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

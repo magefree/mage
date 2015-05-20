@@ -55,7 +55,6 @@ public class UnstableFooting extends CardImpl {
         super(ownerId, 153, "Unstable Footing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setRed(true);
 
         // Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{R}"));

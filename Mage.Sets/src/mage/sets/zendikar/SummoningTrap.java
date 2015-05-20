@@ -65,7 +65,6 @@ public class SummoningTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setGreen(true);
 
         // If a creature spell you cast this turn was countered by a spell or
         // ability an opponent controlled, you may pay {0} rather than pay

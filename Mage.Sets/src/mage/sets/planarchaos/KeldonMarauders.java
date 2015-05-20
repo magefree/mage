@@ -54,7 +54,6 @@ public class KeldonMarauders extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

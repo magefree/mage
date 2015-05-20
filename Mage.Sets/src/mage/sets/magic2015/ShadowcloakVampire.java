@@ -50,7 +50,6 @@ public class ShadowcloakVampire extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

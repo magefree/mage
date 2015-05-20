@@ -50,7 +50,6 @@ public class DreamCache extends CardImpl {
         super(ownerId, 59, "Dream Cache", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlue(true);
 
         // Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
         this.getSpellAbility().addEffect(new DreamCacheEffect());

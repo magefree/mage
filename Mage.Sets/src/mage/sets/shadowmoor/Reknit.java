@@ -44,8 +44,6 @@ public class Reknit extends CardImpl {
         super(ownerId, 236, "Reknit", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G/W}");
         this.expansionSetCode = "SHM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Regenerate target permanent.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());

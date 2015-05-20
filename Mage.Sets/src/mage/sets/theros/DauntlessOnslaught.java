@@ -46,7 +46,6 @@ public class DauntlessOnslaught extends CardImpl {
         super(ownerId, 6, "Dauntless Onslaught", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Up to two target creatures each get +2/+2 until end of turn.
         Effect effect = new BoostTargetEffect(2,2, Duration.EndOfTurn);

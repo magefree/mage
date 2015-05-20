@@ -52,7 +52,6 @@ public class LayBare extends CardImpl {
         super(ownerId, 74, "Lay Bare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Look at its controller's hand.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

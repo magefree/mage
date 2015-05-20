@@ -46,7 +46,6 @@ public class OgreBerserker extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Berserker");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

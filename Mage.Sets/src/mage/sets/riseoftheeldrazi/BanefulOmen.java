@@ -54,7 +54,6 @@ public class BanefulOmen extends CardImpl {
         super(ownerId, 96, "Baneful Omen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}{B}");
         this.expansionSetCode = "ROE";
 
-        this.color.setBlack(true);
 
         // At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.
         this.addAbility(new BanefulOmenTriggeredAbility());

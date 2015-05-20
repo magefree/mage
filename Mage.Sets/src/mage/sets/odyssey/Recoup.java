@@ -63,7 +63,6 @@ public class Recoup extends CardImpl {
         super(ownerId, 216, "Recoup", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
 
         // Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         this.getSpellAbility().addEffect(new RecoupEffect());

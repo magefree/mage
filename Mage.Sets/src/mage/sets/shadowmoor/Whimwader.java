@@ -57,7 +57,6 @@ public class Whimwader extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

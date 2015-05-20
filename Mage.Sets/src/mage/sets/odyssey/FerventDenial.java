@@ -47,7 +47,6 @@ public class FerventDenial extends CardImpl {
         super(ownerId, 86, "Fervent Denial", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -59,7 +59,6 @@ public class GhastlyDemise extends CardImpl {
         super(ownerId, 139, "Ghastly Demise", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

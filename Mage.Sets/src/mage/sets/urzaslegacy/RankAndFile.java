@@ -56,7 +56,6 @@ public class RankAndFile extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

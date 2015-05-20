@@ -54,7 +54,6 @@ public class RollingEarthquake extends CardImpl {
         super(ownerId, 122, "Rolling Earthquake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "PTK";
 
-        this.color.setRed(true);
 
         // Rolling Earthquake deals X damage to each creature without horsemanship and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));

@@ -59,7 +59,6 @@ public class Farseek extends CardImpl {
         super(ownerId, 163, "Farseek", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
 
         // Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay));

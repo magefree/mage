@@ -80,8 +80,6 @@ public class GarrukApexPredator extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Garruk");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 

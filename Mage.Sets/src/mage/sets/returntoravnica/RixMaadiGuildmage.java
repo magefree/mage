@@ -67,8 +67,6 @@ public class RixMaadiGuildmage extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

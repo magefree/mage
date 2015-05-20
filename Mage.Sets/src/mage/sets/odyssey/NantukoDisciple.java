@@ -54,7 +54,6 @@ public class NantukoDisciple extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -57,7 +57,7 @@ public class Degavolver extends CardImpl {
         super(ownerId, 6, "Degavolver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "APC";
         this.subtype.add("Volver");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

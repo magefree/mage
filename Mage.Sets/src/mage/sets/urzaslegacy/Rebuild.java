@@ -52,7 +52,6 @@ public class Rebuild extends CardImpl {
         super(ownerId, 40, "Rebuild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ULG";
 
-        this.color.setBlue(true);
 
         // Return all artifacts to their owners' hands.
         this.getSpellAbility().addEffect(new RebuildEffect());

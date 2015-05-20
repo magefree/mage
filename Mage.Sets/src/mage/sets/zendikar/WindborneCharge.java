@@ -47,7 +47,6 @@ public class WindborneCharge extends CardImpl {
         super(ownerId, 38, "Windborne Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "ZEN";
 
-        this.color.setWhite(true);
 
         // Two target creatures you control each get +2/+2 and gain flying until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(2));

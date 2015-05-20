@@ -60,7 +60,6 @@ public class ThunderscapeFamiliar extends CardImpl {
         this.expansionSetCode = "PLS";
         this.subtype.add("Kavu");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

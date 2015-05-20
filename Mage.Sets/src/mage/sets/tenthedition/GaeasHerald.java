@@ -53,7 +53,6 @@ public class GaeasHerald extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -53,7 +53,6 @@ public class Crush extends CardImpl {
         super(ownerId, 61, "Crush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "MBS";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

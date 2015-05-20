@@ -51,7 +51,6 @@ public class RudeAwakening extends CardImpl {
         super(ownerId, 160, "Rude Awakening", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "MMA";
 
-        this.color.setGreen(true);
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

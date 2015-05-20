@@ -55,7 +55,6 @@ public class Spiritualize extends CardImpl {
         super(ownerId, 53, "Spiritualize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ODY";
 
-        this.color.setWhite(true);
 
         // Until end of turn, whenever target creature deals damage, you gain that much life.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new SpiritualizeTriggeredAbility()));

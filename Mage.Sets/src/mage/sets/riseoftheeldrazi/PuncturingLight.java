@@ -54,7 +54,6 @@ public class PuncturingLight extends CardImpl {
         super(ownerId, 41, "Puncturing Light", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ROE";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

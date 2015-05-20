@@ -49,7 +49,6 @@ public class TraitorousInstinct extends CardImpl {
         super(ownerId, 168, "Traitorous Instinct", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));

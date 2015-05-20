@@ -54,7 +54,6 @@ public class Rancor extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

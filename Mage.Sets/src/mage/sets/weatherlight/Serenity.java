@@ -56,7 +56,6 @@ public class Serenity extends CardImpl {
         super(ownerId, 140, "Serenity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "WTH";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.
         Effect effect = new DestroyAllEffect(new FilterPermanent(filter), true);

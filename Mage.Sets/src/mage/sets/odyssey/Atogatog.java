@@ -64,11 +64,6 @@ public class Atogatog extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Atog");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

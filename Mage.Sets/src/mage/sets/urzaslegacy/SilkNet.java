@@ -47,7 +47,6 @@ public class SilkNet extends CardImpl {
         super(ownerId, 112, "Silk Net", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ULG";
 
-        this.color.setGreen(true);
 
         // Target creature gets +1/+1 and gains reach until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));

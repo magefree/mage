@@ -46,8 +46,6 @@ public class ConsultTheNecrosages extends CardImpl {
         super(ownerId, 199, "Consult the Necrosages", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Choose one - Target player draws two cards; or target player discards two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());

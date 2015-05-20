@@ -54,7 +54,6 @@ public class AEtherShockwave extends CardImpl {
         super(ownerId, 1, "AEther Shockwave", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "SOK";
 
-        this.color.setWhite(true);
 
         // Choose one - Tap all Spirits; or tap all non-Spirit creatures.
         this.getSpellAbility().addEffect(new TapAllEffect(filterSpirit));

@@ -47,7 +47,6 @@ public class MagmaGiant extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

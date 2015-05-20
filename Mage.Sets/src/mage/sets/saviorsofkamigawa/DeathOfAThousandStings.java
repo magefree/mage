@@ -53,7 +53,6 @@ public class DeathOfAThousandStings extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // Target player loses 1 life and you gain 1 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));

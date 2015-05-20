@@ -61,7 +61,6 @@ public class Tariff extends CardImpl {
         super(ownerId, 144, "Tariff", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "WTH";
 
-        this.color.setWhite(true);
 
         // Each player sacrifices the creature he or she controls with the highest converted mana cost unless he or she pays that creature's mana cost. If two or more creatures a player controls are tied for highest cost, that player chooses one.
         this.getSpellAbility().addEffect(new TariffEffect());

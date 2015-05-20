@@ -56,7 +56,6 @@ public class ShowAndTell extends CardImpl {
         super(ownerId, 96, "Show and Tell", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield.
         this.getSpellAbility().addEffect(new ShowAndTellEffect());

@@ -47,7 +47,6 @@ public class AstralSteel extends CardImpl {
         super(ownerId, 2, "Astral Steel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "SCG";
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+2 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

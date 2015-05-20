@@ -49,7 +49,6 @@ public class UnspeakableSymbol extends CardImpl {
         super(ownerId, 79, "Unspeakable Symbol", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "SCG";
 
-        this.color.setBlack(true);
 
         // Pay 3 life: Put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new PayLifeCost(3));

@@ -59,7 +59,6 @@ public class FireWhip extends CardImpl {
         this.expansionSetCode = "TSB";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

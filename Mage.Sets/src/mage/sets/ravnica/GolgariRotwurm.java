@@ -55,8 +55,6 @@ public class GolgariRotwurm extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

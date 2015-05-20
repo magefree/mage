@@ -48,7 +48,6 @@ public class SerrasBlessing extends CardImpl {
         super(ownerId, 44, "Serra's Blessing", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "9ED";
 
-        this.color.setWhite(true);
 
         // Creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));

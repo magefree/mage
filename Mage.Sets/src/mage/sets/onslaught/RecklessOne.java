@@ -59,7 +59,6 @@ public class RecklessOne extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

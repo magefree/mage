@@ -48,8 +48,6 @@ public class Decimate extends CardImpl {
         super(ownerId, 287, "Decimate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
         this.expansionSetCode = "ODY";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Destroy target artifact, target creature, target enchantment, and target land.
         Effect effect = new DestroyTargetEffect();

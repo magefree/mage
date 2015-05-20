@@ -52,7 +52,6 @@ public class KeenSense extends CardImpl {
         this.expansionSetCode = "PLC";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

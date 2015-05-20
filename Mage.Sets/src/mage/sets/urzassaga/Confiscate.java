@@ -52,7 +52,6 @@ public class Confiscate extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();

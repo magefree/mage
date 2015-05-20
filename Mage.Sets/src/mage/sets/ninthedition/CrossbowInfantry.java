@@ -53,7 +53,6 @@ public class CrossbowInfantry extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Archer");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

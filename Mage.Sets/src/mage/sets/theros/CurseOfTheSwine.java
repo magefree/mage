@@ -52,7 +52,6 @@ public class CurseOfTheSwine extends CardImpl {
         super(ownerId, 46, "Curse of the Swine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "THS";
 
-        this.color.setBlue(true);
 
         // Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield.
        this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());

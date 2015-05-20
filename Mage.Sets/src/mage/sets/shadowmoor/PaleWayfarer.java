@@ -58,7 +58,6 @@ public class PaleWayfarer extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Giant");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

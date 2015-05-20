@@ -54,7 +54,6 @@ public class WallOfEssence extends CardImpl {
         this.expansionSetCode = "STH";
         this.subtype.add("Wall");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

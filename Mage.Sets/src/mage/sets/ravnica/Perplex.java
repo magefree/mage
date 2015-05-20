@@ -47,8 +47,6 @@ public class Perplex extends CardImpl {
         super(ownerId, 217, "Perplex", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
         this.expansionSetCode = "RAV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Counter target spell unless its controller discards his or her hand.
         Effect effect = new CounterUnlessPaysEffect(new DiscardHandCost());

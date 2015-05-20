@@ -52,7 +52,6 @@ public class Whipflare extends CardImpl {
         super(ownerId, 102, "Whipflare", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         // Whipflare deals 2 damage to each nonartifact creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));

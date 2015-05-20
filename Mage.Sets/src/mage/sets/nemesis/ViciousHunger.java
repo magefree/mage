@@ -45,7 +45,6 @@ public class ViciousHunger extends CardImpl {
         super(ownerId, 74, "Vicious Hunger", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "NMS";
 
-        this.color.setBlack(true);
 
         // Vicious Hunger deals 2 damage to target creature and you gain 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

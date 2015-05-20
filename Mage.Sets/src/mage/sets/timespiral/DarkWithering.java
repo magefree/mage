@@ -57,7 +57,6 @@ public class DarkWithering extends CardImpl {
         super(ownerId, 101, "Dark Withering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}{B}");
         this.expansionSetCode = "TSP";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

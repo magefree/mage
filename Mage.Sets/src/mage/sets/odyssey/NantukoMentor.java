@@ -56,7 +56,6 @@ public class NantukoMentor extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -46,7 +46,6 @@ public class ForceSpike extends CardImpl {
         super(ownerId, 76, "Force Spike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "7ED";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());

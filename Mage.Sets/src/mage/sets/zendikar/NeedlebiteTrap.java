@@ -53,7 +53,6 @@ public class NeedlebiteTrap extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
 
-        this.color.setBlack(true);
 
         // If an opponent gained life this turn, you may pay {B} rather than pay Needlebite Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(

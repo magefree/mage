@@ -46,7 +46,6 @@ public class InnerChamberGuard extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Samurai");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

@@ -55,7 +55,6 @@ public class ThinkTank extends CardImpl {
         super(ownerId, 104, "Think Tank", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThinkTankLookLibraryEffect(), TargetController.YOU, false));

@@ -46,7 +46,6 @@ public class SproutingVines extends CardImpl {
         super(ownerId, 128, "Sprouting Vines", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "SCG";
 
-        this.color.setGreen(true);
 
         // Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, new FilterBasicLandCard()), true));

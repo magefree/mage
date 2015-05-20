@@ -44,7 +44,6 @@ public class WildJhovall extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

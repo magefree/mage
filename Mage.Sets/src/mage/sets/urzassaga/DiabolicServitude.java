@@ -61,7 +61,6 @@ public class DiabolicServitude extends CardImpl {
         super(ownerId, 130, "Diabolic Servitude", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlack(true);
 
         // When Diabolic Servitude enters the battlefield, return target creature card from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiabolicServitudeReturnCreatureEffect());

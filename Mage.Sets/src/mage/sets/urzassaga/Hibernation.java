@@ -52,7 +52,6 @@ public class Hibernation extends CardImpl {
         super(ownerId, 79, "Hibernation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Return all green permanents to their owners' hands.
         this.getSpellAbility().addEffect(new HibernationEffect());

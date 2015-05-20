@@ -45,7 +45,6 @@ public class RaidingNightstalker extends CardImpl {
         this.expansionSetCode = "PO2";
         this.subtype.add("Nightstalker");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

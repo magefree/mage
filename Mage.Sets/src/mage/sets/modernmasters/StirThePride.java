@@ -49,7 +49,6 @@ public class StirThePride extends CardImpl {
         super(ownerId, 30, "Stir the Pride", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "MMA";
 
-        this.color.setWhite(true);
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

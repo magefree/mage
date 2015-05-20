@@ -53,7 +53,6 @@ public class SaltfieldRecluse extends CardImpl {
         this.subtype.add("Rebel");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

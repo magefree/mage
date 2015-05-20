@@ -49,7 +49,6 @@ public class GrowthSpasm extends CardImpl {
         super(ownerId, 186, "Growth Spasm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "ROE";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));

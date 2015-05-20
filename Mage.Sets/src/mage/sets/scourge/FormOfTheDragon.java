@@ -66,7 +66,6 @@ public class FormOfTheDragon extends CardImpl {
         super(ownerId, 93, "Form of the Dragon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}{R}");
         this.expansionSetCode = "SCG";
 
-        this.color.setRed(true);
 
         // At the beginning of your upkeep, Form of the Dragon deals 5 damage to target creature or player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);

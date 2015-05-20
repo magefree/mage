@@ -48,7 +48,6 @@ public class Windfall extends CardImpl {
         super(ownerId, 111, "Windfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WindfallEffect());

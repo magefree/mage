@@ -44,7 +44,6 @@ public class WitchsFamiliar extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Frog");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

@@ -44,7 +44,6 @@ public class RackAndRuin extends CardImpl {
         super(ownerId, 89, "Rack and Ruin", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ULG";
 
-        this.color.setRed(true);
 
         // Destroy two target artifacts.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

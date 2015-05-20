@@ -49,7 +49,6 @@ public class BlinkingSpirit extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

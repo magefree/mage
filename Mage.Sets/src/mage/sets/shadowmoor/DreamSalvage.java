@@ -54,8 +54,6 @@ public class DreamSalvage extends CardImpl {
         super(ownerId, 160, "Dream Salvage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U/B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Draw cards equal to the number of cards target opponent discarded this turn.
         this.getSpellAbility().addEffect(new DreamSalvageEffect());

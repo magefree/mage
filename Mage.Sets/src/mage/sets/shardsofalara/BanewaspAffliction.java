@@ -55,7 +55,6 @@ public class BanewaspAffliction extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

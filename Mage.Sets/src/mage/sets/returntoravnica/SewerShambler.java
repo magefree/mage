@@ -47,7 +47,6 @@ public class SewerShambler extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

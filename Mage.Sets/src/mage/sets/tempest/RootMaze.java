@@ -52,7 +52,6 @@ public class RootMaze extends CardImpl {
         super(ownerId, 144, "Root Maze", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "TMP";
 
-        this.color.setGreen(true);
 
         // Artifacts and lands enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootMazeEffect()));

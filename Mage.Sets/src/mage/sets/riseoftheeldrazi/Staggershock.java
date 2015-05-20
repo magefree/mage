@@ -45,7 +45,6 @@ public class Staggershock extends CardImpl {
         super(ownerId, 166, "Staggershock", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.addAbility(new ReboundAbility());

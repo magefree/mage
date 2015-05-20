@@ -50,7 +50,6 @@ public class Oblation extends CardImpl {
         super(ownerId, 46, "Oblation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ONS";
 
-        this.color.setWhite(true);
 
         // The owner of target nonland permanent shuffles it into his or her library, then draws two cards.
         this.getSpellAbility().addEffect(new OblationEffect());

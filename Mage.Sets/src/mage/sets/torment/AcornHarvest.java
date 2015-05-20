@@ -48,7 +48,6 @@ public class AcornHarvest extends CardImpl {
         super(ownerId, 118, "Acorn Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "TOR";
 
-        this.color.setGreen(true);
 
         // Put two 1/1 green Squirrel creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SquirrelToken(), 2));

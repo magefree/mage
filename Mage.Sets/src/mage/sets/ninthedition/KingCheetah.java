@@ -45,7 +45,6 @@ public class KingCheetah extends CardImpl {
         this.expansionSetCode = "9ED";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

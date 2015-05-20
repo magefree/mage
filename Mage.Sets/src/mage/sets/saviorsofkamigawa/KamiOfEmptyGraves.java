@@ -45,7 +45,6 @@ public class KamiOfEmptyGraves extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

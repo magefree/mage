@@ -54,7 +54,6 @@ public class NetcasterSpider extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

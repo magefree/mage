@@ -51,7 +51,6 @@ public class Geosurge extends CardImpl {
         super(ownerId, 85, "Geosurge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{R}{R}{R}");
         this.expansionSetCode = "NPH";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new BasicManaEffect(new GeosurgeConditionalMana()));
     }

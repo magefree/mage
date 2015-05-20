@@ -57,7 +57,6 @@ public class DauthiHorror extends CardImpl {
         this.subtype.add("Dauthi");
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

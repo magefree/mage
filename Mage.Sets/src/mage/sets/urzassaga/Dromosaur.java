@@ -47,7 +47,6 @@ public class Dromosaur extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

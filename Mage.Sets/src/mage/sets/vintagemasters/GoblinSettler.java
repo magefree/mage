@@ -48,7 +48,6 @@ public class GoblinSettler extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

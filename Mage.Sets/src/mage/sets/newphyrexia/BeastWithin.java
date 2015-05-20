@@ -52,7 +52,6 @@ public class BeastWithin extends CardImpl {
         super(ownerId, 103, "Beast Within", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "NPH";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

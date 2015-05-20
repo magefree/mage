@@ -55,7 +55,6 @@ public class Relearn extends CardImpl {
         super(ownerId, 51, "Relearn", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{U}");
         this.expansionSetCode = "WTH";
 
-        this.color.setBlue(true);
 
         // Return target instant or sorcery card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

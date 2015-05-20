@@ -53,7 +53,6 @@ public class Tremor extends CardImpl {
         super(ownerId, 225, "Tremor", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "7ED";
 
-        this.color.setRed(true);
 
         // Tremor deals 1 damage to each creature without flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));

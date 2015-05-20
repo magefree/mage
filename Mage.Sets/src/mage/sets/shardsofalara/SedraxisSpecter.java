@@ -49,9 +49,6 @@ public class SedraxisSpecter extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Specter");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

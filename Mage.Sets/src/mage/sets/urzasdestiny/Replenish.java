@@ -51,7 +51,6 @@ public class Replenish extends CardImpl {
         super(ownerId, 15, "Replenish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "UDS";
 
-        this.color.setWhite(true);
 
         // Return all enchantment cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReplenishEffect());

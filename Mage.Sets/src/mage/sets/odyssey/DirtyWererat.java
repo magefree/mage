@@ -60,7 +60,6 @@ public class DirtyWererat extends CardImpl {
         this.subtype.add("Rat");
         this.subtype.add("Minion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

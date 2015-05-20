@@ -59,7 +59,6 @@ public class HordeOfBoggarts extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

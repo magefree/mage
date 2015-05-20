@@ -49,8 +49,6 @@ public class Moroii extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Vampire");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

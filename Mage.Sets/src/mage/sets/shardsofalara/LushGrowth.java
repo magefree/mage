@@ -52,7 +52,6 @@ public class LushGrowth extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

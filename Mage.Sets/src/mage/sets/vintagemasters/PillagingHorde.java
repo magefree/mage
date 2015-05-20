@@ -48,7 +48,6 @@ public class PillagingHorde extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

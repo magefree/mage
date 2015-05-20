@@ -47,7 +47,6 @@ public class LightningAxe extends CardImpl {
         super(ownerId, 168, "Lightning Axe", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "TSP";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Lightning Axe, discard a card or pay {5}.
         this.getSpellAbility().addCost(new OrCost(new DiscardCardCost(), new GenericManaCost(5),"discard a card or pay {5}"));

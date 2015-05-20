@@ -59,8 +59,6 @@ public class ShivanWurm extends CardImpl {
         this.expansionSetCode = "VMA";
         this.subtype.add("Wurm");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

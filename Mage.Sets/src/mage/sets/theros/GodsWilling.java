@@ -46,7 +46,6 @@ public class GodsWilling extends CardImpl {
         super(ownerId, 16, "Gods Willing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "THS";
 
-        this.color.setWhite(true);
 
         // Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));

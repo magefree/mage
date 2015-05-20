@@ -53,7 +53,6 @@ public class BeseechTheQueen extends CardImpl {
         super(ownerId, 57, "Beseech the Queen", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2/B}{2/B}{2/B}");
         this.expansionSetCode = "SHM";
 
-        this.color.setBlack(true);
 
         // <i>({2B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)</i>
         // Search your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. Then shuffle your library.

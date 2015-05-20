@@ -49,7 +49,6 @@ public class Righteousness extends CardImpl {
         super(ownerId, 36, "Righteousness", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

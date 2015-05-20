@@ -55,7 +55,6 @@ public class WeirdHarvest extends CardImpl {
         super(ownerId, 299, "Weird Harvest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
         this.expansionSetCode = "ONS";
 
-        this.color.setGreen(true);
 
         // Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
         getSpellAbility().addEffect(new WeirdHarvestEffect());

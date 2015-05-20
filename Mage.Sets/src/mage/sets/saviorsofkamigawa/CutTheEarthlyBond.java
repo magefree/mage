@@ -53,7 +53,6 @@ public class CutTheEarthlyBond extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Return target enchanted permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

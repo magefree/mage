@@ -43,7 +43,6 @@ public class TimeStop extends CardImpl {
         super(ownerId, 117, "Time Stop", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
         this.expansionSetCode = "10E";
 
-        this.color.setBlue(true);
 
         // End the turn.
         this.getSpellAbility().addEffect(new EndTurnEffect());

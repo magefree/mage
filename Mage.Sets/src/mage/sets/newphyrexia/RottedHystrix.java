@@ -44,7 +44,6 @@ public class RottedHystrix extends CardImpl {
         this.expansionSetCode = "NPH";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
     }

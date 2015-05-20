@@ -48,7 +48,7 @@ public class FlowstoneCharger extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Beast");
         this.color.setRed(true);
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, -3, Duration.EndOfTurn), false));

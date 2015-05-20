@@ -47,7 +47,6 @@ public class GatherCourage extends CardImpl {
         super(ownerId, 165, "Gather Courage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "RAV";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

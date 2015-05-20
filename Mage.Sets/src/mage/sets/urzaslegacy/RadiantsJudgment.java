@@ -53,7 +53,6 @@ public class RadiantsJudgment extends CardImpl {
         super(ownerId, 22, "Radiant's Judgment", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ULG";
 
-        this.color.setWhite(true);
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -51,7 +51,6 @@ public class LifesLegacy extends CardImpl {
         super(ownerId, 183, "Life's Legacy", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "M15";
 
-        this.color.setGreen(true);
 
         // As an additional cost to cast Life's Legacy, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

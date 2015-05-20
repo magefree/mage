@@ -56,7 +56,6 @@ public class ErebossEmissary extends CardImpl {
         this.expansionSetCode = "THS";
         this.subtype.add("Snake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

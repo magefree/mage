@@ -55,7 +55,6 @@ public class InvasiveSpecies extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
 
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

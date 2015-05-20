@@ -48,7 +48,6 @@ public class Accelerate extends CardImpl {
         super(ownerId, 90, "Accelerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "TOR";
 
-        this.color.setRed(true);
 
         // Target creature gains haste until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

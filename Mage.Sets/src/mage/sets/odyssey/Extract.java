@@ -52,7 +52,6 @@ public class Extract extends CardImpl {
         super(ownerId, 85, "Extract", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlue(true);
 
         // Search target player's library for a card and exile it. Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ExtractEffect());

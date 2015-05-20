@@ -58,7 +58,6 @@ public class ImmortalCoil extends CardImpl {
         super(ownerId, 79, "Immortal Coil", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}{B}{B}");
         this.expansionSetCode = "ALA";
 
-        this.color.setBlack(true);
 
         // {tap}, Exile two cards from your graveyard: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());

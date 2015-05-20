@@ -46,7 +46,6 @@ public class KeenEyedArchers extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Archer");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

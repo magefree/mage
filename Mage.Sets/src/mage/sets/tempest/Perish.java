@@ -54,7 +54,6 @@ public class Perish extends CardImpl {
         super(ownerId, 41, "Perish", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "TMP";
 
-        this.color.setBlack(true);
 
         // Destroy all green creatures. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));

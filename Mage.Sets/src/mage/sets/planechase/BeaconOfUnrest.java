@@ -56,7 +56,6 @@ public class BeaconOfUnrest extends CardImpl {
         super(ownerId, 18, "Beacon of Unrest", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "HOP";
 
-        this.color.setBlack(true);
 
         // Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

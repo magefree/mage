@@ -43,7 +43,6 @@ public class Inferno extends CardImpl {
         super(ownerId, 70, "Inferno", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{R}{R}");
         this.expansionSetCode = "DRK";
 
-        this.color.setRed(true);
 
         // Inferno deals 6 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(6));

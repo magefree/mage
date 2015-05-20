@@ -65,7 +65,6 @@ public class ManaBloom extends CardImpl {
         super(ownerId, 130, "Mana Bloom", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{X}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
 
         // Mana Bloom enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new ManaBloomEffect(),rule));

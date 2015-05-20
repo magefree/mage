@@ -48,7 +48,6 @@ public class ExaltedAngel extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

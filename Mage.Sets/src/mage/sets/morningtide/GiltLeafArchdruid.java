@@ -71,7 +71,6 @@ public class GiltLeafArchdruid extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

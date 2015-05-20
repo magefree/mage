@@ -44,8 +44,6 @@ public class Manamorphose extends CardImpl {
         super(ownerId, 211, "Manamorphose", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
         this.expansionSetCode = "SHM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Add two mana in any combination of colors to your mana pool.
         this.getSpellAbility().addEffect(new AddManaInAnyCombinationEffect(2));

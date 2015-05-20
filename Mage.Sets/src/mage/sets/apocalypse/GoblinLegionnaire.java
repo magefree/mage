@@ -52,7 +52,7 @@ public class GoblinLegionnaire extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Soldier");
         this.color.setRed(true);
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));

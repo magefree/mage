@@ -54,7 +54,6 @@ public class ArmWithAEther extends CardImpl {
         super(ownerId, 28, "Arm with AEther", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "NPH";
 
-        this.color.setBlue(true);
 
         // Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
         Effect effect = new GainAbilityControlledEffect(new ArmWithAEtherTriggeredAbility(), Duration.EndOfTurn, new FilterCreaturePermanent());

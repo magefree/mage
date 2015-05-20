@@ -52,8 +52,6 @@ public class CommonBond extends CardImpl {
         super(ownerId, 151, "Common Bond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Put a +1/+1 counter on target creature. Put a +1/+1 counter on target creature.
         this.getSpellAbility().addEffect(new CommonBondEffect());

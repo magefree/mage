@@ -51,7 +51,6 @@ public class HeartstabberMosquito extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

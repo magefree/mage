@@ -50,7 +50,7 @@ public class DegaDisciple extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));

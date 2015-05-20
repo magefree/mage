@@ -52,7 +52,6 @@ public class Tombfire extends CardImpl {
         super(ownerId, 165, "Tombfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ODY";
 
-        this.color.setBlack(true);
 
         // Target player exiles all cards with flashback from his or her graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());

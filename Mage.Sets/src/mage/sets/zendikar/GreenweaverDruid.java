@@ -50,7 +50,6 @@ public class GreenweaverDruid extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -46,7 +46,6 @@ public class SpawningBreath extends CardImpl {
         super(ownerId, 164, "Spawning Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ROE";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

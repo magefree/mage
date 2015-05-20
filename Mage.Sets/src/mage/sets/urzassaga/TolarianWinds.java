@@ -49,7 +49,6 @@ public class TolarianWinds extends CardImpl {
         super(ownerId, 104, "Tolarian Winds", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "USG";
 
-        this.color.setBlue(true);
 
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new TolarianWindsEffect());

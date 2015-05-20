@@ -63,7 +63,6 @@ public class Terastodon extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Elephant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

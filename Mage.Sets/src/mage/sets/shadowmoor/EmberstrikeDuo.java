@@ -62,8 +62,6 @@ public class EmberstrikeDuo extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

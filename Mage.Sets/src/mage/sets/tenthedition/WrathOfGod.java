@@ -44,7 +44,6 @@ public class WrathOfGod extends CardImpl {
         super(ownerId, 61, "Wrath of God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "10E";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterCreaturePermanent("creatures"), true));

@@ -51,7 +51,6 @@ public class TreasureHunt extends CardImpl {
         super(ownerId, 42, "Treasure Hunt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "WWK";
 
-        this.color.setBlue(true);
 
         // Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.
         this.getSpellAbility().addEffect(new TreasureHuntEffect());

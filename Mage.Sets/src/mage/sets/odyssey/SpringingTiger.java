@@ -51,7 +51,6 @@ public class SpringingTiger extends CardImpl {
         this.expansionSetCode = "ODY";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
