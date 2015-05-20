@@ -63,21 +63,13 @@ public class BreakingEntering extends SplitCard {
         super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setRed(true);
-
         // Breaking
         // Target player puts the top eight cards of his or her library into his or her graveyard.
-        getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveTargetEffect(8));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
         // Entering
         // Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
-        getRightHalfCard().getColor().setRed(true);
-        getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new EnteringReturnFromGraveyardToBattlefieldEffect());
 
     }

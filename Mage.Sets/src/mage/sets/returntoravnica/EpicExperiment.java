@@ -27,7 +27,9 @@
  */
 package mage.sets.returntoravnica;
 
+import java.util.ArrayList;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -55,7 +57,6 @@ public class EpicExperiment extends CardImpl {
     public EpicExperiment(UUID ownerId) {
         super(ownerId, 159, "Epic Experiment", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{U}{R}");
         this.expansionSetCode = "RTR";
-
 
         // Exile the top X cards of your library. For each instant and sorcery card with
         // converted mana cost X or less among them, you may cast that card without paying
@@ -94,12 +95,13 @@ class EpicExperimentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);         
+        if (controller != null && sourceObject != null) {
             // move cards from library to exile
             for (int i = 0; i < source.getManaCostsToPay().getX(); i++) {
                 if (controller.getLibrary().size() > 0) {
                     Card topCard = controller.getLibrary().getFromTop(game);
-                    controller.moveCardToExileWithInfo(topCard, source.getSourceId(), "Cards exiled by Epic Experiment",  source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(topCard, source.getSourceId(), "Cards exiled by " + sourceObject.getName(),  source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             }
             // cast the possible cards without paying the mana
@@ -108,13 +110,12 @@ class EpicExperimentEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
             filter.setMessage("instant and sorcery cards with converted mana cost "+ source.getManaCostsToPay().getX() +" or less");
             while (epicExperimentExileZone != null && epicExperimentExileZone.count(filter, game) > 0
-                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with Epic Experiment without paying its mana cost?", game)) {
+                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + sourceObject.getLogName() + " without paying its mana cost?", game)) {
                 TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
                 while (epicExperimentExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, epicExperimentExileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {                            
-                            if (controller.cast(card.getSpellAbility(), game, true))
-                            {
+                            if (controller.cast(card.getSpellAbility(), game, true)) {
                                 game.getExile().removeCard(card, game);
                             }
                         }
@@ -124,9 +125,7 @@ class EpicExperimentEffect extends OneShotEffect {
             // move cards not cast to graveyard
             ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null) {
-                for (Card card : exile.getCards(game)) {
-                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                }
+                controller.moveCardsToGraveyardWithInfo(exile, source, game, Zone.EXILED);
             }
             return true;
         }

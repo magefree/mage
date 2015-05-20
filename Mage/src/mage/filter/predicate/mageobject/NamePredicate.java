@@ -56,7 +56,13 @@ public class NamePredicate implements Predicate<MageObject> {
             SplitCard card = (SplitCard) ((Spell)input).getCard();
             return name.equals(card.getLeftHalfCard().getName()) || name.equals(card.getRightHalfCard().getName());
         } else {
-            return name.equals(input.getName());
+            if (name.contains(" // ")) {
+                String leftName = name.substring(0, name.indexOf(" // "));
+                String rightName = name.substring(name.indexOf(" // ") + 4, name.length());
+                return leftName.equals(input.getName()) || rightName.equals(input.getName());
+            } else {
+                return name.equals(input.getName());
+            }
         }
     }
 
