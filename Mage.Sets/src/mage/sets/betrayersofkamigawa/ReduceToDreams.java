@@ -52,7 +52,6 @@ public class ReduceToDreams extends CardImpl {
         super(ownerId, 49, "Reduce to Dreams", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "BOK";
 
-        this.color.setBlue(true);
 
         // Return all artifacts and enchantments to their owners' hands.
         this.getSpellAbility().addEffect(new ReduceToDreamsEffect());

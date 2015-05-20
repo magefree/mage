@@ -46,7 +46,6 @@ public class PeachGardenOath extends CardImpl {
         super(ownerId, 34, "Peach Garden Oath", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "8ED";
 
-        this.color.setWhite(true);
 
         // You gain 2 life for each creature you control.
         DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent(), 2);

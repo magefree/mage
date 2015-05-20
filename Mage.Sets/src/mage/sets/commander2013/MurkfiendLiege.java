@@ -62,8 +62,6 @@ public class MurkfiendLiege extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

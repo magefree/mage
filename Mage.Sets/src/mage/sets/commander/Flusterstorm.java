@@ -55,7 +55,6 @@ public class Flusterstorm extends CardImpl {
         super(ownerId, 46, "Flusterstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlue(true);
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")));

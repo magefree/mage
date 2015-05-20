@@ -55,7 +55,6 @@ public class NacatlHuntPride extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

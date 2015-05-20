@@ -59,7 +59,6 @@ public class FromTheAshes extends CardImpl {
         super(ownerId, 108, "From the Ashes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // Destroy all nonbasic lands. For each land destroyed this way, its controller may search his or her library for a basic land card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.
         this.getSpellAbility().addEffect(new FromTheAshesEffect());

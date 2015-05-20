@@ -55,7 +55,6 @@ public class Thunderbolt extends CardImpl {
         super(ownerId, 159, "Thunderbolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Choose one - Thunderbolt deals 3 damage to target player; or Thunderbolt deals 4 damage to target creature with flying.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

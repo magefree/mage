@@ -57,7 +57,6 @@ public class GempalmStrider extends CardImpl {
         this.expansionSetCode = "EVG";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

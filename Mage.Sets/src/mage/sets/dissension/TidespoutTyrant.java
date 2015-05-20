@@ -49,7 +49,6 @@ public class TidespoutTyrant extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Djinn");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

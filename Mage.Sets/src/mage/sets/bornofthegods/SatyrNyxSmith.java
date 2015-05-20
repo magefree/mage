@@ -52,7 +52,6 @@ public class SatyrNyxSmith extends CardImpl {
         this.subtype.add("Satyr");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

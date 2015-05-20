@@ -61,7 +61,6 @@ public class NayaSoulbeast extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -55,7 +55,6 @@ public class CallForBlood extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Call for Blood, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

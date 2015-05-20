@@ -65,7 +65,6 @@ public class SiftThroughSands extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Draw two cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

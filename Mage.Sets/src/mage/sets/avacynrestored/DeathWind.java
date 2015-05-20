@@ -48,7 +48,6 @@ public class DeathWind extends CardImpl {
         super(ownerId, 93, "Death Wind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Target creature gets -X/-X until end of turn.
         DynamicValue x = new SignInversionDynamicValue(new ManacostVariableValue());

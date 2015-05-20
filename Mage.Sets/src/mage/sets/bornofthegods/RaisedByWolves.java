@@ -68,7 +68,6 @@ public class RaisedByWolves extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

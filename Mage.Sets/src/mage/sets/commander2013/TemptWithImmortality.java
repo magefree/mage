@@ -55,7 +55,6 @@ public class TemptWithImmortality extends CardImpl {
         super(ownerId, 95, "Tempt with Immortality", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // Tempting offer - Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from his or her graveyard to the battlefield. For each player who does, return a creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());

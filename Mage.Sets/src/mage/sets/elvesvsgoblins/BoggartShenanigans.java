@@ -58,7 +58,6 @@ public class BoggartShenanigans extends CardImpl {
         this.expansionSetCode = "EVG";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
 
         // Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
         Ability ability = new DiesCreatureTriggeredAbility(new DamageTargetEffect(1), true, filter, false);

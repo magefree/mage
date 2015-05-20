@@ -62,8 +62,6 @@ public class EmmaraTandris extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

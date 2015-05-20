@@ -54,7 +54,6 @@ public class BonfireOfTheDamned extends CardImpl {
         super(ownerId, 129, "Bonfire of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Bonfire of the Damned deals X damage to target player and each creature he or she controls.
         this.getSpellAbility().addEffect(new BonfireOfTheDamnedEffect());

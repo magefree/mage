@@ -47,7 +47,6 @@ public class BuildersBlessing extends CardImpl {
         super(ownerId, 8, "Builder's Blessing", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Untapped creatures you control get +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));

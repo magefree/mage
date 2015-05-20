@@ -46,7 +46,6 @@ public class VengefulVampire extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

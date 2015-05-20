@@ -62,7 +62,6 @@ public class RoarOfJukai extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
 
         // If you control a Forest, each blocked creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new RoarOfJukaiEffect());

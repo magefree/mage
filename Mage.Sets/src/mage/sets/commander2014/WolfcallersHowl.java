@@ -52,7 +52,6 @@ public class WolfcallersHowl extends CardImpl {
         super(ownerId, 52, "Wolfcaller's Howl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "C14";
 
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the number of your opponents with four or more cards in hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WolfcallersHowlEffect(), TargetController.YOU, false));

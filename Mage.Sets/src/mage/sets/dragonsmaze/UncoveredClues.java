@@ -54,7 +54,6 @@ public class UncoveredClues extends CardImpl {
         super(ownerId, 19, "Uncovered Clues", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
 
         // Look at the top four cards of your library. You may reveal up to two instant and/or sorcery cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(4, 2, filter, true));

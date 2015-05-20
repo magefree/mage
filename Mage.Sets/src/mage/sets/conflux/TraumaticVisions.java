@@ -46,7 +46,6 @@ public class TraumaticVisions extends CardImpl {
         super(ownerId, 36, "Traumatic Visions", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlue(true);
 
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());

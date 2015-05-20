@@ -63,7 +63,6 @@ public class ThroughTheBreach extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice that creature at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThroughTheBreachEffect());

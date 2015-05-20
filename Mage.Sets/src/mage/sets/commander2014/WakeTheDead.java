@@ -64,7 +64,6 @@ public class WakeTheDead extends CardImpl {
         super(ownerId, 31, "Wake the Dead", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Cast Wake the Dead only during combat on an opponent's turn.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WakeTheDeadEffect());

@@ -57,7 +57,6 @@ public class ReturnToDust extends CardImpl {
         super(ownerId, 28, "Return to Dust", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "CMD";
 
-        this.color.setWhite(true);
 
         // Exile target artifact or enchantment. If you cast this spell during your main phase, you may exile up to one other target artifact or enchantment.
         Effect effect = new ExileTargetEffect();

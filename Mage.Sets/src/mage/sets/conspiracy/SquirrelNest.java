@@ -58,7 +58,6 @@ public class SquirrelNest extends CardImpl {
         this.expansionSetCode = "CNS";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

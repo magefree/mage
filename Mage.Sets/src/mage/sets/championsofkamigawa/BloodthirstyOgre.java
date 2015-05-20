@@ -66,7 +66,6 @@ public class BloodthirstyOgre extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

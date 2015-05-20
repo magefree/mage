@@ -49,7 +49,6 @@ public class EntreatTheAngels extends CardImpl {
         super(ownerId, 20, "Entreat the Angels", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{X}{W}{W}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Put X 4/4 white Angel creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken(), new ManacostVariableValue()));

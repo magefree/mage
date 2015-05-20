@@ -47,8 +47,6 @@ public class AEtherMutation extends CardImpl {
         super(ownerId, 91, "AEther Mutation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{U}");
         this.expansionSetCode = "APC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -59,7 +59,6 @@ public class CurseOfPredation extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setGreen(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

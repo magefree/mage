@@ -50,7 +50,6 @@ public class ReforgeTheSoul extends CardImpl {
         super(ownerId, 151, "Reforge the Soul", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Each player discards his or her hand, then draws seven cards.
         this.getSpellAbility().addEffect(new ReforgeTheSoulEffect());

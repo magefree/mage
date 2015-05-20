@@ -55,7 +55,6 @@ public class RuneSnag extends CardImpl {
         super(ownerId, 46, "Rune Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CSP";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {2} plus an additional {2} for each card named Rune Snag in each graveyard.
         Effect effect = new CounterUnlessPaysEffect(new IntPlusDynamicValue(2, new MultipliedValue(new CardsInAllGraveyardsCount(filter), 2)));

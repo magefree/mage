@@ -73,8 +73,6 @@ public class KioraTheCrashingWave extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Kiora");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
 

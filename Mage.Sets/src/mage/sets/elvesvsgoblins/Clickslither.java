@@ -63,7 +63,6 @@ public class Clickslither extends CardImpl {
         this.expansionSetCode = "EVG";
         this.subtype.add("Insect");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

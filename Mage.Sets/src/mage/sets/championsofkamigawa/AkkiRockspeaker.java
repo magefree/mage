@@ -49,7 +49,6 @@ public class AkkiRockspeaker extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

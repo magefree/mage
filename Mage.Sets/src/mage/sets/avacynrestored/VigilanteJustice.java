@@ -55,7 +55,6 @@ public class VigilanteJustice extends CardImpl {
         super(ownerId, 165, "Vigilante Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to target creature or player.
         Ability ability = new CreatureEntersBattlefieldTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), filter, false, false);

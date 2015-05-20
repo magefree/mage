@@ -54,7 +54,6 @@ public class WarCadence extends CardImpl {
         super(ownerId, 128, "War Cadence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // {X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature he or she controls.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarCadenceReplacementEffect(), new ManaCostsImpl("{X}{R}") ));

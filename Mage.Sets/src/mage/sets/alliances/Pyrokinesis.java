@@ -52,7 +52,6 @@ public class Pyrokinesis extends CardImpl {
         super(ownerId, 115, "Pyrokinesis", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
         this.expansionSetCode = "ALL";
 
-        this.color.setRed(true);
 
         // You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a red card from your hand");

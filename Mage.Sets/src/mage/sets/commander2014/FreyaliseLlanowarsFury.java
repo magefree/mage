@@ -72,7 +72,6 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Freyalise");
 
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         

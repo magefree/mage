@@ -59,7 +59,6 @@ public class ArchetypeOfFinality extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Gorgon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

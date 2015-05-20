@@ -57,7 +57,6 @@ public class FaithsShield extends CardImpl {
         super(ownerId, 7, "Faith's Shield", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Target permanent you control gains protection from the color of your choice until end of turn.
 

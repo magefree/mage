@@ -54,7 +54,6 @@ public class CutTheTethers extends CardImpl {
         super(ownerId, 56, "Cut the Tethers", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "CHK";
 
-        this.color.setBlue(true);
 
         // For each Spirit, return it to its owner's hand unless that player pays {3}.
         this.getSpellAbility().addEffect(new CutTheTethersEffect());

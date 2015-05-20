@@ -47,7 +47,6 @@ public class SilverstormSamurai extends CardImpl {
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -44,7 +44,6 @@ public class RagingPoltergeist extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
     }

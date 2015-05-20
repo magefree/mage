@@ -71,9 +71,6 @@ public class MarathWillOfTheWild extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

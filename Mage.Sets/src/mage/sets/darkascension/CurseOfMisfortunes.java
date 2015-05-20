@@ -64,7 +64,6 @@ public class CurseOfMisfortunes extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setBlack(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

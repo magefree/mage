@@ -57,7 +57,6 @@ public class SpoilsOfBlood extends CardImpl {
         super(ownerId, 30, "Spoils of Blood", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Put an X/X black Horror creature token onto the battlefield, where X is the number of creatures that died this turn.
         this.getSpellAbility().addEffect(new SpoilsOfBloodEffect());

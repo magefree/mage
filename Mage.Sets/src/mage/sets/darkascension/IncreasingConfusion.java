@@ -51,7 +51,6 @@ public class IncreasingConfusion extends CardImpl {
         super(ownerId, 41, "Increasing Confusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead.
         this.getSpellAbility().addEffect(new IncreasingConfusionEffect());

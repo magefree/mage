@@ -57,7 +57,6 @@ public class ShaperParasite extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

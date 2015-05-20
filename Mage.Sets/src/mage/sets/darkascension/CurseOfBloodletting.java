@@ -56,7 +56,6 @@ public class CurseOfBloodletting extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setRed(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

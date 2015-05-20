@@ -55,7 +55,6 @@ public class Comeuppance extends CardImpl {
         super(ownerId, 4, "Comeuppance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, Comeuppance deals that much damage to that creature. If damage from a noncreature source is prevented this way, Comeuppance deals that much damage to the source's controller.
         this.getSpellAbility().addEffect(new ComeuppanceEffect());

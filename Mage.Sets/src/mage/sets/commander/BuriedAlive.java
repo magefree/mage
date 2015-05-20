@@ -53,7 +53,6 @@ public class BuriedAlive extends CardImpl {
         super(ownerId, 74, "Buried Alive", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlack(true);
 
         // Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new BuriedAliveEffect());        

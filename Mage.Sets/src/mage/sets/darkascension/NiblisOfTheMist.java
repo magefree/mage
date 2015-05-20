@@ -49,7 +49,6 @@ public class NiblisOfTheMist extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

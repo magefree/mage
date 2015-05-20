@@ -70,8 +70,6 @@ public class MelekIzzetParagon extends CardImpl {
         this.subtype.add("Weird");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

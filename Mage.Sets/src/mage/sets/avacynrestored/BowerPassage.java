@@ -50,7 +50,6 @@ public class BowerPassage extends CardImpl {
         super(ownerId, 170, "Bower Passage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Creatures with flying can't block creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BowerPassageEffect()));

@@ -51,7 +51,6 @@ public class Overblaze extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
         this.getSpellAbility().addEffect(new FireServantEffect());

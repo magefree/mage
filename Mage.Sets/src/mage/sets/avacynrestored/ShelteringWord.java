@@ -52,7 +52,6 @@ public class ShelteringWord extends CardImpl {
         super(ownerId, 192, "Sheltering Word", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));

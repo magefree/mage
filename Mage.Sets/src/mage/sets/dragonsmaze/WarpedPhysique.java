@@ -51,8 +51,6 @@ public class WarpedPhysique extends CardImpl {
         super(ownerId, 117, "Warped Physique", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue =  new CardsInControllerHandCount();

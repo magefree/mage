@@ -51,7 +51,6 @@ public class IntellectualOffering extends CardImpl {
         super(ownerId, 15, "Intellectual Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Choose an opponent. You and that player each draw three cards.
         this.getSpellAbility().addEffect(new IntellectualOfferingDrawEffect());

@@ -58,7 +58,6 @@ public class NessianWildsRavager extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

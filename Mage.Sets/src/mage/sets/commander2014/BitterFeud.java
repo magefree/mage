@@ -60,7 +60,6 @@ public class BitterFeud extends CardImpl {
         super(ownerId, 32, "Bitter Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // As Bitter Feud enters the battlefield, choose two players.
         this.addAbility(new AsEntersBattlefieldAbility(new BitterFeudEntersBattlefieldEffect()));

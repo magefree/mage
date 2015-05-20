@@ -56,7 +56,6 @@ public class Nyxathid extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

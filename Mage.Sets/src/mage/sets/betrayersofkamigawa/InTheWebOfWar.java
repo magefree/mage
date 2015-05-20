@@ -54,7 +54,6 @@ public class InTheWebOfWar extends CardImpl {
         super(ownerId, 108, "In the Web of War", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "BOK";
 
-        this.color.setRed(true);
 
         // Whenever a creature enters the battlefield under your control, it gets +2/+0 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(2,0, Duration.EndOfTurn);

@@ -46,7 +46,6 @@ public class Gravepurge extends CardImpl {
         super(ownerId, 65, "Gravepurge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Put any number of target creature cards from your graveyard on top of your library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

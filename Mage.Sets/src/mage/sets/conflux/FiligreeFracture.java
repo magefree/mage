@@ -62,7 +62,6 @@ public class FiligreeFracture extends CardImpl {
         super(ownerId, 82, "Filigree Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "CON";
 
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

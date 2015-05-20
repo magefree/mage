@@ -54,8 +54,6 @@ public class BlastOfGenius extends CardImpl {
         super(ownerId, 55, "Blast of Genius", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{R}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
 
         // Choose target creature or player. Draw three cards and discard a card. Blast of Genius deals damage equal to the converted mana cost of the discard card to that creature or player.
         this.getSpellAbility().addEffect(new BlastOfGeniusEffect());

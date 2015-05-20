@@ -53,7 +53,6 @@ public class BoneToAsh extends CardImpl {
         super(ownerId, 29, "Bone to Ash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Counter target creature spell.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

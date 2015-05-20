@@ -46,7 +46,6 @@ public class HideousLaughter extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // All creatures get -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2,-2, Duration.EndOfTurn));

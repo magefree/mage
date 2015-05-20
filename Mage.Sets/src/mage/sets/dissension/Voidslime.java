@@ -44,8 +44,6 @@ public class Voidslime extends CardImpl {
         super(ownerId, 137, "Voidslime", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{U}{U}");
         this.expansionSetCode = "DIS";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
 
         // Counter target spell, activated ability, or triggered ability.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

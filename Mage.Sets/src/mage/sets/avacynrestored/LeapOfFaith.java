@@ -48,7 +48,6 @@ public class LeapOfFaith extends CardImpl {
         super(ownerId, 26, "Leap of Faith", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));

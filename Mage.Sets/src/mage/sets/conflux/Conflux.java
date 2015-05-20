@@ -56,11 +56,6 @@ public class Conflux extends CardImpl {
         super(ownerId, 102, "Conflux", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{W}{U}{B}{R}{G}");
         this.expansionSetCode = "CON";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConfluxEffect());

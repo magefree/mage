@@ -56,7 +56,6 @@ public class YokeOfTheDamned extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

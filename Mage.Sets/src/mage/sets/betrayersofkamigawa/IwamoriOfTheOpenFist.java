@@ -62,7 +62,6 @@ public class IwamoriOfTheOpenFist extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

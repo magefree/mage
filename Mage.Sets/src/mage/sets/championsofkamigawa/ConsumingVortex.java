@@ -46,7 +46,6 @@ public class ConsumingVortex extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

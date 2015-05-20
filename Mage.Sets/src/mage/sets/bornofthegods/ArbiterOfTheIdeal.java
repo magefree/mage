@@ -64,7 +64,6 @@ public class ArbiterOfTheIdeal extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

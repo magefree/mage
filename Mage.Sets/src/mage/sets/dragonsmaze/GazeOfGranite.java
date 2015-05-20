@@ -55,8 +55,6 @@ public class GazeOfGranite extends CardImpl {
         super(ownerId, 72, "Gaze of Granite", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{G}");
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Destroy each nonland permanent with converted mana cost X or less.
          this.getSpellAbility().addEffect(new GazeOfGraniteEffect());

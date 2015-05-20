@@ -66,7 +66,6 @@ public class DomineeringWill extends CardImpl {
         super(ownerId, 13, "Domineering Will", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.
         this.getSpellAbility().addEffect(new DomineeringWillEffect());

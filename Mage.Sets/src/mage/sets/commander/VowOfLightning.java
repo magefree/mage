@@ -58,7 +58,6 @@ public class VowOfLightning extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

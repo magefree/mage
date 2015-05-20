@@ -57,11 +57,6 @@ public class Chromanticore extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Manticore");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

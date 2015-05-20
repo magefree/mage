@@ -61,7 +61,6 @@ public class FaithsFetters extends CardImpl {
         this.expansionSetCode = "DDC";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();

@@ -52,8 +52,6 @@ public class BredForTheHunt extends CardImpl {
         super(ownerId, 59, "Bred for the Hunt", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{U}");
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
 
         // Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card.
         this.addAbility(new BredForTheHuntTriggeredAbility());

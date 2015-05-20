@@ -58,8 +58,6 @@ public class KrasisIncubation extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

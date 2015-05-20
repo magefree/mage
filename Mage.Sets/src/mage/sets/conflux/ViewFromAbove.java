@@ -57,7 +57,6 @@ public class ViewFromAbove extends CardImpl {
         super(ownerId, 38, "View from Above", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlue(true);
 
         // Target creature gains flying until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));

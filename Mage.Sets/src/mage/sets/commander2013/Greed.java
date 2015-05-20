@@ -48,7 +48,6 @@ public class Greed extends CardImpl {
         super(ownerId, 79, "Greed", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // {B}, Pay 2 life: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}"));

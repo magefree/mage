@@ -45,7 +45,6 @@ public class MentalAgony extends CardImpl {
         super(ownerId, 114, "Mental Agony", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Target player discards two cards and loses 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

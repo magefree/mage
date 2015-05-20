@@ -47,7 +47,6 @@ public class ArtfulDodge extends CardImpl {
         super(ownerId, 27, "Artful Dodge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Target creature can't be blocked this turn.
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());

@@ -59,7 +59,6 @@ public class ArchetypeOfEndurance extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

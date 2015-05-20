@@ -49,7 +49,6 @@ public class DangerousWager extends CardImpl {
         super(ownerId, 131, "Dangerous Wager", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Discard your hand, then draw two cards.
         this.getSpellAbility().addEffect(new DangerousWagerEffect());

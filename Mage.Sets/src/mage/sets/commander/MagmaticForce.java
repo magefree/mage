@@ -50,7 +50,6 @@ public class MagmaticForce extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

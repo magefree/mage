@@ -19,7 +19,6 @@ public class ReapTheSeagraf extends CardImpl {
         super(ownerId, 72, "Reap the Seagraf", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD")));
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));

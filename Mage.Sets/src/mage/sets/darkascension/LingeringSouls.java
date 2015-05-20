@@ -47,7 +47,6 @@ public class LingeringSouls extends CardImpl {
         super(ownerId, 12, "Lingering Souls", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2));

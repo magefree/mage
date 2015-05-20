@@ -58,7 +58,6 @@ public class VowOfMalice extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

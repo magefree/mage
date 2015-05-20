@@ -45,8 +45,6 @@ public class PilferedPlans extends CardImpl {
         super(ownerId, 90, "Pilfered Plans", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}{B}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target player puts the top two cards of his or her library into his or her graveyard. Draw two cards.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(2));

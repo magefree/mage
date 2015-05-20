@@ -52,7 +52,6 @@ public class SalvageSlasher extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         BoostSourceEffect effect = new BoostSourceEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard()),

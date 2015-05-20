@@ -47,7 +47,6 @@ public class CripplingChill extends CardImpl {
         super(ownerId, 46, "Crippling Chill", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Tap target creature. It doesn't untap during its controller's next untap step.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

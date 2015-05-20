@@ -56,7 +56,6 @@ public class AustereCommand extends CardImpl {
         super(ownerId, 8, "Austere Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "CMD";
 
-        this.color.setWhite(true);
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);

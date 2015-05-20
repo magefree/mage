@@ -45,7 +45,6 @@ public class ArgivianRestoration extends CardImpl {
         super(ownerId, 69, "Argivian Restoration", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "DDF";
 
-        this.color.setBlue(true);
 
         // Return target artifact card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

@@ -46,8 +46,6 @@ public class DebtToTheDeathless extends CardImpl {
         super(ownerId, 64, "Debt to the Deathless", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{W}{W}{B}{B}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Each opponent loses two times X life. You gain life equal to the life lost this way.
         this.getSpellAbility().addEffect(new DebtToTheDeathlessEffect());

@@ -60,7 +60,6 @@ public class SavageBeating extends CardImpl {
         super(ownerId, 67, "Savage Beating", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "DST";
 
-        this.color.setRed(true);
 
         // Cast Savage Beating only during your turn and only during combat.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SavageBeatingTimingEffect());

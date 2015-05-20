@@ -46,7 +46,6 @@ public class BloodFeud extends CardImpl {
         super(ownerId, 83, "Blood Feud", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

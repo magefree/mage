@@ -49,7 +49,6 @@ public class InciteRebellion extends CardImpl {
         super(ownerId, 37, "Incite Rebellion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // For each player, Incite Rebellion deals damage to that player and each creature that player controls equal to the number of creatures he or she controls.
         this.getSpellAbility().addEffect(new InciteRebellionEffect());

@@ -67,7 +67,6 @@ public class GenjuOfTheFalls extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant Island
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

@@ -50,7 +50,6 @@ public class LashOut extends CardImpl {
         super(ownerId, 127, "Lash Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
 
         // Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new LashOutEffect());

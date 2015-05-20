@@ -65,9 +65,6 @@ public class JelevaNephaliasScourge extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

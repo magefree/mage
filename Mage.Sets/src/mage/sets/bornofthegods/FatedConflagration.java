@@ -47,7 +47,6 @@ public class FatedConflagration extends CardImpl {
         super(ownerId, 94, "Fated Conflagration", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}{R}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Fated Conflagration deals 5 damage to target creature or planewalker. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

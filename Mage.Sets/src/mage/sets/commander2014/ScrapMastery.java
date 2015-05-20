@@ -56,7 +56,6 @@ public class ScrapMastery extends CardImpl {
         super(ownerId, 38, "Scrap Mastery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // Each player exiles all artifact cards from his or her graveyard, then sacrifices all artifacts he or she controls, then puts all cards he or she exiled this way onto the battlefield.
         this.getSpellAbility().addEffect(new ScrapMasteryEffect());

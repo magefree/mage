@@ -51,7 +51,6 @@ public class WhirlpoolWhelm extends CardImpl {
         super(ownerId, 69, "Whirlpool Whelm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlue(true);
 
         // Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead.
         this.getSpellAbility().addEffect(new WhirlpoolWhelmEffect());

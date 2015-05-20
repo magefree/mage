@@ -50,7 +50,6 @@ public class Armistice extends CardImpl {
         super(ownerId, 65, "Armistice", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // {3}{W}{W}: You draw a card and target opponent gains 3 life.
         Effect effect = new DrawCardSourceControllerEffect(1);

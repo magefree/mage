@@ -44,7 +44,6 @@ public class BarTheDoor extends CardImpl {
         super(ownerId, 2, "Bar the Door", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +0/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 4, Duration.EndOfTurn));

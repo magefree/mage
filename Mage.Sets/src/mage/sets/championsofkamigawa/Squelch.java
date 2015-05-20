@@ -45,7 +45,6 @@ public class Squelch extends CardImpl {
         super(ownerId, 92, "Squelch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CHK";
 
-        this.color.setBlue(true);
 
         // Counter target activated ability.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

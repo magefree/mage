@@ -60,7 +60,6 @@ public class Outwit extends CardImpl {
         super(ownerId, 70, "Outwit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Counter target spell that targets a player.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

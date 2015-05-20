@@ -46,7 +46,6 @@ public class UndyingEvil extends CardImpl {
         super(ownerId, 77, "Undying Evil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Target creature gains undying until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new UndyingAbility(), Duration.EndOfTurn));

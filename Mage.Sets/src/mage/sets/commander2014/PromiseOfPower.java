@@ -56,7 +56,6 @@ public class PromiseOfPower extends CardImpl {
         super(ownerId, 157, "Promise of Power", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

@@ -56,7 +56,6 @@ public class SpitefulReturned extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

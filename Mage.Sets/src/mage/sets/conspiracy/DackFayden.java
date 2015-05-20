@@ -72,8 +72,6 @@ public class DackFayden extends CardImpl {
         this.expansionSetCode = "CNS";
         this.subtype.add("Dack");
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
         
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

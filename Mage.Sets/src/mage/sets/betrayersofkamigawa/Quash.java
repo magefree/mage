@@ -55,7 +55,6 @@ public class Quash extends CardImpl {
         super(ownerId, 47, "Quash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "BOK";
 
-        this.color.setBlue(true);
 
         // Counter target instant or sorcery spell. 
         // Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.

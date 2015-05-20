@@ -49,7 +49,6 @@ public class OneDozenEyes extends CardImpl {
         super(ownerId, 159, "One Dozen Eyes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

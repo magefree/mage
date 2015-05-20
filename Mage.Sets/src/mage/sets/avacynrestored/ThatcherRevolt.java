@@ -54,7 +54,6 @@ public class ThatcherRevolt extends CardImpl {
         super(ownerId, 158, "Thatcher Revolt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Put three 1/1 red Human creature tokens with haste onto the battlefield. Sacrifice those tokens at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ThatcherRevoltEffect());

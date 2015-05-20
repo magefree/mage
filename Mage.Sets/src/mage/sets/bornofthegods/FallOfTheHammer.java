@@ -61,7 +61,6 @@ public class FallOfTheHammer extends CardImpl {
         super(ownerId, 93, "Fall of the Hammer", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Target creature you control deals damage equal to its power to another target creature.
         this.getSpellAbility().addEffect(new FallOfTheHammerDamageEffect());

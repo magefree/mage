@@ -54,7 +54,6 @@ public class WidespreadPanic extends CardImpl {
         super(ownerId, 131, "Widespread Panic", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // Whenever a spell or ability causes its controller to shuffle his or her library, that player puts a card from his or her hand on top of his or her library.
         this.addAbility(new WidespreadPanicTriggeredAbility());

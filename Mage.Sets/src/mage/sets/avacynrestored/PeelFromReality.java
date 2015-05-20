@@ -59,7 +59,6 @@ public class PeelFromReality extends CardImpl {
         super(ownerId, 71, "Peel from Reality", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Return target creature you control and target creature you don't control to their owners' hands.
         this.getSpellAbility().addEffect(new PeelFromRealityEffect());

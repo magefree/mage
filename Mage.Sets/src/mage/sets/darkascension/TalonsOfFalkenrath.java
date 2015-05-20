@@ -57,7 +57,6 @@ public class TalonsOfFalkenrath extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         this.addAbility(FlashAbility.getInstance());
         // Enchant creature

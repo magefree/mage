@@ -59,7 +59,6 @@ public class SoulOfTheHarvest extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

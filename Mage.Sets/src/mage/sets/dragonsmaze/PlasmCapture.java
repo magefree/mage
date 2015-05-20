@@ -56,8 +56,6 @@ public class PlasmCapture extends CardImpl {
         super(ownerId, 91, "Plasm Capture", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

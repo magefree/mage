@@ -47,7 +47,6 @@ public class StrangeInversion extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Switch target creature's power and toughness until end of turn.
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));

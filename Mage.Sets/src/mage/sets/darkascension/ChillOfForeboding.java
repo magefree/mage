@@ -53,7 +53,6 @@ public class ChillOfForeboding extends CardImpl {
         super(ownerId, 32, "Chill of Foreboding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Each player puts the top five cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new ChillOfForebodingEffect());

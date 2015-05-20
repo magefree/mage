@@ -60,7 +60,6 @@ public class BlindingBeam extends CardImpl {
         super(ownerId, 28, "Blinding Beam", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "DDF";
 
-        this.color.setWhite(true);
 
         // Choose one -
         this.getSpellAbility().getModes().setMinModes(1);

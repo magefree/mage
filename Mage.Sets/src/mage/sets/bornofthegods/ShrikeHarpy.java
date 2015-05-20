@@ -53,7 +53,6 @@ public class ShrikeHarpy extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Harpy");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -59,7 +59,6 @@ public class VortexElemental extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

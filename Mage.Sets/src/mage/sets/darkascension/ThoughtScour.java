@@ -45,7 +45,6 @@ public class ThoughtScour extends CardImpl {
         super(ownerId, 52, "Thought Scour", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Target player puts the top two cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());

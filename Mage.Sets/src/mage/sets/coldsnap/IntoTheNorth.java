@@ -53,7 +53,6 @@ public class IntoTheNorth extends CardImpl {
         super(ownerId, 111, "Into the North", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "CSP";
 
-        this.color.setGreen(true);
 
         // Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay));

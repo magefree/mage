@@ -52,7 +52,6 @@ public class Whirlwind extends CardImpl {
         super(ownerId, 224, "Whirlwind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "C14";
 
-        this.color.setGreen(true);
 
         // Destroy all creatures with flying.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

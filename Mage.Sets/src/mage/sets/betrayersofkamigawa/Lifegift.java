@@ -46,7 +46,6 @@ public class Lifegift extends CardImpl {
         super(ownerId, 132, "Lifegift", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "BOK";
 
-        this.color.setGreen(true);
 
         // Whenever a land enters the battlefield, you may gain 1 life.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new FilterLandPermanent("a land"), true));

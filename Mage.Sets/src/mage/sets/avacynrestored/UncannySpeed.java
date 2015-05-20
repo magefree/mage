@@ -47,7 +47,6 @@ public class UncannySpeed extends CardImpl {
         super(ownerId, 163, "Uncanny Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Target creature gets +3/+0 and gains haste until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));

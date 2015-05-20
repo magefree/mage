@@ -57,9 +57,6 @@ public class GahijiHonoredOne extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

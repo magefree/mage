@@ -53,8 +53,6 @@ public class GoblinTestPilot extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

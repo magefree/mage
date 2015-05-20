@@ -58,7 +58,6 @@ public class Counterlash extends CardImpl {
         super(ownerId, 33, "Counterlash", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.
         this.getSpellAbility().addTarget(new TargetSpell());

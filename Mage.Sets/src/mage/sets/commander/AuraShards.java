@@ -58,8 +58,6 @@ public class AuraShards extends CardImpl {
         super(ownerId, 182, "Aura Shards", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{W}");
         this.expansionSetCode = "CMD";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new FilterCreaturePermanent(), true, "Whenever a creature enters the battlefield under your control, you may destroy target artifact or enchantment");

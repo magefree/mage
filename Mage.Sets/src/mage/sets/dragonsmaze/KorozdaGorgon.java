@@ -55,8 +55,6 @@ public class KorozdaGorgon extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Gorgon");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

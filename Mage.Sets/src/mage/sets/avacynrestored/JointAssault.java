@@ -51,7 +51,6 @@ public class JointAssault extends CardImpl {
         super(ownerId, 183, "Joint Assault", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. If it's paired with a creature, that creature also gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new JointAssaultBoostTargetEffect(2, 2, Duration.EndOfTurn));

@@ -53,7 +53,6 @@ public class CollectiveVoyage extends CardImpl {
         super(ownerId, 147, "Collective Voyage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "CMD";
 
-        this.color.setGreen(true);
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player searches his or her library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles his or her library.
         this.getSpellAbility().addEffect(new CollectiveVoyageEffect());

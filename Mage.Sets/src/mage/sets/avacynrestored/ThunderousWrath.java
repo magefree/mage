@@ -46,7 +46,6 @@ public class ThunderousWrath extends CardImpl {
         super(ownerId, 160, "Thunderous Wrath", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Thunderous Wrath deals 5 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

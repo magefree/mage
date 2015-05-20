@@ -61,7 +61,6 @@ public class PhantomNantuko extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

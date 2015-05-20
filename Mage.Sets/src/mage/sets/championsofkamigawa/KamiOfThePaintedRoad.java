@@ -60,7 +60,6 @@ public class KamiOfThePaintedRoad extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

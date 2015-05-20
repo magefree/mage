@@ -45,7 +45,6 @@ public class TemporalMastery extends CardImpl {
         super(ownerId, 81, "Temporal Mastery", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{U}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Take an extra turn after this one. Exile Temporal Mastery.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

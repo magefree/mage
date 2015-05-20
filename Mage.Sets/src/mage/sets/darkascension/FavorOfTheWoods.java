@@ -52,7 +52,6 @@ public class FavorOfTheWoods extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -56,7 +56,6 @@ public class LordOfThePit extends CardImpl {
         this.expansionSetCode = "DDC";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

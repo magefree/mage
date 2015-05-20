@@ -46,7 +46,6 @@ public class StormboundGeist extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

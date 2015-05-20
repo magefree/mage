@@ -60,7 +60,6 @@ public class ToxicIguanar extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

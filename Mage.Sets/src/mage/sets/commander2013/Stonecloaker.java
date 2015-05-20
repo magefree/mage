@@ -52,7 +52,6 @@ public class Stonecloaker extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Gargoyle");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -51,7 +51,6 @@ public class AvenTrailblazer extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(0);
 

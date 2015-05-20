@@ -58,7 +58,6 @@ public class SpoilsOfVictory extends CardImpl {
         super(ownerId, 172, "Spoils of Victory", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, Outcome.PutLandInPlay));

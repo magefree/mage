@@ -51,7 +51,6 @@ public class DefyDeath extends CardImpl {
         super(ownerId, 16, "Defy Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

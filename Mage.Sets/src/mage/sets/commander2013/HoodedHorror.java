@@ -52,7 +52,6 @@ public class HoodedHorror extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

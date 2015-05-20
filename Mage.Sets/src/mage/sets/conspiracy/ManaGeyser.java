@@ -54,7 +54,6 @@ public class ManaGeyser extends CardImpl {
         super(ownerId, 147, "Mana Geyser", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "CNS";
 
-        this.color.setRed(true);
 
         // Add {R} to your mana pool for each tapped land your opponents control.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filter)));

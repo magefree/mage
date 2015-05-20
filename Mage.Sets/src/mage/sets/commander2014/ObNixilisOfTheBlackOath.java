@@ -70,7 +70,6 @@ public class ObNixilisOfTheBlackOath extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Nixilis");
 
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

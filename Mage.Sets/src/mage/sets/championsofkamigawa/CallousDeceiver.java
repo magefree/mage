@@ -63,7 +63,6 @@ public class CallousDeceiver extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         // {1}: Look at the top card of your library.

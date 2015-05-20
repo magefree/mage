@@ -53,7 +53,6 @@ public class AppetiteForBrains extends CardImpl {
         super(ownerId, 84, "Appetite for Brains", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));

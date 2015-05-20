@@ -54,7 +54,6 @@ public class ScornfulAEtherLich extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

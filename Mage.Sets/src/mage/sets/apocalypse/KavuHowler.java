@@ -57,7 +57,6 @@ public class KavuHowler extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Kavu");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

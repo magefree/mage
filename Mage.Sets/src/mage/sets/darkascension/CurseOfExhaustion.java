@@ -55,7 +55,6 @@ public class CurseOfExhaustion extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setWhite(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

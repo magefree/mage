@@ -64,7 +64,6 @@ public class KitsunePalliator extends CardImpl {
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

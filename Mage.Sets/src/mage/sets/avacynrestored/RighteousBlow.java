@@ -44,7 +44,6 @@ public class RighteousBlow extends CardImpl {
         super(ownerId, 34, "Righteous Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Righteous Blow deals 2 damage to target attacking or blocking creature.
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());

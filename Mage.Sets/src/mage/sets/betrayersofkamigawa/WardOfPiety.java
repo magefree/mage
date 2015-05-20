@@ -60,7 +60,6 @@ public class WardOfPiety extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

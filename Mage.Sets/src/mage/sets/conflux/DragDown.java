@@ -46,7 +46,6 @@ public class DragDown extends CardImpl {
         super(ownerId, 42, "Drag Down", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlack(true);
 
         // Domain - Target creature gets -1/-1 until end of turn for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new DomainValue(-1), new DomainValue(-1), Duration.EndOfTurn, true));

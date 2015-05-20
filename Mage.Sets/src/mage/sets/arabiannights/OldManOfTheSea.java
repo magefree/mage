@@ -64,7 +64,6 @@ public class OldManOfTheSea extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Djinn");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

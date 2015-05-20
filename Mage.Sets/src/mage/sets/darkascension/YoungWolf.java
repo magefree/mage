@@ -45,7 +45,6 @@ public class YoungWolf extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

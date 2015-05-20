@@ -52,7 +52,6 @@ public class SuddenDemise extends CardImpl {
         super(ownerId, 124, "Sudden Demise", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // Choose a color. Sudden Demise deals X damage to each creature of the chosen color.       
         this.getSpellAbility().addEffect(new SuddenDemiseDamageEffect());

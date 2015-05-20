@@ -63,8 +63,6 @@ public class EpharaGodOfThePolis extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

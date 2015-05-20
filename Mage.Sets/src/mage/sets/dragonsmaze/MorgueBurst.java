@@ -55,8 +55,6 @@ public class MorgueBurst extends CardImpl {
         super(ownerId, 86, "Morgue Burst", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.
         this.getSpellAbility().addEffect(new MorgueBurstEffect());

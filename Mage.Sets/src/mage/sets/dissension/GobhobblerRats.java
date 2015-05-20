@@ -55,8 +55,6 @@ public class GobhobblerRats extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Rat");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

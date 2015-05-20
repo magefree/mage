@@ -49,7 +49,6 @@ public class PredatorOoze extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Ooze");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

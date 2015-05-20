@@ -50,7 +50,6 @@ public class WildLeotau extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Cat");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

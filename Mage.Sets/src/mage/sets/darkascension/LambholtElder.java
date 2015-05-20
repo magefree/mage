@@ -53,7 +53,6 @@ public class LambholtElder extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Werewolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

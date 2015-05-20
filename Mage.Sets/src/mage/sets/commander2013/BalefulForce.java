@@ -50,7 +50,6 @@ public class BalefulForce extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

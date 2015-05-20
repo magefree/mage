@@ -55,7 +55,6 @@ public class LightningProwess extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

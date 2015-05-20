@@ -61,8 +61,6 @@ public class Immerwolf extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Wolf");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

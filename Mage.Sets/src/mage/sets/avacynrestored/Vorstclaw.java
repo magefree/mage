@@ -45,7 +45,6 @@ public class Vorstclaw extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Horror");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
     }

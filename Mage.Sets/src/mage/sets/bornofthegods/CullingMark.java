@@ -48,7 +48,6 @@ public class CullingMark extends CardImpl {
         super(ownerId, 120, "Culling Mark", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Target creature blocks this turn if able.
         this.getSpellAbility().addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn));

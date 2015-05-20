@@ -65,7 +65,6 @@ public class Tromokratis extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

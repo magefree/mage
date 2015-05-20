@@ -48,7 +48,6 @@ public class ErdwalRipper extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Vampire");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

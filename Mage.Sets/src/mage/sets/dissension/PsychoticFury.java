@@ -57,7 +57,6 @@ public class PsychoticFury extends CardImpl {
         super(ownerId, 68, "Psychotic Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "DIS";
 
-        this.color.setRed(true);
 
         // Target multicolored creature gains double strike until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

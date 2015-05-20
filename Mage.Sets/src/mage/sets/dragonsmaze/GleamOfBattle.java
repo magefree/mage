@@ -45,8 +45,6 @@ public class GleamOfBattle extends CardImpl {
         super(ownerId, 73, "Gleam of Battle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Whenever a creature you control attacks, put a +1/+1 counter on it.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, true));

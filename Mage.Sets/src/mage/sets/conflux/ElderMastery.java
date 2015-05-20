@@ -54,9 +54,6 @@ public class ElderMastery extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

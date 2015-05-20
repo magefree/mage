@@ -44,7 +44,6 @@ public class Ghostform extends CardImpl {
         super(ownerId, 56, "Ghostform", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Up to two target creatures can't be blocked this turn..
         this.getSpellAbility().addEffect(new CantBeBlockedTargetEffect());

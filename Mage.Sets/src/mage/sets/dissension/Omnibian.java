@@ -52,8 +52,6 @@ public class Omnibian extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Frog");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -51,7 +51,6 @@ public class ScaldingDevil extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Devil");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

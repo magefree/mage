@@ -46,7 +46,6 @@ public class Qumulox extends CardImpl {
         this.expansionSetCode = "DDF";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

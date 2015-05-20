@@ -53,7 +53,6 @@ public class ServantOfTymaret extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

@@ -45,7 +45,6 @@ public class BannersRaised extends CardImpl {
         super(ownerId, 127, "Banners Raised", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Creatures you control get +1/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));

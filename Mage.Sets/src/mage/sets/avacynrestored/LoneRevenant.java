@@ -55,7 +55,6 @@ public class LoneRevenant extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

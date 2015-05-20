@@ -46,7 +46,6 @@ public class WakeTheReflections extends CardImpl {
         super(ownerId, 10, "Wake the Reflections", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
 
         // Populate.
         this.getSpellAbility().addEffect(new PopulateEffect());

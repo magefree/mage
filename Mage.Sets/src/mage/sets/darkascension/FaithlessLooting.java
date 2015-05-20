@@ -47,7 +47,6 @@ public class FaithlessLooting extends CardImpl {
         super(ownerId, 87, "Faithless Looting", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Draw two cards, then discard two cards.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));

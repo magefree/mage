@@ -50,8 +50,6 @@ public class HullBreach extends CardImpl {
         super(ownerId, 193, "Hull Breach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Choose one - Destroy target artifact;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

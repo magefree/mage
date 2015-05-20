@@ -51,7 +51,6 @@ public class HecklingFiends extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Devil");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

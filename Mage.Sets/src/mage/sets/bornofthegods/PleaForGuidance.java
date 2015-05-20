@@ -51,7 +51,6 @@ public class PleaForGuidance extends CardImpl {
         super(ownerId, 24, "Plea for Guidance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Search your library for up to two enchantment cards, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true, true));

@@ -52,7 +52,6 @@ public class DevastationTide extends CardImpl {
         super(ownerId, 48, "Devastation Tide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Return all nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new DevastationTideEffect());

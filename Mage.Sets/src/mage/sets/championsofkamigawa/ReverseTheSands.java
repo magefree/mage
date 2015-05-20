@@ -51,7 +51,6 @@ public class ReverseTheSands extends CardImpl {
         super(ownerId, 41, "Reverse the Sands", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{W}{W}");
         this.expansionSetCode = "CHK";
 
-        this.color.setWhite(true);
 
         // Redistribute any number of players' life totals.
         this.getSpellAbility().addEffect(new ReverseTheSandsEffect());

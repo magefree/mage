@@ -58,8 +58,6 @@ public class SavagebornHydra extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Hydra");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -45,7 +45,6 @@ public class DrownInSorrow extends CardImpl {
         super(ownerId, 65, "Drown in Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // All creatures get -2/-2 until end of turn. Scry 1.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));

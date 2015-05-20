@@ -47,7 +47,6 @@ public class KodamasMight extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Duration.EndOfTurn));

@@ -61,7 +61,6 @@ public class EmberWeaver extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

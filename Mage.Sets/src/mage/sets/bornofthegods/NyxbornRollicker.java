@@ -49,7 +49,6 @@ public class NyxbornRollicker extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Satyr");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

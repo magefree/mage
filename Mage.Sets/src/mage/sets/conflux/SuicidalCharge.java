@@ -51,8 +51,6 @@ public class SuicidalCharge extends CardImpl {
         super(ownerId, 128, "Suicidal Charge", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}");
         this.expansionSetCode = "CON";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Sacrifice Suicidal Charge: Creatures your opponents control get -1/-1 until end of turn. Those creatures attack this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn), new SacrificeSourceCost());

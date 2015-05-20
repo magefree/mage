@@ -48,7 +48,6 @@ public class Sanguimancy extends CardImpl {
         super(ownerId, 81, "Sanguimancy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // You draw X cards and you lose X life, where X is your devotion to black.
         DynamicValue blackDevotion = new DevotionCount(ColoredManaSymbol.B);

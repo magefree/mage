@@ -66,7 +66,6 @@ public class UnexpectedlyAbsent extends CardImpl {
         super(ownerId, 25, "Unexpectedly Absent", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
 
         // Put target nonland permanent into its owner's library just beneath the top X cards of that library.
         this.getSpellAbility().addEffect(new UnexpectedlyAbsentEffect());

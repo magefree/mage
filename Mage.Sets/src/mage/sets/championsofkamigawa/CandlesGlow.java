@@ -51,7 +51,6 @@ public class CandlesGlow extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setWhite(true);
 
         // Prevent the next 3 damage that would be dealt to target creature or player this turn. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new CandlesGlowPreventDamageTargetEffect(Duration.EndOfTurn));

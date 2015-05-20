@@ -48,7 +48,6 @@ public class WrackWithMadness extends CardImpl {
         super(ownerId, 107, "Wrack with Madness", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Target creature deals damage to itself equal to its power.
         this.getSpellAbility().addEffect(new WrackWithMadnessEffect());

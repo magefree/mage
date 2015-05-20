@@ -56,7 +56,6 @@ public class GruesomeDiscovery extends CardImpl {
         super(ownerId, 66, "Gruesome Discovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Target player discards two cards.
         // Morbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards.

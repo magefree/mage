@@ -51,7 +51,6 @@ public class TemptWithGlory extends CardImpl {
         super(ownerId, 24, "Tempt with Glory", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
 
         // Tempting offer - Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature he or she controls. For each opponent who does, put a +1/+1 counter on each creature you control.
         this.getSpellAbility().addEffect(new TemptWithGloryEffect());

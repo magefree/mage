@@ -56,7 +56,6 @@ public class HeraldOfTorment extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

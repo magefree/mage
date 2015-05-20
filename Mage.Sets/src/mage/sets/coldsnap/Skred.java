@@ -50,7 +50,6 @@ public class Skred extends CardImpl {
         super(ownerId, 97, "Skred", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "CSP";
 
-        this.color.setRed(true);
         
         //Skred deals damage to target creature equal to the number of snow permanents you control.
         this.getSpellAbility().addEffect(new SkredDamageEffect());

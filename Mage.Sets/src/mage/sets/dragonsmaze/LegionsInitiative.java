@@ -76,8 +76,6 @@ public class LegionsInitiative extends CardImpl {
         super(ownerId, 81, "Legion's Initiative", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Red creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filterRedCreature)));

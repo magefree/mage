@@ -51,7 +51,6 @@ public class GlimpseTheSunGod extends CardImpl {
         super(ownerId, 13, "Glimpse the Sun God", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Tap X target creatures. Scry 1.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));

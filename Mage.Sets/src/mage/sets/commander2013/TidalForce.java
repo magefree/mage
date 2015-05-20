@@ -49,7 +49,6 @@ public class TidalForce extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

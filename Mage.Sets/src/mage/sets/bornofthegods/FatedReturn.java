@@ -51,7 +51,6 @@ public class FatedReturn extends CardImpl {
         super(ownerId, 69, "Fated Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{B}{B}{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

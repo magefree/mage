@@ -58,8 +58,6 @@ public class QuicksilverDagger extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

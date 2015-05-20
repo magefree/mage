@@ -60,8 +60,6 @@ public class Contagion extends CardImpl {
         super(ownerId, 4, "Contagion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "ALL";
 
-        this.color.setBlack(true);
-
         FilterOwnedCard filter = new FilterOwnedCard("black card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLACK));
         filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself

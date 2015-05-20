@@ -52,7 +52,6 @@ public class FlashCounter extends CardImpl {
         super(ownerId, 78, "Flash Counter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "8ED";
 
-        this.color.setBlue(true);
 
         // Counter target instant spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -50,7 +50,6 @@ public class TimberlandGuide extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

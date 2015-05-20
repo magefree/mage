@@ -66,7 +66,6 @@ public class GenjuOfTheSpires extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant Mountain
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

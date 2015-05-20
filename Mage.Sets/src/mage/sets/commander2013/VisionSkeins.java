@@ -44,7 +44,6 @@ public class VisionSkeins extends CardImpl {
         super(ownerId, 65, "Vision Skeins", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Each player draws two cards.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));

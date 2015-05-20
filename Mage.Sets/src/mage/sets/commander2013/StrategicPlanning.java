@@ -53,7 +53,6 @@ public class StrategicPlanning extends CardImpl {
         super(ownerId, 59, "Strategic Planning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new StrategicPlanningEffect());

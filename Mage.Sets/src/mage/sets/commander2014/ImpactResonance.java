@@ -54,7 +54,6 @@ public class ImpactResonance extends CardImpl {
         super(ownerId, 36, "Impact Resonance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
         DynamicValue xValue = new GreatestAmountOfDamageDealtValue();

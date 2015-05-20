@@ -56,7 +56,6 @@ public class TrackersInstincts extends CardImpl {
         super(ownerId, 128, "Tracker's Instincts", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new TrackersInstinctsEffect());

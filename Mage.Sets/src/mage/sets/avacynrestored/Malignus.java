@@ -54,7 +54,6 @@ public class Malignus extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

@@ -47,7 +47,6 @@ public class LoyalPegasus extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Pegasus");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -53,8 +53,6 @@ public class RainOfGore extends CardImpl {
         super(ownerId, 126, "Rain of Gore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{R}");
         this.expansionSetCode = "DIS";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // If a spell or ability would cause its controller to gain life, that player loses that much life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RainOfGoreEffect()));

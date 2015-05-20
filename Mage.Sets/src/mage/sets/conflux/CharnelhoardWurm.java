@@ -49,9 +49,6 @@ public class CharnelhoardWurm extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Wurm");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -54,7 +54,6 @@ public class ThunderBrute extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Cyclops");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

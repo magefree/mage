@@ -57,7 +57,6 @@ public class SearingBlood extends CardImpl {
         super(ownerId, 111, "Searing Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to that creature's controller.
         this.getSpellAbility().addEffect(new SearingBloodEffect());

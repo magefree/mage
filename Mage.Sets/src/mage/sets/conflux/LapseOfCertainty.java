@@ -45,7 +45,6 @@ public class LapseOfCertainty extends CardImpl {
         super(ownerId, 9, "Lapse of Certainty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "CON";
 
-        this.color.setWhite(true);
 
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, true));

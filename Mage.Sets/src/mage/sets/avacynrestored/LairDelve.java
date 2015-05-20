@@ -53,7 +53,6 @@ public class LairDelve extends CardImpl {
         super(ownerId, 184, "Lair Delve", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new LairDelveEffect());

@@ -52,7 +52,6 @@ public class Excoriate extends CardImpl {
         super(ownerId, 10, "Excoriate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Exile target tapped creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -60,7 +60,6 @@ public class Sunbond extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -46,7 +46,6 @@ public class HoldAtBay extends CardImpl {
         super(ownerId, 18, "Hold at Bay", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Prevent the next 7 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 7));

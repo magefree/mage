@@ -55,7 +55,6 @@ public class RazorBarrier extends CardImpl {
         super(ownerId, 26, "Razor Barrier", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DDF";
 
-        this.color.setWhite(true);
 
         // Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new RazorBarrierEffect(Duration.EndOfTurn));

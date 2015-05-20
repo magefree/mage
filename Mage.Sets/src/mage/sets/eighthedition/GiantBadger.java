@@ -48,7 +48,6 @@ public class GiantBadger extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Badger");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

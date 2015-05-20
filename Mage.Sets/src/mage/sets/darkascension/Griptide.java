@@ -44,7 +44,6 @@ public class Griptide extends CardImpl {
         super(ownerId, 38, "Griptide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

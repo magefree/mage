@@ -59,8 +59,6 @@ public class Dovescape extends CardImpl {
         super(ownerId, 143, "Dovescape", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W/U}{W/U}{W/U}");
         this.expansionSetCode = "DIS";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
         this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, true));

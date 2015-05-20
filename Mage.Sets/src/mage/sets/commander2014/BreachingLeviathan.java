@@ -60,7 +60,6 @@ public class BreachingLeviathan extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Leviathan");
 
-        this.color.setBlue(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

@@ -51,7 +51,6 @@ public class DruidsRepository extends CardImpl {
         super(ownerId, 176, "Druids' Repository", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Whenever a creature you control attacks, put a charge counter on Druids' Repository.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance())));

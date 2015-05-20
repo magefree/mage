@@ -60,9 +60,6 @@ public class LordOfTresserhorn extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(10);
         this.toughness = new MageInt(4);
 

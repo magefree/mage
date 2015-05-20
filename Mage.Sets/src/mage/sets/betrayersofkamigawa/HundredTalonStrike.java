@@ -63,7 +63,6 @@ public class HundredTalonStrike extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+0 and gains first strike until end of turn.
         Effect effect = new BoostTargetEffect(1,0, Duration.EndOfTurn);

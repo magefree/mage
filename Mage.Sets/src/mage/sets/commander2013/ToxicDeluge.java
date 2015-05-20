@@ -49,7 +49,6 @@ public class ToxicDeluge extends CardImpl {
         super(ownerId, 96, "Toxic Deluge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Toxic Deluge, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));

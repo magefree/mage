@@ -58,7 +58,6 @@ public class FalkenrathTorturer extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -55,7 +55,6 @@ public class Skyreaping extends CardImpl {
         super(ownerId, 140, "Skyreaping", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Skyreaping deals damage to each creature with flying equal to your devotion to green.
         Effect effect = new DamageAllEffect(new DevotionCount(ColoredManaSymbol.G), filter);

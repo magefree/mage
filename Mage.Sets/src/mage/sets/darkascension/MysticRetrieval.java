@@ -58,7 +58,6 @@ public class MysticRetrieval extends CardImpl {
         super(ownerId, 42, "Mystic Retrieval", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Return target instant or sorcery card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

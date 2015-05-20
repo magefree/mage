@@ -57,7 +57,6 @@ public class SylvanOffering extends CardImpl {
         super(ownerId, 48, "Sylvan Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "C14";
 
-        this.color.setGreen(true);
 
         // Choose an opponent. You and that player each put an X/X green Treefolk creature token onto the battlefield.
         this.getSpellAbility().addEffect(new SylvanOfferingEffect1());

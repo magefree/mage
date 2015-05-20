@@ -29,7 +29,6 @@ package mage.sets.alliances;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -45,7 +44,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetOpponent;
 
@@ -61,9 +59,6 @@ public class Phelddagrif extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Phelddagrif");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

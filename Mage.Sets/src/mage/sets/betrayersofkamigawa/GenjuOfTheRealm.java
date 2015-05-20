@@ -63,11 +63,6 @@ public class GenjuOfTheRealm extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Enchant Land
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

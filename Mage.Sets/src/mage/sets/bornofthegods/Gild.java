@@ -47,7 +47,6 @@ public class Gild extends CardImpl {
         super(ownerId, 73, "Gild", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // Exile target creature.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

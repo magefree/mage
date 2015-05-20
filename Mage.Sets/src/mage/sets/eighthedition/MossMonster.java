@@ -44,7 +44,6 @@ public class MossMonster extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
     }

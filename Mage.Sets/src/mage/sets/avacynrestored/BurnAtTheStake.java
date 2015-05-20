@@ -60,7 +60,6 @@ public class BurnAtTheStake extends CardImpl {
         super(ownerId, 130, "Burn at the Stake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.
         this.getSpellAbility().addCost(new TapVariableTargetCost(filter, true, "any number of"));

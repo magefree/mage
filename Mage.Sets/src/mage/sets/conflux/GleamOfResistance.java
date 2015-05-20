@@ -48,7 +48,6 @@ public class GleamOfResistance extends CardImpl {
         super(ownerId, 8, "Gleam of Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "CON";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +1/+2 until end of turn. Untap those creatures.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 2, Duration.EndOfTurn));

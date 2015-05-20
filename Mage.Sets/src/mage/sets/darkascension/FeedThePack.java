@@ -56,7 +56,6 @@ public class FeedThePack extends CardImpl {
         super(ownerId, 114, "Feed the Pack", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FeedThePackEffect(), true));

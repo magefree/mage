@@ -47,7 +47,6 @@ public class FatedIntervention extends CardImpl {
         super(ownerId, 121, "Fated Intervention", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G}{G}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Put two 3/3 green Centaur enchantment creature tokens onto the battlefield. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurEnchantmentCreatureToken(), 2));

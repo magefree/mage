@@ -56,7 +56,6 @@ public class Dreadwaters extends CardImpl {
         super(ownerId, 49, "Dreadwaters", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of lands you control.
         this.getSpellAbility().addTarget(new TargetPlayer());

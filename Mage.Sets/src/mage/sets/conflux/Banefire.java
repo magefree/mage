@@ -57,7 +57,6 @@ public class Banefire extends CardImpl {
         super(ownerId, 58, "Banefire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "CON";
 
-        this.color.setRed(true);
 
         // Banefire deals X damage to target creature or player.       
         this.getSpellAbility().addEffect(new BaneFireEffect());

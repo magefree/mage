@@ -50,7 +50,6 @@ public class WordOfSeizing extends CardImpl {
         super(ownerId, 185, "Word of Seizing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // Split second
         this.addAbility(new SplitSecondAbility());

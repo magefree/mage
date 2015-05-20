@@ -46,7 +46,6 @@ public class SilverclawGriffin extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

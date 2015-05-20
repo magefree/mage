@@ -50,8 +50,6 @@ public class LibraryOfLatNam extends CardImpl {
         super(ownerId, 47, "Library of Lat-Nam", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "ALL";
 
-        this.color.setBlue(true);
-
         // An opponent chooses one
         this.getSpellAbility().getModes().setModeChooser(TargetController.OPPONENT);
         // You draw three cards at the beginning of the next turn's upkeep;

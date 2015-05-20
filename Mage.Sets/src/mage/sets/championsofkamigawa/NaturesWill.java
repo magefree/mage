@@ -56,7 +56,6 @@ public class NaturesWill extends CardImpl {
         super(ownerId, 230, "Nature's Will", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "CHK";
 
-        this.color.setGreen(true);
 
         // Whenever one or more creatures you control deal combat damage to a player, tap all lands that player controls and untap all lands you control.
         this.addAbility(new NaturesWillTriggeredAbility());

@@ -68,7 +68,6 @@ public class CorruptedRoots extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant Forest or Plains
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

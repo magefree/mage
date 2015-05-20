@@ -60,8 +60,6 @@ public class VoiceOfResurgence extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

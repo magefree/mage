@@ -53,7 +53,6 @@ public class ScorchTheFields extends CardImpl {
         super(ownerId, 103, "Scorch the Fields", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

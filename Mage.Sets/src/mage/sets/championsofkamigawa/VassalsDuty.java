@@ -61,7 +61,6 @@ public class VassalsDuty extends CardImpl {
         super(ownerId, 48, "Vassal's Duty", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "CHK";
 
-        this.color.setWhite(true);
 
         // {1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VassalsDutyPreventDamageTargetEffect(Duration.EndOfTurn, 1), new GenericManaCost(1));

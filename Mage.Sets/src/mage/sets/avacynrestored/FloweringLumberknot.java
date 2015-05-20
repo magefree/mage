@@ -52,7 +52,6 @@ public class FloweringLumberknot extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

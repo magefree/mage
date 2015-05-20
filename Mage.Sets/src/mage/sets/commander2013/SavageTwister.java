@@ -45,8 +45,6 @@ public class SavageTwister extends CardImpl {
         super(ownerId, 208, "Savage Twister", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Savage Twister deals X damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), new FilterCreaturePermanent()));

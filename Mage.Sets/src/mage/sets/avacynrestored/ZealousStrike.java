@@ -48,7 +48,6 @@ public class ZealousStrike extends CardImpl {
         super(ownerId, 41, "Zealous Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Target creature gets +2/+2 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));

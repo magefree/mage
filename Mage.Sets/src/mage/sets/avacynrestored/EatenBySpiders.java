@@ -58,7 +58,6 @@ public class EatenBySpiders extends CardImpl {
         super(ownerId, 177, "Eaten by Spiders", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Destroy target creature with flying and all Equipment attached to that creature.
         this.getSpellAbility().addEffect(new EatenBySpidersEffect());

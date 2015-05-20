@@ -70,7 +70,6 @@ public class GoryosVengeance extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
         // Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new GoryosVengeanceEffect());

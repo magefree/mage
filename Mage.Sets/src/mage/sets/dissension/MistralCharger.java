@@ -45,7 +45,6 @@ public class MistralCharger extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Pegasus");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

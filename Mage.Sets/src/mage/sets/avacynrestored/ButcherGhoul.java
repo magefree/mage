@@ -45,7 +45,6 @@ public class ButcherGhoul extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -45,7 +45,6 @@ public class EnshrinedMemories extends CardImpl {
         super(ownerId, 124, "Enshrined Memories", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "BOK";
 
-        this.color.setGreen(true);
 
         // Reveal the top X cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(new ManacostVariableValue(), new FilterCreatureCard("all creature cards"),true));

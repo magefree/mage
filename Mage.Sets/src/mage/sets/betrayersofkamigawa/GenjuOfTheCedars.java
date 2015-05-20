@@ -67,7 +67,6 @@ public class GenjuOfTheCedars extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

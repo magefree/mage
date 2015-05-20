@@ -45,7 +45,6 @@ public class StoneThrowingDevils extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Devil");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

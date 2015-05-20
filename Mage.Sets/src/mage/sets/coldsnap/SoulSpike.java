@@ -58,7 +58,6 @@ public class SoulSpike extends CardImpl {
         super(ownerId, 70, "Soul Spike", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{B}{B}");
         this.expansionSetCode = "CSP";
 
-        this.color.setBlack(true);
 
         // You may exile two black cards from your hand rather than pay Soul Spike's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));

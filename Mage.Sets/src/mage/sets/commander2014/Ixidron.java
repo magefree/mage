@@ -66,7 +66,6 @@ public class Ixidron extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

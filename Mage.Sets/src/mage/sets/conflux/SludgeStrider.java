@@ -61,9 +61,6 @@ public class SludgeStrider extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Insect");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

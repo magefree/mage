@@ -50,7 +50,6 @@ public class GravetillerWurm extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -46,7 +46,6 @@ public class Exclude extends CardImpl {
         super(ownerId, 108, "Exclude", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Counter target creature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -56,7 +56,6 @@ public class Nullify extends CardImpl {
         super(ownerId, 45, "Nullify", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Counter target creature or Aura spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

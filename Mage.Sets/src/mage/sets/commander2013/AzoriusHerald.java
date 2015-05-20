@@ -51,7 +51,6 @@ public class AzoriusHerald extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

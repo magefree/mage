@@ -49,8 +49,6 @@ public class BiomanticMastery extends CardImpl {
         super(ownerId, 142, "Biomantic Mastery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G/U}{G/U}{G/U}");
         this.expansionSetCode = "DIS";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // <i>({GU} can be paid with either {G} or {U}.)</i>
         // Draw a card for each creature target player controls, then draw a card for each creature another target player controls.

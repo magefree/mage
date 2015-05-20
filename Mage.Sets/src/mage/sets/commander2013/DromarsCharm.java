@@ -49,9 +49,6 @@ public class DromarsCharm extends CardImpl {
         super(ownerId, 187, "Dromar's Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{U}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose one - You gain 5 life; or counter target spell; or target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(5));

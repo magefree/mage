@@ -62,8 +62,6 @@ public class DeepfireElemental extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

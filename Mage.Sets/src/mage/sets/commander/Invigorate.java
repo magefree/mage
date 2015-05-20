@@ -56,7 +56,6 @@ public class Invigorate extends CardImpl {
         super(ownerId, 162, "Invigorate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "CMD";
 
-        this.color.setGreen(true);
 
         // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
         this.addAbility(new AlternativeCostSourceAbility(new GainLifeOpponentCost(3), new PermanentsOnTheBattlefieldCondition(filter)));    

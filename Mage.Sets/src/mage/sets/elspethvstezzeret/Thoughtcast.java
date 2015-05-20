@@ -44,7 +44,6 @@ public class Thoughtcast extends CardImpl {
         super(ownerId, 71, "Thoughtcast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "DDF";
 
-        this.color.setBlue(true);
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());

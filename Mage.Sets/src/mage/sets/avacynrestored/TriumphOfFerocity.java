@@ -50,7 +50,6 @@ public class TriumphOfFerocity extends CardImpl {
         super(ownerId, 198, "Triumph of Ferocity", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false);

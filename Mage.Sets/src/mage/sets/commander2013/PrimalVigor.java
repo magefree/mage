@@ -51,7 +51,6 @@ public class PrimalVigor extends CardImpl {
         super(ownerId, 162, "Primal Vigor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // If one or more tokens would be put onto the battlefield, twice that many of those tokens are put onto the battlefield instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrimalVigorTokenEffect()));

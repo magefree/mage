@@ -50,7 +50,6 @@ public class WildHunger extends CardImpl {
         super(ownerId, 132, "Wild Hunger", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Target creature gets +3/+1 and gains trample until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

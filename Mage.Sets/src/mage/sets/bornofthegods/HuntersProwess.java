@@ -54,7 +54,6 @@ public class HuntersProwess extends CardImpl {
         super(ownerId, 124, "Hunter's Prowess", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Until end of turn, target creature gets +3/+3 and gains trample and "Whenever this creature deals combat damage to a player, draw that many cards."
         Effect effect = new BoostTargetEffect(3,3, Duration.EndOfTurn);

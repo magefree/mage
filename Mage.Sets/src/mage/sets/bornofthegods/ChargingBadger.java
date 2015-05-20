@@ -45,7 +45,6 @@ public class ChargingBadger extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Badger");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

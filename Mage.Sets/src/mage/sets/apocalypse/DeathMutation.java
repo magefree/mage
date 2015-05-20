@@ -57,8 +57,6 @@ public class DeathMutation extends CardImpl {
         super(ownerId, 96, "Death Mutation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{B}{G}");
         this.expansionSetCode = "APC";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

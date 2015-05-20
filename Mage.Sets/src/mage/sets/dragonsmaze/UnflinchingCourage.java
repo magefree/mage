@@ -58,8 +58,6 @@ public class UnflinchingCourage extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

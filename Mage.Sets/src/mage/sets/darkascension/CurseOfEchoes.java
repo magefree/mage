@@ -64,7 +64,6 @@ public class CurseOfEchoes extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setBlue(true);
 
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();

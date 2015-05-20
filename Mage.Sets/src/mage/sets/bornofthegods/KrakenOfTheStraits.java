@@ -55,7 +55,6 @@ public class KrakenOfTheStraits extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

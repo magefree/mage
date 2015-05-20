@@ -49,7 +49,6 @@ public class Howlgeist extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

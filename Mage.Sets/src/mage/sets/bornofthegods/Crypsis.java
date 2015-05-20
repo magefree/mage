@@ -59,7 +59,6 @@ public class Crypsis extends CardImpl {
         super(ownerId, 34, "Crypsis", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn));

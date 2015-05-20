@@ -66,8 +66,6 @@ public class MogisGodOfSlaughter extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 

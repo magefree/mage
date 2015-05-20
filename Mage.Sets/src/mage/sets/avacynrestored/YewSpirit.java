@@ -51,7 +51,6 @@ public class YewSpirit extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

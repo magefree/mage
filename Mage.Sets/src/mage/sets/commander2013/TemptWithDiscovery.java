@@ -51,7 +51,6 @@ public class TemptWithDiscovery extends CardImpl {
         super(ownerId, 174, "Tempt with Discovery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Tempting offer - Search your library for a land card and put it onto the battlefield.
         // Each opponent may search his or her library for a land card and put it onto the battlefield.

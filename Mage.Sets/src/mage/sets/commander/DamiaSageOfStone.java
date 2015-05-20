@@ -58,9 +58,6 @@ public class DamiaSageOfStone extends CardImpl {
         this.subtype.add("Gorgon");
         this.subtype.add("Wizard");
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

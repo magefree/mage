@@ -64,7 +64,6 @@ public class IncreasingVengeance extends CardImpl {
         super(ownerId, 95, "Increasing Vengeance", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
         this.getSpellAbility().addEffect(new IncreasingVengeanceEffect());

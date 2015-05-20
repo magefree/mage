@@ -52,7 +52,6 @@ public class BlessingsOfNature extends CardImpl {
         super(ownerId, 168, "Blessings of Nature", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Distribute four +1/+1 counters among any number of target creatures.
         this.getSpellAbility().addEffect(new BlessingsOfNatureEffect());

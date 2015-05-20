@@ -66,7 +66,6 @@ public class VolcanicOffering extends CardImpl {
         super(ownerId, 40, "Volcanic Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "C14";
 
-        this.color.setRed(true);
 
         // Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.
         // Volcanic Offering deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control.

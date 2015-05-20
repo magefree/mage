@@ -56,7 +56,6 @@ public class ArcaneDenial extends CardImpl {
         super(ownerId, 28, "Arcane Denial", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.
         this.getSpellAbility().addEffect(new ArcaneDenialEffect());

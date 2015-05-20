@@ -65,7 +65,6 @@ public class KumanosBlessing extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

@@ -60,7 +60,6 @@ public class DregsOfSorrow extends CardImpl {
         super(ownerId, 143, "Dregs of Sorrow", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{4}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Destroy X target nonblack creatures. Draw X cards.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target nonblack creatures"));

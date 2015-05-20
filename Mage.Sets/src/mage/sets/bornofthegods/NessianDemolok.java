@@ -60,7 +60,6 @@ public class NessianDemolok extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

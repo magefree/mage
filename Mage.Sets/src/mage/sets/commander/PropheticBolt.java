@@ -48,8 +48,6 @@ public class PropheticBolt extends CardImpl {
         super(ownerId, 219, "Prophetic Bolt", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Prophetic Bolt deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

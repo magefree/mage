@@ -79,7 +79,6 @@ public class NahiriTheLithomancer extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Nahiri");
 
-        this.color.setWhite(true);
         
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

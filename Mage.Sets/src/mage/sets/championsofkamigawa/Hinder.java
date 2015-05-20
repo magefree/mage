@@ -60,7 +60,6 @@ public class Hinder extends CardImpl {
         super(ownerId, 65, "Hinder", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "CHK";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new HinderEffect());

@@ -47,7 +47,6 @@ public class Splinter extends CardImpl {
         super(ownerId, 146, "Splinter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "BOK";
 
-        this.color.setGreen(true);
 
         // Exile target artifact. Search its controller's graveyard, hand, and library for all cards
         // with the same name as that artifact and exile them. Then that player shuffles his or her library.

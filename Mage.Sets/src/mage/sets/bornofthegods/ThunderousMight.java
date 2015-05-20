@@ -57,7 +57,6 @@ public class ThunderousMight extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

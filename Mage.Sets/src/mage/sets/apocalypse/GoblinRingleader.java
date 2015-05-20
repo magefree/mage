@@ -58,7 +58,6 @@ public class GoblinRingleader extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

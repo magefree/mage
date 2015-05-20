@@ -55,7 +55,6 @@ public class EchoingCalm extends CardImpl {
         super(ownerId, 2, "Echoing Calm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DST";
 
-        this.color.setWhite(true);
 
         // Destroy target enchantment and all other enchantments with the same name as that enchantment.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

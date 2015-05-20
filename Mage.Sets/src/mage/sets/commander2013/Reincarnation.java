@@ -60,7 +60,6 @@ public class Reincarnation extends CardImpl {
         super(ownerId, 166, "Reincarnation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
         this.getSpellAbility().addEffect(new ReincarnationEffect());

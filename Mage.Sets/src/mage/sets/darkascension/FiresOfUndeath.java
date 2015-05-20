@@ -47,7 +47,6 @@ public class FiresOfUndeath extends CardImpl {
         super(ownerId, 88, "Fires of Undeath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Fires of Undeath deals 2 damage to target creature or player.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

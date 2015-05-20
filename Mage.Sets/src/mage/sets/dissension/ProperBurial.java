@@ -49,7 +49,6 @@ public class ProperBurial extends CardImpl {
         super(ownerId, 16, "Proper Burial", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "DIS";
 
-        this.color.setWhite(true);
 
         // Whenever a creature you control dies, you gain life equal to that creature's toughness.
         this.addAbility(new ProperBurialTriggeredAbility());

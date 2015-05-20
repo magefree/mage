@@ -46,7 +46,6 @@ public class SylvanBounty extends CardImpl {
         super(ownerId, 94, "Sylvan Bounty", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{G}");
         this.expansionSetCode = "CON";
 
-        this.color.setGreen(true);
 
         // Target player gains 8 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(8));

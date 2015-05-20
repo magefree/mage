@@ -72,8 +72,6 @@ public class XenagosGodOfRevels extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

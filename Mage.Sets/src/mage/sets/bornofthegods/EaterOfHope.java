@@ -64,7 +64,6 @@ public class EaterOfHope extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

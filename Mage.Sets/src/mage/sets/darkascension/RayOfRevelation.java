@@ -55,7 +55,6 @@ public class RayOfRevelation extends CardImpl {
         super(ownerId, 17, "Ray of Revelation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Destroy target enchantment.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

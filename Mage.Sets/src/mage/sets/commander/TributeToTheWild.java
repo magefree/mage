@@ -54,7 +54,6 @@ public class TributeToTheWild extends CardImpl {
         super(ownerId, 175, "Tribute to the Wild", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "CMD";
 
-        this.color.setGreen(true);
 
         // Each opponent sacrifices an artifact or enchantment.
       this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));

@@ -53,7 +53,6 @@ public class MondronenShaman extends CardImpl {
         this.subtype.add("Werewolf");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

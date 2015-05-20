@@ -47,7 +47,6 @@ public class HungerOfTheHowlpack extends CardImpl {
         super(ownerId, 119, "Hunger of the Howlpack", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature.
         // Morbid - Put three +1/+1 counters on that creature instead if a creature died this turn.

@@ -44,7 +44,6 @@ public class SavannahLions extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Cat");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }

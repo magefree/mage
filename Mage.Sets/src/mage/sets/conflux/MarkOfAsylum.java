@@ -49,7 +49,6 @@ public class MarkOfAsylum extends CardImpl {
         super(ownerId, 10, "Mark of Asylum", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "CON";
 
-        this.color.setWhite(true);
 
         // Prevent all noncombat damage that would be dealt to creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllNonCombatDamageToAllEffect(Duration.WhileOnBattlefield, filter)));

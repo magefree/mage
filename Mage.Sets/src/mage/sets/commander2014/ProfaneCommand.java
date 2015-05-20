@@ -63,7 +63,6 @@ public class ProfaneCommand extends CardImpl {
         super(ownerId, 156, "Profane Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         DynamicValue xValue = new ManacostVariableValue();
         // Choose two -

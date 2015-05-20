@@ -68,8 +68,6 @@ public class VishKalBloodArbiter extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

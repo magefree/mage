@@ -52,7 +52,6 @@ public class Terminus extends CardImpl {
         super(ownerId, 38, "Terminus", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
 
         // Put all creatures on the bottom of their owners' libraries.

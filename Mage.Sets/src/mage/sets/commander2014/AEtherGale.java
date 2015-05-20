@@ -46,7 +46,6 @@ public class AEtherGale extends CardImpl {
         super(ownerId, 11, "AEther Gale", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Return six target nonland permanents to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -46,7 +46,6 @@ public class CatharsCrusade extends CardImpl {
         super(ownerId, 10, "Cathars' Crusade", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
         this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));

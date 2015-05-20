@@ -47,7 +47,6 @@ public class CumberStone extends CardImpl {
         super(ownerId, 24, "Cumber Stone", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}{U}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlue(true);
 
         // Creatures your opponents control get -1/-0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));

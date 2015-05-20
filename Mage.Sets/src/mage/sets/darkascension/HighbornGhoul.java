@@ -45,7 +45,6 @@ public class HighbornGhoul extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -50,7 +50,6 @@ public class DistortingWake extends CardImpl {
         super(ownerId, 107, "Distorting Wake", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Return X target nonland permanents to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();

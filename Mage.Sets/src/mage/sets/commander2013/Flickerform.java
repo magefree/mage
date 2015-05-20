@@ -67,7 +67,6 @@ public class Flickerform extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

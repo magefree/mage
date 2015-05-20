@@ -50,7 +50,6 @@ public class MistRaven extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

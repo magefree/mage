@@ -55,7 +55,6 @@ public class CrushingVines extends CardImpl {
         super(ownerId, 110, "Crushing Vines", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Choose one - Destroy target creature with flying; or destroy target artifact.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -45,7 +45,6 @@ public class GrimFlowering extends CardImpl {
         super(ownerId, 117, "Grim Flowering", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Draw a card for each creature card in your graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerGraveyardCount(new FilterCreatureCard())));

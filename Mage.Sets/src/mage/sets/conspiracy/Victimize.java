@@ -54,7 +54,6 @@ public class Victimize extends CardImpl {
         super(ownerId, 133, "Victimize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "CNS";
 
-        this.color.setBlack(true);
 
         // Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
         this.getSpellAbility().addEffect(new VictimizeEffect());

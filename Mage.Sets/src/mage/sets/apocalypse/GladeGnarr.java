@@ -54,7 +54,6 @@ public class GladeGnarr extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new GladeGnarrTriggeredAbility());

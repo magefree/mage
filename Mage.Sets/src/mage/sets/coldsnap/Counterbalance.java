@@ -56,7 +56,6 @@ public class Counterbalance extends CardImpl {
         super(ownerId, 31, "Counterbalance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "CSP";
 
-        this.color.setBlue(true);
 
         // Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterbalanceEffect(), new FilterSpell(), true, SetTargetPointer.SPELL));

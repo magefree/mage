@@ -50,7 +50,6 @@ public class RainOfThorns extends CardImpl {
         super(ownerId, 190, "Rain of Thorns", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Choose one or more - Destroy target artifact; destroy target enchantment; and/or destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

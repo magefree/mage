@@ -57,8 +57,6 @@ public class KiorasFollower extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

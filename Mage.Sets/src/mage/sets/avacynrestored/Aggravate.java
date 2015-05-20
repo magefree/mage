@@ -55,7 +55,6 @@ public class Aggravate extends CardImpl {
         super(ownerId, 125, "Aggravate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Aggravate deals 1 damage to each creature target player controls.
         this.getSpellAbility().addEffect(new AggraveteEffect());

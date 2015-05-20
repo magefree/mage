@@ -51,8 +51,6 @@ public class DrownInFilth extends CardImpl {
         super(ownerId, 67, "Drown in Filth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

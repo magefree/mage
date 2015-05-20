@@ -62,7 +62,6 @@ public class CallToServe extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant nonblack creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

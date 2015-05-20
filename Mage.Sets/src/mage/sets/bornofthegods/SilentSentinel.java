@@ -59,7 +59,6 @@ public class SilentSentinel extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Archon");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

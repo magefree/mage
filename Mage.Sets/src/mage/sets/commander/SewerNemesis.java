@@ -59,7 +59,6 @@ public class SewerNemesis extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

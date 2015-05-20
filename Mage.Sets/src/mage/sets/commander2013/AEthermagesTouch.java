@@ -60,8 +60,6 @@ public class AEthermagesTouch extends CardImpl {
         super(ownerId, 176, "AEthermage's Touch", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains "At the beginning of your end step, return this creature to its owner's hand." Then put the rest of the cards revealed this way on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new AEthermagesTouchEffect());

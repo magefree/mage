@@ -50,7 +50,6 @@ public class MarkovWarlord extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

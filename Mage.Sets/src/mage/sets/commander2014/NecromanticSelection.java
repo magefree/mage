@@ -71,7 +71,6 @@ public class NecromanticSelection extends CardImpl {
         super(ownerId, 26, "Necromantic Selection", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.
         this.getSpellAbility().addEffect(new NecromanticSelectionEffect());

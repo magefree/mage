@@ -75,7 +75,6 @@ public class DarettiScrapSavant extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Daretti");
 
-        this.color.setRed(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

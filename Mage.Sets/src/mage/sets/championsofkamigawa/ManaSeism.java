@@ -51,7 +51,6 @@ public class ManaSeism extends CardImpl {
         super(ownerId, 179, "Mana Seism", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "CHK";
 
-        this.color.setRed(true);
 
         // Sacrifice any number of lands. Add {1} to your mana pool for each land sacrificed this way.
         this.getSpellAbility().addEffect(new ManaSeismEffect());

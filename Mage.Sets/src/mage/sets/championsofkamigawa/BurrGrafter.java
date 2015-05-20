@@ -53,7 +53,6 @@ public class BurrGrafter extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

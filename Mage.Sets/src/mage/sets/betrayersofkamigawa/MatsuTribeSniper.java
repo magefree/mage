@@ -64,7 +64,6 @@ public class MatsuTribeSniper extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Archer");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

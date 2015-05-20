@@ -50,7 +50,6 @@ public class AliFromCairo extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Human");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

@@ -63,7 +63,6 @@ public class CraterhoofBehemoth extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -51,7 +51,6 @@ public class BreakOfDay extends CardImpl {
         super(ownerId, 3, "Break of Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

@@ -57,7 +57,6 @@ public class SpitefulShadows extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -53,7 +53,6 @@ public class AEtherSnap extends CardImpl {
         super(ownerId, 133, "AEther Snap", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Remove all counters from all permanents and exile all tokens.
         this.getSpellAbility().addEffect(new AEtherSnapEffect());

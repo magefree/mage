@@ -65,7 +65,6 @@ public class OniPossession extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
     this.getSpellAbility().addTarget(auraTarget);

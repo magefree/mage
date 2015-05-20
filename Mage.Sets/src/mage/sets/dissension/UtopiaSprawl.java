@@ -71,7 +71,6 @@ public class UtopiaSprawl extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

@@ -51,7 +51,6 @@ public class ScepterOfFugue extends CardImpl {
         super(ownerId, 53, "Scepter of Fugue", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{B}{B}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlack(true);
 
         // {1}{B}, {tap}: Target player discards a card. Activate this ability only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{1}{B}"), MyTurnCondition.getInstance());

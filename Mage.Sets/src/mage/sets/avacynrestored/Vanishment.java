@@ -47,7 +47,6 @@ public class Vanishment extends CardImpl {
         super(ownerId, 82, "Vanishment", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Put target nonland permanent on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

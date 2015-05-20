@@ -60,8 +60,6 @@ public class MasterOfCruelties extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Demon");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

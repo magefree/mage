@@ -44,7 +44,6 @@ public class SowingSalt extends CardImpl {
         super(ownerId, 118, "Sowing Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "BOK";
 
-        this.color.setRed(true);
 
         // Exile target nonbasic land. Search its controller's graveyard, hand, and library for all cards with 
         // the same name as that land and exile them. Then that player shuffles his or her library.

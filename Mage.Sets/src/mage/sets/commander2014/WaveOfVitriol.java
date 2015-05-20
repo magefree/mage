@@ -57,7 +57,6 @@ public class WaveOfVitriol extends CardImpl {
         super(ownerId, 51, "Wave of Vitriol", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
         this.expansionSetCode = "C14";
 
-        this.color.setGreen(true);
 
         // Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search his or her library for a basic land card and put it onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
         this.getSpellAbility().addEffect(new WaveOfVitriolEffect());

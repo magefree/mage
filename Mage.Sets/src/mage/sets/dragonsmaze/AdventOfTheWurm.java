@@ -50,8 +50,6 @@ public class AdventOfTheWurm extends CardImpl {
         super(ownerId, 51, "Advent of the Wurm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Put a 5/5 green Wurm creature token with trample onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));

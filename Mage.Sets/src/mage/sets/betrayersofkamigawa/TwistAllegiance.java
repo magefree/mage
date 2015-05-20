@@ -56,7 +56,6 @@ public class TwistAllegiance extends CardImpl {
         super(ownerId, 120, "Twist Allegiance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}");
         this.expansionSetCode = "BOK";
 
-        this.color.setRed(true);
 
         // You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn.
         this.getSpellAbility().addEffect(new TwistAllegianceEffect());

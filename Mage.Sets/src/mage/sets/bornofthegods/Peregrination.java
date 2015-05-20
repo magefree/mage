@@ -59,7 +59,6 @@ public class Peregrination extends CardImpl {
         super(ownerId, 132, "Peregrination", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Seach your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Shuffle your library, then scry 1.
         this.getSpellAbility().addEffect(new PeregrinationEffect());

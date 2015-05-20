@@ -52,7 +52,6 @@ public class HumanFrailty extends CardImpl {
         super(ownerId, 109, "Human Frailty", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Destroy target Human creature.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

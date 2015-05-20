@@ -55,8 +55,6 @@ public class Browse extends CardImpl {
         super(ownerId, 38, "Browse", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "ALL";
 
-        this.color.setBlue(true);
-
         // {2}{U}{U}: Look at the top five cards of your library, put one of them into your hand, and exile the rest.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BrowseEffect(), new ManaCostsImpl("{2}{U}{U}"));
         this.addAbility(ability);

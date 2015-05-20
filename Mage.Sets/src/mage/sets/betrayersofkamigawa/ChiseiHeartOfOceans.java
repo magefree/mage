@@ -63,7 +63,6 @@ public class ChiseiHeartOfOceans extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

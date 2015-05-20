@@ -57,7 +57,6 @@ public class TomorrowAzamisFamiliar extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

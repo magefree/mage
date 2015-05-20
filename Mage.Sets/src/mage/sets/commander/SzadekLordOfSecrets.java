@@ -61,8 +61,6 @@ public class SzadekLordOfSecrets extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

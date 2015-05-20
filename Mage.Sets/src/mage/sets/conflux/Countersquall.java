@@ -54,8 +54,6 @@ public class Countersquall extends CardImpl {
         super(ownerId, 103, "Countersquall", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Counter target noncreature spell. Its controller loses 2 life.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

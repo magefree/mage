@@ -53,7 +53,6 @@ public class Cursebreak extends CardImpl {
         super(ownerId, 14, "Cursebreak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Destroy target enchantment. You gain 2 life.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

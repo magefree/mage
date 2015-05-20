@@ -49,8 +49,6 @@ public class RestoreThePeace extends CardImpl {
         super(ownerId, 97, "Restore the Peace", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{U}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Return each creature that dealt damage this turn to its owner's hand.
         this.getSpellAbility().addEffect(new RestoreThePeaceEffect());

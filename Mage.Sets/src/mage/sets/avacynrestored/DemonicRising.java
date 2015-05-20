@@ -53,7 +53,6 @@ public class DemonicRising extends CardImpl {
         super(ownerId, 94, "Demonic Rising", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
         TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new DemonToken()), false);

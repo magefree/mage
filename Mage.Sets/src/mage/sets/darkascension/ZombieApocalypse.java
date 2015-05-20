@@ -54,7 +54,6 @@ public class ZombieApocalypse extends CardImpl {
         super(ownerId, 80, "Zombie Apocalypse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
         this.getSpellAbility().addEffect(new ZombieApocalypseEffect());

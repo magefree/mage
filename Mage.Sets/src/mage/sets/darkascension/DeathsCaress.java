@@ -51,7 +51,6 @@ public class DeathsCaress extends CardImpl {
         super(ownerId, 59, "Death's Caress", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -52,7 +52,6 @@ public class CommandersAuthority extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

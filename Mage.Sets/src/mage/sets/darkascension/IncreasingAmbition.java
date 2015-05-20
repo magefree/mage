@@ -57,7 +57,6 @@ public class IncreasingAmbition extends CardImpl {
         super(ownerId, 69, "Increasing Ambition", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Search your library for a card and put that card into your hand. If Increasing Ambition was cast from a graveyard, instead search your library for two cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new IncreasingAmbitionEffect());

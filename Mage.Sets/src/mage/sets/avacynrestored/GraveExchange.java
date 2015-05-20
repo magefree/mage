@@ -57,7 +57,6 @@ public class GraveExchange extends CardImpl {
         super(ownerId, 105, "Grave Exchange", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

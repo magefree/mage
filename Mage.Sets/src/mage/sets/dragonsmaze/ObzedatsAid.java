@@ -58,8 +58,6 @@ public class ObzedatsAid extends CardImpl {
         super(ownerId, 89, "Obzedat's Aid", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{B}");
         this.expansionSetCode = "DGM";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Return target permanent card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

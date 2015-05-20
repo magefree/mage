@@ -58,7 +58,6 @@ public class PresenceOfGond extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

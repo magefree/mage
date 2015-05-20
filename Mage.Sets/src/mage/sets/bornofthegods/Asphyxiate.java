@@ -53,7 +53,6 @@ public class Asphyxiate extends CardImpl {
         super(ownerId, 60, "Asphyxiate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // Destroy target untapped creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

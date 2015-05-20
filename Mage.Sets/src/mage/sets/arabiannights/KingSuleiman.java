@@ -61,7 +61,6 @@ public class KingSuleiman extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Human");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

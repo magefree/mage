@@ -59,8 +59,6 @@ public class BatwingBrume extends CardImpl {
         super(ownerId, 81, "Batwing Brume", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Prevent all combat damage that would be dealt this turn if {W} was spent to cast Batwing Brume. Each player loses 1 life for each attacking creature he or she controls if {B} was spent to cast Batwing Brume.
         Effect effect = new ConditionalReplacementEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true),

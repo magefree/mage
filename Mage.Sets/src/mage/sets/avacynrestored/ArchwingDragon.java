@@ -49,7 +49,6 @@ public class ArchwingDragon extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

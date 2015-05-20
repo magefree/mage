@@ -61,7 +61,6 @@ public class SpawningGrounds extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

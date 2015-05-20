@@ -48,7 +48,6 @@ public class TragicSlip extends CardImpl {
         super(ownerId, 76, "Tragic Slip", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Target creature gets -1/-1 until end of turn.
         // Morbid - That creature gets -13/-13 until end of turn instead if a creature died this turn.

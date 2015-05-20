@@ -52,7 +52,6 @@ public class SiegeBehemoth extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 

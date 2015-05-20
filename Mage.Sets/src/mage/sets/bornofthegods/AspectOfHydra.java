@@ -49,7 +49,6 @@ public class AspectOfHydra extends CardImpl {
         super(ownerId, 117, "Aspect of Hydra", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Target creature gets +X/+X until end of turn, where X is your devotion to green.
         DynamicValue greenDevotion = new DevotionCount(ColoredManaSymbol.G);

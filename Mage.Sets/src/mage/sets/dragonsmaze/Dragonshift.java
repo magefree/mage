@@ -63,8 +63,6 @@ public class Dragonshift extends CardImpl {
         super(ownerId, 66, "Dragonshift", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Until end of turn, target creature you control becomes a blue and red Dragon with base power and toughness 4/4, loses all abilities, and gains flying.
         Effect effect = new BecomesCreatureTargetEffect(new DragonToken(), true, false, Duration.EndOfTurn);

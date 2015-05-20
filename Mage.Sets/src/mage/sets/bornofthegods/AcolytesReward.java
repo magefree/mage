@@ -53,7 +53,6 @@ public class AcolytesReward extends CardImpl {
         super(ownerId, 1, "Acolyte's Reward", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, Acolyte's Reward deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new AcolytesRewardEffect());

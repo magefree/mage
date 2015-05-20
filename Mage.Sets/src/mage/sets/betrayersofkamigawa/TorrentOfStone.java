@@ -55,7 +55,6 @@ public class TorrentOfStone extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setRed(true);
 
         // Torrent of Stone deals 4 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

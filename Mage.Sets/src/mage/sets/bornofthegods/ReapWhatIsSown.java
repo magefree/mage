@@ -47,8 +47,6 @@ public class ReapWhatIsSown extends CardImpl {
         super(ownerId, 154, "Reap What Is Sown", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Put a +1/+1 counter on each of up to three target creatures.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

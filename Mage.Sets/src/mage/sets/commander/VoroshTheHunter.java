@@ -51,9 +51,6 @@ public class VoroshTheHunter extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

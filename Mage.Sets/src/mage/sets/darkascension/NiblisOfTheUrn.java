@@ -49,7 +49,6 @@ public class NiblisOfTheUrn extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

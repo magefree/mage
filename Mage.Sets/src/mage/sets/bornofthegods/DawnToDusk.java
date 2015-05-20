@@ -59,7 +59,6 @@ public class DawnToDusk extends CardImpl {
         super(ownerId, 6, "Dawn to Dusk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);

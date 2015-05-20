@@ -46,7 +46,6 @@ public class Cloudshift extends CardImpl {
         super(ownerId, 12, "Cloudshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Exile target creature you control, then return that card to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

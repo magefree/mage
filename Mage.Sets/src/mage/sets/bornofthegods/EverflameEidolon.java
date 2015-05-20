@@ -54,7 +54,6 @@ public class EverflameEidolon extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

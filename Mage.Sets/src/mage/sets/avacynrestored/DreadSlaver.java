@@ -60,7 +60,6 @@ public class DreadSlaver extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

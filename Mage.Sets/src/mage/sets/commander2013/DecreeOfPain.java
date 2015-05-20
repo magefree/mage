@@ -54,7 +54,6 @@ public class DecreeOfPain extends CardImpl {
         super(ownerId, 72, "Decree of Pain", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{B}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         this.getSpellAbility().addEffect(new DecreeOfPainEffect());

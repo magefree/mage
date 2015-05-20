@@ -55,7 +55,6 @@ public class RevengeOfTheHunted extends CardImpl {
         super(ownerId, 191, "Revenge of the Hunted", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

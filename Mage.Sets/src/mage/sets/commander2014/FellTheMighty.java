@@ -50,7 +50,6 @@ public class FellTheMighty extends CardImpl {
         super(ownerId, 7, "Fell the Mighty", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures with power greater than target creature's power.
         this.getSpellAbility().addEffect(new FellTheMightyEffect());

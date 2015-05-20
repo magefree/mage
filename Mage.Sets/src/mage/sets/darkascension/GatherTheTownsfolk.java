@@ -48,7 +48,6 @@ public class GatherTheTownsfolk extends CardImpl {
         super(ownerId, 8, "Gather the Townsfolk", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Put two 1/1 white Human creature tokens onto the battlefield.
         // Fateful hour - If you have 5 or less life, put five of those tokens onto the battlefield instead.

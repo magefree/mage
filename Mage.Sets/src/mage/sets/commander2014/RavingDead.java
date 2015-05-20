@@ -61,7 +61,6 @@ public class RavingDead extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 

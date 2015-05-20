@@ -59,7 +59,6 @@ public class GeistSnatch extends CardImpl {
         super(ownerId, 55, "Geist Snatch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Counter target creature spell. Put a 1/1 blue Spirit creature token with flying onto the battlefield.
         this.getSpellAbility().addTarget(new TargetSpell(filter));

@@ -53,8 +53,6 @@ public class LimDulsVault extends CardImpl {
         super(ownerId, 197, "Lim-Dul's Vault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.
         this.getSpellAbility().addEffect(new LimDulsVaultEffect());

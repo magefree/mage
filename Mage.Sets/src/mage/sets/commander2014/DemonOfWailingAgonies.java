@@ -52,7 +52,6 @@ public class DemonOfWailingAgonies extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

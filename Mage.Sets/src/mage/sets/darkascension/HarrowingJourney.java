@@ -45,7 +45,6 @@ public class HarrowingJourney extends CardImpl {
         super(ownerId, 67, "Harrowing Journey", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Target player draws three cards and loses 3 life.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));

@@ -73,7 +73,6 @@ public class FellShepherd extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Avatar");
 
-        this.color.setBlack(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(6);
 

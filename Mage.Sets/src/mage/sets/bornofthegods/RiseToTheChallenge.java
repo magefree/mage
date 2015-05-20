@@ -48,7 +48,6 @@ public class RiseToTheChallenge extends CardImpl {
         super(ownerId, 107, "Rise to the Challenge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Target creature gets +2/+0 and gains first strike until end of turn.
         Effect effect = new BoostTargetEffect(2,0, Duration.EndOfTurn);

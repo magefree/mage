@@ -69,7 +69,6 @@ public class GenjuOfTheFields extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant Plains
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

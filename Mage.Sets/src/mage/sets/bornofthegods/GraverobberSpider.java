@@ -54,7 +54,6 @@ public class GraverobberSpider extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

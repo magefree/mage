@@ -51,7 +51,6 @@ public class SongOfTheDryads extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();

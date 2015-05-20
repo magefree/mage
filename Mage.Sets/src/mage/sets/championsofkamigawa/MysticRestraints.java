@@ -54,7 +54,6 @@ public class MysticRestraints extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

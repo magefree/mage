@@ -46,7 +46,6 @@ public class ForsakenDrifters extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

@@ -46,7 +46,6 @@ public class BattleHymn extends CardImpl {
         super(ownerId, 128, "Battle Hymn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Add {R} to your mana pool for each creature you control.
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));

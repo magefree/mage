@@ -52,7 +52,6 @@ public class PatagiaViper extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

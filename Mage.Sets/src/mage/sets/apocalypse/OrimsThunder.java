@@ -67,7 +67,6 @@ public class OrimsThunder extends CardImpl {
         super(ownerId, 15, "Orim's Thunder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "APC";
 
-        this.color.setWhite(true);
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));

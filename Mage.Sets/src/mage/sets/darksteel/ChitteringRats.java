@@ -54,7 +54,6 @@ public class ChitteringRats extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

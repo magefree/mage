@@ -73,8 +73,6 @@ public class HuntmasterOfTheFells extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new RavagerOfTheFells(ownerId);
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

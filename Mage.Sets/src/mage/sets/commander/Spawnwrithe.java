@@ -47,7 +47,6 @@ public class Spawnwrithe extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

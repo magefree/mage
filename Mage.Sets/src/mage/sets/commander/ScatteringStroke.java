@@ -57,7 +57,6 @@ public class ScatteringStroke extends CardImpl {
         super(ownerId, 60, "Scattering Stroke", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Clash with an opponent. If you win, at the beginning of your next main phase, you may add {X} to your mana pool, where X is that spell's converted mana cost.
         this.getSpellAbility().addEffect(new ScatteringStrokeEffect());

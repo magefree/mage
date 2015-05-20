@@ -45,7 +45,6 @@ public class ForkedBranchGarami extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

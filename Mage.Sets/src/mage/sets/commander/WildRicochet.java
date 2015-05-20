@@ -60,7 +60,6 @@ public class WildRicochet extends CardImpl {
         super(ownerId, 139, "Wild Ricochet", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
 
         // You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new WildRicochetEffect());

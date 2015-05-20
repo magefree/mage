@@ -57,8 +57,6 @@ public class NinThePainArtist extends CardImpl {
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

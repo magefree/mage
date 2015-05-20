@@ -58,8 +58,6 @@ public class RalZarek extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Ral");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

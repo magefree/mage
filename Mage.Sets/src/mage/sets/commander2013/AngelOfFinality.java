@@ -49,7 +49,6 @@ public class AngelOfFinality extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

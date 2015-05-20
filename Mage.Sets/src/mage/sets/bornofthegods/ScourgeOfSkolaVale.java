@@ -68,7 +68,6 @@ public class ScourgeOfSkolaVale extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

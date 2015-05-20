@@ -60,8 +60,6 @@ public class EpharasEnlightenment extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -58,7 +58,6 @@ public class SakikoMotherOfSummer extends CardImpl {
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

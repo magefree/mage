@@ -60,7 +60,6 @@ public class IllusionistsGambit extends CardImpl {
         super(ownerId, 47, "Illusionist's Gambit", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Cast Illusionist's Gambit only during the declare blockers step on an opponent's turn.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new IllusionistsGambitEffect());

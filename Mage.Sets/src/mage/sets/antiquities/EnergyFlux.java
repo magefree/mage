@@ -51,7 +51,6 @@ public class EnergyFlux extends CardImpl {
         super(ownerId, 53, "Energy Flux", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "ATQ";
 
-        this.color.setBlue(true);
 
         // All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."
         this.addAbility(new SimpleStaticAbility(

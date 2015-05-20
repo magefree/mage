@@ -56,7 +56,6 @@ public class FlameWreathedPhoenix extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

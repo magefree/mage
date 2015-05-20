@@ -49,7 +49,6 @@ public class RiteOfFlame extends CardImpl {
         super(ownerId, 96, "Rite of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "CSP";
 
-        this.color.setRed(true);
 
         // Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
         this.getSpellAbility().addEffect(new RiteOfFlameManaEffect());

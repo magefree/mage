@@ -58,7 +58,6 @@ public class DemonlordOfAshmouth extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

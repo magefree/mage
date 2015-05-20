@@ -51,7 +51,6 @@ public class Scour extends CardImpl {
         super(ownerId, 20, "Scour", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "BOK";
 
-        this.color.setWhite(true);
 
         // Exile target enchantment.
         // Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.

@@ -44,7 +44,6 @@ public class Prosperity extends CardImpl {
         super(ownerId, 54, "Prosperity", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Each player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(new ManacostVariableValue()));

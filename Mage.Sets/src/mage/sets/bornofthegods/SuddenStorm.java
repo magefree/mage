@@ -46,7 +46,6 @@ public class SuddenStorm extends CardImpl {
         super(ownerId, 53, "Sudden Storm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Tap up to two target creatures. Those creatures don't untap during their controllers' next untap steps. Scry 1.
         this.getSpellAbility().addEffect(new TapTargetEffect());

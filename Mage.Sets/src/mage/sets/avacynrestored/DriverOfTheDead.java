@@ -58,7 +58,6 @@ public class DriverOfTheDead extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

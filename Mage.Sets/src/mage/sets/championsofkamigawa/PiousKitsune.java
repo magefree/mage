@@ -62,7 +62,6 @@ public class PiousKitsune extends CardImpl {
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

@@ -67,7 +67,6 @@ public class ActOfAuthority extends CardImpl {
         super(ownerId, 1, "Act of Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
 
         // When Act of Authority enters the battlefield, you may exile target artifact or enchantment.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetEffect(), true);

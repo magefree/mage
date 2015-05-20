@@ -48,7 +48,6 @@ public class SetessanOathsworn extends CardImpl {
         this.subtype.add("Satyr");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

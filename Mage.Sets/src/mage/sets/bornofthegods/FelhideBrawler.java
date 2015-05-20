@@ -54,7 +54,6 @@ public class FelhideBrawler extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Minotaur");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

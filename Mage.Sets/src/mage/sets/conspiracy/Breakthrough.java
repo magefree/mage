@@ -51,7 +51,6 @@ public class Breakthrough extends CardImpl {
         super(ownerId, 92, "Breakthrough", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}");
         this.expansionSetCode = "CNS";
 
-        this.color.setBlue(true);
 
         // Draw four cards,
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));

@@ -44,7 +44,6 @@ public class SilverbackApe extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Ape");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
     }

@@ -50,7 +50,6 @@ public class TemptWithVengeance extends CardImpl {
         super(ownerId, 125, "Tempt with Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // Tempting offer - Put X 1/1 red Elemental creature tokens with haste onto the battlefield. Each opponent may put X 1/1 red Elemental creature tokens with haste onto the battlefield. For each player who does, put X 1/1 red Elemental creature tokens with haste onto the battlefield.
        this.getSpellAbility().addEffect(new TemptWithVengeanceEffect());

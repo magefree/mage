@@ -51,7 +51,6 @@ public class AmassTheComponents extends CardImpl {
         super(ownerId, 43, "Amass the Components", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Draw three cards, then put a card from your hand on the bottom of your library.
         this.getSpellAbility().addEffect(new AmassTheComponentsEffect());

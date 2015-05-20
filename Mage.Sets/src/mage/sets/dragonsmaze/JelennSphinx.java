@@ -50,8 +50,6 @@ public class JelennSphinx extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

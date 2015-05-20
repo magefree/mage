@@ -55,7 +55,6 @@ public class ShardConvergence extends CardImpl {
         super(ownerId, 91, "Shard Convergence", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "CON";
 
-        this.color.setGreen(true);
 
         // Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ShardConvergenceEffect());

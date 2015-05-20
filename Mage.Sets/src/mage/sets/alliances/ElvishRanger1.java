@@ -28,10 +28,10 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,7 +44,6 @@ public class ElvishRanger1 extends CardImpl {
         this.expansionSetCode = "ALL";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
     }

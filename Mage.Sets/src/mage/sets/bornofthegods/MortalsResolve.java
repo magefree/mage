@@ -48,7 +48,6 @@ public class MortalsResolve extends CardImpl {
         super(ownerId, 127, "Mortal's Resolve", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Target creature gets +1/+1 and gains indestructible until end of turn.
         Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);

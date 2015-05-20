@@ -65,7 +65,6 @@ public class Commandeer extends CardImpl {
         super(ownerId, 29, "Commandeer", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{U}{U}");
         this.expansionSetCode = "CSP";
 
-        this.color.setBlue(true);
 
         // You may exile two blue cards from your hand rather than pay Commandeer's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));

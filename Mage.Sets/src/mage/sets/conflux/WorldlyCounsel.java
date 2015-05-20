@@ -54,7 +54,6 @@ public class WorldlyCounsel extends CardImpl {
         super(ownerId, 39, "Worldly Counsel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlue(true);
 
         // Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new WorldlyCounselEffect());

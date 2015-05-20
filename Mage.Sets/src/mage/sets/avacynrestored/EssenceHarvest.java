@@ -51,7 +51,6 @@ public class EssenceHarvest extends CardImpl {
         super(ownerId, 100, "Essence Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Target player loses X life and you gain X life, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new EssenceHarvestEffect());

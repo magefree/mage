@@ -53,7 +53,6 @@ public class MassAppeal extends CardImpl {
         super(ownerId, 66, "Mass Appeal", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Draw a card for each Human you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));

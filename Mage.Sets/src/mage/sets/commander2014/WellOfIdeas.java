@@ -48,7 +48,6 @@ public class WellOfIdeas extends CardImpl {
         super(ownerId, 20, "Well of Ideas", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // When Well of Ideas enters the battlefield, draw two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(2), false));

@@ -62,8 +62,6 @@ public class Spiritmonger extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

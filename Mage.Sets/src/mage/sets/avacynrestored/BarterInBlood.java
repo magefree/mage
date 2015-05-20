@@ -51,7 +51,6 @@ public class BarterInBlood extends CardImpl {
         super(ownerId, 85, "Barter in Blood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Each player sacrifices two creatures.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(2, filter));

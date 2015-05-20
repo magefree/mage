@@ -63,7 +63,6 @@ public class ControlledInstincts extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant red or green creature
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

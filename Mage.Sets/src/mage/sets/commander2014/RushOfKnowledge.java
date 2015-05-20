@@ -48,7 +48,6 @@ public class RushOfKnowledge extends CardImpl {
         super(ownerId, 123, "Rush of Knowledge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlue(true);
 
         // Draw cards equal to the highest converted mana cost among permanents you control.
         this.getSpellAbility().addEffect(new RushOfKnowledgeEffect());

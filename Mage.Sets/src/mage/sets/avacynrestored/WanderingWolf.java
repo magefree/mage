@@ -47,7 +47,6 @@ public class WanderingWolf extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

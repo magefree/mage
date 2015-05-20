@@ -52,7 +52,6 @@ public class Borrowing100000Arrows extends CardImpl {
         super(ownerId, 33, "Borrowing 100,000 Arrows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Draw a card for each tapped creature target opponent controls.
         this.getSpellAbility().addEffect(new Borrowing100000ArrowsEffect());

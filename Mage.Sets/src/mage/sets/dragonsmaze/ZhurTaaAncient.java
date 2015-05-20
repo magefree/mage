@@ -48,8 +48,6 @@ public class ZhurTaaAncient extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
 

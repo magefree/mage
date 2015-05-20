@@ -44,7 +44,6 @@ public class RegalUnicorn extends CardImpl {
         this.expansionSetCode = "6ED";
         this.subtype.add("Unicorn");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

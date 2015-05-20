@@ -43,7 +43,6 @@ public class BrilliantPlan extends CardImpl {
         super(ownerId, 34, "Brilliant Plan", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlue(true);
 
         // Draw three cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

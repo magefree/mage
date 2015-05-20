@@ -45,7 +45,6 @@ public class IntoTheVoid extends CardImpl {
         super(ownerId, 62, "Into the Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Return up to two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

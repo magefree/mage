@@ -61,7 +61,6 @@ public class AerieOuphes extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Ouphe");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

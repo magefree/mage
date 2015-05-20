@@ -64,7 +64,6 @@ public class DjinnOfInfiniteDeceits extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Djinn");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 

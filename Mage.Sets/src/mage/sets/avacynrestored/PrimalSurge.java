@@ -51,7 +51,6 @@ public class PrimalSurge extends CardImpl {
         super(ownerId, 189, "Primal Surge", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{8}{G}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Exile the top card of your library. If it's a permanent card, you may put it onto the battlefield. If you do, repeat this process.
         this.getSpellAbility().addEffect(new PrimalSurgeEffect());

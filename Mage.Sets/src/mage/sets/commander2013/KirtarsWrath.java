@@ -52,7 +52,6 @@ public class KirtarsWrath extends CardImpl {
         super(ownerId, 15, "Kirtar's Wrath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures. They can't be regenerated.
         // Threshold - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated.

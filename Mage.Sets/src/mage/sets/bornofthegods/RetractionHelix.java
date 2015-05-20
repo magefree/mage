@@ -53,7 +53,6 @@ public class RetractionHelix extends CardImpl {
         super(ownerId, 49, "Retraction Helix", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());

@@ -54,9 +54,6 @@ public class NumotTheDevastator extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

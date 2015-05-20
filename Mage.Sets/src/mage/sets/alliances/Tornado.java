@@ -56,7 +56,6 @@ public class Tornado extends CardImpl {
         super(ownerId, 86, "Tornado", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "ALL";
 
-        this.color.setGreen(true);
 
         // Cumulative upkeep {G}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));

@@ -48,7 +48,6 @@ public class MortalsArdor extends CardImpl {
         super(ownerId, 20, "Mortal's Ardor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+1 and gains lifelink until end of turn.
         Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);

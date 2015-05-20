@@ -59,7 +59,6 @@ public class LoyalCathar extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new UnhallowedCathar(ownerId);
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

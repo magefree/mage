@@ -51,7 +51,6 @@ public class ScouringSands extends CardImpl {
         super(ownerId, 110, "Scouring Sands", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Scouring Sands deals 1 damage to each creature your opponents control. Scry 1.
         this.getSpellAbility().addEffect(new ScouringSandsDamageEffect());

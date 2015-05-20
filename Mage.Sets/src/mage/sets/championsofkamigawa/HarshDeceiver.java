@@ -62,7 +62,6 @@ public class HarshDeceiver extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

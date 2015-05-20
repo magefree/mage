@@ -53,8 +53,6 @@ public class ForceOfWill extends CardImpl {
         super(ownerId, 42, "Force of Will", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "ALL";
 
-        this.color.setBlue(true);
-
         // You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a blue card from your hand");
         filter.add(new ColorPredicate(ObjectColor.BLUE));

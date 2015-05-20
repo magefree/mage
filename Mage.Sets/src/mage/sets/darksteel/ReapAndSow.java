@@ -49,7 +49,6 @@ public class ReapAndSow extends CardImpl {
         super(ownerId, 81, "Reap and Sow", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "DST";
 
-        this.color.setGreen(true);
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

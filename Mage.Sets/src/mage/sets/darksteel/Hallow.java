@@ -52,7 +52,6 @@ public class Hallow extends CardImpl {
         super(ownerId, 4, "Hallow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "DST";
 
-        this.color.setWhite(true);
 
         // Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new HallowPreventDamageByTargetEffect(Duration.EndOfTurn));

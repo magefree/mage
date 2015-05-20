@@ -57,7 +57,6 @@ public class SatyrWayfinder extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Satyr");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

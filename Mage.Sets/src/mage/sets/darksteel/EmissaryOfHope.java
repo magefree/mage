@@ -56,7 +56,6 @@ public class EmissaryOfHope extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

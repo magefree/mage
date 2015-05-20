@@ -47,8 +47,6 @@ public class WarleadersHelix extends CardImpl {
         super(ownerId, 116, "Warleader's Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

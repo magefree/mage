@@ -57,8 +57,6 @@ public class Malfegor extends CardImpl {
         this.subtype.add("Demon");
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

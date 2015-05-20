@@ -57,9 +57,6 @@ public class RubiniaSoulsinger extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Faerie");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

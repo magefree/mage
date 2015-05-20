@@ -54,7 +54,6 @@ public class BrineElemental extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

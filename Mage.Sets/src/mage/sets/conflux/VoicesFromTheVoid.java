@@ -45,7 +45,6 @@ public class VoicesFromTheVoid extends CardImpl {
         super(ownerId, 55, "Voices from the Void", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlack(true);
 
         // Domain - Target player discards a card for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new DomainValue()));

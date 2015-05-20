@@ -56,7 +56,6 @@ public class GiftsUngiven extends CardImpl {
         super(ownerId, 62, "Gifts Ungiven", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "CHK";
 
-        this.color.setBlue(true);
 
         // Search your library for up to four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new GiftsUngivenEffect());

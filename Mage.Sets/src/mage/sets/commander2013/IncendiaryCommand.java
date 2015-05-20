@@ -54,7 +54,6 @@ public class IncendiaryCommand extends CardImpl {
         super(ownerId, 113, "Incendiary Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
 
         // Choose two - 
         this.getSpellAbility().getModes().setMinModes(2);

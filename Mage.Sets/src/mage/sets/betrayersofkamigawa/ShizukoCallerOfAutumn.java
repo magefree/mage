@@ -52,7 +52,6 @@ public class ShizukoCallerOfAutumn extends CardImpl {
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

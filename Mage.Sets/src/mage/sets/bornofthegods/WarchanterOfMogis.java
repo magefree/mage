@@ -51,7 +51,6 @@ public class WarchanterOfMogis extends CardImpl {
         this.subtype.add("Minotaur");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

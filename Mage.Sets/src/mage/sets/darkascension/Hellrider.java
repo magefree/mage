@@ -52,7 +52,6 @@ public class Hellrider extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Devil");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

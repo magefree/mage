@@ -53,7 +53,6 @@ public class NephaliaSmuggler extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

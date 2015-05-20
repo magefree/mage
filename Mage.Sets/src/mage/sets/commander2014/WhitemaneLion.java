@@ -48,7 +48,6 @@ public class WhitemaneLion extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Cat");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

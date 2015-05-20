@@ -65,7 +65,6 @@ public class HorobisWhisper extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setBlack(true);
 
 
         // If you control a Swamp, destroy target nonblack creature.

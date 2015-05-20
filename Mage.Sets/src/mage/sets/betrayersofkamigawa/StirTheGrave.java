@@ -50,7 +50,6 @@ public class StirTheGrave extends CardImpl {
         super(ownerId, 85, "Stir the Grave", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{B}");
         this.expansionSetCode = "BOK";
 
-        this.color.setBlack(true);
 
         // Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

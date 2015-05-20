@@ -73,7 +73,6 @@ public class PristineAngel extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

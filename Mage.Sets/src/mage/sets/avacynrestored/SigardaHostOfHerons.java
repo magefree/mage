@@ -55,8 +55,6 @@ public class SigardaHostOfHerons extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

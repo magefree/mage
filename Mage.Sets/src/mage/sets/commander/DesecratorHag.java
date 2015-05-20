@@ -57,8 +57,6 @@ public class DesecratorHag extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Hag");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

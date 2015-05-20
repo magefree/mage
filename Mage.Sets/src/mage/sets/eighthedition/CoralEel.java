@@ -45,7 +45,6 @@ public class CoralEel extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Fish");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }

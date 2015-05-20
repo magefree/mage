@@ -46,7 +46,6 @@ public class FarbogExplorer extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Scout");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

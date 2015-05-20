@@ -61,7 +61,6 @@ public class Tanglewalker extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -55,7 +55,6 @@ public class BenevolentOffering extends CardImpl {
         super(ownerId, 3, "Benevolent Offering", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // Choose an opponent. You and that player each put three 1/1 white Spirit creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new BenevolentOfferingEffect1());

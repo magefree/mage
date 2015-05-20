@@ -52,7 +52,6 @@ public class ShatteredPerception extends CardImpl {
         super(ownerId, 104, "Shattered Perception", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Discard all the cards in your hand, then draw that many cards.
         this.getSpellAbility().addEffect(new ShatteredPerceptionEffect());

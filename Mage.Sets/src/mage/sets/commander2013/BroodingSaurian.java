@@ -62,7 +62,6 @@ public class BroodingSaurian extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Lizard");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

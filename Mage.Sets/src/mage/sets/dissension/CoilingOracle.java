@@ -47,8 +47,6 @@ public class CoilingOracle extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Druid");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 	

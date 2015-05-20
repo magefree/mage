@@ -57,7 +57,6 @@ public class TyrantsFamiliar extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

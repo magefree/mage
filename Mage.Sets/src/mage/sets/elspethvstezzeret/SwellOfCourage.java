@@ -48,7 +48,6 @@ public class SwellOfCourage extends CardImpl {
         super(ownerId, 31, "Swell of Courage", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "DDF";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));

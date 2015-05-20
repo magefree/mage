@@ -49,7 +49,6 @@ public class MindsAglow extends CardImpl {
         super(ownerId, 51, "Minds Aglow", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlue(true);
 
         // Join forces - Starting with you, each player may pay any amount of mana. Each player draws X cards, where X is the total amount of mana paid this way.
         this.getSpellAbility().addEffect(new MindsAglowEffect());

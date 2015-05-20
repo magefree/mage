@@ -57,7 +57,6 @@ public class GriffinDreamfinder extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

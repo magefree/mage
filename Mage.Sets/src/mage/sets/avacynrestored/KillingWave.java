@@ -54,7 +54,6 @@ public class KillingWave extends CardImpl {
         super(ownerId, 111, "Killing Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // For each creature, its controller sacrifices it unless he or she pays X life.
         this.getSpellAbility().addEffect(new KillingWaveEffect());

@@ -65,8 +65,6 @@ public class RenderSilent extends CardImpl {
         super(ownerId, 96, "Render Silent", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}");
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
 
         // Counter target spell. Its controller can't cast spells this turn.
         this.getSpellAbility().addEffect(new RenderSilentCounterEffect());

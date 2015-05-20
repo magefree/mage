@@ -62,7 +62,6 @@ public class NezumiShortfang extends CardImpl {
         this.subtype.add("Rat");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.flipCard = true;

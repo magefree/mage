@@ -49,7 +49,6 @@ public class Necrobite extends CardImpl {
         super(ownerId, 115, "Necrobite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Target creature gains deathtouch until end of turn. Regenerate it.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));

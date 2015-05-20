@@ -70,9 +70,6 @@ public class RoonOfTheHiddenRealm extends CardImpl {
         this.subtype.add("Rhino");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

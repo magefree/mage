@@ -71,7 +71,6 @@ public class TamiyoTheMoonSage extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Tamiyo");
 
-        this.color.setBlue(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

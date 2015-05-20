@@ -43,7 +43,6 @@ public class DeliriumSkeins extends CardImpl {
         super(ownerId, 41, "Delirium Skeins", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "DIS";
 
-        this.color.setBlack(true);
 
         // Each player discards three cards.
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(3, false));

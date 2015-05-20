@@ -55,7 +55,6 @@ public class ForgestokerDragon extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

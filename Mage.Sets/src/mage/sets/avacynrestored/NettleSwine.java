@@ -44,7 +44,6 @@ public class NettleSwine extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
     }

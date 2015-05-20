@@ -60,7 +60,6 @@ public class UnravelTheAEther extends CardImpl {
         super(ownerId, 143, "Unravel the AEther", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Choose target artifact or enchantment. Its owner shuffles it into his or her library.
         this.getSpellAbility().addEffect(new UnravelTheAEtherShuffleIntoLibraryEffect());

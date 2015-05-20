@@ -54,7 +54,6 @@ public class Restore extends CardImpl {
         super(ownerId, 167, "Restore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Put target land card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RestoreEffect());

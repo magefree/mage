@@ -54,7 +54,6 @@ public class MatsuTribeDecoy extends CardImpl {
         this.subtype.add("Snake");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

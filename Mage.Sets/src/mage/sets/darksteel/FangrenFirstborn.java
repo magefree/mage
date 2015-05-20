@@ -48,7 +48,6 @@ public class FangrenFirstborn extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

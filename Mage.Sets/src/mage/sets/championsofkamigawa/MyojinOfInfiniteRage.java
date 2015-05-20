@@ -64,7 +64,6 @@ public class MyojinOfInfiniteRage extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 

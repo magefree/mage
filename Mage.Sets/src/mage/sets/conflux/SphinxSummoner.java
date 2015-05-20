@@ -56,8 +56,6 @@ public class SphinxSummoner extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

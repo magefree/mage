@@ -72,8 +72,6 @@ public class VarolzTheScarStriped extends CardImpl {
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

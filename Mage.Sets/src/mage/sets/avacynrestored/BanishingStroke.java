@@ -59,7 +59,6 @@ public class BanishingStroke extends CardImpl {
         super(ownerId, 7, "Banishing Stroke", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Put target artifact, creature, or enchantment on the bottom of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));

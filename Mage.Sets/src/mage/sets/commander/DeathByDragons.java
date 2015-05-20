@@ -52,7 +52,6 @@ public class DeathByDragons extends CardImpl {
         super(ownerId, 118, "Death by Dragons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "CMD";
 
-        this.color.setRed(true);
 
         // Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new DeathByDragonsEffect());

@@ -49,7 +49,6 @@ public class EyeGouge extends CardImpl {
         super(ownerId, 67, "Eye Gouge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlack(true);
 
         // Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1, Duration.EndOfTurn));

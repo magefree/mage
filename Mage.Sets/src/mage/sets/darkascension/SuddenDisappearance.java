@@ -54,7 +54,6 @@ public class SuddenDisappearance extends CardImpl {
         super(ownerId, 23, "Sudden Disappearance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Exile all nonland permanents target player controls. Return the exiled cards to the battlefield under their owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new SuddenDisappearanceEffect());

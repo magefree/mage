@@ -65,9 +65,6 @@ public class ShattergangBrothers extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

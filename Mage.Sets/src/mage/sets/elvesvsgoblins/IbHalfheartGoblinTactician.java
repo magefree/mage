@@ -77,7 +77,6 @@ public class IbHalfheartGoblinTactician extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Advisor");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

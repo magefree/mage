@@ -47,7 +47,6 @@ public class FatedInfatuation extends CardImpl {
         super(ownerId, 39, "Fated Infatuation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Put a token onto the battlefield that's a copy of target creature you control. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());

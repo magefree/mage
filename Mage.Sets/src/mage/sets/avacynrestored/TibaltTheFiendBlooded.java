@@ -70,7 +70,6 @@ public class TibaltTheFiendBlooded extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Tibalt");
 
-        this.color.setRed(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
 

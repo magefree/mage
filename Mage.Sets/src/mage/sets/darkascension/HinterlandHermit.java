@@ -56,7 +56,6 @@ public class HinterlandHermit extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new HinterlandScourge(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -53,7 +53,6 @@ public class Eradicate extends CardImpl {
         super(ownerId, 65, "Eradicate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "BOK";
 
-        this.color.setBlack(true);
 
         // Exile target nonblack creature. Search its controller's graveyard, hand, and library for all cards 
         // with the same name as that creature and exile them. Then that player shuffles his or her library.

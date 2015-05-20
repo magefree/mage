@@ -70,7 +70,6 @@ public class GenjuOfTheFens extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant Swamp
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

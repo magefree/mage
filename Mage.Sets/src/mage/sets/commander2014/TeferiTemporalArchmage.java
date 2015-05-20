@@ -65,7 +65,6 @@ public class TeferiTemporalArchmage extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Teferi");
 
-        this.color.setBlue(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 

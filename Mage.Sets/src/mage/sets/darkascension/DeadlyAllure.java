@@ -48,7 +48,6 @@ public class DeadlyAllure extends CardImpl {
         super(ownerId, 58, "Deadly Allure", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlack(true);
 
         // Target creature gains deathtouch until end of turn and must be blocked this turn if able.        
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));

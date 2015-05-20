@@ -55,7 +55,6 @@ public class PsychicSpear extends CardImpl {
         super(ownerId, 78, "Psychic Spear", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "BOK";
 
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

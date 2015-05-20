@@ -59,7 +59,6 @@ public class VeteranExplorer extends CardImpl {
         this.subtype.add("Soldier");
         this.subtype.add("Scout");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

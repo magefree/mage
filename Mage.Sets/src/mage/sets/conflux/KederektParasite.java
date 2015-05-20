@@ -52,7 +52,6 @@ public class KederektParasite extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

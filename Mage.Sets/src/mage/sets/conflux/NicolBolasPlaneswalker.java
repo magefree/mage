@@ -65,9 +65,6 @@ public class NicolBolasPlaneswalker extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Bolas");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 

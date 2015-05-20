@@ -57,7 +57,6 @@ public class SavingGrasp extends CardImpl {
         super(ownerId, 46, "Saving Grasp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Return target creature you own to your hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -53,7 +53,6 @@ public class FoolsDemise extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -49,7 +49,6 @@ public class HornetQueen extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

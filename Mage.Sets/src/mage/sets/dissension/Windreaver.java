@@ -54,8 +54,6 @@ public class Windreaver extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

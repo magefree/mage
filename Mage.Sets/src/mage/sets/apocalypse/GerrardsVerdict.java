@@ -49,8 +49,6 @@ public class GerrardsVerdict extends CardImpl {
         super(ownerId, 102, "Gerrard's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}{B}");
         this.expansionSetCode = "APC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Target player discards two cards. You gain 3 life for each land card discarded this way.
         this.getSpellAbility().addEffect(new GerrardsVerdictEffect());

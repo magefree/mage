@@ -54,9 +54,6 @@ public class TenebTheHarvester extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

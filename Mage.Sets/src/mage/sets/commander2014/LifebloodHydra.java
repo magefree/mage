@@ -56,7 +56,6 @@ public class LifebloodHydra extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

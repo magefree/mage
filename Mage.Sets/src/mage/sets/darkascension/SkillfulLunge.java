@@ -47,7 +47,6 @@ public class SkillfulLunge extends CardImpl {
         super(ownerId, 22, "Skillful Lunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Target creature gets +2/+0 and gains first strike until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

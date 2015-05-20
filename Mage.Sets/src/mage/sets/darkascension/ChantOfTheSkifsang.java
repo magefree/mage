@@ -49,7 +49,6 @@ public class ChantOfTheSkifsang extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

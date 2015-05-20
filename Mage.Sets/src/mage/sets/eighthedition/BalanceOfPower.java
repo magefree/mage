@@ -48,7 +48,6 @@ public class BalanceOfPower extends CardImpl {
         super(ownerId, 62, "Balance of Power", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "8ED";
 
-        this.color.setBlue(true);
 
         // If target opponent has more cards in hand than you, draw cards equal to the difference.
         this.getSpellAbility().addEffect(new BalanceOfPowerEffect());

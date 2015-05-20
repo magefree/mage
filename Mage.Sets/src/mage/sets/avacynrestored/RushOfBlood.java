@@ -47,7 +47,6 @@ public class RushOfBlood extends CardImpl {
         super(ownerId, 154, "Rush of Blood", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Target creature gets +X/+0 until end of turn, where X is its power.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new TargetPermanentPowerCount(), new StaticValue(0), Duration.EndOfTurn, true));

@@ -56,7 +56,6 @@ public class GiftOfEstates extends CardImpl {
         super(ownerId, 73, "Gift of Estates", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

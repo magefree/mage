@@ -64,7 +64,6 @@ public class Reshape extends CardImpl {
         super(ownerId, 31, "Reshape", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "DST";
 
-        this.color.setBlue(true);
 
         // As an additional cost to cast Reshape, sacrifice an artifact.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false)));

@@ -48,7 +48,6 @@ public class TerrifyingPresence extends CardImpl {
         super(ownerId, 196, "Terrifying Presence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt by creatures other than target creature this turn.
         this.getSpellAbility().addEffect(new TerrifyingPresenceEffect());

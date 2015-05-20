@@ -51,8 +51,6 @@ public class ConsumeStrength extends CardImpl {
         super(ownerId, 93, "Consume Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");
         this.expansionSetCode = "APC";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
         this.getSpellAbility().addEffect(new ConsumeStrengthEffect());

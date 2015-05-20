@@ -55,7 +55,6 @@ public class MerchantScroll extends CardImpl {
         super(ownerId, 91, "Merchant Scroll", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "8ED";
 
-        this.color.setBlue(true);
 
         // Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));

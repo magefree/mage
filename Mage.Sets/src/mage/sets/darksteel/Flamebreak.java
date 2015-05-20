@@ -62,7 +62,6 @@ public class Flamebreak extends CardImpl {
         super(ownerId, 61, "Flamebreak", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{R}{R}");
         this.expansionSetCode = "DST";
 
-        this.color.setRed(true);
 
         // Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(new StaticValue(3), filter1));

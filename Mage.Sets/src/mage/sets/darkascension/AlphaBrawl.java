@@ -59,7 +59,6 @@ public class AlphaBrawl extends CardImpl {
         super(ownerId, 82, "Alpha Brawl", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.
         this.getSpellAbility().addEffect(new AlphaBrawlEffect());

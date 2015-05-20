@@ -43,7 +43,6 @@ public class Famine extends CardImpl {
         super(ownerId, 77, "Famine", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // Famine deals 3 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(3));

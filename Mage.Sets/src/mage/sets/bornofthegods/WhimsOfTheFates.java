@@ -59,7 +59,6 @@ public class WhimsOfTheFates extends CardImpl {
         super(ownerId, 115, "Whims of the Fates", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Starting with you, each player separates all permanents he or she controls into three piles. Then each player chooses one of his or her piles at random and sacrifices those permanents.
         this.getSpellAbility().addEffect(new WhimsOfTheFateEffect());

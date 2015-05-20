@@ -52,7 +52,6 @@ public class LightningVolley extends CardImpl {
         super(ownerId, 101, "Lightning Volley", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Until end of turn, creatures you control gain "{T}: This creature deals 1 damage to target creature or player."        
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

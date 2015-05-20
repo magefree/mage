@@ -46,7 +46,6 @@ public class Gloomwidow extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

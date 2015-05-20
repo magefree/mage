@@ -57,7 +57,6 @@ public class SylvanMessenger extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Elf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

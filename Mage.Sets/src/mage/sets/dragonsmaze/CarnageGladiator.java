@@ -59,8 +59,6 @@ public class CarnageGladiator extends CardImpl {
         this.subtype.add("Skeleton");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

@@ -60,8 +60,6 @@ public class FalkenrathAristocrat extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Vampire");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

@@ -44,7 +44,6 @@ public class VolcanicFallout extends CardImpl {
         super(ownerId, 74, "Volcanic Fallout", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "CON";
 
-        this.color.setRed(true);
 
         // Volcanic Fallout can't be countered.
         this.addAbility(new CantBeCounteredAbility());

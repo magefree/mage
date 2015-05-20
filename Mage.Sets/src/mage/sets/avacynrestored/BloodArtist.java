@@ -51,7 +51,6 @@ public class BloodArtist extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

@@ -55,7 +55,6 @@ public class SecretsOfTheDead extends CardImpl {
         super(ownerId, 48, "Secrets of the Dead", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "DKA";
 
-        this.color.setBlue(true);
 
         // Whenever you cast a spell from your graveyard, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));

@@ -47,7 +47,6 @@ public class VampiricSpirit extends CardImpl {
         this.expansionSetCode = "8ED";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

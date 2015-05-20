@@ -51,7 +51,6 @@ public class DampingField extends CardImpl {
         super(ownerId, 98, "Damping Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ATQ";
 
-        this.color.setWhite(true);
 
         // Players can't untap more than one artifact during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingFieldEffect()));

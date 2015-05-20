@@ -52,7 +52,6 @@ public class Sideswipe extends CardImpl {
         super(ownerId, 187, "Sideswipe", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CHK";
 
-        this.color.setRed(true);
 
         // You may change any targets of target Arcane spell.
         Effect effect = new ChooseNewTargetsTargetEffect(false, false);

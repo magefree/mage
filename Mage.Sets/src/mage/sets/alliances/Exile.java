@@ -63,8 +63,6 @@ public class Exile extends CardImpl {
         super(ownerId, 129, "Exile", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ALL";
 
-        this.color.setWhite(true);
-
         // Exile target nonwhite attacking creature. 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ExileTargetEffect());

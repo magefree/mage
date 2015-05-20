@@ -45,7 +45,6 @@ public class VitalSurge extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
 
         // You gain 3 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

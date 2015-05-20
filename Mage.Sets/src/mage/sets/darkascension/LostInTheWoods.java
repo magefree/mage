@@ -56,7 +56,6 @@ public class LostInTheWoods extends CardImpl {
         super(ownerId, 123, "Lost in the Woods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
         this.addAbility(new AttacksAllTriggeredAbility(new LostInTheWoodsEffect(), true, new FilterCreaturePermanent(), SetTargetPointer.PERMANENT, true));

@@ -55,7 +55,6 @@ public class Crusade extends CardImpl {
         super(ownerId, 27, "Crusade", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{W}");
         this.expansionSetCode = "DDF";
 
-        this.color.setWhite(true);
 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }

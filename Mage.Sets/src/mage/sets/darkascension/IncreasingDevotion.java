@@ -48,7 +48,6 @@ public class IncreasingDevotion extends CardImpl {
         super(ownerId, 11, "Increasing Devotion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "DKA";
 
-        this.color.setWhite(true);
 
         // Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead.
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());

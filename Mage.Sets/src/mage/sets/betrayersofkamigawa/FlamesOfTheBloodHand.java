@@ -52,7 +52,6 @@ public class FlamesOfTheBloodHand extends CardImpl {
         super(ownerId, 101, "Flames of the Blood Hand", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "BOK";
 
-        this.color.setRed(true);
 
         // Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4, false));

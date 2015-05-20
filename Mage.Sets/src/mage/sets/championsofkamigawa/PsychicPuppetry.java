@@ -46,7 +46,6 @@ public class PsychicPuppetry extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-        this.color.setBlue(true);
 
         // You may tap or untap target permanent.
         this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());

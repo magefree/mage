@@ -46,7 +46,6 @@ public class ThassasRebuff extends CardImpl {
         super(ownerId, 54, "Thassa's Rebuff", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {X}, where X is your devotion to blue.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new DevotionCount(ColoredManaSymbol.U)));

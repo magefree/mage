@@ -50,7 +50,6 @@ public class DivineDeflection extends CardImpl {
         super(ownerId, 18, "Divine Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}");
         this.expansionSetCode = "AVR";
 
-        this.color.setWhite(true);
 
         // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Duration.EndOfTurn));

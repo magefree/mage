@@ -57,7 +57,6 @@ public class KodamasReach extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
 
         // Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new KodamasReachEffect());

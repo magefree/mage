@@ -56,7 +56,6 @@ public class CourtHomunculus extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Homunculus");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

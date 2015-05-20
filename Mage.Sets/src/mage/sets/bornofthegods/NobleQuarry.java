@@ -54,7 +54,6 @@ public class NobleQuarry extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Unicorn");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

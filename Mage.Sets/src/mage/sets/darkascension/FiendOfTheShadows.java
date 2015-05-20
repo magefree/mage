@@ -68,7 +68,6 @@ public class FiendOfTheShadows extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

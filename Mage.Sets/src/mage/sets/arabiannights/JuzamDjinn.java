@@ -48,7 +48,6 @@ public class JuzamDjinn extends CardImpl {
         this.expansionSetCode = "ARN";
         this.subtype.add("Djinn");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

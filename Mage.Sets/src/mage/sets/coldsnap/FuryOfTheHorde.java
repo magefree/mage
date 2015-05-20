@@ -67,7 +67,6 @@ public class FuryOfTheHorde extends CardImpl {
         super(ownerId, 81, "Fury of the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "CSP";
 
-        this.color.setRed(true);
 
         // You may exile two red cards from your hand rather than pay Fury of the Horde's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(2, filter))));

@@ -49,7 +49,6 @@ public class NyxbornWolf extends CardImpl {
         this.expansionSetCode = "BNG";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

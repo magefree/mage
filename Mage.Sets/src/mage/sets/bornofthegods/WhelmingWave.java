@@ -57,7 +57,6 @@ public class WhelmingWave extends CardImpl {
         super(ownerId, 57, "Whelming Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "BNG";
 
-        this.color.setBlue(true);
 
         // Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents.
         Effect effect = new ReturnToHandFromBattlefieldAllEffect(filter);

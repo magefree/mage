@@ -54,7 +54,6 @@ public class BurdenOfGuilt extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

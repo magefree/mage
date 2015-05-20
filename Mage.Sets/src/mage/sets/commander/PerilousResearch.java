@@ -51,7 +51,6 @@ public class PerilousResearch extends CardImpl {
         super(ownerId, 54, "Perilous Research", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CMD";
 
-        this.color.setBlue(true);
 
         // Draw two cards, then sacrifice a permanent.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

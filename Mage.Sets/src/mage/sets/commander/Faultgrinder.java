@@ -51,7 +51,6 @@ public class Faultgrinder extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -45,7 +45,6 @@ public class BoltOfKeranos extends CardImpl {
         super(ownerId, 89, "Bolt of Keranos", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Bolt of Keranos deals 3 damage to target creature and/or player. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

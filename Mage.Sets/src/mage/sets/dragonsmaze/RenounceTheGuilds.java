@@ -53,7 +53,6 @@ public class RenounceTheGuilds extends CardImpl {
         super(ownerId, 5, "Renounce the Guilds", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
 
         // Each player sacrifices a multicolored permanent.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(filter));

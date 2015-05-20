@@ -63,7 +63,6 @@ public class SoulSeizer extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new GhastlyHaunting(ownerId);
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

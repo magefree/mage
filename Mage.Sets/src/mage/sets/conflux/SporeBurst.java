@@ -45,7 +45,6 @@ public class SporeBurst extends CardImpl {
         super(ownerId, 93, "Spore Burst", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "CON";
 
-        this.color.setGreen(true);
 
         // Domain - Put a 1/1 green Saproling creature token onto the battlefield for each basic land type among lands you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new DomainValue()));

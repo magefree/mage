@@ -61,7 +61,6 @@ public class InfernalOffering extends CardImpl {
         super(ownerId, 24, "Infernal Offering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "C14";
 
-        this.color.setBlack(true);
 
         // Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards.
         this.getSpellAbility().addEffect(new InfernalOfferingSacrificeEffect());

@@ -59,8 +59,6 @@ public class GruulWarChant extends CardImpl {
         super(ownerId, 75, "Gruul War Chant", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{G}");
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter));

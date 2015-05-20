@@ -50,7 +50,6 @@ public class MannichiTheFeveredDream extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

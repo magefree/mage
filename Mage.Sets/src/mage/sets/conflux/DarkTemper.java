@@ -52,7 +52,6 @@ public class DarkTemper extends CardImpl {
         super(ownerId, 61, "Dark Temper", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "CON";
 
-        this.color.setRed(true);
 
         // Dark Temper deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.
         this.getSpellAbility().addEffect(new DarkTemperEffect());

@@ -53,7 +53,6 @@ public class AbundantGrowth extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

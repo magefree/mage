@@ -62,7 +62,6 @@ public class GhostlyFlicker extends CardImpl {
         super(ownerId, 57, "Ghostly Flicker", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetControlledPermanent(2, 2, filter, false));

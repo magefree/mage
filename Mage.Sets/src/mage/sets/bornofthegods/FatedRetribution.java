@@ -55,7 +55,6 @@ public class FatedRetribution extends CardImpl {
         super(ownerId, 11, "Fated Retribution", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{4}{W}{W}{W}");
         this.expansionSetCode = "BNG";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures and planeswalkers. If it's your turn, scry 2.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));

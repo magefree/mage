@@ -58,7 +58,6 @@ public class SosukesSummons extends CardImpl {
         super(ownerId, 145, "Sosuke's Summons", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "BOK";
 
-        this.color.setGreen(true);
 
         // Put two 1/1 green Snake creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 2));

@@ -57,7 +57,6 @@ public class AfflictedDeserter extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new WerewolfRansacker(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

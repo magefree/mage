@@ -56,8 +56,6 @@ public class Dystopia extends CardImpl {
         super(ownerId, 6, "Dystopia", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "ALL";
 
-        this.color.setBlack(true);
-
         // Cumulative upkeep-Pay 1 life.
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(1)));
         

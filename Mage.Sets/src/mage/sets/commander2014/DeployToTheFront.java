@@ -47,7 +47,6 @@ public class DeployToTheFront extends CardImpl {
         super(ownerId, 6, "Deploy to the Front", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}{W}");
         this.expansionSetCode = "C14";
 
-        this.color.setWhite(true);
 
         // Put X 1/1 white Soldier creature tokens onto the battlefield, where X is the number of creatures on the battlefield.
         Effect effect = new CreateTokenEffect(new SoldierToken("C14"), new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("the number of creatures on the battlefield")));

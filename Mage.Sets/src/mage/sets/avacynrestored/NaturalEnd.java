@@ -56,7 +56,6 @@ public class NaturalEnd extends CardImpl {
         super(ownerId, 185, "Natural End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Destroy target artifact or enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

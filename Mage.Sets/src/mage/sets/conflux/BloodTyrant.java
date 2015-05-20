@@ -60,9 +60,6 @@ public class BloodTyrant extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Vampire");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

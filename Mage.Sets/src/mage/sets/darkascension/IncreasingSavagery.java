@@ -51,7 +51,6 @@ public class IncreasingSavagery extends CardImpl {
         super(ownerId, 120, "Increasing Savagery", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "DKA";
 
-        this.color.setGreen(true);
 
         // Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.
         this.getSpellAbility().addEffect(new IncreasingSavageryEffect());

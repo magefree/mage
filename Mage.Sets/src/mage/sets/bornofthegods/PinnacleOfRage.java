@@ -45,7 +45,6 @@ public class PinnacleOfRage extends CardImpl {
         super(ownerId, 105, "Pinnacle of Rage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "BNG";
 
-        this.color.setRed(true);
 
         // Pinnacle of Rage deals 3 damage to each of two target creatures and/or players.
         Effect effect = new DamageTargetEffect(3);

@@ -57,7 +57,6 @@ public class SecondGuess extends CardImpl {
         super(ownerId, 74, "Second Guess", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Counter target spell that's the second spell cast this turn.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

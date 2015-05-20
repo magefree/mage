@@ -51,7 +51,6 @@ public class BriarpackAlpha extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

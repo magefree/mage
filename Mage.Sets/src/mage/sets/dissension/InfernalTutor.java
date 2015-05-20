@@ -59,7 +59,6 @@ public class InfernalTutor extends CardImpl {
         super(ownerId, 46, "Infernal Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "DIS";
 
-        this.color.setBlack(true);
 
         // Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new InfernalTutorEffect());

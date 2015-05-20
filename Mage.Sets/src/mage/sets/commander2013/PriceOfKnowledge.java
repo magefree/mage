@@ -55,7 +55,6 @@ public class PriceOfKnowledge extends CardImpl {
         super(ownerId, 89, "Price of Knowledge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{B}");
         this.expansionSetCode = "C13";
 
-        this.color.setBlack(true);
 
         // Players have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY);

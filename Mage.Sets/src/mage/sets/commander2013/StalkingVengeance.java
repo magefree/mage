@@ -64,7 +64,6 @@ public class StalkingVengeance extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

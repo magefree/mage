@@ -45,7 +45,6 @@ public class LatchSeeker extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -47,7 +47,6 @@ public class BurningOil extends CardImpl {
         super(ownerId, 84, "Burning Oil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "DKA";
 
-        this.color.setRed(true);
 
         // Burning Oil deals 3 damage to target attacking or blocking creature.
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());

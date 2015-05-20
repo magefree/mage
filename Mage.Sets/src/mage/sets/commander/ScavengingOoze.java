@@ -56,7 +56,6 @@ public class ScavengingOoze extends CardImpl {
         this.expansionSetCode = "CMD";
         this.subtype.add("Ooze");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

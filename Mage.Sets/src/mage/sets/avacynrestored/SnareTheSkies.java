@@ -48,7 +48,6 @@ public class SnareTheSkies extends CardImpl {
         super(ownerId, 193, "Snare the Skies", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "AVR";
 
-        this.color.setGreen(true);
 
         // Target creature gets +1/+1 and gains reach until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));

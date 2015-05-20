@@ -52,7 +52,6 @@ public class HallowedSpiritkeeper extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

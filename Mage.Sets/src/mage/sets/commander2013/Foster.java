@@ -63,7 +63,6 @@ public class Foster extends CardImpl {
         super(ownerId, 146, "Foster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "C13";
 
-        this.color.setGreen(true);
 
         // Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
         Ability ability = new DiesCreatureTriggeredAbility(

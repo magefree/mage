@@ -55,7 +55,6 @@ public class BaneOfProgress extends CardImpl {
         this.expansionSetCode = "C13";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

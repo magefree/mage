@@ -44,7 +44,6 @@ public class HollowhengeBeast extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
     }

@@ -77,8 +77,6 @@ public class SorinLordOfInnistrad extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Sorin");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

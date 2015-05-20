@@ -46,7 +46,6 @@ public class MischiefAndMayhem extends CardImpl {
         super(ownerId, 126, "Mischief and Mayhem", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "BNG";
 
-        this.color.setGreen(true);
 
         // Up to two target creatures each get +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4,4, Duration.EndOfTurn));

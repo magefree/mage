@@ -55,7 +55,6 @@ public class PillarOfFlame extends CardImpl {
         super(ownerId, 149, "Pillar of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "AVR";
 
-        this.color.setRed(true);
 
         // Pillar of Flame deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

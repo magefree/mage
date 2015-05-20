@@ -50,7 +50,6 @@ public class WretchedBanquet extends CardImpl {
         super(ownerId, 56, "Wretched Banquet", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "CON";
 
-        this.color.setBlack(true);
 
         // Destroy target creature if it has the least power or is tied for least power among creatures on the battlefield.
         this.getSpellAbility().addEffect(new WretchedBanquetEffect());

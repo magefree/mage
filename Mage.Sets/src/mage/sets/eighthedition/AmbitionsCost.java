@@ -44,7 +44,6 @@ public class AmbitionsCost extends CardImpl {
         super(ownerId, 118, "Ambition's Cost", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "8ED";
 
-        this.color.setBlack(true);
 
         // You draw three cards and you lose 3 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

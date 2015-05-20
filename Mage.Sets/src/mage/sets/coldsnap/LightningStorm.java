@@ -59,7 +59,6 @@ public class LightningStorm extends CardImpl {
         super(ownerId, 89, "Lightning Storm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "CSP";
 
-        this.color.setRed(true);
 
         // Lightning Storm deals X damage to target creature or player, where X is 3 plus the number of charge counters on it.
         Effect effect = new DamageTargetEffect(new LightningStormCountCondition(CounterType.CHARGE));

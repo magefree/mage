@@ -47,7 +47,6 @@ public class ExquisiteBlood extends CardImpl {
         super(ownerId, 102, "Exquisite Blood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlack(true);
 
         // Whenever an opponent loses life, you gain that much life.
         ExquisiteBloodTriggeredAbility ability = new ExquisiteBloodTriggeredAbility();

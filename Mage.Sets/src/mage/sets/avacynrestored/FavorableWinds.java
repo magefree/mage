@@ -56,7 +56,6 @@ public class FavorableWinds extends CardImpl {
         super(ownerId, 51, "Favorable Winds", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "AVR";
 
-        this.color.setBlue(true);
 
         // Creatures you control with flying get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
