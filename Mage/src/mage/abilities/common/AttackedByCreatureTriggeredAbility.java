@@ -51,7 +51,7 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, SetTargetPointer.PERMANENT);
+        this(effect, optional, SetTargetPointer.NONE);
     }
 
     public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
