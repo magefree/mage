@@ -65,7 +65,6 @@ public class PathOfBravery extends CardImpl {
         super(ownerId, 26, "Path of Bravery", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "M14";
 
-        this.color.setWhite(true);
 
         // As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new LifeCondition(), rule)));

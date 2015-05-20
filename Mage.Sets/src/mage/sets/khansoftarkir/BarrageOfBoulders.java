@@ -58,7 +58,6 @@ public class BarrageOfBoulders extends CardImpl {
         super(ownerId, 100, "Barrage of Boulders", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Barrage of Boulders deals 1 damage to each creature you don't control.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));

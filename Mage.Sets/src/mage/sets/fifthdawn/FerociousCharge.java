@@ -46,7 +46,6 @@ public class FerociousCharge extends CardImpl {
         super(ownerId, 88, "Ferocious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "5DN";
 
-        this.color.setGreen(true);
 
         // Target creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));

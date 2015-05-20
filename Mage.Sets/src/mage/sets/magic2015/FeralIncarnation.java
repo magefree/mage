@@ -45,7 +45,6 @@ public class FeralIncarnation extends CardImpl {
         super(ownerId, 174, "Feral Incarnation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{8}{G}");
         this.expansionSetCode = "M15";
 
-        this.color.setGreen(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

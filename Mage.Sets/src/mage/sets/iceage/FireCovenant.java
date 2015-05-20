@@ -48,8 +48,6 @@ public class FireCovenant extends CardImpl {
         super(ownerId, 367, "Fire Covenant", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // As an additional cost to cast Fire Covenant, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));

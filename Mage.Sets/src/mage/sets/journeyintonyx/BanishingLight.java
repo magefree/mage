@@ -62,7 +62,6 @@ public class BanishingLight extends CardImpl {
         super(ownerId, 5, "Banishing Light", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // When Banishing Light enters the battlefield, exile target nonland permanent an opponent controls until Banishing Light leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BanishingLightExileEffect());

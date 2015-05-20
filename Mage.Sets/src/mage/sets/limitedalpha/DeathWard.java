@@ -45,7 +45,6 @@ public class DeathWard extends CardImpl {
         super(ownerId, 201, "Death Ward", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "LEA";
 
-        this.color.setWhite(true);
 
         // Regenerate target creature.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());

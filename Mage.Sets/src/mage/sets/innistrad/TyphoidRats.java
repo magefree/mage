@@ -45,7 +45,6 @@ public class TyphoidRats extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

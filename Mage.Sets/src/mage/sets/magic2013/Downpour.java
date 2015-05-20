@@ -44,7 +44,6 @@ public class Downpour extends CardImpl {
         super(ownerId, 48, "Downpour", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Tap up to three target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect());

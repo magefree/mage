@@ -47,7 +47,6 @@ public class Geistflame extends CardImpl {
         super(ownerId, 144, "Geistflame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Geistflame deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

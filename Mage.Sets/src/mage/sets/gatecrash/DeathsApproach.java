@@ -57,8 +57,6 @@ public class DeathsApproach extends CardImpl {
         super(ownerId, 62, "Death's Approach", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "GTC";
 
-        this.subtype.add("Aura");
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

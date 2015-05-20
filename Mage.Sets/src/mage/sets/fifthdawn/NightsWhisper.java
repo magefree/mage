@@ -44,7 +44,6 @@ public class NightsWhisper extends CardImpl {
         super(ownerId, 55, "Night's Whisper", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // You draw two cards and you lose 2 life.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

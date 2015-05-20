@@ -51,7 +51,6 @@ public class CarnivorousMossBeast extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

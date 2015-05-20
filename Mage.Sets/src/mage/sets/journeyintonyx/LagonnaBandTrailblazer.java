@@ -48,7 +48,6 @@ public class LagonnaBandTrailblazer extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Scout");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

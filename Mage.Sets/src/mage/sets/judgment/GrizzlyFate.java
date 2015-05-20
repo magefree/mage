@@ -50,7 +50,6 @@ public class GrizzlyFate extends CardImpl {
         super(ownerId, 119, "Grizzly Fate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "JUD";
 
-        this.color.setGreen(true);
 
         // Put two 2/2 green Bear creature tokens onto the battlefield.
         // Threshold - Put four 2/2 green Bear creature tokens onto the battlefield instead if seven or more cards are in your graveyard.

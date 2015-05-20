@@ -60,8 +60,6 @@ public class StormchaserChimera extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Chimera");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

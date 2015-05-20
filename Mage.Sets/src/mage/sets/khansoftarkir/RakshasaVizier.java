@@ -54,9 +54,6 @@ public class RakshasaVizier extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Demon");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

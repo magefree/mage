@@ -47,7 +47,6 @@ public class Mugging extends CardImpl {
         super(ownerId, 102, "Mugging", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Mugging deals 2 damage to target creature. That creature can't block this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

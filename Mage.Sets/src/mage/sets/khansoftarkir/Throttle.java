@@ -45,7 +45,6 @@ public class Throttle extends CardImpl {
         super(ownerId, 93, "Throttle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Target creature gets -4/-4 until end of turn
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4,-4, Duration.EndOfTurn));

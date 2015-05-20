@@ -58,7 +58,6 @@ public class EndlessHorizons extends CardImpl {
         super(ownerId, 4, "Endless Horizons", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setWhite(true);
 
         // When Endless Horizons enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EndlessHorizonsEffect(), false));

@@ -51,7 +51,6 @@ public class Stasis extends CardImpl {
         super(ownerId, 28, "Stasis", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // Players skip their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));

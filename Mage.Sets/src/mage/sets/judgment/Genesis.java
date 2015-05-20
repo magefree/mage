@@ -54,7 +54,6 @@ public class Genesis extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Incarnation");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

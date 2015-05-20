@@ -47,8 +47,6 @@ public class AltarOfBone extends CardImpl {
         super(ownerId, 359, "Altar of Bone", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");
         this.expansionSetCode = "ICE";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // As an additional cost to cast Altar of Bone, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

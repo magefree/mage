@@ -66,7 +66,6 @@ public class FlashOfInsight extends CardImpl {
         super(ownerId, 40, "Flash of Insight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{1}{U}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlue(true);
 
         // Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new FlashOfInsightEffect());

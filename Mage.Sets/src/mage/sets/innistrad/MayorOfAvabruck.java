@@ -71,7 +71,6 @@ public class MayorOfAvabruck extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new HowlpackAlpha(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

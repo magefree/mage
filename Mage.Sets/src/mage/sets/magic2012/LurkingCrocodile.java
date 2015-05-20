@@ -46,7 +46,6 @@ public class LurkingCrocodile extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Crocodile");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

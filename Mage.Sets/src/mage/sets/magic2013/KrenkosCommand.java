@@ -44,7 +44,6 @@ public class KrenkosCommand extends CardImpl {
         super(ownerId, 139, "Krenko's Command", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Put two 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));

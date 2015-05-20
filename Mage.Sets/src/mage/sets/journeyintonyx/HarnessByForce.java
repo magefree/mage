@@ -50,7 +50,6 @@ public class HarnessByForce extends CardImpl {
         super(ownerId, 100, "Harness by Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Strive - Harness by Force costs {2}{R} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));

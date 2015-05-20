@@ -50,7 +50,6 @@ public class StrengthFromTheFallen extends CardImpl {
         super(ownerId, 143, "Strength from the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Constellation - Whenever Strength from the Fallen or another entchantment enters the battlefield under your control, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         DynamicValue xValue = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));

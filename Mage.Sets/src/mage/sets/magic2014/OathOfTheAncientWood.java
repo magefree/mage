@@ -58,7 +58,6 @@ public class OathOfTheAncientWood extends CardImpl {
         super(ownerId, 187, "Oath of the Ancient Wood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

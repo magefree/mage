@@ -58,9 +58,6 @@ public class VillainousWealth extends CardImpl {
         super(ownerId, 211, "Villainous Wealth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{G}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Target opponent exiles the top X cards of his or her library. You may cast any number of nonland cards with converted mana cost X or less from among them without paying their mana cost.
         this.getSpellAbility().addTarget(new TargetOpponent());

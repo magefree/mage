@@ -53,7 +53,6 @@ public class Revive extends CardImpl {
         super(ownerId, 187, "Revive", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // Return target green card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

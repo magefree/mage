@@ -65,7 +65,6 @@ public class WardSliver extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Sliver");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

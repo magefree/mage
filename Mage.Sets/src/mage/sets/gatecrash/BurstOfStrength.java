@@ -46,7 +46,6 @@ public class BurstOfStrength extends CardImpl {
         super(ownerId, 115, "Burst of Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature and untap it.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)));

@@ -45,8 +45,6 @@ public class SlipperyBogle extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

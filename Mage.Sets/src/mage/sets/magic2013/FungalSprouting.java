@@ -55,7 +55,6 @@ public class FungalSprouting extends CardImpl {
         super(ownerId, 173, "Fungal Sprouting", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new FungalSproutingEffect());

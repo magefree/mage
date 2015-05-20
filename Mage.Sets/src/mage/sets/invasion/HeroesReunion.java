@@ -44,8 +44,6 @@ public class HeroesReunion extends CardImpl {
         super(ownerId, 250, "Heroes' Reunion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "INV";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Target player gains 7 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(7));

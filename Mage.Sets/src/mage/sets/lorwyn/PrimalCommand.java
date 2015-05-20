@@ -66,7 +66,6 @@ public class PrimalCommand extends CardImpl {
         super(ownerId, 233, "Primal Command", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "LRW";
 
-        this.color.setGreen(true);
 
         // Choose two - 
         this.getSpellAbility().getModes().setMinModes(2);

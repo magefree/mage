@@ -48,7 +48,6 @@ public class MacetailHystrodon extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

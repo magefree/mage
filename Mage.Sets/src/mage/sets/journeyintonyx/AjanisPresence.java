@@ -49,7 +49,6 @@ public class AjanisPresence extends CardImpl {
         super(ownerId, 2, "Ajani's Presence", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Strive - Ajani's Presence costs {2}{W} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{W}"));

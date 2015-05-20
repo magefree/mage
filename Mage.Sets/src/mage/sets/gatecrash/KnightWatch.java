@@ -44,7 +44,6 @@ public class KnightWatch extends CardImpl {
         super(ownerId, 19, "Knight Watch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         //Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(),2));

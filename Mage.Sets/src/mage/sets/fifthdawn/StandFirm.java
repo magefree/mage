@@ -46,7 +46,6 @@ public class StandFirm extends CardImpl {
         super(ownerId, 17, "Stand Firm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "5DN";
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));

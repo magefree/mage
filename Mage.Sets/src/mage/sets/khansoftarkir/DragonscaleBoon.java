@@ -47,7 +47,6 @@ public class DragonscaleBoon extends CardImpl {
         super(ownerId, 131, "Dragonscale Boon", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // Put two +1/+1 counters on target creature and untap it
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));

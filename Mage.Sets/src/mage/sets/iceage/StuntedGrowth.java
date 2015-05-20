@@ -54,7 +54,6 @@ public class StuntedGrowth extends CardImpl {
         super(ownerId, 154, "Stunted Growth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "ICE";
 
-        this.color.setGreen(true);
 
         // Target player chooses three cards from his or her hand and puts them on top of his or her library in any order.
         this.getSpellAbility().addEffect(new StuntedGrowthEffect());

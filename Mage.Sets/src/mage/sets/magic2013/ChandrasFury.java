@@ -46,7 +46,6 @@ public class ChandrasFury extends CardImpl {
         super(ownerId, 124, "Chandra's Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

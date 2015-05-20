@@ -57,7 +57,6 @@ public class MagmaSliver extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

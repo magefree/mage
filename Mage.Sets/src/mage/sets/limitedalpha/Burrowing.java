@@ -60,7 +60,6 @@ public class Burrowing extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         // Enchanted creature has mountainwalk.

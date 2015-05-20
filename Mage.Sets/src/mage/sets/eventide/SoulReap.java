@@ -72,7 +72,6 @@ public class SoulReap extends CardImpl {
         super(ownerId, 44, "Soul Reap", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
 
         // Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

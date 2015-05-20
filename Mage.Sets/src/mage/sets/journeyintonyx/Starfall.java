@@ -50,7 +50,6 @@ public class Starfall extends CardImpl {
         super(ownerId, 114, "Starfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Starfall deals 3 damage to target creature. If that creature is an enchantment, Starfall deals 3 damage to that creature's controller.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

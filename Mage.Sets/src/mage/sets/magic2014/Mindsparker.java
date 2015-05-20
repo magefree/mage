@@ -69,7 +69,6 @@ public class Mindsparker extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

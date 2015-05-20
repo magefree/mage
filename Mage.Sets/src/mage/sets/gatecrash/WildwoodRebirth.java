@@ -45,7 +45,6 @@ public class WildwoodRebirth extends CardImpl {
         super(ownerId, 140, "Wildwood Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

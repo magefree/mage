@@ -44,7 +44,6 @@ public class AlpineGrizzly extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Bear");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
     }

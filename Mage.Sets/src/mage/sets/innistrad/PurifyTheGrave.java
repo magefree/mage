@@ -48,7 +48,6 @@ public class PurifyTheGrave extends CardImpl {
         super(ownerId, 27, "Purify the Grave", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Exile target card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

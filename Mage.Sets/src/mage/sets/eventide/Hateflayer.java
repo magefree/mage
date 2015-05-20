@@ -53,7 +53,6 @@ public class Hateflayer extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

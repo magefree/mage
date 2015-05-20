@@ -57,7 +57,6 @@ public class IntangibleVirtue extends CardImpl {
         super(ownerId, 19, "Intangible Virtue", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Creature tokens you control get +1/+1 and have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter)));

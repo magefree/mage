@@ -49,7 +49,6 @@ public class Paraselene extends CardImpl {
         super(ownerId, 26, "Paraselene", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.
         this.getSpellAbility().addEffect(new ParaseleneEffect());

@@ -46,7 +46,6 @@ public class AltarsReap extends CardImpl {
         super(ownerId, 86, "Altar's Reap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Altar's Reap, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("a creature"), true)));

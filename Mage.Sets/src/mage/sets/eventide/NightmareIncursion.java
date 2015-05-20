@@ -59,7 +59,6 @@ public class NightmareIncursion extends CardImpl {
         super(ownerId, 40, "Nightmare Incursion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
 
         // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles his or her library.
         Effect effect = new NightmareIncursionEffect();

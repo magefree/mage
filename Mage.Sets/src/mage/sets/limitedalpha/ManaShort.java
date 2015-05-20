@@ -52,7 +52,6 @@ public class ManaShort extends CardImpl {
         super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Tap all lands target player controls and empty his or her mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());

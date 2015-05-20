@@ -48,7 +48,6 @@ public class EphemeralShields extends CardImpl {
         super(ownerId, 11, "Ephemeral Shields", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "M15";
 
-        this.color.setWhite(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

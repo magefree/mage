@@ -50,7 +50,6 @@ public class InterpretTheSigns extends CardImpl {
         super(ownerId, 43, "Interpret the Signs", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Scry 3, then reveal the top card of your library. Draw cards equal to that card's converted mana cost.
         this.getSpellAbility().addEffect(new ScryEffect(3));

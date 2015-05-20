@@ -51,7 +51,6 @@ public class FontOfFertility extends CardImpl {
         super(ownerId, 123, "Font of Fertility", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // {1}{G}, Sacrifice Font of Fertility: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());

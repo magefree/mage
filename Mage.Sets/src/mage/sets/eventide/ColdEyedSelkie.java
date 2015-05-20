@@ -52,8 +52,6 @@ public class ColdEyedSelkie extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

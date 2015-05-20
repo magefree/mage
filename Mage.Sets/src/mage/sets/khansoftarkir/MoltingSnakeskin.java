@@ -58,7 +58,6 @@ public class MoltingSnakeskin extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

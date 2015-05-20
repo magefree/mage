@@ -68,7 +68,6 @@ public class Spelltwine extends CardImpl {
         super(ownerId, 68, "Spelltwine", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Exile target instant or sorcery card from your graveyard and target instant or sorcery card from an opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana costs. Exile Spelltwine.
         this.getSpellAbility().addEffect(new SpelltwineEffect());

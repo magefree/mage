@@ -60,7 +60,6 @@ public class GarrukRelentless extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Garruk");
 
-        this.color.setGreen(true);
 
         this.canTransform = true;
         this.secondSideCard = new GarrukTheVeilCursed(ownerId);

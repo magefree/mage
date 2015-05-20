@@ -51,7 +51,6 @@ public class CosmicLarva extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
 

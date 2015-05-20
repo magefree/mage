@@ -45,7 +45,6 @@ public class AccursedSpirit extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

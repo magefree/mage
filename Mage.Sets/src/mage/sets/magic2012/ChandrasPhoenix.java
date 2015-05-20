@@ -53,7 +53,6 @@ public class ChandrasPhoenix extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

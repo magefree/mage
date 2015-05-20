@@ -51,7 +51,6 @@ public class ShatteredDreams extends CardImpl {
         super(ownerId, 59, "Shattered Dreams", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());

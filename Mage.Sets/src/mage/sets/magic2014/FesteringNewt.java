@@ -63,7 +63,6 @@ public class FesteringNewt extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Salamander");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

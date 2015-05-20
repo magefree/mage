@@ -55,8 +55,6 @@ public class SignalTheClans extends CardImpl {
         super(ownerId, 194, "Signal the Clans", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.
         this.getSpellAbility().addEffect(new SignalTheClansEffect());

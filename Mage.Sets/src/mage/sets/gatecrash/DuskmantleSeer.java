@@ -58,8 +58,6 @@ public class DuskmantleSeer extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

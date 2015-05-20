@@ -61,7 +61,6 @@ public class EarthServant extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

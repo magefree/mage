@@ -46,8 +46,6 @@ public class Electrolyze extends CardImpl {
         super(ownerId, 111, "Electrolyze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.
         Effect effect = new DamageMultiEffect(2);

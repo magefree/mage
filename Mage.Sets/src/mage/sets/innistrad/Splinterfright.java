@@ -54,7 +54,6 @@ public class Splinterfright extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

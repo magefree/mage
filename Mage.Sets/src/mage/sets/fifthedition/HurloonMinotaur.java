@@ -44,7 +44,6 @@ public class HurloonMinotaur extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Minotaur");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

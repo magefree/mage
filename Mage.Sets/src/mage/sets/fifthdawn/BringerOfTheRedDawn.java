@@ -58,7 +58,6 @@ public class BringerOfTheRedDawn extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Bringer");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

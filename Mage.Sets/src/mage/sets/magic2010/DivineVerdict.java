@@ -45,7 +45,6 @@ public class DivineVerdict extends CardImpl {
         super(ownerId, 8, "Divine Verdict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "M10";
 
-        this.color.setWhite(true);
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

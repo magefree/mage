@@ -47,8 +47,6 @@ public class DrakewingKrasis extends CardImpl {
         this.subtype.add("Lizard");
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -46,7 +46,6 @@ public class SigiledSkink extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -50,7 +50,6 @@ public class MindUnbound extends CardImpl {
         super(ownerId, 68, "Mind Unbound", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlue(true);
 
         // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), TargetController.YOU, false);

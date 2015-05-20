@@ -55,7 +55,6 @@ public class DictateOfErebos extends CardImpl {
         super(ownerId, 65, "Dictate of Erebos", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

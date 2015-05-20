@@ -46,8 +46,6 @@ public class Winterflame extends CardImpl {
         super(ownerId, 213, "Winterflame", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Choose one or both -
         this.getSpellAbility().getModes().setMinModes(1);

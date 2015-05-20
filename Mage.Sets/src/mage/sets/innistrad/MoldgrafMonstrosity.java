@@ -57,7 +57,6 @@ public class MoldgrafMonstrosity extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

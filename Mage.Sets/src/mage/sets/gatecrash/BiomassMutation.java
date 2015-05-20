@@ -48,8 +48,6 @@ public class BiomassMutation extends CardImpl {
         super(ownerId, 213, "Biomass Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G/U}{G/U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
 
         // Creatures you control become X/X until end of turn.
         DynamicValue variableMana = new ManacostVariableValue();

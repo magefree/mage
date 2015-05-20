@@ -61,7 +61,6 @@ public class DrainLife extends CardImpl {
         super(ownerId, 14, "Drain Life", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlack(true);
 
         // Spend only black mana on X.
         // Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.

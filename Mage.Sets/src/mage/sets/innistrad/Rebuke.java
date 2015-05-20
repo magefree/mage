@@ -45,7 +45,6 @@ public class Rebuke extends CardImpl {
         super(ownerId, 29, "Rebuke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Destroy target attacking creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));

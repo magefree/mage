@@ -47,7 +47,6 @@ public class PhantasmalBear extends CardImpl {
         this.subtype.add("Bear");
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

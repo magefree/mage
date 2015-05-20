@@ -53,7 +53,6 @@ public class MoltenBirth extends CardImpl {
         super(ownerId, 147, "Molten Birth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "M14";
 
-        this.color.setRed(true);
 
         // Put two 1/1 red Elemental creature tokens onto the battlefield. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
         this.getSpellAbility().addEffect(new MoltenBirthEffect());

@@ -50,9 +50,6 @@ public class AbominationOfGudul extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

@@ -44,7 +44,6 @@ public class BarbaryApes extends CardImpl {
         this.expansionSetCode = "LEG";
         this.subtype.add("Ape");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

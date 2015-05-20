@@ -52,7 +52,6 @@ public class Envelop extends CardImpl {
         super(ownerId, 39, "Envelop", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlue(true);
 
         // Counter target sorcery spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

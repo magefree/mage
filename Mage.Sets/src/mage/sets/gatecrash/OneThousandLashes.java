@@ -56,8 +56,6 @@ public class OneThousandLashes extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

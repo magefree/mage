@@ -49,7 +49,6 @@ public class Cartographer extends CardImpl {
         this.expansionSetCode = "EXO";
         this.subtype.add("Human");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

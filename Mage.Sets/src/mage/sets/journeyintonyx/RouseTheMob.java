@@ -49,7 +49,6 @@ public class RouseTheMob extends CardImpl {
         super(ownerId, 109, "Rouse the Mob", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Strive — Rouse the Mob costs {2}{R} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));

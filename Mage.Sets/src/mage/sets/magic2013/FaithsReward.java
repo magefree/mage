@@ -50,7 +50,6 @@ public class FaithsReward extends CardImpl {
         super(ownerId, 14, "Faith's Reward", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "M13";
 
-        this.color.setWhite(true);
 
         // Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new FaithsRewardEffect());

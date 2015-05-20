@@ -52,7 +52,6 @@ public class GroundshakerSliver extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Sliver");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -44,7 +44,6 @@ public class MindSculpt extends CardImpl {
         super(ownerId, 61, "Mind Sculpt", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Target opponent puts the top seven cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(7));

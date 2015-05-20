@@ -46,7 +46,6 @@ public class CacklingCounterpart extends CardImpl {
         super(ownerId, 46, "Cackling Counterpart", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Put a token onto the battlefield that's a copy of target creature you control.
         this.getSpellAbility().addEffect(new PutTokenOntoBattlefieldCopyTargetEffect());

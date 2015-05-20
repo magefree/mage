@@ -49,8 +49,6 @@ public class MartialGlory extends CardImpl {
         super(ownerId, 175, "Martial Glory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Target creature gets +3/+0 until end of turn.
         Effect effect = new BoostTargetEffect(3,0, Duration.EndOfTurn);

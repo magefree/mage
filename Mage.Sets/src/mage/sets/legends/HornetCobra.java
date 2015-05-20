@@ -45,7 +45,6 @@ public class HornetCobra extends CardImpl {
         this.expansionSetCode = "LEG";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

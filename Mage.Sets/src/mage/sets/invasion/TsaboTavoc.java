@@ -64,8 +64,6 @@ public class TsaboTavoc extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Horror");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 

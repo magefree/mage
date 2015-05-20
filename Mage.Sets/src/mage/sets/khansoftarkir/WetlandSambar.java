@@ -44,7 +44,6 @@ public class WetlandSambar extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
     }

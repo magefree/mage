@@ -62,7 +62,6 @@ public class BattleScreech extends CardImpl {
         super(ownerId, 3, "Battle Screech", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "JUD";
 
-        this.color.setWhite(true);
 
         // Put two 1/1 white Bird creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(), 2));

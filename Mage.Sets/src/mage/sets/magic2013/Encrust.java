@@ -64,7 +64,6 @@ public class Encrust extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);

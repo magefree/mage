@@ -45,8 +45,6 @@ public class SivitriScarzam extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
     }

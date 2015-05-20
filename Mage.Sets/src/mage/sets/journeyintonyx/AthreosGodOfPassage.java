@@ -75,8 +75,6 @@ public class AthreosGodOfPassage extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

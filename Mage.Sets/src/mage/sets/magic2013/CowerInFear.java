@@ -54,7 +54,6 @@ public class CowerInFear extends CardImpl {
         super(ownerId, 84, "Cower in Fear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Creatures your opponents control get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));

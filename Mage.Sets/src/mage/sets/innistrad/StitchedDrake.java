@@ -49,7 +49,6 @@ public class StitchedDrake extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Drake");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

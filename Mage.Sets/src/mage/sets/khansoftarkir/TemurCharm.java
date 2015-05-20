@@ -66,9 +66,6 @@ public class TemurCharm extends CardImpl {
         super(ownerId, 208, "Temur Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Choose one -
         // <strong>�</strong> Target creature you control gets +1/+1 until end of turn. That creature fights target creature you don't control.

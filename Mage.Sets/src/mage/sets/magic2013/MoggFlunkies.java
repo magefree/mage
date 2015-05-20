@@ -46,7 +46,6 @@ public class MoggFlunkies extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

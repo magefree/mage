@@ -48,8 +48,6 @@ public class AuraMutation extends CardImpl {
         super(ownerId, 232, "Aura Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "INV";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Destroy target enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

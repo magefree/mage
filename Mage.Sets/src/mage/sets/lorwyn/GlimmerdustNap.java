@@ -59,7 +59,6 @@ public class GlimmerdustNap extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant tapped creature
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

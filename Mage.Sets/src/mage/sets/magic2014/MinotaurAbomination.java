@@ -45,7 +45,6 @@ public class MinotaurAbomination extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Minotaur");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
     }

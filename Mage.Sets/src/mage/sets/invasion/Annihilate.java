@@ -54,7 +54,6 @@ public class Annihilate extends CardImpl {
         super(ownerId, 94, "Annihilate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlack(true);
 
         // Destroy target nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

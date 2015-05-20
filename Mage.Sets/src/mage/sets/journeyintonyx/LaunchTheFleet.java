@@ -50,7 +50,6 @@ public class LaunchTheFleet extends CardImpl {
         super(ownerId, 15, "Launch the Fleet", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Strive - Launch the Fleet costs 1 more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}"));

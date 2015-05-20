@@ -50,8 +50,6 @@ public class WhisperingMadness extends CardImpl {
         super(ownerId, 207, "Whispering Madness", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
         this.getSpellAbility().addEffect(new WhisperingMadnessEffect());

@@ -52,7 +52,6 @@ public class KjeldoranDead extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Skeleton");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

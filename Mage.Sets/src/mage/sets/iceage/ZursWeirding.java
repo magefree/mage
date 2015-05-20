@@ -56,7 +56,6 @@ public class ZursWeirding extends CardImpl {
         super(ownerId, 112, "Zur's Weirding", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlue(true);
 
         // Players play with their hands revealed.
         

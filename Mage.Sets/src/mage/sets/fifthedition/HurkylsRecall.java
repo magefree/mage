@@ -51,7 +51,6 @@ public class HurkylsRecall extends CardImpl {
         super(ownerId, 93, "Hurkyl's Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // Return all artifacts target player owns to his or her hand.
         this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());

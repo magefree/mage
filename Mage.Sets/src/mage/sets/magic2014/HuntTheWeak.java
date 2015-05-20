@@ -57,7 +57,6 @@ public class HuntTheWeak extends CardImpl {
         super(ownerId, 179, "Hunt the Weak", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

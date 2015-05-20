@@ -52,7 +52,6 @@ public class AngelicAccord extends CardImpl {
         super(ownerId, 3, "Angelic Accord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "M14";
 
-        this.color.setWhite(true);
 
         // At the beginning of each end step, if you gained 4 or more life this turn, put a 4/4 white Angel creature token with flying onto the battlefield.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY, new YouGainedLifeCondition(Condition.ComparisonType.GreaterThan, 3), false), new PlayerGainedLifeWatcher());

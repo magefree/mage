@@ -51,7 +51,6 @@ public class EarsplittingRats extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

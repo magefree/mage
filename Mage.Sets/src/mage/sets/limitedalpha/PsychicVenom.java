@@ -58,7 +58,6 @@ public class PsychicVenom extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

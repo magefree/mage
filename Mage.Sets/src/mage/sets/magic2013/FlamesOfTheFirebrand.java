@@ -44,7 +44,6 @@ public class FlamesOfTheFirebrand extends CardImpl {
         super(ownerId, 132, "Flames of the Firebrand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));

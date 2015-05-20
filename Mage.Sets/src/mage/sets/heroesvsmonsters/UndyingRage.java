@@ -58,7 +58,6 @@ public class UndyingRage extends CardImpl {
         this.expansionSetCode = "DDL";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

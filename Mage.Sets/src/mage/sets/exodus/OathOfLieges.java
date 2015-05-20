@@ -62,7 +62,6 @@ public class OathOfLieges extends CardImpl {
         super(ownerId, 11, "Oath of Lieges", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "EXO";
 
-        this.color.setWhite(true);
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), false, Outcome.PutLandInPlay);

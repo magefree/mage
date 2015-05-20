@@ -59,7 +59,6 @@ public class AshesToAshes extends CardImpl {
         super(ownerId, 3, "Ashes to Ashes", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlack(true);
 
         // Exile two target nonartifact creatures. Ashes to Ashes deals 5 damage to you.
         this.getSpellAbility().addEffect(new AshesToAshesEffect());

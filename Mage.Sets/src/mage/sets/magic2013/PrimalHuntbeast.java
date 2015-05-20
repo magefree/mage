@@ -45,7 +45,6 @@ public class PrimalHuntbeast extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

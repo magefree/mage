@@ -60,7 +60,6 @@ public class LilianasShade extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Shade");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

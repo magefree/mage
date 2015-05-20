@@ -54,7 +54,6 @@ public class Lhurgoyf extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Lhurgoyf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

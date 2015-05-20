@@ -55,7 +55,6 @@ public class FurorOfTheBitten extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

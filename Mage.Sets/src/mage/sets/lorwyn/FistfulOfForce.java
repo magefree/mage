@@ -56,7 +56,6 @@ public class FistfulOfForce extends CardImpl {
         super(ownerId, 212, "Fistful of Force", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "LRW";
 
-        this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn.
         this.getSpellAbility().addEffect(new FistfulOfForceEffect());

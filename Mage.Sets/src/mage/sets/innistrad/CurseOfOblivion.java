@@ -60,7 +60,6 @@ public class CurseOfOblivion extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setBlack(true);
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();

@@ -62,7 +62,6 @@ public class FavorOfTheMighty extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Giant");
 
-        this.color.setWhite(true);
 
         // Each creature with the highest converted mana cost has protection from all colors.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FavorOfTheMightyEffect()));

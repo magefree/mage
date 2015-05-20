@@ -54,7 +54,6 @@ public class IntoTheWilds extends CardImpl {
         super(ownerId, 180, "Into the Wilds", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield. 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect(), TargetController.YOU, false));

@@ -57,7 +57,6 @@ public class SpellRupture extends CardImpl {
         super(ownerId, 52, "Spell Rupture", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new SpellRuptureCounterUnlessPaysEffect());

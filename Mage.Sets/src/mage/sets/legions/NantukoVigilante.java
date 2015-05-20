@@ -63,7 +63,6 @@ public class NantukoVigilante extends CardImpl {
         this.subtype.add("Druid");
         this.subtype.add("Mutant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -48,7 +48,6 @@ public class GoldenglowMoth extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Insect");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         

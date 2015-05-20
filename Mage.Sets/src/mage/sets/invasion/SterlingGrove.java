@@ -67,8 +67,6 @@ public class SterlingGrove extends CardImpl {
         super(ownerId, 278, "Sterling Grove", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{W}");
         this.expansionSetCode = "INV";
 
-        this.color.setWhite(true);
-        this.color.setGreen(true);
 
         // Other enchantments you control have shroud.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filterPermanent, true)));

@@ -53,7 +53,6 @@ public class Skizzik extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

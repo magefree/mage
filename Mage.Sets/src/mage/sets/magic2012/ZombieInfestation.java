@@ -49,7 +49,6 @@ public class ZombieInfestation extends CardImpl {
         super(ownerId, 120, "Zombie Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlack(true);
 
         // Discard two cards: Put a 2/2 black Zombie creature token onto the battlefield.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

@@ -53,7 +53,6 @@ public class PearlLakeAncient extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Leviathan");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);
 

@@ -45,7 +45,6 @@ public class HiveStirrings extends CardImpl {
         super(ownerId, 21, "Hive Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "M14";
 
-        this.color.setWhite(true);
 
         // Put two 1/1 colorless Sliver creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SliverToken(), 2));

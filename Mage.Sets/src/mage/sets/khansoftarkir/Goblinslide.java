@@ -58,7 +58,6 @@ public class Goblinslide extends CardImpl {
         super(ownerId, 109, "Goblinslide", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Whenever you cast a noncreature spell, you may pay {1}. If you do, put a 1/1 red Goblin creature token with haste onto the battlefield.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinslideGoblinToken()), new GenericManaCost(1)), filter, false));

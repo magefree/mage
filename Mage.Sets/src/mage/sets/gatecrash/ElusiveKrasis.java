@@ -47,8 +47,6 @@ public class ElusiveKrasis extends CardImpl {
         this.subtype.add("Fish");
         this.subtype.add("Mutant");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

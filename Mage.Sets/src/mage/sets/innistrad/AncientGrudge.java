@@ -55,7 +55,6 @@ public class AncientGrudge extends CardImpl {
         super(ownerId, 127, "Ancient Grudge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

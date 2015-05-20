@@ -54,7 +54,6 @@ public class ExtinguishAllHope extends CardImpl {
         super(ownerId, 68, "Extinguish All Hope", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Destroy all nonenchantment creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

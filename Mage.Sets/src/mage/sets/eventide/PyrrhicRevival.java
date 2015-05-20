@@ -53,8 +53,6 @@ public class PyrrhicRevival extends CardImpl {
         super(ownerId, 93, "Pyrrhic Revival", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W/B}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
         this.getSpellAbility().addEffect(new PyrrhicRevivalEffect());

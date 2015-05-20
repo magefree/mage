@@ -57,9 +57,6 @@ public class TrapEssence extends CardImpl {
         super(ownerId, 209, "Trap Essence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Counter target creature spell. Put two +1/+1 counters on up to one target creature.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

@@ -58,7 +58,6 @@ public class CrimsonMuckwader extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Lizard");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

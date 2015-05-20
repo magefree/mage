@@ -46,7 +46,6 @@ public class SuddenStrength extends CardImpl {
         super(ownerId, 132, "Sudden Strength", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "JUD";
 
-        this.color.setGreen(true);
 
         // Target creature gets +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(3,3,Duration.EndOfTurn));

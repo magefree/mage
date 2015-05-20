@@ -48,7 +48,6 @@ public class Enlarge extends CardImpl {
         super(ownerId, 170, "Enlarge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));

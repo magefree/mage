@@ -48,7 +48,6 @@ public class Crocanura extends CardImpl {
         this.subtype.add("Crocodile");
         this.subtype.add("Frog");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

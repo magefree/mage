@@ -53,8 +53,6 @@ public class CankerousThirst extends CardImpl {
         super(ownerId, 116, "Cankerous Thirst", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B/G}");
         this.expansionSetCode = "EVE";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(

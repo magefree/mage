@@ -47,8 +47,6 @@ public class HobgoblinDragoon extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Knight");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

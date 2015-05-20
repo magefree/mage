@@ -44,7 +44,6 @@ public class DurkwoodBoars extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }

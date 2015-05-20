@@ -56,7 +56,6 @@ public class TornadoElemental extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

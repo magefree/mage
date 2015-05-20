@@ -60,7 +60,6 @@ public class QuarryColossus extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Giant");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

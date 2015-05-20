@@ -47,7 +47,6 @@ public class DefiantStrike extends CardImpl {
         super(ownerId, 7, "Defiant Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));

@@ -48,7 +48,6 @@ public class SanguineBond extends CardImpl {
         super(ownerId, 111, "Sanguine Bond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "M10";
 
-        this.color.setBlack(true);
 
         // Whenever you gain life, target opponent loses that much life.
         SanguineBondTriggeredAbility ability = new SanguineBondTriggeredAbility();

@@ -57,9 +57,6 @@ public class SultaiCharm extends CardImpl {
         super(ownerId, 204, "Sultai Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Choose one -
         // <strong>*</strong> Destroy target monocolored creature.

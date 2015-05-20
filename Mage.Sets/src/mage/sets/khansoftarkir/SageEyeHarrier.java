@@ -48,7 +48,6 @@ public class SageEyeHarrier extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

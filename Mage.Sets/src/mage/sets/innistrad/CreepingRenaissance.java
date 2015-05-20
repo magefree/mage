@@ -51,7 +51,6 @@ public class CreepingRenaissance extends CardImpl {
         super(ownerId, 174, "Creeping Renaissance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CreepingRenaissanceEffect());

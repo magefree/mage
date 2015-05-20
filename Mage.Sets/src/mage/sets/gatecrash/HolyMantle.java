@@ -56,8 +56,6 @@ public class HolyMantle extends CardImpl {
         super(ownerId, 17, "Holy Mantle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "GTC";
 
-        this.subtype.add("Aura");
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

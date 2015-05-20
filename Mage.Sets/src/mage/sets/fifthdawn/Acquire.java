@@ -25,7 +25,6 @@ public class Acquire extends CardImpl{
         super(ownerId, 21, "Acquire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Search target opponent's library for an artifact card and put that card onto the battlefield under your control.
         // Then that player shuffles his or her library.

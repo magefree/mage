@@ -57,7 +57,6 @@ public class Delay extends CardImpl {
         super(ownerId, 35, "Delay", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "FUT";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend.
         this.getSpellAbility().addEffect(new DelayEffect());

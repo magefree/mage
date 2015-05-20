@@ -66,7 +66,6 @@ public class EternalThirst extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

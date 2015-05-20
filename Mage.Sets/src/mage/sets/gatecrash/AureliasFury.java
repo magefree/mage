@@ -87,8 +87,6 @@ public class AureliasFury extends CardImpl {
         super(ownerId, 144, "Aurelia's Fury", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
         // Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.

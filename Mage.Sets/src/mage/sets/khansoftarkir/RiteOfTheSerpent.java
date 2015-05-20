@@ -52,7 +52,6 @@ public class RiteOfTheSerpent extends CardImpl {
         super(ownerId, 86, "Rite of the Serpent", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. If that creature had a +1/+1 counter on it, put a 1/1 green Snake creature token onto the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

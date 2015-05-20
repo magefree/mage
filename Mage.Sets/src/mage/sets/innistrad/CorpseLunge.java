@@ -53,7 +53,6 @@ public class CorpseLunge extends CardImpl {
         super(ownerId, 93, "Corpse Lunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Corpse Lunge, exile a creature card from your graveyard.
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard"))));

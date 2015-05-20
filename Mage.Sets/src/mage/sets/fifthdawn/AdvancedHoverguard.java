@@ -51,7 +51,6 @@ public class AdvancedHoverguard extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Drone");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

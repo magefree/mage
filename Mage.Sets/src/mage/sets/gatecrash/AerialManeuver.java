@@ -48,7 +48,6 @@ public class AerialManeuver extends CardImpl {
         super(ownerId, 1, "Aerial Maneuver", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Target creature gets +1/+1 and gains flying and first strike until end of turn.
         getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));

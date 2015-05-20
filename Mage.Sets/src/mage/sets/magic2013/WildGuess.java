@@ -45,7 +45,6 @@ public class WildGuess extends CardImpl {
         super(ownerId, 157, "Wild Guess", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Wild Guess, discard a card.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand()));

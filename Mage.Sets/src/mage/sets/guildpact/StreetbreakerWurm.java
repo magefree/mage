@@ -44,8 +44,6 @@ public class StreetbreakerWurm extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Wurm");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
     }

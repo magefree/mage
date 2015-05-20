@@ -47,7 +47,6 @@ public class Slaughterhorn extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

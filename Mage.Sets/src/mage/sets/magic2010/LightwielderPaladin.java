@@ -60,7 +60,6 @@ public class LightwielderPaladin extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Knight");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

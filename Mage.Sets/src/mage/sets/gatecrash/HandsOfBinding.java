@@ -55,7 +55,6 @@ public class HandsOfBinding extends CardImpl {
         super(ownerId, 37, "Hands of Binding", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         //Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());

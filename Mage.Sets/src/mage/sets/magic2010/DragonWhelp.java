@@ -57,7 +57,6 @@ public class DragonWhelp extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -48,7 +48,6 @@ public class SaguArcher extends CardImpl {
         this.subtype.add("Naga");
         this.subtype.add("Archer");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

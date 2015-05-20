@@ -49,7 +49,6 @@ public class BraveTheSands extends CardImpl {
         super(ownerId, 5, "Brave the Sands", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Creatures you control have vigilance.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));

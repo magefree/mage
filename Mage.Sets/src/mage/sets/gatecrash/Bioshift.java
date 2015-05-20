@@ -52,8 +52,6 @@ public class Bioshift extends CardImpl {
         super(ownerId, 214, "Bioshift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G/U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
 
         // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
         getSpellAbility().addEffect(new MoveCounterFromTargetToTargetEffect());

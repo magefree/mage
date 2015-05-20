@@ -61,7 +61,6 @@ public class TelJiladLifebreather extends CardImpl {
         this.subtype.add("Troll");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

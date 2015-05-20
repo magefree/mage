@@ -53,7 +53,6 @@ public class Windstorm extends CardImpl {
         super(ownerId, 205, "Windstorm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{G}");
         this.expansionSetCode = "M10";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));
     }

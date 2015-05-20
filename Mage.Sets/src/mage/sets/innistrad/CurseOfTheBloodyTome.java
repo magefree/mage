@@ -58,7 +58,6 @@ public class CurseOfTheBloodyTome extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setBlue(true);
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();

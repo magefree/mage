@@ -52,7 +52,6 @@ public class Recall extends CardImpl {
         super(ownerId, 93, "Recall", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{X}{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // Discard X cards, then return a card from your graveyard to your hand for each card discarded this way.
         this.getSpellAbility().addEffect(new RecallEffect());

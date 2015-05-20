@@ -71,9 +71,6 @@ public class MarduCharm extends CardImpl {
         super(ownerId, 186, "Mardu Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose one -
         // <strong>*</strong> Mardu Charm deals 4 damage to target creature.

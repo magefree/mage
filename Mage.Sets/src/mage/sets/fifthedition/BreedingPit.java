@@ -52,7 +52,6 @@ public class BreedingPit extends CardImpl {
         super(ownerId, 10, "Breeding Pit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlack(true);
 
         // At the beginning of your upkeep, sacrifice Breeding Pit unless you pay {B}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), TargetController.YOU, false));

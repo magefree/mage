@@ -60,7 +60,6 @@ public class Prohibit extends CardImpl {
         super(ownerId, 67, "Prohibit", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Kicker {2}
         this.addAbility(new KickerAbility("{2}"));

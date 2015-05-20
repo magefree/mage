@@ -48,7 +48,6 @@ public class HowlFromBeyond extends CardImpl {
         super(ownerId, 20, "Howl from Beyond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlack(true);
 
         // Target creature gets +X/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));

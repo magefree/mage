@@ -44,8 +44,6 @@ public class ArrowsOfJustice extends CardImpl {
         super(ownerId, 211, "Arrows of Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Arrows of Justice deals 4 damage to target attacking or blocking creature.
         getSpellAbility().addEffect(new DamageTargetEffect(4));

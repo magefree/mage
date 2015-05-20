@@ -54,7 +54,6 @@ public class HydraBroodmaster extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

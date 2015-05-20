@@ -59,7 +59,6 @@ public class OrcishLibrarian extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Orc");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

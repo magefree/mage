@@ -48,7 +48,6 @@ public class ThoughtrenderLamia extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Lamia");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

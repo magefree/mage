@@ -55,7 +55,6 @@ public class Endure extends CardImpl {
         super(ownerId, 5, "Endure", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setWhite(true);
 
         // Prevent all damage that would be dealt to you and permanents you control this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));

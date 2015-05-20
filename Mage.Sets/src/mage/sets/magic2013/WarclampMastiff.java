@@ -45,7 +45,6 @@ public class WarclampMastiff extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

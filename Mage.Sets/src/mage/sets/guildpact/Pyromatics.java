@@ -45,7 +45,6 @@ public class Pyromatics extends CardImpl {
         super(ownerId, 72, "Pyromatics", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
 
         // Replicate {1}{R}
         this.addAbility(new ReplicateAbility(this, "{1}{R}"));

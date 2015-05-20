@@ -53,7 +53,6 @@ public class EnterTheInfinite extends CardImpl {
         super(ownerId, 34, "Enter the Infinite", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{8}{U}{U}{U}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Draw cards equal to the number of cards in your library, 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerLibraryCount()));

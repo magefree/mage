@@ -54,10 +54,6 @@ public class WitchMawNephilim extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Nephilim");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

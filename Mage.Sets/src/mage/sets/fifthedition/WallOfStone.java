@@ -45,7 +45,6 @@ public class WallOfStone extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(8);
 

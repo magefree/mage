@@ -51,7 +51,6 @@ public class FlaringPain extends CardImpl {
         super(ownerId, 89, "Flaring Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "JUD";
 
-        this.color.setRed(true);
 
         // Damage can't be prevented this turn.
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());

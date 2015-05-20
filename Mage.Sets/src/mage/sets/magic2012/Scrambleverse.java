@@ -58,7 +58,6 @@ public class Scrambleverse extends CardImpl {
         super(ownerId, 153, "Scrambleverse", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
         this.expansionSetCode = "M12";
 
-        this.color.setRed(true);
 
         // For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents.
         this.getSpellAbility().addEffect(new ScrambleverseEffect());

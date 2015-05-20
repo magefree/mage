@@ -47,7 +47,6 @@ public class IllusionaryServant extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

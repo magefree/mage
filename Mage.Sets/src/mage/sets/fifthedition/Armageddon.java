@@ -44,7 +44,6 @@ public class Armageddon extends CardImpl {
         super(ownerId, 283, "Armageddon", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "5ED";
 
-        this.color.setWhite(true);
 
         // Destroy all lands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterLandPermanent("lands")));

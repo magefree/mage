@@ -66,8 +66,6 @@ public class MirrorSheen extends CardImpl {
         super(ownerId, 105, "Mirror Sheen", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U/R}{U/R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // {1}{UR}{UR}: Copy target instant or sorcery spell that targets you. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MirrorSheenEffect(), new ManaCostsImpl("{1}{U/R}{U/R}"));

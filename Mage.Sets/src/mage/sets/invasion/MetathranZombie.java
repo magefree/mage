@@ -49,7 +49,6 @@ public class MetathranZombie extends CardImpl {
         this.subtype.add("Metathran");
         this.subtype.add("Zombie");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

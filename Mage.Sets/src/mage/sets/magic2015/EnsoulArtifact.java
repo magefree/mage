@@ -55,7 +55,6 @@ public class EnsoulArtifact extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant artifact
         TargetPermanent auraTarget = new TargetArtifactPermanent();

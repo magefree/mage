@@ -45,7 +45,6 @@ public class FomoriNomad extends CardImpl {
         this.subtype.add("Nomad");
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }

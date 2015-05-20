@@ -63,8 +63,6 @@ public class SyggRiverGuide extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

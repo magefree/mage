@@ -53,7 +53,6 @@ public class PinToTheEarth extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

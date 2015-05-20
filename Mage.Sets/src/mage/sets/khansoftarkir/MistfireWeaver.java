@@ -55,7 +55,6 @@ public class MistfireWeaver extends CardImpl {
         this.subtype.add("Djinn");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

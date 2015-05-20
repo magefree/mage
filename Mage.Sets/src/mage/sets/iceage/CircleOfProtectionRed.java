@@ -58,7 +58,6 @@ public class CircleOfProtectionRed extends CardImpl {
         super(ownerId, 239, "Circle of Protection: Red", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ICE";
 
-        this.color.setWhite(true);
 
         // {1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);

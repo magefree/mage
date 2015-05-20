@@ -44,7 +44,6 @@ public class YawningFissure extends CardImpl {
         super(ownerId, 164, "Yawning Fissure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "M10";
 
-        this.color.setRed(true);
 
         // Each opponent sacrifices a land.
         this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(new FilterControlledLandPermanent("a land")));

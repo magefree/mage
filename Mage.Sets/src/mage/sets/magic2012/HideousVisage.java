@@ -47,7 +47,6 @@ public class HideousVisage extends CardImpl {
         super(ownerId, 100, "Hideous Visage", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlack(true);
 
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
     }

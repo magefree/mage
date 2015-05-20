@@ -45,7 +45,6 @@ public class SetAdrift extends CardImpl {
         super(ownerId, 54, "Set Adrift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Delve
         this.addAbility(new DelveAbility());

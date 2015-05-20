@@ -47,7 +47,6 @@ public class ShowerOfSparks extends CardImpl {
         super(ownerId, 61, "Shower of Sparks", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "DDL";
 
-        this.color.setRed(true);
 
         // Shower of Sparks deals 1 damage to target creature and 1 damage to target player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

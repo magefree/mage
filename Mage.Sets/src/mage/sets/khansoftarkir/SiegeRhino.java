@@ -50,9 +50,6 @@ public class SiegeRhino extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Rhino");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

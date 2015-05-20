@@ -53,7 +53,6 @@ public class LeylineOfLifeforce extends CardImpl {
         super(ownerId, 90, "Leyline of Lifeforce", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "GPT";
 
-        this.color.setGreen(true);
 
         // If Leyline of Lifeforce is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

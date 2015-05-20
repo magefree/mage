@@ -48,7 +48,6 @@ public class RangersGuile extends CardImpl {
         super(ownerId, 201, "Ranger's Guile", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Target creature you control gets +1/+1 and gains hexproof until end of turn.
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());

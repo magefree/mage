@@ -57,7 +57,6 @@ public class VerdantHaven extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

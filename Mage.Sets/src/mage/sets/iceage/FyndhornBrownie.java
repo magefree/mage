@@ -51,7 +51,6 @@ public class FyndhornBrownie extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Ouphe");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

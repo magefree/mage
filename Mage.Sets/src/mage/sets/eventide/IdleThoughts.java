@@ -48,7 +48,6 @@ public class IdleThoughts extends CardImpl {
         super(ownerId, 23, "Idle Thoughts", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
 
         // {2}: Draw a card if you have no cards in hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(

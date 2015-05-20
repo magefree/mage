@@ -57,7 +57,6 @@ public class MirrorMadPhantasm extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 

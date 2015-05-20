@@ -45,7 +45,6 @@ public class MawOfTheMire extends CardImpl {
         super(ownerId, 108, "Maw of the Mire", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Destroy target land. You gain 4 life.
         this.getSpellAbility().addTarget(new TargetLandPermanent());

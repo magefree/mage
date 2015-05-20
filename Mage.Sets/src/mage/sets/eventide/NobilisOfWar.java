@@ -51,8 +51,6 @@ public class NobilisOfWar extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

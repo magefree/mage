@@ -54,7 +54,6 @@ public class RevivingMelody extends CardImpl {
         super(ownerId, 138, "Reviving Melody", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Choose one or both - 
         this.getSpellAbility().getModes().setMinModes(1);

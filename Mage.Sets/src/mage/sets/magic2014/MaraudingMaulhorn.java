@@ -58,7 +58,6 @@ public class MaraudingMaulhorn extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

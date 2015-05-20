@@ -45,8 +45,6 @@ public class ShatteringBlow extends CardImpl {
         super(ownerId, 225, "Shattering Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Exile target artifact.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

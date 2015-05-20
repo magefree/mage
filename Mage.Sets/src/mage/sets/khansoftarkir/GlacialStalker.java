@@ -46,7 +46,6 @@ public class GlacialStalker extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

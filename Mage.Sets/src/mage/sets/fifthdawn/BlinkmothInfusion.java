@@ -50,7 +50,6 @@ public class BlinkmothInfusion extends CardImpl {
         super(ownerId, 25, "Blinkmoth Infusion", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{12}{U}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());

@@ -63,7 +63,6 @@ public class ThrullParasite extends CardImpl {
        this.expansionSetCode = "GTC";
        this.subtype.add("Thrull");
 
-       this.color.setBlack(true);
        this.power = new MageInt(1);
        this.toughness = new MageInt(1);
 

@@ -46,7 +46,6 @@ public class Braingeyser extends CardImpl {
         super(ownerId, 51, "Braingeyser", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Target player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(new ManacostVariableValue()));

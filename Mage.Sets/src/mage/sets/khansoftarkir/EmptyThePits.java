@@ -46,7 +46,6 @@ public class EmptyThePits extends CardImpl {
         super(ownerId, 72, "Empty the Pits", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{X}{X}{B}{B}{B}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Delve
         this.addAbility(new DelveAbility());

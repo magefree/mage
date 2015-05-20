@@ -53,7 +53,6 @@ public class DivineTransformation extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -46,7 +46,6 @@ public class ShatteringSpree extends CardImpl {
         super(ownerId, 75, "Shattering Spree", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
 
         // Replicate {R}
         this.addAbility(new ReplicateAbility(this, "{R}"));

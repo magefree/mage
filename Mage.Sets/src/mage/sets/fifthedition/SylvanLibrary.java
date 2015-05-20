@@ -61,7 +61,6 @@ public class SylvanLibrary extends CardImpl {
         super(ownerId, 191, "Sylvan Library", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "5ED";
 
-        this.color.setGreen(true);
 
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true), new CardsDrawnThisTurnWatcher());

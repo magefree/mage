@@ -50,7 +50,6 @@ public class BrimstoneVolley extends CardImpl {
         super(ownerId, 132, "Brimstone Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Brimstone Volley deals 3 damage to target creature or player.
         // Morbid - Brimstone Volley deals 5 damage to that creature or player instead if a creature died this turn.

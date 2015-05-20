@@ -53,8 +53,6 @@ public class MindGrind extends CardImpl {
         super(ownerId, 178, "Mind Grind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Each opponent reveals cards from the top of his or her library until he or she reveals X land cards, then puts all cards revealed this way into his or her graveyard. X can't be 0.
         this.getSpellAbility().addEffect(new MindGrindEffect());

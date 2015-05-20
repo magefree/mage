@@ -47,8 +47,6 @@ public class FrenziedTilling extends CardImpl {
         super(ownerId, 247, "Frenzied Tilling", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{G}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Destroy target land. Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

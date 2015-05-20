@@ -49,8 +49,6 @@ public class DebtorsKnell extends CardImpl {
         super(ownerId, 141, "Debtors' Knell", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W/B}{W/B}{W/B}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // <i>({WB} can be paid with either {W} or {B}.)</i>
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.

@@ -47,7 +47,6 @@ public class CloudfinRaptor extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Mutant");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

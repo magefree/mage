@@ -64,7 +64,6 @@ public class NyxInfusion extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
 
         // Enchant creature

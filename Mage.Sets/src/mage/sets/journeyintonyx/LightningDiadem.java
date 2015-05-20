@@ -56,7 +56,6 @@ public class LightningDiadem extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

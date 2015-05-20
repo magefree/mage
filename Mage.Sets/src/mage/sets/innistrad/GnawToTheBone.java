@@ -50,7 +50,6 @@ public class GnawToTheBone extends CardImpl {
         super(ownerId, 183, "Gnaw to the Bone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // You gain 2 life for each creature card in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard(), 2);

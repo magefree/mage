@@ -44,7 +44,6 @@ public class TorGiant extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

@@ -49,7 +49,6 @@ public class PhantomBeast extends CardImpl {
         this.subtype.add("Illusion");
         this.subtype.add("Beast");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

@@ -45,7 +45,6 @@ public class Dissipate extends CardImpl {
         super(ownerId, 53, "Dissipate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));

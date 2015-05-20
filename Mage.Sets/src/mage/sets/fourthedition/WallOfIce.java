@@ -45,7 +45,6 @@ public class WallOfIce extends CardImpl {
         this.expansionSetCode = "4ED";
         this.subtype.add("Wall");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

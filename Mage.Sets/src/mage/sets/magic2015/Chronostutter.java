@@ -51,7 +51,6 @@ public class Chronostutter extends CardImpl {
         super(ownerId, 48, "Chronostutter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // Put target creature into its owner's library second from the top.
         this.getSpellAbility().addEffect(new ChronostutterEffect());

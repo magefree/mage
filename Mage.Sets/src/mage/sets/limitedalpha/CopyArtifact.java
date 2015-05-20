@@ -58,7 +58,6 @@ public class CopyArtifact extends CardImpl {
         super(ownerId, 54, "Copy Artifact", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // You may have Copy Artifact enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(

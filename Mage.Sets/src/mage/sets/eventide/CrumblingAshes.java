@@ -58,7 +58,6 @@ public class CrumblingAshes extends CardImpl {
         super(ownerId, 35, "Crumbling Ashes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
 
         // At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), TargetController.YOU, false);

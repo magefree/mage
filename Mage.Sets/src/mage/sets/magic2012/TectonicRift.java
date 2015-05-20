@@ -50,7 +50,6 @@ public class TectonicRift extends CardImpl {
         super(ownerId, 157, "Tectonic Rift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "M12";
 
-        this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

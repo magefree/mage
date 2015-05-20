@@ -61,7 +61,6 @@ public class DragonGrip extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.
         AsThoughEffect effect = new CastAsThoughItHadFlashSourceEffect(Duration.EndOfGame);

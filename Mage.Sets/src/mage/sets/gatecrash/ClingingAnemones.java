@@ -46,7 +46,6 @@ public class ClingingAnemones extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Jellyfish");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

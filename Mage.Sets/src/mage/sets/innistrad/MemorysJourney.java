@@ -56,7 +56,6 @@ public class MemorysJourney extends CardImpl {
         super(ownerId, 66, "Memory's Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Target player shuffles up to three target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new MemorysJourneyEffect());

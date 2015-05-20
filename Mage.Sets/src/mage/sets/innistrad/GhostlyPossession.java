@@ -56,7 +56,6 @@ public class GhostlyPossession extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

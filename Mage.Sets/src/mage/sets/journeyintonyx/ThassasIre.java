@@ -49,7 +49,6 @@ public class ThassasIre extends CardImpl {
         super(ownerId, 54, "Thassa's Ire", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // {3}{U}: You may tap or untap target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{3}{U}"));

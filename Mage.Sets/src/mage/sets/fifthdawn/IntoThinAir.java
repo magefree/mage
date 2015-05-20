@@ -45,7 +45,6 @@ public class IntoThinAir extends CardImpl {
         super(ownerId, 33, "Into Thin Air", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Affinity for artifacts
         this.addAbility(new AffinityForArtifactsAbility());

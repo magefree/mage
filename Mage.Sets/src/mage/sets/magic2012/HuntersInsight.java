@@ -52,7 +52,6 @@ public class HuntersInsight extends CardImpl {
         super(ownerId, 180, "Hunter's Insight", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "M12";
 
-        this.color.setGreen(true);
 
         // Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new HuntersInsightTriggeredAbility(), Duration.EndOfTurn));

@@ -59,7 +59,6 @@ public class SerpentOfTheEndlessSea extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

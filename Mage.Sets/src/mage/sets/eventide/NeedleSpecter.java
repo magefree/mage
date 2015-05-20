@@ -52,7 +52,6 @@ public class NeedleSpecter extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Specter");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -52,7 +52,6 @@ public class HorrorOfTheDim extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

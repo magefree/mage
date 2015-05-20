@@ -51,7 +51,6 @@ public class MarduWarshrieker extends CardImpl {
         this.subtype.add("Orc");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

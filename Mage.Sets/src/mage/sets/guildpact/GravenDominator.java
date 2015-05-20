@@ -56,7 +56,6 @@ public class GravenDominator extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Gargoyle");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

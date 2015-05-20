@@ -50,7 +50,6 @@ public class Fungusaur extends CardImpl {
         this.subtype.add("Fungus");
         this.subtype.add("Lizard");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

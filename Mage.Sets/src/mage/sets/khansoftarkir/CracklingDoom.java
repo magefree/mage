@@ -57,9 +57,6 @@ public class CracklingDoom extends CardImpl {
         super(ownerId, 171, "Crackling Doom", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Crackling Doom deals 2 damage to each opponent. Each opponent sacrifices a creature with the greatest power among creatures he or she controls.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(2, TargetController.OPPONENT));

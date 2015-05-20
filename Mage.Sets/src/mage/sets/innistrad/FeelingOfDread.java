@@ -48,7 +48,6 @@ public class FeelingOfDread extends CardImpl {
         super(ownerId, 14, "Feeling of Dread", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Tap up to two target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect());

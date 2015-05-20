@@ -50,7 +50,6 @@ public class FontOfReturn extends CardImpl {
         super(ownerId, 71, "Font of Return", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // {3}{B}, Sacrifice Font of Return: Return up to three target creature cards from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl("{3}{B}"));

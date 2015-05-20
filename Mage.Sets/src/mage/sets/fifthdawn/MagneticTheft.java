@@ -63,7 +63,6 @@ public class MagneticTheft extends CardImpl {
         super(ownerId, 74, "Magnetic Theft", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Attach target Equipment to target creature.
         this.getSpellAbility().addEffect(new EquipEffect());

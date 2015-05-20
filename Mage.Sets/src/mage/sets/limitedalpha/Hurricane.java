@@ -53,7 +53,6 @@ public class Hurricane extends CardImpl {
         super(ownerId, 109, "Hurricane", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // Hurricane deals X damage to each creature with flying and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(new ManacostVariableValue(), filter));

@@ -51,7 +51,6 @@ public class SpiritOfTheHearth extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

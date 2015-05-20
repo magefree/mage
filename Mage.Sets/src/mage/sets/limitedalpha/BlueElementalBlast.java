@@ -59,7 +59,6 @@ public class BlueElementalBlast extends CardImpl {
         super(ownerId, 50, "Blue Elemental Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Choose one - Counter target red spell; or destroy target red permanent.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

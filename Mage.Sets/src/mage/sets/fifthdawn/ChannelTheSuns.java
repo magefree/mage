@@ -46,7 +46,6 @@ public class ChannelTheSuns extends CardImpl {
         super(ownerId, 84, "Channel the Suns", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "5DN";
 
-        this.color.setGreen(true);
 
         // Add {W}{U}{B}{R}{G} to your mana pool.
         Effect effect = new AddManaToManaPoolSourceControllerEffect(new Mana(1, 1, 1, 1, 1, 0, 0));

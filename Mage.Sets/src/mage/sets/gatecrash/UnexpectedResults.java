@@ -71,8 +71,6 @@ public class UnexpectedResults extends CardImpl {
         super(ownerId, 203, "Unexpected Results", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{G}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Shuffle your library, then reveal the top card. If it's a nonland card, you may cast it without paying its mana cost. If it's a land card, you may put it onto the battlefield and return Unexpected Results to its owner's hand.
         this.getSpellAbility().addEffect(new UnexpectedResultEffect());

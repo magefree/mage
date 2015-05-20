@@ -65,7 +65,6 @@ public class ElderDruid extends CardImpl {
         this.subtype.add("Cleric");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

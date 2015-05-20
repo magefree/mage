@@ -72,7 +72,6 @@ public class Seasinger extends CardImpl {
         this.expansionSetCode = "FEM";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

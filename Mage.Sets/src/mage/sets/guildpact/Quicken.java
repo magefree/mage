@@ -57,7 +57,6 @@ public class Quicken extends CardImpl {
         super(ownerId, 31, "Quicken", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlue(true);
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());

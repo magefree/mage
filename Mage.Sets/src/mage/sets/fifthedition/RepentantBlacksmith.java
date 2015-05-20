@@ -54,7 +54,6 @@ public class RepentantBlacksmith extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Human");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

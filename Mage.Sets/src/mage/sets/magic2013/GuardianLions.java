@@ -45,7 +45,6 @@ public class GuardianLions extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Cat");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(6);
 

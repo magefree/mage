@@ -52,7 +52,6 @@ public class KavuScout extends CardImpl {
         this.subtype.add("Kavu");
         this.subtype.add("Scout");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

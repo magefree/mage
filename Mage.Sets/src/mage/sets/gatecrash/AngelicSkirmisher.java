@@ -74,7 +74,6 @@ public class AngelicSkirmisher extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

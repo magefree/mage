@@ -48,7 +48,6 @@ public class KeeneyeAven extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

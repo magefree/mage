@@ -65,7 +65,6 @@ public class MerEkNightblade extends CardImpl {
         this.subtype.add("Orc");
         this.subtype.add("Assassin");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

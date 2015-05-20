@@ -57,7 +57,6 @@ public class DismissIntoDream extends CardImpl {
         super(ownerId, 50, "Dismiss into Dream", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{6}{U}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlue(true);
 
         // Each creature your opponents control is an Illusion in addition to its other types 
         // and has "When this creature becomes the target of a spell or ability, sacrifice it."

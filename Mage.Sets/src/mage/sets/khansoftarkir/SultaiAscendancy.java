@@ -49,9 +49,6 @@ public class SultaiAscendancy extends CardImpl {
         super(ownerId, 203, "Sultai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{B}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, look at the top two cards of your library. Put any number of them into your graveyard and the rest on top of your library in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(

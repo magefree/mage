@@ -52,7 +52,6 @@ public class Conquer extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

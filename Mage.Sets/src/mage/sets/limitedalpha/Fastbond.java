@@ -51,7 +51,6 @@ public class Fastbond extends CardImpl {
         super(ownerId, 101, "Fastbond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // You may play any number of additional lands on each of your turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield)));

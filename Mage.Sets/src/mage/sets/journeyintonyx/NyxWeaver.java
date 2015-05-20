@@ -55,8 +55,6 @@ public class NyxWeaver extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

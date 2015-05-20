@@ -53,7 +53,6 @@ public class HereticsPunishment extends CardImpl {
         super(ownerId, 147, "Heretic's Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // {3}{R}: Choose target creature or player, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HereticsPunishmentEffect(), new ManaCostsImpl("{3}{R}"));

@@ -44,7 +44,6 @@ public class RainOfBlades extends CardImpl {
         super(ownerId, 28, "Rain of Blades", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M13";
 
-        this.color.setWhite(true);
 
         // Rain of Blades deals 1 damage to each attacking creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));

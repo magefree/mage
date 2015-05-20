@@ -53,7 +53,6 @@ public class Deicide extends CardImpl {
         super(ownerId, 7, "Deicide", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Exile target enchantment. If the exiled card is a God card, search its controller's graveyard, hand, and library for any number of cards with the same name as that card and exile them, then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new DeicideExileEffect());

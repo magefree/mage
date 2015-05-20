@@ -45,7 +45,6 @@ public class BogImp extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

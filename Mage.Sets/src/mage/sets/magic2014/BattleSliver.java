@@ -49,7 +49,6 @@ public class BattleSliver extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

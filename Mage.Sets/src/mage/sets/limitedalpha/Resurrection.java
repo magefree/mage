@@ -52,7 +52,6 @@ public class Resurrection extends CardImpl {
         super(ownerId, 218, "Resurrection", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
         this.expansionSetCode = "LEA";
 
-        this.color.setWhite(true);
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ResurrectionEffect());

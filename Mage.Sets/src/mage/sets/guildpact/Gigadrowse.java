@@ -48,7 +48,6 @@ public class Gigadrowse extends CardImpl {
         super(ownerId, 26, "Gigadrowse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlue(true);
 
         // Replicate {U}
         this.addAbility(new ReplicateAbility(this, "{U}"));

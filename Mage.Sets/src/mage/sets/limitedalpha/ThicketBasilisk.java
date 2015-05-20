@@ -55,7 +55,6 @@ public class ThicketBasilisk extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Basilisk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -57,7 +57,6 @@ public class GoldenWish extends CardImpl {
         super(ownerId, 12, "Golden Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "JUD";
 
-        this.color.setWhite(true);
 
         // You may choose an artifact or enchantment card you own from outside the game, reveal that card, and put it into your hand. Exile Golden Wish.
         this.getSpellAbility().addEffect(new GoldenWishEffect());

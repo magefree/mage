@@ -59,8 +59,6 @@ public class ClanDefiance extends CardImpl {
         super(ownerId, 151, "Clan Defiance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Choose one or more - 
         this.getSpellAbility().getModes().setMinModes(1);

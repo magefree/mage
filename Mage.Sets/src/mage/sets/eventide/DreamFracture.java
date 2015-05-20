@@ -49,7 +49,6 @@ public class DreamFracture extends CardImpl {
         super(ownerId, 19, "Dream Fracture", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Its controller draws a card.
         this.getSpellAbility().addEffect(new DreamFractureEffect());

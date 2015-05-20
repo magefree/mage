@@ -50,7 +50,6 @@ public class Hydroblast extends CardImpl {
         super(ownerId, 94, "Hydroblast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // Choose one - Counter target spell if it's red;
         this.getSpellAbility().addEffect(new HydroblastCounterEffect());

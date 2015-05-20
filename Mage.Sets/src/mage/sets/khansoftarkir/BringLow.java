@@ -50,7 +50,6 @@ public class BringLow extends CardImpl {
         super(ownerId, 103, "Bring Low", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Bring Low deals 3 damage to target creature. If that creature has a +1/+1 counter on it, Bring Low deals 5 damage to it instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

@@ -61,7 +61,6 @@ public class YawgmothsAgenda extends CardImpl {
         super(ownerId, 135, "Yawgmoth's Agenda", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlack(true);
 
         // You can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.YOU)));

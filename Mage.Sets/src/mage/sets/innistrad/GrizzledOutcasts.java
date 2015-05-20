@@ -55,7 +55,6 @@ public class GrizzledOutcasts extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new KrallenhordeWantons(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

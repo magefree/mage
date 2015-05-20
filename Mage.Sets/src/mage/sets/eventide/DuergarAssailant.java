@@ -52,8 +52,6 @@ public class DuergarAssailant extends CardImpl {
         this.subtype.add("Dwarf");
         this.subtype.add("Soldier");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

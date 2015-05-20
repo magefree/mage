@@ -49,7 +49,6 @@ public class CrosswayVampire extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Vampire");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -59,9 +59,6 @@ public class EfreetWeaponmaster extends CardImpl {
         this.subtype.add("Efreet");
         this.subtype.add("Monk");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

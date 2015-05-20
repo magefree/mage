@@ -45,7 +45,6 @@ public class TakeUpArms extends CardImpl {
         super(ownerId, 26, "Take Up Arms", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Put three 1/1 white Warrior creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TakeUpArmsToken(), 3));

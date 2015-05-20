@@ -49,7 +49,6 @@ public class FirewingPhoenix extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

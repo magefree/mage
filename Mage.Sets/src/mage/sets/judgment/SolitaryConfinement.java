@@ -54,7 +54,6 @@ public class SolitaryConfinement extends CardImpl {
         super(ownerId, 24, "Solitary Confinement", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "JUD";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), TargetController.YOU, false));

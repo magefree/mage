@@ -51,7 +51,6 @@ public class MurderOfCrows extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

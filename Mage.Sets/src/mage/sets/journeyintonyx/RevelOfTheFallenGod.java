@@ -47,8 +47,6 @@ public class RevelOfTheFallenGod extends CardImpl {
         super(ownerId, 155, "Revel of the Fallen God", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{R}{R}{G}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Put four 2/2 red and green Satyr creature tokens with haste onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RevelOfTheFallenGodSatyrToken(), 4));

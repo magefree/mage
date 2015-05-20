@@ -44,7 +44,6 @@ public class IcatianTown extends CardImpl {
         super(ownerId, 162, "Icatian Town", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{W}");
         this.expansionSetCode = "FEM";
 
-        this.color.setWhite(true);
 
         // Put four 1/1 white Citizen creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CitizenToken(), 4));

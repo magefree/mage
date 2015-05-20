@@ -45,7 +45,6 @@ public class WorstFears extends CardImpl {
         super(ownerId, 87, "Worst Fears", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // You control target player during that player's next turn. Exile Worst Fears. (You see all cards that player could see and make all decisions for that player.)
         this.getSpellAbility().addEffect(new ControlTargetPlayerNextTurnEffect());

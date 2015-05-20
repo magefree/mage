@@ -47,8 +47,6 @@ public class InsideOut extends CardImpl {
         super(ownerId, 103, "Inside Out", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U/R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Switch target creature's power and toughness until end of turn.
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));

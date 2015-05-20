@@ -54,7 +54,6 @@ public class Pox extends CardImpl {
         super(ownerId, 51, "Pox", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{B}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlack(true);
 
         // Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
         this.getSpellAbility().addEffect(new PoxEffect());

@@ -53,7 +53,6 @@ public class KavuTitan extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Kavu");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

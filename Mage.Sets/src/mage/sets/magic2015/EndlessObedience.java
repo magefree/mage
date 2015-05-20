@@ -46,7 +46,6 @@ public class EndlessObedience extends CardImpl {
         super(ownerId, 94, "Endless Obedience", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

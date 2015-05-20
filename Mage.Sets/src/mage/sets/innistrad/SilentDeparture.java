@@ -48,7 +48,6 @@ public class SilentDeparture extends CardImpl {
         super(ownerId, 75, "Silent Departure", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

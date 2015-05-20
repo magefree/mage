@@ -49,7 +49,6 @@ public class HarvestguardAlseids extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Nymph");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

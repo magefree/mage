@@ -45,7 +45,6 @@ public class OreskosSwiftclaw extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
     }

@@ -54,7 +54,6 @@ public class Festergloom extends CardImpl {
         super(ownerId, 97, "Festergloom", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Nonblack creatures get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));

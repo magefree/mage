@@ -55,7 +55,6 @@ public class VillagersOfEstwald extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new HowlpackOfEstwald(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

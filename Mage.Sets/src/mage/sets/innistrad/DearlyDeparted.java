@@ -64,7 +64,6 @@ public class DearlyDeparted extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

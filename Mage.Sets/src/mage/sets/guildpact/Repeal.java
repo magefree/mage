@@ -52,7 +52,6 @@ public class Repeal extends CardImpl {
         super(ownerId, 32, "Repeal", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlue(true);
 
         // Return target nonland permanent with converted mana cost X to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

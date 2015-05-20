@@ -61,7 +61,6 @@ public class SuspensionField extends CardImpl {
         super(ownerId, 25, "Suspension Field", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // When Suspension Field enters the battlefield, you may exile target creature with toughness 3 or greater until Suspension Field leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SuspensionFieldExileEffect(), true);

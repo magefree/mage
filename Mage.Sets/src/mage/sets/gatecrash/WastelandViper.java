@@ -51,7 +51,6 @@ public class WastelandViper extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

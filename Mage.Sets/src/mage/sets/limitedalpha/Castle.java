@@ -48,7 +48,6 @@ public class Castle extends CardImpl {
         super(ownerId, 193, "Castle", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "LEA";
 
-        this.color.setWhite(true);
         
         // Untapped creatures you control get +0/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));

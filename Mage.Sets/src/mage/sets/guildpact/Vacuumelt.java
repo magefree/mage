@@ -45,7 +45,6 @@ public class Vacuumelt extends CardImpl {
         super(ownerId, 40, "Vacuumelt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlue(true);
 
         // Replicate {2}{U}
         this.addAbility(new ReplicateAbility(this, "{2}{U}"));

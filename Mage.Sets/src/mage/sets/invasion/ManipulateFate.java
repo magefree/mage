@@ -53,7 +53,6 @@ public class ManipulateFate extends CardImpl {
         super(ownerId, 60, "Manipulate Fate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Search your library for three cards, exile them, then shuffle your library.
         this.getSpellAbility().addEffect(new ManipulateFateEffect());

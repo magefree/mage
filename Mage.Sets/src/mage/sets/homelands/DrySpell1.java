@@ -43,7 +43,6 @@ public class DrySpell1 extends CardImpl {
         super(ownerId, 7, "Dry Spell", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "HML";
 
-        this.color.setBlack(true);
 
         // Dry Spell deals 1 damage to each creature and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));

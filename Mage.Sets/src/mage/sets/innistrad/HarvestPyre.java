@@ -47,7 +47,6 @@ public class HarvestPyre extends CardImpl {
         super(ownerId, 146, "Harvest Pyre", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Harvest Pyre, exile X cards from your graveyard.
         this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCard("cards from your graveyard")));

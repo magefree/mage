@@ -77,7 +77,6 @@ public class AjaniSteadfast extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Ajani");
 
-        this.color.setWhite(true);
         
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

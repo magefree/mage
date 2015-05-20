@@ -53,7 +53,6 @@ public class Monomania extends CardImpl {
         super(ownerId, 102, "Monomania", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlack(true);
 
         // Target player chooses a card in his or her hand and discards the rest.
         this.getSpellAbility().addEffect(new MonomaniaEffect());

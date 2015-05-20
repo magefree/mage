@@ -54,7 +54,6 @@ public class Hindervines extends CardImpl {
         super(ownerId, 124, "Hindervines", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(filter, Duration.EndOfTurn, true));

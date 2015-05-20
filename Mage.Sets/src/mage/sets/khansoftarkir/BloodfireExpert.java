@@ -46,7 +46,6 @@ public class BloodfireExpert extends CardImpl {
         this.subtype.add("Efreet");
         this.subtype.add("Monk");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

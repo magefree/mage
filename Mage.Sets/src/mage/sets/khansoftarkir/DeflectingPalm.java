@@ -54,8 +54,6 @@ public class DeflectingPalm extends CardImpl {
         super(ownerId, 173, "Deflecting Palm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
         this.getSpellAbility().addEffect(new DeflectingPalmEffect());

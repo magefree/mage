@@ -46,7 +46,6 @@ public class AxegrinderGiant extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
     }

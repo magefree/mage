@@ -44,7 +44,6 @@ public class RollickOfAbandon extends CardImpl {
         super(ownerId, 108, "Rollick of Abandon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // All creatures get +2/-2 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(2,-2, Duration.EndOfTurn));

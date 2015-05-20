@@ -51,7 +51,6 @@ public class LeylineOfLightning extends CardImpl {
         super(ownerId, 68, "Leyline of Lightning", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
 
         // If Leyline of Lightning is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

@@ -47,7 +47,6 @@ public class FlowstoneFlood extends CardImpl {
         super(ownerId, 83, "Flowstone Flood", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "EXO";
 
-        this.color.setRed(true);
 
         // Buyback—Pay 3 life, Discard a card at random. (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
         BuybackAbility buybackAbility = new BuybackAbility(new PayLifeCost(3));

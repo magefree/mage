@@ -49,7 +49,6 @@ public class CinderWall extends CardImpl {
         this.expansionSetCode = "DDG";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

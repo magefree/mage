@@ -70,8 +70,6 @@ public class NightveilSpecter extends CardImpl {
       this.expansionSetCode = "GTC";
       this.subtype.add("Specter");
 
-      this.color.setBlue(true);
-      this.color.setBlack(true);
       this.power = new MageInt(2);
       this.toughness = new MageInt(3);
 

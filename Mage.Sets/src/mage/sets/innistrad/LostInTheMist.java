@@ -51,7 +51,6 @@ public class LostInTheMist extends CardImpl {
         super(ownerId, 63, "Lost in the Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Return target permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetSpell());

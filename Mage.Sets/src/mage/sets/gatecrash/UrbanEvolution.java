@@ -48,8 +48,6 @@ public class UrbanEvolution extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
         
         //Draw three cards. 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));

@@ -59,8 +59,6 @@ public class TreasuryThrull extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Thrull");
 
-        this.color.setWhite(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

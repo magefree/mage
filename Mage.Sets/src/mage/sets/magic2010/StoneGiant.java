@@ -60,7 +60,6 @@ public class StoneGiant extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Giant");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         // {tap}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn.

@@ -50,8 +50,6 @@ public class Recoil extends CardImpl {
         super(ownerId, 264, "Recoil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Return target permanent to its owner's hand. Then that player discards a card.
         this.getSpellAbility().addEffect(new RecoilEffect());

@@ -64,9 +64,6 @@ public class MarduAscendancy extends CardImpl {
         super(ownerId, 185, "Mardu Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{W}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Whenever a nontoken creature you control attacks, put a 1/1 red Goblin creature token onto the battlefield tapped and attacking.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new GoblinToken(expansionSetCode), 1, true, true), false, attackFilter));

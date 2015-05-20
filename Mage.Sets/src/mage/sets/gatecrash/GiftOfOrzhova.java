@@ -56,9 +56,6 @@ public class GiftOfOrzhova extends CardImpl {
         super(ownerId, 219, "Gift of Orzhova", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W/B}{W/B}");
         this.expansionSetCode = "GTC";
 
-        this.subtype.add("Aura");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -44,8 +44,6 @@ public class UtterEnd extends CardImpl {
         super(ownerId, 210, "Utter End", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Exile target nonland permanent.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

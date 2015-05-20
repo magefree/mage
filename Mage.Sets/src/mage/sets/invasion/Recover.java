@@ -49,7 +49,6 @@ public class Recover extends CardImpl {
         super(ownerId, 122, "Recover", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));

@@ -44,7 +44,6 @@ public class Murder extends CardImpl {
         super(ownerId, 101, "Murder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Destroy target creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

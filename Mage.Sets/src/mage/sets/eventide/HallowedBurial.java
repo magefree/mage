@@ -50,7 +50,6 @@ public class HallowedBurial extends CardImpl {
         super(ownerId, 7, "Hallowed Burial", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setWhite(true);
 
         // Put all creatures on the bottom of their owners' libraries.
         this.getSpellAbility().addEffect(new HallowedBurialEffect());

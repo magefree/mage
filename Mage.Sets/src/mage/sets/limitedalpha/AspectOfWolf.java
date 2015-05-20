@@ -56,7 +56,6 @@ public class AspectOfWolf extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -52,7 +52,6 @@ public class BlindObedience extends CardImpl {
         super(ownerId, 6, "Blind Obedience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
         this.addAbility(new ExtortAbility());

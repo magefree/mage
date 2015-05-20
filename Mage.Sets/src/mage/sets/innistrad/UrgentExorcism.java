@@ -57,7 +57,6 @@ public class UrgentExorcism extends CardImpl {
         super(ownerId, 40, "Urgent Exorcism", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Destroy target Spirit or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

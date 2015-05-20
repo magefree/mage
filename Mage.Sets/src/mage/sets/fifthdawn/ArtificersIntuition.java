@@ -56,7 +56,6 @@ public class ArtificersIntuition extends CardImpl {
         super(ownerId, 23, "Artificer's Intuition", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // {U}, Discard an artifact card: Search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), new ManaCostsImpl("{U}"));

@@ -47,7 +47,6 @@ public class MoanOfTheUnhallowed extends CardImpl {
         super(ownerId, 109, "Moan of the Unhallowed", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Put two 2/2 black Zombie creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 2));

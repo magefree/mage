@@ -51,7 +51,6 @@ public class Manabond extends CardImpl {
         super(ownerId, 113, "Manabond", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "EXO";
 
-        this.color.setGreen(true);
 
         // At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ManabondEffect(), true));

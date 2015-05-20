@@ -44,7 +44,6 @@ public class TalrandsInvocation extends CardImpl {
         super(ownerId, 73, "Talrand's Invocation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Put two 2/2 blue Drake creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DrakeToken(), 2));

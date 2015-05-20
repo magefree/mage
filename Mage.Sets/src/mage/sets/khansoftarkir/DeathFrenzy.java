@@ -51,8 +51,6 @@ public class DeathFrenzy extends CardImpl {
         super(ownerId, 172, "Death Frenzy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // All creatures get -2/-2 until end of turn. Whenever a creature dies this turn, you gain 1 life.
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));

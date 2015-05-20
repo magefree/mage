@@ -48,8 +48,6 @@ public class StitchInTime extends CardImpl {
         super(ownerId, 132, "Stitch in Time", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Flip a coin. If you win the flip, take an extra turn after this one.
         this.getSpellAbility().addEffect(new StitchInTimeEffect());

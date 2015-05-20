@@ -46,7 +46,6 @@ public class HighlandGame extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

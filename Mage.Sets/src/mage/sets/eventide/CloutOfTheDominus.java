@@ -59,8 +59,6 @@ public class CloutOfTheDominus extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

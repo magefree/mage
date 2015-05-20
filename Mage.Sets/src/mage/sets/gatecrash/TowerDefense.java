@@ -55,7 +55,6 @@ public class TowerDefense extends CardImpl {
         super(ownerId, 137, "Tower Defense", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Creatures you control get +0/+5 and gain reach until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(0, 5, Duration.EndOfTurn, filter , false));

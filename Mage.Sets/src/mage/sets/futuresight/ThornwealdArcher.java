@@ -47,7 +47,6 @@ public class ThornwealdArcher extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Archer");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

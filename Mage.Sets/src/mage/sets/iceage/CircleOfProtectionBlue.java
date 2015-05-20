@@ -58,7 +58,6 @@ public class CircleOfProtectionBlue extends CardImpl {
         super(ownerId, 237, "Circle of Protection: Blue", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ICE";
 
-        this.color.setWhite(true);
 
         // {1}: The next time a blue source of your choice would deal damage to you this turn, prevent that damage.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, filter);

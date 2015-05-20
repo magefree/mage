@@ -44,7 +44,6 @@ public class SerumVisions extends CardImpl {
         super(ownerId, 36, "Serum Visions", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

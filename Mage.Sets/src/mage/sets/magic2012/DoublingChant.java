@@ -57,7 +57,6 @@ public class DoublingChant extends CardImpl {
         super(ownerId, 170, "Doubling Chant", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}");
         this.expansionSetCode = "M12";
 
-        this.color.setGreen(true);
 
         this.getSpellAbility().addEffect(new DoublingChantEffect());
     }

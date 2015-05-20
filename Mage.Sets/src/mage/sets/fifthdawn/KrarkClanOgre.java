@@ -54,7 +54,6 @@ public class KrarkClanOgre extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Ogre");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

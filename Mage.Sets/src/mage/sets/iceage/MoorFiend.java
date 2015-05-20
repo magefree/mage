@@ -45,7 +45,6 @@ public class MoorFiend extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

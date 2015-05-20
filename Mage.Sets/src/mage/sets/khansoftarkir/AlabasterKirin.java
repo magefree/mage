@@ -46,7 +46,6 @@ public class AlabasterKirin extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Kirin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

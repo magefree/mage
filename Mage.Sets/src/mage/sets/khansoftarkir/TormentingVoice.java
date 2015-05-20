@@ -45,7 +45,6 @@ public class TormentingVoice extends CardImpl {
         super(ownerId, 123, "Tormenting Voice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Tormenting Voice, discard a card.
         this.getSpellAbility().addCost(new DiscardTargetCost(new TargetCardInHand()));

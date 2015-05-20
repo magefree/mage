@@ -61,7 +61,6 @@ public class SingingBellStrike extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

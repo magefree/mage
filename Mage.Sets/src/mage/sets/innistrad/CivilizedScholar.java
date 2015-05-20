@@ -61,7 +61,6 @@ public class CivilizedScholar extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new HomicidalBrute(ownerId);
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

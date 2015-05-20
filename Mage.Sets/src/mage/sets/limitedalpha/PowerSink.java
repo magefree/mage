@@ -56,7 +56,6 @@ public class PowerSink extends CardImpl {
         super(ownerId, 73, "Power Sink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.
         this.getSpellAbility().addEffect(new PowerSinkCounterUnlessPaysEffect());

@@ -56,7 +56,6 @@ public class GoldmeadowStalwart extends CardImpl {
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

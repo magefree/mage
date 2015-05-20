@@ -65,7 +65,6 @@ public class HoodedHydra extends CardImpl {
         this.subtype.add("Snake");
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

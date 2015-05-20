@@ -64,7 +64,6 @@ public class BloodcrazedHoplite extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

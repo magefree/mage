@@ -46,7 +46,6 @@ public class SentinelSpider extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

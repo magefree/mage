@@ -60,7 +60,6 @@ public class CracklingPerimeter extends CardImpl {
         super(ownerId, 88, "Crackling Perimeter", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapTargetCost(new TargetControlledPermanent(filter))));

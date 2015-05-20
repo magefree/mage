@@ -54,7 +54,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         super(ownerId, 118, "Goblin War Drums", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "FEM";
 
-        this.color.setRed(true);
 
         // Each creature you control can't be blocked except by two or more creatures.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter)));

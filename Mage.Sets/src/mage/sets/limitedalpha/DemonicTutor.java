@@ -45,7 +45,6 @@ public class DemonicTutor extends CardImpl {
         super(ownerId, 13, "Demonic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlack(true);
 
         // Search your library for a card and put that card into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary();

@@ -64,7 +64,6 @@ public class QuietContemplation extends CardImpl {
         super(ownerId, 50, "Quiet Contemplation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Whenever you cast a noncreature spell, you may pay {1}. If you do, tap target creature an opponent controls and it doesn't untap during its controller's next untap step.
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new TapTargetEffect(), new GenericManaCost(1),"Tap creature?");        

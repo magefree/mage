@@ -53,7 +53,6 @@ public class ThrissNantukoPrimus extends CardImpl {
         this.subtype.add("Insect");
         this.subtype.add("Druid");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

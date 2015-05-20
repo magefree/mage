@@ -45,7 +45,6 @@ public class SabretoothTiger extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Cat");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

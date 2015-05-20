@@ -47,7 +47,6 @@ public class DigThroughTime extends CardImpl {
         super(ownerId, 36, "Dig Through Time", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{6}{U}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Delve
         this.addAbility(new DelveAbility());

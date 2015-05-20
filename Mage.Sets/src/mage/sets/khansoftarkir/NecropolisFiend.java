@@ -67,7 +67,6 @@ public class NecropolisFiend extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

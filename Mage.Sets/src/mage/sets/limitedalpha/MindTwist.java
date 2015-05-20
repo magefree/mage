@@ -45,7 +45,6 @@ public class MindTwist extends CardImpl {
         super(ownerId, 24, "Mind Twist", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlack(true);
 
         // Target player discards X cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));

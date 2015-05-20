@@ -58,8 +58,6 @@ public class SaplingOfColfenor extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

@@ -59,7 +59,6 @@ public class SultaiFlayer extends CardImpl {
         this.subtype.add("Naga");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

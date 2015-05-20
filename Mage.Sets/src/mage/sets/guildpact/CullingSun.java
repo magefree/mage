@@ -51,8 +51,6 @@ public class CullingSun extends CardImpl {
         super(ownerId, 109, "Culling Sun", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{B}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }

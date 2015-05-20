@@ -61,7 +61,6 @@ public class PlungeIntoDarkness extends CardImpl {
         super(ownerId, 57, "Plunge into Darkness", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

@@ -57,8 +57,6 @@ public class FireAtWill extends CardImpl {
         super(ownerId, 140, "Fire at Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R/W}{R/W}{R/W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Fire at Will deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));

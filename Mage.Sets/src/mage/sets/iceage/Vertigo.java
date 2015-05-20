@@ -55,7 +55,6 @@ public class Vertigo extends CardImpl {
         super(ownerId, 222, "Vertigo", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
 
         // Vertigo deals 2 damage to target creature with flying. That creature loses flying until end of turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));

@@ -60,9 +60,6 @@ public class JeskaiAscendancy extends CardImpl {
         super(ownerId, 180, "Jeskai Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{R}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
         Effect effect = new BoostControlledEffect(1,1,Duration.EndOfTurn);

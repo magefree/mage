@@ -48,7 +48,6 @@ public class AbunasChant extends CardImpl {
         super(ownerId, 1, "Abuna's Chant", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "5DN";
 
-        this.color.setWhite(true);
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

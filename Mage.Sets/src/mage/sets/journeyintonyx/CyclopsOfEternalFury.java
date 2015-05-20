@@ -52,7 +52,6 @@ public class CyclopsOfEternalFury extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Cyclops");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

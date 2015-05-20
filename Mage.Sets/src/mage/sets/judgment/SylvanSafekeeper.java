@@ -55,7 +55,6 @@ public class SylvanSafekeeper extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

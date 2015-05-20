@@ -56,7 +56,6 @@ public class Lignify extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

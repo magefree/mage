@@ -54,7 +54,6 @@ public class IcyPrison extends CardImpl {
         super(ownerId, 74, "Icy Prison", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlue(true);
 
         // When Icy Prison enters the battlefield, exile target creature.
         Ability ability1 = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect(), false);

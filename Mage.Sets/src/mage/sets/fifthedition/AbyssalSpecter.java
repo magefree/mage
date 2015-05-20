@@ -47,7 +47,6 @@ public class AbyssalSpecter extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Specter");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

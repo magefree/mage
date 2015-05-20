@@ -78,7 +78,6 @@ public class DanceOfTheDead extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature card in a graveyard
         TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard("creature card in a graveyard"));

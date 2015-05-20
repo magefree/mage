@@ -55,7 +55,6 @@ public class BrassclawOrcs extends CardImpl {
         this.expansionSetCode = "FEM";
         this.subtype.add("Orc");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

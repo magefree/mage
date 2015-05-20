@@ -46,8 +46,6 @@ public class RagingKavu extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Kavu");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

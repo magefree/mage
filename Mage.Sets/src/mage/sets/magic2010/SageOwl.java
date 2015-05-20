@@ -47,7 +47,6 @@ public class SageOwl extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

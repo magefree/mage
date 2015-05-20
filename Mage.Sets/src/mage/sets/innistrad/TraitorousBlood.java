@@ -49,7 +49,6 @@ public class TraitorousBlood extends CardImpl {
         super(ownerId, 166, "Traitorous Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

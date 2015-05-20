@@ -65,7 +65,6 @@ public class Anger extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Incarnation");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

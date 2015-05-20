@@ -48,7 +48,6 @@ public class SeismicStomp extends CardImpl {
         super(ownerId, 152, "Seismic Stomp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "M14";
 
-        this.color.setRed(true);
 
         // Creatures without flying can't block this turn.
         this.getSpellAbility().addEffect(new SeismicStompEffect());

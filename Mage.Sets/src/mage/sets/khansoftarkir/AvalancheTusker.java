@@ -54,9 +54,6 @@ public class AvalancheTusker extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

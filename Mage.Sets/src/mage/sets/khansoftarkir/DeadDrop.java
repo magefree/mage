@@ -46,7 +46,6 @@ public class DeadDrop extends CardImpl {
         super(ownerId, 67, "Dead Drop", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{9}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Delve
         this.addAbility(new DelveAbility());

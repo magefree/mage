@@ -46,7 +46,6 @@ public class BlurredMongoose extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Mongoose");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

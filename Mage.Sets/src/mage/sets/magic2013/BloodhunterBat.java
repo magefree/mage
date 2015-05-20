@@ -50,7 +50,6 @@ public class BloodhunterBat extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Bat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

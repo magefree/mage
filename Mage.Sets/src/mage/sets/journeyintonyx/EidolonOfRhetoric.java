@@ -48,7 +48,6 @@ public class EidolonOfRhetoric extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

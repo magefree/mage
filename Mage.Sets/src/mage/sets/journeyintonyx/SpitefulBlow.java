@@ -48,7 +48,6 @@ public class SpitefulBlow extends CardImpl {
         super(ownerId, 83, "Spiteful Blow", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Destroy target creature and target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

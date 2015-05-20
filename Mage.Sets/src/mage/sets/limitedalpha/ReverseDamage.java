@@ -51,7 +51,6 @@ public class ReverseDamage extends CardImpl {
         super(ownerId, 219, "Reverse Damage", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "LEA";
 
-        this.color.setWhite(true);
 
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
         this.getSpellAbility().addEffect(new ReverseDamageEffect());

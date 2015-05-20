@@ -56,7 +56,6 @@ public class NaturalSelection extends CardImpl {
         super(ownerId, 121, "Natural Selection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.
         this.getSpellAbility().addEffect(new NaturalSelectionEffect());

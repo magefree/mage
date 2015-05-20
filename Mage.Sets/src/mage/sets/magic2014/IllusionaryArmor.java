@@ -57,7 +57,6 @@ public class IllusionaryArmor extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant Creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

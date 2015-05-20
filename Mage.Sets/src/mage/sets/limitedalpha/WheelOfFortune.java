@@ -44,7 +44,6 @@ public class WheelOfFortune extends CardImpl {
         super(ownerId, 184, "Wheel of Fortune", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "LEA";
 
-        this.color.setRed(true);
 
         // Each player discards his or her hand,
         this.getSpellAbility().addEffect(new DiscardHandAllEffect());

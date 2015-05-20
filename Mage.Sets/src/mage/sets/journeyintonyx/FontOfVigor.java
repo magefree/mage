@@ -48,7 +48,6 @@ public class FontOfVigor extends CardImpl {
         super(ownerId, 11, "Font of Vigor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // {2}{W}, Sacrifice Font of Vigor: You gain 7 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(7), new ManaCostsImpl("{2}{W}"));

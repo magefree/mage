@@ -53,7 +53,6 @@ public class HardenedScales extends CardImpl {
         super(ownerId, 133, "Hardened Scales", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // If one or more +1/+1 counters would be placed on a creature you control, that many plus one +1/+1 counters are placed on it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HardenedScalesEffect()));

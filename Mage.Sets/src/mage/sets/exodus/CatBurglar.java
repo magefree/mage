@@ -54,7 +54,6 @@ public class CatBurglar extends CardImpl {
         this.subtype.add("Rogue");
         this.subtype.add("Minion");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

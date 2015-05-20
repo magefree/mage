@@ -54,7 +54,6 @@ public class GnarledScarhide extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Minotaur");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

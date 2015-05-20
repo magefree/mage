@@ -52,7 +52,6 @@ public class Hubris extends CardImpl {
         super(ownerId, 41, "Hubris", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Return target creature and all Auras attached to it to their owners' hand.
         this.getSpellAbility().addEffect(new HubrisReturnEffect());

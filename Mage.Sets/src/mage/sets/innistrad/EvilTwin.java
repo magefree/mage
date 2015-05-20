@@ -62,8 +62,6 @@ public class EvilTwin extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

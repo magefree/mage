@@ -56,7 +56,6 @@ public class Thunderblust extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(2);
 

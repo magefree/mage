@@ -55,7 +55,6 @@ public class DeathWish extends CardImpl {
         super(ownerId, 64, "Death Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlack(true);
 
         // You may choose a card you own from outside the game and put it into your hand. You lose half your life, rounded up. Exile Death Wish.
         this.getSpellAbility().addEffect(new DeathWishEffect());

@@ -65,8 +65,6 @@ public class SorinSolemnVisitor extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Sorin");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

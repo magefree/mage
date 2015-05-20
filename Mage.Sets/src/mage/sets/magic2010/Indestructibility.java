@@ -54,7 +54,6 @@ public class Indestructibility extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();

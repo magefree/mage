@@ -59,7 +59,6 @@ public class MesmericSliver extends CardImpl {
         this.expansionSetCode = "FUT";
         this.subtype.add("Sliver");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

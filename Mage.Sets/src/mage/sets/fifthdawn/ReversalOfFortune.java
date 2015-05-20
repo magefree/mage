@@ -54,7 +54,6 @@ public class ReversalOfFortune extends CardImpl {
         super(ownerId, 77, "Reversal of Fortune", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Target opponent reveals his or her hand. You may copy an instant or sorcery card in it. If you do, you may cast the copy without paying its mana cost.
         this.getSpellAbility().addEffect(new ReversalOfFortuneEffect());

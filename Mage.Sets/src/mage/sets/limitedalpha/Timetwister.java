@@ -49,7 +49,6 @@ public class Timetwister extends CardImpl {
         super(ownerId, 85, "Timetwister", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
         this.getSpellAbility().addEffect(new TimetwisterEffect());

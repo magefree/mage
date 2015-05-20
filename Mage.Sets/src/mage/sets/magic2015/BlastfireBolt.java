@@ -51,7 +51,6 @@ public class BlastfireBolt extends CardImpl {
         super(ownerId, 130, "Blastfire Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // Blastfire Bolt deals 5 damage to target creature.  Destroy all Equipment attached to that creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));

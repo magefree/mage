@@ -59,7 +59,6 @@ public class ThousandWinds extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

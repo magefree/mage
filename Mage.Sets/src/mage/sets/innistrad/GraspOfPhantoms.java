@@ -48,7 +48,6 @@ public class GraspOfPhantoms extends CardImpl {
         super(ownerId, 58, "Grasp of Phantoms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Put target creature on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

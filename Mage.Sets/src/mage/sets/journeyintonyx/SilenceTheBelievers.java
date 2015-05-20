@@ -54,7 +54,6 @@ public class SilenceTheBelievers extends CardImpl {
         super(ownerId, 82, "Silence the Believers", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Strive - Silence the Believers costs 2B more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{B}"));

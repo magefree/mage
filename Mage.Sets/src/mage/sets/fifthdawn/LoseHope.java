@@ -46,7 +46,6 @@ public class LoseHope extends CardImpl {
         super(ownerId, 52, "Lose Hope", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Target creature gets -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));

@@ -69,7 +69,6 @@ public class ShadowbornDemon extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

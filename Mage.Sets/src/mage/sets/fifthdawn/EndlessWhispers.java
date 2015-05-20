@@ -59,7 +59,6 @@ public class EndlessWhispers extends CardImpl {
         super(ownerId, 49, "Endless Whispers", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under his or her control at the beginning of the next end step."
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnSourceToBattlefieldEffect());

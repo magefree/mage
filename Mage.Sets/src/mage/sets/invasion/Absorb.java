@@ -45,8 +45,6 @@ public class Absorb extends CardImpl {
         super(ownerId, 226, "Absorb", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}{U}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Counter target spell. You gain 3 life.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

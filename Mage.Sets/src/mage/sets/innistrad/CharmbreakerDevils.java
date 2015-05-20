@@ -69,7 +69,6 @@ public class CharmbreakerDevils extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Devil");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

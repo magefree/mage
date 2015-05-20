@@ -49,7 +49,6 @@ public class RitesOfFlourishing extends CardImpl {
         super(ownerId, 192, "Rites of Flourishing", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "M12";
 
-        this.color.setGreen(true);
 
         // At the beginning of each player's draw step, that player draws an additional card.
         this.addAbility(new RitesOfFlourishingAbility());

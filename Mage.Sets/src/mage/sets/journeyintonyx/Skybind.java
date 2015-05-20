@@ -61,7 +61,6 @@ public class Skybind extends CardImpl {
         super(ownerId, 25, "Skybind", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Constellation — When Skybind or another enchantment enters the battlefield under your control, exile target nonenchantment permanent. Return that card to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new ConstellationAbility(new SkybindEffect(), false);

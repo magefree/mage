@@ -62,7 +62,6 @@ public class MortalObstinacy extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

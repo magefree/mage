@@ -77,8 +77,6 @@ public class RiseOfTheHobgoblins extends CardImpl {
         super(ownerId, 145, "Rise of the Hobgoblins", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{R/W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RiseOfTheHobgoblinsEffect()));

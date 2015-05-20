@@ -60,7 +60,6 @@ public class JacesMindseeker extends CardImpl {
         this.subtype.add("Fish");
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

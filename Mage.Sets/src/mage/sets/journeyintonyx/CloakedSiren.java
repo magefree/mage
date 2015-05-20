@@ -46,7 +46,6 @@ public class CloakedSiren extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Siren");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

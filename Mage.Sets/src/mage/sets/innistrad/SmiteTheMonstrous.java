@@ -52,7 +52,6 @@ public class SmiteTheMonstrous extends CardImpl {
         super(ownerId, 33, "Smite the Monstrous", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Destroy target creature with power 4 or greater.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -50,7 +50,6 @@ public class VampireBats extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Bat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

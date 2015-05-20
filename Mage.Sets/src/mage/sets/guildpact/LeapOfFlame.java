@@ -50,8 +50,6 @@ public class LeapOfFlame extends CardImpl {
         super(ownerId, 121, "Leap of Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Replicate {U}{R}
         this.addAbility(new ReplicateAbility(this, "{U}{R}"));

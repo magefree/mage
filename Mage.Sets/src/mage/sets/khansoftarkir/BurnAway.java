@@ -55,7 +55,6 @@ public class BurnAway extends CardImpl {
         super(ownerId, 104, "Burn Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Burn Away deals 6 damage to target creature. When that creature dies this turn, exile all cards from its controller's graveyard.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));

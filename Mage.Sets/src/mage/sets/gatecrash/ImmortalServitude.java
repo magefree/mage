@@ -51,8 +51,6 @@ public class ImmortalServitude extends CardImpl {
         super(ownerId, 220, "Immortal Servitude", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W/B}{W/B}{W/B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Return each creature card with converted mana cost X from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ImmortalServitudeEffect());

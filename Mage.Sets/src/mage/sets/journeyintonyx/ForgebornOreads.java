@@ -48,7 +48,6 @@ public class ForgebornOreads extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Nymph");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

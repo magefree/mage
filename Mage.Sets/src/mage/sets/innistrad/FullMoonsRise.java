@@ -64,7 +64,6 @@ public class FullMoonsRise extends CardImpl {
         super(ownerId, 180, "Full Moon's Rise", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Werewolf creatures you control get +1/+0 and have trample.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));

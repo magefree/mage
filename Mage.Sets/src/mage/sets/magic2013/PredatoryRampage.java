@@ -61,7 +61,6 @@ public class PredatoryRampage extends CardImpl {
         super(ownerId, 180, "Predatory Rampage", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // Creatures you control get +3/+3 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));

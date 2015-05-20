@@ -61,7 +61,6 @@ public class StolenIdentity extends CardImpl {
         super(ownerId, 53, "Stolen Identity", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Put a token onto the battlefield that's a copy of target artifact or creature.
         this.getSpellAbility().addEffect(new StolenIdentityEffect());

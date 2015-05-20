@@ -47,7 +47,6 @@ public class KrumarBondKin extends CardImpl {
         this.subtype.add("Orc");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

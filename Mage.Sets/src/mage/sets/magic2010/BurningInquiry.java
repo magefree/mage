@@ -45,7 +45,6 @@ public class BurningInquiry extends CardImpl {
         super(ownerId, 128, "Burning Inquiry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "M10";
 
-        this.color.setRed(true);
 
         // Each player draws three cards, then discards three cards at random.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(3));

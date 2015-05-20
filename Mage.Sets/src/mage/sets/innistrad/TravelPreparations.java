@@ -48,7 +48,6 @@ public class TravelPreparations extends CardImpl {
         super(ownerId, 206, "Travel Preparations", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Put a +1/+1 counter on each of up to two target creatures.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

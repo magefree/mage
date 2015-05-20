@@ -54,7 +54,6 @@ public class Voidwalk extends CardImpl {
         super(ownerId, 55, "Voidwalk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new VoidwalkEffect());

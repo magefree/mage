@@ -75,7 +75,6 @@ public class Godsend extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
 
-        this.color.setWhite(true);
 
         // Equipped creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3,3,Duration.WhileOnBattlefield)));

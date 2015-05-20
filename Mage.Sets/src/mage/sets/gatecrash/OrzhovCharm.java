@@ -64,8 +64,6 @@ public class OrzhovCharm extends CardImpl {
         super(ownerId, 185, "Orzhov Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         //Choose one - Return target creature you control and all Auras you control attached to it to their owner's hand
         this.getSpellAbility().addEffect(new OrzhovCharmReturnToHandEffect());

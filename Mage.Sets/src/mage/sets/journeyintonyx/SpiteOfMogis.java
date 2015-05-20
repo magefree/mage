@@ -47,7 +47,6 @@ public class SpiteOfMogis extends CardImpl {
         super(ownerId, 113, "Spite of Mogis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Spite of Mogis deals damage to target creature equal to the number of instant and sorcery cards in your graveyard. Scry 1.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards"))));

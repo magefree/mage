@@ -57,8 +57,6 @@ public class Doomgape extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
 

@@ -53,7 +53,6 @@ public class GnawingZombie extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

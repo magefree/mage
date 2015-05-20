@@ -51,8 +51,6 @@ public class CoercedConfession extends CardImpl {
         super(ownerId, 217, "Coerced Confession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U/B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way.
         getSpellAbility().addEffect(new CoercedConfessionMillEffect());

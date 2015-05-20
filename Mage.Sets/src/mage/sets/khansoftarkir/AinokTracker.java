@@ -48,7 +48,6 @@ public class AinokTracker extends CardImpl {
         this.subtype.add("Hound");
         this.subtype.add("Scout");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

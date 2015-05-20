@@ -60,7 +60,6 @@ public class WildGrowth extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -49,7 +49,6 @@ public class PredatorsRapport extends CardImpl {
         super(ownerId, 129, "Predator's Rapport", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Choose target creature you control. You gain life equal to that creature's power plus its toughness.
         Effect effect = new GainLifeEffect(new TargetPermanentPowerPlusToughnessCount());

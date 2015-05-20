@@ -53,7 +53,6 @@ public class Reset extends CardImpl {
         super(ownerId, 73, "Reset", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LEG";
 
-        this.color.setBlue(true);
 
         // Cast Reset only during an opponent's turn after his or her upkeep step.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new ResetReplacementEffect());

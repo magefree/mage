@@ -59,7 +59,6 @@ public class InTheEyeOfChaos extends CardImpl {
         this.expansionSetCode = "LEG";
         this.supertype.add("World");
 
-        this.color.setBlue(true);
 
         // Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.
         this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new InTheEyeOfChaosEffect(), filter, false, true));

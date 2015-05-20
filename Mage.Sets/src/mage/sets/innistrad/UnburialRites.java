@@ -48,7 +48,6 @@ public class UnburialRites extends CardImpl {
         super(ownerId, 122, "Unburial Rites", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());

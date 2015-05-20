@@ -50,7 +50,6 @@ public class DutifulThrull extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Thrull");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

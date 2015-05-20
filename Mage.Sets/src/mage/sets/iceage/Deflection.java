@@ -52,7 +52,6 @@ public class Deflection extends CardImpl {
         super(ownerId, 65, "Deflection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlue(true);
 
         // Change the target of target spell with a single target.
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));

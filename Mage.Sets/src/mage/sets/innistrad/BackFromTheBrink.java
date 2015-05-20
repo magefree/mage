@@ -57,7 +57,6 @@ public class BackFromTheBrink extends CardImpl {
         super(ownerId, 44, "Back from the Brink", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Exile a creature card from your graveyard and pay its mana cost: Put a token onto the battlefield that's a copy of that card. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BackFromTheBrinkEffect(), new BackFromTheBrinkCost()));

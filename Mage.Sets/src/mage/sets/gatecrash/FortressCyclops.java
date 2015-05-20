@@ -49,8 +49,6 @@ public class FortressCyclops extends CardImpl {
         this.subtype.add("Cyclops");
         this.subtype.add("Soldier");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

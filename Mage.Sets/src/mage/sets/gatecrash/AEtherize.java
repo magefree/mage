@@ -44,7 +44,6 @@ public class AEtherize extends CardImpl {
         super(ownerId, 29, "AEtherize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Return all attacking creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterAttackingCreature("attacking creatures")));

@@ -61,8 +61,6 @@ public class InvertTheSkies extends CardImpl {
         super(ownerId, 155, "Invert the Skies", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G/U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Creatures your opponents control lose flying until end of turn if {G} was spent to cast Invert the Skies, and creatures you control gain flying until end of turn if {U} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(

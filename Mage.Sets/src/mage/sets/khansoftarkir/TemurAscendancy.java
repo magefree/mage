@@ -58,9 +58,6 @@ public class TemurAscendancy extends CardImpl {
         super(ownerId, 207, "Temur Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));

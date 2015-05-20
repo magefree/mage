@@ -57,7 +57,6 @@ public class ValorousStance extends CardImpl {
         super(ownerId, 28, "Valorous Stance", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "FRF";
 
-        this.color.setWhite(true);
         
         //Choose one - Target creature gains Indestructible until end of turn
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));

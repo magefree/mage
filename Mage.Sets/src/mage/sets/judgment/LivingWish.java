@@ -57,7 +57,6 @@ public class LivingWish extends CardImpl {
         super(ownerId, 124, "Living Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "JUD";
 
-        this.color.setGreen(true);
 
         // You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand. Exile Living Wish.
         this.getSpellAbility().addEffect(new LivingWishEffect());

@@ -47,7 +47,6 @@ public class RallyThePeasants extends CardImpl {
         super(ownerId, 28, "Rally the Peasants", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +2/+0 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));

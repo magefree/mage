@@ -56,7 +56,6 @@ public class Karma extends CardImpl {
         super(ownerId, 318, "Karma", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "5ED";
 
-        this.color.setWhite(true);
 
         // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), TargetController.ANY, false));

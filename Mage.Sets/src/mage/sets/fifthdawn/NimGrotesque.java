@@ -51,7 +51,6 @@ public class NimGrotesque extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Zombie");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

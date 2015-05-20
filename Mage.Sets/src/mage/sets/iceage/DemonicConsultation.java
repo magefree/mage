@@ -54,7 +54,6 @@ public class DemonicConsultation extends CardImpl {
         super(ownerId, 9, "Demonic Consultation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlack(true);
 
         // Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way.
         this.getSpellAbility().addEffect(new DemonicConsultationEffect());

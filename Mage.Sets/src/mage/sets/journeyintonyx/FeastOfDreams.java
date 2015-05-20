@@ -59,7 +59,6 @@ public class FeastOfDreams extends CardImpl {
         super(ownerId, 69, "Feast of Dreams", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Destroy target enchanted creature or enchantment creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

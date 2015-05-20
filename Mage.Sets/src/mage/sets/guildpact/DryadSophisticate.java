@@ -48,7 +48,6 @@ public class DryadSophisticate extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -49,7 +49,6 @@ public class GriffinProtector extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

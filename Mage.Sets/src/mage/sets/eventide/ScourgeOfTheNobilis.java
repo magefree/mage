@@ -62,8 +62,6 @@ public class ScourgeOfTheNobilis extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

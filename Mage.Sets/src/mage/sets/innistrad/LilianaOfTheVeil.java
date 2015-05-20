@@ -62,7 +62,6 @@ public class LilianaOfTheVeil extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Liliana");
 
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

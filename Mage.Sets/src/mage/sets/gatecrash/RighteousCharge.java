@@ -44,7 +44,6 @@ public class RighteousCharge extends CardImpl {
         super(ownerId, 23, "Righteous Charge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +2/+2 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));

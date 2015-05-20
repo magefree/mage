@@ -48,7 +48,6 @@ public class PhantasmalDragon extends CardImpl {
         this.subtype.add("Dragon");
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

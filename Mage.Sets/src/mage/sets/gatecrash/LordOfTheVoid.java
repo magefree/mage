@@ -58,7 +58,6 @@ public class LordOfTheVoid extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Demon");
 
-        this.color.setBlack(true);
         
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);

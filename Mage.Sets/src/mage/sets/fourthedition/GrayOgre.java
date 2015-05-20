@@ -44,7 +44,6 @@ public class GrayOgre extends CardImpl {
         this.expansionSetCode = "4ED";
         this.subtype.add("Ogre");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
     }

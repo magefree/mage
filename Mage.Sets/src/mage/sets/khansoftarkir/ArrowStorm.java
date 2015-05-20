@@ -48,7 +48,6 @@ public class ArrowStorm extends CardImpl {
         super(ownerId, 98, "Arrow Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Arrow Storm deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

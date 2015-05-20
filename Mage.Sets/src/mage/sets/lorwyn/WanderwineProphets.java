@@ -59,7 +59,6 @@ public class WanderwineProphets extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

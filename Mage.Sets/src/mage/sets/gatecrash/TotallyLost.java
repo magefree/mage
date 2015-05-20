@@ -44,7 +44,6 @@ public class TotallyLost extends CardImpl {
         super(ownerId, 54, "Totally Lost", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Put target nonland permanent on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));

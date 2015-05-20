@@ -46,7 +46,6 @@ public class InfernalPlunge extends CardImpl {
         super(ownerId, 148, "Infernal Plunge", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // As an additional cost to cast Infernal Plunge, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

@@ -50,8 +50,6 @@ public class MirarisWake extends CardImpl {
         super(ownerId, 139, "Mirari's Wake", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{W}");
         this.expansionSetCode = "JUD";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.WhileOnBattlefield)));

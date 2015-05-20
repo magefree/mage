@@ -61,7 +61,6 @@ public class PestilenceRats extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Rat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

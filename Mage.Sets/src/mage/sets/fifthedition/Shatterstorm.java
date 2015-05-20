@@ -44,7 +44,6 @@ public class Shatterstorm extends CardImpl {
         super(ownerId, 266, "Shatterstorm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "5ED";
 
-        this.color.setRed(true);
 
         // Destroy all artifacts. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent(), true));

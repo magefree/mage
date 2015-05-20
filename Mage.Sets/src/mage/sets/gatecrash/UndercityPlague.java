@@ -48,7 +48,6 @@ public class UndercityPlague extends CardImpl {
         super(ownerId, 83, "Undercity Plague", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Target player loses 1 life, discards a card, then sacrifices a permanent.
         this.getSpellAbility().addTarget(new TargetPlayer());

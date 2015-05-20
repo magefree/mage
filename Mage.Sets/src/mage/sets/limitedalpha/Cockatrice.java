@@ -56,7 +56,6 @@ public class Cockatrice extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Cockatrice");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

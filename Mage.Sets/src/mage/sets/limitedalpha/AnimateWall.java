@@ -64,7 +64,6 @@ public class AnimateWall extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant Wall
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

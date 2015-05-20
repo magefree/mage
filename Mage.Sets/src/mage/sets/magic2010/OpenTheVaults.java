@@ -52,7 +52,6 @@ public class OpenTheVaults extends CardImpl {
         super(ownerId, 21, "Open the Vaults", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "M10";
 
-        this.color.setWhite(true);
 
         // Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.
         this.getSpellAbility().addEffect(new OpenTheVaultsEffect());

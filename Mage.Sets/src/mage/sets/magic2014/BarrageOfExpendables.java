@@ -50,7 +50,6 @@ public class BarrageOfExpendables extends CardImpl {
         super(ownerId, 127, "Barrage of Expendables", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "M14";
 
-        this.color.setRed(true);
 
         // {R}, Sacrifice a creature: Barrage of Expendables deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));

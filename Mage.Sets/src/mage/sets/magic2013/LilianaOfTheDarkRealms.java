@@ -78,7 +78,6 @@ public class LilianaOfTheDarkRealms extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Liliana");
 
-        this.color.setBlack(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

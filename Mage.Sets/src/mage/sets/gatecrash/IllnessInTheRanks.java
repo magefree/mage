@@ -53,7 +53,6 @@ public class IllnessInTheRanks extends CardImpl {
         super(ownerId, 69, "Illness in the Ranks", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Creature tokens get -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));

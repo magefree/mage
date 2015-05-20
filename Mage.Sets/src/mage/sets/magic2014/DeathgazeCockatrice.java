@@ -46,7 +46,6 @@ public class DeathgazeCockatrice extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Cockatrice");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -49,7 +49,6 @@ public class FontOfIre extends CardImpl {
         super(ownerId, 97, "Font of Ire", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // {3}{R}, Sacrifice Font of Ire: Font of Ire deals 5 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl("{3}{R}"));

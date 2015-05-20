@@ -49,9 +49,6 @@ public class FlyingCraneTechnique extends CardImpl {
         super(ownerId, 176, "Flying Crane Technique", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{R}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Untap all creatures you control.  They gain flying and double strike until end of turn.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures");

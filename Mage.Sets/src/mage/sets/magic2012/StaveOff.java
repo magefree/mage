@@ -45,7 +45,6 @@ public class StaveOff extends CardImpl {
         super(ownerId, 36, "Stave Off", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M12";
 
-        this.color.setWhite(true);
 
         // Target creature gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));

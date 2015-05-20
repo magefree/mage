@@ -48,7 +48,6 @@ public class BatteringWurm extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

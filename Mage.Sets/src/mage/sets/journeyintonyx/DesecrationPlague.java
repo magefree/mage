@@ -53,7 +53,6 @@ public class DesecrationPlague extends CardImpl {
         super(ownerId, 120, "Desecration Plague", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Destroy target enchantment or land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

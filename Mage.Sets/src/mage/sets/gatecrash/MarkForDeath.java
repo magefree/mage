@@ -66,7 +66,6 @@ public class MarkForDeath extends CardImpl {
         super(ownerId, 99, "Mark for Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
         this.getSpellAbility().addEffect(new MarkForDeathEffect());

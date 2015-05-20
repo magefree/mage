@@ -47,7 +47,6 @@ public class Switcheroo extends CardImpl {
         super(ownerId, 71, "Switcheroo", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Exchange control of two target creatures.
         this.getSpellAbility().addEffect(new ExchangeControlTargetEffect(Duration.EndOfGame, rule));

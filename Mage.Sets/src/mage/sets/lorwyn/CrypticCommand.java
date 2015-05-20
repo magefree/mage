@@ -57,7 +57,6 @@ public class CrypticCommand extends CardImpl {
         super(ownerId, 56, "Cryptic Command", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}{U}{U}");
         this.expansionSetCode = "LRW";
 
-        this.color.setBlue(true);
 
         // Choose two -
         this.getSpellAbility().getModes().setMinModes(2);

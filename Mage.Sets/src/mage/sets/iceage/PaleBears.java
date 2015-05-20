@@ -45,7 +45,6 @@ public class PaleBears extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Bear");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -47,7 +47,6 @@ public class CullingTheWeak extends CardImpl {
         super(ownerId, 55, "Culling the Weak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "EXO";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Culling the Weak, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature"))));

@@ -59,7 +59,6 @@ public class DismantlingBlow extends CardImpl {
         super(ownerId, 14, "Dismantling Blow", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "INV";
 
-        this.color.setWhite(true);
 
         // Kicker {2}{U}
         this.addAbility(new KickerAbility("{2}{U}"));

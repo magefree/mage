@@ -63,7 +63,6 @@ public class PrimevalBounty extends CardImpl {
         super(ownerId, 190, "Primeval Bounty", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BeastToken()), filterCreature, false));

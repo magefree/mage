@@ -50,7 +50,6 @@ public class WeedStrangle extends CardImpl {
         super(ownerId, 147, "Weed Strangle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "LRW";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new WeedStrangleEffect());

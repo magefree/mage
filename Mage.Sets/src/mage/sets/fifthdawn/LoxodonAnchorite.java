@@ -53,7 +53,6 @@ public class LoxodonAnchorite extends CardImpl {
         this.subtype.add("Elephant");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

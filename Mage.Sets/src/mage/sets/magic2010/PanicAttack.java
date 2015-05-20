@@ -45,7 +45,6 @@ public class PanicAttack extends CardImpl {
         super(ownerId, 150, "Panic Attack", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "M10";
 
-        this.color.setRed(true);
 
         // Up to three target creatures can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));

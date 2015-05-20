@@ -53,7 +53,6 @@ public class FeastOnTheFallen extends CardImpl {
         super(ownerId, 96, "Feast on the Fallen", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control. 
         Ability ability = new ConditionalTriggeredAbility(

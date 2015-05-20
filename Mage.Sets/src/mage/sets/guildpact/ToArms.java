@@ -48,7 +48,6 @@ public class ToArms extends CardImpl {
         super(ownerId, 20, "To Arms!", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "GPT";
 
-        this.color.setWhite(true);
 
         // Untap all creatures you control.
         Effect effect = new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule);

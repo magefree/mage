@@ -48,7 +48,6 @@ public class StromkirkPatrol extends CardImpl {
         this.subtype.add("Vampire");
         this.subtype.add("Soldier");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

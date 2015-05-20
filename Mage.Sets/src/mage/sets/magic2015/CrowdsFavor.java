@@ -49,7 +49,6 @@ public class CrowdsFavor extends CardImpl {
         super(ownerId, 138, "Crowd's Favor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

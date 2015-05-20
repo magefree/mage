@@ -54,7 +54,6 @@ public class PhosphorescentFeast extends CardImpl {
         super(ownerId, 72, "Phosphorescent Feast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}{G}");
         this.expansionSetCode = "EVE";
 
-        this.color.setGreen(true);
 
         // Chroma - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.
         Effect effect = new PhosphorescentFeastEffect();

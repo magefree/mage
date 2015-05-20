@@ -52,7 +52,6 @@ public class Countermand extends CardImpl {
         super(ownerId, 33, "Countermand", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Counter target spell. Its controller puts the top four cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));

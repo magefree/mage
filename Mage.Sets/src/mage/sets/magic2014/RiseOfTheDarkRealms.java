@@ -49,7 +49,6 @@ public class RiseOfTheDarkRealms extends CardImpl {
         super(ownerId, 111, "Rise of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlack(true);
 
         // Put all creature cards from all graveyards onto the battlefield under your control.
         this.getSpellAbility().addEffect(new RiseOfTheDarkRealmsEffect());

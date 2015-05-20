@@ -49,7 +49,6 @@ public class VoraciousWurm extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Wurm");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

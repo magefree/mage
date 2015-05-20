@@ -51,7 +51,6 @@ public class NightSoil extends CardImpl {
         super(ownerId, 80, "Night Soil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
         this.expansionSetCode = "FEM";
 
-        this.color.setGreen(true);
 
         // {1}, Exile two creature cards from a single graveyard: Put a 1/1 green Saproling creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));

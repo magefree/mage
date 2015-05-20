@@ -67,7 +67,6 @@ public class OrcishLumberjack extends CardImpl {
         this.expansionSetCode = "DDL";
         this.subtype.add("Orc");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

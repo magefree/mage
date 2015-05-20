@@ -64,7 +64,6 @@ public class CapriciousEfreet extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Efreet");
 
-        this.color.setRed(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

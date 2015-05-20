@@ -73,7 +73,6 @@ public class GarrukCallerOfBeasts extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Garruk");
 
-        this.color.setGreen(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

@@ -51,7 +51,6 @@ public class GruesomeDeformity extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();

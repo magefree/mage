@@ -50,7 +50,6 @@ public class Forbid extends CardImpl {
         super(ownerId, 35, "Forbid", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "EXO";
 
-        this.color.setBlue(true);
 
         // Buyback-Discard two cards.
         this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));

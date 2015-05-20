@@ -49,7 +49,6 @@ public class DevilsPlay extends CardImpl {
         super(ownerId, 140, "Devil's Play", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Devil's Play deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

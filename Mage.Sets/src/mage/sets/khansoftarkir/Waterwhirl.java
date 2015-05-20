@@ -44,7 +44,6 @@ public class Waterwhirl extends CardImpl {
         super(ownerId, 60, "Waterwhirl", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Return up to two target creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

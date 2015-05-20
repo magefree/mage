@@ -58,7 +58,6 @@ public class SwarmbornGiant extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Giant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -60,8 +60,6 @@ public class Void extends CardImpl {
         super(ownerId, 287, "Void", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{R}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
 
         // Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
         Choice numberChoice = new ChoiceImpl();

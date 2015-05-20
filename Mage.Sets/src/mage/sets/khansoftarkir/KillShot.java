@@ -45,7 +45,6 @@ public class KillShot extends CardImpl {
         super(ownerId, 15, "Kill Shot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Destroy target attacking creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterAttackingCreature()));

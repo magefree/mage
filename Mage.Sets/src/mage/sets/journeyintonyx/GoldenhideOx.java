@@ -49,7 +49,6 @@ public class GoldenhideOx extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Ox");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

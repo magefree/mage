@@ -49,7 +49,6 @@ public class StonySilence extends CardImpl {
         super(ownerId, 36, "Stony Silence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Activated abilities of artifacts can't be activated.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StonySilenceCantActivateEffect()));

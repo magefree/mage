@@ -56,7 +56,6 @@ public class ConsignToDust extends CardImpl {
         super(ownerId, 119, "Consign to Dust", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Strive - Consign to Dust costs 2G more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{G}"));

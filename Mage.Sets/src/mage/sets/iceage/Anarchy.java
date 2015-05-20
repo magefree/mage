@@ -52,7 +52,6 @@ public class Anarchy extends CardImpl {
         super(ownerId, 170, "Anarchy", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
 
         // Destroy all white permanents.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

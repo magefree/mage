@@ -52,7 +52,6 @@ public class RiteOfPassage extends CardImpl {
         super(ownerId, 91, "Rite of Passage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "5DN";
 
-        this.color.setGreen(true);
 
         // Whenever a creature you control is dealt damage, put a +1/+1 counter on it.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

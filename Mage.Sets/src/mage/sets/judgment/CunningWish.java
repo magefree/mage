@@ -56,7 +56,6 @@ public class CunningWish extends CardImpl {
         super(ownerId, 37, "Cunning Wish", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlue(true);
 
         // You may choose an instant card you own from outside the game, reveal that card, and put it into your hand. Exile Cunning Wish.
         this.getSpellAbility().addEffect(new CunningWishEffect());

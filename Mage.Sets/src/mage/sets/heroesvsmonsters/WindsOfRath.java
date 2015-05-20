@@ -51,7 +51,6 @@ public class WindsOfRath extends CardImpl {
         super(ownerId, 31, "Winds of Rath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "DDL";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures that aren't enchanted. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));

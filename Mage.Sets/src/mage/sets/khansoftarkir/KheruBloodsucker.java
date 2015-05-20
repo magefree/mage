@@ -73,7 +73,6 @@ public class KheruBloodsucker extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

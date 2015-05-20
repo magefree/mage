@@ -56,7 +56,6 @@ public class TalarasBane extends CardImpl {
         super(ownerId, 47, "Talara's Bane", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
         this.getSpellAbility().addEffect(new TalarasBaneEffect());

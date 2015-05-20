@@ -70,8 +70,6 @@ public class ObzedatGhostCouncil extends CardImpl {
         this.subtype.add("Advisor");
         this.supertype.add("Legendary");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

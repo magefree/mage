@@ -48,7 +48,6 @@ public class NightbirdsClutches extends CardImpl {
         super(ownerId, 154, "Nightbird's Clutches", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Up to two target creatures can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));

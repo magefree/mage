@@ -55,7 +55,6 @@ public class TaintedWell extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

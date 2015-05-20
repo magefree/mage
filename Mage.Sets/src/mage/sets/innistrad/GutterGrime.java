@@ -60,7 +60,6 @@ public class GutterGrime extends CardImpl {
         super(ownerId, 186, "Gutter Grime", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
         this.addAbility(new GutterGrimeTriggeredAbility());

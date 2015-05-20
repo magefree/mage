@@ -56,7 +56,6 @@ public class PatriciansScorn extends CardImpl {
         super(ownerId, 29, "Patrician's Scorn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "FUT";
 
-        this.color.setWhite(true);
 
         // If you've cast another white spell this turn, you may cast Patrician's Scorn without paying its mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new CastWhiteSpellThisTurnCondition()), new PatriciansScornWatcher());

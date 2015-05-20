@@ -54,7 +54,6 @@ public class LlanowarAugur extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

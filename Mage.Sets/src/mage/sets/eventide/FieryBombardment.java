@@ -61,7 +61,6 @@ public class FieryBombardment extends CardImpl {
         super(ownerId, 52, "Fiery Bombardment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
 
         // Chroma - {2}, Sacrifice a creature: Fiery Bombardment deals damage to target creature or player equal to the number of red mana symbols in the sacrificed creature's mana cost.
         Effect effect = new FieryBombardmentEffect();

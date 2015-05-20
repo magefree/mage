@@ -48,9 +48,6 @@ public class FieryJustice extends CardImpl {
         super(ownerId, 366, "Fiery Justice", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}{G}{W}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Fiery Justice deals 5 damage divided as you choose among any number of target creatures and/or players. Target opponent gains 5 life.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));

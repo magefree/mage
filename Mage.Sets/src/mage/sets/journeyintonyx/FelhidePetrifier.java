@@ -51,7 +51,6 @@ public class FelhidePetrifier extends CardImpl {
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

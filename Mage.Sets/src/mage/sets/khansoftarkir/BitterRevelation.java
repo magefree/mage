@@ -54,7 +54,6 @@ public class BitterRevelation extends CardImpl {
         super(ownerId, 65, "Bitter Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
         this.getSpellAbility().addEffect(new BitterRevelationEffect());

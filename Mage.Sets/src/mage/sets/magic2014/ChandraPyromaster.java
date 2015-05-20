@@ -75,7 +75,6 @@ public class ChandraPyromaster extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Chandra");
 
-        this.color.setRed(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

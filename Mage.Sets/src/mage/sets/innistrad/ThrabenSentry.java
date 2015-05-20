@@ -57,7 +57,6 @@ public class ThrabenSentry extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new ThrabenMilitia(ownerId);
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

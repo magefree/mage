@@ -50,8 +50,6 @@ public class Snakeform extends CardImpl {
         super(ownerId, 161, "Snakeform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G/U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1.
         Effect effect = new BecomesCreatureTargetEffect(new SnakeToken(), true, false, Duration.EndOfTurn);

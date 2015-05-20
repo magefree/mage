@@ -45,7 +45,6 @@ public class Vanquish extends CardImpl {
         super(ownerId, 20, "Vanquish", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "5DN";
 
-        this.color.setWhite(true);
 
         // Destroy target blocking creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

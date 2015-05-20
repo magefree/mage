@@ -51,7 +51,6 @@ public class BloodReckoning extends CardImpl {
         super(ownerId, 81, "Blood Reckoning", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Whenever a creature attacks you or a planeswalker you control, that creature's controller loses 1 life.
         this.addAbility(new BloodReckoningTriggeredAbility());

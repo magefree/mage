@@ -61,7 +61,6 @@ public class SetessanTactics extends CardImpl {
         super(ownerId, 140, "Setessan Tactics", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Strive - Setessan Tactics costs G more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{G}"));

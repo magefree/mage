@@ -60,7 +60,6 @@ public class SurvivalOfTheFittest extends CardImpl {
         super(ownerId, 129, "Survival of the Fittest", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "EXO";
 
-        this.color.setGreen(true);
 
         // {G}, Discard a creature card: Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new ColoredManaCost(ColoredManaSymbol.G));

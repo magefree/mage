@@ -54,7 +54,6 @@ public class CinderElemental extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

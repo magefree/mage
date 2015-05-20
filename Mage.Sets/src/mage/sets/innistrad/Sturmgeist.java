@@ -52,7 +52,6 @@ public class Sturmgeist extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

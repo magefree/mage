@@ -55,7 +55,6 @@ public class RaidersSpoils extends CardImpl {
         super(ownerId, 83, "Raiders' Spoils", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Creatures you control get +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield)));

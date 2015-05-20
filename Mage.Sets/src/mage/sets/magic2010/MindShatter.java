@@ -46,7 +46,6 @@ public class MindShatter extends CardImpl {
         super(ownerId, 106, "Mind Shatter", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "M10";
 
-        this.color.setBlack(true);
 
         // Target player discards X cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new ManacostVariableValue(), true));

@@ -51,7 +51,6 @@ public class SwordsToPlowshares extends CardImpl {
         super(ownerId, 302, "Swords to Plowshares", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "4ED";
 
-        this.color.setWhite(true);
 
         // Exile target creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

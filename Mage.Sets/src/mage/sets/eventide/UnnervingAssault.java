@@ -62,8 +62,6 @@ public class UnnervingAssault extends CardImpl {
         super(ownerId, 114, "Unnerving Assault", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U/R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast Unnerving Assault, and creatures you control get +1/+0 until end of turn if {R} was spent to cast it.
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(

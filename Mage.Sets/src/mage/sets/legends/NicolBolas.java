@@ -53,9 +53,6 @@ public class NicolBolas extends CardImpl {
         this.subtype.add("Elder");
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

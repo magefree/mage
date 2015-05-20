@@ -56,7 +56,6 @@ public class TaroxBladewing extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

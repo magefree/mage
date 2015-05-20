@@ -54,7 +54,6 @@ public class EyesOfTheWatcher extends CardImpl {
         super(ownerId, 30, "Eyes of the Watcher", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Whenever you cast an instant or sorcery spell, you may pay {1}. If you do, scry 2.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ScryEffect(2), new ManaCostsImpl("{1}")), filter, true));

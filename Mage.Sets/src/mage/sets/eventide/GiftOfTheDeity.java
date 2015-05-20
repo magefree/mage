@@ -61,8 +61,6 @@ public class GiftOfTheDeity extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

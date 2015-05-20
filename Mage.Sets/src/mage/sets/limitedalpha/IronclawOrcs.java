@@ -55,7 +55,6 @@ public class IronclawOrcs extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Orc");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

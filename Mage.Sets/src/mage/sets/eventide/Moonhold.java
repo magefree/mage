@@ -58,8 +58,6 @@ public class Moonhold extends CardImpl {
         super(ownerId, 143, "Moonhold", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R/W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Target player can't play land cards this turn if {R} was spent to cast Moonhold and can't play creature cards this turn if {W} was spent to cast it.
         ContinuousRuleModifyingEffect effect = new MoonholdEffect();

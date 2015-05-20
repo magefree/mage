@@ -55,7 +55,6 @@ public class PastInFlames extends CardImpl {
         super(ownerId, 155, "Past in Flames", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
         this.getSpellAbility().addEffect(new PastInFlamesEffect());

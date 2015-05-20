@@ -48,8 +48,6 @@ public class ArtifactMutation extends CardImpl {
         super(ownerId, 231, "Artifact Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Destroy target artifact. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

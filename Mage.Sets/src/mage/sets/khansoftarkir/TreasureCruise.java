@@ -44,7 +44,6 @@ public class TreasureCruise extends CardImpl {
         super(ownerId, 59, "Treasure Cruise", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{7}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Delve
         this.addAbility(new DelveAbility());

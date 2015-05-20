@@ -56,7 +56,6 @@ public class BurningWish extends CardImpl {
         super(ownerId, 83, "Burning Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "JUD";
 
-        this.color.setRed(true);
 
         // You may choose a sorcery card you own from outside the game, reveal that card, and put it into your hand. Exile Burning Wish.
         this.getSpellAbility().addEffect(new BurningWishEffect());

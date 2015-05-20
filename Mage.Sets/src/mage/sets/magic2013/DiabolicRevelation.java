@@ -53,7 +53,6 @@ public class DiabolicRevelation extends CardImpl {
         super(ownerId, 87, "Diabolic Revelation", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{3}{B}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Search your library for up to X cards and put those cards into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new DiabolicRevelationEffect());

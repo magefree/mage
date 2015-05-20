@@ -54,7 +54,6 @@ public class ShadowLance extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

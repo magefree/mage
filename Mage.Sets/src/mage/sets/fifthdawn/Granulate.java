@@ -52,7 +52,6 @@ public class Granulate extends CardImpl {
         super(ownerId, 67, "Granulate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Destroy each nonland artifact with converted mana cost 4 or less.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

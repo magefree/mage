@@ -28,7 +28,6 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;

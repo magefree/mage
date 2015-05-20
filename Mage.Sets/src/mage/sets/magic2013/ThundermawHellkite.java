@@ -65,7 +65,6 @@ public class ThundermawHellkite extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -52,7 +52,6 @@ public class ChainLightning extends CardImpl {
         super(ownerId, 137, "Chain Lightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "LEG";
 
-        this.color.setRed(true);
 
         // Chain Lightning deals 3 damage to target creature or player. Then that player or that creature's controller may pay {R}{R}. If the player does, he or she may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainLightningEffect());

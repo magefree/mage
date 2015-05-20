@@ -47,7 +47,6 @@ public class RainOfRust extends CardImpl {
         super(ownerId, 76, "Rain of Rust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);

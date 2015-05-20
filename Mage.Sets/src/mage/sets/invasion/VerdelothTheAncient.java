@@ -65,7 +65,6 @@ public class VerdelothTheAncient extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

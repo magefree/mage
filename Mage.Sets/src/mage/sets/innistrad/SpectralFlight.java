@@ -52,7 +52,6 @@ public class SpectralFlight extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();

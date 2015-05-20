@@ -46,7 +46,6 @@ public class RazorfootGriffin extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Griffin");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

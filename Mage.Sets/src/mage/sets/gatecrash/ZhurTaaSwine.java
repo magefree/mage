@@ -47,8 +47,6 @@ public class ZhurTaaSwine extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Boar");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

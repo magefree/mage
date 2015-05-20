@@ -49,7 +49,6 @@ public class SteelformSliver extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Sliver");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -55,7 +55,6 @@ public class CaravanVigil extends CardImpl {
         super(ownerId, 173, "Caravan Vigil", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         // Morbid - You may put that card onto the battlefield instead of putting it into your hand if a creature died this turn.

@@ -56,7 +56,6 @@ public class Moat extends CardImpl {
         super(ownerId, 197, "Moat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "LEG";
 
-        this.color.setWhite(true);
 
         // Creatures without flying can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter)));

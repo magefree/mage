@@ -71,7 +71,6 @@ public class SpinalEmbrace extends CardImpl {
         super(ownerId, 276, "Spinal Embrace", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Cast Spinal Embrace only during combat.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new SpinalEmbraceEffect());

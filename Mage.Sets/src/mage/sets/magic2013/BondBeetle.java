@@ -50,7 +50,6 @@ public class BondBeetle extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Insect");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

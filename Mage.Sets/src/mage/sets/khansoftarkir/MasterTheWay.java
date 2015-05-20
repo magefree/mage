@@ -47,8 +47,6 @@ public class MasterTheWay extends CardImpl {
         super(ownerId, 188, "Master the Way", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Draw a card. Master the Way deals damage to target creature or player equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

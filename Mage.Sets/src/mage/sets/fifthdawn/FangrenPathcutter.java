@@ -49,7 +49,6 @@ public class FangrenPathcutter extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

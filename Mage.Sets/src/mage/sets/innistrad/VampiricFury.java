@@ -57,7 +57,6 @@ public class VampiricFury extends CardImpl {
         super(ownerId, 167, "Vampiric Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Vampire creatures you control get +2/+0 and gain first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, vampires));

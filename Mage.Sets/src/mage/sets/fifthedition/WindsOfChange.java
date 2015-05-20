@@ -49,7 +49,6 @@ public class WindsOfChange extends CardImpl {
         super(ownerId, 275, "Winds of Change", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "5ED";
 
-        this.color.setRed(true);
 
         // Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
         this.getSpellAbility().addEffect(new WindsOfChangeEffect());

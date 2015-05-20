@@ -46,7 +46,6 @@ public class LiturgyOfBlood extends CardImpl {
         super(ownerId, 104, "Liturgy of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. Add {B}{B}{B} to your mana pool.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

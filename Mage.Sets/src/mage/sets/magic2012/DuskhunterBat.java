@@ -46,7 +46,6 @@ public class DuskhunterBat extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Bat");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

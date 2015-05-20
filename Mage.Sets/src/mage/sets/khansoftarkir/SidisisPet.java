@@ -48,7 +48,6 @@ public class SidisisPet extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Ape");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

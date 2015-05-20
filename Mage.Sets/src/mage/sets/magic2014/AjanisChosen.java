@@ -63,7 +63,6 @@ public class AjanisChosen extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

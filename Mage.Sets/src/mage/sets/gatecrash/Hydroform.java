@@ -49,8 +49,6 @@ public class Hydroform extends CardImpl {
         super(ownerId, 172, "Hydroform", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
         this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new HydroformToken(), false, true, Duration.EndOfTurn));

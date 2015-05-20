@@ -47,7 +47,6 @@ public class DisownedAncestor extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

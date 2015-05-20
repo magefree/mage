@@ -60,7 +60,6 @@ public class SengirAutocrat extends CardImpl {
         this.expansionSetCode = "HML";
         this.subtype.add("Human");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

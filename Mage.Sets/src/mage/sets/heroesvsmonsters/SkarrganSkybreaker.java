@@ -54,8 +54,6 @@ public class SkarrganSkybreaker extends CardImpl {
         this.subtype.add("Giant");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

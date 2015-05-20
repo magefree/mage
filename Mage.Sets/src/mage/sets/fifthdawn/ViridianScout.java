@@ -60,7 +60,6 @@ public class ViridianScout extends CardImpl {
         this.subtype.add("Warrior");
         this.subtype.add("Scout");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

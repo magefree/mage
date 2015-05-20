@@ -48,7 +48,6 @@ public class Lumberknot extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Treefolk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

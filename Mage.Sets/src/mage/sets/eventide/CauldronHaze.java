@@ -48,8 +48,6 @@ public class CauldronHaze extends CardImpl {
         super(ownerId, 84, "Cauldron Haze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W/B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose any number of target creatures. Each of those creatures gains persist until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new PersistAbility(), Duration.EndOfTurn, rule));

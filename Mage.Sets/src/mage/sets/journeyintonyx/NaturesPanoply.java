@@ -47,7 +47,6 @@ public class NaturesPanoply extends CardImpl {
         super(ownerId, 131, "Nature's Panoply", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Strive - Nature's Panoply costs {2}{G} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{G}"));

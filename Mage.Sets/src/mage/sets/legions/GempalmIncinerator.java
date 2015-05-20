@@ -58,7 +58,6 @@ public class GempalmIncinerator extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

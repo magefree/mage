@@ -47,7 +47,6 @@ public class PlasmaElemental extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

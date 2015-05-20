@@ -45,7 +45,6 @@ public class Repulse extends CardImpl {
         super(ownerId, 70, "Repulse", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Return target creature to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

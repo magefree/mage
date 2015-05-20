@@ -45,7 +45,6 @@ public class RottingMastodon extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Elephant");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(8);
     }

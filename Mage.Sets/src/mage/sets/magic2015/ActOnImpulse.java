@@ -55,7 +55,6 @@ public class ActOnImpulse extends CardImpl {
         super(ownerId, 126, "Act on Impulse", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // Exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
         this.getSpellAbility().addEffect(new ActOnImpulseExileEffect());

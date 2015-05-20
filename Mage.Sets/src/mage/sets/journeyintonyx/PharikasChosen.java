@@ -45,7 +45,6 @@ public class PharikasChosen extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Snake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

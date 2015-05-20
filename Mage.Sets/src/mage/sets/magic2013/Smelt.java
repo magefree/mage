@@ -44,7 +44,6 @@ public class Smelt extends CardImpl {
         super(ownerId, 149, "Smelt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

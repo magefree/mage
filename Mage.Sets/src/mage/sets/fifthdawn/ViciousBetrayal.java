@@ -52,7 +52,6 @@ public class ViciousBetrayal extends CardImpl {
         super(ownerId, 60, "Vicious Betrayal", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Vicious Betrayal, sacrifice any number of creatures.
         this.getSpellAbility().addCost(new SacrificeXTargetCost(new FilterControlledCreaturePermanent()));

@@ -50,7 +50,6 @@ public class FeralRidgewolf extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Wolf");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

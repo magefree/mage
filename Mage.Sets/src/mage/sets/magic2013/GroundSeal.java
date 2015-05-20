@@ -54,7 +54,6 @@ public class GroundSeal extends CardImpl {
         super(ownerId, 176, "Ground Seal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // When Ground Seal enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));

@@ -53,7 +53,6 @@ public class EndlessRanksOfTheDead extends CardImpl {
         super(ownerId, 99, "Endless Ranks of the Dead", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield,
         // where X is half the number of Zombies you control, rounded down.

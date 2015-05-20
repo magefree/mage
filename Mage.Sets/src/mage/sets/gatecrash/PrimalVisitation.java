@@ -57,8 +57,6 @@ public class PrimalVisitation extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

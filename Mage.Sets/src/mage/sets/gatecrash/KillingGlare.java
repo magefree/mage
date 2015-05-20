@@ -50,7 +50,6 @@ public class KillingGlare extends CardImpl {
         super(ownerId, 70, "Killing Glare", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Destroy target creature with power X or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

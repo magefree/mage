@@ -55,7 +55,6 @@ public class HunterSliver extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Sliver");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

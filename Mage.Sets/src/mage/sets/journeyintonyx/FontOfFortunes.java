@@ -48,7 +48,6 @@ public class FontOfFortunes extends CardImpl {
         super(ownerId, 38, "Font of Fortunes", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // {1}{U}, Sacrifice Font of Fortunes: Draw two cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl("{1}{U}"));

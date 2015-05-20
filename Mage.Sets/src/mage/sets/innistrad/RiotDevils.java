@@ -44,7 +44,6 @@ public class RiotDevils extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Devil");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

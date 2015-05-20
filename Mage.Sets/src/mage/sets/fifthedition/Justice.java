@@ -56,7 +56,6 @@ public class Justice extends CardImpl {
         super(ownerId, 317, "Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "5ED";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));

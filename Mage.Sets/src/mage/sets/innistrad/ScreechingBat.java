@@ -61,7 +61,6 @@ public class ScreechingBat extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new StalkingVampire(ownerId);
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

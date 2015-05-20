@@ -53,7 +53,6 @@ public class SereneRemembrance extends CardImpl {
         super(ownerId, 132, "Serene Remembrance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setGreen(true);
 
         // Shuffle Serene Remembrance and up to three target cards from a single graveyard into their owners' libraries.
         this.getSpellAbility().addEffect(new SereneRemembranceEffect());

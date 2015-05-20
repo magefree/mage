@@ -47,7 +47,6 @@ public class EbonDrake extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Drake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -46,7 +46,6 @@ public class AvenEnvoy extends CardImpl {
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

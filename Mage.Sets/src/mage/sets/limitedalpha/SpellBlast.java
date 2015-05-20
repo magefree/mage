@@ -53,7 +53,6 @@ public class SpellBlast extends CardImpl {
         super(ownerId, 80, "Spell Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Counter target spell with converted mana cost X.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

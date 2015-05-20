@@ -60,7 +60,6 @@ public class GibberingDescent extends CardImpl {
         super(ownerId, 66, "Gibbering Descent", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "FUT";
 
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player loses 1 life and discards a card.
         Effect effect = new LoseLifeTargetEffect(1);

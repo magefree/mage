@@ -57,7 +57,6 @@ public class Dread extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Incarnation");
 
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

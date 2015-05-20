@@ -45,7 +45,6 @@ public class GlacialWall extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Wall");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

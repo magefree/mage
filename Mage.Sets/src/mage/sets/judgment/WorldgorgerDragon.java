@@ -64,7 +64,6 @@ public class WorldgorgerDragon extends CardImpl {
         this.subtype.add("Nightmare");
         this.subtype.add("Dragon");
 
-        this.color.setRed(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

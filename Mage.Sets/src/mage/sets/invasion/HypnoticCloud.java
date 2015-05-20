@@ -47,7 +47,6 @@ public class HypnoticCloud extends CardImpl {
         super(ownerId, 109, "Hypnotic Cloud", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlack(true);
 
         // Kicker {4}
         this.addAbility(new KickerAbility("{4}"));

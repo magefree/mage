@@ -50,8 +50,6 @@ public class CragPuca extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Shapeshifter");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

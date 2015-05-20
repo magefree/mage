@@ -50,7 +50,6 @@ public class Brainstorm extends CardImpl {
         super(ownerId, 76, "Brainstorm", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // Draw three cards, then put two cards from your hand on top of your library in any order.
         this.getSpellAbility().addEffect(new BrainstormEffect());

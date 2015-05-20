@@ -54,7 +54,6 @@ public class UnwillingRecruit extends CardImpl {
         super(ownerId, 64, "Unwilling Recruit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}{R}{R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
 
         // Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
         this.getSpellAbility().addEffect(new UnwillingRecruitEffect());

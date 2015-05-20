@@ -46,7 +46,6 @@ public class MindWarp extends CardImpl {
         super(ownerId, 14, "Mind Warp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlack(true);
 
         // Look at target player's hand and choose X cards from it. That player discards those cards.
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new ManacostVariableValue(), TargetController.ANY));

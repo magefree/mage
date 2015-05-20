@@ -61,7 +61,6 @@ public class LeoninIconoclast extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Monk");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

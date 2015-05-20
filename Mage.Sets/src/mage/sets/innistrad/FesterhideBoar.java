@@ -50,7 +50,6 @@ public class FesterhideBoar extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Boar");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

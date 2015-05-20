@@ -44,7 +44,6 @@ public class Opt extends CardImpl {
         super(ownerId, 64, "Opt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Look at the top card of your library. You may put that card on the bottom of your library.
         this.getSpellAbility().addEffect(new LookLibraryMayPutToBottomEffect());

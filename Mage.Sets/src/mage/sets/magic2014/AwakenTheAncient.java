@@ -64,7 +64,6 @@ public class AwakenTheAncient extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant Mountain
         TargetPermanent auraTarget = new TargetLandPermanent(filter);

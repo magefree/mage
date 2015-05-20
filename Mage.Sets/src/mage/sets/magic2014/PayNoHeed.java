@@ -43,7 +43,6 @@ public class PayNoHeed extends CardImpl {
         super(ownerId, 27, "Pay No Heed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M14";
 
-        this.color.setWhite(true);
 
         // Prevent all damage a source of your choice would deal this turn.
         this.getSpellAbility().addEffect(new PreventDamageBySourceEffect());

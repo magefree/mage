@@ -56,7 +56,6 @@ public class ScoutTheBorders extends CardImpl {
         super(ownerId, 148, "Scout the Borders", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
         this.getSpellAbility().addEffect(new  ScoutTheBordersEffect());

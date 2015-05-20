@@ -45,7 +45,6 @@ public class HolyDay extends CardImpl {
         super(ownerId, 20, "Holy Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "INV";
 
-        this.color.setWhite(true);
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));

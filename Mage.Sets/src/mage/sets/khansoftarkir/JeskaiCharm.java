@@ -53,9 +53,6 @@ public class JeskaiCharm extends CardImpl {
         super(ownerId, 181, "Jeskai Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{R}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setWhite(true);
 
         // Choose one -
         // - Put target creature on top of its owner's library.

@@ -49,7 +49,6 @@ public class Mournwhelk extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

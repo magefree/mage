@@ -45,7 +45,6 @@ public class ShowOfValor extends CardImpl {
         super(ownerId, 34, "Show of Valor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "M13";
 
-        this.color.setWhite(true);
 
         // Target creature gets +2/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 4, Duration.EndOfTurn));

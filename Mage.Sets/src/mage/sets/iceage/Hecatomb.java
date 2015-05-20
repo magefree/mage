@@ -64,7 +64,6 @@ public class Hecatomb extends CardImpl {
         super(ownerId, 18, "Hecatomb", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlack(true);
 
         // When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledCreaturePermanent(4))), false));

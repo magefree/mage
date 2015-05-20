@@ -46,8 +46,6 @@ public class Petrahydrox extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Weird");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

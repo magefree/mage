@@ -53,7 +53,6 @@ public class HarmsWay extends CardImpl {
         super(ownerId, 14, "Harm's Way", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M10";
 
-        this.color.setWhite(true);
 
         // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());

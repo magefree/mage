@@ -46,7 +46,6 @@ public class CleaverRiot extends CardImpl {
         super(ownerId, 125, "Cleaver Riot", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Creatures you control gain double strike until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));

@@ -46,7 +46,6 @@ public class EidolonOfBlossoms extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Spirit");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

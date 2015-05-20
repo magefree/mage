@@ -45,7 +45,6 @@ public class BloodrageVampire extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

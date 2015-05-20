@@ -58,7 +58,6 @@ public class Vigor extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Incarnation");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

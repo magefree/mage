@@ -44,7 +44,6 @@ public class AncestralRecall extends CardImpl {
         super(ownerId, 48, "Ancestral Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Target player draws three cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));

@@ -46,7 +46,6 @@ public class RidgetopRaptor extends CardImpl {
         this.subtype.add("Lizard");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -50,7 +50,6 @@ public class Tsunami extends CardImpl {
         super(ownerId, 162, "Tsunami", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "4ED";
 
-        this.color.setGreen(true);
 
         // Destroy all Islands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

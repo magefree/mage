@@ -55,7 +55,6 @@ public class HourOfNeed extends CardImpl {
         super(ownerId, 40, "Hour of Need", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Strive — Hour of Need costs {1}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{U}"));

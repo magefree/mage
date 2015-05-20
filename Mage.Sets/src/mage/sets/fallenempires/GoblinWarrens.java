@@ -53,7 +53,6 @@ public class GoblinWarrens extends CardImpl {
         super(ownerId, 122, "Goblin Warrens", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "FEM";
 
-        this.color.setRed(true);
 
         // {2}{R}, Sacrifice two Goblins: Put three 1/1 red Goblin creature tokens onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken(), 3), new ManaCostsImpl("{2}{R}"));

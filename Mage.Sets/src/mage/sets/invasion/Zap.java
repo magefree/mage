@@ -45,7 +45,6 @@ public class Zap extends CardImpl {
         super(ownerId, 180, "Zap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
 
         // Zap deals 1 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));

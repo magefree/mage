@@ -50,7 +50,6 @@ public class ZephyrCharge extends CardImpl {
         super(ownerId, 82, "Zephyr Charge", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlue(true);
 
         // {1}{U}: Target creature gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));

@@ -45,7 +45,6 @@ public class BladeOfTheSixthPride extends CardImpl {
         this.subtype.add("Cat");
         this.subtype.add("Rebel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
     }

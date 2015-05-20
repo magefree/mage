@@ -58,9 +58,6 @@ public class SultaiSoothsayer extends CardImpl {
         this.subtype.add("Naga");
         this.subtype.add("Shaman");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 

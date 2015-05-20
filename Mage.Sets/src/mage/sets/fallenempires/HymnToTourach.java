@@ -44,7 +44,6 @@ public class HymnToTourach extends CardImpl {
         super(ownerId, 12, "Hymn to Tourach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "FEM";
 
-        this.color.setBlack(true);
 
         // Target player discards two cards at random.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2, true));

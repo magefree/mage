@@ -48,7 +48,6 @@ public class HoardersGreed extends CardImpl {
         super(ownerId, 117, "Hoarder's Greed", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "LRW";
 
-        this.color.setBlack(true);
 
         // You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process.
         this.getSpellAbility().addEffect(new HoardersGreedEffect());

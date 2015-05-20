@@ -51,7 +51,6 @@ public class WallOfWater extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Wall");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

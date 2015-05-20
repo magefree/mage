@@ -47,8 +47,6 @@ public class InvokeTheFiremind extends CardImpl {
         super(ownerId, 118, "Invoke the Firemind", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new ManacostVariableValue()));
         Mode mode = new Mode();

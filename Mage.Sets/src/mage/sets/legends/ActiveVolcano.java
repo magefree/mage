@@ -58,7 +58,6 @@ public class ActiveVolcano extends CardImpl {
         super(ownerId, 130, "Active Volcano", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "LEG";
 
-        this.color.setRed(true);
 
         // Choose one - Destroy target blue permanent;
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

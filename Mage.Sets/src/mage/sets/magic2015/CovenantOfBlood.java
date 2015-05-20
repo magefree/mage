@@ -47,7 +47,6 @@ public class CovenantOfBlood extends CardImpl {
         super(ownerId, 91, "Covenant of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{6}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Convoke
         this.addAbility(new ConvokeAbility());

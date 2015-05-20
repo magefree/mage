@@ -45,7 +45,6 @@ public class MentalVapors extends CardImpl {
         super(ownerId, 72, "Mental Vapors", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Target player discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));

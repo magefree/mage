@@ -51,7 +51,6 @@ public class GuardianOfTheGateless extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

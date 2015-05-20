@@ -64,8 +64,6 @@ public class BorborygmosEnraged extends CardImpl {
         
         this.supertype.add("Legendary");
 
-        this.color.setGreen(true);
-        this.color.setRed(true);
         
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);

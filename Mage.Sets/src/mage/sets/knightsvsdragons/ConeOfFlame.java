@@ -49,7 +49,6 @@ public class ConeOfFlame extends CardImpl {
         super(ownerId, 75, "Cone of Flame", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "DDG";
 
-        this.color.setRed(true);
 
         // Cone of Flame deals 1 damage to target creature or player, 2 damage to another target creature or player, and 3 damage to a third target creature or player.
         this.getSpellAbility().addEffect(new ConeOfFlameEffect());

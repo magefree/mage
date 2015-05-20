@@ -45,7 +45,6 @@ public class UtopiaTree extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Plant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

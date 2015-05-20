@@ -52,7 +52,6 @@ public class Wispmare extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

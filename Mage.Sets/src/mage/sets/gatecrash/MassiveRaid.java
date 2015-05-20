@@ -46,7 +46,6 @@ public class MassiveRaid extends CardImpl {
         super(ownerId, 100, "Massive Raid", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Massive Raid deals damage to target creature or player equal to the number of creatures you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent())));

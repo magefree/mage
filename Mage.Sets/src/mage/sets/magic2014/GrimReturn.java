@@ -56,7 +56,6 @@ public class GrimReturn extends CardImpl {
         super(ownerId, 100, "Grim Return", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlack(true);
 
         // Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.
         Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();

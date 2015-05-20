@@ -45,8 +45,6 @@ public class SlinkingSerpent extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Serpent");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

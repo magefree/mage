@@ -52,7 +52,6 @@ public class DisdainfulStroke extends CardImpl {
         super(ownerId, 37, "Disdainful Stroke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Counter target spell with converted mana cost 4 or greater.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

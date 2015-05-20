@@ -48,7 +48,6 @@ public class TouchOfTheEternal extends CardImpl {
         super(ownerId, 37, "Touch of the Eternal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{W}{W}");
         this.expansionSetCode = "M13";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TouchOfTheEternalEffect(), TargetController.YOU, false));

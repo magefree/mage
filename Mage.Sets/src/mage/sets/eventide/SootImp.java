@@ -64,7 +64,6 @@ public class SootImp extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Imp");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

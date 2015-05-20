@@ -51,8 +51,6 @@ public class SparkTrooper extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Soldier");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
 

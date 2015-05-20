@@ -49,7 +49,6 @@ public class CruelFeeding extends CardImpl {
         super(ownerId, 64, "Cruel Feeding", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Strive - Cruel Feeding costs {2}{B} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{B}"));

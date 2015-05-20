@@ -76,8 +76,6 @@ public class AjaniMentorOfHeroes extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Ajani");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

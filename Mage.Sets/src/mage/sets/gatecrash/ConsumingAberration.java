@@ -60,8 +60,6 @@ public class ConsumingAberration extends CardImpl {
         
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
-        this.color.setBlue(true);
         
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

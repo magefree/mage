@@ -61,7 +61,6 @@ public class Mutilate extends CardImpl {
         super(ownerId, 102, "Mutilate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // All creatures get -1/-1 until end of turn for each Swamp you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);

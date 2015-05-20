@@ -45,7 +45,6 @@ public class ShieldedPassage extends CardImpl {
         super(ownerId, 24, "Shielded Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Prevent all damage that would be dealt to target creature this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));

@@ -53,7 +53,6 @@ public class FeastOfTheUnicorn1 extends CardImpl {
         this.expansionSetCode = "HML";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

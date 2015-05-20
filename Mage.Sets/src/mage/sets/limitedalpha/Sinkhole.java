@@ -44,7 +44,6 @@ public class Sinkhole extends CardImpl {
         super(ownerId, 38, "Sinkhole", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlack(true);
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

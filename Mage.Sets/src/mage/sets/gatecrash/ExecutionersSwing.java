@@ -53,8 +53,6 @@ public class ExecutionersSwing extends CardImpl {
         super(ownerId, 161, "Executioner's Swing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Target creature that dealt damage this turn gets -5/-5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5,-5, Duration.EndOfTurn));

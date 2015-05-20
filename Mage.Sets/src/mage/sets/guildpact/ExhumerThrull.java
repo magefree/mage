@@ -49,7 +49,6 @@ public class ExhumerThrull extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Thrull");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

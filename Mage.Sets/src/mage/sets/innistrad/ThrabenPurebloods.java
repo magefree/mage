@@ -44,7 +44,6 @@ public class ThrabenPurebloods extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Hound");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
     }

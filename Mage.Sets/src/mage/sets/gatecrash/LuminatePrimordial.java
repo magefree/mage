@@ -56,7 +56,6 @@ public class LuminatePrimordial extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Avatar");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

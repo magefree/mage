@@ -64,7 +64,6 @@ public class WrathOfMaritLage extends CardImpl {
         super(ownerId, 109, "Wrath of Marit Lage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlue(true);
 
         // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect()));

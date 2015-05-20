@@ -49,7 +49,6 @@ public class PlatedSliver extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Sliver");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

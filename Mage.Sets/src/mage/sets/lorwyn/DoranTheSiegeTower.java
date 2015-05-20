@@ -66,9 +66,6 @@ public class DoranTheSiegeTower extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

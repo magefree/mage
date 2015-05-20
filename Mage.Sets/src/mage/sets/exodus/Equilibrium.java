@@ -56,7 +56,6 @@ public class Equilibrium extends CardImpl {
         super(ownerId, 32, "Equilibrium", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "EXO";
 
-        this.color.setBlue(true);
 
         // Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.
         Ability ability = new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(1)), filter, false);

@@ -58,7 +58,6 @@ public class SkaabRuinator extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

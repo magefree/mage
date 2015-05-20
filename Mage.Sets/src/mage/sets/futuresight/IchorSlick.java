@@ -49,7 +49,6 @@ public class IchorSlick extends CardImpl {
         super(ownerId, 68, "Ichor Slick", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "FUT";
 
-        this.color.setBlack(true);
 
         // Target creature gets -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));

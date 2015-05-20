@@ -48,7 +48,6 @@ public class OakgnarlWarrior extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

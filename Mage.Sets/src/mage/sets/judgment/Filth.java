@@ -65,7 +65,6 @@ public class Filth extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Incarnation");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

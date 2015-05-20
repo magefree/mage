@@ -44,7 +44,6 @@ public class PensiveMinotaur extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Minotaur");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

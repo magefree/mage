@@ -54,7 +54,6 @@ public class WarstormSurge extends CardImpl {
         super(ownerId, 160, "Warstorm Surge", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "M12";
 
-        this.color.setRed(true);
 
         Ability ability = new WarstormSurgeTriggeredAbility();
         ability.addTarget(new TargetCreatureOrPlayer());

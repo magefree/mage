@@ -47,7 +47,6 @@ public class FeedbackBolt extends CardImpl {
         super(ownerId, 64, "Feedback Bolt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Feedback Bolt deals damage to target player equal to the number of artifacts you control.
         Effect effect = new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledArtifactPermanent()));

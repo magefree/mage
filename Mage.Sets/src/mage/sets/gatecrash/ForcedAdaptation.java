@@ -53,7 +53,6 @@ public class ForcedAdaptation extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

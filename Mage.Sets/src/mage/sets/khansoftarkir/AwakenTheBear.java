@@ -48,7 +48,6 @@ public class AwakenTheBear extends CardImpl {
         super(ownerId, 129, "Awaken the Bear", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // Target creature gets +3/+3 and gains trample until end of turn
         Effect effect = new BoostTargetEffect(3, 3, Duration.EndOfTurn);

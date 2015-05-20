@@ -48,7 +48,6 @@ public class BelfrySpirit extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Spirit");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

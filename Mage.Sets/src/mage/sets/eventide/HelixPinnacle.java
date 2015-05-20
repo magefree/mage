@@ -56,7 +56,6 @@ public class HelixPinnacle extends CardImpl {
         super(ownerId, 68, "Helix Pinnacle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "EVE";
 
-        this.color.setGreen(true);
 
         // Shroud
         this.addAbility(ShroudAbility.getInstance());

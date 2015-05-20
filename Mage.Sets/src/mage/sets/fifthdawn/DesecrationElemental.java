@@ -48,7 +48,6 @@ public class DesecrationElemental extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

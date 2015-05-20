@@ -46,8 +46,6 @@ public class MourningThrull extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Thrull");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

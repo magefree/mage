@@ -56,7 +56,6 @@ public class UlvenwaldMystics extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new UlvenwaldPrimordials(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

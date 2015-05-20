@@ -50,7 +50,6 @@ public class MesaFalcon1 extends CardImpl {
         this.expansionSetCode = "HML";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

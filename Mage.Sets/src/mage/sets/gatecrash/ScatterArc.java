@@ -53,7 +53,6 @@ public class ScatterArc extends CardImpl {
         super(ownerId, 48, "Scatter Arc", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Counter target noncreature spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

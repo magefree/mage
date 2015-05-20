@@ -50,7 +50,6 @@ public class FrozenShade extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Shade");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

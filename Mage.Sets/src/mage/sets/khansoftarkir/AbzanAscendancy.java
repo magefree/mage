@@ -61,9 +61,6 @@ public class AbzanAscendancy extends CardImpl {
         super(ownerId, 160, "Abzan Ascendancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{B}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // When Abzan Ascendancy enters the battlefield, put a +1/+1 counter on each creature you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));

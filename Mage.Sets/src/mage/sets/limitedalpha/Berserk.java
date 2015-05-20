@@ -65,7 +65,6 @@ public class Berserk extends CardImpl {
         super(ownerId, 94, "Berserk", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // Cast Berserk only before the combat damage step. (Zone = all because it can be at least graveyard or hand)
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new BerserkReplacementEffect()), new CombatDamageStepStartedWatcher());

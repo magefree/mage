@@ -48,7 +48,6 @@ public class PhalanxFormation extends CardImpl {
         super(ownerId, 21, "Phalanx Formation", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Strive — Phalanx Formation costs {1}{W} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{W}"));

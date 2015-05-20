@@ -48,7 +48,6 @@ public class BurningVengeance extends CardImpl {
         super(ownerId, 133, "Burning Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player.
         this.addAbility(new BurningVengeanceOnCastAbility());

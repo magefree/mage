@@ -62,7 +62,6 @@ public class HoldTheGates extends CardImpl {
         super(ownerId, 16, "Hold the Gates", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +0/+1 for each Gate you control and have vigilance.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,

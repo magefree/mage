@@ -60,8 +60,6 @@ public class NoggleBandit extends CardImpl {
         this.subtype.add("Noggle");
         this.subtype.add("Rogue");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

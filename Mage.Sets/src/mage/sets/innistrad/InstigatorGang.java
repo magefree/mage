@@ -58,7 +58,6 @@ public class InstigatorGang extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new WildbloodPack(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

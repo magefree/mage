@@ -53,8 +53,6 @@ public class AssembleTheLegion extends CardImpl {
        super(ownerId, 142, "Assemble the Legion", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{W}");
        this.expansionSetCode = "GTC";
 
-       this.color.setRed(true);
-       this.color.setWhite(true);
 
        // At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.
        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AssembleTheLegionEffect(), TargetController.YOU, false));

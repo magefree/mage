@@ -56,7 +56,6 @@ public class AggressiveMining extends CardImpl {
         super(ownerId, 127, "Aggressive Mining", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "M15";
 
-        this.color.setRed(true);
 
         // You can't play lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AggressiveMiningEffect()));

@@ -50,7 +50,6 @@ public class PersonalSanctuary extends CardImpl {
         super(ownerId, 30, "Personal Sanctuary", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "M12";
 
-        this.color.setWhite(true);
 
         // During your turn, prevent all damage that would be dealt to you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));

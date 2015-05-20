@@ -54,7 +54,6 @@ public class CryptSliver extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Sliver");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

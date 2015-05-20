@@ -48,7 +48,6 @@ public class Scorchwalker extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 

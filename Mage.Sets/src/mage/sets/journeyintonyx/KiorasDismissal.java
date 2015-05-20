@@ -47,7 +47,6 @@ public class KiorasDismissal extends CardImpl {
         super(ownerId, 44, "Kiora's Dismissal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Strive - Kiora's Dismissal costs U more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{U}"));

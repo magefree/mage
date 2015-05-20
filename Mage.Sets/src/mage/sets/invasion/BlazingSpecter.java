@@ -48,8 +48,6 @@ public class BlazingSpecter extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Specter");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

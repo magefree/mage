@@ -45,7 +45,6 @@ public class GoldenHind extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Elk");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -44,7 +44,6 @@ public class MerfolkOfThePearlTrident extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

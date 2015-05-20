@@ -56,7 +56,6 @@ public class HolyArmor extends CardImpl {
         this.expansionSetCode = "4ED";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

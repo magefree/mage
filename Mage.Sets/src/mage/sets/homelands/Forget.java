@@ -48,7 +48,6 @@ public class Forget extends CardImpl {
         super(ownerId, 32, "Forget", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{U}");
         this.expansionSetCode = "HML";
 
-        this.color.setBlue(true);
 
         // Target player discards two cards, then draws as many cards as he or she discarded this way.
         this.getSpellAbility().addEffect(new ForgetEffect());

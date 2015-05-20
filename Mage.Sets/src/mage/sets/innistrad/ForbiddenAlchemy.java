@@ -56,7 +56,6 @@ public class ForbiddenAlchemy extends CardImpl {
         super(ownerId, 55, "Forbidden Alchemy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new ForbiddenAlchemyEffect());

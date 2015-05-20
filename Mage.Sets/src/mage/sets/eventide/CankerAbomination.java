@@ -57,8 +57,6 @@ public class CankerAbomination extends CardImpl {
         this.subtype.add("Treefolk");
         this.subtype.add("Horror");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

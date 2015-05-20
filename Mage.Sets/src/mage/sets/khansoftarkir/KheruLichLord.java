@@ -73,9 +73,6 @@ public class KheruLichLord extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

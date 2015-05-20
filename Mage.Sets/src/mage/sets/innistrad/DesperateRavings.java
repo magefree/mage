@@ -52,7 +52,6 @@ public class DesperateRavings extends CardImpl {
         super(ownerId, 139, "Desperate Ravings", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Draw two cards, then discard a card at random.
         this.getSpellAbility().addEffect(new DesperateRavingsEffect());

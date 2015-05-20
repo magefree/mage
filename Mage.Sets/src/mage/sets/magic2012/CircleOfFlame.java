@@ -52,7 +52,6 @@ public class CircleOfFlame extends CardImpl {
         super(ownerId, 127, "Circle of Flame", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "M12";
 
-        this.color.setRed(true);
 
         // Whenever a creature without flying attacks you or a planeswalker you control, Circle of Flame deals 1 damage to that creature.
         this.addAbility(new CircleOfFlameTriggeredAbility());

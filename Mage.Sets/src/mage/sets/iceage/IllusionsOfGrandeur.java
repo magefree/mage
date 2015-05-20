@@ -48,7 +48,6 @@ public class IllusionsOfGrandeur extends CardImpl {
         super(ownerId, 79, "Illusions of Grandeur", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "ICE";
 
-        this.color.setBlue(true);
 
         // Cumulative upkeep {2}
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(2)));

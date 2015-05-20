@@ -60,8 +60,6 @@ public class FavorOfTheOverbeing extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

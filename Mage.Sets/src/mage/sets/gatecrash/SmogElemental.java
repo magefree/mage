@@ -56,7 +56,6 @@ public class SmogElemental extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

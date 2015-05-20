@@ -44,7 +44,6 @@ public class MentalNote extends CardImpl {
         super(ownerId, 46, "Mental Note", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlue(true);
 
         // Put the top two cards of your library into your graveyard.
         this.getSpellAbility().addEffect(new PutTopCardOfLibraryIntoGraveControllerEffect(2));

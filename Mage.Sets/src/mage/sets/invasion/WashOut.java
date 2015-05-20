@@ -60,7 +60,6 @@ public class WashOut extends CardImpl {
         super(ownerId, 87, "Wash Out", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
 
         // Return all permanents of the color of your choice to their owners' hands.
         this.getSpellAbility().addChoice(new ChoiceColor());

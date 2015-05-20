@@ -59,7 +59,6 @@ public class YevaNaturesHerald extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

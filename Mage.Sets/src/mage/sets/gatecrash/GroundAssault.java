@@ -46,8 +46,6 @@ public class GroundAssault extends CardImpl {
         super(ownerId, 168, "Ground Assault", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Ground Assault deals damage to target creature equal to the number of lands you control.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(new FilterControlledLandPermanent())));

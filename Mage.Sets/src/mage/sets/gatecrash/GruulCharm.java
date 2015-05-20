@@ -67,8 +67,6 @@ public class GruulCharm extends CardImpl {
         super(ownerId, 169, "Gruul Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Choose one - Creatures without flying can't block this turn;
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));

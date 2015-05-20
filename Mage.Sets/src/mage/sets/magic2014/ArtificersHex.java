@@ -63,7 +63,6 @@ public class ArtificersHex extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant Equipment
         TargetPermanent auraTarget = new TargetPermanent(filter);

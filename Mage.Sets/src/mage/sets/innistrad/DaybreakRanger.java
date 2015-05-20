@@ -71,7 +71,6 @@ public class DaybreakRanger extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new NightfallPredator(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

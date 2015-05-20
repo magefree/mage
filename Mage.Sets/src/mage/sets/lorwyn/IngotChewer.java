@@ -50,7 +50,6 @@ public class IngotChewer extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

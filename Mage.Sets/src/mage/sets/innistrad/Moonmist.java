@@ -59,7 +59,6 @@ public class Moonmist extends CardImpl {
         super(ownerId, 195, "Moonmist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Transform all Humans. Prevent all combat damage that would be dealt this turn by creatures other than Werewolves and Wolves.
         this.getSpellAbility().addEffect(new MoonmistEffect());

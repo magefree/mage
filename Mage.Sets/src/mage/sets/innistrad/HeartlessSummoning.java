@@ -48,7 +48,6 @@ public class HeartlessSummoning extends CardImpl {
         super(ownerId, 104, "Heartless Summoning", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Creature spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2)));

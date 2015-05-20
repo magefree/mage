@@ -57,7 +57,6 @@ public class Paralyze extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

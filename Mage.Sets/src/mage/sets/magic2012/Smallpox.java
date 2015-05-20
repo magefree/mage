@@ -52,7 +52,6 @@ public class Smallpox extends CardImpl {
         super(ownerId, 108, "Smallpox", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlack(true);
 
         // Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land.
         this.getSpellAbility().addEffect(new LoseLifeAllPlayersEffect(1));

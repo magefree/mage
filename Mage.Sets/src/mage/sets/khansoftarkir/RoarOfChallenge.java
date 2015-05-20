@@ -51,7 +51,6 @@ public class RoarOfChallenge extends CardImpl {
         super(ownerId, 145, "Roar of Challenge", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));

@@ -46,7 +46,6 @@ public class MidnightRecovery extends CardImpl {
         super(ownerId, 73, "Midnight Recovery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

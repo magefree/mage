@@ -51,7 +51,6 @@ public class SolidarityOfHeroes extends CardImpl {
         super(ownerId, 141, "Solidarity of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Strive - Solidarity of Heroes costs {1}{G} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{G}"));

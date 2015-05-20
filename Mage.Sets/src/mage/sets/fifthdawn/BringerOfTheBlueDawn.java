@@ -52,7 +52,6 @@ public class BringerOfTheBlueDawn extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Bringer");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

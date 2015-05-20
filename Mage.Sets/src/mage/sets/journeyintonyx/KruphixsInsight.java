@@ -53,7 +53,6 @@ public class KruphixsInsight extends CardImpl {
         super(ownerId, 129, "Kruphix's Insight", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(6), false, new StaticValue(3), filter, Zone.GRAVEYARD, false, true, true,Zone.HAND, false));

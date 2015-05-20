@@ -56,7 +56,6 @@ public class Obliterate extends CardImpl {
         super(ownerId, 156, "Obliterate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{R}{R}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
 
         // Obliterate can't be countered.
         this.addAbility(new CantBeCounteredAbility());

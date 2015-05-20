@@ -52,7 +52,6 @@ public class Gush extends CardImpl {
         super(ownerId, 27, "Gush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "DD2";
 
-        this.color.setBlue(true);
 
         // You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.
         AlternativeCostSourceAbility ability;   

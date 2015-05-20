@@ -55,7 +55,6 @@ public class FaerieTrickery extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Faerie");
 
-        this.color.setBlue(true);
 
         // Counter target non-Faerie spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
         this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));

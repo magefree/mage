@@ -48,7 +48,6 @@ public class Fervor extends CardImpl {
         super(ownerId, 129, "Fervor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(

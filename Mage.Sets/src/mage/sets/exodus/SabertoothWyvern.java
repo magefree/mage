@@ -46,7 +46,6 @@ public class SabertoothWyvern extends CardImpl {
         this.expansionSetCode = "EXO";
         this.subtype.add("Drake");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

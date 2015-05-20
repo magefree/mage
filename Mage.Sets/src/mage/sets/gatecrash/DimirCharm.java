@@ -72,8 +72,6 @@ public class DimirCharm extends CardImpl {
         super(ownerId, 154, "Dimir Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setBlue(true);
 
         //Choose one - Counter target sorcery spell
         this.getSpellAbility().addEffect(new CounterTargetEffect());

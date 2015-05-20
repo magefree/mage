@@ -55,7 +55,6 @@ public class KnowledgeAndPower extends CardImpl {
         super(ownerId, 101, "Knowledge and Power", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Whenever you scry, you may pay 2. If you do. Knowledge and Power deals 2 damage to target creature or player.
         this.addAbility(new ScryTriggeredAbility() );

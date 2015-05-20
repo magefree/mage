@@ -72,7 +72,6 @@ public class SimicManipulator extends CardImpl {
         this.subtype.add("Mutant");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

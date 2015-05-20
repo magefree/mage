@@ -58,7 +58,6 @@ public class DawnsReflection extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

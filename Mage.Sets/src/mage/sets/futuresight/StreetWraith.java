@@ -47,7 +47,6 @@ public class StreetWraith extends CardImpl {
         this.expansionSetCode = "FUT";
         this.subtype.add("Wraith");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

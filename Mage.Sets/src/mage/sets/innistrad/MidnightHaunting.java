@@ -44,7 +44,6 @@ public class MidnightHaunting extends CardImpl {
         super(ownerId, 22, "Midnight Haunting", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken("ISD"), 2));

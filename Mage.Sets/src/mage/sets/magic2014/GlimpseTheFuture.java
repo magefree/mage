@@ -53,7 +53,6 @@ public class GlimpseTheFuture extends CardImpl {
         super(ownerId, 58, "Glimpse the Future", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlue(true);
 
         // Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard. 
         this.getSpellAbility().addEffect(new GlimpseTheFutureEffect());

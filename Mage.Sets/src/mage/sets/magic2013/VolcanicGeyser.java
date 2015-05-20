@@ -45,7 +45,6 @@ public class VolcanicGeyser extends CardImpl {
         super(ownerId, 154, "Volcanic Geyser", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Volcanic Geyser deals X damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

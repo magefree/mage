@@ -56,7 +56,6 @@ public class RecklessWaif extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new MercilessPredator(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

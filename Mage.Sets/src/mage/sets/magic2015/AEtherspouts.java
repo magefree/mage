@@ -58,7 +58,6 @@ public class AEtherspouts extends CardImpl {
         super(ownerId, 44, "AEtherspouts", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlue(true);
 
         // For each attacking creature, its owner puts it on the top or bottom of his or her library.
         this.getSpellAbility().addEffect(new AEtherspoutsEffect());

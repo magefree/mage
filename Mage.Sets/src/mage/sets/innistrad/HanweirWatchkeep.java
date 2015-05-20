@@ -57,7 +57,6 @@ public class HanweirWatchkeep extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new BaneOfHanweir(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

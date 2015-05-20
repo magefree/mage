@@ -46,8 +46,6 @@ public class Undermine extends CardImpl {
         super(ownerId, 282, "Undermine", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}{B}");
         this.expansionSetCode = "INV";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Counter target spell. Its controller loses 3 life.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));

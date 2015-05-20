@@ -56,7 +56,6 @@ public class HighTide extends CardImpl {
         super(ownerId, 35, "High Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "FEM";
 
-        this.color.setBlue(true);
 
         // Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new HighTideTriggeredAbility()));

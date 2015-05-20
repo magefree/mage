@@ -57,7 +57,6 @@ public class Derelor extends CardImpl {
         this.expansionSetCode = "FEM";
         this.subtype.add("Thrull");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

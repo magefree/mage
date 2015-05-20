@@ -59,7 +59,6 @@ public class EntanglingVines extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant tapped creature
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);

@@ -47,7 +47,6 @@ public class DictateOfHeliod extends CardImpl {
         super(ownerId, 8, "Dictate of Heliod", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setWhite(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

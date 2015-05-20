@@ -62,7 +62,6 @@ public class UndeadAlchemist extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Zombie");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

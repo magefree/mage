@@ -58,7 +58,6 @@ public class PhantomNomad extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Nomad");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

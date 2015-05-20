@@ -64,9 +64,6 @@ public class AbzanCharm extends CardImpl {
         super(ownerId, 161, "Abzan Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}{B}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose one -
         // *Exile target creature with power 3 or greater

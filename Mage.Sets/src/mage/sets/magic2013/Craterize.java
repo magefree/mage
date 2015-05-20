@@ -44,7 +44,6 @@ public class Craterize extends CardImpl {
         super(ownerId, 126, "Craterize", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Destroy target land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -52,7 +52,6 @@ public class AngelicEdict extends CardImpl {
         super(ownerId, 2, "Angelic Edict", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setWhite(true);
 
         // Exile target creature or enchantment.
         getSpellAbility().addEffect(new ExileTargetEffect());

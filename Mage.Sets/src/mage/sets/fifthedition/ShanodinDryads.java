@@ -45,7 +45,6 @@ public class ShanodinDryads extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Dryad");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

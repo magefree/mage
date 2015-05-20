@@ -54,7 +54,6 @@ public class DarkProphecy extends CardImpl {
         super(ownerId, 93, "Dark Prophecy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
         this.expansionSetCode = "M14";
 
-        this.color.setBlack(true);
 
         // Whenever a creature you control dies, you draw a card and lose 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter);

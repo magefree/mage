@@ -65,8 +65,6 @@ public class PharikaGodOfAffliction extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("God");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

@@ -52,7 +52,6 @@ public class ChaoticBacklash extends CardImpl {
         super(ownerId, 49, "Chaotic Backlash", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
 
         // Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.
         this.getSpellAbility().addEffect(new ChaoticBacklashEffect());

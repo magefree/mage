@@ -67,7 +67,6 @@ public class Juxtapose extends CardImpl {
         super(ownerId, 95, "Juxtapose", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlue(true);
 
         // You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
         this.getSpellAbility().addEffect(new JuxtaposeEffect(new FilterCreaturePermanent(), "You and target player exchange control of the creature you each control with the highest converted mana cost."));

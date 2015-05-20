@@ -64,7 +64,6 @@ public class SavageSummoning extends CardImpl {
         super(ownerId, 194, "Savage Summoning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M14";
 
-        this.color.setGreen(true);
 
         // Savage Summoning can't be countered.
         Ability ability = new CantBeCounteredAbility();

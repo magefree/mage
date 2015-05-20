@@ -55,7 +55,6 @@ public class CribSwap extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
 
-        this.color.setWhite(true);
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());

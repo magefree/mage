@@ -51,7 +51,6 @@ public class WyluliWolf extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

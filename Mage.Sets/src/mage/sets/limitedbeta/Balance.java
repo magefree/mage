@@ -57,7 +57,6 @@ public class Balance extends CardImpl {
         super(ownerId, 188, "Balance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "LEB";
 
-        this.color.setWhite(true);
 
         // Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
         this.getSpellAbility().addEffect(new BalanceEffect());

@@ -49,7 +49,6 @@ public class AerialFormation extends CardImpl {
         super(ownerId, 30, "Aerial Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Strive — Aerial Formation costs {2}{U} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{U}"));

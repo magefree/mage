@@ -50,7 +50,6 @@ public class GarruksHorde extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

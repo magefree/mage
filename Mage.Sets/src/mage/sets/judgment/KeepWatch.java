@@ -44,7 +44,6 @@ public class KeepWatch extends CardImpl {
         super(ownerId, 43, "Keep Watch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "JUD";
 
-        this.color.setBlue(true);
 
         // Draw a card for each attacking creature.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new AttackingCreatureCount()));

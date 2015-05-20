@@ -49,7 +49,6 @@ public class SkaabGoliath extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
 
-        this.color.setBlue(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(9);
 

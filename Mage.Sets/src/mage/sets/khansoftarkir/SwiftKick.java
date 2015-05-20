@@ -57,7 +57,6 @@ public class SwiftKick extends CardImpl {
         super(ownerId, 122, "Swift Kick", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Target creature you control gets +1/+0 until end of turn. It fights target creature you don't control.
         Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);

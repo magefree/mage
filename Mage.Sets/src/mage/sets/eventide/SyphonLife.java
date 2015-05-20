@@ -49,7 +49,6 @@ public class SyphonLife extends CardImpl {
         super(ownerId, 46, "Syphon Life", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlack(true);
 
         // Target player loses 2 life and you gain 2 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));

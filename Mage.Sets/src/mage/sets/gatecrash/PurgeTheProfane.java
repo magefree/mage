@@ -45,8 +45,6 @@ public class PurgeTheProfane extends CardImpl {
         super(ownerId, 190, "Purge the Profane", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Target opponent discards two cards and you gain 2 life.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

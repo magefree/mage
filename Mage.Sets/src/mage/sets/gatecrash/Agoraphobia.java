@@ -56,7 +56,6 @@ public class Agoraphobia extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

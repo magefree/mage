@@ -51,7 +51,6 @@ public class Flashfires extends CardImpl {
         super(ownerId, 231, "Flashfires", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "5ED";
 
-        this.color.setRed(true);
 
         // Destroy all Plains.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

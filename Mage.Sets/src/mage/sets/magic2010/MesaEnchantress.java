@@ -55,7 +55,6 @@ public class MesaEnchantress extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Druid");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 

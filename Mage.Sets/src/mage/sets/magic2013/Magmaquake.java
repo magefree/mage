@@ -59,7 +59,6 @@ public class Magmaquake extends CardImpl {
         super(ownerId, 140, "Magmaquake", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Magmaquake deals X damage to each creature without flying and each planeswalker.
         this.getSpellAbility().addEffect(new DamageAllEffect(new ManacostVariableValue(), filter));

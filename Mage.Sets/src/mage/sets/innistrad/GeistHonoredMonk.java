@@ -54,7 +54,6 @@ public class GeistHonoredMonk extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

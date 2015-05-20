@@ -57,7 +57,6 @@ public class BloodBairn extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

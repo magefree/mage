@@ -56,7 +56,6 @@ public class Abomination extends CardImpl {
         this.expansionSetCode = "LEG";
         this.subtype.add("Horror");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 

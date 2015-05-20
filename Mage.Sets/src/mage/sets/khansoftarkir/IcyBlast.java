@@ -53,7 +53,6 @@ public class IcyBlast extends CardImpl {
         super(ownerId, 42, "Icy Blast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Tap X target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect("X target creatures"));

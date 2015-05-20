@@ -45,7 +45,6 @@ public class WallOfHeat extends CardImpl {
         this.expansionSetCode = "LEG";
         this.subtype.add("Wall");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);
 

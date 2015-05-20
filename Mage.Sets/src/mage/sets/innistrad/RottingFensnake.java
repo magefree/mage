@@ -45,7 +45,6 @@ public class RottingFensnake extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Snake");
 
-        this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
     }

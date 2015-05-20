@@ -50,7 +50,6 @@ public class PriceOfProgress extends CardImpl {
         super(ownerId, 95, "Price of Progress", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "EXO";
 
-        this.color.setRed(true);
 
         // Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.
         this.getSpellAbility().addEffect(new PriceOfProgressEffect());

@@ -96,8 +96,6 @@ public class BaneAlleyBroker extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rogue");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

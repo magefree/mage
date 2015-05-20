@@ -67,8 +67,6 @@ public class IroasGodOfVictory extends CardImpl {
         this.supertype.add("Legendary");        
         this.subtype.add("God");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
 

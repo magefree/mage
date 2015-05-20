@@ -60,7 +60,6 @@ public class ColossalWhale extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Whale");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

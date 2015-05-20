@@ -66,7 +66,6 @@ public class Wonder extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Incarnation");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -63,8 +63,6 @@ public class RideDown extends CardImpl {
         super(ownerId, 194, "Ride Down", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Destroy target blocking creature. Creatures that were blocked by that creature this combat gain trample until end of turn.
         this.getSpellAbility().addEffect(new RideDownEffect());

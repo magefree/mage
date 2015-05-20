@@ -52,7 +52,6 @@ public class LurkingPredators extends CardImpl {
         super(ownerId, 190, "Lurking Predators", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "M10";
 
-        this.color.setGreen(true);
 
         // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
         this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));

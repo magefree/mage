@@ -45,7 +45,6 @@ public class DutifulReturn extends CardImpl {
         super(ownerId, 71, "Dutiful Return", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Return up to two target creature cards from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

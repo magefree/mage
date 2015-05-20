@@ -60,7 +60,6 @@ public class EntanglingTrap extends CardImpl {
         super(ownerId, 13, "Entangling Trap", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "LRW";
 
-        this.color.setWhite(true);
 
         // Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.
         Ability ability = new EntanglingClashTriggeredAbility();

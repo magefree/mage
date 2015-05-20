@@ -59,7 +59,6 @@ public class SilverchaseFox extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Fox");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

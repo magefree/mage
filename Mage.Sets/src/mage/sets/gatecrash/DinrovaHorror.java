@@ -53,8 +53,6 @@ public class DinrovaHorror extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Horror");
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

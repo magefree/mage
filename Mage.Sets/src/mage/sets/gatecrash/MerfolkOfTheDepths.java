@@ -46,8 +46,6 @@ public class MerfolkOfTheDepths extends CardImpl {
         this.subtype.add("Merfolk");
         this.subtype.add("Soldier");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

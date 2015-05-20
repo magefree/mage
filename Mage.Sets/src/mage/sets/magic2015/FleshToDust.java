@@ -44,7 +44,6 @@ public class FleshToDust extends CardImpl {
         super(ownerId, 98, "Flesh to Dust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "M15";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

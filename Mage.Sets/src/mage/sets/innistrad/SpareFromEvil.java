@@ -55,7 +55,6 @@ public class SpareFromEvil extends CardImpl {
         super(ownerId, 34, "Spare from Evil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Creatures you control gain protection from non-Human creatures until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Duration.EndOfTurn, new FilterCreaturePermanent(), false));

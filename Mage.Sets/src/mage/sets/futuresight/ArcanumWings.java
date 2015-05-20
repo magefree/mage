@@ -56,7 +56,6 @@ public class ArcanumWings extends CardImpl {
         this.expansionSetCode = "FUT";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

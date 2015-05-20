@@ -45,7 +45,6 @@ public class SegovianLeviathan extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Leviathan");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

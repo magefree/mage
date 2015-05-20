@@ -65,7 +65,6 @@ public class MephidrossVampire extends CardImpl {
         this.expansionSetCode = "5DN";
         this.subtype.add("Vampire");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

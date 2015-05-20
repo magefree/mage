@@ -51,8 +51,6 @@ public class GhorClanRampager extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -49,7 +49,6 @@ public class DictateOfKruphix extends CardImpl {
         super(ownerId, 37, "Dictate of Kruphix", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

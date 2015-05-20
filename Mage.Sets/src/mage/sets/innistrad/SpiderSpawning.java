@@ -51,7 +51,6 @@ public class SpiderSpawning extends CardImpl {
         super(ownerId, 203, "Spider Spawning", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Put a 1/2 green Spider creature token with reach onto the battlefield for each creature card in your graveyard.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiderToken(), new CardsInControllerGraveyardCount(new FilterCreatureCard())));

@@ -50,7 +50,6 @@ public class SomberwaldSpider extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

@@ -48,7 +48,6 @@ public class ScreamingFury extends CardImpl {
         super(ownerId, 78, "Screaming Fury", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "5DN";
 
-        this.color.setRed(true);
 
         // Target creature gets +5/+0 and gains haste until end of turn.
         Effect effect = new BoostTargetEffect(5,0, Duration.EndOfTurn);

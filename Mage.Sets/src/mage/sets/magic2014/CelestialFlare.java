@@ -47,7 +47,6 @@ public class CelestialFlare extends CardImpl {
         super(ownerId, 12, "Celestial Flare", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}{W}");
         this.expansionSetCode = "M14";
 
-        this.color.setWhite(true);
 
         // Target player sacrifices an attacking or blocking creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(filter, 1, "Target player"));

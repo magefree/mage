@@ -52,7 +52,6 @@ public class GoblinDiplomats extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -45,7 +45,6 @@ public class LandLeeches extends CardImpl {
         this.expansionSetCode = "4ED";
         this.subtype.add("Leech");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -52,7 +52,6 @@ public class NightTerrors extends CardImpl {
         super(ownerId, 111, "Night Terrors", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. Exile that card.
         this.getSpellAbility().addTarget(new TargetPlayer());

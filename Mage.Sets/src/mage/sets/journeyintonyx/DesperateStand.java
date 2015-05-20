@@ -50,8 +50,6 @@ public class DesperateStand extends CardImpl {
         super(ownerId, 147, "Desperate Stand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{W}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         // Strive - Desperate Stand costs RW more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{R}{W}"));

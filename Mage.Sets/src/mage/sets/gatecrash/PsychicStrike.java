@@ -52,8 +52,6 @@ public class PsychicStrike extends CardImpl {
         super(ownerId, 189, "Psychic Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.
         this.getSpellAbility().addTarget(new TargetSpell(new FilterSpell()));

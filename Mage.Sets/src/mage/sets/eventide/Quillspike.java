@@ -55,8 +55,6 @@ public class Quillspike extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

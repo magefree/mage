@@ -50,7 +50,6 @@ public class PolarKraken extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Kraken");
 
-        this.color.setBlue(true);
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
 

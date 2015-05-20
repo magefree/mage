@@ -47,7 +47,6 @@ public class FlurryOfHorns extends CardImpl {
         super(ownerId, 96, "Flurry of Horns", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Put two 2/3 red Minotaur creature tokens with haste onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FlurryOfHornsMinotaurToken(), 2));

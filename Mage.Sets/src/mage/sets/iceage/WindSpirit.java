@@ -50,7 +50,6 @@ public class WindSpirit extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

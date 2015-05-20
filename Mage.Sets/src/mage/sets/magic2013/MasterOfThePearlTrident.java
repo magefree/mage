@@ -58,7 +58,6 @@ public class MasterOfThePearlTrident extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

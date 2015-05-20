@@ -50,7 +50,6 @@ public class MakeAWish extends CardImpl {
         super(ownerId, 192, "Make a Wish", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Return two cards at random from your graveyard to your hand.
         this.getSpellAbility().addEffect(new MakeAWishEffect());

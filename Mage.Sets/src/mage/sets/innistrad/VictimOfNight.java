@@ -55,7 +55,6 @@ public class VictimOfNight extends CardImpl {
         super(ownerId, 124, "Victim of Night", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Destroy target non-Vampire, non-Werewolf, non-Zombie creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

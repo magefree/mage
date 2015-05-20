@@ -47,7 +47,6 @@ public class WhirlwindAdept extends CardImpl {
         this.subtype.add("Djinn");
         this.subtype.add("Monk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

@@ -57,7 +57,6 @@ public class SquelchingLeeches extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Leech");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

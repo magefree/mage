@@ -45,7 +45,6 @@ public class RocOfKherRidges extends CardImpl {
         this.expansionSetCode = "LEA";
         this.subtype.add("Bird");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

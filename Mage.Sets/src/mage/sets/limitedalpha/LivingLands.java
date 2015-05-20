@@ -56,7 +56,6 @@ public class LivingLands extends CardImpl {
         super(ownerId, 118, "Living Lands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // All Forests are 1/1 creatures that are still lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new LivingLandsToken(), "lands", filter, Duration.WhileOnBattlefield)));

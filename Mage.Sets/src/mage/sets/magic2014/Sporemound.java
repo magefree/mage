@@ -49,7 +49,6 @@ public class Sporemound extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Fungus");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

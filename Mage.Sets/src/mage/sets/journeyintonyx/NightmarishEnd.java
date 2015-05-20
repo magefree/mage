@@ -49,7 +49,6 @@ public class NightmarishEnd extends CardImpl {
         super(ownerId, 76, "Nightmarish End", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // Target creature gets -X/-X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue = new SignInversionDynamicValue(new CardsInControllerHandCount());

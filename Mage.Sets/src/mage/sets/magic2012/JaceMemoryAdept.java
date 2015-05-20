@@ -55,7 +55,6 @@ public class JaceMemoryAdept extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Jace");
 
-        this.color.setBlue(true);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

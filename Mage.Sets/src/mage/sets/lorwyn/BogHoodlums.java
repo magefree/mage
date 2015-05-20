@@ -50,7 +50,6 @@ public class BogHoodlums extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
 
-        this.color.setBlack(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 

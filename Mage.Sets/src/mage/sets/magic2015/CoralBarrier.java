@@ -49,7 +49,6 @@ public class CoralBarrier extends CardImpl {
         this.expansionSetCode = "M15";
         this.subtype.add("Wall");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

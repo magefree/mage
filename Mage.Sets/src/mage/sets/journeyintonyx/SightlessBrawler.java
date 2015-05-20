@@ -55,7 +55,6 @@ public class SightlessBrawler extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

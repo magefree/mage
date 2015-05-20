@@ -48,7 +48,6 @@ public class FeatOfResistance extends CardImpl {
         super(ownerId, 10, "Feat of Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Put a +1/+1 counter on target creature you control. It gains protection from the color of your choice until end of turn.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));

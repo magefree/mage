@@ -57,7 +57,6 @@ public class PullFromTheDeep extends CardImpl {
         super(ownerId, 47, "Pull from the Deep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Return up to one target instant card and up to one target sorcery card from your graveyard to your hand. Exile Pull from the Deep.
         Effect effect = new ReturnToHandTargetEffect();

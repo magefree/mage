@@ -48,7 +48,6 @@ public class TimeWalk extends CardImpl {
         super(ownerId, 84, "Time Walk", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
 
         // Take an extra turn after this one.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());

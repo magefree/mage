@@ -52,7 +52,6 @@ public class HomingLightning extends CardImpl {
         super(ownerId, 96, "Homing Lightning", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Homing Lightning deals 4 damage to target creature and each other creature with the same name as that creature.
         this.getSpellAbility().addEffect(new HomingLightningEffect());

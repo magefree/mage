@@ -46,7 +46,6 @@ public class SerpentsGift extends CardImpl {
         super(ownerId, 190, "Serpent's Gift", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // Target creature gains deathtouch until end of turn.
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));

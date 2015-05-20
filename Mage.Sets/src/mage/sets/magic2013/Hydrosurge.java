@@ -45,7 +45,6 @@ public class Hydrosurge extends CardImpl {
         super(ownerId, 54, "Hydrosurge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // Target creature gets -5/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, 0, Duration.EndOfTurn));

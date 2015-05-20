@@ -52,7 +52,6 @@ public class Smoke extends CardImpl {
         super(ownerId, 176, "Smoke", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
         this.expansionSetCode = "LEA";
 
-        this.color.setRed(true);
 
         // Players can't untap more than one creature during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SmokeEffect()));

@@ -47,7 +47,6 @@ public class ArmyOfTheDamned extends CardImpl {
         super(ownerId, 87, "Army of the Damned", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{B}{B}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("ISD"), 13, true, false));

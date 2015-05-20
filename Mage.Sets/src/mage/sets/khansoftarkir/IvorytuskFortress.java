@@ -56,9 +56,6 @@ public class IvorytuskFortress extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elephant");
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

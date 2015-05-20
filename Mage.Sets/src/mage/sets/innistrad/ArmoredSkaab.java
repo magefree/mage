@@ -54,7 +54,6 @@ public class ArmoredSkaab extends CardImpl {
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

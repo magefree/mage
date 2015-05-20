@@ -54,8 +54,6 @@ public class BorosCharm extends CardImpl {
         super(ownerId, 148, "Boros Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
 
         //Choose one - Boros Charm deals 4 damage to target player
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

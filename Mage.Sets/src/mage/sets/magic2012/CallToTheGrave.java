@@ -63,7 +63,6 @@ public class CallToTheGrave extends CardImpl {
         super(ownerId, 85, "Call to the Grave", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player "), TargetController.ANY, false);

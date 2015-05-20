@@ -50,7 +50,6 @@ public class Convalescence extends CardImpl {
         super(ownerId, 5, "Convalescence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "EXO";
 
-        this.color.setWhite(true);
 
         // At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect(), TargetController.YOU, false));

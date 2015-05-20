@@ -60,7 +60,6 @@ public class AjaniCallerOfThePride extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Ajani");
 
-        this.color.setWhite(true);
     }
 
     @Override

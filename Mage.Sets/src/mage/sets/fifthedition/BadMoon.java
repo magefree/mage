@@ -56,7 +56,6 @@ public class BadMoon extends CardImpl {
         super(ownerId, 4, "Bad Moon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "5ED";
 
-        this.color.setBlack(true);
 
         // Black creatures get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));

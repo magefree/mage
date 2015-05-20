@@ -56,7 +56,6 @@ public class Polymorph extends CardImpl {
         super(ownerId, 67, "Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "M10";
 
-        this.color.setBlue(true);
 
         // Destroy target creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

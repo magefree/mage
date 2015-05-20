@@ -58,7 +58,6 @@ public class Twinflame extends CardImpl {
         super(ownerId, 115, "Twinflame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Strive - Twinflame costs 2R more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{2}{R}"));

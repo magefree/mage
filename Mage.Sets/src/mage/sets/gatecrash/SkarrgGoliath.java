@@ -50,7 +50,6 @@ public class SkarrgGoliath extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
 

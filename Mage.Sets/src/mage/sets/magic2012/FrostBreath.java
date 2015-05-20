@@ -45,7 +45,6 @@ public class FrostBreath extends CardImpl {
         super(ownerId, 54, "Frost Breath", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlue(true);
 
         // Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new TapTargetEffect());

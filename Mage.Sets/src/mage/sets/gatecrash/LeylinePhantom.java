@@ -52,7 +52,6 @@ public class LeylinePhantom extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

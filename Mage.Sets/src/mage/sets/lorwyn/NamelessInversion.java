@@ -49,7 +49,6 @@ public class NamelessInversion extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
 
-        this.color.setBlack(true);
 
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());

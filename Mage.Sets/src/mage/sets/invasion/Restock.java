@@ -47,7 +47,6 @@ public class Restock extends CardImpl {
         super(ownerId, 206, "Restock", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "INV";
 
-        this.color.setGreen(true);
 
         // Return two target cards from your graveyard to your hand. Exile Restock.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();

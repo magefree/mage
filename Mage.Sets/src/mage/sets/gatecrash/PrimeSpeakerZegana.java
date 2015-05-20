@@ -60,8 +60,6 @@ public class PrimeSpeakerZegana extends CardImpl {
         this.subtype.add("Wizard");
         this.supertype.add("Legendary");
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
         
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

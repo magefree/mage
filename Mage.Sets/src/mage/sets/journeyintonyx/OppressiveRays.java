@@ -63,7 +63,6 @@ public class OppressiveRays extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

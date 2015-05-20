@@ -47,7 +47,6 @@ public class MomentOfHeroism extends CardImpl {
         super(ownerId, 24, "Moment of Heroism", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ISD";
 
-        this.color.setWhite(true);
 
         // Target creature gets +2/+2 and gains lifelink until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));

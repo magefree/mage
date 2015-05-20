@@ -57,8 +57,6 @@ public class Castigate extends CardImpl {
         super(ownerId, 106, "Castigate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}{B}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Target opponent reveals his or her hand. You choose a nonland card from it and exile that card.
         this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));

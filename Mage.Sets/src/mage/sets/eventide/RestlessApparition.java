@@ -51,8 +51,6 @@ public class RestlessApparition extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

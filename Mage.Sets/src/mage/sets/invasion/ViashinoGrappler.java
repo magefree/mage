@@ -48,7 +48,6 @@ public class ViashinoGrappler extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Viashino");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

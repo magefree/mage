@@ -54,7 +54,6 @@ public class CripplingBlight extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();

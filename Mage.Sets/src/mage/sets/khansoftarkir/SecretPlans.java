@@ -57,8 +57,6 @@ public class SecretPlans extends CardImpl {
         super(ownerId, 198, "Secret Plans", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
 
         // Face-down creatures you control get +0/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,1, Duration.WhileOnBattlefield, filter)));

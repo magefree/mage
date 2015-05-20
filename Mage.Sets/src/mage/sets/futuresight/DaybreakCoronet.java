@@ -65,7 +65,6 @@ public class DaybreakCoronet extends CardImpl {
         this.expansionSetCode = "FUT";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature with another Aura attached to it
         FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with another Aura attached to it.");

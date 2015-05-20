@@ -54,7 +54,6 @@ public class LeylineOfTheMeek extends CardImpl {
         super(ownerId, 10, "Leyline of the Meek", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "GPT";
 
-        this.color.setWhite(true);
 
         // If Leyline of the Meek is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

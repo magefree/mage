@@ -51,7 +51,6 @@ public class Ephemeron extends CardImpl {
         this.expansionSetCode = "EXO";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

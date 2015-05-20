@@ -51,7 +51,6 @@ public class BloodfireMentor extends CardImpl {
         this.subtype.add("Efreet");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

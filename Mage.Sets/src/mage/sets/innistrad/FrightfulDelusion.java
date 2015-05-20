@@ -51,7 +51,6 @@ public class FrightfulDelusion extends CardImpl {
         super(ownerId, 57, "Frightful Delusion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {1}. That player discards a card.
         this.getSpellAbility().addTarget(new TargetSpell());

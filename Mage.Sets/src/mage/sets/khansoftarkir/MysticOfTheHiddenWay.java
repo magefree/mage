@@ -49,7 +49,6 @@ public class MysticOfTheHiddenWay extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Monk");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

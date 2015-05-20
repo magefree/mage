@@ -47,7 +47,6 @@ public class MoongloveWinnower extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Rogue");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

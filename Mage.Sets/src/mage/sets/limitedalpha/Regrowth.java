@@ -46,7 +46,6 @@ public class Regrowth extends CardImpl {
         super(ownerId, 123, "Regrowth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "LEA";
 
-        this.color.setGreen(true);
 
         // Return target card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

@@ -54,9 +54,6 @@ public class SavageKnuckleblade extends CardImpl {
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

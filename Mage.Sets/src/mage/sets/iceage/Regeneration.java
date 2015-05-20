@@ -51,7 +51,6 @@ public class Regeneration extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

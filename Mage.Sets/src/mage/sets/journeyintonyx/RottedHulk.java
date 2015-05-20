@@ -44,7 +44,6 @@ public class RottedHulk extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Elemental");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
     }

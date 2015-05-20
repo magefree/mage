@@ -46,7 +46,6 @@ public class SilverErne extends CardImpl {
         this.expansionSetCode = "ICE";
         this.subtype.add("Bird");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

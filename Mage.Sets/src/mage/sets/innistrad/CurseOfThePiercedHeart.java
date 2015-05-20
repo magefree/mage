@@ -59,7 +59,6 @@ public class CurseOfThePiercedHeart extends CardImpl {
         this.subtype.add("Aura");
         this.subtype.add("Curse");
 
-        this.color.setRed(true);
 
         // Enchant player
         TargetPlayer target = new TargetPlayer();

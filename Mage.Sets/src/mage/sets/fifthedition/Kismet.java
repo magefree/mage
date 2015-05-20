@@ -51,7 +51,6 @@ public class Kismet extends CardImpl {
         super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "5ED";
 
-        this.color.setWhite(true);
 
         // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));

@@ -57,7 +57,6 @@ public class SiegeOfTowers extends CardImpl {
         super(ownerId, 76, "Siege of Towers", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "GPT";
 
-        this.color.setRed(true);
 
         // Replicate {1}{R}
         this.addAbility(new ReplicateAbility(this, "{1}{R}"));

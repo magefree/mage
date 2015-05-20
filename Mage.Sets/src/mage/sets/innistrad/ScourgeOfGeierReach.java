@@ -58,7 +58,6 @@ public class ScourgeOfGeierReach extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Elemental");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

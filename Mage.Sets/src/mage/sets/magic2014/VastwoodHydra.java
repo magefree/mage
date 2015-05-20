@@ -66,7 +66,6 @@ public class VastwoodHydra extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Hydra");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

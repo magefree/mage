@@ -47,7 +47,6 @@ public class DictateOfKarametra extends CardImpl {
         super(ownerId, 121, "Dictate of Karametra", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

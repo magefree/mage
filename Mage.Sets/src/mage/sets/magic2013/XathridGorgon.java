@@ -63,7 +63,6 @@ public class XathridGorgon extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Gorgon");
 
-        this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

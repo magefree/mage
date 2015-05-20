@@ -60,7 +60,6 @@ public class BondsOfFaith extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

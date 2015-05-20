@@ -53,8 +53,6 @@ public class AlmsBeast extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Beast");
 
-        this.color.setWhite(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

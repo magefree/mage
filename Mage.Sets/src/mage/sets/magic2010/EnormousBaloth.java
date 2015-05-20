@@ -44,7 +44,6 @@ public class EnormousBaloth extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
     }

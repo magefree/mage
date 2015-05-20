@@ -43,7 +43,6 @@ public class WeaveFate extends CardImpl {
         super(ownerId, 61, "Weave Fate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

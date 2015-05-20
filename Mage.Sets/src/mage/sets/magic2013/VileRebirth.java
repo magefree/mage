@@ -49,7 +49,6 @@ public class VileRebirth extends CardImpl {
         super(ownerId, 115, "Vile Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Exile target creature card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

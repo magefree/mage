@@ -54,7 +54,6 @@ public class HowlOfTheHorde extends CardImpl {
         super(ownerId, 112, "Howl of the Horde", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy. 
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new HowlOfTheHordeDelayedTriggeredAbility());

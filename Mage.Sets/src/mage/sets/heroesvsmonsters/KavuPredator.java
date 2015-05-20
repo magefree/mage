@@ -55,7 +55,6 @@ public class KavuPredator extends CardImpl {
         this.expansionSetCode = "DDL";
         this.subtype.add("Kavu");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

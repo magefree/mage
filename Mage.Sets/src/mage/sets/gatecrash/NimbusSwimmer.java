@@ -54,8 +54,6 @@ public class NimbusSwimmer extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Leviathan");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

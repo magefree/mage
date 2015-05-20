@@ -58,7 +58,6 @@ public class Blight extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -44,7 +44,6 @@ public class HordelingOutburst extends CardImpl {
         super(ownerId, 111, "Hordeling Outburst", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
 
         // Put 3 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(expansionSetCode), 3));

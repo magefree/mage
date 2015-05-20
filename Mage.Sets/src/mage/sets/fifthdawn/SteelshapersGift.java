@@ -54,7 +54,6 @@ public class SteelshapersGift extends CardImpl {
         super(ownerId, 19, "Steelshaper's Gift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "5DN";
 
-        this.color.setWhite(true);
 
         // Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));

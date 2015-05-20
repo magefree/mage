@@ -61,7 +61,6 @@ public class NessianGameWarden extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

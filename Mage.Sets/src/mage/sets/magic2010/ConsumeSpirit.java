@@ -59,7 +59,6 @@ public class ConsumeSpirit extends CardImpl {
         super(ownerId, 89, "Consume Spirit", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{1}{B}");
         this.expansionSetCode = "M10";
 
-        this.color.setBlack(true);
 
         // Spend only black mana on X.
         // Consume Spirit deals X damage to target creature or player and you gain X life.

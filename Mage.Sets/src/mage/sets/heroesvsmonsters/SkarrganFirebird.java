@@ -54,7 +54,6 @@ public class SkarrganFirebird extends CardImpl {
         this.expansionSetCode = "DDL";
         this.subtype.add("Phoenix");
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

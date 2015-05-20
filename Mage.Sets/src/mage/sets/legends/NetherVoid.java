@@ -47,7 +47,6 @@ public class NetherVoid extends CardImpl {
         this.expansionSetCode = "LEG";
         this.supertype.add("World");
 
-        this.color.setBlack(true);
 
         // Whenever a player casts a spell, counter it unless that player pays {3}.
         this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, true));

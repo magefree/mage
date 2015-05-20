@@ -49,7 +49,6 @@ public class ForcedFruition extends CardImpl {
         super(ownerId, 66, "Forced Fruition", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}");
         this.expansionSetCode = "LRW";
 
-        this.color.setBlue(true);
 
         // Whenever an opponent casts a spell, that player draws seven cards.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(7),

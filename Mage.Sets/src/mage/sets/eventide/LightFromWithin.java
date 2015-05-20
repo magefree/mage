@@ -66,7 +66,6 @@ public class LightFromWithin extends CardImpl {
         super(ownerId, 10, "Light from Within", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "EVE";
 
-        this.color.setWhite(true);
 
         // Chroma - Each creature you control gets +1/+1 for each white mana symbol in its mana cost.
         Effect effect = new LightFromWithinEffect();

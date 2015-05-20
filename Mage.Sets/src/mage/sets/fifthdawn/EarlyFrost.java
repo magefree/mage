@@ -45,7 +45,6 @@ public class EarlyFrost extends CardImpl {
         super(ownerId, 29, "Early Frost", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Tap up to three target lands.
         this.getSpellAbility().addEffect(new TapTargetEffect());

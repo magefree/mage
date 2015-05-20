@@ -55,7 +55,6 @@ public class Tangle extends CardImpl {
         super(ownerId, 213, "Tangle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "INV";
 
-        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));

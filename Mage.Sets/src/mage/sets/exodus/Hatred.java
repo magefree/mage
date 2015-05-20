@@ -49,7 +49,6 @@ public class Hatred extends CardImpl {
         super(ownerId, 64, "Hatred", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{B}{B}");
         this.expansionSetCode = "EXO";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Hatred, pay X life.
         this.getSpellAbility().addCost(new PayVariableLifeCost(true));

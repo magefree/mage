@@ -44,7 +44,6 @@ public class BlindPhantasm extends CardImpl {
         this.expansionSetCode = "FUT";
         this.subtype.add("Illusion");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

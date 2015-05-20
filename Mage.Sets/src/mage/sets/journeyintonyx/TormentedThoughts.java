@@ -53,7 +53,6 @@ public class TormentedThoughts extends CardImpl {
         super(ownerId, 86, "Tormented Thoughts", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlack(true);
 
         // As an additional cost to cast Tormented Thoughts, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), false)));

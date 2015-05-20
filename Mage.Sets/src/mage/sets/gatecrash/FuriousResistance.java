@@ -59,7 +59,6 @@ public class FuriousResistance extends CardImpl {
         super(ownerId, 93, "Furious Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Target blocking creature gets +3/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new FuriousResistanceEffect());

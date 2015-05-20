@@ -46,7 +46,6 @@ public class BecomeImmense extends CardImpl {
         super(ownerId, 130, "Become Immense", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // Delve
         this.addAbility(new DelveAbility());

@@ -56,7 +56,6 @@ public class MindOverMatter extends CardImpl {
         super(ownerId, 40, "Mind Over Matter", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}{U}{U}");
         this.expansionSetCode = "EXO";
 
-        this.color.setBlue(true);
 
         // Discard a card: You may tap or untap target artifact, creature, or land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new DiscardCardCost());

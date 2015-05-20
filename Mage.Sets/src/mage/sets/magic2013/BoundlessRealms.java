@@ -56,7 +56,6 @@ public class BoundlessRealms extends CardImpl {
         super(ownerId, 162, "Boundless Realms", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{G}");
         this.expansionSetCode = "M13";
 
-        this.color.setGreen(true);
 
         // Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new BoundlessRealmsEffect());

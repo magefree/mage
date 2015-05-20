@@ -56,7 +56,6 @@ public class BoggartHarbinger extends CardImpl {
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

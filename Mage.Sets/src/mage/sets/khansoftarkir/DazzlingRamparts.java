@@ -52,7 +52,6 @@ public class DazzlingRamparts extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Wall");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

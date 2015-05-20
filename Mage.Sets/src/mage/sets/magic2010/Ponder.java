@@ -44,7 +44,6 @@ public class Ponder extends CardImpl {
         super(ownerId, 68, "Ponder", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "M10";
 
-        this.color.setBlue(true);
 
         // Look at the top three cards of your library, then put them back in any order. You may shuffle your library.
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(3, true));

@@ -57,7 +57,6 @@ public class AeonChronicler extends CardImpl {
         this.expansionSetCode = "DDM";
         this.subtype.add("Avatar");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

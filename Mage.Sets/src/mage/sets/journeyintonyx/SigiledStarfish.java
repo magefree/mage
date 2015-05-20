@@ -48,7 +48,6 @@ public class SigiledStarfish extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Starfish");
 
-        this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

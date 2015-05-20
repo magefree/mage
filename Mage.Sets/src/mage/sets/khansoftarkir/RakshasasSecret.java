@@ -46,7 +46,6 @@ public class RakshasasSecret extends CardImpl {
         super(ownerId, 84, "Rakshasa's Secret", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Target opponent discards two cards. Put the top two cards of your library into your graveyard.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

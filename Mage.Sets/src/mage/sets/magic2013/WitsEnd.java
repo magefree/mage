@@ -50,7 +50,6 @@ public class WitsEnd extends CardImpl {
         super(ownerId, 117, "Wit's End", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{B}{B}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlack(true);
 
         // Target player discards his or her hand.
         this.getSpellAbility().addEffect(new WitsEndEffect());

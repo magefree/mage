@@ -47,7 +47,6 @@ public class BumpInTheNight extends CardImpl {
         super(ownerId, 92, "Bump in the Night", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Target opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));

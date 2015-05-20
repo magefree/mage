@@ -54,7 +54,6 @@ public class GhoulcallersChant extends CardImpl {
         super(ownerId, 101, "Ghoulcaller's Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Choose one - Return target creature card from your graveyard to your hand
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

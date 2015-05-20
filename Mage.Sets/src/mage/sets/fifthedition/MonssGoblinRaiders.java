@@ -44,7 +44,6 @@ public class MonssGoblinRaiders extends CardImpl {
         this.expansionSetCode = "5ED";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
     }

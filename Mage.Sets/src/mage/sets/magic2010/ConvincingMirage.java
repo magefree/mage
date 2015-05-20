@@ -67,7 +67,6 @@ public class ConvincingMirage extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Aura");
 
-        this.color.setBlue(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

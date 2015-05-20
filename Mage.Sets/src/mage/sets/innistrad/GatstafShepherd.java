@@ -55,7 +55,6 @@ public class GatstafShepherd extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new GatstafHowler(ownerId);
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -65,7 +65,6 @@ public class Valor extends CardImpl {
         this.expansionSetCode = "JUD";
         this.subtype.add("Incarnation");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

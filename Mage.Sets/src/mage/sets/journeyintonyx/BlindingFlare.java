@@ -47,7 +47,6 @@ public class BlindingFlare extends CardImpl {
         super(ownerId, 91, "Blinding Flare", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Strive — Blinding Flare costs {R} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{R}"));

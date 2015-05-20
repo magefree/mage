@@ -46,8 +46,6 @@ public class BarktoothWarbeard extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
 
-        this.color.setRed(true);
-        this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
     }

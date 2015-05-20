@@ -63,8 +63,6 @@ public class ArmadilloCloak extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

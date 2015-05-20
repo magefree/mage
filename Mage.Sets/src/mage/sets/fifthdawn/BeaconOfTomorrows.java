@@ -49,7 +49,6 @@ public class BeaconOfTomorrows extends CardImpl {
         super(ownerId, 24, "Beacon of Tomorrows", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{6}{U}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Target player takes an extra turn after this one.
         this.getSpellAbility().addTarget(new TargetPlayer());

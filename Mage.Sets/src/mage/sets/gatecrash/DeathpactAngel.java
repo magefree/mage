@@ -60,8 +60,6 @@ public class DeathpactAngel extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

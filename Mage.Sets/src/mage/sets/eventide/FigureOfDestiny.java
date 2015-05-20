@@ -64,8 +64,6 @@ public class FigureOfDestiny extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Kithkin");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -59,7 +59,6 @@ public class SeeTheUnwritten extends CardImpl {
         super(ownerId, 149, "See the Unwritten", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{4}{G}{G}");
         this.expansionSetCode = "KTK";
 
-        this.color.setGreen(true);
 
         // Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.
         // <i>Ferocious</i> - If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.

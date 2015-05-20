@@ -51,7 +51,6 @@ public class Worldfire extends CardImpl {
         super(ownerId, 158, "Worldfire", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{6}{R}{R}{R}");
         this.expansionSetCode = "M13";
 
-        this.color.setRed(true);
 
         // Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
         this.getSpellAbility().addEffect(new WorldfireEffect());

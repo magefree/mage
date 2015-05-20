@@ -51,7 +51,6 @@ public class KrosanTusker extends CardImpl {
         this.subtype.add("Boar");
         this.subtype.add("Beast");
 
-        this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

@@ -62,7 +62,6 @@ public class TemurCharger extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Horse");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

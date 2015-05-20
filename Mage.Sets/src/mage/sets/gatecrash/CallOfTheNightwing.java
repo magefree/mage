@@ -47,8 +47,6 @@ public class CallOfTheNightwing extends CardImpl {
         super(ownerId, 149, "Call of the Nightwing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
 
         // Put a 1/1/ blue and black Horror creature token with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new NightwingHorrorToken(),1));

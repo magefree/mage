@@ -60,7 +60,6 @@ public class CrownedCeratok extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Rhino");
 
-        this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

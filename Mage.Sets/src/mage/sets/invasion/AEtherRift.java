@@ -55,8 +55,6 @@ public class AEtherRift extends CardImpl {
         super(ownerId, 227, "AEther Rift", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AEtherRiftEffect(), TargetController.YOU, false));

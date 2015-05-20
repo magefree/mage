@@ -46,7 +46,6 @@ public class Condescend extends CardImpl {
         super(ownerId, 27, "Condescend", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {X}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManacostVariableValue()));

@@ -50,7 +50,6 @@ public class DarkthicketWolf extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Wolf");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

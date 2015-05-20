@@ -57,7 +57,6 @@ public class Shackles extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

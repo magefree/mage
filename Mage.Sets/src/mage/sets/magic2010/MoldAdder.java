@@ -59,7 +59,6 @@ public class MoldAdder extends CardImpl {
         this.subtype.add("Fungus");
         this.subtype.add("Snake");
 
-        this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

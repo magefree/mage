@@ -55,7 +55,6 @@ public class GraveBramble extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Plant");
 
-        this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

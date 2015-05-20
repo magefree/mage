@@ -53,7 +53,6 @@ public class Inundate extends CardImpl {
         super(ownerId, 25, "Inundate", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{U}{U}{U}");
         this.expansionSetCode = "EVE";
 
-        this.color.setBlue(true);
 
         // Return all nonblue creatures to their owners' hands.
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));

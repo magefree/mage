@@ -55,8 +55,6 @@ public class OverbeingOfMyth extends CardImpl {
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

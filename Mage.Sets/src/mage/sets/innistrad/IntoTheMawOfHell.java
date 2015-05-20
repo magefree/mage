@@ -50,7 +50,6 @@ public class IntoTheMawOfHell extends CardImpl {
         super(ownerId, 150, "Into the Maw of Hell", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Destroy target land. Into the Maw of Hell deals 13 damage to target creature.
         this.getSpellAbility().addTarget(new TargetLandPermanent());

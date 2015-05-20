@@ -55,7 +55,6 @@ public class Jokulhaups extends CardImpl {
         super(ownerId, 195, "Jokulhaups", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
 
         // Destroy all artifacts, creatures, and lands. They can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));

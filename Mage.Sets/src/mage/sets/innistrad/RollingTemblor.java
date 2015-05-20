@@ -56,7 +56,6 @@ public class RollingTemblor extends CardImpl {
         super(ownerId, 161, "Rolling Temblor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "ISD";
 
-        this.color.setRed(true);
 
         // Rolling Temblor deals 2 damage to each creature without flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));

@@ -59,7 +59,6 @@ public class MarketFestival extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setGreen(true);
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

@@ -52,7 +52,6 @@ public class Skullcrack extends CardImpl {
         super(ownerId, 106, "Skullcrack", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
 
         // Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
         this.getSpellAbility().addEffect(new CantGainLifeAllEffect(Duration.EndOfTurn));

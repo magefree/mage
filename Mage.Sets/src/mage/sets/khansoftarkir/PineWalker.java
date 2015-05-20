@@ -50,7 +50,6 @@ public class PineWalker extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Elemental");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

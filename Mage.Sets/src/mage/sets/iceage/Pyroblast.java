@@ -50,7 +50,6 @@ public class Pyroblast extends CardImpl {
         super(ownerId, 213, "Pyroblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ICE";
 
-        this.color.setRed(true);
 
         // Choose one - Counter target spell if it's blue; or destroy target permanent if it's blue.
         this.getSpellAbility().addEffect(new PyroblastCounterTargetEffect());

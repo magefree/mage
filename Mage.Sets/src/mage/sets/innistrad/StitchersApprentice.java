@@ -59,7 +59,6 @@ public class StitchersApprentice extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Homunculus");
 
-        this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

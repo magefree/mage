@@ -55,7 +55,6 @@ public class PreyUpon extends CardImpl {
         super(ownerId, 200, "Prey Upon", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Target creature you control fights target creature you don't control.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

@@ -52,7 +52,6 @@ public class SpiritMantle extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
 
-        this.color.setWhite(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

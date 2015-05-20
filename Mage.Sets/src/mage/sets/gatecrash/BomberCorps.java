@@ -49,7 +49,6 @@ public class BomberCorps extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
 
-        this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

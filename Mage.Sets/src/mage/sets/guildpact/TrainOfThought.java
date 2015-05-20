@@ -44,7 +44,6 @@ public class TrainOfThought extends CardImpl {
         super(ownerId, 39, "Train of Thought", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "GPT";
 
-        this.color.setBlue(true);
 
         // Replicate {1}{U}
         this.addAbility(new ReplicateAbility(this, "{1}{U}"));

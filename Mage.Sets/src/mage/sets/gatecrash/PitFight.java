@@ -47,8 +47,6 @@ public class PitFight extends CardImpl {
         super(ownerId, 223, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
         this.expansionSetCode = "GTC";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
 
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

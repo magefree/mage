@@ -53,7 +53,6 @@ public class Bramblecrush extends CardImpl {
         super(ownerId, 172, "Bramblecrush", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Destroy target noncreature permanent.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

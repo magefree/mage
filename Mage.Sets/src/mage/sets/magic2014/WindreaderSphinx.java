@@ -53,7 +53,6 @@ public class WindreaderSphinx extends CardImpl {
         this.expansionSetCode = "M14";
         this.subtype.add("Sphinx");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
 

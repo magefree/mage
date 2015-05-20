@@ -65,7 +65,6 @@ public class KheruSpellsnatcher extends CardImpl {
         this.subtype.add("Naga");
         this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

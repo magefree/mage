@@ -44,7 +44,6 @@ public class CaptainsCall extends CardImpl {
         super(ownerId, 9, "Captain's Call", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "M13";
 
-        this.color.setWhite(true);
     }
 
     @Override

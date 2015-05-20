@@ -58,7 +58,6 @@ public class UnrulyMob extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Human");
 
-        this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

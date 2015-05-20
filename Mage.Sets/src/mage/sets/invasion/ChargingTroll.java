@@ -50,8 +50,6 @@ public class ChargingTroll extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Troll");
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -48,7 +48,6 @@ public class VisionsOfBeyond extends CardImpl {
         super(ownerId, 80, "Visions of Beyond", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "M12";
 
-        this.color.setBlue(true);
 
         // Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
         this.getSpellAbility().addEffect(new VisionsOfBeyondEffect());

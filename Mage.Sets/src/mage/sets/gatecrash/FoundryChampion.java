@@ -58,8 +58,6 @@ public class FoundryChampion extends CardImpl {
         this.subtype.add("Elemental");
         this.subtype.add("Soldier");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

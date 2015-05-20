@@ -62,7 +62,6 @@ public class RetributionOfTheAncients extends CardImpl {
         super(ownerId, 85, "Retribution of the Ancients", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         DynamicValue xValue = new SignInversionDynamicValue(new GetXValue());
         // {B}, Remove X +1/+1 counters from among creatures you control: Target creature gets -X/-X until end of turn.

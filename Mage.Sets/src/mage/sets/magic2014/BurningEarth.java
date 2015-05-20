@@ -46,7 +46,6 @@ public class BurningEarth extends CardImpl {
         super(ownerId, 130, "Burning Earth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "M14";
 
-        this.color.setRed(true);
 
         // Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(

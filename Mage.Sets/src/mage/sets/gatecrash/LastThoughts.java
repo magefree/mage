@@ -44,7 +44,6 @@ public class LastThoughts extends CardImpl {
         super(ownerId, 40, "Last Thoughts", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

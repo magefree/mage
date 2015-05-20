@@ -54,7 +54,6 @@ public class BlindingSpray extends CardImpl {
         super(ownerId, 32, "Blinding Spray", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{U}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlue(true);
 
         // Creatures your opponents control get -4/-0 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(-4, 0, Duration.EndOfTurn, filter, false));

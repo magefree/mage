@@ -53,7 +53,6 @@ public class StonehornChanter extends CardImpl {
         this.subtype.add("Rhino");
         this.subtype.add("Cleric");
 
-        this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

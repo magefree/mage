@@ -49,7 +49,6 @@ public class Gridlock extends CardImpl {
         super(ownerId, 36, "Gridlock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
 
         // Tap X target nonland permanents.
         this.getSpellAbility().addEffect(new TapTargetEffect());

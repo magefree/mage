@@ -72,7 +72,6 @@ public class ArachnusSpinner extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Spider");
 
-        this.color.setGreen(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 

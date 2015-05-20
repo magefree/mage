@@ -45,7 +45,6 @@ public class FillWithFright extends CardImpl {
         super(ownerId, 50, "Fill with Fright", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Target player discards two cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));

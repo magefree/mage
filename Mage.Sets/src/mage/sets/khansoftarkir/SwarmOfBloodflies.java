@@ -50,7 +50,6 @@ public class SwarmOfBloodflies extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Insect");
 
-        this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

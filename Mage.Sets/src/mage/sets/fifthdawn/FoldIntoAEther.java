@@ -53,7 +53,6 @@ public class FoldIntoAEther extends CardImpl {
         super(ownerId, 31, "Fold into AEther", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, its controller may put a creature card from his or her hand onto the battlefield.
         this.getSpellAbility().addEffect(new FoldIntoAEtherEffect());

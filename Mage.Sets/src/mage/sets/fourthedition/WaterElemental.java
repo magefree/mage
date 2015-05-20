@@ -44,7 +44,6 @@ public class WaterElemental extends CardImpl {
         this.expansionSetCode = "4ED";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
     }

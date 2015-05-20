@@ -57,7 +57,6 @@ public class SpikeWeaver extends CardImpl {
         this.expansionSetCode = "EXO";
         this.subtype.add("Spike");
 
-        this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

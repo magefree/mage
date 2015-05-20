@@ -45,7 +45,6 @@ public class MurderousCut extends CardImpl {
         super(ownerId, 81, "Murderous Cut", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{B}");
         this.expansionSetCode = "KTK";
 
-        this.color.setBlack(true);
 
         // Delve
         this.addAbility(new DelveAbility());

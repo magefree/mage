@@ -46,7 +46,6 @@ public class WarBehemoth extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Beast");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

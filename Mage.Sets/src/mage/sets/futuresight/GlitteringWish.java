@@ -57,8 +57,6 @@ public class GlitteringWish extends CardImpl {
         super(ownerId, 156, "Glittering Wish", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{W}");
         this.expansionSetCode = "FUT";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
 
         // You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish.
         this.getSpellAbility().addEffect(new GlitteringWishEffect());

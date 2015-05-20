@@ -60,8 +60,6 @@ public class CentaurArcher extends CardImpl {
         this.subtype.add("Centaur");
         this.subtype.add("Archer");
 
-        this.color.setGreen(true);
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

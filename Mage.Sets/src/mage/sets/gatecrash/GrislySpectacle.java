@@ -61,7 +61,6 @@ public class GrislySpectacle extends CardImpl {
         super(ownerId, 66, "Grisly Spectacle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

@@ -56,7 +56,6 @@ public class TormentedPariah extends CardImpl {
         this.canTransform = true;
         this.secondSideCard = new RampagingWerewolf(ownerId);
 
-        this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

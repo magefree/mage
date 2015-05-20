@@ -53,7 +53,6 @@ public class MerrowCommerce extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
 
-        this.color.setBlue(true);
 
         // At the beginning of your end step, untap all Merfolk you control.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new UntapAllControllerEffect(filter, "untap all Merfolk you control"), false));

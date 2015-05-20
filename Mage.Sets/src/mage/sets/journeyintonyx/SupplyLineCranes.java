@@ -50,7 +50,6 @@ public class SupplyLineCranes extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

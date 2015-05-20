@@ -61,7 +61,6 @@ public class Omniscience extends CardImpl {
         super(ownerId, 63, "Omniscience", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{7}{U}{U}{U}");
         this.expansionSetCode = "M13";
 
-        this.color.setBlue(true);
 
         // You may cast nonland cards from your hand without paying their mana costs.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmniscienceCastingEffect()));

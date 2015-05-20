@@ -49,7 +49,6 @@ public class EndHostilities extends CardImpl {
         super(ownerId, 8, "End Hostilities", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Destroy all creatures and all permanents attached to creatures.
         this.getSpellAbility().addEffect(new EndHostilitiesEffect());

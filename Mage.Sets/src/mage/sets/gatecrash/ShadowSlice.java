@@ -45,7 +45,6 @@ public class ShadowSlice extends CardImpl {
         super(ownerId, 77, "Shadow Slice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
 
         // Target Opponent loses 3 life.
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(3));

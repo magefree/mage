@@ -59,7 +59,6 @@ public class FlamespeakersWill extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

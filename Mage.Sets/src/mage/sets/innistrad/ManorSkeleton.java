@@ -49,7 +49,6 @@ public class ManorSkeleton extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Skeleton");
 
-        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

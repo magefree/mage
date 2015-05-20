@@ -50,7 +50,6 @@ public class DevourInShadow extends CardImpl {
         super(ownerId, 46, "Devour in Shadow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
         this.expansionSetCode = "5DN";
 
-        this.color.setBlack(true);
 
         // Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

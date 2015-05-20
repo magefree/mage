@@ -48,7 +48,6 @@ public class RiseOfEagles extends CardImpl {
         super(ownerId, 49, "Rise of Eagles", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "JOU";
 
-        this.color.setBlue(true);
 
         // Put two 2/2 blue Bird enchantment creature tokens with flying onto the battlefield. Scry 1.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RiseOfEaglesBirdToken(), 2));

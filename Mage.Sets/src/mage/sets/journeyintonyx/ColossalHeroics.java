@@ -48,7 +48,6 @@ public class ColossalHeroics extends CardImpl {
         super(ownerId, 118, "Colossal Heroics", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "JOU";
 
-        this.color.setGreen(true);
 
         // Strive - Colossal Heroics costs {1}{G} more to cast for each target beyond the first.
         this.addAbility(new StriveAbility("{1}{G}"));

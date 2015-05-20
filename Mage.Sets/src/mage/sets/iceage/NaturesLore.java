@@ -52,7 +52,6 @@ public class NaturesLore extends CardImpl {
         super(ownerId, 143, "Nature's Lore", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "ICE";
 
-        this.color.setGreen(true);
 
         // Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true));

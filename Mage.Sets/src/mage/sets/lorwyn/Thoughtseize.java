@@ -55,7 +55,6 @@ public class Thoughtseize extends CardImpl {
         super(ownerId, 145, "Thoughtseize", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "LRW";
 
-        this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

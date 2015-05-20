@@ -56,7 +56,6 @@ public class SeverTheBloodline extends CardImpl {
         super(ownerId, 115, "Sever the Bloodline", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlack(true);
 
         // Exile target creature and all other creatures with the same name as that creature.
         this.getSpellAbility().addEffect(new SeverTheBloodlineEffect());

@@ -54,7 +54,6 @@ public class KingMacarTheGoldCursed extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
 
-        this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

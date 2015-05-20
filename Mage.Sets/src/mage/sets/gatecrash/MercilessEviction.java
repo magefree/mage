@@ -48,8 +48,6 @@ public class MercilessEviction extends CardImpl {
         super(ownerId, 177, "Merciless Eviction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlack(true);
-        this.color.setWhite(true);
 
         // Choose one - Exile all artifacts
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterArtifactPermanent("artifacts")));

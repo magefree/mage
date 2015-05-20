@@ -47,7 +47,6 @@ public class OrcishOriflamme extends CardImpl {
         super(ownerId, 167, "Orcish Oriflamme", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "LEA";
 
-        this.color.setRed(true);
 
         // Attacking creatures you control get +1/+0.
         BoostControlledEffect boostEffect = new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature(), false);

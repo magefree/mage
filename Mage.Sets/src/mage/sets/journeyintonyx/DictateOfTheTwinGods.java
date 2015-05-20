@@ -57,7 +57,6 @@ public class DictateOfTheTwinGods extends CardImpl {
         super(ownerId, 93, "Dictate of the Twin Gods", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "JOU";
 
-        this.color.setRed(true);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

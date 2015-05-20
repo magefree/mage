@@ -54,7 +54,6 @@ public class RushOfBattle extends CardImpl {
         super(ownerId, 19, "Rush of Battle", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "KTK";
 
-        this.color.setWhite(true);
 
         // Creatures you control get +2/+1 until end of turn. Warrior creatures you control gain lifelink until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));

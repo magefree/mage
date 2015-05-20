@@ -51,7 +51,6 @@ public class Disintegrate extends CardImpl {
         super(ownerId, 141, "Disintegrate", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "LEA";
 
-        this.color.setRed(true);
 
         // Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

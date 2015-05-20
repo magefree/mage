@@ -47,7 +47,6 @@ public class ThinkTwice extends CardImpl {
         super(ownerId, 83, "Think Twice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ISD";
 
-        this.color.setBlue(true);
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

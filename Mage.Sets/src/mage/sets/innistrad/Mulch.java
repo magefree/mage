@@ -52,7 +52,6 @@ public class Mulch extends CardImpl {
         super(ownerId, 196, "Mulch", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "ISD";
 
-        this.color.setGreen(true);
 
         // Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
         this.getSpellAbility().addEffect(new MulchEffect());

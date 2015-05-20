@@ -55,7 +55,6 @@ public class WingmateRoc extends CardImpl {
         this.expansionSetCode = "KTK";
         this.subtype.add("Bird");
 
-        this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

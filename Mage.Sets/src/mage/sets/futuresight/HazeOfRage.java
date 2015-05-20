@@ -46,7 +46,6 @@ public class HazeOfRage extends CardImpl {
         super(ownerId, 100, "Haze of Rage", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "FUT";
 
-        this.color.setRed(true);
 
         // Buyback {2}
         this.addAbility(new BuybackAbility("{2}"));

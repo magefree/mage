@@ -53,7 +53,6 @@ public class ElderOfLaurels extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Advisor");
 
-        this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

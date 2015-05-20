@@ -47,7 +47,6 @@ public class IronBarbHellion extends CardImpl {
         this.subtype.add("Hellion");
         this.subtype.add("Beast");
 
-        this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

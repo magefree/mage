@@ -56,7 +56,6 @@ public class VoidStalker extends CardImpl {
         this.expansionSetCode = "M13";
         this.subtype.add("Elemental");
 
-        this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

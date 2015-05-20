@@ -47,7 +47,6 @@ public class NyxFleeceRam extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Sheep");
 
-        this.color.setWhite(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

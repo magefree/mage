@@ -54,8 +54,6 @@ public class Mindswipe extends CardImpl {
         super(ownerId, 189, "Mindswipe", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{R}");
         this.expansionSetCode = "KTK";
 
-        this.color.setRed(true);
-        this.color.setBlue(true);
 
         // Counter target spell unless its controller pays {X}.  Mindswipe deals X damage to that spell's controller.
         Effect effect = new CounterUnlessPaysEffect(new ManacostVariableValue());

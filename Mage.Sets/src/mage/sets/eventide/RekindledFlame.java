@@ -55,7 +55,6 @@ public class RekindledFlame extends CardImpl {
         super(ownerId, 61, "Rekindled Flame", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "EVE";
 
-        this.color.setRed(true);
 
         // Rekindled Flame deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
