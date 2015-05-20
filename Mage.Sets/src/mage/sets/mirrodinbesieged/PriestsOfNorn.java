@@ -46,7 +46,7 @@ public class PriestsOfNorn extends CardImpl {
         super(ownerId, 16, "Priests of Norn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
         this.addAbility(VigilanceAbility.getInstance());

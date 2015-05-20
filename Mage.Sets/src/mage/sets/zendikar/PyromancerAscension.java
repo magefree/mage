@@ -57,7 +57,7 @@ public class PyromancerAscension extends CardImpl {
     public PyromancerAscension(UUID ownerId) {
         super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
         this.expansionSetCode = "ZEN";
-        this.color.setRed(true);
+
 
         // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         this.addAbility(new PyromancerAscensionQuestTriggeredAbility());

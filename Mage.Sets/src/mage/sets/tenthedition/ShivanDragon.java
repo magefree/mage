@@ -47,7 +47,7 @@ public class ShivanDragon extends CardImpl {
         super(ownerId, 230, "Shivan Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

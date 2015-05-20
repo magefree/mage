@@ -54,7 +54,7 @@ public class Scrap extends CardImpl {
     public Scrap(UUID ownerId) {
         super(ownerId, 213, "Scrap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

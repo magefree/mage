@@ -53,7 +53,7 @@ public class Thoughtbind extends CardImpl {
     public Thoughtbind(UUID ownerId) {
         super(ownerId, 96, "Thoughtbind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "CHK";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }

@@ -45,7 +45,7 @@ public class Runeboggle extends CardImpl {
     public Runeboggle(UUID ownerId) {
         super(ownerId, 33, "Runeboggle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "GPT";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

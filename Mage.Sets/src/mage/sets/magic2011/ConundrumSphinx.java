@@ -58,7 +58,7 @@ public class ConundrumSphinx extends CardImpl {
         super(ownerId, 51, "Conundrum Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Sphinx");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

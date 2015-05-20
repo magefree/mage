@@ -45,7 +45,7 @@ public class WindingWurm extends CardImpl{
         super(ownerId, 285, "Winding Wurm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -62,7 +62,7 @@ public class AegisAngel extends CardImpl {
         super(ownerId, 1, "Aegis Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "M12";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

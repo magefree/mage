@@ -48,8 +48,8 @@ public class OdiousTrow extends CardImpl {
         super(ownerId, 125, "Odious Trow", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B/G}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Troll");
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B/G}")));

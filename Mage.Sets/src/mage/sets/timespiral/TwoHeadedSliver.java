@@ -57,7 +57,7 @@ public class TwoHeadedSliver extends CardImpl {
         super(ownerId, 183, "Two-Headed Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "TSP";
         this.subtype.add("Sliver");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

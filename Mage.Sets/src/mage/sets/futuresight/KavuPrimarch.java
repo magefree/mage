@@ -49,7 +49,7 @@ public class KavuPrimarch extends CardImpl {
         super(ownerId, 128, "Kavu Primarch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "FUT";
         this.subtype.add("Kavu");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

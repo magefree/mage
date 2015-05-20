@@ -28,9 +28,7 @@
 
 package mage.sets.conflux;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,10 +36,11 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -52,9 +51,8 @@ public class ScarlandThrinax extends CardImpl {
     public ScarlandThrinax(UUID ownerId) {
         super(ownerId, 123, "Scarland Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
         this.expansionSetCode = "CON";
-        this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.subtype.add("Lizard");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

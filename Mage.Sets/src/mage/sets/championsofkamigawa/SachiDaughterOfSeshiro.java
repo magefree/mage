@@ -65,7 +65,7 @@ public class SachiDaughterOfSeshiro extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         

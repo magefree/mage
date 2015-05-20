@@ -47,7 +47,7 @@ public class FurnaceWhelp extends CardImpl {
         super(ownerId, 205, "Furnace Whelp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

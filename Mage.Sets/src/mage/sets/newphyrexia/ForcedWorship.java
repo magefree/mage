@@ -56,7 +56,7 @@ public class ForcedWorship extends CardImpl {
         super(ownerId, 11, "Forced Worship", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

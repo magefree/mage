@@ -49,7 +49,7 @@ public class FirstVolley extends CardImpl {
         super(ownerId, 100, "First Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
 
         // First Volley deals 1 damage to target creature and 1 damage to that creature's controller.
         this.getSpellAbility().addEffect(new FirstVolleyEffect());

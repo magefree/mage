@@ -53,7 +53,7 @@ public class PestilentKathari extends CardImpl {
         this.expansionSetCode = "CON";
         this.subtype.add("Bird");
         this.subtype.add("Warrior");        
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
     this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

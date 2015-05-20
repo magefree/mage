@@ -47,7 +47,7 @@ public class AnnihilatingFire extends CardImpl {
     public AnnihilatingFire(UUID ownerId) {
             super(ownerId, 85, "Annihilating Fire", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
             this.expansionSetCode = "RTR";
-            this.color.setRed(true);
+
 
             // Annihilating Fire deals 3 damage to target creature or player.
             this.getSpellAbility().addEffect(new DamageTargetEffect(3));

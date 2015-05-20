@@ -59,7 +59,7 @@ public class ArborElf extends CardImpl {
         this.expansionSetCode = "WWK";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());

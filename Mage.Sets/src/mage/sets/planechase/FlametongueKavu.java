@@ -47,7 +47,7 @@ public class FlametongueKavu extends CardImpl {
         super(ownerId, 54, "Flametongue Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "HOP";
         this.subtype.add("Kavu");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(4), false);

@@ -58,8 +58,8 @@ public class AbruptDecay extends CardImpl {
     public AbruptDecay (UUID ownerId) {
         super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
         this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
 
         // Abrupt Decay can't be countered by spells or abilities.
         Effect effect =  new CantBeCounteredSourceEffect();

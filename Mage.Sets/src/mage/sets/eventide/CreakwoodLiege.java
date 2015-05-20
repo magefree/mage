@@ -63,8 +63,8 @@ public class CreakwoodLiege extends CardImpl {
         super(ownerId, 117, "Creakwood Liege", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B/G}{B/G}{B/G}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Horror");
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

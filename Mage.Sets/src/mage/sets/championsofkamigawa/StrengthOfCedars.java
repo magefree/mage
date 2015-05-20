@@ -51,7 +51,7 @@ public class StrengthOfCedars extends CardImpl {
         super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setGreen(true);
+
 
         // Target creature gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter, null);

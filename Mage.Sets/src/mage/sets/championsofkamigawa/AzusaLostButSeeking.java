@@ -51,7 +51,7 @@ public class AzusaLostButSeeking extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Monk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(2, Duration.WhileOnBattlefield)));

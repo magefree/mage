@@ -47,7 +47,7 @@ public class BrindleBoar extends CardImpl {
     public BrindleBoar(UUID ownerId) {
         super(ownerId, 166, "Brindle Boar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         this.subtype.add("Boar");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

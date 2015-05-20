@@ -52,7 +52,7 @@ public class JourneyToNowhere extends CardImpl {
     public JourneyToNowhere(UUID ownerId) {
         super(ownerId, 14, "Journey to Nowhere", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
         
         // When Journey to Nowhere enters the battlefield, exile target creature.
         FilterCreaturePermanent filter = new FilterCreaturePermanent();

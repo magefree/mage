@@ -45,7 +45,7 @@ public class HeartbeatOfSpring extends CardImpl {
     public HeartbeatOfSpring(UUID ownerId) {
         super(ownerId, 212, "Heartbeat of Spring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "CHK";
-        this.color.setGreen(true);
+
         
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new TapForManaAllTriggeredManaAbility(

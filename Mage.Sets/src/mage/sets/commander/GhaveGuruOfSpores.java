@@ -70,9 +70,8 @@ public class GhaveGuruOfSpores extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Fungus");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
 		
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

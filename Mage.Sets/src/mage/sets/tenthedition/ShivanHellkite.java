@@ -51,7 +51,7 @@ public class ShivanHellkite extends CardImpl {
         super(ownerId, 231, "Shivan Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

@@ -44,7 +44,7 @@ public class Redirect extends CardImpl {
     public Redirect(UUID ownerId) {
         super(ownerId, 71, "Redirect", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
 
         // You may choose new targets for target spell.
         this.getSpellAbility().addTarget(new TargetSpell());

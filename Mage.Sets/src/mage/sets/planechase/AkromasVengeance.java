@@ -52,7 +52,7 @@ public class AkromasVengeance extends CardImpl {
     public AkromasVengeance(UUID ownerId) {
         super(ownerId, 1, "Akroma's Vengeance", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "HOP";
-        this.color.setWhite(true);
+
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
         this.getSpellAbility().addEffect(new AkromasVengeanceEffect());
     }

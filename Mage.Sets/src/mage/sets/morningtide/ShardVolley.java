@@ -49,7 +49,7 @@ public class ShardVolley extends CardImpl {
     public ShardVolley(UUID ownerId) {
         super(ownerId, 103, "Shard Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "MOR";
-        this.color.setRed(true);
+
 
         // As an additional cost to cast Shard Volley, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

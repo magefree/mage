@@ -45,7 +45,7 @@ public class GrayscaledGharial extends CardImpl {
         super(ownerId, 52, "Grayscaled Gharial", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Crocodile");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new IslandwalkAbility());

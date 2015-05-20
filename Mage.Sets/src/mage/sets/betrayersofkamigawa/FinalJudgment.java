@@ -49,7 +49,7 @@ public class FinalJudgment extends CardImpl {
     public FinalJudgment(UUID ownerId) {
         super(ownerId, 4, "Final Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "BOK";
-        this.color.setWhite(true);
+
         // Exile all creatures.
         this.getSpellAbility().addEffect(new FinalJudgmentEffect());
 

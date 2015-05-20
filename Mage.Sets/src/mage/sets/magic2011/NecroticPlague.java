@@ -71,7 +71,7 @@ public class NecroticPlague extends CardImpl {
     public NecroticPlague(UUID ownerId) {
         super(ownerId, 107, "Necrotic Plague", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
         this.subtype.add("Aura");
 
         // Enchant creature

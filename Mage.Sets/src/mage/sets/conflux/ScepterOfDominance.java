@@ -48,7 +48,7 @@ public class ScepterOfDominance extends CardImpl {
     public ScepterOfDominance(UUID ownerId) {
         super(ownerId, 17, "Scepter of Dominance", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{W}{W}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
+
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));
         ability.addCost(new TapSourceCost());

@@ -55,7 +55,7 @@ public class VolitionReins extends CardImpl {
         super(ownerId, 53, "Volition Reins", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
 
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);

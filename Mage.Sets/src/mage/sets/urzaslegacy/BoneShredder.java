@@ -62,7 +62,7 @@ public class BoneShredder extends CardImpl {
         super(ownerId, 49, "Bone Shredder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Minion");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

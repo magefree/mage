@@ -48,7 +48,7 @@ public class AetherSting extends CardImpl {
     public AetherSting(UUID ownerId) {
         super(ownerId, 76, "AEther Sting", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "UDS";
-        this.color.setRed(true);
+
 
         // Whenever an opponent casts a creature spell, AEther Sting deals 1 damage to that player.
         this.addAbility(new AetherStingTriggeredAbility());

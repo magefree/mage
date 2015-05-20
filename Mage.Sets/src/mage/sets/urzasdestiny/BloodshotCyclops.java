@@ -56,7 +56,7 @@ public class BloodshotCyclops extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Cyclops");
         this.subtype.add("Giant");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

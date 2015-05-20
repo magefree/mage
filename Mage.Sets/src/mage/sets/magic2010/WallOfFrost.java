@@ -45,7 +45,7 @@ public class WallOfFrost extends CardImpl {
         super(ownerId, 80, "Wall of Frost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Wall");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(7);
 

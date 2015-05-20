@@ -49,7 +49,7 @@ public class SwayOfTheStars extends CardImpl {
     public SwayOfTheStars(UUID ownerId) {
         super(ownerId, 54, "Sway of the Stars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{U}{U}");
         this.expansionSetCode = "BOK";
-        this.color.setBlue(true);
+
 
         // Each player shuffles his or her hand, graveyard, and permanents he or she owns into his or her library, then draws seven cards. Each player's life total becomes 7.
         this.getSpellAbility().addEffect(new SwayOfTheStarsEffect());

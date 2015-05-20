@@ -46,7 +46,7 @@ public class HawkeaterMoth extends CardImpl {
         super(ownerId, 259, "Hawkeater Moth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Insect");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

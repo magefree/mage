@@ -45,7 +45,7 @@ public class Acridian extends CardImpl {
         super(ownerId, 230, "Acridian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Insect");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(new EchoAbility("{1}{G}"));

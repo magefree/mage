@@ -47,7 +47,7 @@ public class MindSpring extends CardImpl {
     public MindSpring(UUID ownerId) {
         super(ownerId, 64, "Mind Spring", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new MindSpringEffect());
     }
 

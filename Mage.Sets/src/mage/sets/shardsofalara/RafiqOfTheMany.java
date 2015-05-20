@@ -54,9 +54,8 @@ public class RafiqOfTheMany extends CardImpl {
     public RafiqOfTheMany(UUID ownerId) {
         super(ownerId, 185, "Rafiq of the Many", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{G}{W}{U}");
         this.expansionSetCode = "ALA";
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Knight");

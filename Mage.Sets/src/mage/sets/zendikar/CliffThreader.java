@@ -46,7 +46,7 @@ public class CliffThreader extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Kor");
         this.subtype.add("Scout");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new MountainwalkAbility());

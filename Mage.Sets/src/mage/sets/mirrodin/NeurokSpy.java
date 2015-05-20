@@ -51,7 +51,7 @@ public class NeurokSpy extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

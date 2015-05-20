@@ -50,7 +50,7 @@ public class Gallantry extends CardImpl {
     public Gallantry(UUID ownerId) {
         super(ownerId, 232, "Gallantry", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "TMP";
-        this.color.setWhite(true);
+
 
         // Target blocking creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));

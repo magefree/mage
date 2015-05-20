@@ -52,7 +52,7 @@ public class ArgothianElder extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());

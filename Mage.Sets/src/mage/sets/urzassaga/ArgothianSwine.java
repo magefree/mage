@@ -45,7 +45,7 @@ public class ArgothianSwine extends CardImpl {
         super(ownerId, 235, "Argothian Swine", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Boar");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(TrampleAbility.getInstance());

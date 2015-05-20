@@ -43,7 +43,7 @@ public class Counterspell extends CardImpl {
     public Counterspell(UUID ownerId) {
         super(ownerId, 57, "Counterspell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "TMP";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

@@ -45,7 +45,7 @@ public class KavuClimber extends CardImpl {
         super(ownerId, 273, "Kavu Climber", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Kavu");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));

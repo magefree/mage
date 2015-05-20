@@ -44,7 +44,7 @@ public class Battlegrowth extends CardImpl {
     public Battlegrowth(UUID ownerId) {
         super(ownerId, 113, "Battlegrowth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MRD";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

@@ -56,7 +56,7 @@ public class NecroticOoze extends CardImpl {
         super(ownerId, 72, "Necrotic Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Ooze");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

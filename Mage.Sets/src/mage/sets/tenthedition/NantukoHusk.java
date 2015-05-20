@@ -51,7 +51,7 @@ public class NantukoHusk extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Zombie");
         this.subtype.add("Insect");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));

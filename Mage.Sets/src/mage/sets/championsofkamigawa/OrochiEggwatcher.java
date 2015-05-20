@@ -64,7 +64,7 @@ public class OrochiEggwatcher extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.flipCard = true;

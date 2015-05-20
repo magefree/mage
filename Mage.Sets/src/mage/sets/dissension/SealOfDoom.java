@@ -57,7 +57,7 @@ public class SealOfDoom extends CardImpl {
     public SealOfDoom(UUID ownerId) {
         super(ownerId, 53, "Seal of Doom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "DIS";
-        this.color.setBlack(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

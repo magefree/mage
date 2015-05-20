@@ -48,7 +48,7 @@ public class KathariScreecher extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

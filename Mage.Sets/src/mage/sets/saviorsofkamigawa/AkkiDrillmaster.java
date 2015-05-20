@@ -53,7 +53,7 @@ public class AkkiDrillmaster extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // {tap}: Target creature gains haste until end of turn.

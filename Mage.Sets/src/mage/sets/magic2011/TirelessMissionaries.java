@@ -47,7 +47,7 @@ public class TirelessMissionaries extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

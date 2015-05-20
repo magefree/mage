@@ -44,7 +44,7 @@ public class DelusionsOfMediocrity extends CardImpl {
     public DelusionsOfMediocrity(UUID ownerId) {
         super(ownerId, 30, "Delusions of Mediocrity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "ULG";
-        this.color.setBlue(true);
+
 
         //When Delusions of Mediocrity enters the battlefield, you gain 10 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(10), false));

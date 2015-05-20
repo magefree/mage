@@ -48,7 +48,7 @@ public class ConquerorsPledge extends CardImpl {
     public ConquerorsPledge(UUID ownerId) {
         super(ownerId, 8, "Conqueror's Pledge", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
 
         this.addAbility(new KickerAbility("{6}"));
 

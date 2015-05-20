@@ -55,7 +55,7 @@ public class ClearAPath extends CardImpl {
     public ClearAPath(UUID ownerId) {
         super(ownerId, 32, "Clear a Path", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "DGM";
-        this.color.setRed(true);
+
 
         // Destroy target creature with defender.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

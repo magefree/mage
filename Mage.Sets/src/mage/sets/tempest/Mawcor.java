@@ -51,7 +51,7 @@ public class Mawcor extends CardImpl {
         super(ownerId, 75, "Mawcor", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Beast");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

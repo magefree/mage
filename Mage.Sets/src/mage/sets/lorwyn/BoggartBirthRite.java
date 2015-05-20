@@ -53,7 +53,7 @@ public class BoggartBirthRite extends CardImpl {
         super(ownerId, 101, "Boggart Birth Rite", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }

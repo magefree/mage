@@ -51,7 +51,7 @@ public class Flight extends CardImpl {
         super(ownerId, 53, "Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));

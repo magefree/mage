@@ -45,7 +45,7 @@ public class StampedingRhino extends CardImpl {
         super(ownerId, 196, "Stampeding Rhino", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Rhino");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());

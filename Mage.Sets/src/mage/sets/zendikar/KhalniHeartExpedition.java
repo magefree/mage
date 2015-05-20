@@ -53,7 +53,7 @@ public class KhalniHeartExpedition extends CardImpl {
     public KhalniHeartExpedition(UUID ownerId) {
         super(ownerId, 167, "Khalni Heart Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "ZEN";
-        this.color.setGreen(true);
+
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());

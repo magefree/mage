@@ -51,7 +51,7 @@ public class SlithBloodletter extends CardImpl {
         super(ownerId, 77, "Slith Bloodletter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Slith");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));

@@ -56,7 +56,7 @@ public class WingedSliver extends CardImpl {
         super(ownerId, 106, "Winged Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));

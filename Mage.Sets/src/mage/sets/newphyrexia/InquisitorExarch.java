@@ -49,7 +49,7 @@ public class InquisitorExarch extends CardImpl {
         super(ownerId, 12, "Inquisitor Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

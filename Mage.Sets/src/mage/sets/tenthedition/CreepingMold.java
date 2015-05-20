@@ -55,7 +55,7 @@ public class CreepingMold extends CardImpl {
     public CreepingMold(UUID ownerId) {
         super(ownerId, 258, "Creeping Mold", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "10E";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

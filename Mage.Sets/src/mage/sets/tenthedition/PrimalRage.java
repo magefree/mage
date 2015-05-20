@@ -48,7 +48,7 @@ public class PrimalRage extends CardImpl {
     public PrimalRage(UUID ownerId) {
         super(ownerId, 286, "Primal Rage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "10E";
-        this.color.setGreen(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 

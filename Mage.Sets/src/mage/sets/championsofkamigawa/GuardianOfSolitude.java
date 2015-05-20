@@ -53,7 +53,7 @@ public class GuardianOfSolitude extends CardImpl {
         super(ownerId, 64, "Guardian of Solitude", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter, false);

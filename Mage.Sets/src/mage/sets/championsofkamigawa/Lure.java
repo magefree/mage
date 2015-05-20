@@ -53,7 +53,7 @@ public class Lure extends CardImpl {
         super(ownerId, 226, "Lure", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -54,7 +54,7 @@ public class HiddenStrings extends CardImpl {
     public HiddenStrings(UUID ownerId) {
         super(ownerId, 12, "Hidden Strings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "DGM";
-        this.color.setBlue(true);
+
 
         // You may tap or untap target permanent, then you may tap or untap another target permanent
         this.getSpellAbility().addEffect(new HiddenStringsEffect());

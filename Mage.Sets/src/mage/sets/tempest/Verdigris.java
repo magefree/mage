@@ -51,7 +51,7 @@ public class Verdigris extends CardImpl {
     public Verdigris(UUID ownerId) {
         super(ownerId, 158, "Verdigris", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

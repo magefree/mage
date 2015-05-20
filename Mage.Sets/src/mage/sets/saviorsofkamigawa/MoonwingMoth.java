@@ -47,7 +47,7 @@ public class MoonwingMoth extends CardImpl {
         super(ownerId, 20, "Moonwing Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Insect");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

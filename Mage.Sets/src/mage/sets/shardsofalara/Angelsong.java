@@ -46,7 +46,7 @@ public class Angelsong extends CardImpl {
     public Angelsong(UUID ownerId) {
         super(ownerId, 4, "Angelsong", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "ALA";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }

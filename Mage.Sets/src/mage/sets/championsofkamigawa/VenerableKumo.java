@@ -46,7 +46,7 @@ public class VenerableKumo extends CardImpl {
         super(ownerId, 248, "Venerable Kumo", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(ReachAbility.getInstance());

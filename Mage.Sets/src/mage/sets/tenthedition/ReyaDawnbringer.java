@@ -52,7 +52,7 @@ public class ReyaDawnbringer extends CardImpl {
         this.expansionSetCode = "10E";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

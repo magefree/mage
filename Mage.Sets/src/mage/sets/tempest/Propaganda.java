@@ -53,7 +53,7 @@ public class Propaganda extends CardImpl {
     public Propaganda (UUID ownerId) {
         super(ownerId, 80, "Propaganda", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "TMP";
-        this.color.setBlue(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PropagandaReplacementEffect()));
     }
 

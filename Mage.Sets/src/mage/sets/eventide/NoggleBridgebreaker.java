@@ -49,8 +49,8 @@ public class NoggleBridgebreaker extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Noggle");
         this.subtype.add("Rogue");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

@@ -44,7 +44,7 @@ public class Fog extends CardImpl {
     public Fog(UUID ownerId) {
         super(ownerId, 182, "Fog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
     }
 

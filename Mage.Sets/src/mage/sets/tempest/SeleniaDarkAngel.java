@@ -50,8 +50,8 @@ public class SeleniaDarkAngel extends CardImpl {
         this.expansionSetCode = "TMP";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         

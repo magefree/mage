@@ -53,7 +53,7 @@ public class BallistaSquad extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Human");
         this.subtype.add("Rebel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

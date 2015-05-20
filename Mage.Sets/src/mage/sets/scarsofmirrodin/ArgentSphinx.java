@@ -57,7 +57,7 @@ public class ArgentSphinx extends CardImpl {
         super(ownerId, 28, "Argent Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Sphinx");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

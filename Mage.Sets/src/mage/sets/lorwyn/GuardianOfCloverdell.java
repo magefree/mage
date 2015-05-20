@@ -64,7 +64,7 @@ public class GuardianOfCloverdell extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));

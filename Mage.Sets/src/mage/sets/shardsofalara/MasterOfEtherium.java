@@ -61,7 +61,7 @@ public class MasterOfEtherium extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Vedalken");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterCounted), Duration.EndOfGame)));

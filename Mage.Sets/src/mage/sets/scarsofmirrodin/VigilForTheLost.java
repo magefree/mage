@@ -54,7 +54,7 @@ public class VigilForTheLost extends CardImpl {
     public VigilForTheLost (UUID ownerId) {
         super(ownerId, 26, "Vigil for the Lost", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "SOM";
-        this.color.setWhite(true);
+
         this.addAbility(new VigilForTheLostTriggeredAbility());
     }
 

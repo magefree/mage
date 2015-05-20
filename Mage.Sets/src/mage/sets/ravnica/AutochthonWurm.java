@@ -46,8 +46,8 @@ public class AutochthonWurm extends CardImpl {
         super(ownerId, 191, "Autochthon Wurm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{10}{G}{G}{G}{W}{W}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(9);
         this.toughness = new MageInt(14);
 

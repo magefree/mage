@@ -50,7 +50,7 @@ public class KamiOfTheHunt extends CardImpl {
         super(ownerId, 219, "Kami of the Hunt", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false));

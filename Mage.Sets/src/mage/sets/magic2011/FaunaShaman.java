@@ -56,7 +56,7 @@ public class FaunaShaman extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

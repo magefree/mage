@@ -29,19 +29,19 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,9 +53,8 @@ public class HellkiteOverlord extends CardImpl {
         super(ownerId, 172, "Hellkite Overlord", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{R}{R}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Dragon");
-        this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(FlyingAbility.getInstance());

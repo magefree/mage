@@ -29,15 +29,14 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
@@ -51,9 +50,8 @@ public class Godsire extends CardImpl {
         super(ownerId, 170, "Godsire", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{G}{G}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(VigilanceAbility.getInstance());

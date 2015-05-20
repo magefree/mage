@@ -54,7 +54,7 @@ public class Twincast extends CardImpl {
     public Twincast(UUID ownerId) {
         super(ownerId, 78, "Twincast", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));

@@ -53,7 +53,7 @@ public class OnyxMage extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{B}"));

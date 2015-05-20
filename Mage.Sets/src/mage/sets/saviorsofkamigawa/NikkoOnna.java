@@ -51,7 +51,7 @@ public class NikkoOnna extends CardImpl {
         super(ownerId, 21, "Nikko-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

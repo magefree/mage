@@ -45,7 +45,7 @@ public class JacesErasure extends CardImpl {
     public JacesErasure(UUID ownerId) {
         super(ownerId, 59, "Jace's Erasure", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
 
         DrawCardControllerTriggeredAbility ability = new DrawCardControllerTriggeredAbility(new PutLibraryIntoGraveTargetEffect(1), true);
         ability.addTarget(new TargetPlayer());

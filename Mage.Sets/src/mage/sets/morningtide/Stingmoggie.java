@@ -65,7 +65,7 @@ public class Stingmoggie extends CardImpl {
         super(ownerId, 106, "Stingmoggie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

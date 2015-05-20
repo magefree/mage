@@ -48,7 +48,7 @@ public class Batterhorn extends CardImpl {
         super(ownerId, 87, "Batterhorn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Beast");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

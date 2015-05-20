@@ -45,7 +45,7 @@ public class DeadlyRecluse extends CardImpl {
     public DeadlyRecluse(UUID ownerId) {
         super(ownerId, 175, "Deadly Recluse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.subtype.add("Spider");
         this.power = new MageInt(1);
     this.toughness = new MageInt(2);

@@ -55,7 +55,7 @@ public class SilhanaLedgewalker extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Elf");
         this.subtype.add("Rogue");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

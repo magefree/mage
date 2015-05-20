@@ -55,7 +55,7 @@ public class DefenderOfChaos extends CardImpl {
         this.expansionSetCode = "ULG";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -65,7 +65,7 @@ public class EverbarkShaman extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

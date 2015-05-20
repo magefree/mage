@@ -53,7 +53,7 @@ public class TerashisVerdict extends CardImpl {
         super(ownerId, 27, "Terashi's Verdict", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
         // Destroy target attacking creature with power 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));

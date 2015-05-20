@@ -50,7 +50,7 @@ public class Deprive extends CardImpl {
     public Deprive(UUID ownerId) {
         super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "ROE";
-        this.color.setBlue(true);
+
         // As an additional cost to cast Deprive, return a land you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
 

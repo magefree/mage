@@ -60,7 +60,7 @@ public class SkullCollector extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // At the beginning of your upkeep, return a black creature you control to its owner's hand.

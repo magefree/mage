@@ -48,7 +48,7 @@ public class PrideGuardian extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Cat");
         this.subtype.add("Monk");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
         

@@ -52,7 +52,7 @@ public class Skinrender extends CardImpl {
         super(ownerId, 78, "Skinrender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

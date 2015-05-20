@@ -48,7 +48,7 @@ public class KozileksPredator extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Eldrazi");
         this.subtype.add("Drone");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -52,8 +52,8 @@ public class GoblinOutlander extends CardImpl {
     public GoblinOutlander(UUID ownerId) {
         super(ownerId, 109, "Goblin Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{R}");
         this.expansionSetCode = "CON";
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

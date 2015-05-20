@@ -60,7 +60,7 @@ public class KnightlyValor extends CardImpl {
         super(ownerId, 13, "Knightly Valor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

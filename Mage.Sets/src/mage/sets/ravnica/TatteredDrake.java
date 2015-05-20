@@ -50,7 +50,7 @@ public class TatteredDrake extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Zombie");
         this.subtype.add("Drake");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

@@ -55,7 +55,7 @@ public class KodamaOfTheSouthTree extends CardImpl {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), true), filter, false);

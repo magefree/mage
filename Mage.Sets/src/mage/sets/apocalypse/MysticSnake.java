@@ -48,7 +48,7 @@ public class MysticSnake extends CardImpl {
         super(ownerId, 112, "Mystic Snake", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}{U}");
         this.expansionSetCode = "APC";
         this.subtype.add("Snake");
-        this.color.setBlue(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

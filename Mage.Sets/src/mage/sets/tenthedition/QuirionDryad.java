@@ -60,7 +60,7 @@ public class QuirionDryad extends CardImpl {
         super(ownerId, 287, "Quirion Dryad", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Dryad");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, false));

@@ -51,7 +51,7 @@ public class SoulOfMagma extends CardImpl {
         super(ownerId, 189, "Soul of Magma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), filter, false);

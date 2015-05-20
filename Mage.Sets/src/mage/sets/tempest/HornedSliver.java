@@ -56,7 +56,7 @@ public class HornedSliver extends CardImpl {
         super(ownerId, 128, "Horned Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));

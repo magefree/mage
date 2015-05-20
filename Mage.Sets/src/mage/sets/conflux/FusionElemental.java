@@ -29,10 +29,10 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -44,11 +44,8 @@ public class FusionElemental extends CardImpl {
         super(ownerId, 107, "Fusion Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "CON";
         this.subtype.add("Elemental");
-        this.color.setBlack(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(8);
     this.toughness = new MageInt(8);
     }

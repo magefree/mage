@@ -61,7 +61,7 @@ public class Goatnapper extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
         this.subtype.add("Rogue");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);

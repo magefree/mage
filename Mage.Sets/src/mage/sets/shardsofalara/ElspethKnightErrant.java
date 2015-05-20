@@ -66,7 +66,7 @@ public class ElspethKnightErrant extends CardImpl {
         super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elspeth");
-        this.color.setWhite(true);
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 

@@ -54,7 +54,7 @@ public class Fireball extends CardImpl {
     public Fireball(UUID ownerId) {
         super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new FireballTargetCreatureOrPlayer(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new FireballEffect());
     }

@@ -52,7 +52,7 @@ public class KithkinHealer extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Kithkin");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());

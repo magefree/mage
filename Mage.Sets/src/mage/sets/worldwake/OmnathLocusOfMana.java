@@ -58,7 +58,7 @@ public class OmnathLocusOfMana extends CardImpl {
         this.expansionSetCode = "WWK";
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

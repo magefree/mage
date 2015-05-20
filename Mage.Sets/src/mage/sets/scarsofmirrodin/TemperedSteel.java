@@ -54,7 +54,7 @@ public class TemperedSteel extends CardImpl {
     public TemperedSteel (UUID ownerId) {
         super(ownerId, 24, "Tempered Steel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "SOM";
-        this.color.setWhite(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 

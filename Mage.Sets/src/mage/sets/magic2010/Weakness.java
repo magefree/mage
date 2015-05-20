@@ -56,7 +56,7 @@ public class Weakness extends CardImpl {
     public Weakness(UUID ownerId) {
         super(ownerId, 121, "Weakness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
         this.subtype.add("Aura");
         TargetPermanent auraTarget = new TargetCreaturePermanent();
     this.getSpellAbility().addTarget(auraTarget);

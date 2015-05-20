@@ -49,7 +49,7 @@ public class LuminousAngel extends CardImpl {
         super(ownerId, 15, "Luminous Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

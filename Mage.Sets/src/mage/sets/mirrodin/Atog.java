@@ -58,7 +58,7 @@ public class Atog extends CardImpl {
         super(ownerId, 86, "Atog", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Atog");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

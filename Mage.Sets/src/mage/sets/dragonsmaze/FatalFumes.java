@@ -47,7 +47,7 @@ public class FatalFumes extends CardImpl {
     public FatalFumes(UUID ownerId) {
         super(ownerId, 24, "Fatal Fumes", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "DGM";
-        this.color.setBlack(true);
+
 
         // Target creature gets -4/-2 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

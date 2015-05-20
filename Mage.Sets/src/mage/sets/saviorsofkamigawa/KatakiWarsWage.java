@@ -59,7 +59,7 @@ public class KatakiWarsWage extends CardImpl {
         this.expansionSetCode = "SOK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         // All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."

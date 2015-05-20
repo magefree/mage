@@ -53,7 +53,7 @@ public class CreakwoodGhoul extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Plant");
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B/G}{B/G}")) ;

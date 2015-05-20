@@ -49,7 +49,7 @@ public class CivicWayfinder extends CardImpl {
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

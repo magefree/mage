@@ -61,8 +61,8 @@ public class SarkhanVol extends CardImpl {
         super(ownerId, 191, "Sarkhan Vol", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Sarkhan");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Creatures you control get +1/+1 and gain haste until end of turn.

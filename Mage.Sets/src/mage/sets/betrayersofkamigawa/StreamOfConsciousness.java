@@ -53,7 +53,7 @@ public class StreamOfConsciousness extends CardImpl {
         super(ownerId, 53, "Stream of Consciousness", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+
 
         // Target player shuffles up to four target cards from his or her graveyard into his or her library.
         this.getSpellAbility().addEffect(new StreamOfConsciousnessEffect());

@@ -51,7 +51,7 @@ public class JettingGlasskite extends CardImpl {
         super(ownerId, 38, "Jetting Glasskite", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

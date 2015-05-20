@@ -48,7 +48,7 @@ public class EmeriaAngel extends CardImpl {
         super(ownerId, 11, "Emeria Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

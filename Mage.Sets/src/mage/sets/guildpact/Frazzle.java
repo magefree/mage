@@ -52,7 +52,7 @@ public class Frazzle extends CardImpl {
     public Frazzle(UUID ownerId) {
         super(ownerId, 25, "Frazzle", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "GPT";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 

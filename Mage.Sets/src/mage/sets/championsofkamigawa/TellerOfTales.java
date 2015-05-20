@@ -56,7 +56,7 @@ public class TellerOfTales extends CardImpl {
         super(ownerId, 95, "Teller of Tales", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Flying

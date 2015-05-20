@@ -44,7 +44,7 @@ public class Uproot extends CardImpl {
         super(ownerId, 149, "Uproot", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setGreen(true);
+
         // Put target land on top of its owner's library.
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetLandPermanent());

@@ -47,7 +47,7 @@ public class HowlingBanshee extends CardImpl {
         super(ownerId, 99, "Howling Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

@@ -69,8 +69,6 @@ public class DuergarHedgeMage extends CardImpl {
         this.subtype.add("Dwarf");
         this.subtype.add("Shaman");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

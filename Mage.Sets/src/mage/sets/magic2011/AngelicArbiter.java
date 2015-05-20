@@ -61,7 +61,7 @@ public class AngelicArbiter extends CardImpl {
         super(ownerId, 4, "Angelic Arbiter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

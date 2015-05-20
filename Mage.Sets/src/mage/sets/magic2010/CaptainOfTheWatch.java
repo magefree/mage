@@ -62,7 +62,7 @@ public class CaptainOfTheWatch extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(VigilanceAbility.getInstance());

@@ -50,7 +50,7 @@ public class HornetHarasser extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), false);

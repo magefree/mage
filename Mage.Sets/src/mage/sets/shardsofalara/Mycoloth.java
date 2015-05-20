@@ -51,7 +51,7 @@ public class Mycoloth extends CardImpl {
         super(ownerId, 140, "Mycoloth", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Fungus");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

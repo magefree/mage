@@ -48,7 +48,7 @@ public class RedSunsZenith extends CardImpl {
     public RedSunsZenith(UUID ownerId) {
         super(ownerId, 74, "Red Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "MBS";
-        this.color.setRed(true);
+
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

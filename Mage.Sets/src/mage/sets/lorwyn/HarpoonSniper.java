@@ -62,7 +62,7 @@ public class HarpoonSniper extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
         this.subtype.add("Archer");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)), new ColoredManaCost(ColoredManaSymbol.W));

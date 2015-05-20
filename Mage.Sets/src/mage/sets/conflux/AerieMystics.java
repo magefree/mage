@@ -52,7 +52,7 @@ public class AerieMystics extends CardImpl {
     public AerieMystics(UUID ownerId) {
         super(ownerId, 1, "Aerie Mystics", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
+
         this.subtype.add("Bird");
         this.subtype.add("Wizard");
         this.power = new MageInt(3);

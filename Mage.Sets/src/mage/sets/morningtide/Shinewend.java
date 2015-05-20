@@ -63,7 +63,7 @@ public class Shinewend extends CardImpl {
         super(ownerId, 23, "Shinewend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

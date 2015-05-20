@@ -59,7 +59,7 @@ public class StabWound extends CardImpl {
         super(ownerId, 78, "Stab Wound", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

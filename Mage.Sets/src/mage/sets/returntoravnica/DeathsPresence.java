@@ -52,7 +52,7 @@ public class DeathsPresence extends CardImpl {
     public DeathsPresence(UUID ownerId) {
         super(ownerId, 121, "Death's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
         this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
+
         
         // Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
         this.addAbility(new DeathsPresenceTriggeredAbility());

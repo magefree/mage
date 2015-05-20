@@ -50,7 +50,7 @@ public class NantukoShade extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Insect");
         this.subtype.add("Shade");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -62,7 +62,7 @@ public class TerashisGrasp extends CardImpl {
         super(ownerId, 26, "Terashi's Grasp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
 
         // Destroy target artifact or enchantment. 
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

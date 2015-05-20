@@ -51,7 +51,7 @@ public class DevouringSwarm extends CardImpl {
         super(ownerId, 91, "Devouring Swarm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Insect");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

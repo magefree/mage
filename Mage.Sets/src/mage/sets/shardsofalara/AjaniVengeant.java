@@ -63,8 +63,8 @@ public class AjaniVengeant extends CardImpl {
         super(ownerId, 154, "Ajani Vengeant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Ajani");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Target permanent doesn't untap during its controller's next untap step.

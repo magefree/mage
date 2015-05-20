@@ -42,7 +42,7 @@ public class Tidings extends CardImpl {
     public Tidings(UUID ownerId) {
         super(ownerId, 116, "Tidings", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
     }
 

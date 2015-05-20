@@ -49,7 +49,7 @@ public class TuktukTheExplorer extends CardImpl {
         this.expansionSetCode = "ROE";
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

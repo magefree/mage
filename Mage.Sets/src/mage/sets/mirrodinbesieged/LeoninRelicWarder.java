@@ -64,7 +64,7 @@ public class LeoninRelicWarder extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Cat");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

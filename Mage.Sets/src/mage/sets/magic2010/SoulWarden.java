@@ -56,7 +56,7 @@ public class SoulWarden extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

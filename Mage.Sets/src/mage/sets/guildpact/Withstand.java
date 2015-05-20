@@ -46,7 +46,7 @@ public class Withstand extends CardImpl {
     public Withstand(UUID ownerId) {
         super(ownerId, 21, "Withstand", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "GPT";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

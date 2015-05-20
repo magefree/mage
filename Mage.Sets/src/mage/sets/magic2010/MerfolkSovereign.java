@@ -63,7 +63,7 @@ public class MerfolkSovereign extends CardImpl {
         super(ownerId, 62, "Merfolk Sovereign", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Merfolk");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

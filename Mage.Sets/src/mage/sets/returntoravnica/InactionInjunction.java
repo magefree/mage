@@ -55,7 +55,7 @@ public class InactionInjunction extends CardImpl {
         super(ownerId, 41, "Inaction Injunction", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "RTR";
  
-        this.color.setBlue(true);
+
  
         // Detain target creature an opponent controls.
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)

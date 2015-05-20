@@ -60,7 +60,7 @@ public class MnemonicSliver extends CardImpl {
         super(ownerId, 77, "Mnemonic Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));

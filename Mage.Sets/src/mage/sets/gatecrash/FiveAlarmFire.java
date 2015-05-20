@@ -58,7 +58,7 @@ public class FiveAlarmFire extends CardImpl {
         super(ownerId, 91, "Five-Alarm Fire", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "GTC";
         
-        this.color.setRed(true);
+
 
         //Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.
         this.addAbility(new FiveAlarmFireTriggeredAbility());

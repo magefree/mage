@@ -46,8 +46,8 @@ public class DoubleCleave extends CardImpl {
     public DoubleCleave(UUID ownerId) {
         super(ownerId, 135, "Double Cleave", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/W}");
         this.expansionSetCode = "EVE";
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

@@ -45,7 +45,7 @@ public class GoblinPatrol extends CardImpl{
         super(ownerId, 193, "Goblin Patrol", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

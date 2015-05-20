@@ -49,7 +49,7 @@ public class Bereavement extends CardImpl {
     public Bereavement(UUID ownerId) {
         super(ownerId, 117, "Bereavement", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "USG";
-        this.color.setBlack(true);
+
 
         // Whenever a green creature dies, its controller discards a card.
         this.addAbility(new BereavementTriggeredAbility());

@@ -45,7 +45,7 @@ public class FistsOfTheAnvil extends CardImpl {
     public FistsOfTheAnvil(UUID ownerId) {
         super(ownerId, 201, "Fists of the Anvil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 0, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

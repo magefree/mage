@@ -47,8 +47,8 @@ public class SkyknightLegionnaire extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

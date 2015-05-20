@@ -63,7 +63,7 @@ public class OpalEyeKondasYojimbo extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

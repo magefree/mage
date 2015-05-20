@@ -54,7 +54,7 @@ public class BondsOfQuicksilver extends CardImpl {
         super(ownerId, 29, "Bonds of Quicksilver", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Aura");
-           this.color.setBlue(true);
+
 
         // Flash (You may cast this spell any time you could cast an instant.)
         this.addAbility(FlashAbility.getInstance());

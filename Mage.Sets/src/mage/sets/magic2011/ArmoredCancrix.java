@@ -43,7 +43,7 @@ public class ArmoredCancrix extends CardImpl {
     public ArmoredCancrix(UUID ownerId) {
         super(ownerId, 44, "Armored Cancrix", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.subtype.add("Crab");
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

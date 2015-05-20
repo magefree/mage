@@ -53,7 +53,7 @@ public class SpreadingSeas extends CardImpl {
     public SpreadingSeas(UUID ownerId) {
         super(ownerId, 70, "Spreading Seas", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
-        this.color.setBlue(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetLandPermanent();

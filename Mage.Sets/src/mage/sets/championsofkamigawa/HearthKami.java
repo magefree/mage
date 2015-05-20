@@ -55,7 +55,7 @@ public class HearthKami extends CardImpl {
         super(ownerId, 171, "Hearth Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

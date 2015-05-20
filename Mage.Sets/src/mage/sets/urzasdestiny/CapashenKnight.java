@@ -50,7 +50,7 @@ public class CapashenKnight extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

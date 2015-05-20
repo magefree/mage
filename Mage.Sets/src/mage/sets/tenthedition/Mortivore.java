@@ -54,7 +54,7 @@ public class Mortivore extends CardImpl {
         super(ownerId, 161, "Mortivore", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Lhurgoyf");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterCreatureCard("creature cards")), Duration.EndOfGame)));

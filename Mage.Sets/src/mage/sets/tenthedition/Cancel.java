@@ -44,7 +44,7 @@ public class Cancel extends CardImpl {
     public Cancel(UUID ownerId) {
         super(ownerId, 71, "Cancel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

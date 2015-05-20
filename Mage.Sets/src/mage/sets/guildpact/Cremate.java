@@ -44,7 +44,7 @@ public class Cremate extends CardImpl {
     public Cremate(UUID ownerId) {
         super(ownerId, 45, "Cremate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "GPT";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

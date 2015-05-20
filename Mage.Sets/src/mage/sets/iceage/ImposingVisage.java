@@ -52,7 +52,7 @@ public class ImposingVisage extends CardImpl {
         super(ownerId, 193, "Imposing Visage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "ICE";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

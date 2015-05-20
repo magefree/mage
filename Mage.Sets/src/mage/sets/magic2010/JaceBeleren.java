@@ -51,7 +51,7 @@ public class JaceBeleren extends CardImpl {
         super(ownerId, 58, "Jace Beleren", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{U}{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Jace");
-        this.color.setBlue(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Each player draws a card.        

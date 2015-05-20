@@ -46,7 +46,7 @@ public class LaunchParty extends CardImpl {
     public LaunchParty(UUID ownerId) {
         super(ownerId, 69, "Launch Party", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "RTR";
-        this.color.setBlack(true);
+
 
         // As an additional cost to cast Launch Party, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));

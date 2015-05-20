@@ -46,7 +46,7 @@ public class CradleGuard extends CardImpl{
         super(ownerId, 245, "Cradle Guard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Treefolk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

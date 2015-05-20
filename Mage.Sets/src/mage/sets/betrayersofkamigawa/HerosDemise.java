@@ -51,7 +51,7 @@ public class HerosDemise extends CardImpl {
     public HerosDemise(UUID ownerId) {
         super(ownerId, 68, "Hero's Demise", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "BOK";
-        this.color.setBlack(true);
+
         // Destroy target legendary creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

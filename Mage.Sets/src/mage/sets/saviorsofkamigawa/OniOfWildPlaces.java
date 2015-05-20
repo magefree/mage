@@ -57,7 +57,7 @@ public class OniOfWildPlaces extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());

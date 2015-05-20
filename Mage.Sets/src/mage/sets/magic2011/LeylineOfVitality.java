@@ -50,7 +50,7 @@ public class LeylineOfVitality extends CardImpl {
     public LeylineOfVitality(UUID ownerId) {
         super(ownerId, 183, "Leyline of Vitality", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         this.addAbility(LeylineAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
 

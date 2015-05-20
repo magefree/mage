@@ -56,7 +56,7 @@ public class TrashForTreasure extends CardImpl {
     public TrashForTreasure(UUID ownerId) {
         super(ownerId, 109, "Trash for Treasure", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "MRD";
-        this.color.setRed(true);
+
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterPermanent)));
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));

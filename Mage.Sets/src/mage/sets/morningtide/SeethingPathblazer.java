@@ -62,7 +62,7 @@ public class SeethingPathblazer extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));

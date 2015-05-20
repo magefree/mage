@@ -47,7 +47,7 @@ public class ScrollThief extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

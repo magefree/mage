@@ -54,7 +54,7 @@ public class Cessation extends CardImpl {
         super(ownerId, 4, "Cessation", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         //Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

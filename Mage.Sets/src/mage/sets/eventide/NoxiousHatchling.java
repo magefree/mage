@@ -60,8 +60,8 @@ public class NoxiousHatchling extends CardImpl {
         super(ownerId, 124, "Noxious Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B/G}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

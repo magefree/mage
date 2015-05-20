@@ -45,7 +45,7 @@ public class ChangelingSentinel extends CardImpl {
         super(ownerId, 6, "Changeling Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(ChangelingAbility.getInstance());

@@ -54,7 +54,7 @@ public class AweForTheGuilds extends CardImpl {
     public AweForTheGuilds(UUID ownerId) {
         super(ownerId, 31, "Awe for the Guilds", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "DGM";
-        this.color.setRed(true);
+
 
         // Monocolored creatures can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));

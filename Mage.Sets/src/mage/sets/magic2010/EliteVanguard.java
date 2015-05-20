@@ -43,7 +43,7 @@ public class EliteVanguard extends CardImpl {
     public EliteVanguard(UUID ownerId) {
         super(ownerId, 9, "Elite Vanguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(2);

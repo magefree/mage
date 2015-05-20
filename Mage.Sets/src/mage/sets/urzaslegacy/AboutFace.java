@@ -45,7 +45,7 @@ public class AboutFace extends CardImpl {
     public AboutFace(UUID ownerId) {
         super(ownerId, 73, "About Face", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ULG";
-        this.color.setRed(true);
+
 
         this.getSpellAbility().addEffect(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

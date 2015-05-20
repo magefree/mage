@@ -51,7 +51,7 @@ public class HorizonSeed extends CardImpl {
         super(ownerId, 15, "Horizon Seed", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SpellCastControllerTriggeredAbility(new RegenerateTargetEffect(), filter, false);

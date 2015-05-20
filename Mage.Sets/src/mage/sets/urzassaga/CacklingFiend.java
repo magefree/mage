@@ -53,7 +53,7 @@ public class CacklingFiend extends CardImpl {
         super(ownerId, 121, "Cackling Fiend", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

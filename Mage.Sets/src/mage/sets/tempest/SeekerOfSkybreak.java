@@ -50,7 +50,7 @@ public class SeekerOfSkybreak extends CardImpl {
         super(ownerId, 148, "Seeker of Skybreak", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());

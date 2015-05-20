@@ -54,7 +54,7 @@ public class GoblinGrenade extends CardImpl {
     public GoblinGrenade(UUID ownerId) {
         super(ownerId, 140, "Goblin Grenade", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "M12";
-        this.color.setRed(true);
+
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

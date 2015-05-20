@@ -53,7 +53,7 @@ public class Sleep extends CardImpl {
     public Sleep(UUID ownerId) {
         super(ownerId, 71, "Sleep", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new SleepEffect());
     }

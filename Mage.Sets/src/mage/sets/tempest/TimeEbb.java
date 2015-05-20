@@ -43,7 +43,7 @@ public class TimeEbb extends CardImpl {
     public TimeEbb(UUID ownerId) {
         super(ownerId, 96, "Time Ebb", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "TMP";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

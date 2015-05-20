@@ -49,7 +49,7 @@ public class PlanarCleansing extends CardImpl {
     public PlanarCleansing(UUID ownerId) {
         super(ownerId, 24, "Planar Cleansing", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{W}{W}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
 
         // Destroy all nonland permanents.
         this.getSpellAbility().addEffect(new PlanarCleansingEffect());

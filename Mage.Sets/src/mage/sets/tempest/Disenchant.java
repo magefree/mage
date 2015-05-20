@@ -54,7 +54,7 @@ public class Disenchant extends CardImpl {
     public Disenchant(UUID ownerId) {
         super(ownerId, 228, "Disenchant", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "TMP";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

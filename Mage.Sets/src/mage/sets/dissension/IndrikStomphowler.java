@@ -58,7 +58,7 @@ public class IndrikStomphowler extends CardImpl {
         super(ownerId, 86, "Indrik Stomphowler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);

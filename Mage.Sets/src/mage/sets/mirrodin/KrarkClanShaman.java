@@ -64,7 +64,7 @@ public class KrarkClanShaman extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrificed))));

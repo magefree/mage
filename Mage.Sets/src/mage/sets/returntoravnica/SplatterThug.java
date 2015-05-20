@@ -47,7 +47,7 @@ public class SplatterThug extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Warrior");
  
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
  

@@ -49,7 +49,7 @@ public class ArcRunner extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
         this.subtype.add("Ox");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
 

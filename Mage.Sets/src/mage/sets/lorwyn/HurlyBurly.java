@@ -56,7 +56,7 @@ public class HurlyBurly extends CardImpl {
     public HurlyBurly(UUID ownerId) {
         super(ownerId, 177, "Hurly-Burly", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "LRW";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filterWithFlying));
         Mode mode = new Mode();
         mode.getEffects().add(new DamageAllEffect(1, filterWithoutFlying));

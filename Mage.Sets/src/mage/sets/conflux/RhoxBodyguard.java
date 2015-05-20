@@ -46,8 +46,8 @@ public class RhoxBodyguard extends CardImpl {
     public RhoxBodyguard(UUID ownerId) {
         super(ownerId, 122, "Rhox Bodyguard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{W}");
         this.expansionSetCode = "CON";
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.subtype.add("Rhino");
         this.subtype.add("Monk");
         this.subtype.add("Soldier");

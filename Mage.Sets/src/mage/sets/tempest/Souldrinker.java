@@ -49,7 +49,7 @@ public class Souldrinker extends CardImpl {
         super(ownerId, 52, "Souldrinker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new PayLifeCost(3)));

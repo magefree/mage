@@ -58,8 +58,8 @@ public class GolgariGuildmage extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{4}{B}"));

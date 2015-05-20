@@ -45,7 +45,7 @@ public class Rescind extends CardImpl {
     public Rescind(UUID ownerId) {
         super(ownerId, 92, "Rescind", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "USG";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent());
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

@@ -45,7 +45,7 @@ public class AvenSquire extends CardImpl {
     public AvenSquire(UUID ownerId) {
         super(ownerId, 3, "Aven Squire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
+
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);

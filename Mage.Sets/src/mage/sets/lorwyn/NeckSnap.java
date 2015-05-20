@@ -44,7 +44,7 @@ public class NeckSnap extends CardImpl {
     public NeckSnap(UUID ownerId) {
         super(ownerId, 32, "Neck Snap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "LRW";
-        this.color.setWhite(true);
+
         // Destroy target attacking or blocking creature.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());

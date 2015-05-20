@@ -53,7 +53,7 @@ public class FleshEaterImp extends CardImpl {
         super(ownerId, 42, "Flesh-Eater Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Imp");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

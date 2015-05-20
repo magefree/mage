@@ -29,10 +29,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
@@ -45,9 +45,8 @@ public class ViolentUltimatum extends CardImpl {
     public ViolentUltimatum (UUID ownerId) {
         super(ownerId, 206, "Violent Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}{R}{R}{R}{G}{G}");
         this.expansionSetCode = "ALA";
-        this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(3, 3, new FilterPermanent(), false));
     }

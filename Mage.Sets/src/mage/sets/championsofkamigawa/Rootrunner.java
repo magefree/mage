@@ -52,7 +52,7 @@ public class Rootrunner extends CardImpl {
         super(ownerId, 237, "Rootrunner", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

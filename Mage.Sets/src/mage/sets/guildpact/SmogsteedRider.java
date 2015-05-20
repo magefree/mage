@@ -50,7 +50,7 @@ public class SmogsteedRider extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature(), true), false));

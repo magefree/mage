@@ -48,7 +48,7 @@ public class RampagingBaloths extends CardImpl {
         super(ownerId, 178, "Rampaging Baloths", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(TrampleAbility.getInstance());

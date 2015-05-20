@@ -45,7 +45,7 @@ public class MendingHands extends CardImpl {
     public MendingHands(UUID ownerId) {
         super(ownerId, 15, "Mending Hands", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "BOK";
-        this.color.setWhite(true);
+
         // Prevent the next 4 damage that would be dealt to target creature or player this turn.
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

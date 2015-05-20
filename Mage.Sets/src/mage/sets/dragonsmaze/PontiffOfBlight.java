@@ -63,7 +63,7 @@ public class PontiffOfBlight extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Zombie");
         this.subtype.add("Cleric");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(7);
 

@@ -54,8 +54,8 @@ public class SireOfInsanity extends CardImpl {
         super(ownerId, 104, "Sire of Insanity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Demon");
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

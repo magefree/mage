@@ -61,7 +61,7 @@ public class FieldOfReality extends CardImpl {
         super(ownerId, 60, "Field of Reality", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
 
         // Enchanted creature can't be blocked by Spirits.
         TargetPermanent auraTarget = new TargetCreaturePermanent();

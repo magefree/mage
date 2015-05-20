@@ -46,7 +46,7 @@ public class VolcanicDragon extends CardImpl {
         super(ownerId, 158, "Volcanic Dragon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

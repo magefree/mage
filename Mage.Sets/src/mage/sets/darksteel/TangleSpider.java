@@ -46,7 +46,7 @@ public class TangleSpider extends CardImpl {
         super(ownerId, 85, "Tangle Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "DST";
         this.subtype.add("Spider");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(FlashAbility.getInstance());

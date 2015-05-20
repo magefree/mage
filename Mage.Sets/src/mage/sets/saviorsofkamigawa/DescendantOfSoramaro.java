@@ -50,7 +50,7 @@ public class DescendantOfSoramaro extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.

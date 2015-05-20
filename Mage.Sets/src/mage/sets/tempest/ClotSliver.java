@@ -58,7 +58,7 @@ public class ClotSliver extends CardImpl {
         super(ownerId, 6, "Clot Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));

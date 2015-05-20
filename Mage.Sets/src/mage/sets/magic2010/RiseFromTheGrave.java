@@ -52,7 +52,7 @@ public class RiseFromTheGrave extends CardImpl {
     public RiseFromTheGrave(UUID ownerId) {
         super(ownerId, 109, "Rise from the Grave", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
 
         // Put target creature card from a graveyard onto the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));

@@ -64,7 +64,7 @@ public class WurmweaverCoil extends CardImpl {
         super(ownerId, 99, "Wurmweaver Coil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));

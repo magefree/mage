@@ -52,7 +52,7 @@ public class PreyseizerDragon extends CardImpl {
         super(ownerId, 50, "Preyseizer Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

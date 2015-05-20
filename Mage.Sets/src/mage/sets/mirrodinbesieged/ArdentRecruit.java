@@ -54,7 +54,7 @@ public class ArdentRecruit extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);

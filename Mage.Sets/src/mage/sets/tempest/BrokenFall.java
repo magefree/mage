@@ -48,7 +48,7 @@ public class BrokenFall extends CardImpl {
     public BrokenFall(UUID ownerId) {
         super(ownerId, 110, "Broken Fall", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ReturnToHandSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

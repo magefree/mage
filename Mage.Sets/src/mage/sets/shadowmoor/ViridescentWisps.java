@@ -49,7 +49,7 @@ public class ViridescentWisps extends CardImpl {
     public ViridescentWisps (UUID ownerId) {
         super(ownerId, 132, "Viridescent Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SHM";
-        this.color.setGreen(true);
+
         //    Target creature becomes green and gets +1/+0 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.EndOfTurn));

@@ -63,7 +63,7 @@ public class QuagSickness extends CardImpl {
     public QuagSickness(UUID ownerId) {
         super(ownerId, 111, "Quag Sickness", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

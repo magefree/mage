@@ -55,7 +55,7 @@ public class TakenoSamuraiGeneral extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(2));

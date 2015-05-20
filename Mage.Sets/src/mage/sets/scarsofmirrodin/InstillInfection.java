@@ -46,7 +46,7 @@ public class InstillInfection extends CardImpl {
     public InstillInfection (UUID ownerId) {
         super(ownerId, 68, "Instill Infection", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "SOM";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

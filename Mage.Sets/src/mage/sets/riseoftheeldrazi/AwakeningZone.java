@@ -29,11 +29,11 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.EldraziSpawnToken;
 
@@ -46,7 +46,6 @@ public class AwakeningZone extends CardImpl {
     public AwakeningZone(UUID ownerId) {
         super(ownerId, 176, "Awakening Zone", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ROE";
-        this.getColor().setGreen(true);
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(new EldraziSpawnToken()), true));
     }
 

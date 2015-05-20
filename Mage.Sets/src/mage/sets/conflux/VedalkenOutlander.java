@@ -52,8 +52,8 @@ public class VedalkenOutlander extends CardImpl {
     public VedalkenOutlander(UUID ownerId) {
         super(ownerId, 132, "Vedalken Outlander", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{W}{U}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.subtype.add("Vedalken");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

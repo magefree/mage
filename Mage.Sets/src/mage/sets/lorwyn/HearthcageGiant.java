@@ -67,7 +67,7 @@ public class HearthcageGiant extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new RedElementalToken(), 2), false));

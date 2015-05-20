@@ -51,7 +51,7 @@ public class HellsThunder extends CardImpl {
         super(ownerId, 103, "Hell's Thunder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

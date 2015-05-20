@@ -53,7 +53,7 @@ public class LoxodonMystic extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Elephant");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));

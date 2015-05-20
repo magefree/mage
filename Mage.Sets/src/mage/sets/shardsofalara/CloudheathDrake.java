@@ -52,7 +52,7 @@ public class CloudheathDrake extends CardImpl {
         super(ownerId, 35, "Cloudheath Drake", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Drake");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

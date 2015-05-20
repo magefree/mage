@@ -59,7 +59,7 @@ public class Cryptoplasm extends CardImpl {
         super(ownerId, 23, "Cryptoplasm", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Shapeshifter");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -58,7 +58,7 @@ public class BlanchwoodArmor extends CardImpl {
         super(ownerId, 253, "Blanchwood Armor", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

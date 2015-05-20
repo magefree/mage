@@ -55,7 +55,7 @@ public class AerialPredation extends CardImpl {
     public AerialPredation(UUID ownerId) {
         super(ownerId, 113, "Aerial Predation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
+
         
         // Destroy target creature with flying. You gain 2 life.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -54,7 +54,7 @@ public class KamiOfTheWaningMoon extends CardImpl {
         super(ownerId, 120, "Kami of the Waning Moon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

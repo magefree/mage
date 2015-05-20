@@ -54,7 +54,7 @@ public class HarborSerpent extends CardImpl {
         super(ownerId, 56, "Harbor Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Serpent");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

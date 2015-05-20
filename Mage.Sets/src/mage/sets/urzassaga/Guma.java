@@ -54,7 +54,7 @@ public class Guma extends CardImpl {
         super(ownerId, 197, "Guma", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Cat");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));

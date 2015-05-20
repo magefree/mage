@@ -59,7 +59,7 @@ public class Nevermore extends CardImpl {
     public Nevermore(UUID ownerId) {
         super(ownerId, 25, "Nevermore", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
         this.expansionSetCode = "ISD";
-        this.color.setWhite(true);
+
 
         //As Nevermore enters the battlefield, name a nonland card.
         this.addAbility(new AsEntersBattlefieldAbility(new NevermoreEffect1()));

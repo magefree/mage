@@ -47,7 +47,7 @@ public class InkwellLeviathan extends CardImpl {
         super(ownerId, 30, "Inkwell Leviathan", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}{U}{U}" );
         this.expansionSetCode = "CON";
         this.subtype.add("Leviathan");
-        this.color.setBlue(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(11);
 

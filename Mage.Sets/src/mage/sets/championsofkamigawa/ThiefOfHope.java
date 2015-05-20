@@ -53,7 +53,7 @@ public class ThiefOfHope extends CardImpl {
         super(ownerId, 147, "Thief of Hope", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeTargetEffect(1), filter, false);

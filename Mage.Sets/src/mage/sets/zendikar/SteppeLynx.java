@@ -47,7 +47,7 @@ public class SteppeLynx extends CardImpl {
         super(ownerId, 36, "Steppe Lynx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Cat");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 

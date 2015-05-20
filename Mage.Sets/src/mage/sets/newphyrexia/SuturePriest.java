@@ -64,7 +64,7 @@ public class SuturePriest extends CardImpl {
         super(ownerId, 25, "Suture Priest", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

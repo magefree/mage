@@ -47,8 +47,8 @@ public class ArmoredWolfRider extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Elf");
         this.subtype.add("Knight");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

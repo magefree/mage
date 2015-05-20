@@ -55,7 +55,7 @@ public class SunderFromWithin extends CardImpl {
         super(ownerId, 117, "Sunder from Within", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
         // Destroy target artifact or land.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

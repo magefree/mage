@@ -51,7 +51,7 @@ public class TwinbladeSlasher extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(WitherAbility.getInstance());

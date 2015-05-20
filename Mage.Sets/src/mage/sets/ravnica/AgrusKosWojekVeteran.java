@@ -61,8 +61,8 @@ public class AgrusKosWojekVeteran extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.

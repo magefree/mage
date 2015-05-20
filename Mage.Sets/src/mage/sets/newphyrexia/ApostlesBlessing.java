@@ -62,7 +62,7 @@ public class ApostlesBlessing extends CardImpl {
     public ApostlesBlessing(UUID ownerId) {
         super(ownerId, 2, "Apostle's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{WP}");
         this.expansionSetCode = "NPH";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new ApostlesBlessingEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
         this.getSpellAbility().addChoice(new ChoiceColorOrArtifact());

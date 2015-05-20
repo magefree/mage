@@ -52,7 +52,7 @@ public class EpicProportions extends CardImpl {
         super(ownerId, 209, "Epic Proportions", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}{G}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         this.addAbility(FlashAbility.getInstance());
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

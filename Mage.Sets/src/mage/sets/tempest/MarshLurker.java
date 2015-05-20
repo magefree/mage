@@ -59,7 +59,7 @@ public class MarshLurker extends CardImpl {
         super(ownerId, 38, "Marsh Lurker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Beast");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

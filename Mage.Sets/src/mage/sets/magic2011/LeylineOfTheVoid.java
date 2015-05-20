@@ -56,7 +56,7 @@ public class LeylineOfTheVoid extends CardImpl {
     public LeylineOfTheVoid(UUID ownerId) {
         super(ownerId, 101, "Leyline of the Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
         // If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
         // If a card would be put into an opponent's graveyard from anywhere, exile it instead.

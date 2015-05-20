@@ -59,7 +59,7 @@ public class NezumiShadowWatcher extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Rat");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Nezumi Shadow-Watcher: Destroy target Ninja.

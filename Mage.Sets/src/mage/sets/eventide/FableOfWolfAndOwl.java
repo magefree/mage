@@ -57,8 +57,8 @@ public class FableOfWolfAndOwl extends CardImpl {
     public FableOfWolfAndOwl(UUID ownerId) {
         super(ownerId, 150, "Fable of Wolf and Owl", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G/U}{G/U}{G/U}");
         this.expansionSetCode = "EVE";
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+
+
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
     }

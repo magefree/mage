@@ -62,8 +62,8 @@ public class JudgesFamiliar extends CardImpl {
         super(ownerId, 218, "Judge's Familiar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W/U}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Bird");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

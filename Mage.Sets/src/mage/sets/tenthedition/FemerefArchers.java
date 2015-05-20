@@ -60,7 +60,7 @@ public class FemerefArchers extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Archer");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new TapSourceCost());

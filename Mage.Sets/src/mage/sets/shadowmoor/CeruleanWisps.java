@@ -49,7 +49,7 @@ public class CeruleanWisps extends CardImpl {
     public CeruleanWisps (UUID ownerId) {
         super(ownerId, 31, "Cerulean Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SHM";
-        this.color.setBlue(true);
+
         // Target creature becomes blue until end of turn. Untap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn));

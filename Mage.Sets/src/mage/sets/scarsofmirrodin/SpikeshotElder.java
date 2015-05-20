@@ -56,7 +56,7 @@ public class SpikeshotElder extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotElderEffect(), new ManaCostsImpl("{1}{R}{R}"));

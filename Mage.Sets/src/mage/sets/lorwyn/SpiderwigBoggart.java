@@ -51,7 +51,7 @@ public class SpiderwigBoggart extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // When Spiderwig Boggart enters the battlefield, target creature gains fear until end of turn.

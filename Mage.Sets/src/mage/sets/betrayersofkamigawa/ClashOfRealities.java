@@ -62,7 +62,7 @@ public class ClashOfRealities extends CardImpl {
     public ClashOfRealities(UUID ownerId) {
         super(ownerId, 97, "Clash of Realities", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "BOK";
-        this.color.setRed(true);
+
 
         // All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
         Ability ability1 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this permanent enters the battlefield, ");

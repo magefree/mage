@@ -48,7 +48,7 @@ public class DrudgeSkeletons extends CardImpl{
         super(ownerId, 95, "Drudge Skeletons", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Skeleton");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

@@ -46,7 +46,7 @@ public class MendingTouch extends CardImpl {
     public MendingTouch(UUID ownerId) {
         super(ownerId, 44, "Mending Touch", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "DGM";
-        this.color.setGreen(true);
+
 
         // Regenerate target creature.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());

@@ -63,7 +63,7 @@ public class EladamriLordOfLeaves extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, filterCreatures, true)));

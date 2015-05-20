@@ -58,7 +58,7 @@ public class RenegadeKrasis extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Beast");
         this.subtype.add("Mutant");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

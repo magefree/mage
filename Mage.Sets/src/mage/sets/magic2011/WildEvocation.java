@@ -54,7 +54,7 @@ public class WildEvocation extends CardImpl {
     public WildEvocation(UUID ownerId) {
         super(ownerId, 160, "Wild Evocation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
 
                 //At the beginning of each player's upkeep, that player reveals a card at random from his or her hand. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WildEvocationEffect(), TargetController.ANY, false));

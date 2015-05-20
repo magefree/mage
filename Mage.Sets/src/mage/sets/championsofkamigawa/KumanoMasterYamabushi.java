@@ -57,7 +57,7 @@ public class KumanoMasterYamabushi extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

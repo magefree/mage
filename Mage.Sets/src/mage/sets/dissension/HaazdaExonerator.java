@@ -60,7 +60,7 @@ public class HaazdaExonerator extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());

@@ -54,7 +54,7 @@ public class GoblinTrenches extends CardImpl {
         public GoblinTrenches(UUID ownerId) {
         super(ownerId, 104, "Goblin Trenches", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
         this.expansionSetCode = "APC";
-        this.color.setRed(true);
+
 
 
         // {2}, Sacrifice a land: Put two 1/1 red and white Goblin Soldier creature tokens onto the battlefield.

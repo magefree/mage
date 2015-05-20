@@ -52,7 +52,7 @@ public class AcolyteOfXathrid extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{1}{B}"));

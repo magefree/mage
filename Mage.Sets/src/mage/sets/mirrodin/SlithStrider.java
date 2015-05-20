@@ -48,7 +48,7 @@ public class SlithStrider extends CardImpl {
         super(ownerId, 50, "Slith Strider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Slith");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BecomesBlockedTriggeredAbility(new DrawCardSourceControllerEffect(1), false));

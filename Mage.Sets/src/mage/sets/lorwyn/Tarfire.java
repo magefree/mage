@@ -45,7 +45,7 @@ public class Tarfire extends CardImpl {
         super(ownerId, 194, "Tarfire", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{R}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         // Tarfire deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

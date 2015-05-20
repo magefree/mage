@@ -47,7 +47,7 @@ public class ScepterOfInsight extends CardImpl {
     public ScepterOfInsight(UUID ownerId) {
         super(ownerId, 33, "Scepter of Insight", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}{U}{U}");
         this.expansionSetCode = "CON";
-        this.color.setBlue(true);
+
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}"));
         ability.addCost(new TapSourceCost());

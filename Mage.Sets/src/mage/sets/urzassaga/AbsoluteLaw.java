@@ -58,7 +58,7 @@ public class AbsoluteLaw extends CardImpl {
     public AbsoluteLaw(UUID ownerId) {
         super(ownerId, 2, "Absolute Law", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
         Ability ability = new ProtectionAbility(filter);
                 this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }

@@ -45,7 +45,7 @@ public class SpinelessThug extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Zombie");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new CantBlockAbility());

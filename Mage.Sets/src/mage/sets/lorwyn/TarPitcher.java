@@ -61,7 +61,7 @@ public class TarPitcher extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // {tap}, Sacrifice a Goblin: Tar Pitcher deals 2 damage to target creature or player.

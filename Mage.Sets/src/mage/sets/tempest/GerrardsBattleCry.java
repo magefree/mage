@@ -48,7 +48,7 @@ public class GerrardsBattleCry extends CardImpl {
     public GerrardsBattleCry(UUID ownerId) {
         super(ownerId, 233, "Gerrard's Battle Cry", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "TMP";
-        this.color.setWhite(true);
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false), new ManaCostsImpl("{2}{W}")));
     }
 

@@ -43,7 +43,7 @@ public class SeethingSong extends CardImpl {
     public SeethingSong(UUID ownerId) {
         super(ownerId, 104, "Seething Song", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MRD";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(5, 0, 0, 0, 0, 0, 0)));
     }
 

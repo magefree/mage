@@ -65,7 +65,7 @@ public class ArmoredAscension extends CardImpl {
     public ArmoredAscension(UUID ownerId) {
         super(ownerId, 3, "Armored Ascension", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

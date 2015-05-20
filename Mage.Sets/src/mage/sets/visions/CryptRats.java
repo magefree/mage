@@ -60,7 +60,7 @@ public class CryptRats extends CardImpl {
         super(ownerId, 5, "Crypt Rats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "VIS";
         this.subtype.add("Rat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

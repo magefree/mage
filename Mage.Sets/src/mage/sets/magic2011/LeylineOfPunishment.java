@@ -57,7 +57,7 @@ public class LeylineOfPunishment extends CardImpl {
     public LeylineOfPunishment(UUID ownerId) {
         super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
 
         // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

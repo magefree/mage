@@ -47,7 +47,7 @@ public class MurmuringPhantasm extends CardImpl {
         super(ownerId, 15, "Murmuring Phantasm", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
 

@@ -54,7 +54,7 @@ public class SilvergladeElemental extends CardImpl {
         super(ownerId, 78, "Silverglade Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "HOP";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, false), true));

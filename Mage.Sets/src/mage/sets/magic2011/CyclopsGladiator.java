@@ -55,7 +55,7 @@ public class CyclopsGladiator extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Cyclops");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

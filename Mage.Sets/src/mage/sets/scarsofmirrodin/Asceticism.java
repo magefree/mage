@@ -52,7 +52,7 @@ public class Asceticism extends CardImpl {
     public Asceticism(UUID ownerId) {
         super(ownerId, 110, "Asceticism", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
         
         // Creatures you control have hexproof.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent())));

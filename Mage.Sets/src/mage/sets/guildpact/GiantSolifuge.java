@@ -46,8 +46,8 @@ public class GiantSolifuge extends CardImpl {
         super(ownerId, 143, "Giant Solifuge", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R/G}{R/G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Insect");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());

@@ -55,8 +55,8 @@ public class NivMizzetTheFiremind extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Wizard");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

@@ -53,7 +53,7 @@ public class SphinxOfMagosi extends CardImpl {
         super(ownerId, 89, "Sphinx of Magosi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Sphinx");
-        this.color.setBlue(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

@@ -51,8 +51,8 @@ public class AgentOfMasks extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Human");
         this.subtype.add("Advisor");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AgentOfMasksEffect(), TargetController.YOU, false));

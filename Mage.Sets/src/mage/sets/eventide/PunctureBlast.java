@@ -44,7 +44,7 @@ public class PunctureBlast extends CardImpl {
     public PunctureBlast(UUID ownerId) {
         super(ownerId, 60, "Puncture Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "EVE";
-        this.color.setRed(true);
+
         this.addAbility(WitherAbility.getInstance());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

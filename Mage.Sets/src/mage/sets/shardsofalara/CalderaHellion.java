@@ -48,7 +48,7 @@ public class CalderaHellion extends CardImpl {
         super(ownerId, 95, "Caldera Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Hellion");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

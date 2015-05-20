@@ -54,7 +54,7 @@ public class TinStreetMarket extends CardImpl {
         this.expansionSetCode = "GTC";
         
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

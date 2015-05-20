@@ -45,7 +45,7 @@ public class ViashinoOutrider extends CardImpl{
         super(ownerId, 223, "Viashino Outrider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Viashino");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

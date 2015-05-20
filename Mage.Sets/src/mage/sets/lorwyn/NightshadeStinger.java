@@ -47,7 +47,7 @@ public class NightshadeStinger extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Faerie");
         this.subtype.add("Rogue");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

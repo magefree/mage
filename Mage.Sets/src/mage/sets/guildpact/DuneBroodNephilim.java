@@ -28,13 +28,13 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.Token;
@@ -50,10 +50,8 @@ public class DuneBroodNephilim extends CardImpl {
         super(ownerId, 110, "Dune-Brood Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Nephilim");
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

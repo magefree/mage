@@ -46,7 +46,7 @@ public class AggressiveUrge extends CardImpl {
     public AggressiveUrge(UUID ownerId) {
         super(ownerId, 250, "Aggressive Urge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "10E";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

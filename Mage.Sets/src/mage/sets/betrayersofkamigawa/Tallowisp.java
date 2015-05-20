@@ -66,7 +66,7 @@ public class Tallowisp extends CardImpl {
         super(ownerId, 25, "Tallowisp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

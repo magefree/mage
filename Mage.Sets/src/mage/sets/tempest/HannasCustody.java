@@ -55,7 +55,7 @@ public class HannasCustody extends CardImpl {
     public HannasCustody(UUID ownerId) {
         super(ownerId, 234, "Hanna's Custody", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "TMP";
-        this.color.setWhite(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 

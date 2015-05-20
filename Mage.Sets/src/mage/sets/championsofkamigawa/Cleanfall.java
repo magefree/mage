@@ -52,7 +52,7 @@ public class Cleanfall extends CardImpl {
         super(ownerId, 6, "Cleanfall", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 

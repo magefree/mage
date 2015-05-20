@@ -50,7 +50,7 @@ public class BogardanHellkite extends CardImpl {
         super(ownerId, 127, "Bogardan Hellkite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{R}{R}");
         this.expansionSetCode = "M10";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

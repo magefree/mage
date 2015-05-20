@@ -52,7 +52,7 @@ public class GaleForce extends CardImpl {
     public GaleForce(UUID ownerId) {
         super(ownerId, 209, "Gale Force", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "CHK";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DamageAllEffect(5, filter));
     }
 

@@ -46,7 +46,7 @@ public class GibberingKami extends CardImpl {
         super(ownerId, 112, "Gibbering Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

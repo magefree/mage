@@ -55,7 +55,7 @@ public class Demolish extends CardImpl {
     public Demolish(UUID ownerId) {
         super(ownerId, 196, "Demolish", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

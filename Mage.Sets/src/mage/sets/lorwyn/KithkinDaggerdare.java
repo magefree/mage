@@ -50,7 +50,7 @@ public class KithkinDaggerdare extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));

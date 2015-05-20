@@ -56,7 +56,7 @@ public class SunblastAngel extends CardImpl {
         super(ownerId, 22, "Sunblast Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

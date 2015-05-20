@@ -44,7 +44,7 @@ public class SacredWolf extends CardImpl {
         super(ownerId, 196, "Sacred Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Wolf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(HexproofAbility.getInstance());

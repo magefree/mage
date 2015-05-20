@@ -60,7 +60,7 @@ public class SoratamiRainshaper extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

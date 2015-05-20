@@ -58,7 +58,7 @@ public class VampiricEmbrace extends CardImpl {
         super(ownerId, 164, "Vampiric Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 		
         // Enchant creature
 		TargetPermanent auraTarget = new TargetCreaturePermanent();

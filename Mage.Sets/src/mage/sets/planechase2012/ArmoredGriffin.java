@@ -45,7 +45,7 @@ public class ArmoredGriffin extends CardImpl {
         super(ownerId, 1, "Armored Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Griffin");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

@@ -49,7 +49,7 @@ public class DissipationField extends CardImpl {
     public DissipationField(UUID ownerId) {
         super(ownerId, 32, "Dissipation Field", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+
 
         // Whenever a permanent deals damage to you, return it to its owner's hand.
         this.addAbility(new DissipationFieldAbility());

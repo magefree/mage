@@ -48,7 +48,7 @@ public class MosquitoGuard extends CardImpl {
         this.expansionSetCode = "DDF";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FirstStrikeAbility.getInstance());

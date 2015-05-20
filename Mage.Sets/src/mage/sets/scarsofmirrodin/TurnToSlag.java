@@ -51,7 +51,7 @@ public class TurnToSlag extends CardImpl {
     public TurnToSlag (UUID ownerId) {
         super(ownerId, 106, "Turn to Slag", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "SOM";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new TurnToSlagEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

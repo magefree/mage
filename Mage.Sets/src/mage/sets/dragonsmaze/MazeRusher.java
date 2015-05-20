@@ -58,7 +58,7 @@ public class MazeRusher extends CardImpl {
         super(ownerId, 33, "Maze Rusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

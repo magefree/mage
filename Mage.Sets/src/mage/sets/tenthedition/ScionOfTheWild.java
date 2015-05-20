@@ -51,7 +51,7 @@ public class ScionOfTheWild extends CardImpl {
         super(ownerId, 295, "Scion of the Wild", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Avatar");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));

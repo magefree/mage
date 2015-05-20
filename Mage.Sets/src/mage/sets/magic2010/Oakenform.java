@@ -56,7 +56,7 @@ public class Oakenform extends CardImpl {
     public Oakenform(UUID ownerId) {
         super(ownerId, 197, "Oakenform", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

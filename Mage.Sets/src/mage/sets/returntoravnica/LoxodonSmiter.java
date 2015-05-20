@@ -57,8 +57,8 @@ public class LoxodonSmiter extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

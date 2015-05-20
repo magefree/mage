@@ -48,7 +48,7 @@ public class ActOfTreason extends CardImpl {
     public ActOfTreason(UUID ownerId) {
         super(ownerId, 124, "Act of Treason", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
 
         // Gain control of target creature until end of turn. Untap that creature.
         // It gains haste until end of turn. (It can attack and {T} this turn.)

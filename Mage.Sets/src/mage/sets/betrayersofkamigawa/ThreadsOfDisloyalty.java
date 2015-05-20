@@ -60,7 +60,7 @@ public class ThreadsOfDisloyalty extends CardImpl {
     public ThreadsOfDisloyalty(UUID ownerId) {
         super(ownerId, 56, "Threads of Disloyalty", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}{U}");
         this.expansionSetCode = "BOK";
-        this.color.setBlue(true);
+
         this.subtype.add("Aura");
 
         // Enchant creature with converted mana cost 2 or less

@@ -56,7 +56,7 @@ public class PeerThroughDepths extends CardImpl {
         super(ownerId, 78, "Peer Through Depths", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-    this.color.setBlue(true);
+
 
         // Look at the top five cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. 
         // Put the rest on the bottom of your library in any order.

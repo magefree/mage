@@ -57,7 +57,7 @@ public class GaeasEmbrace extends CardImpl {
         super(ownerId, 255, "Gaea's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

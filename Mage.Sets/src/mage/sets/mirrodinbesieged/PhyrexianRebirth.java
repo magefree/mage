@@ -51,7 +51,7 @@ public class PhyrexianRebirth extends CardImpl {
     public PhyrexianRebirth (UUID ownerId) {
         super(ownerId, 15, "Phyrexian Rebirth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "MBS";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
     }
 

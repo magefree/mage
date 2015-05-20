@@ -53,7 +53,7 @@ public class DarkBanishing extends CardImpl {
     public DarkBanishing(UUID ownerId) {
         super(ownerId, 11, "Dark Banishing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "TMP";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }

@@ -51,7 +51,7 @@ public class BouncingBeebles extends CardImpl {
         super(ownerId, 28, "Bouncing Beebles", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Beeble");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -46,7 +46,7 @@ public class ExplosiveVegetation extends CardImpl {
     public ExplosiveVegetation(UUID ownerId) {
         super(ownerId, 70, "Explosive Vegetation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "HOP";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), true));
     }
 

@@ -64,7 +64,7 @@ public class SeshiroTheAnointed extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Snake");
         this.subtype.add("Monk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));

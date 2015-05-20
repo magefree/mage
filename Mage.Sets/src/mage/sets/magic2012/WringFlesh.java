@@ -45,7 +45,7 @@ public class WringFlesh extends CardImpl {
     public WringFlesh(UUID ownerId) {
         super(ownerId, 118, "Wring Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "M12";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

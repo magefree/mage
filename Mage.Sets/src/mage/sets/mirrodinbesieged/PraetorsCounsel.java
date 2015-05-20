@@ -51,7 +51,7 @@ public class PraetorsCounsel extends CardImpl {
     public PraetorsCounsel(UUID ownerId) {
         super(ownerId, 88, "Praetor's Counsel", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{5}{G}{G}{G}");
         this.expansionSetCode = "MBS";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new PraetorsCounselEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
         this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));

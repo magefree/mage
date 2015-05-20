@@ -52,7 +52,7 @@ public class Pacifism extends CardImpl {
     public Pacifism(UUID ownerId) {
         super(ownerId, 31, "Pacifism", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "10E";
-        this.color.setWhite(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

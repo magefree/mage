@@ -56,7 +56,7 @@ public class Levitation extends CardImpl {
     public Levitation (UUID ownerId) {
         super(ownerId, 61, "Levitation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "M12";
-        this.color.setBlue(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 

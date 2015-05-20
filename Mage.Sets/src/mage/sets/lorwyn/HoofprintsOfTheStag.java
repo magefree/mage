@@ -56,7 +56,7 @@ public class HoofprintsOfTheStag extends CardImpl {
         super(ownerId, 21, "Hoofprints of the Stag", Rarity.RARE, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
-        this.color.setWhite(true);
+
         this.addAbility(new DrawCardControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"), MyTurnCondition.getInstance());
         ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));

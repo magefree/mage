@@ -57,7 +57,7 @@ public class CitanulHierophants extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Human");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

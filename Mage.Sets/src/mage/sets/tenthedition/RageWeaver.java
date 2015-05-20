@@ -65,7 +65,7 @@ public class RageWeaver extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));

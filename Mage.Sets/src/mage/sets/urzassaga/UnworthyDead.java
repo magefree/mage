@@ -48,7 +48,7 @@ public class UnworthyDead extends CardImpl{
         super(ownerId, 163, "Unworthy Dead", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "USG";
         this.subtype.add("Skeleton");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

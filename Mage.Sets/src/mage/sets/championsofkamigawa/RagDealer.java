@@ -58,7 +58,7 @@ public class RagDealer extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-        this.color.setBlack(true);
+
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

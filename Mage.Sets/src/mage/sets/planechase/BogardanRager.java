@@ -50,7 +50,7 @@ public class BogardanRager extends CardImpl {
         super(ownerId, 49, "Bogardan Rager", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "HOP";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(FlashAbility.getInstance());

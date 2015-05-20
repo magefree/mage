@@ -44,7 +44,7 @@ public class HatchingPlans extends CardImpl {
     public HatchingPlans (UUID ownerId) {
         super(ownerId, 27, "Hatching Plans", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "GPT";
-        this.color.setBlue(true);
+
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(3)));
     }
 

@@ -53,7 +53,7 @@ public class Memoricide extends CardImpl {
     public Memoricide(UUID ownerId) {
         super(ownerId, 69, "Memoricide", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "SOM";
-        this.color.setBlack(true);
+
 
         // Name a nonland card. Search target player's graveyard, hand, and library for any number of cards with
         // that name and exile them. Then that player shuffles his or her library

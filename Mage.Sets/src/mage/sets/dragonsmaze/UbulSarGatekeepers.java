@@ -67,7 +67,7 @@ public class UbulSarGatekeepers extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

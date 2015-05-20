@@ -44,7 +44,7 @@ public class BogWraith extends CardImpl {
     public BogWraith(UUID ownerId) {
         super(ownerId, 86, "Bog Wraith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
         this.subtype.add("Wraith");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

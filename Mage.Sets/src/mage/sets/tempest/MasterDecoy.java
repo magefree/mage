@@ -53,7 +53,7 @@ public class MasterDecoy extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));

@@ -44,7 +44,7 @@ public class SiegeMastodon extends CardImpl {
         super(ownerId, 30, "Siege Mastodon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Elephant");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

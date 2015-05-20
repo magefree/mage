@@ -52,7 +52,7 @@ public class BoldDefense extends CardImpl {
     public BoldDefense(UUID ownerId) {
         super(ownerId, 3, "Bold Defense", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
 
         // Kicker {3}{W} (You may pay an additional {3}{W} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{W}"));

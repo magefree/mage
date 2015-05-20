@@ -58,7 +58,7 @@ public class MazeSentinel extends CardImpl {
         super(ownerId, 4, "Maze Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
 

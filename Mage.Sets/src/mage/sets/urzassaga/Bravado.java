@@ -52,7 +52,7 @@ public class Bravado extends CardImpl {
         super(ownerId, 177, "Bravado", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
 		
         // Enchant creature
 		TargetPermanent auraTarget = new TargetCreaturePermanent();

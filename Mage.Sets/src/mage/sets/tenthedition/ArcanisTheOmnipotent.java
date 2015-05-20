@@ -51,7 +51,7 @@ public class ArcanisTheOmnipotent extends CardImpl {
         this.expansionSetCode = "10E";
         this.supertype.add("Legendary");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         

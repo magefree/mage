@@ -51,7 +51,7 @@ public class ConsecratedSphinx extends CardImpl {
         super(ownerId, 21, "Consecrated Sphinx", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Sphinx");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

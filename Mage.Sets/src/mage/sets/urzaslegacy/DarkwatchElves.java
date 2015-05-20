@@ -55,7 +55,7 @@ public class DarkwatchElves extends CardImpl {
         super(ownerId, 99, "Darkwatch Elves", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

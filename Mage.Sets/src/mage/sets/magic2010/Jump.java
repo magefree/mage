@@ -46,7 +46,7 @@ public class Jump extends CardImpl {
     public Jump(UUID ownerId) {
         super(ownerId, 59, "Jump", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

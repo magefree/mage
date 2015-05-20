@@ -47,7 +47,7 @@ public class SpideryGrasp extends CardImpl {
     public SpideryGrasp(UUID ownerId) {
         super(ownerId, 204, "Spidery Grasp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "ISD";
-        this.color.setGreen(true);
+
 
         // Untap target creature. It gets +2/+4 and gains reach until end of turn.
         this.getSpellAbility().addEffect(new UntapTargetEffect());

@@ -46,7 +46,7 @@ public class SoulParry extends CardImpl {
     public SoulParry (UUID ownerId) {
         super(ownerId, 21, "Soul Parry", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "SOM";
-        this.color.setWhite(true);
+
         
         // Prevent all damage one or two target creatures would deal this turn
         Target target = new TargetCreaturePermanent(1,2);

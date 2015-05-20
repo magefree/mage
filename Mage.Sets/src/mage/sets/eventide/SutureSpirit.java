@@ -51,7 +51,7 @@ public class SutureSpirit extends CardImpl {
         super(ownerId, 16, "Suture Spirit", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

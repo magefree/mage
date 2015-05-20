@@ -52,7 +52,7 @@ public class HolyStrength extends CardImpl {
     public HolyStrength(UUID ownerId) {
         super(ownerId, 22, "Holy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "10E";
-        this.color.setWhite(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

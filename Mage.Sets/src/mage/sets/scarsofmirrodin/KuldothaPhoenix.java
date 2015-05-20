@@ -55,7 +55,7 @@ public class KuldothaPhoenix extends CardImpl {
         super(ownerId, 95, "Kuldotha Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Phoenix");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

@@ -50,7 +50,7 @@ public class KamiOfTwistedReflection extends CardImpl {
         super(ownerId, 71, "Kami of Twisted Reflection", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new SacrificeSourceCost());

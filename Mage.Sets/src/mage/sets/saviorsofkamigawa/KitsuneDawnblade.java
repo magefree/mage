@@ -49,7 +49,7 @@ public class KitsuneDawnblade extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(1));

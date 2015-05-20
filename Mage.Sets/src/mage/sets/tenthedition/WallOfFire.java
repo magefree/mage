@@ -47,7 +47,7 @@ public class WallOfFire extends CardImpl {
         super(ownerId, 247, "Wall of Fire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Wall");
-        this.color.setRed(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());

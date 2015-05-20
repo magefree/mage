@@ -49,7 +49,7 @@ public class Gravedigger extends CardImpl {
         super(ownerId, 146, "Gravedigger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

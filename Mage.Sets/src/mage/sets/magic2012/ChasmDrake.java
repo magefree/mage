@@ -50,7 +50,7 @@ public class ChasmDrake extends CardImpl {
         super(ownerId, 48, "Chasm Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "M12";
         this.subtype.add("Drake");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         

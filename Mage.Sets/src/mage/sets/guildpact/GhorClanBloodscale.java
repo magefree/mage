@@ -51,7 +51,7 @@ public class GhorClanBloodscale extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Viashino");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FirstStrikeAbility.getInstance());

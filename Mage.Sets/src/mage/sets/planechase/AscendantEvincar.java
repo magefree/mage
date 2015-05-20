@@ -62,7 +62,7 @@ public class AscendantEvincar extends CardImpl {
         this.expansionSetCode = "HOP";
         this.supertype.add("Legendary");
         this.subtype.add("Vampire");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

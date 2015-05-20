@@ -63,7 +63,7 @@ public class CateranBrute extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Horror");
 		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
+
 		this.power = new MageInt(2);
 		this.toughness = new MageInt(2);
 	

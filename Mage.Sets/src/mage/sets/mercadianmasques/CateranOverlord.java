@@ -67,7 +67,7 @@ public class CateranOverlord extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Horror");
 		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
+
 		this.power = new MageInt(7);
 		this.toughness = new MageInt(5);
 	

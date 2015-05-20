@@ -48,7 +48,7 @@ public class BurrentonBombardier extends CardImpl {
         this.expansionSetCode = "DDF";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Flying

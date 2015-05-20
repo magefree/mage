@@ -46,7 +46,7 @@ public class FlowstoneGiant extends CardImpl {
         super(ownerId, 174, "Flowstone Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Giant");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));

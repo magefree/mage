@@ -44,8 +44,8 @@ public class Watchwolf extends CardImpl {
         super(ownerId, 239, "Watchwolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Wolf");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }

@@ -55,7 +55,7 @@ public class RekiTheHistoryOfKamigawa extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         // Whenever you cast a legendary spell, draw a card.

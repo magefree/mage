@@ -54,7 +54,7 @@ public class MolimoMaroSorcerer extends CardImpl {
         this.expansionSetCode = "10E";
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

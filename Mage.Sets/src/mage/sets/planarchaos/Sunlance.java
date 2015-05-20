@@ -53,7 +53,7 @@ public class Sunlance extends CardImpl {
     public Sunlance(UUID ownerId) {
         super(ownerId, 31, "Sunlance", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}");
         this.expansionSetCode = "PLC";
-        this.color.setWhite(true);
+
 
         // Sunlance deals 3 damage to target nonwhite creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));

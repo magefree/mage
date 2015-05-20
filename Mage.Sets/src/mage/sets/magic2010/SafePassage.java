@@ -55,7 +55,7 @@ public class SafePassage  extends CardImpl {
     public SafePassage(UUID ownerId) {
         super(ownerId, 28, "Safe Passage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
     }
 

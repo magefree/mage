@@ -47,7 +47,7 @@ public class WallOfOmens extends CardImpl {
         super(ownerId, 53, "Wall of Omens", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Wall");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

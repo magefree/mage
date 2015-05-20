@@ -47,7 +47,7 @@ public class PrizedUnicorn extends CardImpl {
         super(ownerId, 199, "Prized Unicorn", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Unicorn");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

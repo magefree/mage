@@ -49,7 +49,7 @@ public class GoblinBombardment extends CardImpl {
     public GoblinBombardment(UUID ownerId) {
         super(ownerId, 179, "Goblin Bombardment", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

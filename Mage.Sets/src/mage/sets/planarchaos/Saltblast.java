@@ -51,7 +51,7 @@ public class Saltblast extends CardImpl {
     public Saltblast(UUID ownerId) {
         super(ownerId, 15, "Saltblast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}{W}");
         this.expansionSetCode = "PLC";
-        this.color.setWhite(true);
+
 
         // Destroy target nonwhite permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

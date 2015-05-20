@@ -49,7 +49,7 @@ public class Tranquility extends CardImpl {
     public Tranquility(UUID ownerId) {
         super(ownerId, 155, "Tranquility", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new TranquilityEffect());
     }
 

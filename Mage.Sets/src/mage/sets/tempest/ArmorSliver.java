@@ -59,7 +59,7 @@ public class ArmorSliver extends CardImpl {
         super(ownerId, 216, "Armor Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));

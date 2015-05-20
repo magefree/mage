@@ -44,7 +44,7 @@ public class DouseInGloom extends CardImpl {
     public DouseInGloom(UUID ownerId) {
         super(ownerId, 49, "Douse in Gloom", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "GPT";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));

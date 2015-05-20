@@ -64,7 +64,7 @@ public class DevouringRage extends CardImpl {
         super(ownerId, 164, "Devouring Rage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
 
         // As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));

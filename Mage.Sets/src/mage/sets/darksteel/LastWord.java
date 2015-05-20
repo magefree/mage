@@ -45,7 +45,7 @@ public class LastWord extends CardImpl {
     public LastWord (UUID ownerId) {
         super(ownerId, 23, "Last Word", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "DST";
-        this.color.setBlue(true);
+
         this.addAbility(new CantBeCounteredAbility());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());

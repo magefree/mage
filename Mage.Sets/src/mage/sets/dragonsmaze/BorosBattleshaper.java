@@ -68,8 +68,8 @@ public class BorosBattleshaper extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Minotaur");
         this.subtype.add("Soldier");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

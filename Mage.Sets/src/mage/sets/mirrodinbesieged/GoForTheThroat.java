@@ -53,7 +53,7 @@ public class GoForTheThroat extends CardImpl {
     public GoForTheThroat(UUID ownerId) {
         super(ownerId, 43, "Go for the Throat", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "MBS";
-        this.color.setBlack(true);
+
 
         Target target = new TargetCreaturePermanent(filter);
         target.setTargetName("nonartifact creature");

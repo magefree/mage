@@ -47,7 +47,7 @@ public class JungleBarrier extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Plant");
         this.subtype.add("Wall");
-        this.color.setBlue(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(6);

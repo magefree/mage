@@ -63,7 +63,7 @@ public class IndomitableArchangel extends CardImpl {
         super(ownerId, 11, "Indomitable Archangel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

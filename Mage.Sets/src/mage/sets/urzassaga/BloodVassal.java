@@ -49,7 +49,7 @@ public class BloodVassal extends CardImpl {
         super(ownerId, 118, "Blood Vassal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "USG";
         this.subtype.add("Thrull");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

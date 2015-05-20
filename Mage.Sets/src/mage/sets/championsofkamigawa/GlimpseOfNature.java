@@ -47,7 +47,7 @@ public class GlimpseOfNature extends CardImpl {
     public GlimpseOfNature (UUID ownerId) {
         super(ownerId, 210, "Glimpse of Nature", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "CHK";
-        this.color.setGreen(true);
+
 
         // Whenever you cast a creature spell this turn, draw a card.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GlimpseOfNatureTriggeredAbility()));

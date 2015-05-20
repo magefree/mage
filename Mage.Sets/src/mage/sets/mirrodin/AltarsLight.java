@@ -54,7 +54,7 @@ public class AltarsLight extends CardImpl {
     public AltarsLight(UUID ownerId) {
         super(ownerId, 1, "Altar's Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "MRD";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

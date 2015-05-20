@@ -50,7 +50,7 @@ public class FesteringGoblin extends CardImpl {
         this.expansionSetCode = "HOP";
         this.subtype.add("Zombie");
         this.subtype.add("Goblin");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);

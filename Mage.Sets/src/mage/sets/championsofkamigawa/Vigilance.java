@@ -49,7 +49,7 @@ public class Vigilance extends CardImpl {
         super(ownerId, 49, "Vigilance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));

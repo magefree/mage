@@ -51,7 +51,7 @@ public class DauthiMercenary extends CardImpl {
         this.subtype.add("Dauthi");
         this.subtype.add("Knight");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

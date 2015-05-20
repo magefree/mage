@@ -48,7 +48,7 @@ public class TerashisCry extends CardImpl {
         super(ownerId, 47, "Terashi's Cry", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
 
         // Tap up to three target creatures.
         Target target = new TargetCreaturePermanent(0,3);

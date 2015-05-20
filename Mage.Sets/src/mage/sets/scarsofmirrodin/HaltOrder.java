@@ -53,7 +53,7 @@ public class HaltOrder extends CardImpl {
     public HaltOrder (UUID ownerId) {
         super(ownerId, 34, "Halt Order", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

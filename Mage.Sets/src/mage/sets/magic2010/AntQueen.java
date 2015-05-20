@@ -51,7 +51,7 @@ public class AntQueen extends CardImpl {
         super(ownerId, 166, "Ant Queen", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Insect");
-        this.color.setGreen(true);
+
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);

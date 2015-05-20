@@ -46,7 +46,7 @@ public class GriffinSentinel extends CardImpl {
         super(ownerId, 12, "Griffin Sentinel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Griffin");
-        this.color.setWhite(true);
+
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
         this.power = new MageInt(1);

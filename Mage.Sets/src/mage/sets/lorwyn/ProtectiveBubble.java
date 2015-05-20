@@ -53,7 +53,7 @@ public class ProtectiveBubble extends CardImpl {
         super(ownerId, 80, "Protective Bubble", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

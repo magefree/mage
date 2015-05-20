@@ -55,7 +55,7 @@ public class FlameblastDragon extends CardImpl {
         super(ownerId, 100, "Flameblast Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

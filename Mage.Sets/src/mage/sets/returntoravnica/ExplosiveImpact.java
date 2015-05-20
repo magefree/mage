@@ -44,7 +44,7 @@ public class ExplosiveImpact extends CardImpl {
     public ExplosiveImpact(UUID ownerId) {
         super(ownerId, 94, "Explosive Impact", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{5}{R}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
+
 
         // Explosive Impact deals 5 damage to target creature or player.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

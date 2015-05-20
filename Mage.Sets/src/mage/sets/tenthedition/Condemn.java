@@ -51,7 +51,7 @@ public class Condemn extends CardImpl {
     public Condemn(UUID ownerId) {
             super(ownerId, 13, "Condemn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
-        this.color.setWhite(true);
+
         // Put target attacking creature on the bottom of its owner's library.
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));

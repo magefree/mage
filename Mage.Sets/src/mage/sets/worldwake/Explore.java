@@ -46,7 +46,7 @@ public class Explore extends CardImpl {
     public Explore(UUID ownerId) {
         super(ownerId, 99, "Explore", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "WWK";
-        this.color.setGreen(true);
+
 
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -50,7 +50,7 @@ public class SplitTailMiko extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // {W}, {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.

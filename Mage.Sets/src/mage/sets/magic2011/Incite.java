@@ -48,7 +48,7 @@ public class Incite extends CardImpl {
     public Incite(UUID ownerId) {
         super(ownerId, 145, "Incite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
 
         // Target creature becomes red until end of turn and attacks this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

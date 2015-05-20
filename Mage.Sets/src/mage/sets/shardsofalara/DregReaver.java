@@ -45,7 +45,7 @@ public class DregReaver extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Zombie");
         this.subtype.add("Beast");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
     }

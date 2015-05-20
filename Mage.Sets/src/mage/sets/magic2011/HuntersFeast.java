@@ -44,7 +44,7 @@ public class HuntersFeast extends CardImpl {
     public HuntersFeast(UUID ownerId) {
         super(ownerId, 182, "Hunters' Feast", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(6));
     }

@@ -51,7 +51,7 @@ public class DivineFavor extends CardImpl {
         super(ownerId, 14, "Divine Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

@@ -44,7 +44,7 @@ public class WarpathGhoul extends CardImpl {
         super(ownerId, 120, "Warpath Ghoul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

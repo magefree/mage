@@ -59,7 +59,7 @@ public class GoblinGuide extends CardImpl {
     public GoblinGuide(UUID ownerId) {
         super(ownerId, 126, "Goblin Guide", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "ZEN";
-        this.color.setRed(true);
+
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

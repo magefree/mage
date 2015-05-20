@@ -67,7 +67,7 @@ public class HigureTheStillWind extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Ninja");
         this.supertype.add("Legendary");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

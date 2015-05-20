@@ -51,7 +51,7 @@ public class KamiOfTatteredShoji extends CardImpl {
         super(ownerId, 11, "Kami of Tattered Shoji", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
         // Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.

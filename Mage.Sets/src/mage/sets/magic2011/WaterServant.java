@@ -49,7 +49,7 @@ public class WaterServant extends CardImpl {
         super(ownerId, 80, "Water Servant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

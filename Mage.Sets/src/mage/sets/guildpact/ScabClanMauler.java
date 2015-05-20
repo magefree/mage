@@ -46,8 +46,8 @@ public class ScabClanMauler extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Human");
         this.subtype.add("Berserker");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BloodthirstAbility(2));

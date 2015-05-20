@@ -50,7 +50,7 @@ public class TangleAngler extends CardImpl {
         super(ownerId, 128, "Tangle Angler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Horror");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
 

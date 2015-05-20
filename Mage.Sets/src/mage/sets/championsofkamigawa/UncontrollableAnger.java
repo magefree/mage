@@ -53,7 +53,7 @@ public class UncontrollableAnger extends CardImpl {
         super(ownerId, 195, "Uncontrollable Anger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

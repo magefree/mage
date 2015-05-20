@@ -53,7 +53,7 @@ public class KuroPitlord extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Demon");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
         // At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.

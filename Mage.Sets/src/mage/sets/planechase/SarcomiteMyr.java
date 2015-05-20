@@ -53,7 +53,7 @@ public class SarcomiteMyr extends CardImpl {
         super(ownerId, 13, "Sarcomite Myr", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "HOP";
         this.subtype.add("Myr");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2)));

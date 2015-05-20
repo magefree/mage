@@ -70,8 +70,8 @@ public class DomriRade extends CardImpl {
         super(ownerId, 156, "Domri Rade", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{1}{R}{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Domri");
-        this.color.setGreen(true);
-        this.color.setRed(true);
+
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

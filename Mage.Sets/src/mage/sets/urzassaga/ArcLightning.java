@@ -44,7 +44,7 @@ public class ArcLightning extends CardImpl {
     public ArcLightning(UUID ownerId) {
         super(ownerId, 174, "Arc Lightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(3));
     }

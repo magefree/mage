@@ -49,7 +49,7 @@ public class ChandrasOutrage extends CardImpl {
     public ChandrasOutrage(UUID ownerId) {
         super(ownerId, 128, "Chandra's Outrage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new ChandrasOutrageEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

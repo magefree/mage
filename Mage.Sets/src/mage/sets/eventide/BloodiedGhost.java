@@ -48,8 +48,8 @@ public class BloodiedGhost extends CardImpl {
         super(ownerId, 83, "Bloodied Ghost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

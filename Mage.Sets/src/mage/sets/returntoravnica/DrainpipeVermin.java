@@ -50,7 +50,7 @@ public class DrainpipeVermin extends CardImpl {
         super(ownerId, 66, "Drainpipe Vermin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Rat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

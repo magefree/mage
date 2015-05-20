@@ -53,7 +53,7 @@ public class TendrilsOfCorruption extends CardImpl {
     public TendrilsOfCorruption(UUID ownerId) {
         super(ownerId, 114, "Tendrils of Corruption", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));

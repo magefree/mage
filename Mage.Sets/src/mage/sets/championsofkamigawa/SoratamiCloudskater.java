@@ -56,7 +56,7 @@ public class SoratamiCloudskater extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Moonfolk");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

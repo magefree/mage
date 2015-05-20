@@ -52,7 +52,7 @@ public class BlindingMage extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));

@@ -47,7 +47,7 @@ public class TelJiladDefiance extends CardImpl {
     public TelJiladDefiance(UUID ownerId) {
         super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

@@ -50,7 +50,7 @@ public class TormentorExarch extends CardImpl {
         super(ownerId, 97, "Tormentor Exarch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Cleric");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

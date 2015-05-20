@@ -50,8 +50,8 @@ public class VectisAgents extends CardImpl {
     public VectisAgents(UUID ownerId) {
         super(ownerId, 131, "Vectis Agents", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "CON";
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.power = new MageInt(4);

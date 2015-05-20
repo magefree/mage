@@ -50,7 +50,7 @@ public class Frostling extends CardImpl {
         super(ownerId, 103, "Frostling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Frostling: Frostling deals 1 damage to target creature.

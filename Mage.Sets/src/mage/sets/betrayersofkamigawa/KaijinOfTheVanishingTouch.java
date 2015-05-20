@@ -53,7 +53,7 @@ public class KaijinOfTheVanishingTouch extends CardImpl {
         super(ownerId, 39, "Kaijin of the Vanishing Touch", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

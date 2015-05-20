@@ -53,7 +53,7 @@ public class MerfolkMesmerist extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.U));

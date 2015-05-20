@@ -54,7 +54,7 @@ public class JundBattlemage extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{B}"));

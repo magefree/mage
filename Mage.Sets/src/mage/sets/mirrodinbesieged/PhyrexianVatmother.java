@@ -53,7 +53,7 @@ public class PhyrexianVatmother extends CardImpl {
         super(ownerId, 52, "Phyrexian Vatmother", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Horror");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.addAbility(InfectAbility.getInstance());

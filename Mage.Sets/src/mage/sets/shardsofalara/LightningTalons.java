@@ -57,7 +57,7 @@ public class LightningTalons extends CardImpl {
         super(ownerId, 107, "Lightning Talons", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

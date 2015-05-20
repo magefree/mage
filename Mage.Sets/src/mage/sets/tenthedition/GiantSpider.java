@@ -45,7 +45,7 @@ public class GiantSpider extends CardImpl {
         super(ownerId, 267, "Giant Spider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Spider");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

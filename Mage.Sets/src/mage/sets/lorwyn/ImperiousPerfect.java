@@ -60,7 +60,7 @@ public class ImperiousPerfect extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));

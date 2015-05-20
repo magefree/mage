@@ -52,7 +52,7 @@ public class DestructiveForce extends CardImpl {
     public DestructiveForce(UUID ownerId) {
         super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
 
         // Each player sacrifices five lands.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filterLand));

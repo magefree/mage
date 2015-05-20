@@ -58,7 +58,7 @@ public class ChandraTheFirebrand extends CardImpl {
         super(ownerId, 124, "Chandra, the Firebrand", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Chandra");
-        this.color.setRed(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Chandra, the Firebrand deals 1 damage to target creature or player.

@@ -59,8 +59,8 @@ public class BelligerentHatchling extends CardImpl {
         super(ownerId, 134, "Belligerent Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R/W}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

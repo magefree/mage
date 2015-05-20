@@ -45,7 +45,7 @@ public class WoodlandChangeling extends CardImpl {
         super(ownerId, 242, "Woodland Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Changeling

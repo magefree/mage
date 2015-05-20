@@ -63,7 +63,7 @@ public class UrbanBurgeoning extends CardImpl {
         super(ownerId, 138, "Urban Burgeoning", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

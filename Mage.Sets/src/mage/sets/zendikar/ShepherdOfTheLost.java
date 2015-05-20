@@ -47,7 +47,7 @@ public class ShepherdOfTheLost extends CardImpl {
         super(ownerId, 34, "Shepherd of the Lost", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

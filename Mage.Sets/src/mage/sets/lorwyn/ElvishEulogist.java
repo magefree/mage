@@ -58,7 +58,7 @@ public class ElvishEulogist extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CardsInControllerGraveyardCount(filter, 1)), new SacrificeSourceCost()));

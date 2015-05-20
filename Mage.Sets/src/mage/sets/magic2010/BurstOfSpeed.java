@@ -46,7 +46,7 @@ public class BurstOfSpeed extends CardImpl {
     public BurstOfSpeed(UUID ownerId) {
         super(ownerId, 129, "Burst of Speed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 

@@ -61,7 +61,7 @@ public class ScarbladeElite extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elf");
         this.subtype.add("Assassin");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());

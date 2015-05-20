@@ -54,7 +54,7 @@ public class AetherFigment extends CardImpl {
         super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Illusion");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -46,7 +46,7 @@ public class UnearthlyBlizzard extends CardImpl {
         super(ownerId, 196, "Unearthly Blizzard", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
 
         // Up to three target creatures can't block this turn.
         this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));

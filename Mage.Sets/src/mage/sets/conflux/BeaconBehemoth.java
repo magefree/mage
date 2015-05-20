@@ -61,7 +61,7 @@ public class BeaconBehemoth extends CardImpl {
         super(ownerId, 78, "Beacon Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "CON";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 

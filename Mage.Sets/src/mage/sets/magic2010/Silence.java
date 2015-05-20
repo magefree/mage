@@ -50,7 +50,7 @@ public class Silence extends CardImpl {
     public Silence(UUID ownerId) {
         super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new SilenceEffect());
     }
 

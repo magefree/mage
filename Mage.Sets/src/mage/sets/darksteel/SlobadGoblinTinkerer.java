@@ -67,7 +67,7 @@ public class SlobadGoblinTinkerer extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Artificer");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

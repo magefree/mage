@@ -51,7 +51,7 @@ public class GoblinFireslinger extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         

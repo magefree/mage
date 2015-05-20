@@ -67,7 +67,7 @@ public class EtherealArmor extends CardImpl {
         super(ownerId, 9, "Ethereal Armor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

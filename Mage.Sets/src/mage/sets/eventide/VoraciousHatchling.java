@@ -59,8 +59,8 @@ public class VoraciousHatchling extends CardImpl {
         super(ownerId, 97, "Voracious Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

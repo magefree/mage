@@ -45,7 +45,7 @@ public class TitaniasBoon extends CardImpl {
     public TitaniasBoon(UUID ownerId) {
         super(ownerId, 276, "Titania's Boon", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "USG";
-        this.color.setGreen(true);
+
 		
 		// Put a +1/+1 counter on each creature you control.
 		this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent("creature you control")));

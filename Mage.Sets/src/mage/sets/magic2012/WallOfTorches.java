@@ -45,7 +45,7 @@ public class WallOfTorches extends CardImpl {
         super(ownerId, 159, "Wall of Torches", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Wall");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
         this.addAbility(DefenderAbility.getInstance());

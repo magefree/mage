@@ -60,7 +60,7 @@ public class HeartwoodGiant extends CardImpl {
         super(ownerId, 126, "Heartwood Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Giant");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());

@@ -49,7 +49,7 @@ public class SwiftJustice extends CardImpl {
     public SwiftJustice(UUID ownerId) {
         super(ownerId, 26, "Swift Justice", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "RTR";
-        this.color.setWhite(true);
+
 
         // Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

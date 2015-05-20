@@ -58,7 +58,7 @@ public class ElspethTirel extends CardImpl {
         super(ownerId, 6, "Elspeth Tirel", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elspeth");
-        this.color.setWhite(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
 

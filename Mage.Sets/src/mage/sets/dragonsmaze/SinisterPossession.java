@@ -59,7 +59,7 @@ public class SinisterPossession extends CardImpl {
         super(ownerId, 29, "Sinister Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.subtype.add("Aura");
         this.expansionSetCode = "DGM";
-        this.color.setBlack(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

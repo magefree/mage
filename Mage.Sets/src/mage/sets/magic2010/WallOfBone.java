@@ -50,7 +50,7 @@ public class WallOfBone extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Skeleton");
         this.subtype.add("Wall");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
         this.addAbility(DefenderAbility.getInstance());

@@ -58,7 +58,7 @@ public class ChronicFlooding extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
  
-        this.color.setBlue(true);
+
  
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

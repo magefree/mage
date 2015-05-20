@@ -50,7 +50,7 @@ public class WallOfBlood extends CardImpl {
         super(ownerId, 82, "Wall of Blood", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Wall");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
         this.addAbility(DefenderAbility.getInstance());

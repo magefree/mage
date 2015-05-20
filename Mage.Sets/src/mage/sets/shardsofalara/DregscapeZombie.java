@@ -46,7 +46,7 @@ public class DregscapeZombie extends CardImpl {
         super(ownerId, 74, "Dregscape Zombie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}")));

@@ -63,7 +63,7 @@ public class RelentlessRats extends CardImpl {
         super(ownerId, 173, "Relentless Rats", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Rat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

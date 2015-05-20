@@ -58,7 +58,7 @@ public class MazeGlider extends CardImpl {
         super(ownerId, 13, "Maze Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

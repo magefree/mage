@@ -45,7 +45,7 @@ public class GameTrailChangeling extends CardImpl {
         super(ownerId, 123, "Game-Trail Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(ChangelingAbility.getInstance());

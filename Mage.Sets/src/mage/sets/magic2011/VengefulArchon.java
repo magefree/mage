@@ -55,7 +55,7 @@ public class VengefulArchon extends CardImpl {
         super(ownerId, 37, "Vengeful Archon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Archon");
-        this.color.setWhite(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

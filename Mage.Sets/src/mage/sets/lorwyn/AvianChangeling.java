@@ -46,7 +46,7 @@ public class AvianChangeling extends CardImpl {
         super(ownerId, 4, "Avian Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ChangelingAbility.getInstance());

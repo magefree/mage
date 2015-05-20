@@ -57,7 +57,7 @@ public class FloatingDreamZubera extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Zubera");
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new DiesTriggeredAbility(new DrawCardSourceControllerEffect(new ZuberasDiedDynamicValue())), new ZuberasDiedWatcher());

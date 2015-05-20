@@ -43,7 +43,7 @@ public class ElvenCache extends CardImpl {
     public ElvenCache(UUID ownerId) {
         super(ownerId, 55, "Elven Cache", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "VIS";
-        this.color.setGreen(true);
+
 
         // Return target card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

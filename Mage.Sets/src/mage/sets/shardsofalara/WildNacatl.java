@@ -56,7 +56,7 @@ public class WildNacatl extends CardImpl {
     public WildNacatl(UUID ownerId) {
         super(ownerId, 152, "Wild Nacatl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "ALA";
-        this.color.setGreen(true);
+
         this.subtype.add("Cat");
         this.subtype.add("Warrior");
         this.power = new MageInt(1);

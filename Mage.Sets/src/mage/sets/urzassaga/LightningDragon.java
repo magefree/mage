@@ -52,7 +52,7 @@ public class LightningDragon extends CardImpl{
         super(ownerId, 202, "Lightning Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

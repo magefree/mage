@@ -58,7 +58,7 @@ public class Skylasher extends CardImpl {
         super(ownerId, 49, "Skylasher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Insect");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

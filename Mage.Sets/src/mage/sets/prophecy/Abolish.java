@@ -55,7 +55,7 @@ public class Abolish extends CardImpl {
     public Abolish(UUID ownerId) {
         super(ownerId, 1, "Abolish", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "PCY";
-        this.color.setWhite(true);
+
 
         // You may discard a Plains card rather than pay Abolish's mana cost.
         this.addAbility(new AlternativeCostSourceAbility(new DiscardTargetCost(new TargetCardInHand(filterCost))));

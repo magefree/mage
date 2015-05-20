@@ -58,7 +58,7 @@ public class MazeBehemoth extends CardImpl {
         super(ownerId, 43, "Maze Behemoth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

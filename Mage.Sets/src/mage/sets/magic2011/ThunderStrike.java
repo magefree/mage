@@ -47,7 +47,7 @@ public class ThunderStrike extends CardImpl {
     public ThunderStrike(UUID ownerId) {
         super(ownerId, 157, "Thunder Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));

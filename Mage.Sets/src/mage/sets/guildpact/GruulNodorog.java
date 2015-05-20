@@ -49,7 +49,7 @@ public class GruulNodorog extends CardImpl {
         super(ownerId, 88, "Gruul Nodorog", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

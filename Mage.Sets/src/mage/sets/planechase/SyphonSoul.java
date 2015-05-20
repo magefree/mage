@@ -45,7 +45,7 @@ public class SyphonSoul extends CardImpl {
     public SyphonSoul(UUID ownerId) {
         super(ownerId, 43, "Syphon Soul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "HOP";
-        this.color.setBlack(true);
+
 
         // Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
         this.getSpellAbility().addEffect(new SyphonSoulEffect());

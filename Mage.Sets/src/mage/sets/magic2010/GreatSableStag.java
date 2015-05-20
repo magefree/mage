@@ -58,7 +58,7 @@ public class GreatSableStag extends CardImpl {
         super(ownerId, 186, "Great Sable Stag", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Elk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

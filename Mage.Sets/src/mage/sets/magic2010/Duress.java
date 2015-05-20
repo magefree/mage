@@ -53,7 +53,7 @@ public class Duress extends CardImpl {
     public Duress(UUID ownerId){
         super(ownerId, 96, "Duress", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
 
         // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());

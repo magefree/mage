@@ -57,7 +57,7 @@ public class AshlingTheExtinguisher extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new AshlingTheExtinguisherTriggeredAbility());

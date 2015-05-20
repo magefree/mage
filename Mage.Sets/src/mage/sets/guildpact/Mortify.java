@@ -53,8 +53,8 @@ public class Mortify extends CardImpl {
     public Mortify(UUID ownerId) {
         super(ownerId, 122, "Mortify", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{B}");
         this.expansionSetCode = "GPT";
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

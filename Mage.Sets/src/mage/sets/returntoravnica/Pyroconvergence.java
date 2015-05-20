@@ -50,7 +50,7 @@ public class Pyroconvergence extends CardImpl {
     public Pyroconvergence(UUID ownerId) {
         super(ownerId, 103, "Pyroconvergence", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
+
 
         // Whenever you cast a multicolored spell, Pyroconvergence deals 2 damage to target creature or player.
         this.addAbility(new PyroconvergenceTriggeredAbility());

@@ -43,7 +43,7 @@ public class LightningBlast extends CardImpl {
     public LightningBlast(UUID ownerId) {
         super(ownerId, 185, "Lightning Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }

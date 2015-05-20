@@ -48,7 +48,7 @@ public class BlightsoilDruid extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         Ability ability = new GreenManaAbility();

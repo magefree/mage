@@ -47,7 +47,7 @@ public class BurstLightning extends CardImpl {
     public BurstLightning(UUID ownerId) {
         super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ZEN";
-        this.color.setRed(true);
+
 
         // Kicker {4} (You may pay an additional {4} as you cast this spell.)
         this.addAbility(new KickerAbility("{4}"));

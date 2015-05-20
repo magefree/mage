@@ -61,7 +61,6 @@ public class RhoxMeditant extends CardImpl {
         this.subtype.add("Rhino");
         this.subtype.add("Monk");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

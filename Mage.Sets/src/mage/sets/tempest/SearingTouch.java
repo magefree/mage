@@ -44,7 +44,7 @@ public class SearingTouch extends CardImpl {
     public SearingTouch(UUID ownerId) {
         super(ownerId, 201, "Searing Touch", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
 
         // Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility("{4}"));

@@ -48,7 +48,7 @@ public class IntoTheRoil extends CardImpl {
     public IntoTheRoil(UUID ownerId) {
         super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
-        this.color.setBlue(true);
+
 
         // Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)
         this.addAbility(new KickerAbility("{1}{U}"));

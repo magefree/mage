@@ -57,7 +57,7 @@ public class GenesisWave extends CardImpl {
     public GenesisWave(UUID ownerId) {
         super(ownerId, 122, "Genesis Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
         
         // Reveal the top X cards of your library. You may put any number of permanent cards with converted mana
         // cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't

@@ -48,7 +48,7 @@ public class BlizzardElemental extends CardImpl {
         super(ownerId, 27, "Blizzard Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "UDS";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

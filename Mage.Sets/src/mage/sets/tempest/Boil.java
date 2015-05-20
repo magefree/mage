@@ -50,7 +50,7 @@ public class Boil extends CardImpl {
     public Boil(UUID ownerId) {
         super(ownerId, 165, "Boil", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         
         // Destroy all Islands.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

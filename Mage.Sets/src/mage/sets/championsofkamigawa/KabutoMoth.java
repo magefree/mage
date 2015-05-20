@@ -52,7 +52,7 @@ public class KabutoMoth extends CardImpl {
         super(ownerId, 20, "Kabuto Moth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

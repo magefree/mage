@@ -58,7 +58,7 @@ public class ZephidsEmbrace extends CardImpl {
     public ZephidsEmbrace(UUID ownerId) {
         super(ownerId, 114, "Zephid's Embrace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "USG";
-        this.color.setBlue(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

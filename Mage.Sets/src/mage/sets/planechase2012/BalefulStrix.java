@@ -47,8 +47,8 @@ public class BalefulStrix extends CardImpl {
         super(ownerId, 82, "Baleful Strix", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{U}{B}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Bird");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

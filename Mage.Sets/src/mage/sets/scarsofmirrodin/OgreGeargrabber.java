@@ -68,7 +68,7 @@ public class OgreGeargrabber extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Ogre");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         Ability ability = new AttacksTriggeredAbility(new OgreGeargrabberEffect1(), false);

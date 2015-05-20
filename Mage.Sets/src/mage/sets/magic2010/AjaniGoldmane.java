@@ -67,7 +67,7 @@ public class AjaniGoldmane extends CardImpl {
         super(ownerId, 1, "Ajani Goldmane", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Ajani");
-        this.color.setWhite(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: You gain 2 life.

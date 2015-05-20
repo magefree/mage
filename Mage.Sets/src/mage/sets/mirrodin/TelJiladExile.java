@@ -49,7 +49,7 @@ public class TelJiladExile extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Troll");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));

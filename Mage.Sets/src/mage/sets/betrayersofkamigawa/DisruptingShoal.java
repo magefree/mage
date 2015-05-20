@@ -59,7 +59,7 @@ public class DisruptingShoal extends CardImpl {
         super(ownerId, 33, "Disrupting Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a blue card with converted mana cost X from your hand");

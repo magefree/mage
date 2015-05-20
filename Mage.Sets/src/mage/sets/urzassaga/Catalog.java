@@ -47,7 +47,7 @@ public class Catalog extends CardImpl {
     public Catalog(UUID ownerId) {
         super(ownerId, 64, "Catalog", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "USG";
-        this.color.setBlue(true);
+
 
         // Draw two cards, then discard a card.
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,1));

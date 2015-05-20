@@ -53,7 +53,7 @@ public class TurnToDust extends CardImpl {
     public TurnToDust(UUID ownerId) {
         super(ownerId, 137, "Turn to Dust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "MRD";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 1, 0, 0, 0, 0, 0)));

@@ -53,7 +53,7 @@ public class RecumbentBliss extends CardImpl {
         super(ownerId, 13, "Recumbent Bliss", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));

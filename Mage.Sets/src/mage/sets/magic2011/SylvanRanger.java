@@ -51,7 +51,7 @@ public class SylvanRanger extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Elf");
         this.subtype.add("Scout");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

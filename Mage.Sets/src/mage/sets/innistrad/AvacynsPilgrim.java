@@ -46,7 +46,7 @@ public class AvacynsPilgrim extends CardImpl {
         this.expansionSetCode = "ISD";
         this.subtype.add("Human");
         this.subtype.add("Monk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new WhiteManaAbility());

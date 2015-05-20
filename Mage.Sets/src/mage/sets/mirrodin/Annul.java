@@ -54,7 +54,7 @@ public class Annul extends CardImpl {
     public Annul(UUID ownerId) {
         super(ownerId, 29, "Annul", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "MRD";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }

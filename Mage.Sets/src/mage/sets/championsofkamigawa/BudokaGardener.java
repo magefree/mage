@@ -63,7 +63,7 @@ public class BudokaGardener extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Monk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.flipCard = true;

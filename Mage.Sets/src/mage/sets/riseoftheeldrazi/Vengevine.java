@@ -54,7 +54,7 @@ public class Vengevine extends CardImpl {
         super(ownerId, 212, "Vengevine", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

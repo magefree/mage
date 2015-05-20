@@ -50,7 +50,7 @@ public class ScreechingHarpy extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Harpy");
         this.subtype.add("Beast");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

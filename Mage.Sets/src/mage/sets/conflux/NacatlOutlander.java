@@ -52,8 +52,8 @@ public class NacatlOutlander extends CardImpl {
     public NacatlOutlander(UUID ownerId) {
         super(ownerId, 119, "Nacatl Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
         this.expansionSetCode = "CON";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.subtype.add("Cat");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

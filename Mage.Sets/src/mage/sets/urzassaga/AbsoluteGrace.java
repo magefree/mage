@@ -58,7 +58,7 @@ public class AbsoluteGrace extends CardImpl {
     public AbsoluteGrace(UUID ownerId) {
         super(ownerId, 1, "Absolute Grace", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
         Ability ability = new ProtectionAbility(filter);
                 this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }

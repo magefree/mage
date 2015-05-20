@@ -54,7 +54,7 @@ public class ArcaneTeachings extends CardImpl {
         super(ownerId, 188, "Arcane Teachings", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

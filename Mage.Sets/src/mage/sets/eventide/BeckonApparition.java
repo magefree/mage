@@ -47,8 +47,8 @@ public class BeckonApparition extends CardImpl {
     public BeckonApparition(UUID ownerId) {
         super(ownerId, 82, "Beckon Apparition", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}");
         this.expansionSetCode = "EVE";
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeckonApparitionToken(), 1));

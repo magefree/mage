@@ -50,7 +50,7 @@ public class BurrentonShieldBearers extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn), false);

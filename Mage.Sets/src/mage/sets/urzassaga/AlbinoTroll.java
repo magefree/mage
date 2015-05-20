@@ -49,7 +49,7 @@ public class AlbinoTroll extends CardImpl{
         super(ownerId, 231, "Albino Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Troll");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EchoAbility("{1}{G}"));

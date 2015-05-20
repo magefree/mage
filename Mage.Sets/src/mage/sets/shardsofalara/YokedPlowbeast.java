@@ -46,7 +46,7 @@ public class YokedPlowbeast extends CardImpl {
         super(ownerId, 31, "Yoked Plowbeast", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Beast");
-        this.color.setWhite(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

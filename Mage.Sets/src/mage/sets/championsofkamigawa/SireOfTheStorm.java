@@ -50,8 +50,8 @@ public class SireOfTheStorm extends CardImpl {
         super(ownerId, 85, "Sire of the Storm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

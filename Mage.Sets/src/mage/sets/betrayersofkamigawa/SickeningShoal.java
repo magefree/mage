@@ -56,7 +56,7 @@ public class SickeningShoal extends CardImpl {
         super(ownerId, 82, "Sickening Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
 
         // You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a black card with converted mana cost X from your hand");

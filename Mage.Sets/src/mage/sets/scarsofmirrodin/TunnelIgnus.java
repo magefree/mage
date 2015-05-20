@@ -58,7 +58,7 @@ public class TunnelIgnus extends CardImpl {
         super(ownerId, 105, "Tunnel Ignus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

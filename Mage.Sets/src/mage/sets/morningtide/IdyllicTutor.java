@@ -51,7 +51,7 @@ public class IdyllicTutor extends CardImpl {
     public IdyllicTutor(UUID ownerId) {
         super(ownerId, 12, "Idyllic Tutor", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "MOR";
-        this.color.setWhite(true);
+
 
         // Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

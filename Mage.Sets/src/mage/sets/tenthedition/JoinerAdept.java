@@ -51,7 +51,7 @@ public class JoinerAdept extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));

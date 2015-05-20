@@ -59,7 +59,7 @@ public class PetalmaneBaku extends CardImpl {
         super(ownerId, 139, "Petalmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         

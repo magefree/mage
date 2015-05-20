@@ -64,7 +64,7 @@ public class SteelshaperApprentice extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

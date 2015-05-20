@@ -45,7 +45,7 @@ public class GreaterBasilisk extends CardImpl {
         super(ownerId, 180, "Greater Basilisk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Basilisk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

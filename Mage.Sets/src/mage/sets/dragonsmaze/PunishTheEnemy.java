@@ -48,7 +48,7 @@ public class PunishTheEnemy extends CardImpl {
     public PunishTheEnemy(UUID ownerId) {
         super(ownerId, 35, "Punish the Enemy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
         this.expansionSetCode = "DGM";
-        this.color.setRed(true);
+
 
         // Punish the Enemy deals 3 damage to target player and 3 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3, true, "target player and 3 damage to target creature"));

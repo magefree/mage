@@ -55,7 +55,7 @@ public class DreadOfNight extends CardImpl {
     public DreadOfNight(UUID ownerId) {
         super(ownerId, 24, "Dread of Night", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "TMP";
-        this.color.setBlack(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 

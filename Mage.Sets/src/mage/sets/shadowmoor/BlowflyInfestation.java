@@ -60,7 +60,7 @@ public class BlowflyInfestation extends CardImpl {
     public BlowflyInfestation(UUID ownerId) {
         super(ownerId, 58, "Blowfly Infestation", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "SHM";
-        this.color.setBlack(true);
+
 
         Effect effect = new BlowflyInfestationEffect();
         TriggeredAbility triggeredAbility = new DiesCreatureTriggeredAbility(effect, false, false, true);

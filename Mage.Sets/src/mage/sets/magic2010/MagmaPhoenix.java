@@ -51,7 +51,7 @@ public class MagmaPhoenix extends CardImpl {
         super(ownerId, 148, "Magma Phoenix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "M10";
         this.subtype.add("Phoenix");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

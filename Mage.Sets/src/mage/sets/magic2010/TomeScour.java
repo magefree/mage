@@ -44,7 +44,7 @@ public class TomeScour extends CardImpl {
     public TomeScour(UUID ownerId) {
         super(ownerId, 76, "Tome Scour", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(5));
     }

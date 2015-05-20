@@ -47,7 +47,7 @@ public class KindledFury extends CardImpl {
     public KindledFury(UUID ownerId) {
         super(ownerId, 144, "Kindled Fury", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

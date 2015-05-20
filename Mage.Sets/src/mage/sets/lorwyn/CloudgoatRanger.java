@@ -68,7 +68,7 @@ public class CloudgoatRanger extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KithkinToken(), 3), false));

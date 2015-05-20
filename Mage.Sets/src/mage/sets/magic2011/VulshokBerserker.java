@@ -46,7 +46,7 @@ public class VulshokBerserker extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Human");
         this.subtype.add("Berserker");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

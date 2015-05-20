@@ -62,7 +62,7 @@ public class ShriekingAffliction extends CardImpl {
     public ShriekingAffliction (UUID ownerId) {
         super(ownerId, 76, "Shrieking Affliction", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "RTR";
-        this.color.setBlack(true);
+
 
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.
         this.addAbility(new ShriekingAfflictionTriggeredAbility());

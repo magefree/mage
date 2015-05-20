@@ -44,7 +44,7 @@ public class BonebreakerGiant extends CardImpl {
         super(ownerId, 123, "Bonebreaker Giant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Giant");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }

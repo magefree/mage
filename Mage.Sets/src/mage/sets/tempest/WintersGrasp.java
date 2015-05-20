@@ -43,7 +43,7 @@ public class WintersGrasp extends CardImpl {
     public WintersGrasp(UUID ownerId) {
         super(ownerId, 159, "Winter's Grasp", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }

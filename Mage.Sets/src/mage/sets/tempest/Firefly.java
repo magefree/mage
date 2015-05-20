@@ -47,7 +47,7 @@ public class Firefly extends CardImpl {
         super(ownerId, 172, "Firefly", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Insect");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

@@ -52,7 +52,7 @@ public class KeigaTheTideStar extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

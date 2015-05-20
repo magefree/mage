@@ -45,7 +45,7 @@ public class MightOfOaks extends CardImpl {
     public MightOfOaks(UUID ownerId){
         super(ownerId, 192, "Might of Oaks", Rarity.RARE, new CardType[]{CardType.INSTANT},"{3}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
     }

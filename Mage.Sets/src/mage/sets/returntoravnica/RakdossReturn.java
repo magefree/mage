@@ -46,8 +46,8 @@ public class RakdossReturn extends CardImpl {
     public RakdossReturn (UUID ownerId) {
         super(ownerId, 188, "Rakdos's Return", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+
 
         // Rakdos's Return deals X damage to target opponent. That player discards X cards.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));

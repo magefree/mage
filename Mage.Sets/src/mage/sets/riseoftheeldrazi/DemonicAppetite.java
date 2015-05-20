@@ -52,7 +52,7 @@ public class DemonicAppetite extends CardImpl {
         super(ownerId, 106, "Demonic Appetite", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

@@ -65,7 +65,7 @@ public class BloodSpeaker extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Ogre");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

@@ -60,7 +60,7 @@ public class MoggRaider extends CardImpl {
         super(ownerId, 191, "Mogg Raider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));

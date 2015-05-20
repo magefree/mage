@@ -52,7 +52,7 @@ public class WindDancer extends CardImpl {
         super(ownerId, 104, "Wind Dancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Faerie");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

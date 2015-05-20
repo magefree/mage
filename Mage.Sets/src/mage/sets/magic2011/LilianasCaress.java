@@ -50,7 +50,7 @@ public class LilianasCaress extends CardImpl {
     public LilianasCaress(UUID ownerId) {
         super(ownerId, 103, "Liliana's Caress", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
 
         // Whenever an opponent discards a card, that player loses 2 life.
         this.addAbility(new LilianasCaressAbility());

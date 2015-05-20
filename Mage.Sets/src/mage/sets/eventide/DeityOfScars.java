@@ -53,8 +53,8 @@ public class DeityOfScars extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

@@ -47,7 +47,7 @@ public class BountifulHarvest extends CardImpl {
     public BountifulHarvest(UUID ownerId) {
         super(ownerId, 166, "Bountiful Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "M12";
-        this.color.setGreen(true);
+
 
         // You gain 1 life for each land you control.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));

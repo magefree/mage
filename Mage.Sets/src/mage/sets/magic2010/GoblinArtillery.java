@@ -52,7 +52,7 @@ public class GoblinArtillery extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());

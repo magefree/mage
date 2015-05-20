@@ -43,7 +43,7 @@ public class NaturalSpring extends CardImpl {
     public NaturalSpring(UUID ownerId) {
         super(ownerId, 133, "Natural Spring", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
 
         // Target player gains 8 life.
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(8));

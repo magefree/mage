@@ -49,7 +49,7 @@ public class WallOfFaith extends CardImpl {
     public WallOfFaith(UUID ownerId) {
         super(ownerId, 40, "Wall of Faith", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.subtype.add("Wall");
         this.power = new MageInt(0);
     this.toughness = new MageInt(5);

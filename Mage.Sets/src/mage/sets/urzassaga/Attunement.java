@@ -46,7 +46,7 @@ public class Attunement extends CardImpl {
     public Attunement(UUID ownerId) {
         super(ownerId, 61, "Attunement", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "USG";
-        this.color.setBlue(true);
+
 
         // Return Attunement to its owner's hand: Draw three cards, then discard four cards.
 		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ReturnToHandSourceCost());

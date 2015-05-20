@@ -51,7 +51,7 @@ public class VectisSilencers extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));

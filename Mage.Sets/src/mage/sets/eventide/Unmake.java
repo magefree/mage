@@ -29,10 +29,10 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -44,8 +44,6 @@ public class Unmake extends CardImpl {
     public Unmake (UUID ownerId) {
         super(ownerId, 96, "Unmake", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W/B}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
-        this.getColor().setBlack(true);
-        this.getColor().setWhite(true);
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

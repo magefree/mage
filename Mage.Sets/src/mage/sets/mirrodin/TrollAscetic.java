@@ -50,7 +50,7 @@ public class TrollAscetic extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Troll");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(HexproofAbility.getInstance());

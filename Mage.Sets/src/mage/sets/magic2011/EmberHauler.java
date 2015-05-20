@@ -51,7 +51,7 @@ public class EmberHauler extends CardImpl {
         super(ownerId, 135, "Ember Hauler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
         this.expansionSetCode = "M11";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -46,7 +46,7 @@ public class PeregrineGriffin extends CardImpl {
         super(ownerId, 29, "Peregrine Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "M12";
         this.subtype.add("Griffin");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

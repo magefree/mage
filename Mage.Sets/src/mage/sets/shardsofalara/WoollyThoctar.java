@@ -29,10 +29,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -43,9 +43,8 @@ public class WoollyThoctar extends CardImpl {
     public WoollyThoctar(UUID ownerId) {
         super(ownerId, 209, "Woolly Thoctar", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{G}{W}");
         this.expansionSetCode = "ALA";
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.subtype.add("Beast");
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);

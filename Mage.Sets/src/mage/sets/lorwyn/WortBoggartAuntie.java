@@ -60,8 +60,8 @@ public class WortBoggartAuntie extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FearAbility.getInstance());

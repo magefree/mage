@@ -53,7 +53,7 @@ public class Negate extends CardImpl {
     public Negate(UUID ownerId) {
         super(ownerId, 65, "Negate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

@@ -60,7 +60,7 @@ public class ProteanHydra extends CardImpl {
         super(ownerId, 200, "Protean Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Hydra");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 

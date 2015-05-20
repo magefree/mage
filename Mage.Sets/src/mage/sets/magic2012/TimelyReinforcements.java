@@ -51,7 +51,7 @@ public class TimelyReinforcements extends CardImpl {
     public TimelyReinforcements(UUID ownerId) {
         super(ownerId, 40, "Timely Reinforcements", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "M12";
-        this.color.setWhite(true);
+
 
         // If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new TimelyReinforcementsEffect());

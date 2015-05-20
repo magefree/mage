@@ -63,7 +63,7 @@ public class ViridianZealot extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Elf");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{G}"));

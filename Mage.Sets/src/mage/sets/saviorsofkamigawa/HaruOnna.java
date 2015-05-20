@@ -50,7 +50,7 @@ public class HaruOnna extends CardImpl {
         super(ownerId, 132, "Haru-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

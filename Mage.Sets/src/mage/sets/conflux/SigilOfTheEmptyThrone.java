@@ -53,7 +53,7 @@ public class SigilOfTheEmptyThrone extends CardImpl {
     public SigilOfTheEmptyThrone(UUID ownerId) {
         super(ownerId, 18, "Sigil of the Empty Throne", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
+
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
     }

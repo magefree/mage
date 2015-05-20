@@ -48,7 +48,7 @@ public class Wildfire extends CardImpl {
     public Wildfire(UUID ownerId) {
         super(ownerId, 228, "Wildfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
 
         //Each player sacrifices four lands.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(4, filter));

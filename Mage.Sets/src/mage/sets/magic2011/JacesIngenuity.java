@@ -43,7 +43,7 @@ public class JacesIngenuity extends CardImpl {
     public JacesIngenuity(UUID ownerId) {
         super(ownerId, 60, "Jace's Ingenuity", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 

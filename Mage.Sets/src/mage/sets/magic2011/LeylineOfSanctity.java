@@ -56,7 +56,7 @@ public class LeylineOfSanctity extends CardImpl {
     public LeylineOfSanctity(UUID ownerId) {
         super(ownerId, 21, "Leyline of Sanctity", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "M11";
-        this.color.setWhite(true);
+
 
         // If Leyline of Sanctity is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

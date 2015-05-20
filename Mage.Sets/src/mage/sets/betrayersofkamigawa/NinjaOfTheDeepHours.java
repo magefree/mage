@@ -48,7 +48,7 @@ public class NinjaOfTheDeepHours extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Human");
         this.subtype.add("Ninja");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

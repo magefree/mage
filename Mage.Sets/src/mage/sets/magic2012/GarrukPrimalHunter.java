@@ -63,7 +63,7 @@ public class GarrukPrimalHunter extends CardImpl {
         super(ownerId, 174, "Garruk, Primal Hunter", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Garruk");
-        this.color.setGreen(true);
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         

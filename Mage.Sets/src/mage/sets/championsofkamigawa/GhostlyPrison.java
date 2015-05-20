@@ -49,7 +49,7 @@ public class GhostlyPrison extends CardImpl {
     public GhostlyPrison (UUID ownerId) {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
-        this.color.setWhite(true);
+
         
         // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));

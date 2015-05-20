@@ -46,8 +46,8 @@ public class WildCantor extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Human");
         this.subtype.add("Druid");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new AnyColorManaAbility(new SacrificeSourceCost()));

@@ -45,7 +45,7 @@ public class CaravanHurda extends CardImpl {
         super(ownerId, 5, "Caravan Hurda", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Giant");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(5);
         this.addAbility(LifelinkAbility.getInstance());

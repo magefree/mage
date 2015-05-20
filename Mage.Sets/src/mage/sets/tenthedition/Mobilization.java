@@ -59,7 +59,7 @@ public class Mobilization extends CardImpl {
     public Mobilization(UUID ownerId) {
         super(ownerId, 29, "Mobilization", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "10E";
-        this.color.setWhite(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken(), 1), new ManaCostsImpl("{2}{W}")));
     }

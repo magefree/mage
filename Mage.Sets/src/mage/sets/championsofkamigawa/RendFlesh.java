@@ -55,7 +55,7 @@ public class RendFlesh extends CardImpl {
         super(ownerId, 140, "Rend Flesh", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
         Target target = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

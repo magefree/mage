@@ -49,8 +49,8 @@ public class RiotSpikes extends CardImpl {
         super(ownerId, 146, "Riot Spikes", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B/R}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Aura");
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

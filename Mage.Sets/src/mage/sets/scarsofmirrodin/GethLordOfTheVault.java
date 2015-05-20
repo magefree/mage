@@ -63,7 +63,7 @@ public class GethLordOfTheVault extends CardImpl {
         this.expansionSetCode = "SOM";
         this.supertype.add("Legendary");
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

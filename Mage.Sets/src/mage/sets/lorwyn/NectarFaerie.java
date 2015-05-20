@@ -61,7 +61,7 @@ public class NectarFaerie extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

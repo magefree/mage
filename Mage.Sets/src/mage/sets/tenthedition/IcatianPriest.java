@@ -52,7 +52,7 @@ public class IcatianPriest extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{W}"));

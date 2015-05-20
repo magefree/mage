@@ -50,7 +50,7 @@ public class CommanderGrevenIlVec extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Human");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(5);
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeTargetEffect(), false);

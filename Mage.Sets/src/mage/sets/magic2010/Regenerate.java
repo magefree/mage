@@ -43,7 +43,7 @@ public class Regenerate extends CardImpl {
     public Regenerate(UUID ownerId) {
         super(ownerId, 202, "Regenerate", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

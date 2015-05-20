@@ -46,7 +46,7 @@ public class KamiOfLunacy extends CardImpl {
         super(ownerId, 119, "Kami of Lunacy", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

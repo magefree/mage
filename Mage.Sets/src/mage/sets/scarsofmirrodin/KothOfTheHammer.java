@@ -78,7 +78,7 @@ public class KothOfTheHammer extends CardImpl {
         super(ownerId, 94, "Koth of the Hammer", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
-        this.color.setRed(true);
+
 
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));

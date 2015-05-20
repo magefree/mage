@@ -45,7 +45,7 @@ public class WistfulThinking extends CardImpl {
         super(ownerId, 53, "Wistful Thinking", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "PLC";
         
-        this.color.setBlue(true);
+
 
         // Target player draws two cards, then discards four cards.
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2));

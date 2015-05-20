@@ -44,7 +44,7 @@ public class ThreeTragedies extends CardImpl {
         super(ownerId, 87, "Three Tragedies", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
         // Target player discards three cards.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer());

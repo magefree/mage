@@ -48,7 +48,7 @@ public class TreasureHunter extends CardImpl {
         super(ownerId, 52, "Treasure Hunter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);

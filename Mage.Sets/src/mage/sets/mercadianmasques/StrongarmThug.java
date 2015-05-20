@@ -57,7 +57,7 @@ public class StrongarmThug extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Human");
 		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
+
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 	

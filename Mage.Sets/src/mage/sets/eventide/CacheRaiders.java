@@ -48,7 +48,7 @@ public class CacheRaiders extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         

@@ -47,7 +47,7 @@ public class WallOfVines extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Plant");
         this.subtype.add("Wall");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

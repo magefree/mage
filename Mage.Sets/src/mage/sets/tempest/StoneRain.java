@@ -45,7 +45,7 @@ public class StoneRain extends CardImpl {
     public StoneRain (UUID ownerId) {
         super(ownerId, 206, "Stone Rain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

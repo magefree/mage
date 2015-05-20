@@ -48,7 +48,7 @@ public class GrixisSlavedriver extends CardImpl {
     public GrixisSlavedriver(UUID ownerId) {
         super(ownerId, 46, "Grixis Slavedriver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "CON";
-        this.color.setBlack(true);
+
         this.subtype.add("Zombie");
         this.subtype.add("Giant");
         this.power = new MageInt(4);

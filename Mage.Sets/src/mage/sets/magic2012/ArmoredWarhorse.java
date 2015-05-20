@@ -44,7 +44,7 @@ public class ArmoredWarhorse extends CardImpl {
         super(ownerId, 7, "Armored Warhorse", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}{W}");
         this.expansionSetCode = "M12";
         this.subtype.add("Horse");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

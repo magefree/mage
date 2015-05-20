@@ -59,7 +59,7 @@ public class DemonOfDeathsGate extends CardImpl {
         super(ownerId, 92, "Demon of Death's Gate", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");
         this.expansionSetCode = "M11";
         this.subtype.add("Demon");
-        this.color.setBlack(true);
+
         this.power = new MageInt(9);
         this.toughness = new MageInt(9);
         

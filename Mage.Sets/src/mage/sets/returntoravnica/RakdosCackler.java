@@ -45,8 +45,8 @@ public class RakdosCackler extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Devil");
  
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
  

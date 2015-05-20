@@ -50,7 +50,7 @@ public class KinsbaileSkirmisher extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);

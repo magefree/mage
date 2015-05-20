@@ -48,8 +48,8 @@ public class CarnivalHellsteed extends CardImpl {
         this.subtype.add("Nightmare");
         this.subtype.add("Horse");
  
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
  

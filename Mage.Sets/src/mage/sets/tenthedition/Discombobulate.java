@@ -45,7 +45,7 @@ public class Discombobulate extends CardImpl {
     public Discombobulate(UUID ownerId) {
         super(ownerId, 81, "Discombobulate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
                 // Counter target spell. Look at the top four cards of your library, then put them back in any order.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());

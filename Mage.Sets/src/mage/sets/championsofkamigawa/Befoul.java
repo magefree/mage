@@ -60,7 +60,7 @@ public class Befoul extends CardImpl {
     public Befoul (UUID ownerId) {
         super(ownerId, 102, "Befoul", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
-        this.color.setBlack(true);
+
         // Destroy target land or nonblack creature. It can't be regenerated.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

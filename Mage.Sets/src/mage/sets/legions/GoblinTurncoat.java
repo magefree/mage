@@ -59,7 +59,7 @@ public class GoblinTurncoat extends CardImpl {
         this.expansionSetCode = "LGN";
         this.subtype.add("Goblin");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

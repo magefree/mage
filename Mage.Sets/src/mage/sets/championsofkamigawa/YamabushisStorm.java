@@ -57,7 +57,7 @@ public class YamabushisStorm extends CardImpl {
     public YamabushisStorm(UUID ownerId) {
         super(ownerId, 199, "Yamabushi's Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "CHK";
-        this.color.setRed(true);
+
 
         // Yamabushi's Storm deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));

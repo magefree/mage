@@ -48,7 +48,7 @@ public class HiddenHorror extends CardImpl {
         super(ownerId, 149, "Hidden Horror", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "10E";
         this.subtype.add("Horror");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));

@@ -53,7 +53,7 @@ public class Corrupt extends CardImpl {
     public Corrupt(UUID ownerId) {
         super(ownerId, 89, "Corrupt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{5}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new CorruptEffect());
     }

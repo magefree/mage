@@ -52,7 +52,7 @@ public class SeismicStrike extends CardImpl {
     public SeismicStrike(UUID ownerId) {
         super(ownerId, 154, "Seismic Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

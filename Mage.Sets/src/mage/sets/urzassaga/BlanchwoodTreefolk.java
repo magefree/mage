@@ -44,7 +44,7 @@ public class BlanchwoodTreefolk extends CardImpl {
         super(ownerId, 238, "Blanchwood Treefolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Treefolk");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
     }

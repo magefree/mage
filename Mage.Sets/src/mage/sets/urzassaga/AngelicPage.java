@@ -53,7 +53,7 @@ public class AngelicPage extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Angel");
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

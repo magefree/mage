@@ -52,7 +52,7 @@ public class ThornThrashViashino extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Viashino");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

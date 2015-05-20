@@ -61,8 +61,8 @@ public class Showstopper extends CardImpl {
     public Showstopper (UUID ownerId) {
         super(ownerId, 102, "Showstopper", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         this.expansionSetCode = "DGM";
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
 
         // Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
         TriggeredAbility ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);

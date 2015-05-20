@@ -58,7 +58,7 @@ public class KinsbaileCavalier extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Kithkin");
         this.subtype.add("Knight");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));

@@ -46,7 +46,7 @@ public class TukatongueThallid extends CardImpl {
     public TukatongueThallid(UUID ownerId) {
         super(ownerId, 96, "Tukatongue Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "CON";
-        this.color.setGreen(true);
+
         this.subtype.add("Fungus");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

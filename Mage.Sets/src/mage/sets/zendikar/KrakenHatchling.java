@@ -44,7 +44,7 @@ public class KrakenHatchling extends CardImpl {
         super(ownerId, 50, "Kraken Hatchling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Kraken");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

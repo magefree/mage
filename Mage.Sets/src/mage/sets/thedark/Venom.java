@@ -56,7 +56,7 @@ public class Venom extends CardImpl {
         super(ownerId, 53, "Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "DRK";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

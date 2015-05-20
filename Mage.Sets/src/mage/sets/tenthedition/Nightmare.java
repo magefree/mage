@@ -58,7 +58,7 @@ public class Nightmare extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Nightmare");
         this.subtype.add("Horse");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(FlyingAbility.getInstance());

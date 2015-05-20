@@ -44,7 +44,7 @@ public class Preordain extends CardImpl {
     public Preordain(UUID ownerId) {
         super(ownerId, 70, "Preordain", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new ScryEffect(2));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }

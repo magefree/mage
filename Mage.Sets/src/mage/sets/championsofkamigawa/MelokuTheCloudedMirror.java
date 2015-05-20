@@ -58,7 +58,7 @@ public class MelokuTheCloudedMirror extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         // Flying

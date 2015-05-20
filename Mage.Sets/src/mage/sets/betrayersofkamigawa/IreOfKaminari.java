@@ -53,7 +53,7 @@ public class IreOfKaminari extends CardImpl {
         super(ownerId, 109, "Ire of Kaminari", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
         // Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(filter)));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());

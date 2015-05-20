@@ -48,7 +48,7 @@ public class Threaten extends CardImpl {
     public Threaten(UUID ownerId) {
         super(ownerId, 242, "Threaten", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

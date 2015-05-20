@@ -46,7 +46,7 @@ public class GoblinMountaineer extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Goblin");
         this.subtype.add("Scout");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new MountainwalkAbility());

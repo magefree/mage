@@ -57,7 +57,7 @@ public class Floodbringer extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Moonfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

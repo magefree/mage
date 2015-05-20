@@ -52,7 +52,7 @@ public class HellsparkElemental extends CardImpl {
         super(ownerId, 65, "Hellspark Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "CON";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

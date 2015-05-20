@@ -50,7 +50,7 @@ public class RootwaterHunter extends CardImpl {
         super(ownerId, 82, "Rootwater Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Merfolk");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

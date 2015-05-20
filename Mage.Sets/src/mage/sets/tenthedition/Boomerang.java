@@ -43,7 +43,7 @@ public class Boomerang extends CardImpl {
     public Boomerang(UUID ownerId) {
         super(ownerId, 70, "Boomerang", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
         
         // Return target permanent to its owner's hand. 
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

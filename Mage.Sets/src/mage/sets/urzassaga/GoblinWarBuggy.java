@@ -46,7 +46,7 @@ public class GoblinWarBuggy extends CardImpl{
         super(ownerId, 196, "Goblin War Buggy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

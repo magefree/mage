@@ -49,7 +49,7 @@ public class ThoughtNibbler extends CardImpl {
         super(ownerId, 107, "Thought Nibbler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "ODY";
         this.subtype.add("Beast");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

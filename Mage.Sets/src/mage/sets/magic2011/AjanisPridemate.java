@@ -52,7 +52,7 @@ public class AjanisPridemate extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

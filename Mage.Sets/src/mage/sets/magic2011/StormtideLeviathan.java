@@ -71,7 +71,7 @@ public class StormtideLeviathan extends CardImpl {
         super(ownerId, 74, "Stormtide Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Leviathan");
-        this.color.setBlue(true);
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
 

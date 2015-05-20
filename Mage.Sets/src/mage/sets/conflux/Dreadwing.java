@@ -51,7 +51,7 @@ public class Dreadwing extends CardImpl {
         super(ownerId, 43, "Dreadwing", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "CON";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
     this.toughness = new MageInt(1);
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl(("{1}{U}{B}")));

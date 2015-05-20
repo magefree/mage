@@ -59,7 +59,7 @@ public class BlackPoplarShaman extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{2}{B}"));

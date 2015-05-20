@@ -69,7 +69,7 @@ public class SigilTracer extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new ManaCostsImpl("{1}{U}"));

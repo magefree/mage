@@ -59,8 +59,8 @@ public class WeeDragonauts extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

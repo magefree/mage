@@ -52,7 +52,7 @@ public class CryptIncursion extends CardImpl {
     public CryptIncursion(UUID ownerId) {
         super(ownerId, 23, "Crypt Incursion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "DGM";
-        this.color.setBlack(true);
+
 
         // Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.
         this.getSpellAbility().addTarget(new TargetPlayer());

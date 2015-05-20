@@ -45,7 +45,7 @@ public class LlanowarDead extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Zombie");
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

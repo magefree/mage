@@ -46,7 +46,7 @@ public class BrindleShoat extends CardImpl {
         super(ownerId, 60, "Brindle Shoat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Boar");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

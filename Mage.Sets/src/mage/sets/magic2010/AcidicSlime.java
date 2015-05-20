@@ -62,7 +62,7 @@ public class AcidicSlime extends CardImpl {
         super(ownerId, 165, "Acidic Slime", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Ooze");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

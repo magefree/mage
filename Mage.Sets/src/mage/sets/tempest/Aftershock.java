@@ -56,7 +56,7 @@ public class Aftershock extends CardImpl {
     public Aftershock(UUID ownerId) {
         super(ownerId, 160, "Aftershock", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DamageControllerEffect(3));

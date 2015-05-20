@@ -44,7 +44,7 @@ public class CarrionCall extends CardImpl {
     public CarrionCall (UUID ownerId) {
         super(ownerId, 115, "Carrion Call", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new CreateTokenEffect(new InsectToken("SOM"), 2));
     }
 

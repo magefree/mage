@@ -53,7 +53,7 @@ public class HeroOfOxidRidge extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 

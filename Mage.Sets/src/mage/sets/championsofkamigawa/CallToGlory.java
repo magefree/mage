@@ -59,7 +59,7 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
         public CallToGlory(UUID ownerId) {
         super(ownerId, 4, "Call to Glory", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new CalltoGloryFirstEffect());
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));
     }

@@ -58,7 +58,7 @@ public class NimShrieker extends CardImpl {
         super(ownerId, 73, "Nim Shrieker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

@@ -54,7 +54,7 @@ public class SerpentSkin extends CardImpl {
         super(ownerId, 240, "Serpent Skin", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         this.addAbility(FlashAbility.getInstance());
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

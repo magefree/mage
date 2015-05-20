@@ -58,7 +58,7 @@ public class YavimayaEnchantress extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Human");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));

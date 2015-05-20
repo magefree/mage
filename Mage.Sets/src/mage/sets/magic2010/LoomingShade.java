@@ -49,7 +49,7 @@ public class LoomingShade extends CardImpl {
         super(ownerId, 103, "Looming Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Shade");
-    this.color.setBlack(true);
+
     this.power = new MageInt(1);
     this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));

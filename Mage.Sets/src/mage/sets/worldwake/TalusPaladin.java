@@ -62,7 +62,7 @@ public class TalusPaladin extends CardImpl {
         this.subtype.add("Knight");
         this.subtype.add("Ally");
         
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

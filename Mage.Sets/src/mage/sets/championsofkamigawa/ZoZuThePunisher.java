@@ -63,7 +63,7 @@ public class ZoZuThePunisher extends CardImpl {
         this.supertype.add("Legendary");
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Whenever a land enters the battlefield, Zo-Zu the Punisher deals 2 damage to that land's controller.

@@ -47,7 +47,7 @@ public class BattleMadRonin extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(2));

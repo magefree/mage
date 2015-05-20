@@ -49,7 +49,7 @@ public class ManaLeak extends CardImpl {
     public ManaLeak(UUID ownerId) {
         super(ownerId, 62, "Mana Leak", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
     }

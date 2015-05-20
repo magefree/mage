@@ -65,7 +65,7 @@ public class SkeletalVampire extends CardImpl {
         this.expansionSetCode = "GPT";
         this.subtype.add("Vampire");
         this.subtype.add("Skeleton");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

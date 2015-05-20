@@ -65,7 +65,7 @@ public class ChameleonColossus extends CardImpl {
         super(ownerId, 116, "Chameleon Colossus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

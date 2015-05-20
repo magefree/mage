@@ -59,7 +59,7 @@ public class DevouringGreed extends CardImpl {
         super(ownerId, 110, "Devouring Greed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
 
         // As an additional cost to cast Devouring Greed, you may sacrifice any number of Spirits.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true)));

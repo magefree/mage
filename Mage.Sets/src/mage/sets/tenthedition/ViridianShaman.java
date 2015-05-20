@@ -56,7 +56,7 @@ public class ViridianShaman extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);

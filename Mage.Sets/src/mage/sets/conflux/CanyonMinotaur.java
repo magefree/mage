@@ -44,7 +44,7 @@ public class CanyonMinotaur extends CardImpl {
     public CanyonMinotaur(UUID ownerId) {
         super(ownerId, 60, "Canyon Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CON";
-        this.color.setRed(true);
+
         this.subtype.add("Minotaur");
         this.subtype.add("Warrior");
         this.power = new MageInt(3);

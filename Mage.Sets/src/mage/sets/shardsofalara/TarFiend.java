@@ -50,7 +50,7 @@ public class TarFiend extends CardImpl {
         super(ownerId, 89, "Tar Fiend", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elemental");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

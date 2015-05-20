@@ -50,7 +50,7 @@ public class TimeReversal extends CardImpl {
     public TimeReversal(UUID ownerId) {
         super(ownerId, 75, "Time Reversal", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new TimeReversalEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }

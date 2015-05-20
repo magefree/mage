@@ -55,7 +55,7 @@ public class SliceinTwain extends CardImpl {
     public SliceinTwain (UUID ownerId) {
         super(ownerId, 127, "Slice in Twain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

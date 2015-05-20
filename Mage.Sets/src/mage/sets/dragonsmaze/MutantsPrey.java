@@ -60,7 +60,7 @@ public class MutantsPrey extends CardImpl {
     public MutantsPrey(UUID ownerId) {
         super(ownerId, 45, "Mutant's Prey", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "DGM";
-        this.color.setGreen(true);
+
 
         // Target creature you control with a +1/+1 counter on it fights target creature an opponent controls.
         this.getSpellAbility().addEffect(new FightTargetsEffect());

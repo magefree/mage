@@ -46,7 +46,7 @@ public class VaporSnag extends CardImpl {
     public VaporSnag (UUID ownerId) {
         super(ownerId, 48, "Vapor Snag", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "NPH";
-        this.color.setBlue(true);
+
         
         // Return target creature to its owner's hand. Its controller loses 1 life.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

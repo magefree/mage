@@ -45,7 +45,7 @@ public class Skyscribing extends CardImpl {
     public Skyscribing(UUID ownerId) {
         super(ownerId, 57, "Skyscribing", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{U}{U}");
         this.expansionSetCode = "C13";
-        this.color.setBlue(true);
+
         // Each player draws X cards.
         this.getSpellAbility().addEffect(new DrawCardAllEffect(new ManacostVariableValue()));
         // Forecast - {2}{U}, Reveal Skyscribing from your hand: Each player draws a card.

@@ -59,7 +59,7 @@ public class BlindWithAnger extends CardImpl {
         super(ownerId, 158, "Blind with Anger", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));

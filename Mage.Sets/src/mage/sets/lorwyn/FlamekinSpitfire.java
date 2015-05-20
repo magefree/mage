@@ -51,7 +51,7 @@ public class FlamekinSpitfire extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{3}{R}"));

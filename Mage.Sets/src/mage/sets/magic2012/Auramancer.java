@@ -57,7 +57,7 @@ public class Auramancer extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), true);

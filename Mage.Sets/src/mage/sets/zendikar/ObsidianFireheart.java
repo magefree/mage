@@ -69,7 +69,7 @@ public class ObsidianFireheart extends CardImpl {
         super(ownerId, 140, "Obsidian Fireheart", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{R}{R}{R}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

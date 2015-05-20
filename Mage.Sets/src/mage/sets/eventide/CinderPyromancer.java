@@ -62,7 +62,7 @@ public class CinderPyromancer extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
         this.subtype.add("Shaman");
-        this.color.setRed(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

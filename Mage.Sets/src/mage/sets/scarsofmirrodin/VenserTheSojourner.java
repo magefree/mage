@@ -80,8 +80,8 @@ public class VenserTheSojourner extends CardImpl {
         super(ownerId, 135, "Venser, the Sojourner", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Venser");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

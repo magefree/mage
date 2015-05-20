@@ -52,7 +52,7 @@ public class NourishingShoal extends CardImpl {
         super(ownerId, 137, "Nourishing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setGreen(true);
+
 
         // You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a green card with converted mana cost X from your hand");

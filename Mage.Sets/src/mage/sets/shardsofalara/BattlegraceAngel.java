@@ -56,7 +56,7 @@ public class BattlegraceAngel extends CardImpl {
         super(ownerId, 6, "Battlegrace Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

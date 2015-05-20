@@ -44,7 +44,7 @@ public class RuneclawBear extends CardImpl {
         super(ownerId, 203, "Runeclaw Bear", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Bear");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

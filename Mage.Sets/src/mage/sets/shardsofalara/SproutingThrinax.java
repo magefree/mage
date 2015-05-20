@@ -29,12 +29,12 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -48,9 +48,8 @@ public class SproutingThrinax extends CardImpl {
     public SproutingThrinax(UUID ownerId) {
         super(ownerId, 197, "Sprouting Thrinax", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}{R}{G}");
         this.expansionSetCode = "ALA";
-        this.color.setBlack(true);
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.subtype.add("Lizard");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

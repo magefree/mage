@@ -45,7 +45,7 @@ public class Anaconda extends CardImpl {
         super(ownerId, 232, "Anaconda", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Snake");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SwampwalkAbility());

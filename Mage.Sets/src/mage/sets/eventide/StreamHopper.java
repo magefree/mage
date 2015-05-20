@@ -50,8 +50,8 @@ public class StreamHopper extends CardImpl {
         super(ownerId, 113, "Stream Hopper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U/R}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));

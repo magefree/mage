@@ -47,7 +47,7 @@ public class HanabiBlast extends CardImpl {
     public HanabiBlast (UUID ownerId) {
         super(ownerId, 170, "Hanabi Blast", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{R}");
         this.expansionSetCode = "CHK";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(ReturnToHandSpellEffect.getInstance());

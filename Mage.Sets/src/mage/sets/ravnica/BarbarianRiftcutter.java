@@ -53,7 +53,7 @@ public class BarbarianRiftcutter extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Human");
         this.subtype.add("Barbarian");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // {R}, Sacrifice Barbarian Riftcutter: Destroy target land.

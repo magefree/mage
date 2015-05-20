@@ -44,7 +44,7 @@ public class Bloodscent extends CardImpl {
     public Bloodscent(UUID ownerId) {
         super(ownerId, 114, "Bloodscent", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "MRD";
-        this.color.setGreen(true);
+
 
         // All creatures able to block target creature this turn do so.
         this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));

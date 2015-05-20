@@ -69,8 +69,8 @@ public class TezzeretAgentOfBolas extends CardImpl {
         super(ownerId, 97, "Tezzeret, Agent of Bolas", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Tezzeret");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

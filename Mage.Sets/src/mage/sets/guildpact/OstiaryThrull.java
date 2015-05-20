@@ -52,7 +52,7 @@ public class OstiaryThrull extends CardImpl {
         super(ownerId, 55, "Ostiary Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Thrull");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));

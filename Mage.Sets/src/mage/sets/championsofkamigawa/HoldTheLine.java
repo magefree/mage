@@ -46,7 +46,7 @@ public class HoldTheLine extends CardImpl {
     public HoldTheLine(UUID ownerId) {
         super(ownerId, 13, "Hold the Line", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "CHK";
-        this.color.setWhite(true);
+
 
         // Blocking creatures get +7/+7 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(7, 7, Duration.EndOfTurn, filter, false));

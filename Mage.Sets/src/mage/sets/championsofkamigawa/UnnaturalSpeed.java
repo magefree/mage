@@ -48,7 +48,7 @@ public class UnnaturalSpeed extends CardImpl {
         super(ownerId, 197, "Unnatural Speed", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

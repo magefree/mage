@@ -54,7 +54,7 @@ public class ElvishPromenade extends CardImpl {
         super(ownerId, 208, "Elvish Promenade", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), new PermanentsOnBattlefieldCount(filter)));
     }
 

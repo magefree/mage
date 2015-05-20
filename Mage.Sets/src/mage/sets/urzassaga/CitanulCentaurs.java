@@ -46,7 +46,7 @@ public class CitanulCentaurs extends CardImpl{
         super(ownerId, 243, "Citanul Centaurs", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Centaur");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(3);
 

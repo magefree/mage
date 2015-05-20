@@ -54,7 +54,7 @@ public class PhyrexianHydra extends CardImpl {
         super(ownerId, 85, "Phyrexian Hydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Hydra");
-        this.color.setGreen(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

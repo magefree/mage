@@ -48,7 +48,7 @@ public class Clone extends CardImpl {
     public Clone(UUID ownerId) {
         super(ownerId, 73, "Clone", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "10E";
-        this.color.setBlue(true);
+
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);

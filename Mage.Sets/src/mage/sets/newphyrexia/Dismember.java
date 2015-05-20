@@ -46,7 +46,7 @@ public class Dismember extends CardImpl {
     public Dismember (UUID ownerId) {
         super(ownerId, 57, "Dismember", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{BP}{BP}");
         this.expansionSetCode = "NPH";
-        this.color.setBlack(true);
+
         
         // Target creature gets -5/-5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));

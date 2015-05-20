@@ -54,7 +54,7 @@ public class GhalmasWarden extends CardImpl {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elephant");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);

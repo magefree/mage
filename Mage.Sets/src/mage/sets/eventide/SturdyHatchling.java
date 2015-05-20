@@ -64,8 +64,8 @@ public class SturdyHatchling extends CardImpl {
         super(ownerId, 163, "Sturdy Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G/U}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         

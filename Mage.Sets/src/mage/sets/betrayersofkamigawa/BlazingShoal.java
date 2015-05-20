@@ -55,7 +55,7 @@ public class BlazingShoal extends CardImpl {
         super(ownerId, 96, "Blazing Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setRed(true);
+
 
         // You may exile a red card with converted mana cost X from your hand rather than pay Blazing Shoal's mana cost.
         FilterOwnedCard filter = new FilterOwnedCard("a red card with converted mana cost X from your hand");

@@ -50,7 +50,7 @@ public class ScaledHulk extends CardImpl {
         super(ownerId, 143, "Scaled Hulk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // Whenever you cast a Spirit or Arcane spell, Scaled Hulk gets +2/+2 until end of turn.

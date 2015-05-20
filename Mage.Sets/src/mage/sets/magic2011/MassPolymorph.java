@@ -55,7 +55,7 @@ public class MassPolymorph extends CardImpl {
     public MassPolymorph(UUID ownerId) {
         super(ownerId, 64, "Mass Polymorph", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new MassPolymorphEffect());
     }
 

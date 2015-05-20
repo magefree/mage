@@ -43,7 +43,7 @@ public class BaronyVampire extends CardImpl {
     public BaronyVampire(UUID ownerId) {
         super(ownerId, 82, "Barony Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M11";
-        this.color.setBlack(true);
+
         this.subtype.add("Vampire");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

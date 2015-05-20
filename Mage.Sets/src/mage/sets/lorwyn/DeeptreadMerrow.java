@@ -48,7 +48,7 @@ public class DeeptreadMerrow extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
         this.subtype.add("Rogue");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));

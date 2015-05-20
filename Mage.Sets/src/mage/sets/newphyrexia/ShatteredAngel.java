@@ -57,7 +57,7 @@ public class ShatteredAngel extends CardImpl {
         super(ownerId, 23, "Shattered Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

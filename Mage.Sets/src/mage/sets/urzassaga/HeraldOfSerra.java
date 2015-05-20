@@ -47,7 +47,7 @@ public class HeraldOfSerra extends CardImpl{
         super(ownerId, 17, "Herald of Serra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "USG";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

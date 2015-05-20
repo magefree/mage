@@ -65,7 +65,7 @@ public class WickerboughElder extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

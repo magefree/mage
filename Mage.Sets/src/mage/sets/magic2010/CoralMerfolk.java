@@ -43,7 +43,7 @@ public class CoralMerfolk extends CardImpl {
     public CoralMerfolk(UUID ownerId) {
         super(ownerId, 47, "Coral Merfolk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.subtype.add("Merfolk");
         this.power = new MageInt(2);
     this.toughness = new MageInt(1);

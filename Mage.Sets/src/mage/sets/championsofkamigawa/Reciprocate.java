@@ -51,7 +51,7 @@ public class Reciprocate extends CardImpl {
         public Reciprocate(UUID ownerId) {
         super(ownerId, 40, "Reciprocate", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
-        this.color.setWhite(true);
+
         // Exile target creature that dealt damage to you this turn.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new ReciprocateTarget());

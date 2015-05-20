@@ -53,7 +53,7 @@ public class OracleOfMulDaya extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

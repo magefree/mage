@@ -63,8 +63,8 @@ public class Gelectrode extends CardImpl {
         super(ownerId, 113, "Gelectrode", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{R}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Weird");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

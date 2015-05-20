@@ -43,7 +43,7 @@ public class HornedTurtle extends CardImpl {
     public HornedTurtle(UUID ownerId) {
         super(ownerId, 55, "Horned Turtle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.subtype.add("Turtle");
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);

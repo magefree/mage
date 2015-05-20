@@ -56,7 +56,7 @@ public class LoomingHoverguard extends CardImpl {
         super(ownerId, 38, "Looming Hoverguard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Drone");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

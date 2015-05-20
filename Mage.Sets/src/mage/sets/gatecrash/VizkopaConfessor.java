@@ -59,8 +59,8 @@ public class VizkopaConfessor extends CardImpl {
         this.expansionSetCode = "GTC";
         this.subtype.add("Human");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

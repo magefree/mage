@@ -50,7 +50,7 @@ public class NightOfSoulsBetrayal extends CardImpl {
         super(ownerId, 133, "Night of Souls' Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
-        this.color.setBlack(true);
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 

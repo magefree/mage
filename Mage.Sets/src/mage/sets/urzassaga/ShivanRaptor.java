@@ -47,7 +47,7 @@ public class ShivanRaptor extends CardImpl{
         super(ownerId, 215, "Shivan Raptor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Lizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -62,7 +62,7 @@ public class WesternPaladin extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Zombie");
         this.subtype.add("Knight");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}{B}"));

@@ -64,7 +64,7 @@ public class GraveBetrayal extends CardImpl {
     public GraveBetrayal (UUID ownerId) {
         super(ownerId, 67, "Grave Betrayal", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{B}{B}");
         this.expansionSetCode = "RTR";
-        this.color.setBlack(true);
+
 
         // Whenever a creature you don't control dies, return it to the battlefield under
         // your control with an additional +1/+1 counter on it at the beginning of the

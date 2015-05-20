@@ -45,7 +45,7 @@ public class TitanicGrowth extends CardImpl {
     public TitanicGrowth(UUID ownerId) {
         super(ownerId, 198, "Titanic Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "M12";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

@@ -51,7 +51,7 @@ public class GuardDuty extends CardImpl {
         super(ownerId, 23, "Guard Duty", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

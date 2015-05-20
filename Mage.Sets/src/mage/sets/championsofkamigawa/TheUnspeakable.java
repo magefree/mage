@@ -58,7 +58,7 @@ public class TheUnspeakable extends CardImpl {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(7);
         this.addAbility(FlyingAbility.getInstance());

@@ -56,7 +56,7 @@ public class WhiteKnight extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Human");
         this.subtype.add("Knight");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -44,7 +44,7 @@ public class GorillaWarrior extends CardImpl {
         super(ownerId, 256, "Gorilla Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Ape");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
     }

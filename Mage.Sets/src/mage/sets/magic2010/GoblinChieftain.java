@@ -58,7 +58,7 @@ public class GoblinChieftain extends CardImpl {
         super(ownerId, 139, "Goblin Chieftain", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "M10";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

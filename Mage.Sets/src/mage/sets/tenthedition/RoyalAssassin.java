@@ -57,7 +57,7 @@ public class RoyalAssassin extends CardImpl {
     public RoyalAssassin(UUID ownerId){
         super(ownerId, 174, "Royal Assassin", Rarity.RARE, new CardType[]{CardType.CREATURE},"{1}{B}{B}");
         this.expansionSetCode = "10E";
-        this.color.setBlack(true);
+
         this.subtype.add("Human");
         this.subtype.add("Assassin");
         this.power = new MageInt(1);

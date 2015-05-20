@@ -50,7 +50,7 @@ public class RubblebeltMaaka extends CardImpl {
         super(ownerId, 38, "Rubblebelt Maaka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Cat");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

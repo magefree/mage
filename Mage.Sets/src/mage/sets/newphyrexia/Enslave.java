@@ -55,7 +55,7 @@ public class Enslave extends CardImpl {
         super(ownerId, 58, "Enslave", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

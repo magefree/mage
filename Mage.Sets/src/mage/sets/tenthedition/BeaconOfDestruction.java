@@ -44,7 +44,7 @@ public class BeaconOfDestruction extends CardImpl {
     public BeaconOfDestruction(UUID ownerId) {
         super(ownerId, 189, "Beacon of Destruction", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{R}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

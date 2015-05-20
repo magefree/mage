@@ -55,7 +55,7 @@ public class HandOfHonor extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Protection from black

@@ -66,7 +66,6 @@ public class SkirkDrillSergeant extends CardImpl {
         this.expansionSetCode = "EVG";
         this.subtype.add("Goblin");
 
-        this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

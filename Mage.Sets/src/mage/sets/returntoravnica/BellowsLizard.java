@@ -50,7 +50,7 @@ public class BellowsLizard extends CardImpl {
         super(ownerId, 88, "Bellows Lizard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Lizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

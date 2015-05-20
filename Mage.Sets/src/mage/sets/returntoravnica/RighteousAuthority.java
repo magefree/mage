@@ -57,8 +57,8 @@ public class RighteousAuthority extends CardImpl {
         super(ownerId, 189, "Righteous Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

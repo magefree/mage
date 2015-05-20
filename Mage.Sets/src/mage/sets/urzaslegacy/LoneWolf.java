@@ -44,7 +44,7 @@ public class LoneWolf extends CardImpl {
         super(ownerId, 105, "Lone Wolf", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Wolf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

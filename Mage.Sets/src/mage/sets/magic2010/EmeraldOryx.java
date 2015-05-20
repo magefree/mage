@@ -44,7 +44,7 @@ public class EmeraldOryx extends CardImpl {
     public EmeraldOryx(UUID ownerId) {
         super(ownerId, 179, "Emerald Oryx", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.subtype.add("Antelope");
         this.power = new MageInt(2);
     this.toughness = new MageInt(3);

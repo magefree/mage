@@ -55,7 +55,7 @@ public class BanishingKnack extends CardImpl {
         public BanishingKnack(UUID ownerId) {
         super(ownerId, 17, "Banishing Knack", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "EVE";
-        this.color.setBlue(true);
+
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn));

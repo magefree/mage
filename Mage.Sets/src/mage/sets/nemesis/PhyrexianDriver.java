@@ -55,7 +55,7 @@ public class PhyrexianDriver extends CardImpl {
         this.expansionSetCode = "NMS";
         this.subtype.add("Zombie");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 		

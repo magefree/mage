@@ -53,7 +53,7 @@ public class ShimmeringWings extends CardImpl {
         super(ownerId, 87, "Shimmering Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
         
         // Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -58,7 +58,7 @@ public class WalkTheAeons extends CardImpl {
     public WalkTheAeons(UUID ownerId) {
         super(ownerId, 93, "Walk the Aeons", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "TSP";
-        this.color.setBlue(true);
+
 
         // Buyback—Sacrifice three Islands. (You may sacrifice three Islands in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility(new SacrificeTargetCost(new TargetControlledPermanent(3,3, filter, true))));

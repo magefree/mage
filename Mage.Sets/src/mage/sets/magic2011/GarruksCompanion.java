@@ -45,7 +45,7 @@ public class GarruksCompanion extends CardImpl {
         super(ownerId, 176, "Garruk's Companion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

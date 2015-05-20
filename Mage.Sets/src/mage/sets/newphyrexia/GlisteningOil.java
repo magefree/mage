@@ -57,7 +57,7 @@ public class GlisteningOil extends CardImpl {
         super(ownerId, 62, "Glistening Oil", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

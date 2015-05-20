@@ -45,7 +45,7 @@ public class Disorient extends CardImpl {
     public Disorient(UUID ownerId) {
         super(ownerId, 48, "Disorient", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(-7, 0, Duration.EndOfTurn));

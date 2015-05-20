@@ -48,7 +48,7 @@ public class NobleHierarch extends CardImpl {
     public NobleHierarch(UUID ownerId) {
         super(ownerId, 87, "Noble Hierarch", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "CON";
-        this.color.setGreen(true);
+
         this.subtype.add("Human");
         this.subtype.add("Druid");
         this.power = new MageInt(0);

@@ -44,7 +44,7 @@ public class SilvercoatLion extends CardImpl {
         super(ownerId, 32, "Silvercoat Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Cat");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

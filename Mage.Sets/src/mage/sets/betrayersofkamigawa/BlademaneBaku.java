@@ -61,7 +61,7 @@ public class BlademaneBaku extends CardImpl {
         super(ownerId, 95, "Blademane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         

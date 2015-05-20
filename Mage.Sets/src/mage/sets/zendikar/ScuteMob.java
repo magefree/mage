@@ -51,7 +51,7 @@ public class ScuteMob extends CardImpl {
     public ScuteMob(UUID ownerId) {
         super(ownerId, 182, "Scute Mob", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "ZEN";
-        this.color.setGreen(true);
+
         this.subtype.add("Insect");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

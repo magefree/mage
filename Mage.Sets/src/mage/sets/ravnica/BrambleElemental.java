@@ -46,7 +46,7 @@ public class BrambleElemental extends CardImpl {
         super(ownerId, 154, "Bramble Elemental", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

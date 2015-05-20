@@ -60,7 +60,7 @@ public class GarrukWildspeaker extends CardImpl {
         super(ownerId, 183, "Garruk Wildspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Garruk");
-        this.color.setGreen(true);
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 

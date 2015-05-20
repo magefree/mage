@@ -29,11 +29,11 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.events.GameEvent.EventType;
 
 /**
@@ -45,7 +45,6 @@ public class AjanisMantra extends CardImpl {
     public AjanisMantra(UUID ownerId) {
         super(ownerId, 2, "Ajani's Mantra", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "M11";
-        this.getColor().setWhite(true);
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new GainLifeEffect(1), true));
     }
 

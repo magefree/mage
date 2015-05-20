@@ -29,10 +29,6 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +36,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -53,7 +53,6 @@ public class DarkTutelage extends CardImpl {
     public DarkTutelage(UUID ownerId) {
         super(ownerId, 90, "Dark Tutelage", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "M11";
-        this.getColor().setBlack(true);
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DarkTutelageEffect(), false));
     }
 

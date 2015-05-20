@@ -51,7 +51,7 @@ public class Dispel extends CardImpl {
     public Dispel(UUID ownerId) {
         super(ownerId, 26, "Dispel", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "WWK";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

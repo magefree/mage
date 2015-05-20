@@ -63,7 +63,7 @@ public class WildernessHypnotist extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new TapSourceCost());

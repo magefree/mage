@@ -54,7 +54,7 @@ public class Arrest extends CardImpl {
         super(ownerId, 2, "Arrest", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

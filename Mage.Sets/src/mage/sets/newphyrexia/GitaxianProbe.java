@@ -49,7 +49,7 @@ public class GitaxianProbe extends CardImpl {
     public GitaxianProbe (UUID ownerId) {
         super(ownerId, 35, "Gitaxian Probe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{UP}");
         this.expansionSetCode = "NPH";
-        this.color.setBlue(true);
+
 
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new GitaxianProbeEffect());

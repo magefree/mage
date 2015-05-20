@@ -48,7 +48,7 @@ public class BogardanFirefiend extends CardImpl {
         this.expansionSetCode = "HOP";
         this.subtype.add("Elemental");
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new DiesTriggeredAbility(new DamageTargetEffect(2), false);

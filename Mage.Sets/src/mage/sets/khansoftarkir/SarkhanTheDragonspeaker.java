@@ -70,7 +70,7 @@ public class SarkhanTheDragonspeaker extends CardImpl {
         super(ownerId, 119, "Sarkhan, the Dragonspeaker", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{R}{R}");
         this.expansionSetCode = "KTK";
         this.subtype.add("Sarkhan");
-        this.color.setRed(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Until end of turn, Sarkhan, the Dragonspeaker becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.

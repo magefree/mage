@@ -47,7 +47,7 @@ public class DriftingShade extends CardImpl {
         super(ownerId, 96, "Drifting Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Shade");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

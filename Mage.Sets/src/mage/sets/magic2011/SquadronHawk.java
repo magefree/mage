@@ -56,7 +56,7 @@ public class SquadronHawk extends CardImpl {
         super(ownerId, 33, "Squadron Hawk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Bird");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

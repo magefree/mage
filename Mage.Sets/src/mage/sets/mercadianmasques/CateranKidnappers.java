@@ -63,7 +63,7 @@ public class CateranKidnappers extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Human");
 		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
+
 		this.power = new MageInt(4);
 		this.toughness = new MageInt(2);
 	

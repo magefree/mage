@@ -52,7 +52,7 @@ public class Fireslinger extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());

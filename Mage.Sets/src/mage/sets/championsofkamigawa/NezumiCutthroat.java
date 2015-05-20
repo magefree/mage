@@ -47,7 +47,7 @@ public class NezumiCutthroat extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Rat");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FearAbility.getInstance());

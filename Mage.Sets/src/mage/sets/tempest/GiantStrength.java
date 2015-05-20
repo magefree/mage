@@ -48,7 +48,7 @@ public class GiantStrength extends CardImpl {
         super(ownerId, 178, "Giant Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

@@ -52,7 +52,7 @@ public class BenevolentAncestor extends CardImpl {
         super(ownerId, 3, "Benevolent Ancestor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "RAV";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
         this.addAbility(DefenderAbility.getInstance());

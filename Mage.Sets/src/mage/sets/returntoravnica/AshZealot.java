@@ -57,7 +57,7 @@ public class AshZealot extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

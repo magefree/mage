@@ -45,7 +45,7 @@ public class DuskdaleWurm extends CardImpl {
         super(ownerId, 170, "Duskdale Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

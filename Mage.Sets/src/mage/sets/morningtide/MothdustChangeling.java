@@ -60,7 +60,7 @@ public class MothdustChangeling extends CardImpl {
         super(ownerId, 42, "Mothdust Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(ChangelingAbility.getInstance());

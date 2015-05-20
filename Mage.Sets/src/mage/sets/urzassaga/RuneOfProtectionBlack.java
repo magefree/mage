@@ -52,7 +52,7 @@ public class RuneOfProtectionBlack extends CardImpl {
     public RuneOfProtectionBlack(UUID ownerId) {
         super(ownerId, 36, "Rune of Protection: Black", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
 
 		// {W}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RuneOfProtectionBlackEffect() , new ManaCostsImpl("W")));

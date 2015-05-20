@@ -57,7 +57,7 @@ public class SeedguideAsh extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Treefolk");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // When Seedguide Ash dies, you may search your library for up to three Forest cards and put them onto the battlefield tapped. If you do, shuffle your library.

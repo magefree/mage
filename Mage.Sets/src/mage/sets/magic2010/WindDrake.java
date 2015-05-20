@@ -45,7 +45,7 @@ public class WindDrake extends CardImpl {
         super(ownerId, 81, "Wind Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Drake");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

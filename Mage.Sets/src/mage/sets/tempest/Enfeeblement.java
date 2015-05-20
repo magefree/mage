@@ -48,7 +48,7 @@ public class Enfeeblement extends CardImpl {
         super(ownerId, 27, "Enfeeblement", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));

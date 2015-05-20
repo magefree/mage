@@ -45,7 +45,7 @@ public class WirewoodElf extends CardImpl {
         this.expansionSetCode = "ONS";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new GreenManaAbility());

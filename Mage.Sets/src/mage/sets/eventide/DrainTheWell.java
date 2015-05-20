@@ -44,8 +44,8 @@ public class DrainTheWell extends CardImpl {
     public DrainTheWell(UUID ownerId) {
         super(ownerId, 121, "Drain the Well", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B/G}{B/G}");
         this.expansionSetCode = "EVE";
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addTarget(new TargetLandPermanent());

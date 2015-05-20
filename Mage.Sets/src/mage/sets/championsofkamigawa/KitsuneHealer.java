@@ -64,7 +64,7 @@ public class KitsuneHealer extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         

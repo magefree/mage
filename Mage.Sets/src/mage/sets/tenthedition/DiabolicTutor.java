@@ -44,7 +44,7 @@ public class DiabolicTutor extends CardImpl {
     public DiabolicTutor(UUID ownerId){
         super(ownerId, 135, "Diabolic Tutor", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{2}{B}{B}");
         this.expansionSetCode = "10E";
-        this.color.setBlack(true);
+
         TargetCardInLibrary target = new TargetCardInLibrary();
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
     }

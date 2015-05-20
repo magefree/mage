@@ -57,7 +57,7 @@ public class Expunge extends CardImpl {
     public Expunge(UUID ownerId) {
         super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "USG";
-        this.color.setBlack(true);
+
 
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -67,7 +67,7 @@ public class ScionOfOona extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Faerie");
         this.subtype.add("Soldier");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

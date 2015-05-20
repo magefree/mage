@@ -55,7 +55,7 @@ public class PestilenceDemon extends CardImpl {
         super(ownerId, 124, "Pestilence Demon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}{B}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Demon");
-        this.color.setBlack(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

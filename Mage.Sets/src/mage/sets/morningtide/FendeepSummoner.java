@@ -60,7 +60,7 @@ public class FendeepSummoner extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

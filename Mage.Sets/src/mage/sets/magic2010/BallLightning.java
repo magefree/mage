@@ -49,7 +49,7 @@ public class BallLightning extends CardImpl {
         super(ownerId, 125, "Ball Lightning", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}{R}{R}");
         this.expansionSetCode = "M10";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(1);
 

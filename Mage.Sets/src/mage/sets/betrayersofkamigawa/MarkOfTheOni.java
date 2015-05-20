@@ -62,7 +62,7 @@ public class MarkOfTheOni extends CardImpl {
     public MarkOfTheOni(UUID ownerId) {
         super(ownerId, 73, "Mark of the Oni", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "BOK";
-        this.color.setBlack(true);
+
         this.subtype.add("Aura");
 
         // Enchant creature

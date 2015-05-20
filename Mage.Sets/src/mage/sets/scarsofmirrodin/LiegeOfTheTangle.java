@@ -66,7 +66,7 @@ public class LiegeOfTheTangle extends CardImpl {
         super(ownerId, 123, "Liege of the Tangle", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(TrampleAbility.getInstance());

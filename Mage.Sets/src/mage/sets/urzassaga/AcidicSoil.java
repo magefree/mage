@@ -50,7 +50,7 @@ public class AcidicSoil extends CardImpl {
     public AcidicSoil(UUID ownerId) {
         super(ownerId, 172, "Acidic Soil", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
 
         //Acidic Soil deals damage to each player equal to the number of lands he or she controls.
         this.getSpellAbility().addEffect(new AcidicSoilEffect());

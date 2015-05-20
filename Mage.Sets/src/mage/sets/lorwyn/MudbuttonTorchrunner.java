@@ -49,7 +49,7 @@ public class MudbuttonTorchrunner extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // When Mudbutton Torchrunner dies, it deals 3 damage to target creature or player.

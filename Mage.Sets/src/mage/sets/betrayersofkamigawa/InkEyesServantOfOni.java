@@ -62,7 +62,7 @@ public class InkEyesServantOfOni extends CardImpl {
         this.subtype.add("Rat");
         this.subtype.add("Ninja");
         this.supertype.add("Legendary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

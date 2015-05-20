@@ -54,7 +54,7 @@ public class Pestilence extends CardImpl {
     public Pestilence(UUID ownerId) {
         super(ownerId, 147, "Pestilence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
-        this.color.setBlack(true);
+
 		
         // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.
         TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());

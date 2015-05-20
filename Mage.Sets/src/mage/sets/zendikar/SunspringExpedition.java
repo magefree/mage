@@ -54,7 +54,7 @@ public class SunspringExpedition extends CardImpl {
     public SunspringExpedition(UUID ownerId) {
         super(ownerId, 37, "Sunspring Expedition", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         Costs<Cost> costs = new CostsImpl<>();

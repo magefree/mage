@@ -51,7 +51,7 @@ public class DuergarCaveGuard extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Dwarf");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(WitherAbility.getInstance());

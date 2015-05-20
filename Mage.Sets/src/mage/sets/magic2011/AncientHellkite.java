@@ -57,7 +57,7 @@ public class AncientHellkite extends CardImpl {
         super(ownerId, 122, "Ancient Hellkite", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{R}");
         this.expansionSetCode = "M11";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

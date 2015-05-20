@@ -52,7 +52,7 @@ public class ScrapdiverSerpent extends CardImpl {
         super(ownerId, 41, "Scrapdiver Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Serpent");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

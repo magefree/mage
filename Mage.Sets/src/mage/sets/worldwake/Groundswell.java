@@ -54,7 +54,7 @@ public class Groundswell extends CardImpl {
     public Groundswell(UUID ownerId) {
         super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WWK";
-        this.color.setGreen(true);
+
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));

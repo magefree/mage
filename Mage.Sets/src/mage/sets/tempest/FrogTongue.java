@@ -51,7 +51,7 @@ public class FrogTongue extends CardImpl {
         super(ownerId, 122, "Frog Tongue", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

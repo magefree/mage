@@ -55,7 +55,7 @@ public class HauntingEchoes extends CardImpl {
     public HauntingEchoes(UUID ownerId) {
         super(ownerId, 98, "Haunting Echoes", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new HauntingEchoesEffect());
     }

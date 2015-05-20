@@ -44,7 +44,7 @@ public class HorrifyingRevelation extends CardImpl {
     public HorrifyingRevelation(UUID ownerId) {
         super(ownerId, 45, "Horrifying Revelation", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "MBS";
-        this.color.setBlack(true);
+
 
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));

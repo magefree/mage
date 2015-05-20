@@ -50,7 +50,7 @@ public class RobeOfMirrors extends CardImpl {
         super(ownerId, 101, "Robe of Mirrors", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -44,7 +44,7 @@ public class Cobblebrute extends CardImpl {
         super(ownerId, 91, "Cobblebrute", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
     }

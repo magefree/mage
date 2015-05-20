@@ -45,7 +45,7 @@ public class WildGriffin extends CardImpl {
         super(ownerId, 59, "Wild Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "10E";
         this.subtype.add("Griffin");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

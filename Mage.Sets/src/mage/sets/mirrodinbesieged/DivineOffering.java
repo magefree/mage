@@ -58,7 +58,7 @@ public class DivineOffering extends CardImpl {
     public DivineOffering(UUID ownerId) {
         super(ownerId, 5, "Divine Offering", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "MBS";
-        this.color.setWhite(true);
+
 
         // Destroy target artifact. You gain life equal to its converted mana cost.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

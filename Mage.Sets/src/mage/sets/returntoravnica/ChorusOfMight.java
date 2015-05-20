@@ -50,7 +50,7 @@ public class ChorusOfMight extends CardImpl {
     public ChorusOfMight(UUID ownerId) {
         super(ownerId, 119, "Chorus of Might", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
+
         
         // Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());

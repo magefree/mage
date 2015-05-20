@@ -54,7 +54,7 @@ public class MoltenFrame extends CardImpl {
     public MoltenFrame(UUID ownerId) {
         super(ownerId, 69, "Molten Frame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CON";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

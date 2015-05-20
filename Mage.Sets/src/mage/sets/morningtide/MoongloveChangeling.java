@@ -48,7 +48,7 @@ public class MoongloveChangeling extends CardImpl {
         super(ownerId, 67, "Moonglove Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ChangelingAbility.getInstance());

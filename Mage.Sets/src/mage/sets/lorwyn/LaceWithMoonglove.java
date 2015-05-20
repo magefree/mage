@@ -47,7 +47,7 @@ public class LaceWithMoonglove extends CardImpl {
     public LaceWithMoonglove(UUID ownerId) {
         super(ownerId, 225, "Lace with Moonglove", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "LRW";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

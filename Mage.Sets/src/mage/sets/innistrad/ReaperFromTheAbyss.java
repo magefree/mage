@@ -63,7 +63,7 @@ public class ReaperFromTheAbyss extends CardImpl {
         super(ownerId, 112, "Reaper from the Abyss", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Demon");
-        this.color.setBlack(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

@@ -43,7 +43,7 @@ public class CausticRain extends CardImpl {
     public CausticRain(UUID ownerId) {
         super(ownerId, 44, "Caustic Rain", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "GPT";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }

@@ -49,7 +49,7 @@ public class HerosResolve extends CardImpl {
         super(ownerId, 235, "Hero's Resolve", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

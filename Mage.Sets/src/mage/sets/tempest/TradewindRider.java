@@ -61,7 +61,7 @@ public class TradewindRider extends CardImpl {
         super(ownerId, 98, "Tradewind Rider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

@@ -51,7 +51,7 @@ public class UnholyStrength extends CardImpl {
     public UnholyStrength(UUID ownerId) {
         super(ownerId, 185, "Unholy Strength", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "10E";
-        this.color.setBlack(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

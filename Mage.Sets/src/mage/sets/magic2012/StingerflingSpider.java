@@ -58,7 +58,7 @@ public class StingerflingSpider extends CardImpl {
         super(ownerId, 197, "Stingerfling Spider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Spider");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());

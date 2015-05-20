@@ -45,7 +45,7 @@ public class ThousandleggedKami extends CardImpl {
         super(ownerId, 246, "Thousand-legged Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(new SoulshiftAbility(7));

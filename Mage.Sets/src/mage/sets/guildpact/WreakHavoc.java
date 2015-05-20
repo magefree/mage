@@ -55,8 +55,8 @@ public class WreakHavoc extends CardImpl {
     public WreakHavoc(UUID ownerId) {
         super(ownerId, 139, "Wreak Havoc", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}{G}");
         this.expansionSetCode = "GPT";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.addAbility(new CantBeCounteredAbility());
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));

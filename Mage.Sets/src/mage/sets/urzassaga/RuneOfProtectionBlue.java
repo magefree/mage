@@ -52,7 +52,7 @@ public class RuneOfProtectionBlue extends CardImpl {
     public RuneOfProtectionBlue(UUID ownerId) {
         super(ownerId, 37, "Rune of Protection: Blue", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
 
 		// {W}: The next time a blue source of your choice would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RuneOfProtectionBlueEffect() , new ManaCostsImpl("W")));

@@ -58,7 +58,7 @@ public class KiraGreatGlassSpinner extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
         this.supertype.add("Legendary");
-        this.color.setBlue(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

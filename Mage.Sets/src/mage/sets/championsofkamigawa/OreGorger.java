@@ -51,7 +51,7 @@ public class OreGorger extends CardImpl {
         super(ownerId, 182, "Ore Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         Ability ability = new SpellCastControllerTriggeredAbility(new DestroyTargetEffect(), filter, true);

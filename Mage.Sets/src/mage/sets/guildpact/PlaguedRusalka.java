@@ -50,7 +50,7 @@ public class PlaguedRusalka extends CardImpl {
         super(ownerId, 56, "Plagued Rusalka", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));

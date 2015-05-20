@@ -49,7 +49,7 @@ public class PsychicMiasma extends CardImpl {
     public PsychicMiasma(UUID ownerId) {
         super(ownerId, 76, "Psychic Miasma", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "SOM";
-        this.color.setBlack(true);
+
         
         // Target player discards a card. If a land card is discarded this way, return Psychic Miasma to its owner's hand.
         this.getSpellAbility().addTarget(new TargetPlayer());

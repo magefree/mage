@@ -45,7 +45,7 @@ public class PhantomWarrior extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Illusion");
         this.subtype.add("Warrior");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new CantBeBlockedSourceAbility());

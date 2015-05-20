@@ -51,7 +51,7 @@ public class SeeBeyond extends CardImpl {
     public SeeBeyond(UUID ownerId) {
         super(ownerId, 86, "See Beyond", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{U}");
         this.expansionSetCode = "ROE";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new SeeBeyondEffect());
     }
 

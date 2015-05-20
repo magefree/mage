@@ -46,7 +46,7 @@ public class SylvanScrying extends CardImpl {
     public SylvanScrying(UUID ownerId) {
         super(ownerId, 302, "Sylvan Scrying", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "10E";
-        this.color.setGreen(true);
+
 
         // Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

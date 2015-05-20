@@ -57,7 +57,7 @@ public class LobberCrew extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
 

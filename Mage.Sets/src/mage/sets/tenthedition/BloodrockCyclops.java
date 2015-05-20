@@ -44,7 +44,7 @@ public class BloodrockCyclops extends CardImpl {
         super(ownerId, 192, "Bloodrock Cyclops", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "10E";
         this.subtype.add("Cyclops");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new AttacksEachTurnStaticAbility());

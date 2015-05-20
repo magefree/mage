@@ -46,7 +46,7 @@ public class Bandage extends CardImpl {
     public Bandage(UUID ownerId) {
         super(ownerId, 9, "Bandage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

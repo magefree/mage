@@ -50,7 +50,7 @@ public class HuntingMoa extends CardImpl {
         this.expansionSetCode = "UDS";
         this.subtype.add("Bird");
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

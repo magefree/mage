@@ -51,7 +51,7 @@ public class CrownOfFlames extends CardImpl {
             super(ownerId, 169, "Crown of Flames", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

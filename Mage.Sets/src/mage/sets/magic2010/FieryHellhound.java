@@ -50,7 +50,7 @@ public class FieryHellhound extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Elemental");
         this.subtype.add("Hound");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

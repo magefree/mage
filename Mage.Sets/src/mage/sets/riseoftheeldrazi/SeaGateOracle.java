@@ -48,7 +48,7 @@ public class SeaGateOracle extends CardImpl {
     public SeaGateOracle(UUID ownerId) {
         super(ownerId, 85, "Sea Gate Oracle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "ROE";
-        this.color.setBlue(true);
+
         this.subtype.add("Human");
         this.subtype.add("Wizard");
         this.power = new MageInt(1);

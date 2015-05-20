@@ -51,7 +51,7 @@ public class Firebreathing extends CardImpl {
         super(ownerId, 132, "Firebreathing", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));

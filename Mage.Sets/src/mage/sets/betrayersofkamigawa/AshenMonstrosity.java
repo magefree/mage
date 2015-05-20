@@ -45,7 +45,7 @@ public class AshenMonstrosity extends CardImpl {
         super(ownerId, 93, "Ashen Monstrosity", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(4);
         this.addAbility(HasteAbility.getInstance());

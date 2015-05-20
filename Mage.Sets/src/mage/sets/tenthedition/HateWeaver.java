@@ -64,7 +64,7 @@ public class HateWeaver extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Zombie");
         this.subtype.add("Wizard");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));

@@ -50,7 +50,7 @@ public class KamiOfTheTendedGarden extends CardImpl {
         super(ownerId, 134, "Kami of the Tended Garden", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

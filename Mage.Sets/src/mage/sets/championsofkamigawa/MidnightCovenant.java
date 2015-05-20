@@ -52,7 +52,7 @@ public class MidnightCovenant extends CardImpl {
         super(ownerId, 125, "Midnight Covenant", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

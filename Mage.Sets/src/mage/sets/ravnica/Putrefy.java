@@ -54,8 +54,8 @@ public class Putrefy extends CardImpl {
     public Putrefy (UUID ownerId) {
         super(ownerId, 221, "Putrefy", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{G}");
         this.expansionSetCode = "RAV";
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
+
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }

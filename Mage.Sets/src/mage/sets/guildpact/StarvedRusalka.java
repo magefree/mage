@@ -52,7 +52,7 @@ public class StarvedRusalka extends CardImpl {
         super(ownerId, 97, "Starved Rusalka", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ColoredManaCost(ColoredManaSymbol.G));

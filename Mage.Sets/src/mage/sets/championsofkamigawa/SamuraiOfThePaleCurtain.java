@@ -57,7 +57,7 @@ public class SamuraiOfThePaleCurtain extends CardImpl {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         

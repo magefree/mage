@@ -52,7 +52,7 @@ public class DanceOfShadows extends CardImpl {
         super(ownerId, 108, "Dance of Shadows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
         
         // Creatures you control get +1/+0 and gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
         Effect effect = new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter);

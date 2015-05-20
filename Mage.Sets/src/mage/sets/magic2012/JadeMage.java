@@ -50,7 +50,7 @@ public class JadeMage extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{2}{G}")));

@@ -51,7 +51,7 @@ public class RocEgg extends CardImpl {
         super(ownerId, 25, "Roc Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Bird");
-        this.color.setWhite(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

@@ -57,7 +57,7 @@ public class LeylineOfAnticipation extends CardImpl {
         super(ownerId, 61, "Leyline of Anticipation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "M11";
         
-        this.color.setBlue(true);
+
         
         // If Leyline of Anticipation is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());

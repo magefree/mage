@@ -63,7 +63,7 @@ public class PusKami extends CardImpl {
         super(ownerId, 79, "Pus Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // {B}, Sacrifice Pus Kami: Destroy target nonblack creature.

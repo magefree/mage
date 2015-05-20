@@ -44,7 +44,7 @@ public class Dismiss extends CardImpl {
     public Dismiss(UUID ownerId) {
         super(ownerId, 58, "Dismiss", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
         this.expansionSetCode = "TMP";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

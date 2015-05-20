@@ -51,7 +51,7 @@ public class Fabricate extends CardImpl {
     public Fabricate(UUID ownerId) {
         super(ownerId, 52, "Fabricate", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
 
         // Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));

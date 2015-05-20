@@ -54,7 +54,7 @@ public class ArrowVolleyTrap extends CardImpl {
     public ArrowVolleyTrap(UUID ownerId) {
         super(ownerId, 2, "Arrow Volley Trap", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
 
         // If four or more creatures are attacking, you may pay {1}{W} rather than pay Arrow Volley Trap's mana cost.
         this.getSpellAbility().addAlternativeCost(new ArrowVolleyTrapAlternativeCost());

@@ -49,7 +49,7 @@ public class ViridianAcolyte extends CardImpl {
         this.expansionSetCode = "DST";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));

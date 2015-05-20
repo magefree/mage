@@ -59,7 +59,7 @@ public class SunriseSovereign extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Giant");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         // Other Giant creatures you control get +2/+2 and have trample.

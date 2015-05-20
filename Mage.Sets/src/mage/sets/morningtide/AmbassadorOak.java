@@ -48,7 +48,7 @@ public class AmbassadorOak extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Treefolk");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));

@@ -50,7 +50,7 @@ public class HighwayRobber extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Rogue");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2));

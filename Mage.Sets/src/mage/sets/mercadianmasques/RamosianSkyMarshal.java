@@ -64,7 +64,7 @@ public class RamosianSkyMarshal extends CardImpl {
         this.expansionSetCode = "MMQ";
         this.subtype.add("Human");
         this.subtype.add("Rebel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

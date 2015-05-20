@@ -57,7 +57,7 @@ public class CavalryPegasus extends CardImpl {
         super(ownerId, 2, "Cavalry Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "THS";
         this.subtype.add("Pegasus");
-        this.color.setWhite(true);
+
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

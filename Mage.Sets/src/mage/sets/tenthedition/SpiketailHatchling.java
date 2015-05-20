@@ -52,7 +52,7 @@ public class SpiketailHatchling extends CardImpl {
         super(ownerId, 111, "Spiketail Hatchling", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Drake");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

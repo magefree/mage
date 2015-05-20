@@ -59,7 +59,7 @@ public class HanaKami extends CardImpl {
         super(ownerId, 211, "Hana Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{G}"));

@@ -47,7 +47,7 @@ public class Earthbrawn extends CardImpl {
     public Earthbrawn(UUID ownerId) {
         super(ownerId, 119, "Earthbrawn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "MOR";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));

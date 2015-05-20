@@ -44,7 +44,7 @@ public class AssaultGriffin extends CardImpl {
     public AssaultGriffin(UUID ownerId) {
         super(ownerId, 6, "Assault Griffin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "M11";
-        this.color.setWhite(true);
+
         this.subtype.add("Griffin");
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);

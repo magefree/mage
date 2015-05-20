@@ -49,7 +49,7 @@ public class BoneyardWurm extends CardImpl {
         super(ownerId, 171, "Boneyard Wurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
+
 
         // Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(new FilterCreatureCard());

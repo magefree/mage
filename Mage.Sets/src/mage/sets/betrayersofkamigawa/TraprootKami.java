@@ -59,7 +59,7 @@ public class TraprootKami extends CardImpl {
         super(ownerId, 147, "Traproot Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         // Defender; reach

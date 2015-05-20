@@ -54,7 +54,7 @@ public class Clear extends CardImpl {
     public Clear(UUID ownerId) {
         super(ownerId, 7, "Clear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

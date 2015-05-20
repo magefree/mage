@@ -51,7 +51,7 @@ public class IndomitableWill extends CardImpl {
         super(ownerId, 17, "Indomitable Will", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         this.addAbility(FlashAbility.getInstance());
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

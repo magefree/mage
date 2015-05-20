@@ -53,7 +53,7 @@ public class HisokasDefiance extends CardImpl {
     public HisokasDefiance(UUID ownerId) {
         super(ownerId, 67, "Hisoka's Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "CHK";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

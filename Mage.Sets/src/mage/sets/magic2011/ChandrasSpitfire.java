@@ -52,7 +52,7 @@ public class ChandrasSpitfire extends CardImpl {
         super(ownerId, 129, "Chandra's Spitfire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 

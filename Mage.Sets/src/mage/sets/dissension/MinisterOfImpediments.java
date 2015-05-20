@@ -51,8 +51,8 @@ public class MinisterOfImpediments extends CardImpl {
         this.expansionSetCode = "DIS";
         this.subtype.add("Human");
         this.subtype.add("Advisor");
-        this.color.setBlue(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());

@@ -53,7 +53,7 @@ public class LilianasSpecter extends CardImpl {
         super(ownerId, 104, "Liliana's Specter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.expansionSetCode = "M11";
         this.subtype.add("Specter");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

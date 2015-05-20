@@ -52,7 +52,7 @@ public class KamiOfFiresRoar extends CardImpl {
         super(ownerId, 174, "Kami of Fire's Roar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 

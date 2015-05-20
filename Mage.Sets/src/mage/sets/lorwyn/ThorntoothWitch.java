@@ -58,7 +58,7 @@ public class ThorntoothWitch extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         // Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.

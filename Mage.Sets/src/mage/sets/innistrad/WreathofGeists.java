@@ -55,7 +55,7 @@ public class WreathofGeists extends CardImpl {
         super(ownerId, 211, "Wreath of Geists", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

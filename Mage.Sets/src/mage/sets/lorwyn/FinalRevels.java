@@ -46,7 +46,7 @@ public class FinalRevels extends CardImpl {
     public FinalRevels(UUID ownerId) {
         super(ownerId, 113, "Final Revels", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
         this.expansionSetCode = "LRW";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false));
         Mode mode = new Mode();
         mode.getEffects().add(new BoostAllEffect(0, -2, Duration.EndOfTurn, new FilterCreaturePermanent(), false));

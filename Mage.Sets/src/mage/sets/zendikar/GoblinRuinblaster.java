@@ -50,7 +50,7 @@ public class GoblinRuinblaster extends CardImpl {
     public GoblinRuinblaster(UUID ownerId) {
         super(ownerId, 127, "Goblin Ruinblaster", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "ZEN";
-        this.color.setRed(true);
+
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
         this.power = new MageInt(2);

@@ -51,7 +51,7 @@ public class EleshNornGrandCenobite extends CardImpl {
         this.expansionSetCode = "NPH";
         this.supertype.add("Legendary");
         this.subtype.add("Praetor");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(7);
 

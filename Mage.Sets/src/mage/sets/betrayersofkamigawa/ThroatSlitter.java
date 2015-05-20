@@ -58,7 +58,7 @@ public class ThroatSlitter extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Rat");
         this.subtype.add("Ninja");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

@@ -44,7 +44,7 @@ public class BerserkersOfBloodRidge  extends CardImpl {
     public BerserkersOfBloodRidge(UUID ownerId) {
         super(ownerId, 126, "Berserkers of Blood Ridge", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.subtype.add("Human");
         this.subtype.add("Berserker");
         this.power = new MageInt(4);

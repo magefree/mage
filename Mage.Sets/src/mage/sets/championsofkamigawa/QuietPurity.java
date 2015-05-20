@@ -53,7 +53,7 @@ public class QuietPurity extends CardImpl {
         super(ownerId, 39, "Quiet Purity", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }

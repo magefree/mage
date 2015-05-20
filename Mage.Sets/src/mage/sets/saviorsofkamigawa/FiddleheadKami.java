@@ -48,7 +48,7 @@ public class FiddleheadKami extends CardImpl {
         super(ownerId, 130, "Fiddlehead Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

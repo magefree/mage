@@ -47,7 +47,7 @@ public class AuguryOwl extends CardImpl {
         super(ownerId, 45, "Augury Owl", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M11";
         this.subtype.add("Bird");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

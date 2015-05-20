@@ -54,7 +54,7 @@ public class SpiralingDuelist extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Human");
         this.subtype.add("Berserker");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

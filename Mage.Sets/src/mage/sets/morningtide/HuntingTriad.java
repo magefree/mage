@@ -46,7 +46,7 @@ public class HuntingTriad extends CardImpl {
         super(ownerId, 127, "Hunting Triad", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), 3));
         this.addAbility(new ReinforceAbility(3, new ManaCostsImpl("{3}{G}")));
     }

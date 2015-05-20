@@ -54,7 +54,7 @@ public class UncheckedGrowth extends CardImpl {
         super(ownerId, 148, "Unchecked Growth", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setGreen(true);
+
         
         // Target creature gets +4/+4 until end of turn. 
         this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));

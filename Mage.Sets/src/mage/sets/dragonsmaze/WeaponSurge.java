@@ -63,7 +63,7 @@ public class WeaponSurge extends CardImpl {
     public WeaponSurge(UUID ownerId) {
         super(ownerId, 40, "Weapon Surge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "DGM";
-        this.color.setRed(true);
+
 
         // Target creature you control gets +1/+0 and gains first strike until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));

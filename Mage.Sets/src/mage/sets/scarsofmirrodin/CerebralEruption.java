@@ -54,7 +54,7 @@ public class CerebralEruption extends CardImpl {
     public CerebralEruption(UUID ownerId) {
         super(ownerId, 86, "Cerebral Eruption", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{R}{R}");
         this.expansionSetCode = "SOM";
-        this.color.setRed(true);
+
         
         // Target opponent reveals the top card of his or her library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature he or she controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
         this.getSpellAbility().addTarget(new TargetOpponent());

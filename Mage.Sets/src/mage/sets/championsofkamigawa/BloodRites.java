@@ -49,7 +49,7 @@ public class BloodRites extends CardImpl {
     public BloodRites(UUID ownerId) {
         super(ownerId, 159, "Blood Rites", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "CHK";
-        this.color.setRed(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreatureOrPlayer());

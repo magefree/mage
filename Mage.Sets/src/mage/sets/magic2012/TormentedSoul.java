@@ -46,7 +46,7 @@ public class TormentedSoul extends CardImpl {
         super(ownerId, 114, "Tormented Soul", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new CantBlockAbility());

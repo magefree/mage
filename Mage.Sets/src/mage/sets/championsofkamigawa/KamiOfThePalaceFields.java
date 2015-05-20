@@ -47,7 +47,7 @@ public class KamiOfThePalaceFields extends CardImpl {
         super(ownerId, 24, "Kami of the Palace Fields", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());

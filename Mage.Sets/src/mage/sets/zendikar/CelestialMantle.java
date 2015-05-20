@@ -58,7 +58,7 @@ public class CelestialMantle extends CardImpl {
         super(ownerId, 6, "Celestial Mantle", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

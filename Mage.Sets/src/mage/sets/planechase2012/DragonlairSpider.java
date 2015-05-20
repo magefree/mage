@@ -47,8 +47,8 @@ public class DragonlairSpider extends CardImpl {
         super(ownerId, 87, "Dragonlair Spider", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{G}{G}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Spider");
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

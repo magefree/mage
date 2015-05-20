@@ -43,7 +43,7 @@ public class WhispersOfTheMuse extends CardImpl {
     public WhispersOfTheMuse(UUID ownerId) {
         super(ownerId, 103, "Whispers of the Muse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "TMP";
-        this.color.setBlue(true);
+
 
         // Buyback {5} (You may pay an additional {5} as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility("{5}"));

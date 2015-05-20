@@ -48,7 +48,7 @@ public class Skullmulcher extends CardImpl {
         super(ownerId, 148, "Skullmulcher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

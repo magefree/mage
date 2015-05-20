@@ -55,7 +55,7 @@ public class HypervoltGrasp extends CardImpl {
         super(ownerId, 67, "Hypervolt Grasp", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
         
         
         // Enchant creature

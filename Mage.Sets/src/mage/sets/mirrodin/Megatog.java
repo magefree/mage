@@ -60,7 +60,7 @@ public class Megatog extends CardImpl {
         super(ownerId, 100, "Megatog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Atog");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));

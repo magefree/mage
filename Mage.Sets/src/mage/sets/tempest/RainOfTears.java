@@ -43,7 +43,7 @@ public class RainOfTears extends CardImpl {
     public RainOfTears(UUID ownerId) {
         super(ownerId, 43, "Rain of Tears", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "TMP";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }

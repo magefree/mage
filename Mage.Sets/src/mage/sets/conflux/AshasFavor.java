@@ -53,7 +53,7 @@ public class AshasFavor extends CardImpl {
         super(ownerId, 2, "Asha's Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CON";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

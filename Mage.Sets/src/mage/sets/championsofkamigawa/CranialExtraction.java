@@ -55,7 +55,7 @@ public class CranialExtraction extends CardImpl {
         super(ownerId, 105, "Cranial Extraction", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "CHK";
                 this.subtype.add("Arcane");
-        this.color.setBlack(true);
+
 
                 /* Name a nonland card. Search target player's graveyard, hand, and library for 
                  * all cards with that name and exile them. Then that player shuffles his or her library. */

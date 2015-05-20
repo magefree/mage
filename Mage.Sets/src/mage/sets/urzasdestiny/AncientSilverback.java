@@ -47,7 +47,7 @@ public class AncientSilverback extends CardImpl {
         super(ownerId, 101, "Ancient Silverback", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
         this.expansionSetCode = "UDS";
         this.subtype.add("Ape");
-        this.color.setGreen(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
 

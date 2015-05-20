@@ -48,7 +48,7 @@ public class DarklingStalker extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Shade");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));

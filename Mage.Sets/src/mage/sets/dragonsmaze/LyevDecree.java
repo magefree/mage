@@ -56,7 +56,7 @@ public class LyevDecree extends CardImpl {
     public LyevDecree(UUID ownerId) {
         super(ownerId, 3, "Lyev Decree", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
         this.expansionSetCode = "DGM";
-        this.color.setWhite(true);
+
 
         // Detain up to two target creatures your opponent controls.
         this.getSpellAbility().addEffect(new DetainTargetEffect());

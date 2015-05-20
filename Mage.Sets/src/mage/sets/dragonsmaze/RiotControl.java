@@ -57,7 +57,7 @@ public class RiotControl extends CardImpl {
     public RiotControl(UUID ownerId) {
         super(ownerId, 6, "Riot Control", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "DGM";
-        this.color.setWhite(true);
+
 
         // Gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));

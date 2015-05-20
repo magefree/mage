@@ -57,7 +57,7 @@ public class RangerOfEos extends CardImpl {
     public RangerOfEos(UUID ownerId) {
         super(ownerId, 21, "Ranger of Eos", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "ALA";
-        this.color.setWhite(true);
+
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(3);

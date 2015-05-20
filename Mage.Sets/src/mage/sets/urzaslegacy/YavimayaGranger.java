@@ -50,7 +50,7 @@ public class YavimayaGranger extends CardImpl {
         super(ownerId, 118, "Yavimaya Granger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

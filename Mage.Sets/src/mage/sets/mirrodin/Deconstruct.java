@@ -53,7 +53,7 @@ public class Deconstruct extends CardImpl {
     public Deconstruct(UUID ownerId) {
         super(ownerId, 118, "Deconstruct", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "MRD";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 3, 0, 0, 0, 0, 0)));

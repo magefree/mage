@@ -43,7 +43,7 @@ public class DosansOldestChant extends CardImpl {
     public DosansOldestChant(UUID ownerId) {
         super(ownerId, 127, "Dosan's Oldest Chant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "SOK";
-        this.color.setGreen(true);
+
         // You gain 6 life.
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
         // Draw a card.

@@ -44,7 +44,7 @@ public class SoulFeast extends CardImpl {
     public SoulFeast(UUID ownerId) {
         super(ownerId, 179, "Soul Feast", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "10E";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(4));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(4));

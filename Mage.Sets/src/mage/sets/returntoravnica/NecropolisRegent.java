@@ -56,7 +56,7 @@ public class NecropolisRegent extends CardImpl {
         super(ownerId, 71, "Necropolis Regent", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{B}{B}{B}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Vampire");
-        this.color.setBlack(true);
+
 
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);

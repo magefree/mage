@@ -53,7 +53,7 @@ public class ChildOfGaea extends CardImpl {
         super(ownerId, 242, "Child of Gaea", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}{G}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

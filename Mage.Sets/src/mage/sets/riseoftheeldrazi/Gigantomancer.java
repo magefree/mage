@@ -52,7 +52,7 @@ public class Gigantomancer extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Human");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         

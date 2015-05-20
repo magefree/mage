@@ -52,7 +52,7 @@ public class Oxidize extends CardImpl {
     public Oxidize(UUID ownerId) {
         super(ownerId, 79, "Oxidize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "DST";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

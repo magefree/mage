@@ -43,7 +43,7 @@ public class MaritimeGuard extends CardImpl {
     public MaritimeGuard(UUID ownerId) {
         super(ownerId, 63, "Maritime Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.subtype.add("Merfolk");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);

@@ -49,7 +49,7 @@ public class SkeletalChangeling extends CardImpl {
         super(ownerId, 140, "Skeletal Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Shapeshifter");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Changeling

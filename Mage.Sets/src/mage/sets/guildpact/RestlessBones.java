@@ -54,7 +54,7 @@ public class RestlessBones extends CardImpl {
         super(ownerId, 58, "Restless Bones", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Skeleton");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn), new ManaCostsImpl("{3}{B}"));

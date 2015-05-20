@@ -52,7 +52,7 @@ public class Fling extends CardImpl {
     public Fling(UUID ownerId) {
         super(ownerId, 139, "Fling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new FlingEffect());

@@ -54,7 +54,7 @@ public class CrushingPain extends CardImpl {
     public CrushingPain (UUID ownerId) {
         super(ownerId, 162, "Crushing Pain", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "CHK";
-        this.color.setRed(true);
+
 
         // Crushing Pain deals 6 damage to target creature that was dealt damage this turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(6));

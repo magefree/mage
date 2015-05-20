@@ -47,7 +47,7 @@ public class DemonicCollusion extends CardImpl {
     public DemonicCollusion(UUID ownerId) {
         super(ownerId, 103, "Demonic Collusion", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "TSP";
-        this.color.setBlack(true);
+
         // Buyback—Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));
 

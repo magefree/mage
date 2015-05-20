@@ -71,8 +71,8 @@ public class BloodBaronOfVizkopa extends CardImpl {
         super(ownerId, 57, "Blood Baron of Vizkopa", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Vampire");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

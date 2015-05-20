@@ -47,7 +47,7 @@ public class SkulkingFugitive extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Horror");
 		this.subtype.add("Mercenary");
-		this.color.setBlack(true);
+
 		this.power = new MageInt(3);
 		this.toughness = new MageInt(4);
 	

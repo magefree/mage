@@ -46,7 +46,7 @@ public class Afflict extends CardImpl {
     public Afflict(UUID ownerId) {
         super(ownerId, 125, "Afflict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "10E";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

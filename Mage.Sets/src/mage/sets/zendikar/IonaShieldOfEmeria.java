@@ -62,7 +62,7 @@ public class IonaShieldOfEmeria extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

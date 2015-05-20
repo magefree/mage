@@ -50,7 +50,7 @@ public class HarrierGriffin extends CardImpl {
         super(ownerId, 9, "Harrier Griffin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Griffin");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());

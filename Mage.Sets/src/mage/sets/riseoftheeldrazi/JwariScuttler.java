@@ -44,7 +44,7 @@ public class JwariScuttler extends CardImpl {
         super(ownerId, 73, "Jwari Scuttler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Crab");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
     }

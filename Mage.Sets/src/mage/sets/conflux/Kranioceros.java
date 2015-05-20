@@ -49,7 +49,7 @@ public class Kranioceros extends CardImpl {
         super(ownerId, 67, "Kranioceros", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "CON";
         this.subtype.add("Beast");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(2);
 

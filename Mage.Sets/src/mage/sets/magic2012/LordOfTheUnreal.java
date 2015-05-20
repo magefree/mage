@@ -60,7 +60,7 @@ public class LordOfTheUnreal extends CardImpl {
         this.expansionSetCode = "M12";
         this.subtype.add("Human");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false));

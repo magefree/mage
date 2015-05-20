@@ -29,11 +29,11 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -46,9 +46,8 @@ public class RhoxWarMonk extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Rhino");
         this.subtype.add("Monk");
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

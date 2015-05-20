@@ -47,7 +47,7 @@ public class SlithFirewalker extends CardImpl {
         super(ownerId, 107, "Slith Firewalker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}{R}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Slith");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(HasteAbility.getInstance());

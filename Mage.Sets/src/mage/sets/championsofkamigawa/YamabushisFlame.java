@@ -48,7 +48,7 @@ public class YamabushisFlame extends CardImpl {
     public YamabushisFlame(UUID ownerId) {
             super(ownerId, 198, "Yamabushi's Flame", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
             this.expansionSetCode = "CHK";
-            this.color.setRed(true);
+
 
             // Yamabushi's Flame deals 3 damage to target creature or player. 
             this.getSpellAbility().addEffect(new DamageTargetEffect(3));

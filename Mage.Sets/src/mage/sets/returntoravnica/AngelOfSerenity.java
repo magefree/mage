@@ -63,7 +63,7 @@ public class AngelOfSerenity extends CardImpl {
         super(ownerId, 1, "Angel of Serenity", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}{W}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 

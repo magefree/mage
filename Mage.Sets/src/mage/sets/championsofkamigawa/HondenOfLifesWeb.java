@@ -57,7 +57,7 @@ public class HondenOfLifesWeb extends CardImpl {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
-        this.color.setGreen(true);
+
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 

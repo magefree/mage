@@ -59,7 +59,7 @@ public class Seahunter extends CardImpl {
         this.expansionSetCode = "NMS";
         this.subtype.add("Human");
         this.subtype.add("Mercenary");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

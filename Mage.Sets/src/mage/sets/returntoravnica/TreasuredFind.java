@@ -44,8 +44,8 @@ public class TreasuredFind extends CardImpl {
     public TreasuredFind(UUID ownerId) {
         super(ownerId, 204, "Treasured Find", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
         this.expansionSetCode = "RTR";
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
+
 
         // Return target card from your graveyard to your hand. Exile Treasured Find.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

@@ -45,7 +45,7 @@ public class BullHippo extends CardImpl {
         super(ownerId, 239, "Bull Hippo", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Hippo");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new IslandwalkAbility());

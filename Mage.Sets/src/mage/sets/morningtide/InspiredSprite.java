@@ -61,7 +61,7 @@ public class InspiredSprite extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Faerie");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlashAbility.getInstance());

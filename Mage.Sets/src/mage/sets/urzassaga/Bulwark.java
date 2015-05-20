@@ -50,7 +50,7 @@ public class Bulwark extends CardImpl {
     public Bulwark(UUID ownerId) {
         super(ownerId, 178, "Bulwark", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
 		
         // At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is
 		// the number of cards in your hand minus the number of cards in that player's hand.

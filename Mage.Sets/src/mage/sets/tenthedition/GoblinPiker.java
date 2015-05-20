@@ -45,7 +45,7 @@ public class GoblinPiker extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -48,7 +48,7 @@ public class SteepleRoc extends CardImpl {
         super(ownerId, 8, "Steeple Roc", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Bird");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -60,7 +60,7 @@ public class TrollsOfTelJilad extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Troll");
         this.subtype.add("Shaman");
-        this.color.setGreen(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));

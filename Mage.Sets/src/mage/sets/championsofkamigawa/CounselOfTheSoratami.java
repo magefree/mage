@@ -43,7 +43,7 @@ public class CounselOfTheSoratami extends CardImpl {
     public CounselOfTheSoratami (UUID ownerId) {
         super(ownerId, 55, "Counsel of the Soratami", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "CHK";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 

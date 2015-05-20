@@ -50,7 +50,7 @@ public class PitRaptor extends CardImpl {
         this.expansionSetCode = "PCY";
         this.subtype.add("Bird");
         this.subtype.add("Mercenary");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

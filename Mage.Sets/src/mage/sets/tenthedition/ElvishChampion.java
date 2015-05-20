@@ -56,7 +56,7 @@ public class ElvishChampion extends CardImpl {
         super(ownerId, 261, "Elvish Champion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "10E";
         this.subtype.add("Elf");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

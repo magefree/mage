@@ -64,7 +64,7 @@ public class WaxmaneBaku extends CardImpl {
         super(ownerId, 29, "Waxmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         

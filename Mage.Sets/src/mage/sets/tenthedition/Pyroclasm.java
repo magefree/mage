@@ -44,7 +44,7 @@ public class Pyroclasm extends CardImpl {
     public Pyroclasm(UUID ownerId) {
         super(ownerId, 222, "Pyroclasm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
     }
 

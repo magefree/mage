@@ -57,8 +57,8 @@ public class FiresOfYavimaya extends CardImpl {
     public FiresOfYavimaya(UUID ownerId) {
         super(ownerId, 87, "Fires of Yavimaya", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{G}");
         this.expansionSetCode = "HOP";
-        this.color.setRed(true);
-        this.color.setGreen(true);
+
+
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

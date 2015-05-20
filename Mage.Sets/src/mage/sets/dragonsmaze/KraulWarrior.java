@@ -52,7 +52,7 @@ public class KraulWarrior extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Insect");
         this.subtype.add("Warrior");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

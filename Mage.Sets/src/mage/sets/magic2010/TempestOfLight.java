@@ -49,7 +49,7 @@ public class TempestOfLight extends CardImpl {
     public TempestOfLight(UUID ownerId) {
         super(ownerId, 36, "Tempest of Light", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new TempestOfLightEffect());
     }
 

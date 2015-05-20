@@ -55,7 +55,7 @@ public class Demonfire extends CardImpl {
         super(ownerId, 60, "Demonfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "DIS";
         
-        this.color.setRed(true);
+
 
         // Demonfire deals X damage to target creature or player. 
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

@@ -46,7 +46,7 @@ public class GiantCrab extends CardImpl {
         super(ownerId, 66, "Giant Crab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Crab");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));

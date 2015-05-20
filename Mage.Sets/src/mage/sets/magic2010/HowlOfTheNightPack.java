@@ -52,7 +52,7 @@ public class HowlOfTheNightPack extends CardImpl {
     public HowlOfTheNightPack(UUID ownerId) {
         super(ownerId, 187, "Howl of the Night Pack", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{6}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken(), new PermanentsOnBattlefieldCount(filter)));
     }
 

@@ -55,7 +55,7 @@ public class VoiceOfLaw extends CardImpl {
         super(ownerId, 55, "Voice Of Law", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "USG";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
                 this.addAbility(FlyingAbility.getInstance());

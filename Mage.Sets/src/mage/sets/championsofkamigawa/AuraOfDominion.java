@@ -65,7 +65,7 @@ public class AuraOfDominion extends CardImpl {
         super(ownerId, 51, "Aura of Dominion", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Untap));

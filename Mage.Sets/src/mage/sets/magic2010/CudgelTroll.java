@@ -47,7 +47,7 @@ public class CudgelTroll extends CardImpl {
     public CudgelTroll(UUID ownerId) {
         super(ownerId, 174, "Cudgel Troll", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.subtype.add("Troll");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);

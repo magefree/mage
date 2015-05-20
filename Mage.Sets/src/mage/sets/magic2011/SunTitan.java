@@ -58,7 +58,7 @@ public class SunTitan extends CardImpl {
         super(ownerId, 35, "Sun Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "M11";
         this.subtype.add("Giant");
-        this.color.setWhite(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

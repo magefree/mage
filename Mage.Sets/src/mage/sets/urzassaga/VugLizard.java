@@ -46,7 +46,7 @@ public class VugLizard extends CardImpl{
         super(ownerId, 227, "Vug Lizard", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
         this.expansionSetCode = "USG";
         this.subtype.add("Lizard");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 

@@ -71,7 +71,7 @@ public class StoneforgeMystic extends CardImpl {
     public StoneforgeMystic(UUID ownerId) {
         super(ownerId, 20, "Stoneforge Mystic", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "WWK";
-        this.color.setWhite(true);
+
         this.subtype.add("Kor");
         this.subtype.add("Artificer");
         this.power = new MageInt(1);

@@ -58,7 +58,7 @@ public class Attrition extends CardImpl {
     public Attrition(UUID ownerId) {
         super(ownerId, 52, "Attrition", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "UDS";
-        this.color.setBlack(true);
+
 
         //{B}, Sacrifice a creature: Destroy target nonblack creature.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{B}"));

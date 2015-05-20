@@ -29,13 +29,13 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.DragonToken;
 
 /**
@@ -50,9 +50,8 @@ public class BroodmateDragon extends CardImpl {
         super(ownerId, 160, "Broodmate Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{R}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
-        this.color.setGreen(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

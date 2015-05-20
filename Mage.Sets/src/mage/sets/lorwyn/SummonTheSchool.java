@@ -61,7 +61,7 @@ public class SummonTheSchool extends CardImpl {
         super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
-        this.color.setWhite(true);
+
         // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new MerfolkToken(), 2));
         // Tap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.

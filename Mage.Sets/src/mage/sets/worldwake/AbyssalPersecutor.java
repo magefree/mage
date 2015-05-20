@@ -54,7 +54,7 @@ public class AbyssalPersecutor extends CardImpl {
         super(ownerId, 47, "Abyssal Persecutor", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Demon");
-        this.color.setBlack(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

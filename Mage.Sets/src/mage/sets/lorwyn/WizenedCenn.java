@@ -57,7 +57,7 @@ public class WizenedCenn extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Kithkin");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Other Kithkin creatures you control get +1/+1.

@@ -56,7 +56,7 @@ public class PrimalCocoon extends CardImpl {
     public PrimalCocoon(UUID ownerId) {
         super(ownerId, 191, "Primal Cocoon", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

@@ -59,7 +59,7 @@ public class BarbedSliver extends CardImpl {
         super(ownerId, 163, "Barbed Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));

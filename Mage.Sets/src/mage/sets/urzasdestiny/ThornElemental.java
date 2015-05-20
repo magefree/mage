@@ -44,7 +44,7 @@ public class ThornElemental extends CardImpl {
         super(ownerId, 123, "Thorn Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "UDS";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

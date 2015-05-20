@@ -63,7 +63,7 @@ public class SiegeGangCommander extends CardImpl {
         super(ownerId, 157, "Siege-Gang Commander", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "M10";
         this.subtype.add("Goblin");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 3), false));

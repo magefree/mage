@@ -55,7 +55,7 @@ public class BloatedToad extends CardImpl {
         super(ownerId, 97, "Bloated Toad", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "ULG";
         this.subtype.add("Frog");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

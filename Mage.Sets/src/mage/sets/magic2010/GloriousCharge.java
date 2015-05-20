@@ -45,7 +45,7 @@ public class GloriousCharge extends CardImpl {
     public GloriousCharge(UUID ownerId) {
         super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         
         // Creatures you control get +1/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent(), false));

@@ -52,7 +52,7 @@ public class RuneOfProtectionWhite extends CardImpl {
     public RuneOfProtectionWhite(UUID ownerId) {
         super(ownerId, 41, "Rune of Protection: White", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "USG";
-        this.color.setWhite(true);
+
 
 		// {W}: The next time a white source of your choice would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RuneOfProtectionWhiteEffect() , new ManaCostsImpl("W")));

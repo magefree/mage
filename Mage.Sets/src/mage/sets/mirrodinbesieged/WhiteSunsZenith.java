@@ -47,7 +47,7 @@ public class WhiteSunsZenith extends CardImpl {
     public WhiteSunsZenith (UUID ownerId) {
         super(ownerId, 19, "White Sun's Zenith", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}{W}");
         this.expansionSetCode = "MBS";
-        this.color.setWhite(true);
+
         // Put X 2/2 white Cat creature tokens onto the battlefield. Shuffle White Sun's Zenith into its owner's library.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CatToken(), new ManacostVariableValue()));
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());

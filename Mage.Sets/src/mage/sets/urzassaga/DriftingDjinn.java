@@ -51,7 +51,7 @@ public class DriftingDjinn extends CardImpl {
         super(ownerId, 71, "Drifting Djinn", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "USG";
         this.subtype.add("Djinn");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

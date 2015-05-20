@@ -49,7 +49,7 @@ public class HorseshoeCrab extends CardImpl {
         super(ownerId, 87, "Horseshoe Crab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "10E";
         this.subtype.add("Crab");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));

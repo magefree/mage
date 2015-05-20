@@ -45,7 +45,7 @@ public class ScavengingScarab extends CardImpl {
         super(ownerId, 51, "Scavenging Scarab", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "DST";
         this.subtype.add("Insect");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new CantBlockAbility());

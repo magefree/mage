@@ -54,7 +54,7 @@ public class KamiOfTheHonoredDead extends CardImpl {
         super(ownerId, 12, "Kami of the Honored Dead", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
 

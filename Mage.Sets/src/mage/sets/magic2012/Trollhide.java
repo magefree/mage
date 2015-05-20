@@ -54,7 +54,7 @@ public class Trollhide extends CardImpl {
         super(ownerId, 199, "Trollhide", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

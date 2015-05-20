@@ -63,7 +63,7 @@ public class RamosianSergeant extends CardImpl {
 		this.expansionSetCode = "MMQ";
 		this.subtype.add("Human");
 		this.subtype.add("Rebel");
-		this.color.setWhite(true);
+
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 	

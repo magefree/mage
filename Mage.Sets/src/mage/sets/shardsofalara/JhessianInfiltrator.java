@@ -46,8 +46,8 @@ public class JhessianInfiltrator extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Human");
         this.subtype.add("Rogue");
-        this.color.setGreen(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new CantBeBlockedSourceAbility());

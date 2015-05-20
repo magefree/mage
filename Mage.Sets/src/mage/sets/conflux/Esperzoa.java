@@ -50,7 +50,7 @@ public class Esperzoa extends CardImpl {
         super(ownerId, 25, "Esperzoa", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "CON";
         this.subtype.add("Jellyfish");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
         

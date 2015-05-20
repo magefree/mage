@@ -52,7 +52,7 @@ public class Soulscour extends CardImpl {
     public Soulscour (UUID ownerId) {
         super(ownerId, 14, "Soulscour", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{7}{W}{W}{W}");
         this.expansionSetCode = "DST";
-        this.color.setWhite(true);
+
 
         // Destroy all nonartifact permanents.
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));

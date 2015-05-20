@@ -51,7 +51,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl {
         this.expansionSetCode = "BOK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());

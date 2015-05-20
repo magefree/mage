@@ -57,7 +57,7 @@ public class TurnAside extends CardImpl {
     public TurnAside(UUID ownerId) {
         super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+
 
         // Counter target spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());

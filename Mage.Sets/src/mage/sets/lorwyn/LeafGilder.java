@@ -46,7 +46,7 @@ public class LeafGilder extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(new GreenManaAbility());

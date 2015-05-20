@@ -45,7 +45,7 @@ public class ElvishFury extends CardImpl {
     public ElvishFury(UUID ownerId) {
         super(ownerId, 120, "Elvish Fury", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
 
         // Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)
         this.addAbility(new BuybackAbility("{4}"));

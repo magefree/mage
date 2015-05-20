@@ -51,7 +51,7 @@ public class MoonlitStrider extends CardImpl {
         super(ownerId, 16, "Moonlit Strider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

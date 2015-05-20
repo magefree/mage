@@ -45,8 +45,8 @@ public class LightningHelix extends CardImpl {
     public LightningHelix (UUID ownerId) {
         super(ownerId, 213, "Lightning Helix", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "RAV";
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addEffect(new GainLifeEffect(3));

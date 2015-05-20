@@ -57,8 +57,8 @@ public class IsperiaSupremeJudge extends CardImpl {
         this.subtype.add("Sphinx");
         this.supertype.add("Legendary");
         
-        this.color.setWhite(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(4);
 

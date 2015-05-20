@@ -66,7 +66,7 @@ public class QuillmaneBaku extends CardImpl {
         super(ownerId, 48, "Quillmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         

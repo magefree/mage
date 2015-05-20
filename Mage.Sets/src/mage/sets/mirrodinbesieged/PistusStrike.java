@@ -61,7 +61,7 @@ public class PistusStrike extends CardImpl {
     public PistusStrike(UUID ownerId) {
         super(ownerId, 86, "Pistus Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "MBS";
-        this.color.setGreen(true);
+
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

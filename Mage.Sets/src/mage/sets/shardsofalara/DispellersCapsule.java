@@ -60,7 +60,7 @@ public class DispellersCapsule extends CardImpl {
     public DispellersCapsule (UUID ownerId) {
         super(ownerId, 8, "Dispeller's Capsule", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{W}");
         this.expansionSetCode = "ALA";
-        this.color.setWhite(true);
+
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));

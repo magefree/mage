@@ -51,7 +51,7 @@ public class BriarknitKami extends CardImpl {
         super(ownerId, 124, "Briarknit Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.

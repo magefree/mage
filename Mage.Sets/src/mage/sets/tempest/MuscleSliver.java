@@ -55,7 +55,7 @@ public class MuscleSliver extends CardImpl {
         super(ownerId, 132, "Muscle Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Sliver");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));

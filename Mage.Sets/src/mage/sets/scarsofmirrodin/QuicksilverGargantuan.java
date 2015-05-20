@@ -56,7 +56,7 @@ public class QuicksilverGargantuan extends CardImpl {
         super(ownerId, 39, "Quicksilver Gargantuan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Shapeshifter");
-        this.color.setBlue(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

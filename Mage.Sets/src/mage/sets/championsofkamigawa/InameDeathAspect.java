@@ -56,7 +56,7 @@ public class InameDeathAspect extends CardImpl {
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InameDeathAspectEffect(), true));

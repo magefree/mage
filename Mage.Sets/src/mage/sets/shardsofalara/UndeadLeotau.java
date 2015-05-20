@@ -51,7 +51,7 @@ public class UndeadLeotau extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Zombie");
         this.subtype.add("Cat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));

@@ -46,7 +46,7 @@ public class SignInBlood extends CardImpl {
     public SignInBlood(UUID ownerId) {
         super(ownerId, 112, "Sign in Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
         this.expansionSetCode = "M10";
-        this.color.setBlack(true);
+
 
         // Target player draws two cards and loses 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer());

@@ -49,7 +49,7 @@ public class MartyrsTomb extends CardImpl {
     public MartyrsTomb(UUID ownerId) {
         super(ownerId, 110, "Martyrs' Tomb", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{B}");
         this.expansionSetCode = "APC";
-        this.color.setBlack(true);
+
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new PayLifeCost(2));
         ability.addTarget(new TargetCreaturePermanent());

@@ -63,7 +63,7 @@ public class ElvishArchdruid extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Elf");
         this.subtype.add("Druid");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

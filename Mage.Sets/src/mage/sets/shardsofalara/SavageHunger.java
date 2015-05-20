@@ -58,7 +58,7 @@ public class SavageHunger extends CardImpl {
         super(ownerId, 147, "Savage Hunger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Aura");
-        this.color.setGreen(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

@@ -69,8 +69,8 @@ public class BalefireLiege extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
         this.subtype.add("Horror");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));

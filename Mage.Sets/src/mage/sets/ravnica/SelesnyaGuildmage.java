@@ -53,8 +53,8 @@ public class SelesnyaGuildmage extends CardImpl {
         this.expansionSetCode = "RAV";
         this.subtype.add("Elf");
         this.subtype.add("Wizard");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(2);    
         this.toughness = new MageInt(2);
         

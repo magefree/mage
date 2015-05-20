@@ -47,7 +47,7 @@ public class WithstandDeath extends CardImpl {
     public WithstandDeath (UUID ownerId) {
         super(ownerId, 134, "Withstand Death", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "SOM";
-        this.color.setGreen(true);
+
 
         // Target creature is indestructible this turn.
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);

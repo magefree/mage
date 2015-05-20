@@ -54,7 +54,7 @@ public class RecklessSpite extends CardImpl {
     public RecklessSpite(UUID ownerId) {
         super(ownerId, 46, "Reckless Spite", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{B}");
         this.expansionSetCode = "TMP";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5));

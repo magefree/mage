@@ -50,8 +50,8 @@ public class TrestleTroll extends CardImpl {
         super(ownerId, 205, "Trestle Troll", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Troll");
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 

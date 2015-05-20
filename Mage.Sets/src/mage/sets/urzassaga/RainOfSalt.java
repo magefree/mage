@@ -48,7 +48,7 @@ public class RainOfSalt extends CardImpl {
     public RainOfSalt(UUID ownerId) {
         super(ownerId, 206, "Rain of Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
 
         // Destroy two target lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

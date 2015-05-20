@@ -68,8 +68,8 @@ public class KorozdaGuildmage extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Elf");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
-        this.color.setGreen(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

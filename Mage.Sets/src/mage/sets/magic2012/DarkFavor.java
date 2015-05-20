@@ -51,7 +51,7 @@ public class DarkFavor extends CardImpl {
         super(ownerId, 89, "Dark Favor", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M12";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));

@@ -46,7 +46,7 @@ public class MarbleChalice extends CardImpl {
     public MarbleChalice (UUID ownerId) {
         super(ownerId, 18, "Marble Chalice", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}{W}");
         this.expansionSetCode = "ALA";
-        this.color.setWhite(true);
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
     }
 

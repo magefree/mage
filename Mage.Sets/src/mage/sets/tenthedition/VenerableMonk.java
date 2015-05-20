@@ -47,7 +47,7 @@ public class VenerableMonk extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Monk");
         this.subtype.add("Cleric");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));

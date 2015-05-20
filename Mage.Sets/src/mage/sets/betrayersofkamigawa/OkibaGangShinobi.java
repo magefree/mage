@@ -48,7 +48,7 @@ public class OkibaGangShinobi extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Rat");
         this.subtype.add("Ninja");
-        this.color.setBlack(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

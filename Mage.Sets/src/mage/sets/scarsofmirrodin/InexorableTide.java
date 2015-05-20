@@ -44,7 +44,7 @@ public class InexorableTide extends CardImpl {
     public InexorableTide (UUID ownerId) {
         super(ownerId, 35, "Inexorable Tide", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "SOM";
-        this.color.setBlue(true);
+
 
         this.addAbility(new SpellCastControllerTriggeredAbility(new ProliferateEffect(), false));
     }

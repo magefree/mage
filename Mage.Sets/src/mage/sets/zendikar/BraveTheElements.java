@@ -58,7 +58,7 @@ public class BraveTheElements extends CardImpl {
     public BraveTheElements(UUID ownerId) {
         super(ownerId, 4, "Brave the Elements", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "ZEN";
-        this.color.setWhite(true);
+
 
         // Choose a color. White creatures you control gain protection from the chosen color until end of turn.
         this.getSpellAbility().addEffect(new BraveTheElementsChooseColorEffect());

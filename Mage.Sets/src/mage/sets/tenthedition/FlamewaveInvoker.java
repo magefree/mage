@@ -51,7 +51,7 @@ public class FlamewaveInvoker extends CardImpl {
         this.expansionSetCode = "10E";
         this.subtype.add("Goblin");
         this.subtype.add("Mutant");
-        this.color.setRed(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new ManaCostsImpl("{7}{R}"));

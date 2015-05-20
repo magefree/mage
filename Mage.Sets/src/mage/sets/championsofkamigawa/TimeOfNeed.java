@@ -54,7 +54,7 @@ public class TimeOfNeed extends CardImpl {
     public TimeOfNeed(UUID ownerId) {
         super(ownerId, 247, "Time of Need", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "CHK";
-        this.color.setGreen(true);
+
 
         // Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(filter);

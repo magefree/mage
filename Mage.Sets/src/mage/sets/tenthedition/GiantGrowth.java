@@ -45,7 +45,7 @@ public class GiantGrowth extends CardImpl {
     public GiantGrowth(UUID ownerId) {
         super(ownerId, 266, "Giant Growth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "10E";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
     }

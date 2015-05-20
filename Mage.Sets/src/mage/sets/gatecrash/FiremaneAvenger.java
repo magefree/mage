@@ -49,8 +49,8 @@ public class FiremaneAvenger extends CardImpl {
         super(ownerId, 163, "Firemane Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
-        this.color.setRed(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

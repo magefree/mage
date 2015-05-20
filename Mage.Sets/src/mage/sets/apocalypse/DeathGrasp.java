@@ -46,7 +46,7 @@ public class DeathGrasp extends CardImpl {
     public DeathGrasp (UUID ownerId) {
         super(ownerId, 95, "Death Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{W}{B}");
         this.expansionSetCode = "APC";
-        this.color.setWhite(true);
+
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addEffect(new GainLifeEffect(new ManacostVariableValue()));

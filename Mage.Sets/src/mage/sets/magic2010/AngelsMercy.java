@@ -43,7 +43,7 @@ public class AngelsMercy extends CardImpl {
     public AngelsMercy(UUID ownerId) {
         super(ownerId, 2, "Angel's Mercy", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}{W}");
         this.expansionSetCode = "M10";
-        this.color.setWhite(true);
+
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 

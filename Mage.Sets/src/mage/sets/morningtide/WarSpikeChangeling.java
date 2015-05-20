@@ -48,7 +48,7 @@ public class WarSpikeChangeling extends CardImpl {
         super(ownerId, 112, "War-Spike Changeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Shapeshifter");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(ChangelingAbility.getInstance());

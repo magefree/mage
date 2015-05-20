@@ -57,7 +57,7 @@ public class Kurgadon extends CardImpl {
         super(ownerId, 124, "Kurgadon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "SCG";
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

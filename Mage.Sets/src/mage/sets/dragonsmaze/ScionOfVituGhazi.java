@@ -55,7 +55,7 @@ public class ScionOfVituGhazi extends CardImpl {
         super(ownerId, 7, "Scion of Vitu-Ghazi", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

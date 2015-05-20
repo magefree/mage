@@ -59,7 +59,7 @@ public class YukiOnna extends CardImpl {
         super(ownerId, 120, "Yuki-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 

@@ -50,7 +50,7 @@ public class DragonRoost extends CardImpl {
     public DragonRoost(UUID ownerId) {
         super(ownerId, 197, "Dragon Roost", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
     }
 

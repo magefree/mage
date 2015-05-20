@@ -56,7 +56,7 @@ public class WitchsMist extends CardImpl {
     public WitchsMist(UUID ownerId) {
         super(ownerId, 92, "Witch's Mist", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "FUT";
-        this.color.setBlack(true);
+
 
         // {2}{B}, {T}: Destroy target creature that was dealt damage this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),new ManaCostsImpl("{2}{B}"));

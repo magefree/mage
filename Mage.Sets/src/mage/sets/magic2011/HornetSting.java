@@ -44,7 +44,7 @@ public class HornetSting extends CardImpl {
     public HornetSting(UUID ownerId) {
         super(ownerId, 181, "Hornet Sting", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M11";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
     }

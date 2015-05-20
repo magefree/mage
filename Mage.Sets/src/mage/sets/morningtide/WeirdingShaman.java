@@ -61,7 +61,7 @@ public class WeirdingShaman extends CardImpl {
         this.expansionSetCode = "MOR";
         this.subtype.add("Goblin");
         this.subtype.add("Shaman");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new goblinRogueToken(), 2), new ManaCostsImpl("{3}{B}"));

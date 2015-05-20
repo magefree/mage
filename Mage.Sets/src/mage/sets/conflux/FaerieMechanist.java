@@ -54,7 +54,7 @@ public class FaerieMechanist extends CardImpl {
     public FaerieMechanist(UUID ownerId) {
         super(ownerId, 27, "Faerie Mechanist", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "CON";
-        this.color.setBlue(true);
+
         this.subtype.add("Faerie");
         this.subtype.add("Artificer");
     this.power = new MageInt(2);

@@ -53,7 +53,7 @@ public class Thornling extends CardImpl {
     public Thornling(UUID ownerId) {
         super(ownerId, 95, "Thornling", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "CON";
-        this.color.setGreen(true);
+
         this.subtype.add("Elemental");
         this.subtype.add("Shapeshifter");
         this.power = new MageInt(4);

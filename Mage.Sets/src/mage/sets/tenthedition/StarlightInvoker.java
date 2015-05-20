@@ -50,7 +50,7 @@ public class StarlightInvoker extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Cleric");
         this.subtype.add("Mutant");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl("{7}{W}")));

@@ -58,7 +58,7 @@ public class BaneslayerAngel extends CardImpl {
         super(ownerId, 4, "Baneslayer Angel", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

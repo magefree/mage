@@ -54,7 +54,7 @@ public class CelestialAncient extends CardImpl {
         super(ownerId, 7, "Celestial Ancient", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "DIS";
         this.subtype.add("Elemental");
-        this.color.setWhite(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 

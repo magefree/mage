@@ -51,7 +51,7 @@ public class ToilsOfNightAndDay extends CardImpl {
         super(ownerId, 57, "Toils of Night and Day", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+
         // You may tap or untap target permanent, then you may tap or untap another target permanent.
         this.getSpellAbility().addEffect(new ToilsOfNightAndDayEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(0, 2, new FilterPermanent(), false));

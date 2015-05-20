@@ -54,7 +54,7 @@ public class Festercreep extends CardImpl {
         super(ownerId, 62, "Festercreep", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "MOR";
         this.subtype.add("Elemental");
-        this.color.setBlack(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         

@@ -50,7 +50,7 @@ public class Talonrend extends CardImpl {
         super(ownerId, 30, "Talonrend", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());

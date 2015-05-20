@@ -47,7 +47,7 @@ public class SoulboundGuardians extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Kor");
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         this.addAbility(DefenderAbility.getInstance());

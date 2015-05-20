@@ -45,7 +45,7 @@ public class LayWaste extends CardImpl {
     public LayWaste(UUID ownerId) {
         super(ownerId, 201, "Lay Waste", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "USG";
-        this.color.setRed(true);
+
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());

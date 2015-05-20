@@ -45,7 +45,7 @@ public class ZephyrSprite extends CardImpl {
         super(ownerId, 82, "Zephyr Sprite", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "M10";
         this.subtype.add("Faerie");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

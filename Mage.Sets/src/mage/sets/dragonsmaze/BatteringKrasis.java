@@ -49,7 +49,7 @@ public class BatteringKrasis extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Fish");
         this.subtype.add("Beast");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

@@ -59,7 +59,7 @@ public class RaggedVeins extends CardImpl {
         super(ownerId, 139, "Ragged Veins", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

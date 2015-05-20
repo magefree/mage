@@ -44,7 +44,7 @@ public class QuilledSlagwurm extends CardImpl {
         super(ownerId, 89, "Quilled Slagwurm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
     }

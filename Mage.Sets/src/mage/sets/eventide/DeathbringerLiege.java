@@ -68,8 +68,8 @@ public class DeathbringerLiege extends CardImpl {
         super(ownerId, 85, "Deathbringer Liege", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W/B}{W/B}{W/B}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Horror");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));

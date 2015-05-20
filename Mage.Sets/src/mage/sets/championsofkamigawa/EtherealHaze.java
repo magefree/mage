@@ -45,7 +45,7 @@ public class EtherealHaze extends CardImpl {
     public EtherealHaze (UUID ownerId) {
         super(ownerId, 9, "Ethereal Haze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "CHK";
-    this.color.setWhite(true);
+
 
         // Prevent all damage that would be dealt by creatures this turn.
         this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(new FilterCreaturePermanent("creatures"), Duration.EndOfTurn, false));

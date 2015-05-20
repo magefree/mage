@@ -50,8 +50,8 @@ public class ArmadaWurm extends CardImpl {
         super(ownerId, 143, "Armada Wurm", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{W}{W}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Wurm");
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

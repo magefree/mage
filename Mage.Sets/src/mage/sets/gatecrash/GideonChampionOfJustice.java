@@ -63,7 +63,7 @@ public class GideonChampionOfJustice extends CardImpl {
         super(ownerId, 13, "Gideon, Champion of Justice", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Gideon");
-        this.color.setWhite(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.

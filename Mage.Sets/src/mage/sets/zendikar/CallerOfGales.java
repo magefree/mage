@@ -55,7 +55,7 @@ public class CallerOfGales extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}"));

@@ -56,8 +56,8 @@ public class DivinityOfPride extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
-        this.color.setBlack(true);
-        this.color.setWhite(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());

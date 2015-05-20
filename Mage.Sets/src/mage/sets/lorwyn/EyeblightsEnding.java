@@ -54,7 +54,7 @@ public class EyeblightsEnding extends CardImpl {
         super(ownerId, 110, "Eyeblight's Ending", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elf");
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }

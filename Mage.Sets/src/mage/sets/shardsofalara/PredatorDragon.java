@@ -47,7 +47,7 @@ public class PredatorDragon extends CardImpl {
         super(ownerId, 109, "Predator Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}{R}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Dragon");
-        this.color.setRed(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

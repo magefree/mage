@@ -47,7 +47,7 @@ public class MitoticSlime extends CardImpl {
         super(ownerId, 185, "Mitotic Slime", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Ooze");
-        this.color.setGreen(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

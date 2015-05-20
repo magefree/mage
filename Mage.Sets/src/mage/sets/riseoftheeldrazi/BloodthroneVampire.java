@@ -49,7 +49,7 @@ public class BloodthroneVampire extends CardImpl {
     public BloodthroneVampire(UUID ownerId) {
         super(ownerId, 98, "Bloodthrone Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "ROE";
-        this.color.setBlack(true);
+
         this.subtype.add("Vampire");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

@@ -55,7 +55,7 @@ public class PatronOfTheNezumi extends CardImpl {
         this.expansionSetCode = "BOK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

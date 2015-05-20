@@ -49,7 +49,7 @@ public class MagmaRift extends CardImpl {
     public MagmaRift(UUID ownerId) {
         super(ownerId, 136, "Magma Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "ZEN";
-        this.color.setRed(true);
+
 
         // As an additional cost to cast Magma Rift, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));

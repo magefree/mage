@@ -62,7 +62,7 @@ public class ShiningShoal extends CardImpl {
         super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setWhite(true);
+
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
         FilterOwnedCard filter = new FilterOwnedCard("a white card with converted mana cost X from your hand");

@@ -52,8 +52,8 @@ public class ValeronOutlander extends CardImpl {
     public ValeronOutlander(UUID ownerId) {
         super(ownerId, 130, "Valeron Outlander", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.expansionSetCode = "CON";
-        this.color.setGreen(true);
-        this.color.setWhite(true);
+
+
         this.subtype.add("Human");
         this.subtype.add("Scout");
         this.power = new MageInt(2);

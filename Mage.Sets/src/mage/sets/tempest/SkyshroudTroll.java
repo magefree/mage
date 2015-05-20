@@ -49,7 +49,7 @@ public class SkyshroudTroll extends CardImpl {
         this.expansionSetCode = "TMP";
         this.subtype.add("Troll");
         this.subtype.add("Giant");
-        this.color.setGreen(true);
+
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));

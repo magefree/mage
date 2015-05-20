@@ -55,7 +55,7 @@ public class InfernoTitan extends CardImpl {
         super(ownerId, 146, "Inferno Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
         this.expansionSetCode = "M11";
         this.subtype.add("Giant");
-        this.color.setRed(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

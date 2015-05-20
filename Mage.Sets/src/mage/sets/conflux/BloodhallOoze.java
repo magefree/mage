@@ -55,7 +55,7 @@ public class BloodhallOoze extends CardImpl {
     public BloodhallOoze(UUID ownerId) {
         super(ownerId, 59, "Bloodhall Ooze", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "CON";
-        this.color.setRed(true);
+
         this.subtype.add("Ooze");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);

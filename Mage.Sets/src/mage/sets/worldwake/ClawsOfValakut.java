@@ -68,7 +68,7 @@ public class ClawsOfValakut extends CardImpl {
         super(ownerId, 75, "Claws of Valakut", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "WWK";
         this.subtype.add("Aura");
-        this.color.setRed(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

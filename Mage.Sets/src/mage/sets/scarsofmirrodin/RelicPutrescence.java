@@ -58,7 +58,7 @@ public class RelicPutrescence extends CardImpl {
         super(ownerId, 77, "Relic Putrescence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
         TargetPermanent auraTarget = new TargetArtifactPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));

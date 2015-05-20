@@ -44,7 +44,7 @@ public class DiabolicEdict extends CardImpl {
     public DiabolicEdict(UUID ownerId) {
         super(ownerId, 22, "Diabolic Edict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "TMP";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

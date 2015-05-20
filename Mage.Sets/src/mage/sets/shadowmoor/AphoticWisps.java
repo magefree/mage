@@ -50,7 +50,7 @@ public class AphoticWisps extends CardImpl {
     public AphoticWisps (UUID ownerId) {
         super(ownerId, 55, "Aphotic Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "SHM";
-        this.color.setBlack(true);
+
         //    Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.EndOfTurn));

@@ -55,7 +55,7 @@ public class GiantAdephage extends CardImpl {
         super(ownerId, 121, "Giant Adephage", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Insect");
-        this.color.setGreen(true);
+
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
 

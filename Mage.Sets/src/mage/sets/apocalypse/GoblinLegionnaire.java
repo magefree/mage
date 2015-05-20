@@ -51,7 +51,7 @@ public class GoblinLegionnaire extends CardImpl {
         this.expansionSetCode = "APC";
         this.subtype.add("Goblin");
         this.subtype.add("Soldier");
-        this.color.setRed(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

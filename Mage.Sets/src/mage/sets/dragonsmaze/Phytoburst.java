@@ -48,7 +48,7 @@ public class Phytoburst extends CardImpl {
     public Phytoburst(UUID ownerId) {
         super(ownerId, 46, "Phytoburst", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "DGM";
-        this.color.setGreen(true);
+
 
         // Target creature gets +5/+5 until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(5,5, Duration.EndOfTurn));

@@ -47,7 +47,7 @@ public class FamiliarsRuse extends CardImpl {
     public FamiliarsRuse(UUID ownerId) {
         super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LRW";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("creature"),false)));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());

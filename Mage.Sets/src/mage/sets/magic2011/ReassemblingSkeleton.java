@@ -49,7 +49,7 @@ public class ReassemblingSkeleton extends CardImpl {
         this.expansionSetCode = "M11";
         this.subtype.add("Skeleton");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -50,7 +50,7 @@ public class TeardropKami extends CardImpl {
         super(ownerId, 55, "Teardrop Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

@@ -60,7 +60,7 @@ public class GatewayShade extends CardImpl {
         super(ownerId, 65, "Gateway Shade", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Shade");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 

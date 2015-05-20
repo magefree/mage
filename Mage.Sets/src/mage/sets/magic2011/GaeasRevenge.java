@@ -60,7 +60,7 @@ public class GaeasRevenge extends CardImpl {
         super(ownerId, 174, "Gaea's Revenge", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{G}{G}");
         this.expansionSetCode = "M11";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(8);
         this.toughness = new MageInt(5);
 

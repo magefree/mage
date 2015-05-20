@@ -53,7 +53,7 @@ public class VampireAristocrat extends CardImpl {
         this.expansionSetCode = "M10";
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl(""));

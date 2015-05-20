@@ -49,7 +49,7 @@ public class ToothAndClaw extends CardImpl {
     public ToothAndClaw(UUID ownerId) {
         super(ownerId, 210, "Tooth and Claw", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
+
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CarnivoreToken(), 1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(2))));
     }
 

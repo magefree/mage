@@ -44,7 +44,7 @@ public class Foresee extends CardImpl {
     public Foresee(UUID ownerId) {
         super(ownerId, 54, "Foresee", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "M11";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new ScryEffect(4));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }

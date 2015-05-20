@@ -52,7 +52,7 @@ public class KiriOnna extends CardImpl {
         super(ownerId, 43, "Kiri-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

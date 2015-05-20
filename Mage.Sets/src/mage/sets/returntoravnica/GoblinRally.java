@@ -44,7 +44,7 @@ public class GoblinRally extends CardImpl {
     public GoblinRally(UUID ownerId) {
         super(ownerId, 95, "Goblin Rally", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
+
 
         // Put four 1/1 red Goblin creature tokens onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 4));

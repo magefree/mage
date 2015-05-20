@@ -47,7 +47,7 @@ public class FlamekinBrawler extends CardImpl {
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
         this.subtype.add("Warrior");
-        this.color.setRed(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));

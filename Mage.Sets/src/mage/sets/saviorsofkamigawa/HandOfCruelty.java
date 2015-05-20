@@ -55,7 +55,7 @@ public class HandOfCruelty extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Human");
         this.subtype.add("Samurai");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Protection from white

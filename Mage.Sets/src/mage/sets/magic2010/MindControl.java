@@ -51,7 +51,7 @@ public class MindControl extends CardImpl {
     public MindControl(UUID ownerId) {
         super(ownerId, 63, "Mind Control", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.subtype.add("Aura");
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();

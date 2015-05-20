@@ -50,7 +50,7 @@ public class NightwingShade extends CardImpl {
         super(ownerId, 109, "Nightwing Shade", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "M11";
         this.subtype.add("Shade");
-        this.color.setBlack(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

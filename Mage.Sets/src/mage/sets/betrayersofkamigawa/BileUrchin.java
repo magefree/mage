@@ -50,7 +50,7 @@ public class BileUrchin extends CardImpl {
         super(ownerId, 61, "Bile Urchin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Bile Urchin: Target player loses 1 life.

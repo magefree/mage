@@ -49,7 +49,7 @@ public class FurnaceCelebration extends CardImpl {
     public FurnaceCelebration(UUID ownerId) {
         super(ownerId, 90, "Furnace Celebration", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
         this.expansionSetCode = "SOM";
-        this.color.setRed(true);
+
         this.addAbility(new FurnaceCelebrationAbility());
     }
 

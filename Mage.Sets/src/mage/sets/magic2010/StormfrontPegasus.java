@@ -45,7 +45,7 @@ public class StormfrontPegasus extends CardImpl {
         super(ownerId, 35, "Stormfront Pegasus", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "M10";
         this.subtype.add("Pegasus");
-        this.color.setWhite(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 

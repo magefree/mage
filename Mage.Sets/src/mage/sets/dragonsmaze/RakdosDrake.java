@@ -59,7 +59,7 @@ public class RakdosDrake extends CardImpl {
         super(ownerId, 28, "Rakdos Drake", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Drake");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

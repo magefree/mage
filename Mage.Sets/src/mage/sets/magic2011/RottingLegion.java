@@ -45,7 +45,7 @@ public class RottingLegion extends CardImpl {
         super(ownerId, 115, "Rotting Legion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "M11";
         this.subtype.add("Zombie");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 

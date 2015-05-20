@@ -57,7 +57,7 @@ public class IceCage extends CardImpl {
     public IceCage(UUID ownerId) {
         super(ownerId, 56, "Ice Cage", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.subtype.add("Aura");
 
         // Enchant creature

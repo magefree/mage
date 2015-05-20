@@ -54,7 +54,7 @@ public class MagneticFlux extends CardImpl {
     public MagneticFlux(UUID ownerId) {
         super(ownerId, 25, "Magnetic Flux", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "DST";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, false));
     }
 

@@ -50,7 +50,7 @@ public class PatronOfTheAkki extends CardImpl {
         this.expansionSetCode = "BOK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

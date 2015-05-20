@@ -52,7 +52,7 @@ public class GraveTitan extends CardImpl {
         super(ownerId, 97, "Grave Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "M11";
         this.subtype.add("Giant");
-        this.color.setBlack(true);
+
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 

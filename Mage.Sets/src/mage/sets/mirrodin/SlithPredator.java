@@ -47,7 +47,7 @@ public class SlithPredator extends CardImpl {
         super(ownerId, 129, "Slith Predator", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Slith");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(TrampleAbility.getInstance());

@@ -58,7 +58,7 @@ public class PatronOfTheMoon extends CardImpl {
         this.expansionSetCode = "BOK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setBlue(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 

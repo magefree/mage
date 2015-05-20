@@ -44,7 +44,7 @@ public class PyreticRitual extends CardImpl {
     public PyreticRitual(UUID ownerId) {
         super(ownerId, 153, "Pyretic Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "M11";
-        this.color.setRed(true);
+
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }
 

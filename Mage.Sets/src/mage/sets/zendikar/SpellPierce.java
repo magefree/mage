@@ -55,7 +55,7 @@ public class SpellPierce extends CardImpl {
     public SpellPierce(UUID ownerId) {
         super(ownerId, 67, "Spell Pierce", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "ZEN";
-        this.color.setBlue(true);
+
 
         // Counter target noncreature spell unless its controller pays .
         this.getSpellAbility().addTarget(new TargetSpell(filter));

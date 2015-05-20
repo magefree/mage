@@ -48,7 +48,7 @@ public class Overrun extends CardImpl {
     public Overrun(UUID ownerId) {
         super(ownerId, 198, "Overrun", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{2}{G}{G}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
 
         // Creatures you control get +3/+3 and gain trample until end of turn.
         Effect effect = new BoostControlledEffect(3, 3, Duration.EndOfTurn);

@@ -51,7 +51,7 @@ public class ZephyrNet extends CardImpl {
         super(ownerId, 98, "Zephyr Net", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Aura");
-        this.color.setBlue(true);
+
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

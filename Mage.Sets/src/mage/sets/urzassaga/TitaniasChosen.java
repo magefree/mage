@@ -53,7 +53,7 @@ public class TitaniasChosen extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Elf");
         this.subtype.add("Archer");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 		

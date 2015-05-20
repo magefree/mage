@@ -60,8 +60,8 @@ public class GhostCouncilOfOrzhova extends CardImpl {
         this.expansionSetCode = "GPT";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

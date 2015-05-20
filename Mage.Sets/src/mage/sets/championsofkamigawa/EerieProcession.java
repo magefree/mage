@@ -53,7 +53,7 @@ public class EerieProcession extends CardImpl {
         super(ownerId, 58, "Eerie Procession", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+
 
         // Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));

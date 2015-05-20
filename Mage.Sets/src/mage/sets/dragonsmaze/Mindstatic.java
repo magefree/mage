@@ -47,7 +47,7 @@ public class Mindstatic extends CardImpl {
     public Mindstatic(UUID ownerId) {
         super(ownerId, 14, "Mindstatic", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "DGM";
-        this.color.setBlue(true);
+
 
         // Counter target spell unless it's controller pays {6}.
         this.getSpellAbility().addTarget(new TargetSpell());

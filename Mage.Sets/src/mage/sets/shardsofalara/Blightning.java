@@ -45,8 +45,8 @@ public class Blightning extends CardImpl {
     public Blightning(UUID ownerId) {
         super(ownerId, 156, "Blightning", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{R}");
         this.expansionSetCode = "ALA";
-        this.color.setBlack(true);
-        this.color.setRed(true);
+
+
 
         // Blightning deals 3 damage to target player. That player discards two cards.
         this.getSpellAbility().addTarget(new TargetPlayer());

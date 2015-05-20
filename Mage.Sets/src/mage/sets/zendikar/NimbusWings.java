@@ -56,7 +56,7 @@ public class NimbusWings extends CardImpl {
         super(ownerId, 28, "Nimbus Wings", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

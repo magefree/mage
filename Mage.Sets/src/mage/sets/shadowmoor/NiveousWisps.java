@@ -49,7 +49,7 @@ public class NiveousWisps extends CardImpl {
     public NiveousWisps (UUID ownerId) {
         super(ownerId, 15, "Niveous Wisps", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "SHM";
-        this.color.setWhite(true);
+
         // Target creature becomes white until end of turn. Tap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));

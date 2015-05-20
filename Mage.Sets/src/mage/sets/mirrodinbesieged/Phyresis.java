@@ -55,7 +55,7 @@ public class Phyresis extends CardImpl {
         super(ownerId, 49, "Phyresis", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Aura");
-        this.color.setBlack(true);
+
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

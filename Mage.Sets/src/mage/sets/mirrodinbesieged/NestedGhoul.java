@@ -51,7 +51,7 @@ public class NestedGhoul extends CardImpl {
         this.expansionSetCode = "MBS";
         this.subtype.add("Zombie");
         this.subtype.add("Warrior");
-        this.color.setBlack(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
         this.addAbility(new NestedGhoulTriggeredAbility());

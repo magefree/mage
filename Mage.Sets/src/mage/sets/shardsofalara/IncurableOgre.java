@@ -45,7 +45,7 @@ public class IncurableOgre extends CardImpl {
         this.expansionSetCode = "ALA";
         this.subtype.add("Ogre");
         this.subtype.add("Mutant");
-        this.color.setRed(true);
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(1);
     }

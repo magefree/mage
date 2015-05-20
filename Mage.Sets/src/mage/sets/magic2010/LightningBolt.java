@@ -44,7 +44,7 @@ public class LightningBolt extends CardImpl {
     public LightningBolt(UUID ownerId) {
         super(ownerId, 146, "Lightning Bolt", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "M10";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }

@@ -45,7 +45,7 @@ public class PouncingJaguar extends CardImpl{
         super(ownerId, 269, "Pouncing Jaguar", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Cat");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

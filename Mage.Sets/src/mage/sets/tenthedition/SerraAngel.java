@@ -46,7 +46,7 @@ public class SerraAngel extends CardImpl {
         super(ownerId, 39, "Serra Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "10E";
         this.subtype.add("Angel");
-        this.color.setWhite(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

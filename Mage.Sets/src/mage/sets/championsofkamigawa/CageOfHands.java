@@ -55,7 +55,7 @@ public class CageOfHands extends CardImpl {
         super(ownerId, 3, "Cage of Hands", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
-        this.color.setWhite(true);
+
         
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

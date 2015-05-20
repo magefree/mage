@@ -56,7 +56,7 @@ public class StampedeDriver extends CardImpl {
 		this.expansionSetCode = "NMS";
 		this.subtype.add("Human");
 		this.subtype.add("Spellshaper");
-		this.color.setGreen(true);
+
 		this.power = new MageInt(1);
 		this.toughness = new MageInt(1);
 	

@@ -53,7 +53,7 @@ public class BeastmasterAscension extends CardImpl {
     public BeastmasterAscension(UUID ownerId) {
         super(ownerId, 159, "Beastmaster Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "ZEN";
-        this.color.setGreen(true);
+
 
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));

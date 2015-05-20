@@ -51,7 +51,7 @@ public class NeedleStorm extends CardImpl {
     public NeedleStorm(UUID ownerId) {
         super(ownerId, 135, "Needle Storm", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "TMP";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new DamageAllEffect(4, filter));
     }
 

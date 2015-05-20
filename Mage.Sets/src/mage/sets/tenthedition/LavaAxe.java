@@ -44,7 +44,7 @@ public class LavaAxe extends CardImpl {
     public LavaAxe(UUID ownerId) {
         super(ownerId, 215, "Lava Axe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{R}");
         this.expansionSetCode = "10E";
-        this.color.setRed(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }

@@ -69,7 +69,7 @@ public class GideonJura extends CardImpl {
         super(ownerId, 21, "Gideon Jura", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Gideon");
-        this.color.setWhite(true);
+
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
         

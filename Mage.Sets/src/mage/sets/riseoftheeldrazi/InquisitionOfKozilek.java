@@ -57,7 +57,7 @@ public class InquisitionOfKozilek extends CardImpl {
     public InquisitionOfKozilek(UUID ownerId){
         super(ownerId, 115, "Inquisition of Kozilek", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY},"{B}");
         this.expansionSetCode = "ROE";
-        this.color.setBlack(true);
+
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }

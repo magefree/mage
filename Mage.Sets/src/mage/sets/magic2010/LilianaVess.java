@@ -58,7 +58,7 @@ public class LilianaVess extends CardImpl {
         super(ownerId, 102, "Liliana Vess", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{B}");
         this.expansionSetCode = "M10";
         this.subtype.add("Liliana");
-        this.color.setBlack(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
         // +1: Target player discards a card.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);

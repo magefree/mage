@@ -58,7 +58,7 @@ public class Auratog extends CardImpl {
         super(ownerId, 218, "Auratog", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "TMP";
         this.subtype.add("Atog");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));

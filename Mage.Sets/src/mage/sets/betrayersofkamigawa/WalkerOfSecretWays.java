@@ -65,7 +65,7 @@ public class WalkerOfSecretWays extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Human");
         this.subtype.add("Ninja");
-        this.color.setBlue(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 

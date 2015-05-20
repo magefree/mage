@@ -53,7 +53,7 @@ public class GoldmeadowHarrier extends CardImpl {
         this.expansionSetCode = "DDF";
         this.subtype.add("Kithkin");
         this.subtype.add("Soldier");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}"));

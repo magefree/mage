@@ -58,8 +58,8 @@ public class MirkoVoskMindDrinker extends CardImpl {
         this.expansionSetCode = "DGM";
         this.subtype.add("Vampire");
         this.supertype.add("Legendary");
-        this.color.setBlue(true);
-        this.color.setBlack(true);
+
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 

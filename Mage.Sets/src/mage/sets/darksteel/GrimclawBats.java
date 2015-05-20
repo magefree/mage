@@ -49,7 +49,7 @@ public class GrimclawBats extends CardImpl {
         super(ownerId, 45, "Grimclaw Bats", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "DST";
         this.subtype.add("Bat");
-        this.color.setBlack(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());

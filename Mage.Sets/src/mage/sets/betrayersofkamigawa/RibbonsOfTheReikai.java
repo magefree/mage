@@ -52,7 +52,7 @@ public class RibbonsOfTheReikai extends CardImpl {
         super(ownerId, 50, "Ribbons of the Reikai", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{U}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
-        this.color.setBlue(true);
+
 
         // Draw a card for each Spirit you control.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));

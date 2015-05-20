@@ -46,7 +46,7 @@ public class CaveTiger extends CardImpl {
         super(ownerId, 241, "Cave Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Cat");
-        this.color.setGreen(true);
+
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 

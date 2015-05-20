@@ -51,7 +51,7 @@ public class ChildOfThorns extends CardImpl {
         super(ownerId, 123, "Child of Thorns", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-        this.color.setGreen(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // Sacrifice Child of Thorns: Target creature gets +1/+1 until end of turn.

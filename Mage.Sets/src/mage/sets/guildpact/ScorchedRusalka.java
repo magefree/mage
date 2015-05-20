@@ -53,7 +53,7 @@ public class ScorchedRusalka extends CardImpl {
         super(ownerId, 74, "Scorched Rusalka", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "GPT";
         this.subtype.add("Spirit");
-        this.color.setRed(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.R));

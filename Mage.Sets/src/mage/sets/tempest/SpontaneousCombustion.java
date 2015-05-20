@@ -45,8 +45,8 @@ public class SpontaneousCombustion extends CardImpl {
     public SpontaneousCombustion(UUID ownerId) {
         super(ownerId, 348, "Spontaneous Combustion", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}{R}");
         this.expansionSetCode = "TMP";
-        this.color.setRed(true);
-        this.color.setBlack(true);
+
+
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }

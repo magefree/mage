@@ -47,7 +47,7 @@ public class FlowstoneCharger extends CardImpl {
         super(ownerId, 99, "Flowstone Charger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
         this.expansionSetCode = "APC";
         this.subtype.add("Beast");
-        this.color.setRed(true);
+
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);

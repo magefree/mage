@@ -60,7 +60,7 @@ public class AuriokTransfixer extends CardImpl {
         this.expansionSetCode = "MRD";
         this.subtype.add("Human");
         this.subtype.add("Scout");
-        this.color.setWhite(true);
+
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ColoredManaCost(ColoredManaSymbol.W));

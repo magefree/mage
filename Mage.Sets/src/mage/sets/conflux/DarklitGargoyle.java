@@ -49,7 +49,7 @@ public class DarklitGargoyle extends CardImpl {
     public DarklitGargoyle(UUID ownerId) {
         super(ownerId, 7, "Darklit Gargoyle", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "CON";
-        this.color.setWhite(true);
+
         this.subtype.add("Gargoyle");
     this.power = new MageInt(1);
     this.toughness = new MageInt(2);

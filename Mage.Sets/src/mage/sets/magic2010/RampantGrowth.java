@@ -45,7 +45,7 @@ public class RampantGrowth extends CardImpl {
     public RampantGrowth(UUID ownerId){
         super(ownerId, 201, "Rampant Growth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true));
     }

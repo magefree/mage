@@ -47,7 +47,7 @@ public class ConstrictingTendrils extends CardImpl {
     public ConstrictingTendrils(UUID ownerId) {
         super(ownerId, 22, "Constricting Tendrils", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CON";
-        this.color.setBlue(true);
+
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(-3, 0, Duration.EndOfTurn));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));

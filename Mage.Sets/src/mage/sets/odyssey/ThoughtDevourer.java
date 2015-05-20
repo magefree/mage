@@ -49,7 +49,7 @@ public class ThoughtDevourer extends CardImpl {
         super(ownerId, 105, "Thought Devourer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "ODY";
         this.subtype.add("Beast");
-        this.color.setBlue(true);
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

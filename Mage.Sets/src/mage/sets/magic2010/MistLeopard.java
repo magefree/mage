@@ -44,7 +44,7 @@ public class MistLeopard extends CardImpl {
     public MistLeopard(UUID ownerId) {
         super(ownerId, 193, "Mist Leopard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
         this.expansionSetCode = "M10";
-        this.color.setGreen(true);
+
         this.subtype.add("Cat");
         this.power = new MageInt(3);
     this.toughness = new MageInt(2);

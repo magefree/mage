@@ -44,7 +44,7 @@ public class Reclaim extends CardImpl {
     public Reclaim(UUID ownerId) {
         super(ownerId, 191, "Reclaim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M12";
-        this.color.setGreen(true);
+
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }

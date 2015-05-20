@@ -47,7 +47,7 @@ public class CacklingFlames extends CardImpl {
         super(ownerId, 59, "Cackling Flames", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
         this.expansionSetCode = "DIS";
         
-        this.color.setRed(true);
+
 
         // Cackling Flames deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(

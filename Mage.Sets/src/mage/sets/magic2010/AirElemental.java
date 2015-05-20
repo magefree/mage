@@ -44,7 +44,7 @@ public class AirElemental extends CardImpl {
     public AirElemental(UUID ownerId) {
         super(ownerId, 42, "Air Elemental", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
         this.expansionSetCode = "M10";
-        this.color.setBlue(true);
+
         this.subtype.add("Elemental");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

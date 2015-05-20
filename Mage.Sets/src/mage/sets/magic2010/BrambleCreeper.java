@@ -47,7 +47,7 @@ public class BrambleCreeper extends CardImpl {
         super(ownerId, 171, "Bramble Creeper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
         this.expansionSetCode = "M10";
         this.subtype.add("Elemental");
-        this.color.setGreen(true);
+
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));

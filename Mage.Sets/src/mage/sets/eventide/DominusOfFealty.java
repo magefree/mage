@@ -55,8 +55,8 @@ public class DominusOfFealty extends CardImpl {
         this.expansionSetCode = "EVE";
         this.subtype.add("Spirit");
         this.subtype.add("Avatar");
-        this.color.setRed(true);
-        this.color.setBlue(true);
+
+
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
