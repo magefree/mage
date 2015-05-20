@@ -31,6 +31,7 @@ package mage.abilities.common;
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -43,25 +44,25 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    protected boolean setTargetPointer;
+    protected SetTargetPointer setTargetPointer;
 
     public AttackedByCreatureTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional) {
-        this(effect, optional, false);
+        this(effect, optional, SetTargetPointer.PERMANENT);
     }
 
-    public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+    public AttackedByCreatureTriggeredAbility(Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         this(Zone.BATTLEFIELD, effect, optional, setTargetPointer);
     }
     
-    public AttackedByCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean setTargetPointer) {
+    public AttackedByCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
     }
-
+    
     public AttackedByCreatureTriggeredAbility(AttackedByCreatureTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
@@ -77,9 +78,17 @@ public class AttackedByCreatureTriggeredAbility extends TriggeredAbilityImpl {
         UUID playerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
         Permanent attackingCreature = game.getPermanent(event.getSourceId());
         if (getControllerId().equals(playerId) && attackingCreature != null) {
-            if (setTargetPointer) {
+            if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    switch(setTargetPointer) {
+                        case PERMANENT:
+                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                            break;
+                        case PLAYER:
+                            effect.setTargetPointer(new FixedTarget(attackingCreature.getControllerId()));
+                            break;
+                    }
+
                 }
             }
             return true;
