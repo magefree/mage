@@ -75,7 +75,7 @@ public class AltarGolem extends CardImpl {
         
         // Altar Golem's power and toughness are each equal to the number of creatures on the battlefield.
         DynamicValue amount = new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures in play"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
         
         // Altar Golem doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
