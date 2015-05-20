@@ -2112,6 +2112,9 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, int amountToPrevent) {
         PreventionEffectData result = new PreventionEffectData(amountToPrevent);
+        if (!event.getFlag()) { // damage is not preventable
+            return result;
+        }
         if (!(event instanceof DamageEvent)) {
             result.setError(true);
             return result;

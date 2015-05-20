@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.ObjectColor;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -60,9 +61,14 @@ public class Combust extends CardImpl {
         super(ownerId, 130, "Combust", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "M11";
 
+        // Combust deals 5 damage to target white or blue creature. The damage can't be prevented.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5, false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
+        
+        // Combust can't be countered by spells or abilities.
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
     }
 
     public Combust(final Combust card) {
