@@ -811,9 +811,10 @@ public abstract class GameImpl implements Game, Serializable {
             choosingPlayer = this.getPlayer(choosingPlayerId);
         }
         if (choosingPlayer == null) {
-            choosingPlayer = getPlayer(pickChoosingPlayer());
+            choosingPlayerId = pickChoosingPlayer();
+            choosingPlayer = getPlayer(choosingPlayerId);            
         }
-
+        getState().setChoosingPlayerId(choosingPlayerId); // needed to start/stop the timer if active
         if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = targetPlayer.getTargets().get(0);
             Player startingPlayer = state.getPlayer(startingPlayerId);
@@ -859,6 +860,7 @@ public abstract class GameImpl implements Game, Serializable {
                         GameEvent event = new GameEvent(GameEvent.EventType.CAN_TAKE_MULLIGAN, null, null, playerId);
                         if (!replaceEvent(event)) {
                             fireEvent(event);
+                            getState().setChoosingPlayerId(playerId);
                             if (player.chooseMulligan(this)) {
                                 keep = false;
                             }
@@ -880,7 +882,7 @@ public abstract class GameImpl implements Game, Serializable {
             }
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
-
+        getState().setChoosingPlayerId(null);
         // add watchers
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));

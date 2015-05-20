@@ -90,7 +90,8 @@ public class PlayerView implements Serializable {
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.priorityTimeLeft = player.getPriorityTimeLeft();
         this.timerActive = (this.hasPriority && player.isGameUnderControl()) ||
-                (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()));
+                (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId())) ||
+                player.getId().equals(game.getState().getChoosingPlayerId());
 
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {

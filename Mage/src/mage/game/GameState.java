@@ -87,8 +87,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Watchers watchers;
     
 
-    private UUID activePlayerId;
-    private UUID priorityPlayerId;
+    private UUID activePlayerId; // playerId which turn it is
+    private UUID priorityPlayerId; // player that has currently priority
+    private UUID choosingPlayerId; // player that makes a choice at game start
     private SpellStack stack;
     private Command command;
     private Exile exile;
@@ -134,6 +135,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.playerList = state.playerList.copy();
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
+        this.choosingPlayerId = state.choosingPlayerId;
         this.turn = state.turn.copy();
         this.stack = state.stack.copy();
         this.command = state.command.copy();
@@ -358,6 +360,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setPriorityPlayerId(UUID priorityPlayerId) {
         this.priorityPlayerId = priorityPlayerId;
+    }
+
+    public UUID getChoosingPlayerId() {
+        return choosingPlayerId;
+    }
+
+    public void setChoosingPlayerId(UUID choosingPlayerId) {
+        this.choosingPlayerId = choosingPlayerId;
     }
 
     public Battlefield getBattlefield() {
