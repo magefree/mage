@@ -8,7 +8,7 @@ Avacyn Restored|avacynrestored|
 Betrayers of Kamigawa|betrayersofkamigawa|
 Born of the Gods|bornofthegods|
 Champions of Kamigawa|championsofkamigawa|
-Classic Sixth Edition|sixthedition|
+Classic Sixth Edition|classicsixthedition|
 Coldsnap|coldsnap|
 Commander 2013 Edition|commander2013|
 Commander 2014 Edition|commander2014|
