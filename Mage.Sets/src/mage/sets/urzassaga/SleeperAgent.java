@@ -30,12 +30,9 @@ package mage.sets.urzassaga;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,10 +44,7 @@ import mage.constants.SubLayer;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -66,7 +60,9 @@ public class SleeperAgent extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Sleeper Agent enters the battlefield, target opponent gains control of it.
-                this.addAbility(new EntersBattlefieldTriggeredAbility(new SleeperAgentChangeControlEffect(), false));
+                Ability ability = new EntersBattlefieldTriggeredAbility(new SleeperAgentChangeControlEffect(), false);
+                ability.addTarget(new TargetOpponent());
+                this.addAbility(ability);
         // At the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
                 this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false));
     }
@@ -81,11 +77,11 @@ public class SleeperAgent extends CardImpl {
     }
 }
 
-class SleeperAgentChangeControlEffect extends OneShotEffect {
+class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
 
     public SleeperAgentChangeControlEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "an opponent gains control of it";
+        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        staticText = "target opponent gains control of {this}";
     }
 
     public SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
@@ -99,54 +95,14 @@ class SleeperAgentChangeControlEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Target target = new TargetOpponent();
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            if (controller.chooseTarget(outcome, target, source, game)) {
-                ContinuousEffect effect = new SleeperAgentGainControlEffect(Duration.Custom, target.getFirstTarget());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-                game.addEffect(effect, source);
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
-class SleeperAgentGainControlEffect extends ContinuousEffectImpl {
-
-    UUID controller;
-
-    public SleeperAgentGainControlEffect(Duration duration, UUID controller) {
-        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        this.controller = controller;
-    }
-
-    public SleeperAgentGainControlEffect(final SleeperAgentGainControlEffect effect) {
-        super(effect);
-        this.controller = effect.controller;
-    }
-
-    @Override
-    public SleeperAgentGainControlEffect copy() {
-        return new SleeperAgentGainControlEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        }
+        Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
         if (permanent != null) {
-            return permanent.changeControllerId(controller, game);
+            return permanent.changeControllerId(source.getFirstTarget(), game);
+        } else {
+            discard();
         }
         return false;
     }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Gain control of Sleeper Agent";
-    }
 }
+
 
