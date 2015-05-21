@@ -47,21 +47,22 @@ public class LastKnownInformationTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite");
         // choose triggered ability order
-        playerA.addChoice("When enchanted creature dies");
+        setChoice(playerA, "When enchanted creature dies");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Safehold Elite", "When enchanted creature dies");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertGraveyardCount(playerB, "Lightning Bolt", 2);
+        assertGraveyardCount(playerA, "Murder Investigation", 1);
         assertPermanentCount(playerA, "Safehold Elite", 0);
         // because enchanted Safehold Elite's P/T was 2/2, Murder Investigation has to put 2 Soldier onto the battlefield
         assertPermanentCount(playerA, "Soldier", 2);
+        assertGraveyardCount(playerB, "Lightning Bolt", 2);
         
         assertActionCount(playerB, 0);        
 
     }
-
+     
     /**
      * Here we test that Trostani's first ability checks the toughness on resolve.
      *
