@@ -1831,7 +1831,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Tahoma" size="10" style="2"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="e.g.: http://XMage.info/files/server-list.txt"/>
+                    <Property name="text" type="java.lang.String" value="e.g.: http://XMage.de/files/server-list.txt"/>
                   </Properties>
                 </Component>
               </SubComponents>

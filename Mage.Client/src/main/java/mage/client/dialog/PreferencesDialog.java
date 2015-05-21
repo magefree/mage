@@ -1508,7 +1508,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtURLServerList.setPreferredSize(new java.awt.Dimension(300, 22));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
-        jLabel17.setText("e.g.: http://XMage.info/files/server-list.txt");
+        jLabel17.setText("e.g.: http://XMage.de/files/server-list.txt");
 
         javax.swing.GroupLayout connection_serversLayout = new javax.swing.GroupLayout(connection_servers);
         connection_servers.setLayout(connection_serversLayout);
@@ -2122,7 +2122,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (dialog.rememberPswd.isSelected()) {
             load(prefs, dialog.txtPasswordField, KEY_PROXY_PSWD, "");
         }
-        load(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST, "http://XMage.info/files/server-list.txt");
+        load(prefs, dialog.txtURLServerList, KEY_CONNECTION_URL_SERVER_LIST, "http://XMage.de/files/server-list.txt");
     }
 
     private static void loadSelectedAvatar(Preferences prefs) {
