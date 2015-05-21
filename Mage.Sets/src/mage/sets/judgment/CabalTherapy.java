@@ -114,7 +114,7 @@ class CabalTherapyEffect extends OneShotEffect {
                 }
             }
 
-            controller.lookAtCards(sourceObject.getLogName() + " Hand", targetPlayer.getHand(), game);
+            controller.lookAtCards(sourceObject.getName() + " Hand", targetPlayer.getHand(), game);
         }
         return true;
     }

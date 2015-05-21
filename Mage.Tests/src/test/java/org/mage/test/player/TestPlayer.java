@@ -71,7 +71,6 @@ import mage.target.TargetSource;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetPermanentOrPlayer;
-import static org.mage.test.serverside.base.CardTestPlayerBase.NO_TARGET;
 
 /**
  *
