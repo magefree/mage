@@ -35,13 +35,13 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 
 /**
@@ -88,19 +88,17 @@ class GrafdiggersCageEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return EventType.ZONE_CHANGE.equals(event.getType());
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event instanceof ZoneChangeEvent) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
-                Card card = game.getCard(zEvent.getTargetId());
-                if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.BATTLEFIELD && (zEvent.getFromZone() == Zone.GRAVEYARD || zEvent.getFromZone() == Zone.LIBRARY)) {
+            Card card = game.getCard(zEvent.getTargetId());
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                return true;
             }
         }
         return false;
@@ -124,20 +122,19 @@ class GrafdiggersCageEffect2 extends ContinuousRuleModifyingEffectImpl {
         return new GrafdiggersCageEffect2(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null) {
-                Zone zone = game.getState().getZone(card.getId());
-                if (zone != null && (zone == Zone.GRAVEYARD || zone == Zone.LIBRARY)) {
-                    return true;
-                }
+        Card card = game.getCard(event.getSourceId());
+        if (card != null) {
+            Zone zone = game.getState().getZone(card.getId());
+            if (zone != null && (zone == Zone.GRAVEYARD || zone == Zone.LIBRARY)) {
+                return true;
             }
         }
         return false;

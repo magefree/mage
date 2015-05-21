@@ -31,7 +31,6 @@ package mage.abilities.effects.common;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
