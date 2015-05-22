@@ -34,12 +34,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterInPlay;
 import mage.filter.common.FilterControlledCreatureInPlay;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -47,11 +44,10 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class DolmenGate extends CardImpl {
 
-    private static final FilterInPlay filter = new FilterControlledCreatureInPlay("attacking creatures you control");
+    private static final FilterControlledCreatureInPlay filter = new FilterControlledCreatureInPlay("attacking creatures you control");
 
     static {
-        filter.add(new AttackingPredicate());
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.getCreatureFilter().add(new AttackingPredicate());
     }
 
     public DolmenGate(UUID ownerId) {
