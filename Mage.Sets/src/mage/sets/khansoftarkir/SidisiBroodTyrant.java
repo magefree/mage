@@ -143,6 +143,7 @@ class SidisiBroodTyrantTriggeredAbility extends ZoneChangeTriggeredAbility {
                 if (stackObject == null) {
                     stackObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
                 }
+                // If multiple cards go to graveyard from replacement effect (e.g. Dredge) each card is wrongly handled as a new event
                 if (stackObject != null) {
                     if (stackObject.getId().equals(lastStackObjectId)) {
                         return false; // was already handled
