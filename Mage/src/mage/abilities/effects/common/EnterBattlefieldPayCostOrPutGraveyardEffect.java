@@ -86,7 +86,7 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
             if (replace) {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, game.getState().getZone(event.getTargetId()));
+                    player.moveCards(card, game.getState().getZone(event.getTargetId()), Zone.GRAVEYARD, source, game);
                 }
                 return true;
             }

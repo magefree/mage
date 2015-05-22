@@ -99,20 +99,20 @@ class BitterRevelationEffect extends OneShotEffect {
                 }
             }
             if (cards.size() > 0) {
+                Cards cardsToHand = new CardsImpl();
                 player.lookAtCards("Bitter Revelation", cards, game);
                 TargetCard target = new TargetCard(Math.min(2, cards.size()), Zone.PICK, new FilterCard("two cards to put in your hand"));
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
                     for (UUID targetId : target.getTargets()) {
                         Card card = cards.get(targetId, game);
                         if (card != null) {
-                            player.putInHand(card, game);
+                            cardsToHand.add(card);
                             cards.remove(card);
                         }   
                     }
                 }
-                for (Card card : cards.getCards(game)) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                }
+                player.moveCards(cardsToHand, Zone.LIBRARY, Zone.HAND, source, game);
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

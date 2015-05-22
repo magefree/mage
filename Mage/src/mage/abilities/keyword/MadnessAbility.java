@@ -150,7 +150,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl {
                 Player  owner = game.getPlayer(card.getOwnerId());
                 if (owner != null) {
                     // if cast was not successfull, the card is moved to graveyard
-                    owner.moveCardToGraveyardWithInfo(card, getSourceId(), game, Zone.EXILED);                    
+                    owner.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, this, game);
                 }
             }              
             return false;

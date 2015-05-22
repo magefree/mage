@@ -109,7 +109,7 @@ class ZoologistEffect extends OneShotEffect {
                 if (card.getCardType().contains(CardType.CREATURE)) {
                     player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 } else {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
             }
         }

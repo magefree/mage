@@ -237,10 +237,7 @@ class GrinningTotemPutIntoGraveyardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (controller != null && zone != null) {
-            for (Card card : zone.getCards(game)) {
-                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-            }
-            return true;
+            return controller.moveCards(zone, Zone.EXILED, Zone.GRAVEYARD, source, game);
         }
         return false;
     }

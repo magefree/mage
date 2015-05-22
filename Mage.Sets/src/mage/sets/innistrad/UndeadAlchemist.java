@@ -99,15 +99,18 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+                return true;
             }
         }
         return false;
@@ -134,30 +137,23 @@ class UndeadAlchemistEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getTargetId());
         if (player != null) {
-            int cardsCount = Math.min(event.getAmount(), player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                } else {
-                    break;
-                }
-            }
-
-            return true;
+            return player.moveCards(player.getLibrary().getTopCards(game, event.getAmount()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return true;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && event instanceof DamagePlayerEvent) {
-            DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-            if (damageEvent.isCombatDamage()) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.hasSubtype("Zombie")) {
-                    return true;
-                }
+        DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
+        if (damageEvent.isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.hasSubtype("Zombie")) {
+                return true;
             }
         }
         return false;

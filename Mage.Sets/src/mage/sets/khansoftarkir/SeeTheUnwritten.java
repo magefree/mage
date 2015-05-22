@@ -106,15 +106,15 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && sourceObject != null) {
+        if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl(Zone.LIBRARY);
 
             int creatureCardsFound = 0;
-            int count = Math.min(player.getLibrary().size(), 8);
+            int count = Math.min(controller.getLibrary().size(), 8);
             for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
                     if (filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
@@ -124,27 +124,22 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards(sourceObject.getName(), cards, game);
-                if (creatureCardsFound > 0 && player.chooseUse(outcome, "Put creature(s) into play?", game)) {
+                controller.revealCards(sourceObject.getName(), cards, game);
+                if (creatureCardsFound > 0 && controller.chooseUse(outcome, "Put creature(s) into play?", game)) {
                     int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound); 
                     TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);
-                    if (player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
+                    if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
                         for(UUID creatureId: target.getTargets()) {
                             Card card = game.getCard(creatureId);
                             if (card != null) {
                                 cards.remove(card);
-                                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
+                                controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                             }
                         }
 
                     }
                 }
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
+                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
             }
             return true;
         }

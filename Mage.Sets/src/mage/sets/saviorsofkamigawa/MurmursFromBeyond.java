@@ -97,8 +97,9 @@ class MurmursFromBeyondEffect extends OneShotEffect {
             cards.addAll(controller.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {
                 controller.revealCards(staticText, cards, game);
+                Card cardToGraveyard;
                 if (cards.size() == 1) {
-                    controller.moveCardToGraveyardWithInfo(cards.getRandom(game), source.getSourceId(), game, Zone.LIBRARY);
+                    cardToGraveyard = cards.getRandom(game);
                 } else {
                     Player opponent;
                     Set<UUID> opponents = game.getOpponents(controller.getId());
@@ -111,15 +112,13 @@ class MurmursFromBeyondEffect extends OneShotEffect {
                     }
                     TargetCard target = new TargetCard(1, Zone.LIBRARY, new FilterCard());
                     opponent.chooseTarget(outcome, cards, target, source, game);
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCardToGraveyardWithInfo(cards.getRandom(game), source.getSourceId(), game, Zone.LIBRARY);
-                        cards.remove(card);
-                    }
-                    for (Card cardToHand: cards.getCards(game)) {
-                        controller.moveCardToHandWithInfo(cardToHand, source.getSourceId(), game, Zone.LIBRARY);
-                    }
+                    cardToGraveyard = game.getCard(target.getFirstTarget());
+                }                
+                if (cardToGraveyard != null) {                    
+                    controller.moveCards(cardToGraveyard,Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    cards.remove(cardToGraveyard);
                 }
+                controller.moveCards(cards, Zone.LIBRARY, Zone.HAND, source, game);
             }
             return true;
         }

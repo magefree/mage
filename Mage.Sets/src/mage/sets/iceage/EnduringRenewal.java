@@ -112,26 +112,19 @@ class EnduringRenewalReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
-        } else if (you.getLibrary().size() > 0){
-            
-            Card top = you.getLibrary().getFromTop(game);
-
+        }
+        Card card = controller.getLibrary().getFromTop(game);
+        if (card != null) {
             Cards cards = new CardsImpl();
-
-            cards.add(top);
-
-            you.revealCards("Top card of " + you.getName() + "'s library", cards, game);
-
-            if (top.getCardType().contains(CardType.CREATURE)) {
-                you.moveCardToGraveyardWithInfo(top, source.getSourceId(), game, Zone.LIBRARY);
-            } else {
-                you.moveCardToHandWithInfo(top, source.getSourceId(), game, Zone.LIBRARY);
+            cards.add(card);
+            controller.revealCards("Top card of " + controller.getName() + "'s library", cards, game);
+            if (card.getCardType().contains(CardType.CREATURE)) {
+                controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                return true;
             }
-            
-            return true;
         }
         return false;
     }

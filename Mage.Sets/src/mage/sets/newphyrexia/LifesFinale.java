@@ -33,6 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -98,13 +100,7 @@ class LifesFinaleEffect extends OneShotEffect {
         if (player != null && opponent != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 3, new FilterCreatureCard("creature cards from his library to put in his graveyard"));
             if (player.searchLibrary(target, game, opponent.getId())) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = opponent.getLibrary().remove(targetId, game);
-                    if (card != null) {
-                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
+                player.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             opponent.shuffleLibrary(game);
             return true;

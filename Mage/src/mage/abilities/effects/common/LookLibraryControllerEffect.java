@@ -38,11 +38,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.util.CardUtil;
 
 /**
@@ -156,7 +154,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     }
 
     /**
-     * Put the rest of the cards back to library
+     * Put the rest of the cards back to defined zone
      *
      * @param source
      * @param player
@@ -166,27 +164,14 @@ public class LookLibraryControllerEffect extends OneShotEffect {
     protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
         switch(targetZoneLookedCards) {
             case LIBRARY: 
-                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard(this.getPutBackText()));
-                while (player.isInGame() && cards.size() > 1) {
-                    player.choose(Outcome.Neutral, cards, target, game);
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, putOnTop, false);
-                    }
-                    target.clearChosen();
-                }
-                if (cards.size() == 1) {
-                    Card card = cards.get(cards.iterator().next(), game);
-                    player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.LIBRARY, putOnTop, false);
+                if (putOnTop) {
+                    player.putCardsOnTopOfLibrary(cards, game, source, true);
+                } else {
+                    player.putCardsOnBottomOfLibrary(cards, game, source, true);
                 }
                 break;
             case GRAVEYARD: 
-                for (Card card : cards.getCards(game)) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                }
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 break;
             default:
                 // not supported yet
@@ -203,16 +188,6 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle your library?", game)) {
             player.shuffleLibrary(game);
         }
-    }
-
-    protected String getPutBackText() {
-        StringBuilder sb = new StringBuilder("card to put ");
-        if (putOnTop) {
-            sb.append("on your library (last chosen will be on top)");
-        } else {
-            sb.append("on bottom of your library (last chosen will be mostbottom)");
-        }
-        return sb.toString();
     }
 
     @Override

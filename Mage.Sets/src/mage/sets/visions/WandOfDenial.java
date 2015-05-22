@@ -98,9 +98,9 @@ class WandOfDenialEffect extends OneShotEffect {
                 if (!card.getCardType().contains(CardType.LAND)
                         && controller.canPayLifeCost()
                         && controller.getLife() >= 2
-                        && controller.chooseUse(Outcome.Neutral, "Pay 2 life to put " + card.getName() + " into graveyard?", game)) {
+                        && controller.chooseUse(Outcome.Neutral, "Pay 2 life to put " + card.getLogName() + " into graveyard?", game)) {
                     controller.loseLife(2, game);
-                    controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
                 return true;
             }

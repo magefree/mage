@@ -129,7 +129,7 @@ class TransmuteArtifactEffect extends SearchEffect {
                             }
                             else{
                                 //If you don't, put it into its owner's graveyard. Then shuffle your library
-                                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                                controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                             }
                         }
                     }

@@ -98,7 +98,7 @@ class PullFromEternityEffect extends OneShotEffect {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                controller.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

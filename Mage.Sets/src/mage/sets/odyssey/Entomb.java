@@ -54,7 +54,6 @@ public class Entomb extends CardImpl {
         super(ownerId, 132, "Entomb", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ODY";
 
-
         // Search your library for a card and put that card into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyard());
     }
@@ -92,20 +91,11 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
         if (controller == null) {
             return false;
         }
-        boolean result = false;
         if (controller.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = controller.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
-            }
-            result = true;
+            controller.moveCards(game.getCard(target.getFirstTarget()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         controller.shuffleLibrary(game);
-        return result;
+        return true;
     }
     
 }

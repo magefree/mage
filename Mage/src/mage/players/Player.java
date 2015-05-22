@@ -439,6 +439,20 @@ public interface Player extends MageItem, Copyable<Player> {
     UUID getCommanderId();
 
     /**
+     * Moves cards from one zone to another 
+     * 
+     * @param cards
+     * @param fromZone
+     * @param toZone
+     * @param source
+     * @param game
+     * @return 
+     */
+    boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game);
+    boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game);
+    
+    /**
      * Uses card.moveToZone and posts a inform message about moving the card
      * into the game log
      * 

@@ -2821,13 +2821,42 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.commanderId = commanderId;
     }
 
-    ;
-
     @Override
     public UUID getCommanderId() {
         return this.commanderId;
     }
 
+    @Override
+    public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        ArrayList<Card> cardList = new ArrayList<>();
+        cardList.addAll(cards.getCards(game));
+        return moveCards(cardList, fromZone, toZone, source, game);
+    }
+    
+    @Override
+    public boolean moveCards(Card card, Zone fromZone, Zone toZone, Ability source, Game game) {
+        ArrayList<Card> cardList = new ArrayList<>();
+        if (card != null) {
+            cardList.add(card);
+        }
+        return moveCards(cardList, fromZone, toZone, source, game);        
+    }
+    
+    @Override
+    public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        switch(toZone) {
+            case GRAVEYARD: 
+                return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
+            case HAND:
+                for(Card card: cards) {
+                    moveCardToHandWithInfo(card, playerId, game, fromZone);
+                }
+                return true;
+            default:
+                throw new UnsupportedOperationException("to Zone not supported yet");
+        }        
+    }
+    
     @Override
     public boolean moveCardToHandWithInfo(Card card, UUID sourceId, Game game, Zone fromZone) {
         return this.moveCardToHandWithInfo(card, sourceId, game, fromZone, true);

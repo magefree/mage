@@ -124,7 +124,7 @@ class SkirkDrillSergeantEffect extends OneShotEffect {
                 if (filter.match(card, game)) {
                     player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 } else {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
             }
         }

@@ -42,7 +42,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Library;
@@ -67,8 +66,6 @@ public class HermitDruid extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HermitDruidEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
-
-
     }
 
     public HermitDruid(final HermitDruid card) {
@@ -109,13 +106,13 @@ class HermitDruidEffect extends OneShotEffect {
             }
             CardsImpl cards = new CardsImpl();
             Card card;
-            Filter filter = new FilterBasicLandCard();
+            FilterBasicLandCard filter = new FilterBasicLandCard();
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
                     
                     if (filter.match(card, game)) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        player.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
                     } else {
                         cards.add(card);
                     }
@@ -123,9 +120,7 @@ class HermitDruidEffect extends OneShotEffect {
             } while (library.size() > 0 && card != null && !filter.match(card, game));
 
             if (!cards.isEmpty()) {
-                for (Card cardToGrave: cards.getCards(game)) {
-                    player.moveCardToGraveyardWithInfo(cardToGrave, source.getSourceId(), game, Zone.LIBRARY);
-                }
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 if (card != null) {
                     cards.add(card);
                 }

@@ -33,6 +33,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -70,14 +71,7 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            int cardsCount = Math.min(numberCards.calculate(game, source, this), player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                }
-            }
-            return true;
+            return player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return false;
     }

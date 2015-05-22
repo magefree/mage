@@ -102,7 +102,7 @@ class RealmsUnchartedEffect extends OneShotEffect {
         if (controller.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
-                for (UUID cardId : (List<UUID>) target.getTargets()) {
+                for (UUID cardId : target.getTargets()) {
                     Card card = controller.getLibrary().getCard(cardId, game);
                     if (card != null) {
                         cards.add(card);
@@ -129,19 +129,8 @@ class RealmsUnchartedEffect extends OneShotEffect {
                         cards.removeAll(cardsToKeep);
                     }
                 }
-
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
-                for (UUID cardId : cardsToKeep) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
+                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                controller.moveCards(cardsToKeep, Zone.LIBRARY, Zone.HAND, source, game);
             }
             controller.shuffleLibrary(game);
             return true;

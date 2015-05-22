@@ -84,36 +84,37 @@ public class ReturnFromExileEffect extends OneShotEffect {
         ExileZone exile = game.getExile().getExileZone(exileId);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && exile != null) {
-            exile = exile.copy();
-            for (UUID cardId : exile) {
-                Card card = game.getCard(cardId);
-                Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null) {
-                    switch (zone) {
-                        case BATTLEFIELD:
-                            card.moveToZone(zone, source.getSourceId(), game, tapped);
-                            if (!game.isSimulation()) {
-                                game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
-                            }
-                            break;
-                        case HAND:
-                            controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                            break;
-                        case GRAVEYARD:
-                            controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.EXILED);
-                            break;
-                        case LIBRARY:
-                            controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, true, true);
-                            break;
-                        default:
-                            card.moveToZone(zone, source.getSourceId(), game, tapped);
-                            if (!game.isSimulation()) {
-                                game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
-                            }
+            if (zone == Zone.GRAVEYARD) {
+                controller.moveCards(exile, zone, Zone.EXILED, source, game);
+            } else {
+                exile = exile.copy();
+                for (UUID cardId : exile) {
+                    Card card = game.getCard(cardId);
+                    Player owner = game.getPlayer(card.getOwnerId());
+                    if (owner != null) {
+                        switch (zone) {
+                            case BATTLEFIELD:
+                                card.moveToZone(zone, source.getSourceId(), game, tapped);
+                                if (!game.isSimulation()) {
+                                    game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
+                                }
+                                break;
+                            case HAND:
+                                controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.EXILED);
+                                break;
+                            case LIBRARY:
+                                controller.moveCardToLibraryWithInfo(card, source.getSourceId(), game, Zone.EXILED, true, true);
+                                break;
+                            default:
+                                card.moveToZone(zone, source.getSourceId(), game, tapped);
+                                if (!game.isSimulation()) {
+                                    game.informPlayers(controller.getLogName() + " moves " + card.getName() + " to " + zone.toString().toLowerCase());
+                                }
+                        }
                     }
                 }
+                game.getExile().getExileZone(exileId).clear();
             }
-            game.getExile().getExileZone(exileId).clear();
             return true;
         }
         return false;

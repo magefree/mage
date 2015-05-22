@@ -119,19 +119,14 @@ class GiftsUngivenEffect extends OneShotEffect {
                     } else {
                         opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
                     }
-                    TargetCard targetDiscard = new TargetCard(2, Zone.PICK, new FilterCard("cards to put in graveyard"));
+                    TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
                     if (opponent != null && opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
                         cardsToKeep.removeAll(targetDiscard.getTargets());
                         cards.removeAll(cardsToKeep);
                     }
                 }
 
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 for (UUID cardId : cardsToKeep) {
                     Card card = game.getCard(cardId);
                     if (card != null) {

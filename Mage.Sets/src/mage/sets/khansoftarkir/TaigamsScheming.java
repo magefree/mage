@@ -95,38 +95,20 @@ class TaigamsSchemingEffect extends OneShotEffect {
             controller.setTopCardRevealed(false);
             // get cards from top
             Cards cards = new CardsImpl();
-            int count = Math.min(controller.getLibrary().size(), 5);
-            if (count > 0) {
-                cards.addAll(controller.getLibrary().getTopCards(game, count));
+            cards.addAll(controller.getLibrary().getTopCards(game, 5));
+            if (!cards.isEmpty()) {
                 controller.lookAtCards(sourceObject.getName(), cards, game);
                 // pick cards going to graveyard
-                TargetCard target = new TargetCard(0,5, Zone.LIBRARY, new FilterCard("cards to put into your graveyard"));
+                TargetCard target = new TargetCard(0,cards.size(), Zone.LIBRARY, new FilterCard("cards to put into your graveyard"));
                 if (controller.choose(Outcome.Detriment, cards, target, game)) {
-                    for (UUID cardId : (List<UUID>)target.getTargets()) {
-                        Card card = cards.get(cardId, game);
-                        if (card != null) {
-                            cards.remove(card);
-                            controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                        }
-                    }
+                    Cards cardsToGraveyard = new CardsImpl();
+                    cards.removeAll(target.getTargets());
+                    cardsToGraveyard.addAll(target.getTargets());
+                    controller.moveCards(cardsToGraveyard, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
                 // The rest goes back to library in any order
                 if (cards.size() > 0) {
-                    game.informPlayers(controller.getLogName() + " puts " + cards.size() + " card" + (cards.size() ==1 ? "":"s")  + " back to his or her library");
-                    target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put on your library (last chosen will be on top)"));
-                    while (controller.isInGame() && cards.size() > 1) {
-                        controller.choose(Outcome.Neutral, cards, target, game);
-                        Card card = cards.get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            cards.remove(card);
-                            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                        }
-                        target.clearChosen();
-                    }
-                    if (cards.size() == 1) {
-                        Card card = cards.get(cards.iterator().next(), game);
-                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
-                    }
+                    controller.putCardsOnTopOfLibrary(cards, game, source, true);
                 }
             }
             controller.setTopCardRevealed(topCardRevealed);

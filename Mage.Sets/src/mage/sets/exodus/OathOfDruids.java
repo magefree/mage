@@ -161,12 +161,7 @@ class OathOfDruidsEffect extends OneShotEffect {
             player.putOntoBattlefieldWithInfo(creatureCard, game, Zone.LIBRARY, source.getSourceId());
         }
         // and all other cards revealed this way into his or her graveyard
-        for (UUID uuid : nonCreatureCards) {
-            Card card = game.getCard(uuid);
-            if (card != null) {
-                player.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-            }
-        }
+        player.moveCards(nonCreatureCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         return true;
     }
 

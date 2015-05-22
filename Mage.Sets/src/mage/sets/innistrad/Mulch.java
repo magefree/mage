@@ -89,18 +89,21 @@ class MulchEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl();
-            int count = Math.min(controller.getLibrary().size(), 4);
-            cards.addAll(controller.getLibrary().getTopCards(game, count));
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
             if (!cards.isEmpty()) {
+                controller.revealCards(sourceObject.getName(), cards, game);
+                Cards landCards = new CardsImpl();
+                Cards otherCards = new CardsImpl();
                 for (Card card: cards.getCards(game)) {
-                    cards.add(card);
                     if (card.getCardType().contains(CardType.LAND)) {
-                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        landCards.add(card);
                     } else {
-                        controller.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        otherCards.add(card);
                     }
                 }
-                controller.revealCards(sourceObject.getName(), cards, game);
+                controller.moveCards(landCards, Zone.LIBRARY, Zone.HAND, source, game);                
+                controller.moveCards(otherCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                
+                
             }
             return true;
         }

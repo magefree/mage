@@ -35,6 +35,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -106,23 +108,18 @@ class GrindstoneEffect extends OneShotEffect {
                     return true;
                 }
                 colorShared = false;
-                Card card1 = null;
-                Card card2 = null;
-                if (targetPlayer.getLibrary().size() > 0) {
-                    card1 = targetPlayer.getLibrary().removeFromTop(game);                    
+                Cards cards = new CardsImpl();
+                cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
+                if (!cards.isEmpty()) {
+                    Card card1 = targetPlayer.getLibrary().removeFromTop(game);                    
                     if (targetPlayer.getLibrary().size() > 0) {
-                        card2 = targetPlayer.getLibrary().removeFromTop(game);                                        
+                        Card card2 = targetPlayer.getLibrary().removeFromTop(game);                                        
                         if (card1.getColor().hasColor() && card2.getColor().hasColor()) {
                             colorShared = card1.getColor().shares(card2.getColor());
                         }                    
                     }
                 }
-                if (card1 != null) {
-                    targetPlayer.moveCardToGraveyardWithInfo(card1, source.getSourceId(), game, Zone.LIBRARY);
-                }
-                if (card2 != null) {
-                    targetPlayer.moveCardToGraveyardWithInfo(card2, source.getSourceId(), game, Zone.LIBRARY);  
-                }
+                targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             } while (colorShared && targetPlayer.isInGame());
             return true;
         }

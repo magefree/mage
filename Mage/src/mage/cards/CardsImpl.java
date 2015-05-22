@@ -64,13 +64,21 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     public CardsImpl() { }
 
     public CardsImpl(Card card) {
-        this.add(card.getId());
+        if (card != null) {
+            this.add(card.getId());
+        }
+    }
+
+    public CardsImpl(Collection<UUID> cardIds) {
+        if (cardIds != null) {
+            this.addAll(cardIds);
+        }
     }
 
     public CardsImpl(Zone zone) {
         this.zone = zone;
     }
-
+    
     public CardsImpl(Zone zone, Collection<Card> cards) {
         this(zone);
         for (Card card: cards) {
