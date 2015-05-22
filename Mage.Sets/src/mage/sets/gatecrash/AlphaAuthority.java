@@ -61,6 +61,7 @@ public class AlphaAuthority extends CardImpl {
         super(ownerId, 114, "Alpha Authority", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "GTC";
 
+        this.subtype.add("Aura");
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

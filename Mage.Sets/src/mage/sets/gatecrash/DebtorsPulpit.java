@@ -53,6 +53,7 @@ public class DebtorsPulpit extends CardImpl {
         super(ownerId, 10, "Debtor's Pulpit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "GTC";
 
+        this.subtype.add("Aura");
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();

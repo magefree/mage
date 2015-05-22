@@ -53,6 +53,7 @@ public class DyingWish extends CardImpl {
         super(ownerId, 64, "Dying Wish", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "GTC";
 
+        this.subtype.add("Aura");
 
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();

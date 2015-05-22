@@ -61,6 +61,7 @@ public class GuildscornWard extends CardImpl {
         super(ownerId, 15, "Guildscorn Ward", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.expansionSetCode = "GTC";
 
+        this.subtype.add("Aura");
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
