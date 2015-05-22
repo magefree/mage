@@ -365,6 +365,9 @@ public class NewTableDialog extends MageDialog {
         options.setWinsNeeded((Integer)this.spnNumWins.getValue());
         options.setFreeMulligans((Integer)this.spnFreeMulligans.getValue());
         options.setPassword(this.txtPassword.getText());
+        if (!checkMatchOptions(options)) {
+            return;
+        }
         saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
 
         table = session.createTable(roomId, options);
@@ -419,6 +422,45 @@ public class NewTableDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
+    /**
+     * Checks about not valid game option combinations and shows an error message
+     * 
+     * @return 
+     */
+    private boolean checkMatchOptions(MatchOptions options) {
+        switch (options.getDeckType()) {
+            case "Variant Magic - Commander":
+            case "Variant Magic - Duel Commander":
+                if (!options.getGameType().startsWith("Commander")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Variant Magic - Tiny Leaders":
+                if (!options.getGameType().startsWith("Tiny Leaders")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Tiny Leaders needs also a Tiny Leaders game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+        }
+        switch (options.getGameType()) {
+            case "Commander Two Player Duel":
+            case "Commander Free For All":
+                if (!options.getDeckType().equals("Variant Magic - Commander") && !options.getDeckType().equals("Variant Magic - Duel Commander") ) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Commander needs also a Commander game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+            case "Tiny Leaders Two Player Duel":
+                if (!options.getDeckType().equals("Variant Magic - Tiny Leaders")) {
+                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Deck type Tiny Leaders needs also a Tiny Leaders game type", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                break;
+        }        
+        return true;
+    }
+    
     private void setGameOptions() {
         GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();
         int oldValue = (Integer) this.spnNumPlayers.getValue();
