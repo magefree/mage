@@ -28,6 +28,7 @@
 package mage.sets.commander2013;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -55,6 +56,7 @@ import mage.players.Player;
 public class Foster extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+    
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -62,7 +64,6 @@ public class Foster extends CardImpl {
     public Foster(UUID ownerId) {
         super(ownerId, 146, "Foster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
         this.expansionSetCode = "C13";
-
 
         // Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
         Ability ability = new DiesCreatureTriggeredAbility(
@@ -102,28 +103,31 @@ class FosterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (sourceCard == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(Zone.PICK);
+        
+        Cards cards = new CardsImpl();
+        Card cardFound = null;
         while (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().getFromTop(game);
+            Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
-                cards.add(card);
-                if(filter.match(card, game)){
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                cards.add(card);                
+                if (filter.match(card, game)){
+                    cardFound = card;
                     break;
                 }
-                else{
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                }
-            }
+            }            
         }
-        controller.revealCards(sourceCard.getName(), cards, game);
+        if (!cards.isEmpty()) {
+            controller.revealCards(sourceObject.getName(), cards, game);
+            if (cardFound != null) {
+                controller.moveCards(cardFound, Zone.LIBRARY, Zone.HAND, source, game);
+                cards.remove(cardFound);
+            }
+            controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+        }
         return true;
     }
 }

@@ -46,6 +46,7 @@ import mage.constants.Zone;
  * @author Loki
  */
 public class EleshNornGrandCenobite extends CardImpl {
+    
     public EleshNornGrandCenobite (UUID ownerId) {
         super(ownerId, 9, "Elesh Norn, Grand Cenobite", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         this.expansionSetCode = "NPH";
