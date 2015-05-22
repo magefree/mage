@@ -1384,10 +1384,13 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public Class getColumnClass(int columnIndex){
-        if (columnIndex == 0) {
-            return Icon.class;
-        } else {
-            return String.class;
+        switch (columnIndex) {
+            case COLUMN_ICON:
+                return Icon.class;
+            case COLUMN_SKILL:
+                return SkillLevel.class;
+            default:
+                return String.class;
         }
     }
 
