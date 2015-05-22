@@ -42,9 +42,7 @@ import java.util.UUID;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Player;
 import mage.util.ThreadLocalStringBuilder;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -53,13 +51,11 @@ import org.apache.log4j.Logger;
  */
 public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializable {
     
-    private static final Logger logger = Logger.getLogger(CardsImpl.class);
     private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
     private static Random rnd = new Random();
     private UUID ownerId;
     private Zone zone;
-    private boolean errorLogged = false;
 
     public CardsImpl() { }
 
@@ -200,21 +196,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         Set<Card> cards = new LinkedHashSet<>();
         for (UUID cardId: this) {
             Card card = game.getCard(cardId);
-            if (card != null) {
+            if (card != null) { // this can happen during the cancelation (player concedes) of a game
                 cards.add(card);
-            } else {
-                if (!errorLogged) { // this runs in iteration, so the flag helps to stop to fill the log file
-                    // seems like this can happen during the cancelation of a game
-                    logger.error("Card not found  cardId: " + cardId + " gameId: " + game.getId() );
-                    for (Player player :game.getPlayers().values()) {
-                        logger.error(player.getName() + " inGame=" + (player.isInGame() ? "true":"false"));
-                    }
-                    for (StackTraceElement stackTraceElement: Thread.currentThread().getStackTrace()) {
-                        logger.error(stackTraceElement.toString());
-                    }
-                    errorLogged = true;
-                }
-            }
+            } 
         }
         return cards;
     }

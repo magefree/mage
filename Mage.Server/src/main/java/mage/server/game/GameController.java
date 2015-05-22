@@ -336,7 +336,7 @@ public class GameController implements GameCallback {
             joinType = "rejoined";
         }
         user.addGame(playerId, gameSession);
-        logger.debug("Player " + player.getLogName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
+        logger.debug("Player " + player.getName()+ " " + playerId + " has " + joinType + " gameId: " + game.getId());
         ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(playerId).getLogName() + " has " + joinType + " the game", MessageColor.ORANGE, true, MessageType.GAME);
         checkStart();
     }

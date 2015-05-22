@@ -1925,14 +1925,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lostForced(Game game) {
-        logger.debug(this.getLogName() + " has lost gameId: " + game.getId());
+        logger.debug(this.getName() + " has lost gameId: " + game.getId());
         //20100423 - 603.9
         if (!this.wins) {
             this.loses = true;
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
             game.informPlayers(this.getLogName() + " has lost the game.");
         } else {
-            logger.debug(this.getLogName() + " has already won - stop lost");
+            logger.debug(this.getName() + " has already won - stop lost");
         }
         // for draw - first all players that have lost have to be set to lost
         if (!hasLeft()) {
