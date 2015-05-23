@@ -2850,12 +2850,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         game.fireEvent(new ZoneChangeGroupEvent(cards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
         switch(toZone) {
+            case EXILED: 
+                boolean result = false;
+                for(Card card: cards) {
+                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, true);
+                }
+                return result;                
             case GRAVEYARD: 
                 return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
             case HAND:
                 boolean result = false;
                 for(Card card: cards) {
-                    result |= moveCardToHandWithInfo(card, playerId, game, fromZone);
+                    result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone);
                 }
                 return result;
             default:
