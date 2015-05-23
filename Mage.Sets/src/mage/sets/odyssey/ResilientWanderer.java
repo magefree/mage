@@ -30,23 +30,15 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -66,7 +58,7 @@ public class ResilientWanderer extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(), new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new DiscardCardCost());
         this.addAbility(ability);
     }
 
@@ -77,43 +69,6 @@ public class ResilientWanderer extends CardImpl {
     @Override
     public ResilientWanderer copy() {
         return new ResilientWanderer(this);
-    }
-}
-
-class GainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
-
-    protected FilterCard protectionFilter;
-    
-    public GainProtectionFromColorSourceEffect() {
-        super(Duration.EndOfTurn, Outcome.AddAbility);
-    }
-
-    public GainProtectionFromColorSourceEffect(final GainProtectionFromColorSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GainProtectionFromColorSourceEffect copy() {
-        return new GainProtectionFromColorSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
-        if (creature != null) {
-            ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice());
-            ProtectionAbility ability = new ProtectionAbility(protectionFilter);
-            creature.addAbility(ability, source.getSourceId(), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} gains protection from the color of your choice " + duration.toString();
     }
 }
 

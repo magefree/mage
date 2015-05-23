@@ -29,27 +29,18 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.filter.FilterCard;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -65,6 +56,7 @@ public class CartelAristocrat extends CardImpl {
     static {
         filter.add(new AnotherPredicate());
     }
+    
     public CartelAristocrat(UUID ownerId) {
         super(ownerId, 150, "Cartel Aristocrat", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{B}");
         this.expansionSetCode = "GTC";
@@ -75,9 +67,8 @@ public class CartelAristocrat extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice another creature: Cartel Aristocrat gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new CartelAristocratEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+        this.addAbility(new SimpleActivatedAbility(
+                Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public CartelAristocrat(final CartelAristocrat card) {
@@ -87,37 +78,5 @@ public class CartelAristocrat extends CardImpl {
     @Override
     public CartelAristocrat copy() {
         return new CartelAristocrat(this);
-    }
-}
-class CartelAristocratEffect extends OneShotEffect {
-    
-    public CartelAristocratEffect() {
-        super(Outcome.Protect);
-        this.staticText = "{this} gains protection from the color of your choice until end of turn";
-    }
-    
-    public CartelAristocratEffect(final CartelAristocratEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public CartelAristocratEffect copy() {
-        return new CartelAristocratEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ChoiceColor choice = new ChoiceColor();
-        choice.setMessage("Choose color to get protection from");
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.choose(outcome, choice, game)) {
-            FilterCard protectionFilter = new FilterCard();
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice().toLowerCase());
-            ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(protectionFilter), Duration.EndOfTurn);
-            game.addEffect(effect, source);
-            return true;
-        }
-        return false;
     }
 }
