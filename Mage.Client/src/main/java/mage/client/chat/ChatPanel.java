@@ -45,13 +45,16 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.client.util.MageTableRowSorter;
+import mage.client.util.audio.AudioManager;
 import mage.remote.MageRemoteException;
-import mage.remote.Session;
+import mage.view.ChatMessage;
+//import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
 import org.mage.card.arcane.ManaSymbols;
+import org.mage.network.Client;
 
 /**
  *
@@ -60,7 +63,7 @@ import org.mage.card.arcane.ManaSymbols;
 public class ChatPanel extends javax.swing.JPanel {
 
     private UUID chatId;
-    private Session session;
+    private Client client;
     private final List<String> players = new ArrayList<>();
     private final TableModel tableModel;
     /**
@@ -174,20 +177,44 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void connect(UUID chatId) {
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         this.chatId = chatId;
-        if (session.joinChat(chatId)) {
-            MageFrame.addChat(chatId, this);
-        }
+        client.joinChat(chatId);
+        MageFrame.addChat(chatId, this);
     }
 
     public void disconnect() {
-        if (session != null) {
-            session.leaveChat(chatId);
+        if (client != null) {
+            client.leaveChat(chatId);
             MageFrame.removeChat(chatId);
         }
     }
 
+    public void receiveMessage(ChatMessage message) {
+        // play the to the message connected sound
+        if (message.getSoundToPlay() != null) {
+            switch (message.getSoundToPlay()) {
+                case PlayerLeft:
+                    AudioManager.playPlayerLeft();
+                    break;
+                case PlayerQuitTournament:
+                    AudioManager.playPlayerQuitTournament();
+                    break;
+                case PlayerSubmittedDeck:
+                    AudioManager.playPlayerSubmittedDeck();
+                    break;
+                case PlayerWhispered:
+                    AudioManager.playPlayerWhispered();
+                    break;
+            }
+        }
+        // send start message to chat if not done yet
+        if (!isStartMessageDone()) {
+            createChatStartMessage();
+        }
+        receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());
+    }
+    
     /**
      * Display message in the chat. Use different colors for timestamp, username
      * and message.
@@ -198,7 +225,7 @@ public class ChatPanel extends javax.swing.JPanel {
      * @param messageType
      * @param color Preferred color. Not used.
      */
-    public void receiveMessage(String username, String message, String time, MessageType messageType, MessageColor color) {
+    private void receiveMessage(String username, String message, String time, MessageType messageType, MessageColor color) {
         StringBuilder text = new StringBuilder();
         if (time != null) {
             text.append(getColoredText(TIMESTAMP_COLOR, time + ": "));
@@ -218,9 +245,9 @@ public class ChatPanel extends javax.swing.JPanel {
                 break;
             default:
                 if (parentChatRef != null) {
-                    userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = parentChatRef.client.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 } else {
-                    userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                    userColor = client.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
                 }
                 textColor = MESSAGE_COLOR;
                 userSeparator = ": ";
@@ -236,6 +263,35 @@ public class ChatPanel extends javax.swing.JPanel {
         }              
         text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
         this.txtConversation.append(text.toString());
+    }
+
+    private void createChatStartMessage() {
+        setStartMessageDone(true);
+        switch (getChatType()) {
+            case GAME:
+                receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
+                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+                        .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+                        .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+                        .append("<br/><b>F9</b> - Skip everything until your next turn")
+                        .append("<br/><b>F3</b> - Undo F4/F5/F7/F9").toString(),
+                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            case TOURNAMENT:
+                receiveMessage("", new StringBuilder("On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.").toString(),
+                        null,  MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+            case TABLES:
+                receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
+                        .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
+                        .append("<br/>\\list - Show a list of available chat commands.").toString(),
+                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+                break;
+
+        }
     }
 
     private String getColoredText(String color, String text) {
@@ -470,9 +526,9 @@ public class ChatPanel extends javax.swing.JPanel {
     private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
             if (parentChatRef != null) {
-                parentChatRef.session.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
+                parentChatRef.client.sendChatMessage(parentChatRef.chatId, this.txtMessage.getText());
             } else {
-                session.sendChatMessage(chatId, this.txtMessage.getText());
+                client.sendChatMessage(chatId, this.txtMessage.getText());
             }
             this.txtMessage.setText("");
             this.txtMessage.repaint();

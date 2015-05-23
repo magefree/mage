@@ -70,10 +70,11 @@ import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -169,7 +170,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
-                if (!MageFrame.getSession().isTestMode()) {
+                if (!MageFrame.getClient().getServerState().isTestMode()) {
                     this.btnLoad.setVisible(false);
                 }
                 this.deckArea.showSideboard(false);
@@ -179,7 +180,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 if (timeout != 0) {
                     countdown.start();
                     if (updateDeckTask == null || updateDeckTask.isDone()) {
-                        updateDeckTask = new UpdateDeckTask(MageFrame.getSession(), tableId, deck);
+                        updateDeckTask = new UpdateDeckTask(MageFrame.getClient(), tableId, deck);
                         updateDeckTask.execute();
                     }
                 }
@@ -190,7 +191,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
-                if (!MageFrame.getSession().isTestMode()) {
+                if (!MageFrame.getClient().getServerState().isTestMode()) {
                     this.btnLoad.setVisible(true);
                 }
                 this.deckArea.showSideboard(true);
@@ -789,7 +790,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             updateDeckTask.cancel(true);
         }
 
-        if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists())) {
+        if (MageFrame.getClient().submitDeck(tableId, deck.getDeckCardLists())) {
             removeDeckEditor();
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -876,12 +877,12 @@ class ImportFilter extends FileFilter {
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
     private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
-    private final Session session;
+    private final Client client;
     private final UUID tableId;
     private final Deck deck;
 
-    UpdateDeckTask(Session session, UUID tableId, Deck deck) {
-        this.session = session;
+    UpdateDeckTask(Client client, UUID tableId, Deck deck) {
+        this.client = client;
         this.tableId = tableId;
         this.deck = deck;
     }
@@ -889,7 +890,7 @@ class UpdateDeckTask extends SwingWorker<Void, Void> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            session.updateDeck(tableId, deck.getDeckCardLists());
+            client.updateDeck(tableId, deck.getDeckCardLists());
             Thread.sleep(5000);
         }
         return null;

@@ -37,8 +37,9 @@ package mage.client.dialog;
 
 import mage.client.MageFrame;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.UserRequestMessage;
+import org.mage.network.Client;
 
 /**
  *
@@ -176,10 +177,10 @@ public class UserRequestDialog extends MageDialog {
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void sendUserReplay(PlayerAction playerAction) {
-        Session session = MageFrame.getSession();
+        Client client = MageFrame.getClient();
         switch(playerAction) {
             case ADD_PERMISSION_TO_SEE_HAND_CARDS:
-                session.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
+                client.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
                 break;
             default:
                 // not supported action

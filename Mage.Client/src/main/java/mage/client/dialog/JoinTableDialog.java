@@ -31,8 +31,9 @@ import java.util.UUID;
 import javax.swing.JOptionPane;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
-import mage.remote.Session;
+//import mage.remote.Session;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -58,7 +59,7 @@ public class JoinTableDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        this.newPlayerPanel.setPlayerName(MageFrame.getSession().getUserName());
+        this.newPlayerPanel.setPlayerName(MageFrame.getClient().getUserName());
         this.newPlayerPanel.showDeckElements(!isLimited);
         this.setModal(true);
         this.setLocation(100, 100);
@@ -146,13 +147,13 @@ public class JoinTableDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        Session session = MageFrame.getSession();
+        Client client = MageFrame.getClient();
         try {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, txtPassword.getText());
             if (isTournament) {
-                joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+                joined = client.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
             } else {
-                joined = session.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
+                joined = client.joinTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
             }
             
         } catch (Exception ex) {

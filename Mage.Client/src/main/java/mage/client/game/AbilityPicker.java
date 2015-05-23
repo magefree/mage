@@ -30,7 +30,7 @@ package mage.client.game;
 
 import mage.client.MageFrame;
 import mage.client.util.gui.GuiDisplayUtil;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.AbilityPickerView;
 
 import javax.swing.*;
@@ -40,6 +40,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Map.Entry;
 import java.util.UUID;
+import org.mage.network.Client;
 
 /**
  * ************************  U N U S E D   *********************************
@@ -49,15 +50,15 @@ import java.util.UUID;
  */
 public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
-    private Session session;
+    private Client client;
     private UUID gameId;
 
     public AbilityPicker(String ThisIsnotUsedAnymore) {
         this.addPopupMenuListener(this);
     }
 
-    public void init(Session session, UUID gameId) {
-        this.session = session;
+    public void init(Client client, UUID gameId) {
+        this.client = client;
         this.gameId = gameId;
     }
 
@@ -85,7 +86,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
     @Override
     public void popupMenuCanceled(PopupMenuEvent e) {
-        session.sendPlayerBoolean(gameId, false);
+        client.sendPlayerBoolean(gameId, false);
     }
 
     private class AbilityPickerAction extends AbstractAction {
@@ -99,7 +100,7 @@ public class AbilityPicker extends JPopupMenu implements PopupMenuListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            session.sendPlayerUUID(gameId, id);
+            client.sendPlayerUUID(gameId, id);
             setVisible(false);
         }
 

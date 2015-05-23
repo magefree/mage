@@ -119,38 +119,38 @@ public class CallbackClientImpl implements CallbackClient {
                             break;
                         case "chatMessage":
                             {
-                                ChatMessage message = (ChatMessage) callback.getData();
-                                ChatPanel panel = MageFrame.getChat(callback.getObjectId());
-                                if (panel != null) {
-                                    // play the to the message connected sound
-                                    if (message.getSoundToPlay() != null) {
-                                        switch (message.getSoundToPlay()) {
-                                            case PlayerLeft:
-                                                AudioManager.playPlayerLeft();
-                                                break;
-                                            case PlayerQuitTournament:
-                                                AudioManager.playPlayerQuitTournament();
-                                                break;
-                                            case PlayerSubmittedDeck:
-                                                AudioManager.playPlayerSubmittedDeck();
-                                                break;
-                                            case PlayerWhispered:
-                                                AudioManager.playPlayerWhispered();
-                                                break;
-                                        }
-                                    }
-                                    // send start message to chat if not done yet
-                                    if (!panel.isStartMessageDone()) {
-                                        createChatStartMessage(panel);
-                                    }
-                                    // send the message to subchat if exists and it's not a game message
-                                    if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
-                                        panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
-                                    } else {
-                                        panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(),  message.getColor());
-                                    }
-                                    
-                                }       break;
+//                                ChatMessage message = (ChatMessage) callback.getData();
+//                                ChatPanel panel = MageFrame.getChat(callback.getObjectId());
+//                                if (panel != null) {
+//                                    // play the to the message connected sound
+//                                    if (message.getSoundToPlay() != null) {
+//                                        switch (message.getSoundToPlay()) {
+//                                            case PlayerLeft:
+//                                                AudioManager.playPlayerLeft();
+//                                                break;
+//                                            case PlayerQuitTournament:
+//                                                AudioManager.playPlayerQuitTournament();
+//                                                break;
+//                                            case PlayerSubmittedDeck:
+//                                                AudioManager.playPlayerSubmittedDeck();
+//                                                break;
+//                                            case PlayerWhispered:
+//                                                AudioManager.playPlayerWhispered();
+//                                                break;
+//                                        }
+//                                    }
+//                                    // send start message to chat if not done yet
+//                                    if (!panel.isStartMessageDone()) {
+//                                        createChatStartMessage(panel);
+//                                    }
+//                                    // send the message to subchat if exists and it's not a game message
+//                                    if (!message.getMessageType().equals(MessageType.GAME) && panel.getConnectedChat() != null) {
+//                                        panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);
+//                                    } else {
+//                                        panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(),  message.getColor());
+//                                    }
+//                                    
+//                                }       break;
                             }
                         case "serverMessage":
                             if (callback.getData() != null) {
@@ -392,38 +392,38 @@ public class CallbackClientImpl implements CallbackClient {
         });
     }
 
-    private void createChatStartMessage(ChatPanel chatPanel) {
-        chatPanel.setStartMessageDone(true);
-        ChatPanel usedPanel = chatPanel;
-        if (chatPanel.getConnectedChat() != null) {
-            usedPanel = chatPanel.getConnectedChat();
-        }
-        switch (usedPanel.getChatType()) {
-            case GAME:
-                usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
-                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
-                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
-                        .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
-                        .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
-                        .append("<br/><b>F9</b> - Skip everything until your next turn")
-                        .append("<br/><b>F3</b> - Undo F4/F5/F7/F9").toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
-                break;
-            case TOURNAMENT:
-                usedPanel.receiveMessage("", new StringBuilder("On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.").toString(),
-                        null,  MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
-                break;
-            case TABLES:
-                usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
-                        .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
-                        .append("<br/>\\list - Show a list of available chat commands.").toString(),
-                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
-                break;
-
-        }
-    }
+//    private void createChatStartMessage(ChatPanel chatPanel) {
+//        chatPanel.setStartMessageDone(true);
+//        ChatPanel usedPanel = chatPanel;
+//        if (chatPanel.getConnectedChat() != null) {
+//            usedPanel = chatPanel.getConnectedChat();
+//        }
+//        switch (usedPanel.getChatType()) {
+//            case GAME:
+//                usedPanel.receiveMessage("", new StringBuilder("You may use hot keys to play faster:")
+//                        .append("<br/>Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over")
+//                        .append("<br/>Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over")
+//                        .append("<br/><b>F2</b> - Confirm \"Ok\", \"Yes\" or \"Done\" button")
+//                        .append("<br/><b>F4</b> - Skip current turn but stop on declare attackers/blockers and something on the stack")
+//                        .append("<br/><b>F5</b> - Skip to next end step but stop on declare attackers/blockers and something on the stack")
+//                        .append("<br/><b>F7</b> - Skip to next main phase but stop on declare attackers/blockers and something on the stack")
+//                        .append("<br/><b>F9</b> - Skip everything until your next turn")
+//                        .append("<br/><b>F3</b> - Undo F4/F5/F7/F9").toString(),
+//                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+//                break;
+//            case TOURNAMENT:
+//                usedPanel.receiveMessage("", new StringBuilder("On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.").toString(),
+//                        null,  MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+//                break;
+//            case TABLES:
+//                usedPanel.receiveMessage("", new StringBuilder("Download card images by using the \"Images\" menu to the top right .")
+//                        .append("<br/>Download icons and symbols by using the \"Symbols\" menu to the top right.")
+//                        .append("<br/>\\list - Show a list of available chat commands.").toString(),
+//                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+//                break;
+//
+//        }
+//    }
 
     private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
         try {

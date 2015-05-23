@@ -1686,7 +1686,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         try {
-            MageFrame.getSession().updatePreferencesForServer(
+            MageFrame.getClient().updatePreferencesForServer(
                         getSelectedAvatar(),                        
                         dialog.showAbilityPickerForced.isSelected(),
                         dialog.cbAllowRequestToShowHandCards.isSelected(),
@@ -2357,7 +2357,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getSession().updatePreferencesForServer(
+                        MageFrame.getClient().updatePreferencesForServer(
                                 id,
                                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
                                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),

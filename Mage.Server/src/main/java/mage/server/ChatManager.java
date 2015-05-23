@@ -94,93 +94,59 @@ public class ChatManager {
         }
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color) {
-        this.broadcast(chatId, userName, message, color, true);
+    public void broadcast(UUID chatId, User user, String message, MessageColor color) {
+        this.broadcast(chatId, user, message, color, true);
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
-        this.broadcast(chatId, userName, message, color, withTime, MessageType.TALK);
+    public void broadcast(UUID chatId, User user, String message, MessageColor color, boolean withTime) {
+        this.broadcast(chatId, user, message, color, withTime, MessageType.TALK);
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
-        this.broadcast(chatId, userName, message, color, withTime, messageType, null);
+    public void broadcast(UUID chatId, User user, String message, MessageColor color, boolean withTime, MessageType messageType) {
+        this.broadcast(chatId, user, message, color, withTime, messageType, null);
     }
 
-    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+    public void broadcast(UUID chatId, User user, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         ChatSession chatSession = chatSessions.get(chatId);
         if (chatSession != null) {
             if (message.startsWith("\\") || message.startsWith("/")) {
-                User user = UserManager.getInstance().findUser(userName);
-                if (user != null && performUserCommand(user, message, chatId)) {
+//                User user = UserManager.getInstance().findUser(userName);
+                if (chatSession.performUserCommand(user, message, chatId)) {
                     return;
                 }
             }
-            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);
+            chatSession.broadcast(user.getName(), message, color, withTime, messageType, soundToPlay);
         }
     }
 
-
-    private boolean performUserCommand(User user, String message, UUID chatId) {
-        String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
-        if (command.equals("I") || command.equals("INFO")) {            
-            user.setInfo("");
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
-            return true;
-        }
-        if (command.startsWith("I ") || command.startsWith("INFO ")) {
-            user.setInfo(message.substring(command.startsWith("I ") ? 3 : 6));
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
-            return true;
-        }
-        if (command.startsWith("W ") || command.startsWith("WHISPER ")) {
-            String rest = message.substring(command.startsWith("W ")? 3 : 9);
-            int first = rest.indexOf(" ");
-            if (first > 1) {
-                String userToName = rest.substring(0,first);
-                rest = rest.substring(first + 1).trim();
-                User userTo = UserManager.getInstance().findUser(userToName);
-                if (userTo != null) {
-                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {
-                        message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
-                        chatSessions.get(chatId).broadcastInfoToUser(user,message);
-                    }
-                } else {
-                    message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
-                    chatSessions.get(chatId).broadcastInfoToUser(user,message);
-                }
-                return true;
-            }
-        }
-        if (command.equals("L") || command.equals("LIST")) {
-            message += new StringBuilder("<br/>List of commands:")
-                    .append("<br/>\\info [text] - set a info text to your player")
-                    .append("<br/>\\list - Show a list of commands")
-                    .append("<br/>\\whisper [player name] [text] - whisper to the player with the given name").toString();
-            chatSessions.get(chatId).broadcastInfoToUser(user,message);
-            return true;
-        }
-        return false;
+    public void inform(UUID chatId, String message, MessageColor color, boolean withTime, MessageType messageType) {
+        inform(chatId, message, color, withTime, messageType, null);
     }
-
-
-
+    
+    public void inform(UUID chatId, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+        ChatSession chatSession = chatSessions.get(chatId);
+        if (chatSession != null) {
+            chatSession.broadcast("", message, color, withTime, messageType, soundToPlay);
+        }
+    }
+    
     /**
      * 
      * use mainly for announcing that a user connection was lost or that a user has reconnected
      * 
-     * @param userId
+     * @param user
      * @param message
      * @param color 
      */
-    public void broadcast(UUID userId, String message, MessageColor color) {
-        User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
+    public void broadcast(User user, String message, MessageColor color) {
+//        User user = UserManager.getInstance().getUser(userId);
+//        if (user != null) {
             for (ChatSession chat: chatSessions.values()) {
-                if (chat.hasUser(userId)) {
+                if (chat.hasUser(user.getId())) {
                     chat.broadcast(user.getName(), message, color);
                 }
             }
-        }
+//        }
     }
 
     public void sendReconnectMessage(UUID userId) {

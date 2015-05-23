@@ -47,7 +47,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.CardType;
 import mage.constants.EnlargeMode;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.*;
 
 import javax.swing.*;
@@ -60,6 +60,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static mage.client.constants.Constants.*;
+import org.mage.network.Client;
 
 /**
  *
@@ -68,7 +69,8 @@ import static mage.client.constants.Constants.*;
 @SuppressWarnings("serial")
 public class Card extends MagePermanent implements MouseMotionListener, MouseListener, FocusListener, ComponentListener {
 
-    protected static Session session = MageFrame.getSession();
+//    protected static Session session = MageFrame.getSession();
+    protected static Client client = MageFrame.getClient();
     protected static DefaultActionCallback callback = DefaultActionCallback.getInstance();
 
     protected Point p;
@@ -353,7 +355,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     @Override
     public void mousePressed(MouseEvent e) {
         requestFocusInWindow();
-        callback.mouseClicked(e, gameId, session, card);
+        callback.mouseClicked(e, gameId, client, card);
     }
 
     @Override

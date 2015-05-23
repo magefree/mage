@@ -3,8 +3,9 @@ package mage.client.util;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
 
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.CardView;
+import org.mage.network.Client;
 
 
 public class DefaultActionCallback {
@@ -17,12 +18,12 @@ public class DefaultActionCallback {
         return INSTANCE;
     }
 
-    public void mouseClicked(MouseEvent e, UUID gameId, Session session, CardView card) {
+    public void mouseClicked(MouseEvent e, UUID gameId, Client client, CardView card) {
         if (gameId != null) {
             if (card.isAbility() && card.getAbility() != null) {
-                session.sendPlayerUUID(gameId, card.getAbility().getId());
+                client.sendPlayerUUID(gameId, card.getAbility().getId());
             } else {
-                session.sendPlayerUUID(gameId, card.getId());
+                client.sendPlayerUUID(gameId, card.getId());
             }
         }
     }

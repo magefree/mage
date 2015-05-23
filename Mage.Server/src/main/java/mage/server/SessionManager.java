@@ -36,6 +36,8 @@ import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+import org.mage.network.Server;
+import org.mage.network.model.MessageType;
 
 /**
  *
@@ -65,15 +67,17 @@ public class SessionManager {
         return session;
     }
 
-    public void createSession(String sessionId, InvokerCallbackHandler callbackHandler) {
-        Session session = new Session(sessionId, callbackHandler);
-        sessions.put(sessionId, session);
-    }
+//    public void createSession(String sessionId) {
+//        Session session = new Session(sessionId);
+//        sessions.put(sessionId, session);
+//    }
 
     public boolean registerUser(String sessionId, String userName) throws MageException {
-        Session session = sessions.get(sessionId);
-        if (session != null) {
-            String returnMessage =  session.registerUser(userName);
+        Session session = new Session(sessionId);
+        sessions.put(sessionId, session);
+//        Session session = sessions.get(sessionId);
+//        if (session != null) {
+            String returnMessage = session.registerUser(userName);
             if (returnMessage == null) {
                 LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
 
@@ -82,12 +86,14 @@ public class SessionManager {
                 logger.debug("- sessionId: " + sessionId);
                 logger.debug("- host:      " + session.getHost());
                 return true;
-            } else {
-                logger.debug(userName + " not registered: " + returnMessage);
             }
-        } else {
-            logger.error(userName + " tried to join with no sessionId");
-        }
+            logger.debug(userName + " not registered: " + returnMessage);
+            Main.getInstance().informClient(sessionId, returnMessage, MessageType.ERROR);
+//            Server.informClient(sessionId, returnMessage, MessageType.ERROR);
+
+//        } else {
+//            logger.error(userName + " tried to join with no sessionId");
+//        }
         return false;
     }
 

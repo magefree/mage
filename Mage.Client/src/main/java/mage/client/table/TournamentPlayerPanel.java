@@ -40,7 +40,8 @@ import javax.swing.JComboBox;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
-import mage.remote.Session;
+import org.mage.network.Client;
+//import mage.remote.Session;
 
 /**
  *
@@ -48,7 +49,7 @@ import mage.remote.Session;
  */
 public class TournamentPlayerPanel extends javax.swing.JPanel {
 
-    private Session session;
+    private Client client;
 
     /** Creates new form TournamentPlayerPanel */
     public TournamentPlayerPanel() {
@@ -57,8 +58,8 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
     }
 
     public void init(int playerNum) {
-        session = MageFrame.getSession();
-        cbPlayerType.setModel(new DefaultComboBoxModel(session.getPlayerTypes()));
+        client = MageFrame.getClient();
+        cbPlayerType.setModel(new DefaultComboBoxModel(client.getServerState().getPlayerTypes()));
         this.lblPlayerNum.setText("Player " + playerNum);
     }
 
@@ -68,7 +69,7 @@ public class TournamentPlayerPanel extends javax.swing.JPanel {
 
     public boolean joinTournamentTable(UUID roomId, UUID tableId, DeckCardLists deckCardLists) {
         if (!this.cbPlayerType.getSelectedItem().equals("Human")) {
-            return session.joinTournamentTable(
+            return client.joinTournamentTable(
                     roomId,
                     tableId,
                     this.txtPlayerName.getText(),

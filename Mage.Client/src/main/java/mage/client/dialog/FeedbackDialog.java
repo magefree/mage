@@ -254,7 +254,7 @@ public class FeedbackDialog extends javax.swing.JDialog {
         if (email.length() > 100) {
             email = email.substring(0, 100);
         }
-        if (MageFrame.getSession().sendFeedback(title, type, message, email)) {
+        if (MageFrame.getClient().sendFeedback(title, type, message, email)) {
             JOptionPane.showMessageDialog(null, "Feedback was sent. Thank you!", "Success", JOptionPane.INFORMATION_MESSAGE);
             reset();
             dialog.setVisible(false);

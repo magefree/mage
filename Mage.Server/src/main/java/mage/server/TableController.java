@@ -182,7 +182,7 @@ public class TableController {
                 user.showUserMessage("Join Table", "No valid deck selected!");
                 return false;
             }
-            if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+            if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
                 StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
                 for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
                     sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
@@ -271,7 +271,7 @@ public class TableController {
         }
         Deck deck = Deck.load(deckList, false, false);
 
-        if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+        if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
             for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
                 sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
@@ -357,7 +357,7 @@ public class TableController {
                 deck.setName(mPlayer.getDeck().getName());
             }
         }
-        if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
+        if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
             throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
         }
         submitDeck(userId, playerId, deck);
@@ -475,7 +475,7 @@ public class TableController {
                     }
                     User user = UserManager.getInstance().getUser(userId);
                     if (user != null) {
-                        ChatManager.getInstance().broadcast(chatId, user.getName(), "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
+                        ChatManager.getInstance().broadcast(chatId, user, "has left the table", ChatMessage.MessageColor.BLUE, true, ChatMessage.MessageType.STATUS, ChatMessage.SoundToPlay.PlayerLeft);
                         if (!table.isTournamentSubTable()) {
                             user.removeTable(playerId);
                         }

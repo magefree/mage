@@ -1,17 +1,23 @@
 package mage.client.game;
 
+import java.util.UUID;
 import mage.client.components.MageUI;
-import mage.interfaces.MageClient;
-import mage.interfaces.callback.ClientCallback;
+//import mage.interfaces.MageClient;
+//import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
+//import mage.remote.Session;
+//import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.junit.Ignore;
 
 import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
+import mage.interfaces.ServerState;
+import mage.view.ChatMessage;
+import org.mage.network.Client;
+import org.mage.network.interfaces.MageClient;
+import org.mage.network.model.MessageType;
 
 /**
  * Test for emulating the connection from multi mage clients.
@@ -39,25 +45,25 @@ public class MultiConnectTest {
 
     private class ClientMock implements MageClient {
 
-        private Session session;
+        private Client client;
         private final String username;
+        private ServerState serverState;
 
         public ClientMock(String username) {
             this.username = username;
         }
 
         public void connect() {
-            session = new SessionImpl(this);
+            client = new Client(this);
             Connection connection = new Connection();
             connection.setUsername(username);
             connection.setHost("localhost");
             connection.setPort(17171);
             connection.setProxyType(Connection.ProxyType.NONE);
 
-            session.connect(connection);
+            client.connect(username, "localhost", 17171, version);
         }
 
-        @Override
         public MageVersion getVersion() {
             logger.info("getVersion");
             return version;
@@ -69,24 +75,51 @@ public class MultiConnectTest {
             connected++;
         }
 
-        @Override
         public void disconnected(boolean errorCall) {
             logger.info("disconnected");
         }
 
-        @Override
         public void showMessage(String message) {
             logger.info("showMessage: " + message);
         }
 
-        @Override
         public void showError(String message) {
             logger.info("showError: " + message);
         }
 
+//        @Override
+//        public void processCallback(ClientCallback callback) {
+//            logger.info("processCallback");
+//        }
+
         @Override
-        public void processCallback(ClientCallback callback) {
-            logger.info("processCallback");
+        public void inform(String message, MessageType type) {
+            if (type == MessageType.ERROR) {
+                showError(message);
+            }
+            else {
+                showMessage(message);
+            }
+        }
+
+        @Override
+        public void receiveChatMessage(UUID chatId, ChatMessage message) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void receiveBroadcastMessage(String message) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void clientRegistered(ServerState state) {
+            this.serverState = state;
+        }
+
+        @Override
+        public ServerState getServerState() {
+            return serverState;
         }
     }
 

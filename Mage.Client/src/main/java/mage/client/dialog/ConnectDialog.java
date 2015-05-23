@@ -354,7 +354,7 @@ public class ConnectDialog extends MageDialog {
         protected Boolean doInBackground() throws Exception {
             lblStatus.setText("Connecting...");
             btnConnect.setEnabled(false);
-            result = MageFrame.connect(connection);
+            result = MageFrame.getInstance().connect(connection);
             return result;
         }
 
@@ -366,7 +366,7 @@ public class ConnectDialog extends MageDialog {
                 if (result) {
                     lblStatus.setText("");                    
                     connected();
-                    MageFrame.getInstance().showGames(false);
+//                    MageFrame.getInstance().showGames(false);
                 } else {
                     lblStatus.setText("Could not connect");
                 }
@@ -380,7 +380,7 @@ public class ConnectDialog extends MageDialog {
             } catch (TimeoutException ex) {
                 logger.fatal("Connection timeout: ", ex);
             } finally {
-                MageFrame.stopConnecting();
+//                MageFrame.stopConnecting();
                 btnConnect.setEnabled(true);
             }
         }

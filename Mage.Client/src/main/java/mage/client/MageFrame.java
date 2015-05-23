@@ -58,13 +58,13 @@ import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.stats.UpdateMemUsageTask;
 import mage.components.ImagePanel;
-import mage.interfaces.MageClient;
+//import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
+//import mage.remote.Session;
+//import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import mage.view.GameEndView;
 import org.apache.log4j.Logger;
@@ -92,10 +92,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.client.util.audio.AudioManager;
+import mage.interfaces.ServerState;
+import mage.view.ChatMessage;
 import mage.view.UserRequestMessage;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
+import org.mage.network.Client;
+import org.mage.network.interfaces.MageClient;
+import org.mage.network.model.MessageType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -111,10 +117,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static MageFrame instance;
 
-    private static Session session;
+//    private static Session session;
+//    public static MageClient client;
+    private static Client client;
+    private ServerState serverState;
     private ConnectDialog connectDialog;
     private final ErrorDialog errorDialog;
-    private static CallbackClient callbackClient;
+//    private static CallbackClient callbackClient;
     private static final Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
@@ -136,13 +145,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private static long startTime;
 
-    /**
-     * @return the session
-     */
-    public static Session getSession() {
-        return session;
-    }
+//    /**
+//     * @return the session
+//     */
+//    public static Session getSession() {
+//        return session;
+//    }
 
+    public static Client getClient() {
+        return client;
+    }
+    
     public static JDesktopPane getDesktop() {
         return desktopPane;
     }
@@ -159,7 +172,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return grayMode;
     }
 
-    @Override
     public MageVersion getVersion() {
         return version;
     }
@@ -203,8 +215,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         DialogManager.updateParams(768, 1024, false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        session = new SessionImpl(this);
-        callbackClient = new CallbackClientImpl(this);
+//        session = new SessionImpl(this);
+//        callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
         errorDialog = new ErrorDialog();
@@ -212,12 +224,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         desktopPane.add(errorDialog, JLayeredPane.POPUP_LAYER);
         ui.addComponent(MageComponents.DESKTOP_PANE, desktopPane);
 
-        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                session.ping();
-            }
-        }, 60, 60, TimeUnit.SECONDS);
+//        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
+//            @Override
+//            public void run() {
+//                session.ping();
+//            }
+//        }, 60, 60, TimeUnit.SECONDS);
 
         updateMemUsageTask = new UpdateMemUsageTask(jMemUsageLabel);
 
@@ -330,7 +342,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void setWindowTitle() {
         setTitle(TITLE_NAME + "  Client: " 
                 + version == null ? "<not available>" : version.toString() + "  Server: "
-                + ((session != null && session.isConnected()) ? session.getVersionInfo():"<not connected>"));
+                + ((client != null && client.isConnected()) ? serverState.getVersion().toString():"<not connected>"));
     }
 
     private void addTooltipContainer() {
@@ -682,15 +694,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         tableWaitingDialog.showDialog(roomId, tableId, isTournament);
     }
 
-    public static boolean connect(Connection connection) {
-        boolean result = session.connect(connection);
-        MageFrame.getInstance().setWindowTitle();
+    public boolean connect(Connection connection) {
+        boolean result = client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), version);
         return result;
     }
 
-    public static boolean stopConnecting() {
-        return session.stopConnecting();
-    }
+//    public static boolean stopConnecting() {
+//        return session.stopConnecting();
+//    }
 
     public boolean autoConnect() {
         boolean autoConnectParamValue = Boolean.parseBoolean(prefs.get("autoConnect", "false"));
@@ -730,8 +741,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
             connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
-            if (MageFrame.connect(connection)) {  
-                showGames(false);                
+            if (connect(connection)) {  
                 return true;
             } else {
                 showMessage("Unable to connect to server");
@@ -915,9 +925,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-        if (session.isConnected()) {
+        if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                session.disconnect(false);
+                client.disconnect();
                 tablesPane.clearChat();
                 setWindowTitle();
                 showMessage("You have disconnected");                
@@ -949,7 +959,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void btnSendFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFeedbackActionPerformed
-        if (!session.isConnected()) {
+        if (!client.isConnected()) {
             JOptionPane.showMessageDialog(null, "You may send us feedback only when connected to server.", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -957,11 +967,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnSendFeedbackActionPerformed
 
     public void exitApp() {
-        if (session.isConnected()) {
+        if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            session.disconnect(false);
+            client.disconnect();
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
@@ -1167,6 +1177,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     }
                 }
                 instance = new MageFrame();
+                client = new Client(instance);
                 instance.setVisible(true);
                 
             }
@@ -1266,7 +1277,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
     public void disconnected(final boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
             logger.info("DISCONNECTED (Event Dispatch Thread)");
@@ -1288,14 +1298,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                             enableButtons();
                         }
                     } else {
-                        session.disconnect(false);
+                        client.disconnect();
                     }
                 }
             });
         }
     }
 
-    @Override
     public void showMessage(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(desktopPane, message);
@@ -1309,7 +1318,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
     public void showError(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -1323,9 +1331,59 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+//    @Override
+//    public void processCallback(ClientCallback callback) {
+//        callbackClient.processCallback(callback);
+//    }
+
     @Override
-    public void processCallback(ClientCallback callback) {
-        callbackClient.processCallback(callback);
+    public void inform(String message, MessageType type) {
+        if (type == MessageType.ERROR) {
+            showError(message);
+        }
+        else {
+            showMessage(message);
+        }
+    }
+
+    @Override
+    public void receiveChatMessage(final UUID chatId, final ChatMessage message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ChatPanel panel = MageFrame.getChat(chatId);
+                if (panel != null) {
+                    // send the message to subchat if exists and it's not a game message
+                    if (!message.getMessageType().equals(ChatMessage.MessageType.GAME) && panel.getConnectedChat() != null) {
+                        panel.getConnectedChat().receiveMessage(message);
+                    } else {
+                        panel.receiveMessage(message);
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void receiveBroadcastMessage(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clientRegistered(ServerState state) {
+        this.serverState = state;
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                setWindowTitle();
+                showGames(false);                
+            }
+        });
+    }
+
+    @Override
+    public ServerState getServerState() {
+        return serverState;
     }
 
 }

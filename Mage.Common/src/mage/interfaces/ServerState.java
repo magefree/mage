@@ -31,6 +31,7 @@ package mage.interfaces;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import mage.utils.MageVersion;
 import mage.view.GameTypeView;
 import mage.view.TournamentTypeView;
@@ -50,10 +51,12 @@ public class ServerState implements Serializable {
     private final MageVersion version;
     private final long cardsContentVersion;
     private final long expansionsContentVersion;
+    private final UUID mainRoomId;
 
     public ServerState(List<GameTypeView> gameTypes, List<TournamentTypeView> tournamentTypes,
             String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode,
-            MageVersion version, long cardsContentVersion, long expansionsContentVersion) {
+            MageVersion version, long cardsContentVersion, long expansionsContentVersion,
+            UUID mainRoomId) {
         this.gameTypes = gameTypes;
         this.tournamentTypes = tournamentTypes;
         this.playerTypes = playerTypes;
@@ -63,7 +66,7 @@ public class ServerState implements Serializable {
         this.version = version;
         this.cardsContentVersion = cardsContentVersion;
         this.expansionsContentVersion = expansionsContentVersion;
-
+        this.mainRoomId = mainRoomId;
     }
 
     public List<GameTypeView> getGameTypes() {
@@ -110,6 +113,10 @@ public class ServerState implements Serializable {
 
     public long getExpansionsContentVersion() {
         return expansionsContentVersion;
+    }
+    
+    public UUID getMainRoomId() {
+        return mainRoomId;
     }
     
 }

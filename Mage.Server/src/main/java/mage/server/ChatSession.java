@@ -32,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
@@ -152,14 +153,13 @@ public class ChatSession {
     public void broadcast(String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
             boolean remove = false;
-            final String msg = message;
             final String time = (withTime ? timeFormatter.format(new Date()):"");
-            final String username = userName;
-            logger.trace("Broadcasting '" + msg + "' for " + chatId);
+            logger.trace("Broadcasting '" + message + "' for " + chatId);
             for (UUID userId: clients.keySet()) {
-                User user = UserManager.getInstance().getUser(userId);
-                if (user != null) {
-                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
+                User chatUser = UserManager.getInstance().getUser(userId);                
+                if (chatUser != null) {
+                    Main.getInstance().sendChatMessage(chatUser.getSessionId(), chatId, new ChatMessage(userName, message, time, color, messageType, soundToPlay));
+//                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {
                     logger.error("User not found but connected to chat - userId: " + userId + "  chatId: " + chatId);
@@ -176,6 +176,49 @@ public class ChatSession {
         }
     }
 
+    public boolean performUserCommand(User user, String message, UUID chatId) {
+        String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);
+        if (command.equals("I") || command.equals("INFO")) {            
+            user.setInfo("");
+            broadcastInfoToUser(user,message);
+            return true;
+        }
+        if (command.startsWith("I ") || command.startsWith("INFO ")) {
+            user.setInfo(message.substring(command.startsWith("I ") ? 3 : 6));
+            broadcastInfoToUser(user,message);
+            return true;
+        }
+        if (command.startsWith("W ") || command.startsWith("WHISPER ")) {
+            String rest = message.substring(command.startsWith("W ")? 3 : 9);
+            int first = rest.indexOf(" ");
+            if (first > 1) {
+                String userToName = rest.substring(0,first);
+                rest = rest.substring(first + 1).trim();
+                User userTo = UserManager.getInstance().findUser(userToName);
+                if (userTo != null) {
+                    if (!broadcastWhisperToUser(user, userTo, rest)) {
+                        message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
+                        broadcastInfoToUser(user,message);
+                    }
+                } else {
+                    message += new StringBuilder("<br/>User ").append(userToName).append(" not found").toString();
+                    broadcastInfoToUser(user,message);
+                }
+                return true;
+            }
+        }
+        if (command.equals("L") || command.equals("LIST")) {
+            message += new StringBuilder("<br/>List of commands:")
+                    .append("<br/>\\info [text] - set a info text to your player")
+                    .append("<br/>\\list - Show a list of commands")
+                    .append("<br/>\\whisper [player name] [text] - whisper to the player with the given name").toString();
+            broadcastInfoToUser(user,message);
+            return true;
+        }
+        return false;
+    }
+    
+    
     /**
      * @return the chatId
      */

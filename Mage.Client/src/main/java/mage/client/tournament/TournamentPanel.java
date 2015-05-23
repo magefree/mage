@@ -53,12 +53,13 @@ import mage.client.chat.ChatPanel;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ButtonColumn;
 import mage.client.util.Format;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
 import mage.view.TournamentPlayerView;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -70,7 +71,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private UUID tournamentId;
     private boolean firstInitDone = false;
-    private Session session;
+    private Client client;
     private final TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
@@ -112,7 +113,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 //                }
                 if (state.startsWith("Dueling") && actionText.equals("Watch")) {
                     logger.info("Watching game " + gameId);
-                    session.watchTournamentTable(tableId);
+                    client.watchTournamentTable(tableId);
                 }
             }
         };
@@ -159,10 +160,10 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public synchronized void showTournament(UUID tournamentId) {
         this.tournamentId = tournamentId;
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         // MageFrame.addTournament(tournamentId, this);
-        UUID chatRoomId = session.getTournamentChatId(tournamentId);
-        if (session.joinTournament(tournamentId) && chatRoomId != null) {
+        UUID chatRoomId = client.getTournamentChatId(tournamentId);
+        if (client.joinTournament(tournamentId) && chatRoomId != null) {
             this.chatPanel1.connect(chatRoomId);
             startTasks();
             this.setVisible(true);
@@ -248,7 +249,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         btnQuitTournament.setVisible(false);
         if (tournament.getEndTime() == null) {
             for (TournamentPlayerView player : tournament.getPlayers()) {
-                if (player.getName().equals(session.getUserName())) {
+                if (player.getName().equals(client.getUserName())) {
                     if (!player.hasQuit()) {
                         btnQuitTournament.setVisible(true);
                     }
@@ -260,9 +261,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (session != null) {
+        if (client != null) {
             if (updateTask == null || updateTask.isDone()) {
-                updateTask = new UpdateTournamentTask(session, tournamentId, this);
+                updateTask = new UpdateTournamentTask(client, tournamentId, this);
                 updateTask.execute();
             }
         }
@@ -496,7 +497,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            MageFrame.getSession().quitTournament(tournamentId);
+            MageFrame.getClient().quitTournament(tournamentId);
         }
 
     }//GEN-LAST:event_btnQuitTournamentActionPerformed
@@ -673,14 +674,14 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
 class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
 
-    private final Session session;
+    private final Client client;
     private final UUID tournamentId;
     private final TournamentPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 
-    UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
-        this.session = session;
+    UpdateTournamentTask(Client client, UUID tournamentId, TournamentPanel panel) {
+        this.client = client;
         this.tournamentId = tournamentId;
         this.panel = panel;
     }
@@ -688,7 +689,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTournament(tournamentId));    
+            this.publish(client.getTournament(tournamentId));    
             Thread.sleep(2000);
         }
         return null;

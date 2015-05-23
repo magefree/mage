@@ -179,7 +179,8 @@ public class User {
         if (isConnected()) {
             Session session = SessionManager.getInstance().getSession(sessionId);
             if (session != null) {
-                session.fireCallback(call);
+                
+//                session.fireCallback(call);
             }
         }
     }

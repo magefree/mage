@@ -45,10 +45,11 @@ import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
 import mage.client.components.tray.MageTray;
 import mage.client.util.audio.AudioManager;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.SeatView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -61,14 +62,14 @@ public class TableWaitingDialog extends MageDialog {
     private UUID tableId;
     private UUID roomId;
     private boolean isTournament;
-    private Session session;
+    private Client client;
     private final TableWaitModel tableWaitModel;
     private UpdateSeatsTask updateTask;
 
     /** Creates new form TableWaitingDialog */
     public TableWaitingDialog() {
 
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         tableWaitModel = new TableWaitModel();
 
         initComponents();
@@ -113,9 +114,9 @@ public class TableWaitingDialog extends MageDialog {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
-        session = MageFrame.getSession();
-        updateTask = new UpdateSeatsTask(session, roomId, tableId, this);
-        if (session.isTableOwner(roomId, tableId)) {
+        client = MageFrame.getClient();
+        updateTask = new UpdateSeatsTask(client, roomId, tableId, this);
+        if (client.isTableOwner(roomId, tableId)) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
             this.btnMoveUp.setVisible(true);
@@ -124,7 +125,7 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        UUID chatId = session.getTableChatId(tableId);
+        UUID chatId = client.getTableChatId(tableId);
         if (chatId != null) {
             this.chatPanel.connect(chatId);
             updateTask.execute();
@@ -245,12 +246,12 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
-            if (session.startMatch(roomId, tableId)) {
+            if (client.startMatch(roomId, tableId)) {
                 closeDialog();
             }
         }
         else {
-            if (session.startTournament(roomId, tableId)) {
+            if (client.startTournament(roomId, tableId)) {
                 closeDialog();
             }
         }            
@@ -258,7 +259,7 @@ public class TableWaitingDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         try {
-            if (!session.leaveTable(roomId, tableId)) {
+            if (!client.leaveTable(roomId, tableId)) {
                 return; // already started, so leave no more possible
             }
         } catch (Exception e) {
@@ -271,7 +272,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row < this.tableSeats.getRowCount() - 1) {
-            session.swapSeats(roomId, tableId, row, row + 1);
+            client.swapSeats(roomId, tableId, row, row + 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
         }
 
@@ -280,7 +281,7 @@ public class TableWaitingDialog extends MageDialog {
     private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
         int row = this.tableSeats.getSelectedRow();
         if (row > 0) {
-            session.swapSeats(roomId, tableId, row, row - 1);
+            client.swapSeats(roomId, tableId, row, row - 1);
             this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
         }
     }//GEN-LAST:event_btnMoveUpActionPerformed
@@ -363,7 +364,7 @@ class TableWaitModel extends AbstractTableModel {
 
 class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
-    private final Session session;
+    private final Client client;
     private final UUID roomId;
     private final UUID tableId;
     private final TableWaitingDialog dialog;
@@ -371,8 +372,8 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
 
     private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
-    UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
-        this.session = session;
+    UpdateSeatsTask(Client client, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
+        this.client = client;
         this.roomId = roomId;
         this.tableId = tableId;
         this.dialog = dialog;
@@ -381,7 +382,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTable(roomId, tableId));
+            this.publish(client.getTable(roomId, tableId));
             Thread.sleep(1000);
         }
         return null;

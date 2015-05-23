@@ -55,11 +55,12 @@ import mage.game.draft.DraftOptions;
 import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 
 /**
@@ -73,7 +74,7 @@ public class NewTournamentDialog extends MageDialog {
     private TableView table;
     private UUID playerId;
     private UUID roomId;
-    private final Session session;
+    private final Client client;
     private String lastSessionId;
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
@@ -85,7 +86,7 @@ public class NewTournamentDialog extends MageDialog {
     /** Creates new form NewTournamentDialog */
     public NewTournamentDialog() {
         initComponents();
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         lastSessionId = "";
         txtName.setText("Tournament");
         this.spnNumWins.setModel(new SpinnerNumberModel(2, 1, 5, 1));
@@ -96,18 +97,17 @@ public class NewTournamentDialog extends MageDialog {
 
     public void showDialog(UUID roomId) {
         this.roomId = roomId;
-        if (!lastSessionId.equals(MageFrame.getSession().getSessionId())) {
-            lastSessionId = session.getSessionId();
-            this.player1Panel.setPlayerName(session.getUserName());
+        if (!lastSessionId.equals(MageFrame.getClient().getSessionId())) {
+            lastSessionId = client.getSessionId();
+            this.player1Panel.setPlayerName(client.getUserName());
             this.player1Panel.showLevel(false); // no computer
-            cbTournamentType.setModel(new DefaultComboBoxModel(session.getTournamentTypes().toArray()));
+            cbTournamentType.setModel(new DefaultComboBoxModel(client.getServerState().getTournamentTypes().toArray()));
 
-            cbGameType.setModel(new DefaultComboBoxModel(session.getTournamentGameTypes().toArray()));
-            cbDeckType.setModel(new DefaultComboBoxModel(session.getDeckTypes()));
+            cbGameType.setModel(new DefaultComboBoxModel(client.getServerState().getTournamentGameTypes().toArray()));
+            cbDeckType.setModel(new DefaultComboBoxModel(client.getServerState().getDeckTypes()));
 
             cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
-            cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));
-            cbDraftCube.setModel(new DefaultComboBoxModel(session.getDraftCubes()));
+            cbDraftCube.setModel(new DefaultComboBoxModel(client.getServerState().getDraftCubes()));
             cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
             // update player types
             int i=2;
@@ -537,12 +537,12 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         saveTournamentSettingsToPrefs(tOptions);
 
-        table = session.createTournamentTable(roomId, tOptions);
+        table = client.createTournamentTable(roomId, tOptions);
         if (table == null) {
             // message must be send by server!
             return;
         }
-        if (session.joinTournamentTable(
+        if (client.joinTournamentTable(
                 roomId,
                 table.getTableId(),
                 this.player1Panel.getPlayerName(), 
@@ -553,7 +553,7 @@ public class NewTournamentDialog extends MageDialog {
                 if (!player.getPlayerType().toString().equals("Human")) {
                     if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()))) {
                         // error message must be send by sever
-                        session.removeTable(roomId, table.getTableId());
+                        client.removeTable(roomId, table.getTableId());
                         table = null;
                         return;
                     }
@@ -563,7 +563,7 @@ public class NewTournamentDialog extends MageDialog {
             return;
         }
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
-        session.removeTable(roomId, table.getTableId());
+        client.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOkActionPerformed
 
@@ -799,7 +799,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         this.spnConstructTime.setValue(constructionTime);
         String tournamentTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, "Sealed Elimination");
-        for (TournamentTypeView tournamentTypeView : session.getTournamentTypes()) {
+        for (TournamentTypeView tournamentTypeView : client.getServerState().getTournamentTypes()) {
             if (tournamentTypeView.getName().equals(tournamentTypeName)) {
                 cbTournamentType.setSelectedItem(tournamentTypeView);
                 break;

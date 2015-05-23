@@ -45,10 +45,11 @@ import static javax.swing.JTable.AUTO_RESIZE_OFF;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.TableView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -93,8 +94,8 @@ public class ConsolePanel extends javax.swing.JPanel {
 
 
     public void start() {
-        updateUsersTask = new UpdateUsersTask(ConsoleFrame.getSession(), this);
-        updateTablesTask = new UpdateTablesTask(ConsoleFrame.getSession(), ConsoleFrame.getSession().getMainRoomId(), this);
+        updateUsersTask = new UpdateUsersTask(ConsoleFrame.getClient(), this);
+        updateTablesTask = new UpdateTablesTask(ConsoleFrame.getClient(), ConsoleFrame.getClient().getMainRoomId(), this);
         updateUsersTask.execute();
         updateTablesTask.execute();
     }
@@ -268,17 +269,17 @@ public class ConsolePanel extends javax.swing.JPanel {
 
     private void btnDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisconnectActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().disconnectUser((String)tableUserModel.getValueAt(row, 3));
+        ConsoleFrame.getClient().disconnectUser((String)tableUserModel.getValueAt(row, 3));
     }//GEN-LAST:event_btnDisconnectActionPerformed
 
     private void btnRemoveTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTableActionPerformed
         int row = this.tblTables.convertRowIndexToModel(tblTables.getSelectedRow());
-        ConsoleFrame.getSession().removeTable((UUID)tableTableModel.getValueAt(row, 7));
+        ConsoleFrame.getClient().removeTable((UUID)tableTableModel.getValueAt(row, 7));
     }//GEN-LAST:event_btnRemoveTableActionPerformed
 
     private void btnEndSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndSessionActionPerformed
         int row = this.tblUsers.convertRowIndexToModel(tblUsers.getSelectedRow());
-        ConsoleFrame.getSession().endUserSession((String) tableUserModel.getValueAt(row, 3));
+        ConsoleFrame.getClient().endUserSession((String) tableUserModel.getValueAt(row, 3));
     }//GEN-LAST:event_btnEndSessionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -433,21 +434,21 @@ class TableTableModel extends AbstractTableModel {
 
 class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 
-    private final Session session;
+    private final Client client;
     private final ConsolePanel panel;
     private List<UserView> previousUsers;
 
     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
 
-    UpdateUsersTask(Session session, ConsolePanel panel) {
-        this.session = session;
+    UpdateUsersTask(Client client, ConsolePanel panel) {
+        this.client = client;
         this.panel = panel;
     }
 
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            List<UserView> users = session.getUsers();
+            List<UserView> users = client.getUsers();
 
             if (previousUsers == null || checkUserListChanged(users)) {
                 logger.debug("Need to update the user list");
@@ -503,14 +504,14 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
-    private final Session session;
+    private final Client client;
     private final UUID roomId;
     private final ConsolePanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
-    UpdateTablesTask(Session session, UUID roomId, ConsolePanel panel) {
-        this.session = session;
+    UpdateTablesTask(Client client, UUID roomId, ConsolePanel panel) {
+        this.client = client;
         this.roomId = roomId;
         this.panel = panel;
     }
@@ -518,7 +519,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTables(roomId));
+            this.publish(client.getTables(roomId));
             Thread.sleep(3000);
         }
         return null;

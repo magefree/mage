@@ -53,7 +53,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
 import mage.constants.ManaType;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
 import mage.view.CardView;
 import mage.view.ManaPoolView;
@@ -73,6 +73,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.mage.network.Client;
 
 /**
  * Enhanced player pane.
@@ -83,7 +84,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private UUID playerId;
     private UUID gameId;
-    private Session session;
+    private Client client;
     private PlayerView player;
 
     private BigCard bigCard;
@@ -118,8 +119,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
-        session = MageFrame.getSession();
-        cheat.setVisible(session.isTestMode());
+        client = MageFrame.getClient();
+        cheat.setVisible(client.getServerState().isTestMode());
         cheat.setFocusable(false);
 
         if (priorityTime > 0) {
@@ -347,7 +348,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         avatar.setObserver(new Command() {
             @Override
             public void execute() {
-                session.sendPlayerUUID(gameId, playerId);
+                client.sendPlayerUUID(gameId, playerId);
             }
         });
         // timer area /small layout)
@@ -467,7 +468,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         btnPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                session.sendPlayerUUID(gameId, playerId);
+                client.sendPlayerUUID(gameId, playerId);
             }
         });
 
@@ -783,7 +784,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnManaActionPerformed(ManaType manaType) {
-        session.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
+        client.sendPlayerManaType(gameId, player.getPlayerId(), manaType);
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
@@ -804,7 +805,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
         DckDeckImporter deckImporter = new DckDeckImporter();
-        session.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
+        client.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
     }
 
     public PlayerView getPlayer() {

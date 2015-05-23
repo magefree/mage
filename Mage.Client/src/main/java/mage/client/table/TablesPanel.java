@@ -88,12 +88,13 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.SkillLevel;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.Util;
+import org.mage.network.Client;
 
 /**
  *
@@ -113,7 +114,7 @@ public class TablesPanel extends javax.swing.JPanel {
     private NewTableDialog newTableDialog;
     private NewTournamentDialog newTournamentDialog;
     private GameChooser gameChooser;
-    private Session session;
+    private Client client;
     private List<String> messages;
     private int currentMessage;
     private MageTableRowSorter activeTablesSorter;
@@ -128,7 +129,7 @@ public class TablesPanel extends javax.swing.JPanel {
         gameChooser = new GameChooser();
 
         initComponents();
-        tableModel.setSession(session);
+        tableModel.setClient(client);
 
         tableTables.createDefaultColumnsFromModel();
         
@@ -174,7 +175,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 String owner = (String)tableModel.getValueAt(modelRow, TableTableModel.COLUMN_OWNER);
                 switch (action) {
                     case "Join":
-                        if (owner.equals(session.getUserName()) || owner.startsWith(session.getUserName() + ",")) {
+                        if (owner.equals(client.getUserName())) {
                             try {
                                 JDesktopPane desktopPane = (JDesktopPane) MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
                                 JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -199,7 +200,7 @@ public class TablesPanel extends javax.swing.JPanel {
                             logger.info("Joining tournament " + tableId);
                             if (deckType.startsWith("Limited")) {
                                 if (!status.endsWith("PW")) {
-                                    session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1, null, "");
+                                    client.joinTournamentTable(roomId, tableId, client.getUserName(), "Human", 1, null, "");
                                 } else {
                                     joinTableDialog.showDialog(roomId, tableId, true, deckType.startsWith("Limited"));
                                 }
@@ -213,24 +214,24 @@ public class TablesPanel extends javax.swing.JPanel {
                         break;
                     case "Remove":
                         if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            session.removeTable(roomId, tableId);
+                            client.removeTable(roomId, tableId);
                         }  
                         break;
                     case "Show":
                         if (isTournament) {
                             logger.info("Showing tournament table " + tableId);
-                            session.watchTable(roomId, tableId);
+                            client.watchTable(roomId, tableId);
                         }  
                         break;
                     case "Watch":
                         if (!isTournament) {
                             logger.info("Watching table " + tableId);
-                            session.watchTable(roomId, tableId);
+                            client.watchTable(roomId, tableId);
                         }  
                         break;
                     case "Replay":
                         logger.info("Replaying game " + gameId);
-                        session.replayGame(gameId);
+                        client.replayGame(gameId);
                         break;
                 }
              }
@@ -249,7 +250,7 @@ public class TablesPanel extends javax.swing.JPanel {
                         List<UUID> gameList  = matchesModel.getListofGames(modelRow);
                         if (gameList != null && gameList.size() > 0) {
                             if (gameList.size() == 1) {
-                                session.replayGame(gameList.get(0));
+                                client.replayGame(gameList.get(0));
                             }
                             else {
                                 gameChooser.show(gameList, MageFrame.getDesktop().getMousePosition());
@@ -260,7 +261,7 @@ public class TablesPanel extends javax.swing.JPanel {
                     case "Show":;
                         if (matchesModel.isTournament(modelRow)) {
                             logger.info("Showing tournament table " + matchesModel.getTableId(modelRow));
-                            session.watchTable(roomId, matchesModel.getTableId(modelRow));
+                            client.watchTable(roomId, matchesModel.getTableId(modelRow));
                         }                         
                         break;
                 }
@@ -387,18 +388,18 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void startTasks() {
-        if (session != null) {
+        if (client != null) {
             if (updateTablesTask == null || updateTablesTask.isDone()) {
-                updateTablesTask = new UpdateTablesTask(session, roomId, this);
+                updateTablesTask = new UpdateTablesTask(client, roomId, this);
                 updateTablesTask.execute();
             }
             if (updatePlayersTask == null || updatePlayersTask.isDone()) {
-                updatePlayersTask = new UpdatePlayersTask(session, roomId, this.chatPanel);
+                updatePlayersTask = new UpdatePlayersTask(client, roomId, this.chatPanel);
                 updatePlayersTask.execute();
             }
             if (this.btnStateFinished.isSelected()) {
                 if (updateMatchesTask == null || updateMatchesTask.isDone()) {
-                    updateMatchesTask = new UpdateMatchesTask(session, roomId, this);
+                    updateMatchesTask = new UpdateMatchesTask(client, roomId, this);
                     updateMatchesTask.execute();
                 }
             }
@@ -424,12 +425,12 @@ public class TablesPanel extends javax.swing.JPanel {
 
     public void showTables(UUID roomId) {
         this.roomId = roomId;
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         UUID chatRoomId = null;
-        if (session != null) {
-            btnQuickStart.setVisible(session.isTestMode());
-            gameChooser.init(session);
-            chatRoomId = session.getRoomChatId(roomId);
+        if (client != null) {
+            btnQuickStart.setVisible(client.getServerState().isTestMode());
+            gameChooser.init(client);
+            chatRoomId = client.getRoomChatId(roomId);
         }
         if (newTableDialog == null) {
             newTableDialog = new NewTableDialog();
@@ -451,7 +452,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             hideTables();
         }
-        tableModel.setSession(session);
+        tableModel.setClient(client);
 
         reloadMessages();
 
@@ -469,7 +470,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
     protected void reloadMessages() {
         // reload server messages
-        List<String> serverMessages = session.getServerMessages();
+        List<String> serverMessages = client.getServerMessages();
         synchronized (this) {
             this.messages = serverMessages;
             this.currentMessage = 0;
@@ -1156,11 +1157,11 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setWinsNeeded(1);
                 options.setMatchTimeLimit(MatchTimeLimit.NONE);
                 options.setFreeMulligans(2);
-                table = session.createTable(roomId,    options);
+                table = client.createTable(roomId,    options);
 
-                session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
-                session.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");
-                session.startMatch(roomId, table.getTableId());
+                client.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
+                client.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");
+                client.startMatch(roomId, table.getTableId());
             } catch (HeadlessException ex) {
                 handleError(ex);
             }
@@ -1266,7 +1267,7 @@ class TableTableModel extends AbstractTableModel {
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
 
-    private Session session;
+    private Client client;
     
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
@@ -1308,8 +1309,8 @@ class TableTableModel extends AbstractTableModel {
         return columnNames.length;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override
@@ -1336,7 +1337,7 @@ class TableTableModel extends AbstractTableModel {
 
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
-                        if (session != null && owner.equals(session.getUserName())) {
+                        if (client != null && owner.equals(client.getUserName())) {
                             return "";
                         }
                         return "Join";
@@ -1350,7 +1351,7 @@ class TableTableModel extends AbstractTableModel {
                             return "Show";
                         } else {
                             owner = tables[arg0].getControllerName();
-                            if (session != null && owner.equals(session.getUserName())) {
+                            if (client != null && owner.equals(client.getUserName())) {
                                   return "";
                             }
                             return "Watch";
@@ -1403,7 +1404,7 @@ class TableTableModel extends AbstractTableModel {
 
 class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
-    private final Session session;
+    private final Client client;
     private final UUID roomId;
     private final TablesPanel panel;
 
@@ -1411,8 +1412,8 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
     private int count = 0;
 
-    UpdateTablesTask(Session session, UUID roomId, TablesPanel panel) {
-        this.session = session;
+    UpdateTablesTask(Client client, UUID roomId, TablesPanel panel) {
+        this.client = client;
         this.roomId = roomId;
         this.panel = panel;
     }
@@ -1420,7 +1421,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<TableView> tables = session.getTables(roomId);
+            Collection<TableView> tables = client.getTables(roomId);
             if (tables != null) {
                 this.publish(tables);
             }
@@ -1452,14 +1453,14 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
 
 class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
 
-    private final Session session;
+    private final Client client;
     private final UUID roomId;
     private final ChatPanel chat;
 
     private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
-    UpdatePlayersTask(Session session, UUID roomId, ChatPanel chat) {
-        this.session = session;
+    UpdatePlayersTask(Client client, UUID roomId, ChatPanel chat) {
+        this.client = client;
         this.roomId = roomId;
         this.chat = chat;
     }
@@ -1467,7 +1468,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<RoomUsersView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getRoomUsers(roomId));
+            this.publish(client.getRoomUsers(roomId));
             Thread.sleep(3000);
         }
         return null;
@@ -1593,14 +1594,14 @@ class MatchesTableModel extends AbstractTableModel {
 
 class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
 
-    private final Session session;
+    private final Client client;
     private final UUID roomId;
     private final TablesPanel panel;
 
     private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
-    UpdateMatchesTask(Session session, UUID roomId, TablesPanel panel) {
-        this.session = session;
+    UpdateMatchesTask(Client client, UUID roomId, TablesPanel panel) {
+        this.client = client;
         this.roomId = roomId;
         this.panel = panel;
     }
@@ -1608,7 +1609,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            Collection<MatchView> matches = session.getFinishedMatches(roomId);
+            Collection<MatchView> matches = client.getFinishedMatches(roomId);
             if (matches != null) {
                 this.publish(matches);
             }
@@ -1635,10 +1636,10 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
 
 class GameChooser extends JPopupMenu {
 
-    private Session session;
+    private Client client;
 
-    public void init(Session session) {
-        this.session = session;
+    public void init(Client client) {
+        this.client = client;
     }
 
     public void show(List<UUID> games, Point p) {
@@ -1664,7 +1665,7 @@ class GameChooser extends JPopupMenu {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            session.replayGame(id);
+            client.replayGame(id);
             setVisible(false);
         }
 

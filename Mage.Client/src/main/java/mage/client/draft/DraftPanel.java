@@ -63,12 +63,13 @@ import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.BufferedImageBuilder;
-import mage.remote.Session;
+//import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.SimpleCardView;
 import mage.view.SimpleCardsView;
+import org.mage.network.Client;
 
 /**
  *
@@ -77,7 +78,7 @@ import mage.view.SimpleCardsView;
 public class DraftPanel extends javax.swing.JPanel {
 
     private UUID draftId;
-    private Session session;
+    private Client client;
     private Timer countdown;
     private int timeout;
 
@@ -144,9 +145,9 @@ public class DraftPanel extends javax.swing.JPanel {
 
     public synchronized void showDraft(UUID draftId) {
         this.draftId = draftId;
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
         MageFrame.addDraft(draftId, this);
-        if (!session.joinDraft(draftId)) {
+        if (!client.joinDraft(draftId)) {
             hideDraft();
         }
     }
@@ -270,7 +271,7 @@ public class DraftPanel extends javax.swing.JPanel {
                 public void event(Event event) {
                     if (event.getEventName().equals("pick-a-card")) {
                         SimpleCardView source = (SimpleCardView) event.getSource();
-                        DraftPickView view = session.sendCardPick(draftId, source.getId(), cardsHidden);
+                        DraftPickView view = client.sendCardPick(draftId, source.getId(), cardsHidden);
                         if (view != null) {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(emptyView, bigCard);                            
@@ -280,7 +281,7 @@ public class DraftPanel extends javax.swing.JPanel {
                     }
                     if (event.getEventName().equals("mark-a-card")) {
                         SimpleCardView source = (SimpleCardView) event.getSource();
-                        session.sendCardMark(draftId, source.getId());
+                        client.sendCardMark(draftId, source.getId());
                     }
                 }
             }
@@ -764,7 +765,7 @@ public class DraftPanel extends javax.swing.JPanel {
 
     private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            MageFrame.getSession().quitDraft(draftId);
+            MageFrame.getClient().quitDraft(draftId);
             MageFrame.removeDraft(draftId);
         }
     }//GEN-LAST:event_btnQuitTournamentActionPerformed

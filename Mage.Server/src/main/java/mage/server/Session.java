@@ -63,24 +63,25 @@ public class Session {
     private int messageId = 0;
     private final Date timeConnected;
     private boolean isAdmin = false;
-    private final AsynchInvokerCallbackHandler callbackHandler;
+//    private final AsynchInvokerCallbackHandler callbackHandler;
 
     private final ReentrantLock lock;
 
-    public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
+    public Session(String sessionId) {
         this.sessionId = sessionId;
-        this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
+//        this.callbackHandler = (AsynchInvokerCallbackHandler) callbackHandler;
         this.isAdmin = false;
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
     }
 
     public String registerUser(String userName) throws MageException {
-        String returnMessage = registerUserHandling(userName);
-        if (returnMessage != null) {
-            sendErrorMessageToClient(returnMessage);
-        }
-        return returnMessage;
+//        String returnMessage = registerUserHandling(userName);
+//        if (returnMessage != null) {
+//            sendErrorMessageToClient(returnMessage);
+//        }
+//        return returnMessage;
+        return registerUserHandling(userName);
     }
 
     public boolean isLocked() {
@@ -271,19 +272,19 @@ public class Session {
 
     }
 
-    public void fireCallback(final ClientCallback call) {
-        try {
-            call.setMessageId(messageId++);
-            callbackHandler.handleCallbackOneway(new Callback(call));
-        } catch (HandleCallbackException ex) {
-            User user = UserManager.getInstance().getUser(userId);
-            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
-            logger.warn(" - method: " + call.getMethod());
-            logger.warn(" - cause: " + getBasicCause(ex).toString());
-            logger.trace("Stack trace:", ex);
-            userLostConnection();
-        }
-    }
+//    public void fireCallback(final ClientCallback call) {
+//        try {
+//            call.setMessageId(messageId++);
+//            callbackHandler.handleCallbackOneway(new Callback(call));
+//        } catch (HandleCallbackException ex) {
+//            User user = UserManager.getInstance().getUser(userId);
+//            logger.warn("SESSION CALLBACK EXCEPTION - " + (user != null ? user.getName():"") + " userId " + userId);
+//            logger.warn(" - method: " + call.getMethod());
+//            logger.warn(" - cause: " + getBasicCause(ex).toString());
+//            logger.trace("Stack trace:", ex);
+//            userLostConnection();
+//        }
+//    }
 
     public UUID getUserId() {
         return userId;
@@ -305,12 +306,12 @@ public class Session {
         this.host = hostAddress;
     }
 
-    void sendErrorMessageToClient(String message) {
-        List<String> messageData = new LinkedList<>();
-        messageData.add("Error while connecting to server");
-        messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData));
-    }
+//    void sendErrorMessageToClient(String message) {
+//        List<String> messageData = new LinkedList<>();
+//        messageData.add("Error while connecting to server");
+//        messageData.add(message);
+//        fireCallback(new ClientCallback("showUserMessage", null, messageData));
+//    }
 
     public static Throwable getBasicCause(Throwable cause) {
         Throwable t = cause;

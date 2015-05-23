@@ -49,8 +49,9 @@ import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.constants.PlayerAction;
-import mage.remote.Session;
+//import mage.remote.Session;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
 
 /**
  *
@@ -65,7 +66,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     private UUID gameId;
-    private Session session;
+    private Client client;
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanel connectedChatPanel;
@@ -81,7 +82,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void init(UUID gameId) {
         this.gameId = gameId;
-        session = MageFrame.getSession();
+        client = MageFrame.getClient();
     }
 
     public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
@@ -273,29 +274,29 @@ public class FeedbackPanel extends javax.swing.JPanel {
             connectedDialog = null;
         }
         if (mode == FeedbackMode.SELECT && (evt.getModifiers() & ActionEvent.CTRL_MASK) == ActionEvent.CTRL_MASK) {
-            session.sendPlayerInteger(gameId, 0);
+            client.sendPlayerInteger(gameId, 0);
         } else if (mode == FeedbackMode.END) {
             GamePanel gamePanel = MageFrame.getGame(gameId);
             if (gamePanel != null) {
                 gamePanel.removeGame();
             }
         } else {
-            session.sendPlayerBoolean(gameId, false);
+            client.sendPlayerBoolean(gameId, false);
         }
         //AudioManager.playButtonOk();
     }//GEN-LAST:event_btnRightActionPerformed
 
     private void btnLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftActionPerformed
-        session.sendPlayerBoolean(gameId, true);
+        client.sendPlayerBoolean(gameId, true);
         AudioManager.playButtonCancel();
     }//GEN-LAST:event_btnLeftActionPerformed
 
     private void btnSpecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
-        session.sendPlayerString(gameId, "special");
+        client.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
     private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        session.sendPlayerAction(PlayerAction.UNDO, gameId, null);
+        client.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
     public void setHelperPanel(HelperPanel helper) {

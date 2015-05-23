@@ -36,6 +36,7 @@ package mage.server.console;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -44,13 +45,17 @@ import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import mage.interfaces.MageClient;
-import mage.interfaces.callback.ClientCallback;
+import mage.interfaces.ServerState;
+//import mage.interfaces.MageClient;
+//import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
-import mage.remote.Session;
-import mage.remote.SessionImpl;
+//import mage.remote.Session;
+//import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
+import org.mage.network.Client;
+import org.mage.network.interfaces.MageClient;
+import org.mage.network.model.MessageType;
 
 /**
  *
@@ -60,7 +65,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     private static final Logger logger = Logger.getLogger(ConsoleFrame.class);
 
-    private static Session session;
+    private static Client client;
     private ConnectDialog connectDialog;
     private static final Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
     private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH, MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
@@ -69,15 +74,14 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     /**
      * @return the session
      */
-    public static Session getSession() {
-        return session;
+    public static Client getClient() {
+        return client;
     }
 
     public static Preferences getPreferences() {
         return prefs;
     }
 
-    @Override
     public MageVersion getVersion() {
         return version;
     }
@@ -95,22 +99,22 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         initComponents();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            session = new SessionImpl(this);
+            client = new Client();
             connectDialog = new ConnectDialog();
         } catch (Exception ex) {
             logger.fatal("", ex);
         }
         
-        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                session.ping();
-            }
-        }, 60, 60, TimeUnit.SECONDS);        
+//        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
+//            @Override
+//            public void run() {
+//                session.ping();
+//            }
+//        }, 60, 60, TimeUnit.SECONDS);        
     }
 
    public boolean connect(Connection connection) {
-        if (session.connect(connection)) {
+        if (client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), version, this)) {
             this.consolePanel1.start();
             return true;
         }
@@ -200,10 +204,10 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-        if (session.isConnected()) {
+        if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 this.consolePanel1.stop();
-                session.disconnect(false);
+                client.disconnect();
             }
         } else {
             connectDialog.showDialog(this);
@@ -213,7 +217,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private void btnSendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMessageActionPerformed
         String message = JOptionPane.showInputDialog(null, "Type message to send", "Broadcast message", JOptionPane.INFORMATION_MESSAGE);
         if (message != null) {
-            session.sendBroadcastMessage(message);
+            client.sendBroadcastMessage(message);
         }
     }//GEN-LAST:event_btnSendMessageActionPerformed
 
@@ -262,7 +266,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
     public void disconnected(boolean errorCall) {
         if (SwingUtilities.isEventDispatchThread()) {
             consolePanel1.stop();
@@ -281,7 +284,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
     public void showMessage(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(this, message);
@@ -296,7 +298,6 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
     public void showError(final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
             JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -311,16 +312,16 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    @Override
-    public void processCallback(ClientCallback callback) {
-    }
+//    @Override
+//    public void processCallback(ClientCallback callback) {
+//    }
 
     public void exitApp() {
-        if (session.isConnected()) {
+        if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            session.disconnect(false);
+            client.disconnect();
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
@@ -328,5 +329,30 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         }
         dispose();
         System.exit(0);
+    }
+
+    @Override
+    public void inform(String message, MessageType type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void receiveChatMessage(UUID chatId, String user, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void receiveBroadcastMessage(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setServerState(ServerState state) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ServerState getServerState() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -62,7 +62,7 @@ public class TablesPane extends MagePane {
     }
 
     public void showTables() {
-        UUID roomId = MageFrame.getSession().getMainRoomId();
+        UUID roomId = MageFrame.getClient().getServerState().getMainRoomId();
         if (roomId != null) {
             this.setTitle("Tables");
             tablesPanel.showTables(roomId);
