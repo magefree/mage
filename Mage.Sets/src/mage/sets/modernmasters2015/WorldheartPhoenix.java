@@ -31,11 +31,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -112,6 +110,7 @@ public class WorldheartPhoenix extends CardImpl {
                 if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                     Player player = game.getPlayer(affectedControllerId);
                     if (player != null) {
+                        // can sometimes be cast with base mana cost from grave????
                         player.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
                         return true;
                     }
