@@ -25,54 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.restriction;
 
-package mage.sets.mirrodin;
-
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class Arrest extends CardImpl {
 
-    public Arrest (UUID ownerId) {
-        super(ownerId, 2, "Arrest", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
-        this.expansionSetCode = "MRD";
-        this.subtype.add("Aura");
+public class ArrestTest extends CardTestPlayerBase {
 
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+    @Test
+    public void testArrest1() {
+        addCard(Zone.HAND, playerA, "Arrest");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
 
-        //Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
-    }
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
+        // {3}{G}: Put a 1/1 green Saproling creature token onto the battlefield.
+        // {3}{W}: Creatures you control get +1/+1 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Selesnya Guildmage");
 
-    public Arrest (final Arrest card) {
-        super(card);
-    }
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Arrest", "Selesnya Guildmage");
+        attack(2, playerB, "Selesnya Guildmage");
 
-    @Override
-    public Arrest copy() {
-        return new Arrest(this);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Arrest", 1);
+        assertPermanentCount(playerB, "Saproling", 0); // can't use ability so no Saproling
+
+        assertLife(playerA, 20); // can't attack so no damage to player
+        assertLife(playerB, 20);
+
     }
 
 }

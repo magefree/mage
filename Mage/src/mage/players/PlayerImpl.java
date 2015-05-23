@@ -2442,11 +2442,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             // eliminate duplicate activated abilities
             Map<String, Ability> playableActivated = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                for (ActivatedAbility ability : permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+                LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(permanent, Zone.BATTLEFIELD, game);
+                for (ActivatedAbility ability : useableAbilities.values()) {
                     if (!playableActivated.containsKey(ability.toString())) {
-                        if (canPlay(ability, availableMana, permanent, game)) {
-                            playableActivated.put(ability.toString(), ability);
-                        }
+                        playableActivated.put(ability.toString(), ability);
                     }
                 }
             }
@@ -2853,13 +2852,13 @@ public abstract class PlayerImpl implements Player, Serializable {
             case EXILED: 
                 boolean result = false;
                 for(Card card: cards) {
-                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, true);
+                    result |= moveCardToExileWithInfo(card, null, "", source == null ? null : source.getSourceId(), game, fromZone, true);
                 }
                 return result;                
             case GRAVEYARD: 
                 return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
             case HAND:
-                boolean result = false;
+                result = false;
                 for(Card card: cards) {
                     result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone);
                 }
