@@ -502,10 +502,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     
     /**
-     * Moves 1 to n cards to the graveyard. The owner of the cards may determine the order,
-     * if more than one card is moved to graveyard.
-     * Uses card.moveToZone and posts a inform message about moving the card to graveyard
-     * into the game log
+     * Internal used to move cards
+     * Use commonly player.moveCards()
      *
      * @param cards
      * @param source
@@ -513,7 +511,6 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return
      */
-    boolean moveCardsToGraveyardWithInfo(Cards cards, Ability source, Game game, Zone fromZone);
     boolean moveCardsToGraveyardWithInfo(List<Card> cards, Ability source, Game game, Zone fromZone);
 
     /**

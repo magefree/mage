@@ -108,27 +108,23 @@ class BorborygmosEnragedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = new CardsImpl(Zone.PICK);
-            int count = Math.min(player.getLibrary().size(), 3);
-            for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    cards.add(card);
-                    game.setZone(card.getId(), Zone.PICK);
-                    if (card.getCardType().contains(CardType.LAND)) {
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                    } else {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    }
-                }
-            }
-
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Cards cards = new CardsImpl();
+            cards.addAll(controller.getLibrary().getTopCards(game, 3));
             if (!cards.isEmpty()) {
-                player.revealCards("Borborygmous Enraged", cards, game);
-                return true;
+                controller.revealCards("Borborygmous Enraged", cards, game);
+                Cards landCards = new CardsImpl();
+                for(Card card: cards.getCards(game) ) {
+                    if (card.getCardType().contains(CardType.LAND)) {
+                        landCards.add(card);
+                        cards.remove(card);
+                    }                    
+                }
+                controller.moveCards(landCards, Zone.LIBRARY, Zone.HAND, source, game);
+                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
+            return true;
         }
         return false;
     }

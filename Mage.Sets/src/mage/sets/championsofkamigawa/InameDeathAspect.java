@@ -37,6 +37,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
@@ -99,12 +101,7 @@ class InameDeathAspectEffect extends SearchEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                for (UUID cardId: target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    }
-                }
+                player.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             player.shuffleLibrary(game);
             return true;

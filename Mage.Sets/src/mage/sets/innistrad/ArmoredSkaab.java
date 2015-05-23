@@ -70,36 +70,3 @@ public class ArmoredSkaab extends CardImpl {
         return new ArmoredSkaab(this);
     }
 }
-
-class ArmoredSkaabEffect extends OneShotEffect {
-
-    public ArmoredSkaabEffect() {
-        super(Outcome.Discard);
-        this.staticText = "put the top four cards of your library into your graveyard";
-    }
-
-    public ArmoredSkaabEffect(final ArmoredSkaabEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArmoredSkaabEffect copy() {
-        return new ArmoredSkaabEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int cardsCount = Math.min(4, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}

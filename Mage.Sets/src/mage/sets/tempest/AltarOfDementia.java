@@ -93,26 +93,19 @@ class AltarOfDementiaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = 0;
-        for (Cost cost: source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
-                amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
-                break;
-            }
-        }
-        if (amount > 0) {
-            Player player = game.getPlayer(source.getFirstTarget());
-            if (player != null) {
-                for (int i = 0; i<amount ; i++) {
-                    if (player.getLibrary().size() > 0) {
-                        Card card = player.getLibrary().removeFromTop(game);
-                        if (card != null) {
-                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                        }  
-                    }
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player != null) {
+            int amount = 0;
+            for (Cost cost: source.getCosts()) {
+                if (cost instanceof SacrificeTargetCost && ((SacrificeTargetCost)cost).getPermanents().size() > 0) {
+                    amount = ((SacrificeTargetCost)cost).getPermanents().get(0).getPower().getValue();
+                    break;
                 }
-                return true;
             }
+            if (amount > 0) {
+                player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            }
+            return true;            
         }
         return false;
     }

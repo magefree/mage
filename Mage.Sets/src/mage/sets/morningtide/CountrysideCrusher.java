@@ -103,23 +103,20 @@ class CountrysideCrusherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (player != null && permanent != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (controller != null && sourcePermanent != null) {
             Cards cards = new CardsImpl();
-            while (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().getFromTop(game);
+            while (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().getFromTop(game);
                 cards.add(card);
                 if (card.getCardType().contains(CardType.LAND)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                    controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 } else {
                     break;
                 }
             }
-            player.revealCards(permanent.getName(), cards, game);
+            controller.revealCards(sourcePermanent.getName(), cards, game);
             return true;
         }
         return false;

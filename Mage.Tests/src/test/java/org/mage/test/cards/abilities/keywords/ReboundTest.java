@@ -10,7 +10,15 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
+ *  702.87. Rebound
+ *      702.87a Rebound appears on some instants and sorceries. It represents a static ability that functions while 
+ *      the spell is on the stack and may create a delayed triggered ability. "Rebound" means "If this spell was cast
+ *      from your hand, instead of putting it into your graveyard as it resolves, exile it and, at the beginning of
+ *      your next upkeep, you may cast this card from exile without paying its mana cost."
+ *      702.87b Casting a card without paying its mana cost as the result of a rebound ability follows the rules for
+ *      paying alternative costs in rules 601.2b and 601.2e–g.
+ *      702.87c Multiple instances of rebound on the same spell are redundant.
+ * 
  * @author jeff
  */
 public class ReboundTest extends CardTestPlayerBase{
@@ -104,6 +112,8 @@ public class ReboundTest extends CardTestPlayerBase{
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         
         // Target creature gets +1/+0 until end of turn and is unblockable this turn.
+        // Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep,
+        //    you may cast this card from exile without paying its mana cost.)
         addCard(Zone.HAND, playerA, "Distortion Strike");       
         addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
 
@@ -113,12 +123,12 @@ public class ReboundTest extends CardTestPlayerBase{
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Memnite","Distortion Strike");
 
-        setStopAt(1, PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         
         //check exile and graveyard        
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
-        assertGraveyardCount(playerA, "Distortion Strike", 1);
         assertGraveyardCount(playerA, "Memnite", 1);
+        assertGraveyardCount(playerA, "Distortion Strike", 1);
     }      
 }

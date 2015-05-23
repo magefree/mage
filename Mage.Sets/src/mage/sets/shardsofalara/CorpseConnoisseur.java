@@ -98,24 +98,19 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
+                    if (card != null) {
+                        controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                     }
                 }
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
-        }
-        player.shuffleLibrary(game);
+        }    
         return false;
     }
 

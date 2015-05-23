@@ -201,13 +201,14 @@ public class Spell implements StackObject, Card {
                                 result |= spellAbility.resolve(game);
                             }
                         }
-//                        game.getState().handleSimultaneousEvent(game);
-//                        game.resetShortLivingLKI();
                         index++;
                     }
                 }
                 if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {
-                    card.moveToZone(Zone.GRAVEYARD, ability.getSourceId(), game, false);
+                    Player player = game.getPlayer(getControllerId());
+                    if (player != null) {
+                        player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, ability, game);
+                    }
                 }
                 return result;
             }
@@ -524,7 +525,15 @@ public class Spell implements StackObject, Card {
     public void counter(UUID sourceId, Game game) {
         this.countered = true;
         if (!isCopiedSpell()) {
-            card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
+            Player player = game.getPlayer(getControllerId());
+            if (player != null) {
+                Ability counteringAbility = null;
+                MageObject counteringObject = game.getObject(sourceId);
+                if (counteringObject instanceof StackObject) {
+                    counteringAbility = ((StackObject)counteringObject).getStackAbility();
+                }
+                player.moveCards(card, Zone.STACK, Zone.GRAVEYARD, counteringAbility, game);
+            }            
         }
     }
 

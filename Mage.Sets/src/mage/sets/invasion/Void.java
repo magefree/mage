@@ -119,7 +119,7 @@ class VoidEffect extends OneShotEffect {
             targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (filterCard.match(card, game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    targetPlayer.discard(card, source, game);
                 }
             }
         } else {

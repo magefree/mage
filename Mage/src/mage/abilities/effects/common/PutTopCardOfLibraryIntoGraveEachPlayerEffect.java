@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -106,13 +105,7 @@ public class PutTopCardOfLibraryIntoGraveEachPlayerEffect extends OneShotEffect 
     private void putCardsToGravecard(UUID playerId, Ability source, Game game) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            int cardsCount = Math.min(numberCards.calculate(game, source, this), player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                }
-            }
+            player.moveCards(player.getLibrary().getTopCards(game, numberCards.calculate(game, source, this)), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
     }
 

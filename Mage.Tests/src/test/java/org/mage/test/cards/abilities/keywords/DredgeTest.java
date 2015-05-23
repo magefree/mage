@@ -45,7 +45,38 @@ public class DredgeTest extends CardTestPlayerBase {
      */
 
     
-   /**
+    @Test
+    public void testSultaiSoothsayerWithSidisiBroodTyrant() {        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Whenever Sidisi, Brood Tyrant enters the battlefield or attacks, put the top three cards of your library into your graveyard.
+        // Whenever one or more creature cards are put into your graveyard from your library, put a 2/2 black Zombie creature token onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Sidisi, Brood Tyrant");
+        // When Sultai Soothsayer enters the battlefield, look at the top four cards of your library. 
+        // Put one of them into your hand and the rest into your graveyard.
+        addCard(Zone.HAND, playerA, "Sultai Soothsayer");
+        
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 5);
+        skipInitShuffling();
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sultai Soothsayer");
+        addTarget(playerA, "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 3);
+        
+        assertPermanentCount(playerA, "Zombie", 1); // May only be one creature
+        
+    }
+
+    /**
     *    Had a Sidisi, Brood Tyrant in play and dredge a Stinkweed Imp hitting 3 creatures.
     *    and Sidisi triggered 3 times instead of just one.
     */

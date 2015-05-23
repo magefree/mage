@@ -57,7 +57,6 @@ public class JaradsOrders extends CardImpl {
         super(ownerId, 175, "Jarad's Orders", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{G}");
         this.expansionSetCode = "RTR";
 
-
         // Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.
         this.getSpellAbility().addEffect(new JaradsOrdersEffect());
     }
@@ -91,36 +90,35 @@ class JaradsOrdersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {        
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterCreatureCard("creature cards"));
-            if (player.searchLibrary(target, game)) {
+            if (controller.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     Cards revealed = new CardsImpl();
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
-                        Card card = player.getLibrary().getCard(cardId, game);
+                        Card card = controller.getLibrary().getCard(cardId, game);
                         revealed.add(card);
                     }
-                    player.revealCards("Jarad's Orders", revealed, game);
+                    controller.revealCards("Jarad's Orders", revealed, game);
                     if (target.getTargets().size() == 2) {
                         TargetCard target2 = new TargetCard(Zone.PICK, filter);
-                        player.choose(Outcome.Benefit, revealed, target2, game);
+                        controller.choose(Outcome.Benefit, revealed, target2, game);
                         Card card = revealed.get(target2.getFirstTarget(), game);
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
                         revealed.remove(card);
                         card = revealed.getCards(game).iterator().next();
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    }
-                    else if (target.getTargets().size() == 1) {
+                        controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                    } else if (target.getTargets().size() == 1) {
                         Card card = revealed.getCards(game).iterator().next();
-                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
                     }
 
                 }
-                player.shuffleLibrary(game);
+                controller.shuffleLibrary(game);
                 return true;
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
         }
         return false;
 

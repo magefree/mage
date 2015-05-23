@@ -27,12 +27,13 @@
  */
 package mage.sets.commander;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -87,19 +88,12 @@ class BuriedAliveEffect extends SearchEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.searchLibrary(target, game)) {
-                if (target.getTargets().size() > 0) {
-                    for (UUID cardId: target.getTargets()) {
-                        Card card = player.getLibrary().remove(cardId, game);
-                        if (card != null){
-                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                        }
-                    }
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.searchLibrary(target, game)) {
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
-            player.shuffleLibrary(game);
+            controller.shuffleLibrary(game);
             return true;
         }
         return false;

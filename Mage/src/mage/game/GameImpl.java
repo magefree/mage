@@ -1204,7 +1204,7 @@ public abstract class GameImpl implements Game, Serializable {
             top.resolve(this);
         } finally {
             if (top != null) {
-                state.getStack().remove(top);
+                state.getStack().remove(top); // seems partly redundant because move card from stack to grave is already done and the stack removed 
                 rememberLKI(top.getSourceId(), Zone.STACK, top);
                 if (!getTurn().isEndTurnRequested()) {
                     while (state.hasSimultaneousEvents()) {
@@ -1739,8 +1739,7 @@ public abstract class GameImpl implements Game, Serializable {
         boolean result = false;
         if (permanent.moveToZone(Zone.GRAVEYARD, null, this, false)) {
             if (!this.isSimulation()) {
-                this.informPlayers(new StringBuilder(permanent.getLogName())
-                        .append(" is put into graveyard from battlefield").toString());
+                this.informPlayers(permanent.getLogName() + " is put into graveyard from battlefield");
             }
             result = true;
         }

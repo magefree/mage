@@ -65,8 +65,7 @@ public class PutTopCardOfLibraryIntoGraveControllerEffect extends OneShotEffect 
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            controller.moveCardsToGraveyardWithInfo(controller.getLibrary().getTopCards(game, numberCards), source, game, Zone.LIBRARY);
-            return true;
+            return controller.moveCards(controller.getLibrary().getTopCards(game, numberCards), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return false;
     }

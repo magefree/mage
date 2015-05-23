@@ -59,7 +59,6 @@ public class GuildFeud extends CardImpl {
         super(ownerId, 97, "Guild Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
         this.expansionSetCode = "RTR";
 
-
         // At the beginning of your upkeep, target opponent reveals the top three cards
         // of his or her library, may put a creature card from among them onto the battlefield,
         // then puts the rest into his or her graveyard. You do the same with the top three
@@ -101,27 +100,20 @@ class GuildFeudEffect extends OneShotEffect {
         if (opponent != null && controller != null) {
             for (int activePlayer = 0; activePlayer < 2; activePlayer++) {
                 Player player = (activePlayer == 0? opponent : controller);
-                Cards topThreeCards = new CardsImpl(Zone.PICK);
-                for (int i = 0; i < 3; i++) {
-                    if (player.getLibrary().size() > 0) {
-                        Card topCard = player.getLibrary().removeFromTop(game);
-                        if (topCard != null) {
-                            topThreeCards.add(topCard);
-                        }
-                    }
-                }
-                player.revealCards(player.getLogName() + " top three library cards", topThreeCards, game);
+                Cards topThreeCards = new CardsImpl();
+                topThreeCards.addAll(player.getLibrary().getTopCards(game, 3));
+                player.revealCards(player.getName() + " top three library cards", topThreeCards, game);
                 Card creatureToBattlefield;
                 if (!topThreeCards.isEmpty()) {
                     if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", game)) {
-                        TargetCard target = new TargetCard(Zone.PICK,
+                        TargetCard target = new TargetCard(Zone.LIBRARY,
                                 new FilterCreatureCard(
                                 "creature card to put on the battlefield"));
                         if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, game)) {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {
                                 topThreeCards.remove(creatureToBattlefield);
-                                if (creatureToBattlefield.putOntoBattlefield(game, Zone.PICK,
+                                if (creatureToBattlefield.putOntoBattlefield(game, Zone.LIBRARY,
                                         source.getSourceId(), player.getId())) {
                                     game.informPlayers("Guild Feud: " + player.getLogName() + " put " + creatureToBattlefield.getName() + " to the battlefield");
                                     if (activePlayer == 0) {
@@ -133,23 +125,14 @@ class GuildFeudEffect extends OneShotEffect {
                             }
                         }
                     }
-
-                    if (topThreeCards.size() > 0) {
-
-                        while (topThreeCards.size() > 0) {
-                            Card card = topThreeCards.get(topThreeCards.iterator().next(), game);
-                            topThreeCards.remove(card);
-                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                        }
-                    }
+                    player.moveCards(topThreeCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
             }
             // If two creatures are put onto the battlefield this way, those creatures fight each other
             if (opponentCreature != null && controllerCreature != null) {
-                int power = opponentCreature.getPower().getValue();
-                opponentCreature.damage(controllerCreature.getPower().getValue(), source.getSourceId(), game, false, true);
-                controllerCreature.damage(power, source.getSourceId(), game, false, true);
+                opponentCreature.fight(controllerCreature, source, game);
             }
+            return true;
         }
         return false;
     }

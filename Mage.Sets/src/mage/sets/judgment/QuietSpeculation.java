@@ -105,17 +105,9 @@ class SearchLibraryPutInGraveEffect extends SearchEffect {
         }
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                        cards.add(card);
-                    }
-                }
-                if (cards.size() > 0) {
-                    player.revealCards("Quiet Speculation", cards, game);
-                }
+                Cards cards = new CardsImpl(target.getTargets());
+                player.revealCards("Quiet Speculation", cards, game);
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             player.shuffleLibrary(game);
             return true;

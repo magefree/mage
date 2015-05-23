@@ -91,19 +91,8 @@ class KeeningStoneEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            Library library = player.getLibrary();
-
-            int amount = Math.min(player.getGraveyard().size(), library.size());
-            for (int i = 0; i < amount; i++) {
-                Card card = library.removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                }
-            }
-
-            if (amount > 0) {
-                return true;
-            }
+            player.moveCards(player.getLibrary().getTopCards(game, player.getGraveyard().size()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            return true;
         }
         return false;
     }

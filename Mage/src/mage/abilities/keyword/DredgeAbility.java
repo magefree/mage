@@ -104,8 +104,8 @@ class DredgeEffect extends ReplacementEffectImpl {
             }
             Cards cardsToGrave = new CardsImpl();
             cardsToGrave.addAll(player.getLibrary().getTopCards(game, amount));
-            player.moveCardsToGraveyardWithInfo(cardsToGrave, source, game, Zone.LIBRARY);
-            player.moveCardToHandWithInfo(sourceCard, source.getSourceId(), game, Zone.GRAVEYARD);
+            player.moveCards(cardsToGrave, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            player.moveCards(sourceCard, Zone.GRAVEYARD, Zone.HAND, source, game);
             return true;
         }
         return false;

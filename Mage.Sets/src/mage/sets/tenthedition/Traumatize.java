@@ -80,8 +80,7 @@ class TraumatizeEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
             int amount = player.getLibrary().size() / 2;
-            player.moveCardsToGraveyardWithInfo(player.getLibrary().getTopCards(game, amount), source, game, Zone.LIBRARY);
-            return true;
+            return player.moveCards(player.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return false;
     }

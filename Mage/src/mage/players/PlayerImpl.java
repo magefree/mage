@@ -113,6 +113,7 @@ import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -2844,14 +2845,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     
     @Override
     public boolean moveCards(List<Card> cards, Zone fromZone, Zone toZone, Ability source, Game game) {
+        if (cards.isEmpty()) {
+            return true;
+        }
+        game.fireEvent(new ZoneChangeGroupEvent(cards, source == null ? null : source.getSourceId(), this.getId(), fromZone, toZone));
         switch(toZone) {
             case GRAVEYARD: 
                 return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
             case HAND:
+                boolean result = false;
                 for(Card card: cards) {
-                    moveCardToHandWithInfo(card, playerId, game, fromZone);
+                    result |= moveCardToHandWithInfo(card, playerId, game, fromZone);
                 }
-                return true;
+                return result;
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }        
@@ -2886,33 +2892,25 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         return result;
     }
-    
-    @Override
-    public boolean moveCardsToGraveyardWithInfo(Cards allCards, Ability source, Game game, Zone fromZone) {
-        ArrayList<Card> cards = new ArrayList<>();
-        cards.addAll(allCards.getCards(game));
-        return moveCardsToGraveyardWithInfo(cards, source, game, fromZone);
-    }
-    
+       
     @Override
     public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
         while (!allCards.isEmpty()) {
             // identify cards from one owner
             Cards cards = new CardsImpl();
             UUID ownerId = null;
-            for (Card card: allCards) {
+            for (Iterator<Card> it = allCards.iterator(); it.hasNext();) {
+                Card card = it.next();
                 if (cards.isEmpty()) {
                     ownerId = card.getOwnerId();
                 }
                 if (card.getOwnerId().equals(ownerId)) {
+                    it.remove();
                     cards.add(card);
                 }
             }
-            allCards.removeAll(cards.getCards(game));
             // move cards ot graveyard in order the owner decides
-            if (cards.size() != 0) {
-                TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));
-                target.setRequired(true);
+            if (!cards.isEmpty()) {
                 Player choosingPlayer = this;
                 if (ownerId != this.getId()) {
                     choosingPlayer = game.getPlayer(ownerId);
@@ -2925,6 +2923,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                     chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
                 }
                 if (chooseOrder) {
+                    TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));
+                    target.setRequired(true);
                     while (choosingPlayer.isInGame() && cards.size() > 1) {
                         choosingPlayer.chooseTarget(Outcome.Neutral, cards, target, source, game);
                         UUID targetObjectId = target.getFirstTarget();                    
@@ -2936,7 +2936,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         target.clearChosen();
                     }
                     if (cards.size() == 1) {
-                        choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), source.getSourceId(), game, fromZone);
+                        choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), source == null ? null : source.getSourceId(), game, fromZone);
                     }
                 } else {
                     for (Card card : cards.getCards(game)) {

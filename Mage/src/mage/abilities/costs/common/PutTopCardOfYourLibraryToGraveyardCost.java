@@ -68,9 +68,7 @@ public class PutTopCardOfYourLibraryToGraveyardCost extends CostImpl {
         Player player = game.getPlayer(controllerId);
         if (player != null && player.getLibrary().size() >= numberOfCards) {
             paid = true;
-            Cards cards = new CardsImpl();
-            cards.addAll(player.getLibrary().getTopCards(game, numberOfCards));
-            player.moveCardsToGraveyardWithInfo(cards, ability, game, Zone.LIBRARY);
+            player.moveCards(player.getLibrary().getTopCards(game, numberOfCards), Zone.LIBRARY, Zone.GRAVEYARD, ability, game);
         }
         return paid;
     }
