@@ -36,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -60,15 +61,22 @@ public class EldraziConscription extends CardImpl {
         this.subtype.add("Eldrazi");
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AnnihilatorAbility(2), AttachmentType.AURA)));
+        
+        // Enchanted creature gets +10/+10 and has trample and annihilator 2        
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has trample");
+        ability.addEffect(effect);
+        effect = new GainAbilityAttachedEffect(new AnnihilatorAbility(2), AttachmentType.AURA);
+        effect.setText("and annihilator 2. <i>(Whenever it attacks, defending player sacrifices two permanents.)</i>");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public EldraziConscription (final EldraziConscription card) {

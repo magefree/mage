@@ -89,7 +89,7 @@ class GhoulcallersBellEffect extends OneShotEffect {
             if (player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
+                    player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
             }
         }

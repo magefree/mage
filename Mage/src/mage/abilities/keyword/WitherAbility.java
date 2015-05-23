@@ -65,7 +65,7 @@ public class WitherAbility extends StaticAbility implements MageSingleton {
 
     @Override
     public String getRule() {
-        return "Wither";
+        return "Wither <i>(This deals damage to creatures in the form of -1/-1 counters.)</i>";
     }
 
     @Override

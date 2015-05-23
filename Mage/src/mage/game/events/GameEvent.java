@@ -81,13 +81,14 @@ public class GameEvent implements Serializable {
 
         //player events
         /* ZONE_CHANGE
-            targetId    id of the zone chaning object
+            targetId    id of the zone changing object
             sourceId    sourceId of the ability with the object moving effect
             playerId    controller of the moved object
             amount      not used for this event
             flag        not used for this event
         */
         ZONE_CHANGE,
+        ZONE_CHANGE_GROUP,
         EMPTY_DRAW,
         DRAW_CARD, DREW_CARD,
         MIRACLE_CARD_REVEALED,

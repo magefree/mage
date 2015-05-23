@@ -93,7 +93,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (targetPlayer != null
@@ -111,7 +111,7 @@ class GhastlordOfFugueEffect extends OneShotEffect {
                 chosenCard = game.getCard(target.getFirstTarget());
             }
             if (chosenCard != null) {
-                controller.moveCardToExileWithInfo(chosenCard, null, "", source.getSourceId(), game, Zone.HAND, true);
+                controller.moveCards(chosenCard, Zone.HAND, Zone.EXILED, source, game);
             }
             return true;
         }

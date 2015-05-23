@@ -98,8 +98,9 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 while (true) {
                     Card card = player.getLibrary().removeFromTop(game);
-                    if (card == null)
+                    if (card == null) {
                         break;
+                    }
                     if (card.getName().equals("Mirror-Mad Phantasm")) {
                         card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), player.getId());
                         break;
@@ -107,9 +108,7 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                     cards.add(card);
                 }
                 player.revealCards("Mirror-Mad Phantasm", cards, game);
-                for (Card card: cards.getCards(game)) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                }
+                player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 return true;
             }
         }

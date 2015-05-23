@@ -125,7 +125,7 @@ class EpicExperimentEffect extends OneShotEffect {
             // move cards not cast to graveyard
             ExileZone exile = game.getExile().getExileZone(source.getSourceId());
             if (exile != null) {
-                controller.moveCardsToGraveyardWithInfo(exile, source, game, Zone.EXILED);
+                controller.moveCards(exile, Zone.EXILED, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

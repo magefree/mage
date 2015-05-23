@@ -87,7 +87,7 @@ public class ZoneChangeEvent extends GameEvent {
     public ZoneChangeEvent(UUID targetId, UUID playerId, Zone fromZone, Zone toZone) {
         this(targetId, null, playerId, fromZone, toZone);
     }
-
+       
     public Zone getFromZone() {
         return fromZone;
     }

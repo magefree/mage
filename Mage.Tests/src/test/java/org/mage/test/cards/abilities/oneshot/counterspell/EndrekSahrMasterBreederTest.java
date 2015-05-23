@@ -25,50 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package org.mage.test.cards.abilities.oneshot.counterspell;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
+ * @author LevelX2
  */
-public class ResilientWanderer extends CardImpl {
 
-    public ResilientWanderer(UUID ownerId) {
-        super(ownerId, 43, "Resilient Wanderer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+public class EndrekSahrMasterBreederTest extends CardTestPlayerBase {
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    /**
+     * Test that tokens are created also if the spell that triggers Endreks ability is countered
+     *
+     */
+    @Test
+    public void testTokenAlsoIfCountered() {
+        // Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
+        addCard(Zone.BATTLEFIELD, playerA, "Endrek Sahr, Master Breeder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new DiscardCardCost());
-        this.addAbility(ability);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Counterspell", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Silvercoat Lion", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Counterspell", 1);
+        
+        assertPermanentCount(playerA, "Thrull", 2);        
+
     }
 
-    public ResilientWanderer(final ResilientWanderer card) {
-        super(card);
-    }
-
-    @Override
-    public ResilientWanderer copy() {
-        return new ResilientWanderer(this);
-    }
 }
-

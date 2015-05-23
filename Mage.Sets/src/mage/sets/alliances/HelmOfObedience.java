@@ -55,7 +55,7 @@ public class HelmOfObedience extends CardImpl {
         super(ownerId, 163, "Helm of Obedience", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "ALL";
 
-        // {X}, {tap}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
+        // {X}, {T}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
         VariableManaCost xCosts = new VariableManaCost();
         xCosts.setMinX(1);
         SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), xCosts);
@@ -106,28 +106,26 @@ class HelmOfObedienceEffect extends OneShotEffect {
                 while(player.getLibrary().size() > 0) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null){
-                        if(card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false)){
-                            if(card.getCardType().contains(CardType.CREATURE)){
-                                // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
-                                // and put that card onto the battlefield under your control.
-                                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-                                if (sourcePermanent != null) {
-                                    sourcePermanent.sacrifice(source.getSourceId(), game);
-                                }
-                                if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
-                                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
-                                }
+                        player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        if(card.getCardType().contains(CardType.CREATURE)){
+                            // If a creature card is put into that graveyard this way, sacrifice Helm of Obedience
+                            // and put that card onto the battlefield under your control.
+                            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                            if (sourcePermanent != null) {
+                                sourcePermanent.sacrifice(source.getSourceId(), game);
+                            }
+                            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
+                                card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                            }
+                            break;
+                        }
+                        else{
+                            numberOfCard++;
+                            if(numberOfCard >= max){
                                 break;
                             }
-                            else{
-                                numberOfCard++;
-                                if(numberOfCard >= max){
-                                    break;
-                                }
-                            }
                         }
-                    }
-                    else{
+                    } else{
                         return false;
                     }
                 }

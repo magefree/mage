@@ -69,7 +69,7 @@ public class InfernalGenesis extends CardImpl {
 class InfernalGenesisEffect extends OneShotEffect {
 
     InfernalGenesisEffect() {
-        super(Outcome.BoostCreature);
+        super(Outcome.PutCreatureInPlay);
         staticText = "that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost";
     }
 
@@ -79,14 +79,14 @@ class InfernalGenesisEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                if (card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false)) {
+                if (player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game)) {
                     int cmc = card.getManaCost().convertedManaCost();
                     MinionToken token = new MinionToken();
-                    token.putOntoBattlefield(cmc, game, id, player.getId());
+                    token.putOntoBattlefield(cmc, game, source.getSourceId(), player.getId());
                 }
             }
         }

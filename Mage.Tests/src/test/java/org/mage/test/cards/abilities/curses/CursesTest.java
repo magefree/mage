@@ -33,7 +33,11 @@ public class CursesTest extends CardTestPlayerBase {
     public void testCurseOfEchoes() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        // Enchant player
+        // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that
+        // spell and may choose new targets for the copy he or she controls.  
         addCard(Zone.HAND, playerA, "Curse of Echoes");
+        // Draw three cards.
         addCard(Zone.HAND, playerB, "Jace's Ingenuity");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Echoes", playerB);
@@ -49,6 +53,8 @@ public class CursesTest extends CardTestPlayerBase {
     @Test
     public void testCurseOfExhaustion1() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        // Enchant player
+        // Enchanted player can't cast more than one spell each turn.
         addCard(Zone.HAND, playerA, "Curse of Exhaustion");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 2);

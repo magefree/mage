@@ -62,5 +62,35 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+    /**
+     * If I have resolved an Angel's Grace this turn, have an empty library, a Laboratory Maniac on 
+     * the battlefield, and would draw a card, nothing happens. I should win the game if the card drawing effect resolves.
+     */
+    @Test
+    public void testAngelsGrace() {
+        addCard(Zone.HAND, playerA, "Angel's Grace");
+        // Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Bandage");
+        
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Laboratory Maniac", 1);
+        
+        skipInitShuffling();
+        
+        playerA.getLibrary().clear();
 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel's Grace");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bandage");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
+        Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+    }
 }

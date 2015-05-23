@@ -113,15 +113,18 @@ class SepulchralPrimordialEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        for (Target target: source.getTargets()) {
-            if (target instanceof TargetCardInOpponentsGraveyard) {
-                Card targetCard = game.getCard(target.getFirstTarget());
-                if (player != null && targetCard != null) {
-                    targetCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {        
+            for (Target target: source.getTargets()) {
+                if (target instanceof TargetCardInOpponentsGraveyard) {
+                    Card targetCard = game.getCard(target.getFirstTarget());
+                    if (targetCard != null) {
+                        targetCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                    }
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 }

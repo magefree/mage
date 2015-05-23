@@ -94,9 +94,6 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
                     if (mageObject instanceof Card) {
                         Card card = (Card) mageObject;
                         switch (targetZone) {
-                            case HAND:
-                                controller.moveCardToHandWithInfo(card, sourceId, game, Zone.STACK);
-                                break;
                             case LIBRARY:
                                 controller.moveCardToLibraryWithInfo(card, sourceId, game, Zone.STACK, flag, true);
                                 break;
@@ -104,7 +101,7 @@ public class CounterTargetWithReplacementEffect extends OneShotEffect {
                                 controller.moveCardToExileWithInfo(card, null, "", sourceId, game, Zone.STACK, true);
                                 break;
                             default:
-                                card.moveToZone(targetZone, sourceId, game, flag);
+                                controller.moveCards(card, Zone.STACK, targetZone, source, game);
                         }                        
                     } else {
                         return false;

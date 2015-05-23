@@ -34,6 +34,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -99,8 +100,8 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player == null || sourceObject == null) {
             return false;
         }
         int landsToReveal = 4;
@@ -117,12 +118,8 @@ class MirkoVoskMindDrinkerEffect extends OneShotEffect {
                 }
             }
         }
-        player.revealCards("by " + sourceCard.getName() + " from " + player.getName(), cards, game);
-        for(Card card : cards.getCards(game)){
-            if(card != null){
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-            }
-        }
+        player.revealCards("by " + sourceObject.getName() + " from " + player.getName(), cards, game);
+        player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         return true;
     }
 }

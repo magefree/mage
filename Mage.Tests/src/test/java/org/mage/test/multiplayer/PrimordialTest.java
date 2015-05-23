@@ -25,50 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package org.mage.test.multiplayer;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
 /**
  *
- * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
+ * @author LevelX2
  */
-public class ResilientWanderer extends CardImpl {
 
-    public ResilientWanderer(UUID ownerId) {
-        super(ownerId, 43, "Resilient Wanderer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+public class PrimordialTest extends CardTestMultiPlayerBase {
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
+    /**
+     * Tests Primordial cards with multiplayer effects
+     * 
+     */
+    @Test
+    public void SepulchralPrimordialTest() {
+        // When Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one
+        // target creature card from that player's graveyard onto the battlefield under your control.
+        addCard(Zone.HAND, playerA, "Sepulchral Primordial");        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp",7);
+        
+        addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
+        addCard(Zone.GRAVEYARD, playerC, "Walking Corpse");
+        addCard(Zone.GRAVEYARD, playerD, "Pillarfield Ox");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sepulchral Primordial");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new DiscardCardCost());
-        this.addAbility(ability);
+        assertPermanentCount(playerA, "Sepulchral Primordial", 1);
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        assertPermanentCount(playerA, "Walking Corpse", 0);
+        assertPermanentCount(playerA, "Pillarfield Ox", 1);
+        assertGraveyardCount(playerC, "Walking Corpse", 1);
     }
 
-    public ResilientWanderer(final ResilientWanderer card) {
-        super(card);
-    }
-
-    @Override
-    public ResilientWanderer copy() {
-        return new ResilientWanderer(this);
-    }
 }
-

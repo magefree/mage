@@ -69,7 +69,7 @@ public class AddManaOfAnyColorEffect extends BasicManaEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            ChoiceColor choice = new ChoiceColor(false);
+            ChoiceColor choice = new ChoiceColor(true);
 
             if (controller.choose(outcome, choice, game)) {
                 if (choice.getColor() == null) {

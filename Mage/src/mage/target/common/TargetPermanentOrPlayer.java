@@ -83,7 +83,7 @@ public class TargetPermanentOrPlayer extends TargetImpl {
 
     @Override
     public Filter getFilter() {
-        return this.filter;
+        return filter;
     }
 
     public void setFilter(FilterPermanentOrPlayer filter) {

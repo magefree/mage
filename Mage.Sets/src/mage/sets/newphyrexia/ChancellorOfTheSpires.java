@@ -40,7 +40,6 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -104,13 +103,10 @@ class ChancellorOfTheSpiresDelayedTriggeredAbility extends DelayedTriggeredAbili
     ChancellorOfTheSpiresDelayedTriggeredAbility(ChancellorOfTheSpiresDelayedTriggeredAbility ability) {
         super(ability);
     }
-
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
     @Override
     public ChancellorOfTheSpiresDelayedTriggeredAbility copy() {
@@ -132,16 +128,9 @@ class ChancellorOfTheSpiresEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(opponentId);
-            if (player != null) {
-                int cardsCount = Math.min(7, player.getLibrary().size());
-                for (int i = 0; i < cardsCount; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null)
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    else
-                        break;
-                }
+            Player opponent = game.getPlayer(opponentId);
+            if (opponent != null) {
+                opponent.moveCards(opponent.getLibrary().getTopCards(game, 7), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
         }
         return true;

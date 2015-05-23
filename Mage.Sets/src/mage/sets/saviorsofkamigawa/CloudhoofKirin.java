@@ -33,7 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -107,19 +106,8 @@ class CloudhoofKirinEffect extends OneShotEffect {
                 }
             }
             if (targetPlayer != null) {
-                int cardsCount = Math.min(spell.getConvertedManaCost(), targetPlayer.getLibrary().size());
-                for (int i = 0; i < cardsCount; i++) {
-                    Card card = targetPlayer.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    }
-                    else {
-                        break;
-                    }
-                }
-                return true;
+                return targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, spell.getConvertedManaCost()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
-
         }
         return false;
     }

@@ -94,32 +94,26 @@ class SatyrWayfinderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
-        if (player != null && sourceObject != null) {
+        if (controller != null && sourceObject != null) {
             Cards cards = new CardsImpl(Zone.LIBRARY);
-            cards.addAll(player.getLibrary().getTopCards(game, 4));
+            cards.addAll(controller.getLibrary().getTopCards(game, 4));
             boolean properCardFound = cards.count(filterPutInHand, source.getControllerId(), source.getSourceId(), game) > 0;
             if (!cards.isEmpty()) {
-                player.revealCards(sourceObject.getName(), cards, game);
+                controller.revealCards(sourceObject.getName(), cards, game);
                 TargetCard target = new TargetCard(Zone.LIBRARY, filterPutInHand);
                 if (properCardFound && 
-                        player.chooseUse(outcome, "Put a land card into your hand?", game) &&
-                        player.choose(Outcome.DrawCard, cards, target, game)) {
+                        controller.chooseUse(outcome, "Put a land card into your hand?", game) &&
+                        controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
+                        controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                     }
 
                 }
-
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                    }
-                }
+                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

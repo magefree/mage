@@ -83,16 +83,7 @@ class WhetstoneEffect extends OneShotEffect {
         for (UUID playerId : game.getPlayerList()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                // putting cards to grave shouldn't end the game, so getting minimun available
-                int cardsCount = Math.min(2, player.getLibrary().size());
-                for (int i = 0; i < cardsCount; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    } else {
-                        break;
-                    }
-                }
+                player.moveCards(player.getLibrary().getTopCards(game, 2), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
         }
         return true;

@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2014;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -102,35 +103,32 @@ class JaceMindseekerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Cards cards = new CardsImpl();
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            // putting cards to grave shouldn't end the game, so getting minimun available
-            int cardsCount = Math.min(5, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                    if (filter.match(card, game)) {
-                        cards.add(card);
+        Cards cardsToCast = new CardsImpl();
+        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        if (targetOpponent != null) {
+            List<Card> allCards = targetOpponent.getLibrary().getTopCards(game, 5);
+            targetOpponent.moveCards(allCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            for(Card card : allCards) {
+                if (filter.match(card, game)) {
+                    Zone zone = game.getState().getZone(card.getId());
+                    // If the five cards are put into a public zone such as exile instead of a graveyard (perhaps due to the ability of Rest in Peace), 
+                    // you can cast one of those instant or sorcery cards from that zone. 
+                    if (zone.equals(Zone.GRAVEYARD) || zone.equals(Zone.EXILED)) {                        
+                        cardsToCast.add(card);
                     }
-                }
-                else {
-                    throw new IllegalArgumentException("couldn't get card from library");
-                }
+                }                
             }
         }
 
         // cast an instant or sorcery for free
-        // TODO: Check if card can also be cast if it doesn't end in the graveyard due to other active effects (LevelX2 08.07.2013).
-        if (cards.size() > 0) {
+        if (cardsToCast.size() > 0) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.GRAVEYARD, filter); // zone should be ignored here
                 target.setNotTarget(true);
                 if (controller.chooseUse(outcome, "Cast an instant or sorcery card from among them for free?", game)
-                        && controller.choose(outcome, cards, target, game)) {                  
-                    Card card = cards.get(target.getFirstTarget(), game);
+                        && controller.choose(outcome, cardsToCast, target, game)) {                  
+                    Card card = cardsToCast.get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.cast(card.getSpellAbility(), game, true);
                     }

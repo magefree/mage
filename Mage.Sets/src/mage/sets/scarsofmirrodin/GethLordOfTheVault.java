@@ -47,7 +47,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -114,34 +113,15 @@ class GethLordOfTheVaultEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
-            // if still in graveyard
-            if (game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
-                Player player = game.getPlayer(card.getOwnerId());
-                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId())) {
-
-                    Permanent permanent = game.getPermanent(card.getId());
-                    if (permanent != null) {
-                        permanent.setTapped(true);
-                    }
-
-                    int xvalue = card.getManaCost().convertedManaCost();
-                    int cardsCount = Math.min(xvalue, player.getLibrary().size());
-
-                    for (int i = 0; i < cardsCount; i++) {
-                        Card removedCard = player.getLibrary().getFromTop(game);
-                        if (removedCard != null) {
-                            removedCard.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                        } else {
-                            break;
-                        }
-                    }
-
-                }
+            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), true);
+            Player player = game.getPlayer(card.getOwnerId());
+            if (player != null) {
+                player.moveCards(player.getLibrary().getTopCards(game, card.getManaCost().convertedManaCost()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
         }
-        return false;
+        return true;
     }
 
     @Override

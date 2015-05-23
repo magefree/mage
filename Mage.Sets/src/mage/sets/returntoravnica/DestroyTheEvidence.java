@@ -114,7 +114,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect {
                 }
             }
             player.revealCards(sourceObject.getName(), cards, game, true);
-            player.moveCardsToGraveyardWithInfo(cards, source, game, Zone.LIBRARY);
+            player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;

@@ -34,7 +34,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import java.util.UUID;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.CounterPredicate;
 

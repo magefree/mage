@@ -84,17 +84,19 @@ class HinderingLightPredicate implements ObjectPlayerPredicate<ObjectPlayer<Stac
         if (controllerId == null) {
             return false;
         }
-
-        for (Target target : input.getObject().getStackAbility().getTargets()) {
-            for (UUID targetId : target.getTargets()) {
-                if (controllerId.equals(targetId)) {
-                    return true;
+        for (UUID modeId :input.getObject().getStackAbility().getModes().getSelectedModes()) {
+            input.getObject().getStackAbility().getModes().setActiveMode(modeId);
+            for (Target target : input.getObject().getStackAbility().getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    if (controllerId.equals(targetId)) {
+                        return true;
+                    }
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null && controllerId.equals(permanent.getControllerId())) {
+                        return true;
+                    }
                 }
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && controllerId.equals(permanent.getControllerId())) {
-                    return true;
-                }
-            }
+            }                      
         }
         return false;
     }

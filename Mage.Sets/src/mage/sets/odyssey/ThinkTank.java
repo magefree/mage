@@ -89,16 +89,16 @@ class ThinkTankLookLibraryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            if (you.getLibrary().size() > 0) {
-                Card card = you.getLibrary().getFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     CardsImpl cards = new CardsImpl();
                     cards.add(card);
-                    you.lookAtCards("Think Tank", cards, game);
-                    if (you.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
-                        return card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    controller.lookAtCards("Think Tank", cards, game);
+                    if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
+                        return controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                     }
 
                 }

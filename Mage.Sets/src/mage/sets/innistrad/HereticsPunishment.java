@@ -27,6 +27,7 @@
  */
 package mage.sets.innistrad;
 
+import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -74,7 +75,7 @@ class HereticsPunishmentEffect extends OneShotEffect {
 
     public HereticsPunishmentEffect() {
         super(Outcome.Damage);
-        staticText = "Choose target creature or player, then put the top three cards of your library into your graveyard. Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards";
+        staticText = "Choose target creature or player, then put the top three cards of your library into your graveyard. {this} deals damage to that creature or player equal to the highest converted mana cost among those cards";
     }
 
     public HereticsPunishmentEffect(final HereticsPunishmentEffect effect) {
@@ -83,18 +84,17 @@ class HereticsPunishmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             int maxCost = 0;
-            for (int i = 0; i < Math.min(3, player.getLibrary().size()); i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) { 
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                    int test = card.getManaCost().convertedManaCost();
-                    if (test > maxCost)
-                        maxCost = test;
-                }
+            List<Card> cardList = controller.getLibrary().getTopCards(game, 3);
+            for (Card card: cardList) {
+                int test = card.getManaCost().convertedManaCost();
+                if (test > maxCost) {
+                    maxCost = test;
+                }                
             }
+            controller.moveCards(cardList, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(maxCost, source.getSourceId(), game, false, true);

@@ -77,7 +77,7 @@ class SanityGrindingEffect extends OneShotEffect {
 
     public SanityGrindingEffect() {
         super(Outcome.Neutral);
-        staticText = "<i>Chroma</i> - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order";
+        staticText = "<i>Chroma</i> &mdash; Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order";
     }
 
     public SanityGrindingEffect(final SanityGrindingEffect effect) {
@@ -87,24 +87,22 @@ class SanityGrindingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(source.getFirstTarget());
-        Player you = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Cards revealed = new CardsImpl();
         int amount;
-        if (you == null) {
+        if (controller == null) {
             return false;
         }
-        amount = (Math.min(10, you.getLibrary().size()));
+        amount = (Math.min(10, controller.getLibrary().size()));
         for (int i = 0; i < amount; i++) {
-            revealed.add(you.getLibrary().removeFromTop(game));
+            revealed.add(controller.getLibrary().removeFromTop(game));
         }
-        you.revealCards("Sanity Grinding", revealed, game);
+        controller.revealCards("Sanity Grinding", revealed, game);
         if (targetOpponent != null) {
-            amount = (Math.min(targetOpponent.getLibrary().size(), new ChromaSanityGrindingCount(revealed).calculate(game, source, this)));
-            for (int i = 0; i < amount; i++) {
-                targetOpponent.getLibrary().removeFromTop(game).moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-            }
+            targetOpponent.moveCards(targetOpponent.getLibrary().getTopCards(game, new ChromaSanityGrindingCount(revealed).calculate(game, source, this)),
+                    Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
-        return you.putCardsOnBottomOfLibrary(revealed, game, source, true);
+        return controller.putCardsOnBottomOfLibrary(revealed, game, source, true);
     }
 
     @Override
@@ -115,7 +113,7 @@ class SanityGrindingEffect extends OneShotEffect {
 
 class ChromaSanityGrindingCount implements DynamicValue {
 
-    private Cards revealed;
+    private final Cards revealed;
 
     public ChromaSanityGrindingCount(Cards revealed) {
         this.revealed = revealed;

@@ -30,25 +30,16 @@ package mage.sets.onslaught;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -69,7 +60,7 @@ public class JarethLeonineTitan extends CardImpl {
         // Whenever Jareth, Leonine Titan blocks, it gets +7/+7 until end of turn.
         this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(7,7,Duration.EndOfTurn), false));
         // {W}: Jareth gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JarethsGainProtectionFromColorSourceEffect(), new ManaCostsImpl("{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}"));
         this.addAbility(ability);
 
     }
@@ -83,48 +74,3 @@ public class JarethLeonineTitan extends CardImpl {
         return new JarethLeonineTitan(this);
     }
 }
-
-class JarethsGainProtectionFromColorSourceEffect extends ContinuousEffectImpl {
-
-    protected FilterCard protectionFilter;
-
-    public JarethsGainProtectionFromColorSourceEffect() {
-        super(Duration.EndOfTurn, Outcome.AddAbility);
-    }
-
-    public JarethsGainProtectionFromColorSourceEffect(final JarethsGainProtectionFromColorSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public JarethsGainProtectionFromColorSourceEffect copy() {
-        return new JarethsGainProtectionFromColorSourceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent creature = game.getPermanent(source.getSourceId());
-        if (controller != null && creature != null) {
-            ChoiceColor choice = new ChoiceColor();
-            while (!choice.isChosen()) {
-                controller.choose(Outcome.Protect, choice, game);
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-            protectionFilter.setMessage(choice.getChoice());
-            ProtectionAbility ability = new ProtectionAbility(protectionFilter);
-            creature.addAbility(ability, source.getSourceId(), game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "{this} gains protection from the color of your choice " + duration.toString();
-    }
-}
-

@@ -53,7 +53,6 @@ public class ChillOfForeboding extends CardImpl {
         super(ownerId, 32, "Chill of Foreboding", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "DKA";
 
-
         // Each player puts the top five cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new ChillOfForebodingEffect());
         // Flashback {7}{U}
@@ -92,13 +91,7 @@ class ChillOfForebodingEffect extends OneShotEffect {
         for (UUID playerId : sourcePlayer.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int count = Math.min(5, player.getLibrary().size());
-                for (int i = 0; i < count; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                    }
-                }
+                player.moveCards(player.getLibrary().getTopCards(game, 5), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
         }
         return true;

@@ -41,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -55,12 +54,11 @@ public class VengefulRebirth extends CardImpl {
         super(ownerId, 62, "Vengeful Rebirth", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{G}");
         this.expansionSetCode = "ARB";
 
-
         // Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, {this} deals damage equal to that card's converted mana cost to target creature or player
-        Target target = new TargetCardInYourGraveyard();
-        this.getSpellAbility().addTarget(target);
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new VengefulRebirthEffect());
+        
         // Exile Vengeful Rebirth.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
@@ -73,7 +71,6 @@ public class VengefulRebirth extends CardImpl {
     public VengefulRebirth copy() {
         return new VengefulRebirth(this);
     }
-
 }
 
 class VengefulRebirthEffect extends OneShotEffect {
@@ -94,17 +91,17 @@ class VengefulRebirthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Card card = (Card)game.getObject(source.getFirstTarget());
-        if (player != null && card != null && player.removeFromGraveyard(card, game)) {
-            card.moveToZone(Zone.HAND, source.getSourceId(), game, false);            
+        if (controller != null && card != null && controller.removeFromGraveyard(card, game)) {
+            controller.moveCards(card, Zone.GRAVEYARD, Zone.HAND, source, game);
             if (!card.getCardType().contains(CardType.LAND)) {
-                int damage = card.getManaCost().convertedManaCost();
-                Permanent permanent = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
+                int damage = card.getManaCost().convertedManaCost();                
+                Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (permanent != null) {
                     permanent.damage(damage, source.getSourceId(), game, false, true);
                 }
-                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
+                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
                 if (targetPlayer != null) {
                     targetPlayer.damage(damage, source.getSourceId(), game, false, true);
                 }

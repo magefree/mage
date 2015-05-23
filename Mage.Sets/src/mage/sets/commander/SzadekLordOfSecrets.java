@@ -84,11 +84,9 @@ public class SzadekLordOfSecrets extends CardImpl {
 
 class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
 
-    List<Card> cards;
-
     SzadekLordOfSecretsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If {this} would deal combat damage to a player, instead put that many +1/+1 counters on Szadek and that player puts that many cards from the top of his or her library into his or her graveyard";
+        staticText = "If {this} would deal combat damage to a player, instead put that many +1/+1 counters on {this} and that player puts that many cards from the top of his or her library into his or her graveyard";
     }
 
     SzadekLordOfSecretsEffect(final SzadekLordOfSecretsEffect effect) {
@@ -101,14 +99,11 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
         Player damagedPlayer = game.getPlayer(damageEvent.getTargetId());
 
         if (damageEvent.isCombatDamage()) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                p.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), game);
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                permanent.addCounters(CounterType.P1P1.createInstance(damageEvent.getAmount()), game);
                 if (damagedPlayer != null) {
-                    cards = damagedPlayer.getLibrary().getTopCards(game, damageEvent.getAmount());
-                }
-                for (Card card : cards) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    damagedPlayer.moveCards(damagedPlayer.getLibrary().getTopCards(game, damageEvent.getAmount()), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
             }
         }
@@ -116,9 +111,13 @@ class SzadekLordOfSecretsEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                && event.getSourceId().equals(source.getSourceId())) {
+        if (event.getSourceId().equals(source.getSourceId())) {
             DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
             if (damageEvent.isCombatDamage()) {
                 return true;

@@ -117,11 +117,7 @@ class MindGrindEffect extends OneShotEffect {
                 }
             }
             player.revealCards("by " + sourceCard.getName() + " from " + player.getName(), cards, game);
-            for(Card card : cards.getCards(game)){
-                if(card != null){
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                }
-            }
+            player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return true;
     }

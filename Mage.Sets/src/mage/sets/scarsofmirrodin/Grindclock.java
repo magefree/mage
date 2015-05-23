@@ -38,7 +38,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -85,17 +84,12 @@ class GrindclockEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int amount = game.getPermanent(source.getSourceId()).getCounters().getCount(CounterType.CHARGE);
-        Player player = game.getPlayer(source.getFirstTarget());
-        Card card;
-        for (int i = 0; i < amount; i++) {
-            card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-            } else {
-                break;
-            }
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer != null) {
+            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

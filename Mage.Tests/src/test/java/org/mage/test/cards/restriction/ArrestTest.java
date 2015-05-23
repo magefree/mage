@@ -25,50 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package org.mage.test.cards.restriction;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.common.continuous.GainProtectionFromColorSourceEffect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author cbt33, BetaSteward (GainProtectionFromColorTargetEffect)
+ * @author LevelX2
  */
-public class ResilientWanderer extends CardImpl {
 
-    public ResilientWanderer(UUID ownerId) {
-        super(ownerId, 43, "Resilient Wanderer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Human");
-        this.subtype.add("Nomad");
+public class ArrestTest extends CardTestPlayerBase {
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(3);
 
-        // First strike
-        this.addAbility(FirstStrikeAbility.getInstance());
-        // Discard a card: Resilient Wanderer gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new DiscardCardCost());
-        this.addAbility(ability);
+    @Test
+    public void testArrest1() {
+        addCard(Zone.HAND, playerA, "Arrest");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 4);
+        // {3}{G}: Put a 1/1 green Saproling creature token onto the battlefield.
+        // {3}{W}: Creatures you control get +1/+1 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Selesnya Guildmage");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Arrest", "Selesnya Guildmage");
+        attack(2, playerB, "Selesnya Guildmage");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Arrest", 1);
+        assertPermanentCount(playerB, "Saproling", 0); // can't use ability so no Saproling
+
+        assertLife(playerA, 20); // can't attack so no damage to player
+        assertLife(playerB, 20);
+
     }
 
-    public ResilientWanderer(final ResilientWanderer card) {
-        super(card);
-    }
-
-    @Override
-    public ResilientWanderer copy() {
-        return new ResilientWanderer(this);
-    }
 }
-

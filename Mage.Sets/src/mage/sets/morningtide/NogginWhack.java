@@ -127,8 +127,7 @@ class NogginWhackEffect extends OneShotEffect {
                 for (UUID cardId : (List<UUID>) targetInHand.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Discarded card ").append(card.getName()).toString());
+                        controller.discard(card, source, game);
                     }
                 }
             }

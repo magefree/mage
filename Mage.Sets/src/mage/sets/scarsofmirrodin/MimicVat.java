@@ -53,6 +53,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  * @author nantuko
@@ -128,7 +129,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard";
+        return "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard";
     }
 }
 
@@ -146,14 +147,14 @@ class MimicVatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null || permanent == null) {
             return false;
         }
-
         // return older cards to graveyard
         for (UUID imprinted : permanent.getImprinted()) {
             Card card = game.getCard(imprinted);
-            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+            controller.moveCards(card, Zone.EXILED, Zone.GRAVEYARD, source, game);
         }
         permanent.clearImprinted(game);
 

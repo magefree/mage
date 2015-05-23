@@ -91,14 +91,14 @@ class TrackersInstinctsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             Cards cards = new CardsImpl(Zone.PICK);
 
             boolean creaturesFound = false;
-            int count = Math.min(player.getLibrary().size(), 4);
+            int count = Math.min(controller.getLibrary().size(), 4);
             for (int i = 0; i < count; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
                     if (card.getCardType().contains(CardType.CREATURE)) {
@@ -108,9 +108,9 @@ class TrackersInstinctsEffect extends OneShotEffect {
             }
 
             if (!cards.isEmpty()) {
-                player.revealCards("Tracker's Instincts", cards, game);
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCreatureCard("creature card to put in hand"));
-                if (creaturesFound && player.choose(Outcome.DrawCard, cards, target, game)) {
+                controller.revealCards("Tracker's Instincts", cards, game);
+                TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCreatureCard("creature card to put in hand"));
+                if (creaturesFound && controller.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
@@ -118,13 +118,7 @@ class TrackersInstinctsEffect extends OneShotEffect {
                     }
 
                 }
-
-                for (UUID cardId : cards) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
-                    }
-                }
+                controller.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
             return true;
         }

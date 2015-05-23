@@ -37,12 +37,12 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -83,12 +83,16 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOST_LIFE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Set<UUID> opponents = game.getOpponents(this.getControllerId());
-        if (event.getType() == EventType.LOST_LIFE && opponents.contains(event.getPlayerId())) {
+        if (opponents.contains(event.getPlayerId())) {
             Effect effect = this.getEffects().get(0);
-            effect.setValue("targetPlayer", event.getPlayerId());
-            effect.setValue("amount", event.getAmount());
+            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             return true;
         }
         return false;
@@ -117,21 +121,13 @@ class MindcrankEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = (UUID) getValue("targetPlayer");
-        Player player = game.getPlayer(targetId);
-        if (player != null) {
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
             Integer amount = (Integer) getValue("amount");
             if (amount == null) {
                 amount = 0;
             }
-            // putting cards to grave shouldn't end the game, so getting minimum available
-            amount = Math.min(amount, player.getLibrary().size());
-            for (int i = 0; i < amount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                }
-            }
+            targetPlayer.moveCards(targetPlayer.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.GRAVEYARD, source, game);
         }
         return true;
     }

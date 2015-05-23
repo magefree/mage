@@ -180,17 +180,12 @@ class WarpWorldEffect extends OneShotEffect {
             player = playerList.getNext(game);
         } while (!player.getId().equals(game.getActivePlayerId()));
 
-        // put the rest of the cards into the graveyard
+        // put the rest of the cards on buttom of the library
         playerList.setCurrent(game.getActivePlayerId());
         player = game.getPlayer(game.getActivePlayerId());
         do {
-            CardsImpl cards = cardsRevealed.get(player.getId());
-            for (Card card : cards.getCards(game)) {
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
-                }
-            }
-
+            CardsImpl cards = cardsRevealed.get(player.getId());            
+            player.putCardsOnBottomOfLibrary(cards, game, source, false);
             player = playerList.getNext(game);
         } while (!player.getId().equals(game.getActivePlayerId()));
 

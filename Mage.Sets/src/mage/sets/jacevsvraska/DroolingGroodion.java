@@ -67,7 +67,7 @@ public class DroolingGroodion extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DroolingGroodionEffect(), new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(), true)));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (first target)")));
-        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (second target)")));
+        ability.addTarget(new TargetOtherCreaturePermanent(new FilterCreaturePermanent("creature (second target)")));
         this.addAbility(ability);
     }
 
@@ -111,4 +111,29 @@ class DroolingGroodionEffect extends ContinuousEffectImpl {
         }
         return true;
     }
+}
+
+class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+    
+    public TargetOtherCreaturePermanent(FilterCreaturePermanent filter) {
+        super(filter);
+    }
+
+    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (source.getTargets().get(0).getTargets().contains(id)) {
+            return false;
+        }
+        return super.canTarget(controllerId, id, source, game);
+    }
+
+    @Override
+    public TargetOtherCreaturePermanent copy() {
+        return new TargetOtherCreaturePermanent(this);
+    }
+
 }
