@@ -36,9 +36,10 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.mana.ConditionalColorlessManaAbility;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.game.Game;
 
@@ -52,8 +53,11 @@ public class EldraziTemple extends CardImpl {
         super(ownerId, 227, "Eldrazi Temple", Rarity.RARE, new CardType[]{ CardType.LAND }, null);
         this.expansionSetCode = "ROE";
 
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        this.addAbility(new EldraziTempleManaAbility());
+
+        // {T}: Add {2} to your mana pool. Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi.  
+        this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new EldraziTempleManaBuilder()));
     }
 
     public EldraziTemple(final EldraziTemple card) {
@@ -66,39 +70,32 @@ public class EldraziTemple extends CardImpl {
     }
 }
 
-class EldraziTempleManaAbility extends BasicManaAbility {
+class EldraziTempleManaBuilder extends ConditionalManaBuilder {
 
-    EldraziTempleManaAbility ( ) {
-        super(new BasicManaEffect(new EldraziConditionalMana()));
-        this.netMana.add(new Mana(0,0,0,0,0,2,0));
-    }
-
-    EldraziTempleManaAbility ( EldraziTempleManaAbility ability ) {
-        super(ability);
+    @Override
+    public ConditionalMana build(Object... options) {
+        return new EldraziTempleConditionalMana(this.mana);
     }
 
     @Override
-    public EldraziTempleManaAbility copy ( ) {
-        return new EldraziTempleManaAbility(this);
+    public String getRule() {
+        return "Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi";
     }
 }
 
-class EldraziConditionalMana extends ConditionalMana {
+class EldraziTempleConditionalMana extends ConditionalMana {
 
-    public EldraziConditionalMana() {
-        super(Mana.ColorlessMana(2));
-        staticText = "Spend this mana only to cast colorless Eldrazi spells or activate abilities of colorless Eldrazi";
-        addCondition(new EldraziManaCondition());
+    public EldraziTempleConditionalMana(Mana mana) {
+        super(mana);
+        addCondition(new EldraziTempleCondition());
     }
 }
 
-class EldraziManaCondition implements Condition {
+class EldraziTempleCondition implements Condition {
+
     @Override
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source.getSourceId());
-        if (object != null && object.hasSubtype("Eldrazi") && !object.getColor().hasColor()) {
-            return true;
-        }
-        return false;
+        return object != null && object.hasSubtype("Eldrazi") && object.getColor().isColorless();        
     }
 }

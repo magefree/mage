@@ -46,6 +46,8 @@ public class ManaUtilTest extends CardTestPlayerBase {
         testManaToPayVsLand("{1}{R}", "Cavern of Souls", 2, 2); // can't auto choose to pay
         testManaToPayVsLand("{2}", "Cavern of Souls", 2, 2); // can't auto choose to pay
 
+        testManaToPayVsLand("{2}", "Eldrazi Temple", 2, 2); // can't auto choose to pay
+        
         // hybrid mana
         testManaToPayVsLand("{W/R}{W/R}{W/R}", "Sacred Foundry", 2, 1); // auto choose for hybrid mana: choose any
         testManaToPayVsLand("{R}{W/R}", "Sacred Foundry", 2, RedManaAbility.class); // auto choose for hybrid mana: we should choose {R}
@@ -122,7 +124,7 @@ public class ManaUtilTest extends CardTestPlayerBase {
      * @return
      */
     private HashMap<UUID, ManaAbility> getManaAbilities(Card card) {
-        HashMap<UUID, ManaAbility> useableAbilities = new LinkedHashMap<UUID, ManaAbility>();
+        HashMap<UUID, ManaAbility> useableAbilities = new LinkedHashMap<>();
         for (Ability ability: card.getAbilities()) {
             if (ability instanceof ManaAbility) {
                 ability.newId(); // we need to assign id manually as we are not in game
