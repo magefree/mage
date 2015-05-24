@@ -78,6 +78,12 @@ public class ConditionalAnyColorManaAbility extends ManaAbility {
     }
 
     @Override
+    public boolean definesMana() {
+        return true;
+    }
+
+    
+    @Override
     public ConditionalAnyColorManaAbility copy() {
         return new ConditionalAnyColorManaAbility(this);
     }

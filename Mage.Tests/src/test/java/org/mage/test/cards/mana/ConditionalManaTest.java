@@ -29,7 +29,6 @@ package org.mage.test.cards.mana;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -73,5 +72,36 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Silvercoat Lion", 1); // player A could not cast Silvercoat Lion because the conditional mana is not available
     }
-   
+    
+    @Test
+    public void testWorkingWithReflectingPool() {
+        addCard(Zone.BATTLEFIELD, playerA, "Cavern of Souls", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Cavern
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 1); 
+    }
+    
+    @Test
+    public void testWorkingWithReflectingPool2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Reflecting Pool", 1); // can create white mana without restriction from the Hive
+        addCard(Zone.BATTLEFIELD, playerA, "Sliver Hive", 1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {1} to your mana pool");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add to your mana pool one mana of any type");
+        setChoice(playerA, "White");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion");
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+                
+        assertPermanentCount(playerA, "Silvercoat Lion", 1); 
+    }    
 }

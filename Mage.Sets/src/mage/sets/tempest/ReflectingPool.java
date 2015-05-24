@@ -179,6 +179,10 @@ class ReflectingPoolEffect extends ManaEffect {
     public  List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netManas = new ArrayList<>();
         Mana types = getManaTypes(game, source);
+        if (types.getAny()> 0) {
+            netManas.add(new Mana(0,0,0,0,0,0,1));
+            return netManas;
+        }
         if (types.getBlack() > 0) {
             netManas.add(new Mana(ColoredManaSymbol.B));
         }
@@ -209,6 +213,9 @@ class ReflectingPoolEffect extends ManaEffect {
                 if (!ability.equals(source) && ability.definesMana()) {
                     for (Mana netMana: ability.getNetMana(game)) {
                         types.add(netMana);
+                        if (netMana.getAny() > 0) {
+                            return types;
+                        }
                     }
                 }
             }
