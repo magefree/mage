@@ -215,11 +215,11 @@ public class SessionManager {
         return null;
     }
 
-    public boolean extendUserSession(String sessionId, String pingInfo) {
-        Session session = sessions.get(sessionId);
-        if (session != null) {
-            return UserManager.getInstance().extendUserSession(session.getUserId(), pingInfo);
-        }
-        return false;
-    }
+//    public boolean extendUserSession(String sessionId, String pingInfo) {
+//        Session session = sessions.get(sessionId);
+//        if (session != null) {
+//            return UserManager.getInstance().extendUserSession(session.getUserId(), pingInfo);
+//        }
+//        return false;
+//    }
 }

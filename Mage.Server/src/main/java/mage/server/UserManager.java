@@ -64,14 +64,14 @@ public class UserManager {
         return INSTANCE;
     }
     
-    private UserManager()  {
-        expireExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                checkExpired();
-            }
-        }, 60, 60, TimeUnit.SECONDS);
-    }
+//    private UserManager()  {
+//        expireExecutor.scheduleAtFixedRate(new Runnable() {
+//            @Override
+//            public void run() {
+//                checkExpired();
+//            }
+//        }, 60, 60, TimeUnit.SECONDS);
+//    }
 
     public User createUser(String userName, String host) {
         if (findUser(userName) != null) {
@@ -159,31 +159,31 @@ public class UserManager {
         }        
     }
 
-    public boolean extendUserSession(UUID userId, String pingInfo) {
-        if (userId != null) {
-            User user = users.get(userId);
-            if (user != null) {  
-                user.updateLastActivity(pingInfo);
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean extendUserSession(UUID userId, String pingInfo) {
+//        if (userId != null) {
+//            User user = users.get(userId);
+//            if (user != null) {  
+//                user.updateLastActivity(pingInfo);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Is the connection lost for more than 3 minutes, the user will be removed (within 3 minutes the user can reconnect)
      */
-    private void checkExpired() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -3);
-        List<User> usersToCheck = new ArrayList<>();
-        usersToCheck.addAll(users.values());
-        for (User user : usersToCheck) {
-            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
-                removeUser(user.getId(), DisconnectReason.SessionExpired);
-            }
-        }
-    }
+//    private void checkExpired() {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.MINUTE, -3);
+//        List<User> usersToCheck = new ArrayList<>();
+//        usersToCheck.addAll(users.values());
+//        for (User user : usersToCheck) {
+//            if (!user.getUserState().equals(UserState.Expired) && user.isExpired(calendar.getTime())) {
+//                removeUser(user.getId(), DisconnectReason.SessionExpired);
+//            }
+//        }
+//    }
 
     public void handleException(Exception ex) {
         if (ex != null) {

@@ -81,7 +81,8 @@ public class User {
     private String sessionId;
     private String info = "";
     private String pingInfo = "";
-    private Date lastActivity;
+    private Date disconnectionTime;
+//    private Date lastActivity;
     private UserState userState;
     private UserData userData;
 
@@ -92,7 +93,7 @@ public class User {
         this.userState = UserState.Created;
         
         this.connectionTime = new Date();
-        this.lastActivity = new Date();
+//        this.lastActivity = new Date();
         
         this.tables = new ConcurrentHashMap<>();
         this.gameSessions = new ConcurrentHashMap<>();
@@ -151,7 +152,7 @@ public class User {
         return userState.equals(UserState.Connected) || userState.equals(UserState.Reconnected);
     }
 
-    public String getDisconnectDuration() {
+    private String getDisconnectDuration() {
         long secondsDisconnected = getSecondsDisconnected();
         long secondsLeft;
         String sign = "";
@@ -168,7 +169,7 @@ public class User {
     }
 
     public long getSecondsDisconnected() {
-        return SystemUtil.getDateDiff(lastActivity, new Date(), TimeUnit.SECONDS);
+        return SystemUtil.getDateDiff(disconnectionTime, new Date(), TimeUnit.SECONDS);
     }
 
     public Date getConnectionTime() {
@@ -235,49 +236,49 @@ public class User {
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
-        lastActivity = new Date();
+//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerUUID(gameId, userId, data);
     }
 
     public void sendPlayerString(final UUID gameId, final String data) {
-        lastActivity = new Date();
+//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerString(gameId, userId, data);
     }
 
     public void sendPlayerManaType(final UUID gameId, final UUID playerId, final ManaType data) {
-        lastActivity = new Date();
+//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerManaType(gameId, playerId, userId, data);
     }
 
     public void sendPlayerBoolean(final UUID gameId, final Boolean data)  {
-        lastActivity = new Date();
+//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerBoolean(gameId, userId, data);
     }
 
     public void sendPlayerInteger(final UUID gameId, final Integer data) {
-        lastActivity = new Date();
+//        lastActivity = new Date();
         GameManager.getInstance().sendPlayerInteger(gameId, userId, data);
     }
 
-    public void updateLastActivity(String pingInfo) {
-        if (pingInfo != null) {
-            this.pingInfo = pingInfo;
-        }
-        lastActivity = new Date();
-        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
-            userState = UserState.Reconnected;
-        }
-    }
+//    public void updateLastActivity(String pingInfo) {
+//        if (pingInfo != null) {
+//            this.pingInfo = pingInfo;
+//        }
+//        lastActivity = new Date();
+//        if (userState == UserState.Disconnected) { // this can happen if user reconnects very fast after disconnect
+//            userState = UserState.Reconnected;
+//        }
+//    }
 
-    public boolean isExpired(Date expired) {
-        if (lastActivity.before(expired)) {
-            logger.trace(userName + " is expired!");
-            userState = UserState.Expired;
-            return true;
-        }
-        logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
-        return false; /*userState == UserState.Disconnected && */ 
-    }
+//    public boolean isExpired(Date expired) {
+//        if (lastActivity.before(expired)) {
+//            logger.trace(userName + " is expired!");
+//            userState = UserState.Expired;
+//            return true;
+//        }
+//        logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
+//        return false; /*userState == UserState.Disconnected && */ 
+//    }
 
     private void reconnect() {
         for (Entry<UUID, Table> entry: tables.entrySet()) {
