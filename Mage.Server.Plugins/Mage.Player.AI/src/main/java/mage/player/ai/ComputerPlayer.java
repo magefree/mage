@@ -341,10 +341,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetPermanentOrPlayer) {
             List<Permanent> targets;
             TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer) target);
+            List<Permanent> ownedTargets = threats(playerId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());;
+            List<Permanent> opponentTargets = threats(opponentId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
             if (outcome.isGood()) {
-                targets = threats(playerId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = ownedTargets;
             } else {
-                targets = threats(opponentId, sourceId, ((FilterPermanentOrPlayer) t.getFilter()).getPermanentFilter(), game, target.getTargets());
+                targets = opponentTargets;
             }
             for (Permanent permanent : targets) {
                 List<UUID> alreadyTargetted = target.getTargets();
@@ -377,7 +379,21 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 target.add(playerId, game);
                 return true;
             }
-            throw new IllegalStateException("TargetPermanentOrPlayer wasn't handled. class:" + target.getClass().toString());
+            if (outcome.isGood()) { // no other valid targets so use a permanent
+                targets = opponentTargets;
+            } else {
+                targets = ownedTargets;
+            }            
+            for (Permanent permanent : targets) {
+                List<UUID> alreadyTargetted = target.getTargets();
+                if (t.canTarget(permanent.getId(), game)) {
+                    if (alreadyTargetted != null && !alreadyTargetted.contains(permanent.getId())) {
+                        target.add(permanent.getId(), game);
+                        return true;
+                    }
+                }
+            }      
+            return false;
         }
         if (target instanceof TargetCardInGraveyard) {
             List<Card> cards = new ArrayList<>();
