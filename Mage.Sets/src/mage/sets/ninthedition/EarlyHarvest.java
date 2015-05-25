@@ -71,7 +71,7 @@ class UntapAllLandsTargetEffect extends OneShotEffect {
     
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     static {
-        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+        filter.add(new SupertypePredicate("Basic"));
     }
     
     public UntapAllLandsTargetEffect() {
