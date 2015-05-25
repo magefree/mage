@@ -25,51 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package org.mage.test.cards.dynamicvalue;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class SpiritLink extends CardImpl {
 
-    public SpiritLink(UUID ownerId) {
-        super(ownerId, 47, "Spirit Link", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Aura");
+public class NumericSetToEffectValueTest extends CardTestPlayerBase {
 
+
+    /**
+     * Check that the dealt damage is added to life
+     *
+    */
+    @Test
+    public void ArmadilloCloakTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-
+        // Enchanted creature gets +2/+2 and has trample.
         // Whenever enchanted creature deals damage, you gain that much life.
-        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
+        addCard(Zone.HAND, playerA, "Armadillo Cloak");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Armadillo Cloak", "Silvercoat Lion");
+
+        attack(3, playerA, "Silvercoat Lion");
+        
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA,"Armadillo Cloak", 1);        
+        assertPowerToughness(playerA,  "Silvercoat Lion", 4, 4);
+        
+        assertLife(playerA, 24);
+        assertLife(playerB, 16);
+
     }
 
-    public SpiritLink(final SpiritLink card) {
-        super(card);
-    }
-
-    @Override
-    public SpiritLink copy() {
-        return new SpiritLink(this);
-    }
 }

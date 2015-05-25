@@ -29,11 +29,12 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -45,10 +46,6 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -63,7 +60,6 @@ public class ArmadilloCloak extends CardImpl {
         this.expansionSetCode = "INV";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -72,11 +68,14 @@ public class ArmadilloCloak extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and has trample");
+        ability.addEffect(effect);
+        this.addAbility(ability);
 
         // Whenever enchanted creature deals damage, you gain that much life.
-        this.addAbility(new ArmadilloCloakTriggeredAbility());
+        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
 
     }
 
@@ -87,76 +86,5 @@ public class ArmadilloCloak extends CardImpl {
     @Override
     public ArmadilloCloak copy() {
         return new ArmadilloCloak(this);
-    }
-}
-
-class ArmadilloCloakTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ArmadilloCloakTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ArmadilloCloakEffect(), false);
-    }
-
-    public ArmadilloCloakTriggeredAbility(final ArmadilloCloakTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ArmadilloCloakTriggeredAbility copy() {
-        return new ArmadilloCloakTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment == null || enchantment.getAttachedTo() == null) {
-                return false;
-            }
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null && event.getSourceId().equals(enchanted.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature deals damage, " + super.getRule();
-    }
-}
-
-class ArmadilloCloakEffect extends OneShotEffect {
-
-    public ArmadilloCloakEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public ArmadilloCloakEffect(final ArmadilloCloakEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArmadilloCloakEffect copy() {
-        return new ArmadilloCloakEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game);
-                return true;
-            }
-        }
-        return false;
     }
 }
