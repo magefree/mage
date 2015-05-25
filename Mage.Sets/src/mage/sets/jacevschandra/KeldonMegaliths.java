@@ -57,7 +57,7 @@ public class KeldonMegaliths extends CardImpl {
         this.addAbility(new RedManaAbility());
         // Hellbent - {1}{R}, {tap}: Keldon Megaliths deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}"), HellbentCondition.getInstance(),
-                "<i>Hellbent</i> - {1}{R}, {tap}: Keldon Megaliths deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.");
+                "<i>Hellbent</i> - {1}{R}, {tap}: {this} deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.");
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
