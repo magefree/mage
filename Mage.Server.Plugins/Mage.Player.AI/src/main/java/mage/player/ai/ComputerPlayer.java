@@ -368,7 +368,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     return true;
                 }
             }
-            if (!target.isRequired(sourceId, game)) {
+            if (!target.isRequired(sourceId, game) || target.getNumberOfTargets() == 0) {
                 return false;
             }
             if (target.canTarget(opponentId, null, game)) {
