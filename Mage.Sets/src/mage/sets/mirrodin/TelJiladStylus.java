@@ -36,8 +36,11 @@ import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.other.OwnerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -45,6 +48,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TelJiladStylus extends CardImpl {
 
+    private final static FilterPermanent filter = new FilterPermanent();
+    
+    static {
+        filter.add(new OwnerPredicate(TargetController.YOU));
+    }
+    
     public TelJiladStylus(UUID ownerId) {
         super(ownerId, 260, "Tel-Jilad Stylus", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
@@ -52,7 +61,7 @@ public class TelJiladStylus extends CardImpl {
         // {T}: Put target permanent you own on the bottom of your library.
         Effect effect = new PutOnLibraryTargetEffect(false,"put target permanent you own on the bottom of your library");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        ability.addTarget(new TargetControlledPermanent());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
 
