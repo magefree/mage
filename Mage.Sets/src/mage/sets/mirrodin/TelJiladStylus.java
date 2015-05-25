@@ -25,50 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.other.OwnerPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class FlickeringSpirit extends CardImpl {
+public class TelJiladStylus extends CardImpl {
 
-    public FlickeringSpirit(UUID ownerId) {
-        super(ownerId, 17, "Flickering Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "TSP";
-        this.subtype.add("Spirit");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+    private final static FilterPermanent filter = new FilterPermanent();
+    
+    static {
+        filter.add(new OwnerPredicate(TargetController.YOU));
+    }
+    
+    public TelJiladStylus(UUID ownerId) {
+        super(ownerId, 260, "Tel-Jilad Stylus", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "MRD";
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{3}{W}"));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlSourceEffect());
+        // {T}: Put target permanent you own on the bottom of your library.
+        Effect effect = new PutOnLibraryTargetEffect(false,"put target permanent you own on the bottom of your library");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-        
     }
 
-    public FlickeringSpirit(final FlickeringSpirit card) {
+    public TelJiladStylus(final TelJiladStylus card) {
         super(card);
     }
 
     @Override
-    public FlickeringSpirit copy() {
-        return new FlickeringSpirit(this);
+    public TelJiladStylus copy() {
+        return new TelJiladStylus(this);
     }
 }

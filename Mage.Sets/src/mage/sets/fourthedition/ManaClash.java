@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ninthedition;
+package mage.sets.fourthedition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -34,70 +34,75 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class EarlyHarvest extends CardImpl {
+public class ManaClash extends CardImpl {
 
-    public EarlyHarvest(UUID ownerId) {
-        super(ownerId, 235, "Early Harvest", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{G}");
-        this.expansionSetCode = "9ED";
+    public ManaClash(UUID ownerId) {
+        super(ownerId, 228, "Mana Clash", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
+        this.expansionSetCode = "4ED";
 
-        // Target player untaps all basic lands he or she controls.
-        this.getSpellAbility().addEffect(new UntapAllLandsTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // You and target opponent each flip a coin. Mana Clash deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
+        this.getSpellAbility().addEffect(new ManaClashEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public EarlyHarvest(final EarlyHarvest card) {
+    public ManaClash(final ManaClash card) {
         super(card);
     }
 
     @Override
-    public EarlyHarvest copy() {
-        return new EarlyHarvest(this);
+    public ManaClash copy() {
+        return new ManaClash(this);
     }
 }
 
-class UntapAllLandsTargetEffect extends OneShotEffect {
+class ManaClashEffect extends OneShotEffect {
     
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    static {
-        filter.add(new SupertypePredicate("Basic"));
+    public ManaClashEffect() {
+        super(Outcome.Detriment);
+        this.staticText = "You and target opponent each flip a coin. {this} deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip";
     }
     
-    public UntapAllLandsTargetEffect() {
-        super(Outcome.Untap);
-        staticText = "Target player untaps all basic lands he or she controls";
-    }
-
-    public UntapAllLandsTargetEffect(final UntapAllLandsTargetEffect effect) {
+    public ManaClashEffect(final ManaClashEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public ManaClashEffect copy() {
+        return new ManaClashEffect(this);
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            for (Permanent land: game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                land.untap(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller != null && targetOpponent != null) {
+            boolean bothHeads = false;
+            while (!bothHeads) {
+                if (!targetOpponent.isInGame() || !controller.isInGame()) {
+                    return false;
+                }
+                boolean controllerFlip = controller.flipCoin(game);
+                boolean opponentFlip = targetOpponent.flipCoin(game);
+                if (controllerFlip && opponentFlip) {
+                    bothHeads = true;
+                }
+                if (!controllerFlip) {
+                    controller.damage(1, source.getSourceId(), game, false, true);
+                }
+                if (!opponentFlip) {
+                    targetOpponent.damage(1, source.getSourceId(), game, false, true);
+                }
             }
             return true;
         }
         return false;
     }
-
-    @Override
-    public UntapAllLandsTargetEffect copy() {
-        return new UntapAllLandsTargetEffect(this);
-    }
-
 }

@@ -25,50 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-public class FlickeringSpirit extends CardImpl {
+public class ArcboundCrusher extends mage.sets.planechase.ArcboundCrusher {
 
-    public FlickeringSpirit(UUID ownerId) {
-        super(ownerId, 17, "Flickering Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "TSP";
-        this.subtype.add("Spirit");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        
-        // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{3}{W}"));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlSourceEffect());
-        this.addAbility(ability);
-        
+    public ArcboundCrusher(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 95;
+        this.expansionSetCode = "DST";
     }
 
-    public FlickeringSpirit(final FlickeringSpirit card) {
+    public ArcboundCrusher(final ArcboundCrusher card) {
         super(card);
     }
 
     @Override
-    public FlickeringSpirit copy() {
-        return new FlickeringSpirit(this);
+    public ArcboundCrusher copy() {
+        return new ArcboundCrusher(this);
     }
 }

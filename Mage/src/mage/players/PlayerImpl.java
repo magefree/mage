@@ -1665,9 +1665,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         } else if (source instanceof CommandObject){
                             sourceControllerId = ((CommandObject) source).getControllerId();
                             sourceAbilities = ((CommandObject) source).getAbilities();
-                        } else {
-                            source = null;
-                        }
+                        } 
                     } else {
                         sourceAbilities = ((Permanent) source).getAbilities(game);
                         sourceControllerId = ((Permanent) source).getControllerId();
@@ -2110,7 +2108,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
         event.setAppliedEffects(appliedEffects);
-        game.replaceEvent(event);
+        if (!game.replaceEvent(event)) {
+            game.fireEvent(new GameEvent(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId, 0, event.getFlag()));
+        }
         return event.getFlag();
     }
 

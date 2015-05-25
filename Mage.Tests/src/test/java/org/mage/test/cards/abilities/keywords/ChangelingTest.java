@@ -25,50 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package org.mage.test.cards.abilities.keywords;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class FlickeringSpirit extends CardImpl {
 
-    public FlickeringSpirit(UUID ownerId) {
-        super(ownerId, 17, "Flickering Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "TSP";
-        this.subtype.add("Spirit");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+public class ChangelingTest extends CardTestPlayerBase {
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+    /**
+     * Casting changelings with a Long-Forgotten Gohei in play reduces its casting cost by {1}.
+     */
+
+    @Test
+    public void testLongForgottenGohei() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.HAND, playerA, "Woodland Changeling");
         
-        // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{3}{W}"));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlSourceEffect());
-        this.addAbility(ability);
-        
-    }
+        addCard(Zone.BATTLEFIELD, playerA, "Long-Forgotten Gohei");
 
-    public FlickeringSpirit(final FlickeringSpirit card) {
-        super(card);
-    }
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Woodland Changeling");
 
-    @Override
-    public FlickeringSpirit copy() {
-        return new FlickeringSpirit(this);
-    }
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Woodland Changeling", 0); // Casting cost of spell is not reduced so not on the battlefield
+        assertHandCount(playerA, "Woodland Changeling", 1);
+
+    }    
+
 }

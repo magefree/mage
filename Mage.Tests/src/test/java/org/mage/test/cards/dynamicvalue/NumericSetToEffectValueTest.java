@@ -25,50 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package org.mage.test.cards.dynamicvalue;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class FlickeringSpirit extends CardImpl {
 
-    public FlickeringSpirit(UUID ownerId) {
-        super(ownerId, 17, "Flickering Spirit", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
-        this.expansionSetCode = "TSP";
-        this.subtype.add("Spirit");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+public class NumericSetToEffectValueTest extends CardTestPlayerBase {
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+
+    /**
+     * Check that the dealt damage is added to life
+     *
+    */
+    @Test
+    public void ArmadilloCloakTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Enchant creature
+        // Enchanted creature gets +2/+2 and has trample.
+        // Whenever enchanted creature deals damage, you gain that much life.
+        addCard(Zone.HAND, playerA, "Armadillo Cloak");
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Armadillo Cloak", "Silvercoat Lion");
+
+        attack(3, playerA, "Silvercoat Lion");
         
-        // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{3}{W}"));
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlSourceEffect());
-        this.addAbility(ability);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA,"Armadillo Cloak", 1);        
+        assertPowerToughness(playerA,  "Silvercoat Lion", 4, 4);
         
+        assertLife(playerA, 24);
+        assertLife(playerB, 16);
+
     }
 
-    public FlickeringSpirit(final FlickeringSpirit card) {
-        super(card);
-    }
-
-    @Override
-    public FlickeringSpirit copy() {
-        return new FlickeringSpirit(this);
-    }
 }

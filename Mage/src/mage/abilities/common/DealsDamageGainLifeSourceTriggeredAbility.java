@@ -28,7 +28,6 @@
 
 package mage.abilities.common;
 
-import static javax.xml.bind.JAXBIntrospector.getValue;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

@@ -29,20 +29,16 @@ package mage.sets.seventhedition;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
+import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,7 +53,6 @@ public class SpiritLink extends CardImpl {
         this.expansionSetCode = "7ED";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -66,7 +61,7 @@ public class SpiritLink extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature deals damage, you gain that much life.
-        this.addAbility(new SpiritLinkTriggeredAbility());
+        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
     public SpiritLink(final SpiritLink card) {
@@ -76,76 +71,5 @@ public class SpiritLink extends CardImpl {
     @Override
     public SpiritLink copy() {
         return new SpiritLink(this);
-    }
-}
-
-class SpiritLinkTriggeredAbility extends TriggeredAbilityImpl {
-
-    public SpiritLinkTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SpiritLinkEffect(), false);
-    }
-
-    public SpiritLinkTriggeredAbility(final SpiritLinkTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SpiritLinkTriggeredAbility copy() {
-        return new SpiritLinkTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment == null || enchantment.getAttachedTo() == null) {
-                return false;
-            }
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null && event.getSourceId().equals(enchanted.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature deals damage, " + super.getRule();
-    }
-}
-
-class SpiritLinkEffect extends OneShotEffect {
-
-    public SpiritLinkEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-
-    public SpiritLinkEffect(final SpiritLinkEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SpiritLinkEffect copy() {
-        return new SpiritLinkEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game);
-                return true;
-            }
-        }
-        return false;
     }
 }
