@@ -29,10 +29,16 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,7 +55,12 @@ public class FlickeringSpirit extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // {3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileSourceEffect(true), new ManaCostsImpl("{3}{W}"));
+        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlSourceEffect());
+        this.addAbility(ability);
+        
     }
 
     public FlickeringSpirit(final FlickeringSpirit card) {
