@@ -63,7 +63,7 @@ public class DawnCharm extends CardImpl {
 
 
         // Choose one - Prevent all combat damage that would be dealt this turn
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn), true);
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
         // or regenerate target creature;
         Mode mode = new Mode();
         mode.getEffects().add(new RegenerateTargetEffect());
