@@ -62,14 +62,14 @@ public class DawnCharm extends CardImpl {
         this.expansionSetCode = "PLC";
 
 
-        // Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
-        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn));
-
+        // Choose one - Prevent all combat damage that would be dealt this turn
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn), true);
+        // or regenerate target creature;
         Mode mode = new Mode();
         mode.getEffects().add(new RegenerateTargetEffect());
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
-
+        // or counter target spell that targets you.
         mode = new Mode();
         mode.getEffects().add(new CounterTargetEffect());
         mode.getTargets().add(new TargetSpell(filter));
