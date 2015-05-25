@@ -50,7 +50,7 @@ public class SchoolOfTheUnseen extends CardImpl {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {tap}: Add one mana of any color to your mana pool.
-        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
+        Ability ability = new AnyColorManaAbility(new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
