@@ -27,50 +27,78 @@
  */
 package mage.abilities.effects.common.continuous;
 
+import java.util.HashSet;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.choices.ChoiceImpl;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 
 /**
  *
- * @author jeffwadsworth
+ * @author a
  */
-public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
+public class LoseAbilityOrAnotherAbilityTargetEffect extends LoseAbilityTargetEffect {
 
-    protected Ability ability;
+    protected Ability ability2;
 
-    public LoseAbilityTargetEffect(Ability ability) {
-        this(ability, Duration.WhileOnBattlefield);
+    public LoseAbilityOrAnotherAbilityTargetEffect(Ability ability, Ability ability2) {
+        this(ability, ability2, Duration.WhileOnBattlefield);
     }
 
-    public LoseAbilityTargetEffect(Ability ability, Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
-        this.ability = ability;
+    public LoseAbilityOrAnotherAbilityTargetEffect(Ability ability, Ability ability2, Duration duration) {
+        super(ability, duration);
+        this.ability2 = ability2;
     }
 
-    public LoseAbilityTargetEffect(final LoseAbilityTargetEffect effect) {
+    public LoseAbilityOrAnotherAbilityTargetEffect(final LoseAbilityOrAnotherAbilityTargetEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
+        this.ability2 = effect.ability2.copy();
     }
 
     @Override
-    public LoseAbilityTargetEffect copy() {
-        return new LoseAbilityTargetEffect(this);
+    public LoseAbilityOrAnotherAbilityTargetEffect copy() {
+        return new LoseAbilityOrAnotherAbilityTargetEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            while (permanent.getAbilities().contains(ability)) {
-                permanent.getAbilities().remove(ability);
+            ChoiceImpl chooseAbility = new ChoiceImpl();
+            chooseAbility.setMessage("What ability do you wish to remove?");
+
+            HashSet<String> choice = new HashSet<>();
+
+            if (permanent.getAbilities().contains(ability)) {
+                choice.add(ability.getRule());
+            }
+
+            if (permanent.getAbilities().contains(ability2)) {
+                choice.add(ability2.getRule());
+            }
+
+            chooseAbility.setChoices(choice);
+
+            Player player = game.getPlayer(source.getControllerId());
+
+            if (player.choose(outcome, chooseAbility, game)) {
+                
+                String chosenAbility = chooseAbility.getChoice();
+                
+                if (chosenAbility.equals(ability.getRule())) {
+                    while (permanent.getAbilities().contains(ability)) {
+                        permanent.getAbilities().remove(ability);
+                    }
+                }
+                else if (chosenAbility.equals(ability2.getRule())) {
+                    while (permanent.getAbilities().contains(ability2)) {
+                        permanent.getAbilities().remove(ability2);
+                    }
+                }
             }
         }
         return true;
@@ -92,6 +120,8 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
             sb.append("Target ").append(target.getTargetName()).append(" loses ");
         }
         sb.append(ability.getRule());
+        sb.append(" or ");
+        sb.append(ability2.getRule());
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
         }

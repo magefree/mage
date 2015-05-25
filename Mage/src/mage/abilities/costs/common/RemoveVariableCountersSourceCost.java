@@ -54,11 +54,22 @@ public class RemoveVariableCountersSourceCost extends VariableCostImpl  {
     public RemoveVariableCountersSourceCost(Counter counter) {
         this(counter, 0);
     }
+    
+    public RemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay, String text) {
+        this(counter, minimalCountersToPay);
+        this.text = text;
+    }
+
+    public RemoveVariableCountersSourceCost(Counter counter, String text) {
+        this(counter);
+        this.text = text;
+    }
 
     public RemoveVariableCountersSourceCost(final RemoveVariableCountersSourceCost cost) {
         super(cost);
         this.minimalCountersToPay = cost.minimalCountersToPay;
         this.counterName = cost.counterName;
+        this.text = cost.text;
     }
 
     @Override

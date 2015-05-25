@@ -1,16 +1,16 @@
 /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,46 +20,54 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.prophecy;
 
-package mage.target.common;
-
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.TargetPermanent;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.TapTargetEffect;
+import mage.abilities.mana.ColorlessManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author anonymous
  */
-public class TargetControlledPermanent extends TargetPermanent {
+public class WintermoonMesa extends CardImpl {
 
-    public TargetControlledPermanent() {
-        this(1, 1, new FilterControlledPermanent(), false);
+    public WintermoonMesa(UUID ownerId) {
+        super(ownerId, 143, "Wintermoon Mesa", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "PCY";
+
+        // Wintermoon Mesa enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        // {2}, {tap}, Sacrifice Wintermoon Mesa: Tap two target lands.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent(2));
+        this.addAbility(ability);
     }
 
-    public TargetControlledPermanent(int numTargets) {
-        this(numTargets, numTargets, new FilterControlledPermanent(), false);
-    }
-
-    public TargetControlledPermanent(FilterControlledPermanent filter) {
-        this(1, 1, filter, false);
-    }
-
-    public TargetControlledPermanent(int minNumTargets, int maxNumTargets, FilterControlledPermanent filter, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, filter, notTarget);
-        this.targetName = filter.getMessage();
-    }
-
-    public TargetControlledPermanent(final TargetControlledPermanent target) {
-        super(target);
+    public WintermoonMesa(final WintermoonMesa card) {
+        super(card);
     }
 
     @Override
-    public TargetControlledPermanent copy() {
-        return new TargetControlledPermanent(this);
+    public WintermoonMesa copy() {
+        return new WintermoonMesa(this);
     }
 }
