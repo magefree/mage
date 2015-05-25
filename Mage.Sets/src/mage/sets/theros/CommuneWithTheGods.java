@@ -56,7 +56,6 @@ public class CommuneWithTheGods extends CardImpl {
         super(ownerId, 155, "Commune with the Gods", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
         this.expansionSetCode = "THS";
 
-
         // Reveal the top five cards of your library. You may put a creature or enchantment card from among them into your hand. Put the rest into your graveyard.
         this.getSpellAbility().addEffect(new CommuneWithTheGodsEffect());
 
@@ -119,7 +118,7 @@ class CommuneWithTheGodsEffect extends OneShotEffect {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
+                        controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
                     }
 
                 }
