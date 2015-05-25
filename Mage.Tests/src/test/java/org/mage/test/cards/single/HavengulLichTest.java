@@ -19,7 +19,7 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}", playerB);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -53,13 +53,16 @@ public class HavengulLichTest extends CardTestPlayerBase {
     @Test
     public void testCard2() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        // {1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich 
+        // gains all activated abilities of that card until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
+        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
         addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: You may", "Prodigal Pyromancer");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB); // only inm turn 1, so Havengul Lich has the abilit ylost now
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
