@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.CardType;
 import mage.game.Game;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 
 public abstract class MageObjectImpl implements MageObject {
@@ -176,17 +177,14 @@ public abstract class MageObjectImpl implements MageObject {
         }
         if (this.subtype.contains(value)) {
             return true;
-        }
-        else { // checking for Changeling
-            // first make sure input parameter is not creature type
+        } else { // checking for Changeling
+            // first make sure input parameter is a creature type
             // if so, then ChangelingAbility doesn't matter
-            if (value.equals("Mountain") || value.equals("Island") || value.equals("Plains")
-                    || value.equals("Forest") || value.equals("Swamp") || value.equals("Aura")
-                    || value.equals("Equipment") || value.equals("Fortification") || value.equals("Shrine")) {
+            if (CardUtil.isNonCreatureSubtype(value)) {
                 return false;
             }
             // as it is creature subtype, then check the existence of Changeling
-            return abilities.contains(ChangelingAbility.getInstance()) || this.subtype.contains(ChangelingAbility.ALL_CREATURE_TYPE);
+            return abilities.contains(ChangelingAbility.getInstance()) || this.subtype.contains(ChangelingAbility.ALL_CREATURE_TYPE);            
         }
     }
 
