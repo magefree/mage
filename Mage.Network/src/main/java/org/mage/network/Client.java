@@ -15,7 +15,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -37,13 +36,10 @@ import org.mage.network.handlers.client.ChatMessageHandler;
 import org.mage.network.handlers.client.ChatRoomHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.InformClientMessageHandler;
-import org.mage.network.handlers.client.MessageHandler;
+import org.mage.network.handlers.client.ServerMessageHandler;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.JoinChatMessage;
-import org.mage.network.model.LeaveChatMessage;
 import org.mage.network.model.MessageType;
 import org.mage.network.model.RegisterClientMessage;
-import org.mage.network.model.SendChatMessage;
 
 /**
  *
@@ -62,6 +58,7 @@ public class Client {
     private final ChatMessageHandler chatMessageHandler;
     private final InformClientMessageHandler informClientMessageHandler;
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
+    private final ServerMessageHandler serverMessageHandler;
     
     private Channel channel;
     private EventLoopGroup group;
@@ -74,6 +71,7 @@ public class Client {
         chatMessageHandler = new ChatMessageHandler(client);
         informClientMessageHandler = new InformClientMessageHandler(client);
         clientRegisteredMessageHandler = new ClientRegisteredMessageHandler(client);
+        serverMessageHandler = new ServerMessageHandler();
     }
     
     public boolean connect(String userName, String host, int port, MageVersion version) {
@@ -87,8 +85,10 @@ public class Client {
                 .channel(NioSocketChannel.class)
                 .handler(new ClientInitializer());
             
+            clientRegisteredMessageHandler.setUserName(userName);
+            clientRegisteredMessageHandler.setVersion(version);
             channel = b.connect(host, port).sync().channel();
-            channel.writeAndFlush(new RegisterClientMessage(userName, version));
+            clientRegisteredMessageHandler.registerClient();
             client.connected(userName + "@" + host + ":" + port + " ");
             return true;
         } catch (InterruptedException ex) {
@@ -116,6 +116,7 @@ public class Client {
             ch.pipeline().addLast("informClientMessageHandler", informClientMessageHandler);
             ch.pipeline().addLast("clientRegisteredMessageHandler", clientRegisteredMessageHandler);
             ch.pipeline().addLast("chatRoomHandler", chatRoomHandler);
+            ch.pipeline().addLast("serverMessageHandler", serverMessageHandler);
 
         }
     }
@@ -279,7 +280,12 @@ public class Client {
     }
 
     public List<String> getServerMessages() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return serverMessageHandler.getServerMessages();
+        } catch (Exception ex) {
+            logger.error("Error getting server messages", ex);
+        }
+        return null;
     }
 
     public Collection<TableView> getTables(UUID roomId) {

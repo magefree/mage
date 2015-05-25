@@ -29,6 +29,7 @@ import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.JoinChatMessageHandler;
 import org.mage.network.handlers.server.LeaveChatMessageHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
+import org.mage.network.handlers.server.ServerMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.MessageType;
@@ -56,6 +57,7 @@ public class Server {
     private final ChatMessageHandler chatMessageHandler;
     private final JoinChatMessageHandler joinChatMessageHandler;
     private final LeaveChatMessageHandler leaveChatMessageHandler;
+    private final ServerMessageHandler serverMessageHandler;
     
     public Server(MageServer server) {
         registerClientMessageHandler = new RegisterClientMessageHandler(server);
@@ -63,6 +65,7 @@ public class Server {
         joinChatMessageHandler = new JoinChatMessageHandler(server);
         leaveChatMessageHandler = new LeaveChatMessageHandler(server);
         chatRoomIdHandler = new ChatRoomIdHandler(server);
+        serverMessageHandler = new ServerMessageHandler(server);
     }
     
     public void start(int port) {
@@ -105,6 +108,7 @@ public class Server {
             ch.pipeline().addLast(handlersExecutor, chatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, joinChatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, leaveChatMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, serverMessageHandler);
         }
 
     }    

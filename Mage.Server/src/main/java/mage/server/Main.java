@@ -1152,6 +1152,12 @@ public class Main implements MageServer {
 //        });
 //    }
 //
+    
+    @Override
+    public List<String> getServerMessages() {
+        return ServerMessagesUtil.getInstance().getMessages();
+    }
+
 //    @Override
 //    public Object getServerMessagesCompressed(String sessionId) throws MageException {
 //        return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {

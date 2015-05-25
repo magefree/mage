@@ -1,5 +1,6 @@
 package org.mage.network.interfaces;
 
+import java.util.List;
 import java.util.UUID;
 import mage.interfaces.ServerState;
 import mage.utils.MageVersion;
@@ -19,5 +20,7 @@ public interface MageServer {
     void receiveBroadcastMessage(String message, String sessionId);
     
     ServerState getServerState();
+
+    public List<String> getServerMessages();
     
 }

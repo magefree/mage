@@ -1002,20 +1002,25 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.tablesPane.hideTables();
     }
 
-    public void showGames(boolean setActive) {        
-        MagePane topPanebefore = getTopMost(tablesPane);
-        if (!tablesPane.isVisible()) {
-            this.tablesPane.setVisible(true);
-            this.tablesPane.showTables();
-        }
-        if (setActive) {
-            setActive(tablesPane);
-        } else {
-            // if other panel was already shown, mamke sure it's topmost again
-            if (topPanebefore != null) {
-                setActive(topPanebefore);
+    public void showGames(final boolean setActive) {        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MagePane topPanebefore = getTopMost(tablesPane);
+                if (!tablesPane.isVisible()) {
+                    tablesPane.setVisible(true);
+                    tablesPane.showTables();
+                }
+                if (setActive) {
+                    setActive(tablesPane);
+                } else {
+                    // if other panel was already shown, mamke sure it's topmost again
+                    if (topPanebefore != null) {
+                        setActive(topPanebefore);
+                    }
+                }        
             }
-        }        
+        });
     }
     
     public void hideGames() {
@@ -1372,13 +1377,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void clientRegistered(ServerState state) {
         this.serverState = state;
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                setWindowTitle();
-                showGames(false);                
-            }
-        });
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                setWindowTitle();
+//                showGames(false);                
+//            }
+//        });
     }
 
     @Override
