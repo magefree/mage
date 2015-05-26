@@ -153,35 +153,35 @@ class WrexialReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
     }
-
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getTargetId() == cardid) {
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
-        if (card != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (card != null && controller != null) {
             if (card instanceof Spell) {
                 game.rememberLKI(card.getId(), Zone.STACK, (Spell) card);
             }
-            if (card instanceof Card && eventObject == cardid) {
-                ((Card) card).moveToExile(source.getSourceId(), "Wrexial, The Risen Deep", source.getSourceId(), game);
+            if (card instanceof Card) {
+                controller.moveCardToExileWithInfo((Card)card, null, "", source.getSourceId(), game, game.getState().getZone(event.getTargetId()), true);
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD
-                    && ((ZoneChangeEvent) event).getTargetId() == cardid) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

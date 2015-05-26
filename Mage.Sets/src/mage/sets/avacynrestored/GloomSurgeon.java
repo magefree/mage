@@ -84,42 +84,30 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
             int preventedDamage = event.getAmount();
-            event.setAmount(0);
-
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                int cardsCount = Math.min(preventedDamage, player.getLibrary().size());
-                for (int i = 0; i < cardsCount; i++) {
-                    Card card = player.getLibrary().removeFromTop(game);
-                    if (card != null) {
-                        player.moveCardToExileWithInfo(card, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
-                    } else {
-                        break;
-                    }
-                }
-            }
-
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), preventedDamage));
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {                
+                player.moveCards(player.getLibrary().getTopCards(game, preventedDamage), Zone.LIBRARY, Zone.EXILED, source, game);
+            }
             return true;
         }
-
         return false;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
             DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
             if (damageEvent.isCombatDamage()) {
                 return true;
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

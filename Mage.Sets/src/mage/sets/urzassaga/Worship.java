@@ -35,7 +35,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -48,7 +47,6 @@ public class Worship extends CardImpl {
     public Worship(UUID ownerId) {
         super(ownerId, 57, "Worship", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "USG";
-
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));
@@ -79,26 +77,23 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
     public WorshipReplacementEffect copy() {
         return new WorshipReplacementEffect(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null) {
-                Player controller = game.getPlayer(permanent.getControllerId());
-                if (controller != null
-                        && (controller.getLife() - event.getAmount()) < 1
-                        && event.getPlayerId().equals(controller.getId())
-                        && game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), event.getPlayerId(), game) > 0
-                        ) {
-                    event.setAmount(controller.getLife() - 1);
-                }
+        if (source.getControllerId().equals(event.getPlayerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null
+                    && (controller.getLife() - event.getAmount()) < 1
+                    && game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), event.getPlayerId(), game) > 0
+                    ) {
+                event.setAmount(controller.getLife() - 1);
             }
         }
-
         return false;
     }
 
@@ -111,5 +106,4 @@ class WorshipReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return false;
     }
-
 }

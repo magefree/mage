@@ -41,6 +41,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PreventDamageToSourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
@@ -78,8 +79,8 @@ public class OpalEyeKondasYojimbo extends CardImpl {
         ability.addTarget(new TargetSource());
         this.addAbility(ability);
 
-        // {1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OpalEyeKondasYojimboPreventEffect(), new ManaCostsImpl("{1}{W}")));
+        // {1}{W}: Prevent the next 1 damage that would be dealt to Opal-Eye this turn.        
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{W}")));
 
     }
 
@@ -94,32 +95,43 @@ public class OpalEyeKondasYojimbo extends CardImpl {
 }
 
 class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
-
+    
+    private final TargetSource target;
+    
     OpalEyeKondasYojimboRedirectionEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "The next time a source of your choice would deal damage this turn, that damage is dealt to {this} instead";
+        this.target = new TargetSource();
     }
 
     OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
         super(effect);
+        this.target = effect.target.copy();
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        super.init(source, game);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE ) ||
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE ) ||
                 event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER ) ||
-                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER )    ) {
-                if (event.getSourceId().equals(targetPointer.getFirst(game, source))) {
-                    // check source
-                    MageObject object = game.getObject(event.getSourceId());
-                    if (object == null) {
-                        game.informPlayers("Couldn't find source of damage");
-                        return false;
-                    }
-                    return true;
-                }
+                event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER );
+    }
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getSourceId().equals(target.getFirstTarget())) {
+            // check source
+            MageObject object = game.getObject(event.getSourceId());
+            if (object == null) {
+                game.informPlayers("Couldn't find source of damage");
+                return false;
             }
+            return true;
         }
         return false;
     }
@@ -148,7 +160,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
             }
             game.informPlayers(message.toString());
             // redirect damage
-            this.used = true;
+            discard();
             sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
@@ -156,56 +168,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public OpalEyeKondasYojimboRedirectionEffect copy() {
         return new OpalEyeKondasYojimboRedirectionEffect(this);
-    }
-}
-
-class OpalEyeKondasYojimboPreventEffect extends PreventionEffectImpl {
-
-    public OpalEyeKondasYojimboPreventEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Prevent the next 1 damage that would be dealt to {this} this turn";
-    }
-
-    public OpalEyeKondasYojimboPreventEffect(final OpalEyeKondasYojimboPreventEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OpalEyeKondasYojimboPreventEffect copy() {
-        return new OpalEyeKondasYojimboPreventEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            if (event.getAmount() >= 1) {
-                int damage = 1;
-                event.setAmount(event.getAmount() - 1);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
     }
 }

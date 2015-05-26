@@ -31,7 +31,6 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -46,26 +45,24 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
-import mage.target.TargetPermanent;
+import mage.target.TargetPlayer;
 
 /**
  * @author cbt33 / LevelX2
  */
+public class AegisOfHonor extends CardImpl {
 
-public class AegisOfHonor extends CardImpl{
-
-	public AegisOfHonor(UUID ownerId){
-	super(ownerId, 1, "Aegis of Honor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
-	this.expansionSetCode = "ODY";
-
+    public AegisOfHonor(UUID ownerId) {
+        super(ownerId, 1, "Aegis of Honor", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+        this.expansionSetCode = "ODY";
 
 	// {1}: The next time an instant or sorcery spell would deal damage to you this
-	//turn, that spell deals that damage to its controller instead.
-	this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl("{1}")));
+        //turn, that spell deals that damage to its controller instead.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AegisOfHonorEffect(), new ManaCostsImpl("{1}")));
 
+    }
 
-	}
-	public AegisOfHonor(final AegisOfHonor card) {
+    public AegisOfHonor(final AegisOfHonor card) {
         super(card);
     }
 
@@ -98,10 +95,13 @@ class AegisOfHonorEffect extends RedirectionEffect {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }    
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-    	if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)   //Checks for player damage
-			&& event.getTargetId().equals(source.getControllerId()))    //Checks to see the damage is to Aegis of Honor's controller
-        {
+    	if (event.getTargetId().equals(source.getControllerId())) {    //Checks to see the damage is to Aegis of Honor's controller        
             Spell spell = null;
             StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
             if (stackObject == null) {
@@ -112,7 +112,7 @@ class AegisOfHonorEffect extends RedirectionEffect {
             }
             //Checks if damage is from a sorcery or instants
             if (spell != null && instantOrSorceryfilter.match(spell.getCard(), game)) {
-                TargetPermanent target = new TargetPermanent();
+                TargetPlayer target = new TargetPlayer();
                 target.add(spell.getControllerId(), game);
                 redirectTarget = target;
                 return true;

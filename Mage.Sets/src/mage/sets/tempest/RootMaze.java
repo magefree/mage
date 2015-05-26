@@ -52,7 +52,6 @@ public class RootMaze extends CardImpl {
         super(ownerId, 144, "Root Maze", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "TMP";
 
-
         // Artifacts and lands enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootMazeEffect()));
     }
@@ -85,21 +84,16 @@ class RootMazeEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && (permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && (permanent.getCardType().contains(CardType.LAND) || permanent.getCardType().contains(CardType.ARTIFACT));
     }
 
     @Override

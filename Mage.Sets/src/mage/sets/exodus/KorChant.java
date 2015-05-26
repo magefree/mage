@@ -118,9 +118,13 @@ class KorChantEffect extends RedirectionEffect {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                && event.getTargetId().equals(this.getTargetPointer().getFirst(game, source))
+        if (event.getTargetId().equals(this.getTargetPointer().getFirst(game, source))
                 && event.getSourceId().equals(this.target.getFirstTarget())) {
             this.redirectTarget = source.getTargets().get(1);
             return true;

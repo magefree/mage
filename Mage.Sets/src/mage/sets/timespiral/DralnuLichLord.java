@@ -116,13 +116,13 @@ class DralnuLichLordReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE && event.getTargetId().equals(source.getSourceId());
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getSourceId());
     }
 
     @Override

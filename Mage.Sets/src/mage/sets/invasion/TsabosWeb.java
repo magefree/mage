@@ -33,6 +33,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ManaAbility;
@@ -61,7 +62,6 @@ public class TsabosWeb extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TsabosWebPreventUntapEffect()));
-
     }
 
     public TsabosWeb(final TsabosWeb card) {
@@ -74,7 +74,7 @@ public class TsabosWeb extends CardImpl {
     }
 }
 
-class TsabosWebPreventUntapEffect extends ReplacementEffectImpl {
+class TsabosWebPreventUntapEffect extends ContinuousRuleModifyingEffectImpl {
 
     public TsabosWebPreventUntapEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -86,23 +86,18 @@ class TsabosWebPreventUntapEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public TsabosWebPreventUntapEffect copy() {
         return new TsabosWebPreventUntapEffect(this);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNTAP;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 for (Ability ability :permanent.getAbilities()) {

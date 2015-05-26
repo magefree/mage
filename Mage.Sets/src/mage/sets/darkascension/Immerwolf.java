@@ -27,22 +27,26 @@
  */
 package mage.sets.darkascension;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -84,14 +88,13 @@ public class Immerwolf extends CardImpl {
     }
 }
 
-class ImmerwolfEffect extends ReplacementEffectImpl {
+class ImmerwolfEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private static final FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
-    private static final FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
-        filterWerewolf.add(new SubtypePredicate("Werewolf"));
-        filterNonhuman.add(Predicates.not(new SubtypePredicate("Human")));
+        filter.add(new SubtypePredicate("Werewolf"));
+        filter.add(Predicates.not(new SubtypePredicate("Human")));
     }
 
     public ImmerwolfEffect() {
@@ -109,23 +112,15 @@ class ImmerwolfEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TRANSFORM;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.TRANSFORM) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && filterWerewolf.match(permanent, game) && filterNonhuman.match(permanent, game)) {
-                return true;
-            }
-        }
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && 
+                permanent.getControllerId().equals(source.getControllerId()) && 
+                filter.match(permanent, game) ;
     }
 }

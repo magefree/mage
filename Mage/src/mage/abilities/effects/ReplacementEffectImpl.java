@@ -79,9 +79,4 @@ public abstract class ReplacementEffectImpl extends ContinuousEffectImpl impleme
         throw new UnsupportedOperationException("Not used for replacemnt effect.");
     }
 
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return true;
-    }
-
 }

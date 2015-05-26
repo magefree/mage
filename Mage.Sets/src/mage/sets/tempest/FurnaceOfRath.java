@@ -84,7 +84,7 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
                 return true;
@@ -92,29 +92,16 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
                 return true;
         }
         return false;
-    }
-
+    } 
+    
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean applies(GameEvent event, Ability source, Game game) {
         return true;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent)event;
-        if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
-            Player targetPlayer = game.getPlayer(event.getTargetId());
-            if (targetPlayer != null) {
-                targetPlayer.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
-                return true;
-            }
-        } else {
-            Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            if (targetPermanent != null) {
-                targetPermanent.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
-                return true;
-            }
-        }
+        event.setAmount(2 * event.getAmount());
         return false;
     }
 }

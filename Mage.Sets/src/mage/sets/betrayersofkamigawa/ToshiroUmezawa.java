@@ -130,7 +130,7 @@ class ToshiroUmezawaEffect extends OneShotEffect {
 
 class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
 
-    private UUID cardId;
+    private final UUID cardId;
 
     public ToshiroUmezawaReplacementEffect(UUID cardId) {
         super(Duration.EndOfTurn, Outcome.Exile);
@@ -148,11 +148,6 @@ class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
@@ -167,16 +162,16 @@ class ToshiroUmezawaReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD
-                    && ((ZoneChangeEvent) event).getTargetId().equals(cardId)) {
-                return true;
-            }
-        }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        return zEvent.getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getTargetId().equals(cardId);
     }
 }

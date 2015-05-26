@@ -90,11 +90,6 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public DampingMatrixEffect copy() {
         return new DampingMatrixEffect(this);
     }
@@ -103,16 +98,19 @@ class DampingMatrixEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ACTIVATE_ABILITY;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ACTIVATE_ABILITY) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object instanceof Permanent && filter.match((Permanent)object, game)) {
-                Ability ability = object.getAbilities().get(event.getTargetId());
-                if (ability != null && !(ability instanceof ManaAbility)) {
-                    return true;
-                }
+        MageObject object = game.getObject(event.getSourceId());
+        if (object instanceof Permanent && filter.match((Permanent)object, game)) {
+            Ability ability = object.getAbilities().get(event.getTargetId());
+            if (ability != null && !(ability instanceof ManaAbility)) {
+                return true;
             }
         }
         return false;

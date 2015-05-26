@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,7 +56,6 @@ public class UnstableFooting extends CardImpl {
         super(ownerId, 153, "Unstable Footing", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ZEN";
 
-
         // Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)
         this.addAbility(new KickerAbility("{3}{R}"));
 
@@ -64,9 +64,7 @@ public class UnstableFooting extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DamageTargetEffect(5),
                 KickedCondition.getInstance(),
-                "If Unstable Footing was kicked, it deals 5 damage to target player"));
-
-
+                "If {this} was kicked, it deals 5 damage to target player"));
 
     }
 
@@ -107,21 +105,18 @@ class UnstableFootingEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PREVENT_DAMAGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PREVENT_DAMAGE) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }

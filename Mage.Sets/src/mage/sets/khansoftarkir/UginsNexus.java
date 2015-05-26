@@ -91,11 +91,6 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
@@ -104,10 +99,15 @@ class UginsNexusSkipExtraTurnsEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.EXTRA_TURN;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.EXTRA_TURN;
+        return true;
     }
 
 }

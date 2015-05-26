@@ -50,6 +50,7 @@ import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.watchers.Watcher;
@@ -193,10 +194,7 @@ class SavageSummoningWatcher extends Watcher {
     public boolean isSpellCastWithThisSavageSummoning(UUID spellId, UUID cardId, int zoneChangeCounter) {
         String cardKey = new StringBuilder(cardId.toString()).append("_").append(zoneChangeCounter).toString();
         HashSet<String> savageSpells = (HashSet<String>) spellsCastWithSavageSummoning.get(spellId);
-        if (savageSpells != null && savageSpells.contains(cardKey)) {
-            return true;
-        }
-        return false;
+        return savageSpells != null && savageSpells.contains(cardKey);
     }
 
     public boolean isCardCastWithThisSavageSummoning(Card card, UUID cardId, int zoneChangeCounter, Game game) {
@@ -204,10 +202,7 @@ class SavageSummoningWatcher extends Watcher {
         // add one because card is now gone to battlefield as creature
         String cardKey = new StringBuilder(cardId.toString()).append("_").append(zoneChangeCounter).toString();
         HashSet<String> savageSpells = (HashSet<String>) cardsCastWithSavageSummoning.get(creatureCardKey);
-        if (savageSpells != null && savageSpells.contains(cardKey)) {
-            return true;
-        }
-        return false;
+        return savageSpells != null && savageSpells.contains(cardKey);
     }
 
     @Override
@@ -308,11 +303,6 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
         if (creature != null) {
@@ -323,14 +313,14 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD)) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && watcher.isCardCastWithThisSavageSummoning(card, source.getSourceId(), zoneChangeCounter, game)) {
-                return true;
-            }
-        }
-        return false;
+        Card card = game.getCard(event.getTargetId());
+        return card != null && watcher.isCardCastWithThisSavageSummoning(card, source.getSourceId(), zoneChangeCounter, game);
     }
 
 }

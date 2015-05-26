@@ -79,29 +79,27 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER)
                 || event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER)) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object != null && object instanceof Spell) {
-                if (((Spell) object).getControllerId().equals(source.getControllerId())
-                        && (object.getCardType().contains(CardType.INSTANT)
-                         || object.getCardType().contains(CardType.SORCERY))){
-                    return true;
-                }
-            }
-            Permanent permanent = game.getBattlefield().getPermanent(event.getSourceId());
-            if(permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER)){
+                || event.getType().equals(GameEvent.EventType.DAMAGE_PLANESWALKER);
+    }
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        MageObject object = game.getObject(event.getSourceId());
+        if (object != null && object instanceof Spell) {
+            if (((Spell) object).getControllerId().equals(source.getControllerId())
+                    && (object.getCardType().contains(CardType.INSTANT)
+                     || object.getCardType().contains(CardType.SORCERY))){
                 return true;
             }
         }
+        Permanent permanent = game.getBattlefield().getPermanent(event.getSourceId());
+        if(permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER)){
+            return true;
+        }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
