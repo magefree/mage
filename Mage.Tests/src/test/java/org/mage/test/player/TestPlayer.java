@@ -360,16 +360,24 @@ public class TestPlayer extends ComputerPlayer {
                     MageObject targetObject = game.getObject(targetId);
                     if (targetObject != null) {
                         for (String choose2: choices) {
-                            if (targetObject.getName().equals(choose2)) {
-                                List<UUID> alreadyTargetted = target.getTargets();
-                                if (t.canTarget(targetObject.getId(), game)) {
-                                    if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
-                                        target.add(targetObject.getId(), game);
-                                        choices.remove(choose2);
-                                        return true;
+                            String[] targetList = choose2.split("\\^");
+                            boolean targetFound = false;
+                            for (String targetName: targetList) {                        
+                                if (targetObject.getName().equals(targetName)) {
+                                    List<UUID> alreadyTargetted = target.getTargets();
+                                    if (t.canTarget(targetObject.getId(), game)) {
+                                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
+                                            target.add(targetObject.getId(), game);
+                                            choices.remove(choose2);
+                                            targetFound = true;
+                                        }
                                     }
                                 }
                             }
+                            if (targetFound) {
+                                choices.remove(choose2);
+                                return true;
+                            }                            
                         }
                     }
                 }

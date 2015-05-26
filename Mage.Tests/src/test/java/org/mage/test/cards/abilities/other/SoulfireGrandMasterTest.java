@@ -205,7 +205,7 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
     }      
     /**
      * Test that if Soulfire Grand Master has left the battlefield 
-     * spell have no longer lifelink 
+     * spell has no longer lifelink 
      */
     
     @Test
@@ -294,5 +294,39 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         assertLife(playerA, 20); 
 
-    }      
+    }     
+  /**
+     * With a Soulfire Grand Master in play, Deflecting Palm doesn't gain the caster life. 
+     * It should as it has lifelink, and it's Deflecting Palm (an instant) dealing damage. 
+     * I was playing against a human in Standard Constructed.
+     * 
+     */
+    
+    @Test
+    public void testWithDeflectingPalm() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Instant -{R}{W}
+        // The next time a source of your choice would deal damage to you this turn, prevent that damage. 
+        // If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
+        addCard(Zone.HAND, playerA, "Deflecting Palm");
+        addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deflecting Palm", null, "Lightning Bolt");
+        setChoice(playerA, "Lightning Bolt");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Deflecting Palm", 1); 
+
+        assertLife(playerB, 17);
+        assertLife(playerA, 23); // damage is prevented + lifelink + 3
+
+    }          
 }
