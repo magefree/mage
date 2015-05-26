@@ -61,7 +61,6 @@ public class SpellCrumple extends CardImpl {
         super(ownerId, 63, "Spell Crumple", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "CMD";
 
-
         // Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new SpellCrumpleCounterEffect());    
@@ -146,11 +145,6 @@ class SpellCrumpleReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean isInactive(Ability source, Game game) {
         if (!game.getPhase().getStep().getType().equals(phaseStep)) {
             return true;
@@ -181,8 +175,13 @@ class SpellCrumpleReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone().equals(Zone.GRAVEYARD)) {
+        if (((ZoneChangeEvent)event).getToZone().equals(Zone.GRAVEYARD)) {
             MageObject mageObject = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
             if (mageObject instanceof Spell) {
                 return ((Spell)mageObject).getSourceId().equals(event.getTargetId());

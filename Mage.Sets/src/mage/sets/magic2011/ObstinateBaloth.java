@@ -96,10 +96,15 @@ class ObstinateBalothEffect extends ReplacementEffectImpl {
     public ObstinateBalothEffect copy() {
         return new ObstinateBalothEffect(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
             if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
                 StackObject spell = game.getStack().getStackObject(event.getSourceId());
@@ -112,7 +117,7 @@ class ObstinateBalothEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             Player owner = game.getPlayer(card.getOwnerId());
@@ -123,11 +128,6 @@ class ObstinateBalothEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
     }
 
 }

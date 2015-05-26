@@ -51,13 +51,14 @@ import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.game.events.GameEvent.EventType;
 
 /**
  * @author nantuko
  */
 public class DearlyDeparted extends CardImpl {
 
-    private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
+    private static final String ruleText = "As long as {this} is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
 
     public DearlyDeparted(UUID ownerId) {
         super(ownerId, 9, "Dearly Departed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
@@ -110,21 +111,19 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl {
     public void addEffect(Effect effect) {
         baseEffects.add(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human")) {
-                setValue("target", permanent);
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId()) && permanent.hasSubtype("Human")) {
+            setValue("target", permanent);
+            return true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

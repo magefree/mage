@@ -89,11 +89,6 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
     public ForbiddenCryptDrawCardReplacementEffect copy() {
         return new ForbiddenCryptDrawCardReplacementEffect(this);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
@@ -120,8 +115,13 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_CARD;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.DRAW_CARD && event.getPlayerId().equals(source.getControllerId());
+        return event.getPlayerId().equals(source.getControllerId());
     }
     
 }

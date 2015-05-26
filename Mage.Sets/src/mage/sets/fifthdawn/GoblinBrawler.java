@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -75,7 +76,7 @@ public class GoblinBrawler extends CardImpl {
     }
 }
 
-class CantBeEquippedSourceEffect extends ReplacementEffectImpl {
+class CantBeEquippedSourceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantBeEquippedSourceEffect(CantBeEquippedSourceEffect effect) {
         super(effect);
@@ -92,18 +93,13 @@ class CantBeEquippedSourceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACH;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACH && event.getTargetId().equals(source.getSourceId())) {
+        if (event.getTargetId().equals(source.getSourceId())) {
            Permanent permanent = game.getPermanent(event.getSourceId());
            if(permanent != null && permanent.getSubtype().contains("Equipment")){
             return true;

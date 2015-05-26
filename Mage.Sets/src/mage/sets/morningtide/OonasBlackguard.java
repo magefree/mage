@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -47,6 +46,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -96,15 +96,18 @@ class OonasBlackguardReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
-                    && creature.getCardType().contains(CardType.CREATURE)
-                    && creature.getSubtype().contains("Rogue")
-                    && !event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
+        Permanent creature = game.getPermanent(event.getTargetId());
+        if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
+                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.getSubtype().contains("Rogue")
+                && !event.getTargetId().equals(source.getSourceId())) {
+            return true;
         }
         return false;
     }

@@ -93,9 +93,13 @@ class ShieldDancerRedirectionEffect extends RedirectionEffect {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DAMAGE_CREATURE
-                && event.getTargetId().equals(source.getSourceId())
+        if (event.getTargetId().equals(source.getSourceId())
                 && event.getSourceId().equals(source.getTargets().get(0).getFirstTarget())) {
             DamageEvent damageEvent = (DamageEvent) event;
             if (damageEvent.isCombatDamage()) {

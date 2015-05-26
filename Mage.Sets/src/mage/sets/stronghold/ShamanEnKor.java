@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetSource;
@@ -156,9 +157,14 @@ class ShamanEnKorReplacementEffect extends ReplacementEffectImpl {
     }
     
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used) {
-            if (event.getType().equals(GameEvent.EventType.DAMAGE_CREATURE) && targetSource != null) {
+            if (targetSource != null) {
                 if (event.getSourceId().equals(targetSource.getFirstTarget())) {
                     // check source
                     MageObject object = game.getObject(event.getSourceId());

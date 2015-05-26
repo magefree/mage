@@ -87,11 +87,6 @@ class RainOfGoreEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
@@ -101,15 +96,17 @@ class RainOfGoreEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.GAIN_LIFE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case GAIN_LIFE:
-                if (!game.getStack().isEmpty()) {
-                    StackObject stackObject = game.getStack().getFirst();
-                    if (stackObject != null) {
-                        return stackObject.getControllerId().equals(event.getPlayerId());
-                    }
-                }
+        if (!game.getStack().isEmpty()) {
+            StackObject stackObject = game.getStack().getFirst();
+            if (stackObject != null) {
+                return stackObject.getControllerId().equals(event.getPlayerId());
+            }
         }
         return false;
     }

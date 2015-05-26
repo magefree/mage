@@ -103,11 +103,15 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER 
-                && event.getPlayerId().equals(source.getControllerId())
+        if (event.getPlayerId().equals(source.getControllerId())
                 && ((DamageEvent)event).isCombatDamage()) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
@@ -119,11 +123,6 @@ class KjeldoranRoyalGuardEffect extends ReplacementEffectImpl {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

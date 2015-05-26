@@ -60,7 +60,6 @@ public class Hinder extends CardImpl {
         super(ownerId, 65, "Hinder", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.expansionSetCode = "CHK";
 
-
         // Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
         this.getSpellAbility().addEffect(new HinderEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -144,11 +143,6 @@ class HinderReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean isInactive(Ability source, Game game) {
         if (!game.getPhase().getStep().getType().equals(phaseStep)) {
             return true;
@@ -180,8 +174,13 @@ class HinderReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone().equals(Zone.GRAVEYARD)) {
+        if (((ZoneChangeEvent)event).getToZone().equals(Zone.GRAVEYARD)) {
             MageObject mageObject = game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK);
             if (mageObject instanceof Spell) {
                 return ((Spell)mageObject).getSourceId().equals(event.getTargetId());

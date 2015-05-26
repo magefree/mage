@@ -84,34 +84,35 @@ class AliFromCairoReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null
-                        && (controller.getLife() > 0) &&(controller.getLife() - event.getAmount()) < 1
-                        && event.getPlayerId().equals(controller.getId())
-                        ) {
-                    event.setAmount(controller.getLife() - 1);
-                    //unsure how to make this comply with
-                    // 10/1/2008: The ability doesn't change how much damage is dealt;
-                    // it just changes how much life that damage makes you lose.
-                    // An effect such as Spirit Link will see the full amount of damage being dealt.
-                }
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null
+                    && (controller.getLife() > 0) &&(controller.getLife() - event.getAmount()) < 1
+                    && event.getPlayerId().equals(controller.getId())
+                    ) {
+                return true;
+                //unsure how to make this comply with
+                // 10/1/2008: The ability doesn't change how much damage is dealt;
+                // it just changes how much life that damage makes you lose.
+                // An effect such as Spirit Link will see the full amount of damage being dealt.
             }
         }
-
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            event.setAmount(controller.getLife() - 1);
+        }
         return false;
     }
 

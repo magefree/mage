@@ -54,7 +54,6 @@ public class DeflectingPalm extends CardImpl {
         super(ownerId, 173, "Deflecting Palm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "KTK";
 
-
         // The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
         this.getSpellAbility().addEffect(new DeflectingPalmEffect());
     }
@@ -90,13 +89,9 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        super.init(source, game);
     }
 
     @Override

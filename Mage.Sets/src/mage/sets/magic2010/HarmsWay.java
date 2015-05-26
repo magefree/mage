@@ -35,6 +35,7 @@ import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -53,10 +54,8 @@ public class HarmsWay extends CardImpl {
         super(ownerId, 14, "Harm's Way", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M10";
 
-
         // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
         this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
@@ -71,24 +70,29 @@ public class HarmsWay extends CardImpl {
 }
 
 class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
-
+    
+    private final TargetSource target;
+    
     public HarmsWayPreventDamageTargetEffect() {
         super(Duration.EndOfTurn, 2, false, true);
         staticText = "The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";
+        this.target = new TargetSource();
     }
 
     public HarmsWayPreventDamageTargetEffect(final HarmsWayPreventDamageTargetEffect effect) {
         super(effect);
+        this.target = effect.target.copy();
     }
 
     @Override
     public HarmsWayPreventDamageTargetEffect copy() {
         return new HarmsWayPreventDamageTargetEffect(this);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public void init(Ability source, Game game) {
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        super.init(source, game);
     }
 
     @Override
@@ -96,18 +100,20 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
         PreventionEffectData preventionData = preventDamageAction(event, source, game);
         // deal damage now
         if (preventionData.getPreventedDamage() > 0) {
-            UUID redirectTo = source.getTargets().get(1).getFirstTarget();
+            UUID redirectTo = source.getFirstTarget();
             Permanent permanent = game.getPermanent(redirectTo);
             if (permanent != null) {
                 game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getLogName() + " instead");
                 // keep the original source id as it is redirecting
                 permanent.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
+                discard();
             }
             Player player = game.getPlayer(redirectTo);
             if (player != null) {
                 game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName() + " instead");
                 // keep the original source id as it is redirecting
                 player.damage(preventionData.getPreventedDamage(), event.getSourceId(), game, false, true);
+                discard();
             }
         }
         return false;
@@ -115,7 +121,7 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
+        if (super.applies(event, source, game)) {
             // check source
             MageObject object = game.getObject(event.getSourceId());
             if (object == null) {
@@ -123,8 +129,8 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl {
                 return false;
             }
 
-            if (!object.getId().equals(source.getFirstTarget())
-                    && (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(source.getFirstTarget()))) {
+            if (!object.getId().equals(target.getFirstTarget())
+                    && (!(object instanceof Spell) || !((Spell) object).getSourceId().equals(target.getFirstTarget()))) {
                 return false;
             }
 

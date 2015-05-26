@@ -146,19 +146,15 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get("ManaPaidFromOpalPalaceWatcher", source.getSourceId());
-            if (watcher != null) {
-                return watcher.commanderId.contains(event.getTargetId());
-            }
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        OpalPalaceWatcher watcher = (OpalPalaceWatcher) game.getState().getWatchers().get("ManaPaidFromOpalPalaceWatcher", source.getSourceId());
+        return watcher != null &&
+                watcher.commanderId.contains(event.getTargetId());
     }
 
     @Override

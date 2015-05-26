@@ -37,11 +37,13 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.common.DamagedByWatcher;
 
@@ -54,7 +56,6 @@ public class PillarOfFlame extends CardImpl {
     public PillarOfFlame(UUID ownerId) {
         super(ownerId, 149, "Pillar of Flame", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "AVR";
-
 
         // Pillar of Flame deals 2 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
@@ -97,19 +98,25 @@ class PillarOfFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent != null) {
-            return permanent.moveToExile(null, "", source.getSourceId(), game);
+        if (controller != null && permanent != null) {
+            return controller.moveCards(permanent, Zone.BATTLEFIELD, Zone.EXILED, source, game);
         }
         return false;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
             if (watcher != null) {
-                return watcher.damagedCreatures.contains(event.getTargetId());
+                return watcher.wasDamaged(event.getTargetId(), game);
             }
         }
         return false;

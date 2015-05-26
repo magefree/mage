@@ -43,6 +43,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -59,6 +60,7 @@ public class NissasChosen extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
+        // If Nissa's Chosen would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NissasChosenEffect()));
     }
 
@@ -89,27 +91,13 @@ class NissasChosenEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        if (permanent != null) {
-            if(permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false)) {
-                game.informPlayers(new StringBuilder(permanent.getName()).append(" was put on the bottom of its owner's library").toString());
-                return true;
-            }
-            
-        }
-        return false;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId()) )
-        {
+        if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
                 return true;
@@ -117,5 +105,15 @@ class NissasChosenEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-
+    
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (permanent != null && controller != null) {
+            controller.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, false, true);
+            return true;            
+        }
+        return false;
+    }    
 }

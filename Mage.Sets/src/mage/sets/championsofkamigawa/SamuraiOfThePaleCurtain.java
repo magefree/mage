@@ -97,11 +97,6 @@ class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
@@ -111,14 +106,14 @@ class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE ) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD) {
-                return true;
-            }
-        }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+        return zEvent.getToZone() == Zone.GRAVEYARD;
     }
 
 }

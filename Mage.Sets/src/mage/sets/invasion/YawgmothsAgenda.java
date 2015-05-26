@@ -61,7 +61,6 @@ public class YawgmothsAgenda extends CardImpl {
         super(ownerId, 135, "Yawgmoth's Agenda", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "INV";
 
-
         // You can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
         // You may play cards from your graveyard.
@@ -135,11 +134,6 @@ class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -160,8 +154,13 @@ class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getOwnerId().equals(source.getControllerId())) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();

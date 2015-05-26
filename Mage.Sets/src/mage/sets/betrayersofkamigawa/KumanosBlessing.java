@@ -65,7 +65,6 @@ public class KumanosBlessing extends CardImpl {
         this.expansionSetCode = "BOK";
         this.subtype.add("Aura");
 
-
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Enchant creature
@@ -107,11 +106,6 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
@@ -122,14 +116,17 @@ class KumanosBlessingEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
-            if (zce.isDiesEvent()) {
-                DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
-                if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget(), game);
-                }
+        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        if (zce.isDiesEvent()) {
+            DamagedByEnchantedWatcher watcher = (DamagedByEnchantedWatcher) game.getState().getWatchers().get("DamagedByEnchantedWatcher", source.getSourceId());
+            if (watcher != null) {
+                return watcher.wasDamaged(zce.getTarget(), game);
             }
         }
         return false;

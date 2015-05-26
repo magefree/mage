@@ -86,28 +86,26 @@ class TajuruPreserverEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT;
+    }    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT) {
-            MageObject object = game.getObject(event.getSourceId());
-            if (object instanceof PermanentCard) {
-                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {
-                    return true;
-                }
+        MageObject object = game.getObject(event.getSourceId());
+        if (object instanceof PermanentCard) {
+            if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {
+                return true;
             }
-            if (object instanceof Spell) {
-                if (game.getOpponents(source.getControllerId()).contains(((Spell)object).getControllerId())) {
-                    return true;
-                }
+        }
+        if (object instanceof Spell) {
+            if (game.getOpponents(source.getControllerId()).contains(((Spell)object).getControllerId())) {
+                return true;
             }
         }
         return false;

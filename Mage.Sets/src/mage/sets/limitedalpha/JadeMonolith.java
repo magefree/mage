@@ -39,6 +39,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -79,9 +80,9 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
     private final TargetSource targetSource;
     
     public JadeMonolithRedirectionEffect() {
-        super(Duration.EndOfTurn, Outcome.RedirectDamage);
+        super(Duration.OneUse, Outcome.RedirectDamage);
         this.staticText = "The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead";
-        this.targetSource = new TargetSource();
+        this.targetSource = new TargetSource(new FilterObject("source of your choice"));
     }
     
     public JadeMonolithRedirectionEffect(final JadeMonolithRedirectionEffect effect) {
@@ -98,11 +99,6 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
@@ -111,27 +107,26 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
         MageObject sourceObject = game.getObject(source.getSourceId());
         DamageEvent damageEvent = (DamageEvent) event;
         if (controller != null && targetCreature != null) {
-            this.used = true;
-            controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());
-            
+            controller.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), damageEvent.getAppliedEffects());            
             StringBuilder sb = new StringBuilder(sourceObject != null ? sourceObject.getLogName() : "");
             sb.append(": ").append(damageEvent.getAmount()).append(" damage redirected from ").append(targetCreature.getLogName());
             sb.append(" to ").append(controller.getLogName());
             game.informPlayers(sb.toString());
-            
+            discard(); // only one use           
             return true;
         }
         return false;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used) {
-            if (event.getType().equals(EventType.DAMAGE_CREATURE)) {
-                if (event.getSourceId().equals(targetSource.getFirstTarget()) && event.getTargetId().equals(source.getFirstTarget())) {
-                    return true;
-                }
-            }
+        if (event.getSourceId().equals(targetSource.getFirstTarget()) && event.getTargetId().equals(source.getFirstTarget())) {
+            return true;
         }
         return false;
     }

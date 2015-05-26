@@ -91,19 +91,19 @@ class SageOfFablesReplacementEffect extends ReplacementEffectImpl {
     SageOfFablesReplacementEffect(SageOfFablesReplacementEffect effect) {
         super(effect);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
-                    && creature.getCardType().contains(CardType.CREATURE)
-                    && creature.getSubtype().contains("Wizard")
-                    && !event.getTargetId().equals(source.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        Permanent creature = game.getPermanent(event.getTargetId());
+        return creature != null && creature.getControllerId().equals(source.getControllerId()) 
+                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.getSubtype().contains("Wizard")
+                && !event.getTargetId().equals(source.getSourceId());
     }
 
     @Override

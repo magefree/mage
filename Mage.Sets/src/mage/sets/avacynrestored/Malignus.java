@@ -27,21 +27,24 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -111,7 +114,7 @@ class HighestLifeTotalAmongOpponentsCount implements DynamicValue {
     }
 }
 
-class MalignusEffect extends ReplacementEffectImpl {
+class MalignusEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MalignusEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -126,23 +129,15 @@ class MalignusEffect extends ReplacementEffectImpl {
     public MalignusEffect copy() {
         return new MalignusEffect(this);
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.PREVENT_DAMAGE && event.getSourceId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(source.getSourceId());
     }
 
 }

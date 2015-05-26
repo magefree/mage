@@ -78,8 +78,7 @@ public class MossbridgeTroll extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(20, 20, Duration.EndOfTurn), new MossbridgeTrollCost());
         ability.setAdditionalCostsRuleVisible(false);
         this.addAbility(ability);
-        
-        
+               
     }
 
     public MossbridgeTroll(final MossbridgeTroll card) {
@@ -104,11 +103,6 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent mossbridgeTroll = game.getPermanent(event.getTargetId());
         if (mossbridgeTroll != null) {
@@ -118,12 +112,13 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DESTROY_PERMANENT;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DESTROY_PERMANENT
-                && event.getTargetId() == source.getSourceId()) {
-            return true;
-        }
-        return false;
+        return event.getTargetId() == source.getSourceId();
     }
 
     @Override

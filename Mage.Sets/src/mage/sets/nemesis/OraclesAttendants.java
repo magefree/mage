@@ -42,6 +42,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreaturePermanent;
@@ -101,11 +102,6 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
     public void init(Ability source, Game game) {
         this.targetSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
@@ -119,13 +115,14 @@ class OraclesAttendantsReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE 
-                && event.getTargetId().equals(source.getFirstTarget())
-                && event.getSourceId().equals(targetSource.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(source.getFirstTarget())
+                && event.getSourceId().equals(targetSource.getFirstTarget());
     }
     
 }

@@ -62,7 +62,6 @@ public class WheelOfSunAndMoon extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
@@ -100,26 +99,24 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (EventType.ZONE_CHANGE.equals(event.getType())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone().equals(Zone.GRAVEYARD)) {
-                Card card = game.getCard(event.getTargetId());
-                if (card != null) {
-                    Permanent enchantment = game.getPermanent(source.getSourceId());
-                    if (enchantment != null && enchantment.getAttachedTo() != null &&
-                            card.getOwnerId().equals(enchantment.getAttachedTo())) {
-                        return true;
-                    }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null) {
+                Permanent enchantment = game.getPermanent(source.getSourceId());
+                if (enchantment != null && enchantment.getAttachedTo() != null &&
+                        card.getOwnerId().equals(enchantment.getAttachedTo())) {
+                    return true;
                 }
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

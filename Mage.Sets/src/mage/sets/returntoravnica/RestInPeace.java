@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -143,11 +144,6 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -167,10 +163,15 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD;
+        return ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD;
     }
 
 }

@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,6 +57,7 @@ public class MelirasKeepers extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Melira's Keepers can't have counters placed on it
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MelirasKeepersEffect()));
     }
 
@@ -71,7 +72,7 @@ public class MelirasKeepers extends CardImpl {
 
 }
 
-class MelirasKeepersEffect extends ReplacementEffectImpl {
+class MelirasKeepersEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MelirasKeepersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
@@ -83,26 +84,18 @@ class MelirasKeepersEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MelirasKeepersEffect copy() {
         return new MelirasKeepersEffect(this);
     }
-
+   
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ADD_COUNTER;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ADD_COUNTER && event.getTargetId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(source.getSourceId());
     }
 
 }

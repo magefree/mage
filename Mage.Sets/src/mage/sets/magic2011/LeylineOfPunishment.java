@@ -39,6 +39,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
 import mage.abilities.keyword.LeylineAbility;
@@ -57,7 +58,6 @@ public class LeylineOfPunishment extends CardImpl {
     public LeylineOfPunishment(UUID ownerId) {
         super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "M11";
-
 
         // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
@@ -78,7 +78,7 @@ public class LeylineOfPunishment extends CardImpl {
 
 }
 
-class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl {
+class LeylineOfPunishmentEffect2 extends ContinuousRuleModifyingEffectImpl {
 
     public LeylineOfPunishmentEffect2() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -95,21 +95,13 @@ class LeylineOfPunishmentEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PREVENT_DAMAGE;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.PREVENT_DAMAGE) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
 }

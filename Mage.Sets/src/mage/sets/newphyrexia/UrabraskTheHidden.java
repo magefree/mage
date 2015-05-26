@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -92,19 +93,21 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Card c = game.getCard(event.getTargetId());
-            if (c != null && c.getCardType().contains(CardType.CREATURE))
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+            Card card = game.getCard(event.getTargetId());
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 return true;
+            }
         }
         return false;
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
 
     @Override
     public UrabraskTheHiddenEffect copy() {
