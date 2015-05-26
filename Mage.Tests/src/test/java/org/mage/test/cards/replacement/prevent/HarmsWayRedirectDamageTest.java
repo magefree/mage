@@ -25,7 +25,8 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Harm's Way", "Lightning Bolt^targetPlayer=PlayerA");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Harm's Way", playerA);
+        setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -48,8 +49,9 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(2, playerB, "Craw Wurm");
-        castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Harm's Way", "Craw Wurm^targetPlayer=PlayerB");
-
+        castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Harm's Way", playerB);
+        setChoice(playerA, "Craw Wurm");
+        
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -76,8 +78,9 @@ public class HarmsWayRedirectDamageTest extends CardTestPlayerBase {
         // When Magma Phoenix dies, it deals 3 damage to each creature and each player.
         addCard(Zone.BATTLEFIELD, playerB, "Magma Phoenix");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harm's Way", "Magma Phoenix^targetPlayer=PlayerB"/**,
-                "When Magma Phoenix dies, Magma Phoenix deals 3 damage to each creature and each player"**/);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harm's Way", playerB);
+        setChoice(playerA, "Magma Phoenix");        
+        /** When Magma Phoenix dies, Magma Phoenix deals 3 damage to each creature and each player **/
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Magma Phoenix");
 
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
