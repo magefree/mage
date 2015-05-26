@@ -1492,6 +1492,7 @@ public abstract class GameImpl implements Game, Serializable {
         
         List<Permanent> planeswalkers = new ArrayList<>();
         List<Permanent> legendary = new ArrayList<>();
+        List<Permanent> worldEnchantment = new ArrayList<>();
         for (Permanent perm: getBattlefield().getAllActivePermanents()) {
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 //20091005 - 704.5f
@@ -1538,6 +1539,9 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
                 planeswalkers.add(perm);
+            }
+            if (perm.getSupertype().contains("World")) {
+                worldEnchantment.add(perm);
             }
             if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
@@ -1729,7 +1733,28 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-
+        //704.5m  - World Enchantments
+        if (worldEnchantment.size() > 1) { 
+            Date newestCard = null;
+            Permanent newestPermanent = null;
+            for (Permanent permanent :worldEnchantment) {
+                if (newestCard == null) {
+                    newestCard = permanent.getCreateDate();
+                    newestPermanent = permanent;
+                } else if (newestCard.before(permanent.getCreateDate())) {
+                    newestCard = permanent.getCreateDate();
+                    newestPermanent = permanent;
+                } else if(newestCard.equals(permanent.getCreateDate())) {
+                    newestCard = null;
+                }
+            }
+            for (Permanent permanent :worldEnchantment) {
+                if (newestPermanent != permanent) {
+                    movePermanentToGraveyardWithInfo(permanent);
+                    somethingHappened = true;
+                }
+            }
+        }
         //TODO: implement the rest
 
         return somethingHappened;

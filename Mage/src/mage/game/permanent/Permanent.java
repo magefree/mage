@@ -29,6 +29,7 @@
 package mage.game.permanent;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -274,4 +275,5 @@ public interface Permanent extends Card, Controllable {
     @Override
     Permanent copy();
 
+    Date getCreateDate();
 }

@@ -25,38 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package org.mage.test.cards.rules;
 
-import java.util.UUID;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterSpell;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author emerald000
+ * @author LevelX2
  */
-public class NetherVoid extends CardImpl {
 
-    public NetherVoid(UUID ownerId) {
-        super(ownerId, 27, "Nether Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "LEG";
-        this.supertype.add("World");
+public class WorldEnchantmentsRuleTest extends CardTestPlayerBase {
 
-        // Whenever a player casts a spell, counter it unless that player pays {3}.
-        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, true));
+    /**
+     * 704.5m If two or more permanents have the supertype world, all except the one that has had 
+     * the world supertype for the shortest amount of time are put into their owners’ graveyards. 
+     * In the event of a tie for the shortest amount of time, all are put into their owners’ graveyards. 
+     * This is called the “world rule.
+     * 
+     */
+    @Test
+    public void TestTwoWorldEnchantsments() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Nether Void", 1);
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 7);
+        addCard(Zone.HAND, playerB, "Nether Void", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nether Void");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nether Void");
+                
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Nether Void", 0);
+        assertPermanentCount(playerB, "Nether Void", 1);
     }
-
-    public NetherVoid(final NetherVoid card) {
-        super(card);
-    }
-
-    @Override
-    public NetherVoid copy() {
-        return new NetherVoid(this);
-    }
+        
 }
