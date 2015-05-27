@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.common;
 
 import mage.constants.Zone;
@@ -34,7 +33,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -42,6 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  * @author BetaSteward_at_googlemail.com
  */
 public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
+
     private boolean setTargetPointer;
 
     public DealsCombatDamageToAPlayerTriggeredAbility(Effect effect, boolean optional) {
@@ -70,12 +69,12 @@ public class DealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)
+        if (event.getSourceId().equals(getSourceId())
                 && ((DamagedPlayerEvent) event).isCombatDamage()) {
             if (setTargetPointer) {
                 for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        effect.setValue("damage", event.getAmount());
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    effect.setValue("damage", event.getAmount());
                 }
             }
             return true;
