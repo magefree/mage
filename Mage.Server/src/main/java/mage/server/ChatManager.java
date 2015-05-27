@@ -28,6 +28,7 @@
 
 package mage.server;
 
+import mage.remote.DisconnectReason;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;

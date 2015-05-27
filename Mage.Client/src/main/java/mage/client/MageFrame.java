@@ -327,6 +327,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     enableButtons();
                 } else {
                     connectDialog.showDialog();
+                    if (client.isConnected()) {
+                        showGames(false);
+                    }
                 }
             }
         });
@@ -927,13 +930,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                client.disconnect();
+                client.disconnect(false);
                 tablesPane.clearChat();
                 setWindowTitle();
                 showMessage("You have disconnected");                
             }
         } else {
             connectDialog.showDialog();
+            if (client.isConnected()) {
+                showGames(false);
+            }
         }
     }//GEN-LAST:event_btnConnectActionPerformed
 
@@ -971,7 +977,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            client.disconnect();
+            client.disconnect(false);
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
@@ -1282,15 +1288,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    @Override
     public void disconnected(final boolean errorCall) {
-        if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
-            logger.info("DISCONNECTED (Event Dispatch Thread)");
-            setStatusText("Not connected");
-            disableButtons();
-            hideGames();
-            hideTables();
-        } else {
-            logger.info("DISCONNECTED (NO Event Dispatch Thread)");
+//        if (SwingUtilities.isEventDispatchThread()) { // Returns true if the current thread is an AWT event dispatching thread.
+//            logger.info("DISCONNECTED (Event Dispatch Thread)");
+//            setStatusText("Not connected");
+//            disableButtons();
+//            hideGames();
+//            hideTables();
+//        } else {
+//            logger.info("DISCONNECTED (NO Event Dispatch Thread)");
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -1302,12 +1309,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                         if (performConnect()) {
                             enableButtons();
                         }
-                    } else {
-                        client.disconnect();
+//                    } else {
+//                        client.disconnect();
                     }
                 }
             });
-        }
+//        }
     }
 
     public void showMessage(final String message) {

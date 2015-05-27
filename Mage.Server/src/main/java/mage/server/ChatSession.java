@@ -28,6 +28,7 @@
 
 package mage.server;
 
+import mage.remote.DisconnectReason;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -60,6 +60,7 @@ import mage.interfaces.ActionWithResult;
 import org.mage.network.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.remote.DisconnectReason;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
 import mage.server.draft.DraftManager;
@@ -1114,6 +1115,12 @@ public class Main implements MageServer {
 //        }, true);
 //    }
 //
+
+    @Override
+    public void disconnect(String sessionId, DisconnectReason reason) {
+        SessionManager.getInstance().disconnect(sessionId, reason);
+    }
+    
 //    @Override
 //    public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
 //        execute("disconnectUser", sessionId, new Action() {

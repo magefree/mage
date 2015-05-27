@@ -30,7 +30,7 @@ import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
-import org.mage.network.handlers.HeartbeatHandler;
+import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.client.ChatMessageHandler;
 import org.mage.network.handlers.client.ChatRoomHandler;
@@ -121,10 +121,11 @@ public class Client {
         }
     }
     
-    public void disconnect() {
+    public void disconnect(boolean error) {
         
         try {
-            channel.closeFuture().sync();
+            channel.disconnect().sync();
+            client.disconnected(error);
         } catch (InterruptedException ex) {
             logger.fatal("Error disconnecting", ex);
         } finally {

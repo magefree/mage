@@ -1,4 +1,4 @@
-package org.mage.network.handlers;
+package org.mage.network.handlers.client;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -24,7 +24,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent e = (IdleStateEvent) evt;
             if (e.state() == IdleState.READER_IDLE) {
-                ctx.close();
+                ctx.channel().close();
                 logger.info("Disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
                 ctx.writeAndFlush(ping);

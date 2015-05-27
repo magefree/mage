@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import mage.remote.DisconnectReason;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;

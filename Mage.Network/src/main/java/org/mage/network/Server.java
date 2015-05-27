@@ -21,7 +21,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 import java.util.UUID;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
-import org.mage.network.handlers.HeartbeatHandler;
+import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.server.ChatMessageHandler;
 import org.mage.network.handlers.server.ChatRoomIdHandler;
@@ -48,7 +48,7 @@ public class Server {
     
     public static final ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-    private final HeartbeatHandler heartbeatHandler = new HeartbeatHandler();
+    private final HeartbeatHandler heartbeatHandler;
     private final PingMessageHandler pingMessageHandler = new PingMessageHandler();
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     private final RegisterClientMessageHandler registerClientMessageHandler;
@@ -60,6 +60,7 @@ public class Server {
     private final ServerMessageHandler serverMessageHandler;
     
     public Server(MageServer server) {
+        heartbeatHandler = new HeartbeatHandler(server);
         registerClientMessageHandler = new RegisterClientMessageHandler(server);
         chatMessageHandler = new ChatMessageHandler(server);
         joinChatMessageHandler = new JoinChatMessageHandler(server);
@@ -98,7 +99,7 @@ public class Server {
             ch.pipeline().addLast(new ObjectEncoder());
 
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
-            ch.pipeline().addLast("heartbeatHandler", heartbeatHandler);
+            ch.pipeline().addLast(handlersExecutor, heartbeatHandler);
             ch.pipeline().addLast("pingMessageHandler", pingMessageHandler);
 
             ch.pipeline().addLast("connectionHandler", new ConnectionHandler());

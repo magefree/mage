@@ -14,7 +14,7 @@ import org.mage.network.model.PongMessage;
 @Sharable
 public class PingMessageHandler extends SimpleChannelInboundHandler<PingMessage> {
 
-    private static final Logger logger = Logger.getLogger(HeartbeatHandler.class);
+    private static final Logger logger = Logger.getLogger(PingMessageHandler.class);
     private static PongMessage pong = new PongMessage();
     
     @Override

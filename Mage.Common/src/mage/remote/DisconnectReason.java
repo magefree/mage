@@ -1,4 +1,4 @@
-package mage.server;
+package mage.remote;
 
 /**
  *

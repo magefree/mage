@@ -12,6 +12,7 @@ import org.mage.network.model.MessageType;
 public interface MageClient {
     
     void connected(String message);
+    void disconnected(boolean error);
     
     void inform(String message, MessageType type);
     

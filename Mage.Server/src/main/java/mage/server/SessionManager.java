@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import mage.remote.DisconnectReason;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
