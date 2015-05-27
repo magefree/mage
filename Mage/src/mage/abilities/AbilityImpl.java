@@ -927,6 +927,9 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
+        if (object instanceof Permanent) {
+            return ((Permanent) object).isPhasedIn();
+        }
         return true;
     }
     

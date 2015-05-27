@@ -448,7 +448,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     @Override
     public void assertPermanentCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
-        for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents()) {
             if (permanent.getControllerId().equals(player.getId())) {
                 if (permanent.getName().equals(cardName)) {
                     actualCount++;
