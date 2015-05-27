@@ -28,6 +28,7 @@
 package mage.sets.vintagemasters;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -91,13 +92,14 @@ class MindsDesireEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.shuffleLibrary(game);
-            if (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().removeFromTop(game);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            controller.shuffleLibrary(game);
+            if (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    player.moveCardToExileWithInfo(card, source.getSourceId(), "Mind's Desire", source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     ContinuousEffect effect = new MindsDesireCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

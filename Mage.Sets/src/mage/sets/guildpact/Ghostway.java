@@ -98,7 +98,7 @@ class GhostwayEffect extends OneShotEffect {
             UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
-                    controller.moveCardToExileWithInfo(creature, exileId,sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    controller.moveCardToExileWithInfo(creature, exileId,sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                     numberCreatures++;
                 }
             }

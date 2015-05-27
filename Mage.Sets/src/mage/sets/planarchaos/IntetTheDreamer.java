@@ -104,7 +104,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
           MageObject sourceObject = source.getSourceObject(game);
           if (card != null && sourceObject != null) {
               UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-              player.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, false);
+              player.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, false);
               card.setFaceDown(true, game);
               return true;
           }

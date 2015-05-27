@@ -135,7 +135,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD, true);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(),  source.getSourceId(), game, fromHand ? Zone.HAND:Zone.GRAVEYARD, true);
                     // allow to cast the card
                     ContinuousEffect effect = new PsychicIntrusionCastFromExileEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));

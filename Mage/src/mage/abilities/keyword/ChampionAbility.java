@@ -161,7 +161,7 @@ class ChampionExileCost extends CostImpl {
                     if (permanent == null) {
                         return false;
                     }
-                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getLogName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD, true);
+                    paid |= controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName() + " championed permanents", sourceId, game, Zone.BATTLEFIELD, true);
                 }
             }
         }

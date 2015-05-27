@@ -13,6 +13,7 @@ import mage.game.Game;
 public interface MageObject extends MageItem, Serializable {
 
     String getName();
+    String getIdName();
     String getLogName();
     String getImageName();
     void setName(String name);

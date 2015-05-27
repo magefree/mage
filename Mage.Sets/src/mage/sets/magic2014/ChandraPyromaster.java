@@ -36,7 +36,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -210,11 +209,12 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && controller.getLibrary().size() > 0) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null && controller.getLibrary().size() > 0) {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, source.getSourceId(), "Chandra Pyromaster <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
+                controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName() + " <this card may be played the turn it was exiled>", source.getSourceId(), game, Zone.LIBRARY, true);
                 ContinuousEffect effect = new ChandraPyromasterCastFromExileEffect(); 
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 game.addEffect(effect, source);

@@ -131,6 +131,11 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public String getIdName() {
+        return getName() + " ["+getId().toString().substring(0,3) +"]";
+    }
+    
+    @Override
     public String getLogName() {
         return GameLog.getColoredObjectName(this);
     }

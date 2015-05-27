@@ -36,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -108,11 +109,12 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
             if (targetPermanent != null) {
-                controller.moveCardToExileWithInfo(targetPermanent, getId(), "Phyrexian Ingester (Imprint)",  source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)",  source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 sourcePermanent.imprint(targetPermanent.getId(), game);
                 return true;
             }            

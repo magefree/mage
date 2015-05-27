@@ -122,7 +122,7 @@ class KahoMinamoHistorianEffect extends SearchEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = controller.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                            controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                         }
                     }
                 }

@@ -29,6 +29,7 @@ package mage.sets.darkascension;
 
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -87,11 +88,12 @@ class SuddenDisappearanceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             List<Permanent> perms = game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game);
             if (perms.size() > 0) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getFirstTarget(), game)) {
-                    controller.moveCardToExileWithInfo(permanent, source.getSourceId(), "Sudden Disappearance", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                    controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 }
                 AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());

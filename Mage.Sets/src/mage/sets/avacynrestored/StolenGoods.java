@@ -40,6 +40,7 @@ import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.effects.ContinuousEffect;
 import mage.target.targetpointer.FixedTarget;
 
@@ -88,13 +89,14 @@ class StolenGoodsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
-        if (opponent != null && opponent.getLibrary().size() > 0) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (opponent != null && opponent.getLibrary().size() > 0 && sourceObject != null) {
             Library library = opponent.getLibrary();
             Card card;
             do {
                 card = library.removeFromTop(game);
                 if (card != null) {
-                    opponent.moveCardToExileWithInfo(card, source.getSourceId(),  "Stolen Goods", source.getSourceId(), game, Zone.LIBRARY, true);
+                    opponent.moveCardToExileWithInfo(card, source.getSourceId(),  sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 }
             } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
 

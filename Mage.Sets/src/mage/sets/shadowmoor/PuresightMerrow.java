@@ -29,6 +29,7 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.UntapSourceCost;
@@ -96,14 +97,15 @@ class PuresightMerrowEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 controller.lookAtCards("Puresight Merrow", cards, game);
                 if (controller.chooseUse(Outcome.Removal, "Do you wish to exile the card from the top of your library?", game)) {
-                    controller.moveCardToExileWithInfo(card, source.getSourceId(), "Puresight Merrow", source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                 } else {
                     game.informPlayers(controller.getLogName() + " puts the card back on top of their library.");
                 }

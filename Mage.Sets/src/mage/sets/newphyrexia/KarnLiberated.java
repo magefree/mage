@@ -30,6 +30,7 @@ package mage.sets.newphyrexia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
@@ -114,6 +115,10 @@ class KarnLiberatedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null) {
+            return false;
+        }
         List<Card> cards = new ArrayList<>();
         for (ExileZone zone: game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
@@ -143,7 +148,7 @@ class KarnLiberatedEffect extends OneShotEffect {
         }
         for (Card card: cards) {
             if ( CardUtil.isPermanentCard(card) && !card.getSubtype().contains("Aura") ) {
-                game.getExile().add(exileId, "Karn Liberated", card);
+                game.getExile().add(exileId, sourceObject.getIdName(), card);
             }
         }
         DelayedTriggeredAbility delayedAbility = new KarnLiberatedDelayedTriggeredAbility(exileId);
