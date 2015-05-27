@@ -28,16 +28,15 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -48,10 +47,13 @@ public class ChromaticSphere extends CardImpl {
     public ChromaticSphere(UUID ownerId) {
         super(ownerId, 151, "Chromatic Sphere", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
-        Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
+        
+        // {1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+        ManaAbility ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.setUndoPossible(false);
         this.addAbility(ability);
     }
 
