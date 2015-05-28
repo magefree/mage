@@ -39,7 +39,6 @@ import org.mage.network.handlers.client.InformClientMessageHandler;
 import org.mage.network.handlers.client.ServerMessageHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
-import org.mage.network.model.RegisterClientMessage;
 
 /**
  *

@@ -327,7 +327,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     enableButtons();
                 } else {
                     connectDialog.showDialog();
-                    if (client.isConnected()) {
+                    if (client != null && client.isConnected()) {
                         showGames(false);
                     }
                 }
@@ -698,6 +698,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public boolean connect(Connection connection) {
+        client = new Client(instance);
         boolean result = client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), version);
         return result;
     }
@@ -928,7 +929,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
-        if (client.isConnected()) {
+        if (client != null && client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 client.disconnect(false);
                 tablesPane.clearChat();
@@ -937,7 +938,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         } else {
             connectDialog.showDialog();
-            if (client.isConnected()) {
+            if (client != null && client.isConnected()) {
                 showGames(false);
             }
         }
@@ -965,7 +966,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnPreferencesActionPerformed
 
     public void btnSendFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendFeedbackActionPerformed
-        if (!client.isConnected()) {
+        if (client == null || !client.isConnected()) {
             JOptionPane.showMessageDialog(null, "You may send us feedback only when connected to server.", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -973,7 +974,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }//GEN-LAST:event_btnSendFeedbackActionPerformed
 
     public void exitApp() {
-        if (client.isConnected()) {
+        if (client != null && client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
@@ -1188,7 +1189,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     }
                 }
                 instance = new MageFrame();
-                client = new Client(instance);
                 instance.setVisible(true);
                 
             }
