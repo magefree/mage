@@ -38,7 +38,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -52,7 +51,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author LevelX
@@ -146,16 +144,15 @@ class OtherworldlyJourneyReturnFromExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Card card = game.getCard(objectToReturn.getSourceId());
-            if (card != null && objectToReturn.refersTo(card, game)) {
+        Card card = game.getCard(objectToReturn.getSourceId());
+        if (card != null && objectToReturn.refersTo(card, game)) {
+            Player owner = game.getPlayer(card.getOwnerId());
+            if (owner != null) {
                 game.addEffect(new OtherworldlyJourneyEntersBattlefieldEffect(objectToReturn), source);                
-                controller.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }
 
