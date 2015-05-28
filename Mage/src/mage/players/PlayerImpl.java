@@ -932,13 +932,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // some effects set sourceId to cast without paying mana costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     ManaCosts alternateCosts = getCastSourceIdManaCosts();
+                    Ability spellAbility =  spell.getSpellAbility();
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
-                        ability.getManaCosts().clear();
-                        ability.getManaCosts().add(alternateCosts.copy());
-                        ability.getManaCostsToPay().clear();
-                        ability.getManaCostsToPay().add(alternateCosts.copy());
+                        spellAbility.getManaCosts().clear();
+                        spellAbility.getManaCosts().add(alternateCosts.copy());
+                        spellAbility.getManaCostsToPay().clear();
+                        spellAbility.getManaCostsToPay().add(alternateCosts.copy());
                     }                    
                 }
                 setCastSourceIdWithAlternateMana(null, null);
