@@ -490,12 +490,32 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 break;
             }
         }
-
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
-
         Assert.assertEquals("(Battlefield) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters().getCount(type));
     }
+    /**
+     * Assert counter count on a card in exile 
+     *
+     * @param cardName  Name of the cards that should be counted.
+     * @param type      Type of the counter that should be counted.
+     * @param count     Expected count.
+     */
+    public void assertCounterOnExiledCardCount(String cardName, CounterType type, int count) throws AssertionError {
+        Card found = null;
 
+        if (found == null) {
+        for (Card card : currentGame.getExile().getAllCards(currentGame)) {
+            if (card.getName().equals(cardName)) {
+                found = card;
+                break;
+            }
+        }
+            
+        }
+        Assert.assertNotNull("There is no such card in the exile, cardName=" + cardName, found);
+        Assert.assertEquals("(Exile) Counter counts are not equal (" + cardName + ":" + type + ")", count, found.getCounters(currentGame).getCount(type));
+    }
+    
     /**
      * Assert counter count on a player
      *

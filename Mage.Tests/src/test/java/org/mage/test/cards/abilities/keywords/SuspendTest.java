@@ -29,6 +29,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -114,4 +115,28 @@ public class SuspendTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         
     }    
+    @Test
+    public void testDeepSeaKraken() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // Suspend 9-{2}{U}
+        // Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it.
+        addCard(Zone.HAND, playerA, "Deep-Sea Kraken",1);
+
+        // Instant {1}{U}
+        // Counter target spell. If the spell is countered this way, exile it with three time counters on it instead of putting it into its owner's graveyard. If it doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, remove a counter from that card. When the last is removed, the player plays it without paying its mana cost. If it's a creature, it has haste.)
+        addCard(Zone.HAND, playerB, "Lightning Bolt",1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertExileCount("Deep-Sea Kraken", 1);
+        
+        assertCounterOnExiledCardCount("Deep-Sea Kraken", CounterType.TIME, 8); // -1 from spell of player B
+        
+    }       
 }
