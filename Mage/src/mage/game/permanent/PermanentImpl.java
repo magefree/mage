@@ -120,7 +120,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected List<Counter> markedDamage;
     protected int timesLoyaltyUsed = 0;
     protected Map<String, String> info;
-    protected Date createDate;
+    protected int createOrder;
     
     private static final List<UUID> emptyList = Collections.unmodifiableList(new ArrayList<UUID>());
 
@@ -129,7 +129,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
         this.counters = new Counters();        
-        this.createDate = new Date(); 
     }
 
     public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
@@ -137,7 +136,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
         this.counters = new Counters();
-        this.createDate = new Date();         
     }
 
     public PermanentImpl(final PermanentImpl permanent) {
@@ -183,7 +181,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
         this.morphed = permanent.morphed;
         this.manifested = permanent.manifested;
-        this.createDate = permanent.createDate;
+        this.createOrder = permanent.createOrder;
     }
 
     @Override
@@ -1354,8 +1352,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public Date getCreateDate() {
-        return createDate;
+    public int getCreateOrder() {
+        return createOrder;
+    }
+    
+    @Override
+    public void setCreateOrder(int createOrder) {
+        this.createOrder = createOrder;
     }
         
 }

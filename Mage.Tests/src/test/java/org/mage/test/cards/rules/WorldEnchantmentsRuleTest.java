@@ -48,13 +48,16 @@ public class WorldEnchantmentsRuleTest extends CardTestPlayerBase {
      */
     @Test
     public void TestTwoWorldEnchantsments() {
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, "Nether Void", 1);
+        addCard(Zone.HAND, playerA, "Silvercoat Lion", 1);
         
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 7);
         addCard(Zone.HAND, playerB, "Nether Void", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nether Void");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Silvercoat Lion"); // just needed to get different craete time to second Nether Void
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nether Void");
                 
         setStopAt(2, PhaseStep.END_TURN);

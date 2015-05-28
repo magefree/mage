@@ -111,6 +111,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, CardState> cardState = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
+    private int permanentOrderNumber;
     
     public GameState() {
         players = new Players();
@@ -169,6 +170,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
+        this.permanentOrderNumber = state.permanentOrderNumber;
     }
 
     @Override
@@ -575,6 +577,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.cardState = state.cardState;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
+        this.permanentOrderNumber = state.permanentOrderNumber;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {
@@ -837,6 +840,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         values.clear();
         zones.clear();
         simultaneousEvents.clear();
+        permanentOrderNumber = 0;
     }
 
     public void pause() {
@@ -925,4 +929,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         return copiedCard;
     }
+    
+    public int getNextPermanentOrderNumber() {
+        return permanentOrderNumber++;
     }
+}

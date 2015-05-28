@@ -30,6 +30,7 @@ package mage.game;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -1278,6 +1279,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void addPermanent(Permanent permanent) {
         getBattlefield().addPermanent(permanent);
+        permanent.setCreateOrder(getState().getNextPermanentOrderNumber());
     }
 
     @Override
@@ -1735,17 +1737,17 @@ public abstract class GameImpl implements Game, Serializable {
         }
         //704.5m  - World Enchantments
         if (worldEnchantment.size() > 1) { 
-            Date newestCard = null;
+            int newestCard = -1;
             Permanent newestPermanent = null;
             for (Permanent permanent :worldEnchantment) {
-                if (newestCard == null) {
-                    newestCard = permanent.getCreateDate();
+                if (newestCard == -1) {
+                    newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
-                } else if (newestCard.before(permanent.getCreateDate())) {
-                    newestCard = permanent.getCreateDate();
+                } else if (newestCard < permanent.getCreateOrder()) {
+                    newestCard = permanent.getCreateOrder();
                     newestPermanent = permanent;
-                } else if(newestCard.equals(permanent.getCreateDate())) {
-                    newestCard = null;
+                } else if(newestCard == permanent.getCreateOrder()) {
+                    newestPermanent = null;
                 }
             }
             for (Permanent permanent :worldEnchantment) {
