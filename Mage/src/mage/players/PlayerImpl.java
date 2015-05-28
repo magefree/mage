@@ -1818,7 +1818,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         quit = true;
         timerTimeout = true;
         this.concede(game);
-        game.informPlayers(getLogName() + " has run out of time. Loosing the Match.");
+        game.informPlayers(getLogName() + " has run out of time, losing the match.");
     }
 
     @Override
@@ -1826,7 +1826,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         quit = true;
         idleTimeout = true;
         this.concede(game);
-        game.informPlayers(new StringBuilder(getLogName()).append(" was idle for too long. Loosing the Match.").toString());
+        game.informPlayers(new StringBuilder(getLogName()).append(" was idle for too long, losing the Match.").toString());
     }
 
     @Override
