@@ -30,7 +30,6 @@ package mage.game;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -118,7 +117,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
+import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
+import mage.watchers.common.BloodthirstWatcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import mage.watchers.common.MorbidWatcher;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
@@ -884,15 +885,17 @@ public abstract class GameImpl implements Game, Serializable {
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
         getState().setChoosingPlayerId(null);
-        // add watchers
+        Watchers watchers = state.getWatchers();
+        // add default watchers        
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
+            watchers.add(new PlayerDamagedBySourceWatcher(playerId));
+            watchers.add(new BloodthirstWatcher(playerId));
         }
-        state.getWatchers().add(new MorbidWatcher());
-        state.getWatchers().add(new CastSpellLastTurnWatcher());
-        state.getWatchers().add(new SoulbondWatcher());
-        state.getWatchers().add(new PlayerLostLifeWatcher());
-        state.getWatchers().add(new BlockedAttackerWatcher());
+        watchers.add(new MorbidWatcher());
+        watchers.add(new CastSpellLastTurnWatcher());
+        watchers.add(new SoulbondWatcher());
+        watchers.add(new PlayerLostLifeWatcher());
+        watchers.add(new BlockedAttackerWatcher());
 
         //20100716 - 103.5
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {

@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 public class SourceDidDamageWatcher extends Watcher {
 
-    public List<UUID> damageSources = new ArrayList<UUID>();
+    public List<UUID> damageSources = new ArrayList<>();
 
     public SourceDidDamageWatcher() {
         super("SourceDidDamageWatcher", WatcherScope.GAME);

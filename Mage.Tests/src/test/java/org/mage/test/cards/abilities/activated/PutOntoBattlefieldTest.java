@@ -7,8 +7,6 @@ package org.mage.test.cards.abilities.activated;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

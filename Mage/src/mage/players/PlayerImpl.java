@@ -444,7 +444,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payManaMode = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
-        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+        
         this.castSourceIdWithAlternateMana = null;
         this.castSourceIdManaCosts = null;
     }

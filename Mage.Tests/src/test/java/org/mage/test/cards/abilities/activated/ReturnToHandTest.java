@@ -25,41 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package org.mage.test.cards.abilities.activated;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.abilities.keyword.BloodthirstAbility;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * @author Loki
+ *
+ * @author LevelX2
  */
-public class Bonesplitter extends CardImpl {
 
-    public Bonesplitter(UUID ownerId) {
-        super(ownerId, 146, "Bonesplitter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "MRD";
-        this.subtype.add("Equipment");
+public class ReturnToHandTest extends CardTestPlayerBase {
+
+    /**
+     * Tests to put a token onto the battlefield
+     */
+    @Test
+    public void SkarrganFirebirdTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox");
+        // Bloodthirst 3
+        // Flying
+        // {R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.        
+        addCard(Zone.BATTLEFIELD, playerB, "Skarrgan Firebird");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
+        addCard(Zone.HAND, playerB, "Bone Splinters");
         
+        // As an additional cost to cast Bone Splinters, sacrifice a creature.
+        // Destroy target creature.
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Bone Splinters", "Pillarfield Ox");
+        setChoice(playerB, "Skarrgan Firebird");
         
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
+        attack(2, playerB, "Silvercoat Lion");
+        
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "{R}{R}{R}: Return");
+        setStopAt(2, PhaseStep.END_TURN);
+        
+        execute();
+
+        assertPermanentCount(playerA, "Skarrgan Firebird", 0);
+        assertGraveyardCount(playerA, "Pillarfield Ox", 1);
+        assertGraveyardCount(playerB, "Bone Splinters", 1);
+        assertHandCount(playerB, "Skarrgan Firebird", 1);
+
     }
 
-    public Bonesplitter(final Bonesplitter card) {
-        super(card);
-    }
-
-    @Override
-    public Bonesplitter copy() {
-        return new Bonesplitter(this);
-    }
+    
 }
