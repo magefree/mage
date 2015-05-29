@@ -29,7 +29,6 @@ package org.mage.test.multiplayer;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
@@ -65,6 +64,7 @@ public class PrimordialTest extends CardTestMultiPlayerBase {
         assertPermanentCount(playerA, "Walking Corpse", 0);
         assertPermanentCount(playerA, "Pillarfield Ox", 1);
         assertGraveyardCount(playerC, "Walking Corpse", 1);
+        assertGraveyardCount(playerD, "Pillarfield Ox", 0);
     }
 
 }
