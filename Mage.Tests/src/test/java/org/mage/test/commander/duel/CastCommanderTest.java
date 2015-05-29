@@ -39,7 +39,6 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
  */
 public class CastCommanderTest extends CardTestCommanderDuelBase {
     @Test
-    @Ignore
     public void testFirstAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 

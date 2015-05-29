@@ -2454,7 +2454,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (CommandObject commandObject : game.getState().getCommand()) {
                 for (ActivatedAbility ability : commandObject.getAbilities().getActivatedAbilities(Zone.COMMAND)) {
                     if (ability.getControllerId().equals(getId())
-                            && ability.getAbilityType().equals(AbilityType.ACTIVATED)
+                            && ability instanceof ActivatedAbility
                             && canPlay(ability, availableMana, game.getObject(ability.getSourceId()), game)) {
                         playableActivated.put(ability.toString(), ability);
                     }

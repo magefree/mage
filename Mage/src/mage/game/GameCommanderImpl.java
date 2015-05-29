@@ -83,9 +83,10 @@ public abstract class GameCommanderImpl extends GameImpl {
             if (player != null){
                 if (player.getSideboard().size() > 0){
                     Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
-                    if (commander != null) {
+                    if (commander != null) {                        
                         player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
+                        commander.getAbilities().setControllerId(player.getId());
                         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
