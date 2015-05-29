@@ -61,6 +61,7 @@ public class Config {
         maxUserNameLength = Integer.parseInt(p.getProperty("maxUserNameLength"));
         userNamePattern = p.getProperty("userNamePattern");
         saveGameActivated = Boolean.parseBoolean(p.getProperty("saveGameActivated"));
+        useSSL = Boolean.parseBoolean(p.getProperty("useSSL"));
     }
 
     public static final String remoteServer;
@@ -76,5 +77,6 @@ public class Config {
     public static final int maxUserNameLength;
     public static final String userNamePattern;
     public static final boolean saveGameActivated;
+    public static final boolean useSSL;
 
 }

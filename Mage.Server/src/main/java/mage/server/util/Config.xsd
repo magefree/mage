@@ -31,6 +31,7 @@
                         <xs:attribute name="userNamePattern" type="xs:string" use="required"/>
                         <xs:attribute name="maxAiOpponents" type="xs:string" use="optional"/>
                         <xs:attribute name="saveGameActivated" type="xs:boolean" use="optional"/>
+                        <xs:attribute name="useSSL" type="xs:boolean" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 

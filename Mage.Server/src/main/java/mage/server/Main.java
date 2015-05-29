@@ -212,7 +212,7 @@ public class Main implements MageServer {
         try {
             instance = new Main(adminPassword, testMode);
             server = new Server(instance);
-            server.start(config.getPort());
+            server.start(config.getPort(), config.isUseSSL());
             // Parameter: serializationtype => jboss
 //            InvokerLocator serverLocator = new InvokerLocator(connection.getURI());                
 //            if (!isAlreadyRunning(serverLocator)) {
@@ -1320,7 +1320,7 @@ public class Main implements MageServer {
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder", ex);
-        } catch (Exception ex) {
+        } catch (MalformedURLException | InstantiationException | IllegalAccessException ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;
@@ -1333,7 +1333,7 @@ public class Main implements MageServer {
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getName() + " / "+ plugin.getJar() + " - check plugin folder", ex);
-        } catch (Exception ex) {
+        } catch (MalformedURLException | InstantiationException | IllegalAccessException ex) {
             logger.fatal("Error loading game type " + plugin.getJar(), ex);
         }
         return null;

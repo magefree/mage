@@ -16,6 +16,7 @@
             userNamePattern="[^a-z0-9_]"
             maxAiOpponents="15"
             saveGameActivated="false"
+            useSSL="true"
     />
     <playerTypes>
         <playerType name="Human" jar="Mage.Player.Human.jar" className="mage.player.human.HumanPlayer"/>

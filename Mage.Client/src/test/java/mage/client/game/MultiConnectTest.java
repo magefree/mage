@@ -61,7 +61,7 @@ public class MultiConnectTest {
             connection.setPort(17171);
             connection.setProxyType(Connection.ProxyType.NONE);
 
-            client.connect(username, "localhost", 17171, version);
+            client.connect(username, "localhost", 17171, true, version);
         }
 
         public MageVersion getVersion() {
@@ -75,6 +75,7 @@ public class MultiConnectTest {
             connected++;
         }
 
+        @Override
         public void disconnected(boolean errorCall) {
             logger.info("disconnected");
         }
@@ -158,8 +159,8 @@ public class MultiConnectTest {
     private void sleep(int ms) {
         try {
             Thread.sleep(ms);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            logger.error("Error", e);
         }
     }
 }

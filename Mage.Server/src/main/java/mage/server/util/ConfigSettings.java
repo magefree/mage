@@ -120,8 +120,12 @@ public class ConfigSettings {
     }
 
     public Boolean isSaveGameActivated() {
-            return config.getServer().isSaveGameActivated();
-}
+        return config.getServer().isSaveGameActivated();
+    }
+
+    public Boolean isUseSSL() {
+        return config.getServer().isUseSSL();
+    }
 
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();

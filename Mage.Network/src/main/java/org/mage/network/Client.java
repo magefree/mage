@@ -10,11 +10,14 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.IdleStateHandler;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import javax.net.ssl.SSLException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
@@ -59,9 +62,12 @@ public class Client {
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
     
+    private SslContext sslCtx;
     private Channel channel;
     private EventLoopGroup group;
-    private String username;    
+    private String username;
+    private String host;
+    private int port;
     
     public Client(MageClient client) {
         this.client = client;
@@ -73,12 +79,19 @@ public class Client {
         serverMessageHandler = new ServerMessageHandler();
     }
     
-    public boolean connect(String userName, String host, int port, MageVersion version) {
+    public boolean connect(String userName, String host, int port, boolean ssl, MageVersion version) {
         
         this.username = userName;
+        this.host = host;
+        this.port = port;
 
         group = new NioEventLoopGroup();
         try {
+            if (ssl) {
+                sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
+            } else {
+                sslCtx = null;
+            }
             Bootstrap b = new Bootstrap();
             b.group(group)
                 .channel(NioSocketChannel.class)
@@ -90,7 +103,7 @@ public class Client {
             clientRegisteredMessageHandler.registerClient();
             client.connected(userName + "@" + host + ":" + port + " ");
             return true;
-        } catch (InterruptedException ex) {
+        } catch (SSLException | InterruptedException ex) {
             logger.fatal("Error connecting", ex);
             client.inform("Error connecting", MessageType.ERROR);
             group.shutdownGracefully();
@@ -103,6 +116,9 @@ public class Client {
         @Override
         public void initChannel(SocketChannel ch) throws Exception {
             
+            if (sslCtx != null) {
+                ch.pipeline().addLast(sslCtx.newHandler(ch.alloc(), host, port));
+            }
             ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
 

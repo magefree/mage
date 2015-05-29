@@ -14,6 +14,8 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
@@ -47,6 +49,8 @@ public class Server {
     private static final int IDLE_TIMEOUT = 60;
     
     public static final ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    
+    private SslContext sslCtx;
 
     private final HeartbeatHandler heartbeatHandler;
     private final PingMessageHandler pingMessageHandler = new PingMessageHandler();
@@ -69,7 +73,15 @@ public class Server {
         serverMessageHandler = new ServerMessageHandler(server);
     }
     
-    public void start(int port) {
+    public void start(int port, boolean ssl) throws Exception {
+        
+        if (ssl) {
+            SelfSignedCertificate ssc = new SelfSignedCertificate();
+            sslCtx = SslContext.newServerContext(ssc.certificate(), ssc.privateKey());
+        } else {
+            sslCtx = null;
+        }
+        
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         
@@ -95,6 +107,9 @@ public class Server {
         @Override
         public void initChannel(SocketChannel ch) throws Exception {
             
+            if (sslCtx != null) {
+               ch.pipeline().addLast(sslCtx.newHandler(ch.alloc()));
+            }
             ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
 
