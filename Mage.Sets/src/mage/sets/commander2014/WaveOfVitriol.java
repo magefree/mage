@@ -27,6 +27,8 @@
  */
 package mage.sets.commander2014;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +58,6 @@ public class WaveOfVitriol extends CardImpl {
     public WaveOfVitriol(UUID ownerId) {
         super(ownerId, 51, "Wave of Vitriol", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{G}{G}");
         this.expansionSetCode = "C14";
-
 
         // Each player sacrifices all artifacts, enchantments, and nonbasic lands he or she controls. For each land sacrificed this way, its controller may search his or her library for a basic land card and put it onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
         this.getSpellAbility().addEffect(new WaveOfVitriolEffect());
@@ -106,6 +107,7 @@ class WaveOfVitriolEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            Map<Player, Integer> sacrificedLands = new HashMap<>();
             for(UUID playerId: controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -115,21 +117,33 @@ class WaveOfVitriolEffect extends OneShotEffect {
                             count++;
                         }
                     }
-                    game.getState().handleSimultaneousEvent(game);
-                    if (count > 0 && player.chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + count + " basic lands?", game)) {
-                        Target target = new TargetCardInLibrary(0,count, new FilterBasicLandCard());
-                        player.chooseTarget(outcome, target, source, game);
-                        for(UUID targetId: target.getTargets()) {
-                            Card card = game.getCard(targetId);
-                            if (card != null) {
-                                player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
-                            }
-                        }
-                        player.shuffleLibrary(game);
-                        game.getState().handleSimultaneousEvent(game);
+                    if (count > 0) {
+                        sacrificedLands.put(player, count);
                     }
                 }
             }
+            game.getState().handleSimultaneousEvent(game);
+            for(Map.Entry<Player, Integer> entry: sacrificedLands.entrySet()) {
+                if (entry.getKey().chooseUse(Outcome.PutLandInPlay, "Search your library for up to " + entry.getValue() + " basic lands?", game)) {
+                    Target target = new TargetCardInLibrary(0, entry.getValue(), new FilterBasicLandCard());
+                    entry.getKey().chooseTarget(outcome, target, source, game);
+                    for(UUID targetId: target.getTargets()) {
+                        Card card = game.getCard(targetId);
+                        if (card != null) {
+                            entry.getKey().putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), true);
+                        }
+                    }
+                    entry.getKey().shuffleLibrary(game);
+                } else {
+                    entry.setValue(0);
+                }
+            }
+            for(Map.Entry<Player, Integer> entry: sacrificedLands.entrySet()) {
+                if (entry.getValue() > 0) {
+                    entry.getKey().shuffleLibrary(game);
+                }
+            }
+
             return true;
         }
         return false;
