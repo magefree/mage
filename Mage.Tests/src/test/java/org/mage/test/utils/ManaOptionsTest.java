@@ -35,7 +35,8 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
+ * This test checks if the calculated possible mana options are correct related to the given mana sources available.
+ * 
  * @author LevelX2
  */
 public class ManaOptionsTest extends CardTestPlayerBase {

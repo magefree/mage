@@ -144,25 +144,25 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
         if (this.staticText != null && !this.staticText.isEmpty()) {
-            sb.append(staticText);
-        } else {
-            Target target = mode.getTargets().get(0);
-            sb.append("Put ");
-            if (target.getMaxNumberOfTargets() == 0) {
-                sb.append("any number of ");
-            } else {
-                if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
-                    if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
-                        sb.append("up to ");
-                    }
-                    sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
-                }
-            }
-            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
-            sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
+            return staticText;
         }
+        StringBuilder sb = new StringBuilder();    
+        Target target = mode.getTargets().get(0);
+        sb.append("Put ");
+        if (target.getMaxNumberOfTargets() == 0) {
+            sb.append("any number of ");
+        } else {
+            if (target.getMaxNumberOfTargets() != 1 || target.getNumberOfTargets() != 1) {
+                if (target.getMaxNumberOfTargets() > target.getNumberOfTargets()) {
+                    sb.append("up to ");
+                }
+                sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+            }
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
+        sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
+        
         return sb.toString();
 
     }

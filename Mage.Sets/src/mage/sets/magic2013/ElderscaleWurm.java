@@ -38,7 +38,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -120,34 +119,30 @@ class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl {
     public ElderscaleWurmReplacementEffect copy() {
         return new ElderscaleWurmReplacementEffect(this);
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null) {
-                Player controller = game.getPlayer(permanent.getControllerId());
-                if (controller != null && controller.getLife() >= 7
-                        && (controller.getLife() - event.getAmount()) < 7
-                        && event.getPlayerId().equals(controller.getId())) {
-                    event.setAmount(controller.getLife() - 7);
-                }
+        if (event.getPlayerId().equals(source.getControllerId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && controller.getLife() >= 7
+                    && (controller.getLife() - event.getAmount()) < 7) {
+                return true;
             }
         }
-
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            event.setAmount(controller.getLife() - 7);
+        }
         return false;
     }
 

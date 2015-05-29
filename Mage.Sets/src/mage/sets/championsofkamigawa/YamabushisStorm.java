@@ -39,28 +39,29 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
  * @author LevelX
  */
-
 public class YamabushisStorm extends CardImpl {
 
     public YamabushisStorm(UUID ownerId) {
         super(ownerId, 199, "Yamabushi's Storm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "CHK";
 
-
         // Yamabushi's Storm deals 1 damage to each creature.
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));
+        
         // If a creature dealt damage this way would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn));
         this.getSpellAbility().addWatcher(new DamagedByWatcher());
@@ -79,43 +80,42 @@ public class YamabushisStorm extends CardImpl {
 
 class YamabushisStormEffect extends ReplacementEffectImpl {
 
-        public YamabushisStormEffect() {
-                super(Duration.EndOfTurn, Outcome.Exile);
-                staticText = "If a creature dealt damage this way would die this turn, exile it instead";
-        }
+    public YamabushisStormEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "If a creature dealt damage this way would die this turn, exile it instead";
+    }
 
-        public YamabushisStormEffect(final YamabushisStormEffect effect) {
-                super(effect);
-        }
+    public YamabushisStormEffect(final YamabushisStormEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public YamabushisStormEffect copy() {
-                return new YamabushisStormEffect(this);
-        }
+    @Override
+    public YamabushisStormEffect copy() {
+        return new YamabushisStormEffect(this);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-                return true;
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        if (controller != null && permanent != null) {
+            return controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
         }
+        return false;                    
+    }
 
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-                if (permanent != null) {
-                    return permanent.moveToExile(null, "", source.getSourceId(), game);
-                }
-                return false;
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            return watcher != null && watcher.wasDamaged(event.getTargetId(), game);
         }
+        return false;
+    }
 
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-                if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-                        DamagedByWatcher watcher =
-                                (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                        if (watcher != null)
-                                return watcher.damagedCreatures.contains(event.getTargetId());
-                }
-                return false;
-        }
-
-} 
+}

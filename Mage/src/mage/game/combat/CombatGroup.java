@@ -244,7 +244,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                     else {
                         Player player = game.getPlayer(attacker.getControllerId());
-                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getLogName(), game);
+                        int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
                         if (damage > 0) {
@@ -298,7 +298,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         damage = 0;
                         break;
                     }
-                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getLogName(), game);
+                    int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                     assigned.put(blockerId, damageAssigned);
                     damage -= damageAssigned;
                 }
@@ -380,7 +380,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     assigned.put(attackerId, damage);
                     break;
                 }
-                int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getLogName(), game);
+                int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + attacker.getName(), game);
                 assigned.put(attackerId, damageAssigned);
                 damage -= damageAssigned;
             }

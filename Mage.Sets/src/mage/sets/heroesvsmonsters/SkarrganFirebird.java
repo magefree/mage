@@ -88,7 +88,7 @@ class OpponentWasDealtDamageCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
-        return !watcher.conditionMet();
+        return watcher.conditionMet();
     }
 
     @Override

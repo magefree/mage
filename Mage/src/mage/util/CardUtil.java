@@ -28,6 +28,7 @@
 
 package mage.util;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -74,6 +75,12 @@ public class CardUtil {
     static String numberStrings[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
                                       "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
+    public static final String[] NON_CHANGELING_SUBTYPES_VALUES = new String[] { "Mountain", "Forest", "Plains", "Swamp", "Island",
+                                                                                 "Aura", "Curse", "Shrine",
+                                                                                 "Equipment", "Fortification", "Contraption",
+                                                                                 "Trap", "Arcane"};
+    public static final Set<String> NON_CREATURE_SUBTYPES = new HashSet<>(Arrays.asList(NON_CHANGELING_SUBTYPES_VALUES));    
+    
     /**
      * Checks whether two cards share card types.
      *
@@ -637,5 +644,8 @@ public class CardUtil {
         }
         return mana;
     }
-
+    
+    public static boolean isNonCreatureSubtype(String subtype) {
+        return NON_CREATURE_SUBTYPES.contains(subtype);
+    }
 }

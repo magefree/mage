@@ -119,24 +119,23 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER) {
-            Card card = game.getCard(event.getSourceId());
-            if (card != null && card.getColor().isRed()) {
-                event.setAmount(event.getAmount() + 1);
-            }
+        Card card = game.getCard(event.getSourceId());
+        if (card != null && card.getColor().isRed()) {
+            return true;
         }
         return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        event.setAmount(event.getAmount() + 1);
+        return false;
     }
 
     @Override

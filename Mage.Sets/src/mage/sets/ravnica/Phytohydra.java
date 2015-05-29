@@ -39,6 +39,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -89,13 +90,15 @@ class PhytohydraEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_CREATURE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE && event.getTargetId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getTargetId().equals(source.getSourceId());
     }
 
     @Override

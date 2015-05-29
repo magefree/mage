@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -50,7 +51,6 @@ public class Kismet extends CardImpl {
     public Kismet(UUID ownerId) {
         super(ownerId, 319, "Kismet", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "5ED";
-
 
         // Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
@@ -86,9 +86,15 @@ class KismetEffect extends ReplacementEffectImpl {
         return false;
     }
 
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && (permanent.getCardType().contains(CardType.ARTIFACT) || 
                                       permanent.getCardType().contains(CardType.CREATURE) || 
@@ -96,11 +102,6 @@ class KismetEffect extends ReplacementEffectImpl {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

@@ -57,12 +57,12 @@ public class Pariah extends CardImpl {
         this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+        
         // All damage that would be dealt to you is dealt to enchanted creature instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
     }
@@ -90,22 +90,25 @@ class PariahEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-		Permanent equipment = game.getPermanent(source.getSourceId());
-		if(equipment != null){
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
             Permanent p = game.getPermanent(equipment.getAttachedTo());
-			if (p != null) {
-				p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-				return true;
-			}
-		}
+            if (p != null) {
+                p.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                return true;
+            }
+        }
         return true;
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId()))
-            return true;
-        return false;
+        return event.getPlayerId().equals(source.getControllerId());
     }
 
     @Override

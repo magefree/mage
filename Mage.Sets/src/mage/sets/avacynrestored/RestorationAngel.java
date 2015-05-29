@@ -111,7 +111,7 @@ class RestorationAngelEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null && sourcePermanent != null) {
-                controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
+                controller.moveCardToExileWithInfo(permanent, source.getSourceId(), sourcePermanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                 Card card = game.getCard(targetPointer.getFirst(game, source));
                 if (card != null) {
                     Zone currentZone = game.getState().getZone(card.getId());

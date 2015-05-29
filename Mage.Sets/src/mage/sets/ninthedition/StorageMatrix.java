@@ -102,16 +102,18 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                 applies = false;
                 Permanent storageMatrix = game.getPermanent(source.getSourceId());
                 if (storageMatrix != null && !storageMatrix.isTapped()) {
-                    Choice choiceImpl = new ChoiceImpl();
+                    Choice choiceImpl = new ChoiceImpl(true);
                     choiceImpl.setMessage("Untap which kind of permanent?");
                     choiceImpl.setChoices(choice);
                     Player player = game.getPlayer(game.getActivePlayerId());
                     if(player != null){
                         while(!player.choose(outcome, choiceImpl, game)) {
-                            // player has to choose
+                            if (player.isInGame()) {
+                                return false;
+                            }
                         }
                         String choosenType = choiceImpl.getChoice();
-                        game.informPlayers(new StringBuilder(storageMatrix.getName()).append(": ").append(player.getLogName()).append(" chose to untap ").append(choosenType).toString());
+                        game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);
 
                         if(choosenType.equals(CardType.ARTIFACT.toString())){
                             type = CardType.ARTIFACT;

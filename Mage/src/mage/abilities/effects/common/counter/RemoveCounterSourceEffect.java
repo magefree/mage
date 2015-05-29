@@ -60,18 +60,20 @@ public class RemoveCounterSourceEffect extends OneShotEffect {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null && p.getCounters().getCount(counter.getName()) >= counter.getCount()) {
             p.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
-                    .append(" counter from ").append(p.getName()).toString());
+                        .append(" counter from ").append(p.getName()).toString());
+            }
             return true;
         }
         Card c = game.getCard(source.getSourceId());
         if (c != null && c.getCounters(game).getCount(counter.getName()) >= counter.getCount()) {
             c.removeCounters(counter.getName(), counter.getCount(), game);
-            if (!game.isSimulation())
+            if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
-                    .append(" counter from ").append(c.getName())
-                    .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
+                        .append(" counter from ").append(c.getName())
+                        .append(" (").append(c.getCounters(game).getCount(counter.getName())).append(" left)").toString());
+            }
             return true;
         }    
         return false;

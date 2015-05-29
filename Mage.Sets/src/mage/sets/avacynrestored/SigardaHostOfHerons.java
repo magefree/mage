@@ -34,6 +34,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
@@ -75,7 +76,7 @@ public class SigardaHostOfHerons extends CardImpl {
     }
 }
 
-class SigardaHostOfHeronsEffect extends ReplacementEffectImpl {
+class SigardaHostOfHeronsEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SigardaHostOfHeronsEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -92,18 +93,13 @@ class SigardaHostOfHeronsEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT;
     }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof PermanentCard) {
                 if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {

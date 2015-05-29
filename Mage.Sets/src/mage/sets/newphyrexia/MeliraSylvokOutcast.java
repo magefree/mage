@@ -100,11 +100,6 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MeliraSylvokOutcastEffect copy() {
         return new MeliraSylvokOutcastEffect(this);
     }
@@ -115,11 +110,13 @@ class MeliraSylvokOutcastEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ADD_COUNTER;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ADD_COUNTER && event.getData().equals(CounterType.POISON.getName()) && event.getTargetId().equals(source.getControllerId())) {
-            return true;
-        }
-        return false;
+        return event.getData().equals(CounterType.POISON.getName()) && event.getTargetId().equals(source.getControllerId());
     }
 
 }
@@ -136,11 +133,6 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public MeliraSylvokOutcastEffect2 copy() {
         return new MeliraSylvokOutcastEffect2(this);
     }
@@ -149,13 +141,19 @@ class MeliraSylvokOutcastEffect2 extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ADD_COUNTER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ADD_COUNTER && event.getData().equals(CounterType.M1M1.getName())) {
+        if (event.getData().equals(CounterType.M1M1.getName())) {
             Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId()))
+            if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
                 return true;
+            }
         }
         return false;
     }

@@ -119,7 +119,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
                 if (card != null) {
                     // move card to exile
-                    controller.moveCardToExileWithInfo(card, exileId,  sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(card, exileId,  sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     // player gains life
                     int cmc = card.getManaCost().convertedManaCost();
                     if (cmc > 0) {

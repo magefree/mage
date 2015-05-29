@@ -100,6 +100,11 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public String getIdName() {
+        return getName() + " ["+getId().toString().substring(0,3) +"]";        
+    }
+    
+    @Override
     public String getLogName() {
         return GameLog.getColoredObjectName(this);
     }

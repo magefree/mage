@@ -57,7 +57,7 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
             this.put(name, new Counter(name));
         }
         this.get(name).add();
-    }
+        }        
 
     public void addCounter(String name, int amount) {
         if (!this.containsKey(name)) {
@@ -75,14 +75,15 @@ public class Counters extends HashMap<String, Counter> implements Serializable {
     }
 
     public void removeCounter(String name) {
-        if (this.containsKey(name)) {
-            this.get(name).remove();
-        }
+        removeCounter(name, 1);
     }
 
     public void removeCounter(CounterType counterType, int amount) {
         if (this.containsKey(counterType.getName())) {
             get(counterType.getName()).remove(amount);
+            if (get(counterType.getName()).count == 0) {
+                this.remove(counterType.getName());
+            }              
         }
     }
 

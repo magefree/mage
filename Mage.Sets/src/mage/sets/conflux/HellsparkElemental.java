@@ -63,7 +63,7 @@ public class HellsparkElemental extends CardImpl {
         // At the beginning of the end step, sacrifice Hellspark Elemental.
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
 
-        // Unearth {1}{R} ({1}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+        // Unearth {1}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
     }
 

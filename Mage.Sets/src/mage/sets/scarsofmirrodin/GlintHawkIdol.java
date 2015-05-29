@@ -69,6 +69,7 @@ public class GlintHawkIdol extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), filter, true));
 
+        // {W}: Glint Hawk Idol becomes a 2/2 Bird artifact creature with flying until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 

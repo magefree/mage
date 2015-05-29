@@ -48,6 +48,8 @@ public class Bonesplitter extends CardImpl {
         super(ownerId, 146, "Bonesplitter", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Equipment");
+        
+        
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

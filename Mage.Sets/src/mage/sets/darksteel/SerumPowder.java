@@ -87,6 +87,9 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
+            if (!controller.chooseUse(outcome, "Exile all cards from hand and draw that many cards?", game)) {
+                return false;
+            }
             int cardsHand = controller.getHand().size();
             if (cardsHand > 0){
                 Cards cards = new CardsImpl();
@@ -98,26 +101,20 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
                 }
                 controller.drawCards(cardsHand, game);
             }
-            game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getLogName()).append(" exiles hand and draws ").append(cardsHand).append(" card(s)").toString());
+            game.informPlayers(sourceCard.getLogName() +": " + controller.getLogName() + " exiles hand and draws " + cardsHand + " card(s)");
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAN_TAKE_MULLIGAN && source.getControllerId().equals(event.getPlayerId())) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                return controller.chooseUse(outcome, "Exile all cards from hand and draw that many cards?", game);
-            }
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAN_TAKE_MULLIGAN;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return source.getControllerId().equals(event.getPlayerId());
     }
 
     @Override

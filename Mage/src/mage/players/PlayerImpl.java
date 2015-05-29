@@ -444,7 +444,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payManaMode = false;
         this.setLife(game.getLife(), game);
         this.setReachedNextTurnAfterLeaving(false);
-        game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+        
         this.castSourceIdWithAlternateMana = null;
         this.castSourceIdManaCosts = null;
     }
@@ -932,13 +932,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // some effects set sourceId to cast without paying mana costs
                 if (ability.getSourceId().equals(getCastSourceIdWithAlternateMana())) {
                     ManaCosts alternateCosts = getCastSourceIdManaCosts();
+                    Ability spellAbility =  spell.getSpellAbility();
                     if (alternateCosts == null) {
                         noMana = true;
                     } else {
-                        ability.getManaCosts().clear();
-                        ability.getManaCosts().add(alternateCosts.copy());
-                        ability.getManaCostsToPay().clear();
-                        ability.getManaCostsToPay().add(alternateCosts.copy());
+                        spellAbility.getManaCosts().clear();
+                        spellAbility.getManaCosts().add(alternateCosts.copy());
+                        spellAbility.getManaCostsToPay().clear();
+                        spellAbility.getManaCostsToPay().add(alternateCosts.copy());
                     }                    
                 }
                 setCastSourceIdWithAlternateMana(null, null);
@@ -1665,9 +1666,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         } else if (source instanceof CommandObject){
                             sourceControllerId = ((CommandObject) source).getControllerId();
                             sourceAbilities = ((CommandObject) source).getAbilities();
-                        } else {
-                            source = null;
-                        }
+                        } 
                     } else {
                         sourceAbilities = ((Permanent) source).getAbilities(game);
                         sourceControllerId = ((Permanent) source).getControllerId();
@@ -1819,7 +1818,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         quit = true;
         timerTimeout = true;
         this.concede(game);
-        game.informPlayers(getLogName() + " has run out of time. Loosing the Match.");
+        game.informPlayers(getLogName() + " has run out of time, losing the match.");
     }
 
     @Override
@@ -1827,7 +1826,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         quit = true;
         idleTimeout = true;
         this.concede(game);
-        game.informPlayers(new StringBuilder(getLogName()).append(" was idle for too long. Loosing the Match.").toString());
+        game.informPlayers(new StringBuilder(getLogName()).append(" was idle for too long, losing the Match.").toString());
     }
 
     @Override
@@ -2110,7 +2109,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
         event.setAppliedEffects(appliedEffects);
-        game.replaceEvent(event);
+        if (!game.replaceEvent(event)) {
+            game.fireEvent(new GameEvent(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId, 0, event.getFlag()));
+        }
         return event.getFlag();
     }
 

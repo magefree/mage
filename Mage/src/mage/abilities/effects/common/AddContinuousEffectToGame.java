@@ -59,8 +59,7 @@ public class AddContinuousEffectToGame extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ContinuousEffect effectToAdd = effect.copy();
-        game.addEffect(effectToAdd, source);
+        game.addEffect(effect, source);
         return true;
     }
 }

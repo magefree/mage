@@ -95,19 +95,14 @@ class AvenMindcensorEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SEARCH_LIBRARY) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null && game.isOpponent(controller, event.getPlayerId())) {
-                return true;
-            }
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SEARCH_LIBRARY;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        return controller != null && game.isOpponent(controller, event.getPlayerId());
     }
 
     @Override

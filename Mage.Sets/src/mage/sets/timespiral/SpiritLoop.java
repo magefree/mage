@@ -32,19 +32,15 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.DealsDamageAttachedTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.NumericSetToEffectValues;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 /**
@@ -58,7 +54,6 @@ public class SpiritLoop extends CardImpl {
         this.expansionSetCode = "TSP";
         this.subtype.add("Aura");
 
-
         // Enchant creature you control
         TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -67,7 +62,7 @@ public class SpiritLoop extends CardImpl {
         this.addAbility(ability);
         
         // Whenever enchanted creature deals damage, you gain that much life.
-        this.addAbility(new SpiritLoopTriggeredAbility());
+        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
         
         // When Spirit Loop is put into a graveyard from the battlefield, return Spirit Loop to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
@@ -81,76 +76,5 @@ public class SpiritLoop extends CardImpl {
     @Override
     public SpiritLoop copy() {
         return new SpiritLoop(this);
-    }
-}
-
-class SpiritLoopTriggeredAbility extends TriggeredAbilityImpl {
-        
-    public SpiritLoopTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SpiritLoopEffect(), false);
-    }
-    
-    public SpiritLoopTriggeredAbility(final SpiritLoopTriggeredAbility ability) {
-        super(ability);
-    }
-    
-    @Override
-    public SpiritLoopTriggeredAbility copy() {
-        return new SpiritLoopTriggeredAbility(this);
-    }
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment == null || enchantment.getAttachedTo() == null) {
-                return false;
-            }
-            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-            if (enchanted != null && event.getSourceId().equals(enchanted.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public String getRule() {
-        return "Whenever enchanted creature deals damage, " + super.getRule();
-    }
-}
-
-class SpiritLoopEffect extends OneShotEffect {
-    
-    public SpiritLoopEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain that much life";
-    }
-    
-    public SpiritLoopEffect(final SpiritLoopEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public SpiritLoopEffect copy() {
-        return new SpiritLoopEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int amount = (Integer) getValue("damage");
-        if (amount > 0) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.gainLife(amount, game);
-                return true;
-            }
-        }
-        return false;     
     }
 }

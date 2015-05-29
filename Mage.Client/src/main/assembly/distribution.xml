@@ -72,7 +72,7 @@
             <filtered>false</filtered>
             <directory>db/</directory>
             <includes>
-                <include>*.db</include>
+                <include>cards.h2.mv.db</include>
             </includes>
             <outputDirectory>db/</outputDirectory>
             <fileMode>0644</fileMode>

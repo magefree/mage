@@ -36,6 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
@@ -153,7 +154,7 @@ class MasterOfCrueltiesEffect extends OneShotEffect {
     }
 }
 
-class MasterOfCrueltiesNoDamageEffect extends ReplacementEffectImpl {
+class MasterOfCrueltiesNoDamageEffect extends ContinuousRuleModifyingEffectImpl {
 
     public MasterOfCrueltiesNoDamageEffect() {
         super(Duration.EndOfCombat, Outcome.PreventDamage);
@@ -170,25 +171,21 @@ class MasterOfCrueltiesNoDamageEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
+    public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
-                DamageEvent damageEvent = (DamageEvent) event;
-                return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();                
+                return true;
             default:
                 return false;
         }
+    }
+    
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        DamageEvent damageEvent = (DamageEvent) event;
+        return event.getSourceId().equals(source.getSourceId()) && damageEvent.isCombatDamage();                
+        
     }
 }

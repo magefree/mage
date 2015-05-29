@@ -99,13 +99,13 @@ class DelayingShieldReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == EventType.DAMAGE_PLAYER && event.getTargetId().equals(source.getControllerId());
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_PLAYER;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getTargetId().equals(source.getControllerId());
     }
 
     @Override

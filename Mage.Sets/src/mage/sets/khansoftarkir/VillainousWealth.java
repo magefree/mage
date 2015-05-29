@@ -107,7 +107,7 @@ class VillainousWealthEffect extends OneShotEffect {
                 for (int i = 0; i < cardsCount; i++) {
                     Card card = player.getLibrary().getFromTop(game);
                     if (card != null) {
-                        controller.moveCardToExileWithInfo(card, exileId, "Cards exiled by " + mageObject.getLogName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                        controller.moveCardToExileWithInfo(card, exileId, mageObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     }
                 }
             }

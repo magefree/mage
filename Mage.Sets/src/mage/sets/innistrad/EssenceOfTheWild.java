@@ -86,21 +86,16 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-
+    
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent perm = game.getPermanent(event.getTargetId());
+        return perm != null && perm.getCardType().contains(CardType.CREATURE) && perm.getControllerId().equals(source.getControllerId());
     }
-
+    
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
@@ -122,8 +117,8 @@ class EssenceOfTheWildEffect extends ReplacementEffectImpl {
 
 class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl {
 
-    private Permanent essence;
-    private UUID targetId;
+    private final Permanent essence;
+    private final UUID targetId;
 
     public EssenceOfTheWildCopyEffect(Permanent essence, UUID targetId) {
         super(Duration.EndOfGame, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);

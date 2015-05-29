@@ -117,7 +117,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
+import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
+import mage.watchers.common.BloodthirstWatcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 import mage.watchers.common.MorbidWatcher;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
@@ -883,15 +885,17 @@ public abstract class GameImpl implements Game, Serializable {
             saveState(false);
         } while (!mulliganPlayers.isEmpty());
         getState().setChoosingPlayerId(null);
-        // add watchers
+        Watchers watchers = state.getWatchers();
+        // add default watchers        
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
-            state.getWatchers().add(new PlayerDamagedBySourceWatcher(playerId));
+            watchers.add(new PlayerDamagedBySourceWatcher(playerId));
+            watchers.add(new BloodthirstWatcher(playerId));
         }
-        state.getWatchers().add(new MorbidWatcher());
-        state.getWatchers().add(new CastSpellLastTurnWatcher());
-        state.getWatchers().add(new SoulbondWatcher());
-        state.getWatchers().add(new PlayerLostLifeWatcher());
-        state.getWatchers().add(new BlockedAttackerWatcher());
+        watchers.add(new MorbidWatcher());
+        watchers.add(new CastSpellLastTurnWatcher());
+        watchers.add(new SoulbondWatcher());
+        watchers.add(new PlayerLostLifeWatcher());
+        watchers.add(new BlockedAttackerWatcher());
 
         //20100716 - 103.5
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -1278,6 +1282,7 @@ public abstract class GameImpl implements Game, Serializable {
     @Override
     public void addPermanent(Permanent permanent) {
         getBattlefield().addPermanent(permanent);
+        permanent.setCreateOrder(getState().getNextPermanentOrderNumber());
     }
 
     @Override
@@ -1492,6 +1497,7 @@ public abstract class GameImpl implements Game, Serializable {
         
         List<Permanent> planeswalkers = new ArrayList<>();
         List<Permanent> legendary = new ArrayList<>();
+        List<Permanent> worldEnchantment = new ArrayList<>();
         for (Permanent perm: getBattlefield().getAllActivePermanents()) {
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 //20091005 - 704.5f
@@ -1538,6 +1544,9 @@ public abstract class GameImpl implements Game, Serializable {
                     }
                 }
                 planeswalkers.add(perm);
+            }
+            if (perm.getSupertype().contains("World")) {
+                worldEnchantment.add(perm);
             }
             if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
@@ -1729,7 +1738,28 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-
+        //704.5m  - World Enchantments
+        if (worldEnchantment.size() > 1) { 
+            int newestCard = -1;
+            Permanent newestPermanent = null;
+            for (Permanent permanent :worldEnchantment) {
+                if (newestCard == -1) {
+                    newestCard = permanent.getCreateOrder();
+                    newestPermanent = permanent;
+                } else if (newestCard < permanent.getCreateOrder()) {
+                    newestCard = permanent.getCreateOrder();
+                    newestPermanent = permanent;
+                } else if(newestCard == permanent.getCreateOrder()) {
+                    newestPermanent = null;
+                }
+            }
+            for (Permanent permanent :worldEnchantment) {
+                if (newestPermanent != permanent) {
+                    movePermanentToGraveyardWithInfo(permanent);
+                    somethingHappened = true;
+                }
+            }
+        }
         //TODO: implement the rest
 
         return somethingHappened;

@@ -121,7 +121,7 @@ class RoonOfTheHiddenRealmEffect extends OneShotEffect {
                 Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     UUID exileId = UUID.randomUUID();
-                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    if (controller.moveCardToExileWithInfo(permanent, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
                         if (card != null) {
                             AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.BATTLEFIELD));
                             delayedAbility.setSourceId(source.getSourceId());

@@ -54,6 +54,8 @@ public class Mindcrank extends CardImpl {
         super(ownerId, 144, "Mindcrank", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "NPH";
 
+        // Whenever an opponent loses life, that player puts that many cards from the top of his or her library into his or her graveyard. 
+        // (Damage dealt by sources without infect causes loss of life.)
         this.addAbility(new MindcrankTriggeredAbility());
     }
 
@@ -91,8 +93,10 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Set<UUID> opponents = game.getOpponents(this.getControllerId());
         if (opponents.contains(event.getPlayerId())) {
-            Effect effect = this.getEffects().get(0);
-            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("lostLife", event.getAmount());
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+            }
             return true;
         }
         return false;
@@ -123,7 +127,7 @@ class MindcrankEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            Integer amount = (Integer) getValue("amount");
+            Integer amount = (Integer) getValue("lostLife");
             if (amount == null) {
                 amount = 0;
             }

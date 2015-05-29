@@ -99,11 +99,6 @@ class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
         int actualDamage = damageEvent.getAmount();
@@ -119,10 +114,15 @@ class PhyrexianUnlifeEffect2 extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGE_PLAYER;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 // The decision if the player has more than 0 life has to be checked only at start of a combat damage step

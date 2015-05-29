@@ -132,22 +132,18 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                    && permanent.getCardType().contains(CardType.CREATURE)
-                    && !(permanent instanceof PermanentToken)) {
-                return true;
-            }
-        }
-        return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && permanent.getControllerId().equals(source.getControllerId())
+                && permanent.getCardType().contains(CardType.CREATURE)
+                && !(permanent instanceof PermanentToken);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {

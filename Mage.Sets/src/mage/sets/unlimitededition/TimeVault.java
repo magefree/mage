@@ -99,8 +99,13 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     }
     
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PLAY_TURN;
+    }
+    
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.PLAY_TURN && source.getControllerId().equals(event.getPlayerId())) {
+        if (source.getControllerId().equals(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null && permanent.isTapped()) {
                 return true;
@@ -108,12 +113,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
+       
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());

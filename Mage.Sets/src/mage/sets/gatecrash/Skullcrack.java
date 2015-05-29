@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
@@ -71,7 +72,7 @@ public class Skullcrack extends CardImpl {
     }
 }
 
-class DamageCantBePreventedEffect extends ReplacementEffectImpl {
+class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
     public DamageCantBePreventedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -91,17 +92,14 @@ class DamageCantBePreventedEffect extends ReplacementEffectImpl {
     public boolean apply(Game game, Ability source) {
         return true;
     }
-
+    
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.PREVENT_DAMAGE;
     }
-
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.PREVENT_DAMAGE)) {
-            return true;
-        }
-        return false;
+        return true;
     }
 }

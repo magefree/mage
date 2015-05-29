@@ -58,7 +58,6 @@ public class YawgmothsWill extends CardImpl {
         super(ownerId, 171, "Yawgmoth's Will", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "USG";
 
-
         // Until end of turn, you may play cards from your graveyard.
         this.getSpellAbility().addEffect(new CanPlayCardsFromGraveyardEffect());
 
@@ -131,11 +130,6 @@ class YawgmothsWillReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
@@ -154,10 +148,15 @@ class YawgmothsWillReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getOwnerId().equals(source.getControllerId())) {
                 Permanent permanent = ((ZoneChangeEvent) event).getTarget();

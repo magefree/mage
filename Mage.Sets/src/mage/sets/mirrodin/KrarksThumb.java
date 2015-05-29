@@ -27,6 +27,7 @@
  */
 package mage.sets.mirrodin;
 
+import java.util.Random;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -80,7 +81,11 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
-            boolean secondCoinFlip = player.flipCoin(game, event.getAppliedEffects());
+            // because second flip is ignored it may not be done by the player method
+            boolean secondCoinFlip = new Random().nextBoolean();
+            if (!game.isSimulation()) {
+                game.informPlayers("[Flip a coin] " + player.getLogName() + (secondCoinFlip ? " won (head)." : " lost (tail)."));
+            }
             if (player.chooseUse(outcome, "Ignore the first coin flip?", game)) {
                 event.setFlag(secondCoinFlip);
                 game.informPlayers(new StringBuilder(player.getLogName()).append(" ignores the first coin flip.").toString());
@@ -92,11 +97,13 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.FLIP_COIN;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.FLIP_COIN && source.getControllerId().equals(event.getPlayerId())) {
-                return true;
-        }
-        return false;
+        return source.getControllerId().equals(event.getPlayerId());
     }
 
     @Override

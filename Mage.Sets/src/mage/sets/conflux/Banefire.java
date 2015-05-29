@@ -57,13 +57,11 @@ public class Banefire extends CardImpl {
         super(ownerId, 58, "Banefire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "CON";
 
-
         // Banefire deals X damage to target creature or player.       
         this.getSpellAbility().addEffect(new BaneFireEffect());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // If X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new BanefireCantCounterEffect()));
-
     }
 
     public Banefire(final Banefire card) {
@@ -118,7 +116,7 @@ class BaneFireEffect extends OneShotEffect {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
         int damage = source.getManaCostsToPay().getX();
-        boolean preventable = damage >= 5;
+        boolean preventable = damage < 5;
         if (targetPlayer != null) {
             targetPlayer.damage(damage, source.getSourceId(), game, false, preventable);
             return true;

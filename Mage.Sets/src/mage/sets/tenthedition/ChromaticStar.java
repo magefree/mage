@@ -48,10 +48,14 @@ public class ChromaticStar extends CardImpl {
     public ChromaticStar(UUID ownerId) {
         super(ownerId, 314, "Chromatic Star", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "10E";
+        
+        // {1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.        
         Ability ability = new AnyColorManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+        
+        // When Chromatic Star is put into a graveyard from the battlefield, draw a card.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 

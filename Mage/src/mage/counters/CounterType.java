@@ -63,6 +63,7 @@ public enum CounterType {
     LORE("lore"),
     LUCK("luck"),
     LOYALTY("loyalty"),
+    MANNEQUIN("mannequin"),
     M1M1(new BoostCounter(-1, -1).name),
     MINING("mining"),
     P1P1(new BoostCounter(1, 1).name),

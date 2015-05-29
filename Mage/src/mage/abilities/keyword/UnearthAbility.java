@@ -45,6 +45,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -144,10 +146,11 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (source.getSourceObjectIfItStillExists(game) != null) {
+        if (event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
-                return true;
+                // started in graveyard goint to battlefield so current zone change counter has to be +1
+                return source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId());
             }
         }
         return false;
@@ -155,7 +158,11 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        new ExileSourceEffect().apply(game, source);
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && permanent != null) {
+            controller.moveCardToExileWithInfo(permanent, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
+        }
         return true;
     }
 }

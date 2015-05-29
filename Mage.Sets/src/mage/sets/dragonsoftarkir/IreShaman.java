@@ -110,7 +110,7 @@ class IreShamanExileEffect extends OneShotEffect {
             Library library = controller.getLibrary();
             Card card = library.removeFromTop(game);
             if (card != null) {
-                String exileName = new StringBuilder(sourcePermanent.getName()).append(" <this card may be played the turn it was exiled>").toString();
+                String exileName = new StringBuilder(sourcePermanent.getIdName()).append(" <this card may be played the turn it was exiled>").toString();
                 controller.moveCardToExileWithInfo(card, source.getSourceId(), exileName, source.getSourceId(), game, Zone.LIBRARY, true);
                 ContinuousEffect effect = new IreShamanCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(card.getId()));

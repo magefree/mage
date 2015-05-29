@@ -27,8 +27,6 @@
  */
 package mage.sets.fatereforged;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -48,7 +46,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
@@ -61,7 +58,6 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.watchers.Watcher;
 
 /**
  *
@@ -89,7 +85,7 @@ public class SoulfireGrandMaster extends CardImpl {
         // Instant and sorcery spells you control have lifelink.
         Effect effect = new GainAbilitySpellsEffect(LifelinkAbility.getInstance(), filter);
         effect.setText("Instant and sorcery spells you control have lifelink");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new SoulfireGrandMasterLeavesStackWatcher());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of your graveyard as it resolves.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulfireGrandMasterCastFromHandReplacementEffect(), new ManaCostsImpl("{2}{U/R}{U/R}")));
@@ -134,17 +130,32 @@ class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            for (Iterator<StackObject> iterator = game.getStack().iterator(); iterator.hasNext();) {
-                StackObject stackObject = iterator.next();
+            for (Card card: game.getExile().getAllCards(game)) {
+                if (card.getOwnerId().equals(source.getControllerId()) && filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card: player.getLibrary().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card: player.getHand().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (Card card: player.getGraveyard().getCards(game)) {
+                if (filter.match(card, game)) {
+                    game.getState().addOtherAbility(card, ability);
+                }
+            }
+            for (StackObject stackObject : game.getStack()) {
                 if (stackObject.getControllerId().equals(source.getControllerId())) {                        
                     Card card = game.getCard(stackObject.getSourceId());
                     if (card != null && filter.match(card, game)) {
                         if (!card.getAbilities().contains(ability)) {
                             game.getState().addOtherAbility(card, ability);
-                            SoulfireGrandMasterLeavesStackWatcher watcher = (SoulfireGrandMasterLeavesStackWatcher) game.getState().getWatchers().get("SoulfireGrandMasterLeavesStackWatcher");
-                            if (watcher != null) {
-                                watcher.addCardId(card.getId());
-                            }
                         }
                     }
                 }
@@ -238,44 +249,3 @@ class SoulfireGrandMasterCastFromHandReplacementEffect extends ReplacementEffect
     }
 
 }
-
-class SoulfireGrandMasterLeavesStackWatcher extends Watcher {
-
-    private final HashSet<UUID> cardIds = new HashSet<>();
-
-    public SoulfireGrandMasterLeavesStackWatcher() {
-        super("SoulfireGrandMasterLeavesStackWatcher", WatcherScope.GAME);
-    }
-
-    public SoulfireGrandMasterLeavesStackWatcher(final SoulfireGrandMasterLeavesStackWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && cardIds.contains(event.getTargetId())) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                Iterator<Ability> it = card.getAbilities().iterator();
-                while (it.hasNext()) {
-                    if (it.next() instanceof LifelinkAbility) {
-                        it.remove();
-                        break;
-                    }
-                }
-                cardIds.remove(event.getTargetId());
-            }
-        }
-    }
-
-    public void addCardId(UUID cardId) {
-        cardIds.add(cardId);
-    }
-
-    @Override
-    public SoulfireGrandMasterLeavesStackWatcher copy() {
-        return new SoulfireGrandMasterLeavesStackWatcher(this);
-    }
-
-}
-

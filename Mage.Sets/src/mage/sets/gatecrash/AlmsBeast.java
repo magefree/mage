@@ -60,7 +60,7 @@ public class AlmsBeast extends CardImpl {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
                                  new BlockingAttackerIdPredicate(this.getId())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfCombat, filter,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter,
                 "Creatures blocking or blocked by {this} have lifelink")));
     }
 

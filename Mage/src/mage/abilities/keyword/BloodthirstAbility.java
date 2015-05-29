@@ -48,7 +48,7 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
 }
 
 class BloodthirstEffect extends OneShotEffect {
-    private int amount;
+    private final int amount;
 
     BloodthirstEffect(int amount) {
         super(Outcome.BoostCreature);

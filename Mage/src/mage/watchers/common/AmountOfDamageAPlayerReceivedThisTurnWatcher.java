@@ -65,9 +65,9 @@ public class AmountOfDamageAPlayerReceivedThisTurnWatcher extends Watcher {
             if (playerId != null) {
                 Integer amount = amountOfDamageReceivedThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = Integer.valueOf(event.getAmount());
+                    amount = event.getAmount();
                 } else {
-                    amount = Integer.valueOf(amount + event.getAmount());
+                    amount = amount + event.getAmount();
                 }
                 amountOfDamageReceivedThisTurn.put(playerId, amount);
             }

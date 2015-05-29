@@ -137,19 +137,19 @@ class PossibilityStormEffect extends OneShotEffect {
         if (sourceObject != null && spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
             if (spellController != null &&
-                spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.STACK, true)) {
+                spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.STACK, true)) {
                 if (spellController.getLibrary().size() > 0) {
                     Library library = spellController.getLibrary();
                     Card card;
                     do {
                         card = library.removeFromTop(game);
                         if (card != null) {
-                            spellController.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                            spellController.moveCardToExileWithInfo(card, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())) {
-                        if (spellController.chooseUse(Outcome.PlayForFree, new StringBuilder("Cast ").append(card.getName()).append(" without paying cost?").toString(), game)) {
+                        if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", game)) {
                             spellController.cast(card.getSpellAbility(), game, true);
                         }
                     }
