@@ -59,11 +59,9 @@ public class PraetorsGrasp extends CardImpl {
         super(ownerId, 71, "Praetor's Grasp", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
         this.expansionSetCode = "NPH";
 
-
         // Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
         this.getSpellAbility().addEffect(new PraetorsGraspEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-
     }
 
     public PraetorsGrasp(final PraetorsGrasp card) {
@@ -105,7 +103,7 @@ class PraetorsGraspEffect extends OneShotEffect {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 if (card != null && exileId != null) {
                     game.informPlayers(controller.getLogName() + " moves the searched card face down to exile");
-                    card.moveToExile(exileId, sourceObject.getName(), source.getSourceId(), game);
+                    card.moveToExile(exileId, sourceObject.getIdName(), source.getSourceId(), game);
                     card.setFaceDown(true, game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
                     game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
@@ -144,12 +142,11 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId)) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(cardId) && affectedControllerId.equals(source.getControllerId())) {
             Player controller = game.getPlayer(source.getControllerId());
-            MageObject sourceObject = source.getSourceObject(game);
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject, true);
-            if (exileId != null && sourceObject != null && controller != null) {
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+            if (exileId != null && controller != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(cardId)) {
                     if (controller.chooseUse(outcome, "Play the exiled card?", game)) {
@@ -191,10 +188,10 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId)) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (objectId.equals(cardId) && affectedControllerId.equals(source.getControllerId())) {
             MageObject sourceObject = source.getSourceObject(game);
-            UUID exileId = CardUtil.getObjectExileZoneId(game, sourceObject, true);
+            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             if (exileId != null && sourceObject != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(cardId)) {
@@ -203,7 +200,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
                     if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
                         if (controller.chooseUse(outcome, "Reveal exiled card?", game)) {
                             Cards cards = new CardsImpl(card);
-                            controller.lookAtCards("Exiled with " + sourceObject.getName(), cards, game);
+                            controller.lookAtCards("Exiled with " + sourceObject.getIdName(), cards, game);
                         }
                     }
                 } else {
