@@ -390,7 +390,16 @@ public class ContinuousEffects implements Serializable {
     }
 
     private boolean checkAbilityStillExists(Ability ability, ContinuousEffect effect, GameEvent event, Game game) {
-        if (effect.getDuration().equals(Duration.OneUse) || effect.getDuration().equals(Duration.Custom) || ability.getSourceId() == null) { // needed for some special replacment effects (e.g. Undying) or commander replacement effect
+        switch(effect.getDuration()) { // effects with fixed duration don't need an object with the source ability (e.g. a silence cast with isochronic Scepter has no more a card object
+            case EndOfCombat:
+            case EndOfGame:
+            case EndOfStep:
+            case EndOfTurn:  
+            case OneUse:
+            case Custom:  // custom duration means the effect ends itself if needed
+                return true;
+        }
+        if (ability.getSourceId() == null) { // commander replacement effect
             return true;
         }
         MageObject object;

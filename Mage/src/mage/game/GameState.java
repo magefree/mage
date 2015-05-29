@@ -840,6 +840,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         values.clear();
         zones.clear();
         simultaneousEvents.clear();
+        copiedCards.clear();
         permanentOrderNumber = 0;
     }
 
