@@ -14,7 +14,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class TorporOrbTest extends CardTestPlayerBase {
 
     @Test
-    public void testCard() {
+    public void testWallOfOmens() {
         addCard(Zone.BATTLEFIELD, playerA, "Torpor Orb");
         addCard(Zone.HAND, playerA, "Wall of Omens");
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
@@ -32,4 +32,30 @@ public class TorporOrbTest extends CardTestPlayerBase {
         assertHandCount(playerA, 0);
     }
 
+    /**
+     * Treacherous Pit-Dweller doesnt function properly with Torpor Orb and Hushwing Gryff
+     */
+    @Test
+    public void testPitTweller() {
+        addCard(Zone.BATTLEFIELD, playerB, "Torpor Orb");
+        addCard(Zone.BATTLEFIELD, playerB, "Treacherous Pit-Dweller");  // 4/3
+
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        
+        attack(2, playerB, "Treacherous Pit-Dweller");        
+        castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        
+        assertPermanentCount(playerB, "Treacherous Pit-Dweller", 1);
+        assertPowerToughness(playerB, "Treacherous Pit-Dweller", 5,4);
+    }
+    
 }

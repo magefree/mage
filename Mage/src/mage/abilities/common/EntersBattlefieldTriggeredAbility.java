@@ -81,7 +81,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
         if (noRule) {
             return super.getRule();
         }
-        return new StringBuilder(rulePrefix != null ? rulePrefix : "").append("When {this} enters the battlefield, ").append(super.getRule()).toString();
+        return (rulePrefix != null ? rulePrefix : "") + "When {this} enters the battlefield, "+ super.getRule();
     }
 
     @Override

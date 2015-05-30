@@ -30,7 +30,6 @@ package mage.sets.avacynrestored;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
@@ -39,6 +38,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 
 /**
  * @author noxx
@@ -70,30 +72,46 @@ public class TreacherousPitDweller extends CardImpl {
     }
 }
 
-class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility {
+class TreacherousPitDwellerTriggeredAbility extends TriggeredAbilityImpl {
 
     private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
 
     public TreacherousPitDwellerTriggeredAbility() {
-        super(Zone.GRAVEYARD, Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), ruleText, false);
+        super(Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(),false);
         addTarget(new TargetOpponent());
     }
 
     public TreacherousPitDwellerTriggeredAbility(final TreacherousPitDwellerTriggeredAbility ability) {
         super(ability);
     }
-
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+    }
+    
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return  event.getTargetId().equals(getSourceId()) && ((EntersTheBattlefieldEvent) event).getFromZone().equals(Zone.GRAVEYARD);
+    }    
+    
     @Override
     public TreacherousPitDwellerTriggeredAbility copy() {
         return new TreacherousPitDwellerTriggeredAbility(this);
     }
+
+    @Override
+    public String getRule() {
+        return ruleText + super.getRule();
+    }
+    
 }
 
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
 
     public TreacherousPitDwellerEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "Target opponent gains control of {this}";
+        staticText = "target opponent gains control of {this}";
     }
 
     public TreacherousPitDwellerEffect(final TreacherousPitDwellerEffect effect) {
