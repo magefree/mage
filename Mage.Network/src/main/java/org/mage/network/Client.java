@@ -29,6 +29,7 @@ import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserView;
@@ -40,6 +41,7 @@ import org.mage.network.handlers.client.ChatRoomHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.InformClientMessageHandler;
 import org.mage.network.handlers.client.ServerMessageHandler;
+import org.mage.network.handlers.client.RoomMessageHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -61,6 +63,7 @@ public class Client {
     private final InformClientMessageHandler informClientMessageHandler;
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
+    private final RoomMessageHandler roomMessageHandler;
     
     private SslContext sslCtx;
     private Channel channel;
@@ -77,6 +80,7 @@ public class Client {
         informClientMessageHandler = new InformClientMessageHandler(client);
         clientRegisteredMessageHandler = new ClientRegisteredMessageHandler(client);
         serverMessageHandler = new ServerMessageHandler();
+        roomMessageHandler = new RoomMessageHandler();
     }
     
     public boolean connect(String userName, String host, int port, boolean ssl, MageVersion version) {
@@ -132,6 +136,7 @@ public class Client {
             ch.pipeline().addLast("clientRegisteredMessageHandler", clientRegisteredMessageHandler);
             ch.pipeline().addLast("chatRoomHandler", chatRoomHandler);
             ch.pipeline().addLast("serverMessageHandler", serverMessageHandler);
+            ch.pipeline().addLast("tablesMessageHandler", roomMessageHandler);
 
         }
     }
@@ -304,17 +309,22 @@ public class Client {
         return null;
     }
 
-    public Collection<TableView> getTables(UUID roomId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public RoomView getRoom(UUID roomId) {
+        try {
+            return roomMessageHandler.getRoom(roomId);
+        } catch (Exception ex) {
+            logger.error("Error getting tables", ex);
+        }
+        return null;
     }
 
-    public Collection<MatchView> getFinishedMatches(UUID roomId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public Collection<RoomUsersView> getRoomUsers(UUID roomId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Collection<MatchView> getFinishedMatches(UUID roomId) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//    
+//    public Collection<RoomUsersView> getRoomUsers(UUID roomId) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public void sendPlayerInteger(UUID gameId, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

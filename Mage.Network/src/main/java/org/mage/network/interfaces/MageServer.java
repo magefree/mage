@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.interfaces.ServerState;
 import mage.remote.DisconnectReason;
 import mage.utils.MageVersion;
+import mage.view.RoomView;
 
 /**
  *
@@ -23,6 +24,7 @@ public interface MageServer {
     
     ServerState getServerState();
 
-    public List<String> getServerMessages();
+    List<String> getServerMessages();
+    RoomView getRoom(UUID roomId);
     
 }

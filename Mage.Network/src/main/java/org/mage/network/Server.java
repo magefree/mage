@@ -31,6 +31,7 @@ import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.JoinChatMessageHandler;
 import org.mage.network.handlers.server.LeaveChatMessageHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
+import org.mage.network.handlers.server.RoomMessageHandler;
 import org.mage.network.handlers.server.ServerMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.InformClientMessage;
@@ -62,6 +63,7 @@ public class Server {
     private final JoinChatMessageHandler joinChatMessageHandler;
     private final LeaveChatMessageHandler leaveChatMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
+    private final RoomMessageHandler roomMessageHandler;
     
     public Server(MageServer server) {
         heartbeatHandler = new HeartbeatHandler(server);
@@ -71,6 +73,7 @@ public class Server {
         leaveChatMessageHandler = new LeaveChatMessageHandler(server);
         chatRoomIdHandler = new ChatRoomIdHandler(server);
         serverMessageHandler = new ServerMessageHandler(server);
+        roomMessageHandler = new RoomMessageHandler(server);
     }
     
     public void start(int port, boolean ssl) throws Exception {
@@ -125,6 +128,7 @@ public class Server {
             ch.pipeline().addLast(handlersExecutor, joinChatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, leaveChatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, serverMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, roomMessageHandler);
         }
 
     }    

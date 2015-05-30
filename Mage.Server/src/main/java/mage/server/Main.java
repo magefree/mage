@@ -94,6 +94,7 @@ import mage.view.DraftPickView;
 import mage.view.GameView;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserDataView;
@@ -419,22 +420,22 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    //FIXME: why no sessionId here???
-//    public List<TableView> getTables(UUID roomId) throws MageException {
+    @Override
+    //FIXME: why no sessionId here???
+    public RoomView getRoom(UUID roomId) {
 //        try {
-//            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
-//            if (room != null) {
-//                return room.getTables();
-//            } else {
-//                return null;
-//            }
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return new RoomView(room.getRoomUsersInfo(), room.getTables(), room.getFinished());
+            } else {
+                return null;
+            }
 //        }
 //        catch (Exception ex) {
 //            handleException(ex);
 //        }
 //        return null;
-//    }
+    }
 //
 //    @Override
 //    //FIXME: why no sessionId here???

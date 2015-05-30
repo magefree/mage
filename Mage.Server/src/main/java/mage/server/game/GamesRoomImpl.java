@@ -69,7 +69,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<>();
     private static List<MatchView> matchView = new ArrayList<>();
-    private static List<RoomUsersView> roomUsersView = new ArrayList<>();
+    private static RoomUsersView roomUsersView;
 
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
@@ -128,13 +128,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }
 
         Collections.sort(users, new UserNameSorter());                
-        List<RoomUsersView> roomUserInfo = new ArrayList<>();
-        roomUserInfo.add(new RoomUsersView(users, 
+//        List<RoomUsersView> roomUserInfo = new ArrayList<>();
+        roomUsersView = new RoomUsersView(users, 
                 GameManager.getInstance().getNumberActiveGames(),
                 ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()),
                 ConfigSettings.getInstance().getMaxGameThreads()
-        ));
-        roomUsersView = roomUserInfo;
+        );
+//        roomUsersView = roomUserInfo;
     }
 
     @Override
@@ -210,7 +210,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public List<RoomUsersView> getRoomUsersInfo() {
+    public RoomUsersView getRoomUsersInfo() {
         return roomUsersView;
     }
 

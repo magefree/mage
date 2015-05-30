@@ -48,7 +48,7 @@ public interface GamesRoom extends Room {
 
     List<TableView> getTables();
     List<MatchView> getFinished();
-    List<RoomUsersView> getRoomUsersInfo();
+    RoomUsersView getRoomUsersInfo();
     boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException;
     boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException;
     TableView createTable(UUID userId, MatchOptions options);

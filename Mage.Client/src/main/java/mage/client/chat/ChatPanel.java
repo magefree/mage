@@ -370,8 +370,8 @@ public class ChatPanel extends javax.swing.JPanel {
         private final String[] columnNames = new String[]{"Players", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
-        public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
-            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
+        public void loadData(RoomUsersView roomUserInfo) throws MageRemoteException {
+//            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
@@ -535,9 +535,9 @@ public class ChatPanel extends javax.swing.JPanel {
         }
 }//GEN-LAST:event_txtMessageKeyTyped
 
-    public void setRoomUserInfo(List<Collection<RoomUsersView>> view) {
+    public void setRoomUserInfo(RoomUsersView view) {
         try {
-            tableModel.loadData(view.get(0));
+            tableModel.loadData(view);
         } catch (Exception ex) {
             this.players.clear();
         }
