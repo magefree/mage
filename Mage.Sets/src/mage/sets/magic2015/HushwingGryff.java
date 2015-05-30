@@ -36,13 +36,13 @@ import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -104,18 +104,18 @@ class HushwingGryffEffect extends ContinuousRuleModifyingEffectImpl {
         return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
-    @Override
+    @Override    
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent)event).getTarget();
-        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
-            // Because replacement events have to be executed 
-            // call replaceEvent here without calling the triggering event after
-            game.getContinuousEffects().replaceEvent(event, game);
-            return true;
+        Ability ability = (Ability) getValue("targetAbility");
+        if (ability != null && AbilityType.TRIGGERED.equals(ability.getAbilityType())) {
+            Permanent p = game.getPermanent(event.getTargetId());
+            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+                return true;
+            }
         }
         return false;
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
