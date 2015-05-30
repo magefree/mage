@@ -40,6 +40,7 @@ import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 
 import java.util.UUID;
+import mage.game.permanent.Permanent;
 
 /**
  * @author noxx
@@ -97,15 +98,18 @@ class TajuruPreserverEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
-        if (object instanceof PermanentCard) {
-            if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {
-                return true;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())) {
+            MageObject object = game.getObject(event.getSourceId());
+            if (object instanceof PermanentCard) {
+                if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {
+                    return true;
+                }
             }
-        }
-        if (object instanceof Spell) {
-            if (game.getOpponents(source.getControllerId()).contains(((Spell)object).getControllerId())) {
-                return true;
+            if (object instanceof Spell) {
+                if (game.getOpponents(source.getControllerId()).contains(((Spell)object).getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;
