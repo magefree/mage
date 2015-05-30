@@ -850,6 +850,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
     }
 
+    /**
+     * 
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param cardName
+     * @param targetName for modes you can add "mode=3" before target name, multiple targets can be seperated by ^
+     */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
     }

@@ -446,7 +446,7 @@ public class TestPlayer extends ComputerPlayer {
                     for (String targetName: targetList) {
                         for (Card card: this.getHand().getCards(((TargetCardInHand)target).getFilter(), game)) {
                             if (card.getName().equals(targetName) || (card.getName()+"-"+card.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetCardInHand)target).canTarget(source.getControllerId(), card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                if (((TargetCardInHand)target).canTarget(this.getId(), card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.add(card.getId(), game);
                                     targetFound = true;
                                     break;
@@ -663,42 +663,61 @@ public class TestPlayer extends ComputerPlayer {
         int index = 0;
         int targetsSet = 0;
         for (String targetName: targetList) {
+            if (targetName.startsWith("mode=")) {
+                int modeNr = Integer.parseInt(targetName.substring(5, 6));
+                if (modeNr == 0 || modeNr > ability.getModes().size()) {
+                    throw new UnsupportedOperationException("Given mode number (" + modeNr + ") not available for " + ability.toString());
+                }
+                int modeCounter = 1;
+                for (Mode mode :ability.getModes().values()) {
+                    if (modeCounter == modeNr) {
+                        ability.getModes().setMode(mode);
+                        index=0; // reset target index if mode changes
+                        break;
+                    }
+                    modeCounter++;
+                }
+                targetName = targetName.substring(6);
+            }
+            if (ability.getTargets().size() == 0) {
+                throw new AssertionError("Ability has no targets. " + ability.toString());
+            }
+            if (index >= ability.getTargets().size()) {
+                break; // this can happen if targets should be set but can't be used because of hexproof e.g.
+            }     
+            Target currentTarget = ability.getTargets().get(index);            
             if (targetName.startsWith("targetPlayer=")) {
                 target = targetName.substring(targetName.indexOf("targetPlayer=") + 13);
                 for (Player player: game.getPlayers().values()) {
                     if (player.getName().equals(target)) {
-                        ability.getTargets().get(index).addTarget(player.getId(), ability, game);
+                        currentTarget.addTarget(player.getId(), ability, game);
                         index++;
                         targetsSet++;
                         break;
                     }
                 }
             } else {
-                if (ability.getTargets().size() == 0) {
-                    throw new AssertionError("Ability has no targets. " + ability.toString());
-                }
-                for (UUID id: ability.getTargets().get(0).possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
+                for (UUID id: currentTarget.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                     MageObject object = game.getObject(id);
                     if (object != null && 
                             ((!targetName.isEmpty() && object.getName().startsWith(targetName)) || (targetName.isEmpty() && object.getName().isEmpty()))) {
-                        if (index >= ability.getTargets().size()) {
-                            index--;
+                        if (currentTarget.getNumberOfTargets() == 1) {
+                            currentTarget.clearChosen();
                         }
-                        if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
-                            ability.getTargets().get(index).clearChosen();
-                        }
-                        if (ability.getTargets().get(index) instanceof TargetCreaturePermanentAmount) {
+                        if (currentTarget instanceof TargetCreaturePermanentAmount) {
                             // supports only to set the complete amount to one target
-                            TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) ability.getTargets().get(index);
+                            TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) currentTarget;
                             targetAmount.setAmount(ability, game);
                             int amount = targetAmount.getAmountRemaining();
                             targetAmount.addTarget(id, amount,ability, game);
                             targetsSet++;
                         } else {
-                            ability.getTargets().get(index).addTarget(id, ability, game);
+                            currentTarget.addTarget(id, ability, game);
                             targetsSet++;
                         }
-                        index++;
+                        if (currentTarget.getTargets().size() == currentTarget.getMaxNumberOfTargets()) {
+                            index++;
+                        }
                         break;
                     }
                 }
