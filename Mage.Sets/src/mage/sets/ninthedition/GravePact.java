@@ -27,6 +27,8 @@
  */
 package mage.sets.ninthedition;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -41,7 +43,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -121,18 +122,28 @@ class GravePactEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getPlayerList()) {
-            if (!playerId.equals(source.getControllerId())) {
+        List<UUID> perms = new ArrayList<>();
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {            
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
-                Target target = new TargetControlledCreaturePermanent();
-                if (player != null && player.choose(Outcome.Sacrifice, target, source.getSourceId(), game)) {
-                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null) {
-                        permanent.sacrifice(source.getSourceId(), game);
+                if (player != null && !playerId.equals(source.getControllerId())) {
+                    TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
+                    target.setNotTarget(true);
+                    if (target.canChoose(player.getId(), game)) {
+                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        perms.addAll(target.getTargets());
                     }
                 }
             }
+            for (UUID permID : perms) {
+                Permanent permanent = game.getPermanent(permID);
+                if (permanent != null) {
+                    permanent.sacrifice(source.getSourceId(), game);
+                }
+            }
+            return true;        
         }
-        return false;
+        return false;        
     }
 }
