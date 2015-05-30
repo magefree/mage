@@ -92,7 +92,7 @@ public abstract class Watcher implements Serializable {
     public boolean conditionMet() {
         return condition;
     }
-
+    
     public void reset() {
         condition = false;
     }

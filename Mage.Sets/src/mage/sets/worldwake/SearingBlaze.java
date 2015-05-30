@@ -59,7 +59,6 @@ public class SearingBlaze extends CardImpl {
         super(ownerId, 90, "Searing Blaze", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}{R}");
         this.expansionSetCode = "WWK";
 
-
         // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
         // Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
         this.getSpellAbility().addTarget(new TargetPlayer());
