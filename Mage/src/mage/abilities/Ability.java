@@ -537,4 +537,6 @@ public interface Ability extends Controllable, Serializable {
      */
     
     MageObject getSourceObjectIfItStillExists(Game game);
+    
+    String getTargetDescription(Targets targets, Game game);
 }

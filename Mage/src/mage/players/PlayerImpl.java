@@ -130,7 +130,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
-import mage.watchers.common.BloodthirstWatcher;
 
 import org.apache.log4j.Logger;
 
@@ -690,7 +689,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public Cards discard(int amount, boolean random, Ability source, Game game) {
         Cards discardedCards = new CardsImpl();
-        if (amount >= this.getHand().size()) {
+        if (this.getHand().size() == 1) {
             discardedCards.addAll(this.getHand());
             while (this.getHand().size() > 0) {
                 discard(this.getHand().get(this.getHand().iterator().next(), game), source, game);

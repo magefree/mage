@@ -60,10 +60,10 @@ public class Misdirection extends CardImpl {
         super(ownerId, 87, "Misdirection", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
         this.expansionSetCode = "MMQ";
 
-
         // You may exile a blue card from your hand rather than pay Misdirection's mana cost.
         FilterOwnedCard filterCardInHand = new FilterOwnedCard("a blue card from your hand");
         filterCardInHand.add(new ColorPredicate(ObjectColor.BLUE));
+        
         // the exile cost can never be paid with the card itself
         filterCardInHand.add(Predicates.not(new CardIdPredicate(this.getId())));       
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filterCardInHand))));

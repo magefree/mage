@@ -65,4 +65,32 @@ public class SpellCastTriggerTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Sunscorch Regent", 5, 4);
     }
 
+    /**
+     * Monastery Mentor triggers are causing a "rollback" error.
+     */
+    @Test
+    public void testMonasteryMentor() {        
+        // Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
+        // Whenever you cast a noncreature spell, put a 1/1 white Monk creature token with prowess onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Monastery Mentor", 1);
+
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);        
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20); 
+        assertLife(playerB, 14);
+        
+        assertGraveyardCount(playerA, "Lightning Bolt", 2);
+        assertPermanentCount(playerA, "Monk", 2);
+        assertPowerToughness(playerA, "Monk", 2, 2);
+        assertPowerToughness(playerA, "Monk", 1, 1);
+        
+        assertPowerToughness(playerA, "Monastery Mentor", 4, 4);
+    }    
 }

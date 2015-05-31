@@ -1074,6 +1074,7 @@ public abstract class AbilityImpl implements Ability {
         return sb.toString();
     }
 
+    @Override
     public String getTargetDescription(Targets targets, Game game) {
         return getTargetDescriptionForLog(targets, game);
     }

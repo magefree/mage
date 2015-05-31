@@ -235,11 +235,15 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         updateGameStatePriority("choose(5)", game); 
+        UUID abilityControllerId = playerId;
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }        
         if (options == null) {
             options = new HashMap<>();
         }
         while (!abort) {
-            Set<UUID> targetIds = target.possibleTargets(sourceId, playerId, game);
+            Set<UUID> targetIds = target.possibleTargets(sourceId, abilityControllerId, game);
             if (targetIds == null || targetIds.isEmpty()) {
                 return false;
             }
@@ -251,14 +255,14 @@ public class HumanPlayer extends PlayerImpl {
             List<UUID> chosen = target.getTargets();
             options.put("chosen", (Serializable)chosen);
 
-            game.fireSelectTargetEvent(playerId, target.getMessage(), targetIds, required, getOptions(target, options));
+            game.fireSelectTargetEvent(getId(), target.getMessage(), targetIds, required, getOptions(target, options));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (!targetIds.contains(response.getUUID())) {
                     continue;
                 }
                 if (target instanceof TargetPermanent) {
-                    if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), sourceId, game, false)) {
+                    if (((TargetPermanent)target).canTarget(abilityControllerId, response.getUUID(), sourceId, game, false)) {
                         target.add(response.getUUID(), game);
                         if(target.doneChosing()){
                             return true;
@@ -306,13 +310,17 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         updateGameStatePriority("chooseTarget", game);
+        UUID abilityControllerId = playerId;
+        if (target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
         while (!abort) {
-            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+            Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), abilityControllerId, game);
             boolean required = target.isRequired(source);
             if (possibleTargets.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
                 required = false;
             }
-            game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target, null));
+            game.fireSelectTargetEvent(getId(), target.getMessage(), possibleTargets, required, getOptions(target, null));
             waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.getTargets().contains(response.getUUID())) {
@@ -320,7 +328,7 @@ public class HumanPlayer extends PlayerImpl {
                     continue;
                 }
                 if (possibleTargets.contains(response.getUUID())) {
-                    if (target.canTarget(playerId, response.getUUID(), source, game)) {
+                    if (target.canTarget(abilityControllerId, response.getUUID(), source, game)) {
                         target.addTarget(response.getUUID(), source, game);
                         if(target.doneChosing()){
                             return true;

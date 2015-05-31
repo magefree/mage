@@ -389,6 +389,10 @@ public class TestPlayer extends ComputerPlayer {
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (!targets.isEmpty()) {
+            UUID abilityControllerId = playerId;
+            if (target.getTargetController() != null && target.getAbilityController() != null) {
+                abilityControllerId = target.getAbilityController();
+            }
             if ((target instanceof TargetPermanent) || (target instanceof TargetPermanentOrPlayer)) {
                 for (String targetDefinition: targets) {
                     String[] targetList = targetDefinition.split("\\^");
@@ -408,7 +412,7 @@ public class TestPlayer extends ComputerPlayer {
                         }
                         for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
                             if (permanent.getName().equals(targetName) || (permanent.getName()+"-"+permanent.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetPermanent)target).canTarget(source == null ? this.getId(): source.getControllerId(), permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
+                                if (((TargetPermanent)target).canTarget(abilityControllerId, permanent.getId(), source, game) && !target.getTargets().contains(permanent.getId())) {
                                     if ((permanent.isCopy() &&  !originOnly) || (!permanent.isCopy() && !copyOnly )) {
                                         target.add(permanent.getId(), game);
                                         targetFound = true;
@@ -446,7 +450,7 @@ public class TestPlayer extends ComputerPlayer {
                     for (String targetName: targetList) {
                         for (Card card: this.getHand().getCards(((TargetCardInHand)target).getFilter(), game)) {
                             if (card.getName().equals(targetName) || (card.getName()+"-"+card.getExpansionSetCode()).equals(targetName)) {
-                                if (((TargetCardInHand)target).canTarget(this.getId(), card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
+                                if (((TargetCardInHand)target).canTarget(abilityControllerId, card.getId(), source, game) && !target.getTargets().contains(card.getId())) {
                                     target.add(card.getId(), game);
                                     targetFound = true;
                                     break;

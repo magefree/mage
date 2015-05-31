@@ -41,6 +41,7 @@ import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  * @author noxx
@@ -126,8 +127,9 @@ class TreacherousPitDwellerEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) source.getSourceObjectIfItStillExists(game);
-        if (permanent != null) {
-            return permanent.changeControllerId(source.getFirstTarget(), game);
+        Player targetOpponent = game.getPlayer(source.getFirstTarget());
+        if (permanent != null && targetOpponent != null) {
+            return permanent.changeControllerId(targetOpponent.getId(), game);
         } else {
             discard();
         }

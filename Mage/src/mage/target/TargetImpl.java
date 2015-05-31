@@ -61,6 +61,7 @@ public abstract class TargetImpl implements Target {
     protected boolean notTarget = false;
     protected boolean atRandom = false;
     protected UUID targetController = null; // if null the ability controller is the targetController
+    protected UUID abilityController = null; // only used if target controller != ability controller
 
     @Override
     public abstract TargetImpl copy();
@@ -86,6 +87,7 @@ public abstract class TargetImpl implements Target {
         this.atRandom = target.atRandom;
         this.notTarget = target.notTarget;
         this.targetController = target.targetController;
+        this.abilityController = target.abilityController;
     }
 
     @Override
@@ -110,6 +112,12 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public String getMessage() {
+        String suffix = "";
+        if (targetController != null) {
+            // Hint for the selecting player that the targets must be valid from the point of the ability controller
+            // e.g. select opponent text may be misleading otherwise
+            suffix = " (target controlling!)"; 
+        }
         if (getMaxNumberOfTargets() != 1) {
             StringBuilder sb = new StringBuilder();
             sb.append("Select ").append(targetName);
@@ -118,12 +126,13 @@ public abstract class TargetImpl implements Target {
             } else {
                 sb.append(" (").append(targets.size()).append(")");
             }
+            sb.append(suffix);
             return sb.toString();
         }
         if (targetName.startsWith("another") || targetName.startsWith("a ") || targetName.startsWith("an ")) {
-            return "Select " + targetName;
+            return "Select " + targetName + suffix;
         }
-        return "Select a " + targetName;
+        return "Select a " + targetName + suffix;
     }
 
     @Override
@@ -298,7 +307,6 @@ public abstract class TargetImpl implements Target {
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
-        Player player = game.getPlayer(playerId);
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= getNumberOfTargets();
             if (isRandom()) {
@@ -316,7 +324,7 @@ public abstract class TargetImpl implements Target {
                     return chosen;
                 }
             } else {
-                if (!player.chooseTarget(outcome, this, source, game)) {
+                if (!getTargetController(game, playerId).chooseTarget(outcome, this, source, game)) {
                     return chosen;
                 }
             }
@@ -433,5 +441,23 @@ public abstract class TargetImpl implements Target {
         return targetController;
     }
 
+    @Override
+    public void setAbilityController(UUID playerId) {
+        this.abilityController = playerId;
+    }
 
+    @Override
+    public UUID getAbilityController() {
+        return abilityController;
+    }
+
+    @Override
+    public Player getTargetController(Game game, UUID playerId) {
+        if (getTargetController() != null) {
+            return game.getPlayer(getTargetController());
+        } else {
+            return game.getPlayer(playerId);
+        }
+    }    
+    
 }
