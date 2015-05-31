@@ -54,7 +54,6 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-
 public class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId) {
@@ -123,7 +122,7 @@ class PossibilityStormEffect extends OneShotEffect {
 
     public PossibilityStormEffect() {
         super(Outcome.Neutral);
-        staticText = "that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with Possibility Storm on the bottom of his or her library in a random order";
+        staticText = "that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with {this} on the bottom of his or her library in a random order";
     }
 
     public PossibilityStormEffect(final PossibilityStormEffect effect) {
@@ -148,7 +147,9 @@ class PossibilityStormEffect extends OneShotEffect {
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
-                    if (card != null && sharesType(card, spell.getCardType())) {
+                    if (card != null && sharesType(card, spell.getCardType()) && 
+                            !card.getCardType().contains(CardType.LAND) &&
+                            card.getSpellAbility().getTargets().canChoose(spellController.getId(), game)) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", game)) {
                             spellController.cast(card.getSpellAbility(), game, true);
                         }
