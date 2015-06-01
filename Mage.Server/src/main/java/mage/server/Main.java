@@ -491,6 +491,16 @@ public class Main implements MageServer {
 //    public boolean ping(String sessionId, String pingInfo) {
 //        return SessionManager.getInstance().extendUserSession(sessionId, pingInfo);
 //    }
+
+    public void pingClient(String sessionId) {
+        server.pingClient(sessionId);
+    }
+
+    @Override
+    public void pingTime(long milliSeconds, String sessionId) {
+        SessionManager.getInstance().recordPingTime(sessionId, milliSeconds);
+    }
+
 //
 //    @Override
 //    public void deregisterClient(final String sessionId) throws MageException {

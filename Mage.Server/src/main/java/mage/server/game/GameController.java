@@ -73,6 +73,8 @@ import mage.interfaces.Action;
 import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.Main;
+import mage.server.Session;
+import mage.server.SessionManager;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
@@ -363,7 +365,8 @@ public class GameController implements GameCallback {
                                 GameManager.getInstance().joinGame(game.getId(), user.getId());
                                 logger.debug("Player " + player.getLogName() + " (disconnected) has joined gameId: " +game.getId());
                         }
-                        ChatManager.getInstance().broadcast(chatId, user, user.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+                        Session session = SessionManager.getInstance().getSession(user.getSessionId());
+                        ChatManager.getInstance().broadcast(chatId, user, session.getPingInfo() + " is pending to join the game", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
                         if (user.getSecondsDisconnected() > 240) {
                             // Cancel player join possibility lately after 4 minutes
                             logger.debug("Player " + player.getLogName() + " - canceled game (after 240 seconds) gameId: " +game.getId());

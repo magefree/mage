@@ -512,12 +512,12 @@ public class User {
         return userState;
     }
 
-    public String getPingInfo() {
-        if (isConnected()) {
-            return pingInfo;
-        } else {
-            return " (discon. "+ getDisconnectDuration() + ")";
-        }
-    }
+//    public String getPingInfo() {
+//        if (isConnected()) {
+//            return pingInfo;
+//        } else {
+//            return " (discon. "+ getDisconnectDuration() + ")";
+//        }
+//    }
     
 }

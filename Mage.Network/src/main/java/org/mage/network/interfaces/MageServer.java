@@ -26,5 +26,7 @@ public interface MageServer {
 
     List<String> getServerMessages();
     RoomView getRoom(UUID roomId);
+
+    void pingTime(long milliSeconds, String sessionId);
     
 }

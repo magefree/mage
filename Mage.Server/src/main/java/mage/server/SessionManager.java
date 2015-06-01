@@ -223,4 +223,11 @@ public class SessionManager {
 //        }
 //        return false;
 //    }
+
+    void recordPingTime(String sessionId, long milliSeconds) {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.recordPingTime(milliSeconds);
+        }
+    }
 }

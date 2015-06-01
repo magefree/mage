@@ -33,6 +33,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -57,6 +59,7 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 public class Session {
 
     private static final Logger logger = Logger.getLogger(Session.class);
+    private static final ScheduledExecutorService pingTaskExecutor = Executors.newScheduledThreadPool(10);
 
     private final String sessionId;
     private UUID userId;
@@ -64,6 +67,10 @@ public class Session {
     private int messageId = 0;
     private final Date timeConnected;
     private boolean isAdmin = false;
+    private final static int PING_CYCLES = 10;
+    private final LinkedList<Long> pingTime = new LinkedList<>();
+    private String pingInfo = "";
+        
 //    private final AsynchInvokerCallbackHandler callbackHandler;
 
     private final ReentrantLock lock;
@@ -82,6 +89,12 @@ public class Session {
 //            sendErrorMessageToClient(returnMessage);
 //        }
 //        return returnMessage;
+        pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                Main.getInstance().pingClient(sessionId);
+            }
+        }, 10, 60, TimeUnit.SECONDS);
         return registerUserHandling(userName);
     }
 
@@ -260,6 +273,7 @@ public class Session {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
             UserManager.getInstance().removeUser(userId, reason);
+            pingTime.clear();
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
         }
@@ -323,5 +337,22 @@ public class Session {
             }
         }
         return t;
+    }
+
+    public void recordPingTime(long milliSeconds) {
+        pingTime.add(milliSeconds);
+        String lastPing = milliSeconds > 0 ? milliSeconds+"ms" : "<1ms";
+        if (pingTime.size() > PING_CYCLES) {
+            pingTime.poll();
+        }
+        long sum = 0;
+        for (Long time :pingTime) {
+            sum += time;
+        }
+        pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms":"<1ms")+")";
+    }
+
+    public String getPingInfo() {
+        return pingInfo;
     }
 }

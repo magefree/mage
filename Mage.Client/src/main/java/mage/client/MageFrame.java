@@ -84,6 +84,7 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +93,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.util.audio.AudioManager;
 import mage.interfaces.ServerState;
 import mage.view.ChatMessage;
@@ -140,7 +143,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final Map<UUID, DraftPanel> drafts = new HashMap<>();
     private static final MageUI ui = new MageUI();
 
-    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
+//    private static final ScheduledExecutorService pingTaskExecutor = Executors.newSingleThreadScheduledExecutor();
     private static UpdateMemUsageTask updateMemUsageTask;
 
     private static long startTime;
@@ -700,9 +703,46 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public boolean connect(Connection connection) {
         client = new Client(instance);
         boolean result = client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), true, version);
+        if (result) {
+            updateDatabase(connection.isForceDBComparison(), serverState);
+        }
         return result;
     }
 
+    private void updateDatabase(boolean forceDBComparison, ServerState serverState) {
+        long cardDBVersion = CardRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getCardsContentVersion() > cardDBVersion) {
+            List<String> classNames = CardRepository.instance.getClassNames();
+            List<CardInfo> cards = CardRepository.instance.getMissingCards(classNames);
+            CardRepository.instance.addCards(cards);
+            CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
+            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size() +
+                    " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
+        }
+
+        long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
+        if (forceDBComparison || serverState.getExpansionsContentVersion() > expansionDBVersion) {
+            List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+            List<ExpansionInfo> expansions = getMissingExpansionData(setCodes);
+            for (ExpansionInfo expansion : expansions) {
+                ExpansionRepository.instance.add(expansion);
+            }
+            ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
+            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()+
+                    " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
+        }
+    }
+
+    private List<ExpansionInfo> getMissingExpansionData(List<String> codes) {
+        List<ExpansionInfo> result = new ArrayList<>();
+        for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
+            if (!codes.contains(expansionInfo.getCode())) {
+                result.add(expansionInfo);
+            }
+        }
+        return result;
+    }
+    
 //    public static boolean stopConnecting() {
 //        return session.stopConnecting();
 //    }

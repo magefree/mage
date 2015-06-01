@@ -46,6 +46,8 @@ import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.server.RoomImpl;
+import mage.server.Session;
+import mage.server.SessionManager;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
@@ -119,11 +121,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
+            Session session = SessionManager.getInstance().getSession(user.getSessionId());
             try {
-               users.add(new UsersView(user.getName(), user.getInfo(), user.getGameInfo(), user.getPingInfo()));
+               users.add(new UsersView(user.getName(), user.getInfo(), user.getGameInfo(), session.getPingInfo()));
             } catch (Exception ex) {
                 logger.fatal("User update exception: " + user.getName() + " - " + ex.toString(), ex);
-                users.add(new UsersView(user.getName(), user.getInfo(), "[exception]", user.getPingInfo()));
+                users.add(new UsersView(user.getName(), user.getInfo(), "[exception]", session.getPingInfo()));
             }
         }
 

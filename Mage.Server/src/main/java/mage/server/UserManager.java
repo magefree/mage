@@ -197,4 +197,8 @@ public class UserManager {
             logger.fatal("User manager exception - null");
         }
     }
+
+    void recordPingTime(UUID userId, long milliSeconds) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

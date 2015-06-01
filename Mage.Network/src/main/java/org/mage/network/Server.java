@@ -36,6 +36,7 @@ import org.mage.network.handlers.server.ServerMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.MessageType;
+import org.mage.network.model.PingMessage;
 import org.mage.network.model.ReceiveChatMessage;
 
 /**
@@ -48,12 +49,13 @@ public class Server {
 
     private static final int IDLE_PING_TIME = 30;
     private static final int IDLE_TIMEOUT = 60;
+    private static final PingMessage ping = new PingMessage();
     
     public static final ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     
     private SslContext sslCtx;
 
-    private final HeartbeatHandler heartbeatHandler;
+    private final MageServer server;
     private final PingMessageHandler pingMessageHandler = new PingMessageHandler();
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     private final RegisterClientMessageHandler registerClientMessageHandler;
@@ -66,7 +68,7 @@ public class Server {
     private final RoomMessageHandler roomMessageHandler;
     
     public Server(MageServer server) {
-        heartbeatHandler = new HeartbeatHandler(server);
+        this.server = server;
         registerClientMessageHandler = new RegisterClientMessageHandler(server);
         chatMessageHandler = new ChatMessageHandler(server);
         joinChatMessageHandler = new JoinChatMessageHandler(server);
@@ -117,18 +119,18 @@ public class Server {
             ch.pipeline().addLast(new ObjectEncoder());
 
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
-            ch.pipeline().addLast(handlersExecutor, heartbeatHandler);
+            ch.pipeline().addLast(handlersExecutor, "heartbeatHandler", new HeartbeatHandler(server));
             ch.pipeline().addLast("pingMessageHandler", pingMessageHandler);
 
             ch.pipeline().addLast("connectionHandler", new ConnectionHandler());
-            ch.pipeline().addLast(handlersExecutor, registerClientMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "registerClientMessageHandler", registerClientMessageHandler);
 
-            ch.pipeline().addLast(handlersExecutor, chatRoomIdHandler);
-            ch.pipeline().addLast(handlersExecutor, chatMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, joinChatMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, leaveChatMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, serverMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, roomMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "chatRoomIdHandler", chatRoomIdHandler);
+            ch.pipeline().addLast(handlersExecutor, "chatMessageHandler", chatMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "joinChatMessageHandler", joinChatMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "leaveChatMessageHandler", leaveChatMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "serverMessageHandler", serverMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "roomMessageHandler", roomMessageHandler);
         }
 
     }    
@@ -158,4 +160,12 @@ public class Server {
         clients.writeAndFlush(new InformClientMessage(message, type));
     }
 
+    public void pingClient(String sessionId) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null) {
+            HeartbeatHandler heartbeatHandler = (HeartbeatHandler)ch.pipeline().get("heartbeatHandler");
+            heartbeatHandler.pingClient();
+        }
+    }
+    
 }

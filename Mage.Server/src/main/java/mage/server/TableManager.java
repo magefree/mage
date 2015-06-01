@@ -375,7 +375,7 @@ public class TableManager {
             logger.debug(user.getId()
                     + " | " + formatter.format(user.getConnectionTime())
                     + " | " + sessionState
-                    + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + user.getPingInfo() + ")");
+                    + " | " + user.getName() +" (" +user.getUserState().toString() + " - " + session.getPingInfo() + ")");
         }
         ArrayList<ChatSession> chatSessions = ChatManager.getInstance().getChatSessions();
         logger.debug("------- ChatSessions: " + chatSessions.size() + " ----------------------------------");

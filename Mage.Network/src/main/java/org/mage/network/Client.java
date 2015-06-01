@@ -216,7 +216,7 @@ public class Client {
     }
 
     public String getSessionId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return channel.id().asLongText();
     }
 
     public TableView createTournamentTable(UUID roomId, TournamentOptions tOptions) {
