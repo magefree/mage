@@ -98,6 +98,7 @@ public class ConnectDialog extends MageDialog {
         this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
+        this.lblStatus.setText("");
         this.setModal(true);
         this.setLocation(50, 50);
         this.setVisible(true);
@@ -366,7 +367,6 @@ public class ConnectDialog extends MageDialog {
                 if (result) {
                     lblStatus.setText("");                    
                     connected();
-//                    MageFrame.getInstance().showGames(false);
                 } else {
                     lblStatus.setText("Could not connect");
                 }
@@ -374,11 +374,13 @@ public class ConnectDialog extends MageDialog {
                 logger.fatal("Update Players Task error", ex);
             } catch (ExecutionException ex) {
                 logger.fatal("Update Players Task error", ex);
+                lblStatus.setText("Could not connect.  Server not available.");
             } catch (CancellationException ex) {
                 logger.info("Connect was canceled");
                 lblStatus.setText("Connect was canceled");
             } catch (TimeoutException ex) {
                 logger.fatal("Connection timeout: ", ex);
+                lblStatus.setText("Could not connect");
             } finally {
 //                MageFrame.stopConnecting();
                 btnConnect.setEnabled(true);

@@ -39,6 +39,7 @@ import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.client.ChatMessageHandler;
 import org.mage.network.handlers.client.ChatRoomHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
+import org.mage.network.handlers.client.ConnectionHandler;
 import org.mage.network.handlers.client.InformClientMessageHandler;
 import org.mage.network.handlers.client.ServerMessageHandler;
 import org.mage.network.handlers.client.RoomMessageHandler;
@@ -58,6 +59,7 @@ public class Client {
 
     private final MageClient client;
 //    private final MessageHandler h;
+    private final ConnectionHandler connectionHandler;
     private final ChatRoomHandler chatRoomHandler;
     private final ChatMessageHandler chatMessageHandler;
     private final InformClientMessageHandler informClientMessageHandler;
@@ -75,6 +77,7 @@ public class Client {
     public Client(MageClient client) {
         this.client = client;
 //        h = new MessageHandler();
+        connectionHandler = new ConnectionHandler(client);
         chatRoomHandler = new ChatRoomHandler();
         chatMessageHandler = new ChatMessageHandler(client);
         informClientMessageHandler = new InformClientMessageHandler(client);
@@ -126,6 +129,7 @@ public class Client {
             ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
 
+            ch.pipeline().addLast("connectionHandler", connectionHandler);
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
             ch.pipeline().addLast("heartbeatHandler", new HeartbeatHandler());
             ch.pipeline().addLast("pingMessageHandler", new PingMessageHandler());
