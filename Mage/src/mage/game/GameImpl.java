@@ -2100,12 +2100,9 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        // Update players in range of
-        for (Player leftPlayer :this.getPlayers().values()) {
-            if (leftPlayer.isInGame()) {
-                leftPlayer.otherPlayerLeftGame(this);
-            }
-        }
+        // 801.2c The particular players within each player‘s range of influence are determined as each turn begins.
+        // So no update of range if influence yet
+
     }
 
     @Override
