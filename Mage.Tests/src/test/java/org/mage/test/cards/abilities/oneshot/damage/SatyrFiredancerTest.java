@@ -29,7 +29,6 @@ package org.mage.test.cards.abilities.oneshot.damage;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -83,4 +82,23 @@ public class SatyrFiredancerTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
     }
 
+    
+    @Test
+    public void testDamageFromOtherCreature() {
+        // Whenever an instant or sorcery spell you control deals damage to an opponent, Satyr Firedancer deals that much damage to target creature that player controls.        
+        addCard(Zone.BATTLEFIELD, playerA, "Satyr Firedancer");
+
+        // {T}: Prodigal Pyromancer deals 1 damage to target creature or player.
+        addCard(Zone.BATTLEFIELD, playerA, "Prodigal Pyromancer", 1);
+
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals", playerB);        
+        addTarget(playerA, playerB);        
+        
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 19);
+        
+    }
 }
