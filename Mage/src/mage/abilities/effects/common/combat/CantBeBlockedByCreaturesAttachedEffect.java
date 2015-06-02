@@ -48,9 +48,9 @@ public class CantBeBlockedByCreaturesAttachedEffect extends RestrictionEffect {
         this.filter = filter;
         StringBuilder sb = new StringBuilder();
         if (attachmentType.equals(AttachmentType.AURA)) {
-            sb.append("Enchanted");
+            sb.append("Enchanted ");
         } else {
-            sb.append("Equipped");
+            sb.append("Equipped ");
         }
         staticText = sb.append("creature can't be blocked ")
                 .append(filter.getMessage().startsWith("except by") ? "":"by ").append(filter.getMessage()).toString();
