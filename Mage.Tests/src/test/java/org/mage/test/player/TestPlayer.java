@@ -135,7 +135,7 @@ public class TestPlayer extends ComputerPlayer {
                         if (ability.toString().startsWith(groups[0])) {
                             Ability newAbility = ability.copy();
                             if (groups.length > 1 && !groups[1].equals("target=NO_TARGET")) {
-                                if (!addTargets(newAbility, groups, game)) {
+                                    if (!addTargets(newAbility, groups, game)) {
                                     // targets could not be set -> try next priority
                                     break;
                                 }
@@ -198,12 +198,7 @@ public class TestPlayer extends ComputerPlayer {
         UUID defenderId = null;
         for (PlayerAction action: actions) {
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
-                for (UUID uuid: game.getCombat().getDefenders()) {
-                    Player defender = game.getPlayer(uuid);
-                    if (defender != null) {
-                        defenderId = uuid;
-                    }
-                }
+                
                 String command = action.getAction();
                 command = command.substring(command.indexOf("attack:") + 7);
                 String[] groups = command.split("\\$");
@@ -217,7 +212,24 @@ public class TestPlayer extends ComputerPlayer {
                             }
                         }
                     }
+                    if (group.startsWith("defendingPlayer=")) {
+                        String defendingPlayerName = group.substring(group.indexOf("defendingPlayer=") + 16);
+                        for (Player defendingPlayer :game.getPlayers().values()) {
+                            if (defendingPlayer.getName().equals(defendingPlayerName)) {
+                                defenderId = defendingPlayer.getId(); 
+                                break;
+                            }
+                        }
+                    }
                 }
+                if (defenderId == null) {
+                    for (UUID uuid: game.getCombat().getDefenders()) {
+                        Player defender = game.getPlayer(uuid);
+                        if (defender != null) {
+                            defenderId = uuid;
+                        }
+                    }
+                } 
                 FilterCreatureForCombat filter = new FilterCreatureForCombat();
                 filter.add(new NamePredicate(groups[0]));
                 filter.add(Predicates.not(new AttackingPredicate()));
