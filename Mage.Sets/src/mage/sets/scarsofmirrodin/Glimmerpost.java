@@ -53,8 +53,12 @@ public class Glimmerpost extends CardImpl {
         super(ownerId, 227, "Glimmerpost", Rarity.COMMON, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
         this.subtype.add("Locus");
-        this.addAbility(new ColorlessManaAbility());
+        
+        // When Glimmerpost enters the battlefield, you gain 1 life for each Locus on the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GlimmerpostEffect()));
+        
+        // {T}: Add to {1} your mana pool.
+        this.addAbility(new ColorlessManaAbility());
     }
 
     public Glimmerpost (final Glimmerpost card) {
