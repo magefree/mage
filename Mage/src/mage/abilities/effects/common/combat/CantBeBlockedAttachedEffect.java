@@ -45,7 +45,7 @@ public class CantBeBlockedAttachedEffect extends RestrictionEffect {
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can't be blocked";
         } else {
-            this.staticText = "Equiped creature can't be blocked";
+            this.staticText = "Equipped creature can't be blocked";
         }
     }
 
