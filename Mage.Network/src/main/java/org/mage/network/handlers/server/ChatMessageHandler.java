@@ -24,15 +24,4 @@ public class ChatMessageHandler extends SimpleChannelInboundHandler<SendChatMess
         server.receiveChatMessage(msg.getChatId(), ctx.channel().id().asLongText(), msg.getMessage());
     }
     
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
-    
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
-
 }

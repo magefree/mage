@@ -346,10 +346,11 @@ public class Session {
             pingTime.poll();
         }
         long sum = 0;
-        for (Long time :pingTime) {
+        for (Long time : pingTime) {
             sum += time;
         }
-        pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms":"<1ms")+")";
+        long avg = sum / pingTime.size();
+        pingInfo = lastPing + " (Av: " + (avg > 0 ? avg + "ms":"<1ms")+")";
     }
 
     public String getPingInfo() {

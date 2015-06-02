@@ -25,15 +25,4 @@ public class ServerMessageHandler extends SimpleChannelInboundHandler<ServerMess
         ctx.writeAndFlush(new ServerMessagesMessage(server.getServerMessages()));        
     }
     
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
-
-    
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
 }
