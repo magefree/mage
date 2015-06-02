@@ -2900,6 +2900,8 @@ public abstract class PlayerImpl implements Player, Serializable {
        
     @Override
     public boolean moveCardsToGraveyardWithInfo(List<Card> allCards, Ability source, Game game, Zone fromZone) {
+        boolean result = true; 
+        UUID sourceId = source == null ? null : source.getSourceId();
         while (!allCards.isEmpty()) {
             // identify cards from one owner
             Cards cards = new CardsImpl();
@@ -2914,7 +2916,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     cards.add(card);
                 }
             }
-            // move cards ot graveyard in order the owner decides
+            // move cards to graveyard in order the owner decides
             if (!cards.isEmpty()) {
                 Player choosingPlayer = this;
                 if (ownerId != this.getId()) {
@@ -2936,22 +2938,21 @@ public abstract class PlayerImpl implements Player, Serializable {
                         Card card = cards.get(targetObjectId, game);
                         cards.remove(targetObjectId);     
                         if (card != null) {                        
-                            choosingPlayer.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, fromZone);
+                            result &= choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
                         }
                         target.clearChosen();
                     }
                     if (cards.size() == 1) {
-                        choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), source == null ? null : source.getSourceId(), game, fromZone);
+                        result &= choosingPlayer.moveCardToGraveyardWithInfo(cards.getCards(game).iterator().next(), sourceId, game, fromZone);
                     }
                 } else {
                     for (Card card : cards.getCards(game)) {
-                        choosingPlayer.moveCardToGraveyardWithInfo(card, source.getSourceId(), game, fromZone);
+                        result &= choosingPlayer.moveCardToGraveyardWithInfo(card, sourceId, game, fromZone);
                     }
                 }
-            }
-            
+            }           
         }
-        return true;
+        return result;
     }
     
     @Override
