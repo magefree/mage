@@ -65,7 +65,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
 
     @Override
     public String getRule() {
-        return "Affinity for artifacts";
+        return "affinity for artifacts <i>(This spell costs {1} less to cast for each artifact you control.)</i>";
     }
 
     @Override

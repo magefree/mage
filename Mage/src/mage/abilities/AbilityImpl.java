@@ -352,10 +352,18 @@ public abstract class AbilityImpl implements Ability {
         //20100716 - 601.2e
         if (sourceObject != null) {
             sourceObject.adjustCosts(this, game);
-            for (Ability ability : sourceObject.getAbilities()) {
-                if (ability instanceof AdjustingSourceCosts) {
-                    ((AdjustingSourceCosts)ability).adjustCosts(this, game);
-                }
+            if (sourceObject instanceof Card) {
+                for (Ability ability : ((Card)sourceObject).getAbilities(game)) {
+                    if (ability instanceof AdjustingSourceCosts) {
+                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
+                    }
+                }                
+            } else {
+                for (Ability ability : sourceObject.getAbilities()) {
+                    if (ability instanceof AdjustingSourceCosts) {
+                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
+                    }
+                }                
             }
         }
 
