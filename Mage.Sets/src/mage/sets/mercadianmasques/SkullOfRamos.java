@@ -50,7 +50,7 @@ public class SkullOfRamos extends CardImpl {
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
         
-        // Sacrifice Heart of Ramos: Add {B} to your mana pool.
+        // Sacrifice Skull of Ramos: Add {B} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost()));
     }
 

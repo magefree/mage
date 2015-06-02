@@ -30,8 +30,8 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,25 +41,25 @@ import mage.constants.Zone;
  *
  * @author Jgod
  */
-public class ToothOfRamos extends CardImpl {
+public class HornOfRamos extends CardImpl {
 
-    public ToothOfRamos(UUID ownerId) {
-        super(ownerId, 313, "Tooth of Ramos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+    public HornOfRamos(UUID ownerId) {
+        super(ownerId, 299, "Horn of Ramos", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MMQ";
 
-        // {tap}: Add {W} to your mana pool.
-        this.addAbility(new WhiteManaAbility());
+        // {tap}: Add {G} to your mana pool.
+        this.addAbility(new GreenManaAbility());
         
-        // Sacrifice Tooth of Ramos: Add {W} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana, new SacrificeSourceCost()));
+        // Sacrifice Horn of Ramos: Add {G} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana, new SacrificeSourceCost()));
     }
 
-    public ToothOfRamos(final ToothOfRamos card) {
+    public HornOfRamos(final HornOfRamos card) {
         super(card);
     }
 
     @Override
-    public ToothOfRamos copy() {
-        return new ToothOfRamos(this);
+    public HornOfRamos copy() {
+        return new HornOfRamos(this);
     }
 }
