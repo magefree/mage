@@ -62,7 +62,7 @@ public class ForsakenCity extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), TargetController.YOU, true));
         
         // {T}: Add one mana of any color to your mana pool.
-      this.addAbility(new AnyColorManaAbility());
+        this.addAbility(new AnyColorManaAbility());
     }
 
     public ForsakenCity(final ForsakenCity card) {

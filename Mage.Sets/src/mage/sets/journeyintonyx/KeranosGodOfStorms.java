@@ -27,6 +27,9 @@
  */
 package mage.sets.journeyintonyx;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,13 +46,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.Watcher;
+import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
 /**
  *
@@ -77,7 +84,7 @@ public class KeranosGodOfStorms extends CardImpl {
         // Reveal the first card you draw on each of your turns. 
         // Whenever you reveal a land card this way, draw a card. 
         // Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.
-        this.addAbility(new KeranosGodOfStormsTriggeredAbility());
+        this.addAbility(new KeranosGodOfStormsTriggeredAbility(), new CardsDrawnDuringTurnWatcher());
         
         
     }
@@ -94,15 +101,12 @@ public class KeranosGodOfStorms extends CardImpl {
 
 class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
 
-    private int lastTriggeredTurn;
-    
     KeranosGodOfStormsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new InfoEffect(""), false);
     }
 
     KeranosGodOfStormsTriggeredAbility(final KeranosGodOfStormsTriggeredAbility ability) {
         super(ability);
-        this.lastTriggeredTurn = ability.lastTriggeredTurn;
     }
 
     @Override
@@ -113,13 +117,16 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DREW_CARD && event.getPlayerId().equals(this.getControllerId())) {
-            if (game.getActivePlayerId().equals(this.getControllerId()) && this.lastTriggeredTurn != game.getTurnNum()) {
+            if (game.getActivePlayerId().equals(this.getControllerId())) {
+                CardsDrawnDuringTurnWatcher watcher = (CardsDrawnDuringTurnWatcher) game.getState().getWatchers().get("CardsDrawnDuringTurn");
+                if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) != 1) {
+                    return false;
+                }
                 Card card = game.getCard(event.getTargetId());
                 Player controller = game.getPlayer(this.getControllerId());
-                Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
+                Permanent sourcePermanent = (Permanent) getSourceObject(game);
                 if (card != null && controller != null && sourcePermanent != null) {
-                    lastTriggeredTurn = game.getTurnNum();
-                    controller.revealCards(sourcePermanent.getName(), new CardsImpl(card), game);
+                    controller.revealCards(sourcePermanent.getIdName(), new CardsImpl(card), game);
                     this.getTargets().clear();
                     this.getEffects().clear();
                     if (card.getCardType().contains(CardType.LAND)) {
@@ -138,5 +145,55 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Reveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. Whenever you reveal a nonland card this way, Keranos deals 3 damage to target creature or player.";
+    }
+}
+
+class CardsDrawnDuringTurnWatcher extends Watcher {
+
+    private final Map<UUID, Integer> amountOfCardsDrawnThisTurn = new HashMap<>();
+
+    public CardsDrawnDuringTurnWatcher() {
+        super("CardsDrawnDuringTurn", WatcherScope.GAME);
+    }
+
+    public CardsDrawnDuringTurnWatcher(final CardsDrawnDuringTurnWatcher watcher) {
+        super(watcher);
+        for (Entry<UUID, Integer> entry : watcher.amountOfCardsDrawnThisTurn.entrySet()) {
+            amountOfCardsDrawnThisTurn.put(entry.getKey(), entry.getValue());
+        }
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.DREW_CARD) {
+            UUID playerId = event.getPlayerId();
+            if (playerId != null) {
+                Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
+                if (amount == null) {
+                    amount = 1;
+                } else {
+                    amount++;
+                }
+                amountOfCardsDrawnThisTurn.put(playerId, amount);
+            }
+        }
+    }
+
+    public int getAmountCardsDrawn(UUID playerId) {
+        Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
+        if (amount != null) {
+            return amount;
+        }
+        return 0;
+    }
+
+    @Override
+    public void reset() {
+        amountOfCardsDrawnThisTurn.clear();
+    }
+
+    @Override
+    public CardsDrawnDuringTurnWatcher copy() {
+        return new CardsDrawnDuringTurnWatcher(this);
     }
 }
