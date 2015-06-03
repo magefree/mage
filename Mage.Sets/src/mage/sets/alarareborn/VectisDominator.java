@@ -34,7 +34,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -58,14 +57,11 @@ public class VectisDominator extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Wizard");
 
-        
-
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // {tap}: Tap target creature unless its controller pays 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VectisDominatorEffect(new PayLifeCost(2)), new ManaCostsImpl("{1}"));
-        ability.addCost(new TapSourceCost());
+        // {T}: Tap target creature unless its controller pays 2 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VectisDominatorEffect(new PayLifeCost(2)), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
