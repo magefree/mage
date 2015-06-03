@@ -25,44 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timespiral;
+package org.mage.test.cards.cost.additional;
 
-import java.util.UUID;
-import mage.abilities.condition.LockedInCondition;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.condition.common.MyMainPhaseCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class MightOfOldKrosa extends CardImpl {
 
-    public MightOfOldKrosa(UUID ownerId) {
-        super(ownerId, 204, "Might of Old Krosa", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
-        this.expansionSetCode = "TSP";
+public class RemoveCounterCostTest extends CardTestPlayerBase {
 
-        // Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(
-                new BoostTargetEffect(4,4, Duration.EndOfTurn),
-                new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                new LockedInCondition(MyMainPhaseCondition.getInstance()),
-                "Target creature gets +2/+2 until end of turn. If you cast this spell during your main phase, that creature gets +4/+4 until end of turn instead"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+    @Test
+    public void testNovijenSages() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        // Graft 4
+        // {1}, Remove two +1/+1 counters from among creatures you control: Draw a card.        
+        addCard(Zone.HAND, playerA, "Novijen Sages");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Novijen Sages");
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1},Remove two +1/+1 counters");
+        setChoice(playerA, "X=2");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Novijen Sages", 1);
+        assertPowerToughness(playerA, "Novijen Sages", 2, 2);
+
+        assertHandCount(playerA, 1);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
     }
-
-    public MightOfOldKrosa(final MightOfOldKrosa card) {
-        super(card);
-    }
-
-    @Override
-    public MightOfOldKrosa copy() {
-        return new MightOfOldKrosa(this);
-    }
+   
 }

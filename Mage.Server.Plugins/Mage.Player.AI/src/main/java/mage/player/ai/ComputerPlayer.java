@@ -288,6 +288,13 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 } else {
                     targets = threats(opponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
                 }
+                if (targets.isEmpty() && target.isRequired()) {
+                    if (!outcome.isGood()) {
+                        targets = threats(abilityControllerId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
+                    } else {
+                        targets = threats(opponentId, sourceId, ((TargetPermanent) target).getFilter(), game, target.getTargets());
+                    }                    
+                }
             }
             for (Permanent permanent : targets) {
                 if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {

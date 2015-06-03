@@ -244,8 +244,8 @@ public class HumanPlayer extends PlayerImpl {
         }
         while (!abort) {
             Set<UUID> targetIds = target.possibleTargets(sourceId, abilityControllerId, game);
-            if (targetIds == null || targetIds.isEmpty()) {
-                return false;
+            if (targetIds == null || targetIds.isEmpty()) {                
+                return target.getTargets().size() >= target.getNumberOfTargets();
             }
             boolean required = target.isRequired(sourceId, game);
             if (target.getTargets().size() >= target.getNumberOfTargets()) {
