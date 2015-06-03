@@ -77,6 +77,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
                 DashedCondition.getInstance(), false, "","");
         Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return the dashed creature from the battlefield to its owner's hand");
         effect.setTargetPointer(new FixedTarget(card.getId()));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), false));
         addSubAbility(ability);
