@@ -25,56 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.abilities.keywords;
 
-package mage.sets.scarsofmirrodin;
-
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RustedRelic extends CardImpl {
 
-    public RustedRelic (UUID ownerId) {
-        super(ownerId, 199, "Rusted Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                        new ConditionalContinuousEffect(
-                                new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
-                                MetalcraftCondition.getInstance(),
-                                "Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
-    }
+public class MetalcraftTest extends CardTestPlayerBase {
 
-    public RustedRelic (final RustedRelic card) {
-        super(card);
-    }
+    /**
+     * Rusted Relic or Blinkmoth nexus is bugged	
+     * Either Relic does not see Blinkmoth as an artifact or it does not turn 
+     * into one when it should.
+     * 
+     */
+    @Test
+    public void testMetalcraftFromBlinkmoth() {
+        addCard(Zone.BATTLEFIELD, playerA, "Darksteel Citadel",1); 
 
-    @Override
-    public RustedRelic copy() {
-        return new RustedRelic(this);
-    }
-}
+        // Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts
+        addCard(Zone.BATTLEFIELD, playerA, "Rusted Relic", 1); 
 
-class RustedRelicToken extends Token {
+        // {T}: Add {1}to your mana pool.
+        // {1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
+        // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.        
+        addCard(Zone.BATTLEFIELD, playerA, "Blinkmoth Nexus", 1); 
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}: Until end of turn {this} becomes ");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    public RustedRelicToken() {
-        super("Rusted Relic", "a 5/5 Golem artifact creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
+        assertPowerToughness(playerA, "Blinkmoth Nexus", 1, 1);
+        assertPowerToughness(playerA, "Rusted Relic", 5, 5);
+        
+    }             
+     
 }

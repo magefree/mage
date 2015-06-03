@@ -63,8 +63,14 @@ public class BlinkmothNexus extends CardImpl {
     public BlinkmothNexus(UUID ownerId) {
         super(ownerId, 163, "Blinkmoth Nexus", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "DST";
+        
+        // {T}: Add {1}to your mana pool.
         this.addAbility(new ColorlessManaAbility());
+        
+        // {1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new BlinkmothNexusToken(), "land", Duration.EndOfTurn), new GenericManaCost(1)));
+        
+        // {1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));

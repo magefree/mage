@@ -25,56 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package org.mage.test.cards.triggers;
 
-package mage.sets.scarsofmirrodin;
-
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.MetalcraftCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
-import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class RustedRelic extends CardImpl {
+public class BurningEarthTest extends CardTestPlayerBase {
 
-    public RustedRelic (UUID ownerId) {
-        super(ownerId, 199, "Rusted Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "SOM";
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                        new ConditionalContinuousEffect(
-                                new BecomesCreatureSourceEffect(new RustedRelicToken(), "artifact", Duration.WhileOnBattlefield),
-                                MetalcraftCondition.getInstance(),
-                                "Metalcraft - {this} is a 5/5 Golem artifact creature as long as you control three or more artifacts")));
+    /**
+     * Burning Earth - It doesn't cause the damage it should. My opponent taps a
+     * Blood Crypt and an Overgrown Tomb for black and green mana respectively
+     * and casts his card all the while without taking any damage.
+     *
+     */
+    @Test
+    public void testBurningEarth() {
+        // Destroy target artifact or creature. It can't be regenerated.
+        addCard(Zone.HAND, playerB, "Putrefy"); // {1}{B}{G}
+        addCard(Zone.BATTLEFIELD, playerB, "Darksteel Citadel", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Blood Crypt", 1); // {B}{R}
+        addCard(Zone.BATTLEFIELD, playerB, "Overgrown Tomb", 1); // {B}{G}
+        
+        // Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.
+        addCard(Zone.BATTLEFIELD, playerA, "Burning Earth", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Putrefy", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Putrefy", 1);
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        
+        assertLife(playerA, 20);
+        assertLife(playerB, 17);
     }
 
-    public RustedRelic (final RustedRelic card) {
-        super(card);
-    }
-
-    @Override
-    public RustedRelic copy() {
-        return new RustedRelic(this);
-    }
-}
-
-class RustedRelicToken extends Token {
-
-    public RustedRelicToken() {
-        super("Rusted Relic", "a 5/5 Golem artifact creature");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
-        power = new MageInt(5);
-        toughness = new MageInt(5);
-    }
 }
