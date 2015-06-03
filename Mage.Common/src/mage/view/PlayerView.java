@@ -95,12 +95,12 @@ public class PlayerView implements Serializable {
 
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
-            graveyard.put(card.getId(), new CardView(card, game, card.getId(), false));
+            graveyard.put(card.getId(), new CardView(card, game, false));
         }
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (player.getId().equals(card.getOwnerId())) {
-                    exile.put(card.getId(), new CardView(card, game, card.getId(), false)); // unnown if it's allowed to look under a face down card
+                    exile.put(card.getId(), new CardView(card, game, false)); // unnown if it's allowed to look under a face down card
                 }                
             }
         }

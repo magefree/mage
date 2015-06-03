@@ -136,7 +136,7 @@ public class GameView implements Serializable {
             }
             else {
                 // Spell
-                stack.put(stackObject.getId(), new CardView((Spell)stackObject, game, null, stackObject.getControllerId().equals(createdForPlayerId)));
+                stack.put(stackObject.getId(), new CardView((Spell)stackObject, game, stackObject.getControllerId().equals(createdForPlayerId)));
                 checkPaid(stackObject.getId(), (Spell)stackObject);
             }
             //stackOrder.add(stackObject.getId());

@@ -41,8 +41,8 @@ public class DeckView implements Serializable {
 
     public DeckView(Deck deck) {
         name = deck.getName();
-        cards = new SimpleCardsView(deck.getCards());
-        sideboard = new SimpleCardsView(deck.getSideboard());
+        cards = new SimpleCardsView(deck.getCards(), false);
+        sideboard = new SimpleCardsView(deck.getSideboard(), false);
     }
 
     public String getName() {

@@ -114,20 +114,19 @@ public class CardView extends SimpleCardView {
     protected boolean isPlayable;
     protected boolean isChoosable;
     protected boolean selected;
-    protected boolean canAttack;
-    protected boolean gameObject;
+    protected boolean canAttack;    
 
     public CardView(Card card) {
-        this(card, null, null, false);
+        this(card, null, false);
     }
 
     public CardView(Card card, UUID cardId) {
-        this(card, null, null, false);
+        this(card, null, false);
         this.id = cardId;
     }
 
     public CardView(Card card, Game game, UUID cardId) {
-        this(card, game, null, false);
+        this(card, game, false);
         this.id = cardId;
     }
 
@@ -135,15 +134,12 @@ public class CardView extends SimpleCardView {
      *
      * @param card
      * @param game
-     * @param cardId not used?
      * @param controlled is the card view created for the card controller - used for morph / face down cards to know which player may see information for the card
      */
-    public CardView(Card card, Game game, UUID cardId, boolean controlled) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode());
+    public CardView(Card card, Game game, boolean controlled) {
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.getTokenSetCode(), game != null);
         // no information available for face down cards as long it's not a controlled face down morph card
-        // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2
-        this.gameObject = game != null;
-        
+        // TODO: Better handle this in Framework (but currently I'm not sure how to do it there) LevelX2        
         if (game != null && card.isFaceDown(game)) {
             this.fillEmpty(card, controlled);
             if (card instanceof Spell) {
@@ -301,7 +297,7 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(MageObject object) {
-        super(object.getId(), "", 0, false, "");
+        super(object.getId(), "", 0, false, "", true);
         this.name = object.getName();
         this.displayName = object.getName();
         if (object instanceof Permanent) {
@@ -345,11 +341,12 @@ public class CardView extends SimpleCardView {
     }
 
     protected CardView() {
-        super(null, "", 0, false, "");
+        super(null, "", 0, false, "", true);
     }
     
     public CardView(EmblemView emblem) {
         this(true);
+        this.gameObject = true;
         this.id = emblem.getId();
         this.mageObjectType = MageObjectType.EMBLEM;
         this.name = emblem.getName();
@@ -366,13 +363,6 @@ public class CardView extends SimpleCardView {
             throw new IllegalArgumentException("Not supported.");
         }
         fillEmpty(null, false);
-    }
-
-
-    public CardView(String name) {
-        this(true);
-        this.name = name;
-        this.displayName = name;
     }
 
     private void fillEmpty(Card card, boolean controlled) {
@@ -736,8 +726,5 @@ public class CardView extends SimpleCardView {
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
     }
-
-    public boolean isGameObject() {
-        return gameObject;
-    }        
+       
 }

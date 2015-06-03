@@ -237,7 +237,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
             Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);
-                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
+                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));
             }
             gameView.setOpponentHands(handCards);
         }

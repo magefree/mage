@@ -343,7 +343,13 @@ public class Spell extends StackObjImpl implements Card {
     
     @Override
     public String getIdName() {
-        return getName() + " ["+getId().toString().substring(0,3) +"]";
+        String idName;
+        if (card != null) {
+            idName = card.getId().toString().substring(0,3);
+        } else {
+            idName = getId().toString().substring(0,3);
+        }
+        return getName() + " ["+idName+"]";
     }
     
     @Override

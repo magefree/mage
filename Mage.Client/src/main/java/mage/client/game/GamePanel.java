@@ -801,7 +801,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 revealed.put(reveal.getName(), newReveal);
             }
-            revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), CardsViewUtil.convertSimple(reveal.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
+            revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), reveal.getCards(), bigCard, Config.dimensions, gameId, false);
         }
     }
 
@@ -814,7 +814,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 ShowCardsDialog newLookedAt = new ShowCardsDialog();
                 lookedAt.put(looked.getName(), newLookedAt);
             }
-            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), CardsViewUtil.convertSimple(looked.getCards(), loadedCards), bigCard, Config.dimensions, gameId, false);
+            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
         }
     }
 
