@@ -244,7 +244,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -349,7 +349,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected int simulateCombat(Game game, SimulationNode2 node, int depth, int alpha, int beta, boolean counter) {
         Integer val = null;
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -395,7 +395,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
 
     protected int simulateAttackers(Game game, SimulationNode2 node, UUID attackerId, int depth, int alpha, int beta, boolean counter) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -472,7 +472,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     protected int simulateBlockers(Game game, SimulationNode2 node, UUID defenderId, int depth, int alpha, int beta, boolean counter) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -556,7 +556,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     /*protected int simulateCounterAttack(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUP && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -583,7 +583,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }*/
 
     protected void simulateStep(Game game, Step step) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return;
@@ -603,7 +603,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     protected void finishCombat(Game game) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return;
@@ -614,7 +614,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     protected int simulatePostCombatMain(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -632,7 +632,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     }
 
     protected void simulateToEnd(Game game) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.debug("interrupted");
             return;
