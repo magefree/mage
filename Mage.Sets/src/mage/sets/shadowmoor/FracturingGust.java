@@ -51,7 +51,6 @@ public class FracturingGust extends CardImpl {
         super(ownerId, 227, "Fracturing Gust", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{G/W}{G/W}{G/W}");
         this.expansionSetCode = "SHM";
 
-
         // Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
         this.getSpellAbility().addEffect(new FracturingGustDestroyEffect());
     }
@@ -94,7 +93,6 @@ class FracturingGustDestroyEffect extends OneShotEffect {
             for (Permanent permanent: game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.destroy(source.getSourceId(), game, false)) {
                     ++destroyedPermanents;
-
                 }
             }
             game.applyEffects(); // needed in case a destroyed permanent did prevent life gain
