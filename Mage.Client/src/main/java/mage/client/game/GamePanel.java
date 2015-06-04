@@ -90,6 +90,7 @@ import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.PickPileDialog;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
@@ -382,7 +383,8 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.connect(session.getGameChatId(gameId));
         if (!session.joinGame(gameId)) {
             removeGame();
-        } else {
+        } else {            
+            // play start sound
             AudioManager.playYourGameStarted();
         }
     }
@@ -456,6 +458,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
     public synchronized void init(GameView game) {
         addPlayers(game);
+        // default menu states
+        setMenuStates(PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"));
+
         updateGame(game);
     }
 

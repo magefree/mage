@@ -53,6 +53,7 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
+import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
 
@@ -220,6 +221,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
+                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true": "false");
                 gamePanel.setMenuStates(manaPoolAutomatic);
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }

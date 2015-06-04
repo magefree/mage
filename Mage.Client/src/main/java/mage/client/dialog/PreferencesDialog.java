@@ -132,6 +132,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_STOP_ALL_MAIN_PHASES = "stopOnAllMainPhases";
     public static final String KEY_STOP_ALL_END_PHASES = "stopOnAllEndPhases";
 
+    // mana auto payment
+    public static final String KEY_GAME_MANA_AUTOPAYMENT = "gameManaAutopayment";
+    
     // Size of frame to check if divider locations should be used
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
     
