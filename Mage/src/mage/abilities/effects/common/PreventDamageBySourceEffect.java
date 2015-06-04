@@ -54,11 +54,10 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
 
     public PreventDamageBySourceEffect(FilterObject filterObject) {
         super(Duration.EndOfTurn);
-        if (filterObject.getMessage().equals("a")) {
-            this.target = new TargetSource(new FilterObject("source"));
-        } else {
-            this.target = new TargetSource(new FilterObject(filterObject.getMessage() + " source"));
+        if (!filterObject.getMessage().endsWith("source")) {
+            filterObject.setMessage(filterObject.getMessage() + " source");
         }
+        this.target = new TargetSource(filterObject);
         staticText = "Prevent all damage " + filterObject.getMessage() + " source of your choice would deal this turn";
     }
 
