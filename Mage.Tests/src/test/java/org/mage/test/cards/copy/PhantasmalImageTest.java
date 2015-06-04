@@ -483,4 +483,47 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPowerToughness(playerB,  "Kitchen Finks", 2, 1);
 
     }
+ 
+    @Test
+    public void testUndying() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);        
+        // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+        addCard(Zone.HAND, playerA, "Butcher Ghoul");
+
+        // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+        addCard(Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature
+        // on the battlefield, except it's an Illusion in addition to its other types and
+        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."        
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul"); 
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Butcher Ghoul");
+        
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Butcher Ghoul");
+        setChoice(playerB, "Butcher Ghoul");
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Public Execution", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Butcher Ghoul", 1);
+
+        assertHandCount(playerB, "Phantasmal Image", 0);
+        assertGraveyardCount(playerB, "Phantasmal Image", 0);
+        assertPermanentCount(playerB, "Butcher Ghoul", 1);
+        assertPowerToughness(playerB,  "Butcher Ghoul", 2, 2);
+
+    }    
 }
