@@ -78,7 +78,7 @@ public class ColorsChooser extends JComboBox implements ListCellRenderer {
     }
 
     private void drawOn(JPanel panel, String value) {
-        List<Image> images = new ArrayList<Image>();
+        List<Image> images = new ArrayList<>();
         value = value.toUpperCase();
         for (int i = 0; i < value.length(); i++) {
             char symbol = value.charAt(i);

@@ -186,6 +186,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 break;
             case FREE_BUILDING:
                 this.btnSubmit.setVisible(false);
+                this.btnAddLand.setVisible(true);
                 this.cardSelector.loadCards(this.bigCard);
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
@@ -796,7 +797,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLandActionPerformed
         AddLandDialog addLand = new AddLandDialog();
-        addLand.showDialog(deck);
+        addLand.showDialog(deck, mode);
         refreshDeck();
     }//GEN-LAST:event_btnAddLandActionPerformed
     
