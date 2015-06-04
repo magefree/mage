@@ -25,11 +25,15 @@ public class SynodCenturionTest extends CardTestPlayerBase {
     @Test
     public void testAlone() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        // Whenever a player casts a black spell, you may gain 1 life.
         addCard(Zone.BATTLEFIELD, playerA, "Demon's Horn");
+        // Destroy target artifact.
         addCard(Zone.HAND, playerA, "Shatter");
+        // When you control no other artifacts, sacrifice Synod Centurion.
         addCard(Zone.HAND, playerA, "Synod Centurion");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Synod Centurion");
+        
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Shatter", "Demon's Horn");
 
         setStopAt(1, PhaseStep.END_TURN);

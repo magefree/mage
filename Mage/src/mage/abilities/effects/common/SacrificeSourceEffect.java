@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -56,13 +57,17 @@ public class SacrificeSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (sourceObject instanceof Permanent) {
+            Permanent permanent = (Permanent) sourceObject;
             // you can only sacrifice a permanent you control
             if (source.getControllerId().equals(permanent.getControllerId())) {
                 return permanent.sacrifice(source.getSourceId(), game);
             }
             return true;
+        } else {
+            // no permanent?
+            sourceObject.getName();
         }
         return false;
     }

@@ -52,6 +52,7 @@ public class Shatter extends CardImpl {
         super(ownerId, 105, "Shatter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MRD";
 
+        // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }

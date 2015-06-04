@@ -61,7 +61,6 @@ public class PublicExecution extends CardImpl {
         super(ownerId, 105, "Public Execution", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
         this.expansionSetCode = "M13";
 
-
         // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));

@@ -29,16 +29,15 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SpellCastAllTriggeredAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -46,10 +45,18 @@ import mage.game.stack.Spell;
  */
 public class DemonsHorn extends CardImpl {
 
+    private final static FilterSpell filter = new FilterSpell("a black spell");
+    
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+    
     public DemonsHorn(UUID ownerId) {
         super(ownerId, 320, "Demon's Horn", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "10E";
-        this.addAbility(new DemonsHornAbility());
+        
+        // Whenever a player casts a black spell, you may gain 1 life.
+        this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(new StaticValue(1), "you may gain 1 life"), filter, true));
     }
 
     public DemonsHorn(final DemonsHorn card) {
@@ -59,39 +66,6 @@ public class DemonsHorn extends CardImpl {
     @Override
     public DemonsHorn copy() {
         return new DemonsHorn(this);
-    }
-
-}
-
-class DemonsHornAbility extends TriggeredAbilityImpl {
-
-    public DemonsHornAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    public DemonsHornAbility(final DemonsHornAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DemonsHornAbility copy() {
-        return new DemonsHornAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor().isBlack()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts a black spell, you may gain 1 life.";
     }
 
 }

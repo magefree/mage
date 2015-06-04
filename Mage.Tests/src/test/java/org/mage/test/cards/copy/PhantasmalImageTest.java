@@ -316,7 +316,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Frost Titan");
         addCard(Zone.HAND, playerA, "Terror");
         // {1}{U} - Target creature gains shroud until end of turn and can't be blocked this turn.
-        addCard(Zone.HAND, playerA, "Veil of Secrecy");        
+        addCard(Zone.HAND, playerA, "Veil of Secrecy");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
@@ -328,32 +328,31 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setChoice(playerB, "Frost Titan");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terror", "Frost Titan"); // of player Bs Phantasmal Image copying Frost Titan
-                                                                                   // should be countered if not paying {2}
+        // should be countered if not paying {2}
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Veil of Secrecy", 1);
         assertGraveyardCount(playerA, "Terror", 1);
-        
+
         assertLife(playerB, 20);
         assertLife(playerA, 20);
 
-        assertPermanentCount(playerA, "Frost Titan", 1); 
-        
+        assertPermanentCount(playerA, "Frost Titan", 1);
+
         assertGraveyardCount(playerB, "Phantasmal Image", 1); // if triggered ability did not work, the Titan would be in the graveyard instaed
 
     }
-    
+
     // I've casted a Phantasmal Image targeting opponent's Wurmcoil Engine
     // When my Phantasmal Image died, it didn't triggered the Wurmcoil Engine's last ability 
     // (When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and
     // a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.)
-    
     @Test
     public void testDiesTriggeredAbilities() {
         addCard(Zone.BATTLEFIELD, playerA, "Wurmcoil Engine");
-        // Destroy target artifact or enchantment.
+        // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
         addCard(Zone.HAND, playerA, "Public Execution");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
 
@@ -364,22 +363,124 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setChoice(playerB, "Wurmcoil Engine");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Wurmcoil Engine"); // of player Bs Phantasmal Image copying Frost Titan
-                                                                                   // should be countered if not paying {2}
+        // should be countered if not paying {2}
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerA, "Public Execution", 1);
-        
+
         assertLife(playerB, 20);
         assertLife(playerA, 20);
 
-        
-        assertPermanentCount(playerA, "Wurmcoil Engine", 1); 
-        
+        assertPermanentCount(playerA, "Wurmcoil Engine", 1);
+
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
         assertPermanentCount(playerB, "Wurm", 2); // if triggered ability did not work, the Titan would be in the graveyard instaed
 
     }
-    
+
+    /**
+     * Phantasmal Image is not regestering Leave the battlefield triggers,
+     * persist and undying triggers
+     */
+    @Test
+    public void testLeavesTheBattlefieldTriggeredAbilities() {
+        // Shadow (This creature can block or be blocked by only creatures with shadow.)
+        // When Thalakos Seer leaves the battlefield, draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Thalakos Seer");
+
+        // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+        addCard(Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Thalakos Seer");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Thalakos Seer");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Public Execution", 1);
+
+        assertLife(playerB, 20);
+        assertLife(playerA, 20);
+
+        assertPermanentCount(playerA, "Thalakos Seer", 1);
+
+        assertGraveyardCount(playerB, "Phantasmal Image", 1);
+
+        assertHandCount(playerB, 2); // 1 from draw turn 2 and 1 from Thalakos Seer leaves the battlefield trigger
+    }
+
+    /**
+     *                    Action
+     *      Game State 1 -----------------> Game State 2
+     *      (On 'field)     (Move to GY)    (In graveyard)
+     *      
+     *  LTB abilities such as Persist are expceptional in that they trigger based on their existence and 
+     *  state of objects before the event (Game State 1, when the card is on the battlefield) rather than 
+     *  after (Game State 2, when the card is in the graveyard). It doesn't matter that the LTB ability
+     *  doesn't exist in Game State 2. [CR 603.6d]
+     * 
+     *  603.6d Normally, objects that exist immediately after an event are checked to see if the event matched any trigger conditions. 
+     *  Continuous effects that exist at that time are used to determine what the trigger conditions are and what the objects involved 
+     *  in the event look like. However, some triggered abilities must be treated specially. Leaves-the-battlefield abilities, abilities
+     *  that trigger when a permanent phases out, abilities that trigger when an object that all players can see is put into a hand or 
+     *  library, abilities that trigger specifically when an object becomes unattached, abilities that trigger when a player loses control 
+     *  of an object, and abilities that trigger when a player planeswalks away from a plane will trigger based on their existence, and 
+     *  the appearance of objects, prior to the event rather than afterward. The game has to “look back in time” to determine if these abilities trigger.
+     * 
+     *  Example: Two creatures are on the battlefield along with an artifact that has the ability “Whenever a creature dies, you gain 1 life.” 
+     *  Someone plays a spell that destroys all artifacts, creatures, and enchantments. The artifact’s ability triggers twice, even though 
+     *  the artifact goes to its owner’s graveyard at the same time as the creatures.
+     * 
+     */
+    @Test
+    public void testPersist() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);        
+        // When Kitchen Finks enters the battlefield, you gain 2 life.
+        // Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+        addCard(Zone.HAND, playerA, "Kitchen Finks");
+
+        // Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+        addCard(Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature
+        // on the battlefield, except it's an Illusion in addition to its other types and
+        // it gains "When this creature becomes the target of a spell or ability, sacrifice it."        
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kitchen Finks"); 
+        
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Kitchen Finks");
+        
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Kitchen Finks");
+        setChoice(playerB, "Kitchen Finks");
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Public Execution", 1);
+
+        assertLife(playerA, 22);
+        assertLife(playerB, 24);
+
+        assertPermanentCount(playerA, "Kitchen Finks", 1);
+
+        assertHandCount(playerB, "Phantasmal Image", 0);
+        assertGraveyardCount(playerB, "Phantasmal Image", 0);
+        assertPermanentCount(playerB, "Kitchen Finks", 1);
+        assertPowerToughness(playerB,  "Kitchen Finks", 2, 1);
+
+    }
 }
