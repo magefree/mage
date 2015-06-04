@@ -2058,6 +2058,11 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
                     if (attachedTo != null) {
                         attachedTo.removeAttachment(perm.getId(), this);
+                    } else {
+                        Player attachedToPlayer = getPlayer(perm.getAttachedTo());
+                        if (attachedToPlayer != null) {
+                            attachedToPlayer.removeAttachment(perm.getId(), this);
+                        }
                     }
                 }
                 // check if it's a creature and must be removed from combat

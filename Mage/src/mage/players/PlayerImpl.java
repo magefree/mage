@@ -789,12 +789,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean removeFromBattlefield(Permanent permanent, Game game) {
         permanent.removeFromCombat(game, false);
-        game.getBattlefield().removePermanent(permanent.getId());
         if (permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null) {
                 attachedTo.removeAttachment(permanent.getId(), game);
+            } else {
+                Player attachedToPlayer = game.getPlayer(permanent.getAttachedTo());
+                if (attachedToPlayer != null) {
+                    attachedToPlayer.removeAttachment(permanent.getId(), game);
+                }
             }
+            
         }
         if (permanent.getPairedCard() != null) {
             Permanent pairedCard = game.getPermanent(permanent.getPairedCard());
@@ -802,6 +807,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 pairedCard.clearPairedCard();
             }
         }
+        game.getBattlefield().removePermanent(permanent.getId());
         return true;
     }
 
