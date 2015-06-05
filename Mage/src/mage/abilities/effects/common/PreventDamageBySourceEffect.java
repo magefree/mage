@@ -58,7 +58,7 @@ public class PreventDamageBySourceEffect extends PreventionEffectImpl {
             filterObject.setMessage(filterObject.getMessage() + " source");
         }
         this.target = new TargetSource(filterObject);
-        staticText = "Prevent all damage " + filterObject.getMessage() + " source of your choice would deal this turn";
+        staticText = "Prevent all damage " + filterObject.getMessage() + " of your choice would deal this turn";
     }
 
     public PreventDamageBySourceEffect(final PreventDamageBySourceEffect effect) {
