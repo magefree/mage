@@ -37,7 +37,12 @@ import mage.MageInt;
 public class GolemToken extends Token {
 
     public GolemToken() {
+        this("SOM");
+    }
+
+    public GolemToken(String setCode) {
         super("Golem", "a 3/3 colorless Golem artifact creature token");
+        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
         subtype.add("Golem");
