@@ -2379,7 +2379,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             if (hidden) {
                 for (Card card : hand.getUniqueCards(game)) {
-                    for (Ability ability : card.getAbilities()) { // gets this activated ability from hand? (Morph?)
+                    for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                         if (ability.getZone().match(Zone.HAND)) {
                             if (ability instanceof ActivatedAbility) {
                                 if (!(ability instanceof PlayLandAbility)

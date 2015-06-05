@@ -37,7 +37,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class CycleTest extends CardTestPlayerBase {
+public class CyclingTest extends CardTestPlayerBase {
 
     /**
      * 702.28. Cycling
@@ -60,7 +60,7 @@ public class CycleTest extends CardTestPlayerBase {
      */
 
     @Test
-    public void CycleAndTriggerTest() {
+    public void cycleAndTriggerTest() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         // Cycling {3}{B}{B}
@@ -82,15 +82,13 @@ public class CycleTest extends CardTestPlayerBase {
         
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPowerToughness(playerB, "Pillarfield Ox", 0, 2);
-        
-
     }
 
     /**
      * Cycle from graveyard or battlefield may not work
      */
     @Test
-    public void CycleFromGraveyard() {
+    public void cycleFromGraveyard() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
         // Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
         // Cycling {3}{B}{B}
@@ -113,5 +111,32 @@ public class CycleTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Disciple Of Grace", 1);       
 
     }
+    
+    /**
+     * Type cycling for sliver
+     */
+    @Test
+    public void cycleFromHomingSliver() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // Each Sliver card in each player's hand has slivercycling {3}.
+        addCard(Zone.BATTLEFIELD, playerA, "Homing Sliver");
+        // All Sliver creatures have flying.
+        addCard(Zone.HAND, playerA, "Winged Sliver");
+        
+        addCard(Zone.LIBRARY, playerA, "Horned Sliver");
+        addCard(Zone.LIBRARY, playerA, "Silvercoat Lion", 10);
+        skipInitShuffling();
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Slivercycling {3}");
+        addTarget(playerA, "Horned Sliver");
 
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertHandCount(playerA, 1);                        
+        
+        assertGraveyardCount(playerA, "Winged Sliver", 1);
+        
+        assertHandCount(playerA, "Horned Sliver", 1); // searched by slivercyclibng
+    }
 }

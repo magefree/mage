@@ -32,7 +32,7 @@ import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardSourceCost;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.filter.FilterCard;
@@ -76,11 +76,11 @@ public class CyclingAbility extends ActivatedAbilityImpl {
     @Override
     public String getRule() {
         StringBuilder rule = new StringBuilder(this.text);
-        if(cost instanceof ManaCosts){
+        if(cost instanceof ManaCost){
             rule.append(" ");  
         }
         else{
-            rule.append(" - ");  
+            rule.append("&mdash;");  
         }
         rule.append(cost.getText()).append(" <i>(").append(super.getRule(true)).append(")</i>");
         return rule.toString();
