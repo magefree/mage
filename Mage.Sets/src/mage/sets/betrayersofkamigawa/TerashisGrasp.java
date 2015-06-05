@@ -28,7 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
@@ -36,9 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,22 +47,13 @@ import mage.target.TargetPermanent;
  */
 public class TerashisGrasp extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public TerashisGrasp(UUID ownerId) {
         super(ownerId, 26, "Terashi's Grasp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Arcane");
 
-
         // Destroy target artifact or enchantment. 
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         // You gain life equal to its converted mana cost.
         this.getSpellAbility().addEffect(new TerashisGraspEffect());

@@ -33,9 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,23 +42,14 @@ import mage.target.TargetPermanent;
  */
 public class NaturalEnd extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public NaturalEnd(UUID ownerId) {
         super(ownerId, 185, "Natural End", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "AVR";
 
-
         // Destroy target artifact or enchantment. You gain 3 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
     }
 
     public NaturalEnd(final NaturalEnd card) {

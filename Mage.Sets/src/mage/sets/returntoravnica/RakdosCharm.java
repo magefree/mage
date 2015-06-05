@@ -55,7 +55,6 @@ public class RakdosCharm extends CardImpl {
         super(ownerId, 184, "Rakdos Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{R}");
         this.expansionSetCode = "RTR";
 
-
         // Choose one — Exile all cards from target player's graveyard;
         this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -80,7 +79,6 @@ public class RakdosCharm extends CardImpl {
     public RakdosCharm copy() {
         return new RakdosCharm(this);
     }
-
 
     private class RakdosCharmDamageEffect extends OneShotEffect {
 
@@ -113,6 +111,5 @@ public class RakdosCharm extends CardImpl {
         public RakdosCharmDamageEffect copy() {
             return new RakdosCharmDamageEffect(this);
         }
-
     }
 }

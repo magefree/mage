@@ -25,17 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,18 +40,12 @@ import mage.target.TargetPermanent;
  */
 public class Oxidize extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Oxidize(UUID ownerId) {
         super(ownerId, 79, "Oxidize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "DST";
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
     }
 
     public Oxidize(final Oxidize card) {
@@ -65,5 +56,4 @@ public class Oxidize extends CardImpl {
     public Oxidize copy() {
         return new Oxidize(this);
     }
-
 }

@@ -25,7 +25,6 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
 package mage.sets.urzassaga;
 
 import java.util.UUID;
@@ -35,8 +34,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,18 +43,12 @@ import mage.target.TargetPermanent;
  */
 public class Scrap extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Scrap(UUID ownerId) {
         super(ownerId, 213, "Scrap", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "USG";
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 

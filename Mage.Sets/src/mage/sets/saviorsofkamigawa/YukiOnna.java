@@ -28,7 +28,6 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -38,22 +37,14 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
  * @author Loki
  */
 public class YukiOnna extends CardImpl {
-
-    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    private static final FilterPermanent filterTarget = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public YukiOnna(UUID ownerId) {
         super(ownerId, 120, "Yuki-Onna", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
@@ -65,10 +56,10 @@ public class YukiOnna extends CardImpl {
 
         // When Yuki-Onna enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filterTarget));
+        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent()));
         this.addAbility(ability);
         // Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), new FilterSpiritOrArcaneCard(), true));
     }
 
     public YukiOnna(final YukiOnna card) {

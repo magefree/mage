@@ -28,7 +28,6 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -41,9 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -55,30 +52,20 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OrimsThunder extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public OrimsThunder(UUID ownerId) {
         super(ownerId, 15, "Orim's Thunder", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "APC";
-
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));
 
         // Destroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
         this.getSpellAbility().addEffect(new OrimsThunderEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new OrimsThunderEffect2(),
                 KickedCondition.getInstance(),
                 "If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature"));
-
     }
 
     @Override

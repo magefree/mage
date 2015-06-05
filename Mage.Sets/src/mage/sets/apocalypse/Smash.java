@@ -28,15 +28,12 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -47,7 +44,6 @@ public class Smash extends CardImpl {
     public Smash(UUID ownerId) {
         super(ownerId, 69, "Smash", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "APC";
-
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));

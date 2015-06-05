@@ -28,7 +28,6 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -38,10 +37,9 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -53,13 +51,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class NullmageShepherd extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
-    private static final FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");
-
     static {
         filterCost.add(Predicates.not(new TappedPredicate()));
-        filterTarget.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
     public NullmageShepherd(UUID ownerId) {
@@ -73,7 +66,7 @@ public class NullmageShepherd extends CardImpl {
 
         // Tap four untapped creatures you control: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filterCost, true)));
-        ability.addTarget(new TargetPermanent(filterTarget));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

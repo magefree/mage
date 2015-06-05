@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodin;
 
 import java.util.UUID;
@@ -33,8 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,19 +40,13 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class Shatter extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Shatter (UUID ownerId) {
         super(ownerId, 105, "Shatter", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "MRD";
 
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
     }
 
     public Shatter (final Shatter card) {
@@ -65,5 +57,4 @@ public class Shatter extends CardImpl {
     public Shatter copy() {
         return new Shatter(this);
     }
-
 }

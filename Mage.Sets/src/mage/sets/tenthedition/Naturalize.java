@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tenthedition;
 
 import java.util.UUID;
@@ -33,9 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,19 +41,12 @@ import mage.target.TargetPermanent;
  */
 public class Naturalize extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public Naturalize(UUID ownerId){
         super(ownerId, 282, "Naturalize", Rarity.COMMON, new CardType[]{CardType.INSTANT},"{1}{G}");
         this.expansionSetCode = "10E";
 
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        // Destroy target artifact or enchantment.
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

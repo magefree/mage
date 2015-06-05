@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
@@ -40,23 +38,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
  * @author Loki
  */
 public class ViridianZealot extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public ViridianZealot(UUID ownerId) {
         super(ownerId, 90, "Viridian Zealot", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{G}{G}");
@@ -66,9 +54,11 @@ public class ViridianZealot extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+        
+        // {1}{G}, Sacrifice Viridian Zealot: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 
@@ -80,5 +70,4 @@ public class ViridianZealot extends CardImpl {
     public ViridianZealot copy() {
         return new ViridianZealot(this);
     }
-
 }

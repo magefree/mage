@@ -34,9 +34,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -49,19 +47,13 @@ import mage.target.TargetPermanent;
  */
 public class DestructiveRevelry extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public DestructiveRevelry(UUID ownerId) {
         super(ownerId, 192, "Destructive Revelry", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}");
         this.expansionSetCode = "THS";
 
-
         // Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.
         this.getSpellAbility().addEffect(new DestructiveRevelryEffect());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         this.getSpellAbility().addTarget(target);
     }
 

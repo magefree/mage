@@ -40,9 +40,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -53,17 +51,11 @@ import mage.target.targetpointer.SecondTargetPointer;
  */
 public class NullmageAdvocate extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public NullmageAdvocate(UUID ownerId) {
         super(ownerId, 70, "Nullmage Advocate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "PC2";
         this.subtype.add("Insect");
         this.subtype.add("Druid");
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
@@ -76,7 +68,7 @@ public class NullmageAdvocate extends CardImpl {
         effect.setTargetPointer(new SecondTargetPointer());
         ability.addEffect(effect);
         ability.addTarget(new TargetCardInOpponentsGraveyard(2,2, new FilterCard("two target cards from an opponent's graveyard"), true));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.apocalypse;
 
 import java.util.UUID;
@@ -65,7 +64,6 @@ public class IllusionReality extends SplitCard {
         getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addTarget(new TargetArtifactPermanent());
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-
     }
 
     public IllusionReality(final IllusionReality card) {

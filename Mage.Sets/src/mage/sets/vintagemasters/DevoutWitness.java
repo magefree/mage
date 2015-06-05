@@ -39,9 +39,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,14 +47,6 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class DevoutWitness extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public DevoutWitness(UUID ownerId) {
         super(ownerId, 24, "Devout Witness", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -71,7 +61,7 @@ public class DevoutWitness extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(ability);
     }
 
