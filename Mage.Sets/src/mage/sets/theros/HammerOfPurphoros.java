@@ -45,7 +45,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.SaprolingToken;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -60,10 +59,10 @@ public class HammerOfPurphoros extends CardImpl {
         this.expansionSetCode = "THS";
         this.supertype.add("Legendary");
 
-
         // Creatures you control have haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
+        
         // {2}{R}, {tap}, Sacrifice a land: Put a 3/3 colorless Golem enchantment artifact creature token onto the battlefield.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HammerOfPurphorosGolemToken()), new ManaCostsImpl("{2}{R}"));
         ability.addCost(new TapSourceCost());
@@ -84,6 +83,7 @@ class HammerOfPurphorosGolemToken extends Token {
 
     public HammerOfPurphorosGolemToken() {
         super("Golem", "3/3 colorless Golem enchantment artifact creature token");
+        setOriginalExpansionSetCode("THS");
         cardType.add(CardType.ENCHANTMENT);
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

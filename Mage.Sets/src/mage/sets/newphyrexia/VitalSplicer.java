@@ -71,7 +71,7 @@ public class VitalSplicer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Vital Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GolemToken(expansionSetCode))));
 
         // {1}: Regenerate target Golem you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}"));
