@@ -25,14 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -40,26 +38,22 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterArtifactSpell;
+import mage.game.permanent.token.GolemToken;
 
 /**
  *
  * @author Loki, North
  */
 public class GolemFoundry extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public GolemFoundry (UUID ownerId) {
         super(ownerId, 160, "Golem Foundry", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "SOM";
 
+        // Whenever you cast an artifact spell, 
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, true));
+        // you may put a charge counter on Golem Foundry.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
@@ -70,17 +64,5 @@ public class GolemFoundry extends CardImpl {
     @Override
     public GolemFoundry copy() {
         return new GolemFoundry(this);
-    }
-
-}
-
-class GolemToken extends Token {
-    public GolemToken() {
-        super("Golem", "a 3/3 colorless Golem artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Golem");
-        power = new MageInt(3);
-        toughness = new MageInt(3);
     }
 }
