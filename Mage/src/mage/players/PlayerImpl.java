@@ -771,15 +771,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean removeAttachment(UUID permanentId, Game game) {
-        if (this.attachments.contains(permanentId)) {
-            Permanent aura = game.getPermanent(permanentId);
-            if (aura != null) {
-                if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, playerId, permanentId, aura.getControllerId()))) {
-                    this.attachments.remove(permanentId);
-                    aura.attachTo(null, game);
-                }
-                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, playerId, permanentId, aura.getControllerId()));
+    public boolean removeAttachment(Permanent attachment, Game game) {
+        if (this.attachments.contains(attachment.getId())) {
+            if (!game.replaceEvent(new GameEvent(GameEvent.EventType.UNATTACH, playerId, attachment.getId(), attachment.getControllerId()))) {
+                this.attachments.remove(attachment.getId());
+                attachment.attachTo(null, game);
+                game.fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, playerId, attachment.getId(), attachment.getControllerId()));
                 return true;
             }
         }
@@ -789,6 +786,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean removeFromBattlefield(Permanent permanent, Game game) {
         permanent.removeFromCombat(game, false);
+        game.getBattlefield().removePermanent(permanent.getId());
         if (permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null) {
@@ -796,7 +794,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             } else {
                 Player attachedToPlayer = game.getPlayer(permanent.getAttachedTo());
                 if (attachedToPlayer != null) {
-                    attachedToPlayer.removeAttachment(permanent.getId(), game);
+                    attachedToPlayer.removeAttachment(permanent, game);
                 }
             }
             
@@ -807,7 +805,6 @@ public abstract class PlayerImpl implements Player, Serializable {
                 pairedCard.clearPairedCard();
             }
         }
-        game.getBattlefield().removePermanent(permanent.getId());
         return true;
     }
 

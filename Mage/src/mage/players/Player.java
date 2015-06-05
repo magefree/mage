@@ -385,7 +385,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void addCounters(Counter counter, Game game);
     List<UUID> getAttachments();
     boolean addAttachment(UUID permanentId, Game game);
-    boolean removeAttachment(UUID permanentId, Game game);
+    boolean removeAttachment(Permanent  permanent, Game game);
 
     /**
      * Signals that the player becomes active player in this turn.

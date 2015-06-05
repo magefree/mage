@@ -2061,7 +2061,7 @@ public abstract class GameImpl implements Game, Serializable {
                     } else {
                         Player attachedToPlayer = getPlayer(perm.getAttachedTo());
                         if (attachedToPlayer != null) {
-                            attachedToPlayer.removeAttachment(perm.getId(), this);
+                            attachedToPlayer.removeAttachment(perm, this);
                         }
                     }
                 }
