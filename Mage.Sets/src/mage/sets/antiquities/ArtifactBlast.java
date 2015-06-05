@@ -32,27 +32,20 @@ import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
  * @author Jgod
  */
 public class ArtifactBlast extends CardImpl {
-    private static final FilterSpell filter = new FilterSpell("artifact spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-    
     public ArtifactBlast(UUID ownerId) {
         super(ownerId, 87, "Artifact Blast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ATQ";
 
         // Counter target artifact spell.
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 

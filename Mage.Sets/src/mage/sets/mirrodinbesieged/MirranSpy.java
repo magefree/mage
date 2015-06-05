@@ -35,7 +35,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
+import mage.filter.common.FilterArtifactSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -43,9 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author North
  */
 public class MirranSpy extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-
+    
     public MirranSpy(UUID ownerId) {
         super(ownerId, 26, "Mirran Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "MBS";
@@ -58,6 +56,7 @@ public class MirranSpy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an artifact spell, you may untap target creature.
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new UntapTargetEffect(), filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

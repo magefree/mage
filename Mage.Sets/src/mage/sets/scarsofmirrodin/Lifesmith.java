@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -40,8 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -50,12 +48,6 @@ import mage.players.Player;
  * @author Loki
  */
 public class Lifesmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Lifesmith (UUID ownerId) {
         super(ownerId, 124, "Lifesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "SOM";
@@ -65,6 +57,7 @@ public class Lifesmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), filter, false));
     }
 
@@ -106,5 +99,4 @@ class LifesmithEffect extends OneShotEffect {
     public LifesmithEffect copy() {
         return new LifesmithEffect(this);
     }
-
 }
