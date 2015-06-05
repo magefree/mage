@@ -35,20 +35,13 @@ import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
  * @author Loki, North
  */
 public class Riddlesmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Riddlesmith (UUID ownerId) {
         super(ownerId, 40, "Riddlesmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "SOM";
@@ -58,7 +51,8 @@ public class Riddlesmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawDiscardControllerEffect(), filter, true));
+        // Whenever you cast an artifact spell, you may draw a card. If you do, discard a card.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawDiscardControllerEffect(), new FilterArtifactSpell("an artifact spell"), true));
     }
 
     public Riddlesmith (final Riddlesmith card) {
@@ -69,5 +63,4 @@ public class Riddlesmith extends CardImpl {
     public Riddlesmith copy() {
         return new Riddlesmith(this);
     }
-
 }

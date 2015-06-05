@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -40,8 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,12 +49,6 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author Loki, North
  */
 public class Embersmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Embersmith(UUID ownerId) {
         super(ownerId, 87, "Embersmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "SOM";
@@ -66,6 +58,7 @@ public class Embersmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), filter, false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -79,7 +72,6 @@ public class Embersmith extends CardImpl {
     public Embersmith copy() {
         return new Embersmith(this);
     }
-
 }
 
 class EmbersmithEffect extends OneShotEffect {
@@ -116,5 +108,4 @@ class EmbersmithEffect extends OneShotEffect {
     public EmbersmithEffect copy() {
         return new EmbersmithEffect(this);
     }
-
 }
