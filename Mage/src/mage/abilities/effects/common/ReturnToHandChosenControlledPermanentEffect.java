@@ -47,6 +47,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
     
     private final FilterControlledPermanent filter;
     private int number;
+    private int minNumber;
     
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter) {
         this(filter, 1);
@@ -55,6 +56,15 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         super(Outcome.ReturnToHand);
         this.filter = filter;
         this.number = number;
+        this.minNumber = number;
+        this.staticText = getText();
+    }
+    
+        public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int minNumber, int maxNumber) {
+        super(Outcome.ReturnToHand);
+        this.filter = filter;
+        this.number = maxNumber;
+        this.minNumber = minNumber;
         this.staticText = getText();
     }
 
@@ -62,7 +72,10 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         super(effect);
         this.filter = effect.filter;
         this.number = effect.number;
+        this.minNumber = this.minNumber;
     }
+    
+
 
     @Override
     public ReturnToHandChosenControlledPermanentEffect copy() {
@@ -73,7 +86,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(number, number, filter, true);
+            TargetControlledPermanent target = new TargetControlledPermanent(minNumber, number, filter, true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 for (UUID targetCreatureId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(targetCreatureId);
