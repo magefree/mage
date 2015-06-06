@@ -39,10 +39,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 
@@ -53,13 +51,8 @@ import mage.target.TargetPermanent;
 public class HarmonicSliver extends CardImpl {
 
     private static final FilterCreaturePermanent filterSliver = new FilterCreaturePermanent();
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     static {
         filterSliver.add(new SubtypePredicate("Sliver"));
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-
     }
 
     public HarmonicSliver(UUID ownerId) {
@@ -72,7 +65,7 @@ public class HarmonicSliver extends CardImpl {
 
         // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        TargetPermanent target = new TargetPermanent(filter);
+        TargetPermanent target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         ability.addTarget(target);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,

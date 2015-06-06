@@ -43,10 +43,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
@@ -57,13 +55,8 @@ import mage.target.TargetPermanent;
  */
 public class FreyaliseLlanowarsFury extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     private static final FilterControlledCreaturePermanent filterGreen = new FilterControlledCreaturePermanent("green creature you control");
-
     static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
@@ -72,21 +65,19 @@ public class FreyaliseLlanowarsFury extends CardImpl {
         this.expansionSetCode = "C14";
         this.subtype.add("Freyalise");
 
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         
         // +2: Put a 1/1 green Elf Druid creature token onto the battlefield with "{T}: Add {G} to your mana pool."
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
         // -2: Destroy target artifact or enchantment.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DestroyTargetEffect(), -2);
-        loyaltyAbility.addTarget(new TargetPermanent(filter));
+        loyaltyAbility.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(loyaltyAbility);
         // -6: Draw a card for each green creature you control.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterGreen)), -6));
 
         // Freyalise, Llanowar's Fury can be your commander.
         this.addAbility(CanBeYourCommanderAbility.getInstance());
-        
     }
 
     public FreyaliseLlanowarsFury(final FreyaliseLlanowarsFury card) {

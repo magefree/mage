@@ -39,9 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -51,22 +49,11 @@ import mage.target.TargetPermanent;
  */
 public class QasaliPridemage extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public QasaliPridemage(UUID ownerId) {
         super(ownerId, 75, "Qasali Pridemage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}{W}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Cat");
         this.subtype.add("Wizard");
-
-
-
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
@@ -76,7 +63,7 @@ public class QasaliPridemage extends CardImpl {
         // {1}, Sacrifice Qasali Pridemage: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }

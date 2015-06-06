@@ -114,5 +114,4 @@ class ViashinoHereticEffect extends OneShotEffect {
     public String getText(Mode mode) {
         return "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost";
     }
-
 }

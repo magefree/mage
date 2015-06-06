@@ -34,9 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -44,13 +42,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class SliceinTwain extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public SliceinTwain (UUID ownerId) {
         super(ownerId, 127, "Slice in Twain", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
@@ -58,7 +49,7 @@ public class SliceinTwain extends CardImpl {
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
     }
 
     public SliceinTwain (final SliceinTwain card) {
@@ -69,5 +60,4 @@ public class SliceinTwain extends CardImpl {
     public SliceinTwain copy() {
         return new SliceinTwain(this);
     }
-
 }

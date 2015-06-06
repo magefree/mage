@@ -33,9 +33,7 @@ import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,20 +41,13 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class ArtisansSorrow extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public ArtisansSorrow(UUID ownerId) {
         super(ownerId, 151, "Artisan's Sorrow", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "THS";
 
-
         // Destroy target artifact or enchantment. Scry 2.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 

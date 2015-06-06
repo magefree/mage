@@ -45,7 +45,6 @@ public class TelJiladJustice extends CardImpl {
         super(ownerId, 95, "Tel-Jilad Justice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "5DN";
 
-
         // Destroy target artifact.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());

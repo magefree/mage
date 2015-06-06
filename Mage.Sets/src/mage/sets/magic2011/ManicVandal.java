@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.magic2011;
 
 import java.util.UUID;
@@ -36,8 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -46,12 +44,6 @@ import mage.target.TargetPermanent;
  * @author BetaSteward_at_googlemail.com
  */
 public class ManicVandal extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public ManicVandal(UUID ownerId) {
         super(ownerId, 151, "Manic Vandal", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -63,7 +55,7 @@ public class ManicVandal extends CardImpl {
         this.toughness = new MageInt(2);
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }
@@ -76,5 +68,4 @@ public class ManicVandal extends CardImpl {
     public ManicVandal copy() {
         return new ManicVandal(this);
     }
-
 }

@@ -32,8 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -42,18 +41,12 @@ import mage.target.TargetPermanent;
  */
 public class Verdigris extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Verdigris(UUID ownerId) {
         super(ownerId, 158, "Verdigris", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "TMP";
 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactPermanent()));
     }
 
     public Verdigris(final Verdigris card) {

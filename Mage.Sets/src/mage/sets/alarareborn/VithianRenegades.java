@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.alarareborn;
 
 import java.util.UUID;
@@ -36,8 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,11 +43,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class VithianRenegades extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public VithianRenegades (UUID ownerId) {
         super(ownerId, 64, "Vithian Renegades", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
@@ -57,11 +50,12 @@ public class VithianRenegades extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Shaman");
 
-
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+        
+        // When Vithian Renegades enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent()));
         this.addAbility(ability);
     }
 
@@ -73,5 +67,4 @@ public class VithianRenegades extends CardImpl {
     public VithianRenegades copy() {
         return new VithianRenegades(this);
     }
-
 }

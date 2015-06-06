@@ -25,11 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
@@ -38,9 +36,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,21 +47,15 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class NaturesClaim extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public NaturesClaim (UUID ownerId) {
         super(ownerId, 108, "Nature's Claim", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WWK";
 
+        // Destroy target artifact or enchantment. Its controller gains 4 life.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addEffect(new NaturesClaimEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
     }
 
     public NaturesClaim (final NaturesClaim card) {
@@ -105,5 +95,4 @@ class NaturesClaimEffect extends OneShotEffect {
     public NaturesClaimEffect copy() {
         return new NaturesClaimEffect(this);
     }
-
 }

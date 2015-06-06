@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
@@ -37,8 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -47,12 +45,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class ViridianCorrupter extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public ViridianCorrupter (UUID ownerId) {
         super(ownerId, 94, "Viridian Corrupter", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
@@ -64,8 +56,9 @@ public class ViridianCorrupter extends CardImpl {
         this.toughness = new MageInt(2);
         this.addAbility(InfectAbility.getInstance());
 
+        // When Viridian Corrupter enters the battlefield, destroy target artifact.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactPermanent());
         ability.addTarget(target);
         this.addAbility(ability);
     }
@@ -78,5 +71,4 @@ public class ViridianCorrupter extends CardImpl {
     public ViridianCorrupter copy() {
         return new ViridianCorrupter(this);
     }
-
 }

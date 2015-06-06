@@ -35,8 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -47,24 +46,15 @@ import mage.target.TargetPermanent;
  */
 public class RelicCrush extends CardImpl {
     
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    
-    static {
-        filter.add(Predicates.or(
-                (new CardTypePredicate(CardType.ARTIFACT)),
-                (new CardTypePredicate(CardType.ENCHANTMENT))));
-    }
-    
     public RelicCrush(UUID ownerId) {
         super(ownerId, 179, "Relic Crush", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "ZEN";
 
-
         // Destroy target artifact or enchantment and up to one other target artifact or enchantment.
+        FilterPermanent filter = new FilterArtifactOrEnchantmentPermanent();
         this.getSpellAbility().addEffect(new RelicCrushEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, filter, false));
-        
     }
 
     public RelicCrush(final RelicCrush card) {
