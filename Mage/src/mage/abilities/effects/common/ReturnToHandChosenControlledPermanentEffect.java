@@ -27,14 +27,13 @@
  */
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.util.CardUtil;
@@ -44,27 +43,18 @@ import mage.util.CardUtil;
  * @author Plopmans
  */
 public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
-    
+
     private final FilterControlledPermanent filter;
     private int number;
-    private int minNumber;
-    
+
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter) {
         this(filter, 1);
     }
+
     public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int number) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
         this.number = number;
-        this.minNumber = number;
-        this.staticText = getText();
-    }
-    
-        public ReturnToHandChosenControlledPermanentEffect(FilterControlledPermanent filter, int minNumber, int maxNumber) {
-        super(Outcome.ReturnToHand);
-        this.filter = filter;
-        this.number = maxNumber;
-        this.minNumber = minNumber;
         this.staticText = getText();
     }
 
@@ -72,10 +62,7 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
         super(effect);
         this.filter = effect.filter;
         this.number = effect.number;
-        this.minNumber = this.minNumber;
     }
-    
-
 
     @Override
     public ReturnToHandChosenControlledPermanentEffect copy() {
@@ -84,15 +71,13 @@ public class ReturnToHandChosenControlledPermanentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(minNumber, number, filter, true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                for (UUID targetCreatureId : target.getTargets()) {
-                    Permanent permanent = game.getPermanent(targetCreatureId);
-                    if (permanent != null) {
-                        player.moveCardToHandWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD);
-                    }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int available = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
+            if (available > 0) {
+                TargetControlledPermanent target = new TargetControlledPermanent(Math.min(number, available), number, filter, true);
+                if (controller.chooseTarget(this.outcome, target, source, game)) {
+                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.BATTLEFIELD, Zone.HAND, source, game);
                 }
             }
             return true;
