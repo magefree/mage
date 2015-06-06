@@ -34,17 +34,20 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColorOrArtifact;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -62,10 +65,11 @@ public class ApostlesBlessing extends CardImpl {
     public ApostlesBlessing(UUID ownerId) {
         super(ownerId, 2, "Apostle's Blessing", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{WP}");
         this.expansionSetCode = "NPH";
-
-        this.getSpellAbility().addEffect(new ApostlesBlessingEffect(Duration.EndOfTurn));
+        
+        // ({WP} can be paid with either {W} or 2 life.)
+        // Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
+        this.getSpellAbility().addEffect(new ApostlesBlessingEffect());
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
-        this.getSpellAbility().addChoice(new ChoiceColorOrArtifact());
     }
 
     public ApostlesBlessing(final ApostlesBlessing card) {
@@ -79,40 +83,47 @@ public class ApostlesBlessing extends CardImpl {
 
 }
 
-class ApostlesBlessingEffect extends GainAbilityTargetEffect {
-
-    public ApostlesBlessingEffect(Duration duration) {
-        super(new ProtectionAbility(new FilterCard()), duration);
-        staticText = "Target artifact or creature gains protection from artifacts or from the color of your choice until end of turn";
+class ApostlesBlessingEffect extends OneShotEffect {
+    
+    public ApostlesBlessingEffect() {
+        super(Outcome.AddAbility);
+        this.staticText = "Target artifact or creature gains protection from artifacts or from the color of your choice until end of turn";
     }
-
+    
     public ApostlesBlessingEffect(final ApostlesBlessingEffect effect) {
         super(effect);
     }
-
+    
     @Override
     public ApostlesBlessingEffect copy() {
         return new ApostlesBlessingEffect(this);
     }
-
+    
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard protectionFilter = new FilterCard();
-        ChoiceColorOrArtifact choice = (ChoiceColorOrArtifact) source.getChoices().get(0);
-        if (choice.isArtifactSelected()) {
-            protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
-        } else {
-            protectionFilter.add(new ColorPredicate(choice.getColor()));
-        }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            ChoiceColorOrArtifact choice = new ChoiceColorOrArtifact();
+            while (!choice.isChosen()) {
+                if (!controller.isInGame()) {
+                    return false;
+                }
+                controller.choose(outcome, choice, game);
+            }
 
-        protectionFilter.setMessage(choice.getChoice());
-        ((ProtectionAbility) ability).setFilter(protectionFilter);
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null) {
-            creature.addAbility(ability, game);
+            FilterCard protectionFilter = new FilterCard();        
+            if (choice.isArtifactSelected()) {
+                protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
+            } else {
+                protectionFilter.add(new ColorPredicate(choice.getColor()));
+            }
+            protectionFilter.setMessage(choice.getChoice());
+            ProtectionAbility protectionAbility = new ProtectionAbility(protectionFilter);
+            ContinuousEffect effect = new GainAbilityTargetEffect(protectionAbility, Duration.EndOfTurn);
+            effect.setTargetPointer(getTargetPointer());
+            game.addEffect(effect, source);
             return true;
-        }
+        }        
         return false;
     }
-
 }
