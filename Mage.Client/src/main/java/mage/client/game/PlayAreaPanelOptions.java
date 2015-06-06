@@ -25,64 +25,34 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
+package mage.client.game;
 
-package mage.game;
+/**
+ * Defines some options for the PlayAreaPanel
+ *
+ * @author LevelX2
+ */
+public class PlayAreaPanelOptions {
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.game.match.MatchType;
-import mage.game.turn.TurnMod;
-import mage.players.Player;
-
-public class TwoPlayerDuel extends GameImpl {
-
-    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
-        super(attackOption, range, freeMulligans, startLife);
-    }
-
-    public TwoPlayerDuel(final TwoPlayerDuel game) {
-        super(game);
-    }
-
-    @Override
-    public MatchType getGameType() {
-        return new TwoPlayerDuelType();
-    }
-
-    @Override
-    public int getNumPlayers() {
-        return 2;
-    }
-
-    @Override
-    protected void init(UUID choosingPlayerId) {
-        super.init(choosingPlayerId);
-        state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
-    }
-
-    @Override
-    public Set<UUID> getOpponents(UUID playerId) {
-        Set<UUID> opponents = new HashSet<>();
-        for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId)) {
-                opponents.add(opponentId);
-            }
-        }
-        return opponents;
-    }
-
-    @Override
-    public boolean isOpponent(Player player, UUID playerToCheck) {
-       return !player.getId().equals(playerToCheck);
+    public PlayAreaPanelOptions(boolean isPlayer, boolean playerItself, boolean rollbackTurnsAllowed) {
+        this.isPlayer = isPlayer;
+        this.playerItself = playerItself;
+        this.rollbackTurnsAllowed = rollbackTurnsAllowed;
     }
     
-    @Override
-    public TwoPlayerDuel copy() {
-        return new TwoPlayerDuel(this);
-    }
+    /**
+     *  true if the client is a player / false if the client is a watcher
+     */
+    public boolean isPlayer = false;
 
+    /**
+     *  true if the player is the client player itself, false if the player is another player playing with the clinet player
+     */
+    public boolean playerItself = false;
+
+    /**
+     *  true if the player can roll back turns if all players agree
+     */
+    public boolean rollbackTurnsAllowed = false;
+    
 }

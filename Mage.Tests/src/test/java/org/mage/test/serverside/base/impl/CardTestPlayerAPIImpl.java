@@ -172,7 +172,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         gameOptions.testMode = true;
         gameOptions.stopOnTurn = stopOnTurn;
         gameOptions.stopAtStep = stopAtStep;
-        currentGame.start(activePlayer.getId(), gameOptions);
+        currentGame.setGameOptions(gameOptions);
+        currentGame.start(activePlayer.getId());
         long t2 = System.nanoTime();
         logger.debug("Winner: " + currentGame.getWinner());
         logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");

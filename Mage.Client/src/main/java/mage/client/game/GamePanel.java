@@ -483,7 +483,8 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         PlayerView player = game.getPlayers().get(playerSeat);
-        PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId, true, game.getPriorityTime(), game.isPlayer(), this);
+        PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this, 
+                new PlayAreaPanelOptions(game.isPlayer(), true, game.isRollbackTurnsAllowed()));
         players.put(player.getPlayerId(), sessionPlayer);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -515,7 +516,8 @@ public final class GamePanel extends javax.swing.JPanel {
                 col = numColumns - 1;
             }
             player = game.getPlayers().get(playerNum);
-            PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, false, game.getPriorityTime(), game.isPlayer(), this);
+            PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
+                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed()));
             players.put(player.getPlayerId(), playerPanel);
             c = new GridBagConstraints();
             c.fill = GridBagConstraints.BOTH;

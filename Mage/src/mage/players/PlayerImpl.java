@@ -369,8 +369,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPaySacrificeCost = player.canPaySacrificeCost();
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
         this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
-        this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());
-        this.storedBookmark = player.getStoredBookmark();
+        this.alternativeSourceCosts.addAll(player.getAlternativeSourceCosts());        
 
         this.topCardRevealed = player.isTopCardRevealed();
         this.playersUnderYourControl.clear();
@@ -385,7 +384,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.castSourceIdWithAlternateMana = player.getCastSourceIdWithAlternateMana();
         this.castSourceIdManaCosts = player.getCastSourceIdManaCosts();
 
-        this.usersAllowedToSeeHandCards.addAll(player.getUsersAllowedToSeeHandCards());
+        // Don't restore!
+        // this.storedBookmark
+        // this.usersAllowedToSeeHandCards
     }
 
     @Override
@@ -1855,7 +1856,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 passedAllTurns = false;
                 passedUntilEndOfTurn = true;
                 passedUntilStackResolved = false;
-                skippedAtLeastOnce = !game.getTurn().getStepType().equals(PhaseStep.END_TURN);
+                skippedAtLeastOnce = !PhaseStep.END_TURN.equals(game.getTurn().getStepType());
                 this.skip();
                 break;
             case PASS_PRIORITY_UNTIL_NEXT_TURN: // F4
@@ -3124,6 +3125,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public MatchPlayer getMatchPlayer() {
         return matchPlayer;
+    }
+
+    @Override
+    public void abortReset() {
+        abort = false;
     }
 
 }

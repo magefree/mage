@@ -42,6 +42,7 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -69,8 +70,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private boolean smallMode = false;
     private boolean playingMode = true;
     private final GamePanel gamePanel;
-    private final boolean playerItself;
-
+    private final PlayAreaPanelOptions options;
+    
     private JCheckBoxMenuItem manaPoolMenuItem;
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
     
@@ -81,19 +82,18 @@ public class PlayAreaPanel extends javax.swing.JPanel {
      * @param player
      * @param bigCard
      * @param gameId
-     * @param isPlayer true if the client is a player / false if the client is a watcher
-     * @param playerItself true if it's the area of the player itself
      * @param priorityTime
-     * @param gamePanel */
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean playerItself, int priorityTime, boolean isPlayer, GamePanel gamePanel) {
-        //this(isPlayer);
-        this.playerItself = playerItself;
+     * @param gamePanel
+     * @param options 
+     */
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel, PlayAreaPanelOptions options) {
+        this.options = options;
         initComponents();
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
 
         popupMenu = new JPopupMenu();
-        if (isPlayer) {
+        if (options.isPlayer) {
             addPopupMenuPlayer(player.getUserData().allowRequestShowHandCards());
         } else {
             addPopupMenuWatcher();
@@ -242,7 +242,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu.addSeparator();
 
-        if (!playerItself) {
+        if (!options.playerItself) {
             menuItem = new JMenuItem("Request permission to see hand cards");
             popupMenu.add(menuItem);
 
@@ -282,6 +282,63 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             });
         }
+        popupMenu.addSeparator();
+        
+        if (options.rollbackTurnsAllowed) {
+            ActionListener rollBackActionListener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int turnsToRollBack = Integer.parseInt(e.getActionCommand());
+                    gamePanel.getSession().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
+                }
+            };
+            
+            JMenu rollbackMainItem = new JMenu("Roll back");
+            rollbackMainItem.setMnemonic(KeyEvent.VK_R);
+            rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
+            popupMenu.add(rollbackMainItem);
+            
+            menuItem = new JMenuItem("to the start of the current turn");
+            menuItem.setMnemonic(KeyEvent.VK_C);
+            menuItem.setActionCommand("0");
+            menuItem.addActionListener(rollBackActionListener);            
+            rollbackMainItem.add(menuItem);
+   
+            menuItem = new JMenuItem("to the start of the previous turn");
+            menuItem.setMnemonic(KeyEvent.VK_P);
+            menuItem.setActionCommand("1");
+            menuItem.addActionListener(rollBackActionListener);            
+            rollbackMainItem.add(menuItem);
+
+            menuItem = new JMenuItem("the current turn and the 2 turns before");
+            menuItem.setMnemonic(KeyEvent.VK_2);
+            menuItem.setActionCommand("2");
+            menuItem.addActionListener(rollBackActionListener);            
+            rollbackMainItem.add(menuItem);
+
+            menuItem = new JMenuItem("the current turn and the 3 turns before");
+            menuItem.setMnemonic(KeyEvent.VK_3);
+            menuItem.setActionCommand("3");
+            menuItem.addActionListener(rollBackActionListener);            
+            rollbackMainItem.add(menuItem);
+            
+            popupMenu.addSeparator();
+           
+        }
+            
+        menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
+        menuItem.setMnemonic(KeyEvent.VK_P);
+        menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
+        popupMenu.add(menuItem);
+
+        // revoke permissions to see hand cards
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null);
+            }
+        });
+            
         popupMenu.addSeparator();
 
         menuItem = new JMenuItem("Concede game");

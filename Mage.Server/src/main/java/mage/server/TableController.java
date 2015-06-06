@@ -43,6 +43,7 @@ import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -551,7 +552,10 @@ public class TableController {
         try {
             match.startGame();
             table.initGame();
-            GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
+            GameOptions gameOptions = new GameOptions();
+            gameOptions.rollbackTurnsAllowed = match.getOptions().isRollbackTurnsAllowed();
+            match.getGame().setGameOptions(gameOptions);
+            GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId, gameOptions);
             String creator = null;
             StringBuilder opponent = new StringBuilder();
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) { // no AI players

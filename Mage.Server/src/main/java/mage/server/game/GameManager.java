@@ -34,6 +34,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.Game;
+import mage.game.GameOptions;
 import mage.view.GameView;
 
 /**
@@ -51,8 +52,8 @@ public class GameManager {
 
     private final ConcurrentHashMap<UUID, GameController> gameControllers = new ConcurrentHashMap<>();
 
-    public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
-        GameController gameController = new GameController(game, userPlayerMap, tableId, choosingPlayerId);
+    public UUID createGameSession(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
+        GameController gameController = new GameController(game, userPlayerMap, tableId, choosingPlayerId, gameOptions);
         gameControllers.put(game.getId(), gameController);
         return gameController.getSessionId();
     }

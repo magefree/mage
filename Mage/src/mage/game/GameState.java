@@ -77,19 +77,19 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     private final Players players;
     private final PlayerList playerList;
-    private final Turn turn;
+    private UUID choosingPlayerId; // player that makes a choice at game start
+
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
     private final Revealed revealed;
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
-    private final DelayedTriggeredAbilities delayed;
-    private final SpecialActions specialActions;
-    private final TurnMods turnMods;
-    private final Watchers watchers;
-    
 
+    private DelayedTriggeredAbilities delayed;    
+    private SpecialActions specialActions;
+    private Watchers watchers;   
+    private Turn turn;
+    private TurnMods turnMods;
     private UUID activePlayerId; // playerId which turn it is
     private UUID priorityPlayerId; // player that has currently priority
-    private UUID choosingPlayerId; // player that makes a choice at game start
     private SpellStack stack;
     private Command command;
     private Exile exile;
@@ -134,21 +134,24 @@ public class GameState implements Serializable, Copyable<GameState> {
     public GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
+        this.choosingPlayerId = state.choosingPlayerId;
+        this.revealed = state.revealed.copy();
+        this.lookedAt.putAll(state.lookedAt);
+        this.gameOver = state.gameOver;
+        this.paused = state.paused;
+        
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
-        this.choosingPlayerId = state.choosingPlayerId;
         this.turn = state.turn.copy();
+        
         this.stack = state.stack.copy();
         this.command = state.command.copy();
         this.exile = state.exile.copy();
-        this.revealed = state.revealed.copy();
-        this.lookedAt.putAll(state.lookedAt);
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
         this.extraTurn = state.extraTurn;
         this.legendaryRuleActive = state.legendaryRuleActive;
-        this.gameOver = state.gameOver;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger: state.triggered) {
             this.triggered.add(trigger.copy());
@@ -163,13 +166,46 @@ public class GameState implements Serializable, Copyable<GameState> {
                 this.values.put(entry.getKey(), entry.getValue());
         }
         this.zones.putAll(state.zones);
-        this.paused = state.paused;
         this.simultaneousEvents.addAll(state.simultaneousEvents);
         for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
+        this.permanentOrderNumber = state.permanentOrderNumber;
+    }
+    
+    public void restore(GameState state) {
+        this.activePlayerId = state.activePlayerId;
+        this.priorityPlayerId = state.priorityPlayerId;
+        this.turn = state.turn;
+
+        this.stack = state.stack;
+        this.command = state.command;
+        this.exile = state.exile;
+        this.battlefield = state.battlefield;
+        this.turnNum = state.turnNum;
+        this.stepNum = state.stepNum;
+        this.extraTurn = state.extraTurn;
+        this.legendaryRuleActive = state.legendaryRuleActive;        
+        this.effects = state.effects;
+        this.triggered = state.triggered;
+        this.triggers = state.triggers;
+        this.delayed = state.delayed;
+        this.specialActions = state.specialActions;
+        this.combat = state.combat;
+        this.turnMods = state.turnMods;
+        this.watchers = state.watchers;        
+        this.values = state.values;
+        for (Player copyPlayer: state.players.values()) {
+            Player origPlayer = players.get(copyPlayer.getId());
+            origPlayer.restore(copyPlayer);
+        }
+        this.zones = state.zones;
+        this.simultaneousEvents = state.simultaneousEvents;
+        this.cardState = state.cardState;
+        this.zoneChangeCounter = state.zoneChangeCounter;
+        this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
     }
 
@@ -556,28 +592,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setZone(UUID id, Zone zone) {
         zones.put(id, zone);
-    }
-
-    public void restore(GameState state) {
-        this.stack = state.stack;
-        this.command = state.command;
-        this.effects = state.effects;
-        this.triggers = state.triggers;
-        this.triggered = state.triggered;
-        this.combat = state.combat;
-        this.exile = state.exile;
-        this.battlefield = state.battlefield;
-        this.zones = state.zones;
-        this.values = state.values;
-        for (Player copyPlayer: state.players.values()) {
-            Player origPlayer = players.get(copyPlayer.getId());
-            origPlayer.restore(copyPlayer);
-        }
-        this.simultaneousEvents = state.simultaneousEvents;
-        this.cardState = state.cardState;
-        this.zoneChangeCounter = state.zoneChangeCounter;
-        this.copiedCards = state.copiedCards;
-        this.permanentOrderNumber = state.permanentOrderNumber;
     }
 
     public void addSimultaneousEvent(GameEvent event, Game game) {

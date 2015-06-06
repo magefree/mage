@@ -37,6 +37,7 @@ import org.apache.log4j.Logger;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class GameWorker<T> implements Callable {
 

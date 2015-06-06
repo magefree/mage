@@ -554,6 +554,9 @@ public class HumanPlayer extends PlayerImpl {
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
             waitForResponse(game);
+            if(game.executingRollback()) {
+                return true;
+            }
             if (response.getBoolean() != null) {
                 pass(game);
                 return false;

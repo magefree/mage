@@ -280,6 +280,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void leave();
     void concede(Game game);
     void abort();
+    void abortReset();
     void skip();
 
     // priority, undo, ...

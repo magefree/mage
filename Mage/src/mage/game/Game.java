@@ -208,9 +208,7 @@ public interface Game extends MageItem, Serializable {
      */
     PreventionEffectData preventDamage(GameEvent event, Ability source, Game game, boolean preventAllDamage);
 
-    //game play methods
     void start(UUID choosingPlayerId);
-    void start(UUID choosingPlayerId, GameOptions options);
     void resume();
     void pause();
     boolean isPaused();
@@ -293,5 +291,10 @@ public interface Game extends MageItem, Serializable {
     int getPriorityTime();
     void setPriorityTime(int priorityTime);
     UUID getStartingPlayerId();
+    
+    void saveRollBackGameState();
+    boolean canRollbackTurns(int turnsToRollback);
+    void rollbackTurns(int turnsToRollback);
+    boolean executingRollback();
+}    
 
-}

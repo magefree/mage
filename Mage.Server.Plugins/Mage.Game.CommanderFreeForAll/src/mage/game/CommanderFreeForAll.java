@@ -51,9 +51,9 @@ public class CommanderFreeForAll extends GameCommanderImpl {
     }
 
     @Override
-    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+    protected void init(UUID choosingPlayerId) {
         startingPlayerSkipsDraw = false;
-        super.init(choosingPlayerId, gameOptions); 
+        super.init(choosingPlayerId); 
     }
 
     @Override

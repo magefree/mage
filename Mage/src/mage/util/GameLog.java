@@ -38,6 +38,7 @@ import mage.ObjectColor;
 public class GameLog {
     
     static final String LOG_COLOR_PLAYER = "#20B2AA"; // LightSeaGreen  	
+    static final String LOG_COLOR_PLAYER_REQUEST = "#D2691E"; // Chocolate  	
     static final String LOG_COLOR_GREEN = "#90EE90"; // LightGreen
     static final String LOG_COLOR_RED = "#FF6347";   // Tomato  	
     static final String LOG_COLOR_BLUE = "#87CEFA";  // LightSkyBlue
@@ -63,6 +64,10 @@ public class GameLog {
 
     public static String getColoredPlayerName(String name) {        
         return "<font color=\'" + LOG_COLOR_PLAYER + "\'>" + name + "</font>";
+    }
+    
+    public static String getPlayerRequestColoredText(String name) {        
+        return "<font color=\'" + LOG_COLOR_PLAYER_REQUEST + "\'>" + name + "</font>";
     }
 
     private static String getColorName(ObjectColor objectColor) {

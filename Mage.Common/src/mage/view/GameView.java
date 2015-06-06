@@ -81,6 +81,7 @@ public class GameView implements Serializable {
     private boolean special = false;
     private final boolean isPlayer;
     private final int spellsCastCurrentTurn;
+    private final boolean rollbackTurnsAllowed;
 
 
     public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {
@@ -179,7 +180,8 @@ public class GameView implements Serializable {
             spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();
         } else {
             spellsCastCurrentTurn = 0;
-        }
+        }        
+        rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;
     }
 
     private void checkPaid(UUID uuid, StackAbility stackAbility) {
@@ -321,6 +323,10 @@ public class GameView implements Serializable {
 
     public int getSpellsCastCurrentTurn() {
         return spellsCastCurrentTurn;
+    }
+
+    public boolean isRollbackTurnsAllowed() {
+        return rollbackTurnsAllowed;
     }
     
 }

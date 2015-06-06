@@ -170,6 +170,34 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
+    public void requestPermissionToRollbackTurn(UUID requestingUserId, int numberTurns) {
+        if (!killed) {
+            User requestingUser = UserManager.getInstance().getUser(requestingUserId);
+            User requestedUser = UserManager.getInstance().getUser(userId);
+            if (requestedUser != null && requestingUser != null) {
+                String message;
+                switch(numberTurns) {
+                    case 0: 
+                        message = "Allow rollback to the start of the current turn?";
+                        break;
+                    case 1:
+                        message = "Allow rollback to the start of the previous turn?";
+                        break;
+                    default:
+                        message = "Allow to rollback "+numberTurns+ " turns?";
+                }
+                UserRequestMessage userRequestMessage = new UserRequestMessage(
+                        "Request by " + requestedUser.getName(), message                        
+                        , PlayerAction.REQUEST_PERMISSION_TO_ROLLBACK_TURN);
+                userRequestMessage.setRelatedUser(requestingUserId, requestingUser.getName());
+                userRequestMessage.setGameId(game.getId());
+                userRequestMessage.setButton1("Accept", PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);
+                userRequestMessage.setButton2("Deny", PlayerAction.DENY_PERMISSON_TO_ROLLBACK_TURN);
+                requestedUser.fireCallback(new ClientCallback("userRequestDialog", game.getId(), userRequestMessage));
+            }
+        }
+    }
+       
     public void requestPermissionToSeeHandCards(UUID watcherId) {
         if (!killed) {
             User watcher = UserManager.getInstance().getUser(watcherId);

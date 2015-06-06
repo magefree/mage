@@ -117,30 +117,34 @@ public class Turn implements Serializable {
         return null;
     }
 
-    public void play(Game game, UUID activePlayerId) {
+    public void play(Game game, Player activePlayer) {
+        activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
         if (game.isPaused() || game.gameOver(null)) {
             return;
         }
 
-        if (game.getState().getTurnMods().skipTurn(activePlayerId)) {
+        if (game.getState().getTurnMods().skipTurn(activePlayer.getId())) {
             return;
         }
 
-        checkTurnIsControlledByOtherPlayer(game, activePlayerId);
+        checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
 
-        this.activePlayerId = activePlayerId;
+        this.activePlayerId = activePlayer.getId();
         resetCounts();
-        game.getPlayer(activePlayerId).beginTurn(game);
+        game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase: phases) {
             if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
             if (!isEndTurnRequested() || phase.getType().equals(TurnPhase.END)) {
                 currentPhase = phase;
-                game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
-                if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
-                    if (phase.play(game, activePlayerId)) {
+                game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayer.getId(), null, activePlayer.getId()));
+                if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {
+                    if (phase.play(game, activePlayer.getId())) {
+                        if(game.executingRollback()) {
+                            return;
+                        }
                         //20091005 - 500.4/703.4n
                         game.emptyManaPools();                        
                         game.saveState(false);
