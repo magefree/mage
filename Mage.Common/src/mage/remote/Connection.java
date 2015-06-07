@@ -57,6 +57,7 @@ public class Connection {
     private int avatarId;
     private boolean showAbilityPickerForced;
     private boolean allowRequestShowHandCards;
+    private boolean confirmEmptyManaPool;
     private UserSkipPrioritySteps userSkipPrioritySteps;
 
     private static final String serialization = "?serializationtype=jboss";    
@@ -242,6 +243,16 @@ public class Connection {
     public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
         this.allowRequestShowHandCards = allowRequestShowHandCards;
     }
+
+    public boolean confirmEmptyManaPool() {
+        return confirmEmptyManaPool;
+    }
+
+    public void setConfirmEmptyManaPool(boolean confirmEmptyManaPool) {
+        this.confirmEmptyManaPool = confirmEmptyManaPool;
+    }
+    
+    
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {
         return userSkipPrioritySteps;
     }

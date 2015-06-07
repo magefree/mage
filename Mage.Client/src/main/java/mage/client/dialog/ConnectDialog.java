@@ -335,6 +335,7 @@ public class ConnectDialog extends MageDialog {
             connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
             connection.setShowAbilityPickerForced(showAbilityPickerForced);
             connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
+            connection.setConfirmEmptyManaPool(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"));
             logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
             task = new ConnectTask();
             task.execute();

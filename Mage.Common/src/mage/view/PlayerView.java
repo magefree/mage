@@ -115,7 +115,7 @@ public class PlayerView implements Serializable {
         if (player.getUserData() != null) {
             this.userDataView = new UserDataView(player.getUserData());
         } else {
-            this.userDataView = new UserDataView(0, false, false, null);
+            this.userDataView = new UserDataView(0, false, false, true, null);
         }
         
         for (CommandObject commandObject : game.getState().getCommand()) {

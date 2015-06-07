@@ -15,13 +15,16 @@ public class UserDataView implements Serializable {
     protected int userGroup;
     protected boolean showAbilityPickerForced;
     protected boolean allowRequestShowHandCards;
+    protected boolean confirmEmptyManaPool;
     protected UserSkipPrioritySteps userSkipPrioritySteps;
 
-    public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, UserSkipPrioritySteps userSkipPrioritySteps) {
+    public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, 
+            boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps) {
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
         this.allowRequestShowHandCards = allowRequestShowHandCards;
         this.userSkipPrioritySteps = userSkipPrioritySteps;
+        this.confirmEmptyManaPool = confirmEmptyManaPool;
     }
 
     public UserDataView(UserData userData) {
@@ -30,6 +33,7 @@ public class UserDataView implements Serializable {
         this.allowRequestShowHandCards = userData.isAllowRequestShowHandCards();
         this.showAbilityPickerForced = userData.isShowAbilityPickerForced();
         this.userSkipPrioritySteps = userData.getUserSkipPrioritySteps();
+        this.confirmEmptyManaPool = userData.confirmEmptyManaPool();
     }
 
     public int getAvatarId() {
@@ -46,6 +50,10 @@ public class UserDataView implements Serializable {
 
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {
         return userSkipPrioritySteps;
+    }
+
+    public boolean confirmEmptyManaPool() {
+        return confirmEmptyManaPool;
     }
     
 }

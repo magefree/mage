@@ -68,6 +68,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.util.GameLog;
 
 /**
  *
@@ -494,31 +495,35 @@ public class HumanPlayer extends PlayerImpl {
         passed = false;
         if (!abort) {
             if (passedAllTurns) {
-                pass(game);
-                return false;
+                if(passWithManaPoolCheck(game)) {
+                    return false;
+                }
             }
             if (game.getStack().isEmpty()) {
                 passedUntilStackResolved = false;
                 boolean dontCheckPassStep = false;
                 if (passedTurn) {
-                    pass(game);
-                    return false;
+                    if(passWithManaPoolCheck(game)) {
+                        return false;
+                    }
                 }
                 if (passedUntilNextMain) {
                     if (game.getTurn().getStepType().equals(PhaseStep.POSTCOMBAT_MAIN) || game.getTurn().getStepType().equals(PhaseStep.PRECOMBAT_MAIN)) {
                         // it's a main phase
                         if (!skippedAtLeastOnce || (!playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
                             skippedAtLeastOnce = true;
-                            pass(game);
-                            return false;
+                            if(passWithManaPoolCheck(game)) {
+                                return false;
+                            }
                         } else {
                             dontCheckPassStep = true;
                             passedUntilNextMain = false; // reset skip action
                         }
                     } else {
                         skippedAtLeastOnce = true;
-                        pass(game);
-                        return false;
+                        if(passWithManaPoolCheck(game)) {
+                            return false;
+                        }
                     }
                 }
                 if (passedUntilEndOfTurn) {
@@ -526,48 +531,53 @@ public class HumanPlayer extends PlayerImpl {
                         // It's end of turn phase
                         if (!skippedAtLeastOnce || (playerId.equals(game.getActivePlayerId()) && !this.getUserData().getUserSkipPrioritySteps().isStopOnAllEndPhases())) {
                             skippedAtLeastOnce = true;
-                            pass(game);
-                            return false;
+                            if(passWithManaPoolCheck(game)) {
+                                return false;
+                            }
                         } else {
                             dontCheckPassStep = true;
                             passedUntilEndOfTurn = false;
                         }
                     } else {
                         skippedAtLeastOnce = true;
-                        pass(game);
-                        return false;
+                        if(passWithManaPoolCheck(game)) {
+                            return false;
+                        }
                     }
                 }
                 if (!dontCheckPassStep && checkPassStep(game)) {
-                    pass(game);
-                    return false;
+                    if(passWithManaPoolCheck(game)) {
+                        return false;
+                    }
                 }                
             } else if (passedUntilStackResolved) {
                 if (dateLastAddedToStack == game.getStack().getDateLastAdded()) {
                     dateLastAddedToStack = game.getStack().getDateLastAdded();
-                    pass(game);
-                    return false;
+                    if(passWithManaPoolCheck(game)) {
+                        return false;
+                    }
                 } else {
                     passedUntilStackResolved = false;
                 }
             }
-            updateGameStatePriority("priority", game);
-            game.firePriorityEvent(playerId);
-            waitForResponse(game);
-            if(game.executingRollback()) {
-                return true;
+            while (isInGame()) {
+                updateGameStatePriority("priority", game);
+                game.firePriorityEvent(playerId);
+                waitForResponse(game);
+                if(game.executingRollback()) {
+                    return true;
+                }
+                if (response.getBoolean() != null || response.getInteger() != null) {
+                    if (passWithManaPoolCheck(game)) {
+                        return false;
+                    } else {
+                        continue;
+                    }
+                } 
+                break;
             }
-            if (response.getBoolean() != null) {
-                pass(game);
-                return false;
-            } else if (response.getInteger() != null) {
-                /*if (response.getInteger() == -9999) {
-                    passedAllTurns = true;
-                }*/
-                pass(game);
-                //passedTurn = true;
-                return false;
-            } else if (response.getString() != null && response.getString().equals("special")) {
+            
+            if (response.getString() != null && response.getString().equals("special")) {
                 specialAction(game);
             } else if (response.getUUID() != null) {
                 boolean result = false;
@@ -1216,4 +1226,27 @@ public class HumanPlayer extends PlayerImpl {
             super.sendPlayerAction(playerAction, game);
         }
     }
+    
+    protected boolean passWithManaPoolCheck(Game game) {
+        if (userData.confirmEmptyManaPool() &&
+                game.getStack().isEmpty() && getManaPool().count() > 0) {
+            String activePlayerText;
+            if (game.getActivePlayerId().equals(playerId)) {
+                activePlayerText = "Your turn";
+            } else {
+                activePlayerText = game.getPlayer(game.getActivePlayerId()).getName() + "'s turn";
+            }
+            String priorityPlayerText = "";
+            if (!isGameUnderControl()) {
+                priorityPlayerText = " / priority " + game.getPlayer(game.getPriorityPlayerId()).getName();
+            }            
+            if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You have still mana in your mana pool. Pass regardless?")
+                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getStep().getType().toString() + priorityPlayerText), game)) {
+                sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game);
+                return false;
+            }
+        }
+        pass(game);
+        return true;
+    } 
 }

@@ -573,6 +573,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         playersUnderYourControl.clear();
     }
 
+    /**
+     * returns true if the player has the control itself - false if the player is controlled by another player
+     * @return 
+     */
     @Override
     public boolean isGameUnderControl() {
         return isGameUnderControl;
@@ -3132,5 +3136,4 @@ public abstract class PlayerImpl implements Player, Serializable {
     public void abortReset() {
         abort = false;
     }
-
 }

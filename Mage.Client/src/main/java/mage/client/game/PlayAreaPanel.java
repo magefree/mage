@@ -377,12 +377,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     case "Game": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
-                        }                        
+                        }    
+                        break;
                     }
                     case "Match": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             MageFrame.getSession().quitMatch(gameId);
-                        }                        
+                        }     
+                        break;
                     }
                 }
             }
