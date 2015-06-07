@@ -91,6 +91,7 @@ import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.PickPileDialog;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
+import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
 import mage.client.dialog.ShowCardsDialog;
 import mage.client.game.FeedbackPanel.FeedbackMode;
 import mage.client.plugins.adapters.MageActionCallback;
@@ -459,7 +460,9 @@ public final class GamePanel extends javax.swing.JPanel {
     public synchronized void init(GameView game) {
         addPlayers(game);
         // default menu states
-        setMenuStates(PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"));
+        setMenuStates(
+                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true"));
 
         updateGame(game);
     }
@@ -734,10 +737,11 @@ public final class GamePanel extends javax.swing.JPanel {
     /**
      * Set the same state for menu selections to all player areas.
      * @param manaPoolAutomatic 
+     * @param manaPoolAutomaticRestricted 
      */
-    public void setMenuStates(boolean manaPoolAutomatic) {
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
        for(PlayAreaPanel playAreaPanel: players.values()) {
-           playAreaPanel.setMenuStates(manaPoolAutomatic);
+           playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted);
        } 
     }
     

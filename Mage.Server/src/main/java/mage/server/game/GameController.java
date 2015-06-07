@@ -537,10 +537,16 @@ public class GameController implements GameCallback {
                 game.concede(getPlayerId(userId));
                 break;
             case MANA_AUTO_PAYMENT_OFF:
-                game.setManaPoolMode(getPlayerId(userId), false);
+                game.setManaPaymentMode(getPlayerId(userId), false);
                 break;
             case MANA_AUTO_PAYMENT_ON:
-                game.setManaPoolMode(getPlayerId(userId), true);
+                game.setManaPaymentMode(getPlayerId(userId), true);
+                break;
+            case MANA_AUTO_PAYMENT_RESTRICTED_OFF:
+                game.setManaPaymentModeRestricted(getPlayerId(userId), false);
+                break;
+            case MANA_AUTO_PAYMENT_RESTRICTED_ON:
+                game.setManaPaymentModeRestricted(getPlayerId(userId), true);
                 break;
             case ADD_PERMISSION_TO_SEE_HAND_CARDS:
                 if (data instanceof UUID) {

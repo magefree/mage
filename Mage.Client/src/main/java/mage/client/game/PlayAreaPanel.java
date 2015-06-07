@@ -55,6 +55,7 @@ import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS;
 import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
+import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
 import mage.constants.PlayerAction;
 import mage.view.PlayerView;
 
@@ -72,7 +73,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private final GamePanel gamePanel;
     private final PlayAreaPanelOptions options;
     
-    private JCheckBoxMenuItem manaPoolMenuItem;
+    private JCheckBoxMenuItem manaPoolMenuItem1;
+    private JCheckBoxMenuItem manaPoolMenuItem2;
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
     
     public static final int PANEL_HEIGHT = 242;
@@ -139,99 +141,135 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         JMenuItem menuItem;
 
-        menuItem = new JMenuItem("F2 - Confirm");
-        popupMenu.add(menuItem);
-
-        // Confirm (F2)
-        menuItem.addActionListener(new ActionListener() {
+        ActionListener skipListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (gamePanel.getFeedbackPanel() != null) {
-                    gamePanel.getFeedbackPanel().pressOKYesOrDone();
+                switch (e.getActionCommand()) {
+                    case "F2": {
+                        if (gamePanel.getFeedbackPanel() != null) {
+                            gamePanel.getFeedbackPanel().pressOKYesOrDone();
+                        }
+                        break;
+                    }
+                    case "F3": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+                        break;
+                    }
+                    case "F4": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+                        break;
+                    }
+                    case "F5": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+                        break;
+                    }
+                    case "F7": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+                        break;
+                    }
+                    case "F9": {
+                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+                        break;
+                    }                                           
                 }
             }
-        });
-
-
-        menuItem = new JMenuItem("F3 - Cancel previous F4/F9 skip action");
+        };
+                        
+        menuItem = new JMenuItem("<html><b>F2</b> - Confirm current request");
+        menuItem.setActionCommand("F2");
+        menuItem.setMnemonic(KeyEvent.VK_O);
         popupMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
 
-        // Cancel (F3)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
-            }
-        });
+        menuItem = new JMenuItem("<html><b>F3</b> - Cancel active skip action");
+        menuItem.setActionCommand("F3");
+        menuItem.setMnemonic(KeyEvent.VK_N);
+        popupMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+
+
+        JMenu skipMenu = new JMenu("Skip");
+        skipMenu.setMnemonic(KeyEvent.VK_S);
+        popupMenu.add(skipMenu);
+        
+        String tooltipText = "<html>This skip actions stops if something goes to <br><b>stack</b> and if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>.";
+        menuItem = new JMenuItem("<html><b>F4</b> - Phases until next turn");
+        menuItem.setActionCommand("F4");
+        menuItem.setToolTipText(tooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_T);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+
+        menuItem = new JMenuItem("<html><b>F5</b> - Phases until next end step");
+        menuItem.setActionCommand("F5");
+        menuItem.setToolTipText(tooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_E);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+
+        menuItem = new JMenuItem("<html><b>F7</b> - Phases until begin of next main phase");
+        menuItem.setToolTipText(tooltipText);
+        menuItem.setActionCommand("F7");
+        menuItem.setMnemonic(KeyEvent.VK_M);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
+        
+        menuItem = new JMenuItem("<html><b>F9</b> - Everything until your own next turn");
+        menuItem.setActionCommand("F9");
+        menuItem.setToolTipText(tooltipText);
+        menuItem.setMnemonic(KeyEvent.VK_N);
+        skipMenu.add(menuItem);
+        menuItem.addActionListener(skipListener);
 
         popupMenu.addSeparator();
-
-        menuItem = new JMenuItem("F4 - Skip phases until next turn (stop on stack/attack/block)");
-        popupMenu.add(menuItem);
-
-        // Skip to next turn (F4)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
-            }
-        });
-
-        menuItem = new JMenuItem("F5 - Skip phases until next end step (stop on stack/attack/block)");
-        popupMenu.add(menuItem);
-
-        // Skip to next end step of turn (F5)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
-            }
-        });
-
-        menuItem = new JMenuItem("F7 - Skip phases until begin of next main phase (stop on stack/attack/block)");
-        popupMenu.add(menuItem);
-
-        // Skip to next main phase (F7)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
-            }
-        });
-        menuItem = new JMenuItem("F9 - Skip everything until own next turn (stop on attack/block)");
-        popupMenu.add(menuItem);
-
-        // Skip to next own turn (F9)
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
-            }
-        });
-
-        popupMenu.addSeparator();
-
-        manaPoolMenuItem = new JCheckBoxMenuItem("Use mana from pool automatically", true);
-        manaPoolMenuItem.setMnemonic(KeyEvent.VK_M);
-        manaPoolMenuItem.setToolTipText("If not active, you have to click the type of mana you want to pay in the player panel.");
-        popupMenu.add(manaPoolMenuItem);
+        
+        JMenu manaPoolMenu = new JMenu("Mana payment");
+        manaPoolMenu.setMnemonic(KeyEvent.VK_M);        
+        popupMenu.add(manaPoolMenu);
+        
+        manaPoolMenuItem1 = new JCheckBoxMenuItem("Automatically", true);
+        manaPoolMenuItem1.setMnemonic(KeyEvent.VK_A);
+        manaPoolMenuItem1.setToolTipText("<html>If not active, produced mana goes only to the mana pool<br>"
+                                             + "and you have to click the type of mana you want to use <br>"
+                                             + "in the player mana pool panel for payment.");
+        manaPoolMenu.add(manaPoolMenuItem1);
 
         // Auto pay mana from mana pool
-        manaPoolMenuItem.addActionListener(new ActionListener() {
+        manaPoolMenuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true": "false");
-                gamePanel.setMenuStates(manaPoolAutomatic);
+                gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState());
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
+        manaPoolMenuItem2 = new JCheckBoxMenuItem("No automatic usage for mana already in the pool", true);
+        manaPoolMenuItem2.setMnemonic(KeyEvent.VK_N);
+        manaPoolMenuItem2.setToolTipText("<html>Mana that is already in the mana pool as you start casting a spell or activating an ability<br>"
+                                            + " needs to be payed manually. So you use the mana in the pool only by clicking on the related<br>"
+                                            + " mana symbols of mana pool area.");
+        manaPoolMenu.add(manaPoolMenuItem2);
 
+        // Auto pay mana from mana pool
+        manaPoolMenuItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem)e.getSource()).getState();
+                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true": "false");
+                gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted);
+                gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+            }
+        });
 
+        JMenu automaticConfirmsMenu = new JMenu("Automatic confirms");
+        automaticConfirmsMenu.setMnemonic(KeyEvent.VK_U);
+        popupMenu.add(automaticConfirmsMenu);
+        
         menuItem = new JMenuItem("Replacement effects - reset auto select");
         menuItem.setMnemonic(KeyEvent.VK_R);
         menuItem.setToolTipText("Reset all effects that were added to the list of auto select replacement effects this game.");
-        popupMenu.add(menuItem);
+        automaticConfirmsMenu.add(menuItem);
         // Reset the replacement effcts that were auto selected for the game
         menuItem.addActionListener(new ActionListener() {
             @Override
@@ -240,11 +278,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        popupMenu.addSeparator();
-
+        JMenu handCardsMenu = new JMenu("Cards on hand");
+        handCardsMenu.setMnemonic(KeyEvent.VK_H);
+        popupMenu.add(handCardsMenu);
+        
         if (!options.playerItself) {
-            menuItem = new JMenuItem("Request permission to see hand cards");
-            popupMenu.add(menuItem);
+            menuItem = new JMenuItem("Request permission to see the hand cards");
+            menuItem.setMnemonic(KeyEvent.VK_P);
+            handCardsMenu.add(menuItem);
 
             // Request to see hand cards
             menuItem.addActionListener(new ActionListener() {
@@ -254,10 +295,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             });
         } else {
-            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow requests to show your hand cards", allowRequestToShowHandCards);
+            allowViewHandCardsMenuItem = new JCheckBoxMenuItem("Allow requests to show from other users", allowRequestToShowHandCards);
             allowViewHandCardsMenuItem.setMnemonic(KeyEvent.VK_A);
             allowViewHandCardsMenuItem.setToolTipText("If activated watchers or other players can request to see your hand cards. If you grant this to a user, it's valid for the complete match.");
-            popupMenu.add(allowViewHandCardsMenuItem);
+            handCardsMenu.add(allowViewHandCardsMenuItem);
 
             // Requests allowed
             allowViewHandCardsMenuItem.addActionListener(new ActionListener() {
@@ -270,9 +311,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             });
 
             menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
-            menuItem.setMnemonic(KeyEvent.VK_P);
+            menuItem.setMnemonic(KeyEvent.VK_R);
             menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
-            popupMenu.add(menuItem);
+            handCardsMenu.add(menuItem);
 
             // revoke permissions to see hand cards
             menuItem.addActionListener(new ActionListener() {
@@ -282,8 +323,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             });
         }
-        popupMenu.addSeparator();
-        
+               
         if (options.rollbackTurnsAllowed) {
             ActionListener rollBackActionListener = new ActionListener() {
                 @Override
@@ -298,78 +338,73 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
             popupMenu.add(rollbackMainItem);
             
-            menuItem = new JMenuItem("to the start of the current turn");
+            menuItem = new JMenuItem("To the start of the current turn");
             menuItem.setMnemonic(KeyEvent.VK_C);
             menuItem.setActionCommand("0");
             menuItem.addActionListener(rollBackActionListener);            
             rollbackMainItem.add(menuItem);
    
-            menuItem = new JMenuItem("to the start of the previous turn");
+            menuItem = new JMenuItem("To the start of the previous turn");
             menuItem.setMnemonic(KeyEvent.VK_P);
             menuItem.setActionCommand("1");
             menuItem.addActionListener(rollBackActionListener);            
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem("the current turn and the 2 turns before");
+            menuItem = new JMenuItem("The current turn and the 2 turns before");
             menuItem.setMnemonic(KeyEvent.VK_2);
             menuItem.setActionCommand("2");
             menuItem.addActionListener(rollBackActionListener);            
             rollbackMainItem.add(menuItem);
 
-            menuItem = new JMenuItem("the current turn and the 3 turns before");
+            menuItem = new JMenuItem("The current turn and the 3 turns before");
             menuItem.setMnemonic(KeyEvent.VK_3);
             menuItem.setActionCommand("3");
             menuItem.addActionListener(rollBackActionListener);            
             rollbackMainItem.add(menuItem);
+                      
+        }            
             
-            popupMenu.addSeparator();
-           
-        }
-            
-        menuItem = new JMenuItem("Revoke all permission(s) to see your hand cards");
-        menuItem.setMnemonic(KeyEvent.VK_P);
-        menuItem.setToolTipText("Revoke already granted permission for all spectators to see your hand cards.");
-        popupMenu.add(menuItem);
+       
 
-        // revoke permissions to see hand cards
-        menuItem.addActionListener(new ActionListener() {
+        JMenu concedeMenu = new JMenu("Concede");
+        concedeMenu.setMnemonic(KeyEvent.VK_C);
+        popupMenu.add(concedeMenu);
+        
+        ActionListener concedeListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gamePanel.getSession().sendPlayerAction(PlayerAction.REVOKE_PERMISSIONS_TO_SEE_HAND_CARDS, gameId, null);
-            }
-        });
-            
-        popupMenu.addSeparator();
-
-        menuItem = new JMenuItem("Concede game");
-        popupMenu.add(menuItem);
-
-        // Concede
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
+                switch (e.getActionCommand()) {
+                    case "Game": {
+                        if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
+                        }                        
+                    }
+                    case "Match": {
+                        if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            MageFrame.getSession().quitMatch(gameId);
+                        }                        
+                    }
                 }
             }
-        });
+        };
+        
+        // Concede Game
+        menuItem = new JMenuItem("Game");
+        menuItem.setMnemonic(KeyEvent.VK_G);
+        menuItem.setActionCommand("Game");
+        menuItem.setToolTipText("Concedes only the current game and after that the next game of the match is started if there is another game needed.");
+        concedeMenu.add(menuItem);
+        menuItem.addActionListener(concedeListener);
+        
+        // Concede Match
+        menuItem = new JMenuItem("Match");
+        menuItem.setMnemonic(KeyEvent.VK_M);
+        menuItem.setActionCommand("Match");
+        menuItem.setToolTipText("Concedes the complete match. So if you're in a tournament you finish the current tournament round.");
+        concedeMenu.add(menuItem);
+        menuItem.addActionListener(concedeListener);
 
-        popupMenu.addSeparator();
-
-        menuItem = new JMenuItem("Concede complete match");
-        popupMenu.add(menuItem);
-
-        // Quit match
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    MageFrame.getSession().quitMatch(gameId);
-                }
-            }
-        });
-
-
+        
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
@@ -531,8 +566,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playingMode = playingMode;
     }
 
-    public void setMenuStates(boolean manaPoolAutomatic) {
-        manaPoolMenuItem.setSelected(manaPoolAutomatic);
+    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
+        manaPoolMenuItem1.setSelected(manaPoolAutomatic);
+        manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
     }
     
     private mage.client.game.BattlefieldPanel battlefieldPanel;

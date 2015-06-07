@@ -224,7 +224,8 @@ public interface Game extends MageItem, Serializable {
     void timerTimeout(UUID playerId);
     void idleTimeout(UUID playerId);
     void concede(UUID playerId);
-    void setManaPoolMode(UUID playerId, boolean autoPayment);
+    void setManaPaymentMode(UUID playerId, boolean autoPayment);
+    void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted);
     void undo(UUID playerId);
     void emptyManaPools();
     void addEffect(ContinuousEffect continuousEffect, Ability source);

@@ -134,6 +134,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // mana auto payment
     public static final String KEY_GAME_MANA_AUTOPAYMENT = "gameManaAutopayment";
+    public static final String KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE = "gameManaAutopaymentOnlyOne";
     
     // Size of frame to check if divider locations should be used
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";

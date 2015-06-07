@@ -1085,6 +1085,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
+        getManaPool().setStock(); // needed for the "mana already in the pool has to be used manually" option
         boolean result;
         if (ability instanceof PassAbility) {
             pass(game);
