@@ -58,7 +58,9 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
     @Override
     protected TestPlayer createPlayer(String name) {
         if (name.equals("PlayerA")) {
-            return new TestPlayer(new ComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
+            TestPlayer testPlayer = new TestPlayer(new ComputerPlayer7("PlayerA", RangeOfInfluence.ONE, skill));
+            testPlayer.setAIPlayer(true);
+            return testPlayer;
         }
         return super.createPlayer(name);
     }

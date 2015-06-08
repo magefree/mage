@@ -108,6 +108,7 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 100;
     private int foundNoAction = 0;
+    private boolean AIPlayer;
 
     private final List<PlayerAction> actions = new ArrayList<>();
     private final List<String> choices = new ArrayList<>();
@@ -119,6 +120,7 @@ public class TestPlayer implements Player {
     
     public TestPlayer(ComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
+        AIPlayer = false;
     }
 
     public TestPlayer(final TestPlayer testPlayer) {
@@ -414,7 +416,11 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        computerPlayer.pass(game);
+        if (AIPlayer) {
+            computerPlayer.priority(game);
+        } else {
+            computerPlayer.pass(game);
+        }
         // check to prevent endless loops
         if (numberOfActions == actions.size()) {
             foundNoAction++;
@@ -1807,6 +1813,14 @@ public class TestPlayer implements Player {
     @Override
     public void pickCard(List<Card> cards, Deck deck, Draft draft) {
         computerPlayer.pickCard(cards, deck, draft);
+    }
+
+    public void setAIPlayer(boolean AIPlayer) {
+        this.AIPlayer = AIPlayer;
+    }
+
+    public boolean isAIPlayer() {
+        return AIPlayer;
     }
 
 }
