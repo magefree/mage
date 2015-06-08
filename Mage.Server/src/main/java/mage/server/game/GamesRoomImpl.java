@@ -146,7 +146,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
         if (tables.containsKey(tableId)) {
             return TableManager.getInstance().joinTable(userId, tableId, name, playerType, skill, deckList, password);
         } else {
@@ -162,7 +162,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
         if (tables.containsKey(tableId)) {
             return TableManager.getInstance().joinTournament(userId, tableId, name, playerType, skill, deckList, password);
         } else {

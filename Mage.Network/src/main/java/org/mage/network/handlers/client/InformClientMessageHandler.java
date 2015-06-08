@@ -19,7 +19,7 @@ public class InformClientMessageHandler extends SimpleChannelInboundHandler<Info
     
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, InformClientMessage msg) throws Exception {
-        client.inform(msg.getMessage(), msg.getType());
+        client.inform(msg.getTitle(), msg.getMessage(), msg.getType());
     }
     
 }

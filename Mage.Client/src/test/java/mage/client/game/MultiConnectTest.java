@@ -94,7 +94,7 @@ public class MultiConnectTest {
 //        }
 
         @Override
-        public void inform(String message, MessageType type) {
+        public void inform(String title, String message, MessageType type) {
             if (type == MessageType.ERROR) {
                 showError(message);
             }

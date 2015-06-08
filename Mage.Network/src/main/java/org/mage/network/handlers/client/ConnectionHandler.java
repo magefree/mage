@@ -4,7 +4,6 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.log4j.Logger;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.MessageType;
 
 /**
  *

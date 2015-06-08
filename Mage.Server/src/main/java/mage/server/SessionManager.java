@@ -73,9 +73,10 @@ public class SessionManager {
 //        sessions.put(sessionId, session);
 //    }
 
-    public boolean registerUser(String sessionId, String userName) throws MageException {
+    public boolean registerUser(String sessionId, String userName, String host) throws MageException {
         Session session = new Session(sessionId);
         sessions.put(sessionId, session);
+        session.setHost(host);
 //        Session session = sessions.get(sessionId);
 //        if (session != null) {
             String returnMessage = session.registerUser(userName);
@@ -89,7 +90,7 @@ public class SessionManager {
                 return true;
             }
             logger.debug(userName + " not registered: " + returnMessage);
-            Main.getInstance().informClient(sessionId, returnMessage, MessageType.ERROR);
+            Main.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
 //            Server.informClient(sessionId, returnMessage, MessageType.ERROR);
 
 //        } else {

@@ -53,6 +53,7 @@ import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
+import org.mage.network.model.MessageType;
 
 
 /**
@@ -220,11 +221,12 @@ public class User {
         fireCallback(new ClientCallback("showGameEndDialog", gameId));
     }
 
-    public void showUserMessage(final String titel,  String message) {
-        List<String> messageData = new LinkedList<>();
-        messageData.add(titel);
-        messageData.add(message);
-        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
+    public void showUserMessage(final String title,  String message) {
+//        List<String> messageData = new LinkedList<>();
+//        messageData.add(titel);
+//        messageData.add(message);
+//        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
+        Main.getInstance().informClient(sessionId, title, message, MessageType.INFORMATION);
     }
 
     public boolean ccWatchGame(final UUID gameId) {

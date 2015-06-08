@@ -242,16 +242,16 @@ public class Main implements MageServer {
     }
     
     @Override
-    public boolean registerClient(String userName, String sessionId, MageVersion version)  {
+    public boolean registerClient(String userName, String sessionId, MageVersion version, String host)  {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 logger.info("MageVersionException: userName=" + userName + ", version=" + version);
                 LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
-                server.informClient(sessionId, "Wrong version", MessageType.ERROR);
+                String message = "Wrong client version " + version + ", expecting version " + Main.getVersion() + ". \r\n\r\nPlease download needed version from http://XMage.de or http://www.slightlymagic.net/forum/viewforum.php?f=70";
+                server.informClient(sessionId, "Wrong version", message, MessageType.ERROR);
                 return false;
-//                throw new MageVersionException(version, Main.getVersion());
             }
-            return SessionManager.getInstance().registerUser(sessionId, userName);
+            return SessionManager.getInstance().registerUser(sessionId, userName, host);
         } catch (MageException ex) {
 //            if (ex instanceof MageVersionException) {
 //                throw (MageVersionException)ex;
@@ -287,26 +287,26 @@ public class Main implements MageServer {
 //        return false;
 //    }
 //
-//    @Override
-//    public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) throws MageException {
+    @Override
+    public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) {
 //        return executeWithResult("createTable", sessionId, new ActionWithTableViewResult() {
 //            @Override
 //            public TableView execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
-//                if (logger.isDebugEnabled()) {
-//                    User user = UserManager.getInstance().getUser(userId);
-//                    if (user != null) {
-//                        logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
-//                        logger.debug("- " + user.getName() + " userId: " + user.getId());
-//                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));                        
-//                    }
-//                }
-//                LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
-//                return table;
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
+                if (logger.isDebugEnabled()) {
+                    User user = UserManager.getInstance().getUser(userId);
+                    if (user != null) {
+                        logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
+                        logger.debug("- " + user.getName() + " userId: " + user.getId());
+                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));                        
+                    }
+                }
+                LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
+                return table;
 //            }
 //        });
-//    }
+    }
 //
 //    @Override
 //    public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) throws MageException {
@@ -356,22 +356,22 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+    @Override
+    public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) {
 //        return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
 //            @Override
 //            public Boolean execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                logger.debug(name + " joins tableId: " + tableId);
-//                if (userId == null) {
-//                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
-//                    return false;
-//                }                
-//                boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList, password);
-//                return ret;
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                logger.debug(name + " joins tableId: " + tableId);
+                if (userId == null) {
+                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+                    return false;
+                }                
+                boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList, password);
+                return ret;
 //            }
 //        });
-//    }
+    }
 //
 //    @Override
 //    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
@@ -586,14 +586,14 @@ public class Main implements MageServer {
 
     @Override
     public void receiveChatMessage(final UUID chatId, final String sessionId, final String message) {
-        execute("receiveChatMessage", sessionId, new Action() {
-            @Override
-            public void execute() {
+//        execute("receiveChatMessage", sessionId, new Action() {
+//            @Override
+//            public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null)
                     ChatManager.getInstance().broadcast(chatId, user, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
-            }
-        });
+//            }
+//        });
 //        }
 //        catch (Exception ex) {
 //            handleException(sessionId, ex);
@@ -1088,7 +1088,7 @@ public class Main implements MageServer {
     public void handleException(String sessionId, Exception ex) {
         if (!ex.getMessage().equals("No message")) {
             logger.fatal("", ex);
-            server.informClient(sessionId, "Server error: " + ex.getMessage(), MessageType.ERROR);
+            server.informClient(sessionId, "Server error", ex.getMessage(), MessageType.ERROR);
 //            throw new MageException("Server error: " + ex.getMessage());
         }
     }
@@ -1219,57 +1219,57 @@ public class Main implements MageServer {
 //    }
     
     @Override
-    public void receiveBroadcastMessage(String message, String sessionId) {
+    public void receiveBroadcastMessage(String title, String message, String sessionId) {
         if (SessionManager.getInstance().isAdmin(sessionId)) {
             if (message.toLowerCase(Locale.ENGLISH).startsWith("warn")) {
-                server.informClients(message, MessageType.WARNING);
+                server.informClients(title, message, MessageType.WARNING);
             } else {
-                server.informClients(message, MessageType.INFORMATION);
+                server.informClients(title, message, MessageType.INFORMATION);
             }
         }
     }
 
-    public void informClient(String sessionId, String mesage, MessageType type) {
-        server.informClient(sessionId, mesage, type);
+    public void informClient(String sessionId, String title, String message, MessageType type) {
+        server.informClient(sessionId, title, message, type);
     }
     
-    protected void execute(final String actionName, final String sessionId, final Action action, boolean checkAdminRights) throws MageException {
-        if (checkAdminRights) {
-            if (!SessionManager.getInstance().isAdmin(sessionId)) {
-                LogServiceImpl.instance.log(LogKeys.KEY_NOT_ADMIN, actionName, sessionId);
-                return;
-            }
-        }
-        execute(actionName, sessionId, action);
-    }
-
-    protected void execute(final String actionName, final String sessionId, final Action action) {
-        if (SessionManager.getInstance().isValidSession(sessionId)) {
-            try {
-                callExecutor.execute(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            if (SessionManager.getInstance().isValidSession(sessionId)) {
-                                try {
-                                    action.execute();
-                                } catch (MageException me) {
-                                    throw new RuntimeException(me);
-                                }
-                            } else {
-                                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
-                            }
-                        }
-                    }
-                );
-            }
-            catch (Exception ex) {                
-                handleException(sessionId, ex);
-            }
-        } else {
-            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
-        }
-    }
+//    protected void execute(final String actionName, final String sessionId, final Action action, boolean checkAdminRights) throws MageException {
+//        if (checkAdminRights) {
+//            if (!SessionManager.getInstance().isAdmin(sessionId)) {
+//                LogServiceImpl.instance.log(LogKeys.KEY_NOT_ADMIN, actionName, sessionId);
+//                return;
+//            }
+//        }
+//        execute(actionName, sessionId, action);
+//    }
+//
+//    protected void execute(final String actionName, final String sessionId, final Action action) {
+//        if (SessionManager.getInstance().isValidSession(sessionId)) {
+//            try {
+//                callExecutor.execute(
+//                    new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            if (SessionManager.getInstance().isValidSession(sessionId)) {
+//                                try {
+//                                    action.execute();
+//                                } catch (MageException me) {
+//                                    throw new RuntimeException(me);
+//                                }
+//                            } else {
+//                                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
+//                            }
+//                        }
+//                    }
+//                );
+//            }
+//            catch (Exception ex) {                
+//                handleException(sessionId, ex);
+//            }
+//        } else {
+//            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
+//        }
+//    }
 
 //    protected <T> T executeWithResult(String actionName, final String sessionId, final ActionWithResult<T> action, boolean checkAdminRights) throws MageException {
 //        if (checkAdminRights) {

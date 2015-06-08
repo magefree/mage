@@ -42,6 +42,7 @@ import mage.view.TournamentTypeView;
  */
 public class ServerState implements Serializable {
 
+    private final boolean valid;
     private final List<GameTypeView> gameTypes;
     private final List<TournamentTypeView> tournamentTypes;
     private final String[] playerTypes;
@@ -57,6 +58,7 @@ public class ServerState implements Serializable {
             String[] playerTypes, String[] deckTypes, String[] draftCubes, boolean testMode,
             MageVersion version, long cardsContentVersion, long expansionsContentVersion,
             UUID mainRoomId) {
+        this.valid = true;
         this.gameTypes = gameTypes;
         this.tournamentTypes = tournamentTypes;
         this.playerTypes = playerTypes;
@@ -69,6 +71,24 @@ public class ServerState implements Serializable {
         this.mainRoomId = mainRoomId;
     }
 
+    public ServerState() {
+        this.valid = false;
+        this.gameTypes = new ArrayList<>();
+        this.tournamentTypes = new ArrayList<>();;
+        this.playerTypes = new String[1];
+        this.deckTypes = new String[1];
+        this.draftCubes = new String[1];
+        this.testMode = false;
+        this.version = new MageVersion(0,0,0,"","");
+        this.cardsContentVersion = 0;
+        this.expansionsContentVersion = 0;
+        this.mainRoomId = UUID.randomUUID();
+    }
+    
+    public boolean isValid() {
+        return valid;
+    }
+    
     public List<GameTypeView> getGameTypes() {
         return gameTypes;
     }

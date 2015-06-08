@@ -34,6 +34,7 @@ import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
+import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.client.ChatMessageHandler;
@@ -41,8 +42,10 @@ import org.mage.network.handlers.client.ChatRoomHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.ConnectionHandler;
 import org.mage.network.handlers.client.InformClientMessageHandler;
+import org.mage.network.handlers.client.JoinTableMessageHandler;
 import org.mage.network.handlers.client.ServerMessageHandler;
 import org.mage.network.handlers.client.RoomMessageHandler;
+import org.mage.network.handlers.client.TableMessageHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -66,6 +69,10 @@ public class Client {
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
     private final RoomMessageHandler roomMessageHandler;
+    private final TableMessageHandler tableMessageHandler;
+    private final JoinTableMessageHandler joinTableMessageHandler;
+    
+    private final ExceptionHandler exceptionHandler;
     
     private SslContext sslCtx;
     private Channel channel;
@@ -81,9 +88,13 @@ public class Client {
         chatRoomHandler = new ChatRoomHandler();
         chatMessageHandler = new ChatMessageHandler(client);
         informClientMessageHandler = new InformClientMessageHandler(client);
-        clientRegisteredMessageHandler = new ClientRegisteredMessageHandler(client);
+        clientRegisteredMessageHandler = new ClientRegisteredMessageHandler();
         serverMessageHandler = new ServerMessageHandler();
         roomMessageHandler = new RoomMessageHandler();
+        tableMessageHandler = new TableMessageHandler();
+        joinTableMessageHandler = new JoinTableMessageHandler();
+        
+        exceptionHandler = new ExceptionHandler();
     }
     
     public boolean connect(String userName, String host, int port, boolean ssl, MageVersion version) {
@@ -107,17 +118,23 @@ public class Client {
             clientRegisteredMessageHandler.setUserName(userName);
             clientRegisteredMessageHandler.setVersion(version);
             channel = b.connect(host, port).sync().channel();
-            clientRegisteredMessageHandler.registerClient();
-            client.connected(userName + "@" + host + ":" + port + " ");
-            return true;
+            ServerState state = clientRegisteredMessageHandler.registerClient();
+            if (state.isValid()) {
+                client.clientRegistered(state);
+                client.connected(userName + "@" + host + ":" + port + " ");
+                return true;
+            }
+            else {
+                disconnect(false);
+            }
         } catch (SSLException | InterruptedException ex) {
             logger.fatal("Error connecting", ex);
-            client.inform("Error connecting", MessageType.ERROR);
-            group.shutdownGracefully();
+            client.inform("Error", "Error connecting", MessageType.ERROR);
+            disconnect(false);
         }
         return false;
     }
-    
+        
     private class ClientInitializer extends ChannelInitializer<SocketChannel> {
 
         @Override
@@ -140,8 +157,11 @@ public class Client {
             ch.pipeline().addLast("clientRegisteredMessageHandler", clientRegisteredMessageHandler);
             ch.pipeline().addLast("chatRoomHandler", chatRoomHandler);
             ch.pipeline().addLast("serverMessageHandler", serverMessageHandler);
-            ch.pipeline().addLast("tablesMessageHandler", roomMessageHandler);
+            ch.pipeline().addLast("roomMessageHandler", roomMessageHandler);
+            ch.pipeline().addLast("tableMessageHandler", tableMessageHandler);
+            ch.pipeline().addLast("joinTableMessageHandler", joinTableMessageHandler);
 
+            ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
     }
     
@@ -207,12 +227,22 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String human, int i, DeckCardLists importDeck, String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
+        try {
+            return joinTableMessageHandler.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
+        } catch (Exception ex) {
+            logger.error("Error creating table", ex);
+        }
+        return false;
     }
 
     public TableView createTable(UUID roomId, MatchOptions options) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return tableMessageHandler.createTable(roomId, options);
+        } catch (Exception ex) {
+            logger.error("Error creating table", ex);
+        }
+        return null;
     }
 
     public void removeTable(UUID roomId, UUID tableId) {

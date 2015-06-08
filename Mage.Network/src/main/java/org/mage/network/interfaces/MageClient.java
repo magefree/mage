@@ -14,7 +14,7 @@ public interface MageClient {
     void connected(String message);
     void disconnected(boolean error);
     
-    void inform(String message, MessageType type);
+    void inform(String title, String message, MessageType type);
     
     void receiveChatMessage(UUID chatId, ChatMessage message);
     void receiveBroadcastMessage(String message);

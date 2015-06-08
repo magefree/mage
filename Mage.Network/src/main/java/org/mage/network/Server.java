@@ -23,16 +23,19 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 import java.util.UUID;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
+import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.server.ChatMessageHandler;
 import org.mage.network.handlers.server.ChatRoomIdHandler;
 import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.JoinChatMessageHandler;
+import org.mage.network.handlers.server.JoinTableMessageHandler;
 import org.mage.network.handlers.server.LeaveChatMessageHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
 import org.mage.network.handlers.server.RoomMessageHandler;
 import org.mage.network.handlers.server.ServerMessageHandler;
+import org.mage.network.handlers.server.TableMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.MessageType;
@@ -66,6 +69,10 @@ public class Server {
     private final LeaveChatMessageHandler leaveChatMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
     private final RoomMessageHandler roomMessageHandler;
+    private final TableMessageHandler tableMessageHandler;
+    private final JoinTableMessageHandler joinTableMessageHandler;
+    
+    private final ExceptionHandler exceptionHandler;
     
     public Server(MageServer server) {
         this.server = server;
@@ -76,6 +83,10 @@ public class Server {
         chatRoomIdHandler = new ChatRoomIdHandler(server);
         serverMessageHandler = new ServerMessageHandler(server);
         roomMessageHandler = new RoomMessageHandler(server);
+        tableMessageHandler = new TableMessageHandler(server);
+        joinTableMessageHandler = new JoinTableMessageHandler(server);
+        
+        exceptionHandler = new ExceptionHandler();
     }
     
     public void start(int port, boolean ssl) throws Exception {
@@ -131,6 +142,10 @@ public class Server {
             ch.pipeline().addLast(handlersExecutor, "leaveChatMessageHandler", leaveChatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "serverMessageHandler", serverMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "roomMessageHandler", roomMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "tableMessageHandler", tableMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "joinTableMessageHandler", joinTableMessageHandler);
+            
+            ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
 
     }    
@@ -150,14 +165,14 @@ public class Server {
             ch.writeAndFlush(new ReceiveChatMessage(chatId, message));
     }
 
-    public void informClient(String sessionId, String message, MessageType type) {
+    public void informClient(String sessionId, String title, String message, MessageType type) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new InformClientMessage(message, type));
+            ch.writeAndFlush(new InformClientMessage(title, message, type));
     }
 
-    public void informClients(String message, MessageType type) {
-        clients.writeAndFlush(new InformClientMessage(message, type));
+    public void informClients(String title, String message, MessageType type) {
+        clients.writeAndFlush(new InformClientMessage(title, message, type));
     }
 
     public void pingClient(String sessionId) {

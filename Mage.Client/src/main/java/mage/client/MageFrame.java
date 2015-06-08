@@ -788,7 +788,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (connect(connection)) {  
                 return true;
             } else {
-                showMessage("Unable to connect to server");
+                showMessage("Error Connecting", "Unable to connect to server");
             }
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -974,7 +974,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 client.disconnect(false);
                 tablesPane.clearChat();
                 setWindowTitle();
-                showMessage("You have disconnected");                
+                showMessage("Disconnected", "You have disconnected");                
             }
         } else {
             connectDialog.showDialog();
@@ -1357,27 +1357,27 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 //        }
     }
 
-    public void showMessage(final String message) {
+    public void showMessage(final String title, final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message);
+            JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
         } else {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message);
+                    JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
                 }
             });
         }
     }
 
-    public void showError(final String message) {
+    public void showError(final String title, final String message) {
         if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.ERROR_MESSAGE);
         } else {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message, "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.ERROR_MESSAGE);
                 }
             });
         }
@@ -1389,12 +1389,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 //    }
 
     @Override
-    public void inform(String message, MessageType type) {
+    public void inform(String title, String message, MessageType type) {
         if (type == MessageType.ERROR) {
-            showError(message);
+            showError(title, message);
         }
         else {
-            showMessage(message);
+            showMessage(title, message);
         }
     }
 

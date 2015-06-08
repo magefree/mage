@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -149,18 +150,19 @@ public class TableController {
         );
     }
 
-    public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws GameException {
+    public synchronized boolean joinTournament(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
         if (table.getState() != TableState.WAITING) {
             return false;
         }
 
-        Seat seat = table.getNextAvailableSeat(playerType);
-        if (seat == null) {
-            throw new GameException("No available seats.");
-        }
         User user = UserManager.getInstance().getUser(userId);
         if (user == null) {
             logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tournament userId = ").append(userId).toString());
+            return false;
+        }
+        Seat seat = table.getNextAvailableSeat(playerType);
+        if (seat == null) {
+            user.showUserMessage("Join Table", "No available seats");
             return false;
         }
         // check password
@@ -176,8 +178,14 @@ public class TableController {
         }
         Deck deck = null;
         if (!table.getTournament().getTournamentType().isLimited()) {
-            if  (deckList != null) {
-                deck = Deck.load(deckList, false, false);
+            if (deckList != null) {
+                try {
+                    deck = Deck.load(deckList, false, false);
+                } catch (GameException ex) {
+                    logger.error("Error loading deck", ex);
+                    user.showUserMessage("Join Table", "Error loading deck");
+                    return false;
+                }
             } else {
                 user.showUserMessage("Join Table", "No valid deck selected!");
                 return false;
@@ -220,7 +228,8 @@ public class TableController {
 
             return true;
         } else {
-            throw new GameException("Playertype " + seat.getPlayerType() + " could not be created.");
+            logger.error("Playertype " + seat.getPlayerType() + " could not be created.");
+            return false;
         }
     }
 
@@ -244,7 +253,7 @@ public class TableController {
         return true;
     }
 
-    public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws MageException {
+    public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
         User user = UserManager.getInstance().getUser(userId);
         if (user == null) {
             return false;
@@ -269,7 +278,15 @@ public class TableController {
             user.showUserMessage("Join Table", "No available seats.");
             return false;
         }
-        Deck deck = Deck.load(deckList, false, false);
+        
+        Deck deck;
+        try {
+            deck = Deck.load(deckList, false, false);
+        } catch (GameException ex) {
+            logger.error("Error load deck", ex);
+            user.showUserMessage("Join Table", "Error loading deck");
+            return false;
+        }
 
         if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
@@ -297,7 +314,10 @@ public class TableController {
             return false;
         }
         match.addPlayer(player, deck);
-        table.joinTable(player, seat);
+        if (table.joinTable(player, seat) == null) {
+            user.showUserMessage("Join Table", "Seat is occupied");
+            return false;
+        } 
         logger.trace(player.getName() + " joined tableId: " + table.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {

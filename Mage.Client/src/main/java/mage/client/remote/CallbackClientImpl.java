@@ -507,6 +507,6 @@ public class CallbackClientImpl implements CallbackClient {
 
     private void handleException(Exception ex) {
         logger.fatal("Client error\n", ex);
-        frame.showError("Error: " + ex.getMessage());
+//        frame.showError("Error: " + ex.getMessage());
     }
 }

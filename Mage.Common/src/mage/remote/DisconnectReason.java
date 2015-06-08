@@ -6,5 +6,5 @@ package mage.remote;
  */
 
 public enum DisconnectReason {
-    LostConnection, Disconnected, CleaningUp, ConnectingOtherInstance, AdminDisconnect, SessionExpired, Undefined;
+    LostConnection, Disconnected, CleaningUp, ConnectingOtherInstance, AdminDisconnect, SessionExpired, ValidationError, Undefined;
 }

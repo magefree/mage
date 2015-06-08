@@ -17,19 +17,14 @@ import org.mage.network.model.RegisterClientMessage;
  */
 public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<ClientRegisteredMessage> {
 
-    private final MageClient client;    
+//    private final MageClient client;    
 //    private ChannelHandlerContext ctx;
     private final BlockingQueue<ServerState> queue = new LinkedBlockingQueue<>();
     private String userName;
     private MageVersion version;
-
-    public ClientRegisteredMessageHandler (MageClient client) {
-        this.client = client;
-    }
     
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//        this.ctx = ctx;
         ctx.writeAndFlush(new RegisterClientMessage(userName, version));
         super.channelActive(ctx);
     }    
@@ -47,8 +42,8 @@ public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<
         this.version = version;
     }
     
-    public void registerClient() throws InterruptedException {
-        client.clientRegistered(queue.take());
+    public ServerState registerClient() throws InterruptedException {
+        return queue.take();
     }
     
 }
