@@ -30,8 +30,8 @@ package mage.sets.legends;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -39,9 +39,10 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
 
 /**
  *
@@ -53,7 +54,8 @@ public class AkronLegionnaire extends CardImpl {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new AkronLegionairePredicate());
+        filter.add(Predicates.not(new NamePredicate("Akron Legionnaire")));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public AkronLegionnaire(UUID ownerId) {
@@ -65,7 +67,9 @@ public class AkronLegionnaire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter)));
+        Effect effect = new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter);
+        effect.setText("Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
     }
 
@@ -76,22 +80,5 @@ public class AkronLegionnaire extends CardImpl {
     @Override
     public AkronLegionnaire copy() {
         return new AkronLegionnaire(this);
-    }
-}
-
-class AkronLegionairePredicate implements Predicate<Card> {
-
-    public AkronLegionairePredicate() {
-    }
-
-    @Override
-    public boolean apply(Card input, Game game) {
-        return !input.getCardType().contains(CardType.ARTIFACT)
-                || !input.getName().contains("Akron Legionaire");
-    }
-
-    @Override
-    public String toString() {
-        return "";
     }
 }

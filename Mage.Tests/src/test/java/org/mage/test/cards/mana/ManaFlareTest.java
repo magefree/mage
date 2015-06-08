@@ -41,7 +41,7 @@ public class ManaFlareTest extends CardTestPlayerBase {
 
     @Test
     public void testIsland() {
-        // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a multicolored spell.
+        // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         addCard(Zone.BATTLEFIELD, playerA, "Mana Flare", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
 

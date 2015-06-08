@@ -89,6 +89,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
      * @param options 
      */
     public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel, PlayAreaPanelOptions options) {
+        this.gamePanel = gamePanel;
         this.options = options;
         initComponents();
         setOpaque(false);
@@ -101,7 +102,6 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             addPopupMenuWatcher();
         }
         this.add(popupMenu);
-        this.gamePanel = gamePanel;
         init(player, bigCard, gameId, priorityTime);
         update(player);
     }
