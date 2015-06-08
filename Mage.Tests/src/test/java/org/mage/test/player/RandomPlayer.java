@@ -102,16 +102,18 @@ public class RandomPlayer extends ComputerPlayer {
         List<Ability> playables = getPlayableAbilities(game);
         Ability ability;
         while (true) {
-            if (playables.size() == 1)
+            if (playables.size() == 1) {
                 ability = playables.get(0);
-            else
+            } else {
                 ability = playables.get(rnd.nextInt(playables.size()));
+            }
             List<Ability> options = getPlayableOptions(ability, game);
             if (!options.isEmpty()) {
-                if (options.size() == 1)
+                if (options.size() == 1) {
                     ability = options.get(0);
-                else
+                } else {
                     ability = options.get(rnd.nextInt(options.size()));
+                }
             }
             if (ability.getManaCosts().getVariableCosts().size() > 0) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
@@ -154,10 +156,11 @@ public class RandomPlayer extends ComputerPlayer {
                 ability = source;
             }
             else {
-                if (options.size() == 1)
+                if (options.size() == 1) {
                     ability = options.get(0);
-                else
+                } else {
                     ability = options.get(rnd.nextInt(options.size()));
+                }
             }
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
@@ -203,15 +206,18 @@ public class RandomPlayer extends ComputerPlayer {
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
         int numGroups = game.getCombat().getGroups().size();
-        if (numGroups == 0) return;
+        if (numGroups == 0) {
+            return;
+        }
 
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker: blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
-                if (group.getAttackers().size() > 0)
+                if (group.getAttackers().size() > 0) {
                     this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
+                }
             }
         }
         actionCount++;
@@ -243,8 +249,9 @@ public class RandomPlayer extends ComputerPlayer {
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
         Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-        if (possibleTargets.isEmpty())
+        if (possibleTargets.isEmpty()) {
             return false;
+        }
         if (!target.isRequired(source)) {
             if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
@@ -300,8 +307,9 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards.isEmpty())
+        if (cards.isEmpty()) {
             return !target.isRequired(source);
+        }
         Card card = cards.getRandom(game);
         target.addTarget(card.getId(), source, game);
         return true;
@@ -373,8 +381,9 @@ public class RandomPlayer extends ComputerPlayer {
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         Iterator<Mode> it = modes.values().iterator();
         Mode mode = it.next();
-        if (modes.size() == 1)
+        if (modes.size() == 1) {
             return mode;
+        }
         int modeNum = rnd.nextInt(modes.values().size());
         for (int i = 0; i < modeNum; i++) {
             mode = it.next();

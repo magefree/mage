@@ -1595,7 +1595,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    protected List<Permanent> getAvailableManaProducers(Game game) {
+    public List<Permanent> getAvailableManaProducers(Game game) {
         return super.getAvailableManaProducers(game);
     }
 

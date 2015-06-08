@@ -1089,7 +1089,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
-        getManaPool().setStock(); // needed for the "mana already in the pool has to be used manually" option
         boolean result;
         if (ability instanceof PassAbility) {
             pass(game);
@@ -1156,7 +1155,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 return true;
             }
         }
-        game.restoreState(bookmark, source.getRule());
+        game.restoreState(bookmark, source.getRule()); // why restore is needed here?
         return false;
     }
 
@@ -2149,7 +2148,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         return blockers;
     }
 
-    protected ManaOptions getManaAvailable(Game game) {
+    @Override
+    public ManaOptions getManaAvailable(Game game) {
         ManaOptions available = new ManaOptions();
 
         List<Abilities<ManaAbility>> sourceWithoutCosts = new ArrayList<>();
@@ -2207,7 +2207,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     // returns only mana producers that require mana payment
-    protected List<Permanent> getAvailableManaProducersWithCost(Game game) {
+    public List<Permanent> getAvailableManaProducersWithCost(Game game) {
         List<Permanent> result = new ArrayList<>();
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ManaAbility ability : permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD)) {

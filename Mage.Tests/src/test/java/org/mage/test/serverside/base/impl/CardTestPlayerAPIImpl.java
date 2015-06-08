@@ -1,6 +1,8 @@
 package org.mage.test.serverside.base.impl;
 
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -18,19 +20,17 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import org.junit.Assert;
+import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
+import org.mage.test.serverside.base.CardTestAPI.GameResult;
 import org.mage.test.serverside.base.MageTestPlayerBase;
-
-import java.util.List;
-import java.util.UUID;
-import mage.game.GameOptions;
-import org.junit.Before;
 
 /**
  * API for test initialization and asserting the test results.
@@ -213,7 +213,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player {@link Player} to remove all library cards from.
      */
-    @Override
     public void removeAllCardsFromLibrary(TestPlayer player) {
         getCommands(player).put(Zone.LIBRARY, "clear");
     }
@@ -235,7 +234,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
@@ -248,7 +246,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
@@ -263,7 +260,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         if (gameZone.equals(Zone.BATTLEFIELD)) {
@@ -318,7 +314,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player {@link Player} to set life count for.
      * @param life   Life count to set.
      */
-    @Override
     public void setLife(TestPlayer player, int life) {
         getCommands(player).put(Zone.OUTSIDE, "life:" + String.valueOf(life));
     }

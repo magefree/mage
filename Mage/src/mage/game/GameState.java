@@ -175,11 +175,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.permanentOrderNumber = state.permanentOrderNumber;
     }
     
+    public void restoreForRollBack(GameState state) {
+        restore(state);
+        this.turn = state.turn;        
+    }
+    
     public void restore(GameState state) {
         this.activePlayerId = state.activePlayerId;
         this.priorityPlayerId = state.priorityPlayerId;
-        this.turn = state.turn;
-
         this.stack = state.stack;
         this.command = state.command;
         this.exile = state.exile;

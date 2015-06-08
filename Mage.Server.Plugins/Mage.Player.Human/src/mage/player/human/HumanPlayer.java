@@ -1038,6 +1038,12 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    @Override
+    public boolean activateAbility(ActivatedAbility ability, Game game) {
+        getManaPool().setStock(); // needed for the "mana already in the pool has to be used manually" option
+        return super.activateAbility(ability, game); 
+    }
+
     protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1 && suppressAbilityPicker(abilities.values().iterator().next())) {

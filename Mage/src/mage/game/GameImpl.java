@@ -2625,7 +2625,7 @@ public abstract class GameImpl implements Game, Serializable {
                             playerObject.abort();
                         }
                     }
-                    state.restore(restore);
+                    state.restoreForRollBack(restore);
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;

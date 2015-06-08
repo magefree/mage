@@ -102,11 +102,11 @@ class SewerNemesisChoosePlayerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer();
+            TargetPlayer target = new TargetPlayer(1,1,true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Player chosenPlayer = game.getPlayer(target.getFirstTarget());
                 if (chosenPlayer != null) {
-                    game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
+                    game.informPlayers(permanent.getLogName() + ": " + player.getLogName() + " has chosen " + chosenPlayer.getLogName());
                     game.getState().setValue(permanent.getId() + "_player", target.getFirstTarget());
                     return true;
                 }

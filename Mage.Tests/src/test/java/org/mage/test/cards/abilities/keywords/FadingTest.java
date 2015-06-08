@@ -91,7 +91,7 @@ public class FadingTest extends CardTestPlayerBase {
     public void testFadesAway() {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
         addCard(Zone.HAND, playerA, "Blastoderm");
-
+        
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blastoderm");
 
         setStopAt(9, PhaseStep.BEGIN_COMBAT);

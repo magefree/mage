@@ -49,6 +49,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -377,8 +378,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void phasing(Game game);
     void untap(Game game);
 
+    ManaOptions getManaAvailable(Game game);
     List<Ability> getPlayable(Game game, boolean hidden);
     List<Ability> getPlayableOptions(Ability ability, Game game);
+    
 
     Set<UUID> getPlayableInHand(Game game);
     LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game);

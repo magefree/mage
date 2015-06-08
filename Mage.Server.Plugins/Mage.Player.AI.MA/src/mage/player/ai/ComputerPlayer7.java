@@ -84,6 +84,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     public ComputerPlayer7(final ComputerPlayer7 player) {
         super(player);
+        this.allowBadMoves = player.allowBadMoves;
     }
 
     @Override
