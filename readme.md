@@ -1,6 +1,6 @@
 # XMage - Magic, Another Game Engine
 
-XMage allows you to play magic against one or more online players or computer opponents. It includes full rules enforcement for over **10,000** unique cards (nearly 20.000 counting all cards from different editions). Starting with Eventide, all regular sets have nearly all the cards implemented ([a detailed overview](http://ct-magefree.rhcloud.com/stats)).
+XMage allows you to play Magic against one or more online players or computer opponents. It includes full rules enforcement for over **10,000** unique cards (nearly 20,000 counting all cards from different editions). Starting with Eventide, all regular sets have nearly all the cards implemented ([detailed overview](http://ct-magefree.rhcloud.com/stats)).
 
 There are public servers where you can play XMage against other players. You can also host your own server to play against the AI and/or your friends.
 
