@@ -115,12 +115,12 @@ class PolymorphistsJestEffect extends ContinuousEffectImpl {
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            permanent.getColor().setBlack(false);
-                            permanent.getColor().setGreen(false);
-                            permanent.getColor().setBlue(false);
-                            permanent.getColor().setWhite(false);
-                            permanent.getColor().setBlack(false);
-                            permanent.getColor().setColor(ObjectColor.BLUE);
+                            permanent.getColor(game).setBlack(false);
+                            permanent.getColor(game).setGreen(false);
+                            permanent.getColor(game).setBlue(false);
+                            permanent.getColor(game).setWhite(false);
+                            permanent.getColor(game).setBlack(false);
+                            permanent.getColor(game).setColor(ObjectColor.BLUE);
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:

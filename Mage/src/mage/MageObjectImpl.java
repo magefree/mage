@@ -157,7 +157,7 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public ObjectColor getColor() {
+    public ObjectColor getColor(Game game) {
         return color;
     }
 

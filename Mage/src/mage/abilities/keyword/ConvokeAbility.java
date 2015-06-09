@@ -207,7 +207,7 @@ class ConvokeEffect extends OneShotEffect {
                 String manaName;
                 if (!perm.isTapped() && perm.tap(game)) {
                     ManaPool manaPool = controller.getManaPool();
-                    Choice chooseManaType = buildChoice(perm.getColor(), unpaid.getMana());
+                    Choice chooseManaType = buildChoice(perm.getColor(game), unpaid.getMana());
                     if (chooseManaType.getChoices().size() > 0) {
                         if (chooseManaType.getChoices().size() > 1) {
                             chooseManaType.getChoices().add("Colorless");

@@ -135,7 +135,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
                     }
                     break;
                 case ColorChangingEffects_5:
-                    permanent.getColor().setColor(ObjectColor.RED);
+                    permanent.getColor(game).setColor(ObjectColor.RED);
                     break;
                 case AbilityAddingRemovingEffects_6:
                     if (sublayer == SubLayer.NA) {

@@ -105,8 +105,8 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
                     break;
                 case ColorChangingEffects_5:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getColor().hasColor()) {
-                            permanent.getColor().setColor(token.getColor());
+                        if (token.getColor(game).hasColor()) {
+                            permanent.getColor(game).setColor(token.getColor(game));
                         }
                     }
                     break;

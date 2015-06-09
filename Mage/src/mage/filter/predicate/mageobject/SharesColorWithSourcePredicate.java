@@ -22,7 +22,7 @@ public class SharesColorWithSourcePredicate implements ObjectSourcePlayerPredica
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         MageObject sourceObject = game.getObject(input.getSourceId());
         if (sourceObject != null) {
-            return input.getObject().getColor().shares(sourceObject.getColor());
+            return input.getObject().getColor(game).shares(sourceObject.getColor(game));
         }
         return false;
 

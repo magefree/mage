@@ -99,7 +99,7 @@ public class PermanentCard extends PermanentImpl {
         this.abilities.setSourceId(objectId);
         this.cardType.clear();
         this.cardType.addAll(card.getCardType());
-        this.color = card.getColor().copy();
+        this.color = card.getColor(null).copy();
         this.manaCost = card.getManaCost().copy();
         this.power = card.getPower().copy();
         this.toughness = card.getToughness().copy();

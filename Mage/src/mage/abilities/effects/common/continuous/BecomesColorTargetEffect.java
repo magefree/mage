@@ -107,7 +107,7 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
                 MageObject o = game.getObject(targetId);
                 if (o != null) {
                     if (o instanceof Permanent || o instanceof StackObject) {
-                        o.getColor().setColor(objectColor);
+                        o.getColor(game).setColor(objectColor);
                         result = true;
                     }
                 }

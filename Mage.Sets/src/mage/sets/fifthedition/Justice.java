@@ -95,7 +95,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
                 || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
             MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject.getColor().isRed()) {
+            if (sourceObject.getColor(game).isRed()) {
                 if (sourceObject instanceof Permanent && sourceObject.getCardType().contains(CardType.CREATURE)
                         || sourceObject instanceof Spell) {
                     this.getEffects().get(0).setValue("damageAmount", event.getAmount());

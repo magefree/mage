@@ -175,7 +175,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public ObjectColor getColor() {
+    public ObjectColor getColor(Game game) {
         return emptyColor;
     }
 

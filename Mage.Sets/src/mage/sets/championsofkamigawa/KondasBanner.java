@@ -155,7 +155,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (equipedCreature.getColor().shares(perm.getColor())) {
+                if (equipedCreature.getColor(game).shares(perm.getColor(game))) {
                     perm.addPower(power.calculate(game, source, this));
                     perm.addToughness(toughness.calculate(game, source, this));
 

@@ -90,8 +90,8 @@ class ConsignToDreamEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(source.getFirstTarget());
         if (target != null) {
-            if (target.getColor().contains(ObjectColor.RED)
-                    || target.getColor().contains(ObjectColor.GREEN)) {
+            if (target.getColor(game).contains(ObjectColor.RED)
+                    || target.getColor(game).contains(ObjectColor.GREEN)) {
                 applied = target.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             } else {
                 applied = target.moveToZone(Zone.HAND, source.getSourceId(), game, false);

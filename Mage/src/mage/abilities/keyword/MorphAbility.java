@@ -219,7 +219,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
                             }
                         }
                         // change spell colors
-                        ObjectColor spellColor = spell.getColor();
+                        ObjectColor spellColor = spell.getColor(game);
                         spellColor.setBlack(false);
                         spellColor.setRed(false);
                         spellColor.setGreen(false);
@@ -297,7 +297,7 @@ public class MorphAbility extends StaticAbility implements AlternativeSourceCost
         mageObject.getPower().initValue(2);
         mageObject.getToughness().initValue(2);
         mageObject.getAbilities().clear();
-        mageObject.getColor().setColor(new ObjectColor());
+        mageObject.getColor(null).setColor(new ObjectColor());
         mageObject.setName("");
         mageObject.getCardType().clear();
         mageObject.getCardType().add(CardType.CREATURE);

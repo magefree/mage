@@ -145,7 +145,7 @@ class LiegeOfTheTangleEffect extends ContinuousEffectImpl {
                             break;
                         case ColorChangingEffects_5:
                             if (sublayer == SubLayer.NA) {
-                                perm.getColor().setColor(token.getColor());
+                                perm.getColor(game).setColor(token.getColor(game));
                             }
                             break;
                         case PTChangingEffects_7:

@@ -131,7 +131,7 @@ class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends Trigger
             if (chosenColor != null) {
                 if (event.getType() == GameEvent.EventType.SPELL_CAST) {
                     Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null && spell.getColor().shares(chosenColor)) {
+                    if (spell != null && spell.getColor(game).shares(chosenColor)) {
                         this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                         return true;
                     }

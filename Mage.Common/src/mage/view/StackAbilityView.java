@@ -64,12 +64,12 @@ public class StackAbilityView extends CardView {
         this.cardTypes = ability.getCardType();
         this.subTypes = ability.getSubtype();
         this.superTypes = ability.getSupertype();
-        this.color = ability.getColor();
+        this.color = ability.getColor(game);
         this.manaCost = ability.getManaCost().getSymbols();
         this.cardTypes = ability.getCardType();
         this.subTypes = ability.getSubtype();
         this.superTypes = ability.getSupertype();
-        this.color = ability.getColor();
+        this.color = ability.getColor(game);
         this.manaCost = ability.getManaCost().getSymbols();
         this.power = ability.getPower().toString();
         this.toughness = ability.getToughness().toString();                   

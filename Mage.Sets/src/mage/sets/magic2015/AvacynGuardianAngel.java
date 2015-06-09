@@ -127,7 +127,7 @@ class AvacynGuardianAngelPreventToCreatureEffect extends PreventionEffectImpl {
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                 ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && choice != null && sourceObject.getColor().shares(choice.getColor())) {
+                if (sourceObject != null && choice != null && sourceObject.getColor(game).shares(choice.getColor())) {
                     return true;
                 }
             }
@@ -166,7 +166,7 @@ class AvacynGuardianAngelPreventToPlayerEffect extends PreventionEffectImpl {
                     && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
                 ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
                 MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && choice != null && sourceObject.getColor().shares(choice.getColor())) {
+                if (sourceObject != null && choice != null && sourceObject.getColor(game).shares(choice.getColor())) {
                     return true;
                 }
             }

@@ -64,7 +64,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
         if (blocker.getCardType().contains(CardType.ARTIFACT) && (blocker.getCardType().contains(CardType.CREATURE))) {
             result = true;
         }
-        if (attacker.getColor().shares(blocker.getColor())) {
+        if (attacker.getColor(game).shares(blocker.getColor(game))) {
             result = true;
         }
         return result;

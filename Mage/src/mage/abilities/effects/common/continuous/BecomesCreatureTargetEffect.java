@@ -111,14 +111,14 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl {
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
                             if (loseAllAbilities) {
-                                permanent.getColor().setBlack(false);
-                                permanent.getColor().setGreen(false);
-                                permanent.getColor().setBlue(false);
-                                permanent.getColor().setWhite(false);
-                                permanent.getColor().setBlack(false);
+                                permanent.getColor(game).setBlack(false);
+                                permanent.getColor(game).setGreen(false);
+                                permanent.getColor(game).setBlue(false);
+                                permanent.getColor(game).setWhite(false);
+                                permanent.getColor(game).setBlack(false);
                             }
-                            if (token.getColor().hasColor()) {
-                                permanent.getColor().setColor(token.getColor());
+                            if (token.getColor(game).hasColor()) {
+                                permanent.getColor(game).setColor(token.getColor(game));
                             }
                         }
                         break;

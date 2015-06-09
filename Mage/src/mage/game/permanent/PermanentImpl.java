@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
 import mage.MageObjectReference;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -1359,5 +1360,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public void setCreateOrder(int createOrder) {
         this.createOrder = createOrder;
     }
-        
+
+    @Override
+    public ObjectColor getColor(Game game) {
+        return color;
+    }
+     
+    
 }

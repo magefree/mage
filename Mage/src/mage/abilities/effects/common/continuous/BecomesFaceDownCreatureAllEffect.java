@@ -118,7 +118,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl imple
                         permanent.getManaCost().clear();
                         break;
                     case ColorChangingEffects_5:
-                        permanent.getColor().setColor(new ObjectColor());
+                        permanent.getColor(game).setColor(new ObjectColor());
                         break;
                     case AbilityAddingRemovingEffects_6:
                         Card card = game.getCard(permanent.getId()); //

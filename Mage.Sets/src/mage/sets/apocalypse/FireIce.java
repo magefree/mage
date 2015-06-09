@@ -51,12 +51,8 @@ public class FireIce extends SplitCard {
         super(ownerId, 128, "Fire", "Ice", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{1}{U}", false);
         this.expansionSetCode = "APC";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
-
         // Fire
         // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
-        getLeftHalfCard().getColor().setRed(true);
         Effect effect = new DamageMultiEffect(2);
         effect.setText("Fire deals 2 damage divided as you choose among one or two target creatures and/or players");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
@@ -65,7 +61,6 @@ public class FireIce extends SplitCard {
         // Ice
         // Tap target permanent.
         // Draw a card.
-        getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new TapTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent());
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));

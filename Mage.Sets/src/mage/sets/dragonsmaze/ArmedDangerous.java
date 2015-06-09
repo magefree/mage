@@ -51,19 +51,14 @@ public class ArmedDangerous extends SplitCard {
         super(ownerId, 122, "Armed", "Dangerous", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-
         // Armed
         // Target creature gets +1/+1 and gains double strike until end of turn.
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(1,1, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Dangerous
         // All creatures able to block target creature this turn do so.
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

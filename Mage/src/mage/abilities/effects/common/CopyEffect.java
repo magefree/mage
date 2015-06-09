@@ -97,7 +97,7 @@ public class CopyEffect extends ContinuousEffectImpl {
             return false;
         }
         permanent.setName(target.getName());
-        permanent.getColor().setColor(target.getColor());
+        permanent.getColor(game).setColor(target.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(target.getManaCost());
         permanent.getCardType().clear();

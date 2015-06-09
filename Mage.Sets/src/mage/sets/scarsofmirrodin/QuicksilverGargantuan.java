@@ -93,7 +93,7 @@ public class QuicksilverGargantuan extends CardImpl {
             Card card = game.getCard(source.getFirstTarget());
             Permanent permanent = game.getPermanent(source.getSourceId());
             permanent.setName(card.getName());
-            permanent.getColor().setColor(card.getColor());
+            permanent.getColor(game).setColor(card.getColor(game));
             permanent.getManaCost().clear();
             permanent.getManaCost().add(card.getManaCost());
             permanent.getCardType().clear();

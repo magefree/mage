@@ -29,6 +29,7 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
@@ -51,4 +52,33 @@ public class CastCreaturesTest extends CardTestPlayerBaseAI {
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
+    
+    @Test
+    public void testSimpleCast2() {
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+        addCard(Zone.HAND, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 2);
+    }
+    
+    @Test
+    @Ignore // AI should cast Myr Enforcer -> Check why it does not
+    public void testSimpleCast3() {
+        // Affinity for artifacts (This spell costs less to cast for each artifact you control.)
+        addCard(Zone.HAND, playerA, "Myr Enforcer");
+        // {T}: Add to your mana pool.
+        // {T}, {1}, Sacrifice Mind Stone: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Mind Stone", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Myr Enforcer", 1);
+    }    
 }

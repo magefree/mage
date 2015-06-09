@@ -86,7 +86,7 @@ class IronStarAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor().contains(ObjectColor.RED)) {
+            if (spell != null && spell.getColor(game).contains(ObjectColor.RED)) {
                 return true;
             }
         }

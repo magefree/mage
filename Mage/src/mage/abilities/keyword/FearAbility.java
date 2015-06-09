@@ -91,7 +91,7 @@ class FearEffect extends RestrictionEffect implements MageSingleton {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getCardType().contains(CardType.ARTIFACT) || blocker.getColor().isBlack()) {
+        if (blocker.getCardType().contains(CardType.ARTIFACT) || blocker.getColor(game).isBlack()) {
             return true;
         }
         return false;

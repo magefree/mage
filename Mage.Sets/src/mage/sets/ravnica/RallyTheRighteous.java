@@ -93,10 +93,10 @@ class RallyTheRighteousUntapEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target != null) {
-            ObjectColor color = target.getColor();
+            ObjectColor color = target.getColor(game);
             target.untap(game);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                if (permanent.getColor().shares(color) && !permanent.getId().equals(target.getId())) {
+                if (permanent.getColor(game).shares(color) && !permanent.getId().equals(target.getId())) {
                     permanent.untap(game);
                 }
             }
@@ -124,10 +124,10 @@ class RallyTheRighteousBoostEffect extends ContinuousEffectImpl {
         Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));        
         if (target != null) {
             affectedObjectList.add(new MageObjectReference(target, game));
-            ObjectColor color = target.getColor();
+            ObjectColor color = target.getColor(game);
             target.addPower(2);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                if (!permanent.getId().equals(target.getId()) && permanent.getColor().shares(color)) {
+                if (!permanent.getId().equals(target.getId()) && permanent.getColor(game).shares(color)) {
                     affectedObjectList.add(new MageObjectReference(permanent, game));
                 }
             }

@@ -126,7 +126,7 @@ class TokTokVolcanoBornEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getSourceId());
-        if (card != null && card.getColor().isRed()) {
+        if (card != null && card.getColor(game).isRed()) {
             return true;
         }
         return false;

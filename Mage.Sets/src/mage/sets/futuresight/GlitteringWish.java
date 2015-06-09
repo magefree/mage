@@ -82,7 +82,7 @@ class GlitteringWishEffect extends OneShotEffect {
 
             @Override
             public boolean apply(MageObject input, Game game) {
-                return input.getColor().isMulticolored();
+                return input.getColor(game).isMulticolored();
             }
 
             @Override

@@ -149,8 +149,8 @@ public class Commander implements CommandObject{
     }
 
     @Override
-    public ObjectColor getColor() {
-        return card.getColor();
+    public ObjectColor getColor(Game game) {
+        return card.getColor(game);
     }
 
     @Override

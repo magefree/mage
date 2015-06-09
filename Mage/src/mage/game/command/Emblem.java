@@ -150,7 +150,7 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public ObjectColor getColor() {
+    public ObjectColor getColor(Game game) {
         return emptyColor;
     }
 

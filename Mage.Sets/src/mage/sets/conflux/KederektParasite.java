@@ -89,7 +89,7 @@ class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             boolean youControlRedPermanent = false;
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(this.getControllerId())) {
-                if (permanent.getColor().isRed()) {
+                if (permanent.getColor(game).isRed()) {
                     youControlRedPermanent = true;
                     break;
                 }

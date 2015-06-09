@@ -92,11 +92,11 @@ class BecomesAllColorsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.getColor().setBlack(true);
-            permanent.getColor().setBlue(true);
-            permanent.getColor().setRed(true);
-            permanent.getColor().setGreen(true);
-            permanent.getColor().setWhite(true);
+            permanent.getColor(game).setBlack(true);
+            permanent.getColor(game).setBlue(true);
+            permanent.getColor(game).setRed(true);
+            permanent.getColor(game).setGreen(true);
+            permanent.getColor(game).setWhite(true);
             return true;
         }
         return false;

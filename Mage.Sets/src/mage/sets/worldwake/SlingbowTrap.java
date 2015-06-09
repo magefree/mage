@@ -101,7 +101,7 @@ class SlingbowTrapAlternativeCost extends AlternativeCostImpl<Cost> {
         List<UUID> attackers = game.getCombat().getAttackers();
         for (UUID creatureId : attackers) {
             Permanent creature = game.getPermanent(creatureId);
-            if (creature.getColor().isBlack()
+            if (creature.getColor(game).isBlack()
                     && creature.getAbilities().contains(FlyingAbility.getInstance())) {
                 return true;
             }

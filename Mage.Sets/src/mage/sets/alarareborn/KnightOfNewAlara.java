@@ -102,7 +102,7 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {            
             if (creature != null && !creature.getId().equals(source.getSourceId())) {
-                int colors = creature.getColor().getColorCount();
+                int colors = creature.getColor(game).getColorCount();
                 creature.addPower(colors);
                 creature.addToughness(colors);
             }

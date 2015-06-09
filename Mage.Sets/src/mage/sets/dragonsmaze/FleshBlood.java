@@ -60,14 +60,8 @@ public class FleshBlood extends SplitCard {
         super(ownerId, 128, "Flesh", "Blood", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}{G}", "{R}{G}",true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-        this.color.setRed(true);
-
         // Flesh
         // Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
-        getLeftHalfCard().getColor().setBlack(true);
-        getLeftHalfCard().getColor().setGreen(true);
         Target target = new TargetCardInGraveyard(new FilterCreatureCard());
         getLeftHalfCard().getSpellAbility().addTarget(target);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -75,8 +69,6 @@ public class FleshBlood extends SplitCard {
 
         // Blood
         // Target creature you control deals damage equal to its power to target creature or player.
-        getRightHalfCard().getColor().setRed(true);
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());

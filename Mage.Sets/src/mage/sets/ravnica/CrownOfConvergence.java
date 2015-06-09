@@ -104,7 +104,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
             Card topCard = you.getLibrary().getFromTop(game);
             if (topCard != null) {
                 for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    if (permanent.getColor().shares(topCard.getColor()) && !permanent.getColor().isColorless()) {
+                    if (permanent.getColor(game).shares(topCard.getColor(game)) && !permanent.getColor(game).isColorless()) {
                         permanent.addPower(power.calculate(game, source, this));
                         permanent.addToughness(toughness.calculate(game, source, this));
                     }

@@ -116,7 +116,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
                         }
                         break;
                     case ColorChangingEffects_5:
-                        permanent.getColor().setColor(ObjectColor.GREEN);
+                        permanent.getColor(game).setColor(ObjectColor.GREEN);
                         break;
                     case AbilityAddingRemovingEffects_6:
                         boolean flag = false;

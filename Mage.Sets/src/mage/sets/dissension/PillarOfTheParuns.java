@@ -96,7 +96,7 @@ class MultiColoredSpellCastManaCondition extends ManaCondition implements Condit
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.getColor().getColorCount() > 1) {
+            if (object != null && object.getColor(game).getColorCount() > 1) {
                 return true;
             }
         }

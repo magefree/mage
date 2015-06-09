@@ -137,7 +137,7 @@ class EssenceOfTheWildCopyEffect extends ContinuousEffectImpl {
         Permanent permanent = game.getPermanent(targetId);
         if (permanent != null) {
             permanent.setName(essence.getName());
-            permanent.getColor().setColor(essence.getColor());
+            permanent.getColor(game).setColor(essence.getColor(game));
             permanent.getManaCost().clear();
             permanent.getManaCost().add(essence.getManaCost());
             permanent.getCardType().clear();

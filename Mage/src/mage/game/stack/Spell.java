@@ -81,7 +81,7 @@ public class Spell extends StackObjImpl implements Card {
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
-        this.color = card.getColor().copy();
+        this.color = card.getColor(null).copy();
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
@@ -431,7 +431,7 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public ObjectColor getColor() {
+    public ObjectColor getColor(Game game) {
         return color;
     }
 

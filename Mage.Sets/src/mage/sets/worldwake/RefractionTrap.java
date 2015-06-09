@@ -106,7 +106,7 @@ class RefractionTrapWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getColor().isRed()) {
+            if (spell.getColor(game).isRed()) {
                 if (spell.getCardType().contains(CardType.INSTANT)
                         || spell.getCardType().contains(CardType.SORCERY)) {
                     condition = true;

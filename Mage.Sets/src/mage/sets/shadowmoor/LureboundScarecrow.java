@@ -135,7 +135,7 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility {
                 ObjectColor color = (ObjectColor) game.getState().getValue(card.getId() + "_color");
                 if (color != null) {
                     for (Permanent perm: game.getBattlefield().getAllActivePermanents(controllerId)) {
-                        if (perm.getColor().contains(color))
+                        if (perm.getColor(game).contains(color))
                             return false;
                     }
                     return true;

@@ -237,7 +237,7 @@ public class CardView extends SimpleCardView {
         this.cardTypes = card.getCardType();
         this.subTypes = card.getSubtype();
         this.superTypes = card.getSupertype();
-        this.color = card.getColor();
+        this.color = card.getColor(game);
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
         this.faceDown = game != null ? card.isFaceDown(game) : false;
@@ -313,7 +313,7 @@ public class CardView extends SimpleCardView {
         this.cardTypes = object.getCardType();
         this.subTypes = object.getSubtype();
         this.superTypes = object.getSupertype();
-        this.color = object.getColor();
+        this.color = object.getColor(null);
         this.manaCost = object.getManaCost().getSymbols();
         this.convertedManaCost = object.getManaCost().convertedManaCost();
         if (object instanceof PermanentToken) {
@@ -421,7 +421,7 @@ public class CardView extends SimpleCardView {
         this.cardTypes = token.getCardType();
         this.subTypes = token.getSubtype();
         this.superTypes = token.getSupertype();
-        this.color = token.getColor();
+        this.color = token.getColor(null);
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();

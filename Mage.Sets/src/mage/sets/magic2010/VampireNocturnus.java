@@ -126,7 +126,7 @@ class VampireNocturnusCondition implements Condition {
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                return card.getColor().isBlack();
+                return card.getColor(game).isBlack();
             }
         }
         return false;

@@ -50,12 +50,8 @@ public class AssaultBattery extends SplitCard {
         super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", false);
         this.expansionSetCode = "INV";
 
-        this.color.setRed(true);
-        this.color.setGreen(true);
-
         // Assault
         // Assault deals 2 damage to target creature or player.
-        getLeftHalfCard().getColor().setRed(true);
         Effect effect = new DamageTargetEffect(2);
         effect.setText("Assault deals 2 damage to target creature or player");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
@@ -63,7 +59,6 @@ public class AssaultBattery extends SplitCard {
 
         // Battery
         // Put a 3/3 green Elephant creature token onto the battlefield.
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
 
     }

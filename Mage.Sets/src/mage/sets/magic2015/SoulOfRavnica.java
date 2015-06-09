@@ -103,19 +103,19 @@ class SoulOfRavnicaEffect extends OneShotEffect {
         if (controller != null) {
             HashSet<ObjectColor> colors = new HashSet<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (permanent.getColor().isBlack()) {
+                if (permanent.getColor(game).isBlack()) {
                     colors.add(ObjectColor.BLACK);
                 }
-                if (permanent.getColor().isBlue()) {
+                if (permanent.getColor(game).isBlue()) {
                     colors.add(ObjectColor.BLUE);
                 }
-                if (permanent.getColor().isRed()) {
+                if (permanent.getColor(game).isRed()) {
                     colors.add(ObjectColor.RED);
                 }
-                if (permanent.getColor().isGreen()) {
+                if (permanent.getColor(game).isGreen()) {
                     colors.add(ObjectColor.GREEN);
                 }
-                if (permanent.getColor().isWhite()) {
+                if (permanent.getColor(game).isWhite()) {
                     colors.add(ObjectColor.WHITE);
                 }
             }

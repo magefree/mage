@@ -125,11 +125,11 @@ class GrandArchitectEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.getColor().setRed(false);
-            permanent.getColor().setWhite(false);
-            permanent.getColor().setGreen(false);
-            permanent.getColor().setBlue(true);
-            permanent.getColor().setBlack(false);
+            permanent.getColor(game).setRed(false);
+            permanent.getColor(game).setWhite(false);
+            permanent.getColor(game).setGreen(false);
+            permanent.getColor(game).setBlue(true);
+            permanent.getColor(game).setBlack(false);
             return true;
         }
         return false;

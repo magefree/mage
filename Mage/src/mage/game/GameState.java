@@ -109,6 +109,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<UUID, CardAttribute> cardAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
@@ -831,6 +832,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (CardState state: cardState.values()) {
             state.clearAbilities();
         }
+        cardAttribute.clear();
     }
 
     public void clear() {
@@ -892,9 +894,21 @@ public class GameState implements Serializable, Copyable<GameState> {
     public CardState getCardState(UUID cardId) {
         if (!cardState.containsKey(cardId)) {
             cardState.put(cardId, new CardState());
-            // cardState.putIfAbsent(cardId, new CardState());
         }
         return cardState.get(cardId);
+    }
+
+    public CardAttribute getCardAttribute(UUID cardId) {
+        return cardAttribute.get(cardId);
+    }
+
+    public CardAttribute getCreateCardAttribute(Card card) {
+        CardAttribute cardAtt = cardAttribute.get(card.getId());
+        if (cardAtt == null) {
+            cardAtt = new CardAttribute(card);
+            cardAttribute.put(card.getId(), cardAtt);
+        }
+        return cardAtt;
     }
 
     public void addWatcher(Watcher watcher) {

@@ -53,14 +53,8 @@ public class ReadyWilling extends SplitCard {
         super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.color.setBlack(true);
-
         // Ready
         // Creatures you control are indestructible this turn. Untap each creature you control.
-        getLeftHalfCard().getColor().setGreen(true);
-        getLeftHalfCard().getColor().setWhite(true);
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you controll"), false);
         effect.setText("Creatures you control are indestructible this turn");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
@@ -68,8 +62,6 @@ public class ReadyWilling extends SplitCard {
 
         // Willing
         // Creatures you control gain deathtouch and lifelink until end of turn.
-        getRightHalfCard().getColor().setWhite(true);
-        getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures")) );
         effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures"));
         effect.setText("Creatures you control gain lifelink until end of turn");

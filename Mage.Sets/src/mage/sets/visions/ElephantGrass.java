@@ -90,7 +90,7 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId()) ) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if(creature != null && creature.getColor().isBlack()){
+            if(creature != null && creature.getColor(game).isBlack()){
                 return true;
             }
         }
@@ -145,7 +145,7 @@ class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getControllerId()) ) {
             Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && !creature.getColor().isBlack()) {                
+            if (creature != null && !creature.getColor(game).isBlack()) {                
                 Player attackedPlayer = game.getPlayer(event.getTargetId());
                 if (attackedPlayer != null) {
                     // only if a player is attacked. Attacking a planeswalker is free

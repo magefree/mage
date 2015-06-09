@@ -103,7 +103,7 @@ class PersecuteEffect extends OneShotEffect {
             controller.revealCards("Persecute", hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
-                if (card != null && card.getColor().shares(choice.getColor())) {
+                if (card != null && card.getColor(game).shares(choice.getColor())) {
                     controller.discard(card, source, game);
                 }
             }

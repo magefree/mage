@@ -39,7 +39,7 @@ public class ColorlessPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return input.getColor().isColorless();
+        return input.getColor(game).isColorless();
     }
 
     @Override

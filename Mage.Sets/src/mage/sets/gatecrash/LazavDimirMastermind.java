@@ -120,7 +120,7 @@ class LazavDimirEffect extends ContinuousEffectImpl {
         }
         permanent.getPower().setValue(cardToCopy.getPower().getValue());
         permanent.getToughness().setValue(cardToCopy.getToughness().getValue());
-        permanent.getColor().setColor(cardToCopy.getColor());
+        permanent.getColor(game).setColor(cardToCopy.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(cardToCopy.getManaCost());
         permanent.getCardType().clear();

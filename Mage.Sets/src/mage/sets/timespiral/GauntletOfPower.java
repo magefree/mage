@@ -116,7 +116,7 @@ class GauntletOfPowerEffect1 extends ContinuousEffectImpl {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
             for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (perm.getColor().contains(color)) {
+                if (perm.getColor(game).contains(color)) {
                     perm.addPower(1);
                     perm.addToughness(1);
                 }

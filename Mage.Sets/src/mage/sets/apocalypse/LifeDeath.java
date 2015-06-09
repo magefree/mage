@@ -59,18 +59,13 @@ public class LifeDeath extends SplitCard {
         super(ownerId, 130, "Life", "Death", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}", "{1}{B}", false);
         this.expansionSetCode = "APC";
 
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
         // Life
         // All lands you control become 1/1 creatures until end of turn. They're still lands.
-        getLeftHalfCard().getColor().setGreen(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(new LifeLandToken(), "lands", 
                         new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn));
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-        getRightHalfCard().getColor().setBlack(true);
         Target target = new TargetCardInYourGraveyard(1, new FilterCreatureCard("creature card from your graveyard"));
         getRightHalfCard().getSpellAbility().addTarget(target);
         getRightHalfCard().getSpellAbility().addEffect(new DeathEffect());

@@ -89,7 +89,7 @@ class FiligreeFractureEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (player != null && permanent != null
-                && (permanent.getColor().isBlack() || permanent.getColor().isBlue())) {
+                && (permanent.getColor(game).isBlack() || permanent.getColor(game).isBlue())) {
             player.drawCards(1, game);
             return true;
         }
