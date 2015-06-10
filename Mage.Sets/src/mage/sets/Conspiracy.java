@@ -37,7 +37,6 @@ import mage.constants.SetType;
  * @author LevelX2
  */
 
-
     public class Conspiracy extends ExpansionSet {
 
     private static final Conspiracy fINSTANCE =  new Conspiracy();

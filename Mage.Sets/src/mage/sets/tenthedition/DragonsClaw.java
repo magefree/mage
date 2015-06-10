@@ -79,14 +79,14 @@ class DragonsClawAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor(game).isRed()) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null && spell.getColor(game).isRed();
     }
 
     @Override

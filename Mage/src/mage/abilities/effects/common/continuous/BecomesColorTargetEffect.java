@@ -41,8 +41,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
@@ -50,7 +48,7 @@ import mage.players.Player;
  */
 public class BecomesColorTargetEffect extends ContinuousEffectImpl {
 
-    private final ObjectColor setColor;
+    private ObjectColor setColor;
 
     /**
      * Set the color of a spell or permanent
@@ -76,49 +74,55 @@ public class BecomesColorTargetEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public void init(Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
-            return false;
-        }
-        boolean result = false;
-        ObjectColor objectColor;
+            return;
+        }        
         if (setColor == null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(Outcome.PutManaInPool, choice, game);
                 if (!controller.isInGame()) {
-                    return false;
+                    return;
                 }
             }
             if (choice.getColor() != null) {
-                objectColor = choice.getColor();
+                setColor = choice.getColor();
             } else {
-                return false;
+                return;
             }
             if (!game.isSimulation()) {
-                game.informPlayers(controller.getLogName() + " has chosen the color: " + objectColor.toString());
+                game.informPlayers(controller.getLogName() + " has chosen the color: " + setColor.toString());
             }
-        } else {
-            objectColor = this.setColor;
+        } 
+        
+                
+        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        if (objectColor != null) {
+        if (setColor != null) {
+            boolean objectFound = false;
             for (UUID targetId :targetPointer.getTargets(game, source)) {
-                MageObject o = game.getObject(targetId);
-                if (o != null) {
-                    if (o instanceof Permanent || o instanceof StackObject) {
-                        o.getColor(game).setColor(objectColor);
-                        result = true;
-                    }
+                MageObject targetObject = game.getObject(targetId);
+                if (targetObject != null) {
+                    objectFound = true;
+                    targetObject.getColor(game).setColor(setColor);                        
                 }
             }
-        }
-        if (!result) {
-            if (this.getDuration().equals(Duration.Custom)) {
+            if (!objectFound && this.getDuration().equals(Duration.Custom)) {
                 this.discard();
             }
+            return true;
+        } else {
+            throw new UnsupportedOperationException("No color set");
         }
-        return result;
     }
 
     @Override

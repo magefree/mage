@@ -803,7 +803,7 @@ public class ContinuousEffects implements Serializable {
                 }
             }
             // Must be called here for some effects to be able to work correctly
-            // TODO: add info which effects that need
+            // TODO: add info which effects need that call
             game.applyEffects();
         } while (true);
         return caught;
