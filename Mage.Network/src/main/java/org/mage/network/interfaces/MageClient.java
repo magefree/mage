@@ -22,4 +22,5 @@ public interface MageClient {
     void clientRegistered(ServerState state);
     ServerState getServerState();
     
+    void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament);
 }

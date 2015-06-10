@@ -122,6 +122,11 @@ public class MultiConnectTest {
         public ServerState getServerState() {
             return serverState;
         }
+
+        @Override
+        public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 
     public static void main(String[] argv) throws Exception {

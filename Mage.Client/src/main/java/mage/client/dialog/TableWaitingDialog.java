@@ -110,13 +110,13 @@ public class TableWaitingDialog extends MageDialog {
         }
     }
 
-    public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+    public void showDialog(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean isTournament) {
         this.roomId = roomId;
         this.tableId = tableId;
         this.isTournament = isTournament;
         client = MageFrame.getClient();
         updateTask = new UpdateSeatsTask(client, roomId, tableId, this);
-        if (client.isTableOwner(roomId, tableId)) {
+        if (owner) {
             this.btnStart.setVisible(true);
             this.btnMoveDown.setVisible(true);
             this.btnMoveUp.setVisible(true);
@@ -125,7 +125,7 @@ public class TableWaitingDialog extends MageDialog {
             this.btnMoveDown.setVisible(false);
             this.btnMoveUp.setVisible(false);
         }
-        UUID chatId = client.getTableChatId(tableId);
+//        UUID chatId = client.getTableChatId(tableId);
         if (chatId != null) {
             this.chatPanel.connect(chatId);
             updateTask.execute();

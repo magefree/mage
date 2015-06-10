@@ -32,12 +32,15 @@ import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.JoinChatMessageHandler;
 import org.mage.network.handlers.server.JoinTableMessageHandler;
 import org.mage.network.handlers.server.LeaveChatMessageHandler;
+import org.mage.network.handlers.server.LeaveTableMessageHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
 import org.mage.network.handlers.server.RoomMessageHandler;
 import org.mage.network.handlers.server.ServerMessageHandler;
 import org.mage.network.handlers.server.TableMessageHandler;
+import org.mage.network.handlers.server.TableWaitingMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.InformClientMessage;
+import org.mage.network.model.JoinedTableMessage;
 import org.mage.network.model.MessageType;
 import org.mage.network.model.PingMessage;
 import org.mage.network.model.ReceiveChatMessage;
@@ -71,6 +74,8 @@ public class Server {
     private final RoomMessageHandler roomMessageHandler;
     private final TableMessageHandler tableMessageHandler;
     private final JoinTableMessageHandler joinTableMessageHandler;
+    private final TableWaitingMessageHandler tableWaitingMessageHandler;
+    private final LeaveTableMessageHandler leaveTableMessageHandler;
     
     private final ExceptionHandler exceptionHandler;
     
@@ -85,6 +90,8 @@ public class Server {
         roomMessageHandler = new RoomMessageHandler(server);
         tableMessageHandler = new TableMessageHandler(server);
         joinTableMessageHandler = new JoinTableMessageHandler(server);
+        tableWaitingMessageHandler = new TableWaitingMessageHandler(server);
+        leaveTableMessageHandler = new LeaveTableMessageHandler(server);
         
         exceptionHandler = new ExceptionHandler();
     }
@@ -117,7 +124,7 @@ public class Server {
         }
         
     }
-    
+
     private class ServerInitializer extends ChannelInitializer<SocketChannel> {
         
         @Override
@@ -144,6 +151,8 @@ public class Server {
             ch.pipeline().addLast(handlersExecutor, "roomMessageHandler", roomMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "tableMessageHandler", tableMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "joinTableMessageHandler", joinTableMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "tableWaitingMessageHandler", tableWaitingMessageHandler);
+            ch.pipeline().addLast(handlersExecutor, "leaveTableMessageHandler", leaveTableMessageHandler);
             
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
@@ -182,5 +191,12 @@ public class Server {
             heartbeatHandler.pingClient();
         }
     }
+
+    public void joinedTable(String sessionId, UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new JoinedTableMessage(roomId, tableId, chatId, owner, tournament));
+    }
+    
     
 }

@@ -188,8 +188,9 @@ public class User {
         }
     }
 
-    public void ccJoinedTable(final UUID roomId, final UUID tableId, boolean isTournament) {
-        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
+    public void joinedTable(final UUID roomId, final UUID tableId, final UUID chatId, boolean owner, boolean tournament) {
+//        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
+        Main.getInstance().joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
     public void ccGameStarted(final UUID gameId, final UUID playerId) {
@@ -285,7 +286,8 @@ public class User {
 
     private void reconnect() {
         for (Entry<UUID, Table> entry: tables.entrySet()) {
-            ccJoinedTable(entry.getValue().getRoomId(), entry.getValue().getId(), entry.getValue().isTournament());
+            Table t = entry.getValue();
+            joinedTable(t.getRoomId(), t.getId(), TableManager.getInstance().getChatId(t.getId()), TableManager.getInstance().isTableOwner(t.getId(), userId), t.isTournament());
         }
         for (Entry<UUID, UUID> entry: userTournaments.entrySet()) {
             TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(entry.getValue());

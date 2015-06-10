@@ -30,6 +30,7 @@ public class ServerMessageHandler extends SimpleChannelInboundHandler<ServerMess
     }
     
     public List<String> getServerMessages() throws Exception {
+        queue.clear();
         ctx.writeAndFlush(new ServerMessagesRequest());
         return queue.take();
     }

@@ -2,9 +2,7 @@ package org.mage.network.interfaces;
 
 import java.util.List;
 import java.util.UUID;
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
 import mage.remote.DisconnectReason;
@@ -33,6 +31,9 @@ public interface MageServer {
     RoomView getRoom(UUID roomId);
     TableView createTable(String sessionId, UUID roomId, MatchOptions options);
     boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
+    TableView getTable(UUID roomId, UUID tableId);
+    boolean leaveTable(String asLongText, UUID roomId, UUID tableId);
+    
     void pingTime(long milliSeconds, String sessionId);
     
 }

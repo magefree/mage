@@ -604,59 +604,79 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
      * @param gameId
      * @param playerId 
      */
-    public void showGame(UUID gameId, UUID playerId) {
-        try {
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.showGame(gameId, playerId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-        }
-    }
-
-    public void watchGame(UUID gameId) {
-        try {
-            for(Component component :desktopPane.getComponents()) {
-                if (component instanceof GamePane
-                        && ((GamePane) component).getGameId().equals(gameId)) {
-                    setActive((GamePane) component);
-                    return;
+    public void showGame(final UUID gameId, final UUID playerId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    GamePane gamePane = new GamePane();
+                    desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                    gamePane.setMaximum(true);
+                    gamePane.setVisible(true);
+                    gamePane.showGame(gameId, playerId);
+                    setActive(gamePane);
+                } catch (PropertyVetoException ex) {
                 }
             }
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.watchGame(gameId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-        }
+        });
     }
 
-    public void replayGame(UUID gameId) {
-        try {
-            GamePane gamePane = new GamePane();
-            desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
-            gamePane.setMaximum(true);
-            gamePane.setVisible(true);
-            gamePane.replayGame(gameId);
-            setActive(gamePane);
-        } catch (PropertyVetoException ex) {
-        }
+    public void watchGame(final UUID gameId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for(Component component :desktopPane.getComponents()) {
+                        if (component instanceof GamePane
+                                && ((GamePane) component).getGameId().equals(gameId)) {
+                            setActive((GamePane) component);
+                            return;
+                        }
+                    }
+                    GamePane gamePane = new GamePane();
+                    desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                    gamePane.setMaximum(true);
+                    gamePane.setVisible(true);
+                    gamePane.watchGame(gameId);
+                    setActive(gamePane);
+                } catch (PropertyVetoException ex) {
+                }
+            }
+        });
     }
 
-    public void showDraft(UUID draftId) {
-        try {
-            DraftPane draftPane = new DraftPane();
-            desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
-            draftPane.setMaximum(true);
-            draftPane.setVisible(true);
-            draftPane.showDraft(draftId);
-            setActive(draftPane);
-        } catch (PropertyVetoException ex) {
-        }
+    public void replayGame(final UUID gameId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    GamePane gamePane = new GamePane();
+                    desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
+                    gamePane.setMaximum(true);
+                    gamePane.setVisible(true);
+                    gamePane.replayGame(gameId);
+                    setActive(gamePane);
+                } catch (PropertyVetoException ex) {
+                }
+            }
+        });
+    }
+
+    public void showDraft(final UUID draftId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    DraftPane draftPane = new DraftPane();
+                    desktopPane.add(draftPane, JLayeredPane.DEFAULT_LAYER);
+                    draftPane.setMaximum(true);
+                    draftPane.setVisible(true);
+                    draftPane.showDraft(draftId);
+                    setActive(draftPane);
+                } catch (PropertyVetoException ex) {
+                }
+            }
+        });
     }
     
     public void endDraft(UUID draftId) {
@@ -669,35 +689,50 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
     
-    public void showTournament(UUID tournamentId) {
-        try {
-            for(Component component :desktopPane.getComponents()) {
-                if (component instanceof TournamentPane &&
-                    ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
-                    setActive((TournamentPane) component);
-                    return;
+    public void showTournament(final UUID tournamentId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    for(Component component :desktopPane.getComponents()) {
+                        if (component instanceof TournamentPane &&
+                            ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
+                            setActive((TournamentPane) component);
+                            return;
+                        }
+                    }
+                    TournamentPane tournamentPane = new TournamentPane();
+                    desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
+                    tournamentPane.setMaximum(true);
+                    tournamentPane.setVisible(true);
+                    tournamentPane.showTournament(tournamentId);
+                    setActive(tournamentPane);
+                } catch (PropertyVetoException ex) {
                 }
             }
-            TournamentPane tournamentPane = new TournamentPane();
-            desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
-            tournamentPane.setMaximum(true);
-            tournamentPane.setVisible(true);
-            tournamentPane.showTournament(tournamentId);
-            setActive(tournamentPane);
-        } catch (PropertyVetoException ex) {
-        }
+        });
     }
 
-    public void showGameEndDialog(GameEndView gameEndView) {
-        GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
-        desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
-        gameEndDialog.showDialog();
+    public void showGameEndDialog(final GameEndView gameEndView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
+                desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
+                gameEndDialog.showDialog();
+            }
+        });
     }
 
-    public void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
-        TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
-        desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
-        tableWaitingDialog.showDialog(roomId, tableId, isTournament);
+    public void showTableWaitingDialog(final UUID roomId, final UUID tableId, final UUID chatId, final boolean owner, final boolean tournament) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
+                desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
+                tableWaitingDialog.showDialog(roomId, tableId, chatId, owner, tournament);
+            }
+        });
     }
 
     public boolean connect(Connection connection) {
@@ -1358,29 +1393,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showMessage(final String title, final String message) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
-                }
-            });
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
     }
 
     public void showError(final String title, final String message) {
-        if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.ERROR_MESSAGE);
-        } else {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.ERROR_MESSAGE);
-                }
-            });
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(desktopPane, message, title, JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
 
 //    @Override
@@ -1436,6 +1463,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public ServerState getServerState() {
         return serverState;
+    }
+
+    @Override
+    public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        showTableWaitingDialog(roomId, tableId, chatId, owner, tournament);
     }
 
 }

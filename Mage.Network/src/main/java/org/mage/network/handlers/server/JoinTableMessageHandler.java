@@ -22,7 +22,7 @@ public class JoinTableMessageHandler extends SimpleChannelInboundHandler<JoinTab
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, JoinTableRequest msg) {
-        ctx.writeAndFlush(new JoinTableMessage(server.joinTable(ctx.channel().id().asLongText(), msg.getRoomId(), msg.gettableId(), msg.getName(), msg.getPlayerType(), msg.getSkill(), msg.getDeckCardLists(), msg.getPassword())));        
+        ctx.writeAndFlush(new JoinTableMessage(server.joinTable(ctx.channel().id().asLongText(), msg.getRoomId(), msg.getTableId(), msg.getName(), msg.getPlayerType(), msg.getSkill(), msg.getDeckCardLists(), msg.getPassword())));        
     }
 
 }

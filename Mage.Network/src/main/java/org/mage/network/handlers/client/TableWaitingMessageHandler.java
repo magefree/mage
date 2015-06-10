@@ -5,19 +5,19 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import mage.view.RoomView;
-import org.mage.network.model.RoomMessage;
-import org.mage.network.model.RoomRequest;
+import mage.view.TableView;
+import org.mage.network.model.TableWaitingMessage;
+import org.mage.network.model.TableWaitingRequest;
 
 
 /**
  *
  * @author BetaSteward
  */
-public class RoomMessageHandler extends SimpleChannelInboundHandler<RoomMessage> {
+public class TableWaitingMessageHandler extends SimpleChannelInboundHandler<TableWaitingMessage> {
 
     private ChannelHandlerContext ctx;
-    private final BlockingQueue<RoomView> queue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<TableView> queue = new LinkedBlockingQueue<>();
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -26,13 +26,13 @@ public class RoomMessageHandler extends SimpleChannelInboundHandler<RoomMessage>
     }    
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, RoomMessage msg) throws Exception {
+    protected void messageReceived(ChannelHandlerContext ctx, TableWaitingMessage msg) throws Exception {
         queue.offer(msg.getRoom());
     }
     
-    public RoomView getRoom(UUID roomId) throws Exception {
+    public TableView getTable(UUID roomId, UUID tableId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new RoomRequest(roomId));
+        ctx.writeAndFlush(new TableWaitingRequest(roomId, tableId));
         return queue.take();
     }
     

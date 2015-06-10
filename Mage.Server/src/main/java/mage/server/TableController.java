@@ -35,7 +35,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -222,7 +221,7 @@ public class TableController {
             if (seat.getPlayer().isHuman()) {
                 seat.getPlayer().setUserData(user.getUserData());
                 user.addTable(player.getId(), table);
-                user.ccJoinedTable(table.getRoomId(), table.getId(), true);
+                user.joinedTable(table.getRoomId(), table.getId(), chatId, isOwner(userId), true);
                 userPlayerMap.put(userId, player.getId());
             }
 
@@ -325,7 +324,7 @@ public class TableController {
             if (!table.isTournamentSubTable()) {
                 user.addTable(player.getId(), table);
             }
-            user.ccJoinedTable(table.getRoomId(), table.getId(), false);
+            user.joinedTable(table.getRoomId(), table.getId(), chatId, isOwner(userId), false);
             userPlayerMap.put(userId, player.getId());
         }
         return true;

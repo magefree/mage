@@ -32,7 +32,7 @@ public class JoinTableRequest implements Serializable {
         return roomId;
     }
 
-    public UUID gettableId() {
+    public UUID getTableId() {
         return tableId;
     }
     

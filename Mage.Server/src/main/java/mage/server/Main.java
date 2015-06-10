@@ -470,22 +470,22 @@ public class Main implements MageServer {
 //        return null;
 //    }
 //
-//    @Override
-//    //FIXME: why no sessionId here???
-//    public TableView getTable(UUID roomId, UUID tableId) throws MageException {
+    @Override
+    //FIXME: why no sessionId here???
+    public TableView getTable(UUID roomId, UUID tableId) {
 //        try {
-//            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
-//            if (room != null) {
-//                return room.getTable(tableId);
-//            } else {
-//                return null;
-//            }
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return room.getTable(tableId);
+            } else {
+                return null;
+            }
 //        }
 //        catch (Exception ex) {
 //            handleException(ex);
 //        }
 //        return null;
-//    }
+    }
 //
 //    @Override
 //    public boolean ping(String sessionId, String pingInfo) {
@@ -674,22 +674,22 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    public boolean leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-//        TableState tableState = TableManager.getInstance().getController(tableId).getTableState();
-//        if (!tableState.equals(TableState.WAITING) && !tableState.equals(TableState.READY_TO_START)) {
-//            // table was already started, so player can't leave anymore now
-//            return false;
-//        }
+    @Override
+    public boolean leaveTable(final String sessionId, final UUID roomId, final UUID tableId) {
+        TableState tableState = TableManager.getInstance().getController(tableId).getTableState();
+        if (!tableState.equals(TableState.WAITING) && !tableState.equals(TableState.READY_TO_START)) {
+            // table was already started, so player can't leave anymore now
+            return false;
+        }
 //        execute("leaveTable", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
 //            }
 //        });
-//        return true;
-//    }
+        return true;
+    }
 //
 //    @Override
 //    //FIXME: why no sessionId here???
@@ -1375,6 +1375,10 @@ public class Main implements MageServer {
 
     public boolean isTestMode() {
         return testMode;
+    }
+
+    public void joinedTable(String sessionId, UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+        server.joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
 }

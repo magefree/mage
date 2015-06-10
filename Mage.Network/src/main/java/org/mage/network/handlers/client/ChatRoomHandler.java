@@ -31,6 +31,7 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<ChatRoomIdMessa
     }
         
     public UUID getChatRoomId(UUID id) throws Exception {
+        queue.clear();
         ctx.writeAndFlush(new ChatRoomIdRequest(id));
         return queue.take();
     }

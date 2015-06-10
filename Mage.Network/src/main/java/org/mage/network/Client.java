@@ -13,7 +13,6 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.IdleStateHandler;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -27,8 +26,6 @@ import mage.interfaces.ServerState;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.utils.MageVersion;
 import mage.view.DraftPickView;
-import mage.view.MatchView;
-import mage.view.RoomUsersView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
@@ -43,9 +40,12 @@ import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.ConnectionHandler;
 import org.mage.network.handlers.client.InformClientMessageHandler;
 import org.mage.network.handlers.client.JoinTableMessageHandler;
+import org.mage.network.handlers.client.JoinedTableMessageHandler;
+import org.mage.network.handlers.client.LeaveTableMessageHandler;
 import org.mage.network.handlers.client.ServerMessageHandler;
 import org.mage.network.handlers.client.RoomMessageHandler;
 import org.mage.network.handlers.client.TableMessageHandler;
+import org.mage.network.handlers.client.TableWaitingMessageHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -71,6 +71,9 @@ public class Client {
     private final RoomMessageHandler roomMessageHandler;
     private final TableMessageHandler tableMessageHandler;
     private final JoinTableMessageHandler joinTableMessageHandler;
+    private final JoinedTableMessageHandler joinedTableMessageHandler;
+    private final TableWaitingMessageHandler tableWaitingMessageHandler;
+    private final LeaveTableMessageHandler leaveTableMessageHandler;
     
     private final ExceptionHandler exceptionHandler;
     
@@ -93,6 +96,9 @@ public class Client {
         roomMessageHandler = new RoomMessageHandler();
         tableMessageHandler = new TableMessageHandler();
         joinTableMessageHandler = new JoinTableMessageHandler();
+        joinedTableMessageHandler = new JoinedTableMessageHandler(client);
+        tableWaitingMessageHandler = new TableWaitingMessageHandler();
+        leaveTableMessageHandler = new LeaveTableMessageHandler();
         
         exceptionHandler = new ExceptionHandler();
     }
@@ -160,6 +166,9 @@ public class Client {
             ch.pipeline().addLast("roomMessageHandler", roomMessageHandler);
             ch.pipeline().addLast("tableMessageHandler", tableMessageHandler);
             ch.pipeline().addLast("joinTableMessageHandler", joinTableMessageHandler);
+            ch.pipeline().addLast("joinedTableMessageHandler", joinedTableMessageHandler);
+            ch.pipeline().addLast("tableWaitingMessageHandler", tableWaitingMessageHandler);
+            ch.pipeline().addLast("leaveTableMessageHandler", leaveTableMessageHandler);
 
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
@@ -278,7 +287,12 @@ public class Client {
     }
 
     public boolean leaveTable(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return leaveTableMessageHandler.leaveTable(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error creating table", ex);
+        }
+        return false;
     }
 
     public void swapSeats(UUID roomId, UUID tableId, int row, int i) {
@@ -290,7 +304,12 @@ public class Client {
     }
 
     public TableView getTable(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return tableWaitingMessageHandler.getTable(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error getting chat room id", ex);
+        }
+        return null;
     }
 
     public void watchTournamentTable(UUID tableId) {

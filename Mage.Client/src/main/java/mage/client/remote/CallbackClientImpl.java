@@ -161,12 +161,12 @@ public class CallbackClientImpl implements CallbackClient {
                                     JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
                                 }
                             }   break;
-                        case "joinedTable":
-                            {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
-                                break;
-                            }
+//                        case "joinedTable":
+//                            {
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
+//                                break;
+//                            }
                         case "replayInit":
                             {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -425,13 +425,13 @@ public class CallbackClientImpl implements CallbackClient {
 //        }
 //    }
 
-    private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
-        try {
-            frame.showTableWaitingDialog(roomId, tableId, isTournament);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
+//    private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
+//        try {
+//            frame.showTableWaitingDialog(roomId, tableId, isTournament);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
 
     protected void gameStarted(final UUID gameId, final UUID playerId) {
         try {

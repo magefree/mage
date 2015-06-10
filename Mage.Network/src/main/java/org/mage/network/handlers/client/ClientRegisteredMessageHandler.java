@@ -2,12 +2,10 @@ package org.mage.network.handlers.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.interfaces.ServerState;
 import mage.utils.MageVersion;
-import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.ClientRegisteredMessage;
 import org.mage.network.model.RegisterClientMessage;
 
@@ -17,8 +15,6 @@ import org.mage.network.model.RegisterClientMessage;
  */
 public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<ClientRegisteredMessage> {
 
-//    private final MageClient client;    
-//    private ChannelHandlerContext ctx;
     private final BlockingQueue<ServerState> queue = new LinkedBlockingQueue<>();
     private String userName;
     private MageVersion version;
