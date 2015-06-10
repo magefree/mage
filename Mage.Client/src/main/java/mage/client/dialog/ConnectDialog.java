@@ -65,6 +65,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_AUTO_CONNECT;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
+import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection.ProxyType;
 
 /**
@@ -101,7 +102,7 @@ public class ConnectDialog extends MageDialog {
         this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
         
-        String selectedFlag = MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png");
+        String selectedFlag = MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world");
         // set the selected country/flag
         for (int i = 0; i < cbFlag.getItemCount(); i++) {
             String[] name = (String[])cbFlag.getItemAt(i);
@@ -292,7 +293,7 @@ public class ConnectDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, (String)cbFlag.getSelectedItem());
+        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor)cbFlag.getEditor()).getImageItem());
         if (task != null && !task.isDone()) {
             task.cancel(true);
         } else {
@@ -328,7 +329,7 @@ public class ConnectDialog extends MageDialog {
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
-            MageFrame.getPreferences().put(KEY_CONNECT_FLAG, (String)cbFlag.getSelectedItem());    
+            MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor)cbFlag.getEditor()).getImageItem());    
 
             ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 

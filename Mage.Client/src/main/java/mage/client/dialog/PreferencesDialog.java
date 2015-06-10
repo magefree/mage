@@ -150,6 +150,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
     public static final String KEY_TABLES_DIVIDER_LOCATION_3 = "tablePanelDividerLocation3";
 
+    // user list
+    public static final String KEY_USERS_COLUMNS_WIDTH = "userPanelColumnWidth";
+    public static final String KEY_USERS_COLUMNS_ORDER = "userPanelColumnSort";
+    
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";

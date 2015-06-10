@@ -35,6 +35,7 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 
 
@@ -47,20 +48,23 @@ public class CountryItemEditor extends BasicComboBoxEditor {
     private final JPanel panel = new JPanel();
     private final JLabel labelItem = new JLabel();
     private String selectedValue;
+    private String selectedImage;
      
     public CountryItemEditor() {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;
-        constraints.insets = new Insets(2, 5, 2, 2);
+//        constraints.insets = new Insets(2, 5, 2, 2);
+        constraints.insets = new Insets(0, 5, 0, 0);
          
         labelItem.setOpaque(false);
         labelItem.setHorizontalAlignment(JLabel.LEFT);
         labelItem.setForeground(Color.WHITE);
          
         panel.add(labelItem, constraints);
-        panel.setBackground(new Color(0,104,139, 0));   
+//        panel.setBackground(Color.WHITE);   
+        panel.setBackground(new Color(0, 100,190, 255));   
         selectedValue = null;
     }
      
@@ -74,6 +78,9 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         return this.selectedValue;
     }
      
+    public String getImageItem() {
+        return this.selectedImage;
+    }    
     @Override
     public void setItem(Object item) {
         if (item == null || !(item instanceof String[])) {
@@ -81,7 +88,8 @@ public class CountryItemEditor extends BasicComboBoxEditor {
         }
         String[] countryItem = (String[]) item;
         selectedValue = countryItem[0];
+        selectedImage = countryItem[1];
         labelItem.setText(selectedValue);
-        labelItem.setIcon(new ImageIcon(getClass().getResource("/flags/"+ countryItem[1])));      
+        labelItem.setIcon(new ImageIcon(getClass().getResource("/flags/"+ countryItem[1] + ".png")));      
     }  
 }

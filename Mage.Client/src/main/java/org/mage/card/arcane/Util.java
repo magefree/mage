@@ -89,19 +89,5 @@ public class Util {
             throw new RuntimeException("Error invoking runnable in UI thread.", ex);
         }
     }
-    
-    public static int[] getIntArrayFromString(String stringData) {
-        int[] intArray = null;
-        if (stringData != null && !stringData.isEmpty()) {
-            String[] items = stringData.split(",");
-            int lengthW = items.length;
-            intArray = new int[lengthW];
-            for (int i = 0; i < lengthW; i++) {
-                try {
-                    intArray[i] = Integer.parseInt(items[i]);
-                } catch (NumberFormatException nfe) {}
-            }
-        } 
-        return intArray;
-    }
+
 }

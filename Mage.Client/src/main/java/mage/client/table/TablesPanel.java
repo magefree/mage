@@ -64,12 +64,10 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.RowFilter;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -78,10 +76,13 @@ import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
 import mage.client.util.MageTableRowSorter;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.client.util.gui.TableUtil;
 import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
@@ -93,7 +94,6 @@ import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
-import org.mage.card.arcane.Util;
 
 /**
  *
@@ -120,9 +120,11 @@ public class TablesPanel extends javax.swing.JPanel {
     
     JToggleButton[] filterButtons;
     
+    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 60};
+    
     /** Creates new form TablesPanel */
     public TablesPanel() {
-
+        
         tableModel = new TableTableModel();
         matchesModel = new MatchesTableModel();
         gameChooser = new GameChooser();
@@ -135,7 +137,8 @@ public class TablesPanel extends javax.swing.JPanel {
         activeTablesSorter = new MageTableRowSorter(tableModel);
         tableTables.setRowSorter(activeTablesSorter);
         
-        TableTableModel.setColumnWidthAndOrder(tableTables);
+        TableUtil.setColumnWidthAndOrder(tableTables, defaultColumnsWidth, 
+                PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, PreferencesDialog.KEY_TABLES_COLUMNS_ORDER);
         
         tableCompleted.setRowSorter(new MageTableRowSorter(matchesModel));
 
@@ -276,6 +279,7 @@ public class TablesPanel extends javax.swing.JPanel {
     
     public void cleanUp() {
         saveSettings();
+        chatPanel.cleanUp();
     }
 
     private void saveDividerLocations() {
@@ -311,23 +315,7 @@ public class TablesPanel extends javax.swing.JPanel {
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_FILTER_SETTINGS, formatSettings.toString());
         
-        // Column width
-        StringBuilder columnWidthSettings = new StringBuilder();
-        StringBuilder columnOrderSettings = new StringBuilder();
-        boolean firstValue = true;
-        for (int i = 0; i < tableTables.getColumnModel().getColumnCount(); i++) {
-            TableColumn column = tableTables.getColumnModel().getColumn(tableTables.convertColumnIndexToView(i));
-            if (!firstValue) {
-                columnWidthSettings.append(",");
-                columnOrderSettings.append(",");
-            } else {
-                firstValue = false;
-            }
-            columnWidthSettings.append(column.getWidth());
-            columnOrderSettings.append(tableTables.convertColumnIndexToModel(i));
-        }
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, columnWidthSettings.toString());
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_COLUMNS_ORDER, columnOrderSettings.toString());
+        TableUtil.saveColumnWidthAndOrderToPrefs(tableTables, KEY_TABLES_COLUMNS_WIDTH, KEY_TABLES_COLUMNS_ORDER);
     }
 
     private void restoreDividerLocations() {
@@ -1157,6 +1145,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setWinsNeeded(1);
                 options.setMatchTimeLimit(MatchTimeLimit.NONE);
                 options.setFreeMulligans(2);
+                options.setSkillLevel(SkillLevel.CASUAL);
                 table = session.createTable(roomId,    options);
 
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
@@ -1262,8 +1251,7 @@ class TableTableModel extends AbstractTableModel {
     public static final int ACTION_COLUMN = 8; // column the action is located (starting with 0)
 
     private final String[] columnNames = new String[]{"M/T","Deck Type", "Owner / Players", "Game Type", "Info", "Status", "Created / Started", "Skill Level", "Action"};
-    private static final int[] defaultColumnsWidth = {35, 150, 120, 180, 80, 120, 80, 60, 60};
-        
+         
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");;
 
@@ -1272,32 +1260,7 @@ class TableTableModel extends AbstractTableModel {
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
-    }
-
-    static public void setColumnWidthAndOrder(JTable table) {
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
-        // set the column width from saved value or defaults        
-        int[] widths = Util.getIntArrayFromString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH, null));
-        int i = 0;
-        for (int width : defaultColumnsWidth) {
-            if (widths != null && widths.length > i) {
-                width = widths[i];
-            }            
-            TableColumn column = table.getColumnModel().getColumn(i++);
-            column.setWidth(width);
-            column.setPreferredWidth(width);
-        }
-
-        // set the column order
-        int[] order = Util.getIntArrayFromString(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_COLUMNS_ORDER, null));
-        if (order != null && order.length == table.getColumnCount()) {
-            for (int j = 0; j < table.getColumnCount(); j++) {
-                table.moveColumn(table.convertColumnIndexToView(order[j]), j);
-            }
-        }
-        
-    }
+    }   
     
     @Override
     public int getRowCount() {
