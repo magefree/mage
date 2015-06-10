@@ -54,7 +54,6 @@ public class Victimize extends CardImpl {
         super(ownerId, 133, "Victimize", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
         this.expansionSetCode = "CNS";
 
-
         // Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
         this.getSpellAbility().addEffect(new VictimizeEffect());
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards in your graveyard")));
@@ -88,14 +87,14 @@ class VictimizeEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("a creature")));
-            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), true)) {
+            if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                 for (UUID targetId: getTargetPointer().getTargets(game, source)) {
                     Card card = game.getCard(targetId);
                     if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), true);
+                        controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), true);
                     }
                 }
             }

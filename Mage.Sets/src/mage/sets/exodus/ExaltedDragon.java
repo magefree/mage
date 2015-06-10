@@ -105,7 +105,7 @@ class ExaltedDragonReplacementEffect extends ReplacementEffectImpl {
             if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                  player.chooseUse(Outcome.Neutral, "Sacrifice a land?", game) )
             {
-                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true) ) {
+                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), false) ) {
                     return false;
                 }
             }
