@@ -109,9 +109,13 @@ class ThraximundarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED
-                && event.getSourceId() == this.getSourceId()) {
+        if (event.getSourceId() == this.getSourceId()) {
             UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
             return true;
