@@ -49,13 +49,13 @@ public class RecurringInsight extends CardImpl {
     public RecurringInsight(UUID ownerId) {
         super(ownerId, 82, "Recurring Insight", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
         this.expansionSetCode = "ROE";
-
         
         // Rebound
         this.addAbility(new ReboundAbility());
 
         // Draw cards equal to the number of cards in target opponent's hand.
         this.getSpellAbility().addEffect(new RecurringInsightEffect());    
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public RecurringInsight(final RecurringInsight card) {
@@ -81,15 +81,13 @@ class RecurringInsightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TargetOpponent target = new TargetOpponent();
-        Player you = game.getPlayer(source.getControllerId());
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-            you.chooseTarget(Outcome.DrawCard, target, source, game);
-            Player opponent = game.getPlayer(target.getFirstTarget());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (opponent != null) {
-                you.drawCards(opponent.getHand().size(), game);
-                return true;
+                controller.drawCards(opponent.getHand().size(), game);
             }
+            return true;
         }
         return false;
     }
