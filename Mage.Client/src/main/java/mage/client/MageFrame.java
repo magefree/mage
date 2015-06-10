@@ -92,6 +92,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
 import mage.view.UserRequestMessage;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
@@ -710,10 +711,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         ProxyType proxyType = ProxyType.valueByText(prefs.get("proxyType", "None"));
         String proxyUsername = prefs.get("proxyUsername", "");
         String proxyPassword = prefs.get("proxyPassword", "");
-        int avatarId = PreferencesDialog.getSelectedAvatar();
-        boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
-            
-        
         try {
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             Connection connection = new Connection();
@@ -725,10 +722,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             connection.setProxyPort(proxyPort);
             connection.setProxyUsername(proxyUsername);
             connection.setProxyPassword(proxyPassword);
-            connection.setAvatarId(avatarId);
-            connection.setShowAbilityPickerForced(showAbilityPickerForced);
-            connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
-            connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
+            
+            setUserPrefsToConnection(connection);
+            
             logger.debug("connecting (auto): " + proxyType + " " + proxyServer + " " + proxyPort + " " + proxyUsername);
             if (MageFrame.connect(connection)) {  
                 showGames(false);                
@@ -742,6 +738,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return false;
     }
 
+    public void setUserPrefsToConnection(Connection connection) {
+        int avatarId = PreferencesDialog.getSelectedAvatar();
+        connection.setAvatarId(avatarId);
+        boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");        
+        connection.setShowAbilityPickerForced(showAbilityPickerForced);            
+        connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
+        connection.setConfirmEmptyManaPool(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"));
+        connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());           
+        connection.setFlagName(MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png"));        
+    }
+    
     /**
      * This method is called from within the constructor to
      * initialize the form.

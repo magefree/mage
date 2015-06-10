@@ -36,5 +36,5 @@ public interface ClientData {
 
     String getUserName();
 
-    boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps);
+    boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName);
 }

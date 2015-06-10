@@ -58,6 +58,7 @@ public class Connection {
     private boolean showAbilityPickerForced;
     private boolean allowRequestShowHandCards;
     private boolean confirmEmptyManaPool;
+    private String flagName;
     private UserSkipPrioritySteps userSkipPrioritySteps;
 
     private static final String serialization = "?serializationtype=jboss";    
@@ -267,6 +268,14 @@ public class Connection {
 
     public void setForceDBComparison(boolean forceDBComparison) {
         this.forceDBComparison = forceDBComparison;
+    }
+
+    public String getFlagName() {
+        return flagName;
+    }
+
+    public void setFlagName(String flagName) {
+        this.flagName = flagName;
     }
 
 }

@@ -37,7 +37,6 @@ package mage.client.dialog;
 import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -64,6 +63,9 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_AUTO_CONNECT;
+import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
+import mage.remote.Connection.ProxyType;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -96,8 +98,18 @@ public class ConnectDialog extends MageDialog {
         this.txtServer.setText(MageFrame.getPreferences().get("serverAddress", Config.serverName));
         this.txtPort.setText(MageFrame.getPreferences().get("serverPort", Integer.toString(Config.port)));
         this.txtUserName.setText(MageFrame.getPreferences().get("userName", ""));
-        this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false")));
+        this.chkAutoConnect.setSelected(Boolean.parseBoolean(MageFrame.getPreferences().get(KEY_CONNECT_AUTO_CONNECT, "false")));
         this.chkForceUpdateDB.setSelected(false); // has always to be set manually to force comparison
+        
+        String selectedFlag = MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png");
+        // set the selected country/flag
+        for (int i = 0; i < cbFlag.getItemCount(); i++) {
+            String[] name = (String[])cbFlag.getItemAt(i);
+            if (name[1].equals(selectedFlag)) {
+                cbFlag.setSelectedIndex(i);
+                break;
+            }
+        }
         this.setModal(true);
         this.setLocation(50, 50);
         this.setVisible(true);
@@ -107,7 +119,7 @@ public class ConnectDialog extends MageDialog {
         MageFrame.getPreferences().put("serverAddress", txtServer.getText().trim());
         MageFrame.getPreferences().put("serverPort", txtPort.getText().trim());
         MageFrame.getPreferences().put("userName", txtUserName.getText().trim());
-        MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        MageFrame.getPreferences().put(KEY_CONNECT_AUTO_CONNECT, Boolean.toString(chkAutoConnect.isSelected()));
     }
 
     /**
@@ -127,6 +139,8 @@ public class ConnectDialog extends MageDialog {
         txtPort = new javax.swing.JTextField();
         lblUserName = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
+        lblFlag = new javax.swing.JLabel();
+        cbFlag = new mage.client.util.gui.countryBox.CountryComboBox();
         chkAutoConnect = new javax.swing.JCheckBox();
         chkForceUpdateDB = new javax.swing.JCheckBox();
         jProxySettingsButton = new javax.swing.JButton();
@@ -159,7 +173,12 @@ public class ConnectDialog extends MageDialog {
         });
 
         lblUserName.setLabelFor(txtUserName);
-        lblUserName.setText("User Name:");
+        lblUserName.setText("User name:");
+
+        lblFlag.setLabelFor(txtUserName);
+        lblFlag.setText("User flag:");
+
+        cbFlag.setEditable(true);
 
         chkAutoConnect.setText("Automatically connect to this server next time");
         chkAutoConnect.setToolTipText("<HTML>If active this connect dialog will not be shown if you choose to connect.<br>\nInstead XMage tries to connect to the last server you were connected to.");
@@ -211,26 +230,26 @@ public class ConnectDialog extends MageDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPort)
-                            .addComponent(lblServer)
-                            .addComponent(lblUserName))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblPort)
+                                .addComponent(lblServer)
+                                .addComponent(lblUserName))
+                            .addComponent(lblFlag, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jProxySettingsButton)
-                                .addGap(164, 237, Short.MAX_VALUE))
+                            .addComponent(jProxySettingsButton)
+                            .addComponent(cbFlag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtServer, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
                                     .addComponent(txtPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUserName))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFind)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(btnFind))
+                            .addComponent(chkForceUpdateDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chkAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -250,12 +269,16 @@ public class ConnectDialog extends MageDialog {
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblFlag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbFlag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
                 .addComponent(chkAutoConnect)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkForceUpdateDB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProxySettingsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -269,6 +292,7 @@ public class ConnectDialog extends MageDialog {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, (String)cbFlag.getSelectedItem());
         if (task != null && !task.isDone()) {
             task.cancel(true);
         } else {
@@ -304,7 +328,7 @@ public class ConnectDialog extends MageDialog {
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
-
+            MageFrame.getPreferences().put(KEY_CONNECT_FLAG, (String)cbFlag.getSelectedItem());    
 
             ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
 
@@ -329,13 +353,8 @@ public class ConnectDialog extends MageDialog {
             }
 
             // pref settings
-            int avatarId = PreferencesDialog.getSelectedAvatar();
-            connection.setAvatarId(avatarId);
-            boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");
-            connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
-            connection.setShowAbilityPickerForced(showAbilityPickerForced);
-            connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());
-            connection.setConfirmEmptyManaPool(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"));
+            MageFrame.getInstance().setUserPrefsToConnection(connection);            
+            
             logger.debug("connecting: " + connection.getProxyType() + " " + connection.getProxyHost() + " " + connection.getProxyPort());
             task = new ConnectTask();
             task.execute();
@@ -524,9 +543,11 @@ public class ConnectDialog extends MageDialog {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConnect;
     private javax.swing.JButton btnFind;
+    private mage.client.util.gui.countryBox.CountryComboBox cbFlag;
     private javax.swing.JCheckBox chkAutoConnect;
     private javax.swing.JCheckBox chkForceUpdateDB;
     private javax.swing.JButton jProxySettingsButton;
+    private javax.swing.JLabel lblFlag;
     private javax.swing.JLabel lblPort;
     private javax.swing.JLabel lblServer;
     private javax.swing.JLabel lblStatus;

@@ -311,7 +311,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     class TableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Players", "Info", "Games", "Connection"};
+        private final String[] columnNames = new String[]{" ","Players", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(Collection<RoomUsersView> roomUserInfoList) throws MageRemoteException {
@@ -319,8 +319,9 @@ public class ChatPanel extends javax.swing.JPanel {
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
-            tcm.getColumn(0).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(2).setHeaderValue(
+            
+            tcm.getColumn(1).setHeaderValue("Players (" + this.players.length + ")");
+            tcm.getColumn(3).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames() +
                     (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads():" (") +
                     " limit: " + roomUserInfo.getNumberMaxGames() + ")");
@@ -342,12 +343,14 @@ public class ChatPanel extends javax.swing.JPanel {
         public Object getValueAt(int arg0, int arg1) {
             switch (arg1) {
                 case 0:
-                    return players[arg0].getUserName();
+                    return players[arg0].getFlagName();
                 case 1:
-                    return players[arg0].getInfoState();
+                    return players[arg0].getUserName();
                 case 2:
-                    return players[arg0].getInfoGames();
+                    return players[arg0].getInfoState();
                 case 3:
+                    return players[arg0].getInfoGames();
+                case 4:
                     return players[arg0].getInfoPing();
             }
             return "";

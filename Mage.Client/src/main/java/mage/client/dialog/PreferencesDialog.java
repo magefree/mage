@@ -226,6 +226,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
     public static final String KEY_AVATAR = "selectedId";
+    
+    public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
+    public static final String KEY_CONNECT_FLAG = "connectFlag";
+    
 
     private static final Map<String, String> cache = new HashMap<>();
 
@@ -1713,7 +1717,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         dialog.showAbilityPickerForced.isSelected(),
                         dialog.cbAllowRequestToShowHandCards.isSelected(),
                         dialog.cbConfirmEmptyManaPool.isSelected(),
-                        getUserSkipPrioritySteps());
+                        getUserSkipPrioritySteps(),
+                        MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png"));
 
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -2390,7 +2395,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
                                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
                                 PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
-                                getUserSkipPrioritySteps());
+                                getUserSkipPrioritySteps(),
+                                MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png")
+                        );
                     }
                 }
             });

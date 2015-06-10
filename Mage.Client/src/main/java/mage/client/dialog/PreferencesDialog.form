@@ -31,7 +31,7 @@
               <Component id="exitButton" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="tabsPanel" alignment="0" pref="595" max="32767" attributes="0"/>
+          <Component id="tabsPanel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">

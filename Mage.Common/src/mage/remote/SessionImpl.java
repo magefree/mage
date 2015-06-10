@@ -279,7 +279,8 @@ public class SessionImpl implements Session {
                         connection.isShowAbilityPickerForced(),
                         connection.allowRequestShowHandCards(),
                         connection.confirmEmptyManaPool(),
-                        connection.getUserSkipPrioritySteps());
+                        connection.getUserSkipPrioritySteps(),
+                        connection.getFlagName());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
                 if (registerResult) {
@@ -1396,10 +1397,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps) {
+    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName) {
         try {
             if (isConnected()) {
-                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, allowRequestShowHandCards, confirmEmptyManaPool, userSkipPrioritySteps);
+                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, allowRequestShowHandCards, confirmEmptyManaPool, userSkipPrioritySteps, flagName);
                 server.setUserData(connection.getUsername(), sessionId, userDataView);
             }
             return true;
