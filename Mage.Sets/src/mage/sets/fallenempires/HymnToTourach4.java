@@ -28,51 +28,29 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author jonubuu
  */
-public class IcatianJavelineers extends CardImpl {
+public class HymnToTourach4 extends mage.sets.fallenempires.HymnToTourach1 {
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId, 148, "Icatian Javelineers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
-        this.expansionSetCode = "FEM";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public HymnToTourach4(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 15;
+   }
 
-        // Icatian Javelineers enters the battlefield with a javelin counter on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.JAVELIN.createInstance())));
-
-        // {tap}, Remove a javelin counter from Icatian Javelineers: Icatian Javelineers deals 1 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
-        ability.addCost(new RemoveCountersSourceCost(CounterType.JAVELIN.createInstance()));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
-    }
-
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public HymnToTourach4(final HymnToTourach4 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public HymnToTourach4 copy() {
+        return new HymnToTourach4(this);
     }
 }

@@ -45,9 +45,9 @@ import mage.target.common.TargetCardInASingleGraveyard;
  *
  * @author LevelX2
  */
-public class NightSoil extends CardImpl {
+public class NightSoil1 extends CardImpl {
 
-    public NightSoil(UUID ownerId) {
+    public NightSoil1(UUID ownerId) {
         super(ownerId, 80, "Night Soil", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
         this.expansionSetCode = "FEM";
 
@@ -58,12 +58,12 @@ public class NightSoil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightSoil(final NightSoil card) {
+    public NightSoil1(final NightSoil1 card) {
         super(card);
     }
 
     @Override
-    public NightSoil copy() {
-        return new NightSoil(this);
+    public NightSoil1 copy() {
+        return new NightSoil1(this);
     }
 }

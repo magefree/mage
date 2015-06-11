@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author fireshoes
  */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+public class IcatianJavelineers3 extends mage.sets.fallenempires.IcatianJavelineers1 {
 
-    public IcatianJavelineers(UUID ownerId) {
+    public IcatianJavelineers3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+        this.cardNumber = 150;
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public IcatianJavelineers3(final IcatianJavelineers3 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public IcatianJavelineers3 copy() {
+        return new IcatianJavelineers3(this);
     }
 }

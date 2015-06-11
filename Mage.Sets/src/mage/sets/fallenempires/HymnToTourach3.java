@@ -25,28 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author jonubuu
  */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+public class HymnToTourach3 extends mage.sets.fallenempires.HymnToTourach1 {
 
-    public IcatianJavelineers(UUID ownerId) {
+    public HymnToTourach3(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
-    }
+   }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public HymnToTourach3(final HymnToTourach3 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public HymnToTourach3 copy() {
+        return new HymnToTourach3(this);
     }
 }
