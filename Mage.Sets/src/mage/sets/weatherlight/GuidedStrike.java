@@ -30,6 +30,7 @@ package mage.sets.weatherlight;
 import java.util.UUID;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -51,8 +52,12 @@ public class GuidedStrike extends CardImpl {
 
         // Target creature gets +1/+0 and gains first strike until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
