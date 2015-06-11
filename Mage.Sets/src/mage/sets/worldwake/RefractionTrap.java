@@ -27,6 +27,8 @@
  */
 package mage.sets.worldwake;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -34,16 +36,19 @@ import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSource;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -66,7 +71,6 @@ public class RefractionTrap extends CardImpl {
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to target creature or player.
         this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
-        this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         this.getSpellAbility().addWatcher(new RefractionTrapWatcher());
@@ -84,12 +88,15 @@ public class RefractionTrap extends CardImpl {
 
 class RefractionTrapWatcher extends Watcher {
 
+    Set<UUID> playersMetCondition = new HashSet<>();
+            
     public RefractionTrapWatcher() {
         super("RefractionTrapWatcher", WatcherScope.GAME);
     }
 
     public RefractionTrapWatcher(final RefractionTrapWatcher watcher) {
         super(watcher);
+        this.playersMetCondition.addAll(watcher.playersMetCondition);
     }
 
     @Override
@@ -99,26 +106,33 @@ class RefractionTrapWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-        {
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell.getColor(game).isRed()) {
                 if (spell.getCardType().contains(CardType.INSTANT)
                         || spell.getCardType().contains(CardType.SORCERY)) {
-                    condition = true;
+                    playersMetCondition.add(event.getPlayerId());
                 }
             }
         }
     }
 
+    public boolean conditionMetForAnOpponent(UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            for(UUID playerId: playersMetCondition) {
+                if (controller.hasOpponent(playerId, game)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+    }
     @Override
     public void reset() {
-        super.reset();
-        condition = false;
+        playersMetCondition.clear();
+        super.reset();        
     }
 }
 
@@ -126,7 +140,7 @@ class RefractionTrapAlternativeCost extends AlternativeCostImpl {
 
     public RefractionTrapAlternativeCost() {
         super("You may pay {W} rather than pay Refraction Trap's mana cost");
-        this.add(new ColoredManaCost(ColoredManaSymbol.W));
+        this.add(new ManaCostsImpl<ManaCost>("{W}"));
     }
 
     public RefractionTrapAlternativeCost(final RefractionTrapAlternativeCost cost) {
@@ -141,10 +155,7 @@ class RefractionTrapAlternativeCost extends AlternativeCostImpl {
     @Override
     public boolean isAvailable(Game game, Ability source) {
         RefractionTrapWatcher watcher = (RefractionTrapWatcher) game.getState().getWatchers().get("RefractionTrapWatcher");
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
+        return watcher != null && watcher.conditionMetForAnOpponent(source.getControllerId(), game);
     }
 
     @Override
@@ -155,24 +166,33 @@ class RefractionTrapAlternativeCost extends AlternativeCostImpl {
 
 class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
+    private final TargetSource target;
     private int amount;
 
     public RefractionTrapPreventDamageEffect(Duration duration, int amount) {
-        super(duration);
+        super(duration, amount, false, false);
         this.amount = amount;
+        this.target = new TargetSource();
         staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";
     }
 
     public RefractionTrapPreventDamageEffect(final RefractionTrapPreventDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
+         this.target = effect.target.copy();
     }
 
     @Override
     public RefractionTrapPreventDamageEffect copy() {
         return new RefractionTrapPreventDamageEffect(this);
     }
-
+    
+    @Override
+    public void init(Ability source, Game game) {
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        super.init(source, game);
+    }
+    
     @Override
     public boolean apply(Game game, Ability source) {
         return true;
@@ -180,45 +200,29 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int prevented = 0;
-            if (event.getAmount() >= this.amount) {
-                int damage = amount;
-                event.setAmount(event.getAmount() - amount);
-                this.used = true;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
-            } else {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                amount -= damage;
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                prevented = damage;
+        PreventionEffectData preventionData = preventDamageAction(event, source, game);
+        this.used = true;
+        this.discard(); // only one use
+        if (preventionData.getPreventedDamage() > 0) {
+            UUID damageTarget = getTargetPointer().getFirst(game, source);
+            Permanent permanent = game.getPermanent(damageTarget);
+            if (permanent != null) {
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + permanent.getLogName());
+                permanent.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, false, true);
             }
-
-            // deal damage now
-            if (prevented > 0) {
-                UUID damageTarget = source.getTargets().get(1).getFirstTarget();
-                Permanent target = game.getPermanent(damageTarget);
-                if (target != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + target.getName());
-                    target.damage(prevented, source.getSourceId(), game, false, true);
-                }
-                Player player = game.getPlayer(damageTarget);
-                if (player != null) {
-                    game.informPlayers("Dealing " + prevented + " to " + player.getLogName());
-                    player.damage(prevented, source.getSourceId(), game, true, false);
-                }
+            Player player = game.getPlayer(damageTarget);
+            if (player != null) {
+                game.informPlayers("Dealing " + preventionData.getPreventedDamage() + " to " + player.getLogName());
+                player.damage(preventionData.getPreventedDamage(), source.getSourceId(), game, true, false);
             }
         }
+
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used && super.applies(event, source, game)) {
-
             // check source
             MageObject object = game.getObject(event.getSourceId());
             if (object == null) {
@@ -226,7 +230,9 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl {
                 return false;
             }
 
-            if (!object.getId().equals(source.getFirstTarget())) {
+            // check damage source
+            if (!object.getId().equals(target.getFirstTarget()) && 
+                    !((object instanceof StackObject) && ((StackObject)object).getSourceId().equals(target.getFirstTarget()))) {
                 return false;
             }
 
