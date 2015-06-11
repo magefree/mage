@@ -46,7 +46,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
-import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
@@ -56,7 +55,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.watchers.Watcher;
-import mage.watchers.common.CardsDrawnDuringDrawStepWatcher;
 
 /**
  *
