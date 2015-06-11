@@ -87,14 +87,16 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     }
     
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            MageObject eventSource = game.getObject(event.getSourceId());
-            this.getEffects().get(0).setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(eventSource.getId())));
-            return true;
-        }
-        return false;
+        MageObject eventSource = game.getObject(event.getSourceId());
+        this.getEffects().get(0).setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
+        this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(eventSource.getId())));
+        return true;
     }
     
     @Override
@@ -125,7 +127,7 @@ class RepercussionEffect extends OneShotEffect {
         if (playerDamage != null && targetId != null) {
             Player player = game.getPlayer(targetId);
             if (player != null) {
-                    player.damage(playerDamage, targetId, game, false, true);
+                    player.damage(playerDamage, source.getSourceId(), game, false, true);
                     return true;
             }
         }
