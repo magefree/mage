@@ -32,8 +32,10 @@ public interface MageServer {
     TableView createTable(String sessionId, UUID roomId, MatchOptions options);
     boolean joinTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
     TableView getTable(UUID roomId, UUID tableId);
-    boolean leaveTable(String asLongText, UUID roomId, UUID tableId);
+    boolean leaveTable(String sessionId, UUID roomId, UUID tableId);
+    void removeTable(String sessionId, UUID roomId, UUID tableId);
+    void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2);
     
     void pingTime(long milliSeconds, String sessionId);
-    
+
 }

@@ -345,16 +345,16 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
+    @Override
+    public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) {
 //        execute("removeTable", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableManager.getInstance().removeTable(userId, tableId);
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                TableManager.getInstance().removeTable(userId, tableId);
 //            }
 //        });
-//    }
+    }
 //
     @Override
     public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) {
@@ -663,16 +663,16 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
+    @Override
+    public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) {
 //        execute("swapSeats", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
 //            }
 //        });
-//    }
+    }
 //
     @Override
     public boolean leaveTable(final String sessionId, final UUID roomId, final UUID tableId) {

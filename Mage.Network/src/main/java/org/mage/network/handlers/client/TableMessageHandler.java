@@ -9,6 +9,8 @@ import mage.game.match.MatchOptions;
 import mage.view.TableView;
 import org.mage.network.model.CreateTableMessage;
 import org.mage.network.model.CreateTableRequest;
+import org.mage.network.model.RemoveTableRequest;
+import org.mage.network.model.SwapSeatRequest;
 
 
 /**
@@ -35,5 +37,13 @@ public class TableMessageHandler extends SimpleChannelInboundHandler<CreateTable
         ctx.writeAndFlush(new CreateTableRequest(roomId, options));
         return queue.take();
     }
-    
+
+    public void removeTable(UUID roomId, UUID tableId) throws Exception {
+        ctx.writeAndFlush(new RemoveTableRequest(roomId, tableId));
+    }
+
+    public void swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws Exception {
+        ctx.writeAndFlush(new SwapSeatRequest(roomId, tableId, seatNum1, seatNum2));
+    }
+
 }

@@ -8,20 +8,15 @@ import mage.game.match.MatchOptions;
  *
  * @author BetaSteward
  */
-public class CreateTableRequest implements Serializable {
+public class CreateTableRequest extends RoomRequest {
     
-    private UUID roomId;
     private MatchOptions options;
     
     public CreateTableRequest(UUID roomId, MatchOptions options) {
-        this.roomId = roomId;
+        super(roomId);
         this.options = options;
     }
     
-    public UUID getRoomId() {
-        return roomId;
-    }
-
     public MatchOptions getMatchOptions() {
         return options;
     }

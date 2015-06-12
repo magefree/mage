@@ -4,14 +4,14 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.ReceiveChatMessage;
-import org.mage.network.model.SendChatMessage;
+import org.mage.network.model.ChatMessageMessage;
+import org.mage.network.model.ChatMessageRequest;
 
 /**
  *
  * @author BetaSteward
  */
-public class ChatMessageHandler extends SimpleChannelInboundHandler<ReceiveChatMessage> {
+public class ChatMessageHandler extends SimpleChannelInboundHandler<ChatMessageMessage> {
 
     private final MageClient client;
     private ChannelHandlerContext ctx;
@@ -27,11 +27,11 @@ public class ChatMessageHandler extends SimpleChannelInboundHandler<ReceiveChatM
     }    
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, ReceiveChatMessage msg) throws Exception {
+    protected void messageReceived(ChannelHandlerContext ctx, ChatMessageMessage msg) throws Exception {
         client.receiveChatMessage(msg.getChatId(), msg.getMessage());
     }
     
     public void sendMessage(UUID chatId, String message) {
-        ctx.writeAndFlush(new SendChatMessage(chatId, message));
+        ctx.writeAndFlush(new ChatMessageRequest(chatId, message));
     }
 }

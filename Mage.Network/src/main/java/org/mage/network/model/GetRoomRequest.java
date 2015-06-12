@@ -6,10 +6,10 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class ChatRoomIdRequest extends RoomRequest {
+public class GetRoomRequest extends RoomRequest {
     
-    public ChatRoomIdRequest(UUID roomId) {
+    public GetRoomRequest(UUID roomId) {
         super(roomId);
     }
-
+        
 }

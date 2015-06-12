@@ -7,8 +7,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import org.mage.network.model.ChatRoomIdMessage;
 import org.mage.network.model.ChatRoomIdRequest;
-import org.mage.network.model.JoinChatMessage;
-import org.mage.network.model.LeaveChatMessage;
+import org.mage.network.model.JoinChatRequest;
+import org.mage.network.model.LeaveChatRequest;
 
 /**
  *
@@ -30,18 +30,18 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<ChatRoomIdMessa
         queue.offer(msg.getId());
     }
         
-    public UUID getChatRoomId(UUID id) throws Exception {
+    public UUID getChatRoomId(UUID roomId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new ChatRoomIdRequest(id));
+        ctx.writeAndFlush(new ChatRoomIdRequest(roomId));
         return queue.take();
     }
 
     public void joinChat(UUID chatId) {
-        ctx.writeAndFlush(new JoinChatMessage(chatId));
+        ctx.writeAndFlush(new JoinChatRequest(chatId));
     }
     
     public void leaveChat(UUID chatId) {
-        ctx.writeAndFlush(new LeaveChatMessage(chatId));
+        ctx.writeAndFlush(new LeaveChatRequest(chatId));
     }
 
 }

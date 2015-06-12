@@ -6,8 +6,8 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.view.RoomView;
+import org.mage.network.model.GetRoomRequest;
 import org.mage.network.model.RoomMessage;
-import org.mage.network.model.RoomRequest;
 
 
 /**
@@ -32,7 +32,7 @@ public class RoomMessageHandler extends SimpleChannelInboundHandler<RoomMessage>
     
     public RoomView getRoom(UUID roomId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new RoomRequest(roomId));
+        ctx.writeAndFlush(new GetRoomRequest(roomId));
         return queue.take();
     }
     

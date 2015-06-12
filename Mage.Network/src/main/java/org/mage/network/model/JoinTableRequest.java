@@ -8,10 +8,8 @@ import mage.cards.decks.DeckCardLists;
  *
  * @author BetaSteward
  */
-public class JoinTableRequest implements Serializable {
+public class JoinTableRequest extends TableRequest {
     
-    private UUID roomId;
-    private UUID tableId;
     private String name;
     private String playerType;
     private int skill;
@@ -19,23 +17,14 @@ public class JoinTableRequest implements Serializable {
     private String password;
     
     public JoinTableRequest(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
-        this.roomId = roomId;
-        this.tableId = tableId;
+        super(roomId, tableId);
         this.name = name;
         this.playerType = playerType;
         this.skill = skill;
         this.deckList = deckList;
         this.password = password;
     }
-    
-    public UUID getRoomId() {
-        return roomId;
-    }
 
-    public UUID getTableId() {
-        return tableId;
-    }
-    
     public String getName() {
         return name;
     }

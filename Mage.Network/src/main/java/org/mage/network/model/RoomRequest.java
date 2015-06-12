@@ -7,7 +7,7 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class RoomRequest implements Serializable {
+public abstract class RoomRequest implements Serializable {
     
     private UUID roomId;
     

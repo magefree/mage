@@ -52,6 +52,7 @@ import mage.remote.Connection;
 //import mage.remote.Session;
 //import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
+import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
@@ -99,7 +100,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         initComponents();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            client = new Client();
+//            client = new Client();
             connectDialog = new ConnectDialog();
         } catch (Exception ex) {
             logger.fatal("", ex);
@@ -114,10 +115,10 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
    public boolean connect(Connection connection) {
-        if (client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), version, this)) {
-            this.consolePanel1.start();
-            return true;
-        }
+//        if (client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), version, this)) {
+//            this.consolePanel1.start();
+//            return true;
+//        }
         return false;
     }
 
@@ -207,7 +208,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         if (client.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 this.consolePanel1.stop();
-                client.disconnect();
+//                client.disconnect();
             }
         } else {
             connectDialog.showDialog(this);
@@ -321,7 +322,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             if (JOptionPane.showConfirmDialog(this, "You are currently connected.  Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
             }
-            client.disconnect();
+//            client.disconnect();
         } else {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Confirm exit", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
                 return;
@@ -336,23 +337,33 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void receiveChatMessage(UUID chatId, String user, String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void receiveChatMessage(UUID chatId, String user, String message) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     @Override
     public void receiveBroadcastMessage(String message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+//    @Override
+//    public void setServerState(ServerState state) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     @Override
-    public void setServerState(ServerState state) {
+    public ServerState getServerState() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ServerState getServerState() {
+    public void receiveChatMessage(UUID chatId, ChatMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clientRegistered(ServerState state) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

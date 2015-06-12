@@ -255,7 +255,11 @@ public class Client {
     }
 
     public void removeTable(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            tableMessageHandler.removeTable(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error removing table", ex);
+        }
     }
 
     public String getSessionId() {
@@ -290,13 +294,17 @@ public class Client {
         try {
             return leaveTableMessageHandler.leaveTable(roomId, tableId);
         } catch (Exception ex) {
-            logger.error("Error creating table", ex);
+            logger.error("Error leaving table", ex);
         }
         return false;
     }
 
-    public void swapSeats(UUID roomId, UUID tableId, int row, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
+        try {
+            tableMessageHandler.swapSeats(roomId, tableId, seatNum1, seatNum2);
+        } catch (Exception ex) {
+            logger.error("Error swaping seats", ex);
+        }
     }
 
     public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID relatedUserId) {

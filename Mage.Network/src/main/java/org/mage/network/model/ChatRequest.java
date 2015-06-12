@@ -7,22 +7,16 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class SendChatMessage implements Serializable {
+public abstract class ChatRequest implements Serializable {
     
     private UUID chatId;
-    private String message;
     
-    public SendChatMessage(UUID chatId, String message) {
+    public ChatRequest(UUID chatId) {
         this.chatId = chatId;
-        this.message = message;
     }
     
     public UUID getChatId() {
         return chatId;
-    }
-    
-    public String getMessage() {
-        return message;
     }
     
 }

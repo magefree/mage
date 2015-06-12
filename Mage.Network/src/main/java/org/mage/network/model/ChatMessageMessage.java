@@ -8,20 +8,20 @@ import mage.view.ChatMessage;
  *
  * @author BetaSteward
  */
-public class ReceiveChatMessage implements Serializable {
+public class ChatMessageMessage implements Serializable {
     
     private UUID chatId;
     private ChatMessage message;
     
-    public ReceiveChatMessage(UUID chatId, ChatMessage message) {
+    public ChatMessageMessage(UUID chatId, ChatMessage message) {
         this.chatId = chatId;
         this.message = message;
     }
-    
+        
     public UUID getChatId() {
         return chatId;
     }
-    
+
     public ChatMessage getMessage() {
         return message;
     }

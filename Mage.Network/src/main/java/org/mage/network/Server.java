@@ -27,23 +27,17 @@ import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.server.ChatMessageHandler;
-import org.mage.network.handlers.server.ChatRoomIdHandler;
 import org.mage.network.handlers.server.ConnectionHandler;
-import org.mage.network.handlers.server.JoinChatMessageHandler;
-import org.mage.network.handlers.server.JoinTableMessageHandler;
-import org.mage.network.handlers.server.LeaveChatMessageHandler;
-import org.mage.network.handlers.server.LeaveTableMessageHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
 import org.mage.network.handlers.server.RoomMessageHandler;
 import org.mage.network.handlers.server.ServerMessageHandler;
 import org.mage.network.handlers.server.TableMessageHandler;
-import org.mage.network.handlers.server.TableWaitingMessageHandler;
 import org.mage.network.interfaces.MageServer;
+import org.mage.network.model.ChatMessageMessage;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.JoinedTableMessage;
 import org.mage.network.model.MessageType;
 import org.mage.network.model.PingMessage;
-import org.mage.network.model.ReceiveChatMessage;
 
 /**
  *
@@ -66,16 +60,10 @@ public class Server {
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     private final RegisterClientMessageHandler registerClientMessageHandler;
 
-    private final ChatRoomIdHandler chatRoomIdHandler;
     private final ChatMessageHandler chatMessageHandler;
-    private final JoinChatMessageHandler joinChatMessageHandler;
-    private final LeaveChatMessageHandler leaveChatMessageHandler;
     private final ServerMessageHandler serverMessageHandler;
     private final RoomMessageHandler roomMessageHandler;
     private final TableMessageHandler tableMessageHandler;
-    private final JoinTableMessageHandler joinTableMessageHandler;
-    private final TableWaitingMessageHandler tableWaitingMessageHandler;
-    private final LeaveTableMessageHandler leaveTableMessageHandler;
     
     private final ExceptionHandler exceptionHandler;
     
@@ -83,15 +71,9 @@ public class Server {
         this.server = server;
         registerClientMessageHandler = new RegisterClientMessageHandler(server);
         chatMessageHandler = new ChatMessageHandler(server);
-        joinChatMessageHandler = new JoinChatMessageHandler(server);
-        leaveChatMessageHandler = new LeaveChatMessageHandler(server);
-        chatRoomIdHandler = new ChatRoomIdHandler(server);
         serverMessageHandler = new ServerMessageHandler(server);
         roomMessageHandler = new RoomMessageHandler(server);
         tableMessageHandler = new TableMessageHandler(server);
-        joinTableMessageHandler = new JoinTableMessageHandler(server);
-        tableWaitingMessageHandler = new TableWaitingMessageHandler(server);
-        leaveTableMessageHandler = new LeaveTableMessageHandler(server);
         
         exceptionHandler = new ExceptionHandler();
     }
@@ -143,16 +125,10 @@ public class Server {
             ch.pipeline().addLast("connectionHandler", new ConnectionHandler());
             ch.pipeline().addLast(handlersExecutor, "registerClientMessageHandler", registerClientMessageHandler);
 
-            ch.pipeline().addLast(handlersExecutor, "chatRoomIdHandler", chatRoomIdHandler);
             ch.pipeline().addLast(handlersExecutor, "chatMessageHandler", chatMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, "joinChatMessageHandler", joinChatMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, "leaveChatMessageHandler", leaveChatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "serverMessageHandler", serverMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "roomMessageHandler", roomMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "tableMessageHandler", tableMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, "joinTableMessageHandler", joinTableMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, "tableWaitingMessageHandler", tableWaitingMessageHandler);
-            ch.pipeline().addLast(handlersExecutor, "leaveTableMessageHandler", leaveTableMessageHandler);
             
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
@@ -171,7 +147,7 @@ public class Server {
     public void sendChatMessage(String sessionId, UUID chatId, ChatMessage message) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new ReceiveChatMessage(chatId, message));
+            ch.writeAndFlush(new ChatMessageMessage(chatId, message));
     }
 
     public void informClient(String sessionId, String title, String message, MessageType type) {

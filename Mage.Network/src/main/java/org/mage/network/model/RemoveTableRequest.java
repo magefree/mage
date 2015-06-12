@@ -7,10 +7,11 @@ import java.util.UUID;
  *
  * @author BetaSteward
  */
-public class LeaveTableRequest extends TableRequest {
-
-    public LeaveTableRequest(UUID roomId, UUID tableId) {
+public class RemoveTableRequest extends TableRequest {
+    
+    
+    public RemoveTableRequest(UUID roomId, UUID tableId) {
         super(roomId, tableId);
     }
-
+            
 }

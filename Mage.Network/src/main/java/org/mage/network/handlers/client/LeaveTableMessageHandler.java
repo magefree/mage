@@ -5,9 +5,6 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import mage.cards.decks.DeckCardLists;
-import org.mage.network.model.JoinTableMessage;
-import org.mage.network.model.JoinTableRequest;
 import org.mage.network.model.LeaveTableRequest;
 import org.mage.network.model.LeftTableMessage;
 
