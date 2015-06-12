@@ -95,7 +95,7 @@ class LightOfDayEffect extends ReplacementEffectImpl {
         if (permanent != null) {
             Player player = game.getPlayer(source.getControllerId());
             if (player.getInRange().contains(permanent.getControllerId())) {
-                if (permanent.getColor().isBlack()) {
+                if (permanent.getColor(game).isBlack()) {
                     return true;
                 }
             }

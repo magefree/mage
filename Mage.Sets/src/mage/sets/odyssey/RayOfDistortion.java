@@ -35,9 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,20 +44,13 @@ import mage.target.TargetPermanent;
  */
 public class RayOfDistortion extends CardImpl {
     
-    static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public RayOfDistortion(UUID ownerId) {
         super(ownerId, 42, "Ray of Distortion", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{W}");
         this.expansionSetCode = "ODY";
 
-
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         // Flashback {4}{W}{W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{W}{W}"), TimingRule.INSTANT));
     }

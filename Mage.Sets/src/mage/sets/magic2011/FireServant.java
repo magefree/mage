@@ -100,7 +100,7 @@ class FireServantEffect extends ReplacementEffectImpl {
         StackObject spell = game.getStack().getStackObject(event.getSourceId());
         return spell != null &&
                 spell.getControllerId().equals(source.getControllerId()) &&
-                spell.getColor().isRed() &&
+                spell.getColor(game).isRed() &&
                 (spell.getCardType().contains(CardType.INSTANT) || spell.getCardType().contains(CardType.SORCERY));
     }
 

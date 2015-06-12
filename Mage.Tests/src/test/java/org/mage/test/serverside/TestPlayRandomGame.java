@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class TestPlayRandomGame extends MageTestBase {
 
-    private static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
+    private final static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
     @Test
     @Ignore
@@ -58,12 +58,11 @@ public class TestPlayRandomGame extends MageTestBase {
         game.addPlayer(computerB, deck2);
         game.loadCards(deck2.getCards(), computerB.getId());
 
-        boolean testMode = true;
-
         long t1 = System.nanoTime();
         GameOptions options = new GameOptions();
         options.testMode = true;
-        game.start(computerA.getId(), options);
+        game.setGameOptions(options);
+        game.start(computerA.getId());
         long t2 = System.nanoTime();
 
         logger.info("Winner: " + game.getWinner());

@@ -110,7 +110,7 @@ class RicochetTrapWatcher extends Watcher {
         if (event.getType() == EventType.SPELL_CAST
                 && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getColor().isBlue()) {
+            if (spell.getColor(game).isBlue()) {
                 condition = true;
             }
         }

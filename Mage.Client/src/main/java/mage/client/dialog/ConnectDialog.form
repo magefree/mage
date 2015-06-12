@@ -35,20 +35,19 @@
                       <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblServer" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblPort" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblServer" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblFlag" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblStatus" alignment="1" max="32767" attributes="0"/>
-                          <Component id="chkForceUpdateDB" max="32767" attributes="0"/>
-                          <Component id="chkAutoConnect" pref="362" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="164" pref="237" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbFlag" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtServer" pref="286" max="32767" attributes="0"/>
@@ -57,8 +56,9 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnFind" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="chkForceUpdateDB" alignment="0" max="32767" attributes="0"/>
+                          <Component id="chkAutoConnect" alignment="0" pref="358" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -86,12 +86,17 @@
                   <Component id="lblUserName" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lblFlag" max="32767" attributes="0"/>
+                  <Component id="cbFlag" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="chkAutoConnect" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chkForceUpdateDB" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jProxySettingsButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
               <Component id="lblStatus" min="-2" pref="24" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -142,10 +147,23 @@
         <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="txtUserName"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="User Name:"/>
+        <Property name="text" type="java.lang.String" value="User name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtUserName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblFlag">
+      <Properties>
+        <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="txtUserName"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="User flag:"/>
+      </Properties>
+    </Component>
+    <Component class="mage.client.util.gui.countryBox.CountryComboBox" name="cbFlag">
+      <Properties>
+        <Property name="editable" type="boolean" value="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chkAutoConnect">
       <Properties>

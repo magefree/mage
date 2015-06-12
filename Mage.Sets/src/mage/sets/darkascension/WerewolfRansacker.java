@@ -28,7 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -45,6 +44,7 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -90,17 +90,12 @@ public class WerewolfRansacker extends CardImpl {
 }
 
 class WerewolfRansackerAbility extends TriggeredAbilityImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
+    
     public static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
+    
     public WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactPermanent());
         this.addTarget(target);
     }
 
@@ -129,7 +124,6 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return RULE_TEXT + '.';
     }
-
 }
 
 class WerewolfRansackerEffect extends OneShotEffect {
@@ -167,5 +161,4 @@ class WerewolfRansackerEffect extends OneShotEffect {
         }
         return affectedTargets > 0;
     }
-
 }

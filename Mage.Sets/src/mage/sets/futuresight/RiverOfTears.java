@@ -50,7 +50,7 @@ public class RiverOfTears extends CardImpl {
         super(ownerId, 179, "River of Tears", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "FUT";
 
-        // {tap}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
+        // {T}: Add {U} to your mana pool. If you played a land this turn, add {B} to your mana pool instead.
         this.addAbility(new ConditionalManaAbility(Zone.BATTLEFIELD, new ConditionalManaEffect(
                 new BasicManaEffect(Mana.BlackMana),
                 new BasicManaEffect(Mana.BlueMana),

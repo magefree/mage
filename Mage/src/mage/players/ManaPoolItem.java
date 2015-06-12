@@ -51,6 +51,7 @@ public class ManaPoolItem implements Serializable {
     private UUID originalId; // originalId of the mana producing ability
     private boolean flag = false;
     private Duration duration;
+    private int stock; // amount the item had at the start of casting something
 
     public ManaPoolItem() {}
 
@@ -91,6 +92,7 @@ public class ManaPoolItem implements Serializable {
         this.originalId = item.originalId;
         this.flag = item.flag;
         this.duration = item.duration;
+        this.stock = item.stock;
     }
 
     public ManaPoolItem copy() {
@@ -207,8 +209,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeAny() {
+        int oldCount = count();
         if (black > 0) {
-            black--;
+            black--;            
         } else if (blue > 0) {
             blue--;
         } else if (green > 0) {
@@ -219,10 +222,14 @@ public class ManaPoolItem implements Serializable {
             white--;
         } else if (colorless > 0) {
             colorless--;
-        }
+        }       
+        if (stock == oldCount && oldCount > count()) {
+            stock--;
+        }         
     }
     
     public void remove(ManaType manaType) {
+        int oldCount = count();
         switch(manaType) {
             case BLACK:
                 if (black > 0) {
@@ -255,6 +262,9 @@ public class ManaPoolItem implements Serializable {
                 }
                 break;
         }
+        if (stock == oldCount && oldCount > count()) {
+            stock--;
+        }                
     }
     
     public void clear(ManaType manaType) {
@@ -309,6 +319,14 @@ public class ManaPoolItem implements Serializable {
 
     public void setDuration(Duration duration) {
         this.duration = duration;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
         
 }

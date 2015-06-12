@@ -105,7 +105,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
         
         permanent.getPower().setValue(card.getPower().getValue());
         permanent.getToughness().setValue(card.getToughness().getValue());
-        permanent.getColor().setColor(card.getColor());
+        permanent.getColor(game).setColor(card.getColor(game));
         permanent.getManaCost().clear();
         permanent.getManaCost().add(card.getManaCost());
         permanent.getCardType().clear();

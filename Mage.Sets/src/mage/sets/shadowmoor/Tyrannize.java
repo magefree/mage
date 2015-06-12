@@ -92,7 +92,7 @@ class TyrannizeEffect extends OneShotEffect {
             Cost cost = new PayLifeCost(7);
             if (!cost.canPay(source, source.getSourceId(), player.getId(), game)
                     || !player.chooseUse(Outcome.LoseLife, "Pay 7 life?", game)
-                    || !cost.pay(source, game, source.getSourceId(), player.getId(), true)) {
+                    || !cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                 for (Card card : player.getHand().getCards(game)) {
                     player.discard(card, source, game);
                 }

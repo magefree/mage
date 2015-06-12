@@ -28,7 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;

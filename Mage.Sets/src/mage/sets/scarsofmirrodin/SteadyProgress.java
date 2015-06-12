@@ -29,6 +29,7 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -45,8 +46,13 @@ public class SteadyProgress extends CardImpl {
         super(ownerId, 45, "Steady Progress", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "SOM";
 
+        // Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)        
         this.getSpellAbility().addEffect(new ProliferateEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        
+        // Draw a card.
+        Effect effect = new DrawCardSourceControllerEffect(1);
+        effect.setText("<br>Draw a card");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public SteadyProgress (final SteadyProgress card) {

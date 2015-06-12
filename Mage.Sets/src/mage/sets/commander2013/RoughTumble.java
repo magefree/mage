@@ -55,20 +55,16 @@ public class RoughTumble extends SplitCard {
         super(ownerId, 118, "Rough", "Tumble", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{5}{R}", false);
         this.expansionSetCode = "C13";
 
-        this.color.setRed(true);
-
         // Rough
         // Rough deals 2 damage to each creature without flying.
         Effect effect = new DamageAllEffect(2, filterWithoutFlying);
         effect.setText("Rough deals 2 damage to each creature without flying");
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(effect);
 
         // Tumble
         // Tumble deals 6 damage to each creature with flying.
         effect = new DamageAllEffect(6, filterFlying);
         effect.setText("Tumble deals 6 damage to each creature with flying");
-        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getSpellAbility().addEffect(effect);
 
     }

@@ -87,7 +87,7 @@ class GhostflameSliverEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
             if (filter.match(perm, game)) {
-                perm.getColor().setColor(colorless);
+                perm.getColor(game).setColor(colorless);
             }
         }
         return true;

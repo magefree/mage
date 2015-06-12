@@ -54,19 +54,14 @@ public class ToilTrouble extends SplitCard {
         super(ownerId, 133, "Toil", "Trouble", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}", "{2}{R}",true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlack(true);
-        this.color.setRed(true);
-
         // Toil
         // Target player draws two cards and loses 2 life.
-        getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
         getLeftHalfCard().getSpellAbility().addEffect(new DrawCardTargetEffect(2));
         getLeftHalfCard().getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
 
         // Trouble
         // Trouble deals damage to target player equal to the number of cards in that player's hand.
-        getRightHalfCard().getColor().setRed(true);
         Effect effect = new DamageTargetEffect(new TargetPlayerCardsInHandCount());
         effect.setText("Trouble deals damage to target player equal to the number of cards in that player's hand");
         getRightHalfCard().getSpellAbility().addEffect(effect);

@@ -28,6 +28,7 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
+import mage.MageObject;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -50,10 +51,10 @@ public class Peek extends CardImpl {
         super(ownerId, 94, "Peek", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "10E";
 
-
         // Look at target player's hand.
         this.getSpellAbility().addEffect(new PeekEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
+        
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -71,7 +72,7 @@ public class Peek extends CardImpl {
 class PeekEffect extends OneShotEffect {
     PeekEffect() {
         super(Outcome.Detriment);
-        staticText = "Look at target player's hand";
+        staticText = "look at target player's hand";
     }
 
     PeekEffect(final PeekEffect effect) {
@@ -82,8 +83,9 @@ class PeekEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null && controller != null) {
-            controller.lookAtCards("Peek", player.getHand(), game);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player != null && controller != null && sourceObject != null) {
+            controller.lookAtCards(sourceObject.getIdName(), player.getHand(), game);
         }
         return true;
     }

@@ -101,8 +101,8 @@ class GloomwidowsFeastEffect extends OneShotEffect {
         if (targetCreature != null) {
             targetCreature.destroy(source.getSourceId(), game, false);
             Permanent destroyedCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
-            if (destroyedCreature.getColor().isBlue()
-                    || destroyedCreature.getColor().isBlack()) {
+            if (destroyedCreature.getColor(game).isBlue()
+                    || destroyedCreature.getColor(game).isBlack()) {
                 SpiderToken token = new SpiderToken();
                 token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 return true;

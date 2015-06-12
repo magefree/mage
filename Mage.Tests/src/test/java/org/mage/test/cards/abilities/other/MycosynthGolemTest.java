@@ -30,7 +30,8 @@ package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -50,10 +51,11 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
      *
      */
 
-    @Ignore // at this time player.getPlayable() does not account for spells that gain abilities
+    // @Ignore // at this time player.getPlayable() does not account for spells that gain abilities
     @Test
     public void testSpellsAffinity() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mycosynth Golem");
         addCard(Zone.HAND, playerA, "Alpha Myr");
 
@@ -64,6 +66,17 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
         assertHandCount(playerA, "Alpha Myr", 0);
+        
+        Permanent mountain = getPermanent("Mountain", playerA);
+        Permanent forest = getPermanent("Forest", playerA);
+        int tappedLands = 0;
+        if (mountain.isTapped()) {
+            tappedLands++;
+        }
+        if (forest.isTapped()) {
+            tappedLands++;
+        }
+        Assert.assertEquals("only one land may be tapped because the cost reduction", 1, tappedLands);
 
     }
    

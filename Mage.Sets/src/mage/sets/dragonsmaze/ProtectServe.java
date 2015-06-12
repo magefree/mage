@@ -48,18 +48,13 @@ public class ProtectServe extends SplitCard {
         super(ownerId, 131, "Protect", "Serve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-
         // Protect
         // Target creature gets +2/+4 until end of turn.
-        getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2,4, Duration.EndOfTurn));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Serve
         // Target creature gets -6/-0 until end of turn.
-        getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6,0, Duration.EndOfTurn));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 

@@ -35,10 +35,11 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -68,9 +69,11 @@ public class PersistAbility extends DiesTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (p.getCounters().getCount(CounterType.M1M1) == 0) {
-                game.getState().setValue("persist" + getSourceId().toString(), new FixedTarget(p.getId()));
+            Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+            if (permanent.getCounters().getCount(CounterType.M1M1) == 0) {
+                FixedTarget fixedTarget = new FixedTarget(permanent.getId());
+                fixedTarget.init(game, this);
+                game.getState().setValue("persist" + getSourceId().toString(), fixedTarget);
                 return true;
             }
         }
@@ -109,7 +112,7 @@ class PersistEffect extends OneShotEffect {
 class PersistReplacementEffect extends ReplacementEffectImpl {
 
     PersistReplacementEffect() {
-        super(Duration.OneUse, Outcome.UnboostCreature, false);
+        super(Duration.Custom, Outcome.UnboostCreature, false);
         selfScope = true;
         staticText = "return it to the battlefield under its owner's control with a -1/-1 counter on it";
     }
@@ -129,7 +132,7 @@ class PersistReplacementEffect extends ReplacementEffectImpl {
         if (permanent != null) {
             permanent.addCounters(CounterType.M1M1.createInstance(), game);
         }
-        used = true;
+        discard();
         return false;
     }
 
@@ -142,7 +145,9 @@ class PersistReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
             Object fixedTarget = game.getState().getValue("persist" + source.getSourceId().toString());
-            if (fixedTarget instanceof FixedTarget && ((FixedTarget) fixedTarget).getFirst(game, source).equals(source.getSourceId())) {
+            if (fixedTarget instanceof FixedTarget && ((FixedTarget) fixedTarget).getTarget().equals(source.getSourceId()) &&
+                    ((FixedTarget) fixedTarget).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
+                
                 return true;
             }
         }

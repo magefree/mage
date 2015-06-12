@@ -51,6 +51,7 @@ mage.updater.client/target
 
 releases
 Utils/author.txt
+.DS_Store
 .metadata
 .project
 .settings

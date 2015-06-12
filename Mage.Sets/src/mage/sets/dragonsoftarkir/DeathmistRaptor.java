@@ -29,6 +29,7 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -63,7 +64,7 @@ public class DeathmistRaptor extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Whenever a permanent you control is turned face up, you may return Deathmist Raptor from your graveyard to the battlefield face up or face down.
-        this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.GRAVEYARD, new DeathmistRaptorEffect(), new FilterControlledPermanent(), false, true));
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.GRAVEYARD, new DeathmistRaptorEffect(), new FilterControlledPermanent("a permanent you control"), false, true));
 
         // Megamorph {4}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}"), true));
@@ -98,10 +99,10 @@ class DeathmistRaptorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card card = game.getCard(source.getSourceId());
-        if (controller != null && card != null) {
-            controller.putOntoBattlefieldWithInfo(card, game, Zone.GRAVEYARD, source.getSourceId(), false,
-                    controller.chooseUse(Outcome.Detriment, "Return " + card.getName() + " face down to battlefield (otherwise face up)?", game));
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        if (controller != null && (sourceObject instanceof Card)) {
+            controller.putOntoBattlefieldWithInfo((Card) sourceObject, game, Zone.GRAVEYARD, source.getSourceId(), false,
+                    controller.chooseUse(Outcome.Detriment, "Return " + sourceObject.getLogName() + " face down to battlefield (otherwise face up)?", game));
             return true;
         }
         return false;

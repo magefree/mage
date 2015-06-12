@@ -151,7 +151,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
             ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
             Card card = game.getCard(event.getSourceId());
-            if (chosenColor != null && card != null && card.getColor().contains(chosenColor)) {
+            if (chosenColor != null && card != null && card.getColor(game).contains(chosenColor)) {
                 return true;
             }
         }

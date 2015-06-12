@@ -57,10 +57,9 @@ public class BloodchiefAscension extends CardImpl {
         super(ownerId, 82, "Bloodchief Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "ZEN";
 
-
         // At the beginning of each end step, if an opponent lost 2 or more life this turn, you may put a quest counter on Bloodchief Ascension. (Damage causes loss of life.)
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.QUEST.createInstance(), false),
+                new AddCountersSourceEffect(CounterType.QUEST.createInstance(1), false),
                 TargetController.ANY,
                 new OpponentLostLifeCondition(Condition.ComparisonType.GreaterThan, 1),
                 true));

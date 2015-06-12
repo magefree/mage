@@ -126,7 +126,12 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
-            // in Library seems not relevant yet
+            // in Library (e.g. for Mystical Teachings)
+            for (Card card: controller.getLibrary().getCards(game)) {
+                if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
+                    game.getState().addOtherAbility(card, FlashAbility.getInstance());
+                }
+            }            
             return true;
         }
         return false;

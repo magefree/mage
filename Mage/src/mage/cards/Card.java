@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
+import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -134,5 +135,5 @@ public interface Card extends MageObject {
      */
     Card getMainCard();
 
-    void setZone(Zone zone, Game game);
+    void setZone(Zone zone, Game game);    
 }

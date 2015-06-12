@@ -85,7 +85,7 @@ class PyroconvergenceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
          if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor().isMulticolored() && event.getPlayerId().equals(getControllerId())) {
+            if (spell != null && spell.getColor(game).isMulticolored() && event.getPlayerId().equals(getControllerId())) {
                 return true;
             }
         }

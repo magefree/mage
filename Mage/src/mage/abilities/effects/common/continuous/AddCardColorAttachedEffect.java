@@ -63,15 +63,15 @@ public class AddCardColorAttachedEffect extends ContinuousEffectImpl {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null) {
                 if (addedColor.isBlack())
-                    target.getColor().setBlack(true);
+                    target.getColor(game).setBlack(true);
                 if (addedColor.isBlue())
-                    target.getColor().setBlue(true);
+                    target.getColor(game).setBlue(true);
                 if (addedColor.isWhite())
-                    target.getColor().setWhite(true);
+                    target.getColor(game).setWhite(true);
                 if (addedColor.isGreen())
-                    target.getColor().setGreen(true);
+                    target.getColor(game).setGreen(true);
                 if (addedColor.isRed())
-                    target.getColor().setRed(true);
+                    target.getColor(game).setRed(true);
             }
         }
         return true;

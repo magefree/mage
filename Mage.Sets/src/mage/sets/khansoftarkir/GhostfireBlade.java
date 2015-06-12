@@ -67,7 +67,7 @@ public class GhostfireBlade extends CardImpl {
     public void adjustCosts(Ability ability, Game game) {
         if (ability instanceof EquipAbility) {
             Permanent targetCreature = game.getPermanent(ability.getTargets().getFirstTarget());
-            if (targetCreature != null && targetCreature.getColor().isColorless()) {
+            if (targetCreature != null && targetCreature.getColor(game).isColorless()) {
                 CardUtil.reduceCost(ability, 2);
             }
         }

@@ -44,7 +44,11 @@ public class DarksteelCitadel extends CardImpl {
     public DarksteelCitadel (UUID ownerId) {
         super(ownerId, 164, "Darksteel Citadel", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.LAND}, null);
         this.expansionSetCode = "DST";
+        
+        // Indestructible (Effects that say "destroy" don't destroy this land.)
         this.addAbility(IndestructibleAbility.getInstance());
+        
+        // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
 

@@ -89,7 +89,7 @@ class PyroblastCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if(game.getStack().getSpell(source.getFirstTarget()).getColor().isBlue()){
+        if(game.getStack().getSpell(source.getFirstTarget()).getColor(game).isBlue()){
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return true;
@@ -122,7 +122,7 @@ class DestroyTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if (permanent != null && permanent.getColor().isBlue()) {
+        if (permanent != null && permanent.getColor(game).isBlue()) {
             permanent.destroy(source.getSourceId(), game, false);
         }
         return true;

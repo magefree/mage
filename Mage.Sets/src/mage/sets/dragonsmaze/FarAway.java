@@ -50,18 +50,13 @@ public class FarAway extends SplitCard {
         super(ownerId, 127, "Far", "Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-
         // Far
         // Return target creature to its owner's hand.
-        getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Away
         // Target player sacrifices a creature.
-        getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 

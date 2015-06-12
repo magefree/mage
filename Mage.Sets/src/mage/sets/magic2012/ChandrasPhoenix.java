@@ -91,7 +91,7 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl {
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 Card c = game.getCard(event.getSourceId());
                 if (c != null) {
-                    if (c.getColor().isRed() && (c.getCardType().contains(CardType.PLANESWALKER) || c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY))) {
+                    if (c.getColor(game).isRed() && (c.getCardType().contains(CardType.PLANESWALKER) || c.getCardType().contains(CardType.INSTANT) || c.getCardType().contains(CardType.SORCERY))) {
                         return true;
                     }
                 }

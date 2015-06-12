@@ -89,7 +89,7 @@ class HydroblastCounterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getStack().getSpell(source.getFirstTarget()).getColor().isRed()) {
+        if (game.getStack().getSpell(source.getFirstTarget()).getColor(game).isRed()) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
         }
         return true;
@@ -119,7 +119,7 @@ class HydroblastDestroyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
-        if (permanent != null && permanent.getColor().isRed()) {
+        if (permanent != null && permanent.getColor(game).isRed()) {
             permanent.destroy(source.getSourceId(), game, false);
         }
         return true;

@@ -76,7 +76,9 @@ public class HexproofTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
         addCard(Zone.HAND, playerB, "Into the Void");
 
+        // Return up to two target creatures to their owners' hands.
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Into the Void", "Elder of Laurels^Arbor Elf");
+        // Target creature you control gets +1/+1 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Ranger's Guile", "Elder of Laurels");
 
         setStopAt(2, PhaseStep.END_TURN);

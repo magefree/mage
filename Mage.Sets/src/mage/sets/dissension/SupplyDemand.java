@@ -56,20 +56,12 @@ public class SupplyDemand extends SplitCard {
         super(ownerId, 157, "Supply", "Demand", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}{U}", "{X}{G}{W}", false);
         this.expansionSetCode = "DIS";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-
         // Demand
         // Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
-        getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));
 
         // Supply
         // Put X 1/1 green Saproling creature tokens onto the battlefield.
-        getRightHalfCard().getColor().setWhite(true);
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new ManacostVariableValue()));
 
     }

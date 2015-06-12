@@ -1,5 +1,8 @@
 package org.mage.test.serverside.base.impl;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -17,17 +20,17 @@ import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import org.junit.Assert;
+import org.junit.Before;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
+import org.mage.test.serverside.base.CardTestAPI.GameResult;
 import org.mage.test.serverside.base.MageTestPlayerBase;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * API for test initialization and asserting the test results.
@@ -36,6 +39,20 @@ import java.util.UUID;
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
 
+    // Defines the constant if for activate ability is not target but a ability on the stack to define
+    public static final String NO_TARGET = "NO_TARGET";
+         
+    protected GameOptions gameOptions;
+    
+    protected enum ExpectedType {
+        TURN_NUMBER,
+        RESULT,
+        LIFE,
+        BATTLEFIELD,
+        GRAVEYARD,
+        UNKNOWN
+    }
+    
     static {
 //        CardScanner.scanned = true;
         CardScanner.scan();
@@ -83,33 +100,119 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         removeAllCardsFromLibrary(playerB);
         addCard(Zone.LIBRARY, playerB, "Plains", 10);
     }
+    
+    @Before
+    public void reset() throws GameException, FileNotFoundException {
+        if (currentGame != null) {
+            logger.debug("Resetting previous game and creating new one!");
+            currentGame = null;
+            System.gc();
+        }
 
+        currentGame = createNewGameAndPlayers();
+
+        activePlayer = playerA;
+
+        stopOnTurn = 2;
+        stopAtStep = PhaseStep.UNTAP;
+
+        for (Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer)player;
+            getCommands(testPlayer).clear();
+            getLibraryCards(testPlayer).clear();
+            getHandCards(testPlayer).clear();
+            getBattlefieldCards(testPlayer).clear();
+            getGraveCards(testPlayer).clear();
+        }
+
+        gameOptions = new GameOptions();
+    }
+
+    abstract protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException;
+ 
     protected TestPlayer createPlayer(Game game, TestPlayer player, String name) throws GameException {
+        return createPlayer(game, player, name, "RB Aggro.dck");
+    }
+    
+    protected TestPlayer createPlayer(Game game, TestPlayer player, String name, String deckName) throws GameException {
         player = createNewPlayer(name);
         player.setTestMode(true);
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
+        Deck deck = Deck.load(DeckImporterUtil.importDeck(deckName), false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
         }
-        game.addPlayer(player, deck);
         game.loadCards(deck.getCards(), player.getId());
+        game.loadCards(deck.getSideboard(),  player.getId());
+        game.addPlayer(player, deck);
 
         return player;
     }
 
+    /**
+     * Starts testing card by starting current game.
+     *
+     * @throws IllegalStateException In case game wasn't created previously. Use {@link #load} method to initialize the game.
+     */
+    public void execute() throws IllegalStateException {
+        if (currentGame == null || activePlayer == null) {
+            throw new IllegalStateException("Game is not initialized. Use load method to load a test case and initialize a game.");
+        }
+
+        for (Player player : currentGame.getPlayers().values()) {
+            TestPlayer testPlayer = (TestPlayer)player;
+            currentGame.cheat(player.getId(), getCommands(testPlayer));
+            currentGame.cheat(player.getId(), getLibraryCards(testPlayer), getHandCards(testPlayer),
+                    getBattlefieldCards(testPlayer), getGraveCards(testPlayer));
+        }
+
+        long t1 = System.nanoTime();
+
+        gameOptions.testMode = true;
+        gameOptions.stopOnTurn = stopOnTurn;
+        gameOptions.stopAtStep = stopAtStep;
+        currentGame.setGameOptions(gameOptions);
+        currentGame.start(activePlayer.getId());
+        long t2 = System.nanoTime();
+        logger.debug("Winner: " + currentGame.getWinner());
+        logger.info("Test has been executed. Execution time: " + (t2 - t1) / 1000000 + " ms");
+
+    }
+    
+    
+    
     protected TestPlayer createNewPlayer(String playerName) {
         return createPlayer(playerName);
     }
-
+    
+    protected Player getPlayerFromName(String playerName, String line) {
+        Player player = null;
+        switch (playerName) {
+            case "ComputerA":
+                player = currentGame.getPlayer(playerA.getId());
+                break;
+            case "ComputerB":
+                player = currentGame.getPlayer(playerB.getId());
+                break;
+            case "ComputerC":
+                player = currentGame.getPlayer(playerC.getId());
+                break;
+            case "ComputerD":
+                player = currentGame.getPlayer(playerD.getId());
+                break;
+            default:
+                throw new IllegalArgumentException("Wrong player in 'battlefield' line, player=" + player + ", line=" + line);
+        }
+        return player;
+    }
+    
     /**
      * Removes all cards from player's library from the game.
      * Usually this should be used once before initialization to form the library in certain order.
      *
      * @param player {@link Player} to remove all library cards from.
      */
-    @Override
     public void removeAllCardsFromLibrary(TestPlayer player) {
         getCommands(player).put(Zone.LIBRARY, "clear");
     }
@@ -131,7 +234,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
@@ -144,7 +246,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
@@ -159,7 +260,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
         if (gameZone.equals(Zone.BATTLEFIELD)) {
@@ -214,7 +314,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * @param player {@link Player} to set life count for.
      * @param life   Life count to set.
      */
-    @Override
     public void setLife(TestPlayer player, int life) {
         getCommands(player).put(Zone.OUTSIDE, "life:" + String.valueOf(life));
     }
@@ -747,6 +846,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$targetPlayer=" + target.getName() + "$manaInPool=" + manaInPool);
     }
 
+    /**
+     * 
+     * @param turnNum
+     * @param step
+     * @param player
+     * @param cardName
+     * @param targetName for modes you can add "mode=3" before target name, multiple targets can be seperated by ^
+     */
     public void castSpell(int turnNum, PhaseStep step, TestPlayer player, String cardName, String targetName) {
         player.addAction(turnNum, step, "activate:Cast " + cardName + "$target=" + targetName);
     }
@@ -843,6 +950,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void attack(int turnNum, TestPlayer player, String attacker) {
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:"+attacker);
     }
+    
+    public void attack(int turnNum, TestPlayer player, String attacker, TestPlayer defendingPlayer) {
+        player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, "attack:"+attacker+"$defendingPlayer="+defendingPlayer.getName());
+    }
 
     public void attack(int turnNum, TestPlayer player, String attacker, String planeswalker) {
         player.addAction(turnNum, PhaseStep.DECLARE_ATTACKERS, new StringBuilder("attack:").append(attacker).append("$planeswalker=").append(planeswalker).toString());
@@ -897,5 +1008,61 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
         player.addTarget("targetPlayer="+targetPlayer.getName());
     }
+    
+    protected void skipInitShuffling() {
+        gameOptions.skipInitShuffling = true;
+    }
+        
+    protected ExpectedType getExpectedType(String line) {
+        if (line.startsWith("turn:")) {
+            return ExpectedType.TURN_NUMBER;
+        }
+        if (line.startsWith("result:")) {
+            return ExpectedType.RESULT;
+        }
+        if (line.startsWith("life:")) {
+            return ExpectedType.LIFE;
+        }
+        if (line.startsWith("battlefield:")) {
+            return ExpectedType.BATTLEFIELD;
+        }
+        if (line.startsWith("graveyard:")) {
+            return ExpectedType.GRAVEYARD;
+        }
+        return ExpectedType.UNKNOWN;
+    }
+    
+    protected String getStringParam(String line, int index) {
+        String[] params = line.split(":");
+        if (index > params.length - 1) {
+            throw new IllegalArgumentException("Not correct line: " + line);
+        }
+        return params[index];
+    }
+    
+    protected void checkPermanentPT(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope) {
+        if (currentGame == null) {
+            throw new IllegalStateException("Current game is null");
+        }
+        if (scope.equals(Filter.ComparisonScope.All)) {
+            throw new UnsupportedOperationException("ComparisonScope.All is not implemented.");
+        }
 
+        for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
+            if (permanent.getName().equals(cardName)) {
+                Assert.assertEquals("Power is not the same", power, permanent.getPower().getValue());
+                Assert.assertEquals("Toughness is not the same", toughness, permanent.getToughness().getValue());
+                break;
+            }
+        }
+    }    
+
+    protected int getIntParam(String line, int index) {
+        String[] params = line.split(":");
+        if (index > params.length - 1) {
+            throw new IllegalArgumentException("Not correct line: " + line);
+        }
+        return Integer.parseInt(params[index]);
+    }    
+    
 }

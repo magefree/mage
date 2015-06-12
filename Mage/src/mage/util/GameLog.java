@@ -38,6 +38,8 @@ import mage.ObjectColor;
 public class GameLog {
     
     static final String LOG_COLOR_PLAYER = "#20B2AA"; // LightSeaGreen  	
+    static final String LOG_COLOR_PLAYER_REQUEST = "#D2691E"; // Chocolate  	
+    static final String LOG_COLOR_PLAYER_CONFIRM = "#D2691E"; // Chocolate  	
     static final String LOG_COLOR_GREEN = "#90EE90"; // LightGreen
     static final String LOG_COLOR_RED = "#FF6347";   // Tomato  	
     static final String LOG_COLOR_BLUE = "#87CEFA";  // LightSkyBlue
@@ -54,7 +56,7 @@ public class GameLog {
     }
 
     public static String getColoredObjectName(MageObject mageObject) {        
-        return "<font color=\'" + getColorName(mageObject.getColor()) + "\'>" + mageObject.getName() + " ["+mageObject.getId().toString().substring(0,3) + "]</font>";
+        return "<font color=\'" + getColorName(mageObject.getColor(null)) + "\'>" + mageObject.getName() + " ["+mageObject.getId().toString().substring(0,3) + "]</font>";
     }
 
     public static String getNeutralColoredText(String text) {        
@@ -63,6 +65,18 @@ public class GameLog {
 
     public static String getColoredPlayerName(String name) {        
         return "<font color=\'" + LOG_COLOR_PLAYER + "\'>" + name + "</font>";
+    }
+    
+    public static String getPlayerRequestColoredText(String name) {        
+        return "<font color=\'" + LOG_COLOR_PLAYER_REQUEST + "\'>" + name + "</font>";
+    }
+
+    public static String getPlayerConfirmColoredText(String name) {        
+        return "<font color=\'" + LOG_COLOR_PLAYER_CONFIRM + "\'>" + name + "</font>";
+    }
+
+    public static String getSmallSecondLineText(String text) {        
+        return "<div style='font-size:11pt'>" + text + "</div>";
     }
 
     private static String getColorName(ObjectColor objectColor) {

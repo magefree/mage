@@ -38,8 +38,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,12 +46,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki, North
  */
 public class Painsmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Painsmith (UUID ownerId) {
         super(ownerId, 74, "Painsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "SOM";
@@ -62,6 +55,7 @@ public class Painsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
         ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

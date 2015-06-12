@@ -79,4 +79,49 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Worldheart Phoenix", 1); 
         
     }   
+    
+    
+    @Test
+    public void testNarsetEnlightenedMaster() {
+        // First strike
+        // Hexproof
+        // Whenever Narset, Enlightented Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.
+        addCard(Zone.BATTLEFIELD, playerB, "Narset, Enlightened Master", 1);
+
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerB, "Silvercoat Lion");
+        addCard(Zone.LIBRARY, playerB, "Abzan Banner"); 
+        // Ferocious - If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash. (You may cast it any time you could cast an instant.)
+        // Enchant creature
+        // Enchanted creature gets +2/+0 and has first strike.
+        addCard(Zone.LIBRARY, playerB, "Dragon Grip"); 
+        // You gain 2 life for each creature you control.
+        addCard(Zone.LIBRARY, playerB, "Peach Garden Oath"); 
+        addCard(Zone.LIBRARY, playerB, "Plains"); 
+        
+        attack(2, playerB, "Narset, Enlightened Master");
+
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silvercoat Lion"); // can't be cast from exile
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Abzan Banner"); // can be cast from exile
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Dragon Grip", "Narset, Enlightened Master"); // can be cast from exile
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Peach Garden Oath"); // can be cast from exile
+        
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount("Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Abzan Banner", 1); 
+        assertPermanentCount(playerB, "Dragon Grip", 1); 
+        assertGraveyardCount(playerB, "Peach Garden Oath", 1);
+        
+        assertPowerToughness(playerB, "Narset, Enlightened Master", 5, 2);
+        
+        assertHandCount(playerB, "Plains", 1);
+        assertLife(playerA, 17);
+        assertLife(playerB, 22);
+        
+        
+    }   
+    
+    
 }

@@ -178,12 +178,8 @@ public class UserRequestDialog extends MageDialog {
 
     private void sendUserReplay(PlayerAction playerAction) {
         Client client = MageFrame.getClient();
-        switch(playerAction) {
-            case ADD_PERMISSION_TO_SEE_HAND_CARDS:
-                client.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
-                break;
-            default:
-                // not supported action
+        if (session != null && playerAction != null) {
+            session.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
         }
     }
 

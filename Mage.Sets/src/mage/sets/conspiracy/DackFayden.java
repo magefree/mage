@@ -84,7 +84,7 @@ public class DackFayden extends CardImpl {
         this.addAbility(ability);
         
         // -2: Gain control of target artifact.
-        effect = new GainControlTargetEffect(Duration.EndOfGame);
+        effect = new GainControlTargetEffect(Duration.EndOfGame, true);
         effect.setText("Gain control of target artifact");
         ability = new LoyaltyAbility(effect, -2);
         ability.addTarget(new TargetArtifactPermanent());

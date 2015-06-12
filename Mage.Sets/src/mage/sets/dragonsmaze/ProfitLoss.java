@@ -57,17 +57,12 @@ public class ProfitLoss extends SplitCard {
         super(ownerId, 130, "Profit", "Loss", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}", "{2}{B}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
-        this.color.setBlack(true);
-
         // Profit
         // Creatures you control get +1/+1 until end of turn.
-        getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BoostControlledEffect(1,1, Duration.EndOfTurn, new FilterCreaturePermanent()));
 
         // Loss
         // Creatures your opponents control get -1/-1 until end of turn.
-        getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
 
     }

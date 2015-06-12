@@ -90,8 +90,8 @@ class GloomlanceEffect extends OneShotEffect {
             Player targetController = game.getPlayer(targetCreature.getControllerId());
             targetCreature.destroy(source.getSourceId(), game, false);
             Permanent destroyedCreature = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
-            if (destroyedCreature.getColor().isGreen()
-                    || destroyedCreature.getColor().isWhite()) {
+            if (destroyedCreature.getColor(game).isGreen()
+                    || destroyedCreature.getColor(game).isWhite()) {
                 targetController.discard(1, false, source, game);
                 return true;
             }

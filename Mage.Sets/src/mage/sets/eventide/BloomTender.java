@@ -106,19 +106,19 @@ class BloomTenderEffect extends ManaEffect {
         if (controller != null) {
             Mana mana = new Mana();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(controller.getId())) {
-                if (mana.getBlack() == 0 && permanent.getColor().isBlack()) {
+                if (mana.getBlack() == 0 && permanent.getColor(game).isBlack()) {
                     mana.addBlack();
                 }
-                if (mana.getBlue() == 0 && permanent.getColor().isBlue()) {
+                if (mana.getBlue() == 0 && permanent.getColor(game).isBlue()) {
                     mana.addBlue();
                 }
-                if (mana.getRed() == 0 && permanent.getColor().isRed()) {
+                if (mana.getRed() == 0 && permanent.getColor(game).isRed()) {
                     mana.addRed();
                 }
-                if (mana.getGreen() == 0 && permanent.getColor().isGreen()) {
+                if (mana.getGreen() == 0 && permanent.getColor(game).isGreen()) {
                     mana.addGreen();
                 }
-                if (mana.getWhite() == 0 && permanent.getColor().isWhite()) {
+                if (mana.getWhite() == 0 && permanent.getColor(game).isWhite()) {
                     mana.addWhite();
                 }
             }

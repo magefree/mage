@@ -33,9 +33,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
@@ -45,20 +43,14 @@ import mage.target.TargetPermanent;
  */
 public class WearAway extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    static {
-        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
-
     public WearAway(UUID ownerId) {
         super(ownerId, 250, "Wear Away", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
 
-
         // Destroy target artifact or enchantment.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         this.getSpellAbility().addTarget(target);
         // Splice onto Arcane {3}{G}
         this.addAbility(new SpliceOntoArcaneAbility("{3}{G}"));

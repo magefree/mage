@@ -29,27 +29,39 @@ package mage.sets.fifthdawn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
+import mage.players.Player;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class MycosynthGolem extends CardImpl {
+    
+    private static final FilterSpell filter = new FilterSpell("Artifact creature spells you cast");
 
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+    
     public MycosynthGolem(UUID ownerId) {
         super(ownerId, 137, "Mycosynth Golem", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{11}");
         this.expansionSetCode = "5DN";
@@ -62,7 +74,8 @@ public class MycosynthGolem extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
 
         // Artifact creature spells you cast have affinity for artifacts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MycosynthGolemEffect()));
+        this.addAbility(new SimpleStaticAbility(
+            Zone.BATTLEFIELD, new MycosynthGolemGainAbilitySpellsEffect(new AffinityForArtifactsAbility(), filter)));        
         
     }
 
@@ -76,56 +89,46 @@ public class MycosynthGolem extends CardImpl {
     }
 }
 
-class MycosynthGolemEffect extends ReplacementEffectImpl {
+class MycosynthGolemGainAbilitySpellsEffect extends ContinuousEffectImpl {
 
-    public MycosynthGolemEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Artifact creature spells you cast have affinity for artifacts";
+    private final Ability ability;
+    private final FilterSpell filter;
+
+    public MycosynthGolemGainAbilitySpellsEffect(Ability ability, FilterSpell filter) {
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.filter = filter;
+        staticText = filter.getMessage() + " have " + ability.getRule();
     }
 
-    public MycosynthGolemEffect(final MycosynthGolemEffect effect) {
+    public MycosynthGolemGainAbilitySpellsEffect(final MycosynthGolemGainAbilitySpellsEffect effect) {
         super(effect);
+        this.ability = effect.ability;
+        this.filter = effect.filter;
     }
 
     @Override
-    public MycosynthGolemEffect copy() {
-        return new MycosynthGolemEffect(this);
+    public MycosynthGolemGainAbilitySpellsEffect copy() {
+        return new MycosynthGolemGainAbilitySpellsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        MageObject object = game.getObject(event.getSourceId());
-        if (object != null) {
-            Card card = (Card) object;
-            Ability ability = new AffinityForArtifactsAbility();
-            game.getState().addOtherAbility(card, ability);
-            ability.setControllerId(source.getControllerId());
-            ability.setSourceId(card.getId());
-            game.getState().addAbility(ability, source.getSourceId(), card);
-        }
-        return false;
-    }
-    
-    @Override    
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL;
-    }       
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if ((event.getType() == GameEvent.EventType.CAST_SPELL)
-                && event.getPlayerId() == source.getControllerId()) {
-            MageObject spellObject = game.getObject(event.getSourceId());
-            if (spellObject != null
-                    && spellObject.getCardType().contains(CardType.CREATURE)
-                    && spellObject.getCardType().contains(CardType.ARTIFACT)) {
-                return true;
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (player != null && permanent != null) {
+            for (StackObject stackObject : game.getStack()) {
+                // only spells cast, so no copies of spells
+                if ((stackObject instanceof Spell) && !stackObject.isCopy() && stackObject.getControllerId().equals(source.getControllerId())) {
+                    Spell spell = (Spell) stackObject;
+                    if (filter.match(spell, game)) {
+                        if (!spell.getAbilities().contains(ability)) {
+                            game.getState().addOtherAbility(spell.getCard(), ability);
+                        }
+                    }
+                }
             }
+            return true;
         }
         return false;
     }

@@ -45,6 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  * @author Loki
  */
 public class SphinxSummoner extends CardImpl {
+    
     private static final FilterCard filter = new FilterCard("artifact creature card");
 
     static {
@@ -62,7 +63,7 @@ public class SphinxSummoner extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Sphinx Summoner enters the battlefield, you may search your library for an artifact creature card, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
     }
 
     public SphinxSummoner(final SphinxSummoner card) {

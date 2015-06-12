@@ -48,7 +48,7 @@ public class CanBlockOnlyFlyingAttachedEffect extends RestrictionEffect {
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can block only creatures with flying";
         } else {
-            this.staticText = "Equiped creature can block only creatures with flying";
+            this.staticText = "Equipped creature can block only creatures with flying";
         }        
     }
 

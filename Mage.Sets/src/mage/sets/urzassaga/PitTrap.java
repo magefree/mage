@@ -49,7 +49,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class PitTrap extends CardImpl {
     
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("creature without flying");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature without flying");
     
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

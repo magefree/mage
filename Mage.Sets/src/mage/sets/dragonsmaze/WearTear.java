@@ -47,19 +47,14 @@ public class WearTear extends SplitCard {
         super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-
         // Wear
         // Destroy target artifact.
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
         getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Tear
         // Destroy target enchantment.
-        getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         target = new TargetPermanent(new FilterEnchantment());
         getRightHalfCard().getSpellAbility().addTarget(target);

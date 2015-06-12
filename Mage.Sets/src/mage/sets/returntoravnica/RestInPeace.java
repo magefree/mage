@@ -31,8 +31,8 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -72,9 +72,8 @@ public class RestInPeace extends CardImpl {
         super(ownerId, 18, "Rest in Peace", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "RTR";
 
-
         // When Rest in Peace enters the battlefield, exile all cards from all graveyards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RestInPeaceExileAllEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllPlayersEffect()));
 
         // If a card or token would be put into a graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RestInPeaceReplacementEffect()));
@@ -87,43 +86,6 @@ public class RestInPeace extends CardImpl {
     @Override
     public RestInPeace copy() {
         return new RestInPeace(this);
-    }
-}
-
-class RestInPeaceExileAllEffect extends OneShotEffect {
-
-    public RestInPeaceExileAllEffect() {
-        super(Outcome.Detriment);
-        staticText = "exile all cards from all graveyards";
-    }
-
-    public RestInPeaceExileAllEffect(final RestInPeaceExileAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RestInPeaceExileAllEffect copy() {
-        return new RestInPeaceExileAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    for (UUID cid : player.getGraveyard().copy()) {
-                        Card card = game.getCard(cid);
-                        if (card != null) {
-                            controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
 
@@ -173,5 +135,4 @@ class RestInPeaceReplacementEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD;
     }
-
 }

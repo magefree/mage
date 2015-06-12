@@ -35,6 +35,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,11 +64,10 @@ public class RelicOfProgenitus extends CardImpl {
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RelicOfProgenitusEffect2(),new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(),new GenericManaCost(1));
         secondAbility.addCost(new ExileSourceCost());
         secondAbility.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(secondAbility);
-
     }
 
     public RelicOfProgenitus(final RelicOfProgenitus card) {
@@ -112,43 +112,5 @@ class RelicOfProgenitusEffect extends OneShotEffect {
             }
         }
         return false;
-    }
-}
-
-class RelicOfProgenitusEffect2 extends OneShotEffect {
-
-    public RelicOfProgenitusEffect2() {
-        super(Outcome.Detriment);
-        staticText = "Exile all cards from all graveyards";
-    }
-
-    public RelicOfProgenitusEffect2(final RelicOfProgenitusEffect2 effect) {
-        super(effect);
-    }
-
-    @Override
-    public RelicOfProgenitusEffect2 copy() {
-        return new RelicOfProgenitusEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        for (UUID playerId : controller.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                for (UUID cid : player.getGraveyard().copy()) {
-                    Card card = game.getCard(cid);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                    }
-                }
-            }
-        }
-        return true;
     }
 }

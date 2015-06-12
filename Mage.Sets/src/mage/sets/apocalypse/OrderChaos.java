@@ -51,19 +51,14 @@ public class OrderChaos extends SplitCard {
         super(ownerId, 132, "Order", "Chaos", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{W}", "{2}{R}", false);
         this.expansionSetCode = "APC";
 
-        this.color.setWhite(true);
-        this.color.setRed(true);
-
         // Order
         // Exile target attacking creature.
-        getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new ExileTargetEffect());
         Target target = new TargetAttackingCreature();
         getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Chaos
         // Creatures can't block this turn.
-        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getSpellAbility().addEffect(new CantBlockAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn));
 
     }

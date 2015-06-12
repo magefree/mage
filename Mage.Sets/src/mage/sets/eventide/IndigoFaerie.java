@@ -101,7 +101,7 @@ class BecomesBlueTargetEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            permanent.getColor().setBlue(true);
+            permanent.getColor(game).setBlue(true);
             return true;
         }
         return false;

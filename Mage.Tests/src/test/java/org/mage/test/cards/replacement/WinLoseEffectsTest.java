@@ -93,4 +93,55 @@ public class WinLoseEffectsTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+    
+   @Test
+    public void testAngelsGrace2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        // Instant {W}
+        // You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.        
+        addCard(Zone.HAND, playerA, "Angel's Grace");
+        // Instant - {3}{B}{B}
+        // Reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost. 
+        // You may repeat this process any number of times.        
+        addCard(Zone.HAND, playerA, "Ad Nauseam");
+        
+        // Creature
+        // If you would draw a card while your library has no cards in it, you win the game instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Laboratory Maniac", 1);
+        
+        skipInitShuffling();
+        
+        playerA.getLibrary().clear();
+        // Instant {U}
+        // Draw a card. Scry 2 
+        addCard(Zone.LIBRARY, playerA, "Serum Visions"); // 1 life lost
+        addCard(Zone.LIBRARY, playerA, "Bogardan Hellkite", 3); // 24 life lost
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angel's Grace");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ad Nauseam");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Serum Visions");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Angel's Grace", 1);
+        assertGraveyardCount(playerA, "Ad Nauseam", 1);
+        assertGraveyardCount(playerA, "Serum Visions", 1);
+        
+        Assert.assertEquals("Player A library is empty", 0 , playerA.getLibrary().size());
+
+        assertLife(playerA, -5);
+        assertLife(playerB, 20);
+        
+        Assert.assertTrue("Player A has not won but should have", playerA.hasWon());
+
+    }    
 }

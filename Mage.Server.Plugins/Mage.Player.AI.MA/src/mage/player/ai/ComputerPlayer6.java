@@ -63,6 +63,7 @@ import mage.target.Targets;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
+import mage.constants.AbilityType;
 
 /**
  *
@@ -86,7 +87,8 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<>();
     protected int lastLoggedTurn = 0;
-
+    Random random = new Random();
+    protected static final String BLANKS = "...............................................";
     static {
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
@@ -436,8 +438,12 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         });
         pool.execute(task);
         try {
-            logger.debug("maxThink: " + maxThink + " seconds");
-            return task.get(maxThink, TimeUnit.SECONDS);
+            int maxSeconds = maxThink;
+            if (!ALLOW_INTERRUPT) {
+                maxSeconds = 3600;
+            }
+            logger.debug("maxThink: " + maxSeconds + " seconds ");
+            return task.get(maxSeconds, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
             task.cancel(true);
@@ -461,7 +467,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         }
         Game game = node.getGame();
         int val;
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             val = GameStateEvaluator2.evaluate(playerId, game);
             logger.trace("interrupted - " + val);
@@ -505,7 +511,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
     }
 
     protected int simulatePriority(SimulationNode2 node, Game game, int depth, int alpha, int beta) {
-        if (Thread.interrupted()) {
+        if (ALLOW_INTERRUPT && Thread.interrupted()) {
             Thread.currentThread().interrupt();
             logger.info("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
@@ -522,7 +528,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
         int counter = 0;
         for (Ability action : allActions) {
             counter++;
-            if (Thread.interrupted()) {
+            if (ALLOW_INTERRUPT && Thread.interrupted()) {
                 Thread.currentThread().interrupt();
                 logger.info("Sim Prio [" + depth + "] -- interrupted");
                 break;
@@ -537,16 +543,24 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
                 if (!sim.gameOver(null) && action.isUsesStack()) {
                     // only pass if the last action uses the stack
-                    sim.getPlayer(currentPlayer.getId()).pass(game);
-                    sim.getPlayerList().getNext();
+                    UUID nextPlayerId = sim.getPlayerList().get();
+                    do {
+                        sim.getPlayer(nextPlayerId).pass(game);
+                        nextPlayerId = sim.getPlayerList().getNext();
+                    } while (nextPlayerId != this.getId());
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
-                logger.trace(new StringBuilder("Sim Prio [").append(depth).append("]#").append(counter).append(" -- newNode (").append(action.toString()).append(") ").append(newNode.hashCode()).append(" parent node ").append(node.hashCode()));
-                // int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
-
                 sim.checkStateAndTriggered();
-                int val = addActions(newNode, depth - 1, alpha, beta);
-
+                int val;
+                if (action instanceof PassAbility) {
+                    // Stop to simulate deeper if PassAbility 
+                    val = GameStateEvaluator2.evaluate(this.getId(), sim);
+//                    logger.info("evaluate  = " + val );
+                } else {
+                    val = addActions(newNode, depth - 1, alpha, beta);
+//                    logger.info("addAction = " + val );
+                }
+                logger.debug("Sim Prio " + BLANKS.substring(0, 2 + (maxDepth-depth) * 3)+ "["+depth+"]#"+counter+" <" + val +"> - ("+action.toString()+") "+newNode.hashCode()+" parent node "+node.hashCode());
                 if (logger.isInfoEnabled() && depth == maxDepth) {
                     StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
                             .append(" <").append(val).append("> (").append(action)
@@ -564,10 +578,10 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
                 }
 
                 if (currentPlayer.getId().equals(playerId)) {
-                    if (action instanceof PassAbility) {
-                        val = val -15; // passivity penalty
+                    if (depth == maxDepth && action instanceof PassAbility) {
+                        val = val - PASSIVITY_PENALTY; // passivity penalty
                     }
-                    if (val > alpha) {
+                    if (val > alpha || (depth == maxDepth && val == alpha && random.nextBoolean())) { // Adding random for equal value to get change sometimes
                         alpha = val;
                         bestNode = newNode;
                         bestNode.setScore(val);
@@ -1311,7 +1325,7 @@ public class ComputerPlayer6 extends ComputerPlayer /*implements Player*/ {
 
     private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
         // pass or casting two times a spell multiple times on hand is ok
-        if (action instanceof PassAbility || action instanceof SpellAbility) {
+        if (action instanceof PassAbility || action instanceof SpellAbility || action.getAbilityType().equals(AbilityType.MANA)) {
             return false;
         }
         int newVal = GameStateEvaluator2.evaluate(playerId, sim);

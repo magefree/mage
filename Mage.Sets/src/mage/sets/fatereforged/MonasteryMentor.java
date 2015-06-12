@@ -61,6 +61,7 @@ public class MonasteryMentor extends CardImpl {
 
         // Prowess
         this.addAbility(new ProwessAbility());
+        
         // Whenever you cast a noncreature spell, put a 1/1 white Monk creature token with prowess onto the battlefield.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MonasteryMentorToken()), filter, false));
     }

@@ -38,6 +38,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -108,4 +109,7 @@ public interface Target extends Serializable {
     // some targets are choosen from players that are not the controller of the ability (e.g. Pandemonium)
     void setTargetController(UUID playerId);
     UUID getTargetController();
+    void setAbilityController(UUID playerId);
+    UUID getAbilityController();
+    Player getTargetController(Game game, UUID playerId);
 }   

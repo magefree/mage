@@ -113,6 +113,9 @@ public abstract class Phase implements Serializable {
                 currentStep = step;
                 if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {
                     playStep(game);
+                    if (game.executingRollback()) {
+                        return true;
+                    }
                 }
                 if (!game.isSimulation() && checkStopOnStepOption(game)) {
                     return false;
@@ -201,6 +204,9 @@ public abstract class Phase implements Serializable {
             prePriority(game, activePlayerId);
             if (!game.isPaused() && !game.gameOver(null)) {
                 currentStep.priority(game, activePlayerId, false);
+                if(game.executingRollback()) {
+                    return;
+                }                
             }
             if (!game.isPaused() && !game.gameOver(null)) {
                 postPriority(game, activePlayerId);

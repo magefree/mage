@@ -34,22 +34,13 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterSpell;
-import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
  * @author LevelX2
  */
 public class VedalkenArchmage extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public VedalkenArchmage(UUID ownerId) {
         super(ownerId, 55, "Vedalken Archmage", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
         this.expansionSetCode = "MRD";
@@ -60,6 +51,7 @@ public class VedalkenArchmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an artifact spell, draw a card.
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 

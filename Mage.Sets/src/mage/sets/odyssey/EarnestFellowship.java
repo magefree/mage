@@ -97,9 +97,9 @@ class EarnestFellowshipEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-            if (permanent.getColor().hasColor()) {
+            if (permanent.getColor(game).hasColor()) {
                 List<ColorPredicate> colorPredicates = new ArrayList<>();
-                for (ObjectColor color : permanent.getColor().getColors()) {
+                for (ObjectColor color : permanent.getColor(game).getColors()) {
                     colorPredicates.add(new ColorPredicate(color));
                 }
                 FilterCard filterColors = new FilterCard("its colors");

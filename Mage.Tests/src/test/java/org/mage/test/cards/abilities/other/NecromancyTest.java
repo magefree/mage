@@ -112,8 +112,8 @@ public class NecromancyTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Disenchant");
         addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy");
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Necromancy");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necromancy"); // enchanting the Craw Wurm
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Disenchant", "Necromancy"); // if Necromancy leaves, the enchanted creature has to leave too
         
         setStopAt(1, PhaseStep.END_TURN);
         execute();

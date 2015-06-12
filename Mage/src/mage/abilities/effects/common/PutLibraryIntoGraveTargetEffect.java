@@ -82,6 +82,9 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
 

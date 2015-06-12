@@ -78,22 +78,22 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
+        MageObject sourceObject = source.getSourceObject(game);
         if (controller == null || sourceObject == null) {
             return false;
         }
         if (controller.searchLibrary(target, game)) {
             List<Card> cards = new ArrayList<>();
-            for (UUID cardId: (List<UUID>)target.getTargets()) {
+            for (UUID cardId: target.getTargets()) {
                 Card card = controller.getLibrary().remove(cardId, game);
                 if (card != null) {
                     cards.add(card);
                 }
             }
             Cards foundCards = new CardsImpl();
-            foundCards.addAll(cards);
+            foundCards.addAll(target.getTargets());
             if (reveal) {
-                controller.revealCards(sourceObject.getName(), foundCards, game);
+                controller.revealCards(sourceObject.getIdName(), foundCards, game);
             }
             if (forceShuffle) {
                 controller.shuffleLibrary(game);
@@ -117,7 +117,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("Search your library for a ").append(target.getTargetName());
         if (reveal) {
-            sb.append("and reveal that card. Shuffle");
+            sb.append(" and reveal that card. Shuffle");
         } else {
             sb.append(", then shuffle");
         }

@@ -27,6 +27,7 @@
  */
 package mage.sets.khansoftarkir;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
@@ -101,18 +102,16 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (player != null && sourceObject != null) {
-            for (int i = 0; i < 4; i++) {
-                if (player.getLibrary().size() > 0) {
-                    Card card = player.getLibrary().getFromTop(game);
-                    if (card != null) {
-                        player.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
-                        if (!card.getCardType().contains(CardType.CREATURE) && !card.getCardType().contains(CardType.LAND)) {
-                            ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
-                            effect.setTargetPointer(new FixedTarget(card.getId()));
-                            game.addEffect(effect, source);
-                        }
-                    }
-                }
+            List<Card> cards = player.getLibrary().getTopCards(game, 4);
+            player.moveCards(cards, Zone.LIBRARY, Zone.EXILED, source, game);
+            for (Card card : cards) {
+                if (game.getState().getZone(card.getId()) == Zone.EXILED &&
+                        !card.getCardType().contains(CardType.CREATURE) &&
+                        !card.getCardType().contains(CardType.LAND)) {
+                    ContinuousEffect effect = new NarsetEnlightenedMasterCastFromExileEffect();
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
+                    game.addEffect(effect, source);
+                }                
             }
             return true;
         }
@@ -150,10 +149,12 @@ class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (objectId.equals(getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId())) {
             Card card = game.getCard(objectId);
-            if (card != null && game.getState().getZone(objectId) == Zone.EXILED) {
+            if (card != null) {
                 Player player = game.getPlayer(affectedControllerId);
-                player.setCastSourceIdWithAlternateMana(objectId, null);
-                return true;
+                if (player != null) {
+                    player.setCastSourceIdWithAlternateMana(objectId, null);
+                    return true;
+                }
             }
         }
         return false;

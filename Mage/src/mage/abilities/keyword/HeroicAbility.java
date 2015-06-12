@@ -83,17 +83,19 @@ public class HeroicAbility extends TriggeredAbilityImpl {
     private boolean checkSpell(Spell spell, Game game) {
         if (spell != null) {
             SpellAbility sa = spell.getSpellAbility();
-            for (Target target : sa.getTargets()) {
-                if (!target.isNotTarget() && target.getTargets().contains(this.getSourceId())) {
-                    return true;
-                }
-            }
-            for (Effect effect : sa.getEffects()) {
-                for (UUID targetId : effect.getTargetPointer().getTargets(game, sa)) {
-                    if (targetId.equals(this.getSourceId())) {
+            for(UUID modeId :sa.getModes().getSelectedModes()) {
+                for (Target target : sa.getModes().get(modeId).getTargets()) {
+                    if (!target.isNotTarget() && target.getTargets().contains(this.getSourceId())) {
                         return true;
                     }
                 }
+                for (Effect effect : sa.getModes().get(modeId).getEffects()) {
+                    for (UUID targetId : effect.getTargetPointer().getTargets(game, sa)) {
+                        if (targetId.equals(this.getSourceId())) {
+                            return true;
+                        }
+                    }
+                }                
             }
         }
         return false;

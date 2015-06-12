@@ -37,7 +37,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 
-public class ReturnToBattlefieldUnderYourControlTargetEffectTest extends CardTestPlayerBase {
+public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
 
     @Test
     public void testSaffiEriksdotter() {
@@ -115,5 +115,41 @@ public class ReturnToBattlefieldUnderYourControlTargetEffectTest extends CardTes
         assertExileCount("Arcbound Worker", 1);
         
     }
-    
+    /**
+     *  With my opponent's Deathmist Raptor return-to-battlefield trigger on the stack, 
+     *  I exiled the Deathmist Raptor with Pharika, God of Affliction. However, the Deathmist Raptor 
+     *  returned to the battlefield from exile, though it should not have because it had
+     *  changed zones so was a different object.
+     */
+    @Test
+    public void testDeathmistRaptor() {
+        // Deathtouch
+        // Whenever a permanent you control is turned face up, you may return Deathmist Raptor from your graveyard to the battlefield face up or face down.
+        // Megamorph {4}{G}
+        addCard(Zone.GRAVEYARD, playerA, "Deathmist Raptor");
+        addCard(Zone.HAND, playerA, "Pine Walker");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+                
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.        
+        addCard(Zone.BATTLEFIELD, playerB, "Pharika, God of Affliction", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
+        setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
+
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");        
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard", 
+                "Deathmist Raptor", "Whenever a permanent you control is turned face up");
+        
+        setStopAt(3, PhaseStep.END_TURN);        
+
+        execute();
+        assertPermanentCount(playerB, "Pharika, God of Affliction", 1);
+        assertPermanentCount(playerA, "Snake", 1);
+        assertPermanentCount(playerA, "Pine Walker", 1);
+
+        assertExileCount("Deathmist Raptor", 1);
+        
+    }    
 }

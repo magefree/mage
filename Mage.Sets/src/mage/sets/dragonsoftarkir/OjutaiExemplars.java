@@ -58,7 +58,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class OjutaiExemplars extends CardImpl {
     
-    private static final FilterSpell filter = new FilterSpell("creature spell");
+    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));

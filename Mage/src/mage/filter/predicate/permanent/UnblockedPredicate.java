@@ -48,7 +48,8 @@ public class UnblockedPredicate implements Predicate<Permanent> {
             if ((game.getPhase().getStep().getType() == PhaseStep.DECLARE_BLOCKERS
                     && game.getStep().getStepPart() == Step.StepPart.PRIORITY)
                     || game.getPhase().getStep().getType() == PhaseStep.FIRST_COMBAT_DAMAGE
-                    || game.getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
+                    || game.getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE
+                    || game.getPhase().getStep().getType() == PhaseStep.END_COMBAT) {
                 CombatGroup combatGroup = game.getCombat().findGroup(input.getId());
                 if (combatGroup != null) {
                     return combatGroup.getBlockers().isEmpty();

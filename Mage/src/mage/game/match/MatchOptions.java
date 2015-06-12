@@ -53,6 +53,7 @@ public class MatchOptions implements Serializable {
     protected List<String> playerTypes = new ArrayList<>();
     protected String password;
     protected SkillLevel skillLevel;
+    protected boolean rollbackTurnsAllowed;
 
     /**
      * Time each player has during the game to play using his\her priority.
@@ -159,4 +160,12 @@ public class MatchOptions implements Serializable {
     public void setSkillLevel(SkillLevel skillLevel) {
         this.skillLevel = skillLevel;
     }
+
+    public boolean isRollbackTurnsAllowed() {
+        return rollbackTurnsAllowed;
+    }
+
+    public void setRollbackTurnsAllowed(boolean rollbackTurnsAllowed) {
+        this.rollbackTurnsAllowed = rollbackTurnsAllowed;
+    }      
 }

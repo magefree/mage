@@ -34,7 +34,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -44,10 +43,10 @@ import mage.game.permanent.Permanent;
 public class LandfallAbility extends TriggeredAbilityImpl {
 
     public LandfallAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional);        
     }
 
-    public LandfallAbility ( Zone zone, Effect effect, Boolean optional ) {
+    public LandfallAbility (Zone zone, Effect effect, Boolean optional ) {
         super(zone, effect, optional);
     }
 
@@ -63,15 +62,12 @@ public class LandfallAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId);
     }
 
     @Override
     public String getRule() {
-        return "Landfall - Whenever a land enters the battlefield under your control, " + super.getRule();
+        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " + super.getRule();
     }
 
     @Override

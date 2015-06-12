@@ -39,7 +39,7 @@ public class MulticoloredPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        return 1 < input.getColor().getColorCount();
+        return 1 < input.getColor(game).getColorCount();
     }
 
     @Override

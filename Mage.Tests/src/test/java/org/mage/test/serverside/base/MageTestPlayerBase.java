@@ -28,6 +28,7 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.player.ai.ComputerPlayer;
 
 /**
  * Base class for all tests.
@@ -260,14 +261,15 @@ public abstract class MageTestPlayerBase {
     }
     
     private TestPlayer getPlayer(String name) {
-        if (name.equals("ComputerA")) {
-            return playerA;
-        } else if (name.equals("ComputerB")) {
-            return playerB;
-        } else if (name.equals("ComputerC")) {
-            return playerC;
-        } else if (name.equals("ComputerD")) {
-            return playerD;
+        switch (name) {
+            case "ComputerA":
+                return playerA;
+            case "ComputerB":
+                return playerB;
+            case "ComputerC":
+                return playerC;
+            case "ComputerD":
+                return playerD;
         }
         throw new IllegalArgumentException("Couldn't find player for name=" + name);
     }
@@ -339,6 +341,7 @@ public abstract class MageTestPlayerBase {
     }
 
     protected TestPlayer createPlayer(String name) {
-        return new TestPlayer(name, RangeOfInfluence.ONE);
+        return new TestPlayer(new ComputerPlayer(name, RangeOfInfluence.ONE));
     }
+    
 }

@@ -46,7 +46,7 @@ public class AncestralVision extends CardImpl {
         super(ownerId, 48, "Ancestral Vision", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
         this.expansionSetCode = "TSP";
 
-        this.getColor().setBlue(true);
+        this.color.setBlue(true);
         
         // Suspend 4-{U}
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("U"), this));

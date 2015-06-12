@@ -133,7 +133,7 @@ class ZulaportEnforcerEffect extends RestrictionEffect {
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getColor().isBlack()) {
+        if (blocker.getColor(game).isBlack()) {
             return true;
         }
         return false;

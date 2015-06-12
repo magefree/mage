@@ -112,7 +112,7 @@ class OonaQueenOfTheFaeEffect extends OneShotEffect {
             for(int i = 0; i < cardsToExile; i++) {
                 Card card = opponent.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    if (card.getColor().contains(choice.getColor())) {
+                    if (card.getColor(game).contains(choice.getColor())) {
                         cardsWithColor++;
                     }
                     card.moveToExile(null, null, source.getSourceId(), game);

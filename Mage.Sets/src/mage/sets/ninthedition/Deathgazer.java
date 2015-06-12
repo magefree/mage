@@ -87,7 +87,7 @@ class DeathgazerTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             if (event.getSourceId().equals(this.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if(permanent != null && !permanent.getColor().isBlack())
+                if(permanent != null && !permanent.getColor(game).isBlack())
                 {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -97,7 +97,7 @@ class DeathgazerTriggeredAbility extends TriggeredAbilityImpl {
             }
             if (event.getTargetId().equals(this.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null && !permanent.getColor().isBlack())
+                if(permanent != null && !permanent.getColor(game).isBlack())
                 {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));

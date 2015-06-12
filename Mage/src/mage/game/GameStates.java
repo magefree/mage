@@ -42,8 +42,12 @@ public class GameStates implements Serializable {
 
     private static final transient Logger logger = Logger.getLogger(GameStates.class);
 
-//    private List<byte[]> states = new LinkedList<byte[]>();
-    private final List<GameState> states = new LinkedList<>();
+//    private final List<byte[]> states;
+    private final List<GameState> states;
+
+    public GameStates() {
+        this.states = new LinkedList<>();
+    }
 
     public void save(GameState gameState) {
 //        states.add(new Copier<GameState>().copyCompressed(gameState));
@@ -60,8 +64,8 @@ public class GameStates implements Serializable {
             while (states.size() > index + 1) {
                 states.remove(states.size() - 1);
             }
-//            return new Copier<GameState>().uncompressCopy(states.get(index));
             logger.trace("Rolling back state: " + index);
+//            return new Copier<GameState>().uncompressCopy(states.get(index));
             return states.get(index);
         }
         return null;
@@ -78,7 +82,7 @@ public class GameStates implements Serializable {
 
     public GameState get(int index) {
         if (index < states.size()) {
-            // return new Copier<GameState>().uncompressCopy(states.get(index));
+//             return new Copier<GameState>().uncompressCopy(states.get(index));
             return states.get(index);
         }
         return null;

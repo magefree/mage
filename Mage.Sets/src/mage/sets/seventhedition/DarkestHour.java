@@ -83,7 +83,7 @@ class DarkestHourEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            permanent.getColor().setColor(ObjectColor.BLACK);
+            permanent.getColor(game).setColor(ObjectColor.BLACK);
         }
         return true;
     }

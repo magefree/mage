@@ -142,4 +142,39 @@ public class IsochronScepterTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
     }
+    
+    /**
+     * Resolving a Silence cast from exile via Isochron Scepter during my opponent's upkeep does 
+     * not prevent that opponent from casting spells that turn.
+     * 
+     */
+    
+    @Test
+    public void testSilence() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Isochron Scepter");
+        addCard(Zone.HAND, playerA, "Silence");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Isochron Scepter");
+        addTarget(playerA, "Silence");
+        
+        activateAbility(2, PhaseStep.UPKEEP, playerA, "{2},{T}:");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Isochron Scepter", 1);
+        assertExileCount("Silence", 1);
+
+        assertHandCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 0);
+        
+    }    
 }

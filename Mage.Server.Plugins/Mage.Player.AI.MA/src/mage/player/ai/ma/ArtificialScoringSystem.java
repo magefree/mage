@@ -129,7 +129,7 @@ public class ArtificialScoringSystem {
         if (permanent.getCardType().contains(CardType.CREATURE)) {
             return -100;
         } else if (permanent.getCardType().contains(CardType.LAND)) {
-            return -1;
+            return -20; // means probably no mana available  (should be greater than passivity penalty
         } else {
             return -2;
         }

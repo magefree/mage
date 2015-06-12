@@ -38,6 +38,7 @@ import java.util.zip.GZIPOutputStream;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class Copier<T> {
 
@@ -95,8 +96,7 @@ public class Copier<T> {
 
     public T uncompressCopy(byte[] buffer) {
         T copy = null;
-        try {
-            ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)));
+        try (ObjectInputStream in = new CopierObjectInputStream(loader, new GZIPInputStream(new ByteArrayInputStream(buffer)))) {
             copy = (T) in.readObject();
         }
         catch(IOException e) {

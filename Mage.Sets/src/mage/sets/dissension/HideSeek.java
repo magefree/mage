@@ -65,21 +65,13 @@ public class HideSeek extends SplitCard {
         super(ownerId, 151, "Hide", "Seek", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}", "{W}{B}", false);
         this.expansionSetCode = "DIS";
         
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.color.setBlack(true);
-
         // Hide
         // Put target artifact or enchantment on the bottom of its owner's library.
-        getLeftHalfCard().getColor().setRed(true);
-        getLeftHalfCard().getColor().setWhite(true);
         getLeftHalfCard().getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPermanent(filter));
 
         // Seek
         // Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library..
-        getRightHalfCard().getColor().setWhite(true);
-        getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new SeekEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
 

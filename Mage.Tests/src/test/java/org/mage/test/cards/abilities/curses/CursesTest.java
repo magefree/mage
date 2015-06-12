@@ -232,6 +232,63 @@ public class CursesTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Curse of Misfortunes", 1);
-        assertPermanentCount(playerA, "Curse of Bloodletting", 1);    }
+        assertPermanentCount(playerA, "Curse of Bloodletting", 1);    
+    }
+    
+    
+    @Test
+    public void testCurseOfDeathsHold() {
+        // Creatures enchanted player controls get -1/-1.
+        addCard(Zone.HAND, playerA, "Curse of Death's Hold");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+        assertPermanentCount(playerA, "Curse of Death's Hold", 1);
+        
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
+    }
+    
+    @Test
+    public void testCurseOfDeathsHold2() {
+        // Creatures enchanted player controls get -1/-1.
+        addCard(Zone.HAND, playerA, "Curse of Death's Hold");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Tasigur, the Golden Fang", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 3);
+        addCard(Zone.HAND, playerB, "Reclamation Sage");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Reclamation Sage");
+        addTarget(playerB, "Curse of Death's Hold");
+        
+        // {2}{G/U}{G/U}: Put the top two cards of your library into your graveyard, then return a nonland card of an opponent's choice from your graveyard to your hand.
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{G/U}{G/U}: Put the top two cards");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Curse of Death's Hold", playerB);
+               
+        setStopAt(3, PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+        assertGraveyardCount(playerB, "Reclamation Sage", 1);
+        assertPermanentCount(playerA, "Curse of Death's Hold", 1);
+        assertGraveyardCount(playerA, 2);
+        
+        assertPowerToughness(playerB, "Silvercoat Lion", 1, 1);
+    }   
+    
 }

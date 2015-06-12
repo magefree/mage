@@ -1,13 +1,14 @@
 package org.mage.test.serverside.base;
 
-import mage.constants.PhaseStep;
+import java.util.List;
 import mage.abilities.Ability;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.players.Player;
 import org.mage.test.player.TestPlayer;
 
-import java.util.List;
+
 
 /**
  * Interface for all test initialization and assertion operations.
@@ -81,11 +82,14 @@ public interface CardTestAPI {
 
     /**
      * Define turn number to stop the game on.
+     * @param turn
      */
     void setStopOnTurn(int turn);
 
     /**
      * Define the turn number and step to stop the game on.
+     * @param turn
+     * @param step
      */
     void setStopAt(int turn, PhaseStep step);
 

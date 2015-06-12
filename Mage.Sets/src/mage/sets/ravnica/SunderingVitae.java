@@ -33,9 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,24 +41,15 @@ import mage.target.TargetPermanent;
  * @author jonubuu
  */
 public class SunderingVitae extends CardImpl {
-    
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-    
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public SunderingVitae(UUID ownerId) {
         super(ownerId, 185, "Sundering Vitae", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
         this.expansionSetCode = "RAV";
 
-
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Destroy target artifact or enchantment.
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 

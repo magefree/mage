@@ -50,7 +50,6 @@ public class DeathPitsOfRath extends CardImpl {
         super(ownerId, 21, "Death Pits of Rath", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
         this.expansionSetCode = "TMP";
 
-
         // Whenever a creature is dealt damage, destroy it. It can't be regenerated.
         this.addAbility(new DeathPitsOfRathTriggeredAbility());
     }
@@ -81,15 +80,16 @@ class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            for(Effect effect : this.getEffects())
-            {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-            }
-            return true;
+        for(Effect effect : this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
         }
-        return false;
+        return true;
     }
 
     @Override

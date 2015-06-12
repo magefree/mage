@@ -28,6 +28,7 @@
 
 package mage.game.match;
 
+import java.io.Serializable;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.players.Player;
@@ -36,7 +37,10 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MatchPlayer {
+public class MatchPlayer implements Serializable {
+    
+    private static final long serialVersionUID = 42L;
+    
     private int wins;
     private boolean matchWinner;
 
@@ -45,7 +49,7 @@ public class MatchPlayer {
     private final String name;
     
     private boolean quit;
-    private final boolean timerTimeout;
+    //private final boolean timerTimeout;
     private boolean doneSideboarding;
     private int priorityTimeLeft;
 
@@ -56,7 +60,7 @@ public class MatchPlayer {
         this.wins = 0;
         this.doneSideboarding = true;
         this.quit = false;
-        this.timerTimeout = false;
+        //this.timerTimeout = false;
         this.name = player.getName();
         this.matchWinner = false;
     }

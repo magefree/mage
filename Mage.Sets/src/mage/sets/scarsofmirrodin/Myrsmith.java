@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -40,8 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactSpell;
 import mage.game.Game;
 import mage.game.permanent.token.MyrToken;
 
@@ -50,12 +48,6 @@ import mage.game.permanent.token.MyrToken;
  * @author Loki, North
  */
 public class Myrsmith extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("an artifact spell");
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public Myrsmith (UUID ownerId) {
         super(ownerId, 16, "Myrsmith", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "SOM";
@@ -65,6 +57,7 @@ public class Myrsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        FilterArtifactSpell filter = new FilterArtifactSpell("an artifact spell");
         this.addAbility(new SpellCastControllerTriggeredAbility(new MyrsmithEffect(), filter, false));
     }
 
@@ -76,7 +69,6 @@ public class Myrsmith extends CardImpl {
     public Myrsmith copy() {
         return new Myrsmith(this);
     }
-
 }
 
 class MyrsmithEffect extends OneShotEffect {
@@ -103,5 +95,4 @@ class MyrsmithEffect extends OneShotEffect {
     public MyrsmithEffect copy() {
         return new MyrsmithEffect(this);
     }
-
 }

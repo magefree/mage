@@ -138,10 +138,10 @@ class TabletOfTheGuildsGainLifeEffect extends OneShotEffect {
                 ObjectColor color1 = new ObjectColor((String) game.getState().getValue(source.getSourceId() + "_color1"));
                 ObjectColor color2 = new ObjectColor((String) game.getState().getValue(source.getSourceId() + "_color2"));
                 int amount = 0;
-                if (spell.getColor().contains(color1)) {
+                if (spell.getColor(game).contains(color1)) {
                     ++amount;
                 }
-                if (spell.getColor().contains(color2)) {
+                if (spell.getColor(game).contains(color2)) {
                     ++amount;
                 }
                 if (amount > 0) {

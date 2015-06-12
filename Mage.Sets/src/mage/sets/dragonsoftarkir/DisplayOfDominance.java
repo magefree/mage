@@ -124,7 +124,7 @@ class DisplayOfDominanceEffect extends ContinuousRuleModifyingEffectImpl {
         MageObject mageObject = game.getObject(event.getSourceId());
         if (game.getPlayer(ability.getControllerId()).hasOpponent(event.getPlayerId(), game) &&
                 mageObject instanceof Spell &&
-                (mageObject.getColor().isBlack() || mageObject.getColor().isBlue())) {
+                (mageObject.getColor(game).isBlack() || mageObject.getColor(game).isBlue())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             return permanent != null && permanent.getControllerId().equals(ability.getControllerId());
         }

@@ -122,7 +122,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
                 Card chosenCard = cardsToCheck.get(entry.getKey(), game);
                 if (chosenCard != null) {
                     for (UUID cardToCheck : cardsToCheck) {
-                        if (!cardToCheck.equals(chosenCard.getId()) && chosenCard.getColor().equals(game.getCard(cardToCheck).getColor())) {
+                        if (!cardToCheck.equals(chosenCard.getId()) && chosenCard.getColor(game).equals(game.getCard(cardToCheck).getColor(game))) {
                             newPossibleTargets.add(cardToCheck);
                         }
                     }
@@ -131,7 +131,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
         } else {
             for (UUID cardToCheck : cardsToCheck) {
                 FilterCard colorFilter = new FilterCard();
-                colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor()));
+                colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor(game)));
                 if (cardsToCheck.count(colorFilter, game) > 1) {
                     newPossibleTargets.add(cardToCheck);
                 }
@@ -150,7 +150,7 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
         int possibleCards = 0;
         for (UUID cardToCheck : cardsToCheck) {
             FilterCard colorFilter = new FilterCard();
-            colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor()));
+            colorFilter.add(new ColorPredicate(game.getCard(cardToCheck).getColor(game)));
             if (cardsToCheck.count(colorFilter, game) > 1) {
                 ++possibleCards;
             }
@@ -165,12 +165,12 @@ class TargetTwoCardsWithTheSameColorInHand extends TargetCardInHand {
             if (card != null) {
                 if (targets.size() == 1) {
                     Card card2 = game.getCard(targets.entrySet().iterator().next().getKey());
-                    if (card2 != null && card2.getColor().equals(card.getColor())) {
+                    if (card2 != null && card2.getColor(game).equals(card.getColor(game))) {
                         return true;
                     }
                 } else {
                     FilterCard colorFilter = new FilterCard();
-                    colorFilter.add(new ColorPredicate(card.getColor()));
+                    colorFilter.add(new ColorPredicate(card.getColor(game)));
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player.getHand().getCards(colorFilter, game).size() > 1) {
                         return true;

@@ -50,18 +50,13 @@ public class AliveWell extends SplitCard {
         super(ownerId, 121, "Alive", "Well", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}","{W}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setWhite(true);
-
         // Alive
         // Put a 3/3 green Centaur creature token onto the battlefield.
-        getLeftHalfCard().getColor().setGreen(true);
         getLeftHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));
 
 
         // Well
         // You gain 2 life for each creature you control.
-        getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new WellEffect());
 
     }

@@ -44,8 +44,8 @@ public class DraftPickView implements Serializable {
     protected int timeout;
 
     public DraftPickView(DraftPlayer player, int timeout) {
-        this.booster = new SimpleCardsView(player.getBooster());
-        this.picks = new SimpleCardsView(player.getDeck().getSideboard());
+        this.booster = new SimpleCardsView(player.getBooster(), false);
+        this.picks = new SimpleCardsView(player.getDeck().getSideboard(), false);
         this.picking = player.isPicking();
         this.timeout = timeout;
     }

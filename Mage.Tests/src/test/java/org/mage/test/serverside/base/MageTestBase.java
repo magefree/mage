@@ -31,7 +31,6 @@ import java.io.FilenameFilter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static org.mage.test.serverside.base.MageTestPlayerBase.currentGame;
 
 /**
  * Base class for all tests.

@@ -74,7 +74,7 @@ public class ThranLens extends CardImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            perm.getColor().setColor(colorless);
+            perm.getColor(game).setColor(colorless);
         }
         return true;
     }

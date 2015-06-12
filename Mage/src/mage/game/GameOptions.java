@@ -37,4 +37,9 @@ public class GameOptions implements Serializable {
      * If true, library won't be shuffled at the beginning of the game
      */
     public boolean skipInitShuffling = false;
+    
+    /**
+     * If true, players can roll back turn if all players agree
+     */
+    public boolean rollbackTurnsAllowed = true;
 }

@@ -132,11 +132,11 @@ public class CardInfo {
             this.secondSideName = secondSide.getName();
         }
 
-        this.blue = card.getColor().isBlue();
-        this.black = card.getColor().isBlack();
-        this.green = card.getColor().isGreen();
-        this.red = card.getColor().isRed();
-        this.white = card.getColor().isWhite();
+        this.blue = card.getColor(null).isBlue();
+        this.black = card.getColor(null).isBlack();
+        this.green = card.getColor(null).isGreen();
+        this.red = card.getColor(null).isRed();
+        this.white = card.getColor(null).isWhite();
 
         this.setTypes(card.getCardType());
         this.setSubtypes(card.getSubtype());

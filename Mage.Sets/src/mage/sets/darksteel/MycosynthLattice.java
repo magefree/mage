@@ -121,36 +121,36 @@ class EverythingIsColorlessEffect extends ContinuousEffectImpl {
             ObjectColor colorless = new ObjectColor();
             // permaments
             for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                perm.getColor().setColor(colorless);
+                perm.getColor(game).setColor(colorless);
             }
             // spells
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
-                    object.getColor().setColor(colorless);
+                    object.getColor(game).setColor(colorless);
                 }
             }
             // exile
             for (Card card : game.getExile().getAllCards(game)) {
-                card.getColor().setColor(colorless);
+                game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
             }
             // command
             for (CommandObject commandObject : game.getState().getCommand()) {
-                commandObject.getColor().setColor(colorless);
+                commandObject.getColor(game).setColor(colorless);
             }
             for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     // hand
                     for (Card card: player.getHand().getCards(game)) {
-                        card.getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
                     }
                     // library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        card.getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
                     }
                     // graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        card.getColor().setColor(colorless);
+                        game.getState().getCreateCardAttribute(card).getColor().setColor(colorless);
                     }
                 }
             }

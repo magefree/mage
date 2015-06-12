@@ -57,18 +57,10 @@ public class ResearchDevelopment extends SplitCard {
         super(ownerId, 155, "Research", "Development", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{U}", "{3}{U}{R}", false);
         this.expansionSetCode = "DIS";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
-        this.color.setRed(true);
-
         // Choose up to four cards you own from outside the game and shuffle them into your library.
-        getLeftHalfCard().getColor().setGreen(true);
-        getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new ResearchEffect());
 
         // Put a 3/1 red Elemental creature token onto the battlefield unless any opponent has you draw a card. Repeat this process two more times.
-        getRightHalfCard().getColor().setBlue(true);
-        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getSpellAbility().addEffect(new DevelopmentEffect());
     }
 

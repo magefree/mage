@@ -85,11 +85,11 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
             if (permanent != null) {
                 switch (layer) {
                     case ColorChangingEffects_5:
-                        permanent.getColor().setWhite(false);
-                        permanent.getColor().setGreen(false);
-                        permanent.getColor().setBlack(false);
-                        permanent.getColor().setBlue(false);
-                        permanent.getColor().setRed(false);
+                        permanent.getColor(game).setWhite(false);
+                        permanent.getColor(game).setGreen(false);
+                        permanent.getColor(game).setBlack(false);
+                        permanent.getColor(game).setBlue(false);
+                        permanent.getColor(game).setRed(false);
                         break;
                     case AbilityAddingRemovingEffects_6:
                         permanent.removeAllAbilities(source.getSourceId(), game);

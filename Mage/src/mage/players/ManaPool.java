@@ -61,6 +61,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> manaItems = new ArrayList<>();
 
     private boolean autoPayment; // auto payment from mana pool: true - mode is active
+    private boolean autoPaymentRestricted; // auto payment from mana pool: true - if auto Payment is on, it will only pay if one kind of mana is in the pool
     private ManaType unlockedManaType; // type of mana that was selected to pay manually
     
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
@@ -68,6 +69,7 @@ public class ManaPool implements Serializable {
     public ManaPool(UUID playerId) {
         this.playerId = playerId;
         autoPayment = true;
+        autoPaymentRestricted = true;
         unlockedManaType = null;
     }
 
@@ -77,6 +79,7 @@ public class ManaPool implements Serializable {
             manaItems.add(item.copy());
         }
         this.autoPayment = pool.autoPayment;
+        this.autoPaymentRestricted = pool.autoPaymentRestricted;
         this.unlockedManaType = pool.unlockedManaType;
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
     }
@@ -101,11 +104,25 @@ public class ManaPool implements Serializable {
         return get(ManaType.BLACK);
     }
 
+    /**
+     * 
+     * @param manaType the mana type that should be paid
+     * @param ability
+     * @param filter
+     * @param game
+     * @return 
+     */
     public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game) {
         if (!autoPayment && !manaType.equals(unlockedManaType)) {
             // if manual payment and the needed mana type was not unlocked, nothing will be paid
             return false;
         }
+        if (autoPayment && autoPaymentRestricted && !wasManaAddedBeyondStock() && !manaType.equals(unlockedManaType)) {            
+            // if automatic restricted payment and there is laready mana in the pool
+            // and the needed mana type was not unlocked, nothing will be paid
+            return false;
+        }
+        
         if (getConditional(manaType, ability, filter, game) > 0) {
             removeConditional(manaType, ability, game);
             lockManaType(); // pay only one mana if mana payment is set to manually
@@ -118,6 +135,10 @@ public class ManaPool implements Serializable {
                     continue;
                 }
             }            
+            if (!manaType.equals(unlockedManaType) && autoPayment && autoPaymentRestricted && mana.count() == mana.getStock()) {
+                // no mana added beyond the stock so don't auto pay this
+                continue;
+            }
             boolean spendAnyMana = spendAnyMana(ability, game);
             if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
                 GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());
@@ -127,6 +148,9 @@ public class ManaPool implements Serializable {
                     mana.removeAny();
                 } else {
                     mana.remove(manaType);
+                }
+                if (mana.count() == 0) { // so no items with count 0 stay in list
+                    manaItems.remove(mana);
                 }
                 lockManaType(); // pay only one mana if mana payment is set to manually
                 return true;
@@ -416,6 +440,14 @@ public class ManaPool implements Serializable {
         this.autoPayment = autoPayment;
     }
 
+    public void setAutoPaymentRestricted(boolean autoPaymentRestricted) {
+        this.autoPaymentRestricted = autoPaymentRestricted;
+    }
+
+    public boolean isAutoPaymentRestricted() {
+        return autoPaymentRestricted;
+    }
+
     public ManaType getUnlockedManaType() {
         return unlockedManaType;
     }
@@ -428,4 +460,18 @@ public class ManaPool implements Serializable {
         this.unlockedManaType = null;
     }
 
+    public void setStock() {
+        for (ManaPoolItem mana : manaItems) {
+            mana.setStock(mana.count());
+        }
+    }
+    
+    private boolean wasManaAddedBeyondStock() {
+        for (ManaPoolItem mana : manaItems) {
+            if (mana.getStock() < mana.count()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

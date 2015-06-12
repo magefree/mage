@@ -102,7 +102,7 @@ class PermafrostTrapWatcher extends Watcher {
         }
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.CREATURE) && perm.getColor().contains(ObjectColor.GREEN) && !perm.getControllerId().equals(controllerId)) {
+            if (perm.getCardType().contains(CardType.CREATURE) && perm.getColor(game).contains(ObjectColor.GREEN) && !perm.getControllerId().equals(controllerId)) {
                 condition = true;
             }
         }

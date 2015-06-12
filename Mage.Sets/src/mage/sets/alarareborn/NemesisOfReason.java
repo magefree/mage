@@ -53,11 +53,14 @@ public class NemesisOfReason extends CardImpl {
         this.expansionSetCode = "ARB";
         this.subtype.add("Leviathan");
         this.subtype.add("Horror");
-
         
         this.power = new MageInt(3);
         this.toughness = new MageInt(7);
-        this.addAbility(new NemesisOfReasonTriggeredAbility());
+        
+        // Whenever Nemesis of Reason attacks, defending player puts the top ten cards of his or her library into his or her graveyard.
+        Effect effect = new PutLibraryIntoGraveTargetEffect(10);
+        effect.setText("defending player puts the top ten cards of his or her library into his or her graveyard");
+        this.addAbility(new NemesisOfReasonTriggeredAbility(effect));
     }
 
     public NemesisOfReason (final NemesisOfReason card) {
@@ -71,8 +74,9 @@ public class NemesisOfReason extends CardImpl {
 }
 
 class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
-    NemesisOfReasonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(10));
+    
+    NemesisOfReasonTriggeredAbility(Effect effect) {
+        super(Zone.BATTLEFIELD, effect);
     }
 
     NemesisOfReasonTriggeredAbility(final NemesisOfReasonTriggeredAbility ability) {
@@ -85,10 +89,16 @@ class NemesisOfReasonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
-            for (Effect effect : this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        if (event.getSourceId().equals(this.getSourceId()) ) {
+            UUID defenderId = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
+            for (Effect effect : this.getEffects()) {                
+                effect.setTargetPointer(new FixedTarget(defenderId));
             }
             return true;
         }

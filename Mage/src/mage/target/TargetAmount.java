@@ -117,10 +117,9 @@ public abstract class TargetAmount extends TargetImpl {
         if (!amountWasSet) {
             setAmount(source, game);
         }
-        Player player = game.getPlayer(playerId);
         chosen = remainingAmount == 0;
         while (remainingAmount > 0) {
-            if (!player.chooseTargetAmount(outcome, this, source, game)) {
+            if (!getTargetController(game, playerId).chooseTargetAmount(outcome, this, source, game)) {
                 return chosen;
             }
             chosen = remainingAmount == 0;

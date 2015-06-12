@@ -76,7 +76,7 @@ public class WhisperwoodElemental extends CardImpl {
         Effect effect = new GainAbilityControlledEffect(abilityToGain, Duration.EndOfTurn, filter);
         effect.setText("Until end of turn, face-up, nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.\"");
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
+                Zone.ALL, effect, new SacrificeSourceCost()));
     }
 
     public WhisperwoodElemental(final WhisperwoodElemental card) {

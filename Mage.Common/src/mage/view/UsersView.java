@@ -37,16 +37,22 @@ public class UsersView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final String flagName;
     private final String userName;
     private final String infoState;
     private final String infoGames;
     private final String infoPing;
 
-    public UsersView(String userName, String infoState, String infoGames, String infoPing) {
+    public UsersView(String flagName, String userName, String infoState, String infoGames, String infoPing) {
+        this.flagName = flagName;
         this.userName = userName;
         this.infoState = infoState;
         this.infoGames = infoGames;
         this.infoPing = infoPing;
+    }
+
+    public String getFlagName() {
+        return flagName;
     }
 
     public String getUserName() {

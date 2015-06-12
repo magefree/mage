@@ -53,7 +53,7 @@ public class AngelsGrace extends CardImpl {
         this.expansionSetCode = "TSP";
 
 
-        // Split second
+        // Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
         this.addAbility(new SplitSecondAbility());
         
         // You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.

@@ -110,7 +110,9 @@ class PhantasmalImageCopyEffect extends OneShotEffect {
                             if (!permanent.getSubtype().contains("Illusion")) {
                                 permanent.getSubtype().add("Illusion");
                             }
-                            permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
+                            // Add directly because the created permanent is only used to copy from, so there is no need to add the ability to e.g. TriggeredAbilities
+                            permanent.getAbilities().add(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
+                            //permanent.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()), game);
                             return true;
                         }
                     });

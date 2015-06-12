@@ -93,8 +93,8 @@ public class BecomesCreatureAllEffect extends ContinuousEffectImpl {
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getColor().hasColor())
-                                permanent.getColor().setColor(token.getColor());
+                            if (token.getColor(game).hasColor())
+                                permanent.getColor(game).setColor(token.getColor(game));
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:

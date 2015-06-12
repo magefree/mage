@@ -145,7 +145,7 @@ class ChandraAblazeEffect2 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = (Card) this.getValue("discardedCard");
-        if (card != null && card.getColor().isRed()) {
+        if (card != null && card.getColor(game).isRed()) {
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
                 permanent.damage(4, source.getSourceId(), game, false, true);

@@ -52,20 +52,15 @@ public class GiveTake extends SplitCard {
         super(ownerId, 129, "Give", "Take", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}","{2}{U}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setGreen(true);
-        this.color.setBlue(true);
-
         // Give
         // Put three +1/+1 counters on target creature.
         getLeftHalfCard().getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
-        getLeftHalfCard().getColor().setGreen(true);
 
         // Take
         // Remove all +1/+1 counters from target creature you control. Draw that many cards.
         getRightHalfCard().getSpellAbility().addEffect(new TakeEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        getLeftHalfCard().getColor().setBlue(true);
     }
 
     public GiveTake(final GiveTake card) {

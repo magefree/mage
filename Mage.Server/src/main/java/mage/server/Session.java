@@ -157,7 +157,7 @@ public class Session {
         if (user == null) {
             user = UserManager.getInstance().findUser("Admin");
         }
-        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, null));
+        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png"));
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
                logger.info("Error connecting Admin!");
         }        
@@ -169,7 +169,10 @@ public class Session {
         if (user != null) {
             UserData userData = user.getUserData();
             if (userData == null) {
-                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), userDataView.getUserSkipPrioritySteps());
+                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), 
+                        userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), 
+                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
+                userDataView.getFlagName());
                 user.setUserData(userData);
             } else {
                 if (userDataView.getAvatarId() == 51) { // Update special avatar if first avatar is selected
@@ -179,6 +182,7 @@ public class Session {
                 userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
                 userData.setAllowRequestShowHandCards(userDataView.allowRequestShowHandCards());
                 userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
+                userData.setConfirmEmptyManaPool(userDataView.confirmEmptyManaPool());
             }
             return true;
         }

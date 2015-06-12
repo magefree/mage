@@ -138,7 +138,7 @@ class HallOfTriumphBoostControlledEffect extends ContinuousEffectImpl {
         ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (color != null) {
             for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                if (perm.getColor().shares(color)) {
+                if (perm.getColor(game).shares(color)) {
                     perm.addPower(1);
                     perm.addToughness(1);
                 }

@@ -93,7 +93,7 @@ class EmptyShrineKannushiProtectionAbility extends ProtectionAbility {
     public boolean canTarget(MageObject source, Game game) {
         ObjectColor color = new ObjectColor();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(controllerId)) {
-            ObjectColor permanentColor = permanent.getColor();
+            ObjectColor permanentColor = permanent.getColor(game);
             if (permanentColor.isColorless()) {
                 continue;
             }

@@ -34,31 +34,22 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetArtifactPermanent;
+import mage.filter.common.FilterArtifactSpell;
 
 /**
  *
  * @author North
  */
 public class SteelSabotage extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("artifact spell");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
     public SteelSabotage(UUID ownerId) {
         super(ownerId, 33, "Steel Sabotage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "MBS";
 
-
         // Choose one - Counter target artifact spell; or return target artifact to its owner's hand.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addTarget(new TargetSpell(new FilterArtifactSpell()));
         Mode mode = new Mode();
         mode.getEffects().add(new ReturnToHandTargetEffect());
         mode.getTargets().add(new TargetArtifactPermanent());

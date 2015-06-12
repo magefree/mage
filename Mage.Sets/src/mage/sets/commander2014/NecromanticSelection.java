@@ -168,7 +168,7 @@ class NecromanticSelectionContinuousEffect extends ContinuousEffectImpl {
                     break;
                 case ColorChangingEffects_5:
                     if (sublayer == SubLayer.NA) {
-                        creature.getColor().setBlack(true);
+                        creature.getColor(game).setBlack(true);
                     }
                     break;
             }

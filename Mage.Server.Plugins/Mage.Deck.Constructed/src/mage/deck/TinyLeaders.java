@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
@@ -170,15 +171,13 @@ public class TinyLeaders extends DeckValidator {
                 if (!bannedCommander.contains(commander.getName())) {
                     FilterMana color = CardUtil.getColorIdentity(commander);
                     for (Card card : deck.getCards()) {
-                        if (!cardHasValideColor(color, card)) {
-                            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ")");
-                            valid = false;
+                        if (!isCardFormatValid(card, commander, color)) {
+                            valid = false; 
                         }
-                        
-                        //905.5b - Converted mana cost must be 3 or less
-                        if (card.getManaCost().convertedManaCost() > 3) {
-                            invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
-                            valid = false;
+                    }
+                    for (Card card : deck.getSideboard()) {
+                        if (!isCardFormatValid(card, commander, color)) {
+                            valid = false; 
                         }
                     }
                 } else {
@@ -197,6 +196,31 @@ public class TinyLeaders extends DeckValidator {
         return valid;
     }
 
+    private boolean isCardFormatValid(Card card, Card commander, FilterMana color) {
+        if (!cardHasValideColor(color, card)) {
+            invalid.put(card.getName(), "Invalid color (" + commander.getName() + ")");
+            return false;
+        }
+
+        //905.5b - Converted mana cost must be 3 or less
+        if (card instanceof SplitCard) {
+            if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() > 3) {                            
+                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + ")");
+                return false;                                
+            }
+            if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() > 3 ) {
+                invalid.put(card.getName(), "Invalid cost (" + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + ")");
+                return false;                                
+            }                            
+        } else {
+            if (card.getManaCost().convertedManaCost() > 3) {
+                invalid.put(card.getName(), "Invalid cost (" + card.getManaCost().convertedManaCost() + ")");
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      *
      * @param commander FilterMana object with Color Identity of Commander set

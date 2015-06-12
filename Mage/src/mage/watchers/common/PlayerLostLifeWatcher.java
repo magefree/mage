@@ -68,9 +68,9 @@ public class PlayerLostLifeWatcher extends Watcher {
             if (playerId != null) {
                 Integer amount = amountOfLifeLostThisTurn.get(playerId);
                 if (amount == null) {
-                    amount = Integer.valueOf(event.getAmount());
+                    amount = event.getAmount();
                 } else {
-                    amount = Integer.valueOf(amount + event.getAmount());
+                    amount = amount + event.getAmount();
                 }
                 amountOfLifeLostThisTurn.put(playerId, amount);
             }
@@ -80,7 +80,7 @@ public class PlayerLostLifeWatcher extends Watcher {
     public int getLiveLost(UUID playerId) {
         Integer amount = amountOfLifeLostThisTurn.get(playerId);
         if (amount != null) {
-            return amount.intValue();
+            return amount;
         }
         return 0;
     }
@@ -88,7 +88,7 @@ public class PlayerLostLifeWatcher extends Watcher {
     public int getLiveLostLastTurn(UUID playerId) {
         Integer amount = amountOfLifeLostLastTurn.get(playerId);
         if (amount != null) {
-            return amount.intValue();
+            return amount;
         }
         return 0;
     }

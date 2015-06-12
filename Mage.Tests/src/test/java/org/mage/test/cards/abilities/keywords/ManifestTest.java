@@ -362,4 +362,40 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "", 1);
 
     }    
+    
+  /**
+     * Whisperwood Elemental - Its sacrifice ability doesn't work..
+     * 
+     */
+    @Test
+    public void testWhisperwoodElemental() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);   
+        // Seismic Rupture deals 2 damage to each creature without flying.
+        addCard(Zone.HAND, playerA, "Seismic Rupture", 1);
+        
+        // At the beginning of your end step, manifest the top card of your library.
+        // Sacrifice Whisperwood Elemental: Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
+        addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 2);
+
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Sacrifice");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Seismic Rupture");
+        
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // no life gain
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+        assertGraveyardCount(playerA, "Seismic Rupture", 1);
+        assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 2);
+
+        assertPermanentCount(playerB, "", 2);
+
+    }        
 }

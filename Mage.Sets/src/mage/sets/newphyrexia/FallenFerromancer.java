@@ -36,6 +36,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -53,6 +54,11 @@ public class FallenFerromancer extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+        
+        // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        this.addAbility(InfectAbility.getInstance());
+        
+        // {1}{R}, {T}: Fallen Ferromancer deals 1 damage to target creature or player.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new ManaCostsImpl("{1}{R}"));
         ability.addTarget(new TargetCreatureOrPlayer());

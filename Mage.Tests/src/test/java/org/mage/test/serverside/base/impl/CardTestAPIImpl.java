@@ -28,6 +28,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     /**
      * Default game initialization params for red player (that plays with Mountains)
      */
+    @Override
     public void useRedDefault() {
         // *** ComputerA ***
         // battlefield:ComputerA:Mountain:5
@@ -88,6 +89,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
@@ -100,6 +102,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
@@ -114,6 +117,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
+    @Override
     public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
 
@@ -179,6 +183,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player {@link Player} to set life count for.
      * @param life   Life count to set.
      */
+    @Override
     public void setLife(TestPlayer player, int life) {
         if (player.equals(playerA)) {
             commandsA.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
@@ -190,16 +195,18 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     /**
      * Define turn number to stop the game on.
      */
+    @Override
     public void setStopOnTurn(int turn) {
-        stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopOnTurn = turn == -1 ? null : turn;
         stopAtStep = PhaseStep.UNTAP;
     }
 
     /**
      * Define turn number and step to stop the game on.
      */
+    @Override
     public void setStopAt(int turn, PhaseStep step) {
-        stopOnTurn = turn == -1 ? null : Integer.valueOf(turn);
+        stopOnTurn = turn == -1 ? null : turn;
         stopAtStep = step;
     }
 
@@ -208,6 +215,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      *
      * @param turn Expected turn number to compare with. 1-based.
      */
+    @Override
     public void assertTurn(int turn) throws AssertionError {
         Assert.assertEquals("Turn numbers are not equal", turn, currentGame.getTurnNum());
     }
@@ -217,21 +225,28 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      *
      * @param result Expected {@link GameResult} to compare with.
      */
+    @Override
     public void assertResult(Player player, GameResult result) throws AssertionError {
         if (player.equals(playerA)) {
             GameResult actual = CardTestAPI.GameResult.DRAW;
-            if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
-                actual = CardTestAPI.GameResult.WON;
-            } else if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
-                actual = CardTestAPI.GameResult.LOST;
+            switch (currentGame.getWinner()) {
+                case "Player PlayerA is the winner":
+                    actual = CardTestAPI.GameResult.WON;
+                    break;
+                case "Player PlayerB is the winner":
+                    actual = CardTestAPI.GameResult.LOST;
+                    break;
             }
             Assert.assertEquals("Game results are not equal", result, actual);
         } else if (player.equals(playerB)) {
             GameResult actual = CardTestAPI.GameResult.DRAW;
-            if (currentGame.getWinner().equals("Player PlayerB is the winner")) {
-                actual = CardTestAPI.GameResult.WON;
-            } else if (currentGame.getWinner().equals("Player PlayerA is the winner")) {
-                actual = CardTestAPI.GameResult.LOST;
+            switch (currentGame.getWinner()) {
+                case "Player PlayerB is the winner":
+                    actual = CardTestAPI.GameResult.WON;
+                    break;
+                case "Player PlayerA is the winner":
+                    actual = CardTestAPI.GameResult.LOST;
+                    break;
             }
             Assert.assertEquals("Game results are not equal", result, actual);
         }
@@ -243,6 +258,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player {@link Player} to get life for comparison.
      * @param life   Expected player's life to compare with.
      */
+    @Override
     public void assertLife(Player player, int life) throws AssertionError {
         int actual = currentGame.getPlayer(player.getId()).getLife();
         Assert.assertEquals("Life amounts are not equal", life, actual);
@@ -265,6 +281,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param scope     {@link mage.filter.Filter.ComparisonScope} Use ANY, if you want "at least one creature with given name should have specified p\t"
      *                  Use ALL, if you want "all creature with gived name should have specified p\t"
      */
+    @Override
     public void assertPowerToughness(Player player, String cardName, int power, int toughness, Filter.ComparisonScope scope)
             throws AssertionError {
         int count = 0;
@@ -298,6 +315,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     /**
      * {@inheritDoc}
      */
+    @Override
     public void assertAbilities(Player player, String cardName, List<Ability> abilities)
             throws AssertionError {
         int count = 0;
@@ -326,6 +344,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player {@link Player} which permanents should be counted.
      * @param count  Expected count.
      */
+    @Override
     public void assertPermanentCount(Player player, int count) throws AssertionError {
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
@@ -343,6 +362,7 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param cardName Name of the cards that should be counted.
      * @param count    Expected count.
      */
+    @Override
     public void assertPermanentCount(Player player, String cardName, int count) throws AssertionError {
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {

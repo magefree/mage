@@ -74,7 +74,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
     }
     
     @Override
-    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+    protected void init(UUID choosingPlayerId) {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move tiny leader to command zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -101,7 +101,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl{
 
         }
         this.getState().addAbility(ability, null);
-        super.init(choosingPlayerId, gameOptions);
+        super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }

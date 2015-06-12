@@ -30,6 +30,7 @@ package mage.filter.predicate.mageobject;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
+import mage.cards.Card;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
@@ -47,9 +48,15 @@ public class AbilityPredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        Abilities<Ability> abilities = input.getAbilities();
-        for (int i = 0; i < abilities.size(); i++) {
-            if (abilityClass.equals(abilities.get(i).getClass())) {
+        Abilities<Ability> abilities;
+        if (input instanceof Card){
+            abilities = ((Card)input).getAbilities(game);
+        } else {
+            abilities = input.getAbilities();
+        }
+        
+        for (Ability ability : abilities) {
+            if (abilityClass.equals(ability.getClass())) {
                 return true;
             }
         }

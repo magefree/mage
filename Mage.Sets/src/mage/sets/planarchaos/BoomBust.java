@@ -60,11 +60,8 @@ public class BoomBust extends SplitCard {
         super(ownerId, 112, "Boom", "Bust", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}", "{5}{R}", false);
         this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
-
         // Boom
         // Destroy target land you control and target land you don't control.
-        getLeftHalfCard().getColor().setRed(true);
         Effect effect = new DestroyTargetEffect();
         effect.setText("Destroy target land you control and target land you don't control");
         getLeftHalfCard().getSpellAbility().addEffect(effect);
@@ -73,7 +70,6 @@ public class BoomBust extends SplitCard {
 
         // Bust
         // Destroy all lands.
-        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(new FilterLandPermanent()));
 
     }

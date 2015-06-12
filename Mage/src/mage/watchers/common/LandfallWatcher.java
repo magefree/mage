@@ -1,5 +1,8 @@
 package mage.watchers.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
@@ -13,12 +16,15 @@ import mage.watchers.Watcher;
  */
 public class LandfallWatcher extends Watcher {
 
+    Set<UUID> playerPlayedLand = new HashSet<>();
+    
     public LandfallWatcher() {
-        super("LandPlayed", WatcherScope.PLAYER);
+        super("LandPlayed", WatcherScope.GAME);
     }
 
     public LandfallWatcher(final LandfallWatcher watcher) {
         super(watcher);
+        playerPlayedLand.addAll(playerPlayedLand);
     }
 
     @Override
@@ -28,15 +34,21 @@ public class LandfallWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { //no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-                condition = true;
+            if (permanent.getCardType().contains(CardType.LAND) && !playerPlayedLand.contains(event.getPlayerId())) {
+                playerPlayedLand.add(event.getPlayerId());
             }
         }
     }
 
+    @Override
+    public void reset() {
+        playerPlayedLand.clear();
+        super.reset(); 
+    }
+    
+    public boolean landPlayed(UUID playerId) {
+        return playerPlayedLand.contains(playerId);
+    }
 }

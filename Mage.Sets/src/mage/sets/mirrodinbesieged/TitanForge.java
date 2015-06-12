@@ -58,7 +58,7 @@ public class TitanForge extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new TapSourceCost());
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TitanForgeGolemToken()), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
 
@@ -75,8 +75,8 @@ public class TitanForge extends CardImpl {
 
 }
 
-class GolemToken extends Token {
-    GolemToken() {
+class TitanForgeGolemToken extends Token {
+    TitanForgeGolemToken() {
         super("Golem", "a 9/9 colorless Golem artifact creature token");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);

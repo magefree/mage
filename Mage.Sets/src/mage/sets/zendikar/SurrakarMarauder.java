@@ -52,6 +52,8 @@ public class SurrakarMarauder extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. 
+        // (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false));
     }
 

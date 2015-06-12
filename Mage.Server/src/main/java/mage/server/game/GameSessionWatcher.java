@@ -142,7 +142,7 @@ public class GameSessionWatcher {
         Map<String, SimpleCardsView> handCards = new HashMap<>();
         for (Player player: game.getPlayers().values()) {
             if (player.hasUserPermissionToSeeHand(userId)) {
-                handCards.put(player.getName(), new SimpleCardsView(player.getHand().getCards(game)));
+                handCards.put(player.getName(), new SimpleCardsView(player.getHand().getCards(game), true));
                 gameView.setWatchedHands(handCards);
             }
         }

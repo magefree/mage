@@ -55,20 +55,12 @@ public class BeckCall extends SplitCard {
         super(ownerId, 123, "Beck", "Call", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setWhite(true);
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-
         // Beck
         // Whenever a creature enters the battlefield this turn, you may draw a card.
-        getLeftHalfCard().getColor().setGreen(true);
-        getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BeckTriggeredAbility()));
 
         // Call
         // Put four 1/1 white Bird creature tokens with flying onto the battlefield.
-        getRightHalfCard().getColor().setWhite(true);
-        getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(),4));
 
     }

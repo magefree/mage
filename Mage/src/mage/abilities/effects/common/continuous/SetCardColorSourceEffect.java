@@ -75,7 +75,7 @@ public class SetCardColorSourceEffect extends ContinuousEffectImpl {
         MageObject o = game.getObject(source.getSourceId());
         if (o != null) {
             if (o instanceof Permanent || o instanceof StackObject) {
-                o.getColor().setColor(setColor);
+                o.getColor(game).setColor(setColor);
             }
         }
 

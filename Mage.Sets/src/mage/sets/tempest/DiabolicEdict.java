@@ -45,6 +45,7 @@ public class DiabolicEdict extends CardImpl {
         super(ownerId, 22, "Diabolic Edict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "TMP";
 
+        // Target player sacrifices a creature.
         this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

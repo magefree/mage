@@ -1,6 +1,5 @@
 package mage.sets.planarchaos;
 
-import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
@@ -27,17 +26,14 @@ public class DeadGone extends SplitCard {
     public DeadGone(UUID ownerId) {
         super(ownerId, 113, "Dead", "Gone", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}", "{2}{R}", false);
         this.expansionSetCode = "PLC";
-        this.color.setRed(true);
 
         // Dead
         // Dead deals 2 damage to target creature.
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new DeadDamageEffect());
         getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Gone
         // Return target creature you don't control to its owner's hand.
-        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }

@@ -49,18 +49,13 @@ public class DownDirty extends SplitCard {
         super(ownerId, 126, "Down", "Dirty", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}", "{2}{G}", true);
         this.expansionSetCode = "DGM";
 
-        this.color.setBlack(true);
-        this.color.setGreen(true);
-
         // Down
         // Target player discards two cards.
-        getLeftHalfCard().getColor().setBlack(true);
         getLeftHalfCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
         getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 
         // Dirty
         // Return target card from your graveyard to your hand.
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard());
 

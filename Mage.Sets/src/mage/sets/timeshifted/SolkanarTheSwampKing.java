@@ -91,7 +91,7 @@ class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor().isBlack()) {
+            if (spell != null && spell.getColor(game).isBlack()) {
                 return true;
             }
         }

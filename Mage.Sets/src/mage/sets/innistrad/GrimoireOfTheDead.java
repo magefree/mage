@@ -146,7 +146,7 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
             switch (layer) {
                 case ColorChangingEffects_5:
                     if (sublayer == SubLayer.NA) {
-                        permanent.getColor().setBlack(true);
+                        permanent.getColor(game).setBlack(true);
                     }
                     break;
                 case TypeChangingEffects_4:

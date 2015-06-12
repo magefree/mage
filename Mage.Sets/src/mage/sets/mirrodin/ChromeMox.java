@@ -151,7 +151,7 @@ class ChromeMoxManaEffect extends ManaEffect {
                 if (imprintedCard != null) {
                     Choice choice = new ChoiceImpl(true);
                     choice.setMessage("Pick a mana color");
-                    ObjectColor color = imprintedCard.getColor();
+                    ObjectColor color = imprintedCard.getColor(game);
                     if (color.isBlack()) {
                         choice.getChoices().add("Black");
                     }

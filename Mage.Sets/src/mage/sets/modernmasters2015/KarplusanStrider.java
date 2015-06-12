@@ -111,7 +111,7 @@ class KarplusanStriderEffect extends ContinuousRuleModifyingEffectImpl {
             Permanent targettedPermanent = game.getPermanent(event.getTargetId());
             Spell sourceSpell = game.getStack().getSpell(event.getSourceId());
             if (targettedPermanent != null && sourceSpell != null) {
-                return sourceSpell.getColor().isBlue() || sourceSpell.getColor().isBlack();
+                return sourceSpell.getColor(game).isBlue() || sourceSpell.getColor(game).isBlack();
             }
         }
         return false;

@@ -84,7 +84,7 @@ class CivicSaberColorCount implements DynamicValue {
         if (equipment != null) {
             Permanent permanent = game.getPermanent(equipment.getAttachedTo());
             if (permanent != null) {
-                count = permanent.getColor().getColorCount();
+                count = permanent.getColor(game).getColorCount();
             }
         }
         return count;

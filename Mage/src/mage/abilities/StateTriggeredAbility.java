@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -48,23 +49,29 @@ public abstract class StateTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public final boolean checkEventType(GameEvent event, Game game) {
         //20100716 - 603.8
-        Boolean triggered = (Boolean) game.getState().getValue(this.getSourceId().toString() + "triggered");
+        Boolean triggered = (Boolean) game.getState().getValue(getSourceId().toString() + "triggered");
         if (triggered == null) {
             triggered = Boolean.FALSE;
         }
-        if (!triggered) {
-            game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-            super.trigger(game, controllerId);
-        }
+        return !triggered;
+    }
+
+    
+    @Override
+    public void trigger(Game game, UUID controllerId) {
+        //20100716 - 603.8
+        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
+        super.trigger(game, controllerId);
     }
 
     @Override
     public boolean resolve(Game game) {
         //20100716 - 603.8
+        boolean result = super.resolve(game);
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-        return super.resolve(game);
+        return result;        
     }
 
     public void counter(Game game) {

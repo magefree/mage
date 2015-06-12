@@ -54,12 +54,14 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(final PutIntoGraveFromBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.onlyToControllerGraveyard = ability.onlyToControllerGraveyard;        
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override

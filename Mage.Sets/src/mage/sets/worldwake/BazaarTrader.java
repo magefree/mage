@@ -36,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -92,6 +93,8 @@ public class BazaarTrader extends CardImpl {
 
 class BazaarTraderEffect extends ContinuousEffectImpl {
 
+    MageObjectReference targetPermanentReference;
+    
     public BazaarTraderEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.staticText = "Target player gains control of target artifact, creature, or land you control";
@@ -99,6 +102,7 @@ class BazaarTraderEffect extends ContinuousEffectImpl {
 
     public BazaarTraderEffect(final BazaarTraderEffect effect) {
         super(effect);
+        this.targetPermanentReference = effect.targetPermanentReference;
     }
 
     @Override
@@ -107,11 +111,19 @@ class BazaarTraderEffect extends ContinuousEffectImpl {
     }
 
     @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        targetPermanentReference = new MageObjectReference(source.getTargets().get(1).getFirstTarget(), game);
+    }
+
+    @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        Permanent permanent = targetPermanentReference.getPermanent(game);
         if (player != null && permanent != null) {
-            return permanent.changeControllerId(player.getId(), game);
+            return permanent.changeControllerId(player.getId(), game);            
+        } else {
+            discard();
         }
         return false;
     }

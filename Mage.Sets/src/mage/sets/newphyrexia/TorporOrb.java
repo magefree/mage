@@ -28,8 +28,8 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.cards.CardImpl;
@@ -94,12 +94,16 @@ class TorporOrbEffect extends ContinuousRuleModifyingEffectImpl {
         }
         return false;
     }
-
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+        MageObject mageObject = game.getObject(event.getSourceId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (mageObject != null && sourceObject != null) {
+            return sourceObject.getLogName() + " prevented ability of " + mageObject.getLogName() + " to trigger";
+        }
+        return null;
     }
-
+    
     @Override
     public TorporOrbEffect copy() {
         return new TorporOrbEffect(this);

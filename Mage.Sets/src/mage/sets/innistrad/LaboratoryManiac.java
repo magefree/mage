@@ -113,10 +113,7 @@ class LaboratoryManiacEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(event.getPlayerId());
-              if (!player.hasLost() && (
-                        (player.getLife() > 0 || !player.canLoseByZeroOrLessLife())
-                      && player.isEmptyDraw()
-                      && player.getCounters().getCount(CounterType.POISON) < 10)) {
+            if (player != null && !player.hasLost() && player.isEmptyDraw()) {
                 return true;
             }
         }

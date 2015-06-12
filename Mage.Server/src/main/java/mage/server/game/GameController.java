@@ -64,6 +64,7 @@ import mage.constants.PlayerAction;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.GameOptions;
 import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
@@ -118,15 +119,23 @@ public class GameController implements GameCallback {
     private UUID choosingPlayerId;
     private Future<?> gameFuture;
     private boolean useTimeout = true;
+    private GameOptions gameOptions;
+    
+    private UUID userReqestingRollback;
+    private int turnsToRollback;
+    private int requestsOpen;
+    
 
-    public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId) {
+    public GameController(Game game, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = ChatManager.getInstance().createChatSession("Game " + game.getId());
+        this.userReqestingRollback = null;
         this.game = game;
         this.game.setSaveGame(ConfigSettings.getInstance().isSaveGameActivated());
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
+        this.gameOptions = gameOptions;
         for (Player player: game.getPlayers().values()) {
             if (!player.isHuman()) {
                 useTimeout = false; // no timeout for AI players because of beeing idle
@@ -477,14 +486,70 @@ public class GameController implements GameCallback {
             case UNDO:
                 game.undo(getPlayerId(userId));
                 break;
+            case ROLLBACK_TURNS: // basic request of a player to rollback 
+                if (data instanceof Integer) {
+                    turnsToRollback = (Integer) data;
+                    if (game.canRollbackTurns(turnsToRollback)) {                        
+                        requestsOpen = requestPermissionToRollback(userId, turnsToRollback);
+                        if (requestsOpen == 0) {
+                            game.rollbackTurns(turnsToRollback);
+                            turnsToRollback = -1;
+                            requestsOpen = -1;                            
+                        } else {
+                            userReqestingRollback = userId;
+                        }                        
+                    } else {
+                        UUID playerId = getPlayerId(userId);
+                        if (playerId != null) {
+                            Player player = game.getPlayer(playerId);
+                            if (player != null) {  
+                                game.informPlayer(player, "That turn is not available for rollback.");
+                            }
+                        }
+                    }                    
+                }
+                break;
+            case ADD_PERMISSION_TO_ROLLBACK_TURN:                
+                if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                    requestsOpen--;
+                    if (requestsOpen == 0) {
+                        game.rollbackTurns(turnsToRollback);
+                        turnsToRollback = -1;                        
+                        userReqestingRollback = null;
+                        requestsOpen = -1;
+                    }
+                }
+                break;
+            case DENY_PERMISSON_TO_ROLLBACK_TURN: // one player has denied - so cancel the request
+                {
+                    UUID playerId = getPlayerId(userId);
+                    if (playerId != null) {
+                        Player player = game.getPlayer(playerId);
+                        if (player != null) {                
+                            if (userReqestingRollback != null && requestsOpen > 0 && !userId.equals(userReqestingRollback)) {
+                                turnsToRollback = -1;
+                                userReqestingRollback = null;
+                                requestsOpen = -1;
+                                game.informPlayers("Rollback request denied by " + player.getLogName());
+                            }
+                        }
+                    }
+                }
+                break;
             case CONCEDE:
                 game.concede(getPlayerId(userId));
                 break;
             case MANA_AUTO_PAYMENT_OFF:
-                game.setManaPoolMode(getPlayerId(userId), false);
+                game.setManaPaymentMode(getPlayerId(userId), false);
                 break;
             case MANA_AUTO_PAYMENT_ON:
-                game.setManaPoolMode(getPlayerId(userId), true);
+                game.setManaPaymentMode(getPlayerId(userId), true);
+                break;
+            case MANA_AUTO_PAYMENT_RESTRICTED_OFF:
+                game.setManaPaymentModeRestricted(getPlayerId(userId), false);
+                break;
+            case MANA_AUTO_PAYMENT_RESTRICTED_ON:
+                game.setManaPaymentModeRestricted(getPlayerId(userId), true);
                 break;
             case ADD_PERMISSION_TO_SEE_HAND_CARDS:
                 if (data instanceof UUID) {
@@ -516,6 +581,23 @@ public class GameController implements GameCallback {
         }
     }
 
+    private int requestPermissionToRollback(UUID userIdRequester, int numberTurns) {
+        int requests = 0;
+        for (Player player: game.getState().getPlayers().values()) {
+            User requestedUser = getUserByPlayerId(player.getId());
+            if (player.isInGame() && player.isHuman() &&
+                    requestedUser != null &&
+                    !requestedUser.getId().equals(userIdRequester)) {
+                requests++;
+                GameSessionPlayer gameSession = gameSessions.get(player.getId());
+                if (gameSession != null) {                
+                    gameSession.requestPermissionToRollbackTurn(userIdRequester, numberTurns);
+                }
+            }
+        }
+        return requests;
+    }
+    
     private void requestPermissionToSeeHandCards(UUID userIdRequester, UUID userIdGranter) {
         Player grantingPlayer = game.getPlayer(userIdGranter);
         if (grantingPlayer != null) {

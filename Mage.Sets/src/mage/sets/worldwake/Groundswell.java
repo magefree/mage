@@ -32,17 +32,13 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.condition.LockedInCondition;
+import mage.abilities.condition.common.LandfallCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.Watcher;
 import mage.watchers.common.LandfallWatcher;
 
 /**
@@ -55,11 +51,13 @@ public class Groundswell extends CardImpl {
         super(ownerId, 104, "Groundswell", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "WWK";
 
-
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new GroundswellEffect(Duration.EndOfTurn));
-
+        // Target creature gets +2/+2 until end of turn.
+        //Landfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead.
         this.getSpellAbility().addWatcher(new LandfallWatcher());
+        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn), new BoostTargetEffect(2, 2, Duration.EndOfTurn), 
+                new LockedInCondition(LandfallCondition.getInstance()),
+                "Target creature gets +2/+2 until end of turn. <br><i>Landfall</i> &mdash; If you had a land enter the battlefield under your control this turn, that creature gets +4/44 until end of turn instead"));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
     public Groundswell(final Groundswell card) {
@@ -70,40 +68,4 @@ public class Groundswell extends CardImpl {
     public Groundswell copy() {
         return new Groundswell(this);
     }
-}
-
-class GroundswellEffect extends ContinuousEffectImpl {
-
-    public GroundswellEffect(Duration duration) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Target creature gets +2/+2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets +4/+4 until end of turn instead";
-    }
-
-    public GroundswellEffect(final GroundswellEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GroundswellEffect copy() {
-        return new GroundswellEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
-        Permanent target = (Permanent) game.getPermanent(source.getFirstTarget());
-        if (target != null) {
-            if (watcher != null && watcher.conditionMet()) {
-                target.addPower(4);
-                target.addToughness(4);
-            }
-            else{
-                target.addPower(2);
-                target.addToughness(2);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

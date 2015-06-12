@@ -93,7 +93,7 @@ class ForkEffect extends OneShotEffect {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
             Spell copy = spell.copySpell();
-            copy.getColor().setRed(true);
+            copy.getColor(game).setRed(true);
             copy.setControllerId(controller.getId());
             copy.setCopiedSpell(true);
             game.getStack().push(copy);

@@ -37,14 +37,24 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TABLES_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_USERS_COLUMNS_WIDTH;
 import mage.client.util.MageTableRowSorter;
+import mage.client.util.gui.TableUtil;
 import mage.client.util.audio.AudioManager;
 import mage.remote.MageRemoteException;
 import mage.view.ChatMessage;
@@ -53,6 +63,7 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.RoomUsersView;
 import mage.view.UsersView;
+import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.network.Client;
 
@@ -61,7 +72,9 @@ import org.mage.network.Client;
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class ChatPanel extends javax.swing.JPanel {
-
+    
+    private static final Logger logger = Logger.getLogger(ChatPanel.class);
+    
     private UUID chatId;
     private Client client;
     private final List<String> players = new ArrayList<>();
@@ -120,6 +133,8 @@ public class ChatPanel extends javax.swing.JPanel {
      */
     private ChatType chatType = ChatType.DEFAULT;
 
+    private static final int[] defaultColumnsWidth = {20, 100, 100, 80};
+    
     public enum ChatType {
 
         DEFAULT, GAME, TABLES, TOURNAMENT
@@ -147,6 +162,9 @@ public class ChatPanel extends javax.swing.JPanel {
         jTablePlayers.setBackground(new Color(0, 0, 0, ALPHA));
         jTablePlayers.setForeground(Color.white);
         jTablePlayers.setRowSorter(new MageTableRowSorter(tableModel));
+        
+        TableUtil.setColumnWidthAndOrder(jTablePlayers, defaultColumnsWidth, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
+        
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
@@ -158,6 +176,10 @@ public class ChatPanel extends javax.swing.JPanel {
         if (!addPlayersTab) {
             simplifyComponents();
         }
+    }
+
+    public void cleanUp() {
+        TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);        
     }
 
     public ChatType getChatType() {
@@ -367,16 +389,20 @@ public class ChatPanel extends javax.swing.JPanel {
 
     class TableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{"Players", "Info", "Games", "Connection"};
+        
+        
+        private final String[] columnNames = new String[]{" ","Players", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
+        private Map<String, ImageIcon> flagIconCache = new HashMap<>();
 
         public void loadData(RoomUsersView roomUserInfo) throws MageRemoteException {
 //            RoomUsersView roomUserInfo = roomUserInfoList.iterator().next();
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
-            tcm.getColumn(0).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(2).setHeaderValue(
+            
+            tcm.getColumn(1).setHeaderValue("Players (" + this.players.length + ")");
+            tcm.getColumn(3).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames() +
                     (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads():" (") +
                     " limit: " + roomUserInfo.getNumberMaxGames() + ")");
@@ -398,12 +424,14 @@ public class ChatPanel extends javax.swing.JPanel {
         public Object getValueAt(int arg0, int arg1) {
             switch (arg1) {
                 case 0:
-                    return players[arg0].getUserName();
+                    return getCountryFlagIcon(players[arg0].getFlagName());
                 case 1:
-                    return players[arg0].getInfoState();
+                    return players[arg0].getUserName();
                 case 2:
-                    return players[arg0].getInfoGames();
+                    return players[arg0].getInfoState();
                 case 3:
+                    return players[arg0].getInfoGames();
+                case 4:
                     return players[arg0].getInfoPing();
             }
             return "";
@@ -422,13 +450,32 @@ public class ChatPanel extends javax.swing.JPanel {
 
         @Override
         public Class getColumnClass(int columnIndex) {
-            return String.class;
+            switch (columnIndex) {
+                case 0:
+                    return Icon.class;
+                default:
+                    return String.class;
+            }            
         }
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             return false;
         }
+        
+        private ImageIcon getCountryFlagIcon(String countryCode) {
+            ImageIcon flagIcon = flagIconCache.get(countryCode);
+            if (flagIcon == null) {
+                flagIcon = new javax.swing.ImageIcon(getClass().getResource("/flags/" + countryCode +".png"));
+                if (flagIcon.getImage() == null) {
+                    logger.warn("Country flag resource not found: " + countryCode);
+                } else {
+                    flagIconCache.put(countryCode, flagIcon);
+                }
+            }
+            return flagIcon;
+        }
+        
     }
 
     public void clear() {

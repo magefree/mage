@@ -98,19 +98,23 @@ class CrystalShardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        if (targetCreature != null) {
-            Player player = game.getPlayer(targetCreature.getControllerId());
-            if (player != null) {
-                cost.clearPaid();
-                final StringBuilder sb = new StringBuilder("Pay {1} otherwise ").append(targetCreature.getName()).append(" will be returned to its owner's hand)");
-                if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
-                    cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false);
-                }
-                if (!cost.isPaid()) {
-                    return targetCreature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {        
+            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+            if (targetCreature != null) {
+                Player player = game.getPlayer(targetCreature.getControllerId());
+                if (player != null) {
+                    cost.clearPaid();
+                    final StringBuilder sb = new StringBuilder("Pay {1}? (Otherwise ").append(targetCreature.getName()).append(" will be returned to its owner's hand)");
+                    if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+                        cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false);
+                    }
+                    if (!cost.isPaid()) {
+                        controller.moveCards(targetCreature, Zone.BATTLEFIELD, Zone.HAND, source, game);
+                    }
                 }
             }
+            return true;
         }
         return false;
     }

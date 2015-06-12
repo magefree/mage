@@ -116,6 +116,7 @@ import mage.players.Players;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+import mage.util.GameLog;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
@@ -129,6 +130,8 @@ import org.apache.log4j.Logger;
 
 public abstract class GameImpl implements Game, Serializable {
 
+    private static final int ROLLBACK_TURNS_MAX = 4;
+    
     private static final transient Logger logger = Logger.getLogger(GameImpl.class);
 
     private static final FilterPermanent filterAura = new FilterPermanent();
@@ -155,7 +158,8 @@ public abstract class GameImpl implements Game, Serializable {
     private transient Object customData;
     protected boolean simulation = false;
 
-    protected final UUID id;
+    protected final UUID id;    
+    
     protected boolean ready;
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
@@ -170,6 +174,9 @@ public abstract class GameImpl implements Game, Serializable {
     protected GameState state;
     private transient Stack<Integer> savedStates = new Stack<>();
     protected transient GameStates gameStates = new GameStates();
+    // game states to allow player roll back
+    protected transient Map<Integer, GameState> gameStatesRollBack = new HashMap<>();
+    protected boolean executingRollback;
 
     protected Date startTime;
     protected Date endTime;
@@ -206,7 +213,7 @@ public abstract class GameImpl implements Game, Serializable {
         this.attackOption = attackOption;
         this.state = new GameState();
         this.startLife = startLife;
-        // this.actions = new LinkedList<MageAction>();
+        this.executingRollback = false;
     }
 
     public GameImpl(final GameImpl game) {
@@ -232,7 +239,6 @@ public abstract class GameImpl implements Game, Serializable {
             copyCount++;
             copyTime += (System.currentTimeMillis() - t1);
         }
-//        this.actions = new LinkedList<MageAction>();
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
         this.scopeRelevant = game.scopeRelevant;
@@ -268,7 +274,10 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public GameOptions getOptions() {
-        return gameOptions;
+        if (gameOptions != null) {
+            return gameOptions;
+        }
+        return new GameOptions(); // happens during the first game updates
     }
 
     @Override
@@ -611,22 +620,16 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void start(UUID choosingPlayerId) {
-        start(choosingPlayerId, this.gameOptions != null ? gameOptions : GameOptions.getDefault());
-    }
-
-    @Override
     public void cleanUp() {
         gameCards.clear();
     }
 
     @Override
-    public void start(UUID choosingPlayerId, GameOptions options) {
+    public void start(UUID choosingPlayerId) {
         startTime = new Date();
-        this.gameOptions = options;
         if (state.getPlayers().values().iterator().hasNext()) {
             scorePlayer = state.getPlayers().values().iterator().next();
-            init(choosingPlayerId, options);
+            init(choosingPlayerId);
             play(startingPlayerId);
         }
     }
@@ -731,13 +734,26 @@ public abstract class GameImpl implements Game, Serializable {
     }
     
     private boolean playTurn(Player player) {
-        this.logStartOfTurn(player);
-        if (checkStopOnTurnOption()) {
-            return false;
-        }
-        state.setActivePlayerId(player.getId());
-        player.becomesActivePlayer();
-        state.getTurn().play(this, player.getId());
+        do {
+            if (executingRollback) {
+                executingRollback = false;
+                player = getPlayer(state.getActivePlayerId());
+                for (Player playerObject: getPlayers().values()) {
+                    if (playerObject.isInGame()) {
+                        playerObject.abortReset();
+                    }
+                }
+            } else {
+                state.setActivePlayerId(player.getId());
+                saveRollBackGameState();                
+            }
+            this.logStartOfTurn(player);
+            if (checkStopOnTurnOption()) {
+                return false;
+            }
+            state.getTurn().play(this, player);
+        } while (executingRollback);
+        
         if (isPaused() || gameOver(null)) {
             return false;
         }
@@ -778,7 +794,7 @@ public abstract class GameImpl implements Game, Serializable {
         return false;
     }
 
-    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+    protected void init(UUID choosingPlayerId) {
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
             // init only if match is with timer (>0) and time left was not set yet (== MAX_VALUE).
@@ -1108,12 +1124,20 @@ public abstract class GameImpl implements Game, Serializable {
     
 
     @Override
-    public synchronized void setManaPoolMode(UUID playerId, boolean autoPayment) {
+    public synchronized void setManaPaymentMode(UUID playerId, boolean autoPayment) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
             player.getManaPool().setAutoPayment(autoPayment);
         }
     }
+    
+    @Override
+    public synchronized void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.getManaPool().setAutoPaymentRestricted(autoPaymentRestricted);
+        }
+    }    
 
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
@@ -1151,6 +1175,9 @@ public abstract class GameImpl implements Game, Serializable {
                                 }
                                 // resetPassed should be called if player performs any action
                                 if (player.priority(this)) {
+                                    if(executingRollback()) {
+                                        return;
+                                    }
                                     applyEffects();
                                 }
                                 if (isPaused()) {
@@ -2058,6 +2085,11 @@ public abstract class GameImpl implements Game, Serializable {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
                     if (attachedTo != null) {
                         attachedTo.removeAttachment(perm.getId(), this);
+                    } else {
+                        Player attachedToPlayer = getPlayer(perm.getAttachedTo());
+                        if (attachedToPlayer != null) {
+                            attachedToPlayer.removeAttachment(perm, this);
+                        }
                     }
                 }
                 // check if it's a creature and must be removed from combat
@@ -2100,12 +2132,9 @@ public abstract class GameImpl implements Game, Serializable {
             }
         }
 
-        // Update players in range of
-        for (Player leftPlayer :this.getPlayers().values()) {
-            if (leftPlayer.isInGame()) {
-                leftPlayer.otherPlayerLeftGame(this);
-            }
-        }
+        // 801.2c The particular players within each player‘s range of influence are determined as each turn begins.
+        // So no update of range if influence yet
+
     }
 
     @Override
@@ -2564,6 +2593,51 @@ public abstract class GameImpl implements Game, Serializable {
         }
     }
 
+    @Override
+    public void saveRollBackGameState() {
+        if (gameOptions.rollbackTurnsAllowed) {
+            int toDelete = getTurnNum()- ROLLBACK_TURNS_MAX;
+            if (toDelete > 0 && gameStatesRollBack.containsKey(toDelete)) {
+                gameStatesRollBack.remove(toDelete);
+            }
+            gameStatesRollBack.put(getTurnNum(), state.copy());
+        }
+    }
 
+    @Override
+    public boolean canRollbackTurns(int turnsToRollback) {
+        int turnToGoTo = getTurnNum() - turnsToRollback;
+        return turnToGoTo > 0 && gameStatesRollBack.containsKey(turnToGoTo);
+    }
+
+    @Override
+    public synchronized void rollbackTurns(int turnsToRollback) {
+        if (gameOptions.rollbackTurnsAllowed) {
+            int turnToGoTo = getTurnNum() - turnsToRollback;
+            if (turnToGoTo < 1 || !gameStatesRollBack.containsKey(turnToGoTo)) {
+                informPlayers(GameLog.getPlayerRequestColoredText("Player request: It's not possible to rollback " + turnsToRollback +" turn(s)"));
+            } else {
+                GameState restore = gameStatesRollBack.get(turnToGoTo);        
+                if (restore != null) {
+                    informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
+                    for (Player playerObject: getPlayers().values()) {
+                        if (playerObject.isHuman() && playerObject.isInGame()) {
+                            playerObject.abort();
+                        }
+                    }
+                    state.restoreForRollBack(restore);
+                    // because restore uses the objects without copy each copy the state again
+                    gameStatesRollBack.put(getTurnNum(), state.copy());
+                    executingRollback = true;
+                    fireUpdatePlayersEvent();
+                }
+            }
+        }
+    }
+    
+    @Override
+    public boolean executingRollback() {
+        return executingRollback;
+    }
 
 }

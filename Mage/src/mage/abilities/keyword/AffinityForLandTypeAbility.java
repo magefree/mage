@@ -32,10 +32,8 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.common.AffinityEffect;
-import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -50,12 +48,14 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
     private final FilterControlledPermanent filter;
 
     String text;
+    String landType;
 
     public AffinityForLandTypeAbility(String landType, String text) {
         super(Zone.OUTSIDE, new AffinityEffect(getFilter(landType)));
         this.filter = getFilter(landType);
         setRuleAtTheTop(true);
         this.text = text;
+        this.landType = landType;
     }
 
    private static FilterControlledPermanent getFilter(String landType) {
@@ -78,7 +78,7 @@ public class AffinityForLandTypeAbility extends SimpleStaticAbility implements A
 
     @Override
     public String getRule() {
-        return "Affinity for " + text;
+        return "Affinity for " + text + " <i>(This spell costs 1 less to cast for each " + landType + " you control.)</i>";
     }
 
     @Override

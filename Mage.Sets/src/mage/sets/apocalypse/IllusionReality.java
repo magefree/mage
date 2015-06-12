@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.apocalypse;
 
 import java.util.UUID;
@@ -50,22 +49,16 @@ public class IllusionReality extends SplitCard {
         super(ownerId, 129, "Illusion", "Reality", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}", "{2}{G}", false);
         this.expansionSetCode = "APC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
-
         // Illusion
         // Target spell or permanent becomes the color of your choice until end of turn.
-        getLeftHalfCard().getColor().setBlue(true);
         getLeftHalfCard().getSpellAbility().addEffect(new BecomesColorTargetEffect(Duration.EndOfTurn));
         Target target = new TargetSpellOrPermanent();
         getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Reality
         // Destroy target artifact.
-        getRightHalfCard().getColor().setGreen(true);
         getRightHalfCard().getSpellAbility().addTarget(new TargetArtifactPermanent());
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
-
     }
 
     public IllusionReality(final IllusionReality card) {

@@ -95,7 +95,7 @@ class AbominationTriggeredAbility extends TriggeredAbilityImpl {
             Permanent blocked = game.getPermanent(event.getTargetId());
             Permanent abomination = game.getPermanent(sourceId);
             if (blocker != null && blocker != abomination
-                    && blocker.getColor().isWhite()
+                    && blocker.getColor(game).isWhite()
                     && blocked == abomination) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getSourceId()));
@@ -103,14 +103,14 @@ class AbominationTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
             if (blocker != null && blocker == abomination
-                    && game.getPermanent(event.getTargetId()).getColor().isWhite()) {
+                    && game.getPermanent(event.getTargetId()).getColor(game).isWhite()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     return true;
                 }
             }
             if (blocker != null && blocker != abomination
-                    && blocker.getColor().isGreen()
+                    && blocker.getColor(game).isGreen()
                     && blocked == abomination) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getSourceId()));
@@ -118,7 +118,7 @@ class AbominationTriggeredAbility extends TriggeredAbilityImpl {
                 }
             }
             if (blocker != null && blocker == abomination
-                    && game.getPermanent(event.getTargetId()).getColor().isGreen()) {
+                    && game.getPermanent(event.getTargetId()).getColor(game).isGreen()) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     return true;

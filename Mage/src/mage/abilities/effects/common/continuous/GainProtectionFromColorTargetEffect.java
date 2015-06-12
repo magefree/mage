@@ -51,7 +51,7 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
 
     public GainProtectionFromColorTargetEffect(Duration duration) {
         super(new ProtectionAbility(new FilterCard()), duration);
-        choice = new ChoiceColor();
+        choice = new ChoiceColor(true);
     }
 
     public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {

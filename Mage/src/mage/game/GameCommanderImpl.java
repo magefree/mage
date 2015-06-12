@@ -75,7 +75,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     }
 
     @Override
-    protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
+    protected void init(UUID choosingPlayerId) {
         Ability ability = new SimpleStaticAbility(Zone.COMMAND, new InfoEffect("Commander effects"));
         //Move commander to command zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -83,9 +83,10 @@ public abstract class GameCommanderImpl extends GameImpl {
             if (player != null){
                 if (player.getSideboard().size() > 0){
                     Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
-                    if (commander != null) {
+                    if (commander != null) {                        
                         player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
+                        commander.getAbilities().setControllerId(player.getId());
                         ability.addEffect(new CommanderReplacementEffect(commander.getId(), alsoHand, alsoLibrary));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
@@ -100,7 +101,7 @@ public abstract class GameCommanderImpl extends GameImpl {
 
         }
         this.getState().addAbility(ability, null);
-        super.init(choosingPlayerId, gameOptions);
+        super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
             state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
         }

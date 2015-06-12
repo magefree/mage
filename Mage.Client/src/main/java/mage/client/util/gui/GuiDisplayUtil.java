@@ -13,7 +13,6 @@ import org.mage.card.arcane.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import mage.client.dialog.MageDialog;
 import mage.constants.Rarity;
 
 public class GuiDisplayUtil {

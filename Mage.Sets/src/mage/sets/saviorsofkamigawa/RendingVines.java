@@ -52,7 +52,6 @@ public class RendingVines extends CardImpl {
         this.expansionSetCode = "SOK";
         this.subtype.add("Arcane");
 
-
         // Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new RendingVinesEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));

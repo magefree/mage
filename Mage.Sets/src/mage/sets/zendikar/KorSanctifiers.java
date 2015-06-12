@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
@@ -38,9 +37,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,13 +45,6 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class KorSanctifiers extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.ENCHANTMENT)));
-    }
 
     public KorSanctifiers (UUID ownerId) {
         super(ownerId, 22, "Kor Sanctifiers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -68,10 +58,9 @@ public class KorSanctifiers extends CardImpl {
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.addAbility(new KickerAbility("{W}"));
 
-
         // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactOrEnchantmentPermanent()));
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment."));
     }
 
@@ -83,5 +72,4 @@ public class KorSanctifiers extends CardImpl {
     public KorSanctifiers copy() {
         return new KorSanctifiers(this);
     }
-
 }

@@ -135,22 +135,22 @@ class PaintersServantEffect extends ContinuousEffectImpl {
             }
             String colorString = color.toString();
             for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-                setObjectColor(perm, colorString);
+                setObjectColor(perm, colorString, game);
             }
             // Stack
             for (MageObject object : game.getStack()) {
                 if (object instanceof Spell) {
-                    setObjectColor(object, colorString);
+                    setObjectColor(object, colorString, game);
                 }
             }
             // Exile
             for (Card card : game.getExile().getAllCards(game)) {
-                setObjectColor(card, colorString);
+                setCardColor(card, colorString, game);
             }
             // Command
             for (CommandObject commandObject : game.getState().getCommand()) {
                 if (commandObject instanceof Commander) {
-                    setObjectColor(commandObject, colorString);
+                    setObjectColor(commandObject, colorString, game);
                 }
             }
 
@@ -159,15 +159,15 @@ class PaintersServantEffect extends ContinuousEffectImpl {
                 if (player != null) {
                     // Hand
                     for (Card card : player.getHand().getCards(game)) {
-                        setObjectColor(card, colorString);
+                        setCardColor(card, colorString, game);
                     }
                     // Library
                     for (Card card : player.getLibrary().getCards(game)) {
-                        setObjectColor(card, colorString);
+                        setCardColor(card, colorString, game);
                     }
                     // Graveyard
                     for (Card card : player.getGraveyard().getCards(game)) {
-                        setObjectColor(card, colorString);
+                        setCardColor(card, colorString, game);
                     }
                 }
             }
@@ -175,23 +175,44 @@ class PaintersServantEffect extends ContinuousEffectImpl {
         }
         return false;
     }
-
-    protected static void setObjectColor(MageObject obj, String colorString) {
-        switch (colorString) {
+    
+    protected static void setCardColor(Card card, String colorString, Game game) {
+        ObjectColor color = game.getState().getCreateCardAttribute(card).getColor();
+        switch (colorString) {            
             case "W":
-                obj.getColor().setWhite(true);
+                color.setWhite(true);
                 break;
             case "B":
-                obj.getColor().setBlack(true);
+                color.setBlack(true);
                 break;
             case "U":
-                obj.getColor().setBlue(true);
+                color.setBlue(true);
                 break;
             case "G":
-                obj.getColor().setGreen(true);
+                color.setGreen(true);
                 break;
             case "R":
-                obj.getColor().setRed(true);
+                color.setRed(true);
+                break;
+        }
+    }
+
+    protected static void setObjectColor(MageObject obj, String colorString, Game game) {
+        switch (colorString) {
+            case "W":
+                obj.getColor(game).setWhite(true);
+                break;
+            case "B":
+                obj.getColor(game).setBlack(true);
+                break;
+            case "U":
+                obj.getColor(game).setBlue(true);
+                break;
+            case "G":
+                obj.getColor(game).setGreen(true);
+                break;
+            case "R":
+                obj.getColor(game).setRed(true);
                 break;
         }
     }

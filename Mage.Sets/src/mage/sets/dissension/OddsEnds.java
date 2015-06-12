@@ -65,21 +65,13 @@ public class OddsEnds extends SplitCard {
         super(ownerId, 153, "Odds", "Ends", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}{R}", "{3}{R}{W}", false);
         this.expansionSetCode = "DIS";
 
-        this.color.setBlue(true);
-        this.color.setRed(true);
-        this.color.setWhite(true);
-
         // Odds
         // Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
-        getLeftHalfCard().getColor().setBlue(true);
-        getLeftHalfCard().getColor().setRed(true);
         getLeftHalfCard().getSpellAbility().addEffect(new OddsEffect());
         getLeftHalfCard().getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Ends
         // Target player sacrifices two attacking creatures.
-        getRightHalfCard().getColor().setRed(true);
-        getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterAttackingCreature(), 2, "Target player"));
         getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer());
 

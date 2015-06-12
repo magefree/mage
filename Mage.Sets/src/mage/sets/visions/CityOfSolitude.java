@@ -51,7 +51,6 @@ public class CityOfSolitude extends CardImpl {
         super(ownerId, 52, "City of Solitude", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "VIS";
 
-
         // Players can cast spells and activate abilities only during their own turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityOfSolitudeEffect()));
     }
@@ -85,11 +84,6 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return !game.getActivePlayerId().equals(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

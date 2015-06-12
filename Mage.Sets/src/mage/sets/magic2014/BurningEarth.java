@@ -34,7 +34,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
-import mage.filter.common.FilterNonlandPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SupertypePredicate;
 
 /**
  *
@@ -42,16 +44,20 @@ import mage.filter.common.FilterNonlandPermanent;
  */
 public class BurningEarth extends CardImpl {
 
+    private final static FilterLandPermanent filter = new FilterLandPermanent("a player taps a nonbasic land");
+    
+    static {
+        filter.add(Predicates.not(new SupertypePredicate("Basic")));
+    }
+    
     public BurningEarth(UUID ownerId) {
         super(ownerId, 130, "Burning Earth", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "M14";
 
-
         // Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.
         this.addAbility(new TapForManaAllTriggeredAbility(
                 new DamageTargetEffect(1, true, "that player"),
-                new FilterNonlandPermanent("a player taps a nonbasic land"),
-                SetTargetPointer.PLAYER));
+                filter, SetTargetPointer.PLAYER));
     }
 
     public BurningEarth(final BurningEarth card) {

@@ -28,7 +28,6 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -113,7 +112,7 @@ class ShiftingSkyEffect extends OneShotEffect {
                 Player p = game.getPlayer(playerId);
                 if (p != null) {
                     for (Permanent chosen : game.getBattlefield().getAllActivePermanents(filter, playerId, game)) {
-                        setObject(chosen, colorString);
+                        setObject(chosen, colorString, game);
                     }
                 }
             }
@@ -127,22 +126,22 @@ class ShiftingSkyEffect extends OneShotEffect {
         return new ShiftingSkyEffect(this);
     }
 
-    private void setObject(Permanent chosen, String colorString) {
+    private void setObject(Permanent chosen, String colorString, Game game) {
        switch (colorString) {
             case "W":
-                chosen.getColor().setWhite(true);
+                chosen.getColor(game).setWhite(true);
                 break;
             case "B":
-                chosen.getColor().setBlack(true);
+                chosen.getColor(game).setBlack(true);
                 break;
             case "U":
-                chosen.getColor().setBlue(true);
+                chosen.getColor(game).setBlue(true);
                 break;
             case "G":
-                chosen.getColor().setGreen(true);
+                chosen.getColor(game).setGreen(true);
                 break;
             case "R":
-                chosen.getColor().setRed(true);
+                chosen.getColor(game).setRed(true);
                 break;
         }
     }

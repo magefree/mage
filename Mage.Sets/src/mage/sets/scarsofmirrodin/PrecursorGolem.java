@@ -46,6 +46,7 @@ import java.util.UUID;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.filter.FilterInPlay;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.GolemToken;
 import mage.util.TargetAddress;
 
 /**
@@ -139,7 +140,6 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems";
     }
 }
-
 
 class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
 

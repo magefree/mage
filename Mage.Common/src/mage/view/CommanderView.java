@@ -40,7 +40,7 @@ import mage.game.command.Commander;
 public class CommanderView extends CardView implements CommandObjectView, Serializable{
 
     public CommanderView(Commander commander, Card sourceCard, Game game) {
-        super(sourceCard, game, null, false);
+        super(sourceCard, game, false);
         this.mageObjectType = MageObjectType.COMMANDER;
     }   
 }

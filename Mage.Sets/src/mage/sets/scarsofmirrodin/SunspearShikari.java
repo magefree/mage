@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -47,23 +48,23 @@ import mage.constants.Zone;
  */
 public class SunspearShikari extends CardImpl {
 
-    private static final String rule1 = "As long as {this} is equipped, it has first strike";
-    private static final String rule2 = "As long as {this} is equipped, it has lifelink";
-
     public SunspearShikari(UUID ownerId) {
         super(ownerId, 23, "Sunspear Shikari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "SOM";
         this.subtype.add("Cat");
         this.subtype.add("Soldier");
 
-        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), EquippedCondition.getInstance(), rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        // As long as Sunspear Shikari is equipped, it has first strike and lifelink.
+        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), 
+                EquippedCondition.getInstance(), "As long as {this} is equipped, it has first strike");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), 
+                EquippedCondition.getInstance(), "and lifelink");
+        ability.addEffect(effect2);
+        this.addAbility(ability);
     }
 
     public SunspearShikari(final SunspearShikari card) {

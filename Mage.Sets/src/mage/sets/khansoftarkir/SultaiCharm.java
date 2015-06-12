@@ -57,7 +57,6 @@ public class SultaiCharm extends CardImpl {
         super(ownerId, 204, "Sultai Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{G}{U}");
         this.expansionSetCode = "KTK";
 
-
         // Choose one -
         // <strong>*</strong> Destroy target monocolored creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
@@ -73,7 +72,6 @@ public class SultaiCharm extends CardImpl {
         mode = new Mode();
         mode.getEffects().add(new DrawDiscardControllerEffect(2,1));
         this.getSpellAbility().addMode(mode);
-
     }
 
     public SultaiCharm(final SultaiCharm card) {

@@ -72,6 +72,7 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect {
         super(effect);
         this.forceChange = effect.forceChange;
         this.onlyOneTarget = effect.onlyOneTarget;
+        this.filterNewTarget = effect.filterNewTarget;
     }
 
     @Override

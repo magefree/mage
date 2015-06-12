@@ -51,6 +51,7 @@ public class Silence extends CardImpl {
         super(ownerId, 31, "Silence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "M10";
 
+        // Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
         this.getSpellAbility().addEffect(new SilenceEffect());
     }
 
@@ -68,7 +69,7 @@ class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     public SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Your opponents can't cast spells this turn";
+        staticText = "Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>";
     }
 
     public SilenceEffect(final SilenceEffect effect) {
@@ -95,11 +96,13 @@ class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(source.getControllerId()).contains(event.getPlayerId());
     }
 
 }

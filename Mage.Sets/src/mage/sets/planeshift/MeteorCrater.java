@@ -178,7 +178,7 @@ class MeteorCraterEffect extends ManaEffect {
         List<Permanent> controlledPermanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent permanent : controlledPermanents) {
-            ObjectColor color = permanent.getColor();
+            ObjectColor color = permanent.getColor(game);
             if (color.isBlack()) {
                 types.add(Mana.BlackMana);
             }

@@ -54,9 +54,11 @@ public class WurmcoilEngine extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        
+        // Deathtouch, lifelink
         this.addAbility(DeathtouchAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
+        
+        // When Wurmcoil Engine dies, put a 3/3 colorless Wurm artifact creature token with deathtouch and a 3/3 colorless Wurm artifact creature token with lifelink onto the battlefield.        
         Ability ability = new DiesTriggeredAbility(new CreateTokenEffect(new Wurm1Token(expansionSetCode)), false);
         ability.addEffect(new CreateTokenEffect(new Wurm2Token(expansionSetCode)));
         this.addAbility(ability);
