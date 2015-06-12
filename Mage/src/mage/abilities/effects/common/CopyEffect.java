@@ -40,6 +40,7 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -56,6 +57,7 @@ public class CopyEffect extends ContinuousEffectImpl {
      * Object we copy from
      */
     private MageObject target;
+    
     private UUID sourceId;
     private ApplyToPermanent applier;
     
@@ -93,9 +95,14 @@ public class CopyEffect extends ContinuousEffectImpl {
             permanent = game.getPermanent(this.sourceId);
         }
         if (permanent == null) {
-            discard();
-            return false;
+            permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
+            // As long as the permanent is still in the LKI continue to copy to get triggered abilities to TriggeredAbilites for dies events.
+            if (permanent == null) {
+                discard();
+                return false;
+            }
         }
+        permanent.setCopy(true);
         permanent.setName(target.getName());
         permanent.getColor(game).setColor(target.getColor(game));
         permanent.getManaCost().clear();
@@ -134,9 +141,7 @@ public class CopyEffect extends ContinuousEffectImpl {
         } else if (target instanceof PermanentToken || target instanceof Card) {
             permanent.setCardNumber(((Card) target).getCardNumber());
             permanent.setExpansionSetCode(((Card) target).getExpansionSetCode());
-        }
-
-        permanent.setCopy(true);
+        }        
         return true;
     }
 

@@ -68,7 +68,8 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     protected boolean discarded = false; // for manual effect discard
     protected boolean affectedObjectsSet = false;
     protected List<MageObjectReference> affectedObjectList = new ArrayList<>();
-
+    protected boolean temporary = false;
+    
     // until your next turn
     protected int startingTurn;
     protected UUID startingControllerId;
@@ -96,6 +97,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.discarded = effect.discarded;
         this.affectedObjectsSet = effect.affectedObjectsSet;
         this.affectedObjectList.addAll(effect.affectedObjectList); 
+        this.temporary = effect.temporary;
         this.startingTurn = effect.startingTurn;
         this.startingControllerId = effect.startingControllerId;
     }
@@ -232,6 +234,20 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public List<MageObjectReference> getAffectedObjects() {
         return affectedObjectList;
+    }
+
+    /**
+     * Returns the status if the effect is temporary added to the ContinuousEffects
+     * @return 
+     */
+    @Override
+    public boolean isTemporary() {
+        return temporary;
+    }
+
+    @Override
+    public void setTemporary(boolean temporary) {
+        this.temporary = temporary;
     }
 
 }
