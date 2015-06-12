@@ -28,13 +28,10 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
-import mage.abilities.effects.common.DamagePlayersEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 
@@ -45,8 +42,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -75,8 +72,7 @@ public class Repercussion extends CardImpl {
 class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     
     static final String PLAYER_DAMAGE_AMOUNT_KEY = "playerDamage";
-    
-    private int count;
+    static final String TRIGGERING_CREATURE_KEY = "triggeringCreature";
     
     public RepercussionTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -93,9 +89,10 @@ class RepercussionTriggeredAbility extends TriggeredAbilityImpl {
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject eventSource = game.getObject(event.getSourceId());
-        this.getEffects().get(0).setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
-        this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(eventSource.getId())));
+        for(Effect effect : getEffects()) {
+            effect.setValue(PLAYER_DAMAGE_AMOUNT_KEY, event.getAmount());
+            effect.setValue(TRIGGERING_CREATURE_KEY, new MageObjectReference(event.getTargetId(), game));
+        }
         return true;
     }
     
@@ -123,13 +120,16 @@ class RepercussionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer playerDamage = (Integer)this.getValue(RepercussionTriggeredAbility.PLAYER_DAMAGE_AMOUNT_KEY);
-        UUID targetId = this.targetPointer.getFirst(game, source);
-        if (playerDamage != null && targetId != null) {
-            Player player = game.getPlayer(targetId);
-            if (player != null) {
+        MageObjectReference mor = (MageObjectReference)this.getValue(RepercussionTriggeredAbility.TRIGGERING_CREATURE_KEY);        
+        if (playerDamage != null && mor != null) {
+            Permanent creature = mor.getPermanentOrLKIBattlefield(game);
+            if (creature != null) {
+                Player player = game.getPlayer(creature.getControllerId());
+                if (player != null) {
                     player.damage(playerDamage, source.getSourceId(), game, false, true);
-                    return true;
+                }
             }
+            return true;
         }
         return false;
     }
