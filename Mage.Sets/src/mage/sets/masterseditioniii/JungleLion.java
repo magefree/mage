@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.masterseditioniii;
 
 import java.util.UUID;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
+ */
+public class JungleLion extends mage.sets.portal.JungleLion {
+
+    public JungleLion(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+        this.cardNumber = 125;
+        this.expansionSetCode = "ME3";
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public JungleLion(final JungleLion card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public JungleLion copy() {
+        return new JungleLion(this);
     }
 }

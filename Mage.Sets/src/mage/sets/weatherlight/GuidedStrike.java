@@ -25,28 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.weatherlight;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class GuidedStrike extends CardImpl {
+
+    public GuidedStrike(UUID ownerId) {
+        super(ownerId, 132, "Guided Strike", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "WTH";
+
+        // Target creature gets +1/+0 and gains first strike until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
+        effect.setText("Target creature gets +1/+0");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains first strike until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public GuidedStrike(final GuidedStrike card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public GuidedStrike copy() {
+        return new GuidedStrike(this);
     }
 }

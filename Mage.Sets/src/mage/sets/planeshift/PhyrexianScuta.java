@@ -25,28 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.KickerAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.counters.CounterType;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class PhyrexianScuta extends CardImpl {
+
+    public PhyrexianScuta(UUID ownerId) {
+        super(ownerId, 51, "Phyrexian Scuta", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Zombie");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Kicker-Pay 3 life.
+        this.addAbility(new KickerAbility(new PayLifeCost(3)));
+        // If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.getInstance(),
+            true, "If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public PhyrexianScuta(final PhyrexianScuta card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public PhyrexianScuta copy() {
+        return new PhyrexianScuta(this);
     }
 }

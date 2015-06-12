@@ -25,28 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.alliances;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class YavimayaAnts extends CardImpl {
+
+    public YavimayaAnts(UUID ownerId) {
+        super(ownerId, 93, "Yavimaya Ants", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "ALL";
+        this.subtype.add("Insect");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(1);
+
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Cumulative upkeep {G}{G}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}{G}")));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public YavimayaAnts(final YavimayaAnts card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public YavimayaAnts copy() {
+        return new YavimayaAnts(this);
     }
 }

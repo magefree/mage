@@ -34,21 +34,21 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class GoblinGrenade extends mage.sets.magic2012.GoblinGrenade {
+public class GoblinGrenade1 extends mage.sets.magic2012.GoblinGrenade {
 
-    public GoblinGrenade(UUID ownerId) {
+    public GoblinGrenade1(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 114;
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.COMMON;
     }
 
-    public GoblinGrenade(final GoblinGrenade card) {
+    public GoblinGrenade1(final GoblinGrenade1 card) {
         super(card);
     }
 
     @Override
-    public GoblinGrenade copy() {
-        return new GoblinGrenade(this);
+    public GoblinGrenade1 copy() {
+        return new GoblinGrenade1(this);
     }
 }

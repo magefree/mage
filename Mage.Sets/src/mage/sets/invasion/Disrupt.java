@@ -25,28 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.invasion;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class Disrupt extends CardImpl {
+
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public Disrupt(UUID ownerId) {
+        super(ownerId, 51, "Disrupt", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "INV";
+
+        // Counter target instant or sorcery spell unless its controller pays {1}.
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+    }
+
+    public Disrupt(final Disrupt card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public Disrupt copy() {
+        return new Disrupt(this);
     }
 }

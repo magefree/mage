@@ -25,28 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
+ * @author North
  */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+public class GoblinGrenade3 extends mage.sets.magic2012.GoblinGrenade {
 
-    public IcatianJavelineers(UUID ownerId) {
+    public GoblinGrenade3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+        this.cardNumber = 116;
+        this.expansionSetCode = "FEM";
+        this.rarity = Rarity.COMMON;
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public GoblinGrenade3(final GoblinGrenade3 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public GoblinGrenade3 copy() {
+        return new GoblinGrenade3(this);
     }
 }

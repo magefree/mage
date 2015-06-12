@@ -25,28 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.portal;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class FireImp extends CardImpl {
+
+    public FireImp(UUID ownerId) {
+        super(ownerId, 131, "Fire Imp", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "POR";
+        this.subtype.add("Imp");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // When Fire Imp enters the battlefield, it deals 2 damage to target creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(2), false);
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public FireImp(final FireImp card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public FireImp copy() {
+        return new FireImp(this);
     }
 }

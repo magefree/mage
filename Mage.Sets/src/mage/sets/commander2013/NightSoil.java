@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class NightSoil extends mage.sets.fallenempires.NightSoil {
+public class NightSoil extends mage.sets.fallenempires.NightSoil1 {
 
     public NightSoil(UUID ownerId) {
         super(ownerId);

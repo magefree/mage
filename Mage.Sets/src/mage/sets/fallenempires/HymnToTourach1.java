@@ -25,28 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author jonubuu
  */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+public class HymnToTourach1 extends CardImpl {
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+    public HymnToTourach1(UUID ownerId) {
+        super(ownerId, 12, "Hymn to Tourach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
+        this.expansionSetCode = "FEM";
+
+
+        // Target player discards two cards at random.
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(2, true));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public HymnToTourach1(final HymnToTourach1 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public HymnToTourach1 copy() {
+        return new HymnToTourach1(this);
     }
 }

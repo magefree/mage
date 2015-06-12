@@ -25,28 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.portalsecondage;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.EchoAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class OgreArsonist extends CardImpl {
+
+    public OgreArsonist(UUID ownerId) {
+        super(ownerId, 110, "Ogre Arsonist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        this.expansionSetCode = "PO2";
+        this.subtype.add("Ogre");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Ogre Arsonist enters the battlefield, destroy target land.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(ability);
+
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public OgreArsonist(final OgreArsonist card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public OgreArsonist copy() {
+        return new OgreArsonist(this);
     }
 }

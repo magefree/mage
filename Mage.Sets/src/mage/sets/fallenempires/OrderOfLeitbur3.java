@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
+ */
+public class OrderOfLeitbur3 extends mage.sets.mastersedition.OrderOfLeitbur {
+
+    public OrderOfLeitbur3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+        this.cardNumber = 165;
+        this.expansionSetCode = "FEM";
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public OrderOfLeitbur3(final OrderOfLeitbur3 card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public OrderOfLeitbur3 copy() {
+        return new OrderOfLeitbur3(this);
     }
 }

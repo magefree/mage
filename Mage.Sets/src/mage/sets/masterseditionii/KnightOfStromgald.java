@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
+ */
+public class KnightOfStromgald extends mage.sets.iceage.KnightOfStromgald {
+
+    public KnightOfStromgald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+        this.cardNumber = 99;
+        this.expansionSetCode = "ME2";
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public KnightOfStromgald(final KnightOfStromgald card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public KnightOfStromgald copy() {
+        return new KnightOfStromgald(this);
     }
 }

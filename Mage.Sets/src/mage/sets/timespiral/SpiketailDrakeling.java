@@ -25,28 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class SpiketailDrakeling extends CardImpl {
+
+    public SpiketailDrakeling(UUID ownerId) {
+        super(ownerId, 80, "Spiketail Drakeling", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Drake");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Sacrifice Spiketail Drakeling: Counter target spell unless its controller pays {2}.
+         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(2)), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());
+        this.addAbility(ability);
+
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public SpiketailDrakeling(final SpiketailDrakeling card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public SpiketailDrakeling copy() {
+        return new SpiketailDrakeling(this);
     }
 }

@@ -25,28 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.portalthreekingdoms;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class FireAmbush extends CardImpl {
+
+    public FireAmbush(UUID ownerId) {
+        super(ownerId, 111, "Fire Ambush", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
+        this.expansionSetCode = "PTK";
+
+        // Fire Ambush deals 3 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public FireAmbush(final FireAmbush card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public FireAmbush copy() {
+        return new FireAmbush(this);
     }
 }

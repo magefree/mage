@@ -25,28 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.portal;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class MercenaryKnight extends CardImpl {
+
+    public MercenaryKnight(UUID ownerId) {
+        super(ownerId, 22, "Mercenary Knight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "POR";
+        this.subtype.add("Human");
+        this.subtype.add("Mercenary");
+        this.subtype.add("Knight");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Mercenary Knight enters the battlefield, sacrifice it unless you discard a creature card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public MercenaryKnight(final MercenaryKnight card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public MercenaryKnight copy() {
+        return new MercenaryKnight(this);
     }
 }

@@ -25,28 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.CumulativeUpkeepAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class SoldeviSimulacrum extends CardImpl {
+
+    public SoldeviSimulacrum(UUID ownerId) {
+        super(ownerId, 222, "Soldevi Simulacrum", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(4);
+
+        // Cumulative upkeep {1}
+        this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+        // {1}: Soldevi Simulacrum gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public SoldeviSimulacrum(final SoldeviSimulacrum card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public SoldeviSimulacrum copy() {
+        return new SoldeviSimulacrum(this);
     }
 }

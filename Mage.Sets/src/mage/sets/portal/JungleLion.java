@@ -25,28 +25,39 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.portal;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.CantBlockAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class JungleLion extends CardImpl {
+
+    public JungleLion(UUID ownerId) {
+        super(ownerId, 96, "Jungle Lion", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "POR";
+        this.subtype.add("Cat");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Jungle Lion can't block.
+        this.addAbility(new CantBlockAbility());
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public JungleLion(final JungleLion card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public JungleLion copy() {
+        return new JungleLion(this);
     }
 }

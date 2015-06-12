@@ -25,28 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.iceage;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class OrcishCannoneers extends CardImpl {
+
+    public OrcishCannoneers(UUID ownerId) {
+        super(ownerId, 205, "Orcish Cannoneers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}{R}");
+        this.expansionSetCode = "ICE";
+        this.subtype.add("Orc");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // {tap}: Orcish Cannoneers deals 2 damage to target creature or player and 3 damage to you.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());                                                                                         ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addEffect(new DamageControllerEffect(3));
+        this.addAbility(ability);
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public OrcishCannoneers(final OrcishCannoneers card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public OrcishCannoneers copy() {
+        return new OrcishCannoneers(this);
     }
 }

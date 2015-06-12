@@ -25,28 +25,38 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.elspethvskiora;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
- */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
+ * @author LoneFox
 
-    public IcatianJavelineers(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
-        this.expansionSetCode = "DDO";
+ */
+public class Symbiosis extends CardImpl {
+
+    public Symbiosis(UUID ownerId) {
+        super(ownerId, 275, "Symbiosis", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "USG";
+
+        // Two target creatures each get +2/+2 until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    public Symbiosis(final Symbiosis card) {
         super(card);
     }
 
     @Override
-    public IcatianJavelineers copy() {
-        return new IcatianJavelineers(this);
+    public Symbiosis copy() {
+        return new Symbiosis(this);
     }
 }
