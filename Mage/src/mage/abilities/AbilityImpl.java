@@ -247,7 +247,7 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
         game.applyEffects();
-        
+
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */

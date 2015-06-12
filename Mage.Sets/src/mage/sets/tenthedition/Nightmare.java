@@ -61,7 +61,11 @@ public class Nightmare extends CardImpl {
 
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+        
+        // Flying        
         this.addAbility(FlyingAbility.getInstance());
+        
+        // Nightmare's power and toughness are each equal to the number of Swamps you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 

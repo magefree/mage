@@ -1383,11 +1383,12 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
+    public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
         newAbility.init(this);
         state.addDelayedTriggeredAbility(newAbility);
+        return newAbility.getId();
     }
 
     /**
