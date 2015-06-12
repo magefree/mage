@@ -253,7 +253,7 @@ public interface Game extends MageItem, Serializable {
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
     void addTriggeredAbility(TriggeredAbility ability);
-    void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
+    UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
     void applyEffects();
     boolean checkStateAndTriggered();
     void playPriority(UUID activePlayerId, boolean resuming);
