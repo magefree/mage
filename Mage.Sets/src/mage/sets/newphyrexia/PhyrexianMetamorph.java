@@ -36,8 +36,10 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -54,7 +56,15 @@ import mage.util.functions.ApplyToPermanent;
  * @author Loki
  */
 public class PhyrexianMetamorph extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
 
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
+    }
+    
     public PhyrexianMetamorph (UUID ownerId) {
         super(ownerId, 42, "Phyrexian Metamorph", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{UP}");
         this.expansionSetCode = "NPH";
@@ -63,10 +73,21 @@ public class PhyrexianMetamorph extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new PhyrexianMetamorphEffect(),
-                "You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types",
-                true));
+        ApplyToPermanent phyrexianMetamorphApplier = new ApplyToPermanent() {
+            @Override
+            public Boolean apply(Game game, Permanent permanent) {
+                if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
+                    permanent.getCardType().add(CardType.ARTIFACT);
+                }
+                return true;
+            }
+        };
+        
+        // {UP} ( can be paid with either {U} or 2 life.)
+        // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
+        Effect effect = new CopyPermanentEffect(filter, phyrexianMetamorphApplier);
+        effect.setText("You may have {this} enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
         this.addAbility(ability);
     }
 
@@ -77,59 +98,6 @@ public class PhyrexianMetamorph extends CardImpl {
     @Override
     public PhyrexianMetamorph copy() {
         return new PhyrexianMetamorph(this);
-    }
-
-}
-
-class PhyrexianMetamorphEffect extends OneShotEffect {
-
-    private static final FilterPermanent filter = new FilterPermanent("artifact or creature");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
-    }
-
-    public PhyrexianMetamorphEffect() {
-        super(Outcome.Copy);
-    }
-
-    public PhyrexianMetamorphEffect(final PhyrexianMetamorphEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        if (player != null && sourcePermanent != null) {
-            Target target = new TargetPermanent(filter);
-            target.setNotTarget(true);
-            if (target.canChoose(source.getControllerId(), game)) {
-                player.choose(Outcome.Copy, target, source.getSourceId(), game);
-                Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
-                if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new ApplyToPermanent() {
-                        @Override
-                        public Boolean apply(Game game, Permanent permanent) {
-                            if (!permanent.getCardType().contains(CardType.ARTIFACT)) {
-                                permanent.getCardType().add(CardType.ARTIFACT);
-                            }
-                            return true;
-                        }
-                    });
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public PhyrexianMetamorphEffect copy() {
-        return new PhyrexianMetamorphEffect(this);
     }
 
 }

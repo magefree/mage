@@ -81,19 +81,12 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
-            affectedObjectList.add(new MageObjectReference(sourceId, game));
-        }
+        affectedObjectList.add(new MageObjectReference(getSourceId(), game));
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent;
-        if (affectedObjectsSet) {
-            permanent = affectedObjectList.get(0).getPermanent(game);
-        } else {
-            permanent = game.getPermanent(this.sourceId);
-        }
+        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
         if (permanent == null) {
             permanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD, source.getSourceObjectZoneChangeCounter());
             // As long as the permanent is still in the LKI continue to copy to get triggered abilities to TriggeredAbilites for dies events.
