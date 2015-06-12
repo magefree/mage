@@ -525,5 +525,50 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertPermanentCount(playerB, "Butcher Ghoul", 1);
         assertPowerToughness(playerB,  "Butcher Ghoul", 2, 2);
 
+    }
+
+    /**
+     * 12:29: Attacker: Wurmcoil Engine [466] (6/6) blocked by Wurmcoil Engine
+     * [4ed] (6/6) 
+     * 12:29: yespair gains 6 life 
+     * 12:29: HipSomHap gains 6 life
+     * 12:29: Wurmcoil Engine [4ed] died 
+     * 12:29: Ability triggers: Wurmcoil Engine [4ed] - When Wurmcoil Engine [4ed] dies, put a a 3/3 colorless
+     * Wurm artifact creature token with deathtouch onto the battlefield. Put a
+     * a 3/3 colorless Wurm artifact creature token with lifelink onto the
+     * battlefield. 
+     * 12:29: Phantasmal Image [466] died 
+     * 12:29: HipSomHap puts a Wurm [7d0] token onto the battlefield 
+     * 12:29: HipSomHap puts a Wurm [186] token onto the battlefield
+     *
+     * To the best of my knowledge, the Phantasmal Image [466], which entered
+     * the battlefield as a Wurmcoil Engine, should grant tokens through the
+     * Dies-trigger as well, right?
+     */
+
+    @Test
+    public void testDiesTriggered2() {
+        addCard(Zone.BATTLEFIELD, playerB, "Wurmcoil Engine");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerB, "Wurmcoil Engine");
+
+        attack(2, playerB, "Wurmcoil Engine");
+        block(2, playerA, "Wurmcoil Engine", "Wurmcoil Engine");
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 26);
+        assertLife(playerA, 26);
+
+        assertGraveyardCount(playerA, "Phantasmal Image", 1);
+        assertGraveyardCount(playerB, "Wurmcoil Engine", 1);
+
+        assertPermanentCount(playerA, "Wurm", 2);
+        assertPermanentCount(playerB, "Wurm", 2);
+
     }    
 }

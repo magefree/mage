@@ -108,9 +108,11 @@ public class CloneTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 6);
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
+        // Target creature you control gets +1/+1 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
         addCard(Zone.HAND, playerB, "Ranger's Guile");
 
         addCard(Zone.HAND, playerA, "Clone");
+        // Return target nonland permanent to its owner's hand.
         addCard(Zone.HAND, playerA, "Disperse");
 
         addCard(Zone.BATTLEFIELD, playerB, "Nightmare", 1);
