@@ -51,7 +51,7 @@ public class JoinTableDialog extends MageDialog {
     public JoinTableDialog() {
         initComponents();
         newPlayerPanel.showLevel(false);
-        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, ""));
+        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, ""));
     }
 
     public void showDialog(UUID roomId, UUID tableId, boolean isTournament, boolean isLimited) {
@@ -148,7 +148,7 @@ public class JoinTableDialog extends MageDialog {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         Session session = MageFrame.getSession();
         try {
-            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, txtPassword.getText());
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, txtPassword.getText());
             if (isTournament) {
                 joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), "Human", 1, DeckImporterUtil.importDeck(this.newPlayerPanel.getDeckFile()), this.txtPassword.getText());
             } else {
