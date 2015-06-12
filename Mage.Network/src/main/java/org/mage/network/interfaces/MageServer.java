@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
+import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.utils.MageVersion;
 import mage.view.RoomView;
@@ -16,7 +17,7 @@ import mage.view.TableView;
  */
 public interface MageServer {
     
-    boolean registerClient(String userName, String sessionId, MageVersion version, String host);
+    boolean registerClient(Connection connection, String sessionId, MageVersion version, String host);
     void disconnect(String sessionId, DisconnectReason reason);
 
     void receiveChatMessage(UUID chatId, String sessionId, String message);

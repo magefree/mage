@@ -18,10 +18,10 @@ public class ConnectionHandler extends ChannelHandlerAdapter {
         this.client = client;
     }
     
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        logger.error("Connection error", cause);
-        client.disconnected(true);
-    }
+//    @Override
+//    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+//        logger.error("Connection error", cause);
+//        client.disconnected(true);
+//    }
     
 }

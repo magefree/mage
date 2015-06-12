@@ -7,7 +7,7 @@ import java.net.InetSocketAddress;
 import mage.interfaces.ServerState;
 import mage.remote.DisconnectReason;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.model.RegisterClientMessage;
+import org.mage.network.model.RegisterClientRequest;
 import org.mage.network.model.ClientRegisteredMessage;
 
 /**
@@ -15,7 +15,7 @@ import org.mage.network.model.ClientRegisteredMessage;
  * @author BetaSteward
  */
 @Sharable
-public class RegisterClientMessageHandler extends SimpleChannelInboundHandler<RegisterClientMessage> {
+public class RegisterClientMessageHandler extends SimpleChannelInboundHandler<RegisterClientRequest> {
 
     private final MageServer server;
     
@@ -24,9 +24,9 @@ public class RegisterClientMessageHandler extends SimpleChannelInboundHandler<Re
     }
     
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, RegisterClientMessage msg) throws Exception {
+    protected void messageReceived(ChannelHandlerContext ctx, RegisterClientRequest msg) throws Exception {
         String host = ((InetSocketAddress)ctx.channel().remoteAddress()).getAddress().getHostAddress();
-        boolean result = server.registerClient(msg.getUserName(), ctx.channel().id().asLongText(), msg.getMageVersion(), host);
+        boolean result = server.registerClient(msg.getConnection(), ctx.channel().id().asLongText(), msg.getMageVersion(), host);
         if (result) {
             ctx.writeAndFlush(new ClientRegisteredMessage(server.getServerState()));
         }

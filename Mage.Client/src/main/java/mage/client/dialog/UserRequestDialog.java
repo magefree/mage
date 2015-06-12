@@ -178,8 +178,8 @@ public class UserRequestDialog extends MageDialog {
 
     private void sendUserReplay(PlayerAction playerAction) {
         Client client = MageFrame.getClient();
-        if (session != null && playerAction != null) {
-            session.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
+        if (client != null && playerAction != null) {
+            client.sendPlayerAction(playerAction, userRequestMessage.getGameId(), userRequestMessage.getRelatedUserId());
         }
     }
 

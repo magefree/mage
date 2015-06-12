@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
+import mage.remote.Connection;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
@@ -73,23 +74,23 @@ public class SessionManager {
 //        sessions.put(sessionId, session);
 //    }
 
-    public boolean registerUser(String sessionId, String userName, String host) throws MageException {
+    public boolean registerUser(String sessionId, Connection connection, String host) throws MageException {
         Session session = new Session(sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);
 //        Session session = sessions.get(sessionId);
 //        if (session != null) {
-            String returnMessage = session.registerUser(userName);
+            String returnMessage = session.registerUser(connection);
             if (returnMessage == null) {
-                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
+                LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, connection.getUsername(), session.getHost(), sessionId);
 
-                logger.info(userName + " joined server");
+                logger.info(connection.getUsername() + " joined server");
                 logger.debug("- userId:    " + session.getUserId());
                 logger.debug("- sessionId: " + sessionId);
                 logger.debug("- host:      " + session.getHost());
                 return true;
             }
-            logger.debug(userName + " not registered: " + returnMessage);
+            logger.debug(connection.getUsername() + " not registered: " + returnMessage);
             Main.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
 //            Server.informClient(sessionId, returnMessage, MessageType.ERROR);
 
@@ -110,14 +111,14 @@ public class SessionManager {
         return false;
     }
 
-    public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
-        Session session = sessions.get(sessionId);
-        if (session != null) {
-            session.setUserData(userName, userDataView);
-            return true;
-        }
-        return false;
-    }
+//    public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
+//        Session session = sessions.get(sessionId);
+//        if (session != null) {
+//            session.setUserData(userName, userDataView);
+//            return true;
+//        }
+//        return false;
+//    }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);     

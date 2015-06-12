@@ -152,23 +152,23 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                         break;
                     }
                     case "F3": {
-                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
                         break;
                     }
                     case "F4": {
-                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
                         break;
                     }
                     case "F5": {
-                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
                         break;
                     }
                     case "F7": {
-                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
                         break;
                     }
                     case "F9": {
-                        gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+                        gamePanel.getClient().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
                         break;
                     }                                           
                 }
@@ -241,7 +241,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true": "false");
                 gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState());
-                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
+                gamePanel.getClient().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
         manaPoolMenuItem2 = new JCheckBoxMenuItem("No automatic usage for mana already in the pool", true);
@@ -258,7 +258,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem)e.getSource()).getState();
                 PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true": "false");
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted);
-                gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+                gamePanel.getClient().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
             }
         });
 
@@ -329,7 +329,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int turnsToRollBack = Integer.parseInt(e.getActionCommand());
-                    gamePanel.getSession().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
+                    gamePanel.getClient().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
                 }
             };
             
@@ -376,13 +376,13 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 switch (e.getActionCommand()) {
                     case "Game": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
+                            MageFrame.getClient().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
                         }    
                         break;
                     }
                     case "Match": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                            MageFrame.getSession().quitMatch(gameId);
+                            MageFrame.getClient().quitMatch(gameId);
                         }     
                         break;
                     }

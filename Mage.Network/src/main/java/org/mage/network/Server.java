@@ -24,6 +24,7 @@ import java.util.UUID;
 import mage.view.ChatMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
+import org.mage.network.handlers.MessageHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.server.ChatMessageHandler;
@@ -56,6 +57,7 @@ public class Server {
     private SslContext sslCtx;
 
     private final MageServer server;
+//    private final MessageHandler h;
     private final PingMessageHandler pingMessageHandler = new PingMessageHandler();
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
     private final RegisterClientMessageHandler registerClientMessageHandler;
@@ -69,6 +71,7 @@ public class Server {
     
     public Server(MageServer server) {
         this.server = server;
+//        h = new MessageHandler();
         registerClientMessageHandler = new RegisterClientMessageHandler(server);
         chatMessageHandler = new ChatMessageHandler(server);
         serverMessageHandler = new ServerMessageHandler(server);
@@ -118,6 +121,7 @@ public class Server {
             ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
 
+//            ch.pipeline().addLast("h", h);
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
             ch.pipeline().addLast(handlersExecutor, "heartbeatHandler", new HeartbeatHandler(server));
             ch.pipeline().addLast("pingMessageHandler", pingMessageHandler);

@@ -738,7 +738,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public boolean connect(Connection connection) {
         client = new Client(instance);
-        boolean result = client.connect(connection.getUsername(), connection.getHost(), connection.getPort(), true, version);
+        boolean result = client.connect(connection, version);
         if (result) {
             updateDatabase(connection.isForceDBComparison(), serverState);
         }

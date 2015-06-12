@@ -43,6 +43,7 @@ import mage.MageException;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
+import mage.remote.Connection;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.view.UserDataView;
@@ -83,7 +84,7 @@ public class Session {
         this.lock = new ReentrantLock();
     }
 
-    public String registerUser(String userName) throws MageException {
+    public String registerUser(Connection connection) throws MageException {
 //        String returnMessage = registerUserHandling(userName);
 //        if (returnMessage != null) {
 //            sendErrorMessageToClient(returnMessage);
@@ -95,15 +96,16 @@ public class Session {
                 Main.getInstance().pingClient(sessionId);
             }
         }, 10, 60, TimeUnit.SECONDS);
-        return registerUserHandling(userName);
+        return registerUserHandling(connection);
     }
 
     public boolean isLocked() {
         return lock.isLocked();
     }
 
-    public String registerUserHandling(String userName) throws MageException {
+    public String registerUserHandling(Connection connection) throws MageException {
         this.isAdmin = false;
+        String userName = connection.getUsername();
         if (userName.equals("Admin")) {
             return "User name Admin already in use";
         }
@@ -141,6 +143,9 @@ public class Session {
             return new StringBuilder("Error connecting ").append(userName).toString();
         }        
         this.userId = user.getId();
+
+        setUserData(user, connection);
+        
         if (reconnect) { // must be connected to receive the message
             UUID chatId = GamesRoomManager.getInstance().getRoom(GamesRoomManager.getInstance().getMainRoomId()).getChatId();
             if (chatId != null) {
@@ -164,25 +169,25 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserDataView userDataView) {
-        User user = UserManager.getInstance().findUser(userName);
+    public boolean setUserData(User user, Connection connection) {
+//        User user = UserManager.getInstance().findUser(userName);
         if (user != null) {
             UserData userData = user.getUserData();
             if (userData == null) {
-                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), 
-                        userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), 
-                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
-                userDataView.getFlagName());
+                userData = new UserData(UserGroup.PLAYER, connection.getAvatarId(), 
+                        connection.isShowAbilityPickerForced(), connection.allowRequestShowHandCards(), 
+                        connection.confirmEmptyManaPool(), connection.getUserSkipPrioritySteps(),
+                connection.getFlagName());
                 user.setUserData(userData);
             } else {
-                if (userDataView.getAvatarId() == 51) { // Update special avatar if first avatar is selected
-                    updateAvatar(userName, userData);
+                if (connection.getAvatarId() == 51) { // Update special avatar if first avatar is selected
+                    updateAvatar(connection.getUsername(), userData);
                 }
-                userData.setAvatarId(userDataView.getAvatarId());                
-                userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
-                userData.setAllowRequestShowHandCards(userDataView.allowRequestShowHandCards());
-                userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
-                userData.setConfirmEmptyManaPool(userDataView.confirmEmptyManaPool());
+                userData.setAvatarId(connection.getAvatarId());                
+                userData.setShowAbilityPickerForced(connection.isShowAbilityPickerForced());
+                userData.setAllowRequestShowHandCards(connection.allowRequestShowHandCards());
+                userData.setUserSkipPrioritySteps(connection.getUserSkipPrioritySteps());
+                userData.setConfirmEmptyManaPool(connection.confirmEmptyManaPool());
             }
             return true;
         }

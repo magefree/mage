@@ -328,6 +328,7 @@ public class ConnectDialog extends MageDialog {
             connection = new Connection();
             connection.setHost(this.txtServer.getText().trim());
             connection.setPort(Integer.valueOf(this.txtPort.getText().trim()));
+            connection.setSSL(true);
             connection.setUsername(this.txtUserName.getText().trim());
             connection.setForceDBComparison(this.chkForceUpdateDB.isSelected());
             MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor)cbFlag.getEditor()).getImageItem());    

@@ -24,6 +24,7 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.ServerState;
 import mage.players.net.UserSkipPrioritySteps;
+import mage.remote.Connection;
 import mage.utils.MageVersion;
 import mage.view.DraftPickView;
 import mage.view.RoomView;
@@ -103,15 +104,15 @@ public class Client {
         exceptionHandler = new ExceptionHandler();
     }
     
-    public boolean connect(String userName, String host, int port, boolean ssl, MageVersion version) {
+    public boolean connect(Connection connection, MageVersion version) {
         
-        this.username = userName;
-        this.host = host;
-        this.port = port;
+        this.username = connection.getUsername();
+        this.host = connection.getHost();
+        this.port = connection.getPort();
 
         group = new NioEventLoopGroup();
         try {
-            if (ssl) {
+            if (connection.isSSL()) {
                 sslCtx = SslContext.newClientContext(InsecureTrustManagerFactory.INSTANCE);
             } else {
                 sslCtx = null;
@@ -121,13 +122,13 @@ public class Client {
                 .channel(NioSocketChannel.class)
                 .handler(new ClientInitializer());
             
-            clientRegisteredMessageHandler.setUserName(userName);
+            clientRegisteredMessageHandler.setConnection(connection);
             clientRegisteredMessageHandler.setVersion(version);
             channel = b.connect(host, port).sync().channel();
             ServerState state = clientRegisteredMessageHandler.registerClient();
             if (state.isValid()) {
                 client.clientRegistered(state);
-                client.connected(userName + "@" + host + ":" + port + " ");
+                client.connected(connection.getUsername() + "@" + host + ":" + port + " ");
                 return true;
             }
             else {
@@ -270,17 +271,17 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void updatePreferencesForServer(int selectedAvatar, boolean selected, boolean selected0, UserSkipPrioritySteps userSkipPrioritySteps) {
+    public void updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean isTableOwner(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public boolean isTableOwner(UUID roomId, UUID tableId) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
-    public UUID getTableChatId(UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public UUID getTableChatId(UUID tableId) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public boolean startMatch(UUID roomId, UUID tableId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -307,7 +308,7 @@ public class Client {
         }
     }
 
-    public void sendPlayerAction(PlayerAction playerAction, UUID gameId, UUID relatedUserId) {
+    public void sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

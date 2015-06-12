@@ -59,9 +59,10 @@ public class MultiConnectTest {
             connection.setUsername(username);
             connection.setHost("localhost");
             connection.setPort(17171);
+            connection.setSSL(true);
             connection.setProxyType(Connection.ProxyType.NONE);
 
-            client.connect(username, "localhost", 17171, true, version);
+            client.connect(connection, version);
         }
 
         public MageVersion getVersion() {

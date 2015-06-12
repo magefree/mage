@@ -1,13 +1,17 @@
 package org.mage.network.handlers.client;
 
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.interfaces.ServerState;
+import mage.remote.Connection;
 import mage.utils.MageVersion;
+import org.apache.log4j.Logger;
 import org.mage.network.model.ClientRegisteredMessage;
-import org.mage.network.model.RegisterClientMessage;
+import org.mage.network.model.RegisterClientRequest;
 
 /**
  *
@@ -15,13 +19,15 @@ import org.mage.network.model.RegisterClientMessage;
  */
 public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<ClientRegisteredMessage> {
 
+    private static final Logger logger = Logger.getLogger(ClientRegisteredMessageHandler.class);
+    
     private final BlockingQueue<ServerState> queue = new LinkedBlockingQueue<>();
-    private String userName;
+    private Connection connection;
     private MageVersion version;
     
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(new RegisterClientMessage(userName, version));
+        ctx.writeAndFlush(new RegisterClientRequest(connection, version)).addListener(new ListenerImpl());
         super.channelActive(ctx);
     }    
 
@@ -30,8 +36,8 @@ public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<
         queue.offer(msg.getServerState());
     }
     
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
     
     public void setVersion(MageVersion version) {
@@ -42,4 +48,16 @@ public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<
         return queue.take();
     }
     
+    private final class ListenerImpl implements ChannelFutureListener {
+        
+        private final ServerState POISON_PILL = new ServerState();
+
+        @Override
+        public void operationComplete(ChannelFuture future) throws Exception {
+            if (!future.isSuccess()) {
+                logger.error("Communication error", future.cause());
+                queue.offer(POISON_PILL);
+            }
+        }
+    }
 }

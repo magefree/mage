@@ -1,8 +1,14 @@
-package org.mage.network.handlers.client;
+package org.mage.network.handlers;
 
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
+/**
+ *
+ * @author BetaSteward
+ */
+@Sharable
 public class MessageHandler extends ChannelHandlerAdapter {
     
     @Override

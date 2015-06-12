@@ -60,6 +60,7 @@ import mage.interfaces.ActionWithResult;
 import org.mage.network.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
@@ -242,16 +243,16 @@ public class Main implements MageServer {
     }
     
     @Override
-    public boolean registerClient(String userName, String sessionId, MageVersion version, String host)  {
+    public boolean registerClient(Connection connection, String sessionId, MageVersion version, String host)  {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
-                logger.info("MageVersionException: userName=" + userName + ", version=" + version);
-                LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
+                logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version);
+                LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, connection.getUsername(), version.toString(), Main.getVersion().toString(), sessionId);
                 String message = "Wrong client version " + version + ", expecting version " + Main.getVersion() + ". \r\n\r\nPlease download needed version from http://XMage.de or http://www.slightlymagic.net/forum/viewforum.php?f=70";
                 server.informClient(sessionId, "Wrong version", message, MessageType.ERROR);
                 return false;
             }
-            return SessionManager.getInstance().registerUser(sessionId, userName, host);
+            return SessionManager.getInstance().registerUser(sessionId, connection, host);
         } catch (MageException ex) {
 //            if (ex instanceof MageVersionException) {
 //                throw (MageVersionException)ex;
