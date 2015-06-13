@@ -29,20 +29,18 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
+import mage.MageInt;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -50,6 +48,12 @@ import mage.game.permanent.Permanent;
  * @author ayratn
  */
 public class StromkirkNoble extends CardImpl {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Humans");
+
+    static {
+        filter.add(new SubtypePredicate("Human"));
+    }
 
     public StromkirkNoble(UUID ownerId) {
         super(ownerId, 164, "Stromkirk Noble", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R}");
@@ -60,8 +64,8 @@ public class StromkirkNoble extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Stromkirk Noble can't be blocked by Humans.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StromkirkEffect()));
-        // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+       // Whenever Stromkirk Noble deals combat damage to a player, put a +1/+1 counter on it.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
     }
@@ -74,34 +78,4 @@ public class StromkirkNoble extends CardImpl {
     public StromkirkNoble copy() {
         return new StromkirkNoble(this);
     }
-}
-
-class StromkirkEffect extends RestrictionEffect {
-
-    public StromkirkEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public StromkirkEffect(final StromkirkEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Human");
-    }
-
-    @Override
-    public StromkirkEffect copy() {
-        return new StromkirkEffect(this);
-    }
-
 }
