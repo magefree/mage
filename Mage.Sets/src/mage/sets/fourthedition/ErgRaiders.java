@@ -37,7 +37,6 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.game.Game;
@@ -82,9 +81,7 @@ class ErgRaidersCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent raiders = game.getPermanentOrLKIBattlefield(source.getSourceId());
         AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher) game.getState().getWatchers().get("AttackedThisTurn");
-        if(raiders.wasControlledFromStartOfControllerTurn() && !watcher.getAttackedThisTurnCreatures().contains(raiders.getId())) {
-            return true;
-        }
-        return false;
+        // wasControlledFromStartOfControllerTurn should be checked during resolution I guess, but shouldn't be relevant
+        return raiders.wasControlledFromStartOfControllerTurn() && !watcher.getAttackedThisTurnCreatures().contains(raiders.getId());
     }
 }

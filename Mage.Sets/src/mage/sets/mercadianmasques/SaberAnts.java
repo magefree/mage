@@ -30,7 +30,6 @@ package mage.sets.mercadianmasques;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -75,7 +74,7 @@ class SaberAntsEffect extends OneShotEffect {
 
     public SaberAntsEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Whenever Saber Ants is dealt damage, you may put that many 1/1 green Insect creature tokens onto the battlefield.";
+        this.staticText = "you may put that many 1/1 green Insect creature tokens onto the battlefield";
     }
 
     public SaberAntsEffect(final SaberAntsEffect effect) {
