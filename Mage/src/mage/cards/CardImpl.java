@@ -359,6 +359,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                         break;
                     case STACK:
                         StackObject stackObject = game.getStack().getSpell(getId());
+                        if (stackObject == null && (this instanceof SplitCard)) { // handle if half od Split cast is on the stack
+                            stackObject = game.getStack().getSpell(((SplitCard)this).getLeftHalfCard().getId());
+                            if (stackObject == null) {
+                                stackObject = game.getStack().getSpell(((SplitCard)this).getRightHalfCard().getId());
+                            }
+                        }
                         if (stackObject != null) {
                             game.getStack().remove(stackObject);
                         }
