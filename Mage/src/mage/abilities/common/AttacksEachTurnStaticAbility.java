@@ -32,6 +32,7 @@ import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -41,6 +42,7 @@ public class AttacksEachTurnStaticAbility extends StaticAbility {
 
     public AttacksEachTurnStaticAbility() {
         super(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield));
+        addWatcher(new AttackedThisTurnWatcher());
     }
 
     public AttacksEachTurnStaticAbility(AttacksEachTurnStaticAbility ability) {
