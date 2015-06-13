@@ -299,7 +299,7 @@ public abstract class AbilityImpl implements Ability {
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)){
             if (getAbilityType().equals(AbilityType.SPELL)
-                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.LAND_ALTERNATE)) {
+                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
                 return false;
             }
         }

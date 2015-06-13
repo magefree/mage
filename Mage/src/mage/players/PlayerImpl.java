@@ -989,7 +989,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (found) {
-            SpellAbility spellAbility = new SpellAbility(null, "", game.getState().getZone(card.getId()), SpellAbilityType.LAND_ALTERNATE);
+            SpellAbility spellAbility = new SpellAbility(null, "", game.getState().getZone(card.getId()), SpellAbilityType.FACE_DOWN_CREATURE);
             spellAbility.setControllerId(this.getId());
             spellAbility.setSourceId(card.getId());
             if (cast(spellAbility, game, false)) {
