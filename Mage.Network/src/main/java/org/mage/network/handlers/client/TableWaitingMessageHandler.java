@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.view.TableView;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.TableWaitingMessage;
 import org.mage.network.model.TableWaitingRequest;
 
@@ -32,7 +33,7 @@ public class TableWaitingMessageHandler extends SimpleChannelInboundHandler<Tabl
     
     public TableView getTable(UUID roomId, UUID tableId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new TableWaitingRequest(roomId, tableId));
+        ctx.writeAndFlush(new TableWaitingRequest(roomId, tableId)).addListener(WriteListener.getInstance());
         return queue.take();
     }
     

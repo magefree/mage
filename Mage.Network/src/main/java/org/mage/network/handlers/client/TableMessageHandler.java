@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.game.match.MatchOptions;
 import mage.view.TableView;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.CreateTableMessage;
 import org.mage.network.model.CreateTableRequest;
 import org.mage.network.model.RemoveTableRequest;
@@ -34,16 +35,17 @@ public class TableMessageHandler extends SimpleChannelInboundHandler<CreateTable
     }
     
     public TableView createTable(UUID roomId, MatchOptions options) throws Exception {
-        ctx.writeAndFlush(new CreateTableRequest(roomId, options));
+        queue.clear();
+        ctx.writeAndFlush(new CreateTableRequest(roomId, options)).addListener(WriteListener.getInstance());
         return queue.take();
     }
 
     public void removeTable(UUID roomId, UUID tableId) throws Exception {
-        ctx.writeAndFlush(new RemoveTableRequest(roomId, tableId));
+        ctx.writeAndFlush(new RemoveTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());
     }
 
     public void swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws Exception {
-        ctx.writeAndFlush(new SwapSeatRequest(roomId, tableId, seatNum1, seatNum2));
+        ctx.writeAndFlush(new SwapSeatRequest(roomId, tableId, seatNum1, seatNum2)).addListener(WriteListener.getInstance());
     }
 
 }

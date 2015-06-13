@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.ChatRoomIdMessage;
 import org.mage.network.model.ChatRoomIdRequest;
 import org.mage.network.model.JoinChatRequest;
@@ -32,16 +33,16 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<ChatRoomIdMessa
         
     public UUID getChatRoomId(UUID roomId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new ChatRoomIdRequest(roomId));
+        ctx.writeAndFlush(new ChatRoomIdRequest(roomId)).addListener(WriteListener.getInstance());
         return queue.take();
     }
 
     public void joinChat(UUID chatId) {
-        ctx.writeAndFlush(new JoinChatRequest(chatId));
+        ctx.writeAndFlush(new JoinChatRequest(chatId)).addListener(WriteListener.getInstance());
     }
     
     public void leaveChat(UUID chatId) {
-        ctx.writeAndFlush(new LeaveChatRequest(chatId));
+        ctx.writeAndFlush(new LeaveChatRequest(chatId)).addListener(WriteListener.getInstance());
     }
 
 }

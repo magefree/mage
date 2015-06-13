@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.LeaveTableRequest;
 import org.mage.network.model.LeftTableMessage;
 
@@ -31,7 +32,7 @@ public class LeaveTableMessageHandler extends SimpleChannelInboundHandler<LeftTa
     
     public boolean leaveTable(UUID roomId, UUID tableId) throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new LeaveTableRequest(roomId, tableId));
+        ctx.writeAndFlush(new LeaveTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());
         return queue.take();
     }
     

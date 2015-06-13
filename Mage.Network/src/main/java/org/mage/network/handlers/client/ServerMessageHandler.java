@@ -5,6 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.ServerMessagesMessage;
 import org.mage.network.model.ServerMessagesRequest;
 
@@ -31,7 +32,7 @@ public class ServerMessageHandler extends SimpleChannelInboundHandler<ServerMess
     
     public List<String> getServerMessages() throws Exception {
         queue.clear();
-        ctx.writeAndFlush(new ServerMessagesRequest());
+        ctx.writeAndFlush(new ServerMessagesRequest()).addListener(WriteListener.getInstance());
         return queue.take();
     }
     

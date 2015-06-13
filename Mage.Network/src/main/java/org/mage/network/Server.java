@@ -27,6 +27,7 @@ import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.MessageHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.handlers.server.ChatMessageHandler;
 import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.RegisterClientMessageHandler;
@@ -151,17 +152,17 @@ public class Server {
     public void sendChatMessage(String sessionId, UUID chatId, ChatMessage message) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new ChatMessageMessage(chatId, message));
+            ch.writeAndFlush(new ChatMessageMessage(chatId, message)).addListener(WriteListener.getInstance());
     }
 
     public void informClient(String sessionId, String title, String message, MessageType type) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new InformClientMessage(title, message, type));
+            ch.writeAndFlush(new InformClientMessage(title, message, type)).addListener(WriteListener.getInstance());
     }
 
     public void informClients(String title, String message, MessageType type) {
-        clients.writeAndFlush(new InformClientMessage(title, message, type));
+        clients.writeAndFlush(new InformClientMessage(title, message, type)).addListener(WriteListener.getInstance());
     }
 
     public void pingClient(String sessionId) {
@@ -175,7 +176,7 @@ public class Server {
     public void joinedTable(String sessionId, UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new JoinedTableMessage(roomId, tableId, chatId, owner, tournament));
+            ch.writeAndFlush(new JoinedTableMessage(roomId, tableId, chatId, owner, tournament)).addListener(WriteListener.getInstance());
     }
     
     

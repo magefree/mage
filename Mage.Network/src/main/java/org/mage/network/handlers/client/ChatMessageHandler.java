@@ -3,6 +3,7 @@ package org.mage.network.handlers.client;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.UUID;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.ChatMessageMessage;
 import org.mage.network.model.ChatMessageRequest;
@@ -32,6 +33,6 @@ public class ChatMessageHandler extends SimpleChannelInboundHandler<ChatMessageM
     }
     
     public void sendMessage(UUID chatId, String message) {
-        ctx.writeAndFlush(new ChatMessageRequest(chatId, message));
+        ctx.writeAndFlush(new ChatMessageRequest(chatId, message)).addListener(WriteListener.getInstance());
     }
 }
