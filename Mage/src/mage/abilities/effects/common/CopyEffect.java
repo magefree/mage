@@ -67,7 +67,7 @@ public class CopyEffect extends ContinuousEffectImpl {
     
     public CopyEffect(Duration duration, MageObject target, UUID sourceId) {
         super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
-        this.target = target;
+        this.target = target;        
         this.sourceId = sourceId;
     }
 
@@ -81,6 +81,9 @@ public class CopyEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        if (!(target instanceof Permanent) && (target instanceof Card)) {
+            this.target = new PermanentCard((Card)target, source.getControllerId(), game);
+        }
         affectedObjectList.add(new MageObjectReference(getSourceId(), game));
     }
 
