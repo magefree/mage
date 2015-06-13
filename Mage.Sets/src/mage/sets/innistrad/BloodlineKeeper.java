@@ -67,7 +67,7 @@ public class BloodlineKeeper extends CardImpl {
         this.secondSideCard = new LordOfLineage(ownerId);
 
         this.addAbility(FlyingAbility.getInstance());
-        // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
+        // {T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
         this.addAbility(new TransformAbility());

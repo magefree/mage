@@ -18,15 +18,22 @@ public class UserDataView implements Serializable {
     protected boolean confirmEmptyManaPool;
     protected UserSkipPrioritySteps userSkipPrioritySteps;
     String flagName;
+    protected boolean askMoveToGraveOrder;
 
+    static UserDataView getDefaultUserDataView() {
+        return new UserDataView(0, false, false, true, null,"world.png", false);
+    }
+    
     public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, 
-            boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName) {
+            boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName, boolean askMoveToGraveOrder) {
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
         this.allowRequestShowHandCards = allowRequestShowHandCards;
         this.userSkipPrioritySteps = userSkipPrioritySteps;
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
+        this.askMoveToGraveOrder = askMoveToGraveOrder;
+        
     }
 
     public UserDataView(UserData userData) {
@@ -37,6 +44,7 @@ public class UserDataView implements Serializable {
         this.userSkipPrioritySteps = userData.getUserSkipPrioritySteps();
         this.confirmEmptyManaPool = userData.confirmEmptyManaPool();
         this.flagName = userData.getFlagName();
+        this.askMoveToGraveOrder = userData.askMoveToGraveOrder();
     }
 
     public int getAvatarId() {
@@ -61,6 +69,10 @@ public class UserDataView implements Serializable {
 
     public String getFlagName() {
         return flagName;
+    }
+
+    public boolean askMoveToGraveOrder() {
+        return askMoveToGraveOrder;
     }
     
 }

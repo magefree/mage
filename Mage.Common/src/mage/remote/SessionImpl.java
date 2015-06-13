@@ -275,16 +275,10 @@ public class SessionImpl implements Session {
             this.sessionId = callbackClient.getSessionId();
             boolean registerResult;
             if (connection.getPassword() == null) {
-                UserDataView userDataView = new UserDataView(connection.getAvatarId(), 
-                        connection.isShowAbilityPickerForced(),
-                        connection.allowRequestShowHandCards(),
-                        connection.confirmEmptyManaPool(),
-                        connection.getUserSkipPrioritySteps(),
-                        connection.getFlagName());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
                 registerResult = server.registerClient(connection.getUsername(), sessionId, client.getVersion());
                 if (registerResult) {
-                    server.setUserData(connection.getUsername(), sessionId, userDataView);
+                    server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
                 }
             } else {
                 registerResult = server.registerAdmin(connection.getPassword(), sessionId, client.getVersion());
@@ -1397,11 +1391,10 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName) {
+    public boolean updatePreferencesForServer(UserDataView userData) {
         try {
             if (isConnected()) {
-                UserDataView userDataView = new UserDataView(avatarId, showAbilityPickerForced, allowRequestShowHandCards, confirmEmptyManaPool, userSkipPrioritySteps, flagName);
-                server.setUserData(connection.getUsername(), sessionId, userDataView);
+                server.setUserData(connection.getUsername(), sessionId, userData);
             }
             return true;
         } catch (MageException ex) {

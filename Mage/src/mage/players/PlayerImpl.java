@@ -989,7 +989,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (found) {
-            SpellAbility spellAbility = new SpellAbility(null, "", game.getState().getZone(card.getId()), SpellAbilityType.LAND_ALTERNATE);
+            SpellAbility spellAbility = new SpellAbility(null, "", game.getState().getZone(card.getId()), SpellAbilityType.FACE_DOWN_CREATURE);
             spellAbility.setControllerId(this.getId());
             spellAbility.setSourceId(card.getId());
             if (cast(spellAbility, game, false)) {
@@ -2936,9 +2936,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (choosingPlayer == null) {
                     continue;
                 }
-                boolean chooseOrder = true;
-                if (cards.size() > 2) {
-                    chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
+                boolean chooseOrder = false;
+                if (userData.askMoveToGraveOrder()) {
+                    if (cards.size() > 3) {
+                        chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
+                    }
                 }
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));

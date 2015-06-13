@@ -63,7 +63,7 @@ public class MaraudingMaulhorn extends CardImpl {
 
         // Marauding Maulhorn attacks each combat if able unless you control a creature named Advocate of the Beast.
         Effect effect = new ConditionalRequirementEffect(
-                new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield),
+                new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
 
