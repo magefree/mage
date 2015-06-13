@@ -16,10 +16,11 @@ public class UserData implements Serializable {
     protected boolean confirmEmptyManaPool;
     protected UserSkipPrioritySteps userSkipPrioritySteps;
     protected String flagName;
+    protected boolean askMoveToGraveOrder;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced, 
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
-            String flagName) {
+            String flagName, boolean askMoveToGraveOrder) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -83,6 +84,14 @@ public class UserData implements Serializable {
 
     public String getFlagName() {
         return flagName;
+    }
+
+    public boolean askMoveToGraveOrder() {
+        return askMoveToGraveOrder;
+    }
+
+    public void setAskMoveToGraveOrder(boolean askMoveToGraveOrder) {
+        this.askMoveToGraveOrder = askMoveToGraveOrder;
     }
     
 }

@@ -82,10 +82,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_card" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="main_game" min="-2" max="-2" attributes="0"/>
+                      <Component id="main_game" pref="189" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="main_gamelog" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -201,23 +201,17 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="cbAllowRequestToShowHandCards" min="-2" pref="546" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                              <Component id="cbAllowRequestToShowHandCards" min="-2" pref="546" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="showPlayerNamesPermanently" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="nonLandPermanentsInOnePile" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="showAbilityPickerForced" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="cbShowStormCounter" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
-                                      <Component id="cbConfirmEmptyManaPool" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="cbShowStormCounter" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
+                              <Component id="cbConfirmEmptyManaPool" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
+                              <Component id="cbAskMoveToGraveOrder" alignment="0" min="-2" pref="546" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -235,6 +229,9 @@
                           <Component id="cbShowStormCounter" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbConfirmEmptyManaPool" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cbAskMoveToGraveOrder" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -305,6 +302,17 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbConfirmEmptyManaPoolActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbAskMoveToGraveOrder">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Ask player for setting order cards go to graveyard"/>
+                    <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;If activated and multiple cards go to the graveyard at the same time&lt;br&gt;&#xa;the player is asked to set the order of the cards."/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAskMoveToGraveOrderActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

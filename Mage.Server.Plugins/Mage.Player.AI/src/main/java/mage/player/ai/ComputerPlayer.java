@@ -175,7 +175,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64, false, true, false, null, "Computer.png");
+        userData = new UserData(UserGroup.COMPUTER, 64, false, true, false, null, "Computer.png", false);
         pickedCards = new ArrayList<>();
     }
 

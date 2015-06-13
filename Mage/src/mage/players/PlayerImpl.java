@@ -2936,9 +2936,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (choosingPlayer == null) {
                     continue;
                 }
-                boolean chooseOrder = true;
-                if (cards.size() > 2) {
-                    chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
+                boolean chooseOrder = false;
+                if (userData.askMoveToGraveOrder()) {
+                    if (cards.size() > 3) {
+                        chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
+                    }
                 }
                 if (chooseOrder) {
                     TargetCard target = new TargetCard(fromZone, new FilterCard("card to put on the top of your graveyard (last one chosen will be topmost)"));
