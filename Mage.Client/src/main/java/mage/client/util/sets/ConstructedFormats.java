@@ -29,7 +29,7 @@ public class ConstructedFormats {
     public static final String MODERN = "- Modern";
     
     private static final Map<String, List<String>> underlyingSetCodesPerFormat = new HashMap<>();
-    private static final List<String> formats = new ArrayList<String>();
+    private static final List<String> formats = new ArrayList<>();
 
     private ConstructedFormats() {
     }
@@ -59,7 +59,7 @@ public class ConstructedFormats {
         else {
             cutoff = new GregorianCalendar(calendar.get(Calendar.YEAR) - 2, Calendar.SEPTEMBER, 1);
         }
-        final Map<String, ExpansionInfo> expansionInfo = new HashMap<String, ExpansionInfo>();
+        final Map<String, ExpansionInfo> expansionInfo = new HashMap<>();
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
         	expansionInfo.put(set.getName(), set);
         	formats.add(set.getName());
