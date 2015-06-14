@@ -335,8 +335,8 @@ public class ChatPanel extends javax.swing.JPanel {
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
             
-            tcm.getColumn(1).setHeaderValue("Players (" + this.players.length + ")");
-            tcm.getColumn(3).setHeaderValue(
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
+            tcm.getColumn(jTablePlayers.convertColumnIndexToView(3)).setHeaderValue(
                     "Games " + roomUserInfo.getNumberActiveGames() +
                     (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads():" (") +
                     " limit: " + roomUserInfo.getNumberMaxGames() + ")");
