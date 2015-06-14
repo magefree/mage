@@ -59,13 +59,17 @@ public class AquitectsWill extends CardImpl {
         this.subtype.add("Merfolk");
 
         // Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
+        // Add the flood counter to target land
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.FLOOD.createInstance()));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
+        
+        // Add the Flood counter effect
         Effect effect = new AquitectsWillGainAbilityEffect(
                 new BlueManaAbility(),
                 Duration.Custom, rule);
         this.getSpellAbility().addEffect(effect);
-        //this.getSpellAbility().addEffect(new AquitectsWillEffect());
+        
+        // Draw if you control a Merfolk
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), 
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Merfolk", "Merfolk")),
@@ -106,26 +110,3 @@ class AquitectsWillGainAbilityEffect extends GainAbilityTargetEffect {
         return new AquitectsWillGainAbilityEffect(this);
     }
 }
-
-/*
-class AquitectsWillEffect extends OneShotEffect {
-    
-    public AquitectsWillEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "If you control a Merfolk, draw a card.";
-    }
-    
-    public AquitectsWillEffect(final AquitectsWillEffect effect) {
-        super(effect);
-    }
-    
-    @Override
-    public AquitectsWillEffect copy() {
-        return new AquitectsWillEffect(this);
-    }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-}*/
