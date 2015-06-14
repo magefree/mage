@@ -2839,7 +2839,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         ArrayList<Card> cardList = new ArrayList<>();
-        cardList.addAll(cards.getCards(game));
+        for (UUID cardId: cards) {
+            if (fromZone.equals(Zone.BATTLEFIELD)) {
+                Permanent permanent = game.getPermanent(cardId);
+                if (permanent != null) {
+                    cardList.add(permanent);
+                }
+            } else {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    cardList.add(card);
+                }                
+            }
+        }
         return moveCards(cardList, fromZone, toZone, source, game);
     }
 
