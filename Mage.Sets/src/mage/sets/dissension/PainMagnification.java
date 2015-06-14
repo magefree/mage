@@ -85,7 +85,7 @@ class PainMagnificationTriggeredAbility extends TriggeredAbilityImpl {
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 int amount = event.getAmount();
                 if(amount >= 3) {
-                    // If at least 3 damage is dealt, set the the opponent as the Discard target
+                    // If at least 3 damage is dealt, set the opponent as the Discard target
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
