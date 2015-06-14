@@ -209,7 +209,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected Set<UUID> playersUnderYourControl = new HashSet<>();
 
     protected Set<UUID> usersAllowedToSeeHandCards = new HashSet<>();
-    protected boolean requestsAllowedToSeeHandCards = true;
 
     protected List<UUID> attachments = new ArrayList<>();
 
@@ -3113,7 +3112,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public boolean isRequestToShowHandCardsAllowed() {
-        return userData.allowRequestShowHandCards();
+        return userData.isAllowRequestShowHandCards();
     }
 
     @Override

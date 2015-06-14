@@ -569,8 +569,12 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
-        manaPoolMenuItem1.setSelected(manaPoolAutomatic);
-        manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
+        if (manaPoolMenuItem1 != null) {
+            manaPoolMenuItem1.setSelected(manaPoolAutomatic);
+        }
+        if (manaPoolMenuItem2 != null) {
+            manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
+        }
     }
     
     private mage.client.game.BattlefieldPanel battlefieldPanel;

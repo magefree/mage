@@ -28,6 +28,7 @@ public class UserData implements Serializable {
         this.userSkipPrioritySteps = userSkipPrioritySteps;
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
+        this.askMoveToGraveOrder = askMoveToGraveOrder;
     }
 
     public void setGroupId(int groupId) {
@@ -50,20 +51,16 @@ public class UserData implements Serializable {
         return showAbilityPickerForced;
     }
 
-    public boolean isAllowRequestShowHandCards() {
-        return allowRequestShowHandCards;
-    }
-
     public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
         this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
-    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
-        this.allowRequestShowHandCards = allowRequestShowHandCards;
+    public boolean isAllowRequestShowHandCards() {
+        return allowRequestShowHandCards;
     }
 
-    public boolean allowRequestShowHandCards() {
-        return allowRequestShowHandCards;
+    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
+        this.allowRequestShowHandCards = allowRequestShowHandCards;
     }
 
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {

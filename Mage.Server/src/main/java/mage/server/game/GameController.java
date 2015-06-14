@@ -602,8 +602,8 @@ public class GameController implements GameCallback {
                 if (grantingPlayer.isHuman()) {
                     GameSessionPlayer gameSession = gameSessions.get(userIdGranter);
                     if (gameSession != null) {
-                        UUID requestingPlayer = getPlayerId(userIdRequester);
-                        if (requestingPlayer == null || !requestingPlayer.equals(grantingPlayer.getId())) { // don't allow request for your own cards
+                        UUID requestingPlayerId = getPlayerId(userIdRequester);
+                        if (requestingPlayerId == null || !requestingPlayerId.equals(grantingPlayer.getId())) { // don't allow request for your own cards
                             if (grantingPlayer.isRequestToShowHandCardsAllowed()) {
                                 gameSession.requestPermissionToSeeHandCards(userIdRequester);
                             } else {
