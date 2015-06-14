@@ -131,7 +131,14 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
                 if (card.getOwnerId().equals(controller.getId()) && card.getCardType().contains(CardType.CREATURE)) {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
-            }            
+            }  
+            // commander in command zone
+            if (controller.getCommanderId() != null && game.getState().getZone(controller.getCommanderId()).equals(Zone.COMMAND)) {
+                Card card = game.getCard(controller.getCommanderId());
+                if (card.getCardType().contains(CardType.CREATURE)) {
+                    game.getState().addOtherAbility(card, FlashAbility.getInstance());
+                }
+            }
             return true;
         }
         return false;
