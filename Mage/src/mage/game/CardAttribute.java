@@ -21,6 +21,14 @@ public class CardAttribute  implements Serializable {
     public CardAttribute(Card card) {
         color = card.getColor(null).copy();
     }
+
+    public CardAttribute(CardAttribute cardAttribute) {
+        this.color = cardAttribute.color;
+    }
+    
+    public CardAttribute copy() {
+        return new CardAttribute(this);
+    }
     
     public ObjectColor getColor() {
        return color;
