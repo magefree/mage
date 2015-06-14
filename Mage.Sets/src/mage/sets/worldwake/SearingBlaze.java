@@ -96,24 +96,18 @@ class SearingBlazeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Watcher watcher = game.getState().getWatchers().get("LandPlayed", source.getControllerId());
+        LandfallWatcher watcher = (LandfallWatcher) game.getState().getWatchers().get("LandPlayed");
         Player player = game.getPlayer(source.getTargets().get(0).getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (watcher != null && watcher.conditionMet()) {
-            if (player != null) {
-                player.damage(3, source.getSourceId(), game, false, true);
-            }
-            if (creature != null) {
-                creature.damage(3, source.getSourceId(), game, false, true);
-            }
+        int damage = 1;
+        if (watcher != null && watcher.landPlayed(source.getControllerId())) {
+            damage = 3;
         }
-        else {
-            if (player != null) {
-                player.damage(1, source.getSourceId(), game, false, true);
-            }
-            if (creature != null) {
-                creature.damage(1, source.getSourceId(), game, false, true);
-            }
+        if (player != null) {
+            player.damage(damage, source.getSourceId(), game, false, true);
+        }
+        if (creature != null) {
+            creature.damage(damage, source.getSourceId(), game, false, true);
         }
         return true;
     }
@@ -143,7 +137,7 @@ class SearingBlazeTarget extends TargetPermanent {
     @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
-        Set<UUID> possibleTargets = new HashSet<UUID>();
+        Set<UUID> possibleTargets = new HashSet<>();
         MageObject object = game.getObject(sourceId);
         if (object instanceof StackObject) {
             UUID playerId = ((StackObject)object).getStackAbility().getFirstTarget();
