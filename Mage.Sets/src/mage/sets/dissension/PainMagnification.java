@@ -29,6 +29,7 @@ package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -36,6 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -64,7 +66,7 @@ public class PainMagnification extends CardImpl {
 class PainMagnificationTriggeredAbility extends TriggeredAbilityImpl {
     
     public PainMagnificationTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DiscardTargetEffect(1, false), false);
+        super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
     
     public PainMagnificationTriggeredAbility(final PainMagnificationTriggeredAbility ability) {
@@ -79,9 +81,14 @@ class PainMagnificationTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+            // If the damaged player is an opponent
             if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                 int amount = event.getAmount();
                 if(amount >= 3) {
+                    // If at least 3 damage is dealt, set the the opponent as the Discard target
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
                     return true;
                 }                
             }
