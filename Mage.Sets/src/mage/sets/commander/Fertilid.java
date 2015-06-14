@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class Fertilid extends CardImpl {
 

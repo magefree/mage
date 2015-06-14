@@ -38,7 +38,7 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class ElvishBerserker extends CardImpl {
 

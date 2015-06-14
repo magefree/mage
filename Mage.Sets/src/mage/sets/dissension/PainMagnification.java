@@ -41,7 +41,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class PainMagnification extends CardImpl {
 
