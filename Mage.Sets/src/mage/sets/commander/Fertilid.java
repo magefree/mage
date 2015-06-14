@@ -29,9 +29,21 @@ package mage.sets.commander;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterBasicLandCard;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
@@ -47,7 +59,12 @@ public class Fertilid extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Fertilid enters the battlefield with two +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
         // {1}{G}, Remove a +1/+1 counter from Fertilid: Target player searches his or her library for a basic land card and puts it onto the battlefield tapped. Then that player shuffles his or her library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true), new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     public Fertilid(final Fertilid card) {
