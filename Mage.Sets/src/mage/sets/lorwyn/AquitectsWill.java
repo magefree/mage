@@ -33,6 +33,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.mana.BlueManaAbility;
@@ -64,10 +65,7 @@ public class AquitectsWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         
         // Add the Flood counter effect
-        Effect effect = new AquitectsWillGainAbilityEffect(
-                new BlueManaAbility(),
-                Duration.Custom, rule);
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new AquitectsWillEffect(Duration.Custom, false, false, "Island"));
         
         // Draw if you control a Merfolk
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
@@ -86,13 +84,13 @@ public class AquitectsWill extends CardImpl {
     }
 }
 
-class AquitectsWillGainAbilityEffect extends GainAbilityTargetEffect {
+class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
 
-    public AquitectsWillGainAbilityEffect(Ability ability, Duration duration, String rule) {
-        super(ability, duration, rule);
+    public AquitectsWillEffect(Duration duration, boolean chooseLandType, boolean loseType, String... landNames) {
+        super(duration, chooseLandType, loseType, landNames);
     }
 
-    public AquitectsWillGainAbilityEffect(final AquitectsWillGainAbilityEffect effect) {
+    public AquitectsWillEffect(final AquitectsWillEffect effect) {
         super(effect);
     }
 
@@ -106,7 +104,7 @@ class AquitectsWillGainAbilityEffect extends GainAbilityTargetEffect {
     }
 
     @Override
-    public AquitectsWillGainAbilityEffect copy() {
-        return new AquitectsWillGainAbilityEffect(this);
+    public AquitectsWillEffect copy() {
+        return new AquitectsWillEffect(this);
     }
 }
