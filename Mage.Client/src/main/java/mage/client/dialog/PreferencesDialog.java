@@ -66,6 +66,7 @@ import mage.client.util.gui.BufferedImageBuilder;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
+import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 
 /**
@@ -86,6 +87,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS = "gameAllowRequestShowHandCards";
     public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
+    public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
     
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
@@ -346,6 +348,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbAllowRequestToShowHandCards = new javax.swing.JCheckBox();
         cbShowStormCounter = new javax.swing.JCheckBox();
         cbConfirmEmptyManaPool = new javax.swing.JCheckBox();
+        cbAskMoveToGraveOrder = new javax.swing.JCheckBox();
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
@@ -570,6 +573,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        cbAskMoveToGraveOrder.setSelected(true);
+        cbAskMoveToGraveOrder.setText("Ask player for setting order cards go to graveyard");
+        cbAskMoveToGraveOrder.setToolTipText("<html>If activated and multiple cards go to the graveyard at the same time<br>\nthe player is asked to set the order of the cards.");
+        cbAskMoveToGraveOrder.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cbAskMoveToGraveOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAskMoveToGraveOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout main_gameLayout = new javax.swing.GroupLayout(main_game);
         main_game.setLayout(main_gameLayout);
         main_gameLayout.setHorizontalGroup(
@@ -577,18 +590,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(main_gameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(main_gameLayout.createSequentialGroup()
-                        .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(main_gameLayout.createSequentialGroup()
-                        .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(showAbilityPickerForced, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(cbShowStormCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbConfirmEmptyManaPool, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(cbAllowRequestToShowHandCards, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(showPlayerNamesPermanently, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nonLandPermanentsInOnePile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showAbilityPickerForced, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(cbShowStormCounter, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbConfirmEmptyManaPool, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbAskMoveToGraveOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         main_gameLayout.setVerticalGroup(
             main_gameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -603,7 +613,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbShowStormCounter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbConfirmEmptyManaPool))
+                .addComponent(cbConfirmEmptyManaPool)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbAskMoveToGraveOrder)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
@@ -651,10 +664,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 189, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         main_card.getAccessibleContext().setAccessibleName("Game panel");
@@ -1626,7 +1639,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(tabsPanel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1655,6 +1668,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
@@ -1717,13 +1731,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         try {
-            MageFrame.getSession().updatePreferencesForServer(
-                        getSelectedAvatar(),                        
-                        dialog.showAbilityPickerForced.isSelected(),
-                        dialog.cbAllowRequestToShowHandCards.isSelected(),
-                        dialog.cbConfirmEmptyManaPool.isSelected(),
-                        getUserSkipPrioritySteps(),
-                        MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png"));
+            MageFrame.getSession().updatePreferencesForServer(getUserData());
 
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -1978,6 +1986,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbConfirmEmptyManaPoolActionPerformed
 
+    private void cbAskMoveToGraveOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAskMoveToGraveOrderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAskMoveToGraveOrderActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -2055,6 +2067,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true");
         load(prefs, dialog.cbShowStormCounter, KEY_GAME_SHOW_STORM_COUNTER, "true");
         load(prefs, dialog.cbConfirmEmptyManaPool, KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true");
+        load(prefs, dialog.cbAskMoveToGraveOrder, KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true");
 
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
 
@@ -2395,26 +2408,32 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getSession().updatePreferencesForServer(
-                                id,
-                                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
-                                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
-                                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
-                                getUserSkipPrioritySteps(),
-                                MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png")
-                        );
+                        MageFrame.getSession().updatePreferencesForServer(getUserData());                        
                     }
                 }
             });
         }
     }
 
+    public static UserDataView getUserData(){
+        return new UserDataView(
+            getSelectedAvatar(),
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
+            getUserSkipPrioritySteps(),
+            MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),                
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true")
+        );
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBattlefieldBGMBrowse;
     private javax.swing.JButton btnBrowseBackgroundImage;
     private javax.swing.JButton btnBrowseBattlefieldImage;
     private javax.swing.JButton btnBrowseImageLocation;
     private javax.swing.JCheckBox cbAllowRequestToShowHandCards;
+    private javax.swing.JCheckBox cbAskMoveToGraveOrder;
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbConfirmEmptyManaPool;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;

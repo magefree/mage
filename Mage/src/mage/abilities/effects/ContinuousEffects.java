@@ -939,6 +939,7 @@ public class ContinuousEffects implements Serializable {
      */
     public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
         if (!(source instanceof MageSingleton)) { // because MageSingletons may never be removed by removing the temporary effecs they are not added to the temporaryEffects to prevent this
+            effect.setTemporary(true);
             Set abilities = temporaryEffects.get(effect);
             if (abilities == null) {
                 abilities = new HashSet<>();

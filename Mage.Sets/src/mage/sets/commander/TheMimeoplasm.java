@@ -36,6 +36,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -94,31 +96,33 @@ class TheMimeoplasmEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
+        if (controller != null && permanent != null) {
             if (new CardsInAllGraveyardsCount(new FilterCreatureCard()).calculate(game, source, this) >= 2) {
-                if (player.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", game)) {                    
                     TargetCardInGraveyard targetCopy = new TargetCardInGraveyard(new FilterCreatureCard("creature card to become a copy of"));
-                    TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(new FilterCreatureCard("creature card for additional +1/+1 counters"));
-                    if (player.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
+                    TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters"));
+                    if (controller.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {
                         Card cardToCopy = game.getCard(targetCopy.getFirstTarget());
                         if (cardToCopy != null) {
-                            player.moveCardToExileWithInfo(cardToCopy, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
-                            if (player.choose(Outcome.Copy, targetCounters, source.getSourceId(), game)) {
+                            if (controller.choose(Outcome.Copy, targetCounters, source.getSourceId(), game)) {
                                 Card cardForCounters = game.getCard(targetCounters.getFirstTarget());
                                 if (cardForCounters != null) {
-                                    player.moveCardToExileWithInfo(cardForCounters, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
+                                    Cards cardsToExile = new CardsImpl();
+                                    cardsToExile.add(cardToCopy);
+                                    cardsToExile.add(cardForCounters);
+                                    controller.moveCards(cardsToExile, Zone.GRAVEYARD, Zone.EXILED, source, game);
                                     CopyEffect copyEffect = new CopyEffect(Duration.Custom, cardToCopy, source.getSourceId());
                                     game.addEffect(copyEffect, source);
                                     permanent.addCounters(CounterType.P1P1.createInstance(cardForCounters.getPower().getValue()), game);
-                                    return true;
                                 }
                             }
                         }
                     }
                 }
             }
+            return true;            
         }
         return false;
     }

@@ -61,4 +61,7 @@ public interface ContinuousEffect extends Effect {
     void newId();
     @Override
     ContinuousEffect copy();
+    
+    boolean isTemporary();
+    void setTemporary(boolean temporary);
 }

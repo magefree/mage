@@ -372,6 +372,11 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public List<CardType> getCardType() {
+        if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
+            List<CardType> cardTypes = new ArrayList<>();
+            cardTypes.add(CardType.CREATURE);
+            return cardTypes;
+        }
         if (this.getSpellAbility() instanceof BestowAbility) {
             List<CardType> cardTypes = new ArrayList<>();
             cardTypes.addAll(card.getCardType());

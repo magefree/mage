@@ -25,37 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.abilities.effects.common.discard.DiscardTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author jonubuu
+ * @author LevelX2
  */
-public class HymnToTourach extends CardImpl {
+public class NightSoil2 extends mage.sets.fallenempires.NightSoil1 {
 
-    public HymnToTourach(UUID ownerId) {
-        super(ownerId, 12, "Hymn to Tourach", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");
-        this.expansionSetCode = "FEM";
-
-
-        // Target player discards two cards at random.
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(2, true));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    public NightSoil2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 81;
     }
 
-    public HymnToTourach(final HymnToTourach card) {
+    public NightSoil2(final NightSoil2 card) {
         super(card);
     }
 
     @Override
-    public HymnToTourach copy() {
-        return new HymnToTourach(this);
+    public NightSoil2 copy() {
+        return new NightSoil2(this);
     }
 }

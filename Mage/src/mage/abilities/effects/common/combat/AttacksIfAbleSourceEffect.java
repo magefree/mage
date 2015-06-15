@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -40,18 +41,25 @@ import mage.game.permanent.Permanent;
  */
 public class AttacksIfAbleSourceEffect extends RequirementEffect {
 
+    boolean eachCombat;
+   
     public AttacksIfAbleSourceEffect(Duration duration) {
+        this(duration, false);        
+    }
+    
+    public AttacksIfAbleSourceEffect(Duration duration, boolean eachCombat) {
         super(duration);
+        this.eachCombat = eachCombat;
         if (this.duration == Duration.EndOfTurn) {
-            staticText = "{this} attacks this turn if able";
-        }
-        else {
-            staticText = "{this} attacks each turn if able";
+            staticText = "{this} attacks " + (eachCombat ? "each combat" :"this turn") + " if able";
+        } else {
+            staticText = "{this} attacks each " + (eachCombat ? "combat" :"turn") + " if able";
         }
     }
 
     public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
         super(effect);
+        this.eachCombat = effect.eachCombat;
     }
 
     @Override
@@ -61,7 +69,14 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        if (permanent.getId().equals(source.getSourceId())) {
+            if (eachCombat) {
+                return true;
+            }
+            AttackedThisTurnWatcher watcher = (AttackedThisTurnWatcher)game.getState().getWatchers().get("AttackedThisTurn");
+            return watcher != null && !watcher.getAttackedThisTurnCreatures().contains(permanent.getId());            
+        }
+        return false;
     }
 
     @Override

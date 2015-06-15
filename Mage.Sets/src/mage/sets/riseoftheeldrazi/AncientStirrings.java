@@ -37,6 +37,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 
 import java.util.UUID;
+import mage.constants.Zone;
 
 /**
  * @author LevelX
@@ -54,10 +55,11 @@ public class AncientStirrings extends CardImpl {
         super(ownerId, 174, "Ancient Stirrings", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "ROE";
 
-
         // Look at the top five cards of your library. You may reveal a colorless card from among them and put it into your hand. 
         // Then put the rest on the bottom of your library in any order. (Cards with no colored mana in their mana costs are colorless. Lands are also colorless.)
-        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, false));
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(new StaticValue(5), false, new StaticValue(1), filter, Zone.LIBRARY, 
+                false, true, false, Zone.HAND, true));
+        
     }
 
     public AncientStirrings(final AncientStirrings card) {

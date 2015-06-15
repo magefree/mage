@@ -739,14 +739,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void setUserPrefsToConnection(Connection connection) {
-        int avatarId = PreferencesDialog.getSelectedAvatar();
-        connection.setAvatarId(avatarId);
-        boolean showAbilityPickerForced = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_ABILITY_PICKER_FORCED, "true").equals("true");        
-        connection.setShowAbilityPickerForced(showAbilityPickerForced);            
-        connection.setAllowRequestShowHandCards(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"));
-        connection.setConfirmEmptyManaPool(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"));
-        connection.setUserSkipPrioritySteps(PreferencesDialog.getUserSkipPrioritySteps());           
-        connection.setFlagName(MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png"));        
+        connection.setUserData(PreferencesDialog.getUserData());
     }
     
     /**

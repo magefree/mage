@@ -40,6 +40,7 @@ import mage.watchers.Watcher;
  */
 public class AttackedThisTurnWatcher extends Watcher {
 
+    // TODO: use MageObjectReference instead of UUID
     public Set<UUID> attackedThisTurnCreatures = new HashSet<>();
 
     public AttackedThisTurnWatcher() {

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HymnToTourach extends mage.sets.fallenempires.HymnToTourach {
+public class HymnToTourach extends mage.sets.fallenempires.HymnToTourach1 {
 
     public HymnToTourach(UUID ownerId) {
         super(ownerId);

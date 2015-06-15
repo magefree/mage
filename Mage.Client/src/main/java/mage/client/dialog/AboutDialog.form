@@ -52,9 +52,9 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" pref="21" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -82,17 +82,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Courtesy: BetaSteward@googlemail.com. Site: http://XMage.info/"/>
+        <Property name="text" type="java.lang.String" value="Courtesy: BetaSteward@googlemail.com. Site: http://XMage.de/"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000. "/>
+        <Property name="text" type="java.lang.String" value="Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000.,"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Thanks: maurer.it, Rafbill, Alvin, cbt33, Quercitron."/>
+        <Property name="text" type="java.lang.String" value="fireshoes, lunaskyrise, mnapoleon, jgod, LoneFox."/>
       </Properties>
     </Component>
   </SubComponents>

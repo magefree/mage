@@ -29,7 +29,7 @@ package mage.sets.khansoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -64,7 +64,7 @@ public class ZurgoHelmsmasher extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // Zurgo Helmsmasher attacks each combat if able.
-        this.addAbility(new AttacksEachTurnStaticAbility());
+        this.addAbility(new AttacksEachCombatStaticAbility());
         // Zurgo Helmsmasher has indestructible as long as it's your turn.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),

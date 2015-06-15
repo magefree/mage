@@ -11,7 +11,7 @@ You can download this from:  http://java.com/
 Installing and running XMage
 
 You will need to download both the client and the server applications.  These can be
-obtained from HTTP://XMage.info.
+obtained from HTTP://XMage.de.
 Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To

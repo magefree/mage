@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fallenempires;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class GoblinGrenade extends mage.sets.magic2012.GoblinGrenade {
+public class MindRot extends mage.sets.tenthedition.MindRot {
 
-    public GoblinGrenade(UUID ownerId) {
+    public MindRot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 114;
-        this.expansionSetCode = "FEM";
-        this.rarity = Rarity.COMMON;
+        this.cardNumber = 281;
+        this.expansionSetCode = "ORI";
     }
 
-    public GoblinGrenade(final GoblinGrenade card) {
+    public MindRot(final MindRot card) {
         super(card);
     }
 
     @Override
-    public GoblinGrenade copy() {
-        return new GoblinGrenade(this);
+    public MindRot copy() {
+        return new MindRot(this);
     }
 }

@@ -27,7 +27,7 @@
 */
 package mage.remote.interfaces;
 
-import mage.players.net.UserSkipPrioritySteps;
+import mage.view.UserDataView;
 
 /**
  * @author noxx
@@ -36,5 +36,5 @@ public interface ClientData {
 
     String getUserName();
 
-    boolean updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName);
+    boolean updatePreferencesForServer(UserDataView userData);
 }

@@ -111,5 +111,40 @@ public class LandfallTest extends CardTestPlayerBase {
         assertLife(playerB, 20);        
         
     }        
+    
+    /**
+     * Searing Blaze's landfall doesn't appear to be working. My opponent played
+     * a mountain, then played searing blaze targeting my Tasigur, the Golden
+     * Fang. It only dealt 1 damage to me, where it should've dealt 3, because
+     * my opponent had played a land.
+     */
+    @Test
+    public void testSearingBlaze() {
+        // Searing Blaze deals 1 damage to target player and 1 damage to target creature that player controls.
+        // Landfall - If you had a land enter the battlefield under your control this turn, Searing Blaze deals 3 damage to that player and 3 damage to that creature instead.
+        addCard(Zone.HAND, playerA, "Searing Blaze",1); 
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain",1); 
+        addCard(Zone.HAND, playerA, "Mountain"); 
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion",1); 
+
+                
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Searing Blaze"); 
+        
+        
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Mountain", 2);
+        assertGraveyardCount(playerA, "Searing Blaze" , 1);
+                
+        assertLife(playerA, 20); 
+        assertLife(playerB, 17);        
+        
+        assertGraveyardCount(playerB, "Silvercoat Lion" , 1);
+        
+    }        
      
 }

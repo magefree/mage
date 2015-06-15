@@ -42,12 +42,18 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
 
 public abstract class CardTestCommanderDuelBase extends CardTestPlayerAPIImpl {
  
+    public CardTestCommanderDuelBase() {
+        super();
+        this.deckNameA = "CommanderDuel.dck";
+        this.deckNameB = "CommanderDuel.dck";
+    }
+    
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {        
         Game game = new CommanderDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 40);
 
-        playerA = createPlayer(game, playerA, "PlayerA","CommanderDuel.dck");
-        playerB = createPlayer(game, playerB, "PlayerB","CommanderDuel.dck");
+        playerA = createPlayer(game, playerA, "PlayerA",deckNameA);
+        playerB = createPlayer(game, playerB, "PlayerB",deckNameB);
         return game;
     }    
 

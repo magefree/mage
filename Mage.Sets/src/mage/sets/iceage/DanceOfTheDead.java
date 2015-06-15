@@ -42,6 +42,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapEnchantedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -96,7 +97,7 @@ public class DanceOfTheDead extends CardImpl {
         
         // Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new DontUntapInControllersUntapStepSourceEffect();
+        Effect effect = new DontUntapInControllersUntapStepEnchantedEffect();
         effect.setText("and doesn't untap during its controller's untap step");
         ability.addEffect(effect);
         this.addAbility(ability);
@@ -144,7 +145,7 @@ class DanceOfTheDeadReAttachEffect extends OneShotEffect {
             }
             
             // put card into play
-            controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId());
+            controller.putOntoBattlefieldWithInfo(cardInGraveyard, game, Zone.GRAVEYARD, source.getSourceId(), true);
             Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());
             
             FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Dance of the Dead");
