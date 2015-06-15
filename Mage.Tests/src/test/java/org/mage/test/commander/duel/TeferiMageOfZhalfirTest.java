@@ -29,13 +29,10 @@ package org.mage.test.commander.duel;
 
 
 import java.io.FileNotFoundException;
-import mage.abilities.keyword.FlashAbility;
-import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
-import mage.game.command.CommandObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommanderDuelBase;
@@ -67,4 +64,35 @@ public class TeferiMageOfZhalfirTest extends CardTestCommanderDuelBase {
         assertPermanentCount(playerA, "Daxos of Meletis", 1);
         
     }
+    
+    @Test
+    public void testCommanderDamage() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Enchant creature
+        // Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.
+        // When enchanted creature dies, return Angelic Destiny to its owner's hand.
+        addCard(Zone.HAND, playerA, "Angelic Destiny");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Teferi, Mage of Zhalfir");
+ 
+        // Daxos of Meletis can't be blocked by creatures with power 3 or greater.
+        // Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it. 
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Daxos of Meletis");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Destiny","Daxos of Meletis");
+        
+        attack(3, playerA, "Daxos of Meletis");
+        attack(5, playerA, "Daxos of Meletis");
+        attack(7, playerA, "Daxos of Meletis");
+        attack(9, playerA, "Daxos of Meletis");
+        
+        setStopAt(9, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPermanentCount(playerA, "Daxos of Meletis", 1);
+        assertPowerToughness(playerA, "Daxos of Meletis", 6, 6);
+        
+        Assert.assertEquals("Player A has won because of commander damage", true, playerA.hasWon());
+        Assert.assertEquals("Player A has lost because of commander damage", true, playerB.hasLost());
+    }      
 }
