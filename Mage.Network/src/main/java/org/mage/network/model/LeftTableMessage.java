@@ -1,12 +1,12 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class LeftTableMessage implements Serializable {
+public class LeftTableMessage extends ClientMessage {
     
     private boolean success;
     
@@ -14,8 +14,9 @@ public class LeftTableMessage implements Serializable {
         this.success = success;
     }
     
-    public boolean getSuccess() {
-        return success;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.receiveBoolean(success);
     }
     
 }

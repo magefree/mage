@@ -1,13 +1,13 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import mage.view.TableView;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class CreateTableMessage implements Serializable {
+public class CreateTableMessage extends ClientMessage {
     
     private TableView table;
     
@@ -15,8 +15,9 @@ public class CreateTableMessage implements Serializable {
         this.table = table;
     }
     
-    public TableView getTable() {
-        return table;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.receiveTableView(table);
     }
     
 }

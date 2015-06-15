@@ -1,13 +1,13 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import java.util.UUID;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class JoinedTableMessage implements Serializable {
+public class JoinedTableMessage extends ClientMessage {
     
     private UUID roomId;
     private UUID tableId;
@@ -23,23 +23,8 @@ public class JoinedTableMessage implements Serializable {
         this.tournament = tournament;
     }
     
-    public UUID getRoomId() {
-        return roomId;
-    }
-
-    public UUID getTableId() {
-        return tableId;
-    }
-
-    public UUID getChatId() {
-        return chatId;
-    }
-
-    public boolean isOwner() {
-        return owner;
-    }
-    
-    public boolean isTournament() {
-        return tournament;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.getClient().joinedTable(roomId, tableId, chatId, owner, tournament);
     }
 }

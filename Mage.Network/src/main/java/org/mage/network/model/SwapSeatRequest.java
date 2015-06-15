@@ -1,6 +1,5 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /**

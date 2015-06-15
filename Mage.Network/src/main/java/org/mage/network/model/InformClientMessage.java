@@ -1,12 +1,12 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class InformClientMessage implements Serializable {
+public class InformClientMessage extends ClientMessage {
     
     private String title;
     private String message;
@@ -18,15 +18,8 @@ public class InformClientMessage implements Serializable {
         this.type = type;
     }
         
-    public String getTitle() {
-        return title;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-    
-    public MessageType getType() {
-        return type;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.getClient().inform(title, message, type);
     }
 }

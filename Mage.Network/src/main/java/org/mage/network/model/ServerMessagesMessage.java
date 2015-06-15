@@ -1,13 +1,13 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import java.util.List;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class ServerMessagesMessage implements Serializable {
+public class ServerMessagesMessage extends ClientMessage {
     
     private List<String> messages;
     
@@ -15,8 +15,9 @@ public class ServerMessagesMessage implements Serializable {
         this.messages = messages;
     }
     
-    public List<String> getMessages() {
-        return messages;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.receiveStringList(messages);
     }
     
 }

@@ -1,22 +1,23 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import java.util.UUID;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class ChatRoomIdMessage implements Serializable {
+public class ChatRoomIdMessage extends ClientMessage {
     
-    private UUID id;
+    private UUID chatId;
     
-    public ChatRoomIdMessage(UUID id) {
-        this.id = id;
+    public ChatRoomIdMessage(UUID chatId) {
+        this.chatId = chatId;
     }
-    
-    public UUID getId() {
-        return id;
+
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.receiveId(chatId);
     }
-    
+
 }

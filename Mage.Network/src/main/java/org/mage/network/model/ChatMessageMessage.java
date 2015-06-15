@@ -1,14 +1,14 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import java.util.UUID;
 import mage.view.ChatMessage;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class ChatMessageMessage implements Serializable {
+public class ChatMessageMessage extends ClientMessage {
     
     private UUID chatId;
     private ChatMessage message;
@@ -17,13 +17,10 @@ public class ChatMessageMessage implements Serializable {
         this.chatId = chatId;
         this.message = message;
     }
-        
-    public UUID getChatId() {
-        return chatId;
-    }
 
-    public ChatMessage getMessage() {
-        return message;
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.getClient().receiveChatMessage(chatId, message);
     }
     
 }

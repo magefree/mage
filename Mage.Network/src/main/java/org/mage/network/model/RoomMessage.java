@@ -1,13 +1,13 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
 import mage.view.RoomView;
+import org.mage.network.handlers.client.ClientMessageHandler;
 
 /**
  *
  * @author BetaSteward
  */
-public class RoomMessage implements Serializable {
+public class RoomMessage extends ClientMessage {
     
     private RoomView room;
     
@@ -17,6 +17,11 @@ public class RoomMessage implements Serializable {
     
     public RoomView getRoom() {
         return room;
+    }
+
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.receiveRoomView(room);
     }
     
 }

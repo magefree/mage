@@ -33,20 +33,11 @@ import mage.view.TournamentView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
+import org.mage.network.handlers.MessageHandler;
 import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
-import org.mage.network.handlers.client.ChatMessageHandler;
-import org.mage.network.handlers.client.ChatRoomHandler;
+import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
-import org.mage.network.handlers.client.ConnectionHandler;
-import org.mage.network.handlers.client.InformClientMessageHandler;
-import org.mage.network.handlers.client.JoinTableMessageHandler;
-import org.mage.network.handlers.client.JoinedTableMessageHandler;
-import org.mage.network.handlers.client.LeaveTableMessageHandler;
-import org.mage.network.handlers.client.ServerMessageHandler;
-import org.mage.network.handlers.client.RoomMessageHandler;
-import org.mage.network.handlers.client.TableMessageHandler;
-import org.mage.network.handlers.client.TableWaitingMessageHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -63,18 +54,8 @@ public class Client {
 
     private final MageClient client;
 //    private final MessageHandler h;
-    private final ConnectionHandler connectionHandler;
-    private final ChatRoomHandler chatRoomHandler;
-    private final ChatMessageHandler chatMessageHandler;
-    private final InformClientMessageHandler informClientMessageHandler;
+    private final ClientMessageHandler clientMessageHandler;
     private final ClientRegisteredMessageHandler clientRegisteredMessageHandler;
-    private final ServerMessageHandler serverMessageHandler;
-    private final RoomMessageHandler roomMessageHandler;
-    private final TableMessageHandler tableMessageHandler;
-    private final JoinTableMessageHandler joinTableMessageHandler;
-    private final JoinedTableMessageHandler joinedTableMessageHandler;
-    private final TableWaitingMessageHandler tableWaitingMessageHandler;
-    private final LeaveTableMessageHandler leaveTableMessageHandler;
     
     private final ExceptionHandler exceptionHandler;
     
@@ -88,18 +69,8 @@ public class Client {
     public Client(MageClient client) {
         this.client = client;
 //        h = new MessageHandler();
-        connectionHandler = new ConnectionHandler(client);
-        chatRoomHandler = new ChatRoomHandler();
-        chatMessageHandler = new ChatMessageHandler(client);
-        informClientMessageHandler = new InformClientMessageHandler(client);
+        clientMessageHandler = new ClientMessageHandler(client);
         clientRegisteredMessageHandler = new ClientRegisteredMessageHandler();
-        serverMessageHandler = new ServerMessageHandler();
-        roomMessageHandler = new RoomMessageHandler();
-        tableMessageHandler = new TableMessageHandler();
-        joinTableMessageHandler = new JoinTableMessageHandler();
-        joinedTableMessageHandler = new JoinedTableMessageHandler(client);
-        tableWaitingMessageHandler = new TableWaitingMessageHandler();
-        leaveTableMessageHandler = new LeaveTableMessageHandler();
         
         exceptionHandler = new ExceptionHandler();
     }
@@ -153,23 +124,13 @@ public class Client {
             ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
             ch.pipeline().addLast(new ObjectEncoder());
 
-            ch.pipeline().addLast("connectionHandler", connectionHandler);
             ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(IDLE_TIMEOUT, IDLE_PING_TIME, 0));
             ch.pipeline().addLast("heartbeatHandler", new HeartbeatHandler());
             ch.pipeline().addLast("pingMessageHandler", new PingMessageHandler());
 
 //            ch.pipeline().addLast("h", h);
-            ch.pipeline().addLast("chatMessageHandler", chatMessageHandler);
-            ch.pipeline().addLast("informClientMessageHandler", informClientMessageHandler);
             ch.pipeline().addLast("clientRegisteredMessageHandler", clientRegisteredMessageHandler);
-            ch.pipeline().addLast("chatRoomHandler", chatRoomHandler);
-            ch.pipeline().addLast("serverMessageHandler", serverMessageHandler);
-            ch.pipeline().addLast("roomMessageHandler", roomMessageHandler);
-            ch.pipeline().addLast("tableMessageHandler", tableMessageHandler);
-            ch.pipeline().addLast("joinTableMessageHandler", joinTableMessageHandler);
-            ch.pipeline().addLast("joinedTableMessageHandler", joinedTableMessageHandler);
-            ch.pipeline().addLast("tableWaitingMessageHandler", tableWaitingMessageHandler);
-            ch.pipeline().addLast("leaveTableMessageHandler", leaveTableMessageHandler);
+            ch.pipeline().addLast("clientMessageHandler", clientMessageHandler);
 
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
@@ -194,15 +155,15 @@ public class Client {
     }
     
     public void sendChatMessage(UUID chatId, String message) {
-        chatMessageHandler.sendMessage(chatId, message);
+        clientMessageHandler.sendMessage(chatId, message);
     }
 
     public void joinChat(UUID chatId) {
-        chatRoomHandler.joinChat(chatId);
+        clientMessageHandler.joinChat(chatId);
     }
     
     public void leaveChat(UUID chatId) {
-        chatRoomHandler.leaveChat(chatId);
+        clientMessageHandler.leaveChat(chatId);
     }
 
     public void sendPlayerUUID(UUID gameId, UUID id) {
@@ -239,7 +200,7 @@ public class Client {
 
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
         try {
-            return joinTableMessageHandler.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
+            return clientMessageHandler.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
         } catch (Exception ex) {
             logger.error("Error creating table", ex);
         }
@@ -248,7 +209,7 @@ public class Client {
 
     public TableView createTable(UUID roomId, MatchOptions options) {
         try {
-            return tableMessageHandler.createTable(roomId, options);
+            return clientMessageHandler.createTable(roomId, options);
         } catch (Exception ex) {
             logger.error("Error creating table", ex);
         }
@@ -257,7 +218,7 @@ public class Client {
 
     public void removeTable(UUID roomId, UUID tableId) {
         try {
-            tableMessageHandler.removeTable(roomId, tableId);
+            clientMessageHandler.removeTable(roomId, tableId);
         } catch (Exception ex) {
             logger.error("Error removing table", ex);
         }
@@ -275,14 +236,6 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public boolean isTableOwner(UUID roomId, UUID tableId) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
-//    public UUID getTableChatId(UUID tableId) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     public boolean startMatch(UUID roomId, UUID tableId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -293,7 +246,7 @@ public class Client {
 
     public boolean leaveTable(UUID roomId, UUID tableId) {
         try {
-            return leaveTableMessageHandler.leaveTable(roomId, tableId);
+            return clientMessageHandler.leaveTable(roomId, tableId);
         } catch (Exception ex) {
             logger.error("Error leaving table", ex);
         }
@@ -302,7 +255,7 @@ public class Client {
 
     public void swapSeats(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
         try {
-            tableMessageHandler.swapSeats(roomId, tableId, seatNum1, seatNum2);
+            clientMessageHandler.swapSeats(roomId, tableId, seatNum1, seatNum2);
         } catch (Exception ex) {
             logger.error("Error swaping seats", ex);
         }
@@ -314,7 +267,7 @@ public class Client {
 
     public TableView getTable(UUID roomId, UUID tableId) {
         try {
-            return tableWaitingMessageHandler.getTable(roomId, tableId);
+            return clientMessageHandler.getTable(roomId, tableId);
         } catch (Exception ex) {
             logger.error("Error getting chat room id", ex);
         }
@@ -355,7 +308,7 @@ public class Client {
 
     public UUID getRoomChatId(UUID roomId) {
         try {
-            return chatRoomHandler.getChatRoomId(roomId);
+            return clientMessageHandler.getChatRoomId(roomId);
         } catch (Exception ex) {
             logger.error("Error getting chat room id", ex);
         }
@@ -364,7 +317,7 @@ public class Client {
 
     public List<String> getServerMessages() {
         try {
-            return serverMessageHandler.getServerMessages();
+            return clientMessageHandler.getServerMessages();
         } catch (Exception ex) {
             logger.error("Error getting server messages", ex);
         }
@@ -373,7 +326,7 @@ public class Client {
 
     public RoomView getRoom(UUID roomId) {
         try {
-            return roomMessageHandler.getRoom(roomId);
+            return clientMessageHandler.getRoom(roomId);
         } catch (Exception ex) {
             logger.error("Error getting tables", ex);
         }
