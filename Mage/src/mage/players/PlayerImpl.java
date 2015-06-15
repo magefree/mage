@@ -709,7 +709,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         } else {
-            TargetDiscard target = new TargetDiscard(amount, amount, new FilterCard(CardUtil.numberToText(amount, "a") + " card" + (amount > 1 ? "s" : "")), playerId);
+            int possibleAmount = Math.min(getHand().size(), amount);
+            TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount, new FilterCard(CardUtil.numberToText(possibleAmount, "a") + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
                 Card card = this.getHand().get(cardId, game);

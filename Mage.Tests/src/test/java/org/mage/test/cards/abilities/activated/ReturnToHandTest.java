@@ -27,7 +27,6 @@
  */
 package org.mage.test.cards.abilities.activated;
 
-import mage.abilities.keyword.BloodthirstAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;

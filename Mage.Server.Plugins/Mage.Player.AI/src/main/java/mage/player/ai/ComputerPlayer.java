@@ -208,7 +208,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
         }
-        // sometimes a target aelection can be made from a player that does not control the ability
+        // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
