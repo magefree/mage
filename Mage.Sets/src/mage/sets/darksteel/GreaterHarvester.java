@@ -22,6 +22,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -29,17 +30,17 @@ import mage.target.targetpointer.FixedTarget;
  * @author wanderer120
  */
 public class GreaterHarvester extends CardImpl {
-    
-        public static final FilterPermanent filter = new FilterPermanent("a permanent");
-            
-           static{
-               filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-               				new CardTypePredicate(CardType.CREATURE),
-                                        new CardTypePredicate(CardType.ENCHANTMENT),
-                                        new CardTypePredicate(CardType.PLANESWALKER),
-              				new CardTypePredicate(CardType.LAND)));
-           }
-    
+
+    public static final FilterPermanent filter = new FilterPermanent("a permanent");
+
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.PLANESWALKER),
+                new CardTypePredicate(CardType.LAND)));
+    }
+
     public GreaterHarvester(UUID ownerId) {
         super(ownerId, 44, "Greater Harvester", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}{B}");
         this.expansionSetCode = "DST";
@@ -50,7 +51,7 @@ public class GreaterHarvester extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a permanent.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, ""), TargetController.YOU, false));
-    
+
         //Whenever Greater Harvester deals combat damage to a player, that player sacrifices two permanents.
         this.addAbility(new GreaterHarvesterAbility());
     }
@@ -64,6 +65,7 @@ public class GreaterHarvester extends CardImpl {
         return new GreaterHarvester(this);
     }
 }
+
 class GreaterHarvesterAbility extends TriggeredAbilityImpl {
 
     public GreaterHarvesterAbility() {
@@ -80,15 +82,19 @@ class GreaterHarvesterAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return EventType.DAMAGED_PLAYER.equals(event.getType());
+    }
+
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-                for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-                return true;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }
+            return true;
         }
         return false;
     }
