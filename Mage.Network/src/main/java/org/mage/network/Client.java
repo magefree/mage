@@ -237,7 +237,12 @@ public class Client {
     }
 
     public boolean startMatch(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.startMatch(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error starting match", ex);
+        }
+        return false;
     }
 
     public boolean startTournament(UUID roomId, UUID tableId) {

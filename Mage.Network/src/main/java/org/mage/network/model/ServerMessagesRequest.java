@@ -1,12 +1,19 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
+import io.netty.channel.ChannelHandlerContext;
+import org.mage.network.handlers.WriteListener;
+import org.mage.network.interfaces.MageServer;
 
 /**
  *
  * @author BetaSteward
  */
-public class ServerMessagesRequest implements Serializable {
+public class ServerMessagesRequest extends ServerRequest {
+
+    @Override
+    public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
+        ctx.writeAndFlush(new ServerMessagesMessage(server.getServerMessages())).addListener(WriteListener.getInstance());
+    }
     
     
 }

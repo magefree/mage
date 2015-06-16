@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.apache.log4j.Logger;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.model.PingMessage;
 
 /**
@@ -27,7 +28,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
                 ctx.channel().close();
                 logger.info("Disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
-                ctx.writeAndFlush(ping);
+                ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
                 logger.info("Sending ping");
             }
         }

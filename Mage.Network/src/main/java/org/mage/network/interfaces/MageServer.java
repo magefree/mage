@@ -36,7 +36,9 @@ public interface MageServer {
     boolean leaveTable(String sessionId, UUID roomId, UUID tableId);
     void removeTable(String sessionId, UUID roomId, UUID tableId);
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2);
-    
+
+    boolean startMatch(String sessionId, UUID roomId, UUID tableId);
+
     void pingTime(long milliSeconds, String sessionId);
 
 }

@@ -1,14 +1,19 @@
 package org.mage.network.model;
 
+import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
+import org.mage.network.handlers.WriteListener;
+import org.mage.network.interfaces.MageServer;
 
 /**
  *
  * @author BetaSteward
  */
-public class JoinTableRequest extends TableRequest {
+public class JoinTableRequest extends ServerRequest {
     
+    private UUID roomId;
+    private UUID tableId;
     private String name;
     private String playerType;
     private int skill;
@@ -16,7 +21,8 @@ public class JoinTableRequest extends TableRequest {
     private String password;
     
     public JoinTableRequest(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
-        super(roomId, tableId);
+        this.roomId = roomId;
+        this.tableId = tableId;
         this.name = name;
         this.playerType = playerType;
         this.skill = skill;
@@ -24,24 +30,9 @@ public class JoinTableRequest extends TableRequest {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getPlayerType() {
-        return playerType;
-    }
-    
-    public int getSkill() {
-        return skill;
-    }
-    
-    public DeckCardLists getDeckCardLists() {
-        return deckList;
-    }
-
-    public String getPassword() {
-        return password;
+    @Override
+    public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
+        ctx.writeAndFlush(new JoinTableMessage(server.joinTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
     }
     
 }

@@ -1,22 +1,26 @@
 package org.mage.network.model;
 
+import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
+import org.mage.network.interfaces.MageServer;
 
 /**
  *
  * @author BetaSteward
  */
-public class ChatMessageRequest extends ChatRequest {
+public class ChatMessageRequest extends ServerRequest {
     
+    private UUID chatId;
     private String message;
     
     public ChatMessageRequest(UUID chatId, String message) {
-        super(chatId);
+        this.chatId = chatId;
         this.message = message;
     }
-        
-    public String getMessage() {
-        return message;
+
+    @Override
+    public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
+        server.receiveChatMessage(chatId, ctx.channel().id().asLongText(), message);
     }
-    
+            
 }

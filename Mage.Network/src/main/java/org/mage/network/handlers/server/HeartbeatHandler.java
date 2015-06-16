@@ -1,6 +1,5 @@
 package org.mage.network.handlers.server;
 
-import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
@@ -8,6 +7,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 import java.util.concurrent.TimeUnit;
 import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
+import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.PingMessage;
 import org.mage.network.model.PongMessage;
@@ -47,7 +47,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
                 logger.info("Disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
                 startTime = System.nanoTime();
-                ctx.writeAndFlush(ping);
+                ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
                 logger.info("Sending ping");
             }
         }
@@ -64,6 +64,6 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
 
     public void pingClient() {
         startTime = System.nanoTime();
-        ctx.writeAndFlush(ping);
+        ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
     }
 }

@@ -1,24 +1,28 @@
 package org.mage.network.model;
 
-import java.io.Serializable;
+import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 import mage.game.match.MatchOptions;
+import org.mage.network.handlers.WriteListener;
+import org.mage.network.interfaces.MageServer;
 
 /**
  *
  * @author BetaSteward
  */
-public class CreateTableRequest extends RoomRequest {
+public class CreateTableRequest extends ServerRequest {
     
+    private UUID roomId;
     private MatchOptions options;
     
     public CreateTableRequest(UUID roomId, MatchOptions options) {
-        super(roomId);
+        this.roomId = roomId;
         this.options = options;
     }
     
-    public MatchOptions getMatchOptions() {
-        return options;
+    @Override
+    public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
+        ctx.writeAndFlush(new CreateTableMessage(server.createTable(ctx.channel().id().asLongText(), roomId, options))).addListener(WriteListener.getInstance());
     }
     
 }

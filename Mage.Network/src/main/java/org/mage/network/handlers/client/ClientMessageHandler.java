@@ -23,6 +23,7 @@ import org.mage.network.model.LeaveChatRequest;
 import org.mage.network.model.LeaveTableRequest;
 import org.mage.network.model.RemoveTableRequest;
 import org.mage.network.model.ServerMessagesRequest;
+import org.mage.network.model.StartMatchRequest;
 import org.mage.network.model.SwapSeatRequest;
 import org.mage.network.model.TableWaitingRequest;
 
@@ -94,6 +95,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     public boolean leaveTable(UUID roomId, UUID tableId) throws Exception {
         booleanQueue.clear();
         ctx.writeAndFlush(new LeaveTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
+    public boolean startMatch(UUID roomId, UUID tableId) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new StartMatchRequest(roomId, tableId)).addListener(WriteListener.getInstance());
         return booleanQueue.take();
     }
 

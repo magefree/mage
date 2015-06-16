@@ -1,28 +1,30 @@
 package org.mage.network.model;
 
+import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
+import org.mage.network.interfaces.MageServer;
 
 /**
  *
  * @author BetaSteward
  */
-public class SwapSeatRequest extends TableRequest {
+public class SwapSeatRequest extends ServerRequest {
     
+    private UUID roomId;
+    private UUID tableId;
     private int seatNum1;
     private int seatNum2;
     
     public SwapSeatRequest(UUID roomId, UUID tableId, int seatNum1, int seatNum2) {
-        super(roomId, tableId);
+        this.roomId = roomId;
+        this.tableId = tableId;
         this.seatNum1 = seatNum1;
         this.seatNum2 = seatNum2;
     }
             
-    public int getSeatNum1() {
-        return seatNum1;
-    }
-
-    public int getSeatNum2() {
-        return seatNum2;
+    @Override
+    public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
+        server.swapSeats(ctx.channel().id().asLongText(), roomId, tableId, seatNum1, seatNum2);
     }
 
 }
