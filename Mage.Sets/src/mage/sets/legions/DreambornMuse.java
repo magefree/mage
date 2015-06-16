@@ -30,7 +30,7 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
+import mage.abilities.dynamicvalue.common.CardsInTargetPlayerHandCount;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -49,9 +49,13 @@ public class DreambornMuse extends CardImpl {
         this.subtype.add("Spirit");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        PutLibraryIntoGraveTargetEffect effect = new PutLibraryIntoGraveTargetEffect(new CardsInTargetPlayerHandCount());
+        effect.setText("that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.");
 
         // At the beginning of each player's upkeep, that player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in his or her hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PutLibraryIntoGraveTargetEffect(new CardsInTargetHandCount()), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.ANY, false));
+        
     }
 
     public DreambornMuse(final DreambornMuse card) {
@@ -62,8 +66,4 @@ public class DreambornMuse extends CardImpl {
     public DreambornMuse copy() {
         return new DreambornMuse(this);
     }
-}
-
-class DreambornMuseEffect {
-    
 }

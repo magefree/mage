@@ -10,17 +10,17 @@ import mage.players.Player;
  *
  * @author cbrianhill
  */
-public class CardsInTargetHandCount implements DynamicValue {
+public class CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Player player = game.getPlayer(sourceAbility.getFirstTarget());
+        Player player = game.getPlayer(effect.getTargetPointer().getFirst(game, sourceAbility));
         return player.getHand().size();
     }
 
     @Override
     public DynamicValue copy() {
-        return new CardsInTargetHandCount();
+        return new CardsInTargetPlayerHandCount();
     }
 
     @Override
