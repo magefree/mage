@@ -73,5 +73,46 @@ public class ReturnToHandTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Return from graveyard to hand if you play a swamp
+     */
+    @Test
+    public void VeilbornGhoulTest1() {
+        // Veilborn Ghoul can't block.
+        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.        
+        addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
+        addCard(Zone.HAND, playerA, "Swamp");
+        
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        
+        execute();
+
+        assertPermanentCount(playerA, "Swamp", 1);        
+        assertHandCount(playerA, "Veilborn Ghoul", 1);
+
+    }
+    /**
+     * Return from graveyard to hand if you play a non swamp land but Urborg, Tomb of Yawgmoth is in play 
+     */
+    @Test
+    public void VeilbornGhoulTest2() {
+        // Veilborn Ghoul can't block.
+        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.        
+        addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
+        addCard(Zone.HAND, playerA, "Flood Plain");
+        
+        // Each land is a Swamp in addition to its other land types.
+        addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);
+        
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flood Plain");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        
+        execute();
+
+        assertPermanentCount(playerA, "Flood Plain", 1);        
+        assertHandCount(playerA, "Veilborn Ghoul", 1);
+
+    }     
     
 }
