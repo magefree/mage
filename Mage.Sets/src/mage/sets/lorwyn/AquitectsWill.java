@@ -98,8 +98,10 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
     public boolean isInactive(Ability source, Game game) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
         if (land != null && land.getCounters().getCount(CounterType.FLOOD) < 1) {
+            this.discard();
             return true;
         }
+        
         return false;
     }
 
