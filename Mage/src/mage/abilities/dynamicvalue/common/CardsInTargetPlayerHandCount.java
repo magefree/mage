@@ -15,7 +15,10 @@ public class CardsInTargetPlayerHandCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Player player = game.getPlayer(effect.getTargetPointer().getFirst(game, sourceAbility));
-        return player.getHand().size();
+        if (player != null) {
+            return player.getHand().size();
+        }
+        return 0;
     }
 
     @Override
