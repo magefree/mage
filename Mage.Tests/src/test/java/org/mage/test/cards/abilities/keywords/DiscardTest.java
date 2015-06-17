@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -37,16 +36,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class DiscardTest extends CardTestPlayerBase {
 
-   /*
-    * If Rest in Peace is in play, every card going to the graveyard goes to exile instead.
-    * If a card is discarded while Rest in Peace is on the battlefield, abilities that function
-    * when a card is discarded (such as madness) still work, even though that card never reaches
-    * a graveyard.
-    */
-
+    /*
+     * If Rest in Peace is in play, every card going to the graveyard goes to exile instead.
+     * If a card is discarded while Rest in Peace is on the battlefield, abilities that function
+     * when a card is discarded (such as madness) still work, even though that card never reaches
+     * a graveyard.
+     */
     @Test
     public void testRestInPeaceAndCycle() {
 
@@ -67,4 +64,26 @@ public class DiscardTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1); // the card drawn by Cycling
     }
 
+    /**
+     * With Bazaar of Baghdad, if you use it when you have no cards in hand, you
+     * draw 2, it asks for you to discard 3, but you can't. So the game can't
+     * progress and you lose on time.
+     */
+    @Test
+    public void testBazaarOfBaghdad() {
+        // {T}: Draw two cards, then discard three cards.
+        addCard(Zone.BATTLEFIELD, playerA, "Bazaar of Baghdad", 1);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw two cards, then discard three cards");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertHandCount(playerA, 0);
+        assertGraveyardCount(playerA, 2);
+
+    }
 }

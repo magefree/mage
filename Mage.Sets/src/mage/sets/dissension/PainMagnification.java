@@ -77,21 +77,23 @@ class PainMagnificationTriggeredAbility extends TriggeredAbilityImpl {
     public PainMagnificationTriggeredAbility copy() {
         return new PainMagnificationTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            // If the damaged player is an opponent
-            if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-                int amount = event.getAmount();
-                if(amount >= 3) {
-                    // If at least 3 damage is dealt, set the opponent as the Discard target
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
-                    return true;
-                }                
-            }
+        // If the damaged player is an opponent
+        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+            if(event.getAmount() >= 3) {
+                // If at least 3 damage is dealt, set the opponent as the Discard target
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
+            }                
         }
         return false;
     }

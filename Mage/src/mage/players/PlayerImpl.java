@@ -709,7 +709,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 }
             }
         } else {
-            TargetDiscard target = new TargetDiscard(amount, amount, new FilterCard(CardUtil.numberToText(amount, "a") + " card" + (amount > 1 ? "s" : "")), playerId);
+            int possibleAmount = Math.min(getHand().size(), amount);
+            TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount, new FilterCard(CardUtil.numberToText(possibleAmount, "a") + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
             choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
             for (UUID cardId : target.getTargets()) {
                 Card card = this.getHand().get(cardId, game);
@@ -2839,7 +2840,19 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCards(Cards cards, Zone fromZone, Zone toZone, Ability source, Game game) {
         ArrayList<Card> cardList = new ArrayList<>();
-        cardList.addAll(cards.getCards(game));
+        for (UUID cardId: cards) {
+            if (fromZone.equals(Zone.BATTLEFIELD)) {
+                Permanent permanent = game.getPermanent(cardId);
+                if (permanent != null) {
+                    cardList.add(permanent);
+                }
+            } else {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    cardList.add(card);
+                }                
+            }
+        }
         return moveCards(cardList, fromZone, toZone, source, game);
     }
 

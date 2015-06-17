@@ -2422,7 +2422,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
             getUserSkipPrioritySteps(),
-            MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world.png"),                
+            MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),                
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true")
         );
     }

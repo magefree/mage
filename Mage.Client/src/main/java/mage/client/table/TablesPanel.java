@@ -1146,6 +1146,7 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setMatchTimeLimit(MatchTimeLimit.NONE);
                 options.setFreeMulligans(2);
                 options.setSkillLevel(SkillLevel.CASUAL);
+                options.setRollbackTurnsAllowed(true);
                 table = session.createTable(roomId,    options);
 
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");

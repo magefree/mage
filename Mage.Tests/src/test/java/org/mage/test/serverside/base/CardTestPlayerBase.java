@@ -15,12 +15,17 @@ import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
  */
 public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
  
+    public CardTestPlayerBase() {
+        deckNameA = "RB Aggro.dck";
+        deckNameB = "RB Aggro.dck";
+    }
+    
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0, 20);
 
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
+        playerA = createPlayer(game, playerA, "PlayerA", deckNameA);
+        playerB = createPlayer(game, playerB, "PlayerB", deckNameB);
         return game;
     }    
 

@@ -171,6 +171,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<UUID, CardState> entry: state.cardState.entrySet()) {
             cardState.put(entry.getKey(), entry.getValue().copy());
         }
+        for (Map.Entry<UUID, CardAttribute> entry: state.cardAttribute.entrySet()) {
+            cardAttribute.put(entry.getKey(), entry.getValue().copy());
+        }
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
@@ -208,6 +211,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zones = state.zones;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
+        this.cardAttribute = state.cardAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;

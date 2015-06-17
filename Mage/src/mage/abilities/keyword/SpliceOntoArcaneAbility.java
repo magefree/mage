@@ -38,7 +38,6 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.SpliceCardEffectImpl;
 import mage.cards.Card;
-import mage.cards.CardsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
@@ -105,12 +104,12 @@ import mage.players.Player;
 public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
 
     private static final String KEYWORD_TEXT = "Splice onto Arcane";
-    private Costs spliceCosts = new CostsImpl();
+    private Costs<Cost> spliceCosts = new CostsImpl<>();
     private boolean nonManaCosts = false;
 
     public SpliceOntoArcaneAbility(String manaString) {
         super(Zone.HAND, new SpliceOntoArcaneEffect());
-        spliceCosts.add(new ManaCostsImpl(manaString));
+        spliceCosts.add(new ManaCostsImpl<>(manaString));
     }
 
     public SpliceOntoArcaneAbility(Cost cost) {
@@ -144,7 +143,6 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
     }
 }
 
-
 class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
 
     public SpliceOntoArcaneEffect() {
@@ -155,8 +153,6 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
     public SpliceOntoArcaneEffect(final SpliceOntoArcaneEffect effect) {
         super(effect);
     }
-
-
 
     @Override
     public SpliceOntoArcaneEffect copy() {
@@ -175,12 +171,7 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl {
                 splicedAbility.setSourceId(abilityToModify.getSourceId());
                 spell.addSpellAbility(splicedAbility);
                 for (Iterator it = ((SpliceOntoArcaneAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
-                    Cost cost = (Cost) it.next();
-                    if (cost instanceof ManaCostsImpl) {
-                        spell.getSpellAbility().getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                    } else {
-                        spell.getSpellAbility().getCosts().add(cost.copy());
-                    }
+                    spell.getSpellAbility().getCosts().add(((Cost) it.next()).copy());
                 }
             }
             return true;

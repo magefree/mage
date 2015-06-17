@@ -87,7 +87,7 @@ public class ProliferateEffect extends OneShotEffect {
                             choices.add(counter.getName());
                         }
                         choice.setChoices(choices);
-                        choice.setMessage("Choose a counter to proliferate (" + permanent.getName() + ")");
+                        choice.setMessage("Choose a counter to proliferate (" + permanent.getIdName() + ")");
                         controller.choose(Outcome.Benefit, choice, game);
                         for (Counter counter : permanent.getCounters().values()) {
                             if (counter.getName().equals(choice.getChoice())) {
