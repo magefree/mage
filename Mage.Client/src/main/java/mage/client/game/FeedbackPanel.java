@@ -85,14 +85,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
         client = MageFrame.getClient();
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
-        synchronized (this) {
-            if (messageId < this.lastMessageId) {
-                logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
-                return;
-            }
-            this.lastMessageId = messageId;
-        }
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
+//        synchronized (this) {
+//            if (messageId < this.lastMessageId) {
+//                logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
+//                return;
+//            }
+//            this.lastMessageId = messageId;
+//        }
 
         this.lblMessage.setText(message);
         this.helper.setMessage(message);

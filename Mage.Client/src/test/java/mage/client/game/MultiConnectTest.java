@@ -1,5 +1,8 @@
 package mage.client.game;
 
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.client.components.MageUI;
 //import mage.interfaces.MageClient;
@@ -13,8 +16,15 @@ import org.junit.Ignore;
 
 import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
+import mage.choices.Choice;
+import mage.game.Table;
 import mage.interfaces.ServerState;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameEndView;
+import mage.view.GameView;
+import mage.view.UserRequestMessage;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
@@ -131,6 +141,66 @@ public class MultiConnectTest {
 
         @Override
         public void gameStarted(UUID gameId, UUID playerId) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void initGame(UUID gameId, GameView gameView) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameAsk(UUID gameId, GameView gameView, String question) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameChooseChoice(UUID gameId, Choice choice) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameSelectAmount(UUID gameId, String message, int min, int max) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void gameEndInfo(UUID gameId, GameEndView view) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }

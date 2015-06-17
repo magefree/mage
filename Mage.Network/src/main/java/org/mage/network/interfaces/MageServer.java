@@ -3,6 +3,7 @@ package org.mage.network.interfaces;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
 import mage.remote.Connection;
@@ -38,8 +39,13 @@ public interface MageServer {
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2);
 
     boolean startMatch(String sessionId, UUID roomId, UUID tableId);
-    UUID joinGame(final UUID gameId, final String sessionId);
-
+    UUID joinGame(UUID gameId, String sessionId);
+    void sendPlayerUUID(UUID gameId, String sessionId, UUID data);
+    void sendPlayerString(UUID gameId, String sessionId, String data);
+    void sendPlayerManaType(UUID gameId, UUID playerId, String sessionId, ManaType data);
+    void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data);
+    void sendPlayerInteger(UUID gameId, String sessionId, Integer data);
+    
     void pingTime(long milliSeconds, String sessionId);
 
 }

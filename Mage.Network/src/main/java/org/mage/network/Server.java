@@ -1,5 +1,14 @@
 package org.mage.network;
 
+import org.mage.network.model.UserRequestDialogMessage;
+import org.mage.network.model.GameEndInfoMessage;
+import org.mage.network.model.GameSelectAmountMessage;
+import org.mage.network.model.GamePlayXManaMessage;
+import org.mage.network.model.GamePlayManaMessage;
+import org.mage.network.model.GameChooseChoiceMessage;
+import org.mage.network.model.GameChoosePileMessage;
+import org.mage.network.model.GameChooseAbilityMessage;
+import org.mage.network.model.GameSelectMessage;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -20,8 +29,18 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import mage.choices.Choice;
+import mage.game.Table;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameEndView;
+import mage.view.GameView;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
 import org.mage.network.handlers.MessageHandler;
@@ -36,7 +55,10 @@ import org.mage.network.handlers.server.ServerRequestHandler;
 //import org.mage.network.handlers.server.TableMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.ChatMessageMessage;
+import org.mage.network.model.GameAskMessage;
+import org.mage.network.model.GameInitMessage;
 import org.mage.network.model.GameStartedMessage;
+import org.mage.network.model.GameTargetMessage;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.JoinedTableMessage;
 import org.mage.network.model.MessageType;
@@ -184,6 +206,78 @@ public class Server {
         Channel ch = findChannel(sessionId);
         if (ch != null)
             ch.writeAndFlush(new GameStartedMessage(gameId, playerId)).addListener(WriteListener.getInstance());
+    }
+
+    public void initGame(String sessionId, UUID gameId, GameView gameView) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameInitMessage(gameId, gameView)).addListener(WriteListener.getInstance());
+    }
+    
+    public void gameAsk(String sessionId, UUID gameId, GameView gameView, String question) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameAskMessage(gameId, gameView, question)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameTarget(String sessionId, UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameTargetMessage(gameId, gameView, question, cardView, targets, required, options)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameSelect(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameSelectMessage(gameId, gameView, message, options)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameChooseAbility(String sessionId, UUID gameId, AbilityPickerView abilities) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameChooseAbilityMessage(gameId, abilities)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameChoosePile(String sessionId, UUID gameId, String message, CardsView pile1, CardsView pile2) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameChoosePileMessage(gameId, message, pile1, pile2)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameChooseChoice(String sessionId, UUID gameId, Choice choice) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameChooseChoiceMessage(gameId, choice)).addListener(WriteListener.getInstance());
+    }
+
+    public void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GamePlayManaMessage(gameId, gameView, message)).addListener(WriteListener.getInstance());
+    }
+
+    public void gamePlayXMana(String sessionId, UUID gameId, GameView gameView, String message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GamePlayXManaMessage(gameId, gameView, message)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameSelectAmount(String sessionId, UUID gameId, String message, int min, int max) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameSelectAmountMessage(gameId, message, min, max)).addListener(WriteListener.getInstance());
+    }
+
+    public void endGameInfo(String sessionId, UUID gameId, GameEndView view) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameEndInfoMessage(gameId, view)).addListener(WriteListener.getInstance());
+    }
+
+    public void userRequestDialog(String sessionId, UUID gameId, UserRequestMessage userRequestMessage) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new UserRequestDialogMessage(gameId, userRequestMessage)).addListener(WriteListener.getInstance());
     }
 
     

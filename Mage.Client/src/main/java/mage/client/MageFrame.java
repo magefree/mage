@@ -84,10 +84,12 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -98,8 +100,12 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.util.GameManager;
 import mage.client.util.audio.AudioManager;
+import mage.game.Table;
 import mage.interfaces.ServerState;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
@@ -1491,6 +1497,96 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (Plugins.getInstance().isCounterPluginLoaded()) {
             Plugins.getInstance().addGamesPlayed();
         }
+    }
+
+    @Override
+    public void initGame(UUID gameId, GameView gameView) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.init(gameView);
+        }
+    }
+
+    @Override
+    public void gameAsk(UUID gameId, GameView gameView, String question) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.ask(question, gameView);
+        }
+    }
+
+    @Override
+    public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.pickTarget(question, cardView, gameView, targets, required, options);
+        }
+    }
+
+    @Override
+    public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.pickAbility(abilities);
+        }
+    }
+
+    @Override
+    public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.pickPile(message, pile1, pile2);
+        }
+    }
+
+    @Override
+    public void gameChooseChoice(UUID gameId, mage.choices.Choice choice) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.getChoice(choice);
+        }
+    }
+
+    @Override
+    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.playMana(message, gameView);
+        }       
+    }
+
+    @Override
+    public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.playXMana(message, gameView);
+        }
+    }
+
+    @Override
+    public void gameSelectAmount(UUID gameId, String message, int min, int max) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.getAmount(min, max, message);
+        }
+    }
+
+    @Override
+    public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.select(message, gameView, options);
+        }
+    }
+
+    @Override
+    public void gameEndInfo(UUID gameId, GameEndView view) {
+        showGameEndDialog(view);
+    }
+
+    @Override
+    public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
+        showUserRequestDialog(userRequestMessage);
     }
     
 }

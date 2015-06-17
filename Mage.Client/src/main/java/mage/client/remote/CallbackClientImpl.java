@@ -89,13 +89,13 @@ public class CallbackClientImpl implements CallbackClient {
                 try {
                     logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
                     switch (callback.getMethod()) {
-                        case "startGame":
-                            {
+//                        case "startGame":
+//                            {
 //                                TableClientMessage message = (TableClientMessage) callback.getData();
 //                                GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
 //                                gameStarted(message.getGameId(), message.getPlayerId());
 //                                break;
-                            }
+//                            }
                         case "startTournament":
                             {
                                 TableClientMessage message = (TableClientMessage) callback.getData();
@@ -117,8 +117,8 @@ public class CallbackClientImpl implements CallbackClient {
                         case "watchGame":
                             watchGame(callback.getObjectId());
                             break;
-                        case "chatMessage":
-                            {
+//                        case "chatMessage":
+//                            {
 //                                ChatMessage message = (ChatMessage) callback.getData();
 //                                ChatPanel panel = MageFrame.getChat(callback.getObjectId());
 //                                if (panel != null) {
@@ -151,7 +151,7 @@ public class CallbackClientImpl implements CallbackClient {
 //                                    }
 //                                    
 //                                }       break;
-                            }
+//                            }
                         case "serverMessage":
                             if (callback.getData() != null) {
                                 ChatMessage message = (ChatMessage) callback.getData();
@@ -178,7 +178,7 @@ public class CallbackClientImpl implements CallbackClient {
                             {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
-                                    panel.endMessage((String) callback.getData(), callback.getMessageId());
+                                    panel.endMessage((String) callback.getData());
                                 }       break;
                             }
                         case "replayUpdate":
@@ -188,99 +188,99 @@ public class CallbackClientImpl implements CallbackClient {
                                     panel.updateGame((GameView) callback.getData());
                                 }       break;
                             }
-                        case "gameInit":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.init((GameView) callback.getData());
-                                }       break;
-                            }
+//                        case "gameInit":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.init((GameView) callback.getData());
+//                                }       break;
+//                            }
                         case "gameOver":
                             {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                 if (panel != null) {
-                                    panel.endMessage((String) callback.getData(), callback.getMessageId());
+                                    panel.endMessage((String) callback.getData());
                                 }       break;
                             }
                         case "gameError":
                             frame.showErrorDialog("Game Error", (String) callback.getData());
                             break;
-                        case "gameAsk":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                }       break;
-                            }
-                        case "gameTarget": // e.g. Pick triggered ability
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
-                                            message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
-                                }       break;
-                            }
-                        case "gameSelect":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
-                                }       break;
-                            }
-                        case "gameChooseAbility":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.pickAbility((AbilityPickerView) callback.getData());
-                                }       break;
-                            }
-                        case "gameChoosePile":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
-                                }       break;
-                            }
-                        case "gameChooseChoice":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-
-                                if (panel != null) {
-                                    panel.getChoice(message.getChoice(), callback.getObjectId());
-                                }
-                                break;
-                            }
-                        case "gamePlayMana":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.playMana(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                }       
-                                break;
-                            }
-                        case "gamePlayXMana":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
-                                }
-                                break;
-                            }
-                        case "gameSelectAmount":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
-                                }       break;
-                            }
+//                        case "gameAsk":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId());
+//                                }       break;
+//                            }
+//                        case "gameTarget": // e.g. Pick triggered ability
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
+//                                            message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
+//                                }       break;
+//                            }
+//                        case "gameSelect":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());
+//                                }       break;
+//                            }
+//                        case "gameChooseAbility":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.pickAbility((AbilityPickerView) callback.getData());
+//                                }       break;
+//                            }
+//                        case "gameChoosePile":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());
+//                                }       break;
+//                            }
+//                        case "gameChooseChoice":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//
+//                                if (panel != null) {
+//                                    panel.getChoice(message.getChoice(), callback.getObjectId());
+//                                }
+//                                break;
+//                            }
+//                        case "gamePlayMana":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.playMana(message.getMessage(), message.getGameView(), callback.getMessageId());
+//                                }       
+//                                break;
+//                            }
+//                        case "gamePlayXMana":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
+//                                }
+//                                break;
+//                            }
+//                        case "gameSelectAmount":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
+//                                }       break;
+//                            }
                         case "gameUpdate":
                             {
                                 GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -288,9 +288,9 @@ public class CallbackClientImpl implements CallbackClient {
                                     panel.updateGame((GameView) callback.getData());
                                 }       break;
                             }
-                        case "endGameInfo":
-                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
-                            break;
+//                        case "endGameInfo":
+//                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
+//                            break;
                         case "showUserMessage":
                             List<String> messageData = (List<String>) callback.getData();
                             if (messageData.size() == 2) {
@@ -302,7 +302,7 @@ public class CallbackClientImpl implements CallbackClient {
                                     GameClientMessage message = (GameClientMessage) callback.getData();
                                     GamePanel panel = MageFrame.getGame(callback.getObjectId());
                                     if (panel != null) {
-                                        panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
+                                        panel.inform(message.getMessage(), message.getGameView());
                                     }
                                 }
 // no longer needed because phase skip handling on server side now

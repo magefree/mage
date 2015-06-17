@@ -1,5 +1,10 @@
 package org.mage.network.handlers.client;
 
+import org.mage.network.model.SendPlayerManaTypeRequest;
+import org.mage.network.model.SendPlayerIntegerRequest;
+import org.mage.network.model.SendPlayerStringRequest;
+import org.mage.network.model.SendPlayerUUIDRequest;
+import org.mage.network.model.SendPlayerBooleanRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.List;
@@ -7,6 +12,7 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.ManaType;
 import mage.game.match.MatchOptions;
 import mage.view.RoomView;
 import mage.view.TableView;
@@ -153,6 +159,26 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     
     public void receiveStringList(List<String> list) {
         stringListQueue.offer(list);
+    }
+
+    public void sendPlayerUUID(UUID gameId, UUID id) {
+        ctx.writeAndFlush(new SendPlayerUUIDRequest(gameId, id)).addListener(WriteListener.getInstance());
+    }
+
+    public void sendPlayerBoolean(UUID gameId, boolean b) {
+        ctx.writeAndFlush(new SendPlayerBooleanRequest(gameId, b)).addListener(WriteListener.getInstance());
+    }
+
+    public void sendPlayerInteger(UUID gameId, int i) {
+        ctx.writeAndFlush(new SendPlayerIntegerRequest(gameId, i)).addListener(WriteListener.getInstance());
+    }
+
+    public void sendPlayerString(UUID gameId, String string) {
+        ctx.writeAndFlush(new SendPlayerStringRequest(gameId, string)).addListener(WriteListener.getInstance());
+    }
+
+    public void sendPlayerManaType(UUID gameId, UUID playerId, ManaType manaType) {
+        ctx.writeAndFlush(new SendPlayerManaTypeRequest(gameId, playerId, manaType)).addListener(WriteListener.getInstance());
     }
 
 }

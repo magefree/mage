@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import java.io.Serializable;
 import mage.remote.DisconnectReason;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,10 +36,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
+import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.game.Table;
 import mage.game.tournament.TournamentPlayer;
@@ -51,7 +54,12 @@ import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentManager;
 import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
+import mage.view.GameEndView;
+import mage.view.GameView;
 import mage.view.TableClientMessage;
+import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.model.MessageType;
 
@@ -196,6 +204,54 @@ public class User {
     public void gameStarted(final UUID gameId, final UUID playerId) {
 //        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
         Main.getInstance().gameStarted(sessionId, gameId, playerId);
+    }
+
+    public void initGame(UUID gameId, GameView gameView) {
+        Main.getInstance().initGame(sessionId, gameId, gameView);
+    }
+
+    public void gameAsk(UUID gameId, GameView gameView, String question) {
+        Main.getInstance().gameAsk(sessionId, gameId, gameView, question);
+    }
+
+    public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        Main.getInstance().gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
+    }
+
+    public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        Main.getInstance().gameSelect(sessionId, gameId, gameView, message, options);
+    }
+
+    public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
+        Main.getInstance().gameChooseAbility(sessionId, gameId, abilities);
+    }
+
+    public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
+        Main.getInstance().gameChoosePile(sessionId, gameId, message, pile1, pile2);
+    }
+
+    public void gameChooseChoice(UUID gameId, Choice choice) {
+        Main.getInstance().gameChooseChoice(sessionId, gameId, choice);
+    }
+
+    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+        Main.getInstance().gamePlayMana(sessionId, gameId, gameView, message);
+    }
+
+    public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
+        Main.getInstance().gamePlayXMana(sessionId, gameId, gameView, message);
+    }
+
+    public void gameSelectAmount(UUID gameId, String message, int min, int max) {
+        Main.getInstance().gameSelectAmount(sessionId, gameId, message, min, max);
+    }
+
+    public void endGameInfo(UUID gameId, GameEndView view) {
+        Main.getInstance().endGameInfo(sessionId, gameId, view);
+    }
+    
+    public void userRequestDialog (UUID gameId, UserRequestMessage userRequestMessage) {
+        Main.getInstance().userRequestDialog(sessionId, gameId, userRequestMessage);
     }
 
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {

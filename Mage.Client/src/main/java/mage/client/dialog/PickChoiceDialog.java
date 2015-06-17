@@ -58,7 +58,7 @@ public class PickChoiceDialog extends MageDialog {
     Choice choice;
     boolean autoSelect;
 
-    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
+    public void showDialog(Choice choice, MageDialogState mageDialogState) {
         this.lblMessage.setText("<html>" + choice.getMessage());
         this.choice = choice;
         this.autoSelect = false;

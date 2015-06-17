@@ -167,11 +167,23 @@ public class Client {
     }
 
     public void sendPlayerUUID(UUID gameId, UUID id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clientMessageHandler.sendPlayerUUID(gameId, id);
     }
 
     public void sendPlayerBoolean(UUID gameId, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clientMessageHandler.sendPlayerBoolean(gameId, b);
+    }
+
+    public void sendPlayerInteger(UUID gameId, int i) {
+        clientMessageHandler.sendPlayerInteger(gameId, i);
+    }
+
+    public void sendPlayerString(UUID gameId, String string) {
+        clientMessageHandler.sendPlayerString(gameId, string);
+    }
+
+    public void sendPlayerManaType(UUID gameId, UUID playerId, ManaType manaType) {
+        clientMessageHandler.sendPlayerManaType(gameId, playerId, manaType);
     }
 
     public String getUserName() {
@@ -345,18 +357,6 @@ public class Client {
 //    public Collection<RoomUsersView> getRoomUsers(UUID roomId) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-
-    public void sendPlayerInteger(UUID gameId, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void sendPlayerString(UUID gameId, String special) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void sendPlayerManaType(UUID gameId, UUID playerId, ManaType manaType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public void cheat(UUID gameId, UUID playerId, DeckCardLists importDeck) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

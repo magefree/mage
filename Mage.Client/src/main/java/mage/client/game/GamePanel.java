@@ -834,9 +834,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void ask(String question, GameView gameView, int messageId) {
+    public void ask(String question, GameView gameView) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null);
     }
     /**
      * Shows a pick target dialog  and allows the player to pick a target (e.g. the pick triggered ability)
@@ -847,9 +847,8 @@ public final class GamePanel extends javax.swing.JPanel {
      * @param targets
      * @param required
      * @param options
-     * @param messageId 
      */
-    public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
+    public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
         ShowCardsDialog dialog = null;
         if (options != null && options.containsKey("targetZone")) {
             if (Zone.HAND.equals(options.get("targetZone"))) { // mark selectable target cards in hand
@@ -877,19 +876,19 @@ public final class GamePanel extends javax.swing.JPanel {
             dialog = showCards(message, cardView, required, options0);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);        
+        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0);        
         if (dialog != null) {
             this.pickTarget.add(dialog);
         }
     }
 
-    public void inform(String information, GameView gameView, int messageId) {
+    public void inform(String information, GameView gameView) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null);
     }
 
-    public void endMessage(String message, int messageId) {
-        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId);
+    public void endMessage(String message) {
+        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
@@ -897,7 +896,7 @@ public final class GamePanel extends javax.swing.JPanel {
         return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
     }
 
-    public void select(String message, GameView gameView, int messageId, Map<String, Serializable> options) {
+    public void select(String message, GameView gameView, Map<String, Serializable> options) {
         updateGame(gameView, options);
         boolean controllingPlayer = false;
         for (PlayerView playerView : gameView.getPlayers()) {
@@ -926,19 +925,19 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         String messageToDisplay = message + "<div style='font-size:11pt'>" + activePlayerText +" / " + gameView.getStep().toString() + priorityPlayerText + "</div>";
 
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions);
     }
 
-    public void playMana(String message, GameView gameView, int messageId) {
+    public void playMana(String message, GameView gameView) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
     }
 
-    public void playXMana(String message, GameView gameView, int messageId) {
+    public void playXMana(String message, GameView gameView) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
     }
 
     public void replayMessage(String message) {
@@ -973,10 +972,10 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getChoice(Choice choice, UUID objectId) {
+    public void getChoice(Choice choice) {
         hideAll();
         PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, objectId,choiceWindowState);
+        pickChoice.showDialog(choice, choiceWindowState);
         if (choice.isKeyChoice()) {
             if (pickChoice.isAutoSelect()) {
                 client.sendPlayerString(gameId, "#" + choice.getChoiceKey());

@@ -31,10 +31,12 @@ package mage.server;
 import io.netty.channel.ChannelId;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -45,6 +47,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.constants.TableState;
@@ -89,9 +92,12 @@ import mage.utils.ActionWithNullNegativeResult;
 import mage.utils.ActionWithTableViewResult;
 import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DraftPickView;
+import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
@@ -99,6 +105,7 @@ import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserDataView;
+import mage.view.UserRequestMessage;
 import mage.view.UserView;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
@@ -762,81 +769,81 @@ public class Main implements MageServer {
 //        return null;
 //    }
 //
-//    @Override
-//    public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) throws MageException {
+    @Override
+    public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) {
 //        execute("sendPlayerUUID", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                User user = SessionManager.getInstance().getUser(sessionId);
-//                if (user != null) {
-////                    logger.warn("sendPlayerUUID gameId=" + gameId + " sessionId=" + sessionId + " username=" + user.getName());
-//                    user.sendPlayerUUID(gameId, data);
-//                } else {
-//                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-//                }                 
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+//                    logger.warn("sendPlayerUUID gameId=" + gameId + " sessionId=" + sessionId + " username=" + user.getName());
+                    user.sendPlayerUUID(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                 
 //            }
 //        });
-//    }
-//
-//    @Override
-//    public void sendPlayerString(final UUID gameId, final String sessionId, final String data) throws MageException {
+    }
+
+    @Override
+    public void sendPlayerString(final UUID gameId, final String sessionId, final String data) {
 //        execute("sendPlayerString", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                User user = SessionManager.getInstance().getUser(sessionId);
-//                if (user != null) {
-//                    user.sendPlayerString(gameId, data);
-//                } else {
-//                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-//                }                  
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+                    user.sendPlayerString(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                  
 //            }
 //        });
-//    }
-//
-//    @Override
-//    public void sendPlayerManaType(final UUID gameId, final UUID playerId, final String sessionId, final ManaType data) throws MageException {
+    }
+
+    @Override
+    public void sendPlayerManaType(final UUID gameId, final UUID playerId, final String sessionId, final ManaType data) {
 //        execute("sendPlayerManaType", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                User user = SessionManager.getInstance().getUser(sessionId);
-//                if (user != null) {
-//                    user.sendPlayerManaType(gameId, playerId, data);
-//                } else {
-//                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-//                }
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+                    user.sendPlayerManaType(gameId, playerId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }
 //            }
 //        });
-//    }
-//
-//    @Override
-//    public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
+    }
+
+    @Override
+    public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) {
 //        execute("sendPlayerBoolean", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                User user = SessionManager.getInstance().getUser(sessionId);
-//                if (user != null) {
-//                    user.sendPlayerBoolean(gameId, data);
-//                } else {
-//                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-//                }                
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+                    user.sendPlayerBoolean(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                
 //            }
 //        });
-//    }
-//
-//    @Override
-//    public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
+    }
+
+    @Override
+    public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) {
 //        execute("sendPlayerInteger", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                User user = SessionManager.getInstance().getUser(sessionId);
-//                if (user != null) {
-//                    user.sendPlayerInteger(gameId, data);
-//                } else {
-//                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-//                }
+                User user = SessionManager.getInstance().getUser(sessionId);
+                if (user != null) {
+                    user.sendPlayerInteger(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }
 //            }
 //        });
-//    }
+    }
 //
 //    @Override
 //    public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick, final Set<UUID> hiddenCards) throws MageException {
@@ -1385,6 +1392,54 @@ public class Main implements MageServer {
 
     public void gameStarted(String sessionId, UUID gameId, UUID playerId) {
         server.gameStarted(sessionId, gameId, playerId);
+    }
+
+    public void initGame(String sessionId, UUID gameId, GameView gameView) {
+        server.initGame(sessionId, gameId, gameView);
+    }
+
+    void gameAsk(String sessionId, UUID gameId, GameView gameView, String question) {
+        server.gameAsk(sessionId, gameId, gameView, question);
+    }
+
+    void gameTarget(String sessionId, UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+        server.gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
+    }
+
+    void gameSelect(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        server.gameSelect(sessionId, gameId, gameView, message, options);
+    }
+
+    void gameChooseAbility(String sessionId, UUID gameId, AbilityPickerView abilities) {
+        server.gameChooseAbility(sessionId, gameId, abilities);
+    }
+
+    void gameChoosePile(String sessionId, UUID gameId, String message, CardsView pile1, CardsView pile2) {
+        server.gameChoosePile(sessionId, gameId, message, pile1, pile2);
+    }
+
+    void gameChooseChoice(String sessionId, UUID gameId, Choice choice) {
+        server.gameChooseChoice(sessionId, gameId, choice);
+    }
+
+    void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message) {
+        server.gamePlayMana(sessionId, gameId, gameView, message);
+    }
+
+    void gamePlayXMana(String sessionId, UUID gameId, GameView gameView, String message) {
+        server.gamePlayXMana(sessionId, gameId, gameView, message);
+    }
+
+    void gameSelectAmount(String sessionId, UUID gameId, String message, int min, int max) {
+        server.gameSelectAmount(sessionId, gameId, message, min, max);
+    }
+
+    void endGameInfo(String sessionId, UUID gameId, GameEndView view) {
+        server.endGameInfo(sessionId, gameId, view);
+    }
+
+    void userRequestDialog(String sessionId, UUID gameId, UserRequestMessage userRequestMessage) {
+        server.userRequestDialog(sessionId, gameId, userRequestMessage);
     }
 
 }
