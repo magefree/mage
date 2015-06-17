@@ -27,7 +27,6 @@
  */
 package mage.sets.avacynrestored;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import mage.constants.CardType;
@@ -42,11 +41,10 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.Predicate;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -58,7 +56,6 @@ public class DescendantsPath extends CardImpl {
     public DescendantsPath(UUID ownerId) {
         super(ownerId, 173, "Descendants' Path", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "AVR";
-
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), TargetController.YOU, false);
@@ -93,36 +90,39 @@ class DescendantsPathEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().getFromTop(game);
-                player.revealCards("DescendantsPath", new CardsImpl(card), game);
-                if (card.getCardType().contains(CardType.CREATURE)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
+            if (controller.getLibrary().size() > 0) {
+                Card card = controller.getLibrary().getFromTop(game);
+                if (card == null) {
+                    return false;
+                }
+                controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+                if (card.getCardType().contains(CardType.CREATURE)) {                    
                     FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-                    ArrayList<Predicate<MageObject>> subtypes = new ArrayList<>();
-                    for (String subtype: card.getSubtype()) {
-                        subtypes.add(new SubtypePredicate(subtype));
+                    boolean found = false;
+                    for (Permanent  permanent: game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+                        if (CardUtil.shareSubtypes(card, permanent)) {
+                            found = true;
+                            break;
+                        }
                     }
-                    filter.add(Predicates.or(subtypes));
-
-                    int count = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
-                    if (count > 0) {
-                        game.informPlayers("DescendantsPath: Found a creature that shares a creature type with the revealed card.");
-                        if (player.chooseUse(Outcome.Benefit, "Cast the card?", game)) {
-                            player.cast(card.getSpellAbility(), game, true);
+                    if (found) {
+                        game.informPlayers(sourceObject.getLogName() + ": Found a creature that shares a creature type with the revealed card.");
+                        if (controller.chooseUse(Outcome.Benefit, "Cast the card?", game)) {
+                            controller.cast(card.getSpellAbility(), game, true);
                         } else {
-                            game.informPlayers("DescendantsPath: " + player.getLogName() + " canceled casting the card.");
-                            player.getLibrary().putOnBottom(card, game);
+                            game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");
+                            controller.getLibrary().putOnBottom(card, game);
                         }
                     } else {
-                        game.informPlayers("DescendantsPath: No creature that shares a creature type with the revealed card.");
-                        player.getLibrary().putOnBottom(card, game);
+                        game.informPlayers(sourceObject.getLogName() + ": No creature that shares a creature type with the revealed card.");
+                        controller.getLibrary().putOnBottom(card, game);
                     }
                 } else {
-                    game.informPlayers("DescendantsPath: put " + card.getName() + " on the bottom.");
-                    player.getLibrary().putOnBottom(card, game);
+                    game.informPlayers(sourceObject.getLogName() + ": Put " + card.getLogName() + " on the bottom.");
+                    controller.getLibrary().putOnBottom(card, game);
                 }
 
                 return true;
