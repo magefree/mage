@@ -59,6 +59,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
 
     protected boolean chooseLandType;
     protected ArrayList<String> landTypes = new ArrayList();
+    protected boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesBasicLandTargetEffect(Duration duration) {
         this(duration, true, new String[0]);
@@ -69,10 +70,15 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     }
 
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, String... landNames) {
+        this(duration, chooseLandType, true, landNames);
+    }
+    
+    public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, boolean loseOther, String... landNames) {
         super(duration, Outcome.Detriment);
         this.landTypes.addAll(Arrays.asList(landNames));
         this.chooseLandType = chooseLandType;
         this.staticText = setText();
+        this.loseOther = loseOther;
 
     }
 
@@ -103,6 +109,19 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 landTypes.add(choice.getChoice());
             } else {
                 this.discard();
+            }
+        }
+        
+        if(!loseOther) {
+            for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
+                Permanent land = game.getPermanent(targetPermanent);
+                if (land != null) {
+                    for(String type : land.getSubtype()) {
+                        if(!landTypes.contains(type)) {
+                            landTypes.add(type);
+                        }
+                    }
+                }
             }
         }
     }
