@@ -362,15 +362,20 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public UUID getGameChatId(UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    public UUID getGameChatId(UUID gameId) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
+    public UUID joinGame(UUID gameId) {
+        try {
+            return clientMessageHandler.joinGame(gameId);
+        } catch (Exception ex) {
+            logger.error("Error joining game", ex);
+        }
+        return null;
     }
 
-    public boolean joinGame(UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean watchGame(UUID gameId) {
+    public UUID watchGame(UUID gameId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

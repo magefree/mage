@@ -38,6 +38,7 @@ public interface MageServer {
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2);
 
     boolean startMatch(String sessionId, UUID roomId, UUID tableId);
+    UUID joinGame(final UUID gameId, final String sessionId);
 
     void pingTime(long milliSeconds, String sessionId);
 

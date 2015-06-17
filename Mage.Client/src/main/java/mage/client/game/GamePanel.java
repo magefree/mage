@@ -382,10 +382,11 @@ public final class GamePanel extends javax.swing.JPanel {
         this.pnlReplay.setVisible(false);
         
         this.gameChatPanel.clear();
-        this.gameChatPanel.connect(client.getGameChatId(gameId));
-        if (!client.joinGame(gameId)) {
+        UUID chatId = client.joinGame(gameId);
+        if (chatId == null) {
             removeGame();
-        } else {            
+        } else {
+            this.gameChatPanel.connect(chatId);
             // play start sound
             AudioManager.playYourGameStarted();
         }
@@ -415,9 +416,12 @@ public final class GamePanel extends javax.swing.JPanel {
         
         this.pnlReplay.setVisible(false);
         this.gameChatPanel.clear();
-        this.gameChatPanel.connect(client.getGameChatId(gameId));
-        if (!client.watchGame(gameId)) {
+        UUID chatId = client.watchGame(gameId);
+        if (chatId == null) {
             removeGame();
+        }
+        else {
+            this.gameChatPanel.connect(chatId);
         }
         for (PlayAreaPanel panel : getPlayers().values()) {
             panel.setPlayingMode(false);

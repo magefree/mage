@@ -193,8 +193,9 @@ public class User {
         Main.getInstance().joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
-    public void ccGameStarted(final UUID gameId, final UUID playerId) {
-        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+    public void gameStarted(final UUID gameId, final UUID playerId) {
+//        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
+        Main.getInstance().gameStarted(sessionId, gameId, playerId);
     }
 
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {
@@ -298,7 +299,7 @@ public class User {
         }
 
         for (Entry<UUID, GameSessionPlayer> entry: gameSessions.entrySet()) {
-            ccGameStarted(entry.getValue().getGameId(), entry.getKey());
+            gameStarted(entry.getValue().getGameId(), entry.getKey());
             entry.getValue().init();
             GameManager.getInstance().sendPlayerString(entry.getValue().getGameId(), userId, "");
         }

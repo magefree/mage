@@ -96,6 +96,7 @@ import java.util.prefs.Preferences;
 import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.client.util.GameManager;
 import mage.client.util.audio.AudioManager;
 import mage.interfaces.ServerState;
 import mage.view.ChatMessage;
@@ -1477,6 +1478,21 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         showTableWaitingDialog(roomId, tableId, chatId, owner, tournament);
     }
 
+    @Override
+    public void gameStarted(UUID gameId, UUID playerId) {
+//        try {
+            GameManager.getInstance().setCurrentPlayerUUID(playerId);
+            showGame(gameId, playerId);
+            logger.info("Game " + gameId + " started for player " + playerId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+
+        if (Plugins.getInstance().isCounterPluginLoaded()) {
+            Plugins.getInstance().addGamesPlayed();
+        }
+    }
+    
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {

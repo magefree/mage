@@ -36,6 +36,7 @@ import org.mage.network.handlers.server.ServerRequestHandler;
 //import org.mage.network.handlers.server.TableMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.ChatMessageMessage;
+import org.mage.network.model.GameStartedMessage;
 import org.mage.network.model.InformClientMessage;
 import org.mage.network.model.JoinedTableMessage;
 import org.mage.network.model.MessageType;
@@ -179,5 +180,11 @@ public class Server {
             ch.writeAndFlush(new JoinedTableMessage(roomId, tableId, chatId, owner, tournament)).addListener(WriteListener.getInstance());
     }
     
+    public void gameStarted(String sessionId, UUID gameId, UUID playerId) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameStartedMessage(gameId, playerId)).addListener(WriteListener.getInstance());
+    }
+
     
 }

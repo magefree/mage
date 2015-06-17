@@ -91,10 +91,10 @@ public class CallbackClientImpl implements CallbackClient {
                     switch (callback.getMethod()) {
                         case "startGame":
                             {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
-                                gameStarted(message.getGameId(), message.getPlayerId());
-                                break;
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());
+//                                gameStarted(message.getGameId(), message.getPlayerId());
+//                                break;
                             }
                         case "startTournament":
                             {
@@ -433,18 +433,18 @@ public class CallbackClientImpl implements CallbackClient {
 //        }
 //    }
 
-    protected void gameStarted(final UUID gameId, final UUID playerId) {
-        try {
-            frame.showGame(gameId, playerId);
-            logger.info("Game " + gameId + " started for player " + playerId);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-
-        if (Plugins.getInstance().isCounterPluginLoaded()) {
-            Plugins.getInstance().addGamesPlayed();
-        }
-    }
+//    protected void gameStarted(final UUID gameId, final UUID playerId) {
+//        try {
+//            frame.showGame(gameId, playerId);
+//            logger.info("Game " + gameId + " started for player " + playerId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//
+//        if (Plugins.getInstance().isCounterPluginLoaded()) {
+//            Plugins.getInstance().addGamesPlayed();
+//        }
+//    }
 
     protected void draftStarted(UUID draftId, UUID playerId) {
         try {

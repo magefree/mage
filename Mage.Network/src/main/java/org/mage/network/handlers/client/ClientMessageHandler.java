@@ -18,6 +18,7 @@ import org.mage.network.model.ClientMessage;
 import org.mage.network.model.CreateTableRequest;
 import org.mage.network.model.GetRoomRequest;
 import org.mage.network.model.JoinChatRequest;
+import org.mage.network.model.JoinGameRequest;
 import org.mage.network.model.JoinTableRequest;
 import org.mage.network.model.LeaveChatRequest;
 import org.mage.network.model.LeaveTableRequest;
@@ -102,6 +103,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         booleanQueue.clear();
         ctx.writeAndFlush(new StartMatchRequest(roomId, tableId)).addListener(WriteListener.getInstance());
         return booleanQueue.take();
+    }
+
+    public UUID joinGame(UUID gameId) throws Exception {
+        uuidQueue.clear();
+        ctx.writeAndFlush(new JoinGameRequest(gameId)).addListener(WriteListener.getInstance());
+        return uuidQueue.take();
     }
 
     public void joinChat(UUID chatId) {

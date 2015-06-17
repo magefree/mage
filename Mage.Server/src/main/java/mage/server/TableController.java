@@ -581,7 +581,7 @@ public class TableController {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
-                        user.ccGameStarted(match.getGame().getId(), entry.getValue());
+                        user.gameStarted(match.getGame().getId(), entry.getValue());
                         
                         if (creator == null) {
                             creator = user.getName();

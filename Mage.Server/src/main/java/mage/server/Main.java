@@ -514,20 +514,20 @@ public class Main implements MageServer {
 //        });
 //    }
 //
-//    @Override
-//    public boolean startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-//        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
-//            return false;
-//        }
+    @Override
+    public boolean startMatch(final String sessionId, final UUID roomId, final UUID tableId) {
+        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+            return false;
+        }
 //        execute("startMatch", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableManager.getInstance().startMatch(userId, roomId, tableId);
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                TableManager.getInstance().startMatch(userId, roomId, tableId);
 //            }
 //        });
-//        return true;
-//    }
+        return true;
+    }
 //
 //    @Override
 //    public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
@@ -704,16 +704,17 @@ public class Main implements MageServer {
 //        return null;
 //    }
 //
-//    @Override
-//    public void joinGame(final UUID gameId, final String sessionId) throws MageException {
+    @Override
+    public UUID joinGame(final UUID gameId, final String sessionId) {
 //        execute("joinGame", sessionId, new Action() {
 //            @Override
 //            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                GameManager.getInstance().joinGame(gameId, userId);
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().joinGame(gameId, userId);
+                return GameManager.getInstance().getChatId(gameId);
 //            }
 //        });
-//    }
+    }
 //
 //    @Override
 //    public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
@@ -1380,6 +1381,10 @@ public class Main implements MageServer {
 
     public void joinedTable(String sessionId, UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
         server.joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
+    }
+
+    public void gameStarted(String sessionId, UUID gameId, UUID playerId) {
+        server.gameStarted(sessionId, gameId, playerId);
     }
 
 }
