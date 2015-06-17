@@ -36,12 +36,15 @@ import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterBasicLandCard;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInLibrary;
 
@@ -61,7 +64,7 @@ public class Fertilid extends CardImpl {
         // Fertilid enters the battlefield with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), "with two +1/+1 counters on it"));
         // {1}{G}, Remove a +1/+1 counter from Fertilid: Target player searches his or her library for a basic land card and puts it onto the battlefield tapped. Then that player shuffles his or her library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FertilidEffect(new TargetCardInLibrary(new FilterBasicLandCard()), true, true), new ManaCostsImpl("{1}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -74,5 +77,49 @@ public class Fertilid extends CardImpl {
     @Override
     public Fertilid copy() {
         return new Fertilid(this);
+    }
+}
+
+class FertilidEffect extends SearchLibraryPutInPlayEffect {
+    
+    public FertilidEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
+        super(target, tapped, forceShuffle);
+        
+        this.staticText = "Target player searches his or her library for a basic land card and puts it onto the battlefield tapped. Then that player shuffles his or her library.";
+    }
+    
+    public FertilidEffect(final FertilidEffect effect) {
+        super(effect);
+    }
+    
+    @Override
+    public FertilidEffect copy() {
+        return new FertilidEffect(this);
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        
+        if (player != null) {
+            if (player.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    for (UUID cardId: target.getTargets()) {
+                        Card card = player.getLibrary().getCard(cardId, game);
+                        if (card != null) {
+                            player.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId(), tapped);
+                        }
+                    }
+                }
+                player.shuffleLibrary(game);
+                return true;
+            }
+            
+            if (forceShuffle) {
+                player.shuffleLibrary(game);
+            }
+        }
+        
+        return false;
     }
 }
