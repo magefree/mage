@@ -135,16 +135,22 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                     case AbilityAddingRemovingEffects_6:
                         land.removeAllAbilities(source.getSourceId(), game);
                         for (String landType : landTypes)  {
-                            if (landType.equals("Swamp")) {
-                                land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Mountain")) {
-                                land.addAbility(new RedManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Forest")) {
-                                land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Island")) {
-                                land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
-                            } else if (landType.equals("Plains")) {
-                                land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                            switch (landType) {
+                                case "Swamp":
+                                    land.addAbility(new BlackManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Mountain":
+                                    land.addAbility(new RedManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Forest":
+                                    land.addAbility(new GreenManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Island":
+                                    land.addAbility(new BlueManaAbility(), source.getSourceId(), game);
+                                    break;
+                                case "Plains":
+                                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+                                    break;
                             }
                         }
                         break;

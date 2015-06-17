@@ -37,7 +37,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -49,22 +51,20 @@ import mage.target.common.TargetLandPermanent;
  * @author ilcartographer
  */
 public class AquitectsWill extends CardImpl {
-    private static final String rule = "land is an Island in addition to its other types for as long as it has a flood counter on it.";
 
     public AquitectsWill(UUID ownerId) {
         super(ownerId, 52, "Aquitect's Will", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
 
-        // Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
-        // Add the flood counter to target land
+        // Put a flood counter on target land. 
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.FLOOD.createInstance()));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
         
-        // Add the Flood counter effect
+        // That land is an Island in addition to its other types for as long as it has a flood counter on it.
         this.getSpellAbility().addEffect(new AquitectsWillEffect(Duration.Custom, false, false, "Island"));
         
-        // Draw if you control a Merfolk
+        // If you control a Merfolk, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), 
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Merfolk", "Merfolk")),
@@ -85,6 +85,7 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
 
     public AquitectsWillEffect(Duration duration, boolean chooseLandType, boolean loseType, String... landNames) {
         super(duration, chooseLandType, loseType, landNames);
+        staticText = "That land is an Island in addition to its other types for as long as it has a flood counter on it";
     }
 
     public AquitectsWillEffect(final AquitectsWillEffect effect) {
@@ -92,14 +93,16 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
     }
 
     @Override
-    public boolean isInactive(Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (land != null && land.getCounters().getCount(CounterType.FLOOD) < 1) {
+        if (land == null) {
+            // if permanent left battlefield the effect can be removed because it was only valid for that object
             this.discard();
-            return true;
-        }
-        
-        return false;
+        } else if (land.getCounters().getCount(CounterType.FLOOD) > 0) {
+            // only if Flood counter is on the object it becomes an Island.(it would be possible to remove and return the counters with e.g. Fate Transfer if the land becomes a creature too)
+            super.apply(layer, sublayer, source, game);
+        }        
+        return true;
     }
 
     @Override
