@@ -37,7 +37,7 @@ public class MightyLeap extends mage.sets.magic2011.MightyLeap {
 
     public MightyLeap(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 984;
         this.expansionSetCode = "ORI";
     }
 

@@ -37,7 +37,7 @@ public class WeightOfTheUnderworld extends mage.sets.bornofthegods.WeightOfTheUn
 
     public WeightOfTheUnderworld(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 977;
         this.expansionSetCode = "ORI";
     }
 

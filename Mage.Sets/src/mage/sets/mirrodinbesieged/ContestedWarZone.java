@@ -28,7 +28,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Mana;
 
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -46,7 +45,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;

@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.TransformAbility;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.constants.Zone;
@@ -64,6 +65,13 @@ public class PermanentCard extends PermanentImpl {
           }*/
         if (card instanceof LevelerCard) {
             maxLevelCounters = ((LevelerCard) card).getMaxLevelCounters();
+        }
+        if (canTransform()) {
+            if (game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId()) != null) {
+                game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getId(), null);
+                setTransformed(true);
+                TransformAbility.transform(this, getSecondCardFace(), game);
+            }
         }
     }
 

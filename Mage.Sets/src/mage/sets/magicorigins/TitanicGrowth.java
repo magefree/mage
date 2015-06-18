@@ -37,7 +37,7 @@ public class TitanicGrowth extends mage.sets.magic2012.TitanicGrowth {
 
     public TitanicGrowth(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 981;
         this.expansionSetCode = "ORI";
     }
 

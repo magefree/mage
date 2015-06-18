@@ -507,7 +507,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
-                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() < target.getTargets().size()) {
+                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
                         if (target.canTarget(card.getId(), source, game)) {
