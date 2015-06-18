@@ -190,7 +190,7 @@ public class TableController {
                 user.showUserMessage("Join Table", "No valid deck selected!");
                 return false;
             }
-            if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
+            if (!ServerMain.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
                 StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
                 for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
                     sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
@@ -288,7 +288,7 @@ public class TableController {
             return false;
         }
 
-        if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
+        if (!ServerMain.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
             StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
             for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
                 sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
@@ -377,7 +377,7 @@ public class TableController {
                 deck.setName(mPlayer.getDeck().getName());
             }
         }
-        if (!Main.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
+        if (!ServerMain.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
             throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
         }
         submitDeck(userId, playerId, deck);

@@ -73,7 +73,7 @@ import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
 import mage.server.ChatManager;
-import mage.server.Main;
+import mage.server.ServerMain;
 import mage.server.Session;
 import mage.server.SessionManager;
 import mage.server.TableManager;
@@ -935,7 +935,7 @@ public class GameController implements GameCallback {
     private void error(String message, Exception ex) {
         StringBuilder sb = new StringBuilder();
         sb.append(message).append(ex.toString());
-        sb.append("\nServer version: ").append(Main.getVersion().toString());
+        sb.append("\nServer version: ").append(ServerMain.getVersion().toString());
         sb.append("\n");
         for (StackTraceElement e: ex.getStackTrace()) {
             sb.append(e.toString()).append("\n");
@@ -1058,14 +1058,13 @@ public class GameController implements GameCallback {
             return;
         }
         cancelTimeout();
-        futureTimeout = timeoutIdleExecutor.schedule(
-            new Runnable() {
+        futureTimeout = timeoutIdleExecutor.schedule(new Runnable() {
                 @Override
                 public void run() {
                     idleTimeout(playerId);
                 }
             },
-            Main.getInstance().isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
+            ServerMain.getInstance().isTestMode() ? 3600 :ConfigSettings.getInstance().getMaxSecondsIdle(),
             TimeUnit.SECONDS
         );
     }

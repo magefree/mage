@@ -37,7 +37,6 @@ import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.mage.network.Server;
 import org.mage.network.model.MessageType;
 
@@ -91,7 +90,7 @@ public class SessionManager {
                 return true;
             }
             logger.debug(connection.getUsername() + " not registered: " + returnMessage);
-            Main.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
+            ServerMain.getInstance().informClient(sessionId, "Connection Error", returnMessage, MessageType.ERROR);
 //            Server.informClient(sessionId, returnMessage, MessageType.ERROR);
 
 //        } else {

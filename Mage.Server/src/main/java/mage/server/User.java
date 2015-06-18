@@ -198,60 +198,60 @@ public class User {
 
     public void joinedTable(final UUID roomId, final UUID tableId, final UUID chatId, boolean owner, boolean tournament) {
 //        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
-        Main.getInstance().joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
+        ServerMain.getInstance().joinedTable(sessionId, roomId, tableId, chatId, owner, tournament);
     }
 
     public void gameStarted(final UUID gameId, final UUID playerId) {
 //        fireCallback(new ClientCallback("startGame", gameId, new TableClientMessage(gameId, playerId)));
-        Main.getInstance().gameStarted(sessionId, gameId, playerId);
+        ServerMain.getInstance().gameStarted(sessionId, gameId, playerId);
     }
 
     public void initGame(UUID gameId, GameView gameView) {
-        Main.getInstance().initGame(sessionId, gameId, gameView);
+        ServerMain.getInstance().initGame(sessionId, gameId, gameView);
     }
 
     public void gameAsk(UUID gameId, GameView gameView, String question) {
-        Main.getInstance().gameAsk(sessionId, gameId, gameView, question);
+        ServerMain.getInstance().gameAsk(sessionId, gameId, gameView, question);
     }
 
     public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-        Main.getInstance().gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
+        ServerMain.getInstance().gameTarget(sessionId, gameId, gameView, question, cardView, targets, required, options);
     }
 
     public void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
-        Main.getInstance().gameSelect(sessionId, gameId, gameView, message, options);
+        ServerMain.getInstance().gameSelect(sessionId, gameId, gameView, message, options);
     }
 
     public void gameChooseAbility(UUID gameId, AbilityPickerView abilities) {
-        Main.getInstance().gameChooseAbility(sessionId, gameId, abilities);
+        ServerMain.getInstance().gameChooseAbility(sessionId, gameId, abilities);
     }
 
     public void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2) {
-        Main.getInstance().gameChoosePile(sessionId, gameId, message, pile1, pile2);
+        ServerMain.getInstance().gameChoosePile(sessionId, gameId, message, pile1, pile2);
     }
 
     public void gameChooseChoice(UUID gameId, Choice choice) {
-        Main.getInstance().gameChooseChoice(sessionId, gameId, choice);
+        ServerMain.getInstance().gameChooseChoice(sessionId, gameId, choice);
     }
 
     public void gamePlayMana(UUID gameId, GameView gameView, String message) {
-        Main.getInstance().gamePlayMana(sessionId, gameId, gameView, message);
+        ServerMain.getInstance().gamePlayMana(sessionId, gameId, gameView, message);
     }
 
     public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
-        Main.getInstance().gamePlayXMana(sessionId, gameId, gameView, message);
+        ServerMain.getInstance().gamePlayXMana(sessionId, gameId, gameView, message);
     }
 
     public void gameSelectAmount(UUID gameId, String message, int min, int max) {
-        Main.getInstance().gameSelectAmount(sessionId, gameId, message, min, max);
+        ServerMain.getInstance().gameSelectAmount(sessionId, gameId, message, min, max);
     }
 
     public void endGameInfo(UUID gameId, GameEndView view) {
-        Main.getInstance().endGameInfo(sessionId, gameId, view);
+        ServerMain.getInstance().endGameInfo(sessionId, gameId, view);
     }
     
     public void userRequestDialog (UUID gameId, UserRequestMessage userRequestMessage) {
-        Main.getInstance().userRequestDialog(sessionId, gameId, userRequestMessage);
+        ServerMain.getInstance().userRequestDialog(sessionId, gameId, userRequestMessage);
     }
 
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {
@@ -284,7 +284,7 @@ public class User {
 //        messageData.add(titel);
 //        messageData.add(message);
 //        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
-        Main.getInstance().informClient(sessionId, title, message, MessageType.INFORMATION);
+        ServerMain.getInstance().informClient(sessionId, title, message, MessageType.INFORMATION);
     }
 
     public boolean ccWatchGame(final UUID gameId) {

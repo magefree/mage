@@ -38,7 +38,7 @@ import java.util.zip.GZIPInputStream;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.GameStates;
-import mage.server.Main;
+import mage.server.ServerMain;
 import mage.util.CopierObjectInputStream;
 import org.apache.log4j.Logger;
 
@@ -87,7 +87,7 @@ public class GameReplay {
         try{
             InputStream file = new FileInputStream("saved/" + gameId.toString() + ".game");
             InputStream buffer = new BufferedInputStream(file);
-            ObjectInput input = new CopierObjectInputStream(Main.classLoader, new GZIPInputStream(buffer));
+            ObjectInput input = new CopierObjectInputStream(ServerMain.classLoader, new GZIPInputStream(buffer));
             try {
                 Game loadGame = (Game)input.readObject();
                 GameStates states = (GameStates)input.readObject();

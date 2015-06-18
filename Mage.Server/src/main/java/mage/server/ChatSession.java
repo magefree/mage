@@ -159,7 +159,7 @@ public class ChatSession {
             for (UUID userId: clients.keySet()) {
                 User chatUser = UserManager.getInstance().getUser(userId);                
                 if (chatUser != null) {
-                    Main.getInstance().sendChatMessage(chatUser.getSessionId(), chatId, new ChatMessage(userName, message, time, color, messageType, soundToPlay));
+                    ServerMain.getInstance().sendChatMessage(chatUser.getSessionId(), chatId, new ChatMessage(userName, message, time, color, messageType, soundToPlay));
 //                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, messageType, soundToPlay)));
                 }
                 else {

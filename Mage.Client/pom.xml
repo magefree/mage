@@ -131,11 +131,6 @@
             <artifactId>jlayer</artifactId>
             <version>1.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.mobicents.external.tritonus</groupId>
-            <artifactId>tritonus_share</artifactId>
-            <version>0.3.6</version>
-        </dependency>
     </dependencies>
     
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->

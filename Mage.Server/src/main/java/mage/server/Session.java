@@ -48,10 +48,6 @@ import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
-import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
-import org.jboss.remoting.callback.Callback;
-import org.jboss.remoting.callback.HandleCallbackException;
-import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 /**
  *
@@ -93,7 +89,7 @@ public class Session {
         pingTaskExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                Main.getInstance().pingClient(sessionId);
+                ServerMain.getInstance().pingClient(sessionId);
             }
         }, 10, 60, TimeUnit.SECONDS);
         return registerUserHandling(connection);

@@ -62,7 +62,7 @@ import mage.interfaces.ActionWithResult;
 //import mage.interfaces.MageServer;
 import org.mage.network.interfaces.MageServer;
 import mage.interfaces.ServerState;
-import mage.interfaces.callback.ClientCallback;
+//import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.remote.MageVersionException;
@@ -116,7 +116,7 @@ import org.mage.network.model.MessageType;
  *
  * @author BetaSteward_at_googlemail.com, noxx
  */
-public class Main implements MageServer {
+public class ServerMain implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServer.class);
 //    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
@@ -133,10 +133,10 @@ public class Main implements MageServer {
     private final String password;
     private final boolean testMode;
 
-    private static Main instance;
+    private static ServerMain instance;
     private static Server server;
 
-    public Main(String password, boolean testMode) {
+    public ServerMain(String password, boolean testMode) {
         this.password = password;
         this.testMode = testMode;
         ServerMessagesUtil.getInstance().getMessages();
@@ -147,7 +147,7 @@ public class Main implements MageServer {
                     DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
                     CubeFactory.getInstance().getDraftCubes().toArray(new String[CubeFactory.getInstance().getDraftCubes().size()]),
                     testMode,
-                    Main.getVersion(),
+                    ServerMain.getVersion(),
                     CardRepository.instance.getContentVersionConstant(),
                     ExpansionRepository.instance.getContentVersionConstant(),
                     GamesRoomManager.getInstance().getMainRoomId()
@@ -210,7 +210,7 @@ public class Main implements MageServer {
         logger.info("Config - save game active: " + (config.isSaveGameActivated() ? "True":"false"));
         
         try {
-            instance = new Main(adminPassword, testMode);
+            instance = new ServerMain(adminPassword, testMode);
             server = new Server(instance);
             server.start(config.getPort(), config.isUseSSL());
         } catch (Exception ex) {
@@ -219,16 +219,16 @@ public class Main implements MageServer {
 
     }
 
-    public static Main getInstance() {
+    public static ServerMain getInstance() {
         return instance;
     }
     
     @Override
     public boolean registerClient(Connection connection, String sessionId, MageVersion version, String host)  {
-        if (version.compareTo(Main.getVersion()) != 0) {
+        if (version.compareTo(ServerMain.getVersion()) != 0) {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version);
-            LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, connection.getUsername(), version.toString(), Main.getVersion().toString(), sessionId);
-            String message = "Wrong client version " + version + ", expecting version " + Main.getVersion() + ". \r\n\r\nPlease download needed version from http://XMage.de or http://www.slightlymagic.net/forum/viewforum.php?f=70";
+            LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, connection.getUsername(), version.toString(), ServerMain.getVersion().toString(), sessionId);
+            String message = "Wrong client version " + version + ", expecting version " + ServerMain.getVersion() + ". \r\n\r\nPlease download needed version from http://XMage.de or http://www.slightlymagic.net/forum/viewforum.php?f=70";
             server.informClient(sessionId, "Wrong version", message, MessageType.ERROR);
             return false;
         }
