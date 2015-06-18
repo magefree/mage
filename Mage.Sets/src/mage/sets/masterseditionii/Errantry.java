@@ -25,23 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.CanAttackOnlyAloneAbility;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,35 +51,33 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class PowerMatrix extends CardImpl {
+public class Errantry extends CardImpl {
 
-    public PowerMatrix(UUID ownerId) {
-        super(ownerId, 309, "Power Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MMQ";
+    public Errantry(UUID ownerId) {
+        super(ownerId, 124, "Errantry", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Aura");
 
-        // {tap}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("Target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted creature gets +3/+0 and can only attack alone.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAttachedEffect(CanAttackOnlyAloneAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and can only attack alone.");
         ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(", first strike,");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and trample until end of turn.");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public PowerMatrix(final PowerMatrix card) {
+    public Errantry(final Errantry card) {
         super(card);
     }
 
     @Override
-    public PowerMatrix copy() {
-        return new PowerMatrix(this);
+    public Errantry copy() {
+        return new Errantry(this);
     }
 }

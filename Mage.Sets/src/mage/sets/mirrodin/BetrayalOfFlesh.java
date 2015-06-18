@@ -25,23 +25,22 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.Mode;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.keyword.EntwineAbility;
+import mage.abilities.keyword.EntwineAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,35 +48,33 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class PowerMatrix extends CardImpl {
+public class BetrayalOfFlesh extends CardImpl {
 
-    public PowerMatrix(UUID ownerId) {
-        super(ownerId, 309, "Power Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MMQ";
+    public BetrayalOfFlesh(UUID ownerId) {
+        super(ownerId, 58, "Betrayal of Flesh", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
+        this.expansionSetCode = "MRD";
 
-        // {tap}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("Target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(", first strike,");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and trample until end of turn.");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Choose one -
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(1);
+        // Destroy target creature;
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // or return target creature card from your graveyard to the battlefield.
+        Mode mode = new Mode();
+        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().getModes().addMode(mode);
+        // Entwine-Sacrifice three lands.
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent(), true))));
     }
 
-    public PowerMatrix(final PowerMatrix card) {
+    public BetrayalOfFlesh(final BetrayalOfFlesh card) {
         super(card);
     }
 
     @Override
-    public PowerMatrix copy() {
-        return new PowerMatrix(this);
+    public BetrayalOfFlesh copy() {
+        return new BetrayalOfFlesh(this);
     }
 }

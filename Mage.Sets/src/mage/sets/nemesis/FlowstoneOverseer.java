@@ -25,18 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.nemesis;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -49,35 +45,27 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class PowerMatrix extends CardImpl {
+public class FlowstoneOverseer extends CardImpl {
 
-    public PowerMatrix(UUID ownerId) {
-        super(ownerId, 309, "Power Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MMQ";
+    public FlowstoneOverseer(UUID ownerId) {
+        super(ownerId, 82, "Flowstone Overseer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}{R}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // {tap}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("Target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(", first strike,");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and trample until end of turn.");
-        ability.addEffect(effect);
+        // {R}{R}: Target creature gets +1/-1 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public PowerMatrix(final PowerMatrix card) {
+    public FlowstoneOverseer(final FlowstoneOverseer card) {
         super(card);
     }
 
     @Override
-    public PowerMatrix copy() {
-        return new PowerMatrix(this);
+    public FlowstoneOverseer copy() {
+        return new FlowstoneOverseer(this);
     }
 }
