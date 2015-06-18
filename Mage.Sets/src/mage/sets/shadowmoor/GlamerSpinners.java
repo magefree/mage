@@ -111,10 +111,11 @@ class GlamerSpinnersEffect extends OneShotEffect {
          5/1/2008 	You may target a permanent that has no Auras enchanting it.
          5/1/2008 	When the ability resolves, you choose the permanent that will be receiving the Auras. It can't be the targeted permanent, it must have the same controller as the targeted permanent, and it must be able to be enchanted by all the Auras attached to the targeted permanent. If you can't choose a permanent that meets all those criteria, the Auras won't move.
          */
-        Boolean passed = true;
-        Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (targetPermanent != null) {
+        Permanent sourcePermanent = (Permanent) source.getSourceObject(game);
+        if (targetPermanent != null && controller != null && sourcePermanent != null) {
+            Boolean passed = true;
             FilterPermanent filterChoice = new FilterPermanent("a different permanent with the same controller as the target to attach the enchantments to");
             filterChoice.add(new ControllerIdPredicate(targetPermanent.getControllerId()));
             filterChoice.add(Predicates.not(new PermanentIdPredicate(targetPermanent.getId())));
@@ -122,11 +123,10 @@ class GlamerSpinnersEffect extends OneShotEffect {
             Target chosenPermanentToAttachAuras = new TargetPermanent(filterChoice);
             chosenPermanentToAttachAuras.setNotTarget(true);
 
-            LinkedList<UUID> auras = new LinkedList();
+            LinkedList<UUID> auras = new LinkedList<>();
             auras.addAll(targetPermanent.getAttachments());
 
-            if (controller != null
-                    && controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source.getSourceId(), game)) {
+            if (controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source.getSourceId(), game)) {
                 Permanent permanentToAttachAuras = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());
                 if (permanentToAttachAuras != null) {
                     for (UUID auraId : auras) {
@@ -148,7 +148,7 @@ class GlamerSpinnersEffect extends OneShotEffect {
                         }
                     }
                     if (passed) {
-                        LinkedList<UUID> aurasToAttach = new LinkedList();
+                        LinkedList<UUID> aurasToAttach = new LinkedList<>();
                         aurasToAttach.addAll(auras);
 
                         for (UUID auraId : aurasToAttach) {
@@ -158,10 +158,12 @@ class GlamerSpinnersEffect extends OneShotEffect {
                         }
                         return true;
                     }
+                    game.informPlayers(sourcePermanent.getLogName() + ": No enchantments were moved from the target permanent.");
                 }
             }
+            return true;
         }
-        game.informPlayers("Glamer Spinners: No enchantments were moved from the target permanent.");
+        
         return false;
     }
 }

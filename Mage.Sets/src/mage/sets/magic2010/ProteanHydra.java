@@ -49,6 +49,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.effects.PreventionEffectData;
 
 /**
  *
@@ -121,7 +122,7 @@ public class ProteanHydra extends CardImpl {
     class ProteanHydraEffect2 extends PreventionEffectImpl {
 
         public ProteanHydraEffect2() {
-            super(Duration.WhileOnBattlefield);
+            super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
             staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
         }
 
@@ -141,19 +142,14 @@ public class ProteanHydra extends CardImpl {
 
         @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            boolean retValue = false;
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), event.getAmount(), false);
-            int damage = event.getAmount();
-            if (!game.replaceEvent(preventEvent)) {
-                event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), damage));
-                retValue = true;
+            PreventionEffectData  preventionEffectData = preventDamageAction(event, source, game);
+            if (preventionEffectData.getPreventedDamage() > 0) {
+                Permanent permanent = game.getPermanent(source.getSourceId());
+                if (permanent != null) {
+                    permanent.removeCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), game);
+                }                
             }
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
-            }
-            return retValue;
+            return false;
         }
 
         @Override
@@ -184,8 +180,13 @@ public class ProteanHydra extends CardImpl {
         }
 
         @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == EventType.COUNTER_REMOVED;
+        }
+
+        @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == EventType.COUNTER_REMOVED && event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
+            if (event.getData().equals("+1/+1") && event.getTargetId().equals(this.getSourceId())) {
                 return true;
             }
             return false;
@@ -214,11 +215,13 @@ public class ProteanHydra extends CardImpl {
         }
 
         @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == EventType.END_TURN_STEP_PRE;
+        }
+
+        @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == EventType.END_TURN_STEP_PRE) {
-                return true;
-            }
-            return false;
+            return true;
         }
 
         @Override

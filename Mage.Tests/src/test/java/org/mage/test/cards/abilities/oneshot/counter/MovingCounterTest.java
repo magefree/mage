@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.cards.restriction;
+package org.mage.test.cards.abilities.oneshot.counter;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -37,60 +37,44 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LevelX2
  */
 
-public class CantAttackTest extends CardTestPlayerBase {
+public class MovingCounterTest extends CardTestPlayerBase {
 
     /**
-     * Tests "If all other elves get the Forestwalk ability and can't be blockt from creatures whose controler has a forest in game"
+     * I'm having an issue when using Bioshift to move only a portion of
+     * counters to another creature. When I attempt to do this, it moves all of
+     * the counters (and in some cases with my Simic deck) kills the creature.
      */
-
     @Test
-    public void testAttack() {
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
-        addCard(Zone.BATTLEFIELD, playerA, "Myr Enforcer"); // 4/4
+    public void testCantBeCounteredNormal() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        addCard(Zone.BATTLEFIELD, playerB, "Akron Legionnaire"); // 8/4
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
-        addCard(Zone.BATTLEFIELD, playerB, "Myr Enforcer"); // 4/4
+        // Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
+        addCard(Zone.HAND, playerA, "Bioshift", 1);
+        
+        // Protean Hydra enters the battlefield with X +1/+1 counters on it.        
+        // If damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.
+        // Whenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.        
+        addCard(Zone.HAND, playerA, "Protean Hydra", 1);
 
-        attack(2, playerB, "Akron Legionnaire");
-        attack(2, playerB, "Silvercoat Lion");
-        attack(2, playerB, "Myr Enforcer");
 
-        attack(3, playerA, "Silvercoat Lion");
-        attack(3, playerA, "Myr Enforcer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Protean Hydra");
+        setChoice(playerA, "X=4");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Bioshift", "Protean Hydra^Silvercoat Lion");
+        setChoice(playerA, "X=2");
 
-        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
-        assertLife(playerA, 8); // 8 + 4
-        assertLife(playerB, 14); // 4 + 2
+        assertGraveyardCount(playerA, "Bioshift", 1);
+        
+        assertPermanentCount(playerA, "Silvercoat Lion", 1);        
+        assertPowerToughness(playerA, "Silvercoat Lion", 4, 4); // added 2 counters
+
+        assertPermanentCount(playerA, "Protean Hydra", 1);        
+        assertPowerToughness(playerA, "Protean Hydra", 6, 6); // started with 4, removed 2, added 4 at end = 6
+        
 
     }
-    
-   @Test
-    public void testAttackHarborSerpent() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); 
-        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
-        addCard(Zone.BATTLEFIELD, playerA, "Harbor Serpent"); // 5/5
-        addCard(Zone.HAND, playerA, "Island");
-        
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 2); 
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
-        addCard(Zone.BATTLEFIELD, playerB, "Harbor Serpent"); // 5/5
-        
-        attack(2, playerB, "Harbor Serpent");
-        attack(2, playerB, "Silvercoat Lion");
 
-        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
-        attack(3, playerA, "Harbor Serpent");
-        attack(3, playerA, "Silvercoat Lion");
-
-        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
-        execute();
-
-        assertLife(playerB, 13); 
-        assertLife(playerA, 18); 
-    }
-    
 }
-
