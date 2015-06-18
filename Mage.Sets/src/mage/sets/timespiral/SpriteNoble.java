@@ -25,59 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mercadianmasques;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author LoneFox
 
  */
-public class PowerMatrix extends CardImpl {
+public class SpriteNoble extends CardImpl {
 
-    public PowerMatrix(UUID ownerId) {
-        super(ownerId, 309, "Power Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "MMQ";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control with flying");
 
-        // {tap}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
-        Effect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("Target creature gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
-        effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText(", first strike,");
-        ability.addEffect(effect);
-        effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and trample until end of turn.");
-        ability.addEffect(effect);
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public PowerMatrix(final PowerMatrix card) {
+    public SpriteNoble(UUID ownerId) {
+        super(ownerId, 81, "Sprite Noble", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Faerie");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Other creatures you control with flying get +0/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
+        // {tap}: Other creatures you control with flying get +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, true),
+            new TapSourceCost()));
+    }
+
+    public SpriteNoble(final SpriteNoble card) {
         super(card);
     }
 
     @Override
-    public PowerMatrix copy() {
-        return new PowerMatrix(this);
+    public SpriteNoble copy() {
+        return new SpriteNoble(this);
     }
 }
