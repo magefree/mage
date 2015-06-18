@@ -60,10 +60,10 @@ public class PowerMatrix extends CardImpl {
         effect.setText("Target creature gets +1/+1");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("and gains flying,");
+        effect.setText("and gains flying");
         ability.addEffect(effect);
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("first strike,");
+        effect.setText(", first strike,");
         ability.addEffect(effect);
         effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and trample until end of turn.");

@@ -80,7 +80,7 @@ class KaerveksTorchCostIncreaseEffect extends CostModificationEffectImpl {
 
     KaerveksTorchCostIncreaseEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.INCREASE_COST);
-        staticText = "Spells that target Kaervek's Torch cost {2} more to cast";
+        staticText = "Spells that target {this} cost {2} more to cast";
     }
 
     KaerveksTorchCostIncreaseEffect(KaerveksTorchCostIncreaseEffect effect) {

@@ -80,7 +80,7 @@ class LlanowarEmpathEffect extends OneShotEffect {
 
     public LlanowarEmpathEffect() {
         super(Outcome.Benefit);
-        this.staticText = "reveal the top card of your library. If it's a creature card, put it into your hand.";
+        this.staticText = ", then reveal the top card of your library. If it's a creature card, put it into your hand.";
     }
 
     public LlanowarEmpathEffect(final LlanowarEmpathEffect effect) {
