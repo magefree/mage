@@ -30,6 +30,7 @@ package mage.sets.masterseditionii;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -64,8 +65,11 @@ public class Errantry extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +3/+0 and can only attack alone.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(CanAttackOnlyAloneAbility.getInstance(), AttachmentType.AURA)));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
+        Effect effect = new GainAbilityAttachedEffect(CanAttackOnlyAloneAbility.getInstance(), AttachmentType.AURA);
+        effect.setText("and can only attack alone.");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public Errantry(final Errantry card) {
