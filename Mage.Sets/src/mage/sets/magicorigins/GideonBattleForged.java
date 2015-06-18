@@ -155,18 +155,25 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
         }
         Permanent targetPermanent = targetPermanentReference.getPermanent(game);
         if (targetPermanent == null) {
-            return false;
+            return true;
         }
         if (nextTurnTargetController == 0 && startingTurn != game.getTurnNum() && game.getActivePlayerId().equals(targetPermanent.getControllerId())) {
             nextTurnTargetController = game.getTurnNum();
         }
-        return game.getPhase().getType() == TurnPhase.END && game.getTurnNum() > nextTurnTargetController;
+        if (game.getPhase().getType() == TurnPhase.END && nextTurnTargetController > 0 && game.getTurnNum() > nextTurnTargetController) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void init(Ability source, Game game) {
-        targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
         super.init(source, game);
+        if (getTargetPointer().getFirst(game, source) == null) {
+            discard();
+        } else {
+            targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
+        }
     }
     
     @Override
@@ -175,9 +182,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
             if (game.getActivePlayerId().equals(permanent.getControllerId())) {
                 Permanent planeswalker = game.getPermanent(source.getSourceId());
                 if (planeswalker != null) {
-                    if (planeswalker.getCardType().contains(CardType.CREATURE)) {
-                        return true;
-                    }
+                    return true;
                 } else {
                     discard();
                 }
