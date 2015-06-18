@@ -88,6 +88,7 @@ public class GideonBattleForged extends CardImpl {
         Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.UntilYourNextTurn);
         effect.setText("Until your next turn, target creature gains indestructible");
         loyaltyAbility = new LoyaltyAbility(effect, 1);
+        loyaltyAbility.addTarget(new TargetCreaturePermanent());
         effect = new UntapTargetEffect();
         effect.setText("Untap that creature");
         loyaltyAbility.addEffect(effect);
@@ -149,6 +150,9 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
     
     @Override
     public boolean isInactive(Ability source, Game game) {
+        if (targetPermanentReference == null) {
+            return true;
+        }
         Permanent targetPermanent = targetPermanentReference.getPermanent(game);
         if (targetPermanent == null) {
             return false;
@@ -157,6 +161,12 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
             nextTurnTargetController = game.getTurnNum();
         }
         return game.getPhase().getType() == TurnPhase.END && game.getTurnNum() > nextTurnTargetController;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        targetPermanentReference = new MageObjectReference(getTargetPointer().getFirst(game, source), game);
+        super.init(source, game);
     }
     
     @Override

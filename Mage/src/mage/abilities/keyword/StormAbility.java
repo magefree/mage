@@ -69,8 +69,8 @@ public class StormAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)) {
-            StackObject spell = game.getStack().getStackObject(this.sourceId);
+        if (event.getSourceId().equals(getSourceId())) {
+            StackObject spell = game.getStack().getStackObject(getSourceId());
             if (spell instanceof Spell) {
                 for (Effect effect : this.getEffects()) {
                     effect.setValue("StormSpell", spell);
@@ -108,7 +108,7 @@ class StormEffect extends OneShotEffect {
                 Spell spell = (Spell) this.getValue("StormSpell");
                 if (spell != null) {
                     if (!game.isSimulation()) {
-                        game.informPlayers("Storm: " + spell.getName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
+                        game.informPlayers("Storm: " + spell.getLogName() + " will be copied " + stormCount + " time" + (stormCount > 1 ?"s":""));
                     }
                     for (int i = 0; i < stormCount; i++) {
                         Spell copy = spell.copySpell();
