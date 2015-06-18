@@ -31,9 +31,9 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -48,6 +48,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
@@ -132,10 +133,13 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
         if(!target.canChoose(source.getSourceId(), controllerId, game)) {
             return false;
         }
-        game.getPlayer(controllerId).chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
-        Card card = game.getCard(target.getTargets().get(0));
-        if(card != null) {
-            return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+        Player player = game.getPlayer(controllerId);
+        if(player != null) {
+            player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
+            Card card = game.getCard(target.getTargets().get(0));
+            if(card != null) {
+                return card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
+            }
         }
         return false;
     }
