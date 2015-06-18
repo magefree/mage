@@ -45,8 +45,8 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SearchLibraryPutInPlayEffect extends SearchEffect {
 
-    private boolean tapped;
-    private boolean forceShuffle;
+    protected boolean tapped;
+    protected boolean forceShuffle;
 
     public SearchLibraryPutInPlayEffect(TargetCardInLibrary target) {
         this(target, false, true, Outcome.PutCardInPlay);

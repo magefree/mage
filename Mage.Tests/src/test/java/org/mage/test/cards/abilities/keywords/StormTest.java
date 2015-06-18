@@ -30,6 +30,7 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -163,5 +164,39 @@ public class StormTest extends CardTestPlayerBase {
 
         assertLife(playerB, 16);  // 3 (Lightning Bolt) + 1 from Storm copied Grapeshot
     }
-            
+ 
+    /**
+     * I provide a game log fo the issue with storm mentioned earlier. I guess Pyromancer Ascension is a culprit. 
+     * 
+     * 
+     */
+    @Test
+    public void testStormAndPyromancerAscension() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
+        // Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Pyromancer Ascension", 1);
+        // Grapeshot deals 1 damage to target creature or player. - Sorcery {1}{R}
+        // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)        
+        addCard(Zone.LIBRARY, playerA, "Grapeshot", 2);
+        skipInitShuffling();
+        // Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+        addCard(Zone.HAND, playerA, "Sleight of Hand");
+        addCard(Zone.HAND, playerA, "Shock", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sleight of Hand");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "targetPlayer=PlayerB", "Shock", StackClause.WHILE_NOT_ON_STACK);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "targetPlayer=PlayerB", "Shock", StackClause.WHILE_NOT_ON_STACK);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grapeshot", playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Shock", 3);
+        assertGraveyardCount(playerA, "Grapeshot", 1);
+        assertCounterCount("Pyromancer Ascension", CounterType.QUEST, 2);
+        assertLife(playerB, 8); // 6 from the Shocks + 5 from Grapeshot + 1 from Pyromancer Ascencsion copy
+    }    
 }

@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DealsDamageToOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -54,7 +55,6 @@ public class SnakeUmbra extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -63,11 +63,14 @@ public class SnakeUmbra extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+1
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         
         // and has "Whenever this creature deals damage to an opponent, you may draw a card."
         Ability gainedAbility = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
+        effect.setText("and has \"Whenever this creature deals damage to an opponent, you may draw a card.\"");
+        ability.addEffect(effect);
+        this.addAbility(ability);
         
         // Totem armor
         this.addAbility(new TotemArmorAbility());

@@ -44,6 +44,9 @@ public class TransformAbility extends SimpleStaticAbility {
     public static final String NO_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if no spells were cast last turn, transform {this}.";
     public static final String TWO_OR_MORE_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if a player cast two or more spells last turn, transform {this}.";
 
+    // this state value controlls if a permanent enters the battlefield already transformed 
+    public static final String VALUE_KEY_ENTER_TRANSFORMED = "EnterTransformed";
+    
     public TransformAbility() {
         super(Zone.BATTLEFIELD, new TransformEffect());
     }

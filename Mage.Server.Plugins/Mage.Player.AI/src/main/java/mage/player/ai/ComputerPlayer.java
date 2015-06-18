@@ -208,7 +208,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
         }
-        // sometimes a target aelection can be made from a player that does not control the ability
+        // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -507,7 +507,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
-                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() < target.getTargets().size()) {
+                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
                         if (target.canTarget(card.getId(), source, game)) {

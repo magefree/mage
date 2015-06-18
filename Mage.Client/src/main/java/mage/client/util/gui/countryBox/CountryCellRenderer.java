@@ -68,7 +68,7 @@ public class CountryCellRenderer extends DefaultTableCellRenderer {
     private ImageIcon getCountryFlagIcon(String countryCode) {
         ImageIcon flagIcon = flagIconCache.get(countryCode);
         if (flagIcon == null) {
-            flagIcon = new javax.swing.ImageIcon(getClass().getResource("/flags/" + countryCode +".png"));
+            flagIcon = new javax.swing.ImageIcon(getClass().getResource("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" :".png")));
             if (flagIcon.getImage() == null) {
                 logger.warn("Country flag resource not found: " + countryCode);
             } else {
