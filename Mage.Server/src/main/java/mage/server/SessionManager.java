@@ -74,7 +74,7 @@ public class SessionManager {
 //        sessions.put(sessionId, session);
 //    }
 
-    public boolean registerUser(String sessionId, Connection connection, String host) throws MageException {
+    public boolean registerUser(String sessionId, Connection connection, String host) {
         Session session = new Session(sessionId);
         sessions.put(sessionId, session);
         session.setHost(host);

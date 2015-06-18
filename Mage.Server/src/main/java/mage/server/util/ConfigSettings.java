@@ -74,26 +74,6 @@ public class ConfigSettings {
     public int getPort() {
         return config.getServer().getPort().intValue();
     }
-
-    public int getSecondaryBindPort() {
-        return config.getServer().getSecondaryBindPort().intValue();
-    }
-
-    public int getLeasePeriod() {
-        return config.getServer().getLeasePeriod().intValue();
-    }
-
-    public int getMaxPoolSize() {
-        return config.getServer().getMaxPoolSize().intValue();
-    }
-
-    public int getNumAcceptThreads() {
-        return config.getServer().getNumAcceptThreads().intValue();
-    }
-
-    public int getBacklogSize() {
-        return config.getServer().getBacklogSize().intValue();
-    }
         
     public int getMaxGameThreads() {
         return config.getServer().getMaxGameThreads().intValue();

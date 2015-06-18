@@ -84,7 +84,7 @@ public class Session {
         this.lock = new ReentrantLock();
     }
 
-    public String registerUser(Connection connection) throws MageException {
+    public String registerUser(Connection connection) {
 //        String returnMessage = registerUserHandling(userName);
 //        if (returnMessage != null) {
 //            sendErrorMessageToClient(returnMessage);
@@ -103,7 +103,7 @@ public class Session {
         return lock.isLocked();
     }
 
-    public String registerUserHandling(Connection connection) throws MageException {
+    public String registerUserHandling(Connection connection) {
         this.isAdmin = false;
         String userName = connection.getUsername();
         if (userName.equals("Admin")) {
