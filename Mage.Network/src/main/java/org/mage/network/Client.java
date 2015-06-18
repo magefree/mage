@@ -214,7 +214,7 @@ public class Client {
         try {
             return clientMessageHandler.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
         } catch (Exception ex) {
-            logger.error("Error creating table", ex);
+            logger.error("Error joining table", ex);
         }
         return false;
     }
@@ -286,7 +286,7 @@ public class Client {
         try {
             return clientMessageHandler.getTable(roomId, tableId);
         } catch (Exception ex) {
-            logger.error("Error getting chat room id", ex);
+            logger.error("Error getting table", ex);
         }
         return null;
     }
@@ -350,21 +350,9 @@ public class Client {
         return null;
     }
 
-//    public Collection<MatchView> getFinishedMatches(UUID roomId) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//    
-//    public Collection<RoomUsersView> getRoomUsers(UUID roomId) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     public void cheat(UUID gameId, UUID playerId, DeckCardLists importDeck) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-//    public UUID getGameChatId(UUID gameId) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     public UUID joinGame(UUID gameId) {
         try {

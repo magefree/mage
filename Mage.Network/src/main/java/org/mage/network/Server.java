@@ -47,12 +47,8 @@ import org.mage.network.handlers.MessageHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.WriteListener;
-//import org.mage.network.handlers.server.ChatMessageHandler;
 import org.mage.network.handlers.server.ConnectionHandler;
-//import org.mage.network.handlers.server.RegisterClientMessageHandler;
-//import org.mage.network.handlers.server.RoomMessageHandler;
 import org.mage.network.handlers.server.ServerRequestHandler;
-//import org.mage.network.handlers.server.TableMessageHandler;
 import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.ChatMessageMessage;
 import org.mage.network.model.GameAskMessage;
@@ -84,24 +80,14 @@ public class Server {
 //    private final MessageHandler h;
     private final PingMessageHandler pingMessageHandler = new PingMessageHandler();
     private final EventExecutorGroup handlersExecutor = new DefaultEventExecutorGroup(Runtime.getRuntime().availableProcessors() * 2);
-//    private final RegisterClientMessageHandler registerClientMessageHandler;
-
-//    private final ChatMessageHandler chatMessageHandler;
     private final ServerRequestHandler serverMessageHandler;
-//    private final RoomMessageHandler roomMessageHandler;
-//    private final TableMessageHandler tableMessageHandler;
     
     private final ExceptionHandler exceptionHandler;
     
     public Server(MageServer server) {
         this.server = server;
 //        h = new MessageHandler();
-//        registerClientMessageHandler = new RegisterClientMessageHandler(server);
-//        chatMessageHandler = new ChatMessageHandler(server);
         serverMessageHandler = new ServerRequestHandler(server);
-//        roomMessageHandler = new RoomMessageHandler(server);
-//        tableMessageHandler = new TableMessageHandler(server);
-        
         exceptionHandler = new ExceptionHandler();
     }
     
@@ -151,13 +137,7 @@ public class Server {
             ch.pipeline().addLast("pingMessageHandler", pingMessageHandler);
 
             ch.pipeline().addLast("connectionHandler", new ConnectionHandler());
-//            ch.pipeline().addLast(handlersExecutor, "registerClientMessageHandler", registerClientMessageHandler);
-
-//            ch.pipeline().addLast(handlersExecutor, "chatMessageHandler", chatMessageHandler);
             ch.pipeline().addLast(handlersExecutor, "serverMessageHandler", serverMessageHandler);
-//            ch.pipeline().addLast(handlersExecutor, "roomMessageHandler", roomMessageHandler);
-//            ch.pipeline().addLast(handlersExecutor, "tableMessageHandler", tableMessageHandler);
-            
             ch.pipeline().addLast("exceptionHandler", exceptionHandler);
         }
 
