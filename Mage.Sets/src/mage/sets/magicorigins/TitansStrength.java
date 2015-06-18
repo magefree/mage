@@ -37,7 +37,7 @@ public class TitansStrength extends mage.sets.theros.TitansStrength {
 
     public TitansStrength(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 980;
         this.expansionSetCode = "ORI";
     }
 

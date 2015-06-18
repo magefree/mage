@@ -247,7 +247,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for (Ability ability : entry.getValue()) {
                         UUID defenderId = effect.mustAttackDefender(ability, game);
                         if (defenderId != null) {
-                            defendersForcedToAttack.add(defenderId);
+                            if (defenders.contains(defenderId)) {
+                                defendersForcedToAttack.add(defenderId);
+                            }
                         }
                         break;
                     }

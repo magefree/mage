@@ -38,6 +38,7 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -85,7 +86,9 @@ public class GideonJura extends CardImpl {
 
         // 0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
         LoyaltyAbility ability3 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonJuraToken(), "planeswalker", Duration.EndOfTurn), 0);
-        ability3.addEffect(new PreventAllDamageToSourceEffect(Duration.EndOfTurn));
+        Effect effect = new PreventAllDamageToSourceEffect(Duration.EndOfTurn);
+        effect.setText("Prevent all damage that would be dealt to him this turn");
+        ability3.addEffect(effect);
         this.addAbility(ability3);
     }
 
