@@ -97,13 +97,16 @@ class KaerveksTorchCostIncreaseEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if(abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
         {
-            for(Target target: abilityToModify.getTargets()) {
-                for(UUID id: target.getTargets()) {
-                    if(id.equals(source.getSourceObject(game).getId())) {
-                        return true;
+            for(UUID modeId: abilityToModify.getModes().getSelectedModes()) {
+                abilityToModify.getModes().setActiveMode(modeId);
+                for(Target target: abilityToModify.getTargets()) {
+                    for(UUID id: target.getTargets()) {
+                        if(id.equals(source.getSourceObject(game).getId())) {
+                            return true;
+                        }
                     }
                 }
-           }
+            }
         }
         return false;
     }
