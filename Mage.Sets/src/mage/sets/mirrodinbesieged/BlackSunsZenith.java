@@ -51,6 +51,7 @@ public class BlackSunsZenith extends CardImpl {
         super(ownerId, 39, "Black Sun's Zenith", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}");
         this.expansionSetCode = "MBS";
 
+        // Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library.
         this.getSpellAbility().addEffect(new BlackSunsZenithEffect());
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }

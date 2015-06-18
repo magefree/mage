@@ -35,6 +35,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -58,12 +59,15 @@ public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-            if (spellCard != null) {
-                Player owner = game.getPlayer(spellCard.getOwnerId());
-                if (owner != null) {
-                    controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, true, true);
-                    owner.shuffleLibrary(game);
+            Spell spell = game.getStack().getSpell(source.getSourceId());
+            if (spell != null) {
+                Card spellCard = spell.getCard();
+                if (spellCard != null) {
+                    Player owner = game.getPlayer(spellCard.getOwnerId());
+                    if (owner != null) {
+                        controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, true, true);
+                        owner.shuffleLibrary(game);
+                    }
                 }
             }
             return true;

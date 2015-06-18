@@ -113,4 +113,45 @@ public class SpellskiteTest extends CardTestPlayerBase {
         
     }    
     
+    /**
+     * Spellskite fails to redirect Cryptic Command on itself
+     */
+    @Test
+    public void testSpellskite() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        // Choose two -
+        // Counter target spell;
+        // or return target permanent to its owner's hand;
+        // or tap all creatures your opponents control;
+        // or draw a card.        
+        addCard(Zone.HAND, playerA, "Cryptic Command");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Spellskite", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptic Command", "mode=1Lightning Bolt^mode=2Silvercoat Lion", "Lightning Bolt");        
+        setModeChoice(playerA, "1"); // Counter target spell
+        setModeChoice(playerA, "2"); // return target permanent to its owner's hand        
+        
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{UP}: Change a target of target spell or ability to {this}.", "Cryptic Command");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+
+        assertGraveyardCount(playerA, "Cryptic Command", 1);
+        
+        assertHandCount(playerB, "Spellskite", 1);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        
+    }    
 }
