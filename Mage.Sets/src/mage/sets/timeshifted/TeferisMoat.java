@@ -77,17 +77,25 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures of the chosen color without flying can't attack you";
     }
+    
     TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
         super(effect);
     }
-     @Override
+    
+    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (chosenColor == null)
             return false;
         return permanent.getCardType().contains(CardType.CREATURE) && !permanent.getAbilities().contains(FlyingAbility.getInstance()) && !permanent.getColor(game).shares(chosenColor);
     }
-     @Override
+    
+    @Override
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        return !defenderId.equals(source.getControllerId());
+    }
+    
+    @Override
     public TeferisMoatRestrictionEffect copy() {
         return new TeferisMoatRestrictionEffect(this);
     }
