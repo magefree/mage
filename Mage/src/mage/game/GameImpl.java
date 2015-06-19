@@ -1144,6 +1144,7 @@ public abstract class GameImpl implements Game, Serializable {
         int bookmark = 0;
         clearAllBookmarks();
         try {
+            applyEffects();                
             while (!isPaused() && !gameOver(null) && !this.getTurn().isEndTurnRequested()) {
                 if (!resuming) {
                     state.getPlayers().resetPassed();
