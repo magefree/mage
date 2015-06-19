@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -64,7 +64,7 @@ public class HarmonicSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         TargetPermanent target = new TargetPermanent(new FilterArtifactOrEnchantmentPermanent());
         ability.addTarget(target);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
