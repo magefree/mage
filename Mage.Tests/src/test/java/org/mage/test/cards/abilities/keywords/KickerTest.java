@@ -31,6 +31,7 @@ package org.mage.test.cards.abilities.keywords;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -203,4 +204,92 @@ public class KickerTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
         
     }    
+    
+   /**
+     * Bloodhusk Ritualist's discard trigger does nothing if the Ritualist leaves the battlefield before the trigger resolves.
+     */
+    @Test
+    public void testBloodhuskRitualist() {
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.HAND, playerB, "Fireball", 2);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Bloodhusk Ritualist", 1); // 2/2  {2}{B}
+        
+        // Multikicker (You may pay an additional {B} any number of times as you cast this spell.)
+        // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodhusk Ritualist");
+        setChoice(playerA, "Yes"); // 2 x Multikicker
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "No");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Bloodhusk Ritualist");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        Assert.assertEquals("All mana has to be used","[]", playerA.getManaAvailable(currentGame).toString());
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Bloodhusk Ritualist", 1);
+        assertGraveyardCount(playerB, "Fireball", 2);        
+        
+        assertHandCount(playerB, 0);
+    }
+    
+    /**
+     * Test and/or kicker costs
+     */
+    @Test
+    public void testSunscapeBattlemage1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+
+        // Kicker {1}{G} and/or {2}{U}
+        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.        
+        addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
+        setChoice(playerA, "No");  // no {1}{G}
+        setChoice(playerA, "Yes"); // but {2}{U}
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPermanentCount(playerA, "Sunscape Battlemage", 1);
+        assertHandCount(playerA, 2);
+    }
+        
+    
+    /**
+     * Test and/or kicker costs
+     */
+    @Test
+    public void testSunscapeBattlemage2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        
+        // Kicker {1}{G} and/or {2}{U}
+        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.        
+        addCard(Zone.HAND, playerA, "Sunscape Battlemage", 1); // 2/2  {2}{W}
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Birds of Paradise", 2);
+                
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sunscape Battlemage");
+        addTarget(playerA, "Birds of Paradise");
+        setChoice(playerA, "Yes");  // no {1}{G}
+        setChoice(playerA, "Yes"); // but {2}{U}
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Birds of Paradise", 1);
+        assertPermanentCount(playerA, "Sunscape Battlemage", 1);
+        assertHandCount(playerA, 2);
+    }    
+    
+    
 }
