@@ -120,5 +120,91 @@ public class PhyrexianMetamorphTest extends CardTestPlayerBase {
 
     }  
 
+    /**
+     * I had a Harmonic Sliver, my opponent played Phyrexian Metamorph copying
+     * it. The resulting copy only had one instance of the artifact-enchantment
+     * destroying ability, where it should have had two of them and triggered
+     * twice (the Metamorph might have nothing to do with this)
+     */
+   @Test
+    public void testHarmonicSliver() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+
+        // You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
+        addCard(Zone.HAND, playerA, "Phyrexian Metamorph"); // {3}{UP}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Alloy Myr", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Kitesail", 1);
+        // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+        addCard(Zone.BATTLEFIELD, playerB, "Harmonic Sliver"); // 2/4
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Metamorph");
+        setChoice(playerA, "Harmonic Sliver");
+        addTarget(playerA, "Alloy Myr");
+        addTarget(playerA, "Kitesail");
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+               
+        assertPermanentCount(playerA, "Harmonic Sliver", 1);
+
+        assertGraveyardCount(playerB, "Alloy Myr", 1);
+        assertGraveyardCount(playerB, "Kitesail", 1);
+
+    }  
     
+    /**
+     * If a Harmonic Sliver enters the battlefield 
+     * the controller has to destroy one artifacts or enchantments
+     */
+    @Test
+    public void testHarmonicSliverNative1() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        
+        // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+        addCard(Zone.HAND, playerA, "Harmonic Sliver"); 
+
+        addCard(Zone.BATTLEFIELD, playerB, "Alloy Myr", 2); // 2/2        
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harmonic Sliver");
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+               
+        assertPermanentCount(playerA, "Harmonic Sliver", 1);
+
+        assertGraveyardCount(playerB, "Alloy Myr", 1);
+
+    }      
+    
+    /**
+     * If a Harmonic Sliver enters the battlefield and there is already one on the battlefield
+     * the controller has to destroy two artifacts or enchantments
+     */
+    @Test
+    public void testHarmonicSliverNative2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        
+        addCard(Zone.HAND, playerA, "Harmonic Sliver"); 
+
+        addCard(Zone.BATTLEFIELD, playerB, "Alloy Myr", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Kitesail", 1);
+        // All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+        addCard(Zone.BATTLEFIELD, playerB, "Harmonic Sliver"); // 2/4
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Harmonic Sliver");
+        addTarget(playerA, "Alloy Myr");
+        addTarget(playerA, "Kitesail");
+
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
+               
+        assertPermanentCount(playerA, "Harmonic Sliver", 1);
+
+        assertGraveyardCount(playerB, "Alloy Myr", 1);
+        assertGraveyardCount(playerB, "Kitesail", 1);
+
+    }       
 }
