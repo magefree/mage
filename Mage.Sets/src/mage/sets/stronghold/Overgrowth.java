@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -95,17 +96,20 @@ class OvergrowthTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
-                if (enchanted != null) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
-                    return true;
-                }
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
+            if (enchanted != null) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted.getControllerId()));
+                return true;
             }
-        }  
+        }
         return false;
     }
 

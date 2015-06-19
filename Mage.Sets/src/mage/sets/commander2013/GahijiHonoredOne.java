@@ -90,23 +90,26 @@ class GahijiHonoredOneTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ATTACKER_DECLARED)) {
-            Player defender = game.getPlayer(event.getTargetId());
-            if (defender == null) {
-                Permanent planeswalker = game.getPermanent(event.getTargetId());
-                if (planeswalker != null) {
-                    defender = game.getPlayer(planeswalker.getControllerId());
-                }
+        Player defender = game.getPlayer(event.getTargetId());
+        if (defender == null) {
+            Permanent planeswalker = game.getPermanent(event.getTargetId());
+            if (planeswalker != null) {
+                defender = game.getPlayer(planeswalker.getControllerId());
             }
-            if (defender != null) {
-                Set<UUID> opponents = game.getOpponents(this.getControllerId());
-                if (opponents != null && opponents.contains(defender.getId())) {
-                    for (Effect effect: this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
-                    return true;
+        }
+        if (defender != null) {
+            Set<UUID> opponents = game.getOpponents(this.getControllerId());
+            if (opponents != null && opponents.contains(defender.getId())) {
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
+                return true;
             }
         }
         return false;

@@ -92,25 +92,28 @@ class ShireiShizosCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     public ShireiShizosCaretakerTriggeredAbility copy() {
         return new ShireiShizosCaretakerTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent LKIpermanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
-            Card card = game.getCard(zEvent.getTargetId());
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent LKIpermanent = game.getPermanentOrLKIBattlefield(zEvent.getTargetId());
+        Card card = game.getCard(zEvent.getTargetId());
 
-            if (card != null && LKIpermanent != null &&
-                    card.getOwnerId().equals(this.controllerId) && 
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    card.getCardType().contains(CardType.CREATURE) &&
-                    LKIpermanent.getPower().getValue() <= 1) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
-                }
-                return true;
+        if (card != null && LKIpermanent != null &&
+                card.getOwnerId().equals(this.controllerId) && 
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                card.getCardType().contains(CardType.CREATURE) &&
+                LKIpermanent.getPower().getValue() <= 1) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             }
+            return true;
         }
         return false;
     }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.zendikar;
 
 import java.util.UUID;
@@ -85,7 +84,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl {
 
 class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
 
-    ValakutTheMoltenPinnacleTriggeredAbility () {
+    ValakutTheMoltenPinnacleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(3), true);
         this.addTarget(new TargetCreatureOrPlayer());
     }
@@ -100,17 +99,21 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
-                if(permanent.hasSubtype("Mountain")){
-                    return true;
-                }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
+            if (permanent.hasSubtype("Mountain")) {
+                return true;
             }
         }
         return false;
     }
+
     @Override
     public ValakutTheMoltenPinnacleTriggeredAbility copy() {
         return new ValakutTheMoltenPinnacleTriggeredAbility(this);

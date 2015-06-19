@@ -38,6 +38,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
 
@@ -118,13 +119,13 @@ class FinalFortuneLoseDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-            if (connectedTurnMod != null && connectedTurnMod.equals(game.getState().getTurnId())) {
-                return true;
-            }
-        }
-        return false;
+        return connectedTurnMod != null && connectedTurnMod.equals(game.getState().getTurnId());
     }
 
     public void setConnectedTurnMod(UUID connectedTurnMod) {

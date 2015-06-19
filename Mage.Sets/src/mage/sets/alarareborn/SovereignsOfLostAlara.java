@@ -28,10 +28,6 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,7 +35,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
@@ -100,13 +99,16 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getActivePlayerId().equals(this.controllerId)) {
-            if (event.getType() == EventType.DECLARED_ATTACKERS) {
-                if (game.getCombat().attacksAlone()) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
-                    return true;
-                }
+            if (game.getCombat().attacksAlone()) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                return true;
             }
         }
         return false;

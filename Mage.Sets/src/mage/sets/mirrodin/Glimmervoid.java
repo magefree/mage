@@ -28,17 +28,17 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -82,18 +82,21 @@ class GlimmervoidTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-            FilterArtifactPermanent filter = new FilterArtifactPermanent();
-            if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
-                return true;
-            }
+        FilterArtifactPermanent filter = new FilterArtifactPermanent();
+        if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
+            return true;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "At the beginning of the end step, if you control no Artifacts, sacrifice {this}.";
+        return "At the beginning of the end step, if you control no artifacts, sacrifice {this}.";
     }
 }

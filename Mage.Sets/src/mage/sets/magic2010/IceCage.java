@@ -29,18 +29,18 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
+import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -100,13 +100,16 @@ class IceCageAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
+        Permanent enchantment = game.getPermanent(sourceId);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+                return true;
             }
         }
         return false;

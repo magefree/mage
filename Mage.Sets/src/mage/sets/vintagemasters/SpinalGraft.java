@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -95,17 +96,20 @@ class SpinalGraftTriggeredAbility extends TriggeredAbilityImpl {
     public SpinalGraftTriggeredAbility copy() {
         return new SpinalGraftTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                UUID enchanted = enchantment.getAttachedTo();
-                if (event.getTargetId().equals(enchanted)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchanted));
-                    return true;
-                }
+        Permanent enchantment = game.getPermanent(sourceId);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            UUID enchanted = enchantment.getAttachedTo();
+            if (event.getTargetId().equals(enchanted)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted));
+                return true;
             }
         }
         return false;

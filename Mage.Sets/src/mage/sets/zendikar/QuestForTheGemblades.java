@@ -42,6 +42,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -93,16 +94,19 @@ class QuestForTheGembladesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            if (((DamagedCreatureEvent) event).isCombatDamage()) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent == null) {
-                    permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-                }
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
-                    return true;
-                }
+        if (((DamagedCreatureEvent) event).isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent == null) {
+                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+            }
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
+                return true;
             }
         }
         return false;

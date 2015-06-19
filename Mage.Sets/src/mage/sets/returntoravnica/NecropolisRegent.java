@@ -28,9 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -38,11 +35,14 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -94,17 +94,20 @@ class NecropolisRegentTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId)) {
-                    this.getEffects().clear();
-                    Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(event.getAmount()));
-                    effect.setTargetPointer(new FixedTarget(creature.getId()));
-                    this.addEffect(effect);
-                    return true;
-                }
+        if (((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.getControllerId().equals(controllerId)) {
+                this.getEffects().clear();
+                Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(event.getAmount()));
+                effect.setTargetPointer(new FixedTarget(creature.getId()));
+                this.addEffect(effect);
+                return true;
             }
         }
         return false;

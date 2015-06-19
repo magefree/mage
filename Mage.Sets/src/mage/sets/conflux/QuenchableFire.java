@@ -30,9 +30,6 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
@@ -43,10 +40,12 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
 import mage.target.TargetPlayer;
 
 /**
@@ -149,8 +148,13 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             for (SpecialAction action: game.getState().getSpecialActions()) {
                 if (action.getId().equals(specialActionId)) {
                     game.getState().getSpecialActions().remove(action);
@@ -178,5 +182,4 @@ class QuenchableFireSpecialAction extends SpecialAction {
     public QuenchableFireSpecialAction copy() {
         return new QuenchableFireSpecialAction(this);
     }
-
 }

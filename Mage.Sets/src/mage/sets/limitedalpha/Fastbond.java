@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -72,8 +73,6 @@ public class Fastbond extends CardImpl {
 
 class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
 
-
-
     public PlayALandTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageControllerEffect(1), false);
     }
@@ -83,18 +82,20 @@ class PlayALandTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LAND_PLAYED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LAND_PLAYED && event.getPlayerId() == this.getControllerId()) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId() == this.getControllerId();
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player player = game.getPlayer(this.getControllerId());
-        if(player != null){
-            if(player.getLandsPlayed() != 1){
+        if (player != null){
+            if (player.getLandsPlayed() != 1){
                 return true;
             }
         }

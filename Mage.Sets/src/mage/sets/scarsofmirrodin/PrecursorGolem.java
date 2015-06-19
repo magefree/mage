@@ -27,26 +27,26 @@
  */
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.target.Target;
-
-import java.util.UUID;
-import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.filter.FilterInPlay;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GolemToken;
+import mage.game.stack.Spell;
+import mage.target.Target;
 import mage.util.TargetAddress;
 
 /**
@@ -95,14 +95,14 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (checkSpell(spell, game)) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return checkSpell(spell, game);
     }
 
     private boolean checkSpell(Spell spell, Game game) {

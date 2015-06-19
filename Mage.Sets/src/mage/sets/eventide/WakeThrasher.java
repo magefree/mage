@@ -28,18 +28,18 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -87,11 +87,13 @@ class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilit
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAPPED && game.getPermanent(event.getTargetId()).getControllerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return game.getPermanent(event.getTargetId()).getControllerId().equals(this.controllerId);
     }
 
     @Override

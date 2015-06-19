@@ -95,8 +95,13 @@ class EntanglingClashTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CLASHED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (EventType.CLASHED.equals(event.getType()) && event.getPlayerId().equals(getControllerId())) {
+        if (event.getPlayerId().equals(getControllerId())) {
             if (event.getFlag()) { // clash won
                 addEffect(new DontUntapInControllersNextUntapStepTargetEffect("that creature"));
             }

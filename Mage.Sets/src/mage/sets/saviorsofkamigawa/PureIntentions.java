@@ -43,6 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
@@ -85,9 +86,13 @@ class PureIntentionsAllTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) &&
-                game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
+        if (game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
                 StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
             Card card = game.getCard(event.getTargetId());
             if (card != null && card.getOwnerId().equals(getControllerId())) {
@@ -129,14 +134,15 @@ class PureIntentionsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) &&
-                game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
+        return game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId())) &&
                 StackObject.class.isInstance(game.getObject(event.getSourceId())) &&
-                event.getTargetId().equals(getSourceId())) {
-            return true;
-        }
-        return false;
+                event.getTargetId().equals(getSourceId());
     }
 
     @Override

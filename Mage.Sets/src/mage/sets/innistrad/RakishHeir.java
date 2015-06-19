@@ -28,17 +28,18 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -86,18 +87,21 @@ class RakishHeirTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && permanent != null
-                    && permanent.hasSubtype("Vampire") && permanent.getControllerId().equals(controllerId)) {
-                this.getEffects().clear();
-                AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-                effect.setTargetPointer(new FixedTarget(permanent.getId()));
-                this.addEffect(effect);
-                return true;
-            }
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (damageEvent.isCombatDamage() && permanent != null
+                && permanent.hasSubtype("Vampire") && permanent.getControllerId().equals(controllerId)) {
+            this.getEffects().clear();
+            AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+            effect.setTargetPointer(new FixedTarget(permanent.getId()));
+            this.addEffect(effect);
+            return true;
         }
         return false;
     }

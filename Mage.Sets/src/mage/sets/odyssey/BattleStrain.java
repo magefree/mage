@@ -36,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -80,13 +81,16 @@ class BattleStrainTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            if (blocker != null) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
-                return true;
-            }
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        if (blocker != null) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getControllerId()));
+            return true;
         }
         return false;
     }

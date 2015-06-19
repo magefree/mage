@@ -30,10 +30,6 @@ package mage.sets.zendikar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,7 +38,10 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -112,15 +111,15 @@ class LullmageMentorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTERED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.COUNTERED) {
-            CastedSpellsWithSpellTarget watcher = (CastedSpellsWithSpellTarget) game.getState().getWatchers().get("CastedSpellsWithSpellTarget");
-            UUID controllerIdCounter = watcher.getControllerSpell(event.getSourceId(), event.getTargetId());
-            if (controllerIdCounter != null && controllerIdCounter.equals(controllerId)) {
-                return true;
-            }
-        }
-        return false;
+        CastedSpellsWithSpellTarget watcher = (CastedSpellsWithSpellTarget) game.getState().getWatchers().get("CastedSpellsWithSpellTarget");
+        UUID controllerIdCounter = watcher.getControllerSpell(event.getSourceId(), event.getTargetId());
+        return controllerIdCounter != null && controllerIdCounter.equals(controllerId);
     }
 
     @Override

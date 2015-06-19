@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.ZombieToken;
 
 /**
@@ -87,10 +88,15 @@ class WasteNotCreatureTriggeredAbility extends TriggeredAbilityImpl {
     public WasteNotCreatureTriggeredAbility copy() {
         return new WasteNotCreatureTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
             if (discarded != null && discarded.getCardType().contains(CardType.CREATURE)) {
                 return true;
@@ -119,10 +125,15 @@ class WasteNotLandTriggeredAbility extends TriggeredAbilityImpl {
     public WasteNotLandTriggeredAbility copy() {
         return new WasteNotLandTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
             if (discarded != null && discarded.getCardType().contains(CardType.LAND)) {
                 return true;
@@ -151,10 +162,15 @@ class WasteNotOtherTriggeredAbility extends TriggeredAbilityImpl {
     public WasteNotOtherTriggeredAbility copy() {
         return new WasteNotOtherTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             Card discarded = game.getCard(event.getTargetId());
             if (discarded != null && !discarded.getCardType().contains(CardType.LAND) && !discarded.getCardType().contains(CardType.CREATURE)) {
                 return true;

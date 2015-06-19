@@ -201,18 +201,21 @@ class DarettiScrapSavantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    zEvent.getTarget().getCardType().contains(CardType.ARTIFACT) &&
-                    zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
-                }
-                return true;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                zEvent.getTarget().getCardType().contains(CardType.ARTIFACT) &&
+                zEvent.getTarget().getOwnerId().equals(this.controllerId)) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(zEvent.getTargetId()));
             }
+            return true;
         }
         return false;
     }

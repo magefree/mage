@@ -85,10 +85,15 @@ class LichsTombTriggeredAbility extends TriggeredAbilityImpl {
     public LichsTombTriggeredAbility copy() {
         return new LichsTombTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOST_LIFE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.LOST_LIFE && event.getPlayerId() == this.getControllerId()) {
+        if (event.getPlayerId() == this.getControllerId()) {
             ((SacrificeEffect) this.getEffects().get(0)).setAmount(new StaticValue(event.getAmount()));
             return true;
         }

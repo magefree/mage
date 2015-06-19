@@ -44,6 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -91,11 +92,17 @@ class RayOfCommandDelayedTriggeredAbility extends DelayedTriggeredAbility {
     RayOfCommandDelayedTriggeredAbility(RayOfCommandDelayedTriggeredAbility ability) {
         super(ability);
     }
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOST_CONTROL;
+    }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return GameEvent.EventType.LOST_CONTROL.equals(event.getType()) && event.getPlayerId().equals(controllerId);
+        return event.getPlayerId().equals(controllerId);
     }
+    
     @Override
     public RayOfCommandDelayedTriggeredAbility copy() {
         return new RayOfCommandDelayedTriggeredAbility(this);

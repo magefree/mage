@@ -28,11 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.*;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -46,13 +41,20 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.game.turn.Step;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -178,9 +180,13 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER && ((DamagedPlaneswalkerEvent) event).isCombatDamage() && event.getTargetId() == sourceId) {
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLANESWALKER;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (((DamagedPlaneswalkerEvent) event).isCombatDamage() && event.getTargetId() == sourceId) {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
             if (sourceOfDamage != null && sourceOfDamage.getCardType().contains(CardType.CREATURE)) {
                 Effect effect = this.getEffects().get(0);

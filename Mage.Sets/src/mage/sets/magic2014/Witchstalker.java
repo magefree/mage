@@ -43,6 +43,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 /**
@@ -93,18 +94,17 @@ class WitchstalkerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // Opponent casts spell during your turn
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null
-                    && filter.match(spell,game)
-                    && game.getOpponents(this.getControllerId()).contains(spell.getControllerId())
-                    && game.getActivePlayerId().equals(this.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null
+                && filter.match(spell,game)
+                && game.getOpponents(this.getControllerId()).contains(spell.getControllerId())
+                && game.getActivePlayerId().equals(this.getControllerId());
     }
 
     @Override

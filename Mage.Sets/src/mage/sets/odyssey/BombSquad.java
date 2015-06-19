@@ -113,8 +113,13 @@ class BombSquadTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER_ADDED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.COUNTER_ADDED) && event.getData().equals(CounterType.FUSE.getName())) {
+        if (event.getData().equals(CounterType.FUSE.getName())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && filter.match(permanent, game)) {
                 if (4 <= permanent.getCounters().getCount(CounterType.FUSE)) {

@@ -37,6 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -79,13 +80,13 @@ class MilitaryIntelligenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
-            if (game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackerId().equals(getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+        return game.getCombat().getAttackers().size() >= 2 && game.getCombat().getAttackerId().equals(getControllerId());
     }
 
     @Override

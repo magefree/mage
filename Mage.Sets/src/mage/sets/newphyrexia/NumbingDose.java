@@ -28,23 +28,23 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -108,12 +108,16 @@ class NumbingDoseTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent equipment = game.getPermanent(this.getSourceId());
         if (equipment != null) {
             Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-            if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE
-                    && permanent != null && event.getPlayerId().equals(permanent.getControllerId())) {
+            if (permanent != null && event.getPlayerId().equals(permanent.getControllerId())) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 return true;
             }

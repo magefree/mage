@@ -28,10 +28,6 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,8 +37,13 @@ import mage.abilities.keyword.CascadeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -102,19 +103,22 @@ class EnigmaSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-            if (permanent != null &&
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    permanent.getId().equals(this.getSourceId()) &&
-                    // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's 
-                    //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.                    
-                    permanent.getOwnerId().equals(permanent.getControllerId())) {
-                return true;
-            }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
+        if (permanent != null &&
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                permanent.getId().equals(this.getSourceId()) &&
+                // 5/1/2009 If you control an Enigma Sphinx that's owned by another player, it's put into that player's 
+                //          graveyard from the battlefield, so Enigma Sphinx's middle ability won't trigger.                    
+                permanent.getOwnerId().equals(permanent.getControllerId())) {
+            return true;
         }
         return false;
     }

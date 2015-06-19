@@ -44,6 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -96,13 +97,13 @@ class BloodcrazedHopliteTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER_ADDED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COUNTER_ADDED) {
-            if (event.getTargetId().equals(this.getSourceId()) && event.getData().equals(CounterType.P1P1.getName())) {
-               return true;
-            }
-        }
-        return false;
+        return event.getTargetId().equals(this.getSourceId()) && event.getData().equals(CounterType.P1P1.getName());
     }
 
     @Override

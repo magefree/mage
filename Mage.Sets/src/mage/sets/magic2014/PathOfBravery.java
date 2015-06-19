@@ -46,6 +46,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -113,13 +114,13 @@ class PathOfBraveryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS
-                && !game.getCombat().noAttackers()
-                && event.getPlayerId().equals(controllerId)) {
-            return true;
-        }
-        return false;
+        return !game.getCombat().noAttackers() && event.getPlayerId().equals(controllerId);
     }
 
     @Override

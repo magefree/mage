@@ -29,15 +29,15 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -65,6 +65,7 @@ public class Megrim extends CardImpl {
 }
 
 class MergimTriggeredAbility extends TriggeredAbilityImpl {
+    
     MergimTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
         this.addTarget(new TargetOpponent());
@@ -80,8 +81,13 @@ class MergimTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
             this.getTargets().get(0).add(event.getPlayerId(), game);
             return true;
         }

@@ -37,6 +37,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -78,19 +79,24 @@ class NoblePurposeTriggeredAbility extends TriggeredAbilityImpl {
     public NoblePurposeTriggeredAbility copy() {
         return new NoblePurposeTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE 
+                || event.getType() == EventType.DAMAGED_PLAYER 
+                || event.getType() == EventType.DAMAGED_PLANESWALKER;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent) {
-            DamagedEvent damageEvent = (DamagedEvent) event;
-            if (damageEvent.isCombatDamage()) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
-                        && permanent.getControllerId().equals(this.getControllerId())) {
-                    this.getEffects().clear();
-                    this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
-                    return true;
-                }
+        DamagedEvent damageEvent = (DamagedEvent) event;
+        if (damageEvent.isCombatDamage()) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
+                    && permanent.getControllerId().equals(this.getControllerId())) {
+                this.getEffects().clear();
+                this.getEffects().add(new GainLifeEffect(damageEvent.getAmount()));
+                return true;
             }
         }
         return false;

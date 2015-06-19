@@ -49,6 +49,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -98,8 +99,13 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         if (GameEvent.EventType.DISCARDED_CARD.equals(event.getType()) && getControllerId().equals(event.getPlayerId())) {
+         if (getControllerId().equals(event.getPlayerId())) {
              this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
              return true;
          }

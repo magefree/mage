@@ -27,8 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,14 +36,15 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -87,30 +87,33 @@ class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbility
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent equipment = game.getPermanent(sourceId);
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(equipment.getAttachedTo())) {
-                    Permanent blocks = game.getPermanent(event.getTargetId());
-                    if (blocks != null && blocks.hasSubtype("Vampire")) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        }
-                        return true;
+        Permanent equipment = game.getPermanent(sourceId);
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            if (event.getSourceId().equals(equipment.getAttachedTo())) {
+                Permanent blocks = game.getPermanent(event.getTargetId());
+                if (blocks != null && blocks.hasSubtype("Vampire")) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
-                    return false;
+                    return true;
                 }
-                if (event.getTargetId().equals(equipment.getAttachedTo())) {
-                    Permanent blockedBy = game.getPermanent(event.getSourceId());
-                    if (blockedBy != null && blockedBy.hasSubtype("Vampire")) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                        }
-                        return true;
+                return false;
+            }
+            if (event.getTargetId().equals(equipment.getAttachedTo())) {
+                Permanent blockedBy = game.getPermanent(event.getSourceId());
+                if (blockedBy != null && blockedBy.hasSubtype("Vampire")) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
-                    return false;
+                    return true;
                 }
+                return false;
             }
         }
         return false;

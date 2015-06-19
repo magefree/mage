@@ -44,6 +44,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -93,6 +94,14 @@ class BansheesBladeAbility extends TriggeredAbilityImpl {
     @Override
     public BansheesBladeAbility copy() {
         return new BansheesBladeAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER
+                || event.getType() == EventType.DAMAGED_CREATURE
+                || event.getType() == EventType.DAMAGED_PLANESWALKER
+                || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE;
     }
 
     @Override

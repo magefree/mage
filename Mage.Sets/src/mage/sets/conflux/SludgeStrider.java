@@ -45,6 +45,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -96,6 +97,11 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl {
 
     public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.ZONE_CHANGE;
     }
 
     @Override

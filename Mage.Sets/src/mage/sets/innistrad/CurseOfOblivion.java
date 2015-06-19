@@ -28,17 +28,16 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -98,15 +97,18 @@ class CurseOfOblivionAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE) {
-            Permanent enchantment = game.getPermanent(this.sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                Player player = game.getPlayer(enchantment.getAttachedTo());
-                if (player != null && game.getActivePlayerId().equals(player.getId())) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    return true;
-                }
+        Permanent enchantment = game.getPermanent(this.sourceId);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Player player = game.getPlayer(enchantment.getAttachedTo());
+            if (player != null && game.getActivePlayerId().equals(player.getId())) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                return true;
             }
         }
         return false;

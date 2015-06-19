@@ -29,10 +29,6 @@ package mage.sets.urzaslegacy;
 
 import java.util.Iterator;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +40,9 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -97,7 +96,7 @@ class MemoryJarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) 
     {
         Cards cards = new CardsImpl();
-        //Exil hand
+        //Exile hand
         for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null)
@@ -198,11 +197,13 @@ class MemoryJarDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.END_TURN_STEP_PRE) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
 

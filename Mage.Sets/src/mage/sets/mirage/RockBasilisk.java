@@ -28,21 +28,22 @@
 package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.cards.CardImpl;
 
 /**
  *
@@ -88,23 +89,25 @@ class RockBasiliskTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            Permanent blocked = game.getPermanent(event.getTargetId());
-            Permanent rockBasilisk = game.getPermanent(sourceId);
-            if (blocker != null && blocker != rockBasilisk
-                    && !blocker.getSubtype().contains("Wall")
-                    && blocked == rockBasilisk) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
-                return true;
-            }
-            if (blocker != null && blocker == rockBasilisk
-                    && !blocked.getSubtype().contains("Wall")) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
-                return true;
-            }
-            return false;
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocked = game.getPermanent(event.getTargetId());
+        Permanent rockBasilisk = game.getPermanent(sourceId);
+        if (blocker != null && blocker != rockBasilisk
+                && !blocker.getSubtype().contains("Wall")
+                && blocked == rockBasilisk) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
+            return true;
+        }
+        if (blocker != null && blocker == rockBasilisk
+                && !blocked.getSubtype().contains("Wall")) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
+            return true;
         }
         return false;
     }
