@@ -82,10 +82,15 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
     public KarmicJusticeTriggeredAbility copy() {
         return new KarmicJusticeTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DESTROYED_PERMANENT;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DESTROYED_PERMANENT && event.getPlayerId().equals(controllerId) 
+        if (event.getPlayerId().equals(controllerId) 
                 && game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (!mageObject.getCardType().contains(CardType.CREATURE)) {

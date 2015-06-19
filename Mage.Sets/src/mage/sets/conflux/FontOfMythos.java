@@ -29,16 +29,15 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
 import mage.target.TargetPlayer;
 
 /**
@@ -80,14 +79,16 @@ class FontOfMythosAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DRAW_STEP_PRE) {
-                        this.getTargets().clear();
-            this.addTarget(new TargetPlayer());
-            getTargets().get(0).add(event.getPlayerId(),game);
-            return true;
-        }
-        return false;
+        this.getTargets().clear();
+        this.addTarget(new TargetPlayer());
+        getTargets().get(0).add(event.getPlayerId(),game);
+        return true;
     }
 
     @Override

@@ -29,19 +29,20 @@ package mage.sets.magic2012;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -85,15 +86,15 @@ class WorldslayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent p = game.getPermanent(event.getSourceId());
+        return damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId());
     }
 
     @Override

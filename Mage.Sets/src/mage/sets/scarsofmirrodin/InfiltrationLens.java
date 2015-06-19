@@ -28,18 +28,19 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -81,14 +82,17 @@ class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.CREATURE_BLOCKED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.CREATURE_BLOCKED) {
-            Permanent equipment = game.getPermanent(sourceId);
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                Permanent equipped = game.getPermanent(equipment.getAttachedTo());
-                if (equipped.getId().equals(event.getTargetId())) {
-                    return true;
-                }
+        Permanent equipment = game.getPermanent(sourceId);
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            if (equipped.getId().equals(event.getTargetId())) {
+                return true;
             }
         }
         return false;

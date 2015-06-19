@@ -28,10 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -41,11 +37,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PlayTargetWithoutPayingManaEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
@@ -103,10 +104,15 @@ class ChancellorOfTheSpiresDelayedTriggeredAbility extends DelayedTriggeredAbili
     ChancellorOfTheSpiresDelayedTriggeredAbility(ChancellorOfTheSpiresDelayedTriggeredAbility ability) {
         super(ability);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+        return true;
     }
     @Override
     public ChancellorOfTheSpiresDelayedTriggeredAbility copy() {

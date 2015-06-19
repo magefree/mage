@@ -28,10 +28,8 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
-import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -42,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -91,8 +90,12 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
             Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
                 Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
@@ -101,7 +104,6 @@ class FertileGroundTriggeredAbility extends TriggeredManaAbility {
                     return true;
                 }
             }
-        }  
         return false;
     }
 

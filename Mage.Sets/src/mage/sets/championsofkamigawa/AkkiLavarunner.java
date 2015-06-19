@@ -1,5 +1,6 @@
 package mage.sets.championsofkamigawa;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,15 +12,18 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -69,14 +73,14 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            if (damageEvent.isCombatDamage() && this.sourceId.equals(event.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        return damageEvent.isCombatDamage() && this.sourceId.equals(event.getSourceId());
     }
 
     @Override

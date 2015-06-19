@@ -55,6 +55,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -130,15 +131,15 @@ class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        Permanent p = game.getPermanent(event.getSourceId());
+        return damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId());
     }
 
     @Override

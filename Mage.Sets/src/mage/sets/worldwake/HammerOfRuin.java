@@ -29,11 +29,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,12 +36,17 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -96,20 +96,23 @@ class HammerOfRuinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-         if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
-                FilterPermanent filter = new FilterPermanent("Equipment that player controls");
-                filter.add(new SubtypePredicate("Equipment"));
-                filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getLogName());
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
 
-                this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
-                return true;
-            }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        Permanent p = game.getPermanent(event.getSourceId());
+        if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+            FilterPermanent filter = new FilterPermanent("Equipment that player controls");
+            filter.add(new SubtypePredicate("Equipment"));
+            filter.add(new ControllerIdPredicate(event.getPlayerId()));
+            filter.setMessage("creature controlled by " + game.getPlayer(event.getTargetId()).getLogName());
+
+            this.getTargets().clear();
+            this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

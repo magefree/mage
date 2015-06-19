@@ -97,14 +97,14 @@ class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ( event.getType() == EventType.SPELL_CAST ) {
-            Spell spell = (Spell)game.getObject(event.getTargetId());
-            if ( this.getSourceId().equals(spell.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = (Spell) game.getObject(event.getTargetId());
+        return this.getSourceId().equals(spell.getSourceId());
     }
 
     @Override

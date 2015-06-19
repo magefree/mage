@@ -27,7 +27,7 @@
  */
 package mage.sets.fifthedition;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -37,14 +37,18 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  *
@@ -90,18 +94,21 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE
+                || event.getType() == EventType.DAMAGED_PLAYER
+                || event.getType() == EventType.DAMAGED_PLANESWALKER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
-            MageObject sourceObject = game.getObject(event.getSourceId());
-            if (sourceObject.getColor(game).isRed()) {
-                if (sourceObject instanceof Permanent && sourceObject.getCardType().contains(CardType.CREATURE)
-                        || sourceObject instanceof Spell) {
-                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(sourceObject.getId())));
-                    return true;
-                }
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        if (sourceObject.getColor(game).isRed()) {
+            if (sourceObject instanceof Permanent && sourceObject.getCardType().contains(CardType.CREATURE)
+                    || sourceObject instanceof Spell) {
+                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(sourceObject.getId())));
+                return true;
             }
         }
         return false;

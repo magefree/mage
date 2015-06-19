@@ -48,6 +48,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
@@ -104,8 +105,13 @@ class UnscytheKillerOfKingsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getTarget().getCardType().contains(CardType.CREATURE)) { // target token can't create Zombie
                 Permanent equipment = game.getPermanent(getSourceId());

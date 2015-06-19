@@ -94,25 +94,28 @@ class CurseOfTheForsakenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ATTACKER_DECLARED)) {
-            Player defender = game.getPlayer(event.getTargetId());
-            if (defender == null) {
-                Permanent planeswalker = game.getPermanent(event.getTargetId());
-                if (planeswalker != null) {
-                    defender = game.getPlayer(planeswalker.getControllerId());
-                }
+        Player defender = game.getPlayer(event.getTargetId());
+        if (defender == null) {
+            Permanent planeswalker = game.getPermanent(event.getTargetId());
+            if (planeswalker != null) {
+                defender = game.getPlayer(planeswalker.getControllerId());
             }
-            if (defender != null) {
-                Permanent enchantment = game.getPermanent(this.getSourceId());
-                if (enchantment != null
-                        && enchantment.getAttachedTo() != null
-                        && enchantment.getAttachedTo().equals(defender.getId())) {
-                    for (Effect effect: this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    }
-                    return true;
+        }
+        if (defender != null) {
+            Permanent enchantment = game.getPermanent(this.getSourceId());
+            if (enchantment != null
+                    && enchantment.getAttachedTo() != null
+                    && enchantment.getAttachedTo().equals(defender.getId())) {
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
+                return true;
             }
         }
         return false;

@@ -28,17 +28,17 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -84,13 +84,16 @@ class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED) {
-            Permanent p = game.getPermanent(event.getTargetId());
-            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-                if (game.getOpponents(this.controllerId).contains(p.getControllerId()))
-                    return true;
-            }
+        Permanent p = game.getPermanent(event.getTargetId());
+        if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+            if (game.getOpponents(this.controllerId).contains(p.getControllerId()))
+                return true;
         }
         return false;
     }

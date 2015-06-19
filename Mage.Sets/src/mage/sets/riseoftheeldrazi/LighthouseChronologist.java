@@ -28,9 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -41,12 +39,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.turn.TurnMod;
-
-import java.util.UUID;
 
 /**
  *
@@ -109,11 +109,13 @@ class LighthouseChronologistAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE && !game.getActivePlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return !game.getActivePlayerId().equals(this.controllerId);
     }
 
     @Override

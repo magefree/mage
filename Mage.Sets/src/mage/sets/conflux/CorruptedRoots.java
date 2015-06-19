@@ -44,6 +44,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -102,17 +103,20 @@ class CorruptedRootsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED) {
-            Permanent enchantment = game.getPermanent(this.sourceId);
-            if (enchantment != null && enchantment.getAttachedTo().equals(event.getTargetId())) {
-                Permanent attached = game.getPermanent(enchantment.getAttachedTo());
-                if (attached != null) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(attached.getControllerId()));
-                    }
-                    return true;
+        Permanent enchantment = game.getPermanent(this.sourceId);
+        if (enchantment != null && enchantment.getAttachedTo().equals(event.getTargetId())) {
+            Permanent attached = game.getPermanent(enchantment.getAttachedTo());
+            if (attached != null) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(attached.getControllerId()));
                 }
+                return true;
             }
         }
         return false;

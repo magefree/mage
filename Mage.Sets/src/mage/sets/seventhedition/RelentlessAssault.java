@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.watchers.Watcher;
@@ -158,6 +159,12 @@ class RelentlessAssaultDelayedAddMainPhaseAbility extends DelayedTriggeredAbilit
     @Override
     public RelentlessAssaultDelayedAddMainPhaseAbility copy() {
         return new RelentlessAssaultDelayedAddMainPhaseAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PHASE_CHANGED 
+                || event.getType() == EventType.COMBAT_PHASE_PRE;
     }
 
     @Override

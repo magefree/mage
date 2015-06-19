@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -88,8 +89,13 @@ class DrogskolReaverAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.GAINED_LIFE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId);
+        return event.getPlayerId().equals(controllerId);
     }
 
     @Override

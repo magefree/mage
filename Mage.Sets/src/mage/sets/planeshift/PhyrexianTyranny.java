@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -83,18 +84,20 @@ class PhyrexianTyrannyTriggeredAbility extends TriggeredAbilityImpl {
     public PhyrexianTyrannyTriggeredAbility copy() {
         return new PhyrexianTyrannyTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DREW_CARD;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD) {
-            for (Effect effect : this.getEffects()) {
-                if (effect instanceof PhyrexianTyrannyEffect) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
+        for (Effect effect : this.getEffects()) {
+            if (effect instanceof PhyrexianTyrannyEffect) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }
-            return true;
         }
-        return false;
+        return true;
     }
     
     @Override

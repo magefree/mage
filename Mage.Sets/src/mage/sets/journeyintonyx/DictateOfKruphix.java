@@ -37,6 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -82,12 +83,14 @@ class DictateOfKruphixAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DRAW_STEP_PRE) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
+        this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+        return true;
     }
 
     @Override

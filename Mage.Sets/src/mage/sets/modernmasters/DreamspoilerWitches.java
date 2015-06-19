@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -89,14 +90,14 @@ class DreamspoilerWitchesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getPlayerId().equals(this.controllerId)
-                && game.getOpponents(this.controllerId).contains(game.getActivePlayerId())) {
-            return true;
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
 
-        }
-        return false;
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getPlayerId().equals(this.controllerId)
+                && game.getOpponents(this.controllerId).contains(game.getActivePlayerId());
     }
 
     @Override

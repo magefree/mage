@@ -44,6 +44,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -95,11 +96,13 @@ class DemigodOfRevengeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.SPELL_CAST) && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(this.getSourceId());
     }
 
     @Override

@@ -28,18 +28,18 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -80,16 +80,16 @@ class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LAND_PLAYED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
-            Permanent land = game.getPermanent(event.getTargetId());
-            if (land.getCardType().contains(CardType.LAND)
-                    && land.getControllerId().equals(this.controllerId)
-                    && event.getTargetId() != this.getSourceId()) {
-                return true;
-            }
-        }
-        return false;
+        Permanent land = game.getPermanent(event.getTargetId());
+        return land.getCardType().contains(CardType.LAND)
+                && land.getControllerId().equals(this.controllerId)
+                && event.getTargetId() != this.getSourceId();
     }
 
     @Override

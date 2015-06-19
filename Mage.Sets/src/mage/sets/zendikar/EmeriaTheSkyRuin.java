@@ -27,22 +27,22 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
 
 /**
  *
@@ -96,11 +96,13 @@ class EmeriaTheSkyRuinTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

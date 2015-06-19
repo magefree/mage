@@ -80,17 +80,19 @@ class FalseCureTriggeredAbility extends DelayedTriggeredAbility {
     public FalseCureTriggeredAbility copy() {
         return new FalseCureTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.GAINED_LIFE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.GAINED_LIFE) {
-            this.getEffects().clear();
-            Effect effect = new LoseLifeTargetEffect(2 * event.getAmount());
-            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            this.addEffect(effect);
-            return true;
-        }
-        return false;
+        this.getEffects().clear();
+        Effect effect = new LoseLifeTargetEffect(2 * event.getAmount());
+        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+        this.addEffect(effect);
+        return true;
     }
     
     @Override

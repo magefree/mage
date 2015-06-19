@@ -40,6 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -88,14 +89,14 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED ) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            if (attacker != null && filter.match(attacker, game)) {
-                return true;
-            }
-        }
-        return false;
+        Permanent attacker = game.getPermanent(event.getSourceId());
+        return attacker != null && filter.match(attacker, game);
     }
 
     @Override

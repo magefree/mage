@@ -28,10 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +36,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -88,25 +89,28 @@ public class RoninWarclub extends CardImpl {
         }
 
         @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent.getCardType().contains(CardType.CREATURE)
-                        && (permanent.getControllerId().equals(this.controllerId))) {
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+        }
 
-                    if (!this.getTargets().isEmpty()) {
-                        // remove previous target
-                        if (this.getTargets().get(0).getTargets().size() > 0) {
-                            this.getTargets().clear();
-                            this.addTarget(new TargetCreaturePermanent());
-                        }
-                        Target target = this.getTargets().get(0);
-                        if (target instanceof TargetCreaturePermanent) {
-                            target.add(event.getTargetId(), game);
-                        }
+        @Override
+        public boolean checkTrigger(GameEvent event, Game game) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent.getCardType().contains(CardType.CREATURE)
+                    && (permanent.getControllerId().equals(this.controllerId))) {
+
+                if (!this.getTargets().isEmpty()) {
+                    // remove previous target
+                    if (this.getTargets().get(0).getTargets().size() > 0) {
+                        this.getTargets().clear();
+                        this.addTarget(new TargetCreaturePermanent());
                     }
-                    return true;
+                    Target target = this.getTargets().get(0);
+                    if (target instanceof TargetCreaturePermanent) {
+                        target.add(event.getTargetId(), game);
+                    }
                 }
+                return true;
             }
             return false;
         }

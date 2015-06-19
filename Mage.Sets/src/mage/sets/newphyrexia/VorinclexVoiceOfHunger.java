@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -96,8 +97,13 @@ class VorinclexTriggeredAbility2 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));

@@ -28,20 +28,20 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -100,17 +100,19 @@ class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null
-                    && !spell.getCardType().contains(CardType.CREATURE)) {
+            if (spell != null && !spell.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;
             }
-        }
         return false;
     }
 

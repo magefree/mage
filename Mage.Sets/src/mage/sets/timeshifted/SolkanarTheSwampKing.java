@@ -28,17 +28,17 @@
 package mage.sets.timeshifted;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 
 /**
@@ -88,19 +88,18 @@ class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getColor(game).isBlack()) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        return spell != null && spell.getColor(game).isBlack();
     }
 
     @Override
     public String getRule() {
         return "Whenever a player casts a black spell, you gain 1 life.";
     }
-
 }

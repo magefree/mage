@@ -101,16 +101,19 @@ class ObNixilisUnshackledTriggeredAbility extends TriggeredAbilityImpl {
     public ObNixilisUnshackledTriggeredAbility copy() {
         return new ObNixilisUnshackledTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LIBRARY_SEARCHED;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.LIBRARY_SEARCHED) {
-            Player controller = game.getPlayer(this.getControllerId());
-            if (controller != null && game.isOpponent(controller, event.getTargetId())) {
-                this.addTarget(new TargetPlayer());
-                getTargets().get(0).add(event.getPlayerId(), game);
-                return true;
-            }
+        Player controller = game.getPlayer(this.getControllerId());
+        if (controller != null && game.isOpponent(controller, event.getTargetId())) {
+            this.addTarget(new TargetPlayer());
+            getTargets().get(0).add(event.getPlayerId(), game);
+            return true;
         }
         return false;
     }

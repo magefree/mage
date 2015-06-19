@@ -28,14 +28,15 @@
 
 package mage.sets.conflux;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -43,8 +44,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
-import java.util.UUID;
 
 /**
  *
@@ -96,8 +95,13 @@ class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             return true;
         }
         return false;
@@ -136,8 +140,13 @@ class BloodhallOozeTriggeredAbility2 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             return true;
         }
         return false;

@@ -54,6 +54,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -129,6 +130,11 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     public DackFaydenEmblemTriggeredAbility copy() {
         return new DackFaydenEmblemTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
@@ -136,7 +142,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
         List<UUID> targettedPermanents = new ArrayList<>(0);
         Player player = game.getPlayer(this.getControllerId());
         if (player != null) {
-            if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+            if (event.getPlayerId().equals(this.getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     SpellAbility spellAbility = spell.getSpellAbility();

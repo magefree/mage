@@ -28,17 +28,17 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
@@ -84,23 +84,26 @@ class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            MageObject lastKnown = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (lastKnown == null) {
-                return false;
-            }
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-            if (permanent == null) {
-                return false;
-            }
-            if (super.getSourceId().equals(event.getTargetId())
-                    || permanent.getPower().getValue() > 4
-                    && permanent.getControllerId().equals(controllerId)) {
-                Zone after = game.getState().getZone(event.getTargetId());
-                return after != null && Zone.GRAVEYARD.match(after);
-            }
+        MageObject lastKnown = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        if (lastKnown == null) {
+            return false;
+        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
+        if (permanent == null) {
+            return false;
+        }
+        if (super.getSourceId().equals(event.getTargetId())
+                || permanent.getPower().getValue() > 4
+                && permanent.getControllerId().equals(controllerId)) {
+            Zone after = game.getState().getZone(event.getTargetId());
+            return after != null && Zone.GRAVEYARD.match(after);
         }
         return false;
     }

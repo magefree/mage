@@ -27,6 +27,7 @@
  */
 package mage.sets.innistrad;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -38,7 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -47,8 +52,6 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
-
-import java.util.UUID;
 
 /**
  *
@@ -92,20 +95,23 @@ class GutterGrimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            UUID targetId = event.getTargetId();
-            MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
-            if (card instanceof Permanent && !(card instanceof PermanentToken)) {
-                Permanent permanent = (Permanent) card;
-                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
-                        && permanent.getControllerId().equals(this.controllerId)
-                        && (targetId.equals(this.getSourceId())
-                            || (permanent.getCardType().contains(CardType.CREATURE)
-                                && !(permanent instanceof PermanentToken)))) {
-                    return true;
-                }
+        UUID targetId = event.getTargetId();
+        MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+        if (card instanceof Permanent && !(card instanceof PermanentToken)) {
+            Permanent permanent = (Permanent) card;
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD
+                    && permanent.getControllerId().equals(this.controllerId)
+                    && (targetId.equals(this.getSourceId())
+                        || (permanent.getCardType().contains(CardType.CREATURE)
+                            && !(permanent instanceof PermanentToken)))) {
+                return true;
             }
         }
         return false;

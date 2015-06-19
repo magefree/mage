@@ -29,24 +29,20 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
-/**
- *
- * @author LevelX2
- */
 
 
 public class BeckCall extends SplitCard {
@@ -89,13 +85,16 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                return true;
-            }
+        UUID targetId = event.getTargetId();
+        Permanent permanent = game.getPermanent(targetId);
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return true;
         }
         return false;
     }

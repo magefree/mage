@@ -28,17 +28,16 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -52,7 +51,7 @@ import mage.game.permanent.Permanent;
  */
 public class BladeOfTheBloodchief extends CardImpl {
 
-    public BladeOfTheBloodchief ( UUID ownerId ) {
+    public BladeOfTheBloodchief(UUID ownerId) {
         super(ownerId, 196, "Blade of the Bloodchief", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "ZEN";
         this.getSubtype().add("Equipment");
@@ -76,25 +75,28 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
     private static final String text = "Whenever a creature dies, put a +1/+1 counter on equipped "
             + "creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.";
 
-    BladeOfTheBloodChiefTriggeredAbility ( ) {
+    BladeOfTheBloodChiefTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BladeOfTheBloodchiefEffect());
     }
 
-    BladeOfTheBloodChiefTriggeredAbility ( final BladeOfTheBloodChiefTriggeredAbility ability ) {
+    BladeOfTheBloodChiefTriggeredAbility(final BladeOfTheBloodChiefTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ( event.getType() == EventType.ZONE_CHANGE ) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
-                Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-                    Permanent enchantment = game.getPermanent(getSourceId());
-                    if (enchantment != null && enchantment.getAttachedTo() != null) {
-                        return true;
-                    }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+                Permanent enchantment = game.getPermanent(getSourceId());
+                if (enchantment != null && enchantment.getAttachedTo() != null) {
+                    return true;
                 }
             }
         }
@@ -114,11 +116,11 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl {
 
 class BladeOfTheBloodchiefEffect extends OneShotEffect {
 
-    BladeOfTheBloodchiefEffect ( ) {
+    BladeOfTheBloodchiefEffect() {
         super(Outcome.BoostCreature);
     }
 
-    BladeOfTheBloodchiefEffect ( final BladeOfTheBloodchiefEffect ability ) {
+    BladeOfTheBloodchiefEffect(final BladeOfTheBloodchiefEffect ability) {
         super(ability);
     }
 
@@ -128,10 +130,9 @@ class BladeOfTheBloodchiefEffect extends OneShotEffect {
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
-                if ( creature.hasSubtype("Vampire") ) {
+                if (creature.hasSubtype("Vampire")) {
                     creature.addCounters(CounterType.P1P1.createInstance(2), game);
-                }
-                else {
+                } else {
                     creature.addCounters(CounterType.P1P1.createInstance(), game);
                 }
             }

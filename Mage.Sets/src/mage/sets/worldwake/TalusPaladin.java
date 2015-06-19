@@ -28,11 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,12 +35,17 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -101,18 +101,21 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
     public TalusPaladinTriggeredAbility copy() {
         return new TalusPaladinTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent ally = game.getPermanent(event.getTargetId());
-            if (ally != null) {
-                if (ally.hasSubtype("Ally")
-                        && ally.getControllerId().equals(this.getControllerId())) {
-                    if (event.getTargetId().equals(this.getSourceId())
-                            || event.getTargetId().equals(ally.getId())) {
-                        return true;
-                    }
+        Permanent ally = game.getPermanent(event.getTargetId());
+        if (ally != null) {
+            if (ally.hasSubtype("Ally")
+                    && ally.getControllerId().equals(this.getControllerId())) {
+                if (event.getTargetId().equals(this.getSourceId())
+                        || event.getTargetId().equals(ally.getId())) {
+                    return true;
                 }
             }
         }

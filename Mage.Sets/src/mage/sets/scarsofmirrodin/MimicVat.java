@@ -27,8 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,19 +40,20 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.EmptyToken;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-
-import java.util.UUID;
-import mage.players.Player;
 
 /**
  * @author nantuko
@@ -99,30 +99,32 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-
-            // make sure card is on battlefield
-            UUID sourceCardId = getSourceId();
-            if (game.getPermanent(sourceCardId) == null) {
-                // or it is being removed
-                if (game.getLastKnownInformation(sourceCardId, Zone.BATTLEFIELD) == null) {
-                    return false;
-                }
+        // make sure card is on battlefield
+        UUID sourceCardId = getSourceId();
+        if (game.getPermanent(sourceCardId) == null) {
+            // or it is being removed
+            if (game.getLastKnownInformation(sourceCardId, Zone.BATTLEFIELD) == null) {
+                return false;
             }
+        }
 
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
 
-            if (permanent != null &&
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    !(permanent instanceof PermanentToken) &&
-                    permanent.getCardType().contains(CardType.CREATURE)) {
+        if (permanent != null &&
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                !(permanent instanceof PermanentToken) &&
+                permanent.getCardType().contains(CardType.CREATURE)) {
 
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                return true;
-            }
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+            return true;
         }
         return false;
     }

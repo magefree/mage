@@ -41,6 +41,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
@@ -89,17 +90,20 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER
+                || event.getType() == EventType.DAMAGED_CREATURE
+                || event.getType() == EventType.DAMAGED_PLANESWALKER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_CREATURE)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                || event.getType().equals(GameEvent.EventType.DAMAGED_PLANESWALKER)) {
-            Permanent target = game.getPermanent(this.getFirstTarget());
-            if (target != null && event.getSourceId().equals(target.getId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setValue("damage", event.getAmount());
-                }
-                return true;
+        Permanent target = game.getPermanent(this.getFirstTarget());
+        if (target != null && event.getSourceId().equals(target.getId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setValue("damage", event.getAmount());
             }
+            return true;
         }
         return false;
     }

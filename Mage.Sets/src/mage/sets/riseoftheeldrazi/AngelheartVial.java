@@ -28,24 +28,24 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.Outcome;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
 import mage.counters.CounterType;
+import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -95,11 +95,16 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getTargetId().equals(this.getControllerId()))) {
-                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                    return true;
-                }
+        if (event.getTargetId().equals(this.getControllerId())) {
+            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+            return true;
+        }
         return false;
     }
 

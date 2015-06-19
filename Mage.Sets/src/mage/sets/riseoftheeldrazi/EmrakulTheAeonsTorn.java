@@ -28,11 +28,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -44,11 +39,16 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -107,14 +107,14 @@ class EmrakulTheAeonsTornOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (this.getSourceId().equals(spell.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
+        Spell spell = (Spell) game.getObject(event.getTargetId());
+        return this.getSourceId().equals(spell.getSourceId());
     }
 
     @Override

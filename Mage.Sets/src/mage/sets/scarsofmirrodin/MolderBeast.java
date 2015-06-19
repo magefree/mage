@@ -28,16 +28,15 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -82,16 +81,16 @@ class MolderBeastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)) {
-                return true;
-            }
-        }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        return zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT);
     }
 
     @Override

@@ -28,10 +28,6 @@
 package mage.sets.legends;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,8 +36,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -89,42 +90,44 @@ class AbominationTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            Permanent blocked = game.getPermanent(event.getTargetId());
-            Permanent abomination = game.getPermanent(sourceId);
-            if (blocker != null && blocker != abomination
-                    && blocker.getColor(game).isWhite()
-                    && blocked == abomination) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    return true;
-                }
-            }
-            if (blocker != null && blocker == abomination
-                    && game.getPermanent(event.getTargetId()).getColor(game).isWhite()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    return true;
-                }
-            }
-            if (blocker != null && blocker != abomination
-                    && blocker.getColor(game).isGreen()
-                    && blocked == abomination) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    return true;
-                }
-            }
-            if (blocker != null && blocker == abomination
-                    && game.getPermanent(event.getTargetId()).getColor(game).isGreen()) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    return true;
-                }
-            }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocked = game.getPermanent(event.getTargetId());
+        Permanent abomination = game.getPermanent(sourceId);
+        if (blocker != null && blocker != abomination
+                && blocker.getColor(game).isWhite()
+                && blocked == abomination) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                return true;
+            }
+        }
+        if (blocker != null && blocker == abomination
+                && game.getPermanent(event.getTargetId()).getColor(game).isWhite()) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                return true;
+            }
+        }
+        if (blocker != null && blocker != abomination
+                && blocker.getColor(game).isGreen()
+                && blocked == abomination) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                return true;
+            }
+        }
+        if (blocker != null && blocker == abomination
+                && game.getPermanent(event.getTargetId()).getColor(game).isGreen()) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                return true;
+            }
         }
         return false;
     }

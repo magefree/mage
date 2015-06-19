@@ -102,22 +102,28 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE
+                || event.getType() == EventType.DAMAGED_PLANESWALKER
+                || event.getType() == EventType.DAMAGED_PLAYER
+                || event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
-                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
+        if (event.getType() == EventType.DAMAGED_CREATURE
+                || event.getType() == EventType.DAMAGED_PLANESWALKER
+                || event.getType() == EventType.DAMAGED_PLAYER) {
             if (((DamagedEvent) event).isCombatDamage() && !triggeringCreatures.contains(event.getSourceId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                     triggeringCreatures.add(event.getSourceId());
                     return true;
                 }
-
             }
-
         }
         // reset the remembered creatures for every combat damage step
-        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_PRE)) {
+        if (event.getType() == EventType.COMBAT_DAMAGE_STEP_PRE) {
             triggeringCreatures.clear();
         }
         return false;

@@ -28,16 +28,16 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -51,7 +51,6 @@ public class NoMercy extends CardImpl {
         super(ownerId, 56, "No Mercy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
         this.expansionSetCode = "ULG";
 
-
         // Whenever a creature deals damage to you, destroy it.
         this.addAbility(new NoMercyTriggeredAbility());
     }
@@ -64,31 +63,33 @@ public class NoMercy extends CardImpl {
     public NoMercy copy() {
         return new NoMercy(this);
     }
-    
+
     public class NoMercyTriggeredAbility extends TriggeredAbilityImpl {
-        public NoMercyTriggeredAbility()
-        {
+
+        public NoMercyTriggeredAbility() {
             super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         }
-        
+
         public NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {
             super(ability);
         }
-        
+
         @Override
         public NoMercyTriggeredAbility copy() {
-            return new NoMercyTriggeredAbility(this); 
+            return new NoMercyTriggeredAbility(this);
+        }
+
+        @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == EventType.DAMAGED_PLAYER;
         }
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && event.getPlayerId().equals(this.getControllerId())) {
-                
+            if (event.getPlayerId().equals(this.getControllerId())) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null && permanent.getCardType().contains(CardType.CREATURE))
-                {
-                    for(Effect effect : this.getEffects())
-                    {
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
+                    for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                     }
                     return true;
@@ -96,10 +97,11 @@ public class NoMercy extends CardImpl {
             }
             return false;
         }
+
         @Override
         public String getRule() {
             return "Whenever a creature deals damage to you, destroy it";
         }
-     
+
     }
 }

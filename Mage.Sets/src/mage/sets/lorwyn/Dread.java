@@ -94,10 +94,15 @@ class DreadTriggeredAbility extends TriggeredAbilityImpl {
     public DreadTriggeredAbility copy() {
         return new DreadTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {

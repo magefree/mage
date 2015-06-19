@@ -91,9 +91,13 @@ class DeusOfCalamityTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.DAMAGED_PLAYER)
-                && event.getSourceId().equals(this.getSourceId())
+        if (event.getSourceId().equals(this.getSourceId())
                 && event.getAmount() > 5
                 && game.getOpponents(this.getControllerId()).contains(event.getTargetId())) {
             FilterLandPermanent filter = new FilterLandPermanent("land of the damaged player");

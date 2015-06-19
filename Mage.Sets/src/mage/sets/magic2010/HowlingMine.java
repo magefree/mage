@@ -29,12 +29,12 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -78,12 +78,14 @@ class HowlingMineAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DRAW_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DRAW_STEP_PRE) {
-            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-            return true;
-        }
-        return false;
+        this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
+        return true;
     }
 
     @Override

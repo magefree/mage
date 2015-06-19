@@ -51,6 +51,7 @@ import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -167,17 +168,20 @@ class AthreosDiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setValue("creatureId", event.getTargetId());
-                    }
-                    return true;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone().equals(Zone.BATTLEFIELD) && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setValue("creatureId", event.getTargetId());
                 }
+                return true;
             }
         }
         return false;

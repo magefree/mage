@@ -47,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -132,8 +133,13 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+        if (((ZoneChangeEvent)event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             Object object = game.getState().getValue(getSourceId().toString() + "returnedCreature");
             if ((object instanceof MageObjectReference) && ((MageObjectReference)object).refersTo(zEvent.getTarget(), game)) {

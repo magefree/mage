@@ -27,17 +27,17 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreatureOrPlayer;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -78,13 +78,13 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && event.getPlayerId().equals(controllerId)
-                && event.getZone().equals(Zone.GRAVEYARD)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(controllerId) && event.getZone().equals(Zone.GRAVEYARD);
     }
 
     @Override

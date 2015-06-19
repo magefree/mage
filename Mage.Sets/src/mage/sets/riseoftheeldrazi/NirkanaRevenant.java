@@ -28,25 +28,26 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.constants.Zone;
-import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.players.Player;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -80,39 +81,42 @@ public class NirkanaRevenant extends CardImpl {
     }
 }
 
-  class NirkanaRevenantTriggeredAbility extends TriggeredAbilityImpl {
+class NirkanaRevenantTriggeredAbility extends TriggeredAbilityImpl {
 
     public NirkanaRevenantTriggeredAbility() {
-    super(Zone.BATTLEFIELD, new NirkanaRevenantEffect());
+        super(Zone.BATTLEFIELD, new NirkanaRevenantEffect());
     }
 
     public NirkanaRevenantTriggeredAbility(final NirkanaRevenantTriggeredAbility ability) {
-    super(ability);
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-    if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent == null) {
-        permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null && permanent.getSubtype().contains("Swamp") && permanent.getControllerId().equals(this.controllerId)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                return true;
-            }
-    }
-    return false;
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null && permanent.getSubtype().contains("Swamp") && permanent.getControllerId().equals(this.controllerId)) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
     public NirkanaRevenantTriggeredAbility copy() {
-    return new NirkanaRevenantTriggeredAbility(this);
+        return new NirkanaRevenantTriggeredAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "Whenever you tap a Swamp for mana, add B to your mana pool (in addition to the mana the land produces).";
+        return "Whenever you tap a Swamp for mana, add {B} to your mana pool.";
     }
 }
 
@@ -138,8 +142,6 @@ class NirkanaRevenantEffect extends OneShotEffect {
 
     @Override
     public NirkanaRevenantEffect copy() {
-    return new NirkanaRevenantEffect(this);
+        return new NirkanaRevenantEffect(this);
     }
 }
-
-

@@ -28,19 +28,18 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -83,8 +82,13 @@ class RageExtractorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             Spell spell = (Spell) game.getStack().getStackObject(event.getTargetId());
             if (spell != null) {
                 for (ManaCost cost : spell.getCard().getManaCost()) {

@@ -29,19 +29,20 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.ExtortAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -91,14 +92,14 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent land = game.getPermanent(event.getTargetId());
-            if (land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game)) {
-                return true;
-            }
-        }
-        return false;
+        Permanent land = game.getPermanent(event.getTargetId());
+        return land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game);
     }
 
     @Override

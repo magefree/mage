@@ -127,8 +127,13 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER_ADDED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.COUNTER_ADDED) && event.getTargetId().equals(this.getSourceId()) && event.getData().equals(CounterType.PLAGUE.getName())) {
+        if (event.getTargetId().equals(this.getSourceId()) && event.getData().equals(CounterType.PLAGUE.getName())) {
             Permanent sourcePermanent = game.getPermanent(this.getSourceId());
             if (sourcePermanent != null && sourcePermanent.getCounters().getCount(CounterType.PLAGUE) >= 3) {
                 return true;

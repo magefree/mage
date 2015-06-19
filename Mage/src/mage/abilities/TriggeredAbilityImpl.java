@@ -79,10 +79,10 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     // TODO: Implement for all TriggeredAbilities so this default method can be removed
-    @Override
+    /*@Override
     public boolean checkEventType(GameEvent event, Game game) {
         return true;
-    }
+    }*/
 
     @Override
     public boolean resolve(Game game) {

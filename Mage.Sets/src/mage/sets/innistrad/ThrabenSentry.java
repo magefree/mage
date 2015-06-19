@@ -27,21 +27,21 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -93,26 +93,23 @@ class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-
-            Permanent source = game.getPermanent(this.sourceId);
-            if (source == null) {
-                return false;
-            }
-
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            Permanent permanent = zEvent.getTarget();
-
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
-                    zEvent.getToZone() == Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
-                    permanent.getControllerId().equals(this.getControllerId()) &&
-                    !source.isTransformed()) {
-                return true;
-            }
+        Permanent source = game.getPermanent(this.sourceId);
+        if (source == null) {
+            return false;
         }
-        return false;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Permanent permanent = zEvent.getTarget();
+        return permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
+                zEvent.getToZone() == Zone.GRAVEYARD &&
+                zEvent.getFromZone() == Zone.BATTLEFIELD &&
+                permanent.getControllerId().equals(this.getControllerId()) &&
+                !source.isTransformed();
     }
 
     @Override

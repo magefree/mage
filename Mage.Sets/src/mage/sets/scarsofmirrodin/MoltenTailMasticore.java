@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -100,8 +101,13 @@ class MoltenTailMasticoreAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId);
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override

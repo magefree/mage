@@ -40,6 +40,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -92,24 +93,27 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (game.getPermanent(sourceId) == null) {
-                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
-                    return false;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (game.getPermanent(sourceId) == null) {
+            if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
+                return false;
             }
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null
-                        && permanent.getCounters().containsKey(CounterType.M1M1)
-                        && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                    return true;
+        }
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null
+                    && permanent.getCounters().containsKey(CounterType.M1M1)
+                    && game.getOpponents(controllerId).contains(permanent.getControllerId())) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
+                return true;
             }
         }
         return false;

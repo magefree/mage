@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -95,25 +96,27 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent sourcePermanent = game.getPermanent(this.getSourceId());
-            if (sourcePermanent != null) {
-                if (sourcePermanent.getCardType().contains(CardType.CREATURE)) {
-                    if (event.getSourceId() == this.getSourceId()) {
-                        UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-                        return true;
-                    }
-                } else {
-                    if (sourcePermanent.getAttachedTo() != null && sourcePermanent.getAttachedTo().equals(event.getSourceId())) {
-                        UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game);
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
-                        return true;
-                    }
+        Permanent sourcePermanent = game.getPermanent(this.getSourceId());
+        if (sourcePermanent != null) {
+            if (sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+                if (event.getSourceId() == this.getSourceId()) {
+                    UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
+                    return true;
+                }
+            } else {
+                if (sourcePermanent.getAttachedTo() != null && sourcePermanent.getAttachedTo().equals(event.getSourceId())) {
+                    UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game);
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
+                    return true;
                 }
             }
-
         }
         return false;
     }

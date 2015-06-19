@@ -93,9 +93,13 @@ class CausticWaspsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_PLAYER && event.getSourceId().equals(this.sourceId)
-                && ((DamagedPlayerEvent) event).isCombatDamage()) {
+        if (event.getSourceId().equals(this.sourceId) && ((DamagedPlayerEvent) event).isCombatDamage()) {
             Player player = game.getPlayer(event.getTargetId());
             if (player != null) {
                 FilterPermanent filter = new FilterPermanent("an artifact controlled by " + player.getLogName());

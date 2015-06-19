@@ -27,16 +27,16 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-
-import java.util.UUID;
+import mage.game.events.GameEvent.EventType;
 
 /**
  * @author noxx
@@ -79,8 +79,13 @@ class ExquisiteBloodTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOST_LIFE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_LIFE && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             this.getEffects().clear();
             this.addEffect(new GainLifeEffect(event.getAmount()));
             return true;

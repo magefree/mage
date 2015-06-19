@@ -42,6 +42,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.Token;
 
 /**
@@ -100,8 +101,13 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             if (game.getBattlefield().count(filter, this.getSourceId(), this.getControllerId(), game) == 0) {
                 return true;
             }

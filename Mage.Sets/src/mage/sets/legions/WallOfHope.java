@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -59,7 +60,7 @@ public class WallOfHope extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
         // Whenever Wall of Hope is dealt damage, you gain that much life.
         this.addAbility(new WallOfHopeTriggeredAbility());
-        
+
     }
 
     public WallOfHope(final WallOfHope card) {
@@ -88,10 +89,15 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-                        this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                        return true;
+        if (event.getTargetId().equals(this.sourceId)) {
+            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+            return true;
         }
         return false;
     }
@@ -104,10 +110,10 @@ class WallOfHopeTriggeredAbility extends TriggeredAbilityImpl {
 
 class WallOfHopeGainLifeEffect extends OneShotEffect {
 
-        public WallOfHopeGainLifeEffect() {
-            super(Outcome.GainLife);
-            staticText = "you gain that much life";
-        }
+    public WallOfHopeGainLifeEffect() {
+        super(Outcome.GainLife);
+        staticText = "you gain that much life";
+    }
 
     public WallOfHopeGainLifeEffect(final WallOfHopeGainLifeEffect effect) {
         super(effect);
@@ -126,6 +132,5 @@ class WallOfHopeGainLifeEffect extends OneShotEffect {
         }
         return true;
     }
-
 
 }

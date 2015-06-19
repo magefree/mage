@@ -30,7 +30,6 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -44,6 +43,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -92,13 +92,16 @@ class BidentOfThassaTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
-                Permanent creature = game.getPermanent(event.getSourceId());
-                if (creature != null && creature.getControllerId().equals(controllerId)) {
-                    return true;
-                }
+        if (((DamagedPlayerEvent) event).isCombatDamage()) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.getControllerId().equals(controllerId)) {
+                return true;
             }
         }
         return false;

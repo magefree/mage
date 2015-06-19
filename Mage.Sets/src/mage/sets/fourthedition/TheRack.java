@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -86,11 +87,13 @@ class TheRackTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            return event.getPlayerId().equals((UUID) game.getState().getValue(new StringBuilder(this.getSourceId().toString()).append("_player").toString()));
-        }
-        return false;
+        return event.getPlayerId().equals((UUID) game.getState().getValue(new StringBuilder(this.getSourceId().toString()).append("_player").toString()));
     }
 
     @Override
