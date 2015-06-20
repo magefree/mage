@@ -36,6 +36,8 @@ public class SpellMasteryCondition implements Condition {
         return fInstance;
     }
     
+    private SpellMasteryCondition() {}
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
