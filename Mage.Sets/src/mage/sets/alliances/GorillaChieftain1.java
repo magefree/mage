@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author Quercitron
  */
-public class GorillaChieftain extends mage.sets.seventhedition.GorillaChieftain {
+public class GorillaChieftain1 extends mage.sets.seventhedition.GorillaChieftain {
 
-    public GorillaChieftain(UUID ownerId) {
+    public GorillaChieftain1(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 77;
         this.expansionSetCode = "ALL";
     }
 
-    public GorillaChieftain(final GorillaChieftain card) {
+    public GorillaChieftain1(final GorillaChieftain1 card) {
         super(card);
     }
 
     @Override
-    public GorillaChieftain copy() {
-        return new GorillaChieftain(this);
+    public GorillaChieftain1 copy() {
+        return new GorillaChieftain1(this);
     }
 }

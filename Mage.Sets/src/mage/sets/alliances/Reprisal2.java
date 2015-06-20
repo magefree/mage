@@ -34,21 +34,21 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class Reprisal extends mage.sets.seventhedition.Reprisal {
+public class Reprisal2 extends mage.sets.seventhedition.Reprisal {
 
-    public Reprisal(UUID ownerId) {
+    public Reprisal2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 144;
+        this.cardNumber = 145;
         this.expansionSetCode = "ALL";
         this.rarity = Rarity.COMMON;
     }
 
-    public Reprisal(final Reprisal card) {
+    public Reprisal2(final Reprisal2 card) {
         super(card);
     }
 
     @Override
-    public Reprisal copy() {
-        return new Reprisal(this);
+    public Reprisal2 copy() {
+        return new Reprisal2(this);
     }
 }

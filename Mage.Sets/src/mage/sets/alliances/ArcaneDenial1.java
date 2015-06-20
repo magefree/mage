@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ArcaneDenial extends mage.sets.commander2013.ArcaneDenial {
+public class ArcaneDenial1 extends mage.sets.commander2013.ArcaneDenial {
 
-    public ArcaneDenial(UUID ownerId) {
+    public ArcaneDenial1(UUID ownerId) {
         super(ownerId);
         this.cardNumber = 32;
         this.expansionSetCode = "ALL";
     }
 
-    public ArcaneDenial(final ArcaneDenial card) {
+    public ArcaneDenial1(final ArcaneDenial1 card) {
         super(card);
     }
 
     @Override
-    public ArcaneDenial copy() {
-        return new ArcaneDenial(this);
+    public ArcaneDenial1 copy() {
+        return new ArcaneDenial1(this);
     }
 }
