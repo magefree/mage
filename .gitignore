@@ -90,3 +90,6 @@ Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 *.txt
 Mage.Client/serverlist.txt
 /Mage.Network/target/
+/Mage.Server.Tests/target/
+/Mage.Server.Tests/db
+/Mage.Server.Tests/*.log

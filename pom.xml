@@ -62,6 +62,7 @@
         <module>Mage.Updater</module>
         <module>Mage.Stats</module>
         <module>Mage.Network</module>
+        <module>Mage.Server.Tests</module>
     </modules>
 
     <repositories>

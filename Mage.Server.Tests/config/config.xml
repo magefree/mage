@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../Config.xsd">
+    <!-- 
+    serverAddress       - ip of the XMage server. Set it to "0.0.0.0" for local host or to the IP the server should use 
+    port                - the port the primary server socket is bound to 
+    secondaryBindPort   - the port to which the secondary server socket is to be bound. if "-1" is set , an arbitrary port is selected. 
+    backlogSize         - the preferred number of unaccepted incoming connections allowed at a given time. The actual number may be greater 
+                          than the specified backlog. When the queue is full, further connection requests are rejected. The JBoss default value is 200
+    numAcceptThreads    - the number of threads listening on the ServerSocket. The JBoss default value is 1 
+    maxPoolSize         - the maximum number of ServerThreads that can exist at any given time. The JBoss default value is 300 
+    leasePeriod         - To turn on server side connection failure detection of remoting clients, it is necessary to satisfy two criteria. 
+                          The first is that the client lease period is set and is a value greater than 0. The value is represented in milliseconds. 
+                          The client lease period can be set by either the 'clientLeasePeriod' attribute within the Connector configuration or by calling the Connector method
+    maxGameThreads      - Number of games that can be started simultanously on the server
+    maxSecondsIdle      - Number of seconds after that a game is auto conceded by the player that was idle for such a time
+    minUserNameLength   - minmal allowed length of a user name to connect to the server
+    maxUserNameLength   - maximal allowed length of a user name to connect to the server
+    userNamePattern     - pattern for user name validity check
+    maxAiOpponents      - number of allowed AI opponents on the server
+    saveGameActivated   - allow game save and replay options (not working correctly yet)
+    -->
+    <server serverAddress="0.0.0.0"
+            serverName="mage-server"
+            port="17171"
+            secondaryBindPort="17179"             
+            backlogSize="200" 
+            numAcceptThreads="2" 
+            maxPoolSize="300" 
+            leasePeriod="5000"             
+            maxGameThreads="10"
+            maxSecondsIdle="600"
+            minUserNameLength="3"
+            maxUserNameLength="14" 
+            userNamePattern="[^a-z0-9_]"
+            maxAiOpponents="15"
+            saveGameActivated="false"
+			useSSL="true"
+    />
+    <playerTypes>
+        <playerType name="Human" jar="mage-player-human.jar" className="mage.player.human.HumanPlayer"/>
+        <!--<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>-->
+        <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
+        <!--<playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>-->
+		<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+    </playerTypes>
+    <gameTypes>
+        <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
+        <gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
+        <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
+        <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
+		<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
+    </gameTypes>
+    <tournamentTypes>
+        <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
+        <tournamentType name="Constructed Swiss" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedSwissTournament" typeName="mage.tournament.ConstructedSwissTournamentType"/>
+        <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
+        <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
+        <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
+        <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
+        <tournamentType name="Sealed Elimination (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationCubeTournamentType"/>
+        <tournamentType name="Sealed Swiss" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissTournamentType"/>
+        <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
+    </tournamentTypes>
+    <draftCubes>
+        <draftCube name="Ben's Cube (720 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.BensCube"/>
+        <draftCube name="Cube Tutor 360 Pauper" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor360Pauper"/>
+        <draftCube name="Cube Tutor 720" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.CubeTutor720"/>
+        <draftCube name="Mono Blue Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MonoBlueCube"/>
+        <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
+        <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
+        <draftCube name="MTGO Holiday Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2014"/>        
+        <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
+        <draftCube name="MTGO Legacy Cube 2015 (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube2015"/>
+        <draftCube name="The Peasant's Toolbox (800 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
+        <draftCube name="www.MTGCube.com (502 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGCube"/>
+    </draftCubes>
+    <deckTypes>
+        <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
+        <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
+        <deckType name="Constructed - Modern" jar="mage-deck-constructed.jar" className="mage.deck.Modern"/>
+        <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
+        <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
+        <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>        
+        <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
+        <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
+        <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
+        <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
+        <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
+        <deckType name="Block Constructed - Shadowmoor" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmoorBlock"/>
+        <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
+        <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>       
+        <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
+        <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
+        <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
+		<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
+        <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
+    </deckTypes>
+</config>
