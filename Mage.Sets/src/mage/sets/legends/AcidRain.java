@@ -43,7 +43,7 @@ public class AcidRain extends CardImpl {
     
     private static final FilterPermanent filter = new FilterPermanent("Forests");
     static {
-        filter.add(new SubtypePredicate("Forests"));
+        filter.add(new SubtypePredicate("Forest"));
     }
 
     public AcidRain(UUID ownerId) {

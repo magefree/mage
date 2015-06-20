@@ -40,6 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -56,6 +57,7 @@ public class HornOfDeafening extends CardImpl {
         effect.setText("Prevent all combat damage that would be dealt by target creature this turn.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
