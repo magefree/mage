@@ -28,29 +28,34 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author jeffwadsworth
  */
 public class SeismicStomp extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
 
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+    
     public SeismicStomp(UUID ownerId) {
         super(ownerId, 152, "Seismic Stomp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "M14";
 
-
         // Creatures without flying can't block this turn.
-        this.getSpellAbility().addEffect(new SeismicStompEffect());
+        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
     public SeismicStomp(final SeismicStomp card) {
@@ -61,35 +66,4 @@ public class SeismicStomp extends CardImpl {
     public SeismicStomp copy() {
         return new SeismicStomp(this);
     }
-}
-
-class SeismicStompEffect extends RestrictionEffect {
-
-    SeismicStompEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Creatures without flying can't block this turn";
-    }
-
-    SeismicStompEffect(final SeismicStompEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getAbilities().contains(FlyingAbility.getInstance())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public SeismicStompEffect copy() {
-        return new SeismicStompEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
 }

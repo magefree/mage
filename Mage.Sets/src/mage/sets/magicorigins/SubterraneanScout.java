@@ -25,50 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class TectonicRift extends CardImpl {
+public class SubterraneanScout extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
-
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+    
     static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
     
-    public TectonicRift(UUID ownerId) {
-        super(ownerId, 157, "Tectonic Rift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "M12";
+    public SubterraneanScout(UUID ownerId) {
+        super(ownerId, 164, "Subterranean Scout", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Goblin");
+        this.subtype.add("Scout");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Destroy target land. 
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent());
-        // Creatures without flying can't block this turn.
-        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
+        // When Subterranean Scout enters the battlefield, target creature with power 2 or less can't be blocked this turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBeBlockedTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+        
     }
 
-    public TectonicRift(final TectonicRift card) {
+    public SubterraneanScout(final SubterraneanScout card) {
         super(card);
     }
 
     @Override
-    public TectonicRift copy() {
-        return new TectonicRift(this);
+    public SubterraneanScout copy() {
+        return new SubterraneanScout(this);
     }
 }

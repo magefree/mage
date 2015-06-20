@@ -25,50 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.common.TargetLandPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class TectonicRift extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+public class VolcanicRambler extends CardImpl {
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
-    }
-    
-    public TectonicRift(UUID ownerId) {
-        super(ownerId, 157, "Tectonic Rift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
-        this.expansionSetCode = "M12";
+    public VolcanicRambler(UUID ownerId) {
+        super(ownerId, 167, "Volcanic Rambler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(4);
 
-        // Destroy target land. 
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetLandPermanent());
-        // Creatures without flying can't block this turn.
-        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
+        // {2}{R}: Volcanic Rambler deals 1 damage to target player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{R}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);        
     }
 
-    public TectonicRift(final TectonicRift card) {
+    public VolcanicRambler(final VolcanicRambler card) {
         super(card);
     }
 
     @Override
-    public TectonicRift copy() {
-        return new TectonicRift(this);
+    public VolcanicRambler copy() {
+        return new VolcanicRambler(this);
     }
 }

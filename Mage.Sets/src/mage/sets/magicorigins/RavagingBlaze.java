@@ -25,10 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.journeyintonyx;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -43,54 +44,57 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Starfall extends CardImpl {
+public class RavagingBlaze extends CardImpl {
 
-    public Starfall(UUID ownerId) {
-        super(ownerId, 114, "Starfall", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}");
-        this.expansionSetCode = "JOU";
+    public RavagingBlaze(UUID ownerId) {
+        super(ownerId, 159, "Ravaging Blaze", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{R}{R}");
+        this.expansionSetCode = "ORI";
 
-
-        // Starfall deals 3 damage to target creature. If that creature is an enchantment, Starfall deals 3 damage to that creature's controller.
+        // Ravaging Blaze deals X damage to target creature. 
+        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller.
+        this.getSpellAbility().addEffect(new RavagingBlazeEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new StarfallEffect());
-
     }
 
-    public Starfall(final Starfall card) {
+    public RavagingBlaze(final RavagingBlaze card) {
         super(card);
     }
 
     @Override
-    public Starfall copy() {
-        return new Starfall(this);
+    public RavagingBlaze copy() {
+        return new RavagingBlaze(this);
     }
 }
 
-class StarfallEffect extends OneShotEffect {
+class RavagingBlazeEffect extends OneShotEffect {
 
-    public StarfallEffect() {
+    public RavagingBlazeEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals 3 damage to target creature. If that creature is an enchantment, {this} deals 3 damage to that creature's controller";
+        staticText = "{this} deals X damage to target creature.<br>"
+                + "<i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, {this} also deals X damage to that creature's controller.";
     }
 
-    public StarfallEffect(final StarfallEffect effect) {
+    public RavagingBlazeEffect(final RavagingBlazeEffect effect) {
         super(effect);
     }
 
     @Override
-    public StarfallEffect copy() {
-        return new StarfallEffect(this);
+    public RavagingBlazeEffect copy() {
+        return new RavagingBlazeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.damage(3, source.getSourceId(), game, false, true);
-            if (permanent.getCardType().contains(CardType.ENCHANTMENT)) {
-                Player targetController = game.getPlayer(permanent.getControllerId());
-                if (targetController != null) {
-                    targetController.damage(3, source.getSourceId(), game, false, true);
+            int xValue = source.getManaCostsToPay().getX();
+            if (xValue > 0) {
+                permanent.damage(xValue, source.getSourceId(), game, false, true);
+                if (SpellMasteryCondition.getInstance().apply(game, source)) {
+                    Player targetController = game.getPlayer(permanent.getControllerId());
+                    if (targetController != null) {
+                        targetController.damage(xValue, source.getSourceId(), game, false, true);
+                    }
                 }
             }
             return true;
