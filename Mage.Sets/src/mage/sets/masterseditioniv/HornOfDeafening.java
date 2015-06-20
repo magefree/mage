@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class HornOfDeafening extends mage.sets.legends.HornOfDeafening {
 

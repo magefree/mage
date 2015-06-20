@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class SerraAviary extends CardImpl {
     

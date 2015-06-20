@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class SedgeTroll extends mage.sets.masterseditioniv.SedgeTroll {
 

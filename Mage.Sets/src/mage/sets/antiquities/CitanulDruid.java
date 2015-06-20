@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class CitanulDruid extends CardImpl {
     private static final FilterArtifactSpell filter = new FilterArtifactSpell();

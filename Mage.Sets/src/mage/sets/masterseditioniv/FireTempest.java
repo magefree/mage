@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class FireTempest extends mage.sets.portal.FireTempest {
 
