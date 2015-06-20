@@ -53,6 +53,8 @@ import mage.target.common.TargetOpponent;
  */
 public class CuombajjWitches extends CardImpl {
 
+    private final UUID originalId;
+
     public CuombajjWitches(UUID ownerId) {
         super(ownerId, 65, "Cuombajj Witches", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}{B}");
         this.expansionSetCode = "MED";
@@ -64,15 +66,16 @@ public class CuombajjWitches extends CardImpl {
         // {T}: Cuombajj Witches deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to target creature or player and 1 damage to target creature or player of an opponent's choice");
-        Ability ability = new CuombajjWitchesAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
+        originalId = ability.getOriginalId();
     }
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        if(ability instanceof CuombajjWitchesAbility) {
+        if(ability.getOriginalId().equals(originalId)) {
             Player controller = game.getPlayer(ability.getControllerId());
             if(controller != null) {
                 UUID opponentId = null;
@@ -95,26 +98,11 @@ public class CuombajjWitches extends CardImpl {
 
     public CuombajjWitches(final CuombajjWitches card) {
         super(card);
+        this.originalId = card.originalId;
     }
 
     @Override
     public CuombajjWitches copy() {
         return new CuombajjWitches(this);
-    }
-}
-
-// This is for identification in case something grants a second SimpleActivatedAbility to the Witches.
-class CuombajjWitchesAbility extends SimpleActivatedAbility {
-    public CuombajjWitchesAbility(Zone zone, Effect effect, Cost cost) {
-        super(zone, effect, cost);
-    }
-
-    public CuombajjWitchesAbility(final CuombajjWitchesAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CuombajjWitchesAbility copy() {
-        return new CuombajjWitchesAbility(this);
     }
 }
