@@ -28,10 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -43,8 +39,11 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -110,17 +109,22 @@ class AureliaAttacksTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public void reset(Game game) {
         Card sourceCard = game.getCard(getSourceId());
-        game.getState().setValue(getValueKey(sourceCard, game), new Integer(0));
+        game.getState().setValue(getValueKey(sourceCard, game), 0);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-       if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+       if (event.getSourceId().equals(this.getSourceId()) ) {
            Card sourceCard = game.getCard(getSourceId());
            Integer amountAttacks = (Integer) game.getState().getValue(getValueKey(sourceCard, game));
-           if (amountAttacks == null || amountAttacks.intValue() < 1) {
+           if (amountAttacks == null || amountAttacks < 1) {
                if (amountAttacks == null) {
-                   amountAttacks = new Integer(1);
+                   amountAttacks = 1;
                } else {
                    ++amountAttacks;
                }

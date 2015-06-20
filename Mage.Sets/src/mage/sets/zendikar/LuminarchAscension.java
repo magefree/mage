@@ -28,10 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,9 +38,13 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.AngelToken;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
@@ -53,17 +53,16 @@ import mage.watchers.common.PlayerLostLifeWatcher;
  * @author jeffwadsworth
  */
 public class LuminarchAscension extends CardImpl {
-    
+
     private String rule = "At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension. (Damage causes loss of life.)";
-    
+
     public LuminarchAscension(UUID ownerId) {
         super(ownerId, 25, "Luminarch Ascension", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
         this.expansionSetCode = "ZEN";
 
-
         // At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on Luminarch Ascension.
         this.addAbility(new ConditionalTriggeredAbility(new LuminarchAscensionTriggeredAbility(), YouLostNoLifeThisTurnCondition.getInstance(), rule, true));
-        
+
         // {1}{W}: Put a 4/4 white Angel creature token with flying onto the battlefield. Activate this ability only if Luminarch Ascension has four or more quest counters on it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new SourceHasCountersCost(4, CounterType.QUEST));
@@ -82,28 +81,29 @@ public class LuminarchAscension extends CardImpl {
 
 class LuminarchAscensionTriggeredAbility extends TriggeredAbilityImpl {
 
-        public LuminarchAscensionTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
-        }
-
-        public LuminarchAscensionTriggeredAbility(LuminarchAscensionTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public LuminarchAscensionTriggeredAbility copy() {
-            return new LuminarchAscensionTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE
-                    && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-                return true;
-            }
-            return false;
-        }
+    public LuminarchAscensionTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
     }
+
+    public LuminarchAscensionTriggeredAbility(LuminarchAscensionTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public LuminarchAscensionTriggeredAbility copy() {
+        return new LuminarchAscensionTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return game.getOpponents(controllerId).contains(event.getPlayerId());
+    }
+}
 
 class SourceHasCountersCost extends CostImpl {
 
@@ -156,4 +156,3 @@ class YouLostNoLifeThisTurnCondition implements Condition {
         return false;
     }
 }
-

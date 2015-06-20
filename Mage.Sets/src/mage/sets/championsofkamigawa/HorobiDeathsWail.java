@@ -98,13 +98,16 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-                return true;
-            }
+        Permanent creature = game.getPermanent(event.getTargetId());
+        if (creature != null && creature.getCardType().contains(CardType.CREATURE)) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            return true;
         }
         return false;
     }

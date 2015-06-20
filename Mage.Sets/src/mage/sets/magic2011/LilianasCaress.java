@@ -83,9 +83,14 @@ class LilianasCaressAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DISCARDED_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DISCARDED_CARD && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            for (Effect effect :this.getEffects()) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }
             return true;

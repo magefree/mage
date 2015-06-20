@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
+import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,17 +36,17 @@ import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
-import mage.MageObject;
-import mage.game.stack.Spell;
 
 /**
  *
@@ -100,15 +99,18 @@ class SpectralPrisonAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            MageObject eventSourceObject = game.getObject(event.getSourceId());
-            if (eventSourceObject != null && eventSourceObject instanceof Spell) {
-                Permanent enchantment = game.getPermanent(sourceId);
-                if (enchantment != null && enchantment.getAttachedTo() != null) {
-                    if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-                        return true;
-                    }
+        MageObject eventSourceObject = game.getObject(event.getSourceId());
+        if (eventSourceObject != null && eventSourceObject instanceof Spell) {
+            Permanent enchantment = game.getPermanent(sourceId);
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+                    return true;
                 }
             }
         }

@@ -51,6 +51,7 @@ import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -113,8 +114,13 @@ class KeranosGodOfStormsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DREW_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             if (game.getActivePlayerId().equals(this.getControllerId())) {
                 CardsDrawnDuringTurnWatcher watcher = (CardsDrawnDuringTurnWatcher) game.getState().getWatchers().get("CardsDrawnDuringTurn");
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) != 1) {

@@ -53,6 +53,7 @@ import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -84,9 +85,9 @@ public class DecayingSoil extends CardImpl {
         
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                                                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
-                                                new CardsInControllerGraveCondition(7), 
-                                                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand")));
+                new ConditionalContinuousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility(new DecayingSoilEffect(), filter)),
+                new CardsInControllerGraveCondition(7), 
+                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand")));
     }
 
     public DecayingSoil(final DecayingSoil card) {
@@ -119,15 +120,18 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                if (permanent != null && filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (permanent != null && filter.match(permanent, this.getSourceId(), this.getControllerId(), game)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                return true;
             }
         }
         return false;
@@ -136,10 +140,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Player controller = game.getPlayer(this.getControllerId());
-        if(controller != null && controller.getGraveyard().contains(this.getSourceId()))        {
-            return true;
-        }
-        return false;
+        return controller != null && controller.getGraveyard().contains(this.getSourceId());
     }
 
 

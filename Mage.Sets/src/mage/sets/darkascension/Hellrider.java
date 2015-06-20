@@ -28,16 +28,17 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -86,14 +87,17 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent source = game.getPermanent(event.getSourceId());
-            if (source != null && source.getControllerId().equals(controllerId)) {
-                UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
-                return true;
-            }
+        Permanent source = game.getPermanent(event.getSourceId());
+        if (source != null && source.getControllerId().equals(controllerId)) {
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
+            return true;
         }
         return false;
     }

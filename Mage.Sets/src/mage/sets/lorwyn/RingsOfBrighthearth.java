@@ -84,10 +84,15 @@ class RingsOfBrighthearthTriggeredAbility extends TriggeredAbilityImpl {
     public RingsOfBrighthearthTriggeredAbility copy() {
         return new RingsOfBrighthearthTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ACTIVATED_ABILITY;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ACTIVATED_ABILITY && event.getPlayerId().equals(getControllerId())) {
+        if (event.getPlayerId().equals(getControllerId())) {
             StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
             if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
                 Effect effect = this.getEffects().get(0);

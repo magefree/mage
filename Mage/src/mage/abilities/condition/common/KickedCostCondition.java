@@ -24,17 +24,9 @@ public class KickedCostCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            KickerAbility kickerAbility = null;
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    kickerAbility = (KickerAbility) ability;
-                }
-            }
-            if (kickerAbility != null) {
-                for (OptionalAdditionalCost cost: kickerAbility.getKickerCosts()) {
-                    if (cost.getText(true).equals(kickerCostText)) {
-                        return cost.isActivated();
-                    }
+                    return ((KickerAbility) ability).isKicked(game, source, kickerCostText);
                 }
             }
         }

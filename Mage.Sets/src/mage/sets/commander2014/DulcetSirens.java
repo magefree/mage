@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.MorphAbility;
@@ -61,6 +62,7 @@ public class DulcetSirens extends CardImpl {
 
         // {U}, {T}: Target creature attacks target opponent this turn if able.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DulcetSirensForceAttackEffect(Duration.EndOfTurn), new ManaCostsImpl("{U}"));
+        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addTarget(new TargetOpponent());        
         this.addAbility(ability);

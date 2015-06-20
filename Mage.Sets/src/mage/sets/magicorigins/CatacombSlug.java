@@ -37,7 +37,7 @@ public class CatacombSlug extends mage.sets.returntoravnica.CatacombSlug {
 
     public CatacombSlug(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 998;
         this.expansionSetCode = "ORI";
     }
 

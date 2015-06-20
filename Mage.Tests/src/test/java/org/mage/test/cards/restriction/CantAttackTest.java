@@ -66,6 +66,31 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertLife(playerB, 14); // 4 + 2
 
     }
+    
+   @Test
+    public void testAttackHarborSerpent() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); 
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Harbor Serpent"); // 5/5
+        addCard(Zone.HAND, playerA, "Island");
+        
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2); 
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Harbor Serpent"); // 5/5
+        
+        attack(2, playerB, "Harbor Serpent");
+        attack(2, playerB, "Silvercoat Lion");
 
+        playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Island");
+        attack(3, playerA, "Harbor Serpent");
+        attack(3, playerA, "Silvercoat Lion");
+
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerB, 13); 
+        assertLife(playerA, 18); 
+    }
+    
 }
 

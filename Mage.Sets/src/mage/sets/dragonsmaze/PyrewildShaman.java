@@ -31,10 +31,6 @@ package mage.sets.dragonsmaze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -43,16 +39,17 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
-/**
- *
- * @author LevelX2
- */
 
 
 public class PyrewildShaman extends CardImpl {
@@ -103,9 +100,16 @@ class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER
+                || event.getType() == EventType.END_COMBAT_STEP_POST
+                || event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (((DamagedPlayerEvent) event).isCombatDamage()) {
+            if (((DamagedEvent) event).isCombatDamage()) {
                 Permanent creature = game.getPermanent(event.getSourceId());
                 if (creature != null && creature.getControllerId().equals(controllerId) && !damagedPlayerIds.contains(event.getTargetId())) {
                     damagedPlayerIds.add(event.getTargetId());

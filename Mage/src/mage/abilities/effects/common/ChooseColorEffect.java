@@ -35,6 +35,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -64,10 +65,10 @@ public class ChooseColorEffect extends OneShotEffect {
                 }
             }
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(permanent.getLogName()).append(": ").append(controller.getLogName()).append(" has chosen ").append(choice.getChoice()).toString());
+                game.informPlayers(permanent.getLogName()+": "+controller.getLogName()+" has chosen "+choice.getChoice());
             }
             game.getState().setValue(source.getSourceId() + "_color", choice.getColor());
-            permanent.addInfo("chosen color", "<font color = 'blue'>Chosen color: " + choice.getColor().getDescription() + "</font>", game);
+            permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + choice.getChoice()), game);
             return true;
         }
         return false;

@@ -28,21 +28,16 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -85,10 +80,15 @@ class EbonyOwlNetsukeTriggeredAbility extends TriggeredAbilityImpl {
     public EbonyOwlNetsukeTriggeredAbility copy() {
         return new EbonyOwlNetsukeTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player player = game.getPlayer(event.getPlayerId());
             if (player != null) {
                 for (Effect effect: getEffects() ) {

@@ -39,7 +39,6 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +57,10 @@ public class HarborSerpent extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Islandwalk (This creature is unblockable as long as defending player controls an Island.)
         this.addAbility(new IslandwalkAbility());
+
+        // Harbor Serpent can't attack unless there are five or more Islands on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarborSerpentEffect()));
     }
 
@@ -74,11 +76,10 @@ public class HarborSerpent extends CardImpl {
 
 class HarborSerpentEffect extends RestrictionEffect {
 
-    private final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Island", "Island");
 
     public HarborSerpentEffect() {
         super(Duration.WhileOnBattlefield);
-        filter.add(new SubtypePredicate("Island"));
         staticText = "{this} can't attack unless there are five or more Islands on the battlefield";
     }
 
@@ -97,10 +98,8 @@ class HarborSerpentEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 5) {
-            return true;
-        }
-        return false;
+    public boolean applies(Permanent permanent, Ability source, Game game) {        
+        return permanent.getId().equals(source.getSourceId()) && 
+                game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 5;
     }
 }

@@ -28,10 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,9 +36,13 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -92,18 +92,21 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.GRAVEYARD) {
-                if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                    Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-                    if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
-                        for (Effect effect : getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                        }
-                        return true;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getToZone() == Zone.GRAVEYARD) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+                if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
+                    for (Effect effect : getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
+                    return true;
                 }
             }
         }

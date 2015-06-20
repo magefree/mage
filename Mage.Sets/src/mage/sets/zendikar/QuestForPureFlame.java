@@ -44,6 +44,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -90,9 +91,13 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGED_PLAYER)
-                && game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+        if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
             return getControllerId().equals(game.getControllerId(event.getSourceId()));
         }
         return false;

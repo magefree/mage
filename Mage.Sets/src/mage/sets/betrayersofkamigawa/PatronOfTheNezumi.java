@@ -28,9 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -38,6 +35,9 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -88,16 +88,19 @@ class PatronOfTheNezumiTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD) {
-                Card card = game.getCard(zEvent.getTargetId());
-                if (card != null && game.getOpponents(controllerId).contains(card.getOwnerId())) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(zEvent.getPlayerId()));
-                    return true;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getToZone() == Zone.GRAVEYARD) {
+            Card card = game.getCard(zEvent.getTargetId());
+            if (card != null && game.getOpponents(controllerId).contains(card.getOwnerId())) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(zEvent.getPlayerId()));
+                return true;
             }
         }
         return false;

@@ -37,6 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -82,13 +83,16 @@ class BecomesUntappedPermanentTriggeredAbility extends TriggeredAbilityImpl{
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UNTAPPED) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+            return true;
         }
         return false;
     }

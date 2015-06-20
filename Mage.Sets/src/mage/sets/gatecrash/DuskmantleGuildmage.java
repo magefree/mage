@@ -28,10 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -43,6 +39,10 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -100,18 +100,21 @@ class CardPutIntoOpponentGraveThisTurn extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            UUID cardId = event.getTargetId();
-            Card card = game.getCard(cardId);
-            if (card != null && zEvent.getToZone() == Zone.GRAVEYARD && !card.isCopy()
-                    && game.getOpponents(controllerId).contains(card.getOwnerId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(card.getOwnerId()));
-                }
-                return true;
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        UUID cardId = event.getTargetId();
+        Card card = game.getCard(cardId);
+        if (card != null && zEvent.getToZone() == Zone.GRAVEYARD && !card.isCopy()
+                && game.getOpponents(controllerId).contains(card.getOwnerId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(card.getOwnerId()));
             }
+            return true;
         }
         return false;
     }

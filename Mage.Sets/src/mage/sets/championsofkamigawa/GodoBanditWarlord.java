@@ -109,16 +109,21 @@ class GodoBanditWarlordAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public void reset(Game game) {
-        game.getState().setValue(CardUtil.getCardZoneString("amountAttacks", this.getSourceId(), game), new Integer(0));
+        game.getState().setValue(CardUtil.getCardZoneString("amountAttacks", this.getSourceId(), game), 0);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-       if (event.getType() == EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+       if (event.getSourceId().equals(this.getSourceId()) ) {
            Integer amountAttacks = (Integer) game.getState().getValue(CardUtil.getCardZoneString("amountAttacks", this.getSourceId(), game));
-           if (amountAttacks == null || amountAttacks.intValue() < 1) {
+           if (amountAttacks == null || amountAttacks < 1) {
                if (amountAttacks == null) {
-                   amountAttacks = new Integer(1);
+                   amountAttacks = 1;
                } else {
                    ++amountAttacks;
                }

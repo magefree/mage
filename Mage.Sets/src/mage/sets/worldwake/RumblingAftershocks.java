@@ -28,21 +28,21 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -98,21 +98,23 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getControllerId().equals(controllerId)) {
-                int damageAmount = 0;
-                for (Ability ability: (Abilities<Ability>) spell.getAbilities()) {
-                    if (ability instanceof KickerAbility) {
-                        damageAmount += ((KickerAbility) ability).getKickedCounter(game);
-                    }
-                }
-                if (damageAmount > 0) {
-                    this.getEffects().get(0).setValue("damageAmount", new Integer(damageAmount));
-                    return true;
-                }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getControllerId().equals(controllerId)) {
+            int damageAmount = 0;
+            for (Ability ability: spell.getAbilities()) {
+                if (ability instanceof KickerAbility) {
+                    damageAmount += ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility());
+                }
+            }
+            if (damageAmount > 0) {
+                this.getEffects().get(0).setValue("damageAmount", damageAmount);
+                return true;
             }
         }
         return false;
@@ -144,15 +146,15 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        if (player != null && damageAmount.intValue() > 0) {
+        if (player != null && damageAmount > 0) {
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
-               targetPlayer.damage(damageAmount.intValue(), source.getSourceId(), game, false, true);
+               targetPlayer.damage(damageAmount, source.getSourceId(), game, false, true);
                return true;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(damageAmount.intValue(), source.getSourceId(), game, false, true);
+                permanent.damage(damageAmount, source.getSourceId(), game, false, true);
                 return true;
             }
         }

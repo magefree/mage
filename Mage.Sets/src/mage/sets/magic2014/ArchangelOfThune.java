@@ -41,6 +41,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -91,11 +92,13 @@ class ArchangelOfThuneAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.GAINED_LIFE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(controllerId);
     }
 
     @Override

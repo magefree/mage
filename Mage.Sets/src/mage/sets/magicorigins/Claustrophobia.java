@@ -37,7 +37,7 @@ public class Claustrophobia extends mage.sets.innistrad.Claustrophobia {
 
     public Claustrophobia(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 999;
+        this.cardNumber = 995;
         this.expansionSetCode = "ORI";
     }
 

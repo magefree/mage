@@ -28,25 +28,25 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -103,17 +103,20 @@ class MasterOfCrueltiesTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_BLOCKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_BLOCKERS) {
-            Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent.isAttacking()) {
-                for (CombatGroup combatGroup: game.getCombat().getGroups()) {
-                    if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
-                        // check if a player is attacked (instead of a planeswalker)
-                        Player defendingPlayer = game.getPlayer(combatGroup.getDefenderId());
-                        if (defendingPlayer != null) {
-                            return true;
-                        }
+        Permanent sourcePermanent = game.getPermanent(getSourceId());
+        if (sourcePermanent.isAttacking()) {
+            for (CombatGroup combatGroup: game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+                    // check if a player is attacked (instead of a planeswalker)
+                    Player defendingPlayer = game.getPlayer(combatGroup.getDefenderId());
+                    if (defendingPlayer != null) {
+                        return true;
                     }
                 }
             }

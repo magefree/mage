@@ -46,6 +46,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
@@ -102,19 +103,22 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_BLOCKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_BLOCKERS) {
-            Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (sourcePermanent.isAttacking()) {
-                for (CombatGroup combatGroup: game.getCombat().getGroups()) {
-                    if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
-                        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
-                        FilterPermanent filter = new FilterArtifactPermanent();
-                        filter.add(new ControllerIdPredicate(defendingPlayerId));
-                        Target target = new TargetPermanent(filter);
-                        this.addTarget(target);
-                        return true;
-                    }
+        Permanent sourcePermanent = game.getPermanent(getSourceId());
+        if (sourcePermanent.isAttacking()) {
+            for (CombatGroup combatGroup: game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+                    FilterPermanent filter = new FilterArtifactPermanent();
+                    filter.add(new ControllerIdPredicate(defendingPlayerId));
+                    Target target = new TargetPermanent(filter);
+                    this.addTarget(target);
+                    return true;
                 }
             }
         }

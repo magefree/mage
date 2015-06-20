@@ -42,6 +42,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -94,14 +95,14 @@ class DawnsReflectionTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
-            Permanent enchantment = game.getPermanent(this.getSourceId());
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
+        Permanent enchantment = game.getPermanent(this.getSourceId());
+        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
 

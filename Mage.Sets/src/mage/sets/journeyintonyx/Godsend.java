@@ -114,46 +114,49 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_BLOCKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DECLARED_BLOCKERS)) {
-            Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
-            if (equipment != null && equipment.getAttachedTo()!= null) {
-                Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((equipment.getAttachedTo()));
-                if (equippedPermanent != null) {
-                    possibleTargets.clear();
-                    String targetName = "";
-                    if (equippedPermanent.isAttacking()) {                        
-                        for (CombatGroup group: game.getCombat().getGroups()) {                            
-                            if (group.getAttackers().contains(equippedPermanent.getId())) {
-                                possibleTargets.addAll(group.getBlockers());
-                            }
+        Permanent equipment = game.getPermanentOrLKIBattlefield((this.getSourceId()));
+        if (equipment != null && equipment.getAttachedTo()!= null) {
+            Permanent equippedPermanent = game.getPermanentOrLKIBattlefield((equipment.getAttachedTo()));
+            if (equippedPermanent != null) {
+                possibleTargets.clear();
+                String targetName = "";
+                if (equippedPermanent.isAttacking()) {                        
+                    for (CombatGroup group: game.getCombat().getGroups()) {                            
+                        if (group.getAttackers().contains(equippedPermanent.getId())) {
+                            possibleTargets.addAll(group.getBlockers());
                         }
-                        targetName = "a creature blocking attacker ";
-                    } else if (equippedPermanent.getBlocking() > 0) {
-                        for (CombatGroup group: game.getCombat().getGroups()) {
-                            if (group.getBlockers().contains(equippedPermanent.getId())) {
-                                possibleTargets.addAll(group.getAttackers());
-                            }
-                        }
-                        targetName = "a creature blocked by creature ";
-                    }                    
-                    if (possibleTargets.size() > 0) {                    
-                        this.getTargets().clear();
-                        if (possibleTargets.size() == 1) {                            
-                            this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
-                        } else {
-                            this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
-                            targetName = new StringBuilder(targetName).append("equipped by ").append(equipment.getName()).toString();
-                            FilterCreaturePermanent filter = new FilterCreaturePermanent(targetName);
-                            List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
-                            for (UUID creatureId : possibleTargets) {
-                                uuidPredicates.add(new PermanentIdPredicate(creatureId));
-                            }
-                            filter.add(Predicates.or(uuidPredicates));
-                            this.getTargets().add(new TargetCreaturePermanent(filter));
-                        }
-                        return true;
                     }
+                    targetName = "a creature blocking attacker ";
+                } else if (equippedPermanent.getBlocking() > 0) {
+                    for (CombatGroup group: game.getCombat().getGroups()) {
+                        if (group.getBlockers().contains(equippedPermanent.getId())) {
+                            possibleTargets.addAll(group.getAttackers());
+                        }
+                    }
+                    targetName = "a creature blocked by creature ";
+                }                    
+                if (possibleTargets.size() > 0) {                    
+                    this.getTargets().clear();
+                    if (possibleTargets.size() == 1) {                            
+                        this.getEffects().get(0).setTargetPointer(new FixedTarget(possibleTargets.iterator().next()));
+                    } else {
+                        this.getEffects().get(0).setTargetPointer(new FirstTargetPointer());
+                        targetName = new StringBuilder(targetName).append("equipped by ").append(equipment.getName()).toString();
+                        FilterCreaturePermanent filter = new FilterCreaturePermanent(targetName);
+                        List<PermanentIdPredicate> uuidPredicates = new ArrayList<>();
+                        for (UUID creatureId : possibleTargets) {
+                            uuidPredicates.add(new PermanentIdPredicate(creatureId));
+                        }
+                        filter.add(Predicates.or(uuidPredicates));
+                        this.getTargets().add(new TargetCreaturePermanent(filter));
+                    }
+                    return true;
                 }
             }
         }

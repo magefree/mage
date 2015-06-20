@@ -28,9 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -39,8 +36,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -86,11 +87,13 @@ class ChancellorOfTheDrossDelayedTriggeredAbility extends DelayedTriggeredAbilit
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            return true;
-        }
-        return false;
+        return true;
     }
     @Override
     public ChancellorOfTheDrossDelayedTriggeredAbility copy() {
@@ -115,8 +118,9 @@ class ChancellorOfTheDrossEffect extends OneShotEffect {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             loseLife += game.getPlayer(opponentId).loseLife(3, game);
         }
-        if (loseLife > 0)
+        if (loseLife > 0) {
             game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+        }
         return true;
     }
 

@@ -28,8 +28,6 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.cards.CardImpl;
@@ -38,9 +36,9 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -84,9 +82,13 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.ZONE_CHANGE.equals(event.getType()) &&
-                game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
+        if (game.getOpponents(this.getControllerId()).contains(game.getControllerId(event.getSourceId()))) {
             ZoneChangeEvent zce = (ZoneChangeEvent) event;
             if (Zone.BATTLEFIELD.equals(zce.getFromZone()) && Zone.GRAVEYARD.equals(zce.getToZone())) {
                 Permanent targetPermanent = zce.getTarget();

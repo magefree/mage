@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
@@ -72,6 +73,23 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public Effects getEffects() {
         return ability.getEffects();
+    }
+
+    @Override
+    public MageObject getSourceObjectIfItStillExists(Game game) {
+        return ability.getSourceObjectIfItStillExists(game); 
+    }
+
+    @Override
+    public MageObject getSourceObject(Game game) {
+        return ability.getSourceObject(game);
+    }
+
+    
+    
+    @Override
+    public int getSourceObjectZoneChangeCounter() {
+        return ability.getSourceObjectZoneChangeCounter();
     }
 
 }

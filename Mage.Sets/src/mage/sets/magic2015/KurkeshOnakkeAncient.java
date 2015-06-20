@@ -93,18 +93,21 @@ class KurkeshOnakkeAncientTriggeredAbility extends TriggeredAbilityImpl {
     public KurkeshOnakkeAncientTriggeredAbility copy() {
         return new KurkeshOnakkeAncientTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ACTIVATED_ABILITY;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ACTIVATED_ABILITY) { 
-            Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (source.getCardType().contains(CardType.ARTIFACT)) {
-                StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-                if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
-                    Effect effect = this.getEffects().get(0);
-                    effect.setValue("stackAbility", stackAbility.getStackAbility());
-                    return true;
-                }
+        Card source = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (source.getCardType().contains(CardType.ARTIFACT)) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (!(stackAbility.getStackAbility() instanceof ManaAbility)) {
+                Effect effect = this.getEffects().get(0);
+                effect.setValue("stackAbility", stackAbility.getStackAbility());
+                return true;
             }
         }
         return false;

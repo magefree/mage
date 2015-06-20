@@ -87,20 +87,23 @@ class RayneAcademyChancellorTriggeredAbility extends TriggeredAbilityImpl {
     public RayneAcademyChancellorTriggeredAbility copy() {
         return new RayneAcademyChancellorTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED) {
-            Player controller = game.getPlayer(this.getControllerId());
-            Player targetter = game.getPlayer(event.getPlayerId());
-            if (controller != null && targetter != null && !controller.getId().equals(targetter.getId())) {
-                if (event.getTargetId().equals(controller.getId())) {
-                    return true;
-                }
-                Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                if (permanent != null && this.getControllerId().equals(permanent.getControllerId())) {
-                    return true;
-                }
+        Player controller = game.getPlayer(this.getControllerId());
+        Player targetter = game.getPlayer(event.getPlayerId());
+        if (controller != null && targetter != null && !controller.getId().equals(targetter.getId())) {
+            if (event.getTargetId().equals(controller.getId())) {
+                return true;
+            }
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent != null && this.getControllerId().equals(permanent.getControllerId())) {
+                return true;
             }
         }
         return false;

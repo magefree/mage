@@ -27,24 +27,24 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -122,6 +122,11 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public UntapDelayedTriggeredAbility copy() {
         return new UntapDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PHASE_CHANGED || event.getType() == EventType.COMBAT_PHASE_PRE;
     }
 
     @Override

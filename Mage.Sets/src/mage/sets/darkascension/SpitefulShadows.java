@@ -28,18 +28,19 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -93,15 +94,18 @@ class SpitefulShadowsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            UUID targetId = event.getTargetId();
-            if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
-                return true;
-            }
+        Permanent enchantment = game.getPermanent(sourceId);
+        UUID targetId = event.getTargetId();
+        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
+            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(targetId));
+            return true;
         }
         return false;
     }

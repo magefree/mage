@@ -27,23 +27,22 @@
  */
 package mage.sets.worldwake;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
 
 /**
  *
@@ -91,14 +90,16 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if ( event.getType() == EventType.ZONE_CHANGE ) {
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
             // ayrat: make sure Kalastria Highborn is on battlefield
-            UUID sourceId = getSourceId();
-            if (game.getPermanent(sourceId) == null) {
+            if (game.getPermanent(this.getSourceId()) == null) {
                 // or it is being removed
-                if (game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD) == null) {
+                if (game.getLastKnownInformation(this.getSourceId(), Zone.BATTLEFIELD) == null) {
                     return false;
                 }
             }
@@ -106,16 +107,11 @@ class KalastriaHighbornTriggeredAbility extends TriggeredAbilityImpl {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             Permanent permanent = zEvent.getTarget();
 
-            if (permanent != null &&
+        return permanent != null &&
                 zEvent.getToZone() == Zone.GRAVEYARD &&
                 zEvent.getFromZone() == Zone.BATTLEFIELD &&
                 (permanent.getControllerId().equals(this.getControllerId()) &&
-                permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId())))
-            {
-                return true;
-            }
-        }
-        return false;
+                permanent.hasSubtype("Vampire") || permanent.getId().equals(this.getSourceId()));
     }
 
     @Override

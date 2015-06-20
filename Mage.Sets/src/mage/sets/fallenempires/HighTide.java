@@ -28,21 +28,21 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddManaToManaPoolTargetControllerEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -56,10 +56,9 @@ public class HighTide extends CardImpl {
         super(ownerId, 35, "High Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "FEM";
 
-
         // Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new HighTideTriggeredAbility()));
-        
+
     }
 
     public HighTide(final HighTide card) {
@@ -75,9 +74,9 @@ public class HighTide extends CardImpl {
 class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
-    
+
     static {
-            filter.add(new SubtypePredicate("Island"));
+        filter.add(new SubtypePredicate("Island"));
     }
 
     public HighTideTriggeredAbility() {
@@ -90,9 +89,14 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent land = game.getPermanent(event.getTargetId());
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && land != null && filter.match(land, game)) {
+        if (land != null && filter.match(land, game)) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(land.getControllerId()));
             }

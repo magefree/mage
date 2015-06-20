@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
 
 /**
@@ -102,10 +103,15 @@ class WallOfLimbsTriggeredAbility extends TriggeredAbilityImpl {
     public WallOfLimbsTriggeredAbility copy() {
         return new WallOfLimbsTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.GAINED_LIFE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.GAINED_LIFE && event.getPlayerId().equals(controllerId);
+        return event.getPlayerId().equals(controllerId);
     }
     
     @Override

@@ -27,12 +27,7 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import mage.target.common.TargetCardInExile;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,12 +35,17 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.common.TargetCardInExile;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -123,8 +123,13 @@ class KnowledgePoolAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST && event.getZone() == Zone.HAND) {            
+        if (event.getZone() == Zone.HAND) {            
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 for (Effect effect : this.getEffects()) {

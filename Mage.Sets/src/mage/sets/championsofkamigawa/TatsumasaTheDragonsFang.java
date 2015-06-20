@@ -49,6 +49,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
@@ -138,8 +139,13 @@ class TatsumaTheDragonsFangTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+        if (((ZoneChangeEvent) event).isDiesEvent()) {
             if (fixedTarget.getFirst(game, this).equals(event.getTargetId())) {
                 return true;
             }

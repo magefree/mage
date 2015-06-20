@@ -62,7 +62,10 @@ public class SerraAscendant extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Lifelink (Damage dealt by this creature also causes you to gain that much life.)
         this.addAbility(LifelinkAbility.getInstance());
+        
+        // As long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
     }
 

@@ -28,13 +28,13 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.cards.CardImpl;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continuous.LoseAbilitySourceEffect;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -43,6 +43,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -86,16 +87,19 @@ class GuardianOfTheAgesTriggerAbility extends TriggeredAbilityImpl {
     public GuardianOfTheAgesTriggerAbility(final GuardianOfTheAgesTriggerAbility ability){
         super(ability);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game){
-        if(event.getType() == GameEvent.EventType.ATTACKER_DECLARED){
-            Permanent creature = game.getPermanent(event.getSourceId());
-            if(creature != null && filter.match(creature, game)
-                   && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
-                   && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) {
-               return true;
-            }
+        Permanent creature = game.getPermanent(event.getSourceId());
+        if (creature != null && filter.match(creature, game)
+               && game.getOpponents(this.getControllerId()).contains(creature.getControllerId())
+               && game.getPermanent(this.getSourceId()).getAbilities().contains(DefenderAbility.getInstance())) {
+           return true;
         }
         return false;
     }

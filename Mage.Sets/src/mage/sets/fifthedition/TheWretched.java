@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldControlUnchangedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffect;
@@ -77,7 +78,7 @@ public class TheWretched extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At end of combat, gain control of all creatures blocking The Wretched for as long as you control The Wretched.
-        this.addAbility(new EndOfAnyCombatTriggeredAbility(), new BlockedAttackerWatcher());
+        this.addAbility(new EndOfCombatTriggeredAbility(new TheWretchedEffect(), false), new BlockedAttackerWatcher());
 
     }
 
@@ -88,37 +89,6 @@ public class TheWretched extends CardImpl {
     @Override
     public TheWretched copy() {
         return new TheWretched(this);
-    }
-}
-
-class EndOfAnyCombatTriggeredAbility extends TriggeredAbilityImpl {
-
-    EndOfAnyCombatTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TheWretchedEffect(), false);
-    }
-
-    EndOfAnyCombatTriggeredAbility(final EndOfAnyCombatTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EndOfAnyCombatTriggeredAbility copy() {
-        return new EndOfAnyCombatTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.END_COMBAT_STEP_PRE;
-    }
-    
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the end of combat, gain control of all creatures blocking {this} for as long as you control {this}.";
     }
 }
 

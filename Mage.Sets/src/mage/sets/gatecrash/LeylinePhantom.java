@@ -29,17 +29,17 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -73,7 +73,6 @@ public class LeylinePhantom extends CardImpl {
 
 class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
 
-
     public LeylinePhantomTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), false);
     }
@@ -88,13 +87,13 @@ class LeylinePhantomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE || event.getType() == EventType.DAMAGED_PLANESWALKER || event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if(((DamagedEvent) event).isCombatDamage() && event.getSourceId().equals(this.getSourceId())){
-                return true;
-            }
-        }
-        return false;
+        return ((DamagedEvent) event).isCombatDamage() && event.getSourceId().equals(this.getSourceId());
     }
 
     @Override

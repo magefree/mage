@@ -28,9 +28,6 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,11 +36,14 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -137,17 +137,20 @@ class SlumberingDragonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            if (event.getTargetId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(controllerId)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
+        if (event.getTargetId().equals(controllerId)) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+            return true;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getCardType().contains(CardType.PLANESWALKER) && permanent.getControllerId().equals(controllerId)) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+            return true;
         }
         return false;
     }

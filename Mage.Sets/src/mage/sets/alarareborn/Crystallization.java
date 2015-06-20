@@ -32,8 +32,8 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -43,6 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -101,17 +102,20 @@ class CrystallizationTriggeredAbility extends TriggeredAbilityImpl {
     public CrystallizationTriggeredAbility copy() {
         return new CrystallizationTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                UUID enchanted = enchantment.getAttachedTo();
-                if (event.getTargetId().equals(enchanted)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchanted));
-                    return true;
-                }
+        Permanent enchantment = game.getPermanent(sourceId);
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            UUID enchanted = enchantment.getAttachedTo();
+            if (event.getTargetId().equals(enchanted)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchanted));
+                return true;
             }
         }
         return false;

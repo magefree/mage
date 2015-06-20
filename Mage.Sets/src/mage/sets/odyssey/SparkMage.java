@@ -40,6 +40,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -74,39 +75,42 @@ public class SparkMage extends CardImpl {
 
 class SparkMageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public SparkMageTriggeredAbility(){
+    public SparkMageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
         this.addTarget(new TargetCreaturePermanent());
     }
-    
+
     public SparkMageTriggeredAbility(final SparkMageTriggeredAbility ability) {
         super(ability);
     }
-    
-@Override
+
+    @Override
     public SparkMageTriggeredAbility copy() {
         return new SparkMageTriggeredAbility(this);
     }
 
-@Override
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())){
-                Player opponent = game.getPlayer(event.getPlayerId());
-                if (opponent != null) {
-                    FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
-                    filter.add(new ControllerIdPredicate(opponent.getId()));
-                    this.getTargets().clear();
-                    this.getTargets().add(new TargetCreaturePermanent(filter));
-                    return true;
-                }
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
+            Player opponent = game.getPlayer(event.getPlayerId());
+            if (opponent != null) {
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + opponent.getLogName() + " controls");
+                filter.add(new ControllerIdPredicate(opponent.getId()));
+                this.getTargets().clear();
+                this.getTargets().add(new TargetCreaturePermanent(filter));
+                return true;
             }
         }
         return false;
     }
 
-@Override
+    @Override
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may have {this} deal 1 damage to target creature that player controls.";
     }

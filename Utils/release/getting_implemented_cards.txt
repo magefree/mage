@@ -137,6 +137,10 @@ git log 7a54d5364c9789ce2c3ef2c3eb4df7e0e0cde0cf..HEAD --diff-filter=A --name-st
 since 1.4.1.v1
 git log 3e9b4cfb7c22d363755d28f5ff1de351f6b7123c..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
 
+since 1.4.1.v2
+git log 675801e8d493b023add4333e7835751d20da07a1..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+
+
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:
 > perl extract_in_wiki_format.perl

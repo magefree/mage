@@ -29,26 +29,23 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.EvolveAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.StackObject;
 
-/**
- *
- * @author LevelX2
- */
 
 
 public class RenegadeKrasis extends CardImpl {
@@ -102,9 +99,13 @@ class RenegadeKrasisTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER_ADDED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.COUNTER_ADDED) 
-                && event.getTargetId().equals(getSourceId())) {
+        if (event.getTargetId().equals(getSourceId())) {
             Object object = game.getState().getValue("EvolveAddCounterActive");
             if (object != null && (Boolean) object) {
                 StackObject stackObject = game.getStack().getLast();

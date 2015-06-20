@@ -59,6 +59,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -152,15 +153,18 @@ class CastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // The sacrifice occurs only if you cast it using its own ability. If you cast it using some other
         // effect (for instance, if it gained flash from Vedalken Orrery), then it won't be sacrificed.
         // CHECK
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && spell.getSourceId().equals(getSourceId())) {
-                return !(game.isMainPhase() && game.getActivePlayerId().equals(event.getPlayerId()) && game.getStack().size() == 1);
-            }
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null && spell.getSourceId().equals(getSourceId())) {
+            return !(game.isMainPhase() && game.getActivePlayerId().equals(event.getPlayerId()) && game.getStack().size() == 1);
         }
         return false;
     }

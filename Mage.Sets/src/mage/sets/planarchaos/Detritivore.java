@@ -47,7 +47,6 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -107,8 +106,13 @@ class DetritivoreTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COUNTER_REMOVED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return EventType.COUNTER_REMOVED.equals(event.getType()) && event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
+        return event.getData().equals(CounterType.TIME.getName()) && event.getTargetId().equals(this.getSourceId());
     }
 
     @Override

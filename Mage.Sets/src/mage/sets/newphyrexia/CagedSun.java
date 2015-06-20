@@ -28,33 +28,30 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -136,8 +133,13 @@ class CagedSunTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.MANA_ADDED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.MANA_ADDED && event.getPlayerId().equals(controllerId)) {
+        if (event.getPlayerId().equals(controllerId)) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(this.sourceId + "_color");

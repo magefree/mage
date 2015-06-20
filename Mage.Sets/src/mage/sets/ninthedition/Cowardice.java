@@ -28,7 +28,6 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -37,6 +36,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.target.targetpointer.FixedTarget;
@@ -77,14 +77,17 @@ class CowardiceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (GameEvent.EventType.TARGETED.equals(event.getType())) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
-                    StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
+                StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            return true;
         }
         return false;
     }

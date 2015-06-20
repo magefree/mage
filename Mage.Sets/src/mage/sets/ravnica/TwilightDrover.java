@@ -43,6 +43,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -95,17 +96,20 @@ class TwilightDroverTriggeredAbility extends TriggeredAbilityImpl {
     public TwilightDroverTriggeredAbility copy() {
         return new TwilightDroverTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                UUID targetId = event.getTargetId();
-                Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
-                if (permanent != null) {
-                    return permanent.getCardType().contains(CardType.CREATURE) && permanent instanceof PermanentToken;
-                }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+            UUID targetId = event.getTargetId();
+            Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+            if (permanent != null) {
+                return permanent.getCardType().contains(CardType.CREATURE) && permanent instanceof PermanentToken;
             }
         }
         return false;

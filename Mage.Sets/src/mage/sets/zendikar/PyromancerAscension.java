@@ -54,9 +54,9 @@ public class PyromancerAscension extends CardImpl {
         super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
         this.expansionSetCode = "ZEN";
 
-
         // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         this.addAbility(new PyromancerAscensionQuestTriggeredAbility());
+        
         // Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
         this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
     }

@@ -57,7 +57,7 @@ import mage.util.CardUtil;
 public class HixusPrisonWarden extends CardImpl {
 
     public HixusPrisonWarden(UUID ownerId) {
-        super(ownerId, 19, "Hixus, Prison Warden", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{3}{W}{W}");
+        super(ownerId, 19, "Hixus, Prison Warden", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "ORI";
         this.supertype.add("Legendary");
         this.subtype.add("Human");
