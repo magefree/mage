@@ -69,7 +69,11 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
         if (mageObject != null) {
             this.zoneChangeCounter = mageObject.getZoneChangeCounter(game);
         } else {
-            throw new IllegalArgumentException("The provided sourceId is not connected to an object in the game");
+            if (game.getPlayerList().contains(sourceId)) {
+                this.zoneChangeCounter = 0;
+            } else {
+                throw new IllegalArgumentException("The provided sourceId is not connected to an object in the game");
+            }
         }
     }
 

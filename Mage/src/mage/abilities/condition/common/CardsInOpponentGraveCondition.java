@@ -13,7 +13,7 @@ import java.util.UUID;
  *  @author Loki
  */
 public class CardsInOpponentGraveCondition implements Condition {
-    private int value;
+    private final int value;
 
     public CardsInOpponentGraveCondition(int value) {
         this.value = value;

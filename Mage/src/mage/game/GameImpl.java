@@ -122,6 +122,7 @@ import mage.watchers.Watchers;
 import mage.watchers.common.BlockedAttackerWatcher;
 import mage.watchers.common.BloodthirstWatcher;
 import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.DamageDoneWatcher;
 import mage.watchers.common.MorbidWatcher;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
 import mage.watchers.common.PlayerLostLifeWatcher;
@@ -912,6 +913,7 @@ public abstract class GameImpl implements Game, Serializable {
         watchers.add(new SoulbondWatcher());
         watchers.add(new PlayerLostLifeWatcher());
         watchers.add(new BlockedAttackerWatcher());
+        watchers.add(new DamageDoneWatcher());
 
         //20100716 - 103.5
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
