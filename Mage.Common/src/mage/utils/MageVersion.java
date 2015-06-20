@@ -60,6 +60,10 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         this.info = info;
     }
 
+    public static MageVersion getCurrent() {
+        return new MageVersion(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_PATCH, MAGE_VERSION_MINOR_PATCH, MAGE_VERSION_INFO);
+    }
+    
     public int getMajor() {
         return major;
     }

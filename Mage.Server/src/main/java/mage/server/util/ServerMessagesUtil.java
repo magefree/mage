@@ -72,6 +72,7 @@ public class ServerMessagesUtil {
     }
 
     public ServerMessagesUtil() {
+        this.startDate = System.currentTimeMillis();
         updateExecutor = Executors.newSingleThreadScheduledExecutor();
         updateExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -181,10 +182,6 @@ public class ServerMessagesUtil {
 //            reloadMessages();
 //        }
 //    });
-
-    public void setStartDate(long milliseconds) {
-        this.startDate = milliseconds;
-    }
 
     public void incGamesStarted() {
         int value;

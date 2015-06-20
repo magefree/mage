@@ -120,7 +120,7 @@ public class ServerMain implements MageServer {
 
     private static final Logger logger = Logger.getLogger(MageServer.class);
 //    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
-    private static final MageVersion version = new MageVersion(MageVersion.MAGE_VERSION_MAJOR, MageVersion.MAGE_VERSION_MINOR, MageVersion.MAGE_VERSION_PATCH,  MageVersion.MAGE_VERSION_MINOR_PATCH, MageVersion.MAGE_VERSION_INFO);
+    private static final MageVersion version = MageVersion.getCurrent();
 
     private static final String testModeArg = "-testMode=";
     private static final String fastDBModeArg = "-fastDbMode=";
