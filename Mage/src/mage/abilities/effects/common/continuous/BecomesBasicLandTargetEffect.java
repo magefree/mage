@@ -72,7 +72,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, String... landNames) {
         this(duration, chooseLandType, true, landNames);
     }
-    
+
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, boolean loseOther, String... landNames) {
         super(duration, Outcome.Detriment);
         this.landTypes.addAll(Arrays.asList(landNames));
@@ -86,6 +86,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
         this.chooseLandType = effect.chooseLandType;
+        this.loseOther = effect.loseOther;
     }
 
     @Override
@@ -111,7 +112,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl {
                 this.discard();
             }
         }
-        
+
         if(!loseOther) {
             for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
                 Permanent land = game.getPermanent(targetPermanent);

@@ -28,27 +28,25 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author dustinconrad
+ * @author LevelX2
  */
-public class GuerrillaTactics extends mage.sets.ninthedition.GuerrillaTactics {
+public class ArcaneDenial1 extends mage.sets.commander2013.ArcaneDenial {
 
-    public GuerrillaTactics(UUID ownerId) {
+    public ArcaneDenial1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 110;
+        this.cardNumber = 32;
         this.expansionSetCode = "ALL";
-        this.rarity = Rarity.COMMON;
     }
 
-    public GuerrillaTactics(final GuerrillaTactics card) {
+    public ArcaneDenial1(final ArcaneDenial1 card) {
         super(card);
     }
 
     @Override
-    public GuerrillaTactics copy() {
-        return new GuerrillaTactics(this);
+    public ArcaneDenial1 copy() {
+        return new ArcaneDenial1(this);
     }
 }

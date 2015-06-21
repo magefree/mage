@@ -28,29 +28,27 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Backfir3
+ * @author dustinconrad
  */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+public class GuerrillaTactics2 extends mage.sets.ninthedition.GuerrillaTactics {
 
-    public ElvishRanger1(UUID ownerId) {
+    public GuerrillaTactics2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = 111;
         this.expansionSetCode = "ALL";
+        this.rarity = Rarity.COMMON;
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public GuerrillaTactics2(final GuerrillaTactics2 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public GuerrillaTactics2 copy() {
+        return new GuerrillaTactics2(this);
     }
 }

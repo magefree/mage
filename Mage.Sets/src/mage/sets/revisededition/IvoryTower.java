@@ -25,28 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.revisededition;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
- */
-public class DeadlyInsect extends mage.sets.mercadianmasques.DeadlyInsect {
+ * @author LoneFox
 
-    public DeadlyInsect(UUID ownerId) {
+ */
+public class IvoryTower extends mage.sets.antiquities.IvoryTower {
+
+    public IvoryTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 64;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 254;
+        this.expansionSetCode = "3ED";
+        this.rarity = Rarity.RARE;
     }
 
-    public DeadlyInsect(final DeadlyInsect card) {
+    public IvoryTower(final IvoryTower card) {
         super(card);
     }
 
     @Override
-    public DeadlyInsect copy() {
-        return new DeadlyInsect(this);
+    public IvoryTower copy() {
+        return new IvoryTower(this);
     }
 }

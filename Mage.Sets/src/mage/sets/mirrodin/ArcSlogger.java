@@ -28,53 +28,45 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
-import mage.abilities.keyword.EntwineAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileFromTopOfLibraryCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LoneFox
 
  */
-public class BetrayalOfFlesh extends CardImpl {
+public class ArcSlogger extends CardImpl {
 
-    public BetrayalOfFlesh(UUID ownerId) {
-        super(ownerId, 58, "Betrayal of Flesh", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
+    public ArcSlogger(UUID ownerId) {
+        super(ownerId, 85, "Arc-Slogger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.expansionSetCode = "MRD";
+        this.subtype.add("Beast");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        // Choose one -
-        this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMaxModes(1);
-        // Destroy target creature;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // or return target creature card from your graveyard to the battlefield.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine-Sacrifice three lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
+        // {R}, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        ability.addCost(new ExileFromTopOfLibraryCost(10));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public BetrayalOfFlesh(final BetrayalOfFlesh card) {
+    public ArcSlogger(final ArcSlogger card) {
         super(card);
     }
 
     @Override
-    public BetrayalOfFlesh copy() {
-        return new BetrayalOfFlesh(this);
+    public ArcSlogger copy() {
+        return new ArcSlogger(this);
     }
 }

@@ -25,28 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.vintagemasters;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author Plopman
- */
-public class ElvishRanger extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 67;
-        this.expansionSetCode = "ALL";
+ */
+public class SuChi extends CardImpl {
+
+    public SuChi(UUID ownerId) {
+        super(ownerId, 285, "Su-Chi", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "VMA";
+        this.subtype.add("Construct");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Su-Chi dies, add {4} to your mana pool.
+        this.addAbility(new DiesTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 0, 0, 4, 0)), false));
     }
 
-    public ElvishRanger(final ElvishRanger card) {
+    public SuChi(final SuChi card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger copy() {
-        return new ElvishRanger(this);
+    public SuChi copy() {
+        return new SuChi(this);
     }
 }

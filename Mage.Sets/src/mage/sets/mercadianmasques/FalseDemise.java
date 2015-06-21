@@ -25,30 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
- */
-public class Reprisal extends mage.sets.seventhedition.Reprisal {
+ * @author LoneFox
 
-    public Reprisal(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 144;
-        this.expansionSetCode = "ALL";
-        this.rarity = Rarity.COMMON;
+ */
+public class FalseDemise extends CardImpl {
+
+    public FalseDemise(UUID ownerId) {
+        super(ownerId, 80, "False Demise", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+
+        // When enchanted creature dies, return that card to the battlefield under your control.
+        this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "enchanted creature"));
     }
 
-    public Reprisal(final Reprisal card) {
+    public FalseDemise(final FalseDemise card) {
         super(card);
     }
 
     @Override
-    public Reprisal copy() {
-        return new Reprisal(this);
+    public FalseDemise copy() {
+        return new FalseDemise(this);
     }
 }

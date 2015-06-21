@@ -25,28 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.mastersedition;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
- */
-public class StormCrow extends mage.sets.ninthedition.StormCrow {
+ * @author LoneFox
 
-    public StormCrow(UUID ownerId) {
+ */
+public class SuChi extends mage.sets.vintagemasters.SuChi {
+
+    public SuChi(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 54;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 168;
+        this.expansionSetCode = "MED";
+        this.rarity = Rarity.RARE;
     }
 
-    public StormCrow(final StormCrow card) {
+    public SuChi(final SuChi card) {
         super(card);
     }
 
     @Override
-    public StormCrow copy() {
-        return new StormCrow(this);
+    public SuChi copy() {
+        return new SuChi(this);
     }
 }
