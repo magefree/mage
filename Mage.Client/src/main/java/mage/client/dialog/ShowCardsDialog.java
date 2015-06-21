@@ -34,6 +34,16 @@
 
 package mage.client.dialog;
 
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.ImageIcon;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -44,29 +54,29 @@ import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
 import mage.view.SimpleCardsView;
 import org.mage.card.arcane.CardPanel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.UUID;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class ShowCardsDialog extends MageDialog implements MouseListener {
 
-    private boolean reloaded = false;
+
+    
+    // remember if this dialog was already auto positioned, so don't do it after the first time
+    private boolean positioned;
+    
 
     /**
      * Creates new form ShowCardsDialog
      */
     public ShowCardsDialog() {
+        this.positioned = false;
+        
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         this.setModal(false);
+           
     }
 
     public void cleanUp() {
@@ -88,7 +98,6 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     }
     
     public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options) {
-        this.reloaded = true;
         this.title = name;
         this.setTitelBarToolTip(name);
         cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
@@ -106,7 +115,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
             MageFrame.getDesktop().add(this, JLayeredPane.DEFAULT_LAYER);
         }
-        pack();
+            pack();
 
         this.revalidate();
         this.repaint();
@@ -115,24 +124,19 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                int width = ShowCardsDialog.this.getWidth();
-                int height = ShowCardsDialog.this.getWidth();
-                if (width > 0 && height > 0) {
-                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
-                    ShowCardsDialog.this.setLocation(centered.x, centered.y);
-                    GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
+                if (!positioned) {
+                    int width = ShowCardsDialog.this.getWidth();
+                    int height = ShowCardsDialog.this.getHeight();
+                    if (width > 0 && height > 0) {
+                        Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                        ShowCardsDialog.this.setLocation(centered.x, centered.y);
+                        positioned = true;
+                        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, ShowCardsDialog.this);
+                    }
                 }
                 ShowCardsDialog.this.setVisible(true);
             }
         });
-    }
-
-    public boolean isReloaded() {
-        return this.reloaded;
-    }
-
-    public void clearReloaded() {
-        this.reloaded = false;
     }
 
     private void initComponents() {

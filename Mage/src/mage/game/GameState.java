@@ -445,8 +445,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return lookedAt.get(playerId);
     }
 
-    public void clearLookedAt(UUID playerId) {
-        lookedAt.remove(playerId);
+    public void clearRevealed() {
+        revealed.clear();
+    }
+    
+    public void clearLookedAt() {
+        lookedAt.clear();
     }
 
     public Turn getTurn() {

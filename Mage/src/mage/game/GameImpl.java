@@ -1201,7 +1201,6 @@ public abstract class GameImpl implements Game, Serializable {
                                 applyEffects();
                                 state.getPlayers().resetPassed();
                                 fireUpdatePlayersEvent();
-                                state.getRevealed().reset();
                                 resetShortLivingLKI(); 
                                 break;
                             } else {
@@ -1980,6 +1979,8 @@ public abstract class GameImpl implements Game, Serializable {
         }
         logger.trace("fireUpdatePlayersEvent");
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
+        getState().clearLookedAt();        
+        getState().clearRevealed();
     }
 
     @Override

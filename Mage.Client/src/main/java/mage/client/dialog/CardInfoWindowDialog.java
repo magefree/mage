@@ -27,42 +27,140 @@
 */
 
 /*
- * ExileZoneDialog.java
+ * CardInfoWindowDialog.java
  *
  * Created on Feb 1, 2010, 3:00:35 PM
  */
 
 package mage.client.dialog;
 
+import java.awt.Point;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
+import mage.view.CardsView;
 import mage.view.ExileView;
+import mage.view.SimpleCardsView;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileZoneDialog extends MageDialog {
+public class CardInfoWindowDialog extends MageDialog {
 
-    /** Creates new form ExileZoneDialog */
-    public ExileZoneDialog() {
+    public static enum ShowType { REVEAL, LOOKED_AT, EXILE, OTHER };
+    
+    private ShowType showType;
+    private boolean positioned;
+    
+    public CardInfoWindowDialog(ShowType showType, String name) {
+        this.title = name;
+        this.showType = showType;
+        this.positioned = false;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
         this.setModal(false);
+        switch(this.showType) {
+            case LOOKED_AT:
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getLookedAtImage()));
+                this.setClosable(true);
+                break;
+            case REVEAL:
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getRevealedImage()));
+                this.setClosable(true);
+                break;
+            case EXILE:
+                this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
+                break;
+            default:
+                // no icon yet
+        }         
+        this.setTitelBarToolTip(name);        
     }
 
     public void cleanUp() {
         cards.cleanUp();
     }
 
+    public void loadCards(SimpleCardsView showCards, BigCard bigCard, UUID gameId) {
+
+        boolean changed = cards.loadCards(showCards, bigCard, gameId);
+        if (showCards.size() > 0) {
+            show();
+            if (changed) {
+                try {
+                    if (!positioned) {
+                        this.setIcon(false);
+                        firstWindowPosition();
+                    }
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else {
+            this.hideDialog();
+        }        
+    }
+    
+    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
+        boolean changed = cards.loadCards(showCards, bigCard, gameId, null);
+                
+        if (showCards.size() > 0) {
+            show();
+            if (changed) {
+                try {
+                    if (!positioned) {
+                        this.setIcon(false);
+                        firstWindowPosition();
+                    } else {
+                        
+                    }
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        }
+        else {
+            this.hideDialog();
+        }        
+    }
+
+    private void firstWindowPosition() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (!positioned) {
+                    int width = CardInfoWindowDialog.this.getWidth();
+                    int height = CardInfoWindowDialog.this.getHeight();
+                    if (width > 0 && height > 0) {
+                        positioned = true;
+                        Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                        int xPos = centered.x / 2;
+                        int yPos = centered.y / 2;
+                        CardInfoWindowDialog.this.setLocation(xPos, yPos);
+                        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, CardInfoWindowDialog.this);
+                        CardInfoWindowDialog.this.show();
+                    }                    
+                }
+                        
+                
+                // ShowCardsDialog.this.setVisible(true);
+            }
+        });        
+    }
+    
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
-        this.title = exile.getName();
-        this.setTitelBarToolTip(exile.getName());
         boolean changed = cards.loadCards(exile, bigCard, gameId, null);
         if (exile.size() > 0) {
             show();
@@ -70,7 +168,7 @@ public class ExileZoneDialog extends MageDialog {
                 try {
                     this.setIcon(false);
                 } catch (PropertyVetoException ex) {
-                    Logger.getLogger(ExileZoneDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
