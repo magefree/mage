@@ -25,22 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.abilities.Mode;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.keyword.EntwineAbility;
-import mage.abilities.keyword.EntwineAbility;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledPermanent;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,33 +45,30 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LoneFox
 
  */
-public class BetrayalOfFlesh extends CardImpl {
+public class ElvishHunter extends CardImpl {
 
-    public BetrayalOfFlesh(UUID ownerId) {
-        super(ownerId, 58, "Betrayal of Flesh", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{5}{B}");
-        this.expansionSetCode = "MRD";
+    public ElvishHunter(UUID ownerId) {
+        super(ownerId, 157, "Elvish Hunter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Elf");
+        this.subtype.add("Archer");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Choose one -
-        this.getSpellAbility().getModes().setMinModes(1);
-        this.getSpellAbility().getModes().setMaxModes(1);
-        // Destroy target creature;
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // or return target creature card from your graveyard to the battlefield.
-        Mode mode = new Mode();
-        mode.getEffects().add(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
-        this.getSpellAbility().getModes().addMode(mode);
-        // Entwine-Sacrifice three lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
+        // {1}{G}, {tap}: Target creature doesn't untap during its controller's next untap step.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DontUntapInControllersNextUntapStepTargetEffect("Target creature"),
+            new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public BetrayalOfFlesh(final BetrayalOfFlesh card) {
+    public ElvishHunter(final ElvishHunter card) {
         super(card);
     }
 
     @Override
-    public BetrayalOfFlesh copy() {
-        return new BetrayalOfFlesh(this);
+    public ElvishHunter copy() {
+        return new ElvishHunter(this);
     }
 }

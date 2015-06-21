@@ -25,32 +25,73 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
+import mage.players.Player;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 67;
-        this.expansionSetCode = "ALL";
+ */
+public class IvoryTower extends CardImpl {
+
+    public IvoryTower(UUID ownerId) {
+        super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.expansionSetCode = "ATQ";
+
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
+            new IvoryTowerEffect(), false));
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public IvoryTower(final IvoryTower card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public IvoryTower copy() {
+        return new IvoryTower(this);
     }
 }
+
+class IvoryTowerEffect extends OneShotEffect {
+
+    public IvoryTowerEffect() {
+        super(Outcome.GainLife);
+        this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
+    }
+
+    public IvoryTowerEffect(IvoryTowerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if(player != null) {
+            int amount = player.getHand().size() - 4;
+            if(amount > 0) {
+                player.gainLife(amount, game);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public IvoryTowerEffect copy() {
+        return new IvoryTowerEffect(this);
+    }
+
+}
+

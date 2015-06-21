@@ -35,22 +35,22 @@ import mage.constants.Rarity;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
+ */
+public class RoyalHerbalist2 extends mage.sets.alliances.RoyalHerbalist1 {
+
+    public RoyalHerbalist2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 148;
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public RoyalHerbalist2(final RoyalHerbalist2 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public RoyalHerbalist2 copy() {
+        return new RoyalHerbalist2(this);
     }
 }

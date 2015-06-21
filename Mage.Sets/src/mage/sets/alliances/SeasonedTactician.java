@@ -29,28 +29,45 @@ package mage.sets.alliances;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileFromTopOfLibraryCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PreventNextDamageFromChosenSourceToYouEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 67;
+ */
+public class SeasonedTactician extends CardImpl {
+
+    public SeasonedTactician(UUID ownerId) {
+        super(ownerId, 150, "Seasoned Tactician", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "ALL";
+        this.subtype.add("Human");
+        this.subtype.add("Advisor");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // {3}, Exile the top four cards of your library: The next time a source of your choice would deal damage to you this turn, prevent that damage.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn),
+            new ManaCostsImpl("{3}"));
+        ability.addCost(new ExileFromTopOfLibraryCost(4));
+        this.addAbility(ability);
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public SeasonedTactician(final SeasonedTactician card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public SeasonedTactician copy() {
+        return new SeasonedTactician(this);
     }
 }

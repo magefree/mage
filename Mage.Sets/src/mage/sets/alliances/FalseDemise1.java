@@ -28,29 +28,28 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
+ */
+public class FalseDemise1 extends mage.sets.mercadianmasques.FalseDemise {
+
+    public FalseDemise1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = 40;
         this.expansionSetCode = "ALL";
+        this.rarity = Rarity.COMMON;
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public FalseDemise1(final FalseDemise1 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public FalseDemise1 copy() {
+        return new FalseDemise1(this);
     }
 }

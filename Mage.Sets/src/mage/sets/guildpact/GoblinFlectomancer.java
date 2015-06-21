@@ -25,32 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.guildpact;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterInstantOrSorcerySpell;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 67;
-        this.expansionSetCode = "ALL";
+ */
+public class GoblinFlectomancer extends CardImpl {
+
+    public GoblinFlectomancer(UUID ownerId) {
+        super(ownerId, 116, "Goblin Flectomancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{R}{R}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Goblin");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Sacrifice Goblin Flectomancer: You may change the targets of target instant or sorcery spell.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChooseNewTargetsTargetEffect(), new SacrificeSourceCost());
+        ability.addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
+        this.addAbility(ability);
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public GoblinFlectomancer(final GoblinFlectomancer card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public GoblinFlectomancer copy() {
+        return new GoblinFlectomancer(this);
     }
 }

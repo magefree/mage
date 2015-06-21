@@ -29,28 +29,43 @@ package mage.sets.alliances;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.ExileFromTopOfLibraryCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 67;
+ */
+public class RoyalHerbalist1 extends CardImpl {
+
+    public RoyalHerbalist1(UUID ownerId) {
+        super(ownerId, 147, "Royal Herbalist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "ALL";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {2}, Exile the top card of your library: You gain 1 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new ManaCostsImpl("{2}"));
+        ability.addCost(new ExileFromTopOfLibraryCost(1));
+        this.addAbility(ability);
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public RoyalHerbalist1(final RoyalHerbalist1 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public RoyalHerbalist1 copy() {
+        return new RoyalHerbalist1(this);
     }
 }

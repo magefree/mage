@@ -25,28 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.mastersedition;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
- */
-public class ArcaneDenial extends mage.sets.commander2013.ArcaneDenial {
+ * @author LoneFox
 
-    public ArcaneDenial(UUID ownerId) {
+ */
+public class IvoryTower extends mage.sets.antiquities.IvoryTower {
+
+    public IvoryTower(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 32;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 158;
+        this.expansionSetCode = "MED";
+        this.rarity = Rarity.RARE;
     }
 
-    public ArcaneDenial(final ArcaneDenial card) {
+    public IvoryTower(final IvoryTower card) {
         super(card);
     }
 
     @Override
-    public ArcaneDenial copy() {
-        return new ArcaneDenial(this);
+    public IvoryTower copy() {
+        return new IvoryTower(this);
     }
 }

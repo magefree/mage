@@ -25,32 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Backfir3
- */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+ * @author LoneFox
 
-    public ElvishRanger1(UUID ownerId) {
+ */
+public class ElvishHunter1 extends mage.sets.masterseditionii.ElvishHunter {
+
+    public ElvishHunter1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
-        this.expansionSetCode = "ALL";
+        this.cardNumber = 72;
+        this.expansionSetCode = "FEM";
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public ElvishHunter1(final ElvishHunter1 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public ElvishHunter1 copy() {
+        return new ElvishHunter1(this);
     }
 }

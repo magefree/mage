@@ -28,29 +28,27 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
- * @author Backfir3
+ * @author Quercitron
  */
-public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
+public class Reprisal1 extends mage.sets.seventhedition.Reprisal {
 
-    public ElvishRanger1(UUID ownerId) {
+    public Reprisal1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 67;
+        this.cardNumber = 144;
         this.expansionSetCode = "ALL";
+        this.rarity = Rarity.COMMON;
     }
 
-    public ElvishRanger1(final ElvishRanger1 card) {
+    public Reprisal1(final Reprisal1 card) {
         super(card);
     }
 
     @Override
-    public ElvishRanger1 copy() {
-        return new ElvishRanger1(this);
+    public Reprisal1 copy() {
+        return new Reprisal1(this);
     }
 }
