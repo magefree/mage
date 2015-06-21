@@ -43,6 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -91,19 +92,22 @@ class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     public HotSoupTriggeredAbility copy() {
         return new HotSoupTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            Permanent equipment = game.getPermanent(this.getSourceId());
-            if (equipment != null && equipment.getAttachedTo() != null) {
-                if (event.getTargetId() == equipment.getAttachedTo()) {
-                    for(Effect effect : this.getEffects())
-                    {
-                        effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
-                    }
-                    return true;
+        Permanent equipment = game.getPermanent(this.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            if (event.getTargetId() == equipment.getAttachedTo()) {
+                for(Effect effect : this.getEffects())
+                {
+                    effect.setTargetPointer(new FixedTarget(equipment.getAttachedTo()));
                 }
+                return true;
             }
         }
         return false;

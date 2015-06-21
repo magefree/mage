@@ -29,17 +29,17 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DestroySourceEffect;
+import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DestroySourceEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -95,11 +95,13 @@ class PrimalCocoonAbility1 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-            return true;
-        }
-        return false;
+        return event.getPlayerId().equals(this.controllerId);
     }
 
     @Override
@@ -124,14 +126,14 @@ class PrimalCocoonAbility2 extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED  || event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ATTACKER_DECLARED || event.getType() == EventType.BLOCKER_DECLARED) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId() != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
+        Permanent enchantment = game.getPermanent(sourceId);
+        return enchantment != null && enchantment.getAttachedTo() != null && event.getSourceId() != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
     @Override

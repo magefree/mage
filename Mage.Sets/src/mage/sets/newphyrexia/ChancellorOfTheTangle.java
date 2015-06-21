@@ -28,18 +28,19 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -86,11 +87,13 @@ class ChancellorOfTheTangleDelayedTriggeredAbility extends DelayedTriggeredAbili
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PRECOMBAT_MAIN_PHASE_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.PRECOMBAT_MAIN_PHASE_PRE && game.getActivePlayerId().equals(controllerId)) {
-            return true;
-        }
-        return false;
+        return game.getActivePlayerId().equals(controllerId);
     }
     @Override
     public ChancellorOfTheTangleDelayedTriggeredAbility copy() {

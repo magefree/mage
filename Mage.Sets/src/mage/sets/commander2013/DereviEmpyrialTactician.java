@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -95,6 +96,11 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     public DereviEmpyrialTacticianTriggeredAbility(DereviEmpyrialTacticianTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD || event.getType() == EventType.DAMAGED_PLAYER;
     }
 
     @Override

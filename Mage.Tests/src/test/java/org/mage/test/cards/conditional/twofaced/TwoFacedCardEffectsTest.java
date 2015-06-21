@@ -18,6 +18,12 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testEffectTurnedOffOnTransform() {
+        // Other Human creatures you control get +1/+1.
+        // At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.        
+        // Howlpack Alpha (transformed side) ----------------
+        // Each other creature you control that's a Werewolf or a Wolf gets +1/+1.
+        // At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.
+        // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
         addCard(Zone.BATTLEFIELD, playerA, "Mayor of Avabruck");
         addCard(Zone.BATTLEFIELD, playerA, "Wolfir Avenger");
         addCard(Zone.BATTLEFIELD, playerA, "Elite Inquisitor");

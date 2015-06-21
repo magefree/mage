@@ -28,9 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,10 +35,13 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
@@ -93,16 +93,18 @@ class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            Player defender = game.getPlayer(event.getTargetId());
-            Player you = game.getPlayer(controllerId);
-            if (attacker.getControllerId() != you.getId()
-                    && defender == you) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(attacker.getControllerId()));
-                return true;
-            }
+        Permanent attacker = game.getPermanent(event.getSourceId());
+        Player defender = game.getPlayer(event.getTargetId());
+        Player you = game.getPlayer(controllerId);
+        if (attacker.getControllerId() != you.getId() && defender == you) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(attacker.getControllerId()));
+            return true;
         }
         return false;
     }

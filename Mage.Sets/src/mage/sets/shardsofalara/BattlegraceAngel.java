@@ -97,8 +97,13 @@ class BattlegraceAngelAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+        if (game.getActivePlayerId().equals(this.controllerId) ) {
             if (game.getCombat().attacksAlone()) {
                 for (Effect effect: this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));

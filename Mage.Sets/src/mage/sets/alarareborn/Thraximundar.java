@@ -44,6 +44,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -140,14 +141,14 @@ class PlayerSacrificesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SACRIFICED_PERMANENT;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT) {
-            MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (mageObject != null && mageObject.getCardType().contains(CardType.CREATURE)) {
-                return true;
-            }
-        }
-        return false;
+        MageObject mageObject = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+        return mageObject != null && mageObject.getCardType().contains(CardType.CREATURE);
     }
 
     @Override

@@ -38,6 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -80,17 +81,20 @@ class PriceOfGloryAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)  
-                    && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                return true;
-            }
+        Permanent permanent = game.getPermanent(event.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null && permanent.getCardType().contains(CardType.LAND)  
+                && !permanent.getControllerId().equals(game.getActivePlayerId())) { // intervening if clause
+            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+            return true;
         }
         return false;
     }

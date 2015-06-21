@@ -38,7 +38,7 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
  */
 public class CastCommanderTest extends CardTestCommanderDuelBase {
     @Test
-    public void testFirstAbility() {
+    public void testCastCommander() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ob Nixilis of the Black Oath");
@@ -50,5 +50,5 @@ public class CastCommanderTest extends CardTestCommanderDuelBase {
         assertLife(playerB, 40);
 
         assertPermanentCount(playerA, "Ob Nixilis of the Black Oath", 1);
-    }
+    }     
 }

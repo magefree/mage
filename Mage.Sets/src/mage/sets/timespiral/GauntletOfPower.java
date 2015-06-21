@@ -53,6 +53,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.events.ManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -145,41 +146,44 @@ class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                ManaEvent mEvent = (ManaEvent) event;
-                ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");
-                if (color != null) {
-                    Mana mana = mEvent.getMana();
-                    boolean colorFits = false;
-                    if (color.isBlack() && mana.getBlack() > 0) {
-                        colorFits = true;
-                    } else if (color.isBlue() && mana.getBlue() > 0) {
-                        colorFits = true;
-                    } else if (color.isGreen() && mana.getGreen() > 0) {
-                        colorFits = true;
-                    } else if (color.isWhite() && mana.getWhite() > 0) {
-                        colorFits = true;
-                    } else if (color.isRed() && mana.getRed() > 0) {
-                        colorFits = true;
-                    }
-                    if (colorFits) {
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
 
-                        for (Effect effect : getEffects()) {
-                            effect.setValue("mana", mEvent.getMana());
-                        }
-                        switch (setTargetPointer) {
-                            case PERMANENT:
-                                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                                break;
-                            case PLAYER:
-                                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                                break;
-                        }
-                        return true;
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            ManaEvent mEvent = (ManaEvent) event;
+            ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");
+            if (color != null) {
+                Mana mana = mEvent.getMana();
+                boolean colorFits = false;
+                if (color.isBlack() && mana.getBlack() > 0) {
+                    colorFits = true;
+                } else if (color.isBlue() && mana.getBlue() > 0) {
+                    colorFits = true;
+                } else if (color.isGreen() && mana.getGreen() > 0) {
+                    colorFits = true;
+                } else if (color.isWhite() && mana.getWhite() > 0) {
+                    colorFits = true;
+                } else if (color.isRed() && mana.getRed() > 0) {
+                    colorFits = true;
+                }
+                if (colorFits) {
+
+                    for (Effect effect : getEffects()) {
+                        effect.setValue("mana", mEvent.getMana());
                     }
+                    switch (setTargetPointer) {
+                        case PERMANENT:
+                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                            break;
+                        case PLAYER:
+                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                            break;
+                    }
+                    return true;
                 }
             }
         }

@@ -45,6 +45,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -131,8 +132,13 @@ class PerplexingChimeraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
             for (Effect effect: this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }

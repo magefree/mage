@@ -29,17 +29,17 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -84,11 +84,13 @@ class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DREW_CARD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getOpponents(this.getControllerId()).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
+        return game.getOpponents(this.getControllerId()).contains(event.getPlayerId());
     }
 
     @Override

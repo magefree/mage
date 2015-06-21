@@ -88,11 +88,11 @@ public class AboutDialog extends MageDialog {
 
         lblVersion.setText("0.0.0");
 
-        jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://XMage.info/");
+        jLabel2.setText("Courtesy: BetaSteward@googlemail.com. Site: http://XMage.de/");
 
-        jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000. ");
+        jLabel3.setText("Devs: BetaSteward, Noxx, Eugen.Rivniy, North, LevelX2, Jeff, Plopman, dustinconrad, emerald000.,");
 
-        jLabel4.setText("Thanks: maurer.it, Rafbill, Alvin, cbt33, Quercitron.");
+        jLabel4.setText("fireshoes, lunaskyrise, mnapoleon, jgod, LoneFox.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,9 +122,9 @@ public class AboutDialog extends MageDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(btnOk)
                 .addContainerGap())
         );

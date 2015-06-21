@@ -28,14 +28,14 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -88,8 +88,12 @@ class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
             UUID targetId = event.getTargetId();
             MageObject card = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
             if (card != null && card instanceof Permanent && !(card instanceof PermanentToken)) {
@@ -104,7 +108,6 @@ class PawnOfUlamogTriggeredAbility extends TriggeredAbilityImpl {
                     return true;
                 }
             }
-        }
         return false;
     }
 

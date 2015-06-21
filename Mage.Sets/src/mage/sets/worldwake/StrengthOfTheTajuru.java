@@ -54,8 +54,6 @@ public class StrengthOfTheTajuru extends CardImpl {
         super(ownerId, 113, "Strength of the Tajuru", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G}{G}");
         this.expansionSetCode = "WWK";
 
-
-
         // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
         this.addAbility(new MultikickerAbility("{1}"));
 

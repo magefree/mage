@@ -140,7 +140,7 @@ public class Session {
         }        
         this.userId = user.getId();
 
-        setUserData(user, connection);
+        setUserData(user, connection.getUserData());
         
         if (reconnect) { // must be connected to receive the message
             UUID chatId = GamesRoomManager.getInstance().getRoom(GamesRoomManager.getInstance().getMainRoomId()).getChatId();
@@ -158,32 +158,33 @@ public class Session {
         if (user == null) {
             user = UserManager.getInstance().findUser("Admin");
         }
-        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png"));
+        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png", false));
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
                logger.info("Error connecting Admin!");
         }        
         this.userId = user.getId();
     }
 
-    public boolean setUserData(User user, Connection connection) {
+    public boolean setUserData(User user, UserDataView userDataView) {
 //        User user = UserManager.getInstance().findUser(userName);
         if (user != null) {
             UserData userData = user.getUserData();
             if (userData == null) {
-                userData = new UserData(UserGroup.PLAYER, connection.getAvatarId(), 
-                        connection.isShowAbilityPickerForced(), connection.allowRequestShowHandCards(), 
-                        connection.confirmEmptyManaPool(), connection.getUserSkipPrioritySteps(),
-                connection.getFlagName());
+                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), 
+                        userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), 
+                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
+                userDataView.getFlagName(), userDataView.askMoveToGraveOrder());
                 user.setUserData(userData);
             } else {
-                if (connection.getAvatarId() == 51) { // Update special avatar if first avatar is selected
-                    updateAvatar(connection.getUsername(), userData);
+                if (userData.getAvatarId() == 51) { // Update special avatar if first avatar is selected
+                    updateAvatar(user.getName(), userData);
                 }
-                userData.setAvatarId(connection.getAvatarId());                
-                userData.setShowAbilityPickerForced(connection.isShowAbilityPickerForced());
-                userData.setAllowRequestShowHandCards(connection.allowRequestShowHandCards());
-                userData.setUserSkipPrioritySteps(connection.getUserSkipPrioritySteps());
-                userData.setConfirmEmptyManaPool(connection.confirmEmptyManaPool());
+                userData.setAvatarId(userDataView.getAvatarId());                
+                userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
+                userData.setAllowRequestShowHandCards(userDataView.allowRequestShowHandCards());
+                userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
+                userData.setConfirmEmptyManaPool(userDataView.confirmEmptyManaPool());
+                userData.setAskMoveToGraveOrder(userDataView.askMoveToGraveOrder());
             }
             return true;
         }

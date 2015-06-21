@@ -45,6 +45,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.target.common.TargetCardInHand;
@@ -178,6 +179,11 @@ class DelayedAddMainPhaseAbility extends DelayedTriggeredAbility {
     @Override
     public DelayedAddMainPhaseAbility copy() {
         return new DelayedAddMainPhaseAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.PHASE_CHANGED || event.getType() == EventType.COMBAT_PHASE_PRE;
     }
 
     @Override

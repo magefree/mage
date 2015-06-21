@@ -28,6 +28,7 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -45,7 +46,14 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -56,8 +64,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetLandPermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -121,7 +127,7 @@ class KothOfTheHammerToken extends Token {
 class KothOfTheHammerEmblem extends Emblem {
     // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
     public KothOfTheHammerEmblem() {
-        this.setName("EMBLEM: Kothe of the Hammer");
+        this.setName("EMBLEM: Koth of the Hammer");
         this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
     }
 }

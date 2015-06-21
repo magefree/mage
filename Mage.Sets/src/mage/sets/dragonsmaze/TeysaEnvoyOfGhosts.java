@@ -101,15 +101,18 @@ class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+    }
+    
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-            Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.getPlayerId().equals(controllerId) && damageEvent.isCombatDamage() && p != null && p.getCardType().contains(CardType.CREATURE)) {
-                game.getState().setValue(sourceId.toString(), p.getControllerId());
-                getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
-                return true;
-            }
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        Permanent sourcePermanent = game.getPermanent(event.getSourceId());
+        if (damageEvent.getPlayerId().equals(getControllerId()) && damageEvent.isCombatDamage() && sourcePermanent != null && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+            game.getState().setValue(sourceId.toString(), sourcePermanent.getControllerId());
+            getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
+            return true;
         }
         return false;
     }

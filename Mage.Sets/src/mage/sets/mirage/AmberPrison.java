@@ -48,6 +48,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -177,11 +178,14 @@ class AmberPrisonUntapTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType().equals(GameEvent.EventType.UNTAP) && event.getTargetId().equals(this.getSourceId());
-                
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UNTAP;
     }
-    
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(this.getSourceId());
+    }
 }
 
 class AmberPrisonReleaseOnUntapEffect extends OneShotEffect {

@@ -29,21 +29,21 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
@@ -100,12 +100,14 @@ class ReaperFromTheAbyssAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.END_TURN_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-            Watcher watcher = game.getState().getWatchers().get("Morbid");
-            return watcher.conditionMet();
-        }
-        return false;
+        Watcher watcher = game.getState().getWatchers().get("Morbid");
+        return watcher.conditionMet();
     }
 
     @Override

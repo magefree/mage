@@ -1148,7 +1148,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setMatchTimeLimit(MatchTimeLimit.NONE);
                 options.setFreeMulligans(2);
                 options.setSkillLevel(SkillLevel.CASUAL);
-                table = client.createTable(roomId,    options);
+                options.setRollbackTurnsAllowed(true);
+                table = client.createTable(roomId, options);
 
                 client.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"),"");
                 client.joinTable(roomId, table.getTableId(), "Computer", "Computer - mad", 5, DeckImporterUtil.importDeck("test.dck"),"");

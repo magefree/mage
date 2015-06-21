@@ -27,11 +27,11 @@ import org.mage.plugins.card.utils.CardImageUtils;
  * This class stores ALL card images in a cache with soft values. this means
  * that the images may be garbage collected when they are not needed any more, but will
  * be kept as long as possible.
- * 
+ *
  * Key format: "<cardname>#<setname>#<type>#<collectorID>#<param>"
- * 
+ *
  * where param is:
- * 
+ *
  * <ul>
  * <li>#Normal: request for unrotated image</li>
  * <li>#Tapped: request for rotated image</li>
@@ -56,7 +56,7 @@ public class ImageCache {
             @Override
             public BufferedImage apply(String key) {
                 try {
-                    
+
                     boolean usesVariousArt = false;
                     if (key.endsWith("#usesVariousArt")) {
                         usesVariousArt = true;
@@ -111,7 +111,7 @@ public class ImageCache {
                                 } catch(Exception ex) {
                                     exists = false;
                                 }
-                            }                            
+                            }
                             if (exists) {
                                 log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
                                 return loadImage(thumbnailFile);
@@ -150,7 +150,7 @@ public class ImageCache {
             return null;
         }
         TFile file = getTFile(path);
-        return loadImage(file);        
+        return loadImage(file);
     }
 
     public static BufferedImage getManifestImage() {
@@ -159,7 +159,7 @@ public class ImageCache {
         String path = CardImageUtils.generateTokenImagePath(info);
         if (path == null) {
             return null;
-        }        
+        }
         TFile file = getTFile(path);
         return loadImage(file);
     }
@@ -219,7 +219,7 @@ public class ImageCache {
     private static BufferedImage getImage(String key) {
         try {
             BufferedImage image = imageCache.get(key);
-            return image; 
+            return image;
         } catch (NullPointerException ex) {
             // unfortunately NullOutputException, thrown when apply() returns
             // null, is not public
@@ -261,7 +261,7 @@ public class ImageCache {
 
     /**
      * Load image from file
-     * 
+     *
      * @param file
      *            file to load image from
      * @return {@link BufferedImage}
@@ -298,6 +298,7 @@ public class ImageCache {
             }
         } catch (IOException e) {
             log.error(e,e);
+            imageFile.delete();
         }
         return image;
     }
@@ -382,7 +383,7 @@ public class ImageCache {
 
         return getFullSizeImage(original, scale);
     }
-    
+
     public static TFile getTFile(String path) {
         try {
             TFile file = new TFile(path);
@@ -390,6 +391,6 @@ public class ImageCache {
         } catch (NullPointerException ex) {
             log.warn("Imagefile does not exist: " + path);
         }
-        return null;        
+        return null;
     }
 }

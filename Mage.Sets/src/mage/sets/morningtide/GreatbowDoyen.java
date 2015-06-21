@@ -28,8 +28,6 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -37,11 +35,18 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -100,19 +105,22 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            Permanent creature = game.getPermanent(event.getSourceId());
-            Permanent damagedCreature = game.getPermanent(event.getTargetId());
-            if (creature != null && damagedCreature != null 
-                    && creature.getCardType().contains(CardType.CREATURE)
-                    && creature.hasSubtype("Archer")
-                    && creature.getControllerId().equals(controllerId)) {
-                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                this.getEffects().get(0).setValue("controller", damagedCreature.getControllerId());
-                this.getEffects().get(0).setValue("source", event.getSourceId());
-                return true;
-            }
+        Permanent creature = game.getPermanent(event.getSourceId());
+        Permanent damagedCreature = game.getPermanent(event.getTargetId());
+        if (creature != null && damagedCreature != null 
+                && creature.getCardType().contains(CardType.CREATURE)
+                && creature.hasSubtype("Archer")
+                && creature.getControllerId().equals(controllerId)) {
+            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+            this.getEffects().get(0).setValue("controller", damagedCreature.getControllerId());
+            this.getEffects().get(0).setValue("source", event.getSourceId());
+            return true;
         }
         return false;
     }

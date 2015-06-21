@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.game.turn.UpkeepStep;
@@ -96,18 +97,21 @@ class ParadoxHazeTriggeredAbility extends TriggeredAbilityImpl {
     public ParadoxHazeTriggeredAbility copy() {
         return new ParadoxHazeTriggeredAbility(this);
     }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE) {
-            Permanent permanent = game.getPermanent(this.sourceId);
-            if (permanent != null) {
-                Player player = game.getPlayer(permanent.getAttachedTo());
-                if (player != null && game.getActivePlayerId().equals(player.getId()) && lastTriggerTurnNumber != game.getTurnNum()) {
-                    lastTriggerTurnNumber = game.getTurnNum();
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                    return true;
-                }
+        Permanent permanent = game.getPermanent(this.sourceId);
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getAttachedTo());
+            if (player != null && game.getActivePlayerId().equals(player.getId()) && lastTriggerTurnNumber != game.getTurnNum()) {
+                lastTriggerTurnNumber = game.getTurnNum();
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
+                return true;
             }
         }
         return false;

@@ -113,11 +113,10 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
         ZoneChangeEvent zoneChange = (ZoneChangeEvent) event;
         if (zoneChange.isDiesEvent() && zoneChange.getTarget().getCardType().contains(CardType.CREATURE)) {
             Permanent equippedCreature = getEquippedCreature(game);
-            if (equippedCreature == null) {
-                return false;
-            }
             for (MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
-                if (mor.refersTo(equippedCreature, game)) {
+                Permanent permanent = (Permanent) game.getLastKnownInformation(mor.getSourceId(), Zone.BATTLEFIELD);
+                if((equippedCreature != null && mor.refersTo(equippedCreature, game))
+                        || (permanent != null && permanent.getAttachments().contains(getSourceId()))) {
                     setTarget(new FixedTarget(event.getTargetId()));
                     return true;
                 }

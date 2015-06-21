@@ -37,6 +37,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
 
@@ -82,15 +83,18 @@ class SpellshockTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.SPELL_CAST){
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if(spell != null){
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                }
-                return true;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell != null){
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
             }
+            return true;
         }
         return false;
     }

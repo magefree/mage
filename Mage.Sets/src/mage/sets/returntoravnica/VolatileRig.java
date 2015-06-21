@@ -29,11 +29,6 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,7 +37,11 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -105,6 +104,12 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public VolatileRigTriggeredAbility copy() {
         return new VolatileRigTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.COMBAT_DAMAGE_STEP_POST
+                || event.getType() == EventType.DAMAGED_CREATURE;
     }
 
     @Override

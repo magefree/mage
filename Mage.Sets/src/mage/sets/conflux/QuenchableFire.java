@@ -29,22 +29,23 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpecialAction;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RemoveDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RemoveSpecialActionEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-
 import mage.target.TargetPlayer;
 
 /**
@@ -78,7 +79,8 @@ class QuenchableFireEffect extends OneShotEffect {
 
     public QuenchableFireEffect() {
         super(Outcome.Damage);
-        staticText = "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step";
+        staticText = "{this} deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step."
+                + "<br><i>Use the Special button to pay the {U} with a special action before the beginning of your next upkeep step.</i>";
     }
 
     public QuenchableFireEffect(final QuenchableFireEffect effect) {
@@ -92,22 +94,34 @@ class QuenchableFireEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        //create delayed triggered ability
-        QuenchableFireDelayedTriggeredAbility delayedAbility = new QuenchableFireDelayedTriggeredAbility();
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.setSourceObject(source.getSourceObject(game), game);
-        delayedAbility.getTargets().addAll(source.getTargets());
-        game.addDelayedTriggeredAbility(delayedAbility);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null) {
+            
+            //create special action
+            QuenchableFireSpecialAction newAction = new QuenchableFireSpecialAction();
 
-        //create special action
-        QuenchableFireSpecialAction newAction = new QuenchableFireSpecialAction(delayedAbility.getId());
-        delayedAbility.setSpecialActionId(newAction.getId());
-        newAction.setSourceId(source.getSourceId());
-        newAction.setControllerId(source.getFirstTarget());
-        newAction.getTargets().addAll(source.getTargets());
-        game.getState().getSpecialActions().add(newAction);
-        return true;
+            //create delayed triggered ability
+            QuenchableFireDelayedTriggeredAbility delayedAbility = new QuenchableFireDelayedTriggeredAbility();
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            delayedAbility.setSourceObject(sourceObject, game);
+            delayedAbility.getTargets().addAll(source.getTargets());
+            delayedAbility.setSpecialActionId(newAction.getId());            
+            UUID delayedAbilityId = game.addDelayedTriggeredAbility(delayedAbility);
+
+            // update special action
+            newAction.addCost(new ManaCostsImpl("{U}"));
+            Effect effect = new RemoveDelayedTriggeredAbilityEffect(delayedAbilityId);
+            newAction.addEffect(effect);
+            effect.setText(sourceObject.getIdName() + " - Pay {U} to remove the triggered ability that deals 3 damage to you at the beginning of your next upkeep step");           
+            newAction.addEffect(new RemoveSpecialActionEffect(newAction.getId()));            
+            newAction.setSourceId(source.getSourceId());
+            newAction.setControllerId(source.getFirstTarget());
+            newAction.getTargets().addAll(source.getTargets());
+            game.getState().getSpecialActions().add(newAction);
+            return true;
+        }
+        return false;
     }
 
 }
@@ -134,8 +148,13 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.UPKEEP_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
+        if (event.getPlayerId().equals(this.controllerId)) {
             for (SpecialAction action: game.getState().getSpecialActions()) {
                 if (action.getId().equals(specialActionId)) {
                     game.getState().getSpecialActions().remove(action);
@@ -151,11 +170,8 @@ class QuenchableFireDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class QuenchableFireSpecialAction extends SpecialAction {
 
-    public QuenchableFireSpecialAction(UUID effectId) {
+    public QuenchableFireSpecialAction() {
         super();
-        this.addCost(new ManaCostsImpl("{U}"));
-        this.addEffect(new RemoveDelayedTriggeredAbilityEffect(effectId));
-        this.addEffect(new RemoveSpecialActionEffect(this.getId()));
     }
 
     public QuenchableFireSpecialAction(final QuenchableFireSpecialAction ability) {
@@ -166,5 +182,4 @@ class QuenchableFireSpecialAction extends SpecialAction {
     public QuenchableFireSpecialAction copy() {
         return new QuenchableFireSpecialAction(this);
     }
-
 }

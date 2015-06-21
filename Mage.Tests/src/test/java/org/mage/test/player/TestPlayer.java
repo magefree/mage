@@ -29,6 +29,7 @@ package org.mage.test.player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,7 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.TargetSource;
 import mage.target.TargetSpell;
+import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -604,17 +606,53 @@ public class TestPlayer implements Player {
                     }
                 }
             }
+            if (target instanceof TargetCardInGraveyard) {
+                TargetCardInGraveyard targetCardInGraveyard = ((TargetCardInGraveyard) target);
+                Set<UUID> possibleTargets = new HashSet<>();
+                for(UUID playerId: this.getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        possibleTargets.addAll(player.getGraveyard());
+                    }
+                }
+                
+                for (String choose2 : choices) {
+                    String[] targetList = choose2.split("\\^");
+                    boolean targetFound = false;
+                    for (UUID targetId : possibleTargets) {
+                        MageObject targetObject = game.getObject(targetId);
+                        if (targetObject != null) {
+                            for (String targetName : targetList) {
+                                if (targetObject.getName().equals(targetName)) {
+                                    List<UUID> alreadyTargetted = targetCardInGraveyard.getTargets();
+                                    if (targetCardInGraveyard.canTarget(targetObject.getId(), game)) {
+                                        if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
+                                            targetCardInGraveyard.add(targetObject.getId(), game);
+                                            choices.remove(choose2);
+                                            targetFound = true;
+                                        }
+                                    }
+                                }
+                            }
+                            if (targetFound && targetCardInGraveyard.isChosen()) {
+                                choices.remove(choose2);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }            
             if (target instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target);
                 possibleTargets = t.possibleTargets(sourceId, computerPlayer.getId(), game);
-                for (UUID targetId : possibleTargets) {
-                    MageObject targetObject = game.getObject(targetId);
-                    if (targetObject != null) {
-                        for (String choose2 : choices) {
-                            String[] targetList = choose2.split("\\^");
-                            boolean targetFound = false;
-                            for (String targetName : targetList) {
+                for (String choose2 : choices) {
+                    String[] targetList = choose2.split("\\^");
+                    boolean targetFound = false;
+                    for (String targetName : targetList) {
+                        for (UUID targetId : possibleTargets) {
+                            MageObject targetObject = game.getObject(targetId);
+                            if (targetObject != null) {
                                 if (targetObject.getName().equals(targetName)) {
                                     List<UUID> alreadyTargetted = target.getTargets();
                                     if (t.canTarget(targetObject.getId(), game)) {

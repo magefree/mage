@@ -77,6 +77,7 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl {
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
         this.onCard = effect.onCard;
         this.durationPhaseStep = effect.durationPhaseStep;
         this.durationPlayerId = effect.durationPlayerId;

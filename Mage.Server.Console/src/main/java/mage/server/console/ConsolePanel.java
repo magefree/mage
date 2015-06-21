@@ -94,10 +94,10 @@ public class ConsolePanel extends javax.swing.JPanel {
 
 
     public void start() {
-        updateUsersTask = new UpdateUsersTask(ConsoleFrame.getClient(), this);
-        updateTablesTask = new UpdateTablesTask(ConsoleFrame.getClient(), ConsoleFrame.getClient().getMainRoomId(), this);
-        updateUsersTask.execute();
-        updateTablesTask.execute();
+//        updateUsersTask = new UpdateUsersTask(ConsoleFrame.getClient(), this);
+//        updateTablesTask = new UpdateTablesTask(ConsoleFrame.getClient(), ConsoleFrame.getClient().getMainRoomId(), this);
+//        updateUsersTask.execute();
+//        updateTablesTask.execute();
     }
 
     public void stop() {

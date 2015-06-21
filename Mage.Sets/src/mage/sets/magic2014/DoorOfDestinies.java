@@ -28,7 +28,6 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -52,10 +51,10 @@ import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -142,19 +141,22 @@ class AddCounterAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent doorOfDestinies = game.getPermanent(getSourceId());
         if (doorOfDestinies != null) {
             String subtype = (String) game.getState().getValue(doorOfDestinies.getId() + "_type");
             if (subtype != null) {
-                if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-                    FilterSpell filter = new FilterSpell();
-                    filter.add(new ControllerPredicate(TargetController.YOU));
-                    filter.add(new SubtypePredicate(subtype));
-                    Spell spell = game.getStack().getSpell(event.getTargetId());
-                    if (spell != null && filter.match(spell, controllerId, game)) {
-                        return true;
-                    }
+                FilterSpell filter = new FilterSpell();
+                filter.add(new ControllerPredicate(TargetController.YOU));
+                filter.add(new SubtypePredicate(subtype));
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null && filter.match(spell, controllerId, game)) {
+                    return true;
                 }
             }
         }

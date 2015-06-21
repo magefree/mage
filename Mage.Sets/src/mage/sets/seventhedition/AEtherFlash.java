@@ -38,6 +38,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -79,18 +80,21 @@ class AEtherFlashTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                if (getTargets().size() == 0) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(targetId));
-                    }
+        UUID targetId = event.getTargetId();
+        Permanent permanent = game.getPermanent(targetId);
+        if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (getTargets().size() == 0) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(targetId));
                 }
-                return true;
             }
+            return true;
         }
         return false;
     }

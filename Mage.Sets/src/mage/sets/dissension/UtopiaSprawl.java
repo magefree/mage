@@ -28,10 +28,6 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,12 +39,16 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -139,13 +139,16 @@ class UtopiaSprawlTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if(event.getType() == GameEvent.EventType.TAPPED_FOR_MANA){
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }  
+        if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
+            return true;
+        }
         return false;
     }
 

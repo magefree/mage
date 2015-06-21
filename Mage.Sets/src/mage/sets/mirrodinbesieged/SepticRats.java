@@ -28,19 +28,19 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -86,12 +86,19 @@ class SepticRatsTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId()) ) {
+        if (event.getSourceId().equals(this.getSourceId()) ) {
             Player target = game.getPlayer(event.getTargetId());
-            if (target != null)
-                if (target.getCounters().getCount(CounterType.POISON) > 0)
+            if (target != null) {
+                if (target.getCounters().getCount(CounterType.POISON) > 0) {
                     return true;
+                }
+            }
         }
         return false;
     }

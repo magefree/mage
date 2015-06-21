@@ -94,18 +94,19 @@ class SavageFirecatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TAPPED_FOR_MANA && 
-                game.getCard(event.getSourceId()).getCardType().contains(CardType.LAND) &&
-                event.getPlayerId().equals(this.controllerId)){
-            return true;
-        }
-    return false;
-}
+        return game.getCard(event.getSourceId()).getCardType().contains(CardType.LAND) &&
+                event.getPlayerId().equals(this.controllerId);
+    }
     
     @Override
     public String getRule() {
         return "Whenever you tap a land for mana, remove a +1/+1 counter from {this}";
-}
+    }
 
 }

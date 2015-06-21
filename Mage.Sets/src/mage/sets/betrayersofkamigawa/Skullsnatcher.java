@@ -28,9 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,6 +35,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -46,6 +45,7 @@ import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
@@ -104,9 +104,13 @@ class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent
-                && ((DamagedPlayerEvent) event).isCombatDamage()
+        if (((DamagedPlayerEvent) event).isCombatDamage()
                 && event.getSourceId().equals(sourceId)) {
 
             FilterCard filter = new FilterCard("up to two target cards from that player's graveyard");

@@ -51,6 +51,7 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -170,8 +171,13 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(cardId);
+        return event.getSourceId().equals(cardId);
     }
 
     @Override

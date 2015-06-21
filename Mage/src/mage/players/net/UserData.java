@@ -16,10 +16,11 @@ public class UserData implements Serializable {
     protected boolean confirmEmptyManaPool;
     protected UserSkipPrioritySteps userSkipPrioritySteps;
     protected String flagName;
+    protected boolean askMoveToGraveOrder;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced, 
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
-            String flagName) {
+            String flagName, boolean askMoveToGraveOrder) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -27,6 +28,7 @@ public class UserData implements Serializable {
         this.userSkipPrioritySteps = userSkipPrioritySteps;
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
+        this.askMoveToGraveOrder = askMoveToGraveOrder;
     }
 
     public void setGroupId(int groupId) {
@@ -49,20 +51,16 @@ public class UserData implements Serializable {
         return showAbilityPickerForced;
     }
 
-    public boolean isAllowRequestShowHandCards() {
-        return allowRequestShowHandCards;
-    }
-
     public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
         this.showAbilityPickerForced = showAbilityPickerForced;
     }
 
-    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
-        this.allowRequestShowHandCards = allowRequestShowHandCards;
+    public boolean isAllowRequestShowHandCards() {
+        return allowRequestShowHandCards;
     }
 
-    public boolean allowRequestShowHandCards() {
-        return allowRequestShowHandCards;
+    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
+        this.allowRequestShowHandCards = allowRequestShowHandCards;
     }
 
     public UserSkipPrioritySteps getUserSkipPrioritySteps() {
@@ -83,6 +81,14 @@ public class UserData implements Serializable {
 
     public String getFlagName() {
         return flagName;
+    }
+
+    public boolean askMoveToGraveOrder() {
+        return askMoveToGraveOrder;
+    }
+
+    public void setAskMoveToGraveOrder(boolean askMoveToGraveOrder) {
+        this.askMoveToGraveOrder = askMoveToGraveOrder;
     }
     
 }

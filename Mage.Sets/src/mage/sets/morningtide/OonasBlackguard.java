@@ -149,8 +149,13 @@ class OonasBlackguardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER && ((DamagedPlayerEvent) event).isCombatDamage()) {
+        if (((DamagedPlayerEvent) event).isCombatDamage()) {
             Permanent creature = game.getPermanent(event.getSourceId());
             if (creature != null && creature.getControllerId().equals(getControllerId()) && creature.getCounters().getCount(CounterType.P1P1) > 0) {
                 for(Effect effect : this.getEffects())

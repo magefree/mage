@@ -41,6 +41,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -89,9 +90,14 @@ class KavuPredatorTriggeredAbility extends TriggeredAbilityImpl {
         return new KavuPredatorTriggeredAbility(this);
     }
 
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.GAINED_LIFE;
+    }
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.GAINED_LIFE) && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             this.getEffects().get(0).setValue("gainedLife", new Integer(event.getAmount()));
             return true;
         }

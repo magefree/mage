@@ -39,6 +39,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -89,8 +90,13 @@ class SpitemareTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
+        if (event.getTargetId().equals(this.sourceId)) {
             this.getEffects().get(0).setValue("damageAmount", event.getAmount());
             return true;
         }

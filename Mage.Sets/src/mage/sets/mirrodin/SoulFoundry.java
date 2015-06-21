@@ -65,7 +65,7 @@ public class SoulFoundry extends CardImpl {
         // Imprint - When Soul Foundry enters the battlefield, you may exile a creature card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SoulFoundryImprintEffect(), true, "<i>Imprint - </i>"));
 
-        // {X}, {tap}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
+        // {X}, {T}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulFoundryEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -78,20 +78,23 @@ public class SoulFoundry extends CardImpl {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Permanent card = game.getPermanent(ability.getSourceId());
-        if (card != null) {
-            if (card.getImprinted().size() > 0) {
-                Card imprinted = game.getCard(card.getImprinted().get(0));
-                if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
+        if (ability instanceof SimpleActivatedAbility) {
+            Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
+            if (sourcePermanent != null) {
+                if (sourcePermanent.getImprinted().size() > 0) {
+                    Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
+                    if (imprinted != null) {
+                        ability.getManaCostsToPay().clear();
+                        ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaCost().convertedManaCost()));
+                    }
                 }
             }
-        }
 
-        // no {X} anymore as we already have imprinted the card with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
+            // no {X} anymore as we already have imprinted the card with defined manacost
+            for (ManaCost cost : ability.getManaCostsToPay()) {
+                if (cost instanceof VariableCost) {
+                    cost.setPaid();
+                }
             }
         }
     }

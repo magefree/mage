@@ -28,6 +28,7 @@
 package mage.sets.mastersedition;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -45,6 +46,7 @@ import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -98,9 +100,14 @@ class ForcefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller != null && sourceObject != null) {
             Target target = new TargetCreaturePermanent(1, 1, filter, true);
             if (controller.choose(Outcome.PreventDamage, target, source.getSourceId(), game)) {
+                Permanent creature = game.getPermanent(target.getFirstTarget());
+                if (creature != null) {
+                    game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " has chosen " + creature.getLogName());
+                }
                 ContinuousEffect effect = new ForcefieldPreventionEffect();
                 effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
                 game.addEffect(effect, source);

@@ -28,11 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,6 +39,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -124,14 +124,17 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.ZONE_CHANGE)) {
-            ZoneChangeEvent  zce = (ZoneChangeEvent) event;
-            if (zce.isDiesEvent()) {
-                DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
-                if (watcher != null) {
-                    return watcher.wasDamaged(zce.getTarget(), game);
-                }
+        ZoneChangeEvent  zce = (ZoneChangeEvent) event;
+        if (zce.isDiesEvent()) {
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", this.getSourceId());
+            if (watcher != null) {
+                return watcher.wasDamaged(zce.getTarget(), game);
             }
         }
         return false;

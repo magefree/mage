@@ -28,19 +28,19 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ShadowAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
@@ -92,17 +92,20 @@ class SoltariVisionaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            Permanent soltari = game.getPermanent(event.getSourceId());
-            if (soltari != null && soltari.getId() == this.getSourceId()) {
-                FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment that player controls.");
-                filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                filter.setMessage("enchantment controlled by " + game.getPlayer(event.getTargetId()).getLogName());
-                this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
-                return true;
-            }
+        Permanent soltari = game.getPermanent(event.getSourceId());
+        if (soltari != null && soltari.getId() == this.getSourceId()) {
+            FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment that player controls.");
+            filter.add(new ControllerIdPredicate(event.getPlayerId()));
+            filter.setMessage("enchantment controlled by " + game.getPlayer(event.getTargetId()).getLogName());
+            this.getTargets().clear();
+            this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

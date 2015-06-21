@@ -28,14 +28,14 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -84,9 +84,13 @@ class HuntersInsightTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if ((event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.DAMAGED_PLANESWALKER)
-                && event.getSourceId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
+        if (event.getSourceId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
             this.getEffects().clear();
             this.addEffect(new DrawCardSourceControllerEffect(event.getAmount()));
             return true;

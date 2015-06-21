@@ -175,7 +175,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64, false, true, false, null, "Computer.png");
+        userData = new UserData(UserGroup.COMPUTER, 64, false, true, false, null, "Computer.png", false);
         pickedCards = new ArrayList<>();
     }
 
@@ -208,7 +208,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (log.isDebugEnabled()) {
             log.debug("chooseTarget: " + outcome.toString() + ":" + target.toString());
         }
-        // sometimes a target aelection can be made from a player that does not control the ability
+        // sometimes a target selection can be made from a player that does not control the ability
         UUID abilityControllerId = playerId;
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
@@ -311,8 +311,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (card != null) {
                     cards.add(card);
                 }
-            }            
-            while(!target.isChosen() && !cards.isEmpty()) {
+            }          
+            while((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen()) 
+                    && !cards.isEmpty()) {
                 Card pick = pickTarget(cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
@@ -507,7 +508,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
                 ArrayList<Card> cardsInHand = new ArrayList<>(hand.getCards(game));
-                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() < target.getTargets().size()) {
+                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() > target.getTargets().size()) {
                     Card card = pickBestCard(cardsInHand, null, target, source, game);
                     if (card != null) {
                         if (target.canTarget(card.getId(), source, game)) {

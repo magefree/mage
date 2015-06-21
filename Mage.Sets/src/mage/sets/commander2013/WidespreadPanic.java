@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
@@ -85,14 +86,16 @@ class WidespreadPanicTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LIBRARY_SHUFFLED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(GameEvent.EventType.LIBRARY_SHUFFLED)) {
-            for(Effect effect :this.getEffects()) {
-                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-            }
-            return true;
+        for (Effect effect :this.getEffects()) {
+            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
         }
-        return false;
+        return true;
     }
 
     @Override

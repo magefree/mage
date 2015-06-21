@@ -93,18 +93,20 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DAMAGED_CREATURE) {
-            Permanent equipment = game.getPermanent(this.getSourceId());
-            if (equipment != null
-                && equipment.getAttachedTo() != null
-                && event.getSourceId().equals(equipment.getAttachedTo())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent equipment = game.getPermanent(this.getSourceId());
+        if (equipment != null
+            && equipment.getAttachedTo() != null
+            && event.getSourceId().equals(equipment.getAttachedTo())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
+            return true;
         }
         return false;
     }

@@ -27,18 +27,22 @@
  */
 package mage.sets.magic2013;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -88,13 +92,16 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS) {
-            resetEffect();
-            if (game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId)) {
-                enableEffect();
-                return true;
-            }
+        resetEffect();
+        if (game.getCombat().getAttackers().size() >= 4 && game.getCombat().getAttackers().contains(this.sourceId)) {
+            enableEffect();
+            return true;
         }
         return false;
     }

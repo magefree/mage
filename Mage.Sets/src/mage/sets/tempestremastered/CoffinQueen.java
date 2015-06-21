@@ -36,7 +36,6 @@ import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -48,6 +47,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
@@ -128,6 +128,12 @@ class CoffinQueenDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     CoffinQueenDelayedTriggeredAbility(CoffinQueenDelayedTriggeredAbility ability) {
         super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.LOST_CONTROL
+                || event.getType() == EventType.UNTAPPED;
     }
 
     

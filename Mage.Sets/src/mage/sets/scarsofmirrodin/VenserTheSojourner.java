@@ -30,11 +30,6 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.MageObject;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -48,8 +43,12 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
@@ -58,6 +57,7 @@ import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -190,8 +190,13 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null && filter.match(spell, game)) {
                 if (rememberSource) {

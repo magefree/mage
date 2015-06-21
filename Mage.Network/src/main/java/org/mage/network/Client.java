@@ -30,6 +30,7 @@ import mage.view.DraftPickView;
 import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.TournamentView;
+import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
@@ -244,7 +245,7 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void updatePreferencesForServer(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName) {
+    public void updatePreferencesForServer(UserDataView view) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

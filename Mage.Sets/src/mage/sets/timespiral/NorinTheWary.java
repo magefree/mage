@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -86,13 +87,14 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST
+                || event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        switch(event.getType()) {
-            case SPELL_CAST:
-            case ATTACKER_DECLARED:
-                return true;
-        }
-        return false;
+        return true;
     }
 
     @Override

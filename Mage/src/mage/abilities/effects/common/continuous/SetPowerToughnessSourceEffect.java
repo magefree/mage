@@ -36,8 +36,8 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -76,12 +76,16 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = game.getObject(source.getSourceId());        
         if (mageObject == null) {
             if (duration.equals(Duration.Custom)) {
                 discard();
             }
             return false;
+        } else if (isTemporary()) { // it's somehow w
+            if (!(mageObject instanceof Permanent)) {
+                return false;
+            }
         }
         if (amount != null) {
             int value = amount.calculate(game, source, this);

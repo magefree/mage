@@ -247,7 +247,7 @@ public abstract class AbilityImpl implements Ability {
             return false;
         }
         game.applyEffects();
-        
+
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */
@@ -299,7 +299,7 @@ public abstract class AbilityImpl implements Ability {
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)){
             if (getAbilityType().equals(AbilityType.SPELL)
-                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.LAND_ALTERNATE)) {
+                    && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
                 return false;
             }
         }
@@ -329,7 +329,7 @@ public abstract class AbilityImpl implements Ability {
             // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
             // the stack until the spell has finished being cast.)
 
-            if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already TriggeredAbilities.checkTriggers()
+            if (sourceObject != null && !this.getAbilityType().equals(AbilityType.TRIGGERED)) { // triggered abilities check this already in playerImpl.triggerAbility
                 sourceObject.adjustTargets(this, game);
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {

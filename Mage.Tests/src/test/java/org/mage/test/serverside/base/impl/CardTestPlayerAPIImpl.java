@@ -44,6 +44,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
          
     protected GameOptions gameOptions;
     
+    protected String deckNameA;
+    protected String deckNameB;
+    
     protected enum ExpectedType {
         TURN_NUMBER,
         RESULT,
@@ -1007,6 +1010,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void addTarget(TestPlayer player, TestPlayer targetPlayer) {
         player.addTarget("targetPlayer="+targetPlayer.getName());
+    }
+    
+    public void setDecknamePlayerA(String deckname) {
+        deckNameA = deckname;
+    }
+    
+    public void setDecknamePlayerB(String deckname) {
+        deckNameB = deckname;
     }
     
     protected void skipInitShuffling() {

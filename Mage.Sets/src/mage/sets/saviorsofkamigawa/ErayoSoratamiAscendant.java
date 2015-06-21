@@ -40,6 +40,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.CastSpellLastTurnWatcher;
@@ -97,14 +98,14 @@ class ErayoSoratamiAscendantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-            if (watcher != null && watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() == 4) {
-                return true;
-            }            
-        }
-        return false;
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        return watcher != null && watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn() == 4;
     }
 
     @Override
@@ -142,17 +143,20 @@ class ErayosEssenceTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
-                CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-                if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 1) {
-                    for (Effect effect : getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                    return true;
-                }            
-            }
+        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+            CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+            if (watcher != null && watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(event.getPlayerId()) == 1) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                }
+                return true;
+            }            
         }
         return false;
     }

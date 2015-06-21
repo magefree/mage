@@ -28,7 +28,6 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -40,7 +39,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -78,22 +76,23 @@ class DingusEggTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ZONE_CHANGE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getTarget().getCardType().contains(CardType.LAND)) {
-                
-                if (getTargets().size() == 0) {
-                    UUID targetId = zEvent.getTarget().getControllerId();
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(targetId));
-                    }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        if (zEvent.getFromZone() == Zone.BATTLEFIELD
+                && zEvent.getToZone() == Zone.GRAVEYARD
+                && zEvent.getTarget().getCardType().contains(CardType.LAND)) {
+            if (getTargets().size() == 0) {
+                UUID targetId = zEvent.getTarget().getControllerId();
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(targetId));
                 }
-                return true;
-                
             }
+            return true;
         }
         return false;
     }

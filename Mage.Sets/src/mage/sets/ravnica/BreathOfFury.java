@@ -28,29 +28,30 @@
 package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.cards.CardImpl;
-import mage.constants.Rarity;
-import mage.constants.CardType;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.abilities.effects.common.AttachEffect;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TurnPhase;
 import mage.constants.Zone;
-import mage.game.events.GameEvent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
-import mage.abilities.effects.OneShotEffect;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.Target;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.turn.TurnMod;
-import mage.constants.TurnPhase;
-import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 /**
  * @author duncant
  */
@@ -97,20 +98,23 @@ class BreathOfFuryAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;            
-            Permanent enchantment = game.getPermanent(getSourceId());
-            if (damageEvent.isCombatDamage() && 
-                    enchantment != null && 
-                    enchantment.getAttachedTo().equals(event.getSourceId())) {
-                Permanent creature = game.getPermanent(enchantment.getAttachedTo());
-                if (creature != null) {
-                    for (Effect effect : getEffects()) {
-                        effect.setValue("TriggeringCreatureId", creature.getId());
-                    }
-                    return true;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;            
+        Permanent enchantment = game.getPermanent(getSourceId());
+        if (damageEvent.isCombatDamage() && 
+                enchantment != null && 
+                enchantment.getAttachedTo().equals(event.getSourceId())) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature != null) {
+                for (Effect effect : getEffects()) {
+                    effect.setValue("TriggeringCreatureId", creature.getId());
                 }
+                return true;
             }
         }
         return false;

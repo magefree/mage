@@ -38,14 +38,10 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.target.TargetSpell;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -58,9 +54,9 @@ public class PyromancerAscension extends CardImpl {
         super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
         this.expansionSetCode = "ZEN";
 
-
         // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         this.addAbility(new PyromancerAscensionQuestTriggeredAbility());
+        
         // Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
         this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
     }
@@ -92,8 +88,13 @@ class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 Card sourceCard = game.getCard(spell.getSourceId());
@@ -138,10 +139,15 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl {
     public PyromancerAscensionCopyTriggeredAbility copy() {
         return new PyromancerAscensionCopyTriggeredAbility(this);
     }
-
+    
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SPELL_CAST;
+    }
+    
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
+        if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (isControlledInstantOrSorcery(spell)) {
                 Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());

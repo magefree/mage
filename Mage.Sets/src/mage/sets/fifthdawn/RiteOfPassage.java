@@ -39,6 +39,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -88,15 +89,18 @@ class RiteOfPassageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    return true;
-                }
+        UUID targetId = event.getTargetId();
+        Permanent permanent = game.getPermanent(targetId);
+        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+                return true;
             }
         }
         return false;

@@ -37,6 +37,7 @@ Islandwalk|new|
 Level up|cost|
 Lifelink|instance|
 Living weapon|new|
+Menace|new|
 Miracle|cost|
 Mountaincycling|cost|
 Mountainwalk|new|

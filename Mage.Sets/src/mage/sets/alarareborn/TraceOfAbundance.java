@@ -28,18 +28,15 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AddManaAnyColorAttachedControllerEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -48,8 +45,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -110,14 +107,14 @@ class TraceOfAbundanceTriggeredAbility extends TriggeredManaAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED_FOR_MANA;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(this.getSourceId());
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
-            if (enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo())) {
-                return true;
-            }
-        }
-        return false;
+        return enchantment != null && event.getSourceId().equals(enchantment.getAttachedTo());
     }
 
     @Override

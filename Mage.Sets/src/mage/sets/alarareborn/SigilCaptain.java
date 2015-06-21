@@ -39,6 +39,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -84,20 +85,23 @@ class SigilCaptainTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent == null) {
-                return false;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.getControllerId().equals(controllerId)
+                && permanent.getPower().getValue() == 1
+                && permanent.getToughness().getValue() == 1) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }
-            if (permanent.getControllerId().equals(controllerId)
-                    && permanent.getPower().getValue() == 1
-                    && permanent.getToughness().getValue() == 1) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                }
-                return true;
-            }
+            return true;
         }
         return false;
     }

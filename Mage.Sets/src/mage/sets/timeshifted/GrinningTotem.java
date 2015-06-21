@@ -52,6 +52,7 @@ import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
@@ -195,8 +196,13 @@ class GrinningTotemDelayedTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getActivePlayerId().equals(this.getControllerId());
+        return game.getActivePlayerId().equals(this.getControllerId());
     }
 
     @Override

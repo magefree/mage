@@ -28,17 +28,17 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -83,27 +83,28 @@ class DeathgazerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             if (event.getSourceId().equals(this.getSourceId())) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if(permanent != null && !permanent.getColor(game).isBlack())
-                {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                    return true;
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && !permanent.getColor(game).isBlack()) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
+                return true;
             }
-            if (event.getTargetId().equals(this.getSourceId())) {
-                Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null && !permanent.getColor(game).isBlack())
-                {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
-                    }
-                    return true;
+        }
+        if (event.getTargetId().equals(this.getSourceId())) {
+            Permanent permanent = game.getPermanent(event.getSourceId());
+            if (permanent != null && !permanent.getColor(game).isBlack()) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
+                return true;
             }
         }
         return false;

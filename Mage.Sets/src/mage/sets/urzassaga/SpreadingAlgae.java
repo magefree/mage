@@ -28,9 +28,6 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromBattlefieldSourceTriggeredAbility;
@@ -40,12 +37,15 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
@@ -109,14 +109,17 @@ class SpreadingAlgaeTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED) {
-            Permanent enchant = game.getPermanent(sourceId);
-            if (enchant != null && enchant.getAttachedTo() != null) {
-                if (event.getTargetId().equals(enchant.getAttachedTo())) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
-                    return true;
-                }
+        Permanent enchant = game.getPermanent(sourceId);
+        if (enchant != null && enchant.getAttachedTo() != null) {
+            if (event.getTargetId().equals(enchant.getAttachedTo())) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(enchant.getAttachedTo()));
+                return true;
             }
         }
         return false;

@@ -38,6 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -82,18 +83,21 @@ class RakingCanopyTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ATTACKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            if (attacker == null || !attacker.getAbilities().contains(FlyingAbility.getInstance())) {
-                return false;
+        Permanent attacker = game.getPermanent(event.getSourceId());
+        if (attacker == null || !attacker.getAbilities().contains(FlyingAbility.getInstance())) {
+            return false;
+        }
+        if (event.getTargetId().equals(this.getControllerId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(attacker.getId()));
             }
-            if (event.getTargetId().equals(this.getControllerId())) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(attacker.getId()));
-                }
-                return true;
-            }
+            return true;
         }
         return false;
     }

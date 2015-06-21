@@ -53,7 +53,11 @@ public class MantisEngine extends CardImpl {
         this.subtype.add("Insect");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+        
+        // {2}: Mantis Engine gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2)));
+
+        // {2}: Mantis Engine gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2)));
     }
 

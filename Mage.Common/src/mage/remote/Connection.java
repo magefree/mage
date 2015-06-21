@@ -36,6 +36,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 import mage.players.net.UserSkipPrioritySteps;
+import mage.view.UserDataView;
 
 /**
  *
@@ -56,12 +57,14 @@ public class Connection implements Serializable {
     private int clientCardDatabaseVersion;
     private boolean forceDBComparison;
 
-    private int avatarId;
-    private boolean showAbilityPickerForced;
-    private boolean allowRequestShowHandCards;
-    private boolean confirmEmptyManaPool;
-    private String flagName;
-    private UserSkipPrioritySteps userSkipPrioritySteps;
+    private UserDataView userData;
+    
+//    private int avatarId;
+//    private boolean showAbilityPickerForced;
+//    private boolean allowRequestShowHandCards;
+//    private boolean confirmEmptyManaPool;
+//    private String flagName;
+//    private UserSkipPrioritySteps userSkipPrioritySteps;
 
 //    private static final String serialization = "?serializationtype=jboss";    
 //    private static final String transport = "bisocket";
@@ -231,45 +234,12 @@ public class Connection implements Serializable {
         return null;
     }
 
-    public int getAvatarId() {
-        return avatarId;
-    }
-
-    public void setAvatarId(int avatarId) {
-        this.avatarId = avatarId;
-    }
-
-    public boolean isShowAbilityPickerForced() {
-        return showAbilityPickerForced;
-    }
-
-    public void setShowAbilityPickerForced(boolean showAbilityPickerForced) {
-        this.showAbilityPickerForced = showAbilityPickerForced;
-    }
-
-    public boolean allowRequestShowHandCards() {
-        return allowRequestShowHandCards;
-    }
-
-    public void setAllowRequestShowHandCards(boolean allowRequestShowHandCards) {
-        this.allowRequestShowHandCards = allowRequestShowHandCards;
-    }
-
-    public boolean confirmEmptyManaPool() {
-        return confirmEmptyManaPool;
-    }
-
-    public void setConfirmEmptyManaPool(boolean confirmEmptyManaPool) {
-        this.confirmEmptyManaPool = confirmEmptyManaPool;
+    public void setUserData(UserDataView userData) {
+        this.userData= userData;
     }
     
-    
-    public UserSkipPrioritySteps getUserSkipPrioritySteps() {
-        return userSkipPrioritySteps;
-    }
-
-    public void setUserSkipPrioritySteps(UserSkipPrioritySteps userSkipPrioritySteps) {
-        this.userSkipPrioritySteps = userSkipPrioritySteps;
+    public UserDataView getUserData() {
+        return userData;
     }
 
     public boolean isForceDBComparison() {
@@ -279,13 +249,4 @@ public class Connection implements Serializable {
     public void setForceDBComparison(boolean forceDBComparison) {
         this.forceDBComparison = forceDBComparison;
     }
-
-    public String getFlagName() {
-        return flagName;
-    }
-
-    public void setFlagName(String flagName) {
-        this.flagName = flagName;
-    }
-
 }

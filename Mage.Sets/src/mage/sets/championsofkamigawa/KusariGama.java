@@ -48,8 +48,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -103,15 +103,18 @@ class KusariGamaAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_CREATURE;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedEvent) {
-            Permanent sourcePermanet = game.getPermanent(event.getSourceId());
-            Permanent targetPermanet = game.getPermanent(event.getTargetId());
-            if (sourcePermanet != null && targetPermanet != null && sourcePermanet.getAttachments().contains(this.getSourceId()) && filter.match(targetPermanet, game)) {
-                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                this.getEffects().get(0).setValue("damagedCreatureId", targetPermanet.getId());
-                return true;
-            }
+        Permanent sourcePermanet = game.getPermanent(event.getSourceId());
+        Permanent targetPermanet = game.getPermanent(event.getTargetId());
+        if (sourcePermanet != null && targetPermanet != null && sourcePermanet.getAttachments().contains(this.getSourceId()) && filter.match(targetPermanet, game)) {
+            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+            this.getEffects().get(0).setValue("damagedCreatureId", targetPermanet.getId());
+            return true;
         }
         return false;
     }

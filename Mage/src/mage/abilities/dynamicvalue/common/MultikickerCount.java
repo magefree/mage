@@ -50,7 +50,7 @@ public class MultikickerCount implements DynamicValue {
         if (card != null) {
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    count += ((KickerAbility) ability).getKickedCounter(game);
+                    count += ((KickerAbility) ability).getKickedCounter(game, source);
                 }
             }
         }

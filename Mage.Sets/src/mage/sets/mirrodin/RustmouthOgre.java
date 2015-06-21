@@ -40,6 +40,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
 
 /**
@@ -86,18 +87,21 @@ class RustmouthOgreTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
-            DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
-            if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
-                FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact that player controls");
-                filter.add(new ControllerIdPredicate(event.getPlayerId()));
-                filter.setMessage("artifact controlled by " + game.getPlayer(event.getTargetId()).getLogName());
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER;
+    }
 
-                this.getTargets().clear();
-                this.addTarget(new TargetPermanent(filter));
-                return true;
-            }
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
+        if (damageEvent.isCombatDamage() && event.getSourceId().equals(this.getSourceId())) {
+            FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact that player controls");
+            filter.add(new ControllerIdPredicate(event.getPlayerId()));
+            filter.setMessage("artifact controlled by " + game.getPlayer(event.getTargetId()).getLogName());
+
+            this.getTargets().clear();
+            this.addTarget(new TargetPermanent(filter));
+            return true;
         }
         return false;
     }

@@ -29,23 +29,22 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -96,15 +95,18 @@ class FinestHourAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DECLARED_ATTACKERS;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (checkInterveningIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
-            if (event.getType() == EventType.DECLARED_ATTACKERS) {
-                if (game.getCombat().attacksAlone()) {
-                    for (Effect effect: this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
-                    }
-                    return true;
+        if (game.getActivePlayerId().equals(this.controllerId)) {
+            if (game.getCombat().attacksAlone()) {
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
                 }
+                return true;
             }
         }
         return false;

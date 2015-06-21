@@ -29,10 +29,7 @@
 package mage.filter.common;
 
 import mage.constants.AsThoughEffectType;
-import mage.filter.predicate.ObjectPlayer;
-import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.Predicate;
-import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

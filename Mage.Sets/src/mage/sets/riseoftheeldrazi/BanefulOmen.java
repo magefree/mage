@@ -27,22 +27,23 @@
  */
 package mage.sets.riseoftheeldrazi;
 
+import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.cards.CardImpl;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.abilities.effects.OneShotEffect;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import java.util.Set;
 
 /**
  *
@@ -84,11 +85,13 @@ public class BanefulOmen extends CardImpl {
         }
 
         @Override
+        public boolean checkEventType(GameEvent event, Game game) {
+            return event.getType() == EventType.END_TURN_STEP_PRE;
+        }
+
+        @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE && event.getPlayerId().equals(this.controllerId)) {
-                return true;
-            }
-            return false;
+            return event.getPlayerId().equals(this.controllerId);
         }
 
         @Override

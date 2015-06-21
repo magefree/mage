@@ -44,6 +44,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -93,8 +94,13 @@ class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.DAMAGED_PLAYER || event.getType() == EventType.COMBAT_DAMAGE_STEP_POST;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event instanceof DamagedPlayerEvent) {
+        if (event.getType() == EventType.DAMAGED_PLAYER) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
             if (damageEvent.isCombatDamage() && p != null && p.getControllerId().equals(this.getControllerId())) {
@@ -102,7 +108,7 @@ class NaturesWillTriggeredAbility extends TriggeredAbilityImpl {
                 damagedPlayers.add(event.getPlayerId());
             }
         }
-        if (event.getType().equals(GameEvent.EventType.COMBAT_DAMAGE_STEP_POST)) {
+        if (event.getType().equals(EventType.COMBAT_DAMAGE_STEP_POST)) {
             if (madeDamge) {
                 Set<UUID> damagedPlayersCopy = new HashSet<UUID>();
                 damagedPlayersCopy.addAll(damagedPlayers);

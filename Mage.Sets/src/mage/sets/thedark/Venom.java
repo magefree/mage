@@ -28,10 +28,6 @@
 package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
@@ -40,8 +36,13 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,7 +57,6 @@ public class Venom extends CardImpl {
         super(ownerId, 53, "Venom", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
         this.expansionSetCode = "DRK";
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -95,27 +95,30 @@ class VenomTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.BLOCKER_DECLARED;
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            Permanent blocked = game.getPermanent(event.getTargetId());
-			Permanent enchantment = game.getPermanent(this.getSourceId());
-			if (enchantment != null && enchantment.getAttachedTo() != null) {
-				Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
-				if (enchantedCreature != null) {
-					if (blocker != null && blocker != enchantedCreature
-						&& !blocker.getSubtype().contains("Wall")
-						&& blocked == enchantedCreature) {
-                            this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
-							return true;
-					}
-					if (blocker != null && blocker == enchantedCreature
-						&& !blocked.getSubtype().contains("Wall")) {
-                        this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
-						return true;
-					}
-				}
-			}
+        Permanent blocker = game.getPermanent(event.getSourceId());
+        Permanent blocked = game.getPermanent(event.getTargetId());
+        Permanent enchantment = game.getPermanent(this.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent enchantedCreature = game.getPermanent(enchantment.getAttachedTo());
+            if (enchantedCreature != null) {
+                if (blocker != null && blocker != enchantedCreature
+                        && !blocker.getSubtype().contains("Wall")
+                        && blocked == enchantedCreature) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocker.getId()));
+                    return true;
+                }
+                if (blocker != null && blocker == enchantedCreature
+                        && !blocked.getSubtype().contains("Wall")) {
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(blocked.getId()));
+                    return true;
+                }
+            }
         }
         return false;
     }

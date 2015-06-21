@@ -28,14 +28,14 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -93,9 +93,13 @@ class ShimmeringGlasskiteAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.TARGETED && event.getTargetId().equals(this.getSourceId()) && game.getTurnNum() > turnUsed) {
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TARGETED;
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getTargetId().equals(this.getSourceId()) && game.getTurnNum() > turnUsed) {
             this.getTargets().clear();
             TargetStackObject target = new TargetStackObject();
             target.add(event.getSourceId(), game);

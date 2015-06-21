@@ -67,7 +67,7 @@ public class RingOfThune extends CardImpl {
         
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.
         TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false);
-        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white");
+        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.");
         this.addAbility(ability);
         
         // Equip {1}

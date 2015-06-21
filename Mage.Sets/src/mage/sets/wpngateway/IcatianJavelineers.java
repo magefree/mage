@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author fireshoes
  */
-public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers {
+public class IcatianJavelineers extends mage.sets.fallenempires.IcatianJavelineers1 {
 
     public IcatianJavelineers(UUID ownerId) {
         super(ownerId);
