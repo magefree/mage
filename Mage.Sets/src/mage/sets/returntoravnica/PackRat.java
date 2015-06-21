@@ -29,7 +29,7 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 
-import mage.abilities.effects.CopyCardAffect;
+import mage.abilities.effects.CopyCardEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -83,7 +83,7 @@ public class PackRat extends CardImpl {
         // Pack Rat's power and toughness are each equal to the number of Rats you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // {2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyCardAffect(this, 1), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyCardEffect(this, 1), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

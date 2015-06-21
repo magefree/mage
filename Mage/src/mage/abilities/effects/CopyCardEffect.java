@@ -12,19 +12,19 @@ import mage.util.CardUtil;
 /**
  * Created by glerman on 20/6/15.
  */
-public class CopyCardAffect extends OneShotEffect {
+public class CopyCardEffect extends OneShotEffect {
 
     private final Card card;
     private final int copies;
 
-    public CopyCardAffect(Card card, int copies) {
+    public CopyCardEffect(Card card, int copies) {
         super(Outcome.PutCreatureInPlay);
         this.card = card;
         this.copies = copies;
         staticText = "Put a token onto the battlefield that's a copy of {this}";
     }
 
-    public CopyCardAffect(final CopyCardAffect effect) {
+    public CopyCardEffect(final CopyCardEffect effect) {
         super(effect);
         this.card = effect.card;
         this.copies = effect.copies;
@@ -45,7 +45,7 @@ public class CopyCardAffect extends OneShotEffect {
     }
 
     @Override
-    public CopyCardAffect copy() {
-        return new CopyCardAffect(this);
+    public CopyCardEffect copy() {
+        return new CopyCardEffect(this);
     }
 }
