@@ -31,11 +31,8 @@ package mage.abilities.costs.common;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.players.Library;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -71,12 +68,7 @@ public class ExileFromTopOfLibraryCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Player controller = game.getPlayer(controllerId);
         if(controller != null) {
-            Library library = controller.getLibrary();
-            Cards cards = new CardsImpl();
-            for(int i = 0; i < amount; i++) {
-                cards.add(library.removeFromTop(game));
-            }
-            controller.moveCards(cards, Zone.LIBRARY, Zone.EXILED, ability, game);
+            controller.moveCards(controller.getLibrary().getTopCards(game, amount), Zone.LIBRARY, Zone.EXILED, ability, game);
             paid = true;
         }
         return paid;
