@@ -28,6 +28,7 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.MageObject;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -42,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -56,7 +56,10 @@ public class ExplorersScope extends CardImpl {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Equipment");
 
+        // Whenever equipped creature attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.        
         this.addAbility(new AttacksAttachedTriggeredAbility(new ExplorersScopeEffect()));
+        
+        // Equip ({1}: Attach to target creature you control. Equip only as a sorcery.)
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
@@ -88,25 +91,21 @@ class ExplorersScopeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
             return false;
         }
 
-        Card card = player.getLibrary().getFromTop(game);
+        Card card = controller.getLibrary().getFromTop(game);
         if (card != null) {
             Cards cards = new CardsImpl();
             cards.add(card);
-            player.lookAtCards("Explorer's Scope", cards, game);
+            controller.lookAtCards(sourceObject.getIdName(), cards, game);
             if (card.getCardType().contains(CardType.LAND)) {
-                String message = "Put " + card.getName() + " onto the battlefield tapped?";
-                if (player.chooseUse(Outcome.PutLandInPlay, message, game)) {
-                    if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId())) {
-                        Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null) {
-                            permanent.setTapped(true);
-                        }
-                    }
+                String message = "Put " + card.getLogName() + " onto the battlefield tapped?";
+                if (controller.chooseUse(Outcome.PutLandInPlay, message, game)) {
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), true);
                 }
             }
         }
