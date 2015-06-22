@@ -141,7 +141,9 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
        return kickerCost;
     }
 
-    public void resetKicker() {
+    public void resetKicker(Game game, Ability source) {
+        String key = getActivationKey(source, "", game);
+        activations.remove(key);        
         for (OptionalAdditionalCost cost: kickerCosts) {
             cost.reset();
         }
@@ -196,13 +198,13 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
         if (ability instanceof SpellAbility) {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
-                this.resetKicker();
+                this.resetKicker(game, ability);
                 for (OptionalAdditionalCost kickerCost: kickerCosts) {
                     boolean again = true;
                     while (player.isInGame() && again) {
                         String times = "";
                         if (kickerCost.isRepeatable()) {
-                            int activatedCount = kickerCost.getActivateCount();
+                            int activatedCount = getKickedCounter(game, ability);
                             times = Integer.toString(activatedCount + 1) + (activatedCount == 0 ? " time ":" times ");
                         }
                         if (kickerCost.canPay(ability, sourceId, controllerId, game) &&
