@@ -40,7 +40,9 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
@@ -51,13 +53,13 @@ import mage.target.TargetPermanent;
  */
 public class OjutaiSoulOfWinter extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Dragon you control");
-    private static final FilterCreaturePermanent filterPermanent = new FilterCreaturePermanent("permanent an opponent controls");
+    private static final FilterCreaturePermanent filterDragon = new FilterCreaturePermanent("Dragon you control");
+    private static final FilterPermanent filterNonlandPermanent = new FilterNonlandPermanent("nonland permanent an opponent controls");
 
     static {
-        filter.add(new SubtypePredicate("Dragon"));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filterPermanent.add(new ControllerPredicate(TargetController.OPPONENT));
+        filterDragon.add(new SubtypePredicate("Dragon"));
+        filterDragon.add(new ControllerPredicate(TargetController.YOU));
+        filterNonlandPermanent.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public OjutaiSoulOfWinter(UUID ownerId) {
@@ -75,9 +77,9 @@ public class OjutaiSoulOfWinter extends CardImpl {
         // Whenever a Dragon you control attacks, tap target nonland permanent an opponent controls. That permanent doesn't untap during its controller's next untap step.
         Ability ability = new AttacksAllTriggeredAbility(
                 new TapTargetEffect(),
-                false, filter, SetTargetPointer.NONE, false);
+                false, filterDragon, SetTargetPointer.NONE, false);
         ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect("That permanent"));
-        ability.addTarget(new TargetPermanent(filterPermanent));
+        ability.addTarget(new TargetPermanent(filterNonlandPermanent));
         this.addAbility(ability);
     }
 

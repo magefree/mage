@@ -36,7 +36,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class BeeSting extends CardImpl {
 

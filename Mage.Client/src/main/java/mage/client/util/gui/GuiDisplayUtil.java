@@ -75,21 +75,26 @@ public class GuiDisplayUtil {
         Dimension screenDim = c.getToolkit().getScreenSize();
         GraphicsConfiguration g = c.getGraphicsConfiguration();
         if (g != null) {
-            Insets insets =    c.getToolkit().getScreenInsets(g);
-
+            Insets insets = c.getToolkit().getScreenInsets(g);
+            boolean setLocation = false;
             if (x + c.getWidth() > screenDim.width - insets.right) {
                 x = (screenDim.width - insets.right) - c.getWidth();
+                setLocation = true;
             } else if (x < insets.left) {
                 x = insets.left;
+                setLocation = true;
             }
 
             if (y + c.getHeight() > screenDim.height - insets.bottom) {
                 y = (screenDim.height - insets.bottom) - c.getHeight();
+                setLocation = true;
             } else if (y < insets.top) {
                 y = insets.top;
+                setLocation = true;
             }
-
-            c.setLocation(x, y);
+            if (setLocation) {
+                c.setLocation(x, y);
+            }
         } else {
             System.out.println("GuiDisplayUtil::keepComponentInsideScreen -> no GraphicsConfiguration");
         }

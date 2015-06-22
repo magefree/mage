@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class StaffOfZegon extends CardImpl {
 
