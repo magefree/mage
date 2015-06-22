@@ -34,19 +34,30 @@
 
 package mage.client.cards;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import mage.cards.MageCard;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
 import mage.client.util.Config;
-import mage.view.*;
+import mage.view.CardView;
+import mage.view.CardsView;
+import mage.view.PermanentView;
+import mage.view.SimpleCardsView;
+import mage.view.StackAbilityView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.CardPanel;
-
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
@@ -58,7 +69,7 @@ public class Cards extends javax.swing.JPanel {
 
     private final Map<UUID, MageCard> cards = new LinkedHashMap<>();
     private boolean dontDisplayTapped = false;
-    private static final int GAP_X = 5;
+    private static final int GAP_X = 0;
     private String zone;
 
     private static final Border emptyBorder = new EmptyBorder(0,0,0,0);

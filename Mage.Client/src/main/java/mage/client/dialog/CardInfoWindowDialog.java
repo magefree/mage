@@ -34,16 +34,19 @@
 
 package mage.client.dialog;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.Point;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyVetoException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
+import mage.client.util.ImageHelper;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
@@ -57,17 +60,19 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
  */
 public class CardInfoWindowDialog extends MageDialog {
 
-    public static enum ShowType { REVEAL, LOOKED_AT, EXILE, OTHER };
+    public static enum ShowType { REVEAL, LOOKED_AT, EXILE, GRAVEYARD, OTHER };
     
     private ShowType showType;
     private boolean positioned;
+    private String name;
     
     public CardInfoWindowDialog(ShowType showType, String name) {
+        this.name = name;
         this.title = name;
         this.showType = showType;
         this.positioned = false;
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
+                       
         this.setModal(false);
         switch(this.showType) {
             case LOOKED_AT:
@@ -77,6 +82,18 @@ public class CardInfoWindowDialog extends MageDialog {
             case REVEAL:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getRevealedImage()));
                 this.setClosable(true);
+                break;
+            case GRAVEYARD:
+                this.setFrameIcon(new ImageIcon(ImageHelper.getImageFromResources("/info/grave.png")));
+                this.setIconifiable(false);
+                this.setClosable(true);
+                this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+                addWindowListener(new WindowAdapter() {            
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        CardInfoWindowDialog.this.hideDialog();
+                    }
+                });                        
                 break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
@@ -92,72 +109,38 @@ public class CardInfoWindowDialog extends MageDialog {
     }
 
     public void loadCards(SimpleCardsView showCards, BigCard bigCard, UUID gameId) {
-
-        boolean changed = cards.loadCards(showCards, bigCard, gameId);
-        if (showCards.size() > 0) {
-            show();
-            if (changed) {
-                try {
-                    if (!positioned) {
-                        this.setIcon(false);
-                        firstWindowPosition();
-                    }
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        else {
-            this.hideDialog();
-        }        
+        cards.loadCards(showCards, bigCard, gameId);
+        showAndPositionWindow();
     }
     
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-        boolean changed = cards.loadCards(showCards, bigCard, gameId, null);
-                
-        if (showCards.size() > 0) {
-            show();
-            if (changed) {
-                try {
-                    if (!positioned) {
-                        this.setIcon(false);
-                        firstWindowPosition();
-                    } else {
-                        
-                    }
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            
+        cards.loadCards(showCards, bigCard, gameId, null);                
+        if (showType.equals(ShowType.GRAVEYARD)) {
+            setTitle(name + "'s Graveyard (" + showCards.size() + ")");
+            this.setTitelBarToolTip(name);  
         }
-        else {
-            this.hideDialog();
-        }        
+        showAndPositionWindow();            
     }
 
-    private void firstWindowPosition() {
+    private void showAndPositionWindow() {        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                if (!positioned) {
-                    int width = CardInfoWindowDialog.this.getWidth();
-                    int height = CardInfoWindowDialog.this.getHeight();
-                    if (width > 0 && height > 0) {
+                int width = CardInfoWindowDialog.this.getWidth();
+                int height = CardInfoWindowDialog.this.getHeight();
+                if (width > 0 && height > 0) {
+                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
+                    if (!positioned) {
                         positioned = true;
-                        Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
                         int xPos = centered.x / 2;
                         int yPos = centered.y / 2;
                         CardInfoWindowDialog.this.setLocation(xPos, yPos);
-                        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, CardInfoWindowDialog.this);
-                        CardInfoWindowDialog.this.show();
-                    }                    
+                        show();
+                    }
+                    GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, CardInfoWindowDialog.this);
                 }
-                        
-                
-                // ShowCardsDialog.this.setVisible(true);
             }
-        });        
+        });
     }
     
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
@@ -197,7 +180,7 @@ public class CardInfoWindowDialog extends MageDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+            .addComponent(cards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

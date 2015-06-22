@@ -25,54 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.magicorigins;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.players.Player;
+import java.util.UUID;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author LevelX2
+ * @author emerald000
  */
-public class ReturnToLibrarySpellEffect extends OneShotEffect {
-
-    private final boolean toTop;
-
-    public ReturnToLibrarySpellEffect(boolean top) {
-        super(Outcome.Neutral);
-        staticText = "Put {this} on "+ (top ? "top":"the bottom") + " of its owner's library";
-        this.toTop = top;
+public class ElementalBond extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creature with power 3 or greater");
+    static {
+        filter.add(new PowerPredicate(ComparisonType.GreaterThan, 2));
     }
 
-    public ReturnToLibrarySpellEffect(final ReturnToLibrarySpellEffect effect) {
-        super(effect);
-        this.toTop = effect.toTop;
+    public ElementalBond(UUID ownerId) {
+        super(ownerId, 174, "Elemental Bond", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+        this.expansionSetCode = "ORI";
+
+        // Whenever a creature with power 3 or greater enters the battlefield under your control, draw a card.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Spell spell = game.getStack().getSpell(source.getSourceId());
-            if (spell != null) {
-                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-                if (spellCard != null) {
-                    controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, toTop, true);
-                }
-            }
-            return true;
-        }
-        return false;
+    public ElementalBond(final ElementalBond card) {
+        super(card);
     }
 
     @Override
-    public ReturnToLibrarySpellEffect copy() {
-        return new ReturnToLibrarySpellEffect(this);
+    public ElementalBond copy() {
+        return new ElementalBond(this);
     }
 }

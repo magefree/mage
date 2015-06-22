@@ -20,7 +20,7 @@ import java.util.UUID;
 public class DialogManager extends JComponent implements MouseListener,
         MouseMotionListener {
 
-    private final static Map<UUID, DialogManager> dialogManagers = new HashMap<UUID, DialogManager>();
+    private final static Map<UUID, DialogManager> dialogManagers = new HashMap<>();
 
     public static DialogManager getManager(UUID gameId) {
         if (!dialogManagers.containsKey(gameId)) {

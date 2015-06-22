@@ -28,22 +28,17 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -54,7 +49,6 @@ public class Browbeat extends CardImpl {
     public Browbeat(UUID ownerId) {
         super(ownerId, 82, "Browbeat", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "JUD";
-
 
         // Any player may have Browbeat deal 5 damage to him or her. If no one does, target player draws three cards.
         this.getSpellAbility().addEffect(new BrowbeatDrawEffect());
@@ -75,6 +69,7 @@ class BrowbeatDrawEffect extends OneShotEffect {
 
     public BrowbeatDrawEffect() {
         super(Outcome.DrawCard);
+        staticText = "Any player may have {source} deal 5 damage to him or her. If no one does, target player draws three cards.";
     }
 
     public BrowbeatDrawEffect(final BrowbeatDrawEffect effect) {
@@ -88,6 +83,10 @@ class BrowbeatDrawEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         StackObject spell = null;
         for(StackObject object : game.getStack()){
             if(object instanceof Spell && object.getSourceId().equals(source.getSourceId())){
@@ -96,12 +95,12 @@ class BrowbeatDrawEffect extends OneShotEffect {
         }
         if(spell != null){
             boolean drawCards = true;
-            for(UUID uuid : game.getPlayerList()){
-                Player player = game.getPlayer(uuid);
-                if(player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getName() + " deal 5 damage to you?", game)){
+            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
+                Player player = game.getPlayer(playerId);
+                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 5 damage to you?", game)){
                     drawCards = false;
                     player.damage(5, source.getSourceId(), game, false, true);
-                    game.informPlayers(player.getLogName() + " has " + spell.getName() + " deal 5 to him or her");
+                    game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 5 to him or her");
                 }
             }
             if (drawCards) {
@@ -116,11 +115,4 @@ class BrowbeatDrawEffect extends OneShotEffect {
         return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        return "Any player may have {source} deal 5 damage to him or her. If no one does, target player draws three cards.";
-    }
 }

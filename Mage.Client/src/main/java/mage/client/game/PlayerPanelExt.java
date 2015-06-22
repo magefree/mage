@@ -34,6 +34,28 @@
 
 package mage.client.game;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import mage.MageException;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
@@ -59,20 +81,6 @@ import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
-
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Enhanced player pane.
@@ -787,11 +795,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnGraveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraveActionPerformed
+        MageFrame.getGame(gameId).openGraveyardWindow(player.getName());
         /*if (graveyard == null) {
             graveyard = new ShowCardsDialog();
         }*/
         //graveyard.loadCards(player.getName() + " graveyard", player.getGraveyard(), bigCard, Config.dimensions, gameId, false);
-        DialogManager.getManager(gameId).showGraveyardDialog(player.getGraveyard(), bigCard, gameId);
+        // DialogManager.getManager(gameId).showGraveyardDialog(player.getGraveyard(), bigCard, gameId);
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
