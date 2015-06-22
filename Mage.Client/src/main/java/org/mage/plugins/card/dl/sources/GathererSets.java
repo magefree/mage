@@ -43,7 +43,7 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "CMD", "C13", "C14", "PC2",
                                                  "ISD", "DKA", "AVR", 
                                                  "RTR", "GTC", "DGM",
-                                                 "MMA",
+                                                 "MMA", "MM2",
                                                  "THS", "BNG", "JOU",
                                                  "CNS", "VMA", "TPR",
                                                  "KTK", "FRF", "DTK"};

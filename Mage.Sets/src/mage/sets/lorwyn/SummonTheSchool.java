@@ -39,7 +39,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.permanent.token.MerfolkToken;
+import mage.game.permanent.token.MerfolkWizardToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -61,9 +61,9 @@ public class SummonTheSchool extends CardImpl {
         super(ownerId, 42, "Summon the School", Rarity.UNCOMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
-
+        this.color.setWhite(true);
         // Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new MerfolkToken(), 2));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new MerfolkWizardToken(), 2));
         // Tap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(4, 4, filter, false))));
     }
