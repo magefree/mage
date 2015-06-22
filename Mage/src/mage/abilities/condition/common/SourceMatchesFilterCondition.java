@@ -29,7 +29,7 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -41,9 +41,9 @@ import mage.game.permanent.Permanent;
  */
 public class SourceMatchesFilterCondition implements Condition {
 
-    private FilterCreaturePermanent filter;
+    private FilterPermanent filter;
 
-    public SourceMatchesFilterCondition(FilterCreaturePermanent filter) {
+    public SourceMatchesFilterCondition(FilterPermanent filter) {
         this.filter = filter;
     }
 
