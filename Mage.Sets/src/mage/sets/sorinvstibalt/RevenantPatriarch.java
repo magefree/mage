@@ -30,10 +30,11 @@ package mage.sets.sorinvstibalt;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -44,6 +45,7 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.watchers.common.ManaSpentToCastWatcher;
 
 /**
@@ -60,7 +62,10 @@ public class RevenantPatriarch extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Revenant Patriarch enters the battlefield, if {W} was spent to cast it, target player skips his or her next combat phase.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SkipNextCombatIfConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false), new ManaSpentToCastWatcher());   
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TargetPlayerSkipNextCombatEffect(), false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(new ConditionalTriggeredAbility(ability, new ManaWasSpentCondition(ColoredManaSymbol.W), 
+                "if {W} was spent to cast it, target player skips his or her next combat phase."), new ManaSpentToCastWatcher());   
         // Revenant Patriarch can't block.
         this.addAbility(new CantBlockAbility());
     }
@@ -75,33 +80,30 @@ public class RevenantPatriarch extends CardImpl {
     }
 }
 
-class SkipNextCombatIfConditionEffect extends OneShotEffect {
+class TargetPlayerSkipNextCombatEffect extends OneShotEffect {
     
-    protected Condition condition;
-    
-    public SkipNextCombatIfConditionEffect(Condition condition) {
+    public TargetPlayerSkipNextCombatEffect() {
         super(Outcome.Detriment);
-        staticText = "that player skips his or her next combat phase";
-        this.condition = condition;
     }
 
-    public SkipNextCombatIfConditionEffect(final SkipNextCombatIfConditionEffect effect) {
+    public TargetPlayerSkipNextCombatEffect(final TargetPlayerSkipNextCombatEffect effect) {
         super(effect);
-        this.condition = effect.condition;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null && !condition.apply(game, source)) {
+        
+        if (player != null) {
             game.getState().getTurnMods().add(new TurnMod(player.getId(), TurnPhase.COMBAT, null, true));
             return true;
         }
+        
         return false;
     }
 
     @Override
-    public SkipNextCombatIfConditionEffect copy() {
-        return new SkipNextCombatIfConditionEffect(this);
+    public TargetPlayerSkipNextCombatEffect copy() {
+        return new TargetPlayerSkipNextCombatEffect(this);
     }
 }
