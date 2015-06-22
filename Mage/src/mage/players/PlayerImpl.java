@@ -1333,6 +1333,12 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void lookAtCards(String name, Card card, Game game) {
+        game.getState().getLookedAt(this.playerId).add(name, card);
+        game.fireUpdatePlayersEvent();
+    }
+    
+    @Override
     public void lookAtCards(String name, Cards cards, Game game) {
         game.getState().getLookedAt(this.playerId).add(name, cards);
         game.fireUpdatePlayersEvent();

@@ -293,6 +293,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void revealCards(String name, Cards cards, Game game);
     void revealCards(String name, Cards cards, Game game, boolean postToLog);
+    void lookAtCards(String name, Card card, Game game);
     void lookAtCards(String name, Cards cards, Game game);
 
     @Override
@@ -488,6 +489,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param sourceId
      * @param game
      * @param fromZone if null, this info isn't postet
+     * @param withName
      * @return
      */
     boolean moveCardToExileWithInfo(Card card, UUID exileId, String exileName, UUID sourceId, Game game, Zone fromZone, boolean withName);
