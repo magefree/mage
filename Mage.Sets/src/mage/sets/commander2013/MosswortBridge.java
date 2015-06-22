@@ -55,7 +55,7 @@ public class MosswortBridge extends CardImpl {
         this.expansionSetCode = "C13";
 
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
-        this.addAbility(new HideawayAbility(this));
+        this.addAbility(new HideawayAbility());
 
         // {tap}: Add {G} to your mana pool.
         this.addAbility(new GreenManaAbility());
