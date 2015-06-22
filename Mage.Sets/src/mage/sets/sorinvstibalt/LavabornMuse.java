@@ -25,44 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fourthedition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author ilcartographer
  */
-public class PhantasmalForces extends CardImpl {
+public class LavabornMuse extends CardImpl {
 
-    public PhantasmalForces(UUID ownerId) {
-        super(ownerId, 88, "Phantasmal Forces", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
-        this.expansionSetCode = "4ED";
-        this.subtype.add("Illusion");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(1);
+    public LavabornMuse(UUID ownerId) {
+        super(ownerId, 50, "Lavaborn Muse", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "DDK";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
+        // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to him or her.
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.OPPONENT, false, true),
+                new CardsInActivePlayersHandCondition(), 
+                "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 3 damage to him or her.",
+                false));
     }
 
-    public PhantasmalForces(final PhantasmalForces card) {
+    public LavabornMuse(final LavabornMuse card) {
         super(card);
     }
 
     @Override
-    public PhantasmalForces copy() {
-        return new PhantasmalForces(this);
+    public LavabornMuse copy() {
+        return new LavabornMuse(this);
     }
 }
+
+// TODO: Figure out CardsInHandCondition parameters and use that instead of rewriting this
+// TODO: Update HellfireMongrel, ShriekingAffliction to use the CardsInHandCondition?
+class CardsInActivePlayersHandCondition implements Condition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(game.getActivePlayerId());
+        return player != null && player.getHand().size() <= 2;
+    }
+}
+

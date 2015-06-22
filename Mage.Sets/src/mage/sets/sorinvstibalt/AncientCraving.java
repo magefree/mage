@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class AncientCraving extends mage.sets.starter1999.AncientCraving {
 
-    public Onulet(UUID ownerId) {
+    public AncientCraving(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 28;
+        this.expansionSetCode = "DDK";
     }
 
-    public Onulet(final Onulet card) {
+    public AncientCraving(final AncientCraving card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public AncientCraving copy() {
+        return new AncientCraving(this);
     }
 }

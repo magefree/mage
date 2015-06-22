@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class RevenantPatriarch extends mage.sets.sorinvstibalt.RevenantPatriarch {
 
-    public Onulet(UUID ownerId) {
+    public RevenantPatriarch(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 59;
+        this.expansionSetCode = "GPT";
     }
 
-    public Onulet(final Onulet card) {
+    public RevenantPatriarch(final RevenantPatriarch card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public RevenantPatriarch copy() {
+        return new RevenantPatriarch(this);
     }
 }

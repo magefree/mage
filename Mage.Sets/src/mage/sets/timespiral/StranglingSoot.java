@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class StranglingSoot extends mage.sets.sorinvstibalt.StranglingSoot {
 
-    public Onulet(UUID ownerId) {
+    public StranglingSoot(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 132;
+        this.expansionSetCode = "TSP";
     }
 
-    public Onulet(final Onulet card) {
+    public StranglingSoot(final StranglingSoot card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public StranglingSoot copy() {
+        return new StranglingSoot(this);
     }
 }

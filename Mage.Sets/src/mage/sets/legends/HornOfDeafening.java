@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class HornOfDeafening extends CardImpl {
 

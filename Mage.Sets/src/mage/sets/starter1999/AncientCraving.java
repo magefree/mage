@@ -25,30 +25,36 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.starter1999;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class AncientCraving extends CardImpl {
 
-    public Onulet(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+    public AncientCraving(UUID ownerId) {
+        super(ownerId, 64, "Ancient Craving", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{3}{B}");
+        this.expansionSetCode = "S99";
+
+        // You draw three cards and you lose 3 life.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
     }
 
-    public Onulet(final Onulet card) {
+    public AncientCraving(final AncientCraving card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public AncientCraving copy() {
+        return new AncientCraving(this);
     }
 }

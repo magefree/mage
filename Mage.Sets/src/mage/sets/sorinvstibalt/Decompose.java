@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class Decompose extends mage.sets.odyssey.Decompose {
 
-    public Onulet(UUID ownerId) {
+    public Decompose(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 20;
+        this.expansionSetCode = "DDK";
     }
 
-    public Onulet(final Onulet card) {
+    public Decompose(final Decompose card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public Decompose copy() {
+        return new Decompose(this);
     }
 }

@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.tenthedition;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class LavabornMuse extends mage.sets.sorinvstibalt.LavabornMuse {
 
-    public Onulet(UUID ownerId) {
+    public LavabornMuse(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 216;
+        this.expansionSetCode = "10E";
     }
 
-    public Onulet(final Onulet card) {
+    public LavabornMuse(final LavabornMuse card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public LavabornMuse copy() {
+        return new LavabornMuse(this);
     }
 }

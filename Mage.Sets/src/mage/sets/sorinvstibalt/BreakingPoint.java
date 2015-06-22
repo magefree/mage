@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class BreakingPoint extends mage.sets.judgment.BreakingPoint {
 
-    public Onulet(UUID ownerId) {
+    public BreakingPoint(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+        this.cardNumber = 67;
+        this.expansionSetCode = "DDK";
     }
 
-    public Onulet(final Onulet card) {
+    public BreakingPoint(final BreakingPoint card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public BreakingPoint copy() {
+        return new BreakingPoint(this);
     }
 }

@@ -25,30 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.CastFromHandCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.ExileAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterAttackingCreature;
+import mage.watchers.common.CastFromHandWatcher;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class CoalStoker extends CardImpl {
 
-    public Onulet(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+    public CoalStoker(UUID ownerId) {
+        super(ownerId, 49, "Coal Stoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "DDK";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R} to your mana pool.
+        Ability ability = new EntersBattlefieldTriggeredAbility(
+                new ConditionalOneShotEffect(new BasicManaEffect(new Mana(3, 0, 0, 0, 0, 0, 0)), new CastFromHandCondition(),
+                " if you cast it from your hand, add {R}{R}{R} to your mana pool."));
+        this.addAbility(ability, new CastFromHandWatcher());
     }
 
-    public Onulet(final Onulet card) {
+    public CoalStoker(final CoalStoker card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public CoalStoker copy() {
+        return new CoalStoker(this);
     }
 }

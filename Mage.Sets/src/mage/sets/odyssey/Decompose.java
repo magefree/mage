@@ -25,30 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.odyssey;
 
 import java.util.UUID;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInASingleGraveyard;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
+public class Decompose extends CardImpl {
 
-    public Onulet(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+    public Decompose(UUID ownerId) {
+        super(ownerId, 128, "Decompose", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
+        this.expansionSetCode = "ODY";
+
+        // Exile up to three target cards from a single graveyard.
+        this.getSpellAbility().addEffect(new ExileTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("cards")));
     }
 
-    public Onulet(final Onulet card) {
+    public Decompose(final Decompose card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public Decompose copy() {
+        return new Decompose(this);
     }
 }

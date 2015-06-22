@@ -25,30 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.revisededition;
+package mage.sets.sorinvstibalt;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author ilcartographer
  */
-public class Onulet extends mage.sets.mastersedition.Onulet {
-
-    public Onulet(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 269;
-        this.expansionSetCode = "3ED";
-        this.rarity = Rarity.RARE;
+public class StranglingSoot extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 3 or less");
+    
+    static {
+        filter.add(new ToughnessPredicate(Filter.ComparisonType.LessThan, 4));
     }
 
-    public Onulet(final Onulet card) {
+    public StranglingSoot(UUID ownerId) {
+        super(ownerId, 65, "Strangling Soot", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+        this.expansionSetCode = "DDK";
+
+        // Destroy target creature with toughness 3 or less.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        // Flashback {5}{R}
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.INSTANT));
+    }
+
+    public StranglingSoot(final StranglingSoot card) {
         super(card);
     }
 
     @Override
-    public Onulet copy() {
-        return new Onulet(this);
+    public StranglingSoot copy() {
+        return new StranglingSoot(this);
     }
 }
