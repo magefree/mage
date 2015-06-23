@@ -1,3 +1,20 @@
+#Generate|TOK:MM2|Eldrazi Spawn 1|
+#Generate|TOK:MM2|Eldrazi Spawn 2|
+#Generate|TOK:MM2|Eldrazi Spawn 3|
+#Generate|TOK:MM2|Elephant|
+#Generate|TOK:MM2|Faerie Rogue|
+#Generate|TOK:MM2|Germ|
+#Generate|TOK:MM2|Golem|
+#Generate|TOK:MM2|Insect|
+#Generate|TOK:MM2|Myr|
+#Generate|TOK:MM2|Saproling|
+#Generate|TOK:MM2|Snake|
+#Generate|TOK:MM2|Soldier|
+#Generate|TOK:MM2|Spirit|
+#Generate|TOK:MM2|Thrull|
+#Generate|TOK:MM2|Wolf|
+#Generate|TOK:MM2|Wurm|
+
 #Generate|TOK:TPR|Goblin|
 #Generate|TOK:TPR|Pegasus|
 #Generate|TOK:TPR|Rat|

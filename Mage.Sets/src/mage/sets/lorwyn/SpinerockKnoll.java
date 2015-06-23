@@ -61,7 +61,7 @@ public class SpinerockKnoll extends CardImpl {
         this.expansionSetCode = "LRW";
 
         // Hideaway
-        this.addAbility(new HideawayAbility(this));
+        this.addAbility(new HideawayAbility());
         
         // {tap}: Add {R} to your mana pool.
         this.addAbility(new RedManaAbility());

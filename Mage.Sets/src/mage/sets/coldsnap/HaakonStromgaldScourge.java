@@ -90,7 +90,7 @@ public class HaakonStromgaldScourge extends CardImpl {
 class HaakonStromgaldScourgePlayEffect extends AsThoughEffectImpl {
 
     public HaakonStromgaldScourgePlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard";
     }
 
@@ -163,7 +163,7 @@ class HaakonStromgaldScourgePlayEffect2 extends ContinuousRuleModifyingEffectImp
 class HaakonPlayKnightsFromGraveyardEffect extends AsThoughEffectImpl {
 
     public HaakonPlayKnightsFromGraveyardEffect () {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as {this} is on the battlefield, you may play Knight cards from your graveyard";
     }
 

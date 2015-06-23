@@ -25,28 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.judgepromo;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author fireshoes
  */
-public class Wasteland extends mage.sets.tempest.Wasteland {
+public class DeadbridgeShaman extends CardImpl {
 
-    public Wasteland(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 55;
-        this.expansionSetCode = "JR";
+    public DeadbridgeShaman(UUID ownerId) {
+        super(ownerId, 91, "Deadbridge Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Elf");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(1);
+
+        // When Deadbridge Shaman dies, target opponent discards a card.
+        Ability ability = new DiesTriggeredAbility(new DiscardTargetEffect(1));
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public Wasteland(final Wasteland card) {
+    public DeadbridgeShaman(final DeadbridgeShaman card) {
         super(card);
     }
 
     @Override
-    public Wasteland copy() {
-        return new Wasteland(this);
+    public DeadbridgeShaman copy() {
+        return new DeadbridgeShaman(this);
     }
 }

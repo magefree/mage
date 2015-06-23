@@ -114,6 +114,16 @@ public class GamePane extends MagePane {
         return gameId;
     }
 
+    @Override
+    public void deactivated() {
+        gamePanel.deactivated();
+    }
+
+    @Override
+    public void activated() {
+        gamePanel.activated();
+    }
+    
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private UUID gameId;

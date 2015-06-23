@@ -16,6 +16,7 @@ public class MagicCardsImageSource implements CardImageSource {
            
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("CLASH", "clash-pack");
             put("TPR", "tempest-remastered");
             put("ORI", "magic-origins");
             put("MM2", "modern-masters-2015");

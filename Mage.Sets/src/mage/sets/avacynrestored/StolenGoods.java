@@ -115,7 +115,7 @@ class StolenGoodsEffect extends OneShotEffect {
 class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl {
 
     public StolenGoodsCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast card from exile";
     }
 

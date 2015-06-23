@@ -95,7 +95,7 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
     private final UUID exileId;
 
     public FiendOfTheShadowsEffect(UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.exileId = exileId;
         staticText = "You may play that card for as long as it remains exiled";
     }

@@ -30,9 +30,9 @@ package mage.abilities;
 
 import java.util.UUID;
 import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
@@ -52,7 +52,8 @@ public class PlayLandAbility extends ActivatedAbilityImpl {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (!controlsAbility(playerId, game)) {
+        if (!controlsAbility(playerId, game) && 
+                !game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)) {
             return false;
         }
         //20091005 - 114.2a 
