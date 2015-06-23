@@ -109,7 +109,7 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
             int damageAmount = 0;
             for (Ability ability: spell.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    damageAmount += ((KickerAbility) ability).getKickedCounter(game);
+                    damageAmount += ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility());
                 }
             }
             if (damageAmount > 0) {

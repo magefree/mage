@@ -115,7 +115,7 @@ class CommuneWithLavaMayPlayEffect extends AsThoughEffectImpl {
     int castOnTurn = 0;
 
     public CommuneWithLavaMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the end of your next turn, you may play that card.";
     }
 

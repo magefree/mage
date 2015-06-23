@@ -64,7 +64,7 @@ import mage.util.CardUtil;
  */
 public class HideawayAbility extends StaticAbility {
 
-    public HideawayAbility(Card card) {
+    public HideawayAbility() {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new TapSourceEffect(true)));
         Ability ability = new EntersBattlefieldTriggeredAbility(new HideawayExileEffect(), false);
         ability.setRuleVisible(false);
@@ -93,7 +93,6 @@ public class HideawayAbility extends StaticAbility {
 class HideawayExileEffect extends OneShotEffect {
 
     private static FilterCard filter1 = new FilterCard("card to exile face down");
-    private static FilterCard filter2 = new FilterCard("card to put on the bottom of your library");
 
     public HideawayExileEffect() {
         super(Outcome.Benefit);
@@ -111,46 +110,26 @@ class HideawayExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 4);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            cards.add(card);
-            game.setZone(card.getId(), Zone.PICK);
-        }
-
+        Player controller = game.getPlayer(source.getControllerId());
         Permanent hideawaySource = game.getPermanent(source.getSourceId());
-        if (cards.size() == 0 || hideawaySource == null) {
+        if (hideawaySource == null || controller == null) {
             return false;
         }
-
-        TargetCard target1 = new TargetCard(Zone.PICK, filter1);
-        if (player.choose(Outcome.Detriment, cards, target1, game)) {
-            Card card = cards.get(target1.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToExile(CardUtil.getCardExileZoneId(game, source),
-                        new StringBuilder("Hideaway (").append(hideawaySource.getName()).append(")").toString(),
-                        source.getSourceId(), game);
-                card.setFaceDown(true, game);
-            }
-            target1.clearChosen();
-        }
-
+        
+        Cards cards = new CardsImpl(Zone.LIBRARY);
+        cards.addAll(controller.getLibrary().getTopCards(game, 4));        
         if (cards.size() > 0) {
-            TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-            while (player.isInGame() && cards.size() > 1) {
-                player.choose(Outcome.Benefit, cards, target2, game);
-                Card card = cards.get(target2.getFirstTarget(), game);
+            TargetCard target1 = new TargetCard(Zone.LIBRARY, filter1);
+            if (controller.choose(Outcome.Detriment, cards, target1, game)) {
+                Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+                    controller.moveCardToExileWithInfo(card, CardUtil.getCardExileZoneId(game, source), 
+                            "Hideaway (" + hideawaySource.getIdName() +")", source.getSourceId(), game, Zone.LIBRARY, false);
+                    card.setFaceDown(true, game);
                 }
-                target2.clearChosen();
             }
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+            controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
 
         return true;
@@ -179,24 +158,25 @@ class HideawayLookAtFaceDownCardEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
-            Card sourceCard = game.getCard(source.getSourceId());
-            if (sourceCard == null) {
-                return false;
-            }
-
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (game.getState().getZone(objectId) != Zone.EXILED 
+                || !game.getState().getCardState(objectId).isFaceDown()) {
+            return false;
+        }
+        // TODO: Does not handle if a player had the control of the land permanent some time before
+        // we would need to add a watcher to handle this
+        Permanent sourcePermanet = game.getPermanentOrLKIBattlefield(source.getSourceId());
+        if (sourcePermanet != null && sourcePermanet.getControllerId().equals(affectedControllerId)) {
             ExileZone exile = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-            if (exile != null && exile.contains(sourceId)) {
-                Cards cards = new CardsImpl(card);
-                Player controller = game.getPlayer(source.getControllerId());
-                if (controller != null) {
-                    // only the controller can see the card, so return always false
-                    controller.lookAtCards("Exiled with " + sourceCard.getName(), cards, game);
+            Card card = game.getCard(objectId);
+            if (exile != null && exile.contains(objectId) && card != null) {
+                Player player = game.getPlayer(affectedControllerId);
+                if (player != null) {
+                    player.lookAtCards("Hideaway by " + sourcePermanet.getIdName(), card, game);
                 }
             }
         }
+        // only the current or a previous controller can see the card, so always return false for reveal request
         return false;
     }
 }

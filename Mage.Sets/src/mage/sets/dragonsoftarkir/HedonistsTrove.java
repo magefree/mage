@@ -118,7 +118,7 @@ class HedonistsTroveExileEffect extends OneShotEffect {
 class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 
     public HedonistsTrovePlayLandEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play land cards exiled by {this}";
     }
 
@@ -157,7 +157,7 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
     private UUID cardId;
     
     public HedonistsTroveCastNonlandCardsEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}. You can't cast more than one spell this way each turn";
     }
 

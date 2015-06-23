@@ -1127,7 +1127,12 @@ public class TestPlayer implements Player {
     public void lookAtCards(String name, Cards cards, Game game) {
         computerPlayer.lookAtCards(name, cards, game);
     }
-
+    
+    @Override
+    public void lookAtCards(String name, Card card, Game game) {
+        computerPlayer.lookAtCards(name, card, game);
+    }
+    
     @Override
     public void phasing(Game game) {
         computerPlayer.phasing(game);

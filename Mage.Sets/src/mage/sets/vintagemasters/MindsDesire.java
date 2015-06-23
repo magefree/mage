@@ -114,7 +114,7 @@ class MindsDesireEffect extends OneShotEffect {
 class MindsDesireCastFromExileEffect extends AsThoughEffectImpl {
 
     MindsDesireCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "you may play that card without paying its mana cost";
     }
 

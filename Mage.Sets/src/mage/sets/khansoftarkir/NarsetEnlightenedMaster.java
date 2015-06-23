@@ -127,7 +127,7 @@ class NarsetEnlightenedMasterExileEffect extends OneShotEffect {
 class NarsetEnlightenedMasterCastFromExileEffect extends AsThoughEffectImpl {
 
     public NarsetEnlightenedMasterCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, you may cast noncreature cards exiled with {this} this turn without paying their mana costs";
     }
 

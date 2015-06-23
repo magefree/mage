@@ -160,7 +160,7 @@ class KaradorGhostChieftainContinuousEffect extends ContinuousEffectImpl {
 class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     KaradorGhostChieftainCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast one creature card from your graveyard";
     }
 

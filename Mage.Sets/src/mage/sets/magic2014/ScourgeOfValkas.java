@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -78,7 +78,7 @@ public class ScourgeOfValkas extends CardImpl {
 
         // Whenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.
         DynamicValue dragons = new PermanentsOnBattlefieldCount(filter2);
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(dragons), filter, false, rule);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(dragons), filter, false, rule);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
 

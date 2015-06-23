@@ -75,4 +75,50 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertExileCount("Fracturing Gust", 1);
     }
 
+    /**
+     * My opponent put Iona on the battlefield using Unburial Rites, but my game
+     * log didn't show me the color he has chosen.
+     * 
+     */
+    @Test
+    public void testUnburialRites() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 8);
+        // Return target creature card from your graveyard to the battlefield.
+        // Flashback {3}{W}        
+        addCard(Zone.HAND, playerA, "Unburial Rites", 1); // Sorcery - {4}{B}
+        
+        // Flying
+        // As Iona, Shield of Emeria enters the battlefield, choose a color.
+        // Your opponents can't cast spells of the chosen color.
+        addCard(Zone.GRAVEYARD, playerA, "Iona, Shield of Emeria");
+        
+        // As Lurebound Scarecrow enters the battlefield, choose a color.
+        // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.      
+        addCard(Zone.GRAVEYARD, playerA, "Lurebound Scarecrow"); // Enchantment - {2}{U}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1); 
+
+       
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unburial Rites",  "Iona, Shield of Emeria");
+        setChoice(playerA, "Red");
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Flashback {3}{W}"); 
+        addTarget(playerA, "Lurebound Scarecrow");
+        setChoice(playerA, "White");
+        
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt",  playerA);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Iona, Shield of Emeria", 1);
+        assertPermanentCount(playerA, "Lurebound Scarecrow", 1);
+                
+        assertHandCount(playerB, "Lightning Bolt", 1);
+                
+        assertExileCount("Unburial Rites", 1);
+    }
+    
 }

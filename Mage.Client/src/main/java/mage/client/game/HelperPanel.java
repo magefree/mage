@@ -226,7 +226,7 @@ public class HelperPanel extends JPanel {
             if (message.length() < this.getWidth() / 10) {
                 message = getSmallText(message);
             } else {    
-                message = "Use ability?" + getSmallText(message.substring(this.getWidth() / 10));                
+                message = "Use ability?" + getSmallText(message.substring(0, this.getWidth() / 10));                
             }
         } 
         textArea.setText(message);

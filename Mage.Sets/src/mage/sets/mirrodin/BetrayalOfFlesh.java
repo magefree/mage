@@ -66,7 +66,7 @@ public class BetrayalOfFlesh extends CardImpl {
         mode.getTargets().add(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.getSpellAbility().getModes().addMode(mode);
         // Entwine-Sacrifice three lands.
-        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent(), true))));
+        this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
     }
 
     public BetrayalOfFlesh(final BetrayalOfFlesh card) {

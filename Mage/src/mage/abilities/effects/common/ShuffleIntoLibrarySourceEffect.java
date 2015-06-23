@@ -28,12 +28,14 @@
 
 package mage.abilities.effects.common;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -54,15 +56,27 @@ public class ShuffleIntoLibrarySourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                Zone fromZone = game.getState().getZone(card.getId());
-                player.moveCardToLibraryWithInfo(card, source.getSourceId(), game, fromZone, true, true);
-                player.shuffleLibrary(game);
-                return true;
+        MageObject mageObject = source.getSourceObjectIfItStillExists(game);
+        if (mageObject != null) {
+            Zone fromZone = game.getState().getZone(mageObject.getId());
+            Player owner;
+            if (mageObject instanceof Permanent) {
+                owner = game.getPlayer(((Permanent) mageObject).getOwnerId());
+                if (owner != null) {
+                    owner.moveCardToLibraryWithInfo((Permanent)mageObject, source.getSourceId(), game, fromZone, true, true);                
+                    owner.shuffleLibrary(game);
+                    return true;
+                }
+            } else if (mageObject instanceof Card) {
+                owner = game.getPlayer(((Card) mageObject).getOwnerId());
+                if (owner != null) {
+                    owner.moveCardToLibraryWithInfo((Card)mageObject, source.getSourceId(), game, fromZone, true, true);                
+                    owner.shuffleLibrary(game);
+                    return true;
+                }
             }
+
+            
         }
         return false;
     }

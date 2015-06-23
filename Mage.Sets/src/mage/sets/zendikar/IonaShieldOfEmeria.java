@@ -35,11 +35,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseColorEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -47,9 +46,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -70,7 +66,7 @@ public class IonaShieldOfEmeria extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As Iona, Shield of Emeria enters the battlefield, choose a color.
-        this.addAbility(new AsEntersBattlefieldAbility(new IonaShieldOfEmeriaChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Your opponents can't cast spells of the chosen color.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IonaShieldOfEmeriaReplacementEffect()));
@@ -84,39 +80,6 @@ public class IonaShieldOfEmeria extends CardImpl {
     @Override
     public IonaShieldOfEmeria copy() {
         return new IonaShieldOfEmeria(this);
-    }
-}
-
-class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect {
-
-    public IonaShieldOfEmeriaChooseColorEffect() {
-        super(Outcome.Detriment);
-        staticText = "choose a color";
-    }
-
-    public IonaShieldOfEmeriaChooseColorEffect(final IonaShieldOfEmeriaChooseColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Detriment, colorChoice, game)) {
-                game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
-                permanent.addInfo("chosen color", CardUtil.addToolTipMarkTags("Chosen color: " + colorChoice.getColor().getDescription()), game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public IonaShieldOfEmeriaChooseColorEffect copy() {
-        return new IonaShieldOfEmeriaChooseColorEffect(this);
     }
 }
 
@@ -150,6 +113,7 @@ class IonaShieldOfEmeriaReplacementEffect extends ContinuousRuleModifyingEffectI
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId()) ) {
             ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
+            // spell is not on the stack yet, so we have to check the card
             Card card = game.getCard(event.getSourceId());
             if (chosenColor != null && card != null && card.getColor(game).contains(chosenColor)) {
                 return true;

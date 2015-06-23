@@ -311,8 +311,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (card != null) {
                     cards.add(card);
                 }
-            }            
-            while(!target.isChosen() && !cards.isEmpty()) {
+            }          
+            while((outcome.isGood() ? target.getTargets().size() < target.getMaxNumberOfTargets() : !target.isChosen()) 
+                    && !cards.isEmpty()) {
                 Card pick = pickTarget(cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);

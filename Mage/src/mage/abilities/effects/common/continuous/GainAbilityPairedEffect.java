@@ -54,6 +54,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
     public GainAbilityPairedEffect(final GainAbilityPairedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
     }
 
     @Override
@@ -68,7 +69,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl {
             Permanent paired = game.getPermanent(permanent.getPairedCard());
             if (paired != null) {
                 permanent.addAbility(ability, game);
-                paired.addAbility(ability, source.getSourceId(), game);
+                paired.addAbility(ability, source.getSourceId(), game, false);
                 return true;
             }
         }

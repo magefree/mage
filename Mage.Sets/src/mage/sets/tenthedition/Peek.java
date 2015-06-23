@@ -85,7 +85,7 @@ class PeekEffect extends OneShotEffect {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (player != null && controller != null && sourceObject != null) {
-            controller.lookAtCards(sourceObject.getIdName(), player.getHand(), game);
+            controller.lookAtCards(sourceObject.getIdName() + " " + player.getName() + " (" + game.getTurnNum()+"|"+game.getPhase().getType() +")", player.getHand(), game);
         }
         return true;
     }

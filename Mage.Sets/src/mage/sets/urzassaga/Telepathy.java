@@ -48,7 +48,6 @@ public class Telepathy extends CardImpl {
         super(ownerId, 102, "Telepathy", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
         this.expansionSetCode = "USG";
 
-
         // Your opponents play with their hands revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsPlayWithTheTopCardRevealedEffect()));
     }
@@ -82,7 +81,7 @@ class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl {
             for (UUID opponentId : game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(opponentId);
                 if (opponent != null) {
-                    controller.revealCards(sourceObject.getName() + " " + opponent.getName(), opponent.getHand(), game, false);
+                    controller.revealCards(sourceObject.getIdName() + " " + opponent.getName(), opponent.getHand(), game, false);
                 }
             }
             return true;

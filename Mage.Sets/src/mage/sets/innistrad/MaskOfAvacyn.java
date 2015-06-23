@@ -37,6 +37,8 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 
 /**
  * @author nantuko
@@ -52,8 +54,11 @@ public class MaskOfAvacyn extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 
         // Equipped creature gets +1/+2 and has hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2)));
+        Ability ability =  new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Effect effect = new BoostEquippedEffect(1, 2);
+        effect.setText("and has hexproof");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
     public MaskOfAvacyn(final MaskOfAvacyn card) {

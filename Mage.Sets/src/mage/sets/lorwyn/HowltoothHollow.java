@@ -53,7 +53,7 @@ public class HowltoothHollow extends CardImpl {
         this.expansionSetCode = "LRW";
 
         // Hideaway
-        this.addAbility(new HideawayAbility(this));
+        this.addAbility(new HideawayAbility());
         // {tap}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
         

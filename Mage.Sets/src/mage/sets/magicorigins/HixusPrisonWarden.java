@@ -63,7 +63,7 @@ public class HixusPrisonWarden extends CardImpl {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.power = new MageInt(4);
-        this.toughness = new MageInt(44);
+        this.toughness = new MageInt(4);
 
         // Flash
         this.addAbility(FlashAbility.getInstance());

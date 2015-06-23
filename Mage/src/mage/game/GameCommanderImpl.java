@@ -56,8 +56,10 @@ import mage.watchers.common.CommanderInfoWatcher;
 
 public abstract class GameCommanderImpl extends GameImpl {
 
+    static boolean CHECK_COMMANDER_DAMAGE = true;
+    
     private final Map<UUID, Cards> mulliganedCards = new HashMap<>();
-    private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
+    // private final Set<CommanderInfoWatcher> commanderCombatWatcher = new HashSet<>();
     
     protected boolean alsoHand;    // replace commander going to hand
     protected boolean alsoLibrary; // replace commander going to library
@@ -91,9 +93,8 @@ public abstract class GameCommanderImpl extends GameImpl {
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         ability.addEffect(new CommanderManaReplacementEffect(player.getId(), CardUtil.getColorIdentity(commander)));
                         getState().setValue(commander.getId() + "_castCount", 0);
-                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), true);
+                        CommanderInfoWatcher watcher = new CommanderInfoWatcher(commander.getId(), CHECK_COMMANDER_DAMAGE);
                         getState().getWatchers().add(watcher);
-                        this.commanderCombatWatcher.add(watcher);
                         watcher.addCardInfoToCommander(this);
                     }
                 }
@@ -185,12 +186,13 @@ public abstract class GameCommanderImpl extends GameImpl {
      */
     @Override
     protected boolean checkStateBasedActions() {
-        for (CommanderInfoWatcher damageWatcher: commanderCombatWatcher) {
+        for (Player player: getPlayers().values()) {
+            CommanderInfoWatcher damageWatcher = (CommanderInfoWatcher) getState().getWatchers().get("CommanderCombatDamageWatcher", player.getCommanderId());
             for(Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()){
                 if (entrySet.getValue() > 20) {
-                    Player player = getPlayer(entrySet.getKey());
-                    if (player != null && player.isInGame()){
-                        player.lost(this);
+                    Player opponent = getPlayer(entrySet.getKey());
+                    if (opponent != null && player.isInGame()){
+                        opponent.lost(this);
                     }
                 }
             }
