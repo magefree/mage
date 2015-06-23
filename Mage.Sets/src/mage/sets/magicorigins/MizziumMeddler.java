@@ -38,7 +38,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
