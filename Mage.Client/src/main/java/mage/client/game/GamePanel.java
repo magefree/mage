@@ -145,11 +145,14 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final int X_PHASE_WIDTH = 55;
     private static final int STACK_MIN_CARDS_OFFSET_Y = 7;
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
+    
+    // non modal frames
     private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> revealed = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> lookedAt = new HashMap<>();
     private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
     private final Map<String, CardsView> graveyards = new HashMap<>();
+    
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private UUID gameId;
     private UUID playerId; // playerId of the player
@@ -826,6 +829,40 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
     
+    // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
+    public void deactivated() {
+        // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+        for (CardInfoWindowDialog exileDialog: exiles.values()) {
+            exileDialog.hideDialog();
+        }
+        for (CardInfoWindowDialog graveyardDialog: graveyardWindows.values()) {
+            graveyardDialog.hideDialog();
+        }
+        for (CardInfoWindowDialog revealDialog: revealed.values()) {
+            revealDialog.hideDialog();
+        }
+        for (CardInfoWindowDialog lookedAtDialog: lookedAt.values()) {
+            lookedAtDialog.hideDialog();
+        }        
+    }
+       
+    // Called if the game frame comes to front again
+    public void activated() {
+        // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+        for (CardInfoWindowDialog exileDialog: exiles.values()) {
+            exileDialog.show();
+        }
+        for (CardInfoWindowDialog graveyardDialog: graveyardWindows.values()) {
+            graveyardDialog.show();
+        }
+        for (CardInfoWindowDialog revealDialog: revealed.values()) {
+            revealDialog.show();
+        }
+        for (CardInfoWindowDialog lookedAtDialog: lookedAt.values()) {
+            lookedAtDialog.show();
+        }        
+    } 
+    
     public void openGraveyardWindow(String playerName) {
         if(graveyardWindows.containsKey(playerName)) {
             CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(playerName);
@@ -834,9 +871,7 @@ public final class GamePanel extends javax.swing.JPanel {
             } else {
                 cardInfoWindowDialog.show();
             }
-//            if (!cardInfoWindowDialog.isClosed()) {
-                return;
-//            } 
+            return;
         }
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);

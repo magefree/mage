@@ -85,7 +85,7 @@ public class SkaabRuinator extends CardImpl {
 class SkaabRuinatorPlayEffect extends AsThoughEffectImpl {
 
     public SkaabRuinatorPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
         staticText = "You may cast {this} from your graveyard";
     }
 

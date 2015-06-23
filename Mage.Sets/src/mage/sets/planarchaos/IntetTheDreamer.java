@@ -121,7 +121,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
 class IntetTheDreamerEffect extends AsThoughEffectImpl {
 
     public IntetTheDreamerEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play the card from exile without paying its mana cost for as long as {this} remains on the battlefield";
     }
 

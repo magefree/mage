@@ -121,7 +121,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     private UUID cardId;
 
     public PraetorsGraspPlayEffect(UUID cardId) {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.cardId = cardId;
         staticText = "You may look at and play that card for as long as it remains exiled";
     }

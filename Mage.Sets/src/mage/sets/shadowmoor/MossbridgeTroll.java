@@ -105,7 +105,7 @@ class MossbridgeTrollReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent mossbridgeTroll = game.getPermanent(event.getTargetId());
-        if (mossbridgeTroll != null) {
+        if (mossbridgeTroll != null && event.getAmount() == 0) { // 1=noRegen
             return mossbridgeTroll.regenerate(source.getSourceId(), game);
         }
         return false;

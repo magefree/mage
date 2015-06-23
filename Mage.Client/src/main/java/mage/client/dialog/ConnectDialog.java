@@ -429,7 +429,7 @@ public class ConnectDialog extends MageDialog {
         BufferedReader in = null;
         try {
             
-            URL serverListURL = new URL(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST, "http://176.31.186.181/files/server-list.txt"));
+            URL serverListURL = new URL(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt"));
 
             Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
             Proxy p = null;

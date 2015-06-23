@@ -96,7 +96,8 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (!controllerId.equals(playerId)) {
+            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game) 
+                    && !controllerId.equals(playerId)) {
                 return false;
             }
             // Check if spell has no costs (not {0} mana costs), than it's not castable. E.g. for spells like Living End, that only can be cast by Suspend Ability.

@@ -136,7 +136,7 @@ class OutpostSiegeExileEffect extends OneShotEffect {
 class CastFromNonHandZoneTargetEffect extends AsThoughEffectImpl {
 
     public CastFromNonHandZoneTargetEffect(Duration duration) {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, duration, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         staticText = "until end of turn, you may play that card";
     }
 
