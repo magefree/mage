@@ -26,66 +26,26 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.game.tournament;
+package mage.tournament;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import mage.game.draft.DraftCube;
+import mage.game.tournament.TournamentType;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class LimitedOptions implements Serializable {
+public class ChaosBoosterDraftEliminationTournamentType extends TournamentType {
 
-    protected List<String> sets = new ArrayList<>();
-    protected int constructionTime;
-    protected String draftCubeName;
-    protected DraftCube draftCube;
-    protected int numberBoosters;
-    protected boolean isChaos;
-
-    public List<String> getSetCodes() {
-        return sets;
+    public ChaosBoosterDraftEliminationTournamentType() {
+        this.name = "Booster Draft Elimination (Chaos)";
+        this.maxPlayers = 16;
+        this.minPlayers = 4;
+        this.numBoosters = 3;
+        this.draft = true;
+        this.limited = true;
+        this.cubeBooster = false;
+        this.elimination = false;
+        this.isChaos = true;
     }
 
-    public int getConstructionTime() {
-        return constructionTime;
-    }
-
-    public void setConstructionTime(int constructionTime) {
-        this.constructionTime = constructionTime;
-    }
-
-    public String getDraftCubeName() {
-        return draftCubeName;
-    }
-
-    public void setDraftCubeName(String draftCubeName) {
-        this.draftCubeName = draftCubeName;
-    }
-
-    public DraftCube getDraftCube() {
-        return draftCube;
-    }
-
-    public void setDraftCube(DraftCube draftCube) {
-        this.draftCube = draftCube;
-    }
-
-    public int getNumberBoosters() {
-        return numberBoosters;
-    }
-
-    public void setNumberBoosters(int numberBoosters) {
-        this.numberBoosters = numberBoosters;
-    }
-
-    public boolean getIsChaos(){
-        return isChaos;
-    }
-    public void setIsChaos(boolean isChaos){
-        this.isChaos = isChaos;
-    }
 }
