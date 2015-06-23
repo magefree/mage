@@ -85,13 +85,10 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (chosenColor == null)
-            return false;
-        boolean creature = permanent.getCardType().contains(CardType.CREATURE);
-        boolean flying = permanent.getAbilities().contains(FlyingAbility.getInstance());
-        boolean sharesColor = permanent.getColor(game).shares(chosenColor);
-        
-        return creature && !flying && sharesColor;
+        return chosenColor != null &&
+                !permanent.getAbilities().contains(FlyingAbility.getInstance()) &&
+                permanent.getColor(game).shares(chosenColor) &&
+                permanent.getCardType().contains(CardType.CREATURE);
     }
     
     @Override
