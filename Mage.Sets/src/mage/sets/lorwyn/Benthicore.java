@@ -67,7 +67,6 @@ public class Benthicore extends CardImpl {
         super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
-        this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         
