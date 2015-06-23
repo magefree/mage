@@ -92,7 +92,7 @@ class MarangRiverProwlerCastEffect extends AsThoughEffectImpl {
     }
 
     MarangRiverProwlerCastEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard as long as you control a black or green permanent";
     }
 

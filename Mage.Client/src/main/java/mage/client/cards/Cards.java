@@ -69,7 +69,7 @@ public class Cards extends javax.swing.JPanel {
 
     private final Map<UUID, MageCard> cards = new LinkedHashMap<>();
     private boolean dontDisplayTapped = false;
-    private static final int GAP_X = 0;
+    private static final int GAP_X = 5; // needed for marking cards with coloured fram (e.g. on hand)
     private String zone;
 
     private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
