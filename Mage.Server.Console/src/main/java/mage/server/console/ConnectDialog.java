@@ -487,7 +487,7 @@ public class ConnectDialog extends JDialog {
     private void findPublicServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         BufferedReader in = null;
         try {
-            URL serverListURL = new URL("http://XMage.info/files/server-list.txt");
+            URL serverListURL = new URL("http://XMage.de/files/server-list.txt");
             in = new BufferedReader(new InputStreamReader(serverListURL.openStream()));
 
             List<String> servers = new ArrayList<>();
