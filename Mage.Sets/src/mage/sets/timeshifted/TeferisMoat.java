@@ -41,6 +41,9 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -73,6 +76,11 @@ public class TeferisMoat extends CardImpl {
 
 class TeferisMoatRestrictionEffect extends RestrictionEffect {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+    
     TeferisMoatRestrictionEffect(){
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures of the chosen color without flying can't attack you";
