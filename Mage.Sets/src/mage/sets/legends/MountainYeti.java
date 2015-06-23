@@ -25,36 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.legends;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.keyword.MountainwalkAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
- * Describes condition when source matches specified filter
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
+
  */
-public class SourceMatchesFilterCondition implements Condition {
+public class MountainYeti extends CardImpl {
 
-    private FilterPermanent filter;
+    private static final FilterCard filter = new FilterCard("White");
 
-    public SourceMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
+
+    public MountainYeti(UUID ownerId) {
+        super(ownerId, 156, "Mountain Yeti", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "LEG";
+        this.subtype.add("Yeti");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Mountainwalk
+        this.addAbility(new MountainwalkAbility());
+        // protection from white
+        this.addAbility(new ProtectionAbility(filter));
+    }
+
+    public MountainYeti(final MountainYeti card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
-                return true;
-            }
-        }
-        return false;
+    public MountainYeti copy() {
+        return new MountainYeti(this);
     }
 }

@@ -25,36 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.apocalypse;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
- * Describes condition when source matches specified filter
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
+
  */
-public class SourceMatchesFilterCondition implements Condition {
+public class SpectralLynx extends CardImpl {
 
-    private FilterPermanent filter;
+    private static final FilterCard filter = new FilterCard("green");
 
-    public SourceMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
+
+    public SpectralLynx(UUID ownerId) {
+        super(ownerId, 17, "Spectral Lynx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Cat");
+        this.subtype.add("Spirit");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Protection from green
+        this.addAbility(new ProtectionAbility(filter));
+        // {B}: Regenerate Spectral Lynx.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
+    }
+
+    public SpectralLynx(final SpectralLynx card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
-                return true;
-            }
-        }
-        return false;
+    public SpectralLynx copy() {
+        return new SpectralLynx(this);
     }
 }

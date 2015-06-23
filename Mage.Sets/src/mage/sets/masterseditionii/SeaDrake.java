@@ -25,36 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.sets.masterseditionii;
 
+import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.filter.FilterPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetLandPermanent;
 
 /**
- * Describes condition when source matches specified filter
  *
- * @author magenoxx_at_gmail.com
+ * @author LoneFox
+
  */
-public class SourceMatchesFilterCondition implements Condition {
+public class SeaDrake extends CardImpl {
 
-    private FilterPermanent filter;
+    private static final FilterLandPermanent filter =  new FilterLandPermanent("land you control");
 
-    public SourceMatchesFilterCondition(FilterPermanent filter) {
-        this.filter = filter;
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+
+    public SeaDrake(UUID ownerId) {
+        super(ownerId, 64, "Sea Drake", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "ME2";
+        this.subtype.add("Drake");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Sea Drake enters the battlefield, return two target lands you control to their owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        ability.addTarget(new TargetLandPermanent(2, 2, filter, false));
+        this.addAbility(ability);
+    }
+
+    public SeaDrake(final SeaDrake card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (filter.match(permanent, permanent.getId(), permanent.getControllerId(), game)) {
-                return true;
-            }
-        }
-        return false;
+    public SeaDrake copy() {
+        return new SeaDrake(this);
     }
 }
