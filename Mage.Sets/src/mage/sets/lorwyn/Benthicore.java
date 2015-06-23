@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
-import mage.game.permanent.token.MerfolkToken;
+import mage.game.permanent.token.MerfolkWizardToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -67,10 +67,13 @@ public class Benthicore extends CardImpl {
         super(ownerId, 53, "Benthicore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Elemental");
-
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkToken(), 2), false));
+        
+        // When Benthicore enters the battlefield, put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken(), 2), false));
+        
+        // Tap two untapped Merfolk you control: Untap Benthicore. It gains shroud until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         ability.addEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
@@ -85,4 +88,3 @@ public class Benthicore extends CardImpl {
         return new Benthicore(this);
     }
 }
-

@@ -33,6 +33,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -58,9 +59,12 @@ public class ReturnToLibrarySpellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-            if (spellCard != null) {
-                controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, toTop, true);
+            Spell spell = game.getStack().getSpell(source.getSourceId());
+            if (spell != null) {
+                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
+                if (spellCard != null) {
+                    controller.moveCardToLibraryWithInfo(spellCard, source.getSourceId(), game, Zone.STACK, toTop, true);
+                }
             }
             return true;
         }

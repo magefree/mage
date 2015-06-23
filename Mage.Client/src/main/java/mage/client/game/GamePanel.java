@@ -50,6 +50,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +86,8 @@ import mage.client.components.HoverButton;
 import mage.client.components.MageComponents;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.layout.RelativeLayout;
-import mage.client.dialog.ExileZoneDialog;
+import mage.client.dialog.CardInfoWindowDialog;
+import mage.client.dialog.CardInfoWindowDialog.ShowType;
 import mage.client.dialog.PickChoiceDialog;
 import mage.client.dialog.PickNumberDialog;
 import mage.client.dialog.PickPileDialog;
@@ -143,9 +145,11 @@ public final class GamePanel extends javax.swing.JPanel {
     private static final int X_PHASE_WIDTH = 55;
     private static final int STACK_MIN_CARDS_OFFSET_Y = 7;
     private final Map<UUID, PlayAreaPanel> players = new HashMap<>();
-    private final Map<UUID, ExileZoneDialog> exiles = new HashMap<>();
-    private final Map<String, ShowCardsDialog> revealed = new HashMap<>();
-    private final Map<String, ShowCardsDialog> lookedAt = new HashMap<>();
+    private final Map<UUID, CardInfoWindowDialog> exiles = new HashMap<>();
+    private final Map<String, CardInfoWindowDialog> revealed = new HashMap<>();
+    private final Map<String, CardInfoWindowDialog> lookedAt = new HashMap<>();
+    private final Map<String, CardInfoWindowDialog> graveyardWindows = new HashMap<>();
+    private final Map<String, CardsView> graveyards = new HashMap<>();
     private final ArrayList<ShowCardsDialog> pickTarget = new ArrayList<>();
     private UUID gameId;
     private UUID playerId; // playerId of the player
@@ -255,15 +259,19 @@ public final class GamePanel extends javax.swing.JPanel {
         if (pickNumber != null) {
             pickNumber.removeDialog();
         }
-        for (ExileZoneDialog exileDialog: exiles.values()) {
+        for (CardInfoWindowDialog exileDialog: exiles.values()) {
             exileDialog.cleanUp();
             exileDialog.removeDialog();
         }
-        for (ShowCardsDialog revealDialog: revealed.values()) {
+        for (CardInfoWindowDialog graveyardDialog: graveyardWindows.values()) {
+            graveyardDialog.cleanUp();
+            graveyardDialog.removeDialog();
+        }
+        for (CardInfoWindowDialog revealDialog: revealed.values()) {
             revealDialog.cleanUp();
             revealDialog.removeDialog();
         }
-        for (ShowCardsDialog lookedAtDialog: lookedAt.values()) {
+        for (CardInfoWindowDialog lookedAtDialog: lookedAt.values()) {
             lookedAtDialog.cleanUp();
             lookedAtDialog.removeDialog();
         }
@@ -648,6 +656,17 @@ public final class GamePanel extends javax.swing.JPanel {
                 if (player.getPlayerId().equals(playerId)) {
                     updateSkipButtons(player.isPassedTurn(), player.isPassedUntilEndOfTurn(), player.isPassedUntilNextMain(), player.isPassedAllTurns(), player.isPassedUntilStackResolved());
                 }
+                // update open or remove closed graveyard windows
+                
+                graveyards.put(player.getName(), player.getGraveyard());
+                if (graveyardWindows.containsKey(player.getName())) {
+                    CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(player.getName());
+                    if (cardInfoWindowDialog.isClosed()) {
+                        graveyardWindows.remove(player.getName());
+                    } else {
+                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId);
+                    }
+                }
             } else {
                 logger.warn("Couldn't find player.");
                 logger.warn("   uuid:" + player.getPlayerId());
@@ -682,13 +701,14 @@ public final class GamePanel extends javax.swing.JPanel {
 
         for (ExileView exile: game.getExile()) {
             if (!exiles.containsKey(exile.getId())) {
-                ExileZoneDialog newExile = new ExileZoneDialog();
+                CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
                 exiles.put(exile.getId(), newExile);
                 MageFrame.getDesktop().add(newExile, JLayeredPane.MODAL_LAYER);
                 newExile.show();
             }
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
         }
+        
         showRevealed(game);
         showLookedAt(game);
         if (game.getCombat().size() > 0) {
@@ -805,30 +825,71 @@ public final class GamePanel extends javax.swing.JPanel {
             currentStep.setLocation(prevPoint.x - 15, prevPoint.y);
         }
     }
-
-    private void showRevealed(GameView game) {
-        for (RevealedView reveal: game.getRevealed()) {
-            if (!revealed.containsKey(reveal.getName())) {
-                ShowCardsDialog newReveal = new ShowCardsDialog();
-                revealed.put(reveal.getName(), newReveal);
+    
+    public void openGraveyardWindow(String playerName) {
+        if(graveyardWindows.containsKey(playerName)) {
+            CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(playerName);
+            if (cardInfoWindowDialog.isVisible()) {
+                cardInfoWindowDialog.hideDialog();
+            } else {
+                cardInfoWindowDialog.show();
             }
-            revealed.get(reveal.getName()).loadCards("Revealed " + reveal.getName(), reveal.getCards(), bigCard, Config.dimensions, gameId, false);
+//            if (!cardInfoWindowDialog.isClosed()) {
+                return;
+//            } 
         }
+        CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
+        graveyardWindows.put(playerName, newGraveyard);
+        MageFrame.getDesktop().add(newGraveyard, JLayeredPane.MODAL_LAYER);
+        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId);
+    }
+    
+    private void showRevealed(GameView game) {
+        for (RevealedView revealView: game.getRevealed()) {
+            handleGameInfoWindow(revealed, ShowType.REVEAL, revealView.getName(), revealView.getCards());
+        }
+        removeClosedCardInfoWindows(revealed);
     }
 
     private void showLookedAt(GameView game) {
-        for (ShowCardsDialog looked: lookedAt.values()) {
-            looked.clearReloaded();
+        for (LookedAtView lookedAtView: game.getLookedAt()) {
+            handleGameInfoWindow(lookedAt, ShowType.LOOKED_AT, lookedAtView.getName(), lookedAtView.getCards());
         }
-        for (LookedAtView looked: game.getLookedAt()) {
-            if (!lookedAt.containsKey(looked.getName())) {
-                ShowCardsDialog newLookedAt = new ShowCardsDialog();
-                lookedAt.put(looked.getName(), newLookedAt);
+        removeClosedCardInfoWindows(lookedAt);
+    }
+    
+    private void handleGameInfoWindow(Map<String, CardInfoWindowDialog> windowMap, ShowType showType, String name, LinkedHashMap cardsView) {
+        CardInfoWindowDialog cardInfoWindowDialog;
+        if (!windowMap.containsKey(name)) {
+            cardInfoWindowDialog = new CardInfoWindowDialog(showType, name);
+            windowMap.put(name, cardInfoWindowDialog);
+            MageFrame.getDesktop().add(cardInfoWindowDialog, JLayeredPane.MODAL_LAYER);
+        } else {
+            cardInfoWindowDialog = windowMap.get(name);
+        }
+
+        if (cardInfoWindowDialog != null && !cardInfoWindowDialog.isClosed()) {
+            switch(showType) {
+                case REVEAL:
+                    cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
+                    break;
+                case LOOKED_AT:
+                    cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+                    break;
             }
-            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
         }
     }
-
+    
+    private void removeClosedCardInfoWindows(Map<String, CardInfoWindowDialog> windowMap) {
+        // Remove closed window objects from the maps
+        for (Iterator<Map.Entry<String, CardInfoWindowDialog>> iterator = windowMap.entrySet().iterator(); iterator.hasNext();) {
+            Map.Entry<String, CardInfoWindowDialog> entry = iterator.next();
+            if (entry.getValue().isClosed()) {
+                iterator.remove();
+            }            
+        } 
+    }
+    
     public void ask(String question, GameView gameView, int messageId) {
         updateGame(gameView);
         this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null, messageId);

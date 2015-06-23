@@ -111,6 +111,33 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public Image getLookedAtImage() {
+        if (lookedAtIcon == null) {
+            Image image = getImageFromResourceTransparent("/game/looked_at.png", Color.WHITE, new Rectangle(20, 20));
+            lookedAtIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return lookedAtIcon;
+    }
+
+    @Override
+    public Image getRevealedImage() {
+        if (revealedIcon == null) {
+            Image image = getImageFromResourceTransparent("/game/revealed.png", Color.WHITE, new Rectangle(20, 20));
+            revealedIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return revealedIcon;
+    }
+
+    @Override
+    public Image getExileImage() {
+        if (exileIcon == null) {
+            Image image = getImageFromResourceTransparent("/info/exile.png", Color.WHITE, new Rectangle(20, 20));
+            exileIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return exileIcon;
+    }
+
+    @Override
     public BufferedImage getTriggeredAbilityImage() {
         if (triggeredAbilityIcon == null) {
             Image image = getImageFromResourceTransparent("/card/triggered_ability.png", Color.WHITE, new Rectangle(20, 20));
@@ -374,6 +401,9 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageTokenIcon;
     private static BufferedImage triggeredAbilityIcon;
     private static BufferedImage activatedAbilityIcon;
+    private static BufferedImage lookedAtIcon;
+    private static BufferedImage revealedIcon;    
+    private static BufferedImage exileIcon;
     private static BufferedImage imageCopyIcon;
     private static BufferedImage imageCounterGreen;
     private static BufferedImage imageCounterGrey;

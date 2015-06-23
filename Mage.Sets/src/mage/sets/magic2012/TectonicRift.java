@@ -31,13 +31,13 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -45,15 +45,22 @@ import mage.target.common.TargetLandPermanent;
  * @author North
  */
 public class TectonicRift extends CardImpl {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
 
+    static {
+        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    }
+    
     public TectonicRift(UUID ownerId) {
         super(ownerId, 157, "Tectonic Rift", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "M12";
 
-
+        // Destroy target land. 
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        this.getSpellAbility().addEffect(new TectonicRiftEffect());
+        // Creatures without flying can't block this turn.
+        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
     public TectonicRift(final TectonicRift card) {
@@ -64,35 +71,4 @@ public class TectonicRift extends CardImpl {
     public TectonicRift copy() {
         return new TectonicRift(this);
     }
-}
-
-class TectonicRiftEffect extends RestrictionEffect {
-
-    TectonicRiftEffect() {
-        super(Duration.EndOfTurn);
-        staticText = "Creatures without flying can't block this turn";
-    }
-
-    TectonicRiftEffect(final TectonicRiftEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (!permanent.getAbilities().contains(FlyingAbility.getInstance())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public TectonicRiftEffect copy() {
-        return new TectonicRiftEffect(this);
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
 }

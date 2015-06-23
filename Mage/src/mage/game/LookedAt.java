@@ -52,13 +52,14 @@ public class LookedAt extends HashMap<String, Cards> implements Serializable, Co
         }
     }
 
-    public void add(String name, Card card) {
-        this.get(name).add(card);
+    public void add(String name, Card card) {        
+        this.createLookedAt(name).add(card);
     }
 
     public void add(String name, Cards cards) {
-        if (!this.containsKey(name))
+        if (!this.containsKey(name)) {
             createLookedAt(name);
+        }
         this.put(name, cards.copy());
     }
 

@@ -29,6 +29,9 @@ package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -89,5 +92,5 @@ public class ProvokeTest extends CardTestPlayerBase{
         assertLife(playerA, 18); // one attack from Imp
         assertLife(playerB, 15); // Not blocked
         
-    }    
+    }       
 }

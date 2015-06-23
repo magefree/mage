@@ -255,7 +255,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
             list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
         }
         gameView.setLookedAt(list);
-        game.getState().clearLookedAt(playerId);
 
         return gameView;
     }

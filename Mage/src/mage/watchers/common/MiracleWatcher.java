@@ -99,7 +99,7 @@ public class MiracleWatcher extends Watcher {
                         Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards("Miracle", cards, game);
-                        if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getName() + " to be able to use Miracle?", game)) {
+                        if (controller.chooseUse(Outcome.Benefit, "Reveal " + card.getLogName() + " to be able to use Miracle?", game)) {
                             controller.revealCards("Miracle", cards, game);
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MIRACLE_CARD_REVEALED, card.getId(), card.getId(),controller.getId()));
                             break;

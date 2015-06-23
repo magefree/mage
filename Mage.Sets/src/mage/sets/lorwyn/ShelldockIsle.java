@@ -53,7 +53,7 @@ public class ShelldockIsle extends CardImpl {
         this.expansionSetCode = "LRW";
 
         // Hideaway
-        this.addAbility(new HideawayAbility(this));
+        this.addAbility(new HideawayAbility());
         // {tap}: Add {U} to your mana pool.
         this.addAbility(new BlueManaAbility());
         // {U}, {tap}: You may play the exiled card without paying its mana cost if a library has twenty or fewer cards in it.

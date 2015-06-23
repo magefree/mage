@@ -445,8 +445,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return lookedAt.get(playerId);
     }
 
-    public void clearLookedAt(UUID playerId) {
-        lookedAt.remove(playerId);
+    public void clearRevealed() {
+        revealed.clear();
+    }
+    
+    public void clearLookedAt() {
+        lookedAt.clear();
     }
 
     public Turn getTurn() {
@@ -581,7 +585,28 @@ public class GameState implements Serializable, Copyable<GameState> {
         newPlayerList.setCurrent(playerId);
         return newPlayerList;
     }
-
+    /**
+     * Returns a list of all active players of the game in range of playerId, 
+     * also setting the playerId to the current player of the list.
+     * 
+     * @param playerId
+     * @param game
+     * @return playerList
+     */
+    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+        PlayerList newPlayerList = new PlayerList();        
+        Player currentPlayer = game.getPlayer(playerId);
+        if (currentPlayer != null) {
+            for (Player player: players.values()) {
+                if (!player.hasLeft()&& !player.hasLost() && currentPlayer.getInRange().contains(player.getId())) {
+                    newPlayerList.add(player.getId());
+                }
+            }
+            newPlayerList.setCurrent(playerId);
+        }
+        return newPlayerList;
+    }
+    
     public Permanent getPermanent(UUID permanentId) {
         if (permanentId != null && battlefield.containsPermanent(permanentId)) {
             Permanent permanent = battlefield.getPermanent(permanentId);

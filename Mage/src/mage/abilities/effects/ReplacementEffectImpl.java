@@ -33,7 +33,6 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 
 /**
  *
