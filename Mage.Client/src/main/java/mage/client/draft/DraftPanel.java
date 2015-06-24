@@ -153,10 +153,10 @@ public class DraftPanel extends javax.swing.JPanel {
 
     public void updateDraft(DraftView draftView) {        
         if (draftView.getSets().size() != 3){
-            // Chaos draft
-            this.txtPack1.setText("???");
-            this.txtPack2.setText("???");
-            this.txtPack3.setText("???");
+            // Random draft
+            this.txtPack1.setText("Random Boosters");
+            this.txtPack2.setText("Random Boosters");
+            this.txtPack3.setText("Random Boosters");
         }else{
             this.txtPack1.setText(draftView.getSets().get(0));
             this.txtPack2.setText(draftView.getSets().get(1));
