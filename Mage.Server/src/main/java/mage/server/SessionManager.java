@@ -31,13 +31,11 @@ import mage.remote.DisconnectReason;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.MageException;
 import mage.remote.Connection;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.view.UserDataView;
 import org.apache.log4j.Logger;
-import org.mage.network.Server;
 import org.mage.network.model.MessageType;
 
 /**
@@ -110,14 +108,14 @@ public class SessionManager {
         return false;
     }
 
-//    public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
-//        Session session = sessions.get(sessionId);
-//        if (session != null) {
-//            session.setUserData(userName, userDataView);
-//            return true;
-//        }
-//        return false;
-//    }
+    public boolean setUserData(String sessionId, UserDataView userDataView) {
+        Session session = sessions.get(sessionId);
+        if (session != null) {
+            session.setUserData(UserManager.getInstance().getUser(session.getUserId()), userDataView);
+            return true;
+        }
+        return false;
+    }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
         Session session = sessions.get(sessionId);     

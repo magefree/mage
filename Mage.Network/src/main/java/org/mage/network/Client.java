@@ -244,8 +244,12 @@ public class Client {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void updatePreferencesForServer(UserDataView view) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPreferences(UserDataView view) {
+        try {
+            clientMessageHandler.setPreferences(view);
+        } catch (Exception ex) {
+            logger.error("Error updating preferences", ex);
+        }
     }
 
     public boolean startMatch(UUID roomId, UUID tableId) {

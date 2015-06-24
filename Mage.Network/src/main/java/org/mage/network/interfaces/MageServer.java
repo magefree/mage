@@ -13,6 +13,7 @@ import mage.remote.DisconnectReason;
 import mage.utils.MageVersion;
 import mage.view.RoomView;
 import mage.view.TableView;
+import mage.view.UserDataView;
 
 /**
  *
@@ -22,6 +23,7 @@ public interface MageServer {
     
     boolean registerClient(Connection connection, String sessionId, MageVersion version, String host);
     void disconnect(String sessionId, DisconnectReason reason);
+    void setPreferences(String sessionId, UserDataView userDataView);
 
     void receiveChatMessage(UUID chatId, String sessionId, String message);
     void joinChat(UUID chatId, String sessionId);

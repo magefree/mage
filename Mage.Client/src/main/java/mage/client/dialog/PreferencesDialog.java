@@ -1731,7 +1731,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         try {
-            MageFrame.getClient().updatePreferencesForServer(getUserData());
+            MageFrame.getClient().setPreferences(getUserData());
 
             prefs.flush();
         } catch (BackingStoreException ex) {
@@ -2408,7 +2408,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getClient().updatePreferencesForServer(getUserData());                        
+                        MageFrame.getClient().setPreferences(getUserData());                        
                     }
                 }
             });

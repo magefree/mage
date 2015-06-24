@@ -76,6 +76,7 @@ import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
 import mage.view.TableView;
+import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
@@ -195,7 +196,7 @@ public class ServerMain implements MageServer {
     }
     
     @Override
-    public boolean registerClient(Connection connection, String sessionId, MageVersion version, String host)  {
+    public boolean registerClient(final Connection connection, final String sessionId, final MageVersion version, final String host)  {
         if (version.compareTo(ServerMain.getVersion()) != 0) {
             logger.info("MageVersionException: userName=" + connection.getUsername() + ", version=" + version);
             LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, connection.getUsername(), version.toString(), ServerMain.getVersion().toString(), sessionId);
@@ -206,15 +207,10 @@ public class ServerMain implements MageServer {
         return SessionManager.getInstance().registerUser(sessionId, connection, host);
     }
 
-//    @Override
-//    public boolean setUserData(final String userName, final String sessionId, final UserDataView userDataView) throws MageException {
-//        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
-//            @Override
-//            public Boolean execute() throws MageException {
-//                return SessionManager.getInstance().setUserData(userName, sessionId, userDataView);
-//            }
-//        });
-//    }
+    @Override
+    public void setPreferences(final String sessionId, final UserDataView userDataView) {
+        SessionManager.getInstance().setUserData(sessionId, userDataView);
+    }
 //
 //    @Override
 //    public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {

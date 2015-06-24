@@ -1,5 +1,6 @@
 package org.mage.network.handlers.client;
 
+import org.mage.network.model.SetPreferencesRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.view.RoomView;
 import mage.view.TableView;
+import mage.view.UserDataView;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.ChatMessageRequest;
@@ -186,6 +188,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void sendPlayerAction(PlayerAction action, UUID gameId, Serializable data) {
         ctx.writeAndFlush(new PlayerActionRequest(action, gameId, data)).addListener(WriteListener.getInstance());
+    }
+
+    public void setPreferences(UserDataView view) {
+        ctx.writeAndFlush(new SetPreferencesRequest(view)).addListener(WriteListener.getInstance());
     }
 
 }
