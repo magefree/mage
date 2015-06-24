@@ -138,6 +138,7 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("FUT", "Future Sight");
         setsAliases.put("FVD", "From the Vault: Dragons");
         setsAliases.put("FVE", "From the Vault: Exiled");
+        setsAliases.put("FVL", "From the Vault: Legends");
         setsAliases.put("FVR", "From the Vault: Relics");
         setsAliases.put("GPT", "Guildpact");
         setsAliases.put("GPX", "Grand Prix");
@@ -214,6 +215,10 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ULG", "Urza's Legacy");
         setsAliases.put("UNH", "Unhinged");
         setsAliases.put("USG", "Urza's Saga");
+        setsAliases.put("V12", "From the Vault: Realms");
+        setsAliases.put("V13", "From the Vault: Twenty");
+        setsAliases.put("V14", "From the Vault: Annihilation (2014)");
+        setsAliases.put("V15", "From the Vault: Angels (2015)");
         setsAliases.put("VG1", "Vanguard Set 1");
         setsAliases.put("VG2", "Vanguard Set 2");
         setsAliases.put("VG3", "Vanguard Set 3");

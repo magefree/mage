@@ -52,6 +52,7 @@ Provoke|new|
 Prowess|new|
 Reach|instance|
 Rebound|new|
+Renown|number|
 Scavenge|cost|
 Shadow|instance|
 Shroud|instance|

@@ -15,12 +15,11 @@ import java.io.OutputStream;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
-
 import javax.swing.BoundedRangeModel;
 import javax.swing.DefaultBoundedRangeModel;
-
 import org.mage.plugins.card.dl.beans.properties.Property;
 import org.mage.plugins.card.dl.lm.AbstractLaternaBean;
+import org.mage.plugins.card.utils.CardImageUtils;
 
 
 /**
@@ -86,9 +85,11 @@ public class DownloadJob extends AbstractLaternaBean {
      */
     public void setError(String message, Exception error) {
         if (message == null) {
-            message = error.toString();
+            
+            message = "Download of " + this.getName() + "from " + this.getSource().toString() + " caused error: " + error.toString();
         }
-        log.warn(message, error);
+//        log.warn(message, error);
+        log.warn(message);
         this.state.setValue(State.ABORTED);
         this.error.setValue(error);
         this.message.setValue(message);
@@ -132,11 +133,11 @@ public class DownloadJob extends AbstractLaternaBean {
     }
 
     public static Source fromURL(final String url) {
-        return fromURL(null, url);
+        return fromURL(CardImageUtils.getProxyFromPreferences(), url);
     }
 
     public static Source fromURL(final URL url) {
-        return fromURL(null, url);
+        return fromURL(CardImageUtils.getProxyFromPreferences(), url);
     }
 
     public static Source fromURL(final Proxy proxy, final String url) {
@@ -159,6 +160,12 @@ public class DownloadJob extends AbstractLaternaBean {
             public int length() throws IOException {
                 return getConnection().getContentLength();
             }
+
+            @Override
+            public String toString() {
+                return proxy != null ? proxy.type().toString()+" " :"" + url;
+            }
+            
         };
     }
 
@@ -182,6 +189,11 @@ public class DownloadJob extends AbstractLaternaBean {
             public int length() throws IOException {
                 return getConnection().getContentLength();
             }
+            
+            @Override
+            public String toString() {
+                return proxy != null ? proxy.type().toString()+" " :"" + url;
+            }            
         };
     }
 

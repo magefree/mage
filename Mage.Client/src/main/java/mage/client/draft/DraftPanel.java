@@ -152,9 +152,16 @@ public class DraftPanel extends javax.swing.JPanel {
     }
 
     public void updateDraft(DraftView draftView) {        
-        this.txtPack1.setText(draftView.getSets().get(0));
-        this.txtPack2.setText(draftView.getSets().get(1));
-        this.txtPack3.setText(draftView.getSets().get(2));
+        if (draftView.getSets().size() != 3){
+            // Random draft
+            this.txtPack1.setText("Random Boosters");
+            this.txtPack2.setText("Random Boosters");
+            this.txtPack3.setText("Random Boosters");
+        }else{
+            this.txtPack1.setText(draftView.getSets().get(0));
+            this.txtPack2.setText(draftView.getSets().get(1));
+            this.txtPack3.setText(draftView.getSets().get(2));
+        }
         this.chkPack1.setSelected(draftView.getBoosterNum() > 0);
         this.chkPack2.setSelected(draftView.getBoosterNum() > 1);
         this.chkPack3.setSelected(draftView.getBoosterNum() > 2);

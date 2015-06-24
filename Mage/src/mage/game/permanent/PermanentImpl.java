@@ -91,6 +91,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean flipped;
     protected boolean transformed;
     protected boolean monstrous;
+    protected boolean renown;
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected UUID originalControllerId;
@@ -1263,6 +1264,16 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public void setMonstrous(boolean value) {
         this.monstrous = value;
+    }
+
+    @Override
+    public boolean isRenown() {
+        return this.renown;
+    }
+
+    @Override
+    public void setRenown(boolean value) {
+        this.renown = value;
     }
 
     @Override

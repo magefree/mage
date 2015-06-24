@@ -1,5 +1,21 @@
 package org.mage.plugins.card;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLayeredPane;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.constants.Rarity;
@@ -20,19 +36,12 @@ import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
+import org.mage.plugins.card.dl.sources.CardFrames;
 import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-import java.util.*;
-import java.util.List;
 
 /**
  * {@link CardPlugin} implementation.
@@ -494,6 +503,11 @@ public class CardPluginImpl implements CardPlugin {
         it = new GathererSets(imagesPath);
         for(DownloadJob job:it) {
                 g.getDownloader().add(job);
+        }
+
+        it = new CardFrames(imagesPath);
+        for(DownloadJob job:it) {
+            g.getDownloader().add(job);
         }
 
         it = new DirectLinksForDownload(imagesPath);

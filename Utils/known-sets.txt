@@ -47,6 +47,14 @@ Fifth Dawn|fifthdawn|
 Fifth Edition|fifthedition|
 Fourth Edition|fourthedition|
 Friday Night Magic|fridaynightmagic|
+From the Vault: Angels|ftvangels||
+From the Vault: Annihilation|ftvannihilation|
+From the Vault: Dragons|ftvdragons|
+From the Vault: Exiled|ftvexiled|
+From the Vault: Legends|ftvlegends|
+From the Vault: Realms|ftvrealms|
+From the Vault: Relics|ftvrelics|
+From the Vault: Twenty|ftvtwenty|
 Future Sight|futuresight|
 Game Day|gameday|
 Gatecrash|gatecrash|
@@ -100,6 +108,9 @@ Planeshift|planeshift|
 Portal Second Age|portalsecondage|
 Portal Three Kingdoms|portalthreekingdoms|
 Portal|portal|
+Premium Deck Series: Graveborn|pdsgraveborn|
+Premium Deck Series: Fire and Lightning|pdsfireandlightning|
+Premium Deck Series: Slivers|pdsslivers|
 Prerelease Events|prereleaseevents|
 Prophecy|prophecy|
 Ravnica: City of Guilds|ravnica|

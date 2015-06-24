@@ -59,6 +59,7 @@ Fate Reforged|FRF|
 Friday Night Magic|FNMP|
 From the Vault: Dragons|FVD|
 From the Vault: Exiled|FVE|
+From the Vault: Legends|FVL|
 From the Vault: Relics|FVR|
 Future Sight|FUT|
 Gatecrash|GTC|
@@ -110,6 +111,9 @@ Nemesis|NMS|
 Odyssey|ODY|
 Onslaught|ONS|
 Prophecy|PCY|
+Premium Deck Series: Fire and Lightning|PD2|
+Premium Deck Series: Graveborn|PD3|
+Premium Deck Series: Slivers|PDS|
 Planar Chaos|PLC|
 Planeshift|PLS|
 Portal|POR|
@@ -140,6 +144,10 @@ Unhinged|UNH|
 Urza's Destiny|UDS|
 Urza's Legacy|ULG|
 Urza's Saga|USG|
+From the Vault: Realms|V12|
+From the Vault: Twenty|V13|
+From the Vault: Annihilation|V14|
+From the Vault: Angels|V15|
 Vanguard Set 1|VG1|
 Vanguard Set 2|VG2|
 Vanguard Set 3|VG3|
