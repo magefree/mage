@@ -1,8 +1,14 @@
 package org.mage.plugins.card.utils;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.HashMap;
+import java.util.prefs.Preferences;
+import mage.client.MageFrame;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
 import net.java.truevfs.access.TFile;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.images.CardDownloadData;
@@ -149,5 +155,16 @@ public class CardImageUtils {
         }
 
         return imageDir + TFile.separator + imageName;
+    }
+    
+    public static Proxy getProxyFromPreferences() {
+        Preferences prefs = MageFrame.getPreferences();
+        Connection.ProxyType proxyType = Connection.ProxyType.valueByText(prefs.get("proxyType", "None"));
+        if (!proxyType.equals(ProxyType.NONE)) {
+            String proxyServer = prefs.get("proxyAddress", "");
+            int proxyPort = Integer.parseInt(prefs.get("proxyPort", "0"));
+            return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyServer, proxyPort));
+        }
+        return null;
     }
 }
