@@ -37,7 +37,7 @@ public class ChargingGriffin extends mage.sets.magic2014.ChargingGriffin {
 
     public ChargingGriffin(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 996;
+        this.cardNumber = 9;
         this.expansionSetCode = "ORI";
     }
 
