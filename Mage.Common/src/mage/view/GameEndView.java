@@ -107,9 +107,9 @@ public class GameEndView implements Serializable {
                 }
             } else if (matchPlayer.getPlayer().hasIdleTimeout()) {
                 if (matchPlayer.getPlayer().equals(you)) {
-                    additonalText.append("You lost the match for beeing idle. ");
+                    additonalText.append("You lost the match for being idle. ");
                 } else {
-                    additonalText.append(matchPlayer.getName()).append(" lost for beeing idle. ");
+                    additonalText.append(matchPlayer.getName()).append(" lost for being idle. ");
                 }
             } else if (matchPlayer.hasQuit()) {
                 if (matchPlayer.getPlayer().equals(you)) {

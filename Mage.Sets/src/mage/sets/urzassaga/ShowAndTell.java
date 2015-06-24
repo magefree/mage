@@ -43,7 +43,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -76,11 +75,12 @@ class ShowAndTellEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("artifact, creature, enchantment, or land card");
 
     static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.ENCHANTMENT),
-                new CardTypePredicate(CardType.LAND)));
+        List<CardTypePredicate> cardTypes = new ArrayList<>();
+        cardTypes.add(new CardTypePredicate(CardType.ARTIFACT));
+        cardTypes.add(new CardTypePredicate(CardType.CREATURE));
+        cardTypes.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        cardTypes.add(new CardTypePredicate(CardType.LAND));
+        filter.add(Predicates.or(cardTypes));
     }
 
     public ShowAndTellEffect() {
@@ -105,24 +105,23 @@ class ShowAndTellEffect extends OneShotEffect {
         }
         List<Card> cardsToPutIntoPlay = new ArrayList<>();
         TargetCardInHand target = new TargetCardInHand(filter);
-        PlayerList playerList = game.getPlayerList().copy();
-        playerList.setCurrent(game.getActivePlayerId());
-        Player player = game.getPlayer(game.getActivePlayerId());
-        do {
-            if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
-                target.clearChosen();
-                if (player.chooseTarget(outcome, target, source, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        cardsToPutIntoPlay.add(card);
+        
+        for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
+                    target.clearChosen();
+                    if (player.chooseTarget(outcome, target, source, game)) {
+                        Card card = game.getCard(target.getFirstTarget());
+                        if (card != null) {
+                            cardsToPutIntoPlay.add(card);
+                        }
                     }
-                }
+                }                
             }
-            player = playerList.getNextInRange(controller, game);
-        } while (!player.getId().equals(game.getActivePlayerId()));
-
+        }
         for (Card card: cardsToPutIntoPlay) {
-            player = game.getPlayer(card.getOwnerId());
+            Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
                 player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId());
             }
