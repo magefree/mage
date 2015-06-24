@@ -1,6 +1,5 @@
 package org.mage.network.handlers.client;
 
-import org.mage.network.model.SetPreferencesRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.io.Serializable;
@@ -29,12 +28,14 @@ import org.mage.network.model.LeaveChatRequest;
 import org.mage.network.model.LeaveTableRequest;
 import org.mage.network.model.PlayerActionRequest;
 import org.mage.network.model.RemoveTableRequest;
+import org.mage.network.model.SendFeedbackRequest;
 import org.mage.network.model.SendPlayerBooleanRequest;
 import org.mage.network.model.SendPlayerIntegerRequest;
 import org.mage.network.model.SendPlayerManaTypeRequest;
 import org.mage.network.model.SendPlayerStringRequest;
 import org.mage.network.model.SendPlayerUUIDRequest;
 import org.mage.network.model.ServerMessagesRequest;
+import org.mage.network.model.SetPreferencesRequest;
 import org.mage.network.model.StartMatchRequest;
 import org.mage.network.model.SwapSeatRequest;
 import org.mage.network.model.TableWaitingRequest;
@@ -120,6 +121,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         uuidQueue.clear();
         ctx.writeAndFlush(new JoinGameRequest(gameId)).addListener(WriteListener.getInstance());
         return uuidQueue.take();
+    }
+
+    public void sendFeedback(String title, String type, String message, String email) throws Exception {
+        ctx.writeAndFlush(new SendFeedbackRequest(title, type, message, email)).addListener(WriteListener.getInstance());
     }
 
     public void joinChat(UUID chatId) {

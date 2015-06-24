@@ -24,6 +24,7 @@ public interface MageServer {
     boolean registerClient(Connection connection, String sessionId, MageVersion version, String host);
     void disconnect(String sessionId, DisconnectReason reason);
     void setPreferences(String sessionId, UserDataView userDataView);
+    void sendFeedbackMessage(String sessionId, String title, String type, String message, String email);
 
     void receiveChatMessage(UUID chatId, String sessionId, String message);
     void joinChat(UUID chatId, String sessionId);

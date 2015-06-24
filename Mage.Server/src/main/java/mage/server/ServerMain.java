@@ -59,6 +59,7 @@ import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.game.PlayerFactory;
 import mage.server.services.LogKeys;
+import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
@@ -1009,21 +1010,18 @@ public class ServerMain implements MageServer {
 //             }
 //        });
 //    }
-//
-//    @Override
-//    public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
-//        if (title != null && message != null) {
-//            execute("sendFeedbackMessage", sessionId, new Action() {
-//                @Override
-//                public void execute() {
-//                    String host = SessionManager.getInstance().getSession(sessionId).getHost();
-//                    FeedbackServiceImpl.instance.feedback(username, title, type, message, email, host);
-//                    LogServiceImpl.instance.log(LogKeys.KEY_FEEDBACK_ADDED, sessionId, username, host);
-//                }
-//            });
-//        }
-//    }
-//    
+
+    @Override
+    public void sendFeedbackMessage(final String sessionId, final String title, final String type, final String message, final String email) {
+        if (title != null && message != null) {
+            Session session = SessionManager.getInstance().getSession(sessionId);
+            String host = session.getHost();
+            String username = UserManager.getInstance().getUser(session.getUserId()).getName();
+            FeedbackServiceImpl.instance.feedback(username, title, type, message, email, host);
+            LogServiceImpl.instance.log(LogKeys.KEY_FEEDBACK_ADDED, sessionId, username, host);
+        }
+    }
+
 //    @Override
 //    public void sendBroadcastMessage(final String sessionId, final String message) throws MageException {
 //        if (message != null) {

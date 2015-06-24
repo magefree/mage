@@ -203,7 +203,13 @@ public class Client {
     }
 
     public boolean sendFeedback(String title, String type, String message, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.sendFeedback(title, type, message, email);
+            return true;
+        } catch (Exception ex) {
+            logger.error("Error sending feedback", ex);
+        }
+        return false;
     }
 
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String human, int i, DeckCardLists importDeck, String text) {
