@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.cards.decks.DeckCardLists;
 import mage.choices.Choice;
+import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
+import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
@@ -14,9 +17,11 @@ import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
+import mage.view.RoomView;
+import mage.view.TableView;
+import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.mage.network.Client;
-
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -28,18 +33,20 @@ public class TestClient implements MageClient {
 
     private Client client;
     private ServerState serverState;
+    private boolean joinedTableFired = false;
     
     public TestClient() {
         client = new Client(this);
     }
     
-    public boolean connect() {
+    public boolean connect(String userName) {
         Connection connection = new Connection();
         connection.setHost("localhost");
         connection.setPort(17171);
         connection.setSSL(true);
-        connection.setUsername("test_user");
+        connection.setUsername(userName);
         connection.setForceDBComparison(false);
+        connection.setUserData(new UserDataView(51, false, false, false, new UserSkipPrioritySteps(), "world", false));
         return client.connect(connection, MageVersion.getCurrent());
     }
     
@@ -83,7 +90,11 @@ public class TestClient implements MageClient {
 
     @Override
     public void joinedTable(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        joinedTableFired = true;
+    }
+    
+    public boolean isJointedTableFired() {
+        return joinedTableFired;
     }
 
     @Override
@@ -159,4 +170,15 @@ public class TestClient implements MageClient {
         return serverState.getMainRoomId();
     }
     
+    public RoomView getRoom(UUID roomId) {
+        return client.getRoom(roomId);
+    }
+    
+    public TableView createTable(UUID roomId, MatchOptions options) {
+        return client.createTable(roomId, options);
+    }
+    
+    public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
+        return client.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
+    }
 }
