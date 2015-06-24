@@ -25,56 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.antiquities;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
+
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class AshnodsTransmogrant extends mage.sets.fifthedition.AshnodsTransmogrant {
 
-    private int monstrosityValue;
-
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public AshnodsTransmogrant(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 5;
+        this.expansionSetCode = "ATQ";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
+    public AshnodsTransmogrant(final AshnodsTransmogrant card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public AshnodsTransmogrant copy() {
+        return new AshnodsTransmogrant(this);
     }
 }

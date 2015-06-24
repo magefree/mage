@@ -25,56 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.fifthedition;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
+
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class UnstableMutation extends mage.sets.arabiannights.UnstableMutation {
 
-    private int monstrosityValue;
-
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public UnstableMutation(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 131;
+        this.expansionSetCode = "5ED";
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
+    public UnstableMutation(final UnstableMutation card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public UnstableMutation copy() {
+        return new UnstableMutation(this);
     }
 }

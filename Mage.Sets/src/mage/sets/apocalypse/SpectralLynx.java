@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,67 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.apocalypse;
 
-package mage.game.tournament;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import mage.game.draft.DraftCube;
+import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.RegenerateSourceEffect;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
+
  */
-public class LimitedOptions implements Serializable {
+public class SpectralLynx extends CardImpl {
 
-    protected List<String> sets = new ArrayList<>();
-    protected int constructionTime;
-    protected String draftCubeName;
-    protected DraftCube draftCube;
-    protected int numberBoosters;
-    protected boolean isChaos;
+    private static final FilterCard filter = new FilterCard("green");
 
-    public List<String> getSetCodes() {
-        return sets;
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
     }
 
-    public int getConstructionTime() {
-        return constructionTime;
+    public SpectralLynx(UUID ownerId) {
+        super(ownerId, 17, "Spectral Lynx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "APC";
+        this.subtype.add("Cat");
+        this.subtype.add("Spirit");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Protection from green
+        this.addAbility(new ProtectionAbility(filter));
+        // {B}: Regenerate Spectral Lynx.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public void setConstructionTime(int constructionTime) {
-        this.constructionTime = constructionTime;
+    public SpectralLynx(final SpectralLynx card) {
+        super(card);
     }
 
-    public String getDraftCubeName() {
-        return draftCubeName;
-    }
-
-    public void setDraftCubeName(String draftCubeName) {
-        this.draftCubeName = draftCubeName;
-    }
-
-    public DraftCube getDraftCube() {
-        return draftCube;
-    }
-
-    public void setDraftCube(DraftCube draftCube) {
-        this.draftCube = draftCube;
-    }
-
-    public int getNumberBoosters() {
-        return numberBoosters;
-    }
-
-    public void setNumberBoosters(int numberBoosters) {
-        this.numberBoosters = numberBoosters;
-    }
-
-    public boolean getIsChaos(){
-        return isChaos;
-    }
-    public void setIsChaos(boolean isChaos){
-        this.isChaos = isChaos;
+    @Override
+    public SpectralLynx copy() {
+        return new SpectralLynx(this);
     }
 }

@@ -25,56 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.magicorigins;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.RenownAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
  * @author LevelX2
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class RhoxMaulers extends CardImpl {
 
-    private int monstrosityValue;
+    public RhoxMaulers(UUID ownerId) {
+        super(ownerId, 196, "Rhox Maulers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Rhino");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Renown 2
+        this.addAbility(new RenownAbility(2));
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
+    public RhoxMaulers(final RhoxMaulers card) {
+        super(card);
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public RhoxMaulers copy() {
+        return new RhoxMaulers(this);
     }
 }

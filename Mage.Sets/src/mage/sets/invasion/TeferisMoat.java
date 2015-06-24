@@ -25,56 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.invasion;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author anonymous
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class TeferisMoat extends mage.sets.timeshifted.TeferisMoat {
 
-    private int monstrosityValue;
-
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public TeferisMoat(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 279;
+        this.expansionSetCode = "INV";
+        this.rarity = Rarity.RARE;
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
+    public TeferisMoat(final TeferisMoat card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public TeferisMoat copy() {
+        return new TeferisMoat(this);
     }
 }

@@ -25,56 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.vintagemasters;
 
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
+
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class SeaDrake extends mage.sets.masterseditionii.SeaDrake {
 
-    private int monstrosityValue;
-
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    public SeaDrake(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 92;
+        this.expansionSetCode = "VMA";
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
+    public SeaDrake(final SeaDrake card) {
+        super(card);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
-    }
-
-    @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public SeaDrake copy() {
+        return new SeaDrake(this);
     }
 }

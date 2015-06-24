@@ -75,6 +75,9 @@ public interface Permanent extends Card, Controllable {
     boolean isMonstrous();
     void setMonstrous(boolean value);
 
+    boolean isRenown();
+    void setRenown(boolean value);
+
     void setCardNumber(int cid);
     void setExpansionSetCode(String expansionSetCode);
     void setRarity(Rarity rarity);

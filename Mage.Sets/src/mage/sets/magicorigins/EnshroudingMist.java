@@ -25,56 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.common;
+package mage.sets.magicorigins;
 
-import mage.abilities.TriggeredAbilityImpl;
+import java.util.UUID;
+import mage.abilities.condition.common.RenownCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class EnshroudingMist extends CardImpl {
 
-    private int monstrosityValue;
+    public EnshroudingMist(UUID ownerId) {
+        super(ownerId, 13, "Enshrouding Mist", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "ORI";
 
-    public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        // Target creature gets +1/+1 until end of turn. Prevent all damage that would dealt to it this turn. If it's renowned, untap it.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1, Duration.EndOfTurn));
+        Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE);
+        effect.setText("Prevent all damage that would dealt to it this turn");
+        this.getSpellAbility().addEffect(effect);
+        OneShotEffect effect2 = new UntapSourceEffect();
+        effect2.setText("untap it");
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(effect2, RenownCondition.getInstance()));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
+        
     }
 
-    public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
-        super(ability);
-        this.monstrosityValue = ability.monstrosityValue;
-    }
-
-    @Override
-    public BecomesMonstrousSourceTriggeredAbility copy() {
-        return new BecomesMonstrousSourceTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_MONSTROUS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            this.monstrosityValue = event.getAmount();
-            return true;
-        }
-        return false;
-    }
-
-    public int getMonstrosityValue() {
-        return monstrosityValue;
+    public EnshroudingMist(final EnshroudingMist card) {
+        super(card);
     }
 
     @Override
-    public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+    public EnshroudingMist copy() {
+        return new EnshroudingMist(this);
     }
 }

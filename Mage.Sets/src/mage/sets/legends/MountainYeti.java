@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,67 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.legends;
 
-package mage.game.tournament;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import mage.game.draft.DraftCube;
+import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.keyword.MountainwalkAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author LoneFox
+
  */
-public class LimitedOptions implements Serializable {
+public class MountainYeti extends CardImpl {
 
-    protected List<String> sets = new ArrayList<>();
-    protected int constructionTime;
-    protected String draftCubeName;
-    protected DraftCube draftCube;
-    protected int numberBoosters;
-    protected boolean isChaos;
+    private static final FilterCard filter = new FilterCard("White");
 
-    public List<String> getSetCodes() {
-        return sets;
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public int getConstructionTime() {
-        return constructionTime;
+    public MountainYeti(UUID ownerId) {
+        super(ownerId, 156, "Mountain Yeti", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        this.expansionSetCode = "LEG";
+        this.subtype.add("Yeti");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Mountainwalk
+        this.addAbility(new MountainwalkAbility());
+        // protection from white
+        this.addAbility(new ProtectionAbility(filter));
     }
 
-    public void setConstructionTime(int constructionTime) {
-        this.constructionTime = constructionTime;
+    public MountainYeti(final MountainYeti card) {
+        super(card);
     }
 
-    public String getDraftCubeName() {
-        return draftCubeName;
-    }
-
-    public void setDraftCubeName(String draftCubeName) {
-        this.draftCubeName = draftCubeName;
-    }
-
-    public DraftCube getDraftCube() {
-        return draftCube;
-    }
-
-    public void setDraftCube(DraftCube draftCube) {
-        this.draftCube = draftCube;
-    }
-
-    public int getNumberBoosters() {
-        return numberBoosters;
-    }
-
-    public void setNumberBoosters(int numberBoosters) {
-        this.numberBoosters = numberBoosters;
-    }
-
-    public boolean getIsChaos(){
-        return isChaos;
-    }
-    public void setIsChaos(boolean isChaos){
-        this.isChaos = isChaos;
+    @Override
+    public MountainYeti copy() {
+        return new MountainYeti(this);
     }
 }
