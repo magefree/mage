@@ -19,6 +19,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * Created by glerman on 22/6/15.
  */
 public class ChronozoaTest extends CardTestPlayerBase {
+  // Flying
+  // Vanishing 3
+  // When Chronozoa dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield.
 
   /**
    * Test that time counters are removed before the draw phase
@@ -26,9 +29,6 @@ public class ChronozoaTest extends CardTestPlayerBase {
   @Test
   public void testVanishing() {
     addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-    // Flying
-    // Vanishing 3
-    // When Chronozoa dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield.
     addCard(Zone.HAND, playerA, "Chronozoa");
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
@@ -46,9 +46,6 @@ public class ChronozoaTest extends CardTestPlayerBase {
   @Test
   public void testDuplicationEffect() {
     addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
-    // Flying
-    // Vanishing 3
-    // When Chronozoa dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield.
     addCard(Zone.HAND, playerA, "Chronozoa");
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
@@ -75,5 +72,30 @@ public class ChronozoaTest extends CardTestPlayerBase {
         Assert.assertEquals(2, counter.getCount());
       }
     }
+  }
+
+  @Test
+  public void testChronozoaDestroyedWithTimeCounters() throws Exception {
+    addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+    addCard(Zone.HAND, playerA, "Chronozoa");
+    addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+    addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+    castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
+    // Destroy Chronozoa the same phase it should duplicate -> due to stack Chronozoa is destroyed before duplication
+    castSpell(7, PhaseStep.UPKEEP, playerB, "Lightning Bolt", "Chronozoa");
+
+    setStopAt(7, PhaseStep.PRECOMBAT_MAIN);
+    execute();
+
+    // Chronozoa in gy
+    assertGraveyardCount(playerA, 1);
+    // Lightning Bolt in gt
+    assertGraveyardCount(playerB, 1);
+
+    // Chronozoa shouldn't duplicate
+    final List<Permanent> creatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE);
+    Assert.assertTrue(creatures.isEmpty());
+
   }
 }
