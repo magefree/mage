@@ -25,54 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
 
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.*;
-
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
+
  */
-public class BlitzHellion extends CardImpl {
+public class GoblinGardener extends mage.sets.urzasdestiny.GoblinGardener {
 
-    public BlitzHellion(UUID ownerId) {
-        super(ownerId, 49, "Blitz Hellion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}{G}");
-        this.expansionSetCode = "ARB";
-        this.subtype.add("Hellion");
-
-
-
-        this.power = new MageInt(7);
-        this.toughness = new MageInt(7);
-
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-
-        // At the beginning of the end step, Blitz Hellion's owner shuffles it into his or her library.
-        Effect effect = new ShuffleIntoLibrarySourceEffect();
-        effect.setText("{this}'s owner shuffles it into his or her library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
+    public GoblinGardener(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 188;
+        this.expansionSetCode = "7ED";
     }
 
-    public BlitzHellion(final BlitzHellion card) {
+    public GoblinGardener(final GoblinGardener card) {
         super(card);
     }
 
     @Override
-    public BlitzHellion copy() {
-        return new BlitzHellion(this);
+    public GoblinGardener copy() {
+        return new GoblinGardener(this);
     }
 }

@@ -25,53 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
- */
-public class LightningShrieker extends CardImpl {
+ * @author LoneFox
 
-    public LightningShrieker(UUID ownerId) {
-        super(ownerId, 106, "Lightning Shrieker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Dragon");
+ */
+public class CeruleanSphinx extends CardImpl {
+
+    public CeruleanSphinx(UUID ownerId) {
+        super(ownerId, 39, "Cerulean Sphinx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Sphinx");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // At the beginning of the end step, Lightning Shrieker's owner shuffles it into his or her library.
+        // {U}: Cerulean Sphinx's owner shuffles it into his or her library.
         Effect effect = new ShuffleIntoLibrarySourceEffect();
         effect.setText("{this}'s owner shuffles it into his or her library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}")));
     }
 
-    public LightningShrieker(final LightningShrieker card) {
+    public CeruleanSphinx(final CeruleanSphinx card) {
         super(card);
     }
 
     @Override
-    public LightningShrieker copy() {
-        return new LightningShrieker(this);
+    public CeruleanSphinx copy() {
+        return new CeruleanSphinx(this);
     }
 }
