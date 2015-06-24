@@ -766,7 +766,6 @@ public class NewTournamentDialog extends MageDialog {
                 }
             });
 
-            //PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
             if (randomPrefs.length() > 0) {
                 for (String exp : randomPrefs.split(";")) {
