@@ -34,7 +34,6 @@
 
 package mage.client.dialog;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -44,6 +43,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 import mage.client.cards.BigCard;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
@@ -61,18 +62,18 @@ import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 public class CardInfoWindowDialog extends MageDialog {
 
     public static enum ShowType { REVEAL, LOOKED_AT, EXILE, GRAVEYARD, OTHER };
-    
+
     private ShowType showType;
     private boolean positioned;
     private String name;
-    
+
     public CardInfoWindowDialog(ShowType showType, String name) {
         this.name = name;
         this.title = name;
         this.showType = showType;
         this.positioned = false;
         initComponents();
-                       
+
         this.setModal(false);
         switch(this.showType) {
             case LOOKED_AT:
@@ -88,20 +89,20 @@ public class CardInfoWindowDialog extends MageDialog {
                 this.setIconifiable(false);
                 this.setClosable(true);
                 this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-                addWindowListener(new WindowAdapter() {            
+                addInternalFrameListener(new InternalFrameAdapter() {
                     @Override
-                    public void windowClosing(WindowEvent e) {
+                    public void internalFrameClosing(InternalFrameEvent e) {
                         CardInfoWindowDialog.this.hideDialog();
                     }
-                });                        
+                });
                 break;
             case EXILE:
                 this.setFrameIcon(new ImageIcon(ImageManagerImpl.getInstance().getExileImage()));
                 break;
             default:
                 // no icon yet
-        }         
-        this.setTitelBarToolTip(name);        
+        }
+        this.setTitelBarToolTip(name);
     }
 
     public void cleanUp() {
@@ -112,17 +113,17 @@ public class CardInfoWindowDialog extends MageDialog {
         cards.loadCards(showCards, bigCard, gameId);
         showAndPositionWindow();
     }
-    
+
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
-        cards.loadCards(showCards, bigCard, gameId, null);                
+        cards.loadCards(showCards, bigCard, gameId, null);
         if (showType.equals(ShowType.GRAVEYARD)) {
             setTitle(name + "'s Graveyard (" + showCards.size() + ")");
-            this.setTitelBarToolTip(name);  
+            this.setTitelBarToolTip(name);
         }
-        showAndPositionWindow();            
+        showAndPositionWindow();
     }
 
-    private void showAndPositionWindow() {        
+    private void showAndPositionWindow() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -142,7 +143,7 @@ public class CardInfoWindowDialog extends MageDialog {
             }
         });
     }
-    
+
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
         boolean changed = cards.loadCards(exile, bigCard, gameId, null);
         if (exile.size() > 0) {

@@ -25,53 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.starter1999;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class LightningShrieker extends CardImpl {
+public class DakmorLancer extends CardImpl {
 
-    public LightningShrieker(UUID ownerId) {
-        super(ownerId, 106, "Lightning Shrieker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Dragon");
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // At the beginning of the end step, Lightning Shrieker's owner shuffles it into his or her library.
-        Effect effect = new ShuffleIntoLibrarySourceEffect();
-        effect.setText("{this}'s owner shuffles it into his or her library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public LightningShrieker(final LightningShrieker card) {
+
+    public DakmorLancer(UUID ownerId) {
+        super(ownerId, 71, "Dakmor Lancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "S99";
+        this.subtype.add("Human");
+        this.subtype.add("Knight");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // When Dakmor Lancer enters the battlefield, destroy target nonblack creature.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+    }
+
+    public DakmorLancer(final DakmorLancer card) {
         super(card);
     }
 
     @Override
-    public LightningShrieker copy() {
-        return new LightningShrieker(this);
+    public DakmorLancer copy() {
+        return new DakmorLancer(this);
     }
 }

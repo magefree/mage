@@ -25,28 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
 
 /**
  *
- * @author LevelX2
- */
-public class ChargingGriffin extends mage.sets.magic2014.ChargingGriffin {
+ * @author LoneFox
 
-    public ChargingGriffin(UUID ownerId) {
+ */
+public class GoblinGardener extends mage.sets.urzasdestiny.GoblinGardener {
+
+    public GoblinGardener(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
-        this.expansionSetCode = "ORI";
+        this.cardNumber = 188;
+        this.expansionSetCode = "7ED";
     }
 
-    public ChargingGriffin(final ChargingGriffin card) {
+    public GoblinGardener(final GoblinGardener card) {
         super(card);
     }
 
     @Override
-    public ChargingGriffin copy() {
-        return new ChargingGriffin(this);
+    public GoblinGardener copy() {
+        return new GoblinGardener(this);
     }
 }

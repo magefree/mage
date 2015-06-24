@@ -25,53 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fatereforged;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class LightningShrieker extends CardImpl {
+public class StormShaman2 extends mage.sets.alliances.StormShaman1 {
 
-    public LightningShrieker(UUID ownerId) {
-        super(ownerId, 106, "Lightning Shrieker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.expansionSetCode = "FRF";
-        this.subtype.add("Dragon");
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // At the beginning of the end step, Lightning Shrieker's owner shuffles it into his or her library.
-        Effect effect = new ShuffleIntoLibrarySourceEffect();
-        effect.setText("{this}'s owner shuffles it into his or her library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
+    public StormShaman2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 119;
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public LightningShrieker(final LightningShrieker card) {
+    public StormShaman2(final StormShaman2 card) {
         super(card);
     }
 
     @Override
-    public LightningShrieker copy() {
-        return new LightningShrieker(this);
+    public StormShaman2 copy() {
+        return new StormShaman2(this);
     }
 }

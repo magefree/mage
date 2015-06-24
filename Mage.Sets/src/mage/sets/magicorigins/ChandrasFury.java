@@ -37,7 +37,7 @@ public class ChandrasFury extends mage.sets.magic2013.ChandrasFury {
 
     public ChandrasFury(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 997;
+        this.cardNumber = 136;
         this.expansionSetCode = "ORI";
     }
 

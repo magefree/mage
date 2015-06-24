@@ -25,28 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
- */
-public class ChargingGriffin extends mage.sets.magic2014.ChargingGriffin {
+ * @author LoneFox
 
-    public ChargingGriffin(UUID ownerId) {
+ */
+public class DakmorLancer extends mage.sets.starter1999.DakmorLancer {
+
+    public DakmorLancer(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 9;
-        this.expansionSetCode = "ORI";
+        this.cardNumber = 126;
+        this.expansionSetCode = "7ED";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public ChargingGriffin(final ChargingGriffin card) {
+    public DakmorLancer(final DakmorLancer card) {
         super(card);
     }
 
     @Override
-    public ChargingGriffin copy() {
-        return new ChargingGriffin(this);
+    public DakmorLancer copy() {
+        return new DakmorLancer(this);
     }
 }
