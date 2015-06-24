@@ -16,6 +16,14 @@ public class MagicCardsImageSource implements CardImageSource {
            
     private static final Map<String, String> setNameTokenReplacement = new HashMap<String, String>() {
         {
+            put("FVL", "from-the-vault-legends");
+            put("FVD", "from-the-vault-dragons");
+            put("FVE", "from-the-vault-exiled");
+            put("FVR", "from-the-vault-relics");
+            put("V12", "from-the-vault-realms");
+            put("V13", "from-the-vault-twenty");
+            put("V14", "from-the-vault-annihilation");
+            put("V15", "from-the-vault-angels");
             put("CLASH", "clash-pack");
             put("TPR", "tempest-remastered");
             put("ORI", "magic-origins");
