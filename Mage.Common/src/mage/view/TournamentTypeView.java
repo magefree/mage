@@ -46,7 +46,7 @@ public class TournamentTypeView implements Serializable {
     private final boolean limited;
     private final boolean cubeBooster;
     private final boolean elimination;
-    private final boolean chaos;
+    private final boolean random;
 
 
     public TournamentTypeView(TournamentType tournamentType) {
@@ -58,7 +58,7 @@ public class TournamentTypeView implements Serializable {
         this.limited = tournamentType.isLimited();
         this.cubeBooster = tournamentType.isCubeBooster();
         this.elimination = tournamentType.isElimination();
-        this.chaos = tournamentType.isChaos();
+        this.random = tournamentType.isRandom();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class TournamentTypeView implements Serializable {
         return elimination;
     }
 
-    public boolean isChaos(){
-        return chaos;
+    public boolean isRandom(){
+        return random;
     }
 }

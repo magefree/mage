@@ -190,6 +190,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_WINS = "newTournamentNumberOfWins";
     public static final String KEY_NEW_TOURNAMENT_PACKS_SEALED = "newTournamentPacksSealed";
     public static final String KEY_NEW_TOURNAMENT_PACKS_DRAFT = "newTournamentPacksDraft";
+    public static final String KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT = "newTournamentPacksRandomDraft";
     public static final String KEY_NEW_TOURNAMENT_PLAYERS_SEALED = "newTournamentPlayersSealed";
     public static final String KEY_NEW_TOURNAMENT_PLAYERS_DRAFT = "newTournamentPlayersDraft";
     public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";

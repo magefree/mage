@@ -44,7 +44,7 @@ public class TournamentType implements Serializable {
     protected boolean draft;        // or sealed
     protected boolean limited;      // or construced
     protected boolean elimination;  // or Swiss
-    protected boolean isChaos;
+    protected boolean isRandom;
 
     protected TournamentType() {}
 
@@ -85,8 +85,8 @@ public class TournamentType implements Serializable {
         return cubeBooster;
     }
     
-    public boolean isChaos(){
-        return this.isChaos;
+    public boolean isRandom(){
+        return this.isRandom;
     }
     
 }
