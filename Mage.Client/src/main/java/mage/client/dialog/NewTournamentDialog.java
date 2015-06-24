@@ -80,12 +80,12 @@ public class NewTournamentDialog extends MageDialog {
     private UUID roomId;
     private final Session session;
     private String lastSessionId;
-    private JList chaosList = new JList();
+    private JList randomList = new JList();
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
-    private final List<String> chaosPacks = new ArrayList<>();
     private final int CONSTRUCTION_TIME_MIN = 6;
     private final int CONSTRUCTION_TIME_MAX = 30;
+    private final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
     private boolean automaticChange = false;
 
@@ -178,7 +178,7 @@ public class NewTournamentDialog extends MageDialog {
         pnlOtherPlayers = new javax.swing.JPanel();
         btnOk = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        pnlChaosPacks = new javax.swing.JPanel();
+        pnlRandomPacks = new javax.swing.JPanel();
 
         setTitle("New Tournament");
 
@@ -341,8 +341,9 @@ public class NewTournamentDialog extends MageDialog {
             }
         });
 
-        pnlChaosPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlChaosPacks.setLayout(new java.awt.GridLayout(0, 1, 2, 0));
+        pnlRandomPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlRandomPacks.setToolTipText("");
+        pnlRandomPacks.setLayout(new java.awt.GridLayout(0, 1, 2, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -426,7 +427,7 @@ public class NewTournamentDialog extends MageDialog {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(player1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlChaosPacks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlRandomPacks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -469,7 +470,7 @@ public class NewTournamentDialog extends MageDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlChaosPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnlRandomPacks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -529,18 +530,19 @@ public class NewTournamentDialog extends MageDialog {
         }
         if (tournamentType.isLimited()) {
             tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
+            tOptions.getLimitedOptions().setIsRandom(tournamentType.isRandom());
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
-            } else if (tournamentType.isChaos()){
-                for (Integer pack: chaosList.getSelectedIndices()){
-                    String packStr = (String)chaosList.getModel().getElementAt(pack);
+            } else if (tournamentType.isRandom()) {
+                for (Object pack : randomList.getSelectedValuesList()) {
+                    String packStr = (String) pack;
                     String code = packStr.substring(0, 3);
                     tOptions.getLimitedOptions().getSetCodes().add(code);
                 }
-                    if (tOptions.getLimitedOptions().getSetCodes().size() < 2){
-                        // At least two sets must be chosen.
-                        return;
-                    }
+                if (tOptions.getLimitedOptions().getSetCodes().size() < 2) {
+                    // At least two sets must be chosen.
+                    return;
+                }
             } else {
                 for (JComboBox pack: packs) {
                     tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
@@ -653,8 +655,8 @@ public class NewTournamentDialog extends MageDialog {
         createPlayers((Integer) spnNumPlayers.getValue() - 1);
         
         if (tournamentType.isLimited()) {
-            if (tournamentType.isChaos()){
-                createChaosPacks();
+            if (tournamentType.isRandom()){
+                createRandomPacks();
             }else{
                 createPacks(tournamentType.getNumBoosters());
             }
@@ -696,19 +698,19 @@ public class NewTournamentDialog extends MageDialog {
                 this.cbDraftCube.setVisible(true);
                 this.lblPacks.setVisible(false);
                 this.pnlPacks.setVisible(false);
-                this.pnlChaosPacks.setVisible(false);
-            } else if (tournamentType.isChaos()){
+                this.pnlRandomPacks.setVisible(false);
+            } else if (tournamentType.isRandom()){
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
-                this.pnlChaosPacks.setVisible(true);
+                this.pnlRandomPacks.setVisible(true);
                 this.pnlPacks.setVisible(false);
             } else {
                 this.lblDraftCube.setVisible(false);
                 this.cbDraftCube.setVisible(false);
                 this.lblPacks.setVisible(true);
                 this.pnlPacks.setVisible(true);
-                this.pnlChaosPacks.setVisible(false);
+                this.pnlRandomPacks.setVisible(false);
             }
         } else {
             // construced
@@ -716,21 +718,24 @@ public class NewTournamentDialog extends MageDialog {
             this.cbDraftCube.setVisible(false);
             this.pnlPacks.setVisible(false);
             this.pnlPacks.setVisible(false);
-            this.pnlChaosPacks.setVisible(false);
+            this.pnlRandomPacks.setVisible(false);
         }
     }
 
-private void createChaosPacks() {
-        if (pnlChaosPacks.getComponentCount() == 0 ){
-            DefaultListModel chaosListModel = new DefaultListModel();
-            chaosList = new JList(chaosListModel);
+    private void createRandomPacks() {
+        if (pnlRandomPacks.getComponentCount() == 0) {
+            
+            DefaultListModel randomListModel = new DefaultListModel();
+            randomList = new JList(randomListModel);
+            randomList.setToolTipText(randomDraftDescription);
             ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
-            for (ExpansionInfo expansion: allExpansions){
+            for (ExpansionInfo expansion : allExpansions) {
                 String exp = expansion.getCode() + " - " + expansion.getName();
-                chaosListModel.addElement(exp);
+                randomListModel.addElement(exp);
             }
-            chaosList.setSelectionModel(new DefaultListSelectionModel() {
+            randomList.setSelectionModel(new DefaultListSelectionModel() {
                 private boolean mGestureStarted;
+
                 @Override
                 public void setSelectionInterval(int index0, int index1) {
                     // Toggle only one element while the user is dragging the mouse
@@ -760,16 +765,25 @@ private void createChaosPacks() {
                     }
                 }
             });
-            chaosList.setSelectionInterval(0, chaosListModel.size()-1);
-            JScrollPane list1scr = new JScrollPane(chaosList);
-            chaosList.setVisibleRowCount(4);
-            pnlChaosPacks.add(list1scr);
+
+            //PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
+            String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
+            if (randomPrefs.length() > 0) {
+                for (String exp : randomPrefs.split(";")) {
+                    randomList.setSelectedValue(exp, false);
+                }
+            } else {
+                randomList.setSelectionInterval(0, randomListModel.size() - 1);
+            }
+            JScrollPane list1scr = new JScrollPane(randomList);
+            randomList.setVisibleRowCount(4);
+            pnlRandomPacks.add(list1scr);
         }
         this.pack();
         this.revalidate();
         this.repaint();
     }
-    
+
     private void createPacks(int numPacks) {
         while (packs.size() > numPacks) {
             pnlPacks.remove(packs.get(packs.size() - 1));
@@ -916,7 +930,7 @@ private void createChaosPacks() {
             if (tournamentType.isDraft()) {
                 numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
                 setTournamentOptions(numPlayers);
-                if (!tournamentType.isChaos()){
+                if (!tournamentType.isRandom()){
                     loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
                 }
 
@@ -985,11 +999,19 @@ private void createChaosPacks() {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, Integer.toString(tOptions.getPlayerTypes().size()));
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, draftOptions.getTiming().name());
             }
-        }
-        if (tOptions.getTournamentType().startsWith("Booster")) {
             String deckFile = this.player1Panel.getDeckFile();
             if (deckFile != null && !deckFile.isEmpty()) {
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
+            }
+
+            if (tOptions.getLimitedOptions().getIsRandom()){
+                // save random boosters to prefs
+                StringBuilder packlist = new StringBuilder();
+                for (Object pack: randomList.getSelectedValuesList()){                    
+                    packlist.append((String)pack);
+                    packlist.append(";");
+                }
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
             }
         }
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, (tOptions.isWatchingAllowed()?"Yes":"No"));
@@ -1031,11 +1053,11 @@ private void createChaosPacks() {
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblTournamentType;
     private mage.client.table.NewPlayerPanel player1Panel;
-    private javax.swing.JPanel pnlChaosPacks;
     private javax.swing.JPanel pnlDraftOptions;
     private javax.swing.JPanel pnlOtherPlayers;
     private javax.swing.JPanel pnlPacks;
     private javax.swing.JPanel pnlPlayers;
+    private javax.swing.JPanel pnlRandomPacks;
     private javax.swing.JSpinner spnConstructTime;
     private javax.swing.JSpinner spnFreeMulligans;
     private javax.swing.JSpinner spnNumPlayers;

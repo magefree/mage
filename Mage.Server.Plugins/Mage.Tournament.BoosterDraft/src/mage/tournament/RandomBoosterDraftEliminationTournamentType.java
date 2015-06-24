@@ -34,10 +34,10 @@ import mage.game.tournament.TournamentType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ChaosBoosterDraftEliminationTournamentType extends TournamentType {
+public class RandomBoosterDraftEliminationTournamentType extends TournamentType {
 
-    public ChaosBoosterDraftEliminationTournamentType() {
-        this.name = "Booster Draft Elimination (Chaos)";
+    public RandomBoosterDraftEliminationTournamentType() {
+        this.name = "Booster Draft Elimination (Random)";
         this.maxPlayers = 16;
         this.minPlayers = 4;
         this.numBoosters = 3;
@@ -45,7 +45,7 @@ public class ChaosBoosterDraftEliminationTournamentType extends TournamentType {
         this.limited = true;
         this.cubeBooster = false;
         this.elimination = false;
-        this.isChaos = true;
+        this.isRandom = true;
     }
 
 }
