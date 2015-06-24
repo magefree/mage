@@ -44,7 +44,7 @@ public class LimitedOptions implements Serializable {
     protected String draftCubeName;
     protected DraftCube draftCube;
     protected int numberBoosters;
-    protected boolean isChaos;
+    protected boolean isRandom;
 
     public List<String> getSetCodes() {
         return sets;
@@ -82,10 +82,10 @@ public class LimitedOptions implements Serializable {
         this.numberBoosters = numberBoosters;
     }
 
-    public boolean getIsChaos(){
-        return isChaos;
+    public boolean getIsRandom(){
+        return isRandom;
     }
-    public void setIsChaos(boolean isChaos){
-        this.isChaos = isChaos;
+    public void setIsRandom(boolean isRandom){
+        this.isRandom = isRandom;
     }
 }
