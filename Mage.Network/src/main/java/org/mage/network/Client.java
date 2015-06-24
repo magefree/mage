@@ -13,6 +13,7 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import io.netty.handler.timeout.IdleStateHandler;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -23,7 +24,6 @@ import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.interfaces.ServerState;
-import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
 import mage.view.DraftPickView;
@@ -34,11 +34,10 @@ import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
-import org.mage.network.handlers.MessageHandler;
-import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
+import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.model.MessageType;
 
@@ -279,8 +278,12 @@ public class Client {
         }
     }
 
-    public void sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sendPlayerAction(PlayerAction passPriorityAction, UUID gameId, Serializable data) {
+        try {
+            clientMessageHandler.sendPlayerAction(passPriorityAction, gameId, data);
+        } catch (Exception ex) {
+            logger.error("Error swaping seats", ex);
+        }
     }
 
     public TableView getTable(UUID roomId, UUID tableId) {

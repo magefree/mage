@@ -1,9 +1,11 @@
 package org.mage.network.interfaces;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.interfaces.ServerState;
 import mage.remote.Connection;
@@ -45,6 +47,7 @@ public interface MageServer {
     void sendPlayerManaType(UUID gameId, UUID playerId, String sessionId, ManaType data);
     void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data);
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data);
+    void sendPlayerAction(PlayerAction playerAction, UUID gameId, String sessionId, Serializable data);
     
     void pingTime(long milliSeconds, String sessionId);
 

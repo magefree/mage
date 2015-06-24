@@ -1,18 +1,15 @@
 package org.mage.network.handlers.client;
 
-import org.mage.network.model.SendPlayerManaTypeRequest;
-import org.mage.network.model.SendPlayerIntegerRequest;
-import org.mage.network.model.SendPlayerStringRequest;
-import org.mage.network.model.SendPlayerUUIDRequest;
-import org.mage.network.model.SendPlayerBooleanRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
+import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
 import mage.view.RoomView;
 import mage.view.TableView;
@@ -28,7 +25,13 @@ import org.mage.network.model.JoinGameRequest;
 import org.mage.network.model.JoinTableRequest;
 import org.mage.network.model.LeaveChatRequest;
 import org.mage.network.model.LeaveTableRequest;
+import org.mage.network.model.PlayerActionRequest;
 import org.mage.network.model.RemoveTableRequest;
+import org.mage.network.model.SendPlayerBooleanRequest;
+import org.mage.network.model.SendPlayerIntegerRequest;
+import org.mage.network.model.SendPlayerManaTypeRequest;
+import org.mage.network.model.SendPlayerStringRequest;
+import org.mage.network.model.SendPlayerUUIDRequest;
 import org.mage.network.model.ServerMessagesRequest;
 import org.mage.network.model.StartMatchRequest;
 import org.mage.network.model.SwapSeatRequest;
@@ -179,6 +182,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void sendPlayerManaType(UUID gameId, UUID playerId, ManaType manaType) {
         ctx.writeAndFlush(new SendPlayerManaTypeRequest(gameId, playerId, manaType)).addListener(WriteListener.getInstance());
+    }
+
+    public void sendPlayerAction(PlayerAction action, UUID gameId, Serializable data) {
+        ctx.writeAndFlush(new PlayerActionRequest(action, gameId, data)).addListener(WriteListener.getInstance());
     }
 
 }

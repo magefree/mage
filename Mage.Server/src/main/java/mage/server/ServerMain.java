@@ -28,88 +28,59 @@
 
 package mage.server;
 
-import io.netty.channel.ChannelId;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.Serializable;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
-import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.constants.TableState;
-import mage.game.GameException;
-import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchType;
-import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
-import mage.interfaces.Action;
-import mage.interfaces.ActionWithResult;
-//import mage.interfaces.MageServer;
-import org.mage.network.interfaces.MageServer;
 import mage.interfaces.ServerState;
-//import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
 import mage.remote.DisconnectReason;
-import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
-import mage.server.draft.DraftManager;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.game.PlayerFactory;
-import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
-import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
-import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.SystemUtil;
-import mage.server.util.ThreadExecutor;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
-import mage.utils.ActionWithBooleanResult;
-import mage.utils.ActionWithNullNegativeResult;
-import mage.utils.ActionWithTableViewResult;
-import mage.utils.CompressUtil;
 import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.DraftPickView;
 import mage.view.GameEndView;
 import mage.view.GameView;
-import mage.view.MatchView;
-import mage.view.RoomUsersView;
 import mage.view.RoomView;
 import mage.view.TableView;
-import mage.view.TournamentView;
-import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
-import mage.view.UserView;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.mage.network.Server;
+import org.mage.network.interfaces.MageServer;
 import org.mage.network.model.MessageType;
 
 /**
@@ -791,22 +762,17 @@ public class ServerMain implements MageServer {
 //            }
 //        });
 //    }
-//
-//    @Override
-//    public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId, final Object data) throws MageException {
-//        execute("sendPlayerAction", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session == null) {
-//                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
-//                    return;
-//                }
-//                GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
-//            }
-//        });
-//    }
-//            
+
+    @Override
+    public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId, final Serializable data) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session == null) {
+            logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+            return;
+        }
+        GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
+    }
+      
 //    @Override
 //    public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
 //        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
