@@ -49,6 +49,11 @@ public class RenownAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return getSourceObject(game) != null && !((Permanent)getSourceObject(game)).isRenown();
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return event.getSourceId().equals(getSourceId())
                 && ((DamagedPlayerEvent) event).isCombatDamage();
@@ -83,7 +88,7 @@ class BecomeRenownSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null && !permanent.isRenown() && source instanceof RenownAbility) {
+        if (permanent != null && source instanceof RenownAbility) {
             game.informPlayers(permanent.getLogName() + " is now renown");
             int renownValue = ((RenownAbility) source).getRenownValue();
             // handle renown = X
