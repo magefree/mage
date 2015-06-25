@@ -228,10 +228,11 @@ public abstract class AbilityImpl implements Ability {
                 game.resetShortLivingLKI();
                 /**
                  * game.applyEffects() has to be done at least for every effect
-                 * that moves cards/permanent between zones, so Static effects
-                 * work as intened if dependant from the moved objects zone it
-                 * is in Otherwise for example were static abilities with
-                 * replacement effects deactivated to late Example:
+                 * that moves cards/permanent between zones, or chnages control
+                 * of objects so Static effects work as intened if dependant
+                 * from the moved objects zone it is in Otherwise for example
+                 * were static abilities with replacement effects deactivated to
+                 * late Example:
                  * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
                  */
                 if (effect.applyEffectsAfter()) {

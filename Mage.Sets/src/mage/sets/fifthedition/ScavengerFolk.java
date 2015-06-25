@@ -25,72 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
+import mage.target.common.TargetArtifactPermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class IvoryTower extends CardImpl {
+public class ScavengerFolk extends CardImpl {
 
-    public IvoryTower(UUID ownerId) {
-        super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public ScavengerFolk(UUID ownerId) {
+        super(ownerId, 185, "Scavenger Folk", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        this.expansionSetCode = "5ED";
+        this.subtype.add("Human");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
+        // {G}, {T}, Sacrifice Scavenger Folk: Destroy target artifact.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{G}"));                                                                                    ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetArtifactPermanent());
+        this.addAbility(ability);
     }
 
-    public IvoryTower(final IvoryTower card) {
+    public ScavengerFolk(final ScavengerFolk card) {
         super(card);
     }
 
     @Override
-    public IvoryTower copy() {
-        return new IvoryTower(this);
+    public ScavengerFolk copy() {
+        return new ScavengerFolk(this);
     }
 }
-
-class IvoryTowerEffect extends OneShotEffect {
-
-    public IvoryTowerEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
-    }
-
-    public IvoryTowerEffect(IvoryTowerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            int amount = player.getHand().size() - 4;
-            if(amount > 0) {
-                player.gainLife(amount, game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public IvoryTowerEffect copy() {
-        return new IvoryTowerEffect(this);
-    }
-
-}
-

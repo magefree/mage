@@ -25,72 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.sets.starter1999;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
  * @author LoneFox
 
  */
-public class IvoryTower extends CardImpl {
+public class GerrardsWisdom extends CardImpl {
 
-    public IvoryTower(UUID ownerId) {
-        super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public GerrardsWisdom(UUID ownerId) {
+        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
+        this.expansionSetCode = "S99";
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
+        // You gain 2 life for each card in your hand.
+        this.getSpellAbility().addEffect(new GainLifeEffect(new TwiceCardsInControllerHandCount()));
     }
 
-    public IvoryTower(final IvoryTower card) {
+    public GerrardsWisdom(final GerrardsWisdom card) {
         super(card);
     }
 
     @Override
-    public IvoryTower copy() {
-        return new IvoryTower(this);
+    public GerrardsWisdom copy() {
+        return new GerrardsWisdom(this);
     }
 }
 
-class IvoryTowerEffect extends OneShotEffect {
-
-    public IvoryTowerEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
-    }
-
-    public IvoryTowerEffect(IvoryTowerEffect effect) {
-        super(effect);
+class TwiceCardsInControllerHandCount extends CardsInControllerHandCount {
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return 2 * super.calculate(game, sourceAbility, effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            int amount = player.getHand().size() - 4;
-            if(amount > 0) {
-                player.gainLife(amount, game);
-            }
-            return true;
-        }
-        return false;
+    public DynamicValue copy() {
+        return new TwiceCardsInControllerHandCount();
     }
 
     @Override
-    public IvoryTowerEffect copy() {
-        return new IvoryTowerEffect(this);
+    public String toString() {
+        return "2";
     }
-
 }
-

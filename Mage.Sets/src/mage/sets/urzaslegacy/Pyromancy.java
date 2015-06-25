@@ -25,72 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.sets.urzaslegacy;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.DiscardCostCardConvertedMana;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LoneFox
 
  */
-public class IvoryTower extends CardImpl {
+public class Pyromancy extends CardImpl {
 
-    public IvoryTower(UUID ownerId) {
-        super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public Pyromancy(UUID ownerId) {
+        super(ownerId, 88, "Pyromancy", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+        this.expansionSetCode = "ULG";
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
+        // {3}, Discard a card at random: Pyromancy deals damage to target creature or player equal to the converted mana cost of the discarded card.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new DiscardCostCardConvertedMana()), new ManaCostsImpl("{3}"));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addCost(new DiscardCardCost(true));
+        this.addAbility(ability);
     }
 
-    public IvoryTower(final IvoryTower card) {
+    public Pyromancy(final Pyromancy card) {
         super(card);
     }
 
     @Override
-    public IvoryTower copy() {
-        return new IvoryTower(this);
+    public Pyromancy copy() {
+        return new Pyromancy(this);
     }
 }
-
-class IvoryTowerEffect extends OneShotEffect {
-
-    public IvoryTowerEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
-    }
-
-    public IvoryTowerEffect(IvoryTowerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            int amount = player.getHand().size() - 4;
-            if(amount > 0) {
-                player.gainLife(amount, game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public IvoryTowerEffect copy() {
-        return new IvoryTowerEffect(this);
-    }
-
-}
-
