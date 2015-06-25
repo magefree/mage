@@ -29,14 +29,14 @@ package mage.sets.antiquities;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -50,8 +50,7 @@ public class IvoryTower extends CardImpl {
         super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "ATQ";
 
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-            new IvoryTowerEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
     }
 
     public IvoryTower(final IvoryTower card) {
