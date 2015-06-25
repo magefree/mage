@@ -5,9 +5,10 @@
  */
 package org.mage.test.cards.triggers;
 
+
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -133,7 +134,6 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
      * 
      */
     @Test
-    @Ignore
     public void testWithAnimateDeadDifferentTargets() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         
@@ -153,35 +153,40 @@ public class WorldgorgerDragonTest extends CardTestPlayerBase {
         // When Staunch Defenders enters the battlefield, you gain 4 life.
         addCard(Zone.BATTLEFIELD, playerA, "Staunch Defenders", 1);
         
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Worldgorger Dragon");
-        addTarget(playerA, "Worldgorger Dragon");
-        addTarget(playerA, "Worldgorger Dragon");
-        addTarget(playerA, "Silvercoat Lion");
-        
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");      
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
-        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        setChoice(playerA, "Worldgorger Dragon");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");        
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 9);
-        setChoice(playerA, "X=7");
+        setChoice(playerA, "Silvercoat Lion");
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");        
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}");
+        
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Geyser", playerB, 9); 
+        setChoice(playerA, "X=9");
                 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
+        assertGraveyardCount(playerA, "Volcanic Geyser", 1);
         assertGraveyardCount(playerA, "Worldgorger Dragon", 1);        
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         
-        assertLife(playerA, 24);
+        assertLife(playerA, 28);
         assertLife(playerB, 11);
 
-        assertGraveyardCount(playerA, "Volcanic Geyser", 1);
+        Assert.assertEquals("Mana pool", "[]", playerA.getManaAvailable(currentGame).toString());
 
         
     }

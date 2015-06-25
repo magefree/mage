@@ -44,7 +44,6 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.players.PlayerList;
 import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -57,7 +56,6 @@ public class CouncilsJudgment extends CardImpl {
     public CouncilsJudgment(UUID ownerId) {
         super(ownerId, 20, "Council's Judgment", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{W}{W}");
         this.expansionSetCode = "VMA";
-
 
         // Will of the council - Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
         this.getSpellAbility().addEffect(new CouncilsJudgmentEffect());
@@ -74,21 +72,21 @@ public class CouncilsJudgment extends CardImpl {
 }
 
 class CouncilsJudgmentEffect extends OneShotEffect {
-    
+
     CouncilsJudgmentEffect() {
         super(Outcome.Exile);
         this.staticText = "<i>Will of the council</i> — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes";
     }
-    
+
     CouncilsJudgmentEffect(final CouncilsJudgmentEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public CouncilsJudgmentEffect copy() {
         return new CouncilsJudgmentEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -98,13 +96,9 @@ class CouncilsJudgmentEffect extends OneShotEffect {
             FilterNonlandPermanent filter = new FilterNonlandPermanent("a nonland permanent " + controller.getLogName() + " doesn't control");
             filter.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
             //Players each choose a legal permanent
-            PlayerList playerList = game.getState().getPlayerList().copy();
-            while (!playerList.get().equals(controller.getId()) && controller.isInGame()) {
-                playerList.getNext();
-            }
-            do {
-                Player player = game.getPlayer(playerList.get());
-                if (player != null && player.isInGame()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
                     Target target = new TargetNonlandPermanent(filter);
                     target.setNotTarget(true);
                     if (player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
@@ -116,8 +110,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
                                     maxCount = count;
                                 }
                                 chosenCards.put(permanent, count);
-                            }
-                            else {
+                            } else {
                                 if (maxCount == 0) {
                                     maxCount = 1;
                                 }
@@ -127,7 +120,8 @@ class CouncilsJudgmentEffect extends OneShotEffect {
                         }
                     }
                 }
-            } while (playerList.getNextInRange(controller, game) != controller && controller.isInGame());
+            }
+
             //Exile the card(s) with the most votes.
             for (Entry<Permanent, Integer> entry : chosenCards.entrySet()) {
                 if (entry.getValue() == maxCount) {

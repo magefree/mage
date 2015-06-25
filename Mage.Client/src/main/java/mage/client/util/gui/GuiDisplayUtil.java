@@ -1,7 +1,21 @@
 package mage.client.util.gui;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import mage.client.MageFrame;
 import mage.constants.CardType;
 import mage.constants.MageObjectType;
+import mage.constants.Rarity;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -10,39 +24,34 @@ import org.jdesktop.swingx.JXPanel;
 import org.mage.card.arcane.ManaSymbols;
 import org.mage.card.arcane.UI;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import mage.constants.Rarity;
-
 public class GuiDisplayUtil {
+
     private static final Font cardNameFont = new Font("Calibri", Font.BOLD, 15);
     private static final Insets DEFAULT_INSETS = new Insets(0, 0, 70, 25);
     private static final Insets COMPONENT_INSETS = new Insets(0, 0, 40, 40);
 
     public static class TextLines {
-        
+
         public int basicTextLength;
         public ArrayList<String> lines;
     }
-   
+
     public static JXPanel getDescription(CardView card, int width, int height) {
         JXPanel descriptionPanel = new JXPanel();
 
         //descriptionPanel.setAlpha(.8f);
-        descriptionPanel.setBounds(0, 0,  width, height);
+        descriptionPanel.setBounds(0, 0, width, height);
         descriptionPanel.setVisible(false);
         descriptionPanel.setLayout(null);
 
         //descriptionPanel.setBorder(BorderFactory.createLineBorder(Color.green));
-
         JButton j = new JButton("");
-        j.setBounds(0, 0,  width, height);
+        j.setBounds(0, 0, width, height);
         j.setBackground(Color.black);
         j.setLayout(null);
 
         JLabel cardText = new JLabel();
-        cardText.setBounds(5, 5,  width - 10, height - 10);
+        cardText.setBounds(5, 5, width - 10, height - 10);
         cardText.setForeground(Color.white);
         cardText.setFont(cardNameFont);
         cardText.setVerticalAlignment(SwingConstants.TOP);
@@ -70,33 +79,49 @@ public class GuiDisplayUtil {
         return out.toString().toLowerCase();
     }
 
+    public static void keepComponentInsideScreen(int centerX, int centerY, Component component) {
+        Dimension screenDim = component.getToolkit().getScreenSize();
+        GraphicsConfiguration g = component.getGraphicsConfiguration();
 
-    public static void keepComponentInsideScreen(int x, int y, Component c) {
-        Dimension screenDim = c.getToolkit().getScreenSize();
-        GraphicsConfiguration g = c.getGraphicsConfiguration();
         if (g != null) {
-            Insets insets = c.getToolkit().getScreenInsets(g);
+            Insets insets = component.getToolkit().getScreenInsets(g); // no usable space like toolbar
             boolean setLocation = false;
-            if (x + c.getWidth() > screenDim.width - insets.right) {
-                x = (screenDim.width - insets.right) - c.getWidth();
+            if (centerX + component.getWidth() > screenDim.width - insets.right) {
+                centerX = (screenDim.width - insets.right) - component.getWidth();
                 setLocation = true;
-            } else if (x < insets.left) {
-                x = insets.left;
+            } else if (centerX < insets.left) {
+                centerX = insets.left;
                 setLocation = true;
             }
 
-            if (y + c.getHeight() > screenDim.height - insets.bottom) {
-                y = (screenDim.height - insets.bottom) - c.getHeight();
+            if (centerY + component.getHeight() > screenDim.height - insets.bottom) {
+                centerY = (screenDim.height - insets.bottom) - component.getHeight();
                 setLocation = true;
-            } else if (y < insets.top) {
-                y = insets.top;
+            } else if (centerY < insets.top) {
+                centerY = insets.top;
                 setLocation = true;
             }
             if (setLocation) {
-                c.setLocation(x, y);
+                component.setLocation(centerX, centerY);
             }
         } else {
             System.out.println("GuiDisplayUtil::keepComponentInsideScreen -> no GraphicsConfiguration");
+        }
+    }
+
+    static final int OVERLAP_LIMIT = 10;
+
+    public static void keepComponentInsideFrame(int centerX, int centerY, Component component) {
+        Rectangle frameRec = MageFrame.getInstance().getBounds();
+        boolean setLocation = false;
+        if (component.getX() > (frameRec.width - OVERLAP_LIMIT)) {
+            setLocation = true;
+        }
+        if (component.getY() > (frameRec.height - OVERLAP_LIMIT)) {
+            setLocation = true;
+        }
+        if (setLocation) {
+            component.setLocation(centerX, centerY);
         }
     }
 
@@ -117,8 +142,8 @@ public class GuiDisplayUtil {
     public static TextLines getTextLinesfromCardView(CardView card) {
         TextLines textLines = new TextLines();
         textLines.lines = new ArrayList<>(card.getRules());
-        for (String rule: card.getRules()) {
-            textLines.basicTextLength +=rule.length();
+        for (String rule : card.getRules()) {
+            textLines.basicTextLength += rule.length();
         }
         if (card.getMageObjectType().equals(MageObjectType.PERMANENT)) {
             if (card.getPairedCard() != null) {
@@ -156,7 +181,7 @@ public class GuiDisplayUtil {
             }
         }
         if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
-            int damage = ((PermanentView)card).getDamage();
+            int damage = ((PermanentView) card).getDamage();
             if (damage > 0) {
                 textLines.lines.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
                 textLines.basicTextLength += 50;
@@ -183,10 +208,10 @@ public class GuiDisplayUtil {
 
         String fontFamily = "tahoma";
         /*if (prefs.fontFamily == CardFontFamily.arial)
-                                fontFamily = "arial";
-                            else if (prefs.fontFamily == CardFontFamily.verdana) {
-                                fontFamily = "verdana";
-                            }*/
+         fontFamily = "arial";
+         else if (prefs.fontFamily == CardFontFamily.verdana) {
+         fontFamily = "verdana";
+         }*/
 
         final StringBuilder buffer = new StringBuilder(512);
         buffer.append("<html><body style='font-family:");
@@ -198,7 +223,7 @@ public class GuiDisplayUtil {
         buffer.append("<tr><td valign='top'><b>");
         buffer.append(card.getDisplayName());
         if (card.isGameObject()) {
-            buffer.append(" [").append(card.getId().toString().substring(0,3)).append("]");
+            buffer.append(" [").append(card.getId().toString().substring(0, 3)).append("]");
         }
         buffer.append("</b></td><td align='right' valign='top' style='width:");
         buffer.append(symbolCount * 11 + 1);
@@ -208,31 +233,31 @@ public class GuiDisplayUtil {
         }
         buffer.append("</td></tr></table>");
         buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
-        if(card.getColor().isWhite()) {
+        if (card.getColor().isWhite()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_white.png")).append("' alt='W'>");
         }
-        if(card.getColor().isBlue()) {
+        if (card.getColor().isBlue()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_blue.png")).append("' alt='U'>");
         }
-        if(card.getColor().isBlack()) {
+        if (card.getColor().isBlack()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_black.png")).append("' alt='B'>");
         }
-        if(card.getColor().isRed()) {
+        if (card.getColor().isRed()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_red.png")).append("' alt='R'>");
         }
-        if(card.getColor().isGreen()) {
+        if (card.getColor().isGreen()) {
             buffer.append("<img src='").append(getResourcePath("card/color_ind_green.png")).append("' alt='G'>");
         }
-        if(!card.getColor().isColorless()) {
+        if (!card.getColor().isColorless()) {
             buffer.append("&nbsp;&nbsp;");
         }
         buffer.append(getTypes(card));
         buffer.append("</td><td align='right'>");
-        String rarity ;
+        String rarity;
         if (card.getRarity() == null) {
             rarity = Rarity.COMMON.getCode();
-            buffer.append("<b color='black'>");            
-        }else {
+            buffer.append("<b color='black'>");
+        } else {
             switch (card.getRarity()) {
                 case RARE:
                     buffer.append("<b color='#FFBF00'>");
@@ -310,7 +335,7 @@ public class GuiDisplayUtil {
                 if (textLine != null && !textLine.replace(".", "").trim().isEmpty()) {
                     rule.append("<p style='margin: 2px'>").append(textLine).append("</p>");
                 }
-            }                        
+            }
         }
 
         String legal = rule.toString();
@@ -319,12 +344,12 @@ public class GuiDisplayUtil {
 //                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
 //                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
 //                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
-            legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this":card.getName());
-            legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this":card.getName());
+            legal = legal.replaceAll("\\{this\\}", card.getName().isEmpty() ? "this" : card.getName());
+            legal = legal.replaceAll("\\{source\\}", card.getName().isEmpty() ? "this" : card.getName());
             buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
         }
 
-        buffer.append("<br></body></html>");    
+        buffer.append("<br></body></html>");
         return buffer;
     }
 
@@ -347,5 +372,5 @@ public class GuiDisplayUtil {
             types += subType + " ";
         }
         return types.trim();
-    }    
+    }
 }

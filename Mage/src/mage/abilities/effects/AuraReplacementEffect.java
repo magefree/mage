@@ -27,26 +27,25 @@
  */
 package mage.abilities.effects;
 
+import java.util.UUID;
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.MageObject;
-import mage.abilities.Ability;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
+import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.target.Target;
-
-import java.util.UUID;
-import mage.abilities.SpellAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -118,6 +117,9 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         if (targetId == null) {
             Target target = card.getSpellAbility().getTargets().get(0);
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
+            if (enchantCardInGraveyard && target != null) {
+                target.clearChosen();
+            }
             Player player = game.getPlayer(card.getOwnerId());
             Outcome auraOutcome = Outcome.BoostCreature;
             Ability: for (Ability ability:card.getAbilities()) {
