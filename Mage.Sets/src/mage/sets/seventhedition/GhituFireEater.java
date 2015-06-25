@@ -25,72 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.antiquities;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LoneFox
 
  */
-public class IvoryTower extends CardImpl {
+public class GhituFireEater extends CardImpl {
 
-    public IvoryTower(UUID ownerId) {
-        super(ownerId, 18, "Ivory Tower", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "ATQ";
+    public GhituFireEater(UUID ownerId) {
+        super(ownerId, 184, "Ghitu Fire-Eater", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "7ED";
+        this.subtype.add("Human");
+        this.subtype.add("Nomad");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
+        // {T}, Sacrifice Ghitu Fire-Eater: Ghitu Fire-Eater deals damage equal to its power to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public IvoryTower(final IvoryTower card) {
+    public GhituFireEater(final GhituFireEater card) {
         super(card);
     }
 
     @Override
-    public IvoryTower copy() {
-        return new IvoryTower(this);
+    public GhituFireEater copy() {
+        return new GhituFireEater(this);
     }
 }
-
-class IvoryTowerEffect extends OneShotEffect {
-
-    public IvoryTowerEffect() {
-        super(Outcome.GainLife);
-        this.staticText = "you gain X life, where X is the number of cards in your hand minus 4.";
-    }
-
-    public IvoryTowerEffect(IvoryTowerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if(player != null) {
-            int amount = player.getHand().size() - 4;
-            if(amount > 0) {
-                player.gainLife(amount, game);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public IvoryTowerEffect copy() {
-        return new IvoryTowerEffect(this);
-    }
-
-}
-
