@@ -61,6 +61,7 @@ import mage.util.CardUtil;
 public class DaxosOfMeletis extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 3 or greater");
+
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
     }
@@ -119,7 +120,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                 Card card = damagedPlayer.getLibrary().getFromTop(game);
                 if (card != null) {
                     // move card to exile
-                    controller.moveCardToExileWithInfo(card, exileId,  sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
+                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);
                     // player gains life
                     int cmc = card.getManaCost().convertedManaCost();
                     if (cmc > 0) {
@@ -172,7 +173,7 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (sourceId.equals(cardId)) {
+        if (sourceId.equals(cardId) && source.getControllerId().equals(affectedControllerId)) {
             ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
             return exileZone != null && exileZone.contains(cardId);
         }
@@ -202,7 +203,10 @@ class DaxosOfMeletisSpendAnyManaEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        return sourceId.equals(getTargetPointer().getFirst(game, source));
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        return source.getControllerId().equals(affectedControllerId)
+                && objectId == ((FixedTarget) getTargetPointer()).getTarget()
+                && ((FixedTarget) getTargetPointer()).getZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(objectId)
+                && game.getState().getZone(objectId).equals(Zone.STACK);
     }
 }
