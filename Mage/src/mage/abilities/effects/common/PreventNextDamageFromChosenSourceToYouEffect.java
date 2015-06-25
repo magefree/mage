@@ -19,27 +19,27 @@ import mage.target.TargetSource;
  */
 public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffectImpl {
 
-    private final TargetSource targetSource;
-    
+    protected final TargetSource targetSource;
+
     public PreventNextDamageFromChosenSourceToYouEffect(Duration duration) {
         this(duration, new FilterObject("source"));
     }
-    
+
     public PreventNextDamageFromChosenSourceToYouEffect(Duration duration, FilterObject filter) {
         this(duration, filter, false);
     }
-    
+
     public PreventNextDamageFromChosenSourceToYouEffect(Duration duration, FilterObject filter, boolean onlyCombat) {
         super(duration, Integer.MAX_VALUE, onlyCombat);
         this.targetSource = new TargetSource(filter);
         this.staticText = setText();
     }
-    
+
     public PreventNextDamageFromChosenSourceToYouEffect(final PreventNextDamageFromChosenSourceToYouEffect effect) {
         super(effect);
         this.targetSource = effect.targetSource.copy();
     }
-    
+
     @Override
     public PreventNextDamageFromChosenSourceToYouEffect copy() {
         return new PreventNextDamageFromChosenSourceToYouEffect(this);
@@ -76,5 +76,5 @@ public class PreventNextDamageFromChosenSourceToYouEffect extends PreventionEffe
         sb.append(", prevent that damage");
         return sb.toString();
     }
-    
+
 }

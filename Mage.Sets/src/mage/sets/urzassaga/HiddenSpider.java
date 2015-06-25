@@ -35,13 +35,14 @@ import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
+import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureSpell;
 import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -49,38 +50,43 @@ import mage.game.permanent.token.Token;
  * @author LoneFox
 
  */
-public class OpalArchangel extends CardImpl {
+public class HiddenSpider extends CardImpl {
 
-    public OpalArchangel(UUID ownerId) {
-        super(ownerId, 23, "Opal Archangel", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
-        this.expansionSetCode = "USG";
+    private static final FilterCreatureSpell filter = new FilterCreatureSpell("creature spell with flying");
 
-        // When an opponent casts a creature spell, if Opal Archangel is an enchantment, Opal Archangel becomes a 5/5 Angel creature with flying and vigilance.
-        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new OpalArchangelToken(), "", Duration.WhileOnBattlefield, true),
-            new FilterCreatureSpell(), false);
-        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
-            "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 5/5 Angel creature with flying and vigilance."));
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public OpalArchangel(final OpalArchangel card) {
+    public HiddenSpider(UUID ownerId) {
+        super(ownerId, 264, "Hidden Spider", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        this.expansionSetCode = "USG";
+
+        // When an opponent casts a creature spell with flying, if Hidden Spider is an enchantment, Hidden Spider becomes a 3/5 Spider creature with reach.
+        TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new HiddenSpiderToken(), "", Duration.WhileOnBattlefield, true),
+            filter, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, new SourceMatchesFilterCondition(new FilterEnchantmentPermanent()),
+            "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));
+    }
+
+    public HiddenSpider(final HiddenSpider card) {
         super(card);
     }
 
     @Override
-    public OpalArchangel copy() {
-        return new OpalArchangel(this);
+    public HiddenSpider copy() {
+        return new HiddenSpider(this);
     }
 }
 
-class OpalArchangelToken extends Token {
+class HiddenSpiderToken extends Token {
 
-    public OpalArchangelToken() {
-        super("Angel", "a 5/5 Angel creature with flying and vigilance");
+    public HiddenSpiderToken() {
+        super("Spider", "a 3/5 Spider creature with reach");
         cardType.add(CardType.CREATURE);
-        subtype.add("Angel");
-        power = new MageInt(5);
+        subtype.add("Spider");
+        power = new MageInt(3);
         toughness = new MageInt(5);
-        this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(VigilanceAbility.getInstance());
+        this.addAbility(ReachAbility.getInstance());
     }
 }
