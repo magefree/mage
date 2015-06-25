@@ -628,8 +628,10 @@ public class TestPlayer implements Player {
                                     if (targetCardInGraveyard.canTarget(targetObject.getId(), game)) {
                                         if (alreadyTargetted != null && !alreadyTargetted.contains(targetObject.getId())) {
                                             targetCardInGraveyard.add(targetObject.getId(), game);
-                                            choices.remove(choose2);
                                             targetFound = true;
+                                            if (target.getTargets().size() >= target.getMaxNumberOfTargets()) {
+                                                break;
+                                            }
                                         }
                                     }
                                 }
@@ -810,10 +812,12 @@ public class TestPlayer implements Player {
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         if (!choices.isEmpty()) {
-            if (choices.get(0).startsWith("X=")) {
-                int xValue = Integer.parseInt(choices.get(0).substring(2));
-                choices.remove(0);
-                return xValue;
+            for(String choice: choices) {
+                if (choice.startsWith("X=")) {
+                    int xValue = Integer.parseInt(choice.substring(2));
+                    choices.remove(choice);
+                    return xValue;
+                }
             }
         }
         return computerPlayer.announceXMana(min, max, message, game, ability);

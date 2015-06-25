@@ -29,17 +29,15 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ShuffleIntoLibrarySourceEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.*;
 
 /**
  *
@@ -64,7 +62,9 @@ public class BlitzHellion extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, Blitz Hellion's owner shuffles it into his or her library.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ShuffleSourceEffect(), TargetController.ANY, null, false));
+        Effect effect = new ShuffleIntoLibrarySourceEffect();
+        effect.setText("{this}'s owner shuffles it into his or her library.");
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
     }
 
     public BlitzHellion(final BlitzHellion card) {
@@ -74,37 +74,5 @@ public class BlitzHellion extends CardImpl {
     @Override
     public BlitzHellion copy() {
         return new BlitzHellion(this);
-    }
-}
-
-class ShuffleSourceEffect extends OneShotEffect {
-
-    ShuffleSourceEffect() {
-        super(Outcome.Neutral);
-        staticText = "{this}'s owner shuffles it into his or her library";
-    }
-
-    ShuffleSourceEffect(final ShuffleSourceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.moveToZone(Zone.LIBRARY, id, game, false);
-            player.shuffleLibrary(game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ShuffleSourceEffect copy() {
-        return new ShuffleSourceEffect(this);
     }
 }

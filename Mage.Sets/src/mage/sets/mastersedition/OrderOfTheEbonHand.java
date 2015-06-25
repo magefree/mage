@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class OrderOfTheEbonHand extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("White");
+    private static final FilterCard filter = new FilterCard("white");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

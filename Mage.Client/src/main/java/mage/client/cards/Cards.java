@@ -1,37 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * Cards.java
  *
  * Created on Dec 18, 2009, 10:40:12 AM
  */
-
 package mage.client.cards;
 
 import java.awt.Color;
@@ -72,19 +71,21 @@ public class Cards extends javax.swing.JPanel {
     private static final int GAP_X = 5; // needed for marking cards with coloured fram (e.g. on hand)
     private String zone;
 
-    private static final Border emptyBorder = new EmptyBorder(0,0,0,0);
+    private static final Border emptyBorder = new EmptyBorder(0, 0, 0, 0);
 
     private int minOffsetY = 0;
 
     /**
-     * Defines whether component should be visible whenever there is no objects within.
-     * True by default.
+     * Defines whether component should be visible whenever there is no objects
+     * within. True by default.
      */
     private boolean isVisibleIfEmpty = true;
 
     private Dimension cardDimension;
 
-    /** Creates new form Cards */
+    /**
+     * Creates new form Cards
+     */
     public Cards() {
         this(false);
     }
@@ -93,7 +94,7 @@ public class Cards extends javax.swing.JPanel {
         initComponents(skipAddingScrollPane);
         setOpaque(false);
         //cardArea.setOpaque(false);
-        setBackgroundColor(new Color(0,0,0,100));
+        setBackgroundColor(new Color(0, 0, 0, 100));
         if (!skipAddingScrollPane) {
             jScrollPane1.setOpaque(false);
             jScrollPane1.getViewport().setOpaque(false);
@@ -105,10 +106,12 @@ public class Cards extends javax.swing.JPanel {
         cardArea.setBorder(emptyBorder);
     }
 
-    public void cleanUp() {}
+    public void cleanUp() {
+    }
 
     /**
      * Sets components background color
+     *
      * @param color
      */
     public void setBackgroundColor(Color color) {
@@ -151,14 +154,14 @@ public class Cards extends javax.swing.JPanel {
         if (cardsView.size() == 0 && countCards() > 0) {
             // problem happens with transformable cards
             logger.fatal("Card object on the cards panel was not removed");
-            for (Component comp: cardArea.getComponents()) {
+            for (Component comp : cardArea.getComponents()) {
                 if (comp instanceof Card) {
-                    Card card = (Card)comp;
+                    Card card = (Card) comp;
                     logger.fatal("Card name:" + card.getName() + " type:" + card.getType(null));
                 } else if (comp instanceof MageCard) {
-                    MageCard mageCard = (MageCard)comp;
+                    MageCard mageCard = (MageCard) comp;
                     logger.fatal("MageCard name:" + mageCard.getName() + " toolTiptext:" + mageCard.getToolTipText());
-                } else  {
+                } else {
                     logger.fatal("Unknown object:" + comp.getName() + " className:" + comp.getClass().getName());
                 }
                 cardArea.remove(comp);
@@ -167,24 +170,24 @@ public class Cards extends javax.swing.JPanel {
 
         // order objects for display
         java.util.List<CardView> orderedList = new ArrayList<>();
-        for (CardView card: cardsView.values()) {
+        for (CardView card : cardsView.values()) {
             orderedList.add(0, card);
         }
 
         // add objects to the panel
-        for (CardView card: orderedList) {
+        for (CardView card : orderedList) {
             if (dontDisplayTapped) {
                 if (card instanceof PermanentView) {
-                    ((PermanentView)card).overrideTapped(false);
+                    ((PermanentView) card).overrideTapped(false);
                 }
             }
             if (card instanceof StackAbilityView) {
-                CardView tmp = ((StackAbilityView)card).getSourceCard();
+                CardView tmp = ((StackAbilityView) card).getSourceCard();
                 tmp.overrideRules(card.getRules());
                 tmp.setIsAbility(true);
                 tmp.overrideTargets(card.getTargets());
                 tmp.overrideId(card.getId());
-                tmp.setAbilityType(((StackAbilityView)card).getAbilityType());
+                tmp.setAbilityType(((StackAbilityView) card).getAbilityType());
                 card = tmp;
             } else {
                 card.setAbilityType(null);
@@ -212,9 +215,13 @@ public class Cards extends javax.swing.JPanel {
     }
 
     public void sizeCards(Dimension cardDimension) {
-        cardArea.setPreferredSize(new Dimension((int)((cards.size()) * (cardDimension.getWidth() + GAP_X)) + 20, (int)(cardDimension.getHeight()) + 20));
+        cardArea.setPreferredSize(new Dimension((int) ((cards.size()) * (cardDimension.getWidth() + GAP_X)) + 20, (int) (cardDimension.getHeight()) + 20));
         cardArea.revalidate();
         cardArea.repaint();
+    }
+
+    public int getNumberOfCards() {
+        return cards.size();
     }
 
     private Dimension getCardDimension() {
@@ -237,23 +244,23 @@ public class Cards extends javax.swing.JPanel {
 
     private void definePosition(MageCard card) {
         int dx = 0;
-        for (Component comp: cardArea.getComponents()) {
+        for (Component comp : cardArea.getComponents()) {
             if (!comp.equals(card)) {
-                dx = Math.max(dx, (int)comp.getLocation().getX());
+                dx = Math.max(dx, (int) comp.getLocation().getX());
             }
         }
-        dx += ((CardPanel)card).getCardWidth() + GAP_X;
-        card.setLocation(dx, (int)card.getLocation().getY());
+        dx += ((CardPanel) card).getCardWidth() + GAP_X;
+        card.setLocation(dx, (int) card.getLocation().getY());
     }
 
     private void removeCard(UUID cardId) {
-        for (Component comp: cardArea.getComponents()) {
+        for (Component comp : cardArea.getComponents()) {
             if (comp instanceof Card) {
-                if (((Card)comp).getCardId().equals(cardId)) {
+                if (((Card) comp).getCardId().equals(cardId)) {
                     cardArea.remove(comp);
                 }
             } else if (comp instanceof MageCard) {
-                if (((MageCard)comp).getOriginal().getId().equals(cardId)) {
+                if (((MageCard) comp).getOriginal().getId().equals(cardId)) {
                     cardArea.remove(comp);
                 }
             }
@@ -264,10 +271,10 @@ public class Cards extends javax.swing.JPanel {
         return cardArea.getComponentCount();
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -287,7 +294,6 @@ public class Cards extends javax.swing.JPanel {
             add(jScrollPane1, java.awt.BorderLayout.CENTER);
         }
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardArea;
@@ -320,7 +326,7 @@ public class Cards extends javax.swing.JPanel {
 
         for (Component component : cardArea.getComponents()) {
             if (component instanceof CardPanel) {
-                cards.add((CardPanel)component);
+                cards.add((CardPanel) component);
             }
         }
         Collections.sort(cards, new Comparator<CardPanel>() {
