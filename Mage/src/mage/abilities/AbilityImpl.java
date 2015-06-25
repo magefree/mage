@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities;
 
 import java.util.ArrayList;
@@ -141,18 +140,18 @@ public abstract class AbilityImpl implements Ability {
         this.manaCostsToPay = ability.manaCostsToPay.copy();
         this.costs = ability.costs.copy();
         this.optionalCosts = ability.optionalCosts.copy();
-        for (AlternativeCost cost: ability.alternativeCosts) {
-            this.alternativeCosts.add((AlternativeCost)cost.copy());
+        for (AlternativeCost cost : ability.alternativeCosts) {
+            this.alternativeCosts.add((AlternativeCost) cost.copy());
         }
         if (ability.watchers != null) {
             this.watchers = new ArrayList<>();
-            for (Watcher watcher: ability.watchers) {
+            for (Watcher watcher : ability.watchers) {
                 watchers.add(watcher.copy());
             }
         }
         if (ability.subAbilities != null) {
             this.subAbilities = new ArrayList<>();
-            for (Ability subAbility: ability.subAbilities) {
+            for (Ability subAbility : ability.subAbilities) {
                 subAbilities.add(subAbility.copy());
             }
         }
@@ -197,7 +196,7 @@ public abstract class AbilityImpl implements Ability {
         boolean result = true;
         //20100716 - 117.12
         if (checkIfClause(game)) {
-            for (Effect effect: getEffects()) {
+            for (Effect effect : getEffects()) {
                 if (effect instanceof OneShotEffect) {
                     boolean effectResult = effect.apply(game, this);
                     result &= effectResult;
@@ -214,24 +213,28 @@ public abstract class AbilityImpl implements Ability {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     game.addEffect((ContinuousEffect) effect, this);
                 }
                 /**
-                 * All restrained trigger events are fired now.
-                 * To restrain the events is mainly neccessary because of the movement of multiple object at once.
-                 * If the event is fired directly as one object moved, other objects are not already in the correct zone
-                 * to check for their effects. (e.g. Valakut, the Molten Pinnacle)
+                 * All restrained trigger events are fired now. To restrain the
+                 * events is mainly neccessary because of the movement of
+                 * multiple object at once. If the event is fired directly as
+                 * one object moved, other objects are not already in the
+                 * correct zone to check for their effects. (e.g. Valakut, the
+                 * Molten Pinnacle)
                  */
                 game.getState().handleSimultaneousEvent(game);
-                game.resetShortLivingLKI();                
-                 /** 
-                  * game.applyEffects() has to be done at least for every effect that moves cards/permanent between zones,
-                  * so Static effects work as intened if dependant from the moved objects zone it is in
-                  * Otherwise for example were static abilities with replacement effects deactivated to late
-                  * Example: {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
-                  */
+                game.resetShortLivingLKI();
+                /**
+                 * game.applyEffects() has to be done at least for every effect
+                 * that moves cards/permanent between zones, or chnages control
+                 * of objects so Static effects work as intened if dependant
+                 * from the moved objects zone it is in Otherwise for example
+                 * were static abilities with replacement effects deactivated to
+                 * late Example:
+                 * {@link org.mage.test.cards.replacement.DryadMilitantTest#testDiesByDestroy testDiesByDestroy}
+                 */
                 if (effect.applyEffectsAfter()) {
                     game.applyEffects();
                 }
@@ -256,7 +259,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         getSourceObject(game);
-        
+
         /* 20130201 - 601.2b
          * If the player wishes to splice any cards onto the spell (see rule 702.45), he
          * or she reveals those cards in his or her hand.
@@ -264,14 +267,13 @@ public abstract class AbilityImpl implements Ability {
         if (this.abilityType.equals(AbilityType.SPELL)) {
             game.getContinuousEffects().applySpliceEffects(this, game);
         }
-        
-        
+
         if (sourceObject != null) {
             sourceObject.adjustChoices(this, game);
         }
         // TODO: Because all (non targeted) choices have to be done during resolution
         // this has to be removed, if all using effects are changed
-        for (UUID modeId :this.getModes().getSelectedModes()) {
+        for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
             if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
                 logger.debug("activate failed - choice");
@@ -297,7 +299,7 @@ public abstract class AbilityImpl implements Ability {
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
-        if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)){
+        if (!activateAlternateOrAdditionalCosts(sourceObject, noMana, controller, game)) {
             if (getAbilityType().equals(AbilityType.SPELL)
                     && ((SpellAbility) this).getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {
                 return false;
@@ -310,7 +312,7 @@ public abstract class AbilityImpl implements Ability {
         VariableManaCost variableManaCost = handleManaXCosts(game, noMana, controller);
         String announceString = handleOtherXCosts(game, controller);
 
-        for (UUID modeId :this.getModes().getSelectedModes()) {
+        for (UUID modeId : this.getModes().getSelectedModes()) {
             this.getModes().setActiveMode(modeId);
             //20121001 - 601.2c
             // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
@@ -334,15 +336,15 @@ public abstract class AbilityImpl implements Ability {
             }
             if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
                 if ((variableManaCost != null || announceString != null) && !game.isSimulation()) {
-                    game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName(): "") + ": no valid targets with this value of X");
-                } 
+                    game.informPlayer(controller, (sourceObject != null ? sourceObject.getIdName() : "") + ": no valid targets with this value of X");
+                }
                 return false; // when activation of ability is canceled during target selection
             }
         } // end modes
 
         // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
         for (Cost cost : optionalCosts) {
-              if (cost instanceof ManaCost) {
+            if (cost instanceof ManaCost) {
                 cost.clearPaid();
                 if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
                     manaCostsToPay.add((ManaCost) cost);
@@ -353,17 +355,17 @@ public abstract class AbilityImpl implements Ability {
         if (sourceObject != null) {
             sourceObject.adjustCosts(this, game);
             if (sourceObject instanceof Card) {
-                for (Ability ability : ((Card)sourceObject).getAbilities(game)) {
+                for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
                     if (ability instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
+                        ((AdjustingSourceCosts) ability).adjustCosts(this, game);
                     }
-                }                
+                }
             } else {
                 for (Ability ability : sourceObject.getAbilities()) {
                     if (ability instanceof AdjustingSourceCosts) {
-                        ((AdjustingSourceCosts)ability).adjustCosts(this, game);
+                        ((AdjustingSourceCosts) ability).adjustCosts(this, game);
                     }
-                }                
+                }
             }
         }
 
@@ -381,8 +383,8 @@ public abstract class AbilityImpl implements Ability {
         }
 
         UUID activatorId = controllerId;
-        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
-             activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
+        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl) this).getActivatorId() != null) {
+            activatorId = ((ActivatedAbilityImpl) this).getActivatorId();
         }
 
         if (!useAlternativeCost(game)) { // old way still used?
@@ -394,7 +396,6 @@ public abstract class AbilityImpl implements Ability {
         }
 
         //20100716 - 601.2g
-
         if (!costs.pay(this, game, sourceId, activatorId, noMana)) {
             logger.debug("activate failed - non mana costs");
             return false;
@@ -412,14 +413,14 @@ public abstract class AbilityImpl implements Ability {
         activated = true;
         // fire if tapped for mana (may only fire now because else costs of ability itself can be payed with mana of abilities that trigger for that event
         if (this.getAbilityType().equals(AbilityType.MANA)) {
-            for (Cost cost: costs) {
+            for (Cost cost : costs) {
                 if (cost instanceof TapSourceCost) {
                     Mana mana = null;
                     Effect effect = getEffects().get(0);
                     if (effect instanceof BasicManaEffect) {
-                        mana = ((BasicManaEffect)effect).getMana(game, this);
+                        mana = ((BasicManaEffect) effect).getMana(game, this);
                     } else if (effect instanceof DynamicManaEffect) {
-                        mana = ((DynamicManaEffect)effect).getMana(game, this);
+                        mana = ((DynamicManaEffect) effect).getMana(game, this);
                     }
                     if (mana != null && mana.getAny() == 0) { // if mana == null or Any > 0 the event has to be fired in the mana effect to know which mana was produced
                         ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, sourceId, sourceId, controllerId, mana);
@@ -456,14 +457,14 @@ public abstract class AbilityImpl implements Ability {
                     }
                 }
                 if (ability instanceof OptionalAdditionalSourceCosts) {
-                    ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
+                    ((OptionalAdditionalSourceCosts) ability).addOptionalAdditionalCosts(this, game);
                 }
             }
             // controller specific alternate spell costs
             if (!noMana && !alternativeCostisUsed) {
                 if (this.getAbilityType().equals(AbilityType.SPELL)) {
-                    for (AlternativeSourceCosts alternativeSourceCosts: controller.getAlternativeSourceCosts()) {
-                         if (alternativeSourceCosts.isAvailable(this, game)) {
+                    for (AlternativeSourceCosts alternativeSourceCosts : controller.getAlternativeSourceCosts()) {
+                        if (alternativeSourceCosts.isAvailable(this, game)) {
                             if (alternativeSourceCosts.askToActivateAlternativeCosts(this, game)) {
                                 // only one alternative costs may be activated
                                 alternativeCostisUsed = true;
@@ -479,7 +480,9 @@ public abstract class AbilityImpl implements Ability {
 
     /**
      * Handles the setting of non mana X costs
-     * @param controller    *
+     *
+     * @param controller
+     *
      * @param game
      * @return announce message
      *
@@ -519,7 +522,7 @@ public abstract class AbilityImpl implements Ability {
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
         VariableManaCost variableManaCost = null;
-        for (ManaCost cost: manaCostsToPay) {
+        for (ManaCost cost : manaCostsToPay) {
             if (cost instanceof VariableManaCost) {
                 variableManaCost = (VariableManaCost) cost;
                 break; // only one VariableManCost per spell (or is it possible to have more?)
@@ -548,7 +551,7 @@ public abstract class AbilityImpl implements Ability {
                             manaSymbol = "W";
                         }
                         if (manaSymbol == null) {
-                            throw new UnsupportedOperationException("ManaFilter is not supported: " +this.toString() );
+                            throw new UnsupportedOperationException("ManaFilter is not supported: " + this.toString());
                         }
                         for (int i = 0; i < amountMana; i++) {
                             manaString.append("{").append(manaSymbol).append("}");
@@ -566,11 +569,12 @@ public abstract class AbilityImpl implements Ability {
 
     // called at end of turn for each Permanent
     @Override
-    public void reset(Game game) {}
+    public void reset(Game game) {
+    }
 
     // Is this still needed?
     protected boolean useAlternativeCost(Game game) {
-        for (AlternativeCost cost: alternativeCosts) {
+        for (AlternativeCost cost : alternativeCosts) {
             if (cost.isAvailable(game, this)) {
                 if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game)) {
                     return cost.pay(this, game, sourceId, controllerId, false);
@@ -594,17 +598,16 @@ public abstract class AbilityImpl implements Ability {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         if (watchers != null) {
-            for (Watcher watcher: watchers) {
+            for (Watcher watcher : watchers) {
                 watcher.setControllerId(controllerId);
             }
         }
         if (subAbilities != null) {
-            for (Ability subAbility: subAbilities) {
+            for (Ability subAbility : subAbilities) {
                 subAbility.setControllerId(controllerId);
             }
         }
     }
-
 
     @Override
     public UUID getSourceId() {
@@ -621,12 +624,12 @@ public abstract class AbilityImpl implements Ability {
             }
         }
         if (subAbilities != null) {
-            for (Ability subAbility: subAbilities) {
+            for (Ability subAbility : subAbilities) {
                 subAbility.setSourceId(sourceId);
             }
         }
         if (watchers != null) {
-            for (Watcher watcher: watchers) {
+            for (Watcher watcher : watchers) {
                 watcher.setSourceId(sourceId);
             }
         }
@@ -643,13 +646,14 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * Should be used by {@link mage.abilities.effects.CostModificationEffect cost modification effects}
+     * Should be used by
+     * {@link mage.abilities.effects.CostModificationEffect cost modification effects}
      * to manipulate what is actually paid before resolution.
      *
      * @return
      */
     @Override
-    public ManaCosts<ManaCost> getManaCostsToPay ( ) {
+    public ManaCosts<ManaCost> getManaCostsToPay() {
         return manaCostsToPay;
     }
 
@@ -671,7 +675,7 @@ public abstract class AbilityImpl implements Ability {
     @Override
     public Effects getEffects(Game game, EffectType effectType) {
         Effects typedEffects = new Effects();
-        for (Effect effect: getEffects()) {
+        for (Effect effect : getEffects()) {
             if (effect.getEffectType() == effectType) {
                 typedEffects.add(effect);
             }
@@ -760,7 +764,7 @@ public abstract class AbilityImpl implements Ability {
         String text = modes.getText();
         if (!text.isEmpty()) {
             if (sbRule.length() > 1) {
-                String end = sbRule.substring(sbRule.length()-2).trim();
+                String end = sbRule.substring(sbRule.length() - 2).trim();
                 if (end.isEmpty() || end.equals(":") || end.equals(".")) {
                     sbRule.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
                 } else {
@@ -791,9 +795,8 @@ public abstract class AbilityImpl implements Ability {
     public void addCost(Cost cost) {
         if (cost != null) {
             if (cost instanceof ManaCost) {
-                this.addManaCost((ManaCost)cost);
-            }
-            else {
+                this.addManaCost((ManaCost) cost);
+            } else {
                 this.costs.add(cost);
             }
         }
@@ -869,7 +872,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean canChooseTarget(Game game) {
-        for (Mode mode: modes.values()) {
+        for (Mode mode : modes.values()) {
             if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
                 return true;
             }
@@ -878,10 +881,10 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * 
+     *
      * @param game
      * @param source
-     * @return 
+     * @return
      */
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
@@ -915,7 +918,7 @@ public abstract class AbilityImpl implements Ability {
         Zone test = game.getState().getZone(parameterSourceId);
         return test != null && zone.match(test);
     }
-    
+
     @Override
     public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
         MageObject object = source;
@@ -940,7 +943,7 @@ public abstract class AbilityImpl implements Ability {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return getRule();
@@ -985,7 +988,7 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public void setAbilityWord(AbilityWord abilityWord) {
-       this.abilityWord = abilityWord;
+        this.abilityWord = abilityWord;
     }
 
     @Override
@@ -998,7 +1001,7 @@ public abstract class AbilityImpl implements Ability {
             logger.warn("Could get no object: " + this.toString());
         }
         return new StringBuilder(" activates: ")
-                .append(object != null ? this.formatRule(modes.getText(), object.getLogName()) :modes.getText())
+                .append(object != null ? this.formatRule(modes.getText(), object.getLogName()) : modes.getText())
                 .append(" from ")
                 .append(getMessageText(game)).toString();
     }
@@ -1018,7 +1021,7 @@ public abstract class AbilityImpl implements Ability {
                 if (object instanceof Spell) {
                     Spell spell = (Spell) object;
                     String castText = spell.getSpellCastText(game);
-                    sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
+                    sb.append((castText.startsWith("Cast ") ? castText.substring(5) : castText));
                     if (spell.getFromZone() == Zone.GRAVEYARD) {
                         sb.append(" from graveyard");
                     }
@@ -1044,7 +1047,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     if (spellAbility.getTargets().size() > 0) {
                         sb.append(half).append(" half targeting ");
-                        for (Target target: spellAbility.getTargets()) {
+                        for (Target target : spellAbility.getTargets()) {
                             sb.append(target.getTargetedName(game));
                         }
                     }
@@ -1054,7 +1057,7 @@ public abstract class AbilityImpl implements Ability {
                 int i = 0;
                 for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                     i++;
-                    if ( i > 1) {
+                    if (i > 1) {
                         sb.append(" splicing ");
                         if (spellAbility.name.length() > 5 && spellAbility.name.startsWith("Cast ")) {
                             sb.append(spellAbility.name.substring(5));
@@ -1106,7 +1109,7 @@ public abstract class AbilityImpl implements Ability {
                 }
             }
         }
-        for (Choice choice :this.getChoices()) {
+        for (Choice choice : this.getChoices()) {
             sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
         }
         return sb.toString();
@@ -1170,12 +1173,12 @@ public abstract class AbilityImpl implements Ability {
     public void setSourceObject(MageObject sourceObject, Game game) {
         if (sourceObject == null) {
             this.sourceObject = game.getObject(sourceId);
+            // if permanent get card /permanent instead of spell
+
         } else {
             this.sourceObject = sourceObject;
         }
         this.sourceObjectZoneChangeCounter = game.getState().getZoneChangeCounter(sourceId);
     }
 
-
 }
-

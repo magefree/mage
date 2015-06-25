@@ -63,42 +63,42 @@ public class PleaForPower extends CardImpl {
 }
 
 class PleaForPowerEffect extends OneShotEffect {
-    
+
     PleaForPowerEffect() {
         super(Outcome.Benefit);
         this.staticText = "<i>Will of the council</i> — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards";
     }
-    
+
     PleaForPowerEffect(final PleaForPowerEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public PleaForPowerEffect copy() {
         return new PleaForPowerEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int timeCount = 0;
             int knowledgeCount = 0;
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player.chooseUse(Outcome.ExtraTurn, "Choose time?", game)) {
-                    timeCount++;
-                    game.informPlayers(player.getLogName() + " has chosen: time");
-                }
-                else {
-                    knowledgeCount++;
-                    game.informPlayers(player.getLogName() + " has chosen: knowledge");
+                if (player != null) {
+                    if (player.chooseUse(Outcome.ExtraTurn, "Choose time?", game)) {
+                        timeCount++;
+                        game.informPlayers(player.getLogName() + " has chosen: time");
+                    } else {
+                        knowledgeCount++;
+                        game.informPlayers(player.getLogName() + " has chosen: knowledge");
+                    }
                 }
             }
             if (timeCount > knowledgeCount) {
                 new AddExtraTurnControllerEffect().apply(game, source);
-            }
-            else {
+            } else {
                 controller.drawCards(3, game);
             }
             return true;
