@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -75,7 +75,7 @@ public class UyoSilentProphet extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}, Return two lands you control to their owner's hand: Copy target instant or sorcery spell. You may choose new targets for the copy.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("lands"), false)));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }

@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -66,7 +66,7 @@ public class OboroBreezecaller extends CardImpl {
 
         // {2}, Return a land you control to its owner's hand: Untap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }

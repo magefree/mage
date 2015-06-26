@@ -29,6 +29,7 @@ package org.mage.test.cards.restriction;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -36,18 +37,18 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class CantAttackTest extends CardTestPlayerBase {
 
     /**
-     * Tests "If all other elves get the Forestwalk ability and can't be blockt from creatures whose controler has a forest in game"
+     * Tests "If all other elves get the Forestwalk ability and can't be blockt
+     * from creatures whose controler has a forest in game"
      */
-
     @Test
     public void testAttack() {
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Myr Enforcer"); // 4/4
 
+        // Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
         addCard(Zone.BATTLEFIELD, playerB, "Akron Legionnaire"); // 8/4
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Myr Enforcer"); // 4/4
@@ -64,20 +65,21 @@ public class CantAttackTest extends CardTestPlayerBase {
 
         assertLife(playerA, 8); // 8 + 4
         assertLife(playerB, 14); // 4 + 2
-
     }
-    
-   @Test
+
+    @Test
     public void testAttackHarborSerpent() {
-        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); 
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion"); // 2/2
+        // Islandwalk (This creature is unblockable as long as defending player controls an Island.)
+        // Harbor Serpent can't attack unless there are five or more Islands on the battlefield.
         addCard(Zone.BATTLEFIELD, playerA, "Harbor Serpent"); // 5/5
         addCard(Zone.HAND, playerA, "Island");
-        
-        addCard(Zone.BATTLEFIELD, playerB, "Island", 2); 
+
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Harbor Serpent"); // 5/5
-        
+
         attack(2, playerB, "Harbor Serpent");
         attack(2, playerB, "Silvercoat Lion");
 
@@ -88,9 +90,32 @@ public class CantAttackTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
-        assertLife(playerB, 13); 
-        assertLife(playerA, 18); 
+        assertLife(playerB, 13);
+        assertLife(playerA, 18);
     }
-    
-}
 
+    @Test
+    public void testBlazingArchon() {
+        // Flying
+        // Creatures can't attack you.
+        addCard(Zone.BATTLEFIELD, playerA, "Blazing Archon");
+
+        addCard(Zone.BATTLEFIELD, playerA, "Ajani Goldmane"); // Planeswalker 4 loyality counter
+
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox"); // 2/4
+
+        attack(2, playerB, "Pillarfield Ox", "Ajani Goldmane");
+        attack(2, playerB, "Silvercoat Lion", playerA);
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+
+        assertTapped("Silvercoat Lion", false);
+        assertTapped("Pillarfield Ox", true);
+        assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 2);
+    }
+
+}

@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
@@ -70,7 +70,7 @@ public class SoramaroFirstToDream extends CardImpl {
         // {4}, Return a land you control to its owner's hand: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(4));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         this.addAbility(ability);
 
     }

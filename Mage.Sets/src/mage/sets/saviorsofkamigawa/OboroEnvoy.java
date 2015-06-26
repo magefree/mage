@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
@@ -68,7 +68,7 @@ public class OboroEnvoy extends CardImpl {
         Effect effect = new BoostTargetEffect(new SignInversionDynamicValue(new CardsInControllerHandCount()), new StaticValue(-0), Duration.EndOfTurn);
         effect.setText("Target creature gets -X/-0 until end of turn, where X is the number of cards in your hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

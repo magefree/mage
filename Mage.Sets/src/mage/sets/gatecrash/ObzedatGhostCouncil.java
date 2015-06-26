@@ -1,5 +1,5 @@
 /*
-/*
+ /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -70,7 +70,6 @@ public class ObzedatGhostCouncil extends CardImpl {
         this.subtype.add("Advisor");
         this.supertype.add("Legendary");
 
-        
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
@@ -95,7 +94,6 @@ public class ObzedatGhostCouncil extends CardImpl {
     }
 }
 
-
 class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
 
     public ObzedatGhostCouncilExileSourceEffect() {
@@ -116,7 +114,7 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            return permanent.moveToExile(source.getSourceId(),permanent.getName(), source.getSourceId(), game);
+            return permanent.moveToExile(source.getSourceId(), permanent.getName(), source.getSourceId(), game);
         }
         return false;
     }
@@ -180,7 +178,7 @@ class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
         if (card != null) {
             ExileZone currentZone = game.getState().getExile().getExileZone(source.getSourceId());
             // return it only from the own exile zone
-            if (currentZone.size() > 0) {
+            if (currentZone != null && currentZone.size() > 0) {
                 Player owner = game.getPlayer(card.getOwnerId());
                 if (owner != null && owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId())) {
                     return true;

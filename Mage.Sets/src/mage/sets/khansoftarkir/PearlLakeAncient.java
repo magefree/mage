@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.CantBeCounteredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.ProwessAbility;
@@ -67,7 +67,7 @@ public class PearlLakeAncient extends CardImpl {
         
         // Return three lands you control to their owner's hand: Return Pearl Lake Ancient to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), 
-                new ReturnToHandTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
+                new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
     }
 
     public PearlLakeAncient(final PearlLakeAncient card) {
