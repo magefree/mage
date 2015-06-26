@@ -29,7 +29,7 @@ package mage.sets.jacevschandra;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,7 +55,7 @@ public class Gush extends CardImpl {
 
         // You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.
         AlternativeCostSourceAbility ability;   
-        ability = new AlternativeCostSourceAbility(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        ability = new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(2, 2, filter, true)));
         this.addAbility(ability);
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));

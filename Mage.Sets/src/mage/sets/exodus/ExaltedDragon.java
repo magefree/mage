@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;

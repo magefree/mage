@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -63,7 +63,7 @@ public class MoonbowIllusionist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}, Return a land you control to its owner's hand: Target land becomes the basic land type of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land"))));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
 

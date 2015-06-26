@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -98,7 +98,7 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
         if ( player != null ) {
-            ReturnToHandTargetCost attackCost = new ReturnToHandTargetCost(new TargetControlledPermanent(filter));
+            ReturnToHandTargetPermanentCost attackCost = new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter));
             if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
                  player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", game) )
             {

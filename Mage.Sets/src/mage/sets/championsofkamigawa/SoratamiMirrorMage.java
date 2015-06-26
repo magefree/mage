@@ -35,7 +35,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -66,7 +66,7 @@ public class SoratamiMirrorMage extends CardImpl {
 
         // {3}, Return three lands you control to their owner's hand: Return target creature to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(3, 3, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

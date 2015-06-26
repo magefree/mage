@@ -30,7 +30,7 @@ package mage.sets.jacevschandra;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class FathomSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Morph-Return two Islands you control to their owner's hand.
-        this.addAbility(new MorphAbility(this, new ReturnToHandTargetCost(new TargetControlledPermanent(2,2, filter, true))));
+        this.addAbility(new MorphAbility(this, new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(2,2, filter, true))));
         // When Fathom Seer is turned face up, draw two cards.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new DrawCardSourceControllerEffect(2)));
     }

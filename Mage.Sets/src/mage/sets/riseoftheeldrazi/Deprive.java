@@ -31,7 +31,7 @@ package mage.sets.riseoftheeldrazi;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -52,7 +52,7 @@ public class Deprive extends CardImpl {
         this.expansionSetCode = "ROE";
 
         // As an additional cost to cast Deprive, return a land you control to its owner's hand.
-        this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        this.getSpellAbility().addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)));
 
         // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());
