@@ -13,7 +13,7 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class GameTargetMessage extends ClientMessage {
+public class GameTargetCallback extends ClientMessage {
     
     private final UUID gameId;
     private final GameView gameView;
@@ -23,7 +23,7 @@ public class GameTargetMessage extends ClientMessage {
     private final boolean required;
     private final Map<String, Serializable> options;
 
-    public GameTargetMessage(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+    public GameTargetCallback(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
         this.gameId = gameId;
         this.gameView = gameView;
         this.question = question;

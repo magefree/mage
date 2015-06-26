@@ -9,11 +9,11 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class UserRequestDialogMessage extends ClientMessage {
+public class UserRequestDialogCallback extends ClientMessage {
     private final UUID gameId;
     private final UserRequestMessage userRequestMessage;
 
-    public UserRequestDialogMessage(UUID gameId, UserRequestMessage userRequestMessage) {
+    public UserRequestDialogCallback(UUID gameId, UserRequestMessage userRequestMessage) {
         this.gameId = gameId;
         this.userRequestMessage = userRequestMessage;
     }

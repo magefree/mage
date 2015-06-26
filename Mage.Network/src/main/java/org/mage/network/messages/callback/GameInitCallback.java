@@ -1,8 +1,7 @@
 package org.mage.network.messages.callback;
 
 import java.util.UUID;
-import mage.game.Table;
-import mage.view.GameEndView;
+import mage.view.GameView;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -10,18 +9,18 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class GameEndInfoMessage extends ClientMessage {
-    private final UUID gameId;
-    private final GameEndView view;
-
-    public GameEndInfoMessage(UUID gameId, GameEndView view) {
+public class GameInitCallback extends ClientMessage {
+    
+    private UUID gameId;
+    private GameView gameView;
+    
+    public GameInitCallback(UUID gameId, GameView gameView) {
         this.gameId = gameId;
-        this.view = view;
-    }
-
-    @Override
-    public void handleMessage(ClientMessageHandler handler) {
-        handler.getClient().gameEndInfo(gameId, view);
+        this.gameView = gameView;
     }
     
+    @Override
+    public void handleMessage(ClientMessageHandler handler) {
+        handler.getClient().initGame(gameId, gameView);
+    }
 }

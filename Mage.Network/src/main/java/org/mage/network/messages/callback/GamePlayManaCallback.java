@@ -9,18 +9,20 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class GameUpdateMessage extends ClientMessage {
+public class GamePlayManaCallback extends ClientMessage {
     private final UUID gameId;
-    private final GameView view;
+    private final GameView gameView;
+    private final String message;
 
-    public GameUpdateMessage(UUID gameId, GameView view) {
+    public GamePlayManaCallback(UUID gameId, GameView gameView, String message) {
         this.gameId = gameId;
-        this.view = view;
+        this.gameView = gameView;
+        this.message = message;
     }
 
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.getClient().gameUpdate(gameId, view);
+        handler.getClient().gamePlayMana(gameId, gameView, message);
     }
     
 }

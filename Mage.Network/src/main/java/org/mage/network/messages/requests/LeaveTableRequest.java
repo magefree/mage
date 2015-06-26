@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.LeftTableMessage;
+import org.mage.network.messages.responses.LeaveTableResponse;
 
 /**
  *
@@ -22,7 +22,7 @@ public class LeaveTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new LeftTableMessage(server.leaveTable(ctx.channel().id().asLongText(), roomId, tableId))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new LeaveTableResponse(server.leaveTable(ctx.channel().id().asLongText(), roomId, tableId))).addListener(WriteListener.getInstance());
     }
 
 }

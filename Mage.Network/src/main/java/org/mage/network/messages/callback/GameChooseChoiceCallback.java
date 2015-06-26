@@ -1,7 +1,7 @@
 package org.mage.network.messages.callback;
 
 import java.util.UUID;
-import mage.view.GameView;
+import mage.choices.Choice;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -9,20 +9,18 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class GamePlayManaMessage extends ClientMessage {
+public class GameChooseChoiceCallback extends ClientMessage {
     private final UUID gameId;
-    private final GameView gameView;
-    private final String message;
+    private final Choice choice;
 
-    public GamePlayManaMessage(UUID gameId, GameView gameView, String message) {
+    public GameChooseChoiceCallback(UUID gameId, Choice choice) {
         this.gameId = gameId;
-        this.gameView = gameView;
-        this.message = message;
+        this.choice = choice;
     }
 
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.getClient().gamePlayMana(gameId, gameView, message);
+        handler.getClient().gameChooseChoice(gameId, choice);
     }
     
 }

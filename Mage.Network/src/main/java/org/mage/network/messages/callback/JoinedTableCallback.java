@@ -8,7 +8,7 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class JoinedTableMessage extends ClientMessage {
+public class JoinedTableCallback extends ClientMessage {
     
     private UUID roomId;
     private UUID tableId;
@@ -16,7 +16,7 @@ public class JoinedTableMessage extends ClientMessage {
     private boolean owner;
     private boolean tournament;
     
-    public JoinedTableMessage(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
+    public JoinedTableCallback(UUID roomId, UUID tableId, UUID chatId, boolean owner, boolean tournament) {
         this.roomId = roomId;
         this.tableId = tableId;
         this.chatId = chatId;

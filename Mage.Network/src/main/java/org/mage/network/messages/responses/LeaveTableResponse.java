@@ -7,11 +7,11 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class LeftTableMessage extends ClientMessage {
+public class LeaveTableResponse extends ClientMessage {
     
     private boolean success;
     
-    public LeftTableMessage(boolean success) {
+    public LeaveTableResponse(boolean success) {
         this.success = success;
     }
     

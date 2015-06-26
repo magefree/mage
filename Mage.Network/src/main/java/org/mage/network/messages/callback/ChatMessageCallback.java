@@ -9,12 +9,12 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class ChatMessageMessage extends ClientMessage {
+public class ChatMessageCallback extends ClientMessage {
     
     private UUID chatId;
     private ChatMessage message;
     
-    public ChatMessageMessage(UUID chatId, ChatMessage message) {
+    public ChatMessageCallback(UUID chatId, ChatMessage message) {
         this.chatId = chatId;
         this.message = message;
     }

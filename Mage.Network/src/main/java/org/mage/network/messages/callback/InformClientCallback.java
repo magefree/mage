@@ -8,13 +8,13 @@ import org.mage.network.messages.MessageType;
  *
  * @author BetaSteward
  */
-public class InformClientMessage extends ClientMessage {
+public class InformClientCallback extends ClientMessage {
     
     private String title;
     private String message;
     private MessageType type;
     
-    public InformClientMessage(String title, String message, MessageType type) {
+    public InformClientCallback(String title, String message, MessageType type) {
         this.title = title;
         this.message = message;
         this.type = type;
