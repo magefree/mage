@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -76,7 +77,6 @@ public class NotionThief extends CardImpl {
     }
 }
 
-
 class NotionThiefReplacementEffect extends ReplacementEffectImpl {
 
     public NotionThiefReplacementEffect() {
@@ -106,21 +106,22 @@ class NotionThiefReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    } 
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            if (game.getActivePlayerId().equals(event.getPlayerId())) {
+            if (game.getActivePlayerId().equals(event.getPlayerId()) && game.getStep().getType().equals(PhaseStep.DRAW)) {
                 CardsDrawnDuringDrawStepWatcher watcher = (CardsDrawnDuringDrawStepWatcher) game.getState().getWatchers().get("CardsDrawnDuringDrawStep");
                 if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 0) {
                     return true;
                 }
             } else {
+                // not an opponents players draw step, always replace draw
                 return true;
             }
         }
