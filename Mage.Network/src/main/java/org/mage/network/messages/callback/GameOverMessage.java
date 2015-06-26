@@ -1,27 +1,25 @@
-package org.mage.network.messages;
+package org.mage.network.messages.callback;
 
 import java.util.UUID;
-import mage.view.GameView;
 import org.mage.network.handlers.client.ClientMessageHandler;
+import org.mage.network.messages.ClientMessage;
 
 /**
  *
  * @author BetaSteward
  */
-public class GamePlayManaMessage extends ClientMessage {
+public class GameOverMessage extends ClientMessage {
     private final UUID gameId;
-    private final GameView gameView;
     private final String message;
 
-    public GamePlayManaMessage(UUID gameId, GameView gameView, String message) {
+    public GameOverMessage(UUID gameId, String message) {
         this.gameId = gameId;
-        this.gameView = gameView;
         this.message = message;
     }
 
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.getClient().gamePlayMana(gameId, gameView, message);
+        handler.getClient().gameOver(gameId, message);
     }
     
 }

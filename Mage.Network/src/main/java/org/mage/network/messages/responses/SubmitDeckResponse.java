@@ -1,6 +1,5 @@
 package org.mage.network.messages.responses;
 
-import java.util.List;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -8,17 +7,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class ServerMessagesMessage extends ClientMessage {
+public class SubmitDeckResponse extends ClientMessage {
     
-    private List<String> messages;
+    private boolean success;
     
-    public ServerMessagesMessage(List<String> messages) {
-        this.messages = messages;
+    public SubmitDeckResponse(boolean success) {
+        this.success = success;
     }
     
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveStringList(messages);
+        handler.receiveBoolean(success);
     }
     
 }

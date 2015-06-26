@@ -1,9 +1,10 @@
-package org.mage.network.messages;
+package org.mage.network.messages.callback;
 
 import java.util.UUID;
 import mage.game.Table;
 import mage.view.GameEndView;
 import org.mage.network.handlers.client.ClientMessageHandler;
+import org.mage.network.messages.ClientMessage;
 
 /**
  *

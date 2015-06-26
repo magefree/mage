@@ -1,6 +1,8 @@
-package org.mage.network.messages;
+package org.mage.network.messages.callback;
 
 import org.mage.network.handlers.client.ClientMessageHandler;
+import org.mage.network.messages.ClientMessage;
+import org.mage.network.messages.MessageType;
 
 /**
  *

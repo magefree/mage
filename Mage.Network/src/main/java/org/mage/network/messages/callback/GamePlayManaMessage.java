@@ -1,19 +1,20 @@
-package org.mage.network.messages;
+package org.mage.network.messages.callback;
 
 import java.util.UUID;
 import mage.view.GameView;
 import org.mage.network.handlers.client.ClientMessageHandler;
+import org.mage.network.messages.ClientMessage;
 
 /**
  *
  * @author BetaSteward
  */
-public class GamePlayXManaMessage extends ClientMessage {
+public class GamePlayManaMessage extends ClientMessage {
     private final UUID gameId;
     private final GameView gameView;
     private final String message;
 
-    public GamePlayXManaMessage(UUID gameId, GameView gameView, String message) {
+    public GamePlayManaMessage(UUID gameId, GameView gameView, String message) {
         this.gameId = gameId;
         this.gameView = gameView;
         this.message = message;
@@ -21,7 +22,7 @@ public class GamePlayXManaMessage extends ClientMessage {
 
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.getClient().gamePlayXMana(gameId, gameView, message);
+        handler.getClient().gamePlayMana(gameId, gameView, message);
     }
     
 }

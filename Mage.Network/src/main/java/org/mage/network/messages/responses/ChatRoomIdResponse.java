@@ -8,11 +8,11 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class ChatRoomIdMessage extends ClientMessage {
+public class ChatRoomIdResponse extends ClientMessage {
     
     private UUID chatId;
     
-    public ChatRoomIdMessage(UUID chatId) {
+    public ChatRoomIdResponse(UUID chatId) {
         this.chatId = chatId;
     }
 

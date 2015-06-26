@@ -7,11 +7,11 @@ import mage.interfaces.ServerState;
  *
  * @author BetaSteward
  */
-public class ClientRegisteredMessage implements Serializable {
+public class ClientRegisteredResponse implements Serializable {
     
     private ServerState state;
     
-    public ClientRegisteredMessage(ServerState state) {
+    public ClientRegisteredResponse(ServerState state) {
         this.state = state;
     }
     

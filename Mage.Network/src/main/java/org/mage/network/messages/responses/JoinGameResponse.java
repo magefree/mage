@@ -1,6 +1,6 @@
 package org.mage.network.messages.responses;
 
-import mage.view.RoomView;
+import java.util.UUID;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -8,21 +8,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class RoomMessage extends ClientMessage {
+public class JoinGameResponse extends ClientMessage {
     
-    private RoomView room;
+    private UUID chatId;
     
-    public RoomMessage(RoomView room) {
-        this.room = room;
-    }
-    
-    public RoomView getRoom() {
-        return room;
+    public JoinGameResponse(UUID chatId) {
+        this.chatId = chatId;
     }
 
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveRoomView(room);
+        handler.receiveId(chatId);
     }
-    
+
 }

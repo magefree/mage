@@ -1,6 +1,6 @@
 package org.mage.network.messages.responses;
 
-import java.util.UUID;
+import mage.view.TableView;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -8,17 +8,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class JoinGameMessage extends ClientMessage {
+public class CreateTableResponse extends ClientMessage {
     
-    private UUID chatId;
+    private TableView table;
     
-    public JoinGameMessage(UUID chatId) {
-        this.chatId = chatId;
+    public CreateTableResponse(TableView table) {
+        this.table = table;
     }
-
+    
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveId(chatId);
+        handler.receiveTableView(table);
     }
-
+    
 }

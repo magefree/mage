@@ -1,5 +1,6 @@
 package org.mage.network.messages.responses;
 
+import mage.view.TableView;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -7,17 +8,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class SubmitDeckMessage extends ClientMessage {
+public class TableWaitingResponse extends ClientMessage {
     
-    private boolean success;
+    private TableView table;
     
-    public SubmitDeckMessage(boolean success) {
-        this.success = success;
+    public TableWaitingResponse(TableView table) {
+        this.table = table;
     }
     
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveBoolean(success);
+        handler.receiveTableView(table);
     }
     
 }

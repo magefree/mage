@@ -1,5 +1,6 @@
 package org.mage.network.messages.responses;
 
+import mage.view.RoomView;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -7,17 +8,21 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class JoinTableMessage extends ClientMessage {
+public class GetRoomResponse extends ClientMessage {
     
-    private boolean success;
+    private RoomView room;
     
-    public JoinTableMessage(boolean success) {
-        this.success = success;
+    public GetRoomResponse(RoomView room) {
+        this.room = room;
     }
     
+    public RoomView getRoom() {
+        return room;
+    }
+
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveBoolean(success);
+        handler.receiveRoomView(room);
     }
     
 }

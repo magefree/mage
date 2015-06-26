@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.game.match.MatchOptions;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.CreateTableMessage;
+import org.mage.network.messages.responses.CreateTableResponse;
 
 /**
  *
@@ -23,7 +23,7 @@ public class CreateTableRequest extends ServerRequest {
     
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new CreateTableMessage(server.createTable(ctx.channel().id().asLongText(), roomId, options))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new CreateTableResponse(server.createTable(ctx.channel().id().asLongText(), roomId, options))).addListener(WriteListener.getInstance());
     }
     
 }

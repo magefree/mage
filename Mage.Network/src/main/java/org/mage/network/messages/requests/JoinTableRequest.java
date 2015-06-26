@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.JoinTableMessage;
+import org.mage.network.messages.responses.JoinTableResponse;
 
 /**
  *
@@ -33,7 +33,7 @@ public class JoinTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new JoinTableMessage(server.joinTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new JoinTableResponse(server.joinTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
     }
     
 }

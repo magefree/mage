@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.RoomMessage;
+import org.mage.network.messages.responses.GetRoomResponse;
 
 /**
  *
@@ -20,7 +20,7 @@ public class GetRoomRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new RoomMessage(server.getRoom(roomId))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new GetRoomResponse(server.getRoom(roomId))).addListener(WriteListener.getInstance());
     }
     
 }

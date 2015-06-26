@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.UUID;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.TableWaitingMessage;
+import org.mage.network.messages.responses.TableWaitingResponse;
 
 /**
  *
@@ -22,7 +22,7 @@ public class TableWaitingRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new TableWaitingMessage(server.getTable(roomId, tableId))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new TableWaitingResponse(server.getTable(roomId, tableId))).addListener(WriteListener.getInstance());
     }
     
 }

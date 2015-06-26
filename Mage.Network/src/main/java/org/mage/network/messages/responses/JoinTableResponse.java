@@ -7,11 +7,11 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class StartMatchMessage extends ClientMessage {
+public class JoinTableResponse extends ClientMessage {
     
     private boolean success;
     
-    public StartMatchMessage(boolean success) {
+    public JoinTableResponse(boolean success) {
         this.success = success;
     }
     

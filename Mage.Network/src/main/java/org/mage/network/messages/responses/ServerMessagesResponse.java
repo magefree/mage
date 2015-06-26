@@ -1,6 +1,6 @@
 package org.mage.network.messages.responses;
 
-import mage.view.TableView;
+import java.util.List;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -8,17 +8,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class TableWaitingMessage extends ClientMessage {
+public class ServerMessagesResponse extends ClientMessage {
     
-    private TableView table;
+    private List<String> messages;
     
-    public TableWaitingMessage(TableView table) {
-        this.table = table;
+    public ServerMessagesResponse(List<String> messages) {
+        this.messages = messages;
     }
     
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveTableView(table);
+        handler.receiveStringList(messages);
     }
     
 }

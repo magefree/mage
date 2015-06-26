@@ -8,7 +8,7 @@ import mage.remote.DisconnectReason;
 import mage.utils.MageVersion;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.ClientRegisteredMessage;
+import org.mage.network.messages.responses.ClientRegisteredResponse;
 
 /**
  *
@@ -28,10 +28,10 @@ public class RegisterClientRequest extends ServerRequest {
         String host = ((InetSocketAddress)ctx.channel().remoteAddress()).getAddress().getHostAddress();
         boolean result = server.registerClient(connection, ctx.channel().id().asLongText(), version, host);
         if (result) {
-            ctx.writeAndFlush(new ClientRegisteredMessage(server.getServerState())).addListener(WriteListener.getInstance());
+            ctx.writeAndFlush(new ClientRegisteredResponse(server.getServerState())).addListener(WriteListener.getInstance());
         }
         else {
-            ctx.writeAndFlush(new ClientRegisteredMessage(new ServerState())).addListener(WriteListener.getInstance());
+            ctx.writeAndFlush(new ClientRegisteredResponse(new ServerState())).addListener(WriteListener.getInstance());
             server.disconnect(ctx.channel().id().asLongText(), DisconnectReason.ValidationError);
         }
     }

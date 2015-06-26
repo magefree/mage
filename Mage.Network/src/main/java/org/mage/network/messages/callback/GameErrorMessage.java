@@ -1,7 +1,8 @@
-package org.mage.network.messages;
+package org.mage.network.messages.callback;
 
 import java.util.UUID;
 import org.mage.network.handlers.client.ClientMessageHandler;
+import org.mage.network.messages.ClientMessage;
 
 /**
  *

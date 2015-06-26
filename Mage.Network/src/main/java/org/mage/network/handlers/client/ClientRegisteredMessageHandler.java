@@ -10,14 +10,14 @@ import mage.interfaces.ServerState;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.mage.network.messages.responses.ClientRegisteredMessage;
+import org.mage.network.messages.responses.ClientRegisteredResponse;
 import org.mage.network.messages.requests.RegisterClientRequest;
 
 /**
  *
  * @author BetaSteward
  */
-public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<ClientRegisteredMessage> {
+public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<ClientRegisteredResponse> {
 
     private static final Logger logger = Logger.getLogger(ClientRegisteredMessageHandler.class);
     
@@ -32,7 +32,7 @@ public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<
     }    
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, ClientRegisteredMessage msg) throws Exception {
+    protected void messageReceived(ChannelHandlerContext ctx, ClientRegisteredResponse msg) throws Exception {
         queue.offer(msg.getServerState());
     }
     
