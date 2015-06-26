@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
-import mage.cards.decks.InvalidDeckException;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TableState;
 import mage.game.Game;
@@ -346,7 +345,7 @@ public class TableController {
         }
     }
 
-    public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
+    public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) {
         UUID playerId = userPlayerMap.get(userId);
         if (table.isTournament()) {
             TournamentPlayer player = tournament.getPlayer(playerId);
@@ -370,7 +369,16 @@ public class TableController {
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return false;
         }
-        Deck deck = Deck.load(deckList, false, false);
+        User user = UserManager.getInstance().getUser(userId);
+        Deck deck;
+        try {
+            deck = Deck.load(deckList, false, false);
+        }
+        catch (GameException ex) {
+            logger.error("Error loading deck", ex);
+            user.showUserError("Submit deck", "Error loading deck");
+            return false;
+        }
         if (table.getState() == TableState.SIDEBOARDING && table.getMatch() != null) {
             MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
             if (mPlayer != null) {
@@ -378,7 +386,8 @@ public class TableController {
             }
         }
         if (!ServerMain.getInstance().isTestMode() && !table.getValidator().validate(deck)) {
-            throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
+            user.showUserError("Submit deck", table.getValidator().getInvalidMessage());
+            return false;
         }
         submitDeck(userId, playerId, deck);
         return true;

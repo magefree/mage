@@ -4,8 +4,8 @@ import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.apache.log4j.Logger;
-import org.mage.network.model.PingMessage;
-import org.mage.network.model.PongMessage;
+import org.mage.network.messages.PingMessage;
+import org.mage.network.messages.PongMessage;
 
 /**
  *

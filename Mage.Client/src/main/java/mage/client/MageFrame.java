@@ -27,59 +27,22 @@
 */
 package mage.client;
 
-import mage.cards.decks.Deck;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.client.cards.BigCard;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageComponents;
-import mage.client.components.MageJDesktop;
-import mage.client.components.MageRoundPane;
-import mage.client.components.MageUI;
-import mage.client.components.ext.dlg.DialogManager;
-import mage.client.components.tray.MageTray;
-import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.deckeditor.DeckEditorPane;
-import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
-import mage.client.dialog.*;
-import mage.client.draft.DraftPane;
-import mage.client.draft.DraftPanel;
-import mage.client.game.GamePane;
-import mage.client.game.GamePanel;
-import mage.client.plugins.impl.Plugins;
-import mage.client.remote.CallbackClientImpl;
-import mage.client.table.TablesPane;
-import mage.client.tournament.TournamentPane;
-import mage.client.util.EDTExceptionHandler;
-import mage.client.util.SettingsManager;
-import mage.client.util.SystemUtil;
-import mage.client.util.audio.MusicPlayer;
-import mage.client.util.gui.ArrowBuilder;
-import mage.client.util.stats.UpdateMemUsageTask;
-import mage.components.ImagePanel;
-//import mage.interfaces.MageClient;
-import mage.interfaces.callback.CallbackClient;
-import mage.interfaces.callback.ClientCallback;
-import mage.remote.Connection;
-import mage.remote.Connection.ProxyType;
-//import mage.remote.Session;
-//import mage.remote.SessionImpl;
-import mage.utils.MageVersion;
-import mage.view.GameEndView;
-import org.apache.log4j.Logger;
-import org.mage.card.arcane.ManaSymbols;
-import org.mage.plugins.card.constants.Constants;
-import org.mage.plugins.card.images.DownloadPictures;
-import org.mage.plugins.card.utils.impl.ImageManagerImpl;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.JToolBar.Separator;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -91,28 +54,92 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
-import static mage.client.dialog.PreferencesDialog.KEY_CONNECT_FLAG;
+import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar.Separator;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.client.cards.BigCard;
+import mage.client.chat.ChatPanel;
+import mage.client.components.MageComponents;
+import mage.client.components.MageJDesktop;
+import mage.client.components.MageRoundPane;
+import mage.client.components.MageUI;
+import mage.client.components.ext.dlg.DialogManager;
+import mage.client.components.tray.MageTray;
+import mage.client.constants.Constants.DeckEditorMode;
+import mage.client.deckeditor.DeckEditorPane;
+import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
+import mage.client.dialog.AboutDialog;
+import mage.client.dialog.ConnectDialog;
+import mage.client.dialog.ErrorDialog;
+import mage.client.dialog.FeedbackDialog;
+import mage.client.dialog.GameEndDialog;
+import mage.client.dialog.PreferencesDialog;
+import mage.client.dialog.TableWaitingDialog;
+import mage.client.dialog.UserRequestDialog;
+import mage.client.draft.DraftPane;
+import mage.client.draft.DraftPanel;
+import mage.client.game.GamePane;
+import mage.client.game.GamePanel;
+import mage.client.plugins.impl.Plugins;
+import mage.client.table.TablesPane;
+import mage.client.tournament.TournamentPane;
+import mage.client.util.EDTExceptionHandler;
 import mage.client.util.GameManager;
-import mage.client.util.audio.AudioManager;
-import mage.game.Table;
+import mage.client.util.SettingsManager;
+import mage.client.util.SystemUtil;
+import mage.client.util.audio.MusicPlayer;
+import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.stats.UpdateMemUsageTask;
+import mage.components.ImagePanel;
 import mage.interfaces.ServerState;
+import mage.remote.Connection;
+import mage.remote.Connection.ProxyType;
+import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameClientMessage;
+import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import net.java.truevfs.access.TArchiveDetector;
 import net.java.truevfs.access.TConfig;
 import net.java.truevfs.kernel.spec.FsAccessOption;
+import org.apache.log4j.Logger;
+import org.mage.card.arcane.ManaSymbols;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
+import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.images.DownloadPictures;
+import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1580,6 +1607,43 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
         showUserRequestDialog(userRequestMessage);
+    }
+
+    @Override
+    public void gameUpdate(UUID gameId, GameView gameView) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.updateGame(gameView);
+        }
+    }
+
+    @Override
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.inform(message.getMessage(), message.getGameView());
+        }
+    }
+
+    @Override
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    @Override
+    public void gameOver(UUID gameId, String message) {
+        GamePanel panel = MageFrame.getGame(gameId);
+        if (panel != null) {
+            panel.endMessage(message);
+        }
+    }
+
+    @Override
+    public void gameError(UUID gameId, String message) {
+        this.showErrorDialog("Game Error", message);
     }
     
 }

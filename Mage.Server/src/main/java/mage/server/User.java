@@ -28,11 +28,9 @@
 package mage.server;
 
 import java.io.Serializable;
-import mage.remote.DisconnectReason;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -47,6 +45,7 @@ import mage.game.Table;
 import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
+import mage.remote.DisconnectReason;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
@@ -56,12 +55,13 @@ import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 
 /**
@@ -254,6 +254,26 @@ public class User {
         ServerMain.getInstance().userRequestDialog(sessionId, gameId, userRequestMessage);
     }
 
+    public void gameUpdate(UUID gameId, GameView view) {
+        ServerMain.getInstance().gameUpdate(sessionId, gameId, view);
+    }
+
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        ServerMain.getInstance().gameInform(sessionId, gameId, message);
+    }
+
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        ServerMain.getInstance().gameInformPersonal(sessionId, gameId, message);
+    }
+
+    public void gameOver(UUID gameId, String message) {
+        ServerMain.getInstance().gameOver(sessionId, gameId, message);
+    }
+
+    public void gameError(UUID gameId, String message) {
+        ServerMain.getInstance().gameError(sessionId, gameId, message);
+    }
+
     public void ccDraftStarted(final UUID draftId, final UUID playerId) {
         fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
     }
@@ -280,11 +300,11 @@ public class User {
     }
 
     public void showUserMessage(final String title,  String message) {
-//        List<String> messageData = new LinkedList<>();
-//        messageData.add(titel);
-//        messageData.add(message);
-//        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
         ServerMain.getInstance().informClient(sessionId, title, message, MessageType.INFORMATION);
+    }
+
+    public void showUserError(final String title,  String message) {
+        ServerMain.getInstance().informClient(sessionId, title, message, MessageType.ERROR);
     }
 
     public boolean ccWatchGame(final UUID gameId) {

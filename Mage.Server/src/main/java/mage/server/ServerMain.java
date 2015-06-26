@@ -73,6 +73,7 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
@@ -83,7 +84,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.mage.network.Server;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 /**
  *
@@ -321,20 +322,16 @@ public class ServerMain implements MageServer {
 //            }
 //        });
 //    }
-//
-//    @Override
-//    public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
-//        return executeWithResult("submitDeck", sessionId, new ActionWithBooleanResult() {
-//            @Override
-//            public Boolean execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
-//                logger.debug("Session " + sessionId + " submitted deck");
-//                return ret;
-//            }
-//        });
-//    }
-//
+
+    @Override
+    public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
+        if (ret)
+            logger.debug("Session " + sessionId + " submitted deck");
+        return ret;
+    }
+
 //    @Override
 //    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
 //        execute("updateDeck", sessionId, new Action() {
@@ -1253,6 +1250,26 @@ public class ServerMain implements MageServer {
 
     public void userRequestDialog(String sessionId, UUID gameId, UserRequestMessage userRequestMessage) {
         server.userRequestDialog(sessionId, gameId, userRequestMessage);
+    }
+
+    public void gameUpdate(String sessionId, UUID gameId, GameView view) {
+        server.gameUpdate(sessionId, gameId, view);
+    }
+
+    public void gameInform(String sessionId, UUID gameId, GameClientMessage message) {
+        server.gameInform(sessionId, gameId, message);
+    }
+
+    public void gameInformPersonal(String sessionId, UUID gameId, GameClientMessage message) {
+        server.gameInformPersonal(sessionId, gameId, message);
+    }
+
+    public void gameOver(String sessionId, UUID gameId, String message) {
+        server.gameOver(sessionId, gameId, message);
+    }
+
+    public void gameError(String sessionId, UUID gameId, String message) {
+        server.gameError(sessionId, gameId, message);
     }
 
 }

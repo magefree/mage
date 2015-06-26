@@ -7,7 +7,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.WriteListener;
-import org.mage.network.model.PingMessage;
+import org.mage.network.messages.PingMessage;
 
 /**
  *

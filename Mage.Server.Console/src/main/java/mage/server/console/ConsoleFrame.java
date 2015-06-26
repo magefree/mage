@@ -42,7 +42,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
@@ -59,13 +58,14 @@ import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 /**
  *
@@ -433,6 +433,31 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameUpdate(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameOver(UUID gameId, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameError(UUID gameId, String message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

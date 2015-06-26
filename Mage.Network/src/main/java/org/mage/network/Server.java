@@ -1,14 +1,5 @@
 package org.mage.network;
 
-import org.mage.network.model.UserRequestDialogMessage;
-import org.mage.network.model.GameEndInfoMessage;
-import org.mage.network.model.GameSelectAmountMessage;
-import org.mage.network.model.GamePlayXManaMessage;
-import org.mage.network.model.GamePlayManaMessage;
-import org.mage.network.model.GameChooseChoiceMessage;
-import org.mage.network.model.GameChoosePileMessage;
-import org.mage.network.model.GameChooseAbilityMessage;
-import org.mage.network.model.GameSelectMessage;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -34,31 +25,44 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.choices.Choice;
-import mage.game.Table;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
-import org.mage.network.handlers.MessageHandler;
-import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.PingMessageHandler;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.handlers.server.ConnectionHandler;
+import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.server.ServerRequestHandler;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.model.ChatMessageMessage;
-import org.mage.network.model.GameAskMessage;
-import org.mage.network.model.GameInitMessage;
-import org.mage.network.model.GameStartedMessage;
-import org.mage.network.model.GameTargetMessage;
-import org.mage.network.model.InformClientMessage;
-import org.mage.network.model.JoinedTableMessage;
-import org.mage.network.model.MessageType;
-import org.mage.network.model.PingMessage;
+import org.mage.network.messages.ChatMessageMessage;
+import org.mage.network.messages.GameAskMessage;
+import org.mage.network.messages.GameChooseAbilityMessage;
+import org.mage.network.messages.GameChooseChoiceMessage;
+import org.mage.network.messages.GameChoosePileMessage;
+import org.mage.network.messages.GameEndInfoMessage;
+import org.mage.network.messages.GameErrorMessage;
+import org.mage.network.messages.GameInformMessage;
+import org.mage.network.messages.GameInformPersonalMessage;
+import org.mage.network.messages.GameInitMessage;
+import org.mage.network.messages.GameOverMessage;
+import org.mage.network.messages.GamePlayManaMessage;
+import org.mage.network.messages.GamePlayXManaMessage;
+import org.mage.network.messages.GameSelectAmountMessage;
+import org.mage.network.messages.GameSelectMessage;
+import org.mage.network.messages.GameStartedMessage;
+import org.mage.network.messages.GameTargetMessage;
+import org.mage.network.messages.GameUpdateMessage;
+import org.mage.network.messages.InformClientMessage;
+import org.mage.network.messages.JoinedTableMessage;
+import org.mage.network.messages.MessageType;
+import org.mage.network.messages.PingMessage;
+import org.mage.network.messages.UserRequestDialogMessage;
 
 /**
  *
@@ -260,5 +264,34 @@ public class Server {
             ch.writeAndFlush(new UserRequestDialogMessage(gameId, userRequestMessage)).addListener(WriteListener.getInstance());
     }
 
-    
+    public void gameUpdate(String sessionId, UUID gameId, GameView view) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameUpdateMessage(gameId, view)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameInform(String sessionId, UUID gameId, GameClientMessage message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameInformMessage(gameId, message)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameInformPersonal(String sessionId, UUID gameId, GameClientMessage message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameInformPersonalMessage(gameId, message)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameOver(String sessionId, UUID gameId, String message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameOverMessage(gameId, message)).addListener(WriteListener.getInstance());
+    }
+
+    public void gameError(String sessionId, UUID gameId, String message) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new GameErrorMessage(gameId, message)).addListener(WriteListener.getInstance());
+    }
+
 }

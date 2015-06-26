@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.UUID;
 import mage.game.Game;
 import mage.game.Table;
-import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.server.User;
 import mage.server.UserManager;
@@ -78,7 +77,7 @@ public class GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameUpdate", game.getId(), getGameView()));
+                user.gameUpdate(game.getId(), getGameView());
             }
         }
     }
@@ -87,7 +86,7 @@ public class GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameInform", game.getId(), new GameClientMessage(getGameView(), message)));
+                user.gameInform(game.getId(), new GameClientMessage(getGameView(), message));
             }
         }
     }
@@ -96,7 +95,7 @@ public class GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameInformPersonal", game.getId(), new GameClientMessage(getGameView(), message)));
+                user.gameInformPersonal(game.getId(), new GameClientMessage(getGameView(), message));
             }
         }
     }
@@ -106,7 +105,7 @@ public class GameSessionWatcher {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.removeGameWatchInfo(game.getId());
-                user.fireCallback(new ClientCallback("gameOver", game.getId(), message));
+                user.gameOver(game.getId(), message);
             }
         }
     }
@@ -123,7 +122,7 @@ public class GameSessionWatcher {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameError", game.getId(), message));
+                user.gameError(game.getId(), message);
             }
         }
     }

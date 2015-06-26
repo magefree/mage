@@ -9,8 +9,8 @@ import mage.remote.DisconnectReason;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.model.PingMessage;
-import org.mage.network.model.PongMessage;
+import org.mage.network.messages.PingMessage;
+import org.mage.network.messages.PongMessage;
 
 /**
  *

@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import mage.remote.DisconnectReason;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.model.ServerRequest;
+import org.mage.network.messages.requests.ServerRequest;
 
 /**
  *

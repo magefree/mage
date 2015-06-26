@@ -52,6 +52,7 @@ public interface MageServer {
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data);
     void sendPlayerAction(PlayerAction playerAction, UUID gameId, String sessionId, Serializable data);
     
+    boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList);
     void pingTime(long milliSeconds, String sessionId);
 
 }

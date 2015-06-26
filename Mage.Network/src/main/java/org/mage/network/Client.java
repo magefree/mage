@@ -39,7 +39,7 @@ import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.handlers.client.ClientRegisteredMessageHandler;
 import org.mage.network.handlers.client.HeartbeatHandler;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 /**
  *
@@ -195,7 +195,12 @@ public class Client {
     }
 
     public boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.submitDeck(tableId, deckCardLists);
+        } catch (Exception ex) {
+            logger.error("Error submitting deck", ex);
+        }
+        return false;
     }
 
     public void updateDeck(UUID tableId, DeckCardLists deckCardLists) {

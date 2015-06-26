@@ -33,7 +33,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -154,7 +153,7 @@ public class TableManager {
         return false;
     }
 
-    public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
+    public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) {
         if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
         }

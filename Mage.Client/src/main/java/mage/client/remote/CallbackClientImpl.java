@@ -33,32 +33,19 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import static mage.client.chat.ChatPanel.ChatType.TABLES;
-import static mage.client.chat.ChatPanel.ChatType.TOURNAMENT;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
-import mage.client.plugins.impl.Plugins;
 import mage.client.util.DeckUtil;
-import mage.client.util.GameManager;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
-import mage.view.AbilityPickerView;
 import mage.view.ChatMessage;
-import mage.view.ChatMessage.MessageType;
-import static mage.view.ChatMessage.SoundToPlay.PlayerLeft;
-import static mage.view.ChatMessage.SoundToPlay.PlayerQuitTournament;
-import static mage.view.ChatMessage.SoundToPlay.PlayerSubmittedDeck;
-import static mage.view.ChatMessage.SoundToPlay.PlayerWhispered;
 import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
-import mage.view.GameClientMessage;
-import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
 import mage.view.UserRequestMessage;
@@ -195,16 +182,16 @@ public class CallbackClientImpl implements CallbackClient {
 //                                    panel.init((GameView) callback.getData());
 //                                }       break;
 //                            }
-                        case "gameOver":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.endMessage((String) callback.getData());
-                                }       break;
-                            }
-                        case "gameError":
-                            frame.showErrorDialog("Game Error", (String) callback.getData());
-                            break;
+//                        case "gameOver":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.endMessage((String) callback.getData());
+//                                }       break;
+//                            }
+//                        case "gameError":
+//                            frame.showErrorDialog("Game Error", (String) callback.getData());
+//                            break;
 //                        case "gameAsk":
 //                            {
 //                                GameClientMessage message = (GameClientMessage) callback.getData();
@@ -281,13 +268,13 @@ public class CallbackClientImpl implements CallbackClient {
 //                                    panel.getAmount(message.getMin(), message.getMax(), message.getMessage());
 //                                }       break;
 //                            }
-                        case "gameUpdate":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.updateGame((GameView) callback.getData());
-                                }       break;
-                            }
+//                        case "gameUpdate":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.updateGame((GameView) callback.getData());
+//                                }       break;
+//                            }
 //                        case "endGameInfo":
 //                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
 //                            break;
@@ -296,31 +283,31 @@ public class CallbackClientImpl implements CallbackClient {
                             if (messageData.size() == 2) {
                                 JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
                             }   break;
-                        case "gameInform":
-                            if (callback.getMessageId() > gameInformMessageId) {
-                                {
-                                    GameClientMessage message = (GameClientMessage) callback.getData();
-                                    GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                    if (panel != null) {
-                                        panel.inform(message.getMessage(), message.getGameView());
-                                    }
-                                }
-// no longer needed because phase skip handling on server side now
-                            } else {
-                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
-                                //logger.warn("message out of sequence - ignoring");
-                            }
-                            gameInformMessageId = messageId;
-                            break;
-                        case "gameInformPersonal":
-                            {
-                                GameClientMessage message = (GameClientMessage) callback.getData();
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
-                                            JOptionPane.INFORMATION_MESSAGE);
-                                }       break;
-                            }
+//                        case "gameInform":
+//                            if (callback.getMessageId() > gameInformMessageId) {
+//                                {
+//                                    GameClientMessage message = (GameClientMessage) callback.getData();
+//                                    GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                    if (panel != null) {
+//                                        panel.inform(message.getMessage(), message.getGameView());
+//                                    }
+//                                }
+//// no longer needed because phase skip handling on server side now
+//                            } else {
+//                                logger.warn(new StringBuilder("message out of sequence - ignoring").append("MessageId = ").append(callback.getMessageId()).append(" method = ").append(callback.getMethod()));
+//                                //logger.warn("message out of sequence - ignoring");
+//                            }
+//                            gameInformMessageId = messageId;
+//                            break;
+//                        case "gameInformPersonal":
+//                            {
+//                                GameClientMessage message = (GameClientMessage) callback.getData();
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    JOptionPane.showMessageDialog(panel, message.getMessage(), "Game message",
+//                                            JOptionPane.INFORMATION_MESSAGE);
+//                                }       break;
+//                            }
                         case "sideboard":
                             {
                                 TableClientMessage message = (TableClientMessage) callback.getData();

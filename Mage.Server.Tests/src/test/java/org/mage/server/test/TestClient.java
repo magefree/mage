@@ -15,6 +15,7 @@ import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
@@ -23,7 +24,7 @@ import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 /**
  *
@@ -180,5 +181,30 @@ public class TestClient implements MageClient {
     
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
         return client.joinTable(roomId, tableId, playerName, playerType, skill, deck, password);
+    }
+
+    @Override
+    public void gameUpdate(UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameInform(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameInformPersonal(UUID gameId, GameClientMessage message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameOver(UUID gameId, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void gameError(UUID gameId, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

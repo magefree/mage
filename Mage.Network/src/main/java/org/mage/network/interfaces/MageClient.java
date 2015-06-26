@@ -5,15 +5,15 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.choices.Choice;
-import mage.game.Table;
 import mage.interfaces.ServerState;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
-import org.mage.network.model.MessageType;
+import org.mage.network.messages.MessageType;
 
 /**
  *
@@ -36,6 +36,11 @@ public interface MageClient {
     void gameStarted(UUID gameId, UUID playerId);
 
     void initGame(UUID gameId, GameView gameView);
+    void gameUpdate(UUID gameId, GameView gameView);
+    void gameInform(UUID gameId, GameClientMessage message);
+    void gameInformPersonal(UUID gameId, GameClientMessage message);
+    void gameOver(UUID gameId, String message);
+    void gameError(UUID gameId, String message);
 
     void gameAsk(UUID gameId, GameView gameView, String question);
     void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options);

@@ -10,8 +10,8 @@ import mage.interfaces.ServerState;
 import mage.remote.Connection;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-import org.mage.network.model.ClientRegisteredMessage;
-import org.mage.network.model.RegisterClientRequest;
+import org.mage.network.messages.responses.ClientRegisteredMessage;
+import org.mage.network.messages.requests.RegisterClientRequest;
 
 /**
  *
@@ -24,7 +24,7 @@ public class ClientRegisteredMessageHandler extends SimpleChannelInboundHandler<
     private final BlockingQueue<ServerState> queue = new LinkedBlockingQueue<>();
     private Connection connection;
     private MageVersion version;
-    
+        
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ctx.writeAndFlush(new RegisterClientRequest(connection, version)).addListener(new ListenerImpl());

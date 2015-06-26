@@ -16,29 +16,30 @@ import mage.view.TableView;
 import mage.view.UserDataView;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
-import org.mage.network.model.ChatMessageRequest;
-import org.mage.network.model.ChatRoomIdRequest;
-import org.mage.network.model.ClientMessage;
-import org.mage.network.model.CreateTableRequest;
-import org.mage.network.model.GetRoomRequest;
-import org.mage.network.model.JoinChatRequest;
-import org.mage.network.model.JoinGameRequest;
-import org.mage.network.model.JoinTableRequest;
-import org.mage.network.model.LeaveChatRequest;
-import org.mage.network.model.LeaveTableRequest;
-import org.mage.network.model.PlayerActionRequest;
-import org.mage.network.model.RemoveTableRequest;
-import org.mage.network.model.SendFeedbackRequest;
-import org.mage.network.model.SendPlayerBooleanRequest;
-import org.mage.network.model.SendPlayerIntegerRequest;
-import org.mage.network.model.SendPlayerManaTypeRequest;
-import org.mage.network.model.SendPlayerStringRequest;
-import org.mage.network.model.SendPlayerUUIDRequest;
-import org.mage.network.model.ServerMessagesRequest;
-import org.mage.network.model.SetPreferencesRequest;
-import org.mage.network.model.StartMatchRequest;
-import org.mage.network.model.SwapSeatRequest;
-import org.mage.network.model.TableWaitingRequest;
+import org.mage.network.messages.requests.ChatMessageRequest;
+import org.mage.network.messages.requests.ChatRoomIdRequest;
+import org.mage.network.messages.ClientMessage;
+import org.mage.network.messages.requests.CreateTableRequest;
+import org.mage.network.messages.requests.GetRoomRequest;
+import org.mage.network.messages.requests.JoinChatRequest;
+import org.mage.network.messages.requests.JoinGameRequest;
+import org.mage.network.messages.requests.JoinTableRequest;
+import org.mage.network.messages.requests.LeaveChatRequest;
+import org.mage.network.messages.requests.LeaveTableRequest;
+import org.mage.network.messages.requests.PlayerActionRequest;
+import org.mage.network.messages.requests.RemoveTableRequest;
+import org.mage.network.messages.requests.SendFeedbackRequest;
+import org.mage.network.messages.requests.SendPlayerBooleanRequest;
+import org.mage.network.messages.requests.SendPlayerIntegerRequest;
+import org.mage.network.messages.requests.SendPlayerManaTypeRequest;
+import org.mage.network.messages.requests.SendPlayerStringRequest;
+import org.mage.network.messages.requests.SendPlayerUUIDRequest;
+import org.mage.network.messages.requests.ServerMessagesRequest;
+import org.mage.network.messages.requests.SetPreferencesRequest;
+import org.mage.network.messages.requests.StartMatchRequest;
+import org.mage.network.messages.requests.SubmitDeckRequest;
+import org.mage.network.messages.requests.SwapSeatRequest;
+import org.mage.network.messages.requests.TableWaitingRequest;
 
 /**
  *
@@ -123,7 +124,13 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         return uuidQueue.take();
     }
 
-    public void sendFeedback(String title, String type, String message, String email) throws Exception {
+    public boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new SubmitDeckRequest(tableId, deckCardLists)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
+    public void sendFeedback(String title, String type, String message, String email) {
         ctx.writeAndFlush(new SendFeedbackRequest(title, type, message, email)).addListener(WriteListener.getInstance());
     }
 

@@ -67,4 +67,14 @@ public abstract class DeckValidator implements Serializable {
             }
         }
     }
+    
+    public String getInvalidMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Invalid deck for this format").append("\n");
+        for (Map.Entry<String, String> entry: invalid.entrySet()) {
+            sb.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
+        }
+        return sb.toString();
+    }
+
 }
