@@ -3,7 +3,6 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -11,12 +10,10 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class SourcePermanentPowerCount implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
-        if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
-        }
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
         if (sourcePermanent != null) {
             return sourcePermanent.getPower().getValue();
         }

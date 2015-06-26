@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class LivingTsunami extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, sacrifice Living Tsunami unless you return a land you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetCost(new TargetControlledPermanent(1, 1, filter, true))), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(1, 1, filter, true))), TargetController.YOU, false));
     }
 
     public LivingTsunami(final LivingTsunami card) {

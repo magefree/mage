@@ -25,18 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -48,14 +46,15 @@ import mage.game.permanent.token.Token;
  */
 public class PhyrexianRebirth extends CardImpl {
 
-    public PhyrexianRebirth (UUID ownerId) {
+    public PhyrexianRebirth(UUID ownerId) {
         super(ownerId, 15, "Phyrexian Rebirth", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
         this.expansionSetCode = "MBS";
 
+        // Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
         this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
     }
 
-    public PhyrexianRebirth (final PhyrexianRebirth card) {
+    public PhyrexianRebirth(final PhyrexianRebirth card) {
         super(card);
     }
 
@@ -78,7 +77,7 @@ public class PhyrexianRebirth extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             int count = 0;
-            for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 count += permanent.destroy(source.getSourceId(), game, false) ? 1 : 0;
             }
             HorrorToken horrorToken = new HorrorToken();
@@ -95,14 +94,15 @@ public class PhyrexianRebirth extends CardImpl {
 
     }
 
-class HorrorToken extends Token {
-    public HorrorToken() {
-        super("Horror", "X/X colorless Horror artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add("Horror");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
+    class HorrorToken extends Token {
+
+        public HorrorToken() {
+            super("Horror", "X/X colorless Horror artifact creature token");
+            cardType.add(CardType.ARTIFACT);
+            cardType.add(CardType.CREATURE);
+            subtype.add("Horror");
+            power = new MageInt(0);
+            toughness = new MageInt(0);
+        }
     }
-}
 }

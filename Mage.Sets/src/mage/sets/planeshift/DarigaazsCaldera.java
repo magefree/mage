@@ -29,7 +29,7 @@ package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
@@ -59,7 +59,7 @@ public class DarigaazsCaldera extends CardImpl {
         this.subtype.add("Lair");
 
         // When Darigaaz's Caldera enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)))));
         // {tap}: Add {B}, {R}, or {G} to your mana pool.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

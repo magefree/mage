@@ -37,23 +37,49 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class DrawEffectsTest extends CardTestPlayerBase {
 
     /**
-     * The effects of multiple Thought Reflections are cumulative. For example, if you have
-     * three Thought Reflections on the battlefield, you'll draw eight times the original number of cards.
+     * The effects of multiple Thought Reflections are cumulative. For example,
+     * if you have three Thought Reflections on the battlefield, you'll draw
+     * eight times the original number of cards.
      */
     @Test
     public void testCard() {
-        // If you would draw a card, draw two cards instead. 
+        // If you would draw a card, draw two cards instead.
         addCard(Zone.BATTLEFIELD, playerB, "Thought Reflection", 3);
 
         setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        Assert.assertEquals("Player B has to have 4 cards in hand", 8 , playerB.getHand().size());
+        Assert.assertEquals("Player B has to have 4 cards in hand", 8, playerB.getHand().size());
 
+    }
+
+    /**
+     * http://www.slightlymagic.net/forum/viewtopic.php?f=70&t=17295&start=75#p181427
+     * If I have a Notion Thief on the battlefield and cast Opportunity,
+     * targeting my opponent, during my opponent's upkeep, the opponent
+     * incorrectly draws the cards.
+     */
+    @Test
+    public void testNotionThief() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        // Flash
+        // If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Notion Thief", 1);
+
+        // Target player draws four cards.
+        addCard(Zone.HAND, playerA, "Opportunity", 1);
+
+        castSpell(2, PhaseStep.UPKEEP, playerA, "Opportunity", playerB);
+
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, "Opportunity", 1);
+        assertHandCount(playerA, 4);
+        assertHandCount(playerB, 1);
     }
 
 }

@@ -29,7 +29,7 @@ package mage.sets.lorwyn;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
@@ -48,7 +48,7 @@ public class FamiliarsRuse extends CardImpl {
         super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LRW";
 
-        this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("creature"),false)));
+        this.getSpellAbility().addCost(new ReturnToHandTargetPermanentCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("creature"),false)));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

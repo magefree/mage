@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -67,7 +67,7 @@ public class SoratamiSavant extends CardImpl {
 
         // {3}, Return a land you control to its owner's hand: Counter target spell unless its controller pays {3}.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new GenericManaCost(3));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
