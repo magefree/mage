@@ -68,6 +68,7 @@ public class Exorcist extends CardImpl {
                 new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public Exorcist(final Exorcist card) {
