@@ -1,31 +1,30 @@
 /*
-* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server.tournament;
 
 import java.util.Map.Entry;
@@ -63,7 +62,6 @@ import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -89,57 +87,57 @@ public class TournamentController {
 
     private void init() {
         tournament.addTableEventListener(
-            new Listener<TableEvent> () {
-                @Override
-                public void event(TableEvent event) {
-                    switch (event.getEventType()) {
-                        case CHECK_STATE_PLAYERS:
-                            checkPlayersState();
-                            break;
-                        case INFO:
-                            ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS);
-                            logger.debug(tournament.getId() + " " + event.getMessage());
-                            break;
-                        case START_DRAFT:
-                            startDraft(event.getDraft());
-                            break;
-                        case CONSTRUCT:
-                            if (!isAbort()) {
-                                construct();
-                            } else {
-                                endTournament();
-                            }
-                            break;
-                        case START_MATCH:
-                            if (!isAbort()) {
-                                initTournament(); // set state
-                                startMatch(event.getPair(), event.getMatchOptions());
-                            }
-                            break;
-                        case END:
-                            endTournament();
-                            break;
-                    }
-                }
-            }
-        );
-        tournament.addPlayerQueryEventListener(
-            new Listener<PlayerQueryEvent> () {
-                @Override
-                public void event(PlayerQueryEvent event) {
-                    try {
-                        switch (event.getQueryType()) {
+                new Listener<TableEvent>() {
+                    @Override
+                    public void event(TableEvent event) {
+                        switch (event.getEventType()) {
+                            case CHECK_STATE_PLAYERS:
+                                checkPlayersState();
+                                break;
+                            case INFO:
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK, true, MessageType.STATUS);
+                                logger.debug(tournament.getId() + " " + event.getMessage());
+                                break;
+                            case START_DRAFT:
+                                startDraft(event.getDraft());
+                                break;
                             case CONSTRUCT:
-                                construct(event.getPlayerId(), event.getMax());
+                                if (!isAbort()) {
+                                    construct();
+                                } else {
+                                    endTournament();
+                                }
+                                break;
+                            case START_MATCH:
+                                if (!isAbort()) {
+                                    initTournament(); // set state
+                                    startMatch(event.getPair(), event.getMatchOptions());
+                                }
+                                break;
+                            case END:
+                                endTournament();
                                 break;
                         }
-                    } catch (MageException ex) {
-                        logger.fatal("Player event listener error", ex);
                     }
                 }
-            }
         );
-        for (TournamentPlayer player: tournament.getPlayers()) {
+        tournament.addPlayerQueryEventListener(
+                new Listener<PlayerQueryEvent>() {
+                    @Override
+                    public void event(PlayerQueryEvent event) {
+                        try {
+                            switch (event.getQueryType()) {
+                                case CONSTRUCT:
+                                    construct(event.getPlayerId(), event.getMax());
+                                    break;
+                            }
+                        } catch (MageException ex) {
+                            logger.fatal("Player event listener error", ex);
+                        }
+                    }
+                }
+        );
+        for (TournamentPlayer player : tournament.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
                 logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
@@ -163,7 +161,7 @@ public class TournamentController {
         if (tournamentSessions.containsKey(playerId)) {
             logger.debug("player reopened tournament panel   userId: " + userId + " tournamentId: " + tournament.getId());
             return;
-        } 
+        }
         // first join of player
         TournamentSession tournamentSession = new TournamentSession(tournament, userId, tableId, playerId);
         tournamentSessions.put(playerId, tournamentSession);
@@ -172,22 +170,22 @@ public class TournamentController {
             user.addTournament(playerId, tournament.getId());
             TournamentPlayer player = tournament.getPlayer(playerId);
             player.setJoined();
-            logger.debug("player " +player.getPlayer().getName()  + " - client has joined tournament " + tournament.getId());
+            logger.debug("player " + player.getPlayer().getName() + " - client has joined tournament " + tournament.getId());
             ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, MessageType.STATUS);
             checkStart();
         } else {
-            logger.error("User not found  userId: " + userId  + "   tournamentId: " + tournament.getId());
+            logger.error("User not found  userId: " + userId + "   tournamentId: " + tournament.getId());
         }
     }
 
     public void rejoin(UUID playerId) {
         TournamentSession tournamentSession = tournamentSessions.get(playerId);
         if (tournamentSession == null) {
-            logger.fatal("Tournament session not found - playerId:"  + playerId + "  tournamentId " + tournament.getId());
+            logger.fatal("Tournament session not found - playerId:" + playerId + "  tournamentId " + tournament.getId());
             return;
         }
         if (!tournamentSession.init()) {
-            logger.fatal("Unable to initialize client userId: "  + tournamentSession.userId + "  tournamentId " + tournament.getId());
+            logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
             return;
         }
         tournamentSession.update();
@@ -196,12 +194,12 @@ public class TournamentController {
     private void checkStart() {
         if (!started && allJoined()) {
             ThreadExecutor.getInstance().getCallExecutor().execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        startTournament();
-                    }
-            });
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            startTournament();
+                        }
+                    });
         }
     }
 
@@ -209,7 +207,7 @@ public class TournamentController {
         if (!tournament.allJoined()) {
             return false;
         }
-        for (TournamentPlayer player: tournament.getPlayers()) {
+        for (TournamentPlayer player : tournament.getPlayers()) {
             if (player.getPlayer().isHuman() && tournamentSessions.get(player.getPlayer().getId()) == null) {
                 return false;
             }
@@ -218,9 +216,9 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
-        for (final TournamentSession tournamentSession: tournamentSessions.values()) {
+        for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
-                logger.fatal("Unable to initialize client userId: "  + tournamentSession.userId + "  tournamentId " + tournament.getId());
+                logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
                 //TODO: generate client error message
                 return;
             }
@@ -231,10 +229,10 @@ public class TournamentController {
     }
 
     private void endTournament() {
-        for (TournamentPlayer player: tournament.getPlayers()) {
+        for (TournamentPlayer player : tournament.getPlayers()) {
             player.setStateAtTournamentEnd();
         }
-        for (final TournamentSession tournamentSession: tournamentSessions.values()) {
+        for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             tournamentSession.tournamentOver();
         }
         this.tournamentSessions.clear();
@@ -296,8 +294,8 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted his tournament deck", MessageColor.BLACK, true, MessageType.STATUS,  SoundToPlay.PlayerSubmittedDeck);
-            }            
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getLogName() + " has submitted his tournament deck", MessageColor.BLACK, true, MessageType.STATUS, SoundToPlay.PlayerSubmittedDeck);
+            }
         }
     }
 
@@ -387,7 +385,7 @@ public class TournamentController {
     private boolean checkToReplaceDraftPlayerByAi(UUID userId, TournamentPlayer leavingPlayer) {
 
         int humans = 0;
-        for (TournamentPlayer tPlayer :tournament.getPlayers()) {
+        for (TournamentPlayer tPlayer : tournament.getPlayers()) {
             if (tPlayer.getPlayer().isHuman()) {
                 humans++;
             }
@@ -415,7 +413,7 @@ public class TournamentController {
     }
 
     private UUID getPlayerUserId(UUID playerId) {
-        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             if (entry.getValue().equals(playerId)) {
                 return entry.getKey();
             }
@@ -437,7 +435,7 @@ public class TournamentController {
     }
 
     private void checkPlayersState() {
-        for (TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
+        for (TournamentPlayer tournamentPlayer : tournament.getPlayers()) {
             if (!tournamentPlayer.isEliminated() && tournamentPlayer.getPlayer().isHuman()) {
                 if (tournamentSessions.containsKey(tournamentPlayer.getPlayer().getId())) {
                     if (tournamentSessions.get(tournamentPlayer.getPlayer().getId()).isKilled()) {
@@ -452,22 +450,22 @@ public class TournamentController {
         }
 
     }
-    
+
     public void cleanUpOnRemoveTournament() {
         ChatManager.getInstance().destroyChatSession(chatId);
     }
 
     /**
-     * Check tournaments that are not already finished, if they are in a still valid state
+     * Check tournaments that are not already finished, if they are in a still
+     * valid state
      *
      * @param tableState state of the tournament table
-     * @return true  - if tournament is valid
-     *         false - if tournament is not valid and should be removed
+     * @return true - if tournament is valid false - if tournament is not valid
+     * and should be removed
      */
-
     public boolean isTournamentStillValid(TableState tableState) {
         int activePlayers = 0;
-        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+        for (Entry<UUID, UUID> entry : userPlayerMap.entrySet()) {
             TournamentPlayer tournamentPlayer = tournament.getPlayer(entry.getValue());
             if (tournamentPlayer != null) {
                 if (!tournamentPlayer.hasQuit()) {
@@ -480,14 +478,14 @@ public class TournamentController {
                         } else {
                             activePlayers++;
                         }
-                    }                    
-                }                    
+                    }
+                }
             } else {
                 // tournament player is missing
                 logger.debug("Tournament player is missing - tournamentId: " + tournament.getId() + " state: " + tableState.toString());
             }
         }
-        for(TournamentPlayer tournamentPlayer: tournament.getPlayers()) {
+        for (TournamentPlayer tournamentPlayer : tournament.getPlayers()) {
             if (!tournamentPlayer.getPlayer().isHuman()) {
                 if (!tournamentPlayer.hasQuit()) {
                     activePlayers++;

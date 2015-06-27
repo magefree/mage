@@ -1,30 +1,30 @@
 /*
-* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * PreferencesDialog.java
@@ -63,10 +63,11 @@ import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.players.net.UserData;
+import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
-import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 
 /**
@@ -77,7 +78,7 @@ import org.apache.log4j.Logger;
 public class PreferencesDialog extends javax.swing.JDialog {
 
     private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
-    
+
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
@@ -88,7 +89,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_GAME_SHOW_STORM_COUNTER = "gameShowStormCounter";
     public static final String KEY_GAME_CONFIRM_EMPTY_MANA_POOL = "gameConfirmEmptyManaPool";
     public static final String KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER = "gameAskMoveToGraveORder";
-    
+
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
@@ -96,12 +97,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_CARD_IMAGES_PREF_LANGUAGE = "cardImagesPreferedImageLaguage";
-    
+
     public static final String KEY_BACKGROUND_IMAGE = "backgroundImage";
     public static final String KEY_BATTLEFIELD_IMAGE = "battlefieldImage";
     public static final String KEY_BACKGROUND_IMAGE_DEFAULT = "backgroundImagedDefault";
     public static final String KEY_BATTLEFIELD_IMAGE_RANDOM = "battlefieldImagerandom";
-    public static final String KEY_BATTLEFIELD_IMAGE_DEFAULT = "battlefieldImageDefault"; 
+    public static final String KEY_BATTLEFIELD_IMAGE_DEFAULT = "battlefieldImageDefault";
 
     public static final String KEY_SOUNDS_GAME_ON = "soundsOn";
     public static final String KEY_SOUNDS_DRAFT_ON = "soundsDraftOn";
@@ -111,7 +112,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
-
 
     // Phases
     public static final String UPKEEP_YOU = "upkeepYou";
@@ -138,15 +138,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // mana auto payment
     public static final String KEY_GAME_MANA_AUTOPAYMENT = "gameManaAutopayment";
     public static final String KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE = "gameManaAutopaymentOnlyOne";
-    
+
     // Size of frame to check if divider locations should be used
     public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
-    
+
     // pref settings of table settings and filtering
     public static final String KEY_TABLES_FILTER_SETTINGS = "tablePanelFilterSettings";
     public static final String KEY_TABLES_COLUMNS_WIDTH = "tablePanelColumnWidth";
     public static final String KEY_TABLES_COLUMNS_ORDER = "tablePanelColumnSort";
-    
+
     // positions of divider bars
     public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
     public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
@@ -155,11 +155,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // user list
     public static final String KEY_USERS_COLUMNS_WIDTH = "userPanelColumnWidth";
     public static final String KEY_USERS_COLUMNS_ORDER = "userPanelColumnSort";
-    
+    // table waiting dialog
+    public static final String KEY_TABLE_WAITING_WIDTH = "tableWaitingPanelWidth";
+    public static final String KEY_TABLE_WAITING_HEIGHT = "tableWaitingPanelHeight";
+    public static final String KEY_TABLE_WAITING_COLUMNS_WIDTH = "tableWaitingPanelColumnWidth";
+    public static final String KEY_TABLE_WAITING_COLUMNS_ORDER = "tableWaitingPanelColumnSort";
+
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
 
+    public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH = "tournamentPlayerPanelColumnWidth";
+    public static final String KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER = "tournamentPlayerPanelColumnSort";
+    public static final String KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH = "tournamentMatchPanelColumnWidth";
+    public static final String KEY_TOURNAMENT_MATCH_COLUMNS_ORDER = "tournamentMatchPanelColumnSort";
     public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_1 = "tournamentPanelDividerLocation1";
     public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_2 = "tournamentPanelDividerLocation2";
 
@@ -204,7 +213,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
-    
+
     public static final String KEY_DRAFT_SORT_BY = "draftSortBy";
     public static final String KEY_DRAFT_SORT_INDEX = "draftSortIndex";
     public static final String KEY_DRAFT_SORT_ASCENDING = "draftSortAscending";
@@ -234,10 +243,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CONNECTION_URL_SERVER_LIST = "connectionURLServerList";
 
     public static final String KEY_AVATAR = "selectedId";
-    
+
     public static final String KEY_CONNECT_AUTO_CONNECT = "autoConnect";
     public static final String KEY_CONNECT_FLAG = "connectFlag";
-    
 
     private static final Map<String, String> cache = new HashMap<>();
 
@@ -278,38 +286,37 @@ public class PreferencesDialog extends javax.swing.JDialog {
     {
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }
-    
+
     private final JFileChooser fc_i = new JFileChooser();
+
     {
         fc_i.setAcceptAllFileFilterUsed(false);
         fc_i.addChoosableFileFilter(new ImageFileFilter());
     }
 
-    private static class ImageFileFilter extends FileFilter{
-        
+    private static class ImageFileFilter extends FileFilter {
+
         @Override
         public boolean accept(File f) {
             String filename = f.getName();
-            if(f.isDirectory()){
+            if (f.isDirectory()) {
                 return true;
             }
-            if(filename != null){
-                if(filename.endsWith(".jpg") || filename.endsWith(".jpeg") ||
-                        filename.endsWith(".png") || filename.endsWith(".bmp")){
-                      return true;
+            if (filename != null) {
+                if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")
+                        || filename.endsWith(".png") || filename.endsWith(".bmp")) {
+                    return true;
                 }
             }
             return false;
         }
-            
+
         @Override
         public String getDescription() {
-              return "*.png | *.bmp |*.jpg | *.jpeg";
-        } 
+            return "*.png | *.bmp |*.jpg | *.jpeg";
+        }
     }
-    
-    
-    
+
     /**
      * Creates new form PreferencesDialog
      *
@@ -322,15 +329,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         txtImageFolderPath.setEditable(false);
         cbProxyType.setModel(new DefaultComboBoxModel<>(Connection.ProxyType.values()));
         addAvatars();
-        
-        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[] {"en","de","fr","it","es","pt","jp","cn","ru","tw","ko"}));
-        
+
+        cbPreferedImageLanguage.setModel(new DefaultComboBoxModel<>(new String[]{"en", "de", "fr", "it", "es", "pt", "jp", "cn", "ru", "tw", "ko"}));
+
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1698,9 +1705,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
         save(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);        
+        save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbPreferedImageLanguage, KEY_CARD_IMAGES_PREF_LANGUAGE);
-        
+
         save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
@@ -1712,7 +1719,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.cbEnableOtherSounds, KEY_SOUNDS_OTHER_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbEnableBattlefieldBGM, KEY_SOUNDS_MATCH_MUSIC_ON, "true", "false", UPDATE_CACHE_POLICY);
         saveSoundPath(prefs);
-        
+
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
@@ -1770,7 +1777,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
         int returnVal = fc.showOpenDialog(PreferencesDialog.this);
-        
+
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             txtImageFolderPath.setText(file.getAbsolutePath());
@@ -1803,101 +1810,101 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_cbEnableGameSoundsActionPerformed
 
     private void cbEnableBattlefieldBGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableBattlefieldBGMActionPerformed
-        if(cbEnableBattlefieldBGM.isSelected()){
+        if (cbEnableBattlefieldBGM.isSelected()) {
             txtBattlefieldIBGMPath.setEnabled(true);
             btnBattlefieldBGMBrowse.setEnabled(true);
-        }else{
+        } else {
             txtBattlefieldIBGMPath.setEnabled(false);
             btnBattlefieldBGMBrowse.setEnabled(false);
         }
     }//GEN-LAST:event_cbEnableBattlefieldBGMActionPerformed
-    
+
     private void cbUseDefaultBackgroundActionPerformed(java.awt.event.ActionEvent evt) {
-        if(cbUseDefaultBackground.isSelected()){
+        if (cbUseDefaultBackground.isSelected()) {
             useDefaultBackgroundImage();
-        }else{
+        } else {
             useSelectBackgroundImage();
         }
-    }                                                    
+    }
 
-    private void useDefaultBackgroundImage(){
+    private void useDefaultBackgroundImage() {
         txtBackgroundImagePath.setEnabled(false);
         btnBrowseBackgroundImage.setEnabled(false);
         txtBackgroundImagePath.setText("");
     }
-    
-    private void useSelectBackgroundImage(){
+
+    private void useSelectBackgroundImage() {
         String path = cache.get(KEY_BACKGROUND_IMAGE);
         dialog.txtBackgroundImagePath.setText(path);
         txtBackgroundImagePath.setEnabled(true);
         btnBrowseBackgroundImage.setEnabled(true);
     }
-    
+
     private void cbUseDefaultBattleImageActionPerformed(java.awt.event.ActionEvent evt) {
-        if(cbUseDefaultBattleImage.isSelected()){
+        if (cbUseDefaultBattleImage.isSelected()) {
             useDefaultBattlefield();
-        }else{
+        } else {
             useSelectedOrRandom();
         }
-    }                                                     
-    
-    private void useDefaultBattlefield(){
+    }
+
+    private void useDefaultBattlefield() {
         cbUseRandomBattleImage.setEnabled(false);
         txtBattlefieldImagePath.setEnabled(false);
         btnBrowseBattlefieldImage.setEnabled(false);
     }
-    
-    private void useSelectedOrRandom(){
+
+    private void useSelectedOrRandom() {
         cbUseRandomBattleImage.setEnabled(true);
         String temp = cache.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
-        if(temp != null){
-            if(temp.equals("true")){
+        if (temp != null) {
+            if (temp.equals("true")) {
                 useRandomBattleField();
                 cbUseRandomBattleImage.setSelected(true);
-            }else{
+            } else {
                 useSelectedBattleField();
                 cbUseRandomBattleImage.setSelected(false);
             }
-        }else{
-             useSelectedBattleField();
-             cbUseRandomBattleImage.setSelected(false);
+        } else {
+            useSelectedBattleField();
+            cbUseRandomBattleImage.setSelected(false);
         }
     }
-    
+
     private void cbUseRandomBattleImageActionPerformed(java.awt.event.ActionEvent evt) {
-        if(cbUseRandomBattleImage.isSelected()){
+        if (cbUseRandomBattleImage.isSelected()) {
             useRandomBattleField();
-        }else{
+        } else {
             useSelectedBattleField();
         }
-    }                                                    
+    }
 
-    private void useRandomBattleField(){
+    private void useRandomBattleField() {
         txtBattlefieldImagePath.setEnabled(false);
         btnBrowseBattlefieldImage.setEnabled(false);
     }
-    
-    private void useSelectedBattleField(){
+
+    private void useSelectedBattleField() {
         txtBattlefieldImagePath.setEnabled(true);
         btnBrowseBattlefieldImage.setEnabled(true);
     }
-    
+
     private void btnBrowseBackgroundImageActionPerformed(java.awt.event.ActionEvent evt) {
-        int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);     
+        int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc_i.getSelectedFile();
             txtBackgroundImagePath.setText(file.getAbsolutePath());
         }
-    }                                                      
+    }
 
     private void btnBrowseBattlefieldImageActionPerformed(java.awt.event.ActionEvent evt) {
-        int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);     
+        int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc_i.getSelectedFile();
             txtBattlefieldImagePath.setText(file.getAbsolutePath());
         }
-    }  
-    
+    }
+
     private void txtBackgroundImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBackgroundImagePathActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBackgroundImagePathActionPerformed
@@ -1995,12 +2002,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
             this.pnlProxySettings.setVisible(true);
-        }
-        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
+        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.HTTP) {
             this.pnlProxy.setVisible(true);
             this.pnlProxySettings.setVisible(true);
-        }
-        else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
+        } else if (cbProxyType.getSelectedItem() == Connection.ProxyType.NONE) {
             this.pnlProxy.setVisible(false);
             this.pnlProxySettings.setVisible(false);
         }
@@ -2059,7 +2064,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true","true");
+        load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.showCardName, KEY_SHOW_CARD_NAMES, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
@@ -2072,21 +2077,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
 
-        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on","on");
-        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on","on");
-        load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on","on");
-        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on","on");
-        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on","on");
-        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on","on");
-        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on","on");
+        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU, "on", "on");
+        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU, "on", "on");
+        load(prefs, dialog.checkBoxMainYou, MAIN_YOU, "on", "on");
+        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU, "on", "on");
+        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU, "on", "on");
+        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU, "on", "on");
+        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU, "on", "on");
 
-        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on","on");
-        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on","on");
+        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS, "on", "on");
+        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS, "on", "on");
 
         load(prefs, dialog.cbStopAttack, KEY_STOP_ATTACK, "true", "true");
         load(prefs, dialog.cbStopBlock, KEY_STOP_BLOCK, "true", "true");
@@ -2110,13 +2115,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         dialog.cbPreferedImageLanguage.setSelectedItem(MageFrame.getPreferences().get(KEY_CARD_IMAGES_PREF_LANGUAGE, "en"));
-        
-        //add background load precedure 
+
+        //add background load precedure
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
-        if(prop.equals("true")){
+        if (prop.equals("true")) {
             dialog.cbUseDefaultBackground.setSelected(true);
             dialog.useDefaultBackgroundImage();
-        }else{
+        } else {
             dialog.cbUseDefaultBackground.setSelected(false);
             dialog.useSelectBackgroundImage();
             String path = prefs.get(KEY_BACKGROUND_IMAGE, "");
@@ -2124,27 +2129,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_BACKGROUND_IMAGE, path);
         }
         prop = prefs.get(KEY_BATTLEFIELD_IMAGE_DEFAULT, "true");
-        if(prop.equals("true")){
+        if (prop.equals("true")) {
             dialog.cbUseDefaultBattleImage.setSelected(true);
-            dialog.useDefaultBattlefield();        
-        }else{
+            dialog.useDefaultBattlefield();
+        } else {
             dialog.cbUseDefaultBattleImage.setSelected(false);
             dialog.useSelectedOrRandom();
         }
         prop = prefs.get(KEY_BATTLEFIELD_IMAGE_RANDOM, "true");
-        
-        if(dialog.cbUseRandomBattleImage.isEnabled()) {
-            if(prop.equals("true")){
+
+        if (dialog.cbUseRandomBattleImage.isEnabled()) {
+            if (prop.equals("true")) {
                 dialog.cbUseRandomBattleImage.setSelected(true);
                 dialog.useRandomBattleField();
-            }else{
+            } else {
                 dialog.cbUseRandomBattleImage.setSelected(false);
                 dialog.useSelectedBattleField();
                 String path = prefs.get(KEY_BATTLEFIELD_IMAGE, "");
                 dialog.txtBattlefieldImagePath.setText(path);
                 updateCache(KEY_BATTLEFIELD_IMAGE, path);
             }
-        }   
+        }
     }
 
     private static void loadSoundSettings(Preferences prefs) {
@@ -2200,7 +2205,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             loadPhases(MageFrame.getPreferences());
         }
         UserSkipPrioritySteps userSkipPrioritySteps = new UserSkipPrioritySteps();
-        
+
         userSkipPrioritySteps.getYourTurn().setUpkeep(dialog.checkBoxUpkeepYou.isSelected());
         userSkipPrioritySteps.getYourTurn().setDraw(dialog.checkBoxDrawYou.isSelected());
         userSkipPrioritySteps.getYourTurn().setMain1(dialog.checkBoxMainYou.isSelected());
@@ -2216,7 +2221,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         userSkipPrioritySteps.getOpponentTurn().setEndOfCombat(dialog.checkBoxEndOfCOthers.isSelected());
         userSkipPrioritySteps.getOpponentTurn().setMain2(dialog.checkBoxMain2Others.isSelected());
         userSkipPrioritySteps.getOpponentTurn().setEndOfTurn(dialog.checkBoxEndTurnOthers.isSelected());
-        
+
         userSkipPrioritySteps.setStopOnDeclareAttackersDuringSkipActions(dialog.cbStopAttack.isSelected());
         userSkipPrioritySteps.setStopOnDeclareBlockerIfNoneAvailable(dialog.cbStopBlock.isSelected());
         userSkipPrioritySteps.setStopOnAllEndPhases(dialog.cbStopOnAllEnd.isSelected());
@@ -2235,7 +2240,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
-
     private static void saveImagesPath(Preferences prefs) {
         if (!dialog.cbUseDefaultImageFolder.isSelected()) {
             String path = dialog.txtImageFolderPath.getText();
@@ -2243,19 +2247,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         // background path save precedure
-        if(!dialog.cbUseDefaultBackground.isSelected()){
+        if (!dialog.cbUseDefaultBackground.isSelected()) {
             String path = dialog.txtBackgroundImagePath.getText();
             prefs.put(KEY_BACKGROUND_IMAGE, path);
             updateCache(KEY_BACKGROUND_IMAGE, path);
         }
-        if(!dialog.cbUseDefaultBattleImage.isSelected() && !dialog.cbUseRandomBattleImage.isSelected()){
+        if (!dialog.cbUseDefaultBattleImage.isSelected() && !dialog.cbUseRandomBattleImage.isSelected()) {
             String path = dialog.txtBattlefieldImagePath.getText();
             prefs.put(KEY_BATTLEFIELD_IMAGE, path);
             updateCache(KEY_BATTLEFIELD_IMAGE, path);
         }
     }
-    
-    private static void saveSoundPath(Preferences prefs){
+
+    private static void saveSoundPath(Preferences prefs) {
         String path = dialog.txtBattlefieldIBGMPath.getText();
         prefs.put(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
         updateCache(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
@@ -2294,13 +2298,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static void setPrefValue(String key, boolean value) {
-        switch(key) {
+        switch (key) {
             case KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS:
                 dialog.cbAllowRequestToShowHandCards.setSelected(value);
                 save(MageFrame.getPreferences(), dialog.cbAllowRequestToShowHandCards, KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true", "false", UPDATE_CACHE_POLICY);
                 break;
-        }                
+        }
     }
+
     private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String noValue, boolean updateCache) {
         prefs.put(propName, checkBox.isSelected() ? yesValue : noValue);
         if (updateCache) {
@@ -2356,7 +2361,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         try {
             addAvatar(jPanel10, 51, true, false);
             addAvatar(jPanel13, 13, false, false);
-            addAvatar(jPanel11, 9,  false, false);
+            addAvatar(jPanel11, 9, false, false);
             addAvatar(jPanel12, 53, false, false);
             addAvatar(jPanel14, 10, false, false);
             addAvatar(jPanel15, 39, false, false);
@@ -2409,25 +2414,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 public void mousePressed(MouseEvent e) {
                     if (selectedAvatarId != id) {
                         setSelectedId(id);
-                        MageFrame.getSession().updatePreferencesForServer(getUserData());                        
+                        MageFrame.getSession().updatePreferencesForServer(getUserData());
                     }
                 }
             });
         }
     }
 
-    public static UserDataView getUserData(){
-        return new UserDataView(
-            getSelectedAvatar(),
-            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
-            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
-            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
-            getUserSkipPrioritySteps(),
-            MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),                
-            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true")
+    public static UserData getUserData() {
+        return new UserData(UserGroup.PLAYER,
+                getSelectedAvatar(),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
+                getUserSkipPrioritySteps(),
+                MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),
+                PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true")
         );
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBattlefieldBGMBrowse;
     private javax.swing.JButton btnBrowseBackgroundImage;

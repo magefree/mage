@@ -104,8 +104,6 @@ public class User {
         this.watchedGames = new ArrayList<>();
         this.tablesToDelete = new ArrayList<>();
         this.sessionId = "";
-        // default these to avaiod NPE -> will be updated from client short after
-        this.userData = new UserData(UserGroup.PLAYER, 0, false, false, false, null, "world.png", false);
     }
 
     public String getName() {
@@ -393,10 +391,17 @@ public class User {
     }
 
     public void setUserData(UserData userData) {
-        this.userData = userData;
+        if (this.userData != null) {
+            this.userData.update(userData);
+        } else {
+            this.userData = userData;
+        }
     }
 
     public UserData getUserData() {
+        if (userData == null) {// default these to avaiod NPE -> will be updated from client short after
+            return new UserData(UserGroup.DEFAULT, 0, false, false, false, null, "world.png", false);
+        }
         return this.userData;
     }
 

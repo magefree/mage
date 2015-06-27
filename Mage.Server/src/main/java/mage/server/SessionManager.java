@@ -31,9 +31,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
+import mage.players.net.UserData;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
-import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -73,7 +73,7 @@ public class SessionManager {
     public boolean registerUser(String sessionId, String userName) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            String returnMessage =  session.registerUser(userName);
+            String returnMessage = session.registerUser(userName);
             if (returnMessage == null) {
                 LogServiceImpl.instance.log(LogKeys.KEY_USER_CONNECTED, userName, session.getHost(), sessionId);
 
@@ -102,24 +102,24 @@ public class SessionManager {
         return false;
     }
 
-    public boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException {
+    public boolean setUserData(String userName, String sessionId, UserData userData) throws MageException {
         Session session = sessions.get(sessionId);
         if (session != null) {
-            session.setUserData(userName, userDataView);
+            session.setUserData(userName, userData);
             return true;
         }
         return false;
     }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
-        Session session = sessions.get(sessionId);     
+        Session session = sessions.get(sessionId);
         if (session != null) {
             if (!reason.equals(DisconnectReason.AdminDisconnect)) {
                 if (!sessions.containsKey(sessionId)) {
                     // session was removed meanwhile by another thread so we can return
                     return;
                 }
-                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: "+ sessionId);
+                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
                 sessions.remove(sessionId);
                 switch (reason) {
                     case Disconnected:
@@ -135,13 +135,13 @@ public class SessionManager {
                         LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
                         break;
                     default:
-                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: "+ sessionId);
+                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
                 }
             } else {
                 sessions.remove(sessionId);
                 session.kill(reason);
             }
-        } 
+        }
 
     }
 
@@ -155,6 +155,7 @@ public class SessionManager {
 
     /**
      * Admin requested the disconnect of a user
+     *
      * @param sessionId
      * @param userSessionId
      */
@@ -163,12 +164,12 @@ public class SessionManager {
             User userAdmin, user;
             if ((userAdmin = getUserFromSession(sessionId)) != null) {
                 if ((user = getUserFromSession(userSessionId)) != null) {
-                    user.showUserMessage("Admin operation","Your session was disconnected by Admin.");
+                    user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
                     userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
                     disconnect(userSessionId, DisconnectReason.AdminDisconnect);
                     LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
                 } else {
-                    userAdmin.showUserMessage("Admin operation","User with sessionId " + userSessionId + " could not be found!");
+                    userAdmin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
                 }
             }
         }
@@ -203,7 +204,7 @@ public class SessionManager {
 
     public User getUser(String sessionId) {
         Session session = sessions.get(sessionId);
-        if (session != null) { 
+        if (session != null) {
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
         }
         return null;

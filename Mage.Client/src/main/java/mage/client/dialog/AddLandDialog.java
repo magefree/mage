@@ -1,30 +1,30 @@
 /*
-* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.client.dialog;
 
 import java.util.HashSet;
@@ -46,6 +46,7 @@ import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.constants.Rarity;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -53,12 +54,16 @@ import mage.constants.Rarity;
  */
 public class AddLandDialog extends MageDialog {
 
+    private static final Logger logger = Logger.getLogger(MageDialog.class);
+
     private Deck deck;
     private final Set<String> setCodesland = new HashSet<>();
-    
+
     private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
-    /** Creates new form AddLandDialog */
+    /**
+     * Creates new form AddLandDialog
+     */
     public AddLandDialog() {
         initComponents();
         this.setModal(true);
@@ -69,7 +74,7 @@ public class AddLandDialog extends MageDialog {
         SortedSet<String> landSets = new TreeSet<>();
         if (!mode.equals(DeckEditorMode.FREE_BUILDING)) {
             // decide from which sets basic lands are taken from
-            for (String setCode :deck.getExpansionSetCodes()) {
+            for (String setCode : deck.getExpansionSetCodes()) {
                 ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                 if (expansionInfo != null && expansionInfo.hasBasicLands()) {
                     this.setCodesland.add(expansionInfo.getCode());
@@ -79,11 +84,11 @@ public class AddLandDialog extends MageDialog {
 
             // if sets have no basic land, take land from block
             if (this.setCodesland.isEmpty()) {
-                for (String setCode :deck.getExpansionSetCodes()) {
+                for (String setCode : deck.getExpansionSetCodes()) {
                     ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
                     if (expansionInfo != null) {
                         List<ExpansionInfo> blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
-                        for (ExpansionInfo blockSet: blockSets) {
+                        for (ExpansionInfo blockSet : blockSets) {
                             if (blockSet.hasBasicLands()) {
                                 this.setCodesland.add(blockSet.getCode());
                                 landSets.add(blockSet.getName());
@@ -92,22 +97,22 @@ public class AddLandDialog extends MageDialog {
                     }
                 }
             }
-        }            
+        }
         // if still no set with lands found, add list of all available
         if (this.setCodesland.isEmpty()) {
             List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            for (ExpansionInfo expansionInfo: basicLandSets) {
+            for (ExpansionInfo expansionInfo : basicLandSets) {
                 landSets.add(expansionInfo.getName());
             }
-        }        
+        }
         if (landSets.isEmpty()) {
             throw new IllegalArgumentException("No set with basic land was found");
         }
-        if(landSets.size() > 1) {
+        if (landSets.size() > 1) {
             landSets.add("<Random lands>");
         }
         cbLandSet.setModel(new DefaultComboBoxModel(landSets.toArray()));
-        
+
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);
     }
@@ -115,7 +120,7 @@ public class AddLandDialog extends MageDialog {
     private void addLands(String landName, int number) {
         Random random = new Random();
         String landSetName = (String) cbLandSet.getSelectedItem();
-        
+
         CardCriteria criteria = new CardCriteria();
         if (landSetName.equals("<Random lands>")) {
             criteria.setCodes(setCodesland.toArray(new String[setCodesland.size()]));
@@ -123,13 +128,17 @@ public class AddLandDialog extends MageDialog {
             ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByName(landSetName);
             if (expansionInfo == null) {
                 throw new IllegalArgumentException("Code of Set " + landSetName + " not found");
-            }        
-            criteria.setCodes(expansionInfo.getCode());            
-        }                    
+            }
+            criteria.setCodes(expansionInfo.getCode());
+        }
         criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.isEmpty()) {
-            throw new IllegalArgumentException("No basic lands found in Set: " + landSetName);
+            logger.error("No basic lands found in Set: " + landSetName);
+            criteria = new CardCriteria();
+            criteria.rarities(Rarity.LAND).name(landName);
+            criteria.setCodes("M15");
+            cards = CardRepository.instance.findCards(criteria);
         }
 
         for (int i = 0; i < number; i++) {
@@ -138,10 +147,10 @@ public class AddLandDialog extends MageDialog {
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -298,11 +307,11 @@ public class AddLandDialog extends MageDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int nForest = ((Number)spnForest.getValue()).intValue();
-        int nIsland = ((Number)spnIsland.getValue()).intValue();
-        int nMountain = ((Number)spnMountain.getValue()).intValue();
-        int nPlains = ((Number)spnPlains.getValue()).intValue();
-        int nSwamp = ((Number)spnSwamp.getValue()).intValue();
+        int nForest = ((Number) spnForest.getValue()).intValue();
+        int nIsland = ((Number) spnIsland.getValue()).intValue();
+        int nMountain = ((Number) spnMountain.getValue()).intValue();
+        int nPlains = ((Number) spnPlains.getValue()).intValue();
+        int nSwamp = ((Number) spnSwamp.getValue()).intValue();
 
         addLands("Forest", nForest);
         addLands("Island", nIsland);
@@ -316,7 +325,7 @@ public class AddLandDialog extends MageDialog {
         autoAddLands();
     }//GEN-LAST:event_btnAutoAddActionPerformed
 
-    private void autoAddLands(){
+    private void autoAddLands() {
         int red = 0;
         int green = 0;
         int black = 0;
@@ -324,7 +333,9 @@ public class AddLandDialog extends MageDialog {
         int white = 0;
         Set<Card> cards = deck.getCards();
         int land_number = DEFAULT_SEALED_DECK_CARD_NUMBER - cards.size();
-        if(land_number < 0) land_number = 0;
+        if (land_number < 0) {
+            land_number = 0;
+        }
         for (Card cd : cards) {
             Mana m = cd.getManaCost().getMana();
             red += m.getRed();
@@ -334,14 +345,18 @@ public class AddLandDialog extends MageDialog {
             white += m.getWhite();
         }
         int total = red + green + black + blue + white;
-        int redcards = Math.round(land_number*((float)red/(float)total));
-        total -= red;   land_number -= redcards;
-        int greencards = Math.round(land_number*((float)green/(float)total));
-        total -= green;   land_number -= greencards;
-        int blackcards = Math.round(land_number*((float)black/(float)total));
-        total -= black;   land_number -= blackcards;
-        int bluecards = Math.round(land_number*((float)blue/(float)total));
-        total -= blue;   land_number -= bluecards;
+        int redcards = Math.round(land_number * ((float) red / (float) total));
+        total -= red;
+        land_number -= redcards;
+        int greencards = Math.round(land_number * ((float) green / (float) total));
+        total -= green;
+        land_number -= greencards;
+        int blackcards = Math.round(land_number * ((float) black / (float) total));
+        total -= black;
+        land_number -= blackcards;
+        int bluecards = Math.round(land_number * ((float) blue / (float) total));
+        total -= blue;
+        land_number -= bluecards;
         int whitecards = land_number;
         spnMountain.setValue(redcards);
         spnForest.setValue(greencards);
@@ -349,7 +364,7 @@ public class AddLandDialog extends MageDialog {
         spnIsland.setValue(bluecards);
         spnPlains.setValue(whitecards);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAutoAdd;

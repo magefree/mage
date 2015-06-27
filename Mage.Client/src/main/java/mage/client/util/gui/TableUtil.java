@@ -8,7 +8,6 @@ package mage.client.util.gui;
 import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import mage.client.dialog.PreferencesDialog;
-import org.mage.card.arcane.Util;
 
 /**
  *
@@ -17,25 +16,29 @@ import org.mage.card.arcane.Util;
 public class TableUtil {
 
     /**
-     * 
+     *
      * @param table
-     * @param defaultColumnsWidth 
-     * @param widthPrefKey 
-     * @param orderPrefKey 
+     * @param defaultColumnsWidth
+     * @param widthPrefKey
+     * @param orderPrefKey
      */
     static public void setColumnWidthAndOrder(JTable table, int[] defaultColumnsWidth, String widthPrefKey, String orderPrefKey) {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        // set the column width from saved value or defaults        
+        // set the column width from saved value or defaults
         int[] widths = getIntArrayFromString(PreferencesDialog.getCachedValue(widthPrefKey, null));
         int i = 0;
         for (int width : defaultColumnsWidth) {
             if (widths != null && widths.length > i) {
                 width = widths[i];
             }
-            TableColumn column = table.getColumnModel().getColumn(i++);
-            column.setWidth(width);
-            column.setPreferredWidth(width);
+            if (table.getColumnModel().getColumnCount() >= i) {
+                TableColumn column = table.getColumnModel().getColumn(i++);
+                column.setWidth(width);
+                column.setPreferredWidth(width);
+            } else {
+                break;
+            }
         }
 
         // set the column order
@@ -47,7 +50,7 @@ public class TableUtil {
         }
 
     }
-    
+
     static public void saveColumnWidthAndOrderToPrefs(JTable table, String widthPrefKey, String orderPrefKey) {
         // Column width
         StringBuilder columnWidthSettings = new StringBuilder();
@@ -68,8 +71,7 @@ public class TableUtil {
         PreferencesDialog.saveValue(orderPrefKey, columnOrderSettings.toString());
 
     }
-    
-    
+
     public static int[] getIntArrayFromString(String stringData) {
         int[] intArray = null;
         if (stringData != null && !stringData.isEmpty()) {
@@ -79,9 +81,10 @@ public class TableUtil {
             for (int i = 0; i < lengthW; i++) {
                 try {
                     intArray[i] = Integer.parseInt(items[i]);
-                } catch (NumberFormatException nfe) {}
+                } catch (NumberFormatException nfe) {
+                }
             }
-        } 
+        }
         return intArray;
-    }    
+    }
 }

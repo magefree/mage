@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.remote;
 
 import java.io.IOException;
@@ -61,8 +60,8 @@ import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.net.UserData;
 import mage.utils.CompressUtil;
-import mage.players.net.UserSkipPrioritySteps;
 import mage.view.DraftPickView;
 import mage.view.GameTypeView;
 import mage.view.MatchView;
@@ -70,7 +69,6 @@ import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import mage.view.TournamentView;
-import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.CannotConnectException;
@@ -106,7 +104,7 @@ public class SessionImpl implements Session {
     private Connection connection;
     private final static int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
-    private String pingInfo = "";    
+    private String pingInfo = "";
     private static boolean debugMode = false;
 
     private boolean canceled = false;
@@ -123,7 +121,7 @@ public class SessionImpl implements Session {
     public String getSessionId() {
         return sessionId;
     }
-    
+
     @Override
     public synchronized boolean connect(Connection connection) {
         if (isConnected()) {
@@ -165,82 +163,88 @@ public class SessionImpl implements Session {
                     break;
             }
             InvokerLocator clientLocator = new InvokerLocator(connection.getURI());
-            
+
             Map<String, String> metadata = new HashMap<>();
             /*
-            5.8.3.1.1. Write timeouts
-            The socket timeout facility offered by the JDK applies only to read operations on the socket. As of release 2.5.2,
-            the socket and bisocket (and also sslsocket and sslbisocket) transports offer a write timeout facility. When a client
-            or server is configured, in any of the usual ways, with the parameter org.jboss.remoting.transport.socket.SocketWrapper.WRITE_TIMEOUT
-            (actual value "writeTimeout") set to a positive value (in milliseconds), all write operations will time out if they do 
-            not complete within the configured period. When a write operation times out, the socket upon which the write was invoked
-            will be closed, which is likely to result in a java.net.SocketException.
-            Note. A SocketException is considered to be a "retriable" exception, so, if the parameter "numberOfCallRetries" is set 
-            to a value greater than 1, an invocation interrupted by a write timeout can be retried.
-            Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
-            */            
+             5.8.3.1.1. Write timeouts
+             The socket timeout facility offered by the JDK applies only to read operations on the socket. As of release 2.5.2,
+             the socket and bisocket (and also sslsocket and sslbisocket) transports offer a write timeout facility. When a client
+             or server is configured, in any of the usual ways, with the parameter org.jboss.remoting.transport.socket.SocketWrapper.WRITE_TIMEOUT
+             (actual value "writeTimeout") set to a positive value (in milliseconds), all write operations will time out if they do
+             not complete within the configured period. When a write operation times out, the socket upon which the write was invoked
+             will be closed, which is likely to result in a java.net.SocketException.
+             Note. A SocketException is considered to be a "retriable" exception, so, if the parameter "numberOfCallRetries" is set
+             to a value greater than 1, an invocation interrupted by a write timeout can be retried.
+             Note. The write timeout facility applies to writing of both invocations and responses. It applies to push callbacks as well.
+             */
             metadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
             metadata.put("generalizeSocketException", "true");
             server = (MageServer) TransporterClient.createTransporterClient(clientLocator.getLocatorURI(), MageServer.class, metadata);
 
             // http://docs.jboss.org/jbossremoting/docs/guide/2.5/html_single/#d0e1057
             Map<String, String> clientMetadata = new HashMap<>();
-            
+
             clientMetadata.put(SocketWrapper.WRITE_TIMEOUT, "2000");
-                /*  generalizeSocketException
-                 *  If set to false, a failed invocation will be retried in the case of
-                 *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
-                 *  <classname>SocketException</classname>s and also any <classname>IOException</classname>
-                 *  whose message matches the regular expression
-                 *  <code>^.*(?:connection.*reset|connection.*closed|broken.*pipe).*$</code>.
-                 *  See also the "numberOfCallRetries" parameter, above. The default value is false.*/
+            /*  generalizeSocketException
+             *  If set to false, a failed invocation will be retried in the case of
+             *  SocketExceptions. If set to true, a failed invocation will be retried in the case of
+             *  <classname>SocketException</classname>s and also any <classname>IOException</classname>
+             *  whose message matches the regular expression
+             *  <code>^.*(?:connection.*reset|connection.*closed|broken.*pipe).*$</code>.
+             *  See also the "numberOfCallRetries" parameter, above. The default value is false.*/
             clientMetadata.put("generalizeSocketException", "true");
-            
-                /* A remoting server also has the capability to detect when a client is no longer available. 
-                 * This is done by estabilishing a lease with the remoting clients that connect to a server. 
-                 * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to 
-                 * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners 
-                 * if the PING doesn't arrive withing the specified timeout period. */
+
+            /* A remoting server also has the capability to detect when a client is no longer available.
+             * This is done by estabilishing a lease with the remoting clients that connect to a server.
+             * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to
+             * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners
+             * if the PING doesn't arrive withing the specified timeout period. */
             clientMetadata.put(Client.ENABLE_LEASE, "true");
             /*
-            When the socket client invoker makes its first invocation, it will check to see if there is an available
-            socket connection in its pool. Since is the first invocation, there will not be and will create a new socket
-            connection and use it for making the invocation. Then when finished making invocation, will return the still
-            active socket connection to the pool. As more client invocations are made, is possible for the number of
-            socket connections to reach the maximum allowed (which is controlled by 'clientMaxPoolSize' property). At this
-            point, when the next client invocation is made, it will wait up to some configured number of milliseconds, at 
-            which point it will throw an org.jboss.remoting.CannotConnectException. The number of milliseconds is given by 
-            the parameter MicroSocketClientInvoker.CONNECTION_WAIT (actual value "connectionWait"), with a default of
-            30000 milliseconds. Note that if more than one call retry is configured (see next paragraph), 
-            the CannotConnectException will be swallowed.
-            Once the socket client invoker get an available socket connection from the pool, are not out of the woods yet.
-            For example, a network problem could cause a java.net.SocketException. There is also a possibility that the socket
-            connection, while still appearing to be valid, has "gone stale" while sitting in the pool. For example, a ServerThread
-            on the other side of the connection could time out and close its socket. If the attempt to complete an invocation
-            fails, then MicroSocketClientInvoker will make a number of attempts, according to the parameter "numberOfCallRetries",
-            with a default value of 3. Once the configured number of retries has been exhausted,
-            an org.jboss.remoting.InvocationFailureException will be thrown.
-            */            
+             When the socket client invoker makes its first invocation, it will check to see if there is an available
+             socket connection in its pool. Since is the first invocation, there will not be and will create a new socket
+             connection and use it for making the invocation. Then when finished making invocation, will return the still
+             active socket connection to the pool. As more client invocations are made, is possible for the number of
+             socket connections to reach the maximum allowed (which is controlled by 'clientMaxPoolSize' property). At this
+             point, when the next client invocation is made, it will wait up to some configured number of milliseconds, at
+             which point it will throw an org.jboss.remoting.CannotConnectException. The number of milliseconds is given by
+             the parameter MicroSocketClientInvoker.CONNECTION_WAIT (actual value "connectionWait"), with a default of
+             30000 milliseconds. Note that if more than one call retry is configured (see next paragraph),
+             the CannotConnectException will be swallowed.
+             Once the socket client invoker get an available socket connection from the pool, are not out of the woods yet.
+             For example, a network problem could cause a java.net.SocketException. There is also a possibility that the socket
+             connection, while still appearing to be valid, has "gone stale" while sitting in the pool. For example, a ServerThread
+             on the other side of the connection could time out and close its socket. If the attempt to complete an invocation
+             fails, then MicroSocketClientInvoker will make a number of attempts, according to the parameter "numberOfCallRetries",
+             with a default value of 3. Once the configured number of retries has been exhausted,
+             an org.jboss.remoting.InvocationFailureException will be thrown.
+             */
             clientMetadata.put("numberOfCallRetries", "1");
 
-
             /**
-             * I'll explain the meaning of "secondaryBindPort" and "secondaryConnectPort", and maybe that will help.
-             * The Remoting bisocket transport creates two ServerSockets on the server. The "primary" ServerSocket is used to create
-             * connections used for ordinary invocations, e.g., a request to create a JMS consumer, and the "secondary" ServerSocket
-             * is used to create "control" connections for internal Remoting messages. The port for the primary ServerSocket is configured
-             * by the "serverBindPort" parameter, and the port for the secondary ServerSocket is, by default, chosen randomly.
-             * The "secondaryBindPort" parameter can be used to assign a specific port to the secondary ServerSocket. Now, if there is a
-             * translating firewall between the client and server, the client should be given the value of the port that is translated
-             * to the actual binding port of the secondary ServerSocket.
-             * For example, your configuration will tell the secondary ServerSocket to bind to port 14000, and it will tell the client to
-             * connect to port 14001. It assumes that there is a firewall which will translate 14001 to 14000. Apparently, that's not happening.
+             * I'll explain the meaning of "secondaryBindPort" and
+             * "secondaryConnectPort", and maybe that will help. The Remoting
+             * bisocket transport creates two ServerSockets on the server. The
+             * "primary" ServerSocket is used to create connections used for
+             * ordinary invocations, e.g., a request to create a JMS consumer,
+             * and the "secondary" ServerSocket is used to create "control"
+             * connections for internal Remoting messages. The port for the
+             * primary ServerSocket is configured by the "serverBindPort"
+             * parameter, and the port for the secondary ServerSocket is, by
+             * default, chosen randomly. The "secondaryBindPort" parameter can
+             * be used to assign a specific port to the secondary ServerSocket.
+             * Now, if there is a translating firewall between the client and
+             * server, the client should be given the value of the port that is
+             * translated to the actual binding port of the secondary
+             * ServerSocket. For example, your configuration will tell the
+             * secondary ServerSocket to bind to port 14000, and it will tell
+             * the client to connect to port 14001. It assumes that there is a
+             * firewall which will translate 14001 to 14000. Apparently, that's
+             * not happening.
              */
             // secondaryBindPort - the port to which the secondary server socket is to be bound. By default, an arbitrary port is selected.
-
             // secondaryConnectPort - the port clients are to use to connect to the secondary server socket.
-            // By default, the value of secondaryBindPort is used. secondaryConnectPort is useful if the server is behind a translating firewall.           
-
+            // By default, the value of secondaryBindPort is used. secondaryConnectPort is useful if the server is behind a translating firewall.
             // Indicated the max number of threads used within oneway thread pool.
             clientMetadata.put(Client.MAX_NUM_ONEWAY_THREADS, "10");
             clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
@@ -269,7 +273,7 @@ public class SessionImpl implements Session {
                 logger.warn("There should be one callback Connector (number existing = " + callbackConnectors.size() + ")");
             }
 
-            logger.info("Trying to connect as " + (this.getUserName() == null ? "":this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());            
+            logger.info("Trying to connect as " + (this.getUserName() == null ? "" : this.getUserName()) + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
             callbackClient.invoke(null);
 
             this.sessionId = callbackClient.getSessionId();
@@ -289,15 +293,15 @@ public class SessionImpl implements Session {
                 if (!connection.getUsername().equals("Admin")) {
                     updateDatabase(connection.isForceDBComparison(), serverState);
                 }
-                logger.info("Connected as " + (this.getUserName() == null ? "":this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                client.connected(this.getUserName() == null ? "":this.getUserName() +"@" + connection.getHost() + ":" + connection.getPort() +" ");
+                logger.info("Connected as " + (this.getUserName() == null ? "" : this.getUserName()) + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                client.connected(this.getUserName() == null ? "" : this.getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
                 return true;
             }
             disconnect(false);
             // client.showMessage("Unable to connect to server.");
         } catch (MalformedURLException ex) {
             logger.fatal("", ex);
-            client.showMessage("Unable to connect to server. "  + ex.getMessage());
+            client.showMessage("Unable to connect to server. " + ex.getMessage());
         } catch (UndeclaredThrowableException ex) {
             String addMessage = "";
             if (ex.getCause() instanceof InvocationFailureException) {
@@ -311,17 +315,17 @@ public class SessionImpl implements Session {
             if (addMessage.isEmpty()) {
                 logger.fatal("", ex);
             }
-            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage():""));
+            client.showMessage("Unable to connect to server. " + addMessage + (ex.getMessage() != null ? ex.getMessage() : ""));
         } catch (IOException ex) {
             logger.fatal("", ex);
             String addMessage = "";
             if (ex.getMessage() != null && ex.getMessage().startsWith("Unable to perform invocation")) {
                 addMessage = "Maybe the server version is not compatible. ";
             }
-            client.showMessage("Unable to connect to server. " + addMessage + ex.getMessage() != null ? ex.getMessage():"");
+            client.showMessage("Unable to connect to server. " + addMessage + ex.getMessage() != null ? ex.getMessage() : "");
         } catch (MageVersionException ex) {
             if (!canceled) {
-                client.showMessage("Unable to connect to server. "  + ex.getMessage());
+                client.showMessage("Unable to connect to server. " + ex.getMessage());
             }
             disconnect(false);
         } catch (CannotConnectException ex) {
@@ -334,12 +338,12 @@ public class SessionImpl implements Session {
                 disconnect(false);
                 StringBuilder sb = new StringBuilder();
                 sb.append("Unable to connect to server.\n");
-                for (StackTraceElement element :t.getStackTrace()) {
+                for (StackTraceElement element : t.getStackTrace()) {
                     sb.append(element.toString()).append("\n");
                 }
                 client.showMessage(sb.toString());
             }
-        } 
+        }
         return false;
     }
 
@@ -350,8 +354,8 @@ public class SessionImpl implements Session {
             List<CardInfo> cards = server.getMissingCardsData(classNames);
             CardRepository.instance.addCards(cards);
             CardRepository.instance.setContentVersion(serverState.getCardsContentVersion());
-            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size() +
-                    " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
+            logger.info("Updating client cards DB - existing cards: " + classNames.size() + " new cards: " + cards.size()
+                    + " content versions - server: " + serverState.getCardsContentVersion() + " client: " + cardDBVersion);
         }
 
         long expansionDBVersion = ExpansionRepository.instance.getContentVersionFromDB();
@@ -362,8 +366,8 @@ public class SessionImpl implements Session {
                 ExpansionRepository.instance.add(expansion);
             }
             ExpansionRepository.instance.setContentVersion(serverState.getExpansionsContentVersion());
-            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()+
-                    " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
+            logger.info("Updating client expansions DB - existing sets: " + setCodes.size() + " new sets: " + expansions.size()
+                    + " content versions - server: " + serverState.getExpansionsContentVersion() + " client: " + expansionDBVersion);
         }
     }
 
@@ -399,7 +403,8 @@ public class SessionImpl implements Session {
 
     /**
      *
-     * @param askForReconnect - true = connection was lost because of error and ask the user if he want to try to reconnect
+     * @param askForReconnect - true = connection was lost because of error and
+     * ask the user if he want to try to reconnect
      */
     @Override
     public synchronized void disconnect(boolean askForReconnect) {
@@ -410,7 +415,7 @@ public class SessionImpl implements Session {
         if (connection == null || sessionState == SessionState.DISCONNECTED) {
             return;
         }
-        
+
         try {
             callbackClient.removeListener(callbackHandler);
             callbackClient.disconnect();
@@ -450,10 +455,11 @@ public class SessionImpl implements Session {
     }
 
     class CallbackHandler implements InvokerCallbackHandler {
+
         @Override
         public void handleCallback(Callback callback) throws HandleCallbackException {
             //logger.info("callback handler");
-            client.processCallback((ClientCallback)callback.getCallbackObject());
+            client.processCallback((ClientCallback) callback.getCallbackObject());
         }
     }
 
@@ -501,7 +507,6 @@ public class SessionImpl implements Session {
     public String[] getDraftCubes() {
         return serverState.getDraftCubes();
     }
-
 
     @Override
     public List<TournamentTypeView> getTournamentTypes() {
@@ -561,7 +566,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -588,7 +593,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -621,7 +626,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -637,7 +642,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -652,7 +657,7 @@ public class SessionImpl implements Session {
             handleMageException(ex);
             throw new MageRemoteException();
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -667,7 +672,7 @@ public class SessionImpl implements Session {
             handleMageException(ex);
             throw new MageRemoteException();
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -697,7 +702,7 @@ public class SessionImpl implements Session {
             handleMageException(ex);
             throw new MageRemoteException();
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -711,7 +716,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -726,7 +731,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -741,7 +746,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -756,7 +761,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -771,7 +776,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -800,7 +805,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -829,7 +834,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -845,7 +850,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
 //        } finally {
 //            lock.readLock().unlock();
         }
@@ -863,7 +868,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
 //        } finally {
 //            lock.readLock().unlock();
         }
@@ -895,7 +900,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -910,7 +915,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -925,7 +930,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -940,7 +945,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -955,7 +960,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -969,7 +974,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -983,7 +988,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -997,7 +1002,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1013,13 +1018,14 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
 
     /**
      * Remove table - called from admin console
+     *
      * @param tableId
      * @return
      */
@@ -1033,7 +1039,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1048,7 +1054,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1062,7 +1068,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1088,7 +1094,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1107,7 +1113,6 @@ public class SessionImpl implements Session {
 //        }
 //        return false;
 //    }
-
     @Override
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
@@ -1119,7 +1124,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1136,7 +1141,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1198,7 +1203,7 @@ public class SessionImpl implements Session {
         }
         return false;
     }
-    
+
     @Override
     public boolean stopWatching(UUID gameId) {
         try {
@@ -1209,7 +1214,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1224,7 +1229,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1239,7 +1244,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1254,7 +1259,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1269,7 +1274,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1284,7 +1289,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1299,7 +1304,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1313,7 +1318,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return null;
     }
@@ -1342,7 +1347,7 @@ public class SessionImpl implements Session {
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
-            handleThrowable(t);        
+            handleThrowable(t);
         }
         return false;
     }
@@ -1384,14 +1389,13 @@ public class SessionImpl implements Session {
         client.showError(ex.getMessage());
     }
 
-
     @Override
     public String getUserName() {
         return connection.getUsername();
     }
 
     @Override
-    public boolean updatePreferencesForServer(UserDataView userData) {
+    public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
                 server.setUserData(connection.getUsername(), sessionId, userData);
@@ -1411,26 +1415,26 @@ public class SessionImpl implements Session {
             if (isConnected()) {
                 long startTime = System.nanoTime();
                 if (!server.ping(sessionId, pingInfo)) {
-                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() +":" + connection.getPort());
+                    logger.error("Ping failed: " + this.getUserName() + " Session: " + sessionId + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
                     throw new MageException("Ping failed");
                 }
                 pingTime.add(System.nanoTime() - startTime);
                 long milliSeconds = TimeUnit.MILLISECONDS.convert(pingTime.getLast(), TimeUnit.NANOSECONDS);
-                String lastPing = milliSeconds > 0 ? milliSeconds+"ms" : "<1ms";
+                String lastPing = milliSeconds > 0 ? milliSeconds + "ms" : "<1ms";
                 if (pingTime.size() > PING_CYCLES) {
                     pingTime.poll();
                 }
                 long sum = 0;
-                for (Long time :pingTime) {
+                for (Long time : pingTime) {
                     sum += time;
                 }
                 milliSeconds = TimeUnit.MILLISECONDS.convert(sum / pingTime.size(), TimeUnit.NANOSECONDS);
-                pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms":"<1ms")+")";
+                pingInfo = lastPing + " (Av: " + (milliSeconds > 0 ? milliSeconds + "ms" : "<1ms") + ")";
             }
             return true;
         } catch (MageException ex) {
-                handleMageException(ex);
-                disconnect(true);
+            handleMageException(ex);
+            disconnect(true);
         } catch (Throwable t) {
             handleThrowable(t);
         }
@@ -1448,7 +1452,6 @@ public class SessionImpl implements Session {
 
 }
 
-
 class MageAuthenticator extends Authenticator {
 
     private final String username;
@@ -1460,7 +1463,7 @@ class MageAuthenticator extends Authenticator {
     }
 
     @Override
-    public PasswordAuthentication getPasswordAuthentication () {
-        return new PasswordAuthentication (username, password.toCharArray());
+    public PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(username, password.toCharArray());
     }
 }
