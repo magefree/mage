@@ -52,10 +52,10 @@ public class CleverImpersonator extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You have may Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
+        // You may have Clever Impersonator enter the battlefield as a copy of any nonland permanent on the battlefield.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new EntersBattlefieldEffect(new CopyPermanentEffect(new FilterNonlandPermanent()),
-                        "You may have {this} enter the battlefield as a copy of any nonland permanent on the battlefield", 
+                        "You may have {this} enter the battlefield as a copy of any nonland permanent on the battlefield",
                         true)));
     }
 
