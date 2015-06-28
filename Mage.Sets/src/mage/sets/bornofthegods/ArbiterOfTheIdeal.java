@@ -122,7 +122,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
             player.revealCards("Arbiter of the Ideal", cards, game);
 
             if (card != null) {
-                if (filter.match(card, game) && player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("onto battlefield?").toString(), game)) {
+                if (filter.match(card, game) && player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("onto battlefield?").toString(), source, game)) {
                     card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                     Permanent permanent = game.getPermanent(card.getId());
                     if (permanent != null) {

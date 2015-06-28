@@ -91,7 +91,7 @@ class FlashEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
             return false;
         }
 
@@ -103,7 +103,7 @@ class FlashEffect extends OneShotEffect {
                 
                 ManaCosts<ManaCost> reducedCost = CardUtil.removeVariableManaCost(CardUtil.reduceCost(card.getManaCost(), 2));
                 StringBuilder sb = new StringBuilder("Pay ").append(reducedCost.getText()).append("?");
-                if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+                if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                     reducedCost.clearPaid();
                     if (reducedCost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                         return true;

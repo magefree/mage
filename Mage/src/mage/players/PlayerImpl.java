@@ -1326,7 +1326,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             int current = 0, last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(card.getLogName());
+                sb.append(GameLog.getColoredObjectName(card));
                 if (current < last) {
                     sb.append(", ");
                 }
@@ -1373,7 +1373,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                    untap &= effect.canBeUntapped(permanent, game);
+                    untap &= effect.canBeUntapped(permanent, null, game);
                 }
                 if (untap) {
                     canBeUntapped.add(permanent);
@@ -1482,7 +1482,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                    untap &= effect.canBeUntapped(permanent, game);
+                    untap &= effect.canBeUntapped(permanent, null, game);
                 }
                 if (untap) {
                     permanent.untap(game);
@@ -2960,7 +2960,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 boolean chooseOrder = false;
                 if (userData.askMoveToGraveOrder()) {
                     if (cards.size() > 3) {
-                        chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", game);
+                        chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral, "Would you like to choose the order the cards go to graveyard?", source, game);
                     }
                 }
                 if (chooseOrder) {

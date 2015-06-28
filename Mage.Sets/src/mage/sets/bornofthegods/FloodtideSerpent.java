@@ -100,7 +100,7 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
         if ( player != null ) {
             ReturnToHandTargetPermanentCost attackCost = new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter));
             if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", game) )
+                 player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", source, game) )
             {
                 if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true) ) {
                     return false;

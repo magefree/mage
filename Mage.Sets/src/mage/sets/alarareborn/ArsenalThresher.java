@@ -99,7 +99,7 @@ class ArsenalThresherEffect extends OneShotEffect {
         Permanent arsenalThresher = game.getPermanent(source.getSourceId());
         FilterArtifactCard filter = new FilterArtifactCard();
         filter.add(new AnotherCardPredicate());
-        if (you.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", game)) {
+        if (you.chooseUse(Outcome.Benefit, "Do you want to reveal other artifacts in your hand?", source, game)) {
             Cards cards = new CardsImpl();
             if (you.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
                 TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);

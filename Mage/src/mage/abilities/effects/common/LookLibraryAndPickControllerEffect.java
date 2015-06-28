@@ -127,7 +127,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected void actionWithSelectedCards(Cards cards, Game game, Ability source, String windowName) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && foundCardsToPick > 0) {
-            if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), game)) {
+            if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), source, game)) {
                 FilterCard pickFilter = filter.copy();
                 pickFilter.setMessage(getPickText());
                 TargetCard target = new TargetCard((upTo ? 0:numberToPick.calculate(game, source, this)),numberToPick.calculate(game, source, this), Zone.PICK, pickFilter);

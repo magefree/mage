@@ -141,11 +141,11 @@ class CurseOfInertiaTapOrUntapTargetEffect extends OneShotEffect {
             Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (targetPermanent != null) {
                 if (targetPermanent.isTapped()) {
-                    if (player.chooseUse(Outcome.Untap, "Untap that permanent?", game)) {
+                    if (player.chooseUse(Outcome.Untap, "Untap that permanent?", source, game)) {
                         targetPermanent.untap(game);
                     }
                 } else {
-                    if (player.chooseUse(Outcome.Tap, "Tap that permanent?", game)) {
+                    if (player.chooseUse(Outcome.Tap, "Tap that permanent?", source, game)) {
                         targetPermanent.tap(game);
                     }
                 }

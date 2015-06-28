@@ -171,7 +171,7 @@ class HeroesPodiumEffect extends OneShotEffect {
         player.lookAtCards("Heroes' Podium", cards, game);
 
         // You may reveal a legendary creature card from among them and put it into your hand.
-        if (!cards.isEmpty() && legendaryIncluded && player.chooseUse(outcome, "Put a legendary creature card into your hand?", game)) {
+        if (!cards.isEmpty() && legendaryIncluded && player.chooseUse(outcome, "Put a legendary creature card into your hand?", source, game)) {
             if (cards.size() == 1) {
                 Card card = cards.getRandom(game);
                 cards.remove(card);

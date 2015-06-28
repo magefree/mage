@@ -102,7 +102,7 @@ class LorthosTheTideMakerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Cost cost = new ManaCostsImpl("{8}");
-            if (player.chooseUse(Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, game)) {
+            if (player.chooseUse(Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     for (UUID target : this.targetPointer.getTargets(game, source)) {

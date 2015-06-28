@@ -793,7 +793,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);

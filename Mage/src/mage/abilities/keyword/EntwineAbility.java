@@ -28,8 +28,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -40,24 +38,24 @@ import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  * 702.40. Entwine
  *
- * 702.40a Entwine is a static ability of modal spells (see rule 700.2) that functions
- * while the spell is on the stack. "Entwine [cost]" means "You may choose all modes
- * of this spell instead of just one. If you do, you pay an additional [cost]." Using
- * the entwine ability follows the rules for choosing modes and paying additional costs
- * in rules 601.2b and 601.2e-g.
+ * 702.40a Entwine is a static ability of modal spells (see rule 700.2) that
+ * functions while the spell is on the stack. "Entwine [cost]" means "You may
+ * choose all modes of this spell instead of just one. If you do, you pay an
+ * additional [cost]." Using the entwine ability follows the rules for choosing
+ * modes and paying additional costs in rules 601.2b and 601.2e-g.
  *
- * 702.40b If the entwine cost was paid, follow the text of each of the modes in the order
- * written on the card when the spell resolves.
+ * 702.40b If the entwine cost was paid, follow the text of each of the modes in
+ * the order written on the card when the spell resolves.
  *
  * @author LevelX2
  */
-
 public class EntwineAbility extends StaticAbility implements OptionalAdditionalModeSourceCosts {
 
     private static final String keywordText = "Entwine";
@@ -65,24 +63,24 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
     protected OptionalAdditionalCost additionalCost;
 
     public EntwineAbility(String manaString) {
-       super(Zone.STACK, null);
-       this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));
+        super(Zone.STACK, null);
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));
     }
 
     public EntwineAbility(Cost cost) {
-       super(Zone.STACK, null);
-       this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText, cost);
-       setRuleAtTheTop(true);
+        super(Zone.STACK, null);
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText, cost);
+        setRuleAtTheTop(true);
     }
 
     public EntwineAbility(final EntwineAbility ability) {
-       super(ability);
-       additionalCost = ability.additionalCost;
+        super(ability);
+        additionalCost = ability.additionalCost;
     }
 
     @Override
     public EntwineAbility copy() {
-       return new EntwineAbility(this);
+        return new EntwineAbility(this);
     }
 
     @Override
@@ -112,7 +110,7 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             if (player != null) {
                 this.resetCosts();
                 if (additionalCost != null) {
-                    if (player.chooseUse(Outcome.Benefit,new StringBuilder("Pay ").append(additionalCost.getText(false)).append(" ?").toString(), game)) {
+                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
                         additionalCost.activate();
                         for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -129,7 +127,6 @@ public class EntwineAbility extends StaticAbility implements OptionalAdditionalM
             }
         }
     }
-
 
     @Override
     public String getRule() {

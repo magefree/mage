@@ -93,7 +93,7 @@ class ChoiceOfDamnationsEffect extends OneShotEffect {
             int amount = targetPlayer.getAmount(0, Integer.MAX_VALUE, "Chooses a number", game);
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                if (controller.chooseUse(outcome, "Shall " + targetPlayer.getLogName() + " lose " + amount + " life?", game)) {
+                if (controller.chooseUse(outcome, "Shall " + targetPlayer.getLogName() + " lose " + amount + " life?", source, game)) {
                     targetPlayer.loseLife(amount, game);
                 } else {
                     int numberPermanents = game.getState().getBattlefield().countAll(new FilterPermanent(), targetPlayer.getId(), game);

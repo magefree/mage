@@ -104,7 +104,7 @@ public abstract class MageObjectImpl implements MageObject {
     
     @Override
     public String getLogName() {
-        return GameLog.getColoredObjectName(this);
+        return GameLog.getColoredObjectIdName(this);
     }
 
     @Override

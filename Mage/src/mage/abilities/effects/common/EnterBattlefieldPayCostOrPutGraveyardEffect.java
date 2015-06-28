@@ -78,7 +78,7 @@ public class EnterBattlefieldPayCostOrPutGraveyardEffect extends ReplacementEffe
         if (player != null && cost != null && sourceObject != null){
             boolean replace = true;
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)) {
-                if (player.chooseUse(outcome, cost.getText() + "? (otherwise " + sourceObject.getLogName() + " is put into graveyard)", game)) {
+                if (player.chooseUse(outcome, cost.getText() + "? (otherwise " + sourceObject.getLogName() + " is put into graveyard)", source, game)) {
                     cost.clearPaid();
                     replace = !cost.pay(source, game, source.getSourceId(), source.getControllerId(), false);
                 }

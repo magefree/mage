@@ -115,7 +115,7 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
             int ce = countEnchantments.calculate(game, source, this);
             ManaCostsImpl safetyCosts = new ManaCostsImpl("{"+ ce +"}");
             if ( safetyCosts.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) ) {
+                 player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", source, game) ) {
                 if (safetyCosts.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                     return false;
                 }

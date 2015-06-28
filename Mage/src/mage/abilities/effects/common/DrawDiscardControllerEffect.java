@@ -82,7 +82,7 @@ public class DrawDiscardControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (!optional || player.chooseUse(outcome, "Use draw, then discard effect?", game)) {
+            if (!optional || player.chooseUse(outcome, "Use draw, then discard effect?", source, game)) {
                 player.drawCards(cardsToDraw, game);
                 player.discard(cardsToDiscard, false, source, game);
             }

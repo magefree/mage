@@ -130,7 +130,7 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         ManaCostsImpl cost = new ManaCostsImpl("{2}");
         if (player != null) {
-            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability. You may choose new targets for the copy.", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? If you do, copy that ability. You may choose new targets for the copy.", source, game)) {
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     Ability ability = (Ability) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
@@ -140,7 +140,7 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
                         newAbility.newId();
                         game.getStack().push(new StackAbility(newAbility, source.getControllerId()));
                         if (newAbility.getTargets().size() > 0) {
-                            if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", game)) {
+                            if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
                                 newAbility.getTargets().clearChosen();
                                 if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, game) == false) {
                                     return false;

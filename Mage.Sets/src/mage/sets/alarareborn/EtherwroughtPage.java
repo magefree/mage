@@ -111,7 +111,7 @@ class EtherwroughtPageEffect extends OneShotEffect {
                 CardsImpl cards = new CardsImpl();
                 cards.add(card);
                 controller.lookAtCards("Etherwrought Page", cards, game);
-                if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
+                if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", source, game)) {
                     return controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 }
                 return true;

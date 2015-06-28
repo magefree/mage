@@ -28,8 +28,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -43,6 +41,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -51,16 +50,16 @@ import mage.players.Player;
 /**
  * 702.25. Buyback
  *
- *   702.25a Buyback appears on some instants and sorceries. It represents two static 
- *   abilities that function while the spell is on the stack. "Buyback [cost]" means 
- *   "You may pay an additional [cost] as you cast this spell" and "If the buyback 
- *   cost was paid, put this spell into its owner's hand instead of into that player's
- *   graveyard as it resolves." Paying a spell's buyback cost follows the rules for 
- *   paying additional costs in rules 601.2b and 601.2e-g.
+ * 702.25a Buyback appears on some instants and sorceries. It represents two
+ * static abilities that function while the spell is on the stack. "Buyback
+ * [cost]" means "You may pay an additional [cost] as you cast this spell" and
+ * "If the buyback cost was paid, put this spell into its owner's hand instead
+ * of into that player's graveyard as it resolves." Paying a spell's buyback
+ * cost follows the rules for paying additional costs in rules 601.2b and
+ * 601.2e-g.
  *
  * @author LevelX2
  */
-
 public class BuybackAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Buyback";
@@ -69,25 +68,25 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
     protected OptionalAdditionalCost buybackCost;
 
     public BuybackAbility(String manaString) {
-       super(Zone.STACK, new BuybackEffect());
-       this.buybackCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
-       setRuleAtTheTop(true);
+        super(Zone.STACK, new BuybackEffect());
+        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
+        setRuleAtTheTop(true);
     }
-    
+
     public BuybackAbility(Cost cost) {
-       super(Zone.STACK, new BuybackEffect());
-       this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderTextCost, cost);
-       setRuleAtTheTop(true);
+        super(Zone.STACK, new BuybackEffect());
+        this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderTextCost, cost);
+        setRuleAtTheTop(true);
     }
 
     public BuybackAbility(final BuybackAbility ability) {
-       super(ability);
-       buybackCost = ability.buybackCost;
+        super(ability);
+        buybackCost = ability.buybackCost;
     }
 
     @Override
     public BuybackAbility copy() {
-       return new BuybackAbility(this);
+        return new BuybackAbility(this);
     }
 
     @Override
@@ -117,7 +116,7 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
             if (player != null) {
                 this.resetBuyback();
                 if (buybackCost != null) {
-                    if (player.chooseUse(Outcome.Benefit,new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), game)) {
+                    if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), ability, game)) {
                         buybackCost.activate();
                         for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -132,7 +131,6 @@ public class BuybackAbility extends StaticAbility implements OptionalAdditionalS
             }
         }
     }
-
 
     @Override
     public String getRule() {
@@ -186,8 +184,8 @@ class BuybackEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.STACK ) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Zone.STACK) {
                 return true;
             }
         }

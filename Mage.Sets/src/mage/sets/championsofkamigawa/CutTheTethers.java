@@ -96,7 +96,7 @@ class CutTheTethersEffect extends OneShotEffect {
             Player player = game.getPlayer(creature.getControllerId());
             if (player != null) {
                 boolean paid = false;
-                if (player.chooseUse(outcome, new StringBuilder("Pay {3} to keep ").append(creature.getName()).append(" on the battlefield?").toString(), game)) {
+                if (player.chooseUse(outcome, new StringBuilder("Pay {3} to keep ").append(creature.getName()).append(" on the battlefield?").toString(), source, game)) {
                     Cost cost = new GenericManaCost(3);
                     if (!cost.pay(source, game, source.getSourceId(), creature.getControllerId(), false)) {
                         paid = true;

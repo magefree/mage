@@ -94,7 +94,7 @@ class TajNarSwordsmithEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", game)) {
+        if (player != null && player.chooseUse(Outcome.BoostCreature, "Do you want to to pay {X}?", source, game)) {
             int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             Cost cost = new GenericManaCost(costX);
             if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {

@@ -75,7 +75,7 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect {
             if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay,
                     new StringBuilder("Put ")
                     .append(source.getTargets() != null ? source.getTargets().get(0).getTargetName() : "target")
-                    .append(" onto the battlefield?").toString(), game)) {
+                    .append(" onto the battlefield?").toString(), source, game)) {
                 return false;
             }
         }

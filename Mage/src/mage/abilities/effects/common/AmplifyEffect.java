@@ -109,7 +109,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
                 filter.add(filterSubtypes.get(0));
             }
             if (controller.getHand().count(filter, source.getSourceId(), source.getControllerId(), game) > 0){
-                if (controller.chooseUse(outcome, "Reveal cards to Amplify?", game)) {
+                if (controller.chooseUse(outcome, "Reveal cards to Amplify?", source, game)) {
                     TargetCardInHand target = new TargetCardInHand(0, Integer.MAX_VALUE, filter);
                     if (controller.chooseTarget(outcome, target, source, game) && !target.getTargets().isEmpty()) {
                         Cards cards = new CardsImpl();

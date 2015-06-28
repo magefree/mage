@@ -145,7 +145,7 @@ class TalusPaladinEffect extends OneShotEffect {
         if (taluspPaladin != null) {
             StringBuilder sb = new StringBuilder();
             sb.append("Put a +1/+1 counter on Talus Paladin?");
-            if (!player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+            if (!player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 return false;
             }
             taluspPaladin.addCounters(CounterType.P1P1.createInstance(), game);

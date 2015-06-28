@@ -1,18 +1,23 @@
 package mage.util;
 
-import mage.Mana;
-import mage.ManaSymbol;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaSymbols;
-import mage.abilities.mana.*;
-
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageObject;
+import mage.Mana;
+import mage.ManaSymbol;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaSymbols;
+import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.BlueManaAbility;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.RedManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.Card;
 import mage.game.Game;
 
@@ -21,29 +26,32 @@ import mage.game.Game;
  */
 public class ManaUtil {
 
-    private ManaUtil() {}
+    private ManaUtil() {
+    }
 
     /**
-     * In case the choice of mana to be produced is obvious, let's discard all other abilities.
+     * In case the choice of mana to be produced is obvious, let's discard all
+     * other abilities.
      *
-     * Example:
-     *   Pay {W}{R}
+     * Example: Pay {W}{R}
      *
-     *   Land produces {W} or {G}.
+     * Land produces {W} or {G}.
      *
-     *   No need to ask what player wants to choose.
-     *   {W} mana ability should be left only.
+     * No need to ask what player wants to choose. {W} mana ability should be
+     * left only.
      *
      * But we CAN do auto choice only in case we have basic mana abilities.
-     * Example:
-     *   we should pay {1} and we have Cavern of Souls that can produce {1} or any mana of creature type choice.
-     *   We can't simply auto choose {1} as the second mana ability also makes spell uncounterable.
+     * Example: we should pay {1} and we have Cavern of Souls that can produce
+     * {1} or any mana of creature type choice. We can't simply auto choose {1}
+     * as the second mana ability also makes spell uncounterable.
      *
-     * In case we can't auto choose we'll simply return the useableAbilities map back to caller without any modification.
+     * In case we can't auto choose we'll simply return the useableAbilities map
+     * back to caller without any modification.
      *
      * @param unpaid Mana we need to pay. Can be null (it is for X costs now).
      * @param useableAbilities List of mana abilities permanent may produce
-     * @return List of mana abilities permanent may produce and are reasonable for unpaid mana
+     * @return List of mana abilities permanent may produce and are reasonable
+     * for unpaid mana
      */
     public static LinkedHashMap<UUID, ManaAbility> tryToAutoPay(ManaCost unpaid, LinkedHashMap<UUID, ManaAbility> useableAbilities) {
 
@@ -55,8 +63,7 @@ public class ManaUtil {
             }
         }
 
-
-        if (unpaid != null)  {
+        if (unpaid != null) {
             ManaSymbols symbols = ManaSymbols.buildFromManaCost(unpaid);
             Mana unpaidMana = unpaid.getMana();
 
@@ -339,10 +346,10 @@ public class ManaUtil {
 
         return useableAbilities;
     }
-    
+
     /**
-     * This activates the special button inthe feedback panel of the client 
-     * if there exists special ways to pay the mana (e.g. Delve, Convoke)
+     * This activates the special button inthe feedback panel of the client if
+     * there exists special ways to pay the mana (e.g. Delve, Convoke)
      *
      * @param source ability the mana costs have to be paid for
      * @param game
@@ -350,17 +357,26 @@ public class ManaUtil {
      * @return message to be shown in human players feedback area
      */
     public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
+        MageObject baseObject = game.getPermanent(source.getSourceId());
+        if (baseObject == null) {
+            baseObject = game.getCard(source.getSourceId());
+        }
         // check for special mana payment possibilities
-        MageObject mageObject = source.getSourceObject(game);        
-        if (mageObject instanceof Card) {            
-            for (Ability ability :((Card)mageObject).getAbilities(game)) {
+        MageObject mageObject = source.getSourceObject(game);
+        if (mageObject instanceof Card) {
+            for (Ability ability : ((Card) mageObject).getAbilities(game)) {
                 if (ability instanceof AlternateManaPaymentAbility) {
                     ((AlternateManaPaymentAbility) ability).addSpecialAction(source, game, unpaid);
                 }
             }
-            return unpaid.getText() + "<div style='font-size:11pt'>" + mageObject.getLogName() + "</div>";
+            if (baseObject == null) {
+                baseObject = mageObject;
+            }
+        }
+        if (baseObject != null) {
+            return unpaid.getText() + "<div style='font-size:11pt'>" + baseObject.getLogName() + "</div>";
         } else {
             return unpaid.getText();
         }
-    }    
+    }
 }

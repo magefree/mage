@@ -14,6 +14,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect {
+
     protected Effects executingEffects = new Effects();
     private final Cost cost;
     private String chooseUseText;
@@ -39,7 +40,7 @@ public class DoIfCostPaid extends OneShotEffect {
     public void addEffect(Effect effect) {
         executingEffects.add(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = getPayingPlayer(game, source);
@@ -48,28 +49,27 @@ public class DoIfCostPaid extends OneShotEffect {
             String message;
             if (chooseUseText == null) {
                 String effectText = executingEffects.getText(source.getModes().getMode());
-                if (effectText.length() > 0 && effectText.charAt(effectText.length()-1)=='.') {
-                     effectText = effectText.substring(0, effectText.length()-1);
+                if (effectText.length() > 0 && effectText.charAt(effectText.length() - 1) == '.') {
+                    effectText = effectText.substring(0, effectText.length() - 1);
                 }
-                message = getCostText() +" and " + effectText + "?";
+                message = getCostText() + " and " + effectText + "?";
             } else {
                 message = chooseUseText;
             }
             message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             boolean result = true;
-            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffects.get(0).getOutcome(), message, game)) {
+            if (cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(executingEffects.get(0).getOutcome(), message, source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
-                    
-                    for(Effect effect: executingEffects) {
+                    for (Effect effect : executingEffects) {
                         effect.setTargetPointer(this.targetPointer);
                         if (effect instanceof OneShotEffect) {
                             result &= effect.apply(game, source);
-                        }
-                        else {
+                        } else {
                             game.addEffect((ContinuousEffect) effect, source);
                         }
                     }
+                    player.resetStoredBookmark(game); // otherwise you can undo card drawn with Mentor of the Meek
                 }
             }
             return result;
@@ -108,4 +108,3 @@ public class DoIfCostPaid extends OneShotEffect {
         return new DoIfCostPaid(this);
     }
 }
-

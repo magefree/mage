@@ -1,12 +1,17 @@
 package mage.client.components;
 
-import mage.client.util.Command;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
+import javax.swing.JPanel;
+import mage.client.util.Command;
 
 /**
  * Image button with hover.
@@ -47,6 +52,8 @@ public class HoverButton extends JPanel implements MouseListener {
     static final Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
     static final Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
     private boolean useMiniFont = false;
+
+    private boolean alignTextLeft = false;
 
     public HoverButton(String text, Image image, Rectangle size) {
         this(text, image, image, null, image, size);
@@ -113,7 +120,7 @@ public class HoverButton extends JPanel implements MouseListener {
             }
             topTextOffsetX = calculateOffsetForTop(g2d, topText);
             g2d.setColor(textBGColor);
-            g2d.drawString(topText, topTextOffsetX+1, 13);
+            g2d.drawString(topText, topTextOffsetX + 1, 13);
             g2d.setColor(textColor);
             g2d.drawString(topText, topTextOffsetX, 12);
         }
@@ -148,7 +155,11 @@ public class HoverButton extends JPanel implements MouseListener {
                 frc = g2d.getFontRenderContext();
                 textWidth = (int) textFontMini.getStringBounds(text, frc).getWidth();
             }
-            textOffsetX = (imageSize.width - textWidth) / 2;
+            if (alignTextLeft) {
+                textOffsetX = 0;
+            } else {
+                textOffsetX = (imageSize.width - textWidth) / 2;
+            }
         }
         return textOffsetX;
     }
@@ -275,6 +286,10 @@ public class HoverButton extends JPanel implements MouseListener {
 
     public void setTextAlwaysVisible(boolean textAlwaysVisible) {
         this.textAlwaysVisible = textAlwaysVisible;
+    }
+
+    public void setAlignTextLeft(boolean alignTextLeft) {
+        this.alignTextLeft = alignTextLeft;
     }
 
 }

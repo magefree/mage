@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.decorator;
 
 import mage.abilities.Ability;
@@ -42,8 +41,7 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-
-public class ConditionalRestrictionEffect extends RestrictionEffect  {
+public class ConditionalRestrictionEffect extends RestrictionEffect {
 
     protected RestrictionEffect effect;
     protected RestrictionEffect otherwiseEffect;
@@ -55,7 +53,7 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
     public ConditionalRestrictionEffect(RestrictionEffect effect, Condition condition) {
         this(Duration.WhileOnBattlefield, effect, condition, null);
     }
-    
+
     public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect) {
         super(duration);
         this.effectType = EffectType.RESTRICTION;
@@ -93,7 +91,6 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
         initDone = true;
     }
 
-
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (!initDone) { // if simpleStaticAbility, init won't be called
@@ -102,7 +99,7 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
         conditionState = condition.apply(game, source);
         if (conditionState) {
             effect.setTargetPointer(this.targetPointer);
-            return effect.applies(permanent, source,game);
+            return effect.applies(permanent, source, game);
         } else if (otherwiseEffect != null) {
             otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.applies(permanent, source, game);
@@ -147,11 +144,11 @@ public class ConditionalRestrictionEffect extends RestrictionEffect  {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         if (conditionState) {
-            return effect.canBeUntapped(permanent, game);
+            return effect.canBeUntapped(permanent, source, game);
         } else if (otherwiseEffect != null) {
-            return otherwiseEffect.canBeUntapped(permanent, game);
+            return otherwiseEffect.canBeUntapped(permanent, source, game);
         }
         return true;
     }

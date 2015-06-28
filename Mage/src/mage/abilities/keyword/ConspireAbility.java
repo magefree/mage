@@ -126,7 +126,7 @@ public class ConspireAbility extends StaticAbility implements OptionalAdditional
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetConspire();
-                if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(conspireCost.getText(false)).append(" ?").toString(), game)) {
+                if (player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(conspireCost.getText(false)).append(" ?").toString(), ability, game)) {
                     conspireCost.activate();
                     for (Iterator it = ((Costs) conspireCost).iterator(); it.hasNext();) {
                         Cost cost = (Cost) it.next();
@@ -245,8 +245,9 @@ class ConspireEffect extends OneShotEffect {
                     copy.setCopiedSpell(true);
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, source.getControllerId());
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
+                    }
                     return true;
                 }
             }

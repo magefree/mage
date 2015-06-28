@@ -100,7 +100,7 @@ class CaravanVigilEffect extends OneShotEffect {
                     Cards cards = new CardsImpl();
                     cards.add(card);
                     if (MorbidCondition.getInstance().apply(game, source)
-                            && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", game)) {
+                            && controller.chooseUse(Outcome.PutLandInPlay, "Do you wish to put the card onto the battlefield instead?", source, game)) {
                         controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                     } else {
                         controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);

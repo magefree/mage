@@ -100,13 +100,12 @@ class DesertersQuartersTapTargetEffect extends TapTargetEffect {
             if (sourcePermanent != null) {
                 sourcePermanent.addConnectedCard("DesertersQuarters", permanent.getId());
             }
-            if (permanent != null) {             
+            if (permanent != null) {
                 permanent.tap(game);
             }
         }
         return true;
     }
-
 
     @Override
     public DesertersQuartersTapTargetEffect copy() {
@@ -144,7 +143,7 @@ class DesertersQuartersRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

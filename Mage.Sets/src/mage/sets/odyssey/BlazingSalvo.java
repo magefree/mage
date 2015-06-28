@@ -88,7 +88,7 @@ class BlazingSalvoEffect extends OneShotEffect {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {
                 String message = "Have Blazing Salvo do 5 damage to you?";
-                if (player.chooseUse(Outcome.Damage, message, game)){
+                if (player.chooseUse(Outcome.Damage, message, source, game)){
                     player.damage(5, source.getSourceId(), game, true, false);
                 } else {
                     permanent.damage(3, source.getSourceId(), game, false, true);

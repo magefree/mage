@@ -1,37 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 
 /*
  * FeedbackPanel.java
  *
  * Created on 23-Dec-2009, 9:54:01 PM
  */
-
 package mage.client.game;
 
 import java.awt.Component;
@@ -61,6 +60,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
+
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END
     }
 
@@ -73,7 +73,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
-    /** Creates new form FeedbackPanel */
+    /**
+     * Creates new form FeedbackPanel
+     */
     public FeedbackPanel() {
         //initComponents();
         customInitComponents();
@@ -170,7 +172,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 while (c != null && !(c instanceof GamePane)) {
                     c = c.getParent();
                 }
-                if (c != null && ((GamePane)c).isVisible()) { // check if GamePanel still visible 
+                if (c != null && ((GamePane) c).isVisible()) { // check if GamePanel still visible
                     FeedbackPanel.this.btnRight.doClick();
                 }
             }
@@ -181,8 +183,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private void handleOptions(Map<String, Serializable> options) {
         if (options != null) {
             if (options.containsKey("UI.right.btn.text")) {
-                this.btnRight.setText((String)options.get("UI.right.btn.text"));
-                this.helper.setRight((String)options.get("UI.right.btn.text"), true);
+                this.btnRight.setText((String) options.get("UI.right.btn.text"));
+                this.helper.setRight((String) options.get("UI.right.btn.text"), true);
             }
             if (options.containsKey("dialog")) {
                 connectedDialog = (MageDialog) options.get("dialog");
@@ -224,7 +226,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         btnUndo = new javax.swing.JButton();
         btnUndo.setVisible(true);
 
-        setBackground(new java.awt.Color(0,0,0,80));
+        setBackground(new java.awt.Color(0, 0, 0, 80));
 
         btnRight.setText("Cancel");
         btnRight.addActionListener(new java.awt.event.ActionListener() {
@@ -294,7 +296,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         session.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
-    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {
         session.sendPlayerAction(PlayerAction.UNDO, gameId, null);
     }
 
@@ -309,7 +311,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     public void setConnectedChatPanel(ChatPanel chatPanel) {
         this.connectedChatPanel = chatPanel;
     }
-    
+
     public void pressOKYesOrDone() {
         if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes")) {
             btnLeft.doClick();

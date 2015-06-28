@@ -102,7 +102,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl {
             TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
             Cost cost = new DiscardTargetCost(target);
             if (cost.canPay(source, source.getSourceId(), source.getControllerId(), game) &&
-                    player.chooseUse(outcome, "Discard land? (Otherwise Mox Diamond goes to graveyard)", game) &&
+                    player.chooseUse(outcome, "Discard land? (Otherwise Mox Diamond goes to graveyard)", source, game) &&
                     player.chooseTarget(Outcome.Discard, target, source, game)){
                 player.discard(game.getCard(target.getFirstTarget()), source, game);
                 return false;

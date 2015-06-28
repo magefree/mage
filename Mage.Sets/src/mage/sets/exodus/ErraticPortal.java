@@ -102,7 +102,7 @@ class ErraticPortalEffect extends OneShotEffect {
                 Player player = game.getPlayer(targetCreature.getControllerId());
                 if (player != null) {
                     cost.clearPaid();
-                    if (player.chooseUse(Outcome.Benefit, "Pay {1}? (Otherwise " + targetCreature.getLogName() +" will be returned to its owner's hand)", game)) {
+                    if (player.chooseUse(Outcome.Benefit, "Pay {1}? (Otherwise " + targetCreature.getLogName() +" will be returned to its owner's hand)", source, game)) {
                         cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false);
                     }
                     if (!cost.isPaid()) {

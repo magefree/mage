@@ -103,7 +103,7 @@ class ChainLightningEffect extends OneShotEffect {
                 }
             }
             if (affectedPlayer != null) {
-                if (affectedPlayer.chooseUse(Outcome.Copy, "Pay {R}{R} to copy the spell?", game)) {
+                if (affectedPlayer.chooseUse(Outcome.Copy, "Pay {R}{R} to copy the spell?", source, game)) {
                     Cost cost = new ManaCostsImpl("{R}{R}");
                     if (cost.pay(source, game, source.getSourceId(), affectedPlayer.getId(), false)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());

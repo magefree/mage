@@ -92,7 +92,7 @@ class CoercivePortalEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.chooseUse(Outcome.DestroyPermanent, "Choose carnage?", game)) {
+                    if (player.chooseUse(Outcome.DestroyPermanent, "Choose carnage?", source, game)) {
                         carnageCount++;
                         game.informPlayers(player.getLogName() + " has chosen: carnage");
                     }

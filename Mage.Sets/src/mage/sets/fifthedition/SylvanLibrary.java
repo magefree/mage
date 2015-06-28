@@ -61,7 +61,6 @@ public class SylvanLibrary extends CardImpl {
         super(ownerId, 191, "Sylvan Library", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "5ED";
 
-
         // At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new SylvanLibraryEffect(), TargetController.YOU, true), new CardsDrawnThisTurnWatcher());
 
@@ -81,7 +80,7 @@ class SylvanLibraryEffect extends OneShotEffect {
 
     public SylvanLibraryEffect() {
         super(Outcome.LoseLife);
-        this.staticText = "draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
+        this.staticText = "you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library";
     }
 
     public SylvanLibraryEffect(final SylvanLibraryEffect effect) {
@@ -111,18 +110,18 @@ class SylvanLibraryEffect extends OneShotEffect {
                 }
                 int numberOfTargets = Math.min(2, cards.size());
                 if (numberOfTargets > 0) {
-                    TargetCardInHand target = new TargetCardInHand(numberOfTargets, new FilterCard(new StringBuilder(numberOfTargets).append(" cards of cards drawn this turn").toString()));
+                    TargetCardInHand target = new TargetCardInHand(numberOfTargets, new FilterCard(numberOfTargets + " cards of cards drawn this turn"));
                     controller.chooseTarget(outcome, cards, target, source, game);
 
                     Cards cardsPutBack = new CardsImpl();
-                    for (UUID cardId :target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = cards.get(cardId, game);
                         if (card != null) {
                             if (controller.canPayLifeCost()
                                     && controller.getLife() >= 4
-                                    && controller.chooseUse(outcome, new StringBuilder("Pay 4 life for ").append(card.getName()).append("? (Otherwise it's put on top of your library)").toString(), game)) {
+                                    && controller.chooseUse(outcome, "Pay 4 life for " + card.getLogName() + "? (Otherwise it's put on top of your library)", source, game)) {
                                 controller.loseLife(4, game);
-                                game.informPlayers(new StringBuilder(controller.getLogName()).append(" pays 4 life to keep a card on hand").toString());
+                                game.informPlayers(controller.getLogName() + " pays 4 life to keep a card on hand");
                             } else {
                                 cardsPutBack.add(card);
                             }
@@ -146,7 +145,7 @@ class SylvanLibraryEffect extends OneShotEffect {
                         card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                     }
                     if (numberOfCardsToPutBack > 0) {
-                        game.informPlayers(new StringBuilder(controller.getLogName()).append(" puts ").append(numberOfCardsToPutBack).append(" card(s) back to library").toString());
+                        game.informPlayers(controller.getLogName() + " puts " + numberOfCardsToPutBack + " card(s) back to library");
                     }
                 }
             }
@@ -159,7 +158,6 @@ class SylvanLibraryEffect extends OneShotEffect {
 class CardsDrawnThisTurnWatcher extends Watcher {
 
     private final Set<UUID> cardsDrawnThisTurn = new HashSet<UUID>();
-
 
     public CardsDrawnThisTurnWatcher() {
         super("CardsDrawnThisTurnWatcher", WatcherScope.PLAYER);

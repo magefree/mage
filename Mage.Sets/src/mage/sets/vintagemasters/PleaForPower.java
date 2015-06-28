@@ -87,7 +87,7 @@ class PleaForPowerEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.chooseUse(Outcome.ExtraTurn, "Choose time?", game)) {
+                    if (player.chooseUse(Outcome.ExtraTurn, "Choose time?", source, game)) {
                         timeCount++;
                         game.informPlayers(player.getLogName() + " has chosen: time");
                     } else {

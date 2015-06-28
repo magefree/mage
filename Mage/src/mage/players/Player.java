@@ -439,7 +439,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean chooseMulligan(Game game);
 
-    boolean chooseUse(Outcome outcome, String message, Game game);
+    boolean chooseUse(Outcome outcome, String message, Ability source, Game game);
 
     boolean choose(Outcome outcome, Choice choice, Game game);
 

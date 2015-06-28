@@ -109,7 +109,7 @@ class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())
                 && archmage != null
                 && you != null
-                && you.chooseUse(Outcome.Benefit, "Would you like to skip drawing a card?", game)) {
+                && you.chooseUse(Outcome.Benefit, "Would you like to skip drawing a card?", source, game)) {
             return true;
         }
         return false;

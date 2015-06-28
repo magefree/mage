@@ -112,6 +112,25 @@ public class CardInfoWindowDialog extends MageDialog {
         cards.cleanUp();
     }
 
+    public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
+        boolean changed = cards.loadCards(exile, bigCard, gameId, null);
+        String titel = name + " (" + exile.size() + ")";
+        setTitle(titel);
+        this.setTitelBarToolTip(titel);
+        if (exile.size() > 0) {
+            show();
+            if (changed) {
+                try {
+                    this.setIcon(false);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            this.hideDialog();
+        }
+    }
+
     public void loadCards(SimpleCardsView showCards, BigCard bigCard, UUID gameId) {
         cards.loadCards(showCards, bigCard, gameId);
         showAndPositionWindow();
@@ -120,8 +139,9 @@ public class CardInfoWindowDialog extends MageDialog {
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
         cards.loadCards(showCards, bigCard, gameId, null);
         if (showType.equals(ShowType.GRAVEYARD)) {
-            setTitle(name + "'s Graveyard (" + showCards.size() + ")");
-            this.setTitelBarToolTip(name);
+            String titel = name + "'s Graveyard (" + showCards.size() + ")";
+            setTitle(titel);
+            this.setTitelBarToolTip(titel);
         }
         showAndPositionWindow();
     }
@@ -158,22 +178,6 @@ public class CardInfoWindowDialog extends MageDialog {
                 }
             }
         });
-    }
-
-    public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
-        boolean changed = cards.loadCards(exile, bigCard, gameId, null);
-        if (exile.size() > 0) {
-            show();
-            if (changed) {
-                try {
-                    this.setIcon(false);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(CardInfoWindowDialog.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } else {
-            this.hideDialog();
-        }
     }
 
     /**

@@ -145,8 +145,8 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
         if (controller != null && opponent != null && sourceObject != null) {
             Cost cost = new GenericManaCost(4);
             String message = "Would you like to pay {4} to prevent the opponent to draw a card?";
-            if (!(opponent.chooseUse(Outcome.Benefit, message, game) && cost.pay(source, game, source.getSourceId(), opponent.getId(), false))) {
-                if(controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() +")", game)) {
+            if (!(opponent.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, source.getSourceId(), opponent.getId(), false))) {
+                if(controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() +")", source, game)) {
                     controller.drawCards(1, game);
                 }
             }

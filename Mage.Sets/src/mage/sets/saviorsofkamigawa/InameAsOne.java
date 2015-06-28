@@ -115,7 +115,7 @@ class InameAsOneEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", game)) {
+            if (controller.chooseUse(outcome, "Exile " + sourceObject.getLogName() + " to return Spirit card?", source, game)) {
                 // In a Commander game, you may send Iname to the Command Zone instead of exiling it during the resolution
                 // of its ability. If you do, its ability still works. Iname's ability only requires that you attempted to 
                 // exile it, not that it actually gets to the exile zone. This is similar to how destroying a creature 

@@ -88,7 +88,7 @@ class TyrantsChoiceEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
-                    if (player.chooseUse(Outcome.Sacrifice, "Choose death?", game)) {
+                    if (player.chooseUse(Outcome.Sacrifice, "Choose death?", source, game)) {
                         deathCount++;
                         game.informPlayers(player.getLogName() + " has chosen: death");
                     }

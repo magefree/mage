@@ -98,7 +98,7 @@ class BreakingPointDestroyEffect extends OneShotEffect {
             boolean destroyCreatures = true;
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 6 damage to you?", game)) {
+                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 6 damage to you?", source, game)) {
                     destroyCreatures = false;
                     player.damage(6, source.getSourceId(), game, false, true);
                     game.informPlayers(player.getLogName() + " has " + spell.getName() + " deal 6 to him or her");

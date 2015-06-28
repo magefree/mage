@@ -111,7 +111,7 @@ class GuileReplacementEffect extends ReplacementEffectImpl {
         if (spell != null && guileController != null) {
             Card spellCard = spell.getCard();
             guileController.moveCardToExileWithInfo(spellCard, null, "", source.getSourceId(), game, Zone.STACK, true);
-            if (guileController.chooseUse(Outcome.PlayForFree, "Cast that card for free?", game)) {
+            if (guileController.chooseUse(Outcome.PlayForFree, "Cast that card for free?", source, game)) {
                 guileController.cast(spellCard.getSpellAbility(), game, true);
             }
             return true;

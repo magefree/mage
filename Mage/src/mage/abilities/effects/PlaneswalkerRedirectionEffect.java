@@ -77,7 +77,7 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect {
             Player player = game.getPlayer(playerId);
             if (target != null && player != null) {
                 int numPlaneswalkers = game.getBattlefield().countAll(filter, target.getId(), game);
-                if (numPlaneswalkers > 0 && player.chooseUse(outcome, "Redirect damage to planeswalker?", game)) {
+                if (numPlaneswalkers > 0 && player.chooseUse(outcome, "Redirect damage to planeswalker?", source, game)) {
                     redirectTarget = new TargetPermanent(filter);
                     if (numPlaneswalkers == 1) {
                         List<Permanent> planeswalker = game.getBattlefield().getAllActivePermanents(filter, target.getId(), game);

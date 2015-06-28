@@ -114,7 +114,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
                 while (!currentPlayer.getId().equals(player.getId())) {
                     if (currentPlayer.canPayLifeCost() &&
                             currentPlayer.getLife() >= 2 &&
-                            currentPlayer.chooseUse(Outcome.Benefit, message, game)) {
+                            currentPlayer.chooseUse(Outcome.Benefit, message, source, game)) {
                         currentPlayer.loseLife(2, game);
                         player.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);                        
 //                        game.getState().getRevealed().reset();

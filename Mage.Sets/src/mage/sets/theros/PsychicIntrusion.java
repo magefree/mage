@@ -108,7 +108,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 int cardsHand = opponent.getHand().count(filter, game);
                 boolean fromHand = false;
                 if (cardsGraveyard > 0 && cardsHand > 0) {
-                    if (controller.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", game)) {
+                    if (controller.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", source, game)) {
                         fromHand = true;
                     }
                 } else {

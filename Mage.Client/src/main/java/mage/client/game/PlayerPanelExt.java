@@ -328,8 +328,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         avatar.add(new JLabel());
         avatar.add(new JLabel());
         avatar.add(avatarFlag);
-        avatar.setAlignmentY(CENTER_ALIGNMENT);
-        avatarFlag.setHorizontalAlignment(JLabel.CENTER);
+        avatar.setAlignTextLeft(true);
+        avatarFlag.setHorizontalAlignment(JLabel.LEFT);
         avatarFlag.setVerticalAlignment(JLabel.BOTTOM);
         avatar.add(new JLabel());
         String showPlayerNamePermanently = MageFrame.getPreferences().get(PreferencesDialog.KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
