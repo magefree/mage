@@ -28,16 +28,13 @@
 
 package mage.server.game;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.server.Room;
-import mage.view.MatchView;
-import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 
 /**
@@ -46,9 +43,6 @@ import mage.view.TableView;
  */
 public interface GamesRoom extends Room {
 
-    List<TableView> getTables();
-    List<MatchView> getFinished();
-    RoomUsersView getRoomUsersInfo();
     boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
     boolean joinTournamentTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
     TableView createTable(UUID userId, MatchOptions options);
@@ -58,5 +52,7 @@ public interface GamesRoom extends Room {
     TableView getTable(UUID tableId);
     void leaveTable(UUID userId, UUID tableId);
     boolean watchTable(UUID userId, UUID tableId) throws MageException;
+
+    public RoomView getRoomView();
 
 }

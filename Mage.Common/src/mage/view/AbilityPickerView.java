@@ -42,7 +42,7 @@ import mage.abilities.Ability;
 public class AbilityPickerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Map<UUID, String> choices = new LinkedHashMap<UUID, String>();
+    private final Map<UUID, String> choices = new LinkedHashMap<>();
 
     public AbilityPickerView(String objectName, List<? extends Ability> abilities) {
         for (Ability ability: abilities) {
@@ -59,7 +59,7 @@ public class AbilityPickerView implements Serializable {
     }
 
     public AbilityPickerView(Map<UUID, String> modes) {
-        this.choices = modes;
+        this.choices.putAll(modes);
     }
 
     public Map<UUID, String> getChoices() {

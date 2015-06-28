@@ -348,7 +348,7 @@ public class ServerMain implements MageServer {
     public RoomView getRoom(UUID roomId) {
         GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
         if (room != null) {
-            return new RoomView(room.getRoomUsersInfo(), room.getTables(), room.getFinished());
+            return room.getRoomView();
         } else {
             return null;
         }

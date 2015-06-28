@@ -28,7 +28,6 @@
 
 package mage.view;
 
-import java.util.ArrayList;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 
@@ -48,16 +47,12 @@ public class AbilityView extends CardView {
         this.name = "Ability";
         this.sourceName = sourceName;
         this.sourceCard = sourceCard;
-        this.rules = new ArrayList<>();
         rules.add(ability.getRule());
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
-        this.cardTypes = new ArrayList<>();
-        this.subTypes = new ArrayList<>();
-        this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
-        this.manaCost = ability.getManaCosts().getSymbols();
+        this.manaCost.addAll(ability.getManaCosts().getSymbols());
     }
 
     public CardView getSourceCard() {

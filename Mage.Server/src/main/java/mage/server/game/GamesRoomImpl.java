@@ -38,10 +38,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
-import mage.game.GameException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -56,6 +57,7 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.ThreadExecutor;
 import mage.view.MatchView;
 import mage.view.RoomUsersView;
+import mage.view.RoomView;
 import mage.view.TableView;
 import mage.view.UsersView;
 import org.apache.log4j.Logger;
@@ -69,10 +71,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private static final Logger logger = Logger.getLogger(GamesRoomImpl.class);
 
     private static final ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
-    private static List<TableView> tableView = new ArrayList<>();
-    private static List<MatchView> matchView = new ArrayList<>();
-    private static RoomUsersView roomUsersView;
+    private RoomView roomView;
 
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
     public GamesRoomImpl()  {
@@ -89,25 +90,20 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }, 2, 2, TimeUnit.SECONDS);
     }
 
-    @Override
-    public List<TableView> getTables() {
-        return tableView;
-    }
-
     private void update() {
-        ArrayList<TableView> tableList = new ArrayList<>();
-        ArrayList<MatchView> matchList = new ArrayList<>();
+        ArrayList<TableView> tableView = new ArrayList<>();
+        ArrayList<MatchView> matchView = new ArrayList<>();
         List<Table> allTables = new ArrayList<>(tables.values());
         Collections.sort(allTables, new TableListSorter());
         for (Table table: allTables) {
             if (table.getState() != TableState.FINISHED) {
-                tableList.add(new TableView(table));
+                tableView.add(new TableView(table));
             }
-            else if (matchList.size() < 50) { 
+            else if (matchView.size() < 50) { 
                  if (table.isTournament()) {
-                    matchList.add(new MatchView(table));
+                    matchView.add(new MatchView(table));
                 } else {
-                    matchList.add(new MatchView(table));
+                    matchView.add(new MatchView(table));
                 }
             } else {
                 // more since 50 matches finished since this match so remove it
@@ -117,8 +113,6 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 this.removeTable(table.getId());
            }
         }
-        tableView = tableList;
-        matchView = matchList;
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
             Session session = SessionManager.getInstance().getSession(user.getSessionId());
@@ -131,18 +125,17 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         }
 
         Collections.sort(users, new UserNameSorter());                
-//        List<RoomUsersView> roomUserInfo = new ArrayList<>();
-        roomUsersView = new RoomUsersView(users, 
+        RoomUsersView roomUsersView = new RoomUsersView(users, 
                 GameManager.getInstance().getNumberActiveGames(),
                 ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()),
                 ConfigSettings.getInstance().getMaxGameThreads()
         );
-//        roomUsersView = roomUserInfo;
-    }
-
-    @Override
-    public List<MatchView> getFinished() {
-        return matchView;
+        lock.writeLock().lock();
+        try {
+            roomView = new RoomView(roomUsersView, tableView, matchView);
+        } finally {
+            lock.writeLock().unlock();
+        }
     }
 
     @Override
@@ -213,8 +206,13 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public RoomUsersView getRoomUsersInfo() {
-        return roomUsersView;
+    public RoomView getRoomView() {
+        lock.readLock().lock();
+        try {
+            return roomView;
+        } finally {
+            lock.readLock().unlock();
+        }
     }
 
 }

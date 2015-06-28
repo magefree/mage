@@ -51,7 +51,7 @@ public class PermanentView extends CardView {
     private final boolean phasedIn;
     private final boolean summoningSickness;
     private final int damage;
-    private List<UUID> attachments;
+    private final List<UUID> attachments = new ArrayList<>();
     private final CardView original;
     private final boolean copy;
     private final String nameOwner; // only filled if != controller
@@ -64,7 +64,8 @@ public class PermanentView extends CardView {
     public PermanentView(Permanent permanent, Card card, UUID createdForPlayerId, Game game) {
         super(permanent, game, permanent.getControllerId().equals(createdForPlayerId));
         this.controlled = permanent.getControllerId().equals(createdForPlayerId);
-        this.rules = permanent.getRules(game);
+        this.rules.clear();
+        this.rules.addAll(permanent.getRules(game));
         this.tapped = permanent.isTapped();
         this.flipped = permanent.isFlipped();
         this.phasedIn = permanent.isPhasedIn();
@@ -72,10 +73,8 @@ public class PermanentView extends CardView {
         this.morphed = permanent.isMorphed();
         this.manifested = permanent.isManifested();
         this.damage = permanent.getDamage();
-        if (permanent.getAttachments().size() > 0) {
-            attachments = new ArrayList<>();
-            attachments.addAll(permanent.getAttachments());
-        }
+        this.attachments.clear();
+        this.attachments.addAll(permanent.getAttachments());
         this.attachedTo = permanent.getAttachedTo();
         if (isToken()) {
             original = new CardView(((PermanentToken)permanent).getToken());

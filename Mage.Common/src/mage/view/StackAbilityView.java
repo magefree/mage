@@ -61,18 +61,18 @@ public class StackAbilityView extends CardView {
         this.name = "Ability";
         this.loyalty = "";
 
-        this.cardTypes = ability.getCardType();
-        this.subTypes = ability.getSubtype();
-        this.superTypes = ability.getSupertype();
+        this.cardTypes.addAll(ability.getCardType());
+        this.subTypes.addAll(ability.getSubtype());
+        this.superTypes.addAll(ability.getSupertype());
         this.color = ability.getColor(game);
-        this.manaCost = ability.getManaCost().getSymbols();
-        this.cardTypes = ability.getCardType();
-        this.subTypes = ability.getSubtype();
-        this.superTypes = ability.getSupertype();
+        this.manaCost.addAll(ability.getManaCost().getSymbols());
+        this.cardTypes.addAll(ability.getCardType());
+        this.subTypes.addAll(ability.getSubtype());
+        this.superTypes.addAll(ability.getSupertype());
         this.color = ability.getColor(game);
-        this.manaCost = ability.getManaCost().getSymbols();
+        this.manaCost.addAll(ability.getManaCost().getSymbols());
         this.power = ability.getPower().toString();
-        this.toughness = ability.getToughness().toString();                   
+        this.toughness = ability.getToughness().toString();
         String nameToShow;
         if (sourceCard.isFaceDown()) {
             CardView tmpSourceCard = this.getSourceCard();
@@ -85,12 +85,12 @@ public class StackAbilityView extends CardView {
             tmpSourceCard.power = "2";
             tmpSourceCard.toughness = "2";
             nameToShow = "creature without name";
-        } else {         
+        } else {
             nameToShow = sourceName;
         }
-        this.rules = new ArrayList<>();
+        rules.clear();
         rules.add(ability.getRule(nameToShow));
-        this.counters = sourceCard.getCounters();
+        this.counters.addAll(sourceCard.getCounters());
 
         updateTargets(game, ability);
     }

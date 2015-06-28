@@ -28,6 +28,9 @@
 
 package mage.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Modes;
@@ -35,9 +38,14 @@ import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.cards.SplitCard;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.MageObjectType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
+import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -46,11 +54,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.game.Game;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -61,15 +64,15 @@ public class CardView extends SimpleCardView {
     protected UUID parentId;
     protected String name;
     protected String displayName;
-    protected List<String> rules;
+    protected final List<String> rules = new ArrayList<>();
     protected String power;
     protected String toughness;
     protected String loyalty;
-    protected List<CardType> cardTypes;
-    protected List<String> subTypes;
-    protected List<String> superTypes;
+    protected final List<CardType> cardTypes = new ArrayList<>();
+    protected final List<String> subTypes = new ArrayList<>();
+    protected final List<String> superTypes = new ArrayList<>();
     protected ObjectColor color;
-    protected List<String> manaCost;
+    protected final List<String> manaCost = new ArrayList<>();
     protected int convertedManaCost;
     protected Rarity rarity;
 
@@ -95,16 +98,16 @@ public class CardView extends SimpleCardView {
     protected boolean isSplitCard;
     protected String leftSplitName;
     protected ManaCosts leftSplitCosts;
-    protected List<String> leftSplitRules;
+    protected final List<String> leftSplitRules = new ArrayList<>();
     protected String rightSplitName;
     protected ManaCosts rightSplitCosts;
-    protected List<String> rightSplitRules;
+    protected final List<String> rightSplitRules = new ArrayList<>();
 
-    protected List<UUID> targets;
+    protected final List<UUID> targets = new ArrayList<>();
 
     protected UUID pairedCard;
     protected boolean paid;
-    protected List<CounterView> counters;
+    protected final List<CounterView> counters = new ArrayList<>();
 
     protected boolean controlledByOwner = true;
 
@@ -158,7 +161,8 @@ public class CardView extends SimpleCardView {
                 if (card instanceof Permanent) {
                     this.power = Integer.toString(card.getPower().getValue());
                     this.toughness = Integer.toString(card.getToughness().getValue());
-                    this.cardTypes = card.getCardType();
+                    this.cardTypes.clear();
+                    this.cardTypes.addAll(card.getCardType());
                 } else {
                     // this.hideInfo = true;
                     return;
@@ -188,20 +192,22 @@ public class CardView extends SimpleCardView {
             this.isSplitCard = true;
             leftSplitName = splitCard.getLeftHalfCard().getName();
             leftSplitCosts = splitCard.getLeftHalfCard().getManaCost();
-            leftSplitRules = splitCard.getLeftHalfCard().getRules(game);
+            leftSplitRules.addAll(splitCard.getLeftHalfCard().getRules(game));
             rightSplitName = splitCard.getRightHalfCard().getName();
             rightSplitCosts = splitCard.getRightHalfCard().getManaCost();
-            rightSplitRules = splitCard.getRightHalfCard().getRules(game);
+            rightSplitRules.addAll(splitCard.getRightHalfCard().getRules(game));
         }
 
         this.name = card.getImageName();
         this.displayName = card.getName();
+        this.rules.clear();
         if (game == null) {
-            this.rules = card.getRules();
+            this.rules.addAll(card.getRules());
         } else {
-            this.rules = card.getRules(game);
+            this.rules.addAll(card.getRules(game));
         }
-        this.manaCost = card.getManaCost().getSymbols();
+        this.manaCost.clear();
+        this.manaCost.addAll(card.getManaCost().getSymbols());
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
         if (card instanceof Permanent) {
@@ -213,7 +219,7 @@ public class CardView extends SimpleCardView {
                 controlledByOwner = false;
             }
             if (game != null && permanent.getCounters() != null && !permanent.getCounters().isEmpty()) {
-                counters = new ArrayList<>();
+                counters.clear();
                 for (Counter counter: permanent.getCounters().values()) {
                     counters.add(new CounterView(counter));
                 }
@@ -226,7 +232,7 @@ public class CardView extends SimpleCardView {
             }
             this.loyalty = "";
             if (game != null && card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
-                counters = new ArrayList<>();
+                counters.clear();
                 for (Counter counter: card.getCounters(game).values()) {
                     counters.add(new CounterView(counter));
                 }
@@ -234,9 +240,12 @@ public class CardView extends SimpleCardView {
         }
         this.power = Integer.toString(card.getPower().getValue());
         this.toughness = Integer.toString(card.getToughness().getValue());
-        this.cardTypes = card.getCardType();
-        this.subTypes = card.getSubtype();
-        this.superTypes = card.getSupertype();
+        this.cardTypes.clear();
+        this.cardTypes.addAll(card.getCardType());
+        this.subTypes.clear();
+        this.subTypes.addAll(card.getSubtype());
+        this.superTypes.clear();
+        this.superTypes.addAll(card.getSupertype());
         this.color = card.getColor(game);
         this.canTransform = card.canTransform();
         this.flipCard = card.isFlipCard();
@@ -256,7 +265,8 @@ public class CardView extends SimpleCardView {
             }
             //
             // set code und card number for token copies to get the image
-            this.rules = ((PermanentToken) card).getRules(game);
+            this.rules.clear();
+            this.rules.addAll(((PermanentToken) card).getRules(game));
             this.type = ((PermanentToken)card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
@@ -310,29 +320,35 @@ public class CardView extends SimpleCardView {
             this.toughness = object.getToughness().toString();
             this.loyalty = "";
         }
-        this.cardTypes = object.getCardType();
-        this.subTypes = object.getSubtype();
-        this.superTypes = object.getSupertype();
+        this.cardTypes.clear();
+        this.cardTypes.addAll(object.getCardType());
+        this.subTypes.clear();
+        this.subTypes.addAll(object.getSubtype());
+        this.superTypes.clear();
+        this.superTypes.addAll(object.getSupertype());
         this.color = object.getColor(null);
-        this.manaCost = object.getManaCost().getSymbols();
+        this.manaCost.clear();
+        this.manaCost.addAll(object.getManaCost().getSymbols());
         this.convertedManaCost = object.getManaCost().convertedManaCost();
         if (object instanceof PermanentToken) {
             this.mageObjectType = MageObjectType.TOKEN;
             PermanentToken permanentToken = (PermanentToken) object;
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = permanentToken.getExpansionSetCode();
-            this.rules = permanentToken.getRules();
+            this.rules.clear();
+            this.rules.addAll(permanentToken.getRules());
             this.type = permanentToken.getToken().getTokenType();
         } else if (object instanceof Emblem) {
             this.mageObjectType = MageObjectType.EMBLEM;
             Emblem emblem = (Emblem) object;
             this.rarity = Rarity.SPECIAL;
-            this.rules = emblem.getAbilities().getRules(emblem.getName());
+            this.rules.clear();
+            this.rules.addAll(emblem.getAbilities().getRules(emblem.getName()));
         }
         if (this.rarity == null && object instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)object;
             this.rarity = Rarity.NA;
-            this.rules = new ArrayList<>();
+            this.rules.clear();
             this.rules.add(stackAbility.getRule());
             if (stackAbility.getZone().equals(Zone.COMMAND)) {
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
@@ -351,7 +367,8 @@ public class CardView extends SimpleCardView {
         this.mageObjectType = MageObjectType.EMBLEM;
         this.name = emblem.getName();
         this.displayName = name;
-        this.rules = emblem.getRules();
+        this.rules.clear();
+        this.rules.addAll(emblem.getRules());
         // emblem images are always with common (black) symbol
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.rarity = Rarity.COMMON;
@@ -368,15 +385,10 @@ public class CardView extends SimpleCardView {
     private void fillEmpty(Card card, boolean controlled) {
         this.name = "Face Down";
         this.displayName = name;
-        this.rules = new ArrayList<>();
         this.power = "";
         this.toughness = "";
         this.loyalty = "";
-        this.cardTypes = new ArrayList<>();
-        this.subTypes = new ArrayList<>();
-        this.superTypes = new ArrayList<>();
         this.color = new ObjectColor();
-        this.manaCost = new ArrayList<>();
         this.convertedManaCost = 0;
 
         // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
@@ -414,15 +426,15 @@ public class CardView extends SimpleCardView {
         this.id = token.getId();
         this.name = token.getName();
         this.displayName = token.getName();
-        this.rules = token.getAbilities().getRules(this.name);
+        this.rules.addAll(token.getAbilities().getRules(this.name));
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
         this.loyalty = "";
-        this.cardTypes = token.getCardType();
-        this.subTypes = token.getSubtype();
-        this.superTypes = token.getSupertype();
+        this.cardTypes.addAll(token.getCardType());
+        this.subTypes.addAll(token.getSubtype());
+        this.superTypes.addAll(token.getSupertype());
         this.color = token.getColor(null);
-        this.manaCost = token.getManaCost().getSymbols();
+        this.manaCost.addAll(token.getManaCost().getSymbols());
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
         this.tokenSetCode = token.getOriginalExpansionSetCode();
@@ -431,11 +443,9 @@ public class CardView extends SimpleCardView {
     protected final void setTargets(Targets targets) {
         for (Target target : targets) {
             if (target.isChosen()) {
+                this.targets.clear();
                 for (UUID targetUUID : target.getTargets()) {
-                    if (this.targets == null) {
-                        this.targets = new ArrayList<>();
-                    }
-                    this.targets.add(targetUUID);
+                   this.targets.add(targetUUID);
                 }
             }
         }
@@ -454,7 +464,8 @@ public class CardView extends SimpleCardView {
     }
 
     public void overrideRules(List<String> rules) {
-        this.rules = rules;
+        this.rules.clear();
+        this.rules.addAll(rules);
     }
 
     public void setIsAbility(boolean isAbility) {
@@ -543,7 +554,8 @@ public class CardView extends SimpleCardView {
     }
 
     public void overrideTargets(List<UUID> newTargets) {
-        this.targets = newTargets;
+        this.targets.clear();
+        this.targets.addAll(newTargets);
     }
 
     public void overrideId(UUID id) {
