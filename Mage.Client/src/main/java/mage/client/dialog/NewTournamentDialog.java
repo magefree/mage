@@ -35,17 +35,15 @@
 package mage.client.dialog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
+import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.ExpansionInfo;
@@ -80,12 +78,12 @@ public class NewTournamentDialog extends MageDialog {
     private UUID roomId;
     private final Session session;
     private String lastSessionId;
-    private JList randomList = new JList();
+    private RandomPacksSelectorDialog randomPackSelector;
+    private JTextArea txtRandomPacks;
     private final List<TournamentPlayerPanel> players = new ArrayList<>();
     private final List<JComboBox> packs = new ArrayList<>();
     private final int CONSTRUCTION_TIME_MIN = 6;
     private final int CONSTRUCTION_TIME_MAX = 30;
-    private final String randomDraftDescription = ("The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.");
 
     private boolean automaticChange = false;
 
@@ -534,15 +532,8 @@ public class NewTournamentDialog extends MageDialog {
             if (tournamentType.isCubeBooster()) {
                 tOptions.getLimitedOptions().setDraftCubeName(this.cbDraftCube.getSelectedItem().toString());
             } else if (tournamentType.isRandom()) {
-                for (Object pack : randomList.getSelectedValuesList()) {
-                    String packStr = (String) pack;
-                    String code = packStr.substring(0, 3);
-                    tOptions.getLimitedOptions().getSetCodes().add(code);
-                }
-                if (tOptions.getLimitedOptions().getSetCodes().size() < 2) {
-                    // At least two sets must be chosen.
-                    return;
-                }
+                tOptions.getLimitedOptions().getSetCodes().clear();
+                tOptions.getLimitedOptions().getSetCodes().addAll(randomPackSelector.getSelectedPacks());
             } else {
                 for (JComboBox pack: packs) {
                     tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
@@ -724,60 +715,54 @@ public class NewTournamentDialog extends MageDialog {
 
     private void createRandomPacks() {
         if (pnlRandomPacks.getComponentCount() == 0) {
-            
-            DefaultListModel randomListModel = new DefaultListModel();
-            randomList = new JList(randomListModel);
-            randomList.setToolTipText(randomDraftDescription);
-            ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
-            for (ExpansionInfo expansion : allExpansions) {
-                String exp = expansion.getCode() + " - " + expansion.getName();
-                randomListModel.addElement(exp);
+            if (randomPackSelector == null) {
+                randomPackSelector = new RandomPacksSelectorDialog();
             }
-            randomList.setSelectionModel(new DefaultListSelectionModel() {
-                private boolean mGestureStarted;
-
-                @Override
-                public void setSelectionInterval(int index0, int index1) {
-                    // Toggle only one element while the user is dragging the mouse
-                    if (!mGestureStarted) {
-                        if (isSelectedIndex(index0)) {
-                            super.removeSelectionInterval(index0, index1);
-                        } else {
-                            if (getSelectionMode() == SINGLE_SELECTION) {
-                                super.setSelectionInterval(index0, index1);
-                            } else {
-                                super.addSelectionInterval(index0, index1);
-                            }
-                        }
-                    }
-                    // Disable toggling till the adjusting is over, or keep it
-                    // enabled in case setSelectionInterval was called directly.
-                    mGestureStarted = getValueIsAdjusting();
-                }
-
-                @Override
-                public void setValueIsAdjusting(boolean isAdjusting) {
-                    super.setValueIsAdjusting(isAdjusting);
-
-                    if (isAdjusting == false) {
-                        // Enable toggling
-                        mGestureStarted = false;
-                    }
-                }
-            });
-
+            txtRandomPacks = new JTextArea();
+            txtRandomPacks.setEnabled(false);
+            txtRandomPacks.setLineWrap(true);
             String randomPrefs = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, "");
             if (randomPrefs.length() > 0) {
-                for (String exp : randomPrefs.split(";")) {
-                    randomList.setSelectedValue(exp, false);
-                }
+                txtRandomPacks.setText(randomPrefs);
+                ArrayList<String> theList = new ArrayList<>();
+                theList.addAll(Arrays.asList(randomPrefs.split(";")));
+                randomPackSelector.setSelectedPacks(theList);
             } else {
-                randomList.setSelectionInterval(0, randomListModel.size() - 1);
+                ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();
+                StringBuilder packList = new StringBuilder();
+                for (ExpansionInfo exp : allExpansions) {
+                    packList.append(exp.getCode());
+                    packList.append(";");
+                }
+                txtRandomPacks.setText(packList.toString());
             }
-            JScrollPane list1scr = new JScrollPane(randomList);
-            randomList.setVisibleRowCount(4);
-            pnlRandomPacks.add(list1scr);
+
+            pnlRandomPacks.add(txtRandomPacks);
+            JButton btnSelectRandomPacks = new JButton();
+            btnSelectRandomPacks.setText("Select packs to be included in the pool");
+            btnSelectRandomPacks.setToolTipText(RandomPacksSelectorDialog.randomDraftDescription);
+            btnSelectRandomPacks.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    showRandomPackSelectorDialog();
+
+                }
+            });
+            pnlRandomPacks.add(btnSelectRandomPacks);
+                }
+        this.pack();
+        this.revalidate();
+        this.repaint();
+            }
+
+    private void showRandomPackSelectorDialog() {
+        randomPackSelector.showDialog();
+        StringBuilder packList = new StringBuilder();
+        for (String str : randomPackSelector.getSelectedPacks()) {
+            packList.append(str);
+            packList.append(";");
         }
+        this.txtRandomPacks.setText(packList.toString());
         this.pack();
         this.revalidate();
         this.repaint();
@@ -1006,8 +991,8 @@ public class NewTournamentDialog extends MageDialog {
             if (tOptions.getLimitedOptions().getIsRandom()){
                 // save random boosters to prefs
                 StringBuilder packlist = new StringBuilder();
-                for (Object pack: randomList.getSelectedValuesList()){                    
-                    packlist.append((String)pack);
+                for (String pack : this.randomPackSelector.getSelectedPacks()){
+                    packlist.append(pack);
                     packlist.append(";");
                 }
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT, packlist.toString());
