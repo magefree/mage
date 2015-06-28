@@ -74,8 +74,8 @@ public class Heartstone extends CardImpl {
 
 class HeartstoneEffect extends CostModificationEffectImpl {
 
-    private static final String effectText = "Activated abilities of creatures you control cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final String effectText = "Activated abilities of creatures cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public HeartstoneEffect() {
         super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -102,7 +102,7 @@ class HeartstoneEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify.getAbilityType().equals(AbilityType.ACTIVATED)) {
-            //Activated abilities of creatures you control
+            // Activated abilities of creatures
             Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
             if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                 return true;
