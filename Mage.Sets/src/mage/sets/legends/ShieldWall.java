@@ -25,14 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.legends;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 
 /**
@@ -40,23 +39,22 @@ import mage.constants.Rarity;
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class ShieldWall extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public ShieldWall(UUID ownerId) {
+        super(ownerId, 205, "Shield Wall", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "LEG";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // Creatures you control get +0/+2 until end of turn.
+        this.getSpellAbility().addEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public ShieldWall(final ShieldWall card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public ShieldWall copy() {
+        return new ShieldWall(this);
     }
 }

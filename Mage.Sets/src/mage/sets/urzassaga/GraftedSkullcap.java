@@ -25,38 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class GraftedSkullcap extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public GraftedSkullcap(UUID ownerId) {
+        super(ownerId, 296, "Grafted Skullcap", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
+        this.expansionSetCode = "USG";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // At the beginning of your draw step, draw an additional card.
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1),
+            TargetController.YOU, false));
+        // At the beginning of your end step, discard your hand.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(),
+            TargetController.YOU, false));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public GraftedSkullcap(final GraftedSkullcap card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public GraftedSkullcap copy() {
+        return new GraftedSkullcap(this);
     }
 }

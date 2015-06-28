@@ -25,38 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.cost.SpellsCostIncreasementAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class FerozsBan extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public FerozsBan(UUID ownerId) {
+        super(ownerId, 370, "Feroz's Ban", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
+        this.expansionSetCode = "5ED";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // Creature spells cost {2} more to cast.
+        Effect effect = new SpellsCostIncreasementAllEffect(new FilterCreatureCard(), 2);
+        effect.setText("Creature spells cost {2} more to cast.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public FerozsBan(final FerozsBan card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public FerozsBan copy() {
+        return new FerozsBan(this);
     }
 }

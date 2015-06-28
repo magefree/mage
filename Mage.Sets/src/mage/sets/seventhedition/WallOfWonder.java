@@ -25,38 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class WallOfWonder extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public WallOfWonder(UUID ownerId) {
+        super(ownerId, 112, "Wall of Wonder", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "7ED";
+        this.subtype.add("Wall");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(5);
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // {2}{U}{U}: Wall of Wonder gets +4/-4 until end of turn and can attack this turn as though it didn't have defender.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, -4, Duration.EndOfTurn),
+            new ManaCostsImpl("{2}{U}{U}"));
+        ability.addEffect(new CanAttackAsThoughtItDidntHaveDefenderSourceEffect(Duration.EndOfTurn));
+        this.addAbility(ability);
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public WallOfWonder(final WallOfWonder card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public WallOfWonder copy() {
+        return new WallOfWonder(this);
     }
 }

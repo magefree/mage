@@ -25,38 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.common.AttacksAllTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class Caltrops extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public Caltrops(UUID ownerId) {
+        super(ownerId, 129, "Caltrops", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "UDS";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // Whenever a creature attacks, Caltrops deals 1 damage to it.
+        Effect effect = new DamageTargetEffect(1);
+        effect.setText("{this} deals 1 damage to it");
+        this.addAbility(new AttacksAllTriggeredAbility(effect, false, new FilterCreaturePermanent(),
+            SetTargetPointer.PERMANENT, false));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public Caltrops(final Caltrops card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public Caltrops copy() {
+        return new Caltrops(this);
     }
 }

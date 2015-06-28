@@ -28,35 +28,41 @@
 package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class Squall extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public Squall(UUID ownerId) {
+        super(ownerId, 143, "Squall", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "S99";
+
+        // Squall deals 2 damage to each creature with flying.
+        this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
+    }
+
+    public Squall(final Squall card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public Squall copy() {
+        return new Squall(this);
     }
 }

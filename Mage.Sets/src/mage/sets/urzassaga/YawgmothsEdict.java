@@ -25,38 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.ObjectColor;
+import mage.abilities.Ability;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class YawgmothsEdict extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    private static final FilterSpell filter = new FilterSpell("a white spell");
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+
+    public YawgmothsEdict(UUID ownerId) {
+        super(ownerId, 170, "Yawgmoth's Edict", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "USG";
+
+        // Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
+        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1),
+            filter, false, SetTargetPointer.PLAYER);
+        Effect effect = new GainLifeEffect(1);
+        effect.setText("and you gain 1 life");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+    }
+
+    public YawgmothsEdict(final YawgmothsEdict card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public YawgmothsEdict copy() {
+        return new YawgmothsEdict(this);
     }
 }

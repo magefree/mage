@@ -25,38 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class Impatience extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public Impatience(UUID ownerId) {
+        super(ownerId, 197, "Impatience", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        this.expansionSetCode = "7ED";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to him or her.
+        Effect effect = new DamageTargetEffect(2);
+        effect.setText("{this} deals 2 damage to him or her.");
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY,
+            new ImpatienceCondition(), false));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public Impatience(final Impatience card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public Impatience copy() {
+        return new Impatience(this);
+    }
+}
+
+class ImpatienceCondition implements Condition {
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
+        return watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(game.getActivePlayerId()) == 0;
+    }
+
+    public String toString() {
+        return "if that player didn't cast a spell this turn";
     }
 }

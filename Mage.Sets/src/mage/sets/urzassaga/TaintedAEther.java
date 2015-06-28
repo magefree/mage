@@ -25,38 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.constants.SetTargetPointer;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class TaintedAEther extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or a land");
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+    static {
+        filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public TaintedAEther(UUID ownerId) {
+        super(ownerId, 161, "Tainted AEther", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+        this.expansionSetCode = "USG";
+
+        // Whenever a creature enters the battlefield, its controller sacrifices a creature or land.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, ""),
+            new FilterCreaturePermanent(), false, SetTargetPointer.PLAYER,
+            "Whenever a creature enters the battlefield, its controller sacrifices a creature or land"));
+    }
+
+    public TaintedAEther(final TaintedAEther card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public TaintedAEther copy() {
+        return new TaintedAEther(this);
     }
 }

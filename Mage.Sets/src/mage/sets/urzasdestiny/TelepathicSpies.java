@@ -25,38 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.LookAtTargetPlayerHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class TelepathicSpies extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public TelepathicSpies(UUID ownerId) {
+        super(ownerId, 47, "Telepathic Spies", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "UDS";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // When Telepathic Spies enters the battlefield, look at target opponent's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new LookAtTargetPlayerHandEffect(), false);
+        ability.addTarget(new TargetOpponent());
+        this.addAbility(ability);
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public TelepathicSpies(final TelepathicSpies card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public TelepathicSpies copy() {
+        return new TelepathicSpies(this);
     }
 }

@@ -25,38 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.common.GainLifeEffect;
+import mage.ObjectColor;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class NocturnalRaid extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
-
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creatures");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public NocturnalRaid(UUID ownerId) {
+        super(ownerId, 30, "Nocturnal Raid", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
+        this.expansionSetCode = "MIR";
+
+        // Black creatures get +2/+0 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
+    }
+
+    public NocturnalRaid(final NocturnalRaid card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public NocturnalRaid copy() {
+        return new NocturnalRaid(this);
     }
 }

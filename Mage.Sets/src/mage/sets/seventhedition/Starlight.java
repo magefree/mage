@@ -25,38 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.ObjectColor;
+import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class Starlight extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public Starlight(UUID ownerId) {
+        super(ownerId, 49, "Starlight", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{W}");
+        this.expansionSetCode = "7ED";
+
+        // You gain 3 life for each black creature target opponent controls.
+        this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsTargetOpponentControlsCount(filter, 3)));
+        this.getSpellAbility().addTarget(new TargetOpponent());
+    }
+
+    public Starlight(final Starlight card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public Starlight copy() {
+        return new Starlight(this);
     }
 }

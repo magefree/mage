@@ -25,38 +25,77 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.starter1999;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent.EventType;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class GerrardsWisdom extends CardImpl {
+public class Thoughtleech extends CardImpl {
 
-    public GerrardsWisdom(UUID ownerId) {
-        super(ownerId, 18, "Gerrard's Wisdom", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{W}{W}");
-        this.expansionSetCode = "S99";
+    public Thoughtleech(UUID ownerId) {
+        super(ownerId, 274, "Thoughtleech", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
+        this.expansionSetCode = "7ED";
 
-        // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
-            "You gain 2 life for each card in your hand"));
+        // Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
+        this.addAbility(new ThoughtleechTriggeredAbility());
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    public Thoughtleech(final Thoughtleech card) {
         super(card);
     }
 
     @Override
-    public GerrardsWisdom copy() {
-        return new GerrardsWisdom(this);
+    public Thoughtleech copy() {
+        return new Thoughtleech(this);
+    }
+}
+
+class ThoughtleechTriggeredAbility extends TriggeredAbilityImpl {
+
+    ThoughtleechTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+    }
+
+    ThoughtleechTriggeredAbility(final ThoughtleechTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ThoughtleechTriggeredAbility copy() {
+        return new ThoughtleechTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.TAPPED;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent p = game.getPermanent(event.getTargetId());
+        if(p != null && p.getSubtype().contains("Island")) {
+            if(game.getOpponents(this.controllerId).contains(p.getControllerId()))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever an Island an opponent controls becomes tapped, " + modes.getText();
     }
 }
