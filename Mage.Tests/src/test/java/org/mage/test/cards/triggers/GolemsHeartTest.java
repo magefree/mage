@@ -25,74 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.scarsofmirrodin;
+package org.mage.test.cards.triggers;
 
-import java.util.UUID;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.stack.Spell;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GolemsHeart extends CardImpl {
+public class GolemsHeartTest extends CardTestPlayerBase {
 
-    public GolemsHeart(UUID ownerId) {
-        super(ownerId, 161, "Golem's Heart", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "SOM";
-
+    /*
+     My opponent and I were both playing artifact decks.
+     He had Golem's Heart out.
+     He wasn't gaining life when I or he was casting spells.
+     */
+    @Test
+    public void testFirstTriggeredAbility() {
         // Whenever a player casts an artifact spell, you may gain 1 life.
-        this.addAbility(new GolemsHeartAbility());
+        addCard(Zone.BATTLEFIELD, playerA, "Golem's Heart", 1);
+
+        addCard(Zone.HAND, playerA, "Expedition Map"); // {1}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        addCard(Zone.HAND, playerB, "Darksteel Axe"); // {1}
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Expedition Map");
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Darksteel Axe");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 22);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Expedition Map", 1);
+        assertPermanentCount(playerB, "Darksteel Axe", 1);
+
     }
-
-    public GolemsHeart(final GolemsHeart card) {
-        super(card);
-    }
-
-    @Override
-    public GolemsHeart copy() {
-        return new GolemsHeart(this);
-    }
-
-}
-
-class GolemsHeartAbility extends TriggeredAbilityImpl {
-
-    public GolemsHeartAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    public GolemsHeartAbility(final GolemsHeartAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GolemsHeartAbility copy() {
-        return new GolemsHeartAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.SPELL_CAST;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spell.getCardType().contains(CardType.ARTIFACT);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a player casts an artifact spell, you may gain 1 life.";
-    }
-
 }
