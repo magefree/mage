@@ -58,14 +58,16 @@ public class DustOfMoments extends CardImpl {
         super(ownerId, 5, "Dust of Moments", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "FUT";
 
-        // Choose one
-        // Remove two time counters from each permanent and each suspended card
+        // Choose one - Remove two time counters from each permanent and each suspended card
         final Counter counter = new Counter(CounterType.TIME.getName(), 2);
         this.getSpellAbility().addEffect(new AddRemoveAllTimeSuspentCountersEffect(counter, filter, true));
+
         // Or put two time counters on each permanent with a time counter on it and each suspended card
         Mode mode = new Mode();
         mode.getEffects().add(new AddRemoveAllTimeSuspentCountersEffect(counter, filter, false));
         this.getSpellAbility().getModes().addMode(mode);
+        this.getSpellAbility().getModes().setMaxModes(1);
+        this.getSpellAbility().getModes().setMinModes(1);
     }
 
     public DustOfMoments(final DustOfMoments card) {
