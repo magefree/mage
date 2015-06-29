@@ -1,9 +1,7 @@
 package mage.util;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 import mage.MageObject;
 import mage.Mana;
 import mage.ManaSymbol;
@@ -378,5 +376,47 @@ public class ManaUtil {
         } else {
             return unpaid.getText();
         }
+    }
+
+    /** Converts a collection of mana symbols into a single condensed string
+     *  e.g.
+     *  {1}{1}{1}{1}{1}{W} = {5}{W}
+     *  {2}{B}{2}{B}{2}{B} = {6}{B}{B}{B}
+     *  {1}{2}{R}{U}{1}{1} = {5}{R}{U}
+     *  {B}{G}{R}          = {B}{G}{R}
+     * */
+    public static String condenseManaCostString(String rawCost) {
+        int total = 0;
+        int index = 0;
+        // Split the string in to an array of numbers and colored mana symbols
+        String[] splitCost = rawCost.replace("{", "").replace("}", " ").split(" ");
+        // Sort alphabetically which will push1 the numbers to the front before the colored mana symbols
+        Arrays.sort(splitCost);
+        for (String c : splitCost) {
+            // If the string is a representation of a number
+            if(c.matches("\\d+")) {
+                total += Integer.parseInt(c);
+            } else {
+                // First non-number we see we can finish as they are sorted
+                break;
+            }
+            index++;
+        }
+        int splitCostLength = splitCost.length;
+        // No need to add {total} to the mana cost if total == 0
+        int shift = (total > 0) ? 1 : 0;
+        String [] finalCost = new String[shift + splitCostLength - index];
+        // Account for no colourless mana symbols seen
+        if(total > 0) {
+            finalCost[0] = String.valueOf(total);
+        }
+        System.arraycopy(splitCost, index, finalCost, shift, splitCostLength - index);
+        // Combine the cost back as a mana string
+        StringBuilder sb = new StringBuilder();
+        for(String s: finalCost) {
+            sb.append("{" + s + "}");
+        }
+        // Return the condensed string
+        return sb.toString();
     }
 }
