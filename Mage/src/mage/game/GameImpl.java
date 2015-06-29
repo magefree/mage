@@ -1401,6 +1401,9 @@ public abstract class GameImpl implements Game, Serializable {
         } else {
             TriggeredAbility newAbility = ability.copy();
             newAbility.newId();
+            for (Effect effect : newAbility.getEffects()) {
+                effect.getTargetPointer().init(this, newAbility);
+            }
             state.addTriggeredAbility(newAbility);
         }
     }
@@ -1409,7 +1412,9 @@ public abstract class GameImpl implements Game, Serializable {
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
-        newAbility.init(this);
+        // ability.init is called as the ability triggeres not now.
+        // If a FixedTarget pointer is already set from the effect setting up this delayed ability
+        // it has to be already initialized so it won't be overwitten as the ability triggers
         state.addDelayedTriggeredAbility(newAbility);
         return newAbility.getId();
     }
