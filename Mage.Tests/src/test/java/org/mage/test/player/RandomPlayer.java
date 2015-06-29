@@ -1,16 +1,16 @@
 /*
  *  Copyright 2012 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,21 +20,32 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package org.mage.test.player;
 
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
-import mage.abilities.*;
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -45,13 +56,10 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 
-import java.io.Serializable;
-import java.util.*;
-
 /**
  *
  * plays randomly
- * 
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class RandomPlayer extends ComputerPlayer {
@@ -85,12 +93,13 @@ public class RandomPlayer extends ComputerPlayer {
         return actionCount;
     }
 
-       @Override
+    @Override
     public boolean priority(Game game) {
         boolean didSomething = false;
         Ability ability = getAction(game);
-        if (!(ability instanceof PassAbility))                
+        if (!(ability instanceof PassAbility)) {
             didSomething = true;
+        }
 
         activateAbility((ActivatedAbility) ability, game);
 
@@ -135,7 +144,7 @@ public class RandomPlayer extends ComputerPlayer {
 //                }
 //            }
 //            else {
-                break;
+            break;
 //            }
         }
         return ability;
@@ -154,8 +163,7 @@ public class RandomPlayer extends ComputerPlayer {
             List<Ability> options = getPlayableOptions(source, game);
             if (options.isEmpty()) {
                 ability = source;
-            }
-            else {
+            } else {
                 if (options.size() == 1) {
                     ability = options.get(0);
                 } else {
@@ -197,9 +205,9 @@ public class RandomPlayer extends ComputerPlayer {
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
                 if (!game.getCombat().declareAttacker(attackersList.get(i).getId(), defenderId, playerId, game)) {
                     game.undo(playerId);
-                }                
+                }
             }
-        }            
+        }
         actionCount++;
     }
 
@@ -211,7 +219,7 @@ public class RandomPlayer extends ComputerPlayer {
         }
 
         List<Permanent> blockers = getAvailableBlockers(game);
-        for (Permanent blocker: blockers) {
+        for (Permanent blocker : blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
@@ -248,7 +256,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty()) {
             return false;
         }
@@ -317,7 +325,7 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
         }
@@ -379,12 +387,12 @@ public class RandomPlayer extends ComputerPlayer {
 
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        Iterator<Mode> it = modes.values().iterator();
+        Iterator<Mode> it = modes.getAvailableModes(source, game).iterator();
         Mode mode = it.next();
         if (modes.size() == 1) {
             return mode;
         }
-        int modeNum = rnd.nextInt(modes.values().size());
+        int modeNum = rnd.nextInt(modes.getAvailableModes(source, game).size());
         for (int i = 0; i < modeNum; i++) {
             mode = it.next();
         }
@@ -410,8 +418,7 @@ public class RandomPlayer extends ComputerPlayer {
             if (targets.size() == 1) {
                 targetId = targets.get(0);
                 amount = remainingDamage;
-            }
-            else {
+            } else {
                 targetId = targets.get(rnd.nextInt(targets.size()));
                 amount = rnd.nextInt(damage + 1);
             }
@@ -419,8 +426,7 @@ public class RandomPlayer extends ComputerPlayer {
             if (permanent != null) {
                 permanent.damage(amount, sourceId, game, false, true);
                 remainingDamage -= amount;
-            }
-            else {
+            } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
                     player.damage(amount, sourceId, game, false, true);

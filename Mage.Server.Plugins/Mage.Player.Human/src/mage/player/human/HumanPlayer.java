@@ -57,6 +57,7 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.AbilityType;
 import mage.constants.Constants;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
@@ -1139,7 +1140,7 @@ public class HumanPlayer extends PlayerImpl {
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<>();
-            for (Mode mode : modes.values()) {
+            for (Mode mode : modes.getAvailableModes(source, game)) {
                 if (!modes.getSelectedModes().contains(mode.getId()) // show only modes not already selected
                         && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
                     String modeText = mode.getEffects().getText(mode);
@@ -1150,13 +1151,22 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             if (modeMap.size() > 0) {
-                game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
-                waitForResponse(game);
-                if (response.getUUID() != null) {
-                    for (Mode mode : modes.values()) {
-                        if (mode.getId().equals(response.getUUID())) {
-                            return mode;
+                boolean done = false;
+                while (!done) {
+                    game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
+                    waitForResponse(game);
+                    if (response.getUUID() != null) {
+                        for (Mode mode : modes.getAvailableModes(source, game)) {
+                            if (mode.getId().equals(response.getUUID())) {
+                                return mode;
+                            }
                         }
+                    }
+                    if (!source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+                        done = true;
+                    }
+                    if (!isInGame()) {
+                        return null;
                     }
                 }
             }

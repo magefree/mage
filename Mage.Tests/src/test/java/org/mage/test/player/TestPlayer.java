@@ -510,7 +510,7 @@ public class TestPlayer implements Player {
         if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
             int selectedMode = Integer.parseInt(modesSet.get(0));
             int i = 1;
-            for (Mode mode : modes.values()) {
+            for (Mode mode : modes.getAvailableModes(source, game)) {
                 if (i == selectedMode) {
                     modesSet.remove(0);
                     return mode;

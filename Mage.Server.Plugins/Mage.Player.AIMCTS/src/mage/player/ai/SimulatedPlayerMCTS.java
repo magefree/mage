@@ -409,12 +409,12 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (this.isHuman()) {
-            Iterator<Mode> it = modes.values().iterator();
+            Iterator<Mode> it = modes.getAvailableModes(source, game).iterator();
             Mode mode = it.next();
             if (modes.size() == 1) {
                 return mode;
             }
-            int modeNum = rnd.nextInt(modes.values().size());
+            int modeNum = rnd.nextInt(modes.getAvailableModes(source, game).size());
             for (int i = 0; i < modeNum; i++) {
                 mode = it.next();
             }
