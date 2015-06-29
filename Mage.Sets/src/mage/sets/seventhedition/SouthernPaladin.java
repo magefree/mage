@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class SouthernPaladin extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red");
+    private static final FilterPermanent filter = new FilterPermanent("red permanent");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));
