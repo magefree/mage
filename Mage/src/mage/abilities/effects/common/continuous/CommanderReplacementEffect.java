@@ -132,7 +132,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             Permanent permanent = ((ZoneChangeEvent)event).getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)){
                     boolean result = permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                     if (!game.isSimulation())
                         game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");
@@ -152,7 +152,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             }           
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){                    
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", source, game)){                    
                     boolean result = card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                     if (!game.isSimulation())
                         game.informPlayers(player.getLogName() + " has moved his or her commander to the command zone");

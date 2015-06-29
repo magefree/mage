@@ -109,7 +109,7 @@ class ShowAndTellEffect extends OneShotEffect {
         for(UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", game)) {
+                if (player.chooseUse(outcome, "Put an artifact, creature, enchantment, or land card from hand onto the battlefield?", source, game)) {
                     target.clearChosen();
                     if (player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());

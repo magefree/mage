@@ -354,7 +354,7 @@ public class Spell extends StackObjImpl implements Card {
     
     @Override
     public String getLogName() {
-        return GameLog.getColoredObjectName(card);
+        return GameLog.getColoredObjectIdName(card);
     }
 
     @Override

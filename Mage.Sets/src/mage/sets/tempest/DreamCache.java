@@ -87,7 +87,7 @@ class DreamCacheEffect extends OneShotEffect {
         if (player != null) {
             player.drawCards(3, game);
             
-            boolean putOnTop = player.chooseUse(Outcome.Neutral, "Put cards on top?", game);
+            boolean putOnTop = player.chooseUse(Outcome.Neutral, "Put cards on top?", source, game);
             putInLibrary(player, source, game, putOnTop);
             putInLibrary(player, source, game, putOnTop);
             

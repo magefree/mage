@@ -100,7 +100,7 @@ class PrimalSurgeEffect extends OneShotEffect {
                     if ((cardType.contains(CardType.ARTIFACT) || cardType.contains(CardType.CREATURE)
                             || cardType.contains(CardType.ENCHANTMENT) || cardType.contains(CardType.LAND)
                             || cardType.contains(CardType.PLANESWALKER))
-                            && player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", game)) {
+                            && player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " onto the battlefield?", source, game)) {
                         card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
 
                         Permanent permanent = game.getPermanent(card.getId());

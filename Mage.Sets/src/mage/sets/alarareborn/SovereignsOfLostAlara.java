@@ -139,7 +139,7 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect {
             FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
             filter.add(new SubtypePredicate("Aura"));
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
-            if (you.chooseUse(Outcome.Benefit, "Do you want to search your library?", game)) {
+            if (you.chooseUse(Outcome.Benefit, "Do you want to search your library?", source, game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 target.setNotTarget(true);
                 if (you.searchLibrary(target, game)) {

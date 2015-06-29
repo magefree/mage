@@ -98,7 +98,7 @@ class DredgeEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.getLibrary().size() >= amount 
                 && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getLogName()).
-                append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
+                append("? (").append(amount).append(" cards go from top of library to graveyard)").toString(), source, game)) {
             if (!game.isSimulation()) {
                 game.informPlayers(new StringBuilder(player.getLogName()).append(" dreges ").append(sourceCard.getLogName()).toString());
             }

@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.keyword;
 
 import java.util.Iterator;
@@ -54,7 +53,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
 public class ReplicateAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
     private static final String keywordText = "Replicate";
@@ -62,21 +60,21 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
     protected OptionalAdditionalCost additionalCost;
 
     public ReplicateAbility(Card card, String manaString) {
-       super(Zone.STACK, null);
-       this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
-       this.additionalCost.setRepeatable(true);
-       setRuleAtTheTop(true);
-       addSubAbility(new ReplicateTriggeredAbility());
+        super(Zone.STACK, null);
+        this.additionalCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
+        this.additionalCost.setRepeatable(true);
+        setRuleAtTheTop(true);
+        addSubAbility(new ReplicateTriggeredAbility());
     }
 
     public ReplicateAbility(final ReplicateAbility ability) {
-       super(ability);
-       additionalCost = ability.additionalCost;
+        super(ability);
+        additionalCost = ability.additionalCost;
     }
 
     @Override
     public ReplicateAbility copy() {
-       return new ReplicateAbility(this);
+        return new ReplicateAbility(this);
     }
 
     @Override
@@ -119,10 +117,10 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
                     String times = "";
                     if (additionalCost.isRepeatable()) {
                         int numActivations = additionalCost.getActivateCount();
-                        times = Integer.toString(numActivations + 1) + (numActivations == 0 ? " time ":" times ");
+                        times = Integer.toString(numActivations + 1) + (numActivations == 0 ? " time " : " times ");
                     }
-                    if (additionalCost.canPay(ability, sourceId, controllerId, game) &&
-                            player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), game)) {
+                    if (additionalCost.canPay(ability, sourceId, controllerId, game)
+                            && player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(additionalCost.getText(false)).append(" ?").toString(), ability, game)) {
                         additionalCost.activate();
                         for (Iterator it = ((Costs) additionalCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -139,7 +137,6 @@ public class ReplicateAbility extends StaticAbility implements OptionalAdditiona
             }
         }
     }
-
 
     @Override
     public String getRule() {
@@ -179,6 +176,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
     private ReplicateTriggeredAbility(final ReplicateTriggeredAbility ability) {
         super(ability);
     }
+
     @Override
     public ReplicateTriggeredAbility copy() {
         return new ReplicateTriggeredAbility(this);
@@ -196,7 +194,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
             if (spell instanceof Spell) {
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability : card.getAbilities()) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 for (Effect effect : this.getEffects()) {
@@ -215,7 +213,7 @@ class ReplicateTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Replicate <i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>" ;
+        return "Replicate <i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
     }
 }
 
@@ -239,7 +237,7 @@ class ReplicateCopyEffect extends OneShotEffect {
                 // reset replicate now so the copies don't report x times Replicate
                 Card card = game.getCard(spell.getSourceId());
                 if (card != null) {
-                    for (Ability ability: card.getAbilities()) {
+                    for (Ability ability : card.getAbilities()) {
                         if (ability instanceof ReplicateAbility) {
                             if (((ReplicateAbility) ability).isActivated()) {
                                 ((ReplicateAbility) ability).resetReplicate();
@@ -254,8 +252,9 @@ class ReplicateCopyEffect extends OneShotEffect {
                     copy.setCopiedSpell(true);
                     game.getStack().push(copy);
                     copy.chooseNewTargets(game, source.getControllerId());
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(new StringBuilder(controller.getLogName()).append(copy.getActivatedMessage(game)).toString());
+                    }
                 }
                 return true;
             }

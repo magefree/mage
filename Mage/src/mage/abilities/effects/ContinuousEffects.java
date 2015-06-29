@@ -628,7 +628,7 @@ public class ContinuousEffects implements Serializable {
 
         if (spliceAbilities.size() > 0) {
             Player controller = game.getPlayer(abilityToModify.getControllerId());
-            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", game)) {
+            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", abilityToModify, game)) {
                 Cards cardsToReveal = new CardsImpl();
                 do {
                     FilterCard filter = new FilterCard("a card to splice");
@@ -655,7 +655,7 @@ public class ContinuousEffects implements Serializable {
                             spliceAbilities.remove(selectedAbility);
                         }
                     }
-                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", game));
+                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
                 controller.revealCards("Spliced cards", cardsToReveal, game);
             }
         }

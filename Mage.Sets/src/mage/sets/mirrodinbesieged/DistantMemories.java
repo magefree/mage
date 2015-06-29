@@ -103,7 +103,7 @@ class DistantMemoriesEffect extends OneShotEffect {
                 Set<UUID> opponents = game.getOpponents(source.getControllerId());
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
-                    if (opponent != null && !putInHand && opponent.chooseUse(Outcome.Neutral, sb.toString(), game)) {
+                    if (opponent != null && !putInHand && opponent.chooseUse(Outcome.Neutral, sb.toString(), source, game)) {
                         putInHand = true;
                     }
                 }

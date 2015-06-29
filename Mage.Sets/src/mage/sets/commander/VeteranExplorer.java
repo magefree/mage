@@ -114,7 +114,7 @@ class VeteranExplorerEffect extends OneShotEffect {
     }
 
     private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, Ability source, Game game) {
-        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", game)) {
+        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up to two basic land cards and put them onto the battlefield?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
             if (player.searchLibrary(target, game)) {

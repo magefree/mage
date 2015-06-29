@@ -97,7 +97,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         Player player = game.getPlayer(event.getPlayerId());
         if (player != null) {
             FilterCard filter = new FilterCard();
-            if (player.chooseUse(Outcome.Benefit, "Choose land? (No = nonland)", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Choose land? (No = nonland)", source, game)) {
                 filter.add(new CardTypePredicate(CardType.LAND));
             }
             else {
@@ -128,7 +128,7 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         if (event.getPlayerId().equals(source.getControllerId())) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                return player.chooseUse(Outcome.Benefit, "Choose land or nonland?", game);
+                return player.chooseUse(Outcome.Benefit, "Choose land or nonland?", source, game);
             }
         }
         return false;

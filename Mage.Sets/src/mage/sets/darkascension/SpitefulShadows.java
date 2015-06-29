@@ -58,12 +58,12 @@ public class SpitefulShadows extends CardImpl {
         this.expansionSetCode = "DKA";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+
         // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
         this.addAbility(new SpitefulShadowsTriggeredAbility());
     }
@@ -135,16 +135,16 @@ class SpitefulShadowsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Integer damageAmount = (Integer) this.getValue("damageAmount");
-        UUID targetId = this.targetPointer.getFirst(game, source);
-        if (damageAmount != null && targetId != null) {
-            Permanent permanent = game.getPermanent(targetId);
+        if (damageAmount != null) {
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+                FixedTarget fixedTarget = (FixedTarget) getTargetPointer();
+                permanent = (Permanent) game.getLastKnownInformation(fixedTarget.getTarget(), Zone.BATTLEFIELD, fixedTarget.getZoneChangeCounter());
             }
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getControllerId());
                 if (player != null) {
-                    player.damage(damageAmount, targetId, game, false, true);
+                    player.damage(damageAmount, permanent.getId(), game, false, true);
                     return true;
                 }
             }

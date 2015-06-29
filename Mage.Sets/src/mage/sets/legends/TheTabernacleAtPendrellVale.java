@@ -89,7 +89,7 @@ class DestroySourceUnlessPaysEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) { 
-            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText()  + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText()  + "?", source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

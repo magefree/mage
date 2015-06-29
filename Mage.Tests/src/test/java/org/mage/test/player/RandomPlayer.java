@@ -346,7 +346,7 @@ public class RandomPlayer extends ComputerPlayer {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
         return rnd.nextBoolean();
     }
 

@@ -89,7 +89,7 @@ class AdNauseamEffect extends OneShotEffect {
         if (controller == null || sourceCard == null) {
             return false;
         }
-        while (controller.chooseUse(outcome, message, game) && controller.getLibrary().size() > 0) {
+        while (controller.chooseUse(outcome, message, source, game) && controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 controller.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);

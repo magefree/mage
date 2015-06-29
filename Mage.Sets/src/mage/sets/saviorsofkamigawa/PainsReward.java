@@ -94,7 +94,7 @@ class PainsRewardEffect extends OneShotEffect {
             Player currentPlayer = playerList.getNextInRange(controller, game);
             while (currentPlayer != winner) {
                 String text = winner.getLogName() + " has bet " + highBid + " life" + (highBid > 1 ? "s" : "") + ". Top the bid?";
-                if (currentPlayer.chooseUse(Outcome.Detriment, text, game)) {
+                if (currentPlayer.chooseUse(Outcome.Detriment, text, source, game)) {
                     int newBid = currentPlayer.getAmount(highBid + 1, Integer.MAX_VALUE, "Choose amount of life to bid", game);
                     if (newBid > highBid) {
                         highBid = newBid;

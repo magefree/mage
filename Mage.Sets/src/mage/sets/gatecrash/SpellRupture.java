@@ -99,7 +99,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect {
                 int amount = new greatestPowerCountCreatureYouControl().calculate(game, source, this);
                 GenericManaCost cost = new GenericManaCost(amount);
                 StringBuilder sb = new StringBuilder("Pay {").append(amount).append("}? (otherwise ").append(spell.getName()).append(" will be countered)");
-                if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+                if (player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                     cost.pay(source, game, source.getSourceId(), player.getId(), false);
                 }
                 if (!cost.isPaid()) {

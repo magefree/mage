@@ -67,7 +67,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     protected List<AlternativeCost2> alternativeSourceCosts = new LinkedList<>();
 
     // needed to check activation status, if card changes zone after casting it
-    private   int zoneChangeCounter = 0;
+    private int zoneChangeCounter = 0;
 
     public DashAbility(Card card, String manaString) {
         super(Zone.ALL, null);
@@ -75,7 +75,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         this.addDashCost(manaString);
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
-                DashedCondition.getInstance(), false, "","");
+                DashedCondition.getInstance(), false, "", "");
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("return the dashed creature from the battlefield to its owner's hand");
         effect.setTargetPointer(new FixedTarget(card.getId()));
@@ -85,24 +85,24 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     }
 
     public DashAbility(final DashAbility ability) {
-       super(ability);
-       this.alternativeSourceCosts.addAll(ability.alternativeSourceCosts);
-       this.zoneChangeCounter = ability.zoneChangeCounter;
+        super(ability);
+        this.alternativeSourceCosts.addAll(ability.alternativeSourceCosts);
+        this.zoneChangeCounter = ability.zoneChangeCounter;
     }
 
     @Override
     public DashAbility copy() {
-       return new DashAbility(this);
+        return new DashAbility(this);
     }
 
     public final AlternativeCost2 addDashCost(String manaString) {
-       AlternativeCost2 evokeCost = new AlternativeCost2Impl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
-       alternativeSourceCosts.add(evokeCost);
-       return evokeCost;
+        AlternativeCost2 evokeCost = new AlternativeCost2Impl(KEYWORD, REMINDER_TEXT, new ManaCostsImpl(manaString));
+        alternativeSourceCosts.add(evokeCost);
+        return evokeCost;
     }
 
     public void resetDash() {
-        for (AlternativeCost2 cost: alternativeSourceCosts) {
+        for (AlternativeCost2 cost : alternativeSourceCosts) {
             cost.reset();
         }
         zoneChangeCounter = 0;
@@ -111,9 +111,9 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public boolean isActivated(Ability ability, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter +1) {
-            for (AlternativeCost2 cost: alternativeSourceCosts) {
-                if(cost.isActivated(game)) {
+        if (card != null && card.getZoneChangeCounter(game) <= zoneChangeCounter + 1) {
+            for (AlternativeCost2 cost : alternativeSourceCosts) {
+                if (cost.isActivated(game)) {
                     return true;
                 }
             }
@@ -132,9 +132,9 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetDash();
-                for (AlternativeCost2 dashCost: alternativeSourceCosts) {
-                    if (dashCost.canPay(ability, sourceId, controllerId, game) &&
-                        player.chooseUse(Outcome.Benefit, new StringBuilder(KEYWORD).append(" the creature for ").append(dashCost.getText(true)).append(" ?").toString(), game)) {
+                for (AlternativeCost2 dashCost : alternativeSourceCosts) {
+                    if (dashCost.canPay(ability, sourceId, controllerId, game)
+                            && player.chooseUse(Outcome.Benefit, new StringBuilder(KEYWORD).append(" the creature for ").append(dashCost.getText(true)).append(" ?").toString(), ability, game)) {
                         activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
@@ -168,23 +168,23 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
 
     @Override
     public String getRule() {
-       StringBuilder sb = new StringBuilder();
-       int numberCosts = 0;
-       String remarkText = "";
-       for (AlternativeCost2 dashCost: alternativeSourceCosts) {
-           if (numberCosts == 0) {
-               sb.append(dashCost.getText(false));
-               remarkText = dashCost.getReminderText();
-           } else {
-               sb.append(" and/or ").append(dashCost.getText(true));
-           }
-           ++numberCosts;
-       }
-       if (numberCosts == 1) {
+        StringBuilder sb = new StringBuilder();
+        int numberCosts = 0;
+        String remarkText = "";
+        for (AlternativeCost2 dashCost : alternativeSourceCosts) {
+            if (numberCosts == 0) {
+                sb.append(dashCost.getText(false));
+                remarkText = dashCost.getReminderText();
+            } else {
+                sb.append(" and/or ").append(dashCost.getText(true));
+            }
+            ++numberCosts;
+        }
+        if (numberCosts == 1) {
             sb.append(" ").append(remarkText);
-       }
+        }
 
-       return sb.toString();
+        return sb.toString();
     }
 
     @Override
@@ -203,7 +203,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
     @Override
     public Costs<Cost> getCosts() {
         Costs<Cost> alterCosts = new CostsImpl<>();
-        for (AlternativeCost2 aCost: alternativeSourceCosts) {
+        for (AlternativeCost2 aCost : alternativeSourceCosts) {
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;

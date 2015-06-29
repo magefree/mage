@@ -133,7 +133,7 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl {
         Player player = game.getPlayer(source.getControllerId());
 
         String message = "Should the target creature get -X/-X instead of +X/+X?";
-        if (player != null && player.chooseUse(Outcome.Neutral, message, game)) {
+        if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
             this.amount *= -1;
         }
     }

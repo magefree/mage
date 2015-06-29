@@ -105,7 +105,7 @@ class TemurSabertoothEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetPermanent(1,1, filter, true);
             if (target.canChoose(source.getSourceId(), controller.getId(), game)) {
-                if (controller.chooseUse(outcome, "Return another creature to hand?", game) &&
+                if (controller.chooseUse(outcome, "Return another creature to hand?", source, game) &&
                         controller.chooseTarget(outcome, target, source, game)) {
                     Permanent toHand = game.getPermanent(target.getFirstTarget());
                     if (toHand != null) {

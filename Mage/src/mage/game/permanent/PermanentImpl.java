@@ -1300,7 +1300,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 return GameLog.getNeutralColoredText("a creature without name");
             }
         }
-        return GameLog.getColoredObjectName(this);
+        return GameLog.getColoredObjectIdName(this);
     }
 
     @Override

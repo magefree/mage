@@ -91,7 +91,7 @@ public class DoUnlessAnyPlayerPaysEffect extends OneShotEffect {
             // check if any player is willing to pay
             for (UUID playerId: controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
-                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, game)) {
+                if (player != null && cost.canPay(source, source.getSourceId(), player.getId(), game) && player.chooseUse(Outcome.Detriment, message, source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                         if (!game.isSimulation())

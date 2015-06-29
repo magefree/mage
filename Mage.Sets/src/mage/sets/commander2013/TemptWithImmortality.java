@@ -102,7 +102,7 @@ class TemptWithImmortalityEffect extends OneShotEffect {
                     Target targetOpponent = new TargetCardInGraveyard(filter);
 
                     if (targetOpponent.canChoose(source.getSourceId(), opponent.getId(), game)) {
-                        if (opponent.chooseUse(outcome, new StringBuilder("Return a creature card from your graveyard to the battlefield?").toString(), game)) {
+                        if (opponent.chooseUse(outcome, new StringBuilder("Return a creature card from your graveyard to the battlefield?").toString(), source, game)) {
                             if (opponent.chooseTarget(outcome, targetOpponent, source, game)) {
                                 Card card = game.getCard(targetOpponent.getFirstTarget());
                                 if (card != null) {

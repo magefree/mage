@@ -110,7 +110,7 @@ class DisruptionAuraEffect extends OneShotEffect {
             
             String message = CardUtil.replaceSourceName("Pay {this} mana cost ?", permanent.getLogName());
             Cost cost = permanent.getManaCost().copy();
-            if (player.chooseUse(Outcome.Benefit, message, game)) {
+            if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

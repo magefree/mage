@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -43,15 +43,14 @@ import mage.watchers.Watcher;
 
 /* 20130711
  *903.14a A player that’s been dealt 21 or more combat damage by the same commander
- * over the course of the game loses the game. (This is a state-based action. See rule 704.) 
+ * over the course of the game loses the game. (This is a state-based action. See rule 704.)
  *
  *
  * @author Plopman
  */
-
 public class CommanderInfoWatcher extends Watcher {
 
-    public Map<UUID, Integer> damageToPlayer = new HashMap<>();
+    public final Map<UUID, Integer> damageToPlayer = new HashMap<>();
     public boolean checkCommanderDamage;
 
     public CommanderInfoWatcher(UUID commander, boolean checkCommanderDamage) {
@@ -59,7 +58,6 @@ public class CommanderInfoWatcher extends Watcher {
         this.sourceId = commander;
         this.checkCommanderDamage = checkCommanderDamage;
     }
-    
 
     public CommanderInfoWatcher(final CommanderInfoWatcher watcher) {
         super(watcher);
@@ -76,20 +74,21 @@ public class CommanderInfoWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (checkCommanderDamage && event.getType() == EventType.DAMAGED_PLAYER && event instanceof DamagedPlayerEvent) {
             if (sourceId.equals(event.getSourceId())) {
-                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+                DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
                 if (damageEvent.isCombatDamage()) {
                     UUID playerUUID = event.getTargetId();
                     Integer damage = damageToPlayer.get(playerUUID);
-                    if(damage == null){
+                    if (damage == null) {
                         damage = 0;
                     }
                     damage += damageEvent.getAmount();
                     damageToPlayer.put(playerUUID, damage);
                     Player player = game.getPlayer(playerUUID);
                     MageObject commander = game.getObject(sourceId);
-                    if (player != null && commander != null){
-                        if (!game.isSimulation())
+                    if (player != null && commander != null) {
+                        if (!game.isSimulation()) {
                             game.informPlayers(commander.getLogName() + " did " + damage + " combat damage to " + player.getLogName() + " during the game.");
+                        }
                         this.addCardInfoToCommander(game);
                     }
                 }
@@ -109,18 +108,18 @@ public class CommanderInfoWatcher extends Watcher {
         if (object != null) {
             StringBuilder sb = new StringBuilder();
             sb.append("<b>Commander</b>");
-            Integer castCount = (Integer)game.getState().getValue(sourceId + "_castCount");
+            Integer castCount = (Integer) game.getState().getValue(sourceId + "_castCount");
             if (castCount != null) {
-                sb.append(" ").append(castCount).append(castCount == 1 ? " time":" times").append(" casted from the command zone.");
+                sb.append(" ").append(castCount).append(castCount == 1 ? " time" : " times").append(" casted from the command zone.");
             }
-            this.addInfo(object, "Commander",sb.toString(), game);
-            
+            this.addInfo(object, "Commander", sb.toString(), game);
+
             if (checkCommanderDamage) {
                 for (Map.Entry<UUID, Integer> entry : damageToPlayer.entrySet()) {
                     Player damagedPlayer = game.getPlayer(entry.getKey());
                     sb.setLength(0);
                     sb.append("<b>Commander</b> did ").append(entry.getValue()).append(" combat damage to player ").append(damagedPlayer.getLogName()).append(".");
-                    this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(),sb.toString(), game);
+                    this.addInfo(object, new StringBuilder("Commander").append(entry.getKey()).toString(), sb.toString(), game);
                 }
             }
         }
@@ -135,6 +134,6 @@ public class CommanderInfoWatcher extends Watcher {
 
     public Map<UUID, Integer> getDamageToPlayer() {
         return damageToPlayer;
-    }    
+    }
 
 }

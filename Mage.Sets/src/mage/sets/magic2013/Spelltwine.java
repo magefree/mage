@@ -111,7 +111,7 @@ class SpelltwineEffect extends OneShotEffect {
                 controller.moveCardToExileWithInfo(cardTwo, null, "", source.getSourceId(), game, Zone.GRAVEYARD, true);
             }
             boolean castCardOne = true;
-            if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", game)) {
+            if (cardOne != null && controller.chooseUse(Outcome.Neutral, "Cast the copy of " + cardOne.getName() + " first?", source, game)) {
                 Card copyOne = game.copyCard(cardOne, source, controller.getId());
                 controller.cast(copyOne.getSpellAbility(), game, true);
                 castCardOne = false;

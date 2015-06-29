@@ -208,7 +208,7 @@ class ChandraAblazeEffect5 extends OneShotEffect {
             String message = "Play red instant or sorcery card from your graveyard without paying its mana cost?";
             Set<Card> cards = player.getGraveyard().getCards(filter, game);
             TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-            while (!cards.isEmpty() && player.chooseUse(outcome, message, game)) {
+            while (!cards.isEmpty() && player.chooseUse(outcome, message, source, game)) {
                 target.clearChosen();
                 if (player.choose(outcome, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

@@ -110,7 +110,7 @@ class DescendantsPathEffect extends OneShotEffect {
                     }
                     if (found) {
                         game.informPlayers(sourceObject.getLogName() + ": Found a creature that shares a creature type with the revealed card.");
-                        if (controller.chooseUse(Outcome.Benefit, "Cast the card?", game)) {
+                        if (controller.chooseUse(Outcome.Benefit, "Cast the card?", source, game)) {
                             controller.cast(card.getSpellAbility(), game, true);
                         } else {
                             game.informPlayers(sourceObject.getLogName() + ": " + controller.getLogName() + " canceled casting the card.");

@@ -100,7 +100,7 @@ class VhatiIlDalEffect extends OneShotEffect {
         if (controller != null) {
             DynamicValue power = null;
             DynamicValue toughness = null;
-            if (controller.chooseUse(outcome, "Set power? (otherwise toughness is set)", game)) {
+            if (controller.chooseUse(outcome, "Set power? (otherwise toughness is set)", source, game)) {
                 power = new StaticValue(1);
             } else {
                 toughness = new StaticValue(1);

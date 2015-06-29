@@ -106,7 +106,7 @@ public class Commander implements CommandObject{
 
     @Override
     public String getLogName() {
-        return GameLog.getColoredObjectName(this);
+        return GameLog.getColoredObjectIdName(this);
     }
 
     @Override

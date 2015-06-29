@@ -141,7 +141,7 @@ class CurseOfChaosEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player attacker = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (attacker != null) {
-            if (attacker.getHand().size() > 0 && attacker.chooseUse(outcome, "Discard a card and draw a card?", game)){
+            if (attacker.getHand().size() > 0 && attacker.chooseUse(outcome, "Discard a card and draw a card?", source, game)){
                 attacker.discard(1, false, source, game);
                 attacker.drawCards(1, game);
             }

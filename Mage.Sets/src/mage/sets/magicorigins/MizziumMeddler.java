@@ -136,7 +136,7 @@ class MizziumMeddlerEffect extends OneShotEffect {
                             twoTimesTarget = true;
                             continue;
                         }
-                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), game)) {
+                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), source, game)) {
                             if (target.canTarget(stackObject.getControllerId(), source.getSourceId(), sourceAbility, game)) {
                                 oldTarget = game.getObject(targets.getFirstTarget());
                                 target.remove(targetId);

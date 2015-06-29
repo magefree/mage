@@ -141,7 +141,7 @@ class PhyrexianMarauderPayEffect extends ReplacementEffectImpl {
             }
             ManaCostsImpl<ManaCost> attackTax = new ManaCostsImpl<>("{" + xValue + "}");
             if (attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
+                    && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
                 if (attackTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                     return false;
                 }

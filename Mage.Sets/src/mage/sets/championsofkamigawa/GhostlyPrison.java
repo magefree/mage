@@ -103,7 +103,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl {
         if ( player != null && event.getTargetId().equals(source.getControllerId())) {
             ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
             if (attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
+                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", source, game) ) {
                 if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                     return false;
                 }

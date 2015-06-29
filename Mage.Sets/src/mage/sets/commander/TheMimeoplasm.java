@@ -100,7 +100,7 @@ class TheMimeoplasmEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
             if (new CardsInAllGraveyardsCount(new FilterCreatureCard()).calculate(game, source, this) >= 2) {
-                if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", game)) {                    
+                if (controller.chooseUse(Outcome.Benefit, "Do you want to exile two creature cards from graveyards?", source, game)) {                    
                     TargetCardInGraveyard targetCopy = new TargetCardInGraveyard(new FilterCreatureCard("creature card to become a copy of"));
                     TargetCardInGraveyard targetCounters = new TargetCardInGraveyard(new FilterCreatureCard("creature card to determine amount of additional +1/+1 counters"));
                     if (controller.choose(Outcome.Copy, targetCopy, source.getSourceId(), game)) {

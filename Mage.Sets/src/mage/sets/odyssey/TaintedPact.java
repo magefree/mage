@@ -100,7 +100,7 @@ class TaintedPactEffect extends OneShotEffect{
                     break;
                 }
                 names.add(card.getName());
-                if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("into your hand?").toString(), game)) {
+                if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("into your hand?").toString(), source, game)) {
                      //Adds the current card to hand if it is chosen.
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     break;

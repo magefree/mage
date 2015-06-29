@@ -172,7 +172,7 @@ class SwordOfLightAndShadowReturnToHandTargetEffect extends OneShotEffect {
             return false;
         }
         if (!source.getTargets().isEmpty() && targetPointer.getFirst(game, source) != null) {
-            if (controller.chooseUse(outcome, "Return creature card from graveyard to hand?", game)) {
+            if (controller.chooseUse(outcome, "Return creature card from graveyard to hand?", source, game)) {
                 for (UUID targetId : targetPointer.getTargets(game, source)) {
                     switch (game.getState().getZone(targetId)) {
                         case GRAVEYARD:

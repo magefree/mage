@@ -122,7 +122,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
             return false;
         }
 
-        while (player.isInGame() && player.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", game)) {
+        while (player.isInGame() && player.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
             if (player.choose(Outcome.Benefit, targetAura, source.getSourceId(), game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
@@ -137,7 +137,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         }
 
         int count = player.getHand().count(filterAuraCard, game);
-        while (player.isInGame() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", game)) {
+        while (player.isInGame() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.PICK, filterAuraCard);
             if (player.choose(Outcome.Benefit, player.getHand(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
@@ -151,7 +151,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         }
 
         count = player.getGraveyard().count(filterAuraCard, game);
-        while (player.isInGame() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", game)) {
+        while (player.isInGame() && count > 0 && player.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.PICK, filterAuraCard);
             if (player.choose(Outcome.Benefit, player.getGraveyard(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());

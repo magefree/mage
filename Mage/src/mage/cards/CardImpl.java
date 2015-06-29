@@ -753,7 +753,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (name.isEmpty()) {
             return GameLog.getNeutralColoredText("face down card");
         } else {
-            return GameLog.getColoredObjectName(this);
+            return GameLog.getColoredObjectIdName(this);
         }
     }
 

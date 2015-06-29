@@ -106,7 +106,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             Player player = game.getPlayer(equipped.getControllerId());
             if (player != null && equipped != null) {
-                if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? (Or " + equipped.getName() + " will be sacrificed.)", game)) {
+                if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "? (Or " + equipped.getName() + " will be sacrificed.)", source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), equipped.getControllerId(), false)) {
                         return true;

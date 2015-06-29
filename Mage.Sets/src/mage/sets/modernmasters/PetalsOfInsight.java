@@ -98,7 +98,7 @@ class PetalsOfInsightEffect extends OneShotEffect {
             }
         }
         player.lookAtCards("Petals of Insight", cards, game);
-        if (player.chooseUse(outcome, "Put the cards on the bottom of your library in any order?", game)) {
+        if (player.chooseUse(outcome, "Put the cards on the bottom of your library in any order?", source, game)) {
             player.putCardsOnBottomOfLibrary(cards, game, source, true);
             Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
             if (spellCard != null) {

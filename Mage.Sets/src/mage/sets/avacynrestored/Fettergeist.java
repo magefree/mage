@@ -105,7 +105,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
             if (count == 0) {
                 return true;
             }
-            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?", source, game)) {
                 GenericManaCost cost = new GenericManaCost(count);
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

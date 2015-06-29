@@ -67,7 +67,7 @@ public class PutLandFromHandOntoBattlefieldEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetCardInHand(new FilterLandCard("land card"));
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game) &&
-                    controller.chooseUse(outcome, "Put land onto battlefield?", game) &&
+                    controller.chooseUse(outcome, "Put land onto battlefield?", source, game) &&
                     controller.choose(outcome, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

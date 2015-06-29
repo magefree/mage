@@ -102,7 +102,7 @@ class ResearchEffect extends OneShotEffect {
             StringBuilder textToAsk = new StringBuilder(choiceText);
             textToAsk.append(" (0)");
             int count = 0;
-            while (player.chooseUse(Outcome.Benefit, textToAsk.toString(), game)) {
+            while (player.chooseUse(Outcome.Benefit, textToAsk.toString(), source, game)) {
                 Cards cards = player.getSideboard();
                 if(cards.isEmpty()) {
                     game.informPlayer(player, "You have no cards outside the game.");
@@ -172,7 +172,7 @@ class DevelopmentEffect extends OneShotEffect {
                 for (UUID opponentUuid : opponents) {
                     Player opponent = game.getPlayer(opponentUuid);
                     if (opponent != null && opponent.chooseUse(Outcome.Detriment, 
-                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ")", game)) {
+                            "Allow " + player.getLogName() + " to draw a card instead? (" + Integer.toString(i+1) + ")", source, game)) {
                         game.informPlayers(opponent.getLogName() + " had chosen to let " + player.getLogName() + " draw a card.");
                         player.drawCards(1, game);
                         putToken = false;

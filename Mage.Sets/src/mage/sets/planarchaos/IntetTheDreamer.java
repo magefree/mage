@@ -148,7 +148,7 @@ class IntetTheDreamerEffect extends AsThoughEffectImpl {
             if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                 if (zone != null && zone.contains(card.getId())) {
-                    if (controller.chooseUse(outcome, "Look at the card?", game)) {
+                    if (controller.chooseUse(outcome, "Look at the card?", source, game)) {
                         Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards(sourceObject.getName(), cards, game);

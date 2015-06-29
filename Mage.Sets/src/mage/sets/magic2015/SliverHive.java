@@ -33,10 +33,10 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ControlPermanentCost;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
@@ -56,8 +56,9 @@ import mage.game.permanent.token.Token;
  * @author emerald000
  */
 public class SliverHive extends CardImpl {
-    
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Sliver");
+
     static {
         filter.add(new SubtypePredicate("Sliver"));
     }
@@ -68,14 +69,15 @@ public class SliverHive extends CardImpl {
 
         // {T}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
-        
+
         // {T}: Add one mana of any color to your mana pool. Spend this mana only to cast a Sliver spell.
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new SliverHiveManaBuilder(), true));
-        
+
         // {5}, {T}: Put a 1/1 colorless Sliver creature token onto the battlefield. Activate this ability only if you control a Sliver.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new TapSourceCost());
+        Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new TapSourceCost(),
+                new PermanentsOnTheBattlefieldCondition(filter),
+                "{5}, {T}: Put a 1/1 colorless Sliver creature token onto the battlefield. Activate this ability only if you control a Sliver.");
         ability.addCost(new GenericManaCost(5));
-        ability.addCost(new ControlPermanentCost(filter));
         this.addAbility(ability);
     }
 

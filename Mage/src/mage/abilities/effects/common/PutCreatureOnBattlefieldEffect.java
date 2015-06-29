@@ -34,7 +34,7 @@ public class PutCreatureOnBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
             return false;
         }
 

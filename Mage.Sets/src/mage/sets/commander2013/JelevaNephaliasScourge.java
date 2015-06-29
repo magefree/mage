@@ -152,7 +152,7 @@ class JelevaNephaliasCastEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(outcome, "Cast an instant or sorcery from exile?", game)) {
+            if (controller.chooseUse(outcome, "Cast an instant or sorcery from exile?", source, game)) {
                 TargetCardInExile target = new TargetCardInExile(new FilterInstantOrSorceryCard(), CardUtil.getCardExileZoneId(game, source));
                 if (controller.choose(Outcome.PlayForFree, game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source)), target, game)) {
                     Card card = game.getCard(target.getFirstTarget());

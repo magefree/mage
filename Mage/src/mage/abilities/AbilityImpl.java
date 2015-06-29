@@ -346,7 +346,7 @@ public abstract class AbilityImpl implements Ability {
         for (Cost cost : optionalCosts) {
             if (cost instanceof ManaCost) {
                 cost.clearPaid();
-                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
+                if (controller.chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", this, game)) {
                     manaCostsToPay.add((ManaCost) cost);
                 }
             }
@@ -576,7 +576,7 @@ public abstract class AbilityImpl implements Ability {
     protected boolean useAlternativeCost(Game game) {
         for (AlternativeCost cost : alternativeCosts) {
             if (cost.isAvailable(game, this)) {
-                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game)) {
+                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), this, game)) {
                     return cost.pay(this, game, sourceId, controllerId, false);
                 }
             }
@@ -1013,9 +1013,9 @@ public abstract class AbilityImpl implements Ability {
             if (object instanceof StackAbility) {
                 Card card = game.getCard(((StackAbility) object).getSourceId());
                 if (card != null) {
-                    sb.append(GameLog.getColoredObjectName(card));
+                    sb.append(GameLog.getColoredObjectIdName(card));
                 } else {
-                    sb.append(GameLog.getColoredObjectName(object));
+                    sb.append(GameLog.getColoredObjectIdName(object));
                 }
             } else {
                 if (object instanceof Spell) {
@@ -1027,7 +1027,7 @@ public abstract class AbilityImpl implements Ability {
                     }
                     sb.append(getOptionalTextSuffix(game, spell));
                 } else {
-                    sb.append(GameLog.getColoredObjectName(object));
+                    sb.append(GameLog.getColoredObjectIdName(object));
                 }
             }
         } else {

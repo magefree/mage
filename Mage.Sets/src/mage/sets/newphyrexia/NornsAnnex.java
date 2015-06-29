@@ -103,7 +103,7 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
         if (player != null) {
             ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
             if (propagandaTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Benefit, "Pay to declare attacker?", game)) {
+                    && player.chooseUse(Outcome.Benefit, "Pay to declare attacker?", source, game)) {
                 if (propagandaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                     return false;
                 }

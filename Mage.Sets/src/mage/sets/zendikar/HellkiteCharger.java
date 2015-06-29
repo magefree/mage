@@ -97,7 +97,7 @@ class HellkiteChargerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             ManaCosts cost = new ManaCostsImpl("{5}{R}{R}");
-            if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "?", game)) {
+            if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "?", source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     new UntapAllControllerEffect(new FilterAttackingCreature(),"").apply(game, source);

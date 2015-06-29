@@ -27,8 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
@@ -38,6 +36,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -142,7 +142,7 @@ public class LookLibraryControllerEffect extends OneShotEffect {
 
         player.setTopCardRevealed(topCardRevealed);
 
-        this.mayShuffle(player, game);
+        this.mayShuffle(player, source, game);
 
         return true;
     }
@@ -162,19 +162,19 @@ public class LookLibraryControllerEffect extends OneShotEffect {
      * @param game
      */
     protected void putCardsBack(Ability source, Player player, Cards cards, Game game) {
-        switch(targetZoneLookedCards) {
-            case LIBRARY: 
+        switch (targetZoneLookedCards) {
+            case LIBRARY:
                 if (putOnTop) {
                     player.putCardsOnTopOfLibrary(cards, game, source, true);
                 } else {
                     player.putCardsOnBottomOfLibrary(cards, game, source, true);
                 }
                 break;
-            case GRAVEYARD: 
+            case GRAVEYARD:
                 player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                 break;
             default:
-                // not supported yet
+            // not supported yet
         }
     }
 
@@ -184,8 +184,8 @@ public class LookLibraryControllerEffect extends OneShotEffect {
      * @param player
      * @param game
      */
-    protected void mayShuffle(Player player, Game game) {
-        if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle your library?", game)) {
+    protected void mayShuffle(Player player, Ability source, Game game) {
+        if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle your library?", source, game)) {
             player.shuffleLibrary(game);
         }
     }
@@ -225,7 +225,6 @@ public class LookLibraryControllerEffect extends OneShotEffect {
         if (numberLook == 0) {
             sb.append(", where {X} is the number of cards ").append(numberOfCards.getMessage());
         }
-
 
         if (!middleText.isEmpty()) {
             sb.append(middleText);
