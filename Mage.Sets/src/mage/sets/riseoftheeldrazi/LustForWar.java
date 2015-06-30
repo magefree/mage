@@ -31,11 +31,11 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,6 @@ public class LustForWar extends CardImpl {
         this.expansionSetCode = "ROE";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -66,7 +65,8 @@ public class LustForWar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA)));
 
         // Enchanted creature attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
     public LustForWar(final LustForWar card) {

@@ -25,21 +25,24 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -49,22 +52,30 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UncontrollableAnger extends CardImpl {
 
-    public UncontrollableAnger (UUID ownerId) {
+    public UncontrollableAnger(UUID ownerId) {
         super(ownerId, 195, "Uncontrollable Anger", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
 
+        // Flash (You may cast this spell any time you could cast an instant.)
+        this.addAbility(FlashAbility.getInstance());
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(FlashAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA)));
+
+        // Enchanted creature gets +2/+2 and attacks each turn if able.
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect.setText("and attacks each turn if able");
+        ability.addEffect(effect);
+        this.addAbility(ability);
     }
 
-    public UncontrollableAnger (final UncontrollableAnger card) {
+    public UncontrollableAnger(final UncontrollableAnger card) {
         super(card);
     }
 
