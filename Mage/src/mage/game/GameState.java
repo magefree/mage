@@ -77,12 +77,12 @@ import mage.watchers.Watchers;
  *
  * @author BetaSteward_at_googlemail.com
  *
-* since at any time the game state may be copied and restored you cannot rely
+ * since at any time the game state may be copied and restored you cannot rely
  * on any object maintaining it's instance it then becomes necessary to only
  * refer to objects by their ids since these will always remain constant
  * throughout its lifetime
  *
-*/
+ */
 public class GameState implements Serializable, Copyable<GameState> {
 
     private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
@@ -643,7 +643,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void handleSimultaneousEvent(Game game) {
-        if (!simultaneousEvents.isEmpty()) {
+        if (!simultaneousEvents.isEmpty() && !getTurn().isEndTurnRequested()) {
             // it can happen, that the events add new simultaneous events, so copy the list before
             List<GameEvent> eventsToHandle = new ArrayList<>();
             eventsToHandle.addAll(simultaneousEvents);

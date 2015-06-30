@@ -30,7 +30,7 @@ package mage.sets.futuresight;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackAllAnyPlayerEffect;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -62,7 +62,7 @@ public class MagusOfTheMoat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures without flying can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllAnyPlayerEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public MagusOfTheMoat(final MagusOfTheMoat card) {

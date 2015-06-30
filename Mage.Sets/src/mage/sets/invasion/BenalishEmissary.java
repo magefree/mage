@@ -25,58 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public class BenalishEmissary extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
+    public BenalishEmissary(UUID ownerId) {
+        super(ownerId, 5, "Benalish Emissary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "INV";
         this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(4);
 
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        // Kicker {1}{G}
+        this.addAbility(new KickerAbility("{1}{G}"));
+        // When Benalish Emissary enters the battlefield, if it was kicked, destroy target land.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetLandPermanent());
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
+            "When {this} enters the battlefield, if it was kicked, destroy target land."));
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
+    public BenalishEmissary(final BenalishEmissary card) {
         super(card);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public BenalishEmissary copy() {
+        return new BenalishEmissary(this);
     }
 }

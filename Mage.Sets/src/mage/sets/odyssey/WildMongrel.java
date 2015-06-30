@@ -32,23 +32,15 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -67,7 +59,9 @@ public class WildMongrel extends CardImpl {
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("{this} gets +1/+1");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
-        ability.addEffect(new ChangeColorEffect());
+        effect = new BecomesColorSourceEffect(Duration.EndOfTurn);
+        effect.setText("and becomes the color of your choice until end of turn.");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
@@ -78,39 +72,5 @@ public class WildMongrel extends CardImpl {
     @Override
     public WildMongrel copy() {
         return new WildMongrel(this);
-    }
-}
-
-class ChangeColorEffect extends OneShotEffect {
-
-    public ChangeColorEffect() {
-        super(Outcome.Neutral);
-        staticText = "and becomes the color of your choice until end of turn";
-    }
-
-    public ChangeColorEffect(final ChangeColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent wildMongrel = game.getPermanent(source.getSourceId());
-        if (player != null && wildMongrel != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(wildMongrel.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect = new BecomesColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-                game.addEffect(effect, source);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ChangeColorEffect copy() {
-        return new ChangeColorEffect(this);
     }
 }

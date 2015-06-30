@@ -28,13 +28,12 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -47,14 +46,14 @@ import mage.target.TargetSpell;
 public class Flusterstorm extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
-    
+
     public Flusterstorm(UUID ownerId) {
         super(ownerId, 46, "Flusterstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "CMD";
-
 
         // Counter target instant or sorcery spell unless its controller pays {1}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")));

@@ -25,16 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -42,7 +41,7 @@ import mage.cards.CardImpl;
  */
 public class BattleMadRonin extends CardImpl {
 
-    public BattleMadRonin (UUID ownerId) {
+    public BattleMadRonin(UUID ownerId) {
         super(ownerId, 156, "Battle-Mad Ronin", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
@@ -50,11 +49,15 @@ public class BattleMadRonin extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
         this.addAbility(new BushidoAbility(2));
+
+        // Battle-Mad Ronin attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public BattleMadRonin (final BattleMadRonin card) {
+    public BattleMadRonin(final BattleMadRonin card) {
         super(card);
     }
 

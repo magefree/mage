@@ -25,48 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package org.mage.test.cards.triggers.dies;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class Moat extends CardImpl {
+public class GainedDiesTriggersTest extends CardTestPlayerBase {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+    /**
+     * Tests that gained dies triggers work as intended
+     */
+    @Test
+    public void testInfernalScarring() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 3);
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        // Enchant creature
+        // Enchanted creature gets +2/+0 and has "When this creature dies, draw a card."
+        addCard(Zone.HAND, playerA, "Infernal Scarring", 1);
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infernal Scarring", "Silvercoat Lion");
+
+        // Destroy all creatures.
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+        assertHandCount(playerA, 1); // draw a card for dying Lion
     }
 
-    public Moat(UUID ownerId) {
-        super(ownerId, 197, "Moat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "LEG";
-
-
-        // Creatures without flying can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
-    }
-
-    public Moat(final Moat card) {
-        super(card);
-    }
-
-    @Override
-    public Moat copy() {
-        return new Moat(this);
-    }
 }

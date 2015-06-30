@@ -25,51 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+package mage.abilities.effects.common.combat;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
+ * The creatures defined by filter can't attack any opponent
  *
  * @author LevelX2
  */
-public class Spiritmonger extends CardImpl {
+public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
 
-    public Spiritmonger(UUID ownerId) {
-        super(ownerId, 121, "Spiritmonger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Beast");
+    private final FilterCreaturePermanent filter;
 
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.
-        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), false, false, false));
-        // {B}: Regenerate Spiritmonger.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
-        // {G}: Spiritmonger becomes the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+    public CantAttackAnyPlayerAllEffect(Duration duration, FilterCreaturePermanent filter) {
+        super(duration);
+        this.filter = filter;
+        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ");
+            if (duration.equals(Duration.EndOfTurn)) {
+                sb.append(" this turn");
+            } else {
+                sb.append(" ").append(duration.toString());
+            }
+        }
+        staticText = sb.toString();        
     }
 
-    public Spiritmonger(final Spiritmonger card) {
-        super(card);
+    public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public Spiritmonger copy() {
-        return new Spiritmonger(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public CantAttackAnyPlayerAllEffect copy() {
+        return new CantAttackAnyPlayerAllEffect(this);
+    }
+
 }

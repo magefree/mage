@@ -25,58 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public class ObsidianAcolyte extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+      filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
 
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
+    public ObsidianAcolyte(UUID ownerId) {
+        super(ownerId, 22, "Obsidian Acolyte", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "INV";
         this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        // Protection from black
+        this.addAbility(new ProtectionAbility(filter));
+        // {W}: Target creature gains protection from black until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+            new GainAbilityTargetEffect(new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
+    public ObsidianAcolyte(final ObsidianAcolyte card) {
         super(card);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public ObsidianAcolyte copy() {
+        return new ObsidianAcolyte(this);
     }
 }

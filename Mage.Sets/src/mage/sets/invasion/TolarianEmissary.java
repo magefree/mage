@@ -25,58 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetEnchantmentPermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public class TolarianEmissary extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
-    }
-
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
+    public TolarianEmissary(UUID ownerId) {
+        super(ownerId, 81, "Tolarian Emissary", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
+        this.expansionSetCode = "INV";
         this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+        this.subtype.add("Wizard");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        // Kicker {1}{W}
+        this.addAbility(new KickerAbility("{1}{W}"));
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Tolarian Emissary enters the battlefield, if it was kicked, destroy target enchantment.
+        TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        ability.addTarget(new TargetEnchantmentPermanent());
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(),
+            "When {this} enters the battlefield, if it was kicked, destroy target enchantment."));
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
+    public TolarianEmissary(final TolarianEmissary card) {
         super(card);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public TolarianEmissary copy() {
+        return new TolarianEmissary(this);
     }
 }
