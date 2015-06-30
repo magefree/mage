@@ -34,21 +34,21 @@ import mage.constants.Rarity;
  *
  * @author North
  */
-public class Thallid extends mage.sets.timeshifted.Thallid {
+public class Thallid4 extends mage.sets.timeshifted.Thallid {
 
-    public Thallid(UUID ownerId) {
+    public Thallid4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 87;
+        this.cardNumber = 90;
         this.expansionSetCode = "FEM";
         this.rarity = Rarity.COMMON;
     }
 
-    public Thallid(final Thallid card) {
+    public Thallid4(final Thallid4 card) {
         super(card);
     }
 
     @Override
-    public Thallid copy() {
-        return new Thallid(this);
+    public Thallid4 copy() {
+        return new Thallid4(this);
     }
 }

@@ -33,20 +33,20 @@ import java.util.UUID;
  *
  * @author North
  */
-public class VodalianSoldiers extends mage.sets.fifthedition.VodalianSoldiers {
+public class VodalianSoldiers3 extends mage.sets.fifthedition.VodalianSoldiers {
 
-    public VodalianSoldiers(UUID ownerId) {
+    public VodalianSoldiers3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = 64;
         this.expansionSetCode = "FEM";
     }
 
-    public VodalianSoldiers(final VodalianSoldiers card) {
+    public VodalianSoldiers3(final VodalianSoldiers3 card) {
         super(card);
     }
 
     @Override
-    public VodalianSoldiers copy() {
-        return new VodalianSoldiers(this);
+    public VodalianSoldiers3 copy() {
+        return new VodalianSoldiers3(this);
     }
 }

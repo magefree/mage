@@ -28,50 +28,25 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class ThornThallid extends CardImpl {
+public class ThornThallid4 extends mage.sets.fallenempires.ThornThallid1 {
 
-    public ThornThallid(UUID ownerId) {
-        super(ownerId, 96, "Thorn Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
-        this.expansionSetCode = "FEM";
-        this.subtype.add("Fungus");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // At the beginning of your upkeep, put a spore counter on Thorn Thallid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
-        // Remove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new DamageTargetEffect(1), 
-                new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3)));
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+    public ThornThallid4(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 99;
     }
 
-    public ThornThallid(final ThornThallid card) {
+    public ThornThallid4(final ThornThallid4 card) {
         super(card);
     }
 
     @Override
-    public ThornThallid copy() {
-        return new ThornThallid(this);
+    public ThornThallid4 copy() {
+        return new ThornThallid4(this);
     }
 }

@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
-public class ThornThallid extends mage.sets.fallenempires.ThornThallid1 {
+public class VodalianSoldiers1 extends mage.sets.fifthedition.VodalianSoldiers {
 
-    public ThornThallid(UUID ownerId) {
+    public VodalianSoldiers1(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 62;
+        this.expansionSetCode = "FEM";
     }
 
-    public ThornThallid(final ThornThallid card) {
+    public VodalianSoldiers1(final VodalianSoldiers1 card) {
         super(card);
     }
 
     @Override
-    public ThornThallid copy() {
-        return new ThornThallid(this);
+    public VodalianSoldiers1 copy() {
+        return new VodalianSoldiers1(this);
     }
 }

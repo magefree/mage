@@ -25,28 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mastersedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
-public class ThornThallid extends mage.sets.fallenempires.ThornThallid1 {
+public class Thallid2 extends mage.sets.timeshifted.Thallid {
 
-    public ThornThallid(UUID ownerId) {
+    public Thallid2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 135;
-        this.expansionSetCode = "MED";
+        this.cardNumber = 88;
+        this.expansionSetCode = "FEM";
+        this.rarity = Rarity.COMMON;
     }
 
-    public ThornThallid(final ThornThallid card) {
+    public Thallid2(final Thallid2 card) {
         super(card);
     }
 
     @Override
-    public ThornThallid copy() {
-        return new ThornThallid(this);
+    public Thallid2 copy() {
+        return new Thallid2(this);
     }
 }
