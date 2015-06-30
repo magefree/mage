@@ -25,47 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author Sir-Speshkitty
+ * @author LoneFox
  */
-public class AbbeyMatron extends CardImpl {
+public class AesthirGlider2 extends mage.sets.alliances.AesthirGlider1 {
 
-    public AbbeyMatron(UUID ownerId) {
-        super(ownerId, 103, "Abbey Matron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "HML";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        // {W}, {tap}: Abbey Matron gets +0/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    public AesthirGlider2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 157;
+        this.expansionSetCode = "ALL";
     }
 
-    public AbbeyMatron(final AbbeyMatron card) {
+    public AesthirGlider2(final AesthirGlider2 card) {
         super(card);
     }
 
     @Override
-    public AbbeyMatron copy() {
-        return new AbbeyMatron(this);
+    public AesthirGlider2 copy() {
+        return new AesthirGlider2(this);
     }
 }

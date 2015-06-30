@@ -39,9 +39,9 @@ import mage.constants.Rarity;
  *
  * @author Sir-Speshkitty
  */
-public class AesthirGlider extends CardImpl {
+public class AesthirGlider1 extends CardImpl {
 
-    public AesthirGlider(UUID ownerId) {
+    public AesthirGlider1(UUID ownerId) {
         super(ownerId, 156, "Aesthir Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "ALL";
         this.subtype.add("Bird");
@@ -54,12 +54,12 @@ public class AesthirGlider extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public AesthirGlider(final AesthirGlider card) {
+    public AesthirGlider1(final AesthirGlider1 card) {
         super(card);
     }
 
     @Override
-    public AesthirGlider copy() {
-        return new AesthirGlider(this);
+    public AesthirGlider1 copy() {
+        return new AesthirGlider1(this);
     }
 }

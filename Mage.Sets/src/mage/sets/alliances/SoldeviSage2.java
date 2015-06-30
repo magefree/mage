@@ -25,51 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
  */
-public class CemeteryGate extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard("Black");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
+public class SoldeviSage2 extends mage.sets.alliances.SoldeviSage1 {
+
+    public SoldeviSage2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 52;
+        this.expansionSetCode = "ALL";
     }
 
-    public CemeteryGate(UUID ownerId) {
-        super(ownerId, 5, "Cemetery Gate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "HML";
-        this.subtype.add("Wall");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(5);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        
-        // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
-    }
-
-    public CemeteryGate(final CemeteryGate card) {
+    public SoldeviSage2(final SoldeviSage2 card) {
         super(card);
     }
 
     @Override
-    public CemeteryGate copy() {
-        return new CemeteryGate(this);
+    public SoldeviSage2 copy() {
+        return new SoldeviSage2(this);
     }
 }

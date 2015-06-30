@@ -53,9 +53,9 @@ import mage.target.common.TargetControlledPermanent;
  *
  * @author Quercitron
  */
-public class SoldeviSage extends CardImpl {
+public class SoldeviSage1 extends CardImpl {
 
-    public SoldeviSage(UUID ownerId) {
+    public SoldeviSage1(UUID ownerId) {
         super(ownerId, 51, "Soldevi Sage", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "ALL";
         this.subtype.add("Human");
@@ -70,13 +70,13 @@ public class SoldeviSage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public SoldeviSage1(final SoldeviSage1 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public SoldeviSage1 copy() {
+        return new SoldeviSage1(this);
     }
 }
 
@@ -86,7 +86,7 @@ class SoldeviSageEffect extends OneShotEffect {
         super(Outcome.DrawCard);
         this.staticText = "Draw three cards, then discard one of them";
     }
-    
+
     public SoldeviSageEffect(final SoldeviSageEffect effect) {
         super(effect);
     }
@@ -95,7 +95,7 @@ class SoldeviSageEffect extends OneShotEffect {
     public SoldeviSageEffect copy() {
         return new SoldeviSageEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -108,7 +108,7 @@ class SoldeviSageEffect extends OneShotEffect {
                     drawnCards.add(cardId);
                 }
             }
-            
+
             if (drawnCards.size() > 0) {
                 TargetCard cardToDiscard = new TargetCard(Zone.PICK, new FilterCard("card to discard"));
                 cardToDiscard.setNotTarget(true);
@@ -119,10 +119,10 @@ class SoldeviSageEffect extends OneShotEffect {
                     }
                 }
             }
-            
+
             return true;
         }
         return false;
     }
-    
+
 }
