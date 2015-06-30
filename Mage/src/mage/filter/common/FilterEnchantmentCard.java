@@ -25,58 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
+package mage.filter.common;
+
 import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author LoneFox
-
  */
-public class SouthernPaladin extends CardImpl {
+public class FilterEnchantmentCard extends FilterCard {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+    public FilterEnchantmentCard() {
+        this("enchantment");
     }
 
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+    public FilterEnchantmentCard(String name) {
+        super(name);
+        this.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
-        super(card);
+    public FilterEnchantmentCard(final FilterEnchantmentCard filter) {
+        super(filter);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public FilterEnchantmentCard copy() {
+        return new FilterEnchantmentCard(this);
     }
 }

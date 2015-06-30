@@ -25,58 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public class AlloyGolem extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
+    public AlloyGolem(UUID ownerId) {
+        super(ownerId, 297, "Alloy Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Golem");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+        // As Alloy Golem enters the battlefield, choose a color.
+        // Alloy Golem is the chosen color.
+        this.addAbility(new EntersBattlefieldAbility(new BecomesColorSourceEffect(Duration.WhileOnBattlefield),
+            null, true, "As {this} enters the battlefield, choose a color.\n{this} is the chosen color.", ""));
     }
 
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
-    }
-
-    public SouthernPaladin(final SouthernPaladin card) {
+    public AlloyGolem(final AlloyGolem card) {
         super(card);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public AlloyGolem copy() {
+        return new AlloyGolem(this);
     }
 }
