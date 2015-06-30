@@ -25,51 +25,31 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.masterseditionii;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.counters.CounterType;
 
 /**
  *
- * @author LevelX2
+ * @author LoneFox
+
  */
-public class Spiritmonger extends CardImpl {
+public class IhsansShade extends mage.sets.homelands.IhsansShade {
 
-    public Spiritmonger(UUID ownerId) {
-        super(ownerId, 121, "Spiritmonger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
-        this.expansionSetCode = "APC";
-        this.subtype.add("Beast");
-
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
-
-        // Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.
-        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), false, false, false));
-        // {B}: Regenerate Spiritmonger.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
-        // {G}: Spiritmonger becomes the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
+    public IhsansShade(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 95;
+        this.expansionSetCode = "ME2";
+        this.rarity = Rarity.RARE;
     }
 
-    public Spiritmonger(final Spiritmonger card) {
+    public IhsansShade(final IhsansShade card) {
         super(card);
     }
 
     @Override
-    public Spiritmonger copy() {
-        return new Spiritmonger(this);
+    public IhsansShade copy() {
+        return new IhsansShade(this);
     }
 }

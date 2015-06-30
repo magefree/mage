@@ -25,58 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.seventhedition;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.FilterPermanent;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author LoneFox
 
  */
-public class SouthernPaladin extends CardImpl {
+public class YavimayaBarbarian extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("red permanent");
+    private static final FilterCard filter = new FilterCard("blue");
 
     static {
-        filter.add(new ColorPredicate(ObjectColor.RED));
+      filter.add(new ColorPredicate(ObjectColor.BLUE));
     }
 
-    public SouthernPaladin(UUID ownerId) {
-        super(ownerId, 46, "Southern Paladin", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "7ED";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
+    public YavimayaBarbarian(UUID ownerId) {
+        super(ownerId, 290, "Yavimaya Barbarian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{G}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Elf");
+        this.subtype.add("Barbarian");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {W}{W}, {tap}: Destroy target red permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(ability);
+        // Protection from blue
+        this.addAbility(new ProtectionAbility(filter));
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
+    public YavimayaBarbarian(final YavimayaBarbarian card) {
         super(card);
     }
 
     @Override
-    public SouthernPaladin copy() {
-        return new SouthernPaladin(this);
+    public YavimayaBarbarian copy() {
+        return new YavimayaBarbarian(this);
     }
 }
