@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -39,17 +38,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
-    /** 
-     * Soulfire Grand Master
-     * Creature - Human Monk 2/2, 1W (2)
-     * Lifelink
-     * Instant and sorcery spells you control have lifelink.
-     * {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from 
-     * your hand this turn, put that card into your hand instead of into your 
-     * graveyard as it resolves.
+    /**
+     * Soulfire Grand Master Creature - Human Monk 2/2, 1W (2) Lifelink Instant
+     * and sorcery spells you control have lifelink. {2}{U/R}{U/R}: The next
+     * time you cast an instant or sorcery spell from your hand this turn, put
+     * that card into your hand instead of into your graveyard as it resolves.
      *
      */
-       
     @Test
     public void testSpellsGainLifelink() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -57,7 +52,7 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -75,9 +70,9 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
-        
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -87,12 +82,11 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
 
     }
+
     /**
-     * Test with Searing Blood
-     * If the delayed triggered ability triggers, it has to give
-     * life from lifelink because the source is still Searing Blood
+     * Test with Searing Blood If the delayed triggered ability triggers, it has
+     * to give life from lifelink because the source is still Searing Blood
      */
-    // @Ignore // Does not work because as the delayed triggered ability resolves, the source card is no longer on the stack and
     @Test
     public void testSearingBlood1() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -117,9 +111,8 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
     }
 
     /**
-     * Test with Searing Blood
-     * If the delayed triggered ability triggers, it has to give
-     * life from lifelink because the source is still Searing Blood
+     * Test with Searing Blood If the delayed triggered ability triggers, it has
+     * to give life from lifelink because the source is still Searing Blood
      */
     @Test
     public void testSearinBlood2() {
@@ -146,12 +139,12 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
         assertLife(playerA, 28); // +2 from damage to Silvercoat Lion + 3 from Lighning Bolt + 3 from damage to Player B from Searing Blood
 
-    }    
-    
+    }
+
     /**
      * Test copied instant spell gives also life
-     * 
-     */    
+     *
+     */
     @Test
     public void testCopySpell() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
@@ -172,20 +165,18 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
 
         assertLife(playerB, 14);
-        assertLife(playerA, 26); 
+        assertLife(playerA, 26);
 
-    }     
-    
-    
+    }
+
     /**
      * Test damage of activated ability of a permanent does not gain lifelink
-     * 
+     *
      */
-    
     @Test
     public void testActivatedAbility() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        
+
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
         // {3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
@@ -200,21 +191,22 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Rod of Ruin", 1);
 
         assertLife(playerB, 19);
-        assertLife(playerA, 20); 
+        assertLife(playerA, 20);
 
-    }      
+    }
+
     /**
-     * Test that if Soulfire Grand Master has left the battlefield 
-     * spell has no longer lifelink 
+     * Test that if Soulfire Grand Master has left the battlefield spell has no
+     * longer lifelink
      */
-    
+
     @Test
     public void testSoulfireLeft() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        
+
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
-        
+
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
 
@@ -229,28 +221,30 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Soulfire Grand Master", 1);
 
         assertLife(playerB, 17);
-        assertLife(playerA, 20); 
+        assertLife(playerA, 20);
 
-    }      
+    }
+
     /**
-     * I activated the ability of Soulfire grand master, it resolved, then i cast Stoke the Flames 
-     * on Whisperwood Elemental, my opponenet sacrificed the elemental, so stoke didnt resolve, 
-     * but i still got the life from lifelink.
+     * I activated the ability of Soulfire grand master, it resolved, then i
+     * cast Stoke the Flames on Whisperwood Elemental, my opponenet sacrificed
+     * the elemental, so stoke didnt resolve, but i still got the life from
+     * lifelink.
      */
-    
+
     @Test
     public void testSoulfireStokeTheFlames() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        
+
         addCard(Zone.HAND, playerA, "Stoke the Flames");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
-        
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Stoke the Flames", "Whisperwood Elemental");
-        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}", null ,"{this} deals 4 damage");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice {this}", null, "{this} deals 4 damage");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -259,29 +253,28 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
 
         assertLife(playerB, 20);
-        assertLife(playerA, 20); 
+        assertLife(playerA, 20);
 
-    }   
-    
-   /**
-     * Check if second ability resolved, the next spell that is counterer 
-     * won't go to hand back because it did not resolve
-     * 
+    }
+
+    /**
+     * Check if second ability resolved, the next spell that is counterer won't
+     * go to hand back because it did not resolve
+     *
      */
-    
     @Test
     public void testSoulfireCounteredSpellDontGoesBack() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        
+
         addCard(Zone.HAND, playerA, "Stoke the Flames");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Counterspell", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Whisperwood Elemental", 1);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U/R}{U/R}:");
-        
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Stoke the Flames", "Whisperwood Elemental");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Counterspell", "Stoke the Flames");
 
@@ -292,26 +285,28 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Stoke the Flames", 1); // no legal target left so the spell is countered and goes to graveyard
 
         assertLife(playerB, 20);
-        assertLife(playerA, 20); 
+        assertLife(playerA, 20);
 
-    }     
-  /**
-     * With a Soulfire Grand Master in play, Deflecting Palm doesn't gain the caster life. 
-     * It should as it has lifelink, and it's Deflecting Palm (an instant) dealing damage. 
-     * I was playing against a human in Standard Constructed.
-     * 
+    }
+
+    /**
+     * With a Soulfire Grand Master in play, Deflecting Palm doesn't gain the
+     * caster life. It should as it has lifelink, and it's Deflecting Palm (an
+     * instant) dealing damage. I was playing against a human in Standard
+     * Constructed.
+     *
      */
-    
+
     @Test
     public void testWithDeflectingPalm() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
         // Instant -{R}{W}
-        // The next time a source of your choice would deal damage to you this turn, prevent that damage. 
+        // The next time a source of your choice would deal damage to you this turn, prevent that damage.
         // If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
         addCard(Zone.HAND, playerA, "Deflecting Palm");
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
         addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
@@ -323,10 +318,10 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
-        assertGraveyardCount(playerA, "Deflecting Palm", 1); 
+        assertGraveyardCount(playerA, "Deflecting Palm", 1);
 
         assertLife(playerB, 17);
         assertLife(playerA, 23); // damage is prevented + lifelink + 3
 
-    }          
+    }
 }

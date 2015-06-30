@@ -1432,19 +1432,17 @@ public abstract class GameImpl implements Game, Serializable {
      */
     @Override
     public boolean checkStateAndTriggered() {
-        boolean trigger = !getTurn().isEndTurnRequested();
         boolean somethingHappened = false;
         //20091005 - 115.5
         while (!isPaused() && !gameOver(null)) {
             if (!checkStateBasedActions()) {
                 // nothing happened so check triggers
-                if (trigger) {
-                    state.handleSimultaneousEvent(this);
-                }
-                if (isPaused() || gameOver(null) || !trigger || !checkTriggered()) {
+                state.handleSimultaneousEvent(this);
+                if (isPaused() || gameOver(null) || getTurn().isEndTurnRequested() || !checkTriggered()) {
                     break;
                 }
             }
+            state.handleSimultaneousEvent(this);
             applyEffects(); // needed e.g if boost effects end and cause creatures to die
             somethingHappened = true;
         }
