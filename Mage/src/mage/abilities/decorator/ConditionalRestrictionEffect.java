@@ -33,7 +33,6 @@ import mage.abilities.condition.FixedCondition;
 import mage.abilities.condition.LockedInCondition;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
-import mage.constants.EffectType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,7 +55,6 @@ public class ConditionalRestrictionEffect extends RestrictionEffect {
 
     public ConditionalRestrictionEffect(Duration duration, RestrictionEffect effect, Condition condition, RestrictionEffect otherwiseEffect) {
         super(duration);
-        this.effectType = EffectType.RESTRICTION;
         this.effect = effect;
         this.baseCondition = condition;
         this.otherwiseEffect = otherwiseEffect;

@@ -29,23 +29,19 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -53,12 +49,15 @@ import mage.game.permanent.Permanent;
  */
 public class EvilEyeOfOrmsByGore extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Walls");
+    private static final FilterCreaturePermanent cantAttackFilter = new FilterCreaturePermanent("Non-Eye creatures you control");
+    private static final FilterCreaturePermanent cantBeBlockedByFilter = new FilterCreaturePermanent("except by Walls");
 
     static {
-        filter.add(Predicates.not(new SubtypePredicate("Wall")));
+        cantBeBlockedByFilter.add(Predicates.not(new SubtypePredicate("Wall")));
+        cantAttackFilter.add(Predicates.not((new SubtypePredicate("Eye"))));
+        cantAttackFilter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
+
     public EvilEyeOfOrmsByGore(UUID ownerId) {
         super(ownerId, 21, "Evil Eye of Orms-by-Gore", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.expansionSetCode = "5ED";
@@ -68,10 +67,10 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Non-Eye creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EvilEyeOfOrmsByGoreEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
+
         // Evil Eye of Orms-by-Gore can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(cantBeBlockedByFilter, Duration.WhileOnBattlefield)));
     }
 
     public EvilEyeOfOrmsByGore(final EvilEyeOfOrmsByGore card) {
@@ -82,44 +81,4 @@ public class EvilEyeOfOrmsByGore extends CardImpl {
     public EvilEyeOfOrmsByGore copy() {
         return new EvilEyeOfOrmsByGore(this);
     }
-}
-
-class EvilEyeOfOrmsByGoreEffect extends ReplacementEffectImpl {
-
-    public EvilEyeOfOrmsByGoreEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Non-Eye creatures you control can't attack";
-    }
-
-    public EvilEyeOfOrmsByGoreEffect(final EvilEyeOfOrmsByGoreEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EvilEyeOfOrmsByGoreEffect copy() {
-        return new EvilEyeOfOrmsByGoreEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }    
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null) {
-            if (permanent.getControllerId().equals(source.getControllerId())) {
-                if (!permanent.hasSubtype("Eye")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }    
 }

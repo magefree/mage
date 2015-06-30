@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
@@ -36,18 +35,17 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- * The creatures defined by filter can't attack any opponent
  *
  * @author LevelX2
  */
-public class CantAttackAllAnyPlayerEffect extends RestrictionEffect {
+public class CantAttackBlockAllEffect extends RestrictionEffect {
 
     private final FilterCreaturePermanent filter;
 
-    public CantAttackAllAnyPlayerEffect(Duration duration, FilterCreaturePermanent filter) {
+    public CantAttackBlockAllEffect(Duration duration, FilterCreaturePermanent filter) {
         super(duration);
         this.filter = filter;
-        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
+        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack or block");
         if (!duration.toString().isEmpty()) {
             sb.append(" ");
             if (duration.equals(Duration.EndOfTurn)) {
@@ -56,10 +54,10 @@ public class CantAttackAllAnyPlayerEffect extends RestrictionEffect {
                 sb.append(" ").append(duration.toString());
             }
         }
-        staticText = sb.toString();        
+        staticText = sb.toString();
     }
 
-    public CantAttackAllAnyPlayerEffect(final CantAttackAllAnyPlayerEffect effect) {
+    public CantAttackBlockAllEffect(final CantAttackBlockAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -75,8 +73,13 @@ public class CantAttackAllAnyPlayerEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantAttackAllAnyPlayerEffect copy() {
-        return new CantAttackAllAnyPlayerEffect(this);
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public CantAttackBlockAllEffect copy() {
+        return new CantAttackBlockAllEffect(this);
     }
 
 }

@@ -39,13 +39,13 @@ import mage.game.permanent.Permanent;
  * 
  * @author BetaSteward_at_googlemail.com
  */
-public class CantAttackAllSourceEffect extends RestrictionEffect {
+public class CantAttackAnyPlayerSourceEffect extends RestrictionEffect {
 
-    public CantAttackAllSourceEffect(Duration duration) {
+    public CantAttackAnyPlayerSourceEffect(Duration duration) {
         super(duration);
     }
 
-    public CantAttackAllSourceEffect(final CantAttackAllSourceEffect effect) {
+    public CantAttackAnyPlayerSourceEffect(final CantAttackAnyPlayerSourceEffect effect) {
         super(effect);
     }
 
@@ -60,8 +60,8 @@ public class CantAttackAllSourceEffect extends RestrictionEffect {
     }
 
     @Override
-    public CantAttackAllSourceEffect copy() {
-        return new CantAttackAllSourceEffect(this);
+    public CantAttackAnyPlayerSourceEffect copy() {
+        return new CantAttackAnyPlayerSourceEffect(this);
     }
 
 }

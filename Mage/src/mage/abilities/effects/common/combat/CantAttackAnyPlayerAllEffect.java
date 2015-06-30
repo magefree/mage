@@ -25,48 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
 
-import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+package mage.abilities.effects.common.combat;
+
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
+ * The creatures defined by filter can't attack any opponent
  *
  * @author LevelX2
  */
-public class Moat extends CardImpl {
+public class CantAttackAnyPlayerAllEffect extends RestrictionEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+    private final FilterCreaturePermanent filter;
 
-    static {
-        filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+    public CantAttackAnyPlayerAllEffect(Duration duration, FilterCreaturePermanent filter) {
+        super(duration);
+        this.filter = filter;
+        StringBuilder sb = new StringBuilder(filter.getMessage()).append(" can't attack");
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ");
+            if (duration.equals(Duration.EndOfTurn)) {
+                sb.append(" this turn");
+            } else {
+                sb.append(" ").append(duration.toString());
+            }
+        }
+        staticText = sb.toString();        
     }
 
-    public Moat(UUID ownerId) {
-        super(ownerId, 197, "Moat", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "LEG";
-
-
-        // Creatures without flying can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
-    }
-
-    public Moat(final Moat card) {
-        super(card);
+    public CantAttackAnyPlayerAllEffect(final CantAttackAnyPlayerAllEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public Moat copy() {
-        return new Moat(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
+
+    @Override
+    public boolean canAttack(Game game) {
+        return false;
+    }
+
+    @Override
+    public CantAttackAnyPlayerAllEffect copy() {
+        return new CantAttackAnyPlayerAllEffect(this);
+    }
+
 }

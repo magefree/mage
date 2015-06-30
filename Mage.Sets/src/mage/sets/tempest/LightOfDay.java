@@ -28,20 +28,16 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -49,13 +45,19 @@ import mage.players.Player;
  */
 public class LightOfDay extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Black creatures");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+
     public LightOfDay(UUID ownerId) {
         super(ownerId, 239, "Light of Day", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
         this.expansionSetCode = "TMP";
 
-
         // Black creatures can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfDayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
+
     }
 
     public LightOfDay(final LightOfDay card) {
@@ -66,46 +68,4 @@ public class LightOfDay extends CardImpl {
     public LightOfDay copy() {
         return new LightOfDay(this);
     }
-}
-
-class LightOfDayEffect extends ReplacementEffectImpl {
-
-    public LightOfDayEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Black creatures can't attack or block";
-    }
-
-    public LightOfDayEffect(final LightOfDayEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LightOfDayEffect copy() {
-        return new LightOfDayEffect(this);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player.getInRange().contains(permanent.getControllerId())) {
-                if (permanent.getColor(game).isBlack()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-    
 }
