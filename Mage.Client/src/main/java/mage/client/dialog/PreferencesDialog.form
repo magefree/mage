@@ -155,7 +155,7 @@
                 <Component class="javax.swing.JCheckBox" name="showToolTipsInAnyZone">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Show card tooltips while hoovering with the mouse pointer over a card"/>
+                    <Property name="text" type="java.lang.String" value="Show card tooltips while hovering with the mouse pointer over a card"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value=""/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -253,7 +253,7 @@
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Show player names on avatar permanently"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Instead showing the names only if you hoover over the avatar with the mouse, the name is shown all the time."/>
+                    <Property name="toolTipText" type="java.lang.String" value="Instead showing the names only if you hover over the avatar with the mouse, the name is shown all the time."/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                   </Properties>
                   <Events>
