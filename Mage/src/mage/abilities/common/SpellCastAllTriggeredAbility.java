@@ -29,6 +29,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -45,39 +46,35 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
     protected String rule;
-
-    /**
-     * If true, the source that triggered the ability will be set as target to effect.
-     */
-    protected boolean rememberSource = false;
+    protected SetTargetPointer setTargetPointer;
 
     public SpellCastAllTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, spellCard, optional, false);
+        this(Zone.BATTLEFIELD, effect, spellCard, optional, SetTargetPointer.NONE);
     }
 
     public SpellCastAllTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
-        this(effect, filter, optional, false);
+        this(effect, filter, optional, SetTargetPointer.NONE);
     }
 
     public SpellCastAllTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
-        this(effect, filter, optional, false);
+        this(effect, filter, optional, SetTargetPointer.NONE);
         this.rule = rule;
     }
 
-    public SpellCastAllTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
-        this(Zone.BATTLEFIELD, effect, filter, optional, rememberSource);
+    public SpellCastAllTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, SetTargetPointer setTargetPointer) {
+        this(Zone.BATTLEFIELD, effect, filter, optional, setTargetPointer);
     }
 
-    public SpellCastAllTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+    public SpellCastAllTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.filter = filter;
-        this.rememberSource = rememberSource;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public SpellCastAllTriggeredAbility(final SpellCastAllTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
-        this.rememberSource = ability.rememberSource;
+        this.setTargetPointer = ability.setTargetPointer;
         this.rule = ability.rule;
     }
 
@@ -90,8 +87,18 @@ public class SpellCastAllTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
         if (spell != null && filter.match(spell, getControllerId(), game)) {
-            if (rememberSource) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getId()));
+            if (!setTargetPointer.equals(SetTargetPointer.NONE)) {
+                for (Effect effect : this.getEffects()) {
+                    switch(setTargetPointer) {
+                        case SPELL:
+                            effect.setTargetPointer(new FixedTarget(spell.getId()));
+                            break;
+                        case PLAYER:
+                            effect.setTargetPointer(new FixedTarget(spell.getControllerId()));
+                            break;
+                    }
+
+                }
             }
             return true;
         }

@@ -44,9 +44,9 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.constants.SetTargetPointer;
 
 /**
  *
@@ -59,7 +59,7 @@ public class HornOfPlenty extends CardImpl {
         this.expansionSetCode = "MMQ";
 
         // Whenever a player casts a spell, he or she may pay {1}. If that player does, he or she draws a card at the beginning of the next end step.
-        this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), new FilterSpell("a spell"), false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
     public HornOfPlenty(final HornOfPlenty card) {
@@ -90,11 +90,7 @@ class HornOfPlentyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        Player caster = null;
-        if (spell != null) {
-            caster = game.getPlayer(spell.getControllerId());
-        }
+        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
                 Cost cost = new ManaCostsImpl("{1}");

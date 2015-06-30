@@ -25,39 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.legends;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SetTargetPointer;
-import mage.filter.FilterSpell;
 
 /**
  *
- * @author emerald000
+ * @author LoneFox
+
  */
-public class NetherVoid extends CardImpl {
+public class ManaBreach extends mage.sets.exodus.ManaBreach {
 
-    public NetherVoid(UUID ownerId) {
-        super(ownerId, 27, "Nether Void", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
-        this.expansionSetCode = "LEG";
-        this.supertype.add("World");
-
-        // Whenever a player casts a spell, counter it unless that player pays {3}.
-        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
+    public ManaBreach(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 85;
+        this.expansionSetCode = "7ED";
     }
 
-    public NetherVoid(final NetherVoid card) {
+    public ManaBreach(final ManaBreach card) {
         super(card);
     }
 
     @Override
-    public NetherVoid copy() {
-        return new NetherVoid(this);
+    public ManaBreach copy() {
+        return new ManaBreach(this);
     }
 }
