@@ -36,13 +36,12 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterColorlessToken;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -62,7 +61,7 @@ public class PiaAndKiranNalaar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Pia and Kiran Nalaar enters the battlefield put 2 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PiaAndKiranNalaarThopterToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken("ORI"), 2)));
         
         // {2}{R}, Sacrifice an artifact: Pia and Kiran Nalaar deals 2 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{R}"));
@@ -78,18 +77,5 @@ public class PiaAndKiranNalaar extends CardImpl {
     @Override
     public PiaAndKiranNalaar copy() {
         return new PiaAndKiranNalaar(this);
-    }
-}
-
-
-class PiaAndKiranNalaarThopterToken extends Token {
-    PiaAndKiranNalaarThopterToken() {
-        super("Thopter", "a 1/1 colorless Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }
