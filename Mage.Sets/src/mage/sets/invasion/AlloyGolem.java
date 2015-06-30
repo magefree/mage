@@ -25,52 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCardInHand;
 
 /**
- * @author magenoxx_at_gmail.com
+ *
+ * @author LoneFox
+
  */
-public class WildMongrel extends CardImpl {
+public class AlloyGolem extends CardImpl {
 
-    public WildMongrel(UUID ownerId) {
-        super(ownerId, 283, "Wild Mongrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Hound");
+    public AlloyGolem(UUID ownerId) {
+        super(ownerId, 297, "Alloy Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Golem");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("{this} gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
-        effect = new BecomesColorSourceEffect(Duration.EndOfTurn);
-        effect.setText("and becomes the color of your choice until end of turn.");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // As Alloy Golem enters the battlefield, choose a color.
+        // Alloy Golem is the chosen color.
+        this.addAbility(new EntersBattlefieldAbility(new BecomesColorSourceEffect(Duration.WhileOnBattlefield),
+            null, true, "As {this} enters the battlefield, choose a color.\n{this} is the chosen color.", ""));
     }
 
-    public WildMongrel(final WildMongrel card) {
+    public AlloyGolem(final AlloyGolem card) {
         super(card);
     }
 
     @Override
-    public WildMongrel copy() {
-        return new WildMongrel(this);
+    public AlloyGolem copy() {
+        return new AlloyGolem(this);
     }
 }

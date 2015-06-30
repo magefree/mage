@@ -25,52 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.planeshift;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCardInHand;
 
 /**
- * @author magenoxx_at_gmail.com
+ *
+ * @author LoneFox
+
  */
-public class WildMongrel extends CardImpl {
+public class CalderaKavu extends CardImpl {
 
-    public WildMongrel(UUID ownerId) {
-        super(ownerId, 283, "Wild Mongrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Hound");
-
+    public CalderaKavu(UUID ownerId) {
+        super(ownerId, 58, "Caldera Kavu", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Kavu");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("{this} gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
-        effect = new BecomesColorSourceEffect(Duration.EndOfTurn);
-        effect.setText("and becomes the color of your choice until end of turn.");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // {1}{B}: Caldera Kavu gets +1/+1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+        // {G}: Caldera Kavu becomes the color of your choice until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public WildMongrel(final WildMongrel card) {
+    public CalderaKavu(final CalderaKavu card) {
         super(card);
     }
 
     @Override
-    public WildMongrel copy() {
-        return new WildMongrel(this);
+    public CalderaKavu copy() {
+        return new CalderaKavu(this);
     }
 }

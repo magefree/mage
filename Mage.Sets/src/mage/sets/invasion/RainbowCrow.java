@@ -25,52 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCardInHand;
 
 /**
- * @author magenoxx_at_gmail.com
+ *
+ * @author LoneFox
+
  */
-public class WildMongrel extends CardImpl {
+public class RainbowCrow extends CardImpl {
 
-    public WildMongrel(UUID ownerId) {
-        super(ownerId, 283, "Wild Mongrel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "ODY";
-        this.subtype.add("Hound");
-
+    public RainbowCrow(UUID ownerId) {
+        super(ownerId, 69, "Rainbow Crow", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Bird");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
-        effect.setText("{this} gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
-        effect = new BecomesColorSourceEffect(Duration.EndOfTurn);
-        effect.setText("and becomes the color of your choice until end of turn.");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        //
+        // {1}: Rainbow Crow becomes the color of your choice until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public WildMongrel(final WildMongrel card) {
+    public RainbowCrow(final RainbowCrow card) {
         super(card);
     }
 
     @Override
-    public WildMongrel copy() {
-        return new WildMongrel(this);
+    public RainbowCrow copy() {
+        return new RainbowCrow(this);
     }
 }
