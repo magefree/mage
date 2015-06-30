@@ -31,44 +31,38 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author anonymous
  */
-public class GoblinChirurgeon extends CardImpl {
+public class OrcishSpy1 extends CardImpl {
 
-    public GoblinChirurgeon(UUID ownerId) {
-        super(ownerId, 110, "Goblin Chirurgeon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+    public OrcishSpy1(UUID ownerId) {
+        super(ownerId, 124, "Orcish Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
         this.expansionSetCode = "FEM";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
+        this.subtype.add("Orc");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Sacrifice a Goblin: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new RegenerateTargetEffect(), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Goblin","a Goblin"))));
-        ability.addTarget(new TargetCreaturePermanent());
+        // {tap}: Look at the top three cards of target player's library.
+        Ability ability = new SimpleActivatedAbility(Zone.LIBRARY, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
         this.addAbility(ability);
     }
 
-    public GoblinChirurgeon(final GoblinChirurgeon card) {
+    public OrcishSpy1(final OrcishSpy1 card) {
         super(card);
     }
 
     @Override
-    public GoblinChirurgeon copy() {
-        return new GoblinChirurgeon(this);
+    public OrcishSpy1 copy() {
+        return new OrcishSpy1(this);
     }
 }

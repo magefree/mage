@@ -25,28 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eighthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 
 /**
  *
- * @author anonymous
- */
-public class OrcishSpy extends mage.sets.fallenempires.OrcishSpy1 {
+ * @author LoneFox
 
-    public OrcishSpy(UUID ownerId) {
+ */
+public class OrcishSpy3 extends mage.sets.fallenempires.OrcishSpy1 {
+
+    public OrcishSpy3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 208;
-        this.expansionSetCode = "8ED";
+        this.cardNumber = 126;
     }
 
-    public OrcishSpy(final OrcishSpy card) {
+    public OrcishSpy3(final OrcishSpy3 card) {
         super(card);
     }
 
     @Override
-    public OrcishSpy copy() {
-        return new OrcishSpy(this);
+    public OrcishSpy3 copy() {
+        return new OrcishSpy3(this);
     }
 }
