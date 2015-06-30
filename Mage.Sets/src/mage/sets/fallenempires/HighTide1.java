@@ -50,9 +50,9 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author Plopman
  */
-public class HighTide extends CardImpl {
+public class HighTide1 extends CardImpl {
 
-    public HighTide(UUID ownerId) {
+    public HighTide1(UUID ownerId) {
         super(ownerId, 35, "High Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "FEM";
 
@@ -61,13 +61,13 @@ public class HighTide extends CardImpl {
 
     }
 
-    public HighTide(final HighTide card) {
+    public HighTide1(final HighTide1 card) {
         super(card);
     }
 
     @Override
-    public HighTide copy() {
-        return new HighTide(this);
+    public HighTide1 copy() {
+        return new HighTide1(this);
     }
 }
 

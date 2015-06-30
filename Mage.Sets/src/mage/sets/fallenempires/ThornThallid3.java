@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
- */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+ * @author LoneFox
 
-    public SoldeviSage(UUID ownerId) {
+ */
+public class ThornThallid3 extends mage.sets.fallenempires.ThornThallid1 {
+
+    public ThornThallid3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 98;
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public ThornThallid3(final ThornThallid3 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public ThornThallid3 copy() {
+        return new ThornThallid3(this);
     }
 }

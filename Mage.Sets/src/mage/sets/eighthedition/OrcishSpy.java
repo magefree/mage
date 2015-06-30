@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author anonymous
  */
-public class OrcishSpy extends mage.sets.fallenempires.OrcishSpy {
+public class OrcishSpy extends mage.sets.fallenempires.OrcishSpy1 {
 
     public OrcishSpy(UUID ownerId) {
         super(ownerId);

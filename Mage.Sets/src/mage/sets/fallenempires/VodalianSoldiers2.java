@@ -25,29 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author North
  */
-public class Torture extends mage.sets.homelands.Torture1 {
+public class VodalianSoldiers2 extends mage.sets.fifthedition.VodalianSoldiers {
 
-    public Torture(UUID ownerId) {
+    public VodalianSoldiers2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 63;
+        this.expansionSetCode = "FEM";
     }
 
-    public Torture(final Torture card) {
+    public VodalianSoldiers2(final VodalianSoldiers2 card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public VodalianSoldiers2 copy() {
+        return new VodalianSoldiers2(this);
     }
 }

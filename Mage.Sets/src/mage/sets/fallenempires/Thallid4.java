@@ -28,25 +28,27 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
  * @author North
  */
-public class VodalianSoldiers extends mage.sets.fifthedition.VodalianSoldiers {
+public class Thallid4 extends mage.sets.timeshifted.Thallid {
 
-    public VodalianSoldiers(UUID ownerId) {
+    public Thallid4(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
+        this.cardNumber = 90;
         this.expansionSetCode = "FEM";
+        this.rarity = Rarity.COMMON;
     }
 
-    public VodalianSoldiers(final VodalianSoldiers card) {
+    public Thallid4(final Thallid4 card) {
         super(card);
     }
 
     @Override
-    public VodalianSoldiers copy() {
-        return new VodalianSoldiers(this);
+    public Thallid4 copy() {
+        return new Thallid4(this);
     }
 }

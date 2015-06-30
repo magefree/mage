@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
- */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+ * @author LoneFox
 
-    public SoldeviSage(UUID ownerId) {
+ */
+public class BrassclawOrcs2 extends mage.sets.fallenempires.BrassclawOrcs1 {
+
+    public BrassclawOrcs2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 101;
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public BrassclawOrcs2(final BrassclawOrcs2 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public BrassclawOrcs2 copy() {
+        return new BrassclawOrcs2(this);
     }
 }

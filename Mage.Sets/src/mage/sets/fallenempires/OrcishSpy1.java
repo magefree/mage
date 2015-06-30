@@ -25,29 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author anonymous
  */
-public class Torture extends mage.sets.homelands.Torture1 {
+public class OrcishSpy1 extends CardImpl {
 
-    public Torture(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 61;
-        this.expansionSetCode = "5ED";
+    public OrcishSpy1(UUID ownerId) {
+        super(ownerId, 124, "Orcish Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Orc");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Look at the top three cards of target player's library.
+        Ability ability = new SimpleActivatedAbility(Zone.LIBRARY, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public Torture(final Torture card) {
+    public OrcishSpy1(final OrcishSpy1 card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public OrcishSpy1 copy() {
+        return new OrcishSpy1(this);
     }
 }

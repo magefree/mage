@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alliances;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.CantBlockAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Sir-Speshkitty
+ * @author LoneFox
+
  */
-public class AesthirGlider extends CardImpl {
+public class ThornThallid4 extends mage.sets.fallenempires.ThornThallid1 {
 
-    public AesthirGlider(UUID ownerId) {
-        super(ownerId, 156, "Aesthir Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "ALL";
-        this.subtype.add("Bird");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Aesthir Glider can't block.
-        this.addAbility(new CantBlockAbility());
+    public ThornThallid4(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 99;
     }
 
-    public AesthirGlider(final AesthirGlider card) {
+    public ThornThallid4(final ThornThallid4 card) {
         super(card);
     }
 
     @Override
-    public AesthirGlider copy() {
-        return new AesthirGlider(this);
+    public ThornThallid4 copy() {
+        return new ThornThallid4(this);
     }
 }

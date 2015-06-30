@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -78,7 +78,7 @@ class ParaseleneEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int count = 0;
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterEnchantment(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             if (permanent.destroy(source.getSourceId(), game, false)) {
                 count++;
             }

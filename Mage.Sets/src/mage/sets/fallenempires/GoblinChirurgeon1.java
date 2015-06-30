@@ -25,29 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author LevelX2
  */
-public class Torture extends mage.sets.homelands.Torture1 {
+public class GoblinChirurgeon1 extends CardImpl {
 
-    public Torture(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 61;
-        this.expansionSetCode = "5ED";
+    public GoblinChirurgeon1(UUID ownerId) {
+        super(ownerId, 110, "Goblin Chirurgeon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Goblin");
+        this.subtype.add("Shaman");
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+
+        // Sacrifice a Goblin: Regenerate target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new RegenerateTargetEffect(),
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Goblin","a Goblin"))));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public Torture(final Torture card) {
+    public GoblinChirurgeon1(final GoblinChirurgeon1 card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public GoblinChirurgeon1 copy() {
+        return new GoblinChirurgeon1(this);
     }
 }

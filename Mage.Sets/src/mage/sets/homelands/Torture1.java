@@ -48,11 +48,11 @@ import mage.target.common.TargetCreaturePermanent;
  * @author jeffwadsworth
 
  */
-public class Torture extends CardImpl {
-    
+public class Torture1 extends CardImpl {
+
     private static final String rule = "Testing rules";
 
-    public Torture(UUID ownerId) {
+    public Torture1(UUID ownerId) {
         super(ownerId, 23, "Torture", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "HML";
         this.subtype.add("Aura");
@@ -64,7 +64,7 @@ public class Torture extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // {1}{B}: Put a -1/-1 counter on enchanted creature.
         //this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), rule), new ManaCostsImpl("[1}{B}")));
         this.addAbility(new SimpleActivatedAbility(
@@ -73,12 +73,12 @@ public class Torture extends CardImpl {
                 new ManaCostsImpl("{1}{B}")));
     }
 
-    public Torture(final Torture card) {
+    public Torture1(final Torture1 card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public Torture1 copy() {
+        return new Torture1(this);
     }
 }

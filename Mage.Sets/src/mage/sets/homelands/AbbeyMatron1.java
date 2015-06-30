@@ -25,30 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.homelands;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author Quercitron
+ * @author Sir-Speshkitty
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+public class AbbeyMatron1 extends CardImpl {
 
-    public SoldeviSage(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+    public AbbeyMatron1(UUID ownerId) {
+        super(ownerId, 102, "Abbey Matron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "HML";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
+
+        // {W}, {tap}: Abbey Matron gets +0/+3 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public AbbeyMatron1(final AbbeyMatron1 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public AbbeyMatron1 copy() {
+        return new AbbeyMatron1(this);
     }
 }

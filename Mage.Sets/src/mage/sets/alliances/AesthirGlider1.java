@@ -25,47 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.sets.alliances;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.common.CantBlockAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
  * @author Sir-Speshkitty
  */
-public class AbbeyMatron extends CardImpl {
+public class AesthirGlider1 extends CardImpl {
 
-    public AbbeyMatron(UUID ownerId) {
-        super(ownerId, 103, "Abbey Matron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "HML";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+    public AesthirGlider1(UUID ownerId) {
+        super(ownerId, 156, "Aesthir Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "ALL";
+        this.subtype.add("Bird");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // {W}, {tap}: Abbey Matron gets +0/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0,3,Duration.EndOfTurn), new ManaCostsImpl("{W}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Aesthir Glider can't block.
+        this.addAbility(new CantBlockAbility());
     }
 
-    public AbbeyMatron(final AbbeyMatron card) {
+    public AesthirGlider1(final AesthirGlider1 card) {
         super(card);
     }
 
     @Override
-    public AbbeyMatron copy() {
-        return new AbbeyMatron(this);
+    public AesthirGlider1 copy() {
+        return new AesthirGlider1(this);
     }
 }

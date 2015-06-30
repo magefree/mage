@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
- */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+ * @author LoneFox
 
-    public SoldeviSage(UUID ownerId) {
+ */
+public class GoblinChirurgeon2 extends mage.sets.fallenempires.GoblinChirurgeon1 {
+
+    public GoblinChirurgeon2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 111;
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public GoblinChirurgeon2(final GoblinChirurgeon2 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public GoblinChirurgeon2 copy() {
+        return new GoblinChirurgeon2(this);
     }
 }

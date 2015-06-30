@@ -37,7 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -73,13 +73,13 @@ public class SphereOfSafety extends CardImpl {
 class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
 
     private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control";
-    private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
     private final PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
 
-    
+
     SphereOfSafetyReplacementEffect ( ) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
@@ -88,7 +88,7 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
     SphereOfSafetyReplacementEffect ( SphereOfSafetyReplacementEffect effect ) {
         super(effect);
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
@@ -124,7 +124,7 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
         }
         return false;
     }
-    
+
     @Override
     public SphereOfSafetyReplacementEffect copy() {
         return new SphereOfSafetyReplacementEffect(this);
