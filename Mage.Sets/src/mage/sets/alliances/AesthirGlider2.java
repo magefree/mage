@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+public class AesthirGlider2 extends mage.sets.alliances.AesthirGlider1 {
 
-    public SoldeviSage(UUID ownerId) {
+    public AesthirGlider2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 157;
+        this.expansionSetCode = "ALL";
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public AesthirGlider2(final AesthirGlider2 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public AesthirGlider2 copy() {
+        return new AesthirGlider2(this);
     }
 }

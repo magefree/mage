@@ -25,82 +25,79 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.odyssey;
+package mage.sets.exodus;
 
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author cbt33, Level_X2 (Horn of Plenty)
+ * @author LoneFox
+
  */
+public class ManaBreach extends CardImpl {
 
-public class UnifyingTheory extends CardImpl {
+    public ManaBreach(UUID ownerId) {
+        super(ownerId, 38, "Mana Breach", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        this.expansionSetCode = "EXO";
 
-    public UnifyingTheory(UUID ownerId) {
-        super(ownerId, 112, "Unifying Theory", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "ODY";
-
-
-        // Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
-        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
+        // Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
+        this.addAbility(new SpellCastAllTriggeredAbility(new ManaBreachEffect(), new FilterSpell(), false, SetTargetPointer.PLAYER));
     }
 
-    public UnifyingTheory(final UnifyingTheory card) {
+    public ManaBreach(final ManaBreach card) {
         super(card);
     }
 
     @Override
-    public UnifyingTheory copy() {
-        return new UnifyingTheory(this);
+    public ManaBreach copy() {
+        return new ManaBreach(this);
     }
 }
 
-class UnifyingTheoryEffect extends OneShotEffect {
+class ManaBreachEffect extends OneShotEffect {
 
-    public UnifyingTheoryEffect() {
+    public ManaBreachEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player may pay {2}. If the player does, he or she draws a card";
+        staticText="that player returns a land he or she controls to its owner's hand.";
     }
 
-    public UnifyingTheoryEffect(final UnifyingTheoryEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public UnifyingTheoryEffect copy() {
-        return new UnifyingTheoryEffect(this);
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
-        if (caster != null) {
-            if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", source, game)) {
-                Cost cost = new ManaCostsImpl("{2}");
-                if (cost.pay(source, game, source.getSourceId(), caster.getId(), false)) {
-                    caster.drawCards(1, game);
-                }
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if(player != null) {
+            FilterLandPermanent filter = new FilterLandPermanent("a land you control");
+            filter.add(new ControllerIdPredicate(player.getId()));
+            TargetLandPermanent toBounce = new TargetLandPermanent(1, 1, filter, true);
+            if(player.chooseTarget(Outcome.ReturnToHand, toBounce, source, game)) {
+                Permanent land = game.getPermanent(toBounce.getTargets().get(0));
+                land.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             }
             return true;
         }
         return false;
     }
+
+    public ManaBreachEffect(final ManaBreachEffect effect) {
+        super(effect);
+    }
+
+    public ManaBreachEffect copy() {
+        return new ManaBreachEffect(this);
+    }
+
 }

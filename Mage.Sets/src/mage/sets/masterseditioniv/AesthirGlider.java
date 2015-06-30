@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class AesthirGlider extends mage.sets.alliances.AesthirGlider {
+public class AesthirGlider extends mage.sets.alliances.AesthirGlider1 {
 
     public AesthirGlider(UUID ownerId) {
         super(ownerId);

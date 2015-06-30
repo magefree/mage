@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class ThornThallid extends mage.sets.fallenempires.ThornThallid {
+public class ThornThallid extends mage.sets.fallenempires.ThornThallid1 {
 
     public ThornThallid(UUID ownerId) {
         super(ownerId);

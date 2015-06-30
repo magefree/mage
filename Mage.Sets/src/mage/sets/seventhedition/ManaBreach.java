@@ -25,29 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.seventhedition;
 
 import java.util.UUID;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LoneFox
 
  */
-public class Torture extends mage.sets.homelands.Torture1 {
+public class ManaBreach extends mage.sets.exodus.ManaBreach {
 
-    public Torture(UUID ownerId) {
+    public ManaBreach(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 85;
+        this.expansionSetCode = "7ED";
     }
 
-    public Torture(final Torture card) {
+    public ManaBreach(final ManaBreach card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public ManaBreach copy() {
+        return new ManaBreach(this);
     }
 }

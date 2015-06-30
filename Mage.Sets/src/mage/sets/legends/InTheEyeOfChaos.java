@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -48,7 +49,7 @@ import mage.players.Player;
  * @author emerald000
  */
 public class InTheEyeOfChaos extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("an instant spell");
     static {
             filter.add(new CardTypePredicate(CardType.INSTANT));
@@ -61,7 +62,7 @@ public class InTheEyeOfChaos extends CardImpl {
 
 
         // Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.
-        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new InTheEyeOfChaosEffect(), filter, false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new InTheEyeOfChaosEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
     public InTheEyeOfChaos(final InTheEyeOfChaos card) {
@@ -75,21 +76,21 @@ public class InTheEyeOfChaos extends CardImpl {
 }
 
 class InTheEyeOfChaosEffect extends OneShotEffect {
-    
+
     InTheEyeOfChaosEffect() {
         super(Outcome.Detriment);
         this.staticText = "counter it unless that player pays {X}, where X is its converted mana cost";
     }
-    
+
     InTheEyeOfChaosEffect(final InTheEyeOfChaosEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public InTheEyeOfChaosEffect copy() {
         return new InTheEyeOfChaosEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));

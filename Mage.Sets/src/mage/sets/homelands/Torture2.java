@@ -25,30 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.homelands;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Quercitron
+ * @author fireshoes
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+public class Torture2 extends mage.sets.homelands.Torture1 {
 
-    public SoldeviSage(UUID ownerId) {
+    public Torture2(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+        this.cardNumber = 24;
+        this.expansionSetCode = "HML";
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public Torture2(final Torture2 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public Torture2 copy() {
+        return new Torture2(this);
     }
 }

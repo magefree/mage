@@ -25,30 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author Quercitron
+ * @author dustinconrad
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+public class BrassclawOrcs1 extends CardImpl {
 
-    public SoldeviSage(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public BrassclawOrcs1(UUID ownerId) {
+        super(ownerId, 100, "Brassclaw Orcs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Orc");
+
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        // Brassclaw Orcs can't block creatures with power 2 or greater.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+
+    }
+
+    public BrassclawOrcs1(final BrassclawOrcs1 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public BrassclawOrcs1 copy() {
+        return new BrassclawOrcs1(this);
     }
 }

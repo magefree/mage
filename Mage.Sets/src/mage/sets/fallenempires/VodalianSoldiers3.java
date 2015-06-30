@@ -28,47 +28,25 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
-public class GoblinChirurgeon extends CardImpl {
+public class VodalianSoldiers3 extends mage.sets.fifthedition.VodalianSoldiers {
 
-    public GoblinChirurgeon(UUID ownerId) {
-        super(ownerId, 110, "Goblin Chirurgeon", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+    public VodalianSoldiers3(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 64;
         this.expansionSetCode = "FEM";
-        this.subtype.add("Goblin");
-        this.subtype.add("Shaman");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-
-        // Sacrifice a Goblin: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
-                new RegenerateTargetEffect(), 
-                new SacrificeTargetCost(new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("Goblin","a Goblin"))));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
     }
 
-    public GoblinChirurgeon(final GoblinChirurgeon card) {
+    public VodalianSoldiers3(final VodalianSoldiers3 card) {
         super(card);
     }
 
     @Override
-    public GoblinChirurgeon copy() {
-        return new GoblinChirurgeon(this);
+    public VodalianSoldiers3 copy() {
+        return new VodalianSoldiers3(this);
     }
 }

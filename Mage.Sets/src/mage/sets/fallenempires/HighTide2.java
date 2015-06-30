@@ -25,51 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.homelands;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class CemeteryGate extends CardImpl {
-    
-    private static final FilterCard filter = new FilterCard("Black");
-    
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
+public class HighTide2 extends mage.sets.fallenempires.HighTide1 {
+
+    public HighTide2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 36;
     }
 
-    public CemeteryGate(UUID ownerId) {
-        super(ownerId, 5, "Cemetery Gate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
-        this.expansionSetCode = "HML";
-        this.subtype.add("Wall");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(5);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        
-        // Protection from black
-        this.addAbility(new ProtectionAbility(filter));
-    }
-
-    public CemeteryGate(final CemeteryGate card) {
+    public HighTide2(final HighTide2 card) {
         super(card);
     }
 
     @Override
-    public CemeteryGate copy() {
-        return new CemeteryGate(this);
+    public HighTide2 copy() {
+        return new HighTide2(this);
     }
 }

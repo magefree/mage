@@ -25,29 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.fifthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author jeffwadsworth
-
+ * @author North
  */
-public class Torture extends mage.sets.homelands.Torture1 {
+public class Thallid3 extends mage.sets.timeshifted.Thallid {
 
-    public Torture(UUID ownerId) {
+    public Thallid3(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 61;
-        this.expansionSetCode = "5ED";
+        this.cardNumber = 89;
+        this.expansionSetCode = "FEM";
+        this.rarity = Rarity.COMMON;
     }
 
-    public Torture(final Torture card) {
+    public Thallid3(final Thallid3 card) {
         super(card);
     }
 
     @Override
-    public Torture copy() {
-        return new Torture(this);
+    public Thallid3 copy() {
+        return new Thallid3(this);
     }
 }

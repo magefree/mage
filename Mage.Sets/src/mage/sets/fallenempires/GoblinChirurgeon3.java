@@ -28,47 +28,25 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBlockCreaturesSourceEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author dustinconrad
+ * @author LoneFox
+
  */
-public class BrassclawOrcs extends CardImpl {
+public class GoblinChirurgeon3 extends mage.sets.fallenempires.GoblinChirurgeon1 {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 2 or greater");
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 1));
+    public GoblinChirurgeon3(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 112;
     }
 
-    public BrassclawOrcs(UUID ownerId) {
-        super(ownerId, 100, "Brassclaw Orcs", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "FEM";
-        this.subtype.add("Orc");
-
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
-
-        // Brassclaw Orcs can't block creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
-
-    }
-
-    public BrassclawOrcs(final BrassclawOrcs card) {
+    public GoblinChirurgeon3(final GoblinChirurgeon3 card) {
         super(card);
     }
 
     @Override
-    public BrassclawOrcs copy() {
-        return new BrassclawOrcs(this);
+    public GoblinChirurgeon3 copy() {
+        return new GoblinChirurgeon3(this);
     }
 }

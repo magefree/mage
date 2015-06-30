@@ -28,41 +28,27 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author anonymous
+ * @author North
  */
-public class OrcishSpy extends CardImpl {
+public class Thallid2 extends mage.sets.timeshifted.Thallid {
 
-    public OrcishSpy(UUID ownerId) {
-        super(ownerId, 124, "Orcish Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
+    public Thallid2(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 88;
         this.expansionSetCode = "FEM";
-        this.subtype.add("Orc");
-        this.subtype.add("Rogue");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {tap}: Look at the top three cards of target player's library.
-        Ability ability = new SimpleActivatedAbility(Zone.LIBRARY, new LookLibraryTopCardTargetPlayerEffect(3), new TapSourceCost());
-        this.addAbility(ability);
+        this.rarity = Rarity.COMMON;
     }
 
-    public OrcishSpy(final OrcishSpy card) {
+    public Thallid2(final Thallid2 card) {
         super(card);
     }
 
     @Override
-    public OrcishSpy copy() {
-        return new OrcishSpy(this);
+    public Thallid2 copy() {
+        return new Thallid2(this);
     }
 }

@@ -41,8 +41,8 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -55,9 +55,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class AmbushCommander extends CardImpl {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("an Elf");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Forests you control");
 
     static {
         filter.add(new SubtypePredicate("Elf"));
+        filter2.add(new SubtypePredicate("Forest"));
     }
 
     public AmbushCommander(UUID ownerId) {
@@ -69,9 +71,11 @@ public class AmbushCommander extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Forests you control are 1/1 green Elf creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new AmbushCommanderToken(), "lands", new FilterPermanent("Forest", "Forests"), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(new AmbushCommanderToken(),
+            "lands", filter2, Duration.WhileOnBattlefield)));
         // {1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(3,3, Duration.EndOfTurn),
+            new ManaCostsImpl("{1}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -25,30 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.classicsixthedition;
+package mage.sets.fallenempires;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.RemoveCountersSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Quercitron
+ * @author fireshoes
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
+public class ThornThallid1 extends CardImpl {
 
-    public SoldeviSage(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 99;
-        this.expansionSetCode = "6ED";
-        this.rarity = Rarity.UNCOMMON;
+    public ThornThallid1(UUID ownerId) {
+        super(ownerId, 96, "Thorn Thallid", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
+        this.expansionSetCode = "FEM";
+        this.subtype.add("Fungus");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // At the beginning of your upkeep, put a spore counter on Thorn Thallid.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
+        // Remove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(1),
+                new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3)));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    public ThornThallid1(final ThornThallid1 card) {
         super(card);
     }
 
     @Override
-    public SoldeviSage copy() {
-        return new SoldeviSage(this);
+    public ThornThallid1 copy() {
+        return new ThornThallid1(this);
     }
 }

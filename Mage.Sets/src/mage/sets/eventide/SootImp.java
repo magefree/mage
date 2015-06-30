@@ -40,11 +40,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
@@ -52,9 +52,9 @@ import mage.players.Player;
  * @author jeffwadsworth
  */
 public class SootImp extends CardImpl {
-    
+
     static final private FilterSpell filter = new FilterSpell("a nonblack spell");
-    
+
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
@@ -69,10 +69,10 @@ public class SootImp extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Whenever a player casts a nonblack spell, that player loses 1 life.
-        this.addAbility(new SpellCastAllTriggeredAbility(new SootImpEffect(), filter, false, true));
-        
+        this.addAbility(new SpellCastAllTriggeredAbility(new SootImpEffect(), filter, false, SetTargetPointer.PLAYER));
+
     }
 
     public SootImp(final SootImp card) {
@@ -103,11 +103,7 @@ class SootImpEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        Player caster = null;
-        if (spell != null) {
-            caster = game.getPlayer(spell.getControllerId());
-        }
+        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
             caster.loseLife(1, game);
             return true;
