@@ -40,7 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -89,7 +89,7 @@ class HarmonicConvergenceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> enchantments = game.getBattlefield().getActivePermanents(new FilterEnchantment(),
+        List<Permanent> enchantments = game.getBattlefield().getActivePermanents(new FilterEnchantmentPermanent(),
                 source.getControllerId(),
                 source.getSourceId(),
                 game);

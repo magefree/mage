@@ -46,7 +46,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class EtherealArmor extends CardImpl {
 
-    private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -77,7 +77,7 @@ public class EtherealArmor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each enchantment you control and has first strike.
-        PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(new FilterEnchantment(filter));
+        PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(new FilterEnchantmentPermanent(filter));
         SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(countEnchantments, countEnchantments, Duration.WhileOnBattlefield));
         ability2.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA));
         this.addAbility(ability2);

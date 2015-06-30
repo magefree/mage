@@ -40,7 +40,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -48,8 +48,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  * @author fireshoes
  */
 public class HelmOfTheGods extends CardImpl {
-    
-    private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
+
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -61,11 +61,11 @@ public class HelmOfTheGods extends CardImpl {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+1 for each enchantment you control.
-        PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(new FilterEnchantment(filter));
+        PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(new FilterEnchantmentPermanent(filter));
         Effect effect = new BoostEquippedEffect(countEnchantments, countEnchantments);
         effect.setText("Equipped creature gets +1/+1 for each enchantment you control");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

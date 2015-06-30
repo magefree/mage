@@ -42,7 +42,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -88,7 +88,7 @@ public class KitsuneMystic extends CardImpl {
 
 class AutumnTailKitsuneSage extends Token {
 
-    private static final FilterEnchantment filter = new FilterEnchantment("Aura attached to a creature");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura attached to a creature");
 
     static {
         filter.add(new AttachmentAttachedToCardTypePredicate(CardType.CREATURE));
