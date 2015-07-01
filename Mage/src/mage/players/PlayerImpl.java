@@ -2043,6 +2043,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game) {
+        if (isHuman()) {
+            setStoredBookmark(game.bookmarkState());
+        }
         Permanent blocker = game.getPermanent(blockerId);
         CombatGroup group = game.getCombat().findGroup(attackerId);
         if (blocker != null && group != null && group.canBlock(blocker, game)) {

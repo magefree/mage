@@ -69,7 +69,7 @@ public class OppressiveRays extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature can't attack or block unless its controller pays 3.
+        // Enchanted creature can't attack or block unless its controller pays {3}.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
 
         // Activated abilities of enchanted creature cost {3} more to activate.

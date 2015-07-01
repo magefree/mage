@@ -263,7 +263,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
             if (mustAttack) {
-                // check which defenders the forced to attck creature can attack without paying a cost
+                // check which defenders the forced to attack creature can attack without paying a cost
                 HashSet<UUID> defendersCostlessAttackable = new HashSet<>();
                 defendersCostlessAttackable.addAll(defenders);
                 for (UUID defenderId : defenders) {
@@ -501,6 +501,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                         UUID attackingCreatureId = requirementEntry.getKey().mustBlockAttacker(ability, game);
                         Player defender = game.getPlayer(possibleBlocker.getControllerId());
                         if (attackingCreatureId != null && defender != null && possibleBlocker.canBlock(attackingCreatureId, game)) {
+                            // check if the possible blocker has to pay cost to block, if so don't force
+                            if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
+                                    GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackingCreatureId, possibleBlocker.getId(), possibleBlocker.getControllerId()), game)) {
+                                // has cost to block to pay so remove this attacker
+                                continue;
+                            }
                             if (creatureMustBlockAttackers.containsKey(possibleBlocker.getId())) {
                                 creatureMustBlockAttackers.get(possibleBlocker.getId()).add(attackingCreatureId);
                             } else {
@@ -734,6 +740,21 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (creatureForcedToBlock == null) {
                 break;
             }
+
+//            // check if creature has to pay a cost to block so it's not mandatory to block
+//            boolean removedAttacker = false;
+//            for (Iterator<UUID> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+//                UUID possibleAttackerId = iterator.next();
+//                if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
+//                        GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, possibleAttackerId, creatureForcedToBlock.getId(), creatureForcedToBlock.getControllerId()), game)) {
+//                    // has cost to block to pay so remove this attacker
+//                    iterator.remove();
+//                    removedAttacker = true;
+//                }
+//            }
+//            if (removedAttacker && entry.getValue().isEmpty()) {
+//                continue;
+//            }
             // creature does not block -> not allowed
             if (creatureForcedToBlock.getBlocking() == 0) {
                 blockIsValid = false;
@@ -765,7 +786,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             }
             if (!blockIsValid) {
-                sb.append(" ").append(creatureForcedToBlock.getLogName());
+                sb.append(" ").append(creatureForcedToBlock.getIdName());
             }
         }
         if (sb.length() > 0) {

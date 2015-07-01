@@ -964,7 +964,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), false, getOptions(target, null));
+        game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName("Select attacker to block", blockerId, game), target.possibleTargets(null, playerId, game), false, getOptions(target, null));
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing
