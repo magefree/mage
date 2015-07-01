@@ -2459,6 +2459,22 @@ public abstract class PlayerImpl implements Player, Serializable {
                     }
                 }
             }
+            // check if it's possible to play the top card of a library
+            for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                Player player = game.getPlayer(playerInRangeId);
+                if (player != null) {
+                    if (player.isTopCardRevealed() && player.getLibrary().size() > 0) {
+                        Card card = player.getLibrary().getFromTop(game);
+                        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, getId(), game)) {
+                            for (ActivatedAbility ability : card.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                                if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
+                                    playable.add(ability);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             // eliminate duplicate activated abilities
             Map<String, Ability> playableActivated = new HashMap<>();
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {

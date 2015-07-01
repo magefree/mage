@@ -29,6 +29,7 @@ package mage.sets.urzassaga;
 
 import java.util.Set;
 import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -51,7 +52,6 @@ public class Persecute extends CardImpl {
     public Persecute(UUID ownerId) {
         super(ownerId, 146, "Persecute", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "USG";
-
 
         // Choose a color. Target player reveals his or her hand and discards all cards of that color.
         this.getSpellAbility().addEffect(new PersecuteEffect());
@@ -88,19 +88,20 @@ class PersecuteEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getFirstTarget());
-        if (controller != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null) {
             ChoiceColor choice = new ChoiceColor();
             while (!choice.isChosen()) {
                 controller.choose(outcome, choice, game);
                 if (!controller.isInGame()) {
                     return false;
                 }
-            }            
+            }
             if (choice.getColor() == null) {
                 return false;
             }
             Cards hand = controller.getHand();
-            controller.revealCards("Persecute", hand, game);
+            controller.revealCards(sourceObject.getIdName(), hand, game);
             Set<Card> cards = hand.getCards(game);
             for (Card card : cards) {
                 if (card != null && card.getColor(game).shares(choice.getColor())) {
