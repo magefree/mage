@@ -30,7 +30,7 @@ package mage.sets.tempest;
 import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.replacement.CantAttackYouUnlessPayManaAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;

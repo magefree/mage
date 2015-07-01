@@ -29,18 +29,14 @@ package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -57,10 +53,10 @@ public class BlazingArchon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlazingArchonRestrictionEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
+
     }
 
     public BlazingArchon(final BlazingArchon card) {
@@ -70,32 +66,5 @@ public class BlazingArchon extends CardImpl {
     @Override
     public BlazingArchon copy() {
         return new BlazingArchon(this);
-    }
-}
-
-class BlazingArchonRestrictionEffect extends RestrictionEffect {
-   
-    BlazingArchonRestrictionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Creatures can't attack you";
-    }
-
-    BlazingArchonRestrictionEffect(final BlazingArchonRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
-    }
-
-    @Override
-    public BlazingArchonRestrictionEffect copy() {
-        return new BlazingArchonRestrictionEffect(this);
     }
 }

@@ -25,46 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.saviorsofkamigawa;
+package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.Filter;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class Reverence extends CardImpl {
+public class CantAttackYouAllEffect extends RestrictionEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 2 or less");
+    private final FilterCreaturePermanent filterAttacker;
 
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+    public CantAttackYouAllEffect(Duration duration) {
+        this(duration, new FilterCreaturePermanent());
     }
 
-    public Reverence(UUID ownerId) {
-        super(ownerId, 26, "Reverence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
-        this.expansionSetCode = "SOK";
-
-        // Creatures with power 2 or less can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
+    public CantAttackYouAllEffect(Duration duration, FilterCreaturePermanent filter) {
+        super(duration, Outcome.Benefit);
+        this.filterAttacker = filter;
+        staticText = "Creatures can't attack you";
     }
 
-    public Reverence(final Reverence card) {
-        super(card);
+    CantAttackYouAllEffect(final CantAttackYouAllEffect effect) {
+        super(effect);
+        this.filterAttacker = effect.filterAttacker;
     }
 
     @Override
-    public Reverence copy() {
-        return new Reverence(this);
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return filterAttacker.match(permanent, source.getSourceId(), source.getControllerId(), game);
+    }
+
+    @Override
+    public boolean canAttack(UUID defenderId, Ability source, Game game) {
+        return !defenderId.equals(source.getControllerId());
+    }
+
+    @Override
+    public CantAttackYouAllEffect copy() {
+        return new CantAttackYouAllEffect(this);
     }
 }

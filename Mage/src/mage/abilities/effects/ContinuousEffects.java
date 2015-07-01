@@ -336,7 +336,8 @@ public class ContinuousEffects implements Serializable {
                     if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
                         if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                             if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
-                                if (effect.applies(event, ability, game)) {
+                                if (effect.applies(event, ability, game)
+                                        && !((PayCostToAttackBlockEffect) effect).isCostless(event, ability, game)) {
                                     return true;
                                 }
                             }
