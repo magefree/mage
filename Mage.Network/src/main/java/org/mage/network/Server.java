@@ -28,9 +28,13 @@ import mage.choices.Choice;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DraftClientMessage;
+import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
+import mage.view.TableClientMessage;
+import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.handlers.ExceptionHandler;
@@ -40,6 +44,8 @@ import org.mage.network.handlers.server.ConnectionHandler;
 import org.mage.network.handlers.server.HeartbeatHandler;
 import org.mage.network.handlers.server.ServerRequestHandler;
 import org.mage.network.interfaces.MageServer;
+import org.mage.network.messages.MessageType;
+import org.mage.network.messages.PingMessage;
 import org.mage.network.messages.callback.ChatMessageCallback;
 import org.mage.network.messages.callback.GameAskCallback;
 import org.mage.network.messages.callback.GameChooseAbilityCallback;
@@ -60,8 +66,6 @@ import org.mage.network.messages.callback.GameTargetCallback;
 import org.mage.network.messages.callback.GameUpdateCallback;
 import org.mage.network.messages.callback.InformClientCallback;
 import org.mage.network.messages.callback.JoinedTableCallback;
-import org.mage.network.messages.MessageType;
-import org.mage.network.messages.PingMessage;
 import org.mage.network.messages.callback.UserRequestDialogCallback;
 
 /**
@@ -292,6 +296,81 @@ public class Server {
         Channel ch = findChannel(sessionId);
         if (ch != null)
             ch.writeAndFlush(new GameErrorCallback(gameId, message)).addListener(WriteListener.getInstance());
+    }
+    
+    public void showGameEndDialog(String sessionId, UUID gameId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void startDraft(String sessionId, UUID draftId, TableClientMessage tableClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void draftInit(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void draftUpdate(String sessionId, UUID draftId, DraftView draftView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void draftInform(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void draftOver(String sessionId, UUID draftId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void draftPick(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void sideboard(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void construct(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void showTournament(String sessionId, UUID tournamentId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void tournamentInit(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void tournamentUpdate(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void tournamentOver(String sessionId, UUID tournamentId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public void watchGame(String sessionId, UUID gameId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void replayGame(String sessionId, UUID gameId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void replayInit(String sessionId, UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void replayDone(String sessionId, UUID gameId, String result) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void replayUpdate(String sessionId, UUID gameId, GameView gameView) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

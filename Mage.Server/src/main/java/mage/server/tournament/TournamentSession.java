@@ -30,14 +30,12 @@ package mage.server.tournament;
 
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
-import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
-import java.rmi.RemoteException;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -70,7 +68,7 @@ public class TournamentSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentInit", tournament.getId(), getTournamentView()));
+                user.tournamentInit(tournament.getId(), getTournamentView());
                 return true;
             }
         }
@@ -81,7 +79,7 @@ public class TournamentSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentUpdate", tournament.getId(), getTournamentView()));
+                user.tournamentUpdate(tournament.getId(), getTournamentView());
             }
         }
     }
@@ -90,7 +88,7 @@ public class TournamentSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("tournamentOver", tournament.getId(), message));
+                user.tournamentOver(tournament.getId(), message);
             }
         }
     }
@@ -101,7 +99,7 @@ public class TournamentSession {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                user.ccConstruct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
+                user.construct(tournament.getPlayer(playerId).getDeck(), tableId, remaining);
             }
         }
     }

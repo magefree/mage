@@ -43,7 +43,6 @@ import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.game.Table;
 import mage.game.tournament.TournamentPlayer;
-import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.remote.DisconnectReason;
@@ -56,10 +55,14 @@ import mage.server.tournament.TournamentSession;
 import mage.server.util.SystemUtil;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
+import mage.view.ChatMessage;
+import mage.view.DraftClientMessage;
+import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
+import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.messages.MessageType;
@@ -187,15 +190,15 @@ public class User {
         return connectionTime;
     }
 
-    public void fireCallback(final ClientCallback call) {
-        if (isConnected()) {
-            Session session = SessionManager.getInstance().getSession(sessionId);
-            if (session != null) {
-                
+//    public void fireCallback(final ClientCallback call) {
+//        if (isConnected()) {
+//            Session session = SessionManager.getInstance().getSession(sessionId);
+//            if (session != null) {
+//                
 //                session.fireCallback(call);
-            }
-        }
-    }
+//            }
+//        }
+//    }
 
     public void joinedTable(final UUID roomId, final UUID tableId, final UUID chatId, boolean owner, boolean tournament) {
 //        fireCallback(new ClientCallback("joinedTable", tableId, new TableClientMessage(roomId, tableId, isTournament)));
@@ -275,29 +278,65 @@ public class User {
         ServerMain.getInstance().gameError(sessionId, gameId, message);
     }
 
-    public void ccDraftStarted(final UUID draftId, final UUID playerId) {
-        fireCallback(new ClientCallback("startDraft", draftId, new TableClientMessage(draftId, playerId)));
-    }
-
-    public void ccTournamentStarted(final UUID tournamentId, final UUID playerId) {
-        fireCallback(new ClientCallback("startTournament", tournamentId, new TableClientMessage(tournamentId, playerId)));
-    }
-
-    public void ccSideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        fireCallback(new ClientCallback("sideboard", tableId, new TableClientMessage(deck, tableId, time, limited)));
+    public void sideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
+        ServerMain.getInstance().sideboard(sessionId, tableId, new TableClientMessage(deck, tableId, time, limited));
         sideboarding.put(tableId, deck);
     }
 
-    public void ccConstruct(final Deck deck, final UUID tableId, final int time) {
-        fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
+    public void construct(final Deck deck, final UUID tableId, final int time) {
+        ServerMain.getInstance().construct(sessionId, tableId, new TableClientMessage(deck, tableId, time));
     }
 
-    public void ccShowTournament(final UUID tournamentId) {
-        fireCallback(new ClientCallback("showTournament", tournamentId));
+    public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
+        ServerMain.getInstance().startTournament(sessionId, tournamentId, new TableClientMessage(tournamentId, playerId));
     }
 
-    public void ccShowGameEndDialog(final UUID gameId) {
-        fireCallback(new ClientCallback("showGameEndDialog", gameId));
+    public void showTournament(final UUID tournamentId) {
+        ServerMain.getInstance().showTournament(sessionId, tournamentId);
+    }
+
+    public void tournamentInit(UUID tournamentId, TournamentView tournamentView) {
+        ServerMain.getInstance().tournamentInit(sessionId, tournamentId, tournamentView);
+    }
+
+    public void tournamentUpdate(UUID tournamentId, TournamentView tournamentView) {
+        ServerMain.getInstance().tournamentUpdate(sessionId, tournamentId, tournamentView);
+    }
+
+    public void tournamentOver(UUID tournamentId, String message) {
+        ServerMain.getInstance().tournamentOver(sessionId, tournamentId);
+    }
+
+    public void showGameEndDialog(final UUID gameId) {
+        ServerMain.getInstance().showGameEndDialog(sessionId, gameId);
+    }
+
+    public void draftStarted(final UUID draftId, final UUID playerId) {
+        ServerMain.getInstance().startDraft(sessionId, draftId, new TableClientMessage(draftId, playerId));
+    }
+
+    public void draftInit(UUID draftId, DraftClientMessage draftClientMessage) {
+        ServerMain.getInstance().draftInit(sessionId, draftId, draftClientMessage);
+    }
+
+    public void draftUpdate(UUID draftId, DraftView draftView) {
+        ServerMain.getInstance().draftUpdate(sessionId, draftId, draftView);
+    }
+
+    public void draftInform(UUID draftId, DraftClientMessage draftClientMessage) {
+        ServerMain.getInstance().draftInform(sessionId, draftId, draftClientMessage);
+    }
+
+    public void draftOver(UUID draftId) {
+        ServerMain.getInstance().draftOver(sessionId, draftId);
+    }
+
+    public void draftPick(UUID draftId, DraftClientMessage draftClientMessage) {
+        ServerMain.getInstance().draftPick(sessionId, draftId, draftClientMessage);
+    }
+
+    public void chatMessage(UUID chatId, ChatMessage chatMessage) {
+        ServerMain.getInstance().sendChatMessage(sessionId, chatId, chatMessage);
     }
 
     public void showUserMessage(final String title,  String message) {
@@ -308,13 +347,25 @@ public class User {
         ServerMain.getInstance().informClient(sessionId, title, message, MessageType.ERROR);
     }
 
-    public boolean ccWatchGame(final UUID gameId) {
-        fireCallback(new ClientCallback("watchGame", gameId));
+    public boolean watchGame(final UUID gameId) {
+        ServerMain.getInstance().watchGame(sessionId, gameId);
         return true;
     }
 
-    public void ccReplayGame(final UUID gameId) {
-        fireCallback(new ClientCallback("replayGame", gameId));
+    public void replayGame(final UUID gameId) {
+        ServerMain.getInstance().replayGame(sessionId, gameId);
+    }
+
+    public void replayInit(UUID gameId, GameView gameView) {
+        ServerMain.getInstance().replayInit(sessionId, gameId, gameView);
+    }
+
+    public void replayDone(UUID gameId, String result) {
+        ServerMain.getInstance().replayDone(sessionId, gameId, result);
+    }
+
+    public void replayUpdate(UUID gameId, GameView gameView) {
+        ServerMain.getInstance().replayUpdate(sessionId, gameId, gameView);
     }
 
     public void sendPlayerUUID(final UUID gameId, final UUID data) {
@@ -370,7 +421,7 @@ public class User {
         for (Entry<UUID, UUID> entry : userTournaments.entrySet()) {
             TournamentController tournamentController = TournamentManager.getInstance().getTournamentController(entry.getValue());
             if (tournamentController != null) {
-                ccTournamentStarted(entry.getValue(), entry.getKey());
+                tournamentStarted(entry.getValue(), entry.getKey());
                 tournamentController.rejoin(entry.getKey());
             }
         }
@@ -382,7 +433,7 @@ public class User {
         }
 
         for (Entry<UUID, DraftSession> entry : draftSessions.entrySet()) {
-            ccDraftStarted(entry.getValue().getDraftId(), entry.getKey());
+            draftStarted(entry.getValue().getDraftId(), entry.getKey());
             entry.getValue().init();
             entry.getValue().update();
         }
@@ -392,7 +443,7 @@ public class User {
         }
         for (Entry<UUID, Deck> entry : sideboarding.entrySet()) {
             TableController controller = TableManager.getInstance().getController(entry.getKey());
-            ccSideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
+            sideboard(entry.getValue(), entry.getKey(), controller.getRemainingTime(), controller.getOptions().isLimited());
         }
     }
 

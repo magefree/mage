@@ -16,9 +16,9 @@ import mage.view.TableView;
 import mage.view.UserDataView;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
+import org.mage.network.messages.ClientMessage;
 import org.mage.network.messages.requests.ChatMessageRequest;
 import org.mage.network.messages.requests.ChatRoomIdRequest;
-import org.mage.network.messages.ClientMessage;
 import org.mage.network.messages.requests.CreateTableRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
 import org.mage.network.messages.requests.JoinChatRequest;
@@ -40,6 +40,7 @@ import org.mage.network.messages.requests.StartMatchRequest;
 import org.mage.network.messages.requests.SubmitDeckRequest;
 import org.mage.network.messages.requests.SwapSeatRequest;
 import org.mage.network.messages.requests.TableWaitingRequest;
+import org.mage.network.messages.requests.UpdateDeckRequest;
 
 /**
  *
@@ -128,6 +129,10 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         booleanQueue.clear();
         ctx.writeAndFlush(new SubmitDeckRequest(tableId, deckCardLists)).addListener(WriteListener.getInstance());
         return booleanQueue.take();
+    }
+
+    public void updateDeck(UUID tableId, DeckCardLists deckCardLists) throws Exception {
+        ctx.writeAndFlush(new UpdateDeckRequest(tableId, deckCardLists)).addListener(WriteListener.getInstance());
     }
 
     public void sendFeedback(String title, String type, String message, String email) {

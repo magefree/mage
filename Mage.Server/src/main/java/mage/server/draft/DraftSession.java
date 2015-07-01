@@ -35,7 +35,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.game.draft.Draft;
-import mage.interfaces.callback.ClientCallback;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
@@ -74,7 +73,7 @@ public class DraftSession {
             if (user != null) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.fireCallback(new ClientCallback("draftInit", draft.getId(), new DraftClientMessage(getDraftPickView(remaining))));
+                    user.draftInit(draft.getId(), new DraftClientMessage(getDraftPickView(remaining)));
                 }
                 return true;
             }
@@ -86,7 +85,7 @@ public class DraftSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("draftUpdate", draft.getId(), getDraftView()));
+                user.draftUpdate(draft.getId(), getDraftView());
             }
         }
     }
@@ -97,7 +96,7 @@ public class DraftSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("draftInform", draft.getId(), new DraftClientMessage(getDraftView(), message)));
+                user.draftInform(draft.getId(), new DraftClientMessage(getDraftView(), message));
             }
         }
     }
@@ -106,7 +105,7 @@ public class DraftSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("draftOver", draft.getId()));
+                user.draftOver(draft.getId());
             }
         }
     }
@@ -116,7 +115,7 @@ public class DraftSession {
             setupTimeout(timeout);
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("draftPick", draft.getId(), new DraftClientMessage(getDraftPickView(timeout))));
+                user.draftPick(draft.getId(), new DraftClientMessage(getDraftPickView(timeout)));
             }
         }
     }

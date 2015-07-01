@@ -73,11 +73,15 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.DraftClientMessage;
+import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
+import mage.view.TableClientMessage;
 import mage.view.TableView;
+import mage.view.TournamentView;
 import mage.view.UserDataView;
 import mage.view.UserRequestMessage;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -332,18 +336,13 @@ public class ServerMain implements MageServer {
         return ret;
     }
 
-//    @Override
-//    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
-//        execute("updateDeck", sessionId, new Action() {
-//            @Override
-//            public void execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableManager.getInstance().updateDeck(userId, tableId, deckList);
-//                logger.trace("Session " + sessionId + " updated deck");
-//            }
-//        });
-//    }
-//
+    @Override
+    public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        TableManager.getInstance().updateDeck(userId, tableId, deckList);
+        logger.trace("Session " + sessionId + " updated deck");
+    }
+
     @Override
     public RoomView getRoom(UUID roomId) {
         GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
@@ -1270,6 +1269,82 @@ public class ServerMain implements MageServer {
 
     public void gameError(String sessionId, UUID gameId, String message) {
         server.gameError(sessionId, gameId, message);
+    }
+
+    public void startDraft(String sessionId, UUID draftId, TableClientMessage tableClientMessage) {
+        server.startDraft(sessionId, draftId, tableClientMessage);
+    }
+
+    public void draftInit(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        server.draftInit(sessionId, draftId, draftClientMessage);
+    }
+
+    public void draftUpdate(String sessionId, UUID draftId, DraftView draftView) {
+        server.draftUpdate(sessionId, draftId, draftView);
+    }
+
+    public void draftInform(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        server.draftInform(sessionId, draftId, draftClientMessage);
+    }
+
+    public void draftOver(String sessionId, UUID draftId) {
+        server.draftOver(sessionId, draftId);
+    }
+
+    public void draftPick(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+        server.draftPick(sessionId, draftId, draftClientMessage);
+    }
+
+    public void sideboard(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
+        server.sideboard(sessionId, tableId, tableClientMessage);
+    }
+
+    public void construct(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
+        server.construct(sessionId, tableId, tableClientMessage);
+    }
+
+    public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {
+        server.startTournament(sessionId, tournamentId, tableClientMessage);
+    }
+
+    public void showTournament(String sessionId, UUID tournamentId) {
+        server.showTournament(sessionId, tournamentId);
+    }
+
+    public void tournamentInit(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+        server.tournamentInit(sessionId, tournamentId, tournamentView);
+    }
+
+    public void tournamentUpdate(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+        server.tournamentUpdate(sessionId, tournamentId, tournamentView);
+    }
+
+    public void tournamentOver(String sessionId, UUID tournamentId) {
+        server.tournamentOver(sessionId, tournamentId);
+    }
+
+    public void showGameEndDialog(String sessionId, UUID gameId) {
+        server.showGameEndDialog(sessionId, gameId);
+    }
+
+    public void watchGame(String sessionId, UUID gameId) {
+        server.watchGame(sessionId, gameId);
+    }
+
+    public void replayGame(String sessionId, UUID gameId) {
+        server.replayGame(sessionId, gameId);
+    }
+
+    public void replayInit(String sessionId, UUID gameId, GameView gameView) {
+        server.replayInit(sessionId, gameId, gameView);
+    }
+
+    public void replayDone(String sessionId, UUID gameId, String result) {
+        server.replayDone(sessionId, gameId, result);
+    }
+
+    public void replayUpdate(String sessionId, UUID gameId, GameView gameView) {
+        server.replayUpdate(sessionId, gameId, gameView);
     }
 
 }

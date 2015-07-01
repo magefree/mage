@@ -36,7 +36,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
@@ -120,7 +119,7 @@ public class ChatSession {
 
     public boolean broadcastInfoToUser(User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.BLUE, MessageType.USER_INFO, null)));
+            toUser.chatMessage(chatId, new ChatMessage(null, message, timeFormatter.format(new Date()), MessageColor.BLUE, MessageType.USER_INFO, null));
             return true;
         }
         return false;
@@ -128,11 +127,11 @@ public class ChatSession {
 
     public boolean broadcastWhisperToUser(User fromUser, User toUser, String message) {
         if (clients.containsKey(toUser.getId())) {
-            toUser.fireCallback(new ClientCallback("chatMessage", chatId, 
-                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered)));
+            toUser.chatMessage(chatId, 
+                    new ChatMessage(new StringBuilder("Whisper from ").append(fromUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, SoundToPlay.PlayerWhispered));
             if (clients.containsKey(fromUser.getId())) {
-                fromUser.fireCallback(new ClientCallback("chatMessage", chatId,
-                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, null)));
+                fromUser.chatMessage(chatId,
+                        new ChatMessage(new StringBuilder("Whisper to ").append(toUser.getName()).toString(), message, timeFormatter.format(new Date()), MessageColor.YELLOW, MessageType.WHISPER, null));
                 return true;
             }
         }

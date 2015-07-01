@@ -39,7 +39,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
@@ -166,7 +165,7 @@ public class TableManager {
         return true;
     }
 
-    public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
+    public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).updateDeck(userId, deckList);
         }

@@ -51,6 +51,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     private final String minorPatch; // doesn't matter for compatibility
 
     private String info = "";
+    private static MageVersion currentVersion = new MageVersion(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_PATCH, MAGE_VERSION_MINOR_PATCH, MAGE_VERSION_INFO);
 
     public MageVersion(int major, int minor, int patch, String minorPatch, String info) {
         this.major = major;
@@ -61,7 +62,7 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     }
 
     public static MageVersion getCurrent() {
-        return new MageVersion(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_PATCH, MAGE_VERSION_MINOR_PATCH, MAGE_VERSION_INFO);
+        return currentVersion;
     }
     
     public int getMajor() {

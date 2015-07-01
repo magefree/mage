@@ -204,7 +204,11 @@ public class Client {
     }
 
     public void updateDeck(UUID tableId, DeckCardLists deckCardLists) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.updateDeck(tableId, deckCardLists);
+        } catch (Exception ex) {
+            logger.error("Error updating deck", ex);
+        }
     }
 
     public boolean sendFeedback(String title, String type, String message, String email) {

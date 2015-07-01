@@ -390,12 +390,21 @@ public class TableController {
         return true;
     }
 
-    public void updateDeck(UUID userId, DeckCardLists deckList) throws MageException {
+    public void updateDeck(UUID userId, DeckCardLists deckList) {
         UUID playerId = userPlayerMap.get(userId);
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return;
         }
-        Deck deck = Deck.load(deckList, false, false);
+        User user = UserManager.getInstance().getUser(userId);
+        Deck deck;
+        try {
+            deck = Deck.load(deckList, false, false);
+        }
+        catch (GameException ex) {
+            logger.error("Error loading deck", ex);
+            user.showUserError("Update deck", "Error loading deck");
+            return;
+        }
         updateDeck(userId, playerId, deck);
     }
 
@@ -427,7 +436,7 @@ public class TableController {
 
     public boolean watchTable(UUID userId) {
         if (table.isTournament()) {
-            UserManager.getInstance().getUser(userId).ccShowTournament(table.getTournament().getId());
+            UserManager.getInstance().getUser(userId).showTournament(table.getTournament().getId());
             return true;
         } else {
             if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
@@ -440,7 +449,7 @@ public class TableController {
             if (userPlayerMap.get(userId) != null) {
                 return false;
             }
-            return UserManager.getInstance().getUser(userId).ccWatchGame(match.getGame().getId());
+            return UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
         }
     }
 
@@ -646,7 +655,7 @@ public class TableController {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
                         logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
-                        user.ccTournamentStarted(tournament.getId(), entry.getValue());
+                        user.tournamentStarted(tournament.getId(), entry.getValue());
                     }
                 }
                 ServerMessagesUtil.getInstance().incTournamentsStarted();
@@ -665,7 +674,7 @@ public class TableController {
             User user = UserManager.getInstance().getUser(entry.getKey());
             if (user != null) {
                 logger.info(new StringBuilder("User ").append(user.getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.getId()));
-                user.ccDraftStarted(draft.getId(), entry.getValue());
+                user.draftStarted(draft.getId(), entry.getValue());
             } else {
                 logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
             }
@@ -678,7 +687,7 @@ public class TableController {
                 User user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
                 if (user != null) {
-                    user.ccSideboard(deck, table.getId(), remaining, options.isLimited());
+                    user.sideboard(deck, table.getId(), remaining, options.isLimited());
                 }
                 break;
             }
