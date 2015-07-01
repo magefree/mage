@@ -36,7 +36,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-public class UseAlternateSourceCostsTets extends CardTestPlayerBase {
+public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
     @Test
     public void DreamHallsCastColoredSpell() {
