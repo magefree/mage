@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
@@ -64,7 +64,7 @@ public class FirewildBorderpost extends CardImpl {
 
         // You may pay {1} and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost.
         Ability ability = new AlternativeCostSourceAbility(new GenericManaCost(1));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
 
         // Veinfire Firewild enters the battlefield tapped.

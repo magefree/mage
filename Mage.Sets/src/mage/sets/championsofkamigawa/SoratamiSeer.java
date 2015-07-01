@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -70,7 +70,7 @@ public class SoratamiSeer extends CardImpl {
 
         // {4}, Return two lands you control to their owner's hand: Discard all the cards in your hand, then draw that many cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoratamiSeerEffect(), new GenericManaCost(4));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+        ability.addCost(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }
 

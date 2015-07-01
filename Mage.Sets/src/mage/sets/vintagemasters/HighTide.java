@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class HighTide extends mage.sets.fallenempires.HighTide {
+public class HighTide extends mage.sets.fallenempires.HighTide1 {
 
     public HighTide(UUID ownerId) {
         super(ownerId);

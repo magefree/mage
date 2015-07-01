@@ -140,7 +140,7 @@ class CopyActivatedAbilityEffect extends OneShotEffect {
             newAbility.newId();
             game.getStack().push(new StackAbility(newAbility, source.getControllerId()));
             if (newAbility.getTargets().size() > 0) {
-                if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", game)) {
+                if (controller.chooseUse(newAbility.getEffects().get(0).getOutcome(), "Choose new targets?", source, game)) {
                     newAbility.getTargets().clearChosen();
                     if (newAbility.getTargets().chooseTargets(newAbility.getEffects().get(0).getOutcome(), source.getControllerId(), newAbility, game) == false) {
                         return false;

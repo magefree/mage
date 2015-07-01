@@ -29,7 +29,7 @@ package mage.sets.nemesis;
 
 import java.util.UUID;
 import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
@@ -60,7 +60,7 @@ public class Daze extends CardImpl {
 
 
         // You may return an Island you control to its owner's hand rather than pay Daze's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter))));
 
         // Counter target spell unless its controller pays {1}.
         this.getSpellAbility().addTarget(new TargetSpell());

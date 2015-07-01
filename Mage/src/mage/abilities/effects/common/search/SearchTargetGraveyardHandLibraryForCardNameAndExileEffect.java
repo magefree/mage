@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.search;
 
 import java.util.List;
@@ -49,7 +48,6 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-
 public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect extends OneShotEffect {
 
     protected String searchWhatText;
@@ -78,12 +76,13 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     }
 
     /**
-     * 
+     *
      * @param game
      * @param source
      * @param cardName name of the card to exile
-     * @param targetPlayerId id of the target player to exile card name from his or her zones
-     * @return 
+     * @param targetPlayerId id of the target player to exile card name from his
+     * or her zones
+     * @return
      */
     public boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -94,10 +93,10 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 filter.add(new NamePredicate(cardName));
 
                 // cards in Graveyard
-                int cardsCount = (cardName.isEmpty() ? 0 :targetPlayer.getGraveyard().count(filter, game));
+                int cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getGraveyard().count(filter, game));
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getLogName());
-                    TargetCard target = new TargetCard((graveyardExileOptional ? 0 :cardsCount), cardsCount,Zone.GRAVEYARD, filter);
+                    TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
                     if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
@@ -111,23 +110,17 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 }
 
                 // cards in Hand
-                cardsCount = (cardName.isEmpty() ? 0 :targetPlayer.getHand().count(filter, game));
-                if (cardsCount > 0) {
-                    filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getLogName());
-                    TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
-                    if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
-                        List<UUID> targets = target.getTargets();
-                        for (UUID targetId : targets) {
-                            Card targetCard = targetPlayer.getHand().get(targetId, game);
-                            if (targetCard != null) {
-                                targetPlayer.getHand().remove(targetCard);
-                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.HAND, true);
-                            }
+                cardsCount = (cardName.isEmpty() ? 0 : targetPlayer.getHand().count(filter, game));
+                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getLogName());
+                TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
+                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
+                    List<UUID> targets = target.getTargets();
+                    for (UUID targetId : targets) {
+                        Card targetCard = targetPlayer.getHand().get(targetId, game);
+                        if (targetCard != null) {
+                            targetPlayer.getHand().remove(targetCard);
+                            controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.HAND, true);
                         }
-                    }
-                } else {
-                    if (targetPlayer.getHand().size() > 0) {
-                        controller.lookAtCards(targetPlayer.getLogName() + " hand", targetPlayer.getHand(), game);
                     }
                 }
 
@@ -135,20 +128,16 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                 cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
                 cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
-                if (cardsCount > 0) {
-                    filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
-                    TargetCardInLibrary target = new TargetCardInLibrary(0, cardsCount, filter);
-                    if (controller.choose(Outcome.Exile, cardsInLibrary, target, game)) {
-                        List<UUID> targets = target.getTargets();
-                        for (UUID targetId : targets) {
-                            Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
-                            if (targetCard != null) {
-                                controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
-                            }
+                filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
+                TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
+                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, game)) {
+                    List<UUID> targets = targetLib.getTargets();
+                    for (UUID targetId : targets) {
+                        Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
+                        if (targetCard != null) {
+                            controller.moveCardToExileWithInfo(targetCard, null, null, source.getSourceId(), game, Zone.LIBRARY, true);
                         }
                     }
-                } else {
-                    controller.lookAtCards(targetPlayer.getName() + " library", cardsInLibrary, game);
                 }
 
                 targetPlayer.shuffleLibrary(game);

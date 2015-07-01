@@ -106,7 +106,7 @@ class ShaperParasiteEffect extends ContinuousEffectImpl {
         super.init(source, game);
         Player player = game.getPlayer(source.getControllerId());
         String message = "Should the target creature get -2/+2 instead of +2/-2?";
-        if (player != null && player.chooseUse(Outcome.Neutral, message, game)) {
+        if (player != null && player.chooseUse(Outcome.Neutral, message, source, game)) {
             this.power *= -1;
             this.toughness *= -1;
         }

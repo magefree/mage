@@ -94,7 +94,7 @@ class ArashinSovereignEffect extends OneShotEffect {
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
             if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-                boolean onTop = controller.chooseUse(outcome, "Put " + sourceCard.getName() + " on top of it's owners library (otherwise on bottom)?", game);
+                boolean onTop = controller.chooseUse(outcome, "Put " + sourceCard.getName() + " on top of it's owners library (otherwise on bottom)?", source, game);
                 controller.moveCardToLibraryWithInfo(sourceCard, source.getSourceId(), game, Zone.GRAVEYARD, onTop, true);
             }
             return true;

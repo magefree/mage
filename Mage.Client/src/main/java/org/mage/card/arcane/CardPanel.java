@@ -99,12 +99,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public JPanel buttonPanel;
     private JButton dayNightButton;
 
-    public JPanel copyIconPanel;    
+    public JPanel copyIconPanel;
     private JButton showCopySourceButton;
-    
+
     public JPanel iconPanel;
     private JButton typeButton;
-    
+
     public JPanel counterPanel;
     private JLabel loyaltyCounterLabel;
     private JLabel plusCounterLabel;
@@ -125,7 +125,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean isSelected;
     private boolean isPlayable;
     private boolean isChoosable;
-    private boolean canAttack;    
+    private boolean canAttack;
     private boolean showCastingCost;
     private boolean hasImage = false;
     private float alpha = 1.0f;
@@ -151,7 +151,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private JPanel cardArea;
 
     private int yTextOffset = 10;
-    
+
     public CardPanel(CardView newGameCard, UUID gameId, final boolean loadImage, ActionCallback callback, final boolean foil, Dimension dimension) {
         this.gameCard = newGameCard;
         this.callback = callback;
@@ -224,12 +224,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             if (AbilityType.TRIGGERED.equals(newGameCard.getAbilityType())) {
                 setTypeIcon(ImageManagerImpl.getInstance().getTriggeredAbilityImage(),"Triggered Ability");
             } else if (AbilityType.ACTIVATED.equals(newGameCard.getAbilityType())) {
-                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(),"Activated Ability");                
-            }            
+                setTypeIcon(ImageManagerImpl.getInstance().getActivatedAbilityImage(),"Activated Ability");
+            }
         }
-        
+
         if (this.gameCard.isToken()) {
-            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(),"Token Permanent");                
+            setTypeIcon(ImageManagerImpl.getInstance().getTokenIconImage(),"Token Permanent");
         }
 
         // icon to inform about permanent is copying something
@@ -242,7 +242,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             showCopySourceButton = new JButton("");
             showCopySourceButton.setLocation(2, 2);
             showCopySourceButton.setSize(25, 25);
-            showCopySourceButton.setToolTipText("This permanent is copying a target. To see original image, push this button or turn mouse wheel down while hoovering with the mouse pointer over the permanent.");
+            showCopySourceButton.setToolTipText("This permanent is copying a target. To see original image, push this button or turn mouse wheel down while hovering with the mouse pointer over the permanent.");
             copyIconPanel.setVisible(((PermanentView) this.gameCard).isCopy());
 
             showCopySourceButton.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCopyInformIconImage()));
@@ -265,7 +265,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         addMouseMotionListener(this);
         addMouseWheelListener(this);
         addComponentListener(this);
-        
+
         displayTitleAnyway = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_CARD_NAMES, "true").equals("true");
         titleText = new GlowText();
         setText(gameCard);
@@ -274,7 +274,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         titleText.setGlow(Color.black, TEXT_GLOW_SIZE, TEXT_GLOW_INTENSITY);
         titleText.setWrap(true);
         add(titleText);
-        
+
         ptText = new GlowText();
         if (CardUtil.isCreature(gameCard)) {
             ptText.setText(gameCard.getPower() + "/" + gameCard.getToughness());
@@ -350,9 +350,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (toolTipText != null) {
             typeButton.setToolTipText(toolTipText);
         }
-        iconPanel.add(typeButton);    
+        iconPanel.add(typeButton);
     }
-    
+
     public void cleanUp() {
         if (dayNightButton != null) {
             for(ActionListener al: dayNightButton.getActionListeners()) {
@@ -596,7 +596,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         int offsetX = Math.round((CARD_SIZE_FULL.width - cardWidth) / 10.0f);
 
         ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
-       
+
         if (isAnimationPanel || cardWidth < 200) {
             imagePanel.setScalingType(ScalingType.nearestNeighbor);
         } else {
@@ -842,7 +842,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 dayNightButton.setIcon(new ImageIcon(transformIcon));
             }
         }
-        
+
         if (counterPanel != null) {
             updateCounters(card);
         }
@@ -1161,7 +1161,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 this.gameCard = this.temporary;
                 this.temporary = null;
                 update(this.gameCard);
-            }           
+            }
         }
         String temp = this.gameCard.getAlternateName();
         this.gameCard.setAlternateName(this.gameCard.getOriginalName());

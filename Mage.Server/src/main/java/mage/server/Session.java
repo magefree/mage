@@ -1,37 +1,34 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server;
 
-import mage.remote.DisconnectReason;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -39,11 +36,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.MageException;
-import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.remote.Connection;
+import mage.remote.DisconnectReason;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
 import mage.view.UserDataView;
@@ -137,7 +133,7 @@ public class Session {
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
             return new StringBuilder("Error connecting ").append(userName).toString();
-        }        
+        }
         this.userId = user.getId();
 
         setUserData(user, connection.getUserData());
@@ -148,7 +144,7 @@ public class Session {
                 ChatManager.getInstance().joinChat(chatId, userId);
             }
             ChatManager.getInstance().sendReconnectMessage(userId);
-        }        
+        }
         return null;
     }
 
@@ -160,8 +156,8 @@ public class Session {
         }
         user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png", false));
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
-               logger.info("Error connecting Admin!");
-        }        
+            logger.info("Error connecting Admin!");
+        }
         this.userId = user.getId();
     }
 
@@ -169,11 +165,11 @@ public class Session {
 //        User user = UserManager.getInstance().findUser(userName);
         if (user != null) {
             UserData userData = user.getUserData();
-            if (userData == null) {
-                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(), 
-                        userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(), 
-                        userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
-                userDataView.getFlagName(), userDataView.askMoveToGraveOrder());
+            if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
+                userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(),
+                    userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(),
+                    userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
+                    userDataView.getFlagName(), userDataView.askMoveToGraveOrder());
                 user.setUserData(userData);
             } else {
                 if (userData.getAvatarId() == 51) { // Update special avatar if first avatar is selected
@@ -198,35 +194,23 @@ public class Session {
             case "nantuko":
                 userData.setAvatarId(1000);
                 break;
-            case "i_no_k":
-                userData.setAvatarId(1002);
-                break;
-            case "Askael":
-                userData.setAvatarId(1004);
-                break;
             case "North":
                 userData.setAvatarId(1006);
                 break;
             case "BetaSteward":
                 userData.setAvatarId(1008);
                 break;
-            case "Arching":
-                userData.setAvatarId(1010);
-                break;
             case "loki":
                 userData.setAvatarId(1012);
-                break;
-            case "Alive":
-                userData.setAvatarId(1014);
-                break;
-            case "Rahan":
-                userData.setAvatarId(1016);
                 break;
             case "Ayrat":
                 userData.setAvatarId(1018);
                 break;
             case "Bandit":
                 userData.setAvatarId(1020);
+                break;
+            default:
+                userData.setAvatarId(51);
                 break;
         }
     }
@@ -236,10 +220,10 @@ public class Session {
     }
 
     // because different threads can activate this
-    public void  userLostConnection() {
+    public void userLostConnection() {
         boolean lockSet = false;
         try {
-            if(lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
+            if (lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
                 logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
@@ -259,9 +243,8 @@ public class Session {
 
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK lost connection - userId: " + userId, ex);
-        }
-        finally {
-            if (lockSet)    {
+        } finally {
+            if (lockSet) {
                 lock.unlock();
                 logger.trace("SESSION LOCK UNLOCK sessionId: " + sessionId);
             }
@@ -272,9 +255,9 @@ public class Session {
     public void kill(DisconnectReason reason) {
         boolean lockSet = false;
         try {
-            if(lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
+            if (lock.tryLock(5000, TimeUnit.MILLISECONDS)) {
                 lockSet = true;
-                logger.debug("SESSION LOCK SET sessionId: " + sessionId);                
+                logger.debug("SESSION LOCK SET sessionId: " + sessionId);
             } else {
                 logger.error("SESSION LOCK - kill: userId " + userId);
             }
@@ -282,9 +265,8 @@ public class Session {
             pingTime.clear();
         } catch (InterruptedException ex) {
             logger.error("SESSION LOCK - kill: userId " + userId, ex);
-        }
-        finally {
-            if (lockSet)    {
+        } finally {
+            if (lockSet) {
                 lock.unlock();
                 logger.debug("SESSION LOCK UNLOCK sessionId: " + sessionId);
 

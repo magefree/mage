@@ -34,7 +34,7 @@ import mage.constants.Rarity;
  *
  * @author Quercitron
  */
-public class SoldeviSage extends mage.sets.alliances.SoldeviSage {
+public class SoldeviSage extends mage.sets.alliances.SoldeviSage1 {
 
     public SoldeviSage(UUID ownerId) {
         super(ownerId);

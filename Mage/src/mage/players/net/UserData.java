@@ -18,7 +18,7 @@ public class UserData implements Serializable {
     protected String flagName;
     protected boolean askMoveToGraveOrder;
 
-    public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced, 
+    public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
             String flagName, boolean askMoveToGraveOrder) {
         this.groupId = userGroup.getGroupId();
@@ -29,6 +29,21 @@ public class UserData implements Serializable {
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
         this.askMoveToGraveOrder = askMoveToGraveOrder;
+    }
+
+    public void update(UserData userData) {
+        this.groupId = userData.groupId;
+        this.avatarId = userData.avatarId;
+        this.showAbilityPickerForced = userData.showAbilityPickerForced;
+        this.allowRequestShowHandCards = userData.allowRequestShowHandCards;
+        this.userSkipPrioritySteps = userData.userSkipPrioritySteps;
+        this.confirmEmptyManaPool = userData.confirmEmptyManaPool;
+        this.flagName = userData.flagName;
+        this.askMoveToGraveOrder = userData.askMoveToGraveOrder;
+    }
+
+    public static UserData getDefaultUserDataView() {
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false);
     }
 
     public void setGroupId(int groupId) {
@@ -90,5 +105,5 @@ public class UserData implements Serializable {
     public void setAskMoveToGraveOrder(boolean askMoveToGraveOrder) {
         this.askMoveToGraveOrder = askMoveToGraveOrder;
     }
-    
+
 }

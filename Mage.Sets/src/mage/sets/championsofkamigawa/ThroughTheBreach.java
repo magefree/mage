@@ -102,7 +102,7 @@ class ThroughTheBreachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

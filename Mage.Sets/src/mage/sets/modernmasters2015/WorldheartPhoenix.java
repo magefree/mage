@@ -86,7 +86,7 @@ public class WorldheartPhoenix extends CardImpl {
     class WorldheartPhoenixPlayEffect extends AsThoughEffectImpl {
 
         public WorldheartPhoenixPlayEffect() {
-            super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+            super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
             staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost";
         }
 

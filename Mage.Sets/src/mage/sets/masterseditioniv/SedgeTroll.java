@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class SedgeTroll extends CardImpl {
     

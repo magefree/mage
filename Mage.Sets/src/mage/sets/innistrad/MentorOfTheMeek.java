@@ -25,13 +25,14 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.innistrad;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -50,6 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 public class MentorOfTheMeek extends CardImpl {
 
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 2 or less");
+
     static {
         filter.add(new AnotherPredicate());
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
@@ -65,8 +67,10 @@ public class MentorOfTheMeek extends CardImpl {
         this.toughness = new MageInt(2);
 
         //Whenever another creature with power 2 or less enters the battlefield under your control, you may pay 1. If you do, draw a card.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}")),filter, true));
+        Effect effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}"));
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, effect, filter, false);
+        this.addAbility(ability);
 
     }
 

@@ -112,7 +112,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     return false;
                 }
                 boolean guessWrong;
-                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted mana cost greater than 4?", game)) {
+                if (attackedPlayer.chooseUse(Outcome.Detriment, "Is the chosen card's converted mana cost greater than 4?", source, game)) {
                     game.informPlayers(attackedPlayer.getLogName() + " guessed that the chosen card's converted mana cost is greater than 4");
                     guessWrong = cardFromHand.getManaCost().convertedManaCost() <= 4;
                 } else {
@@ -124,7 +124,7 @@ class MasterOfPredicamentsEffect extends OneShotEffect {
                     if (cardFromHand.getCardType().contains(CardType.LAND)) {
                         // If the revealed card is a land, you can't cast it. So nothing happens
                     } else {
-                        if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName() + " without paying its mana cost?", game)) {
+                        if (controller.chooseUse(outcome, "Cast " + cardFromHand.getName() + " without paying its mana cost?", source, game)) {
                             controller.cast(cardFromHand.getSpellAbility(), game, true);
                         }
                     }

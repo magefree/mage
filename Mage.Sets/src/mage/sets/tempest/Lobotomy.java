@@ -141,7 +141,7 @@ class LobotomyEffect extends OneShotEffect {
 
             // search cards in Library
             // If the player has no nonland cards in his or her hand, you can still search that player's library and have him or her shuffle it.
-            if (chosenCard != null || controller.chooseUse(outcome, "Search library anyway?", game)) {
+            if (chosenCard != null || controller.chooseUse(outcome, "Search library anyway?", source, game)) {
                 TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
                 controller.searchLibrary(targetCardsLibrary, game, targetPlayer.getId());
                 for(UUID cardId:  targetCardsLibrary.getTargets()) {

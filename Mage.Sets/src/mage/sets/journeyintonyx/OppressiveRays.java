@@ -118,7 +118,7 @@ class OppressiveRaysEffect extends ReplacementEffectImpl {
             }
             ManaCostsImpl attackBlockTax = new ManaCostsImpl("{3}");
             if (attackBlockTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
+                    && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
                 if (attackBlockTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                     return false;
                 }

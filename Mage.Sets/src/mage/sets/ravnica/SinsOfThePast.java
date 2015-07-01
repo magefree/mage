@@ -110,7 +110,7 @@ class SinsOfThePastEffect extends OneShotEffect {
 class SinsOfThePastCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     SinsOfThePastCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.PlayForFree);
     }
 
     SinsOfThePastCastFromGraveyardEffect(final SinsOfThePastCastFromGraveyardEffect effect) {

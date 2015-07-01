@@ -28,6 +28,11 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -36,11 +41,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.RestrictionEffect;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +56,7 @@ public class UnwindingClock extends CardImpl {
         this.expansionSetCode = "NPH";
 
         // Untap all artifacts you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnwindingClockEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnwindingClockEffect()));
     }
 
     public UnwindingClock(final UnwindingClock card) {
@@ -96,10 +96,10 @@ class UnwindingClockEffect extends ContinuousEffectImpl {
         if (!applied && layer.equals(Layer.RulesEffects)) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                for (Permanent artifact: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent artifact : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
-                    for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game).keySet()) {
-                        untap &= effect.canBeUntapped(artifact, game);
+                    for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game).keySet()) {
+                        untap &= effect.canBeUntapped(artifact, source, game);
                     }
                     if (untap) {
                         artifact.untap(game);

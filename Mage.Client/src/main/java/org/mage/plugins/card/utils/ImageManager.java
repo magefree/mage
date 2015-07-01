@@ -15,6 +15,9 @@ public interface ImageManager {
     Image getTokenIconImage();
     Image getTriggeredAbilityImage();
     Image getActivatedAbilityImage();
+    Image getLookedAtImage();
+    Image getRevealedImage();
+    Image getExileImage();
     Image getCopyInformIconImage();
     Image getCounterImageViolet();
     Image getCounterImageRed();

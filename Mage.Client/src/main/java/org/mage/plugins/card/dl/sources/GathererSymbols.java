@@ -8,12 +8,10 @@ package org.mage.plugins.card.dl.sources;
 
 
 import com.google.common.collect.AbstractIterator;
-import org.mage.plugins.card.dl.DownloadJob;
-
 import java.io.File;
-import java.util.Iterator;
-
 import static java.lang.String.format;
+import java.util.Iterator;
+import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
@@ -70,7 +68,9 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                     sym = "" + (numeric++);
                 } else {
                     sizeIndex++;
-                    if(sizeIndex == sizes.length) return endOfData();
+                    if(sizeIndex == sizes.length) {
+                        return endOfData();
+                    }
 
                     symIndex = 0;
                     numeric = 0;
@@ -80,9 +80,17 @@ public class GathererSymbols implements Iterable<DownloadJob> {
                 String symbol = sym.replaceAll("/", "");
                 File dst = new File(dir, symbol + ".jpg");
 
-                if(symbol.equals("T")) symbol = "tap";
-                else if(symbol.equals("Q")) symbol = "untap";
-                else if(symbol.equals("S")) symbol = "snow";
+                switch (symbol) {
+                    case "T":
+                        symbol = "tap";
+                        break;
+                    case "Q":
+                        symbol = "untap";
+                        break;
+                    case "S":
+                        symbol = "snow";
+                        break;
+                }
 
                 String url = format(urlFmt, sizes[sizeIndex], symbol);
 

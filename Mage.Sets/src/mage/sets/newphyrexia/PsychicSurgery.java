@@ -138,7 +138,7 @@ class PsychicSurgeryEffect extends OneShotEffect {
             }
             player.lookAtCards("Psychic Surgery", cards, game);
 
-            if (!cards.isEmpty() && player.chooseUse(Outcome.Exile, "Do you wish to exile a card?", game)) {
+            if (!cards.isEmpty() && player.chooseUse(Outcome.Exile, "Do you wish to exile a card?", source, game)) {
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to exile"));
                 if (player.choose(Outcome.Exile, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);

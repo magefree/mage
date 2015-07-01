@@ -123,11 +123,11 @@ class MayTapOrUntapAttachedEffect extends OneShotEffect {
             Player player = game.getPlayer(source.getControllerId());
             if (equipedCreature != null && player != null) {
                 if (equipedCreature.isTapped()) {
-                    if (player.chooseUse(Outcome.Untap, "Untap equipped creature?", game)) {
+                    if (player.chooseUse(Outcome.Untap, "Untap equipped creature?", source, game)) {
                         equipedCreature.untap(game);
                     }
                 } else {
-                    if (player.chooseUse(Outcome.Tap, "Tap equipped creature?", game)) {
+                    if (player.chooseUse(Outcome.Tap, "Tap equipped creature?", source, game)) {
                         equipedCreature.tap(game);
                     }
                 }

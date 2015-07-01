@@ -41,7 +41,8 @@ import mage.constants.Layer;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -52,22 +53,28 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AquitectsWill extends CardImpl {
 
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
+
+    static {
+        filter.add(new SubtypePredicate("Merfolk"));
+    }
+
     public AquitectsWill(UUID ownerId) {
         super(ownerId, 52, "Aquitect's Will", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{U}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Merfolk");
 
-        // Put a flood counter on target land. 
+        // Put a flood counter on target land.
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.FLOOD.createInstance()));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
-        
+
         // That land is an Island in addition to its other types for as long as it has a flood counter on it.
         this.getSpellAbility().addEffect(new AquitectsWillEffect(Duration.Custom, false, false, "Island"));
-        
+
         // If you control a Merfolk, draw a card.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(1), 
-                new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent("Merfolk", "Merfolk")),
+                new DrawCardSourceControllerEffect(1),
+                new PermanentsOnTheBattlefieldCondition(filter),
                 "If you control a Merfolk, draw a card"));
     }
 
@@ -101,7 +108,7 @@ class AquitectsWillEffect extends BecomesBasicLandTargetEffect {
         } else if (land.getCounters().getCount(CounterType.FLOOD) > 0) {
             // only if Flood counter is on the object it becomes an Island.(it would be possible to remove and return the counters with e.g. Fate Transfer if the land becomes a creature too)
             super.apply(layer, sublayer, source, game);
-        }        
+        }
         return true;
     }
 

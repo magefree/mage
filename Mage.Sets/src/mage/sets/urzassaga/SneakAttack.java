@@ -99,7 +99,7 @@ class SneakAttackEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+            if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
                 if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());

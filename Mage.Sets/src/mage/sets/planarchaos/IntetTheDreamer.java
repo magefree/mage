@@ -121,7 +121,7 @@ class IntetTheDreamerExileEffect extends OneShotEffect {
 class IntetTheDreamerEffect extends AsThoughEffectImpl {
 
     public IntetTheDreamerEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may play the card from exile without paying its mana cost for as long as {this} remains on the battlefield";
     }
 
@@ -148,7 +148,7 @@ class IntetTheDreamerEffect extends AsThoughEffectImpl {
             if (affectedControllerId.equals(source.getControllerId()) && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 ExileZone zone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
                 if (zone != null && zone.contains(card.getId())) {
-                    if (controller.chooseUse(outcome, "Look at the card?", game)) {
+                    if (controller.chooseUse(outcome, "Look at the card?", source, game)) {
                         Cards cards = new CardsImpl();
                         cards.add(card);
                         controller.lookAtCards(sourceObject.getName(), cards, game);

@@ -40,7 +40,7 @@ import mage.constants.TargetController;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class PhantasmalForces extends CardImpl {
 

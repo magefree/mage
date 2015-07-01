@@ -36,7 +36,7 @@ import mage.game.tournament.TournamentType;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentTypeView implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     private final String name;
     private final int minPlayers;
@@ -46,6 +46,7 @@ public class TournamentTypeView implements Serializable {
     private final boolean limited;
     private final boolean cubeBooster;
     private final boolean elimination;
+    private final boolean random;
 
 
     public TournamentTypeView(TournamentType tournamentType) {
@@ -57,6 +58,7 @@ public class TournamentTypeView implements Serializable {
         this.limited = tournamentType.isLimited();
         this.cubeBooster = tournamentType.isCubeBooster();
         this.elimination = tournamentType.isElimination();
+        this.random = tournamentType.isRandom();
     }
 
     @Override
@@ -96,4 +98,7 @@ public class TournamentTypeView implements Serializable {
         return elimination;
     }
 
+    public boolean isRandom(){
+        return random;
+    }
 }

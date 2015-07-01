@@ -61,15 +61,16 @@ public class FaithsFetters extends CardImpl {
         this.expansionSetCode = "DDC";
         this.subtype.add("Aura");
 
-
         // Enchant permanent
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.LoseAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // When Faith's Fetters enters the battlefield, you gain 4 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
+
         // Enchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.
         Effect effect = new CantAttackBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("Enchanted permanent can't attack or block,");
@@ -108,12 +109,12 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean apply(Game game, Ability source) {
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());

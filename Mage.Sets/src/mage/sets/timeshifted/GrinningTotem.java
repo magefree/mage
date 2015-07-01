@@ -136,7 +136,7 @@ class GrinningTotemSearchAndExileEffect extends OneShotEffect {
 class GrinningTotemMayPlayEffect extends AsThoughEffectImpl {
 
     public GrinningTotemMayPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.staticText = "Until the beginning of your next upkeep, you may play that card.";
     }
     

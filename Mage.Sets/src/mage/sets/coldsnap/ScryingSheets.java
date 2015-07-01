@@ -100,7 +100,7 @@ class ScryingSheetsEffect extends OneShotEffect {
                 cards.add(card);
                 player.lookAtCards("Scrying Sheets", cards, game);
                 if (card.getSupertype().contains("Snow")) {
-                    if (player.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), game)) {
+                    if (player.chooseUse(outcome, new StringBuilder("Reveal ").append(card.getName()).append(" and put it into your hand?").toString(), source, game)) {
                         card = player.getLibrary().removeFromTop(game);
                         player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
                         player.revealCards("Scrying Sheets", cards, game);

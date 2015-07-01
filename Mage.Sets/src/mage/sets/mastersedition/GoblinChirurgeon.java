@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author LevelX2
  */
-public class GoblinChirurgeon extends mage.sets.fallenempires.GoblinChirurgeon {
+public class GoblinChirurgeon extends mage.sets.fallenempires.GoblinChirurgeon1 {
 
     public GoblinChirurgeon(UUID ownerId) {
         super(ownerId);

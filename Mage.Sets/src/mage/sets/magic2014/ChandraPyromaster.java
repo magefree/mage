@@ -228,7 +228,7 @@ class ChandraPyromasterEffect2 extends OneShotEffect {
 class ChandraPyromasterCastFromExileEffect extends AsThoughEffectImpl {
 
     public ChandraPyromasterCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play the card from exile this turn";
     }
 
@@ -295,13 +295,13 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
                     Card copy1 = card.copy();
                     Card copy2 = card.copy();
                     Card copy3 = card.copy();
-                    if (copy1 != null && you.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), game)) {
+                    if (copy1 != null && you.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
                         you.cast(copy1.getSpellAbility(), game, true);
                     }
-                    if (copy2 != null && you.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), game)) {
+                    if (copy2 != null && you.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
                         you.cast(copy2.getSpellAbility(), game, true);
                     }
-                    if (copy3 != null && you.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), game)) {
+                    if (copy3 != null && you.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
                         you.cast(copy3.getSpellAbility(), game, true);
                     }
                     return true;

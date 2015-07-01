@@ -29,14 +29,14 @@ package mage.sets.mirage;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.events.GameEvent.EventType;
 
 /**
  *
@@ -53,8 +53,8 @@ public class HarbingerOfNight extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, put a -1/-1 counter on each creature.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-            new AddCountersAllEffect(CounterType.M1M1.createInstance(), new FilterCreaturePermanent()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), new FilterCreaturePermanent()),
+            TargetController.YOU, false));
     }
 
     public HarbingerOfNight(final HarbingerOfNight card) {

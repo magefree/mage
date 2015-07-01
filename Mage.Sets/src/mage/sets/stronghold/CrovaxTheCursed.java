@@ -111,7 +111,7 @@ class CrovaxTheCursedEffect extends OneShotEffect {
         if (controller != null) {
             Permanent sourceObject = (Permanent) source.getSourceObjectIfItStillExists(game);
             int creatures = game.getBattlefield().countAll(new FilterCreaturePermanent(), source.getControllerId(), game);
-            if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", game)) {
+            if (creatures > 0 && controller.chooseUse(outcome, "Sacrifice a creature?", source, game)) {
                 if (new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, "").apply(game, source)) {
                     if (sourceObject != null) {
                         sourceObject.getCounters().addCounter(CounterType.P1P1.createInstance());

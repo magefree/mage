@@ -117,7 +117,7 @@ class TariffEffect extends OneShotEffect {
             ManaCost manaCost = CardUtil.removeVariableManaCost(creatureToPayFor.getManaCost());
             String message = new StringBuilder("Pay ").append(manaCost.getText()).append(" (otherwise sacrifice ")
                     .append(creatureToPayFor.getName()).append(")?").toString();
-            if (player.chooseUse(Outcome.Benefit, message, game)) {
+            if (player.chooseUse(Outcome.Benefit, message, source, game)) {
                 if (manaCost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     game.informPlayers(new StringBuilder(sourceObject != null ? sourceObject.getName() : "")
                             .append(": ").append(player.getLogName()).append(" has paid").toString());

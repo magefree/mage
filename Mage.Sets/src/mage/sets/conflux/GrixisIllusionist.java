@@ -37,7 +37,10 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
@@ -46,6 +49,12 @@ import mage.target.common.TargetLandPermanent;
  * @author jeffwadsworth
  */
 public class GrixisIllusionist extends CardImpl {
+
+    private static final FilterLandPermanent filter =  new FilterLandPermanent("land you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public GrixisIllusionist(UUID ownerId) {
         super(ownerId, 29, "Grixis Illusionist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
@@ -58,10 +67,9 @@ public class GrixisIllusionist extends CardImpl {
 
         // {tap}: Target land you control becomes the basic land type of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        Target target = new TargetLandPermanent();
+        Target target = new TargetLandPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
-        
     }
 
     public GrixisIllusionist(final GrixisIllusionist card) {

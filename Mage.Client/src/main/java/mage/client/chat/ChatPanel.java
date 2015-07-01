@@ -66,7 +66,7 @@ import org.mage.network.Client;
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class ChatPanel extends javax.swing.JPanel {
-        
+
     private UUID chatId;
     private Client client;
     private final List<String> players = new ArrayList<>();
@@ -74,7 +74,7 @@ public class ChatPanel extends javax.swing.JPanel {
     /**
      * Chat message color for opponents.
      */
-    private static final String OPPONENT_COLOR =  "#FF7F50";
+    private static final String OPPONENT_COLOR = "#FF7F50";
     /**
      * Chat message color for client player.
      */
@@ -126,7 +126,7 @@ public class ChatPanel extends javax.swing.JPanel {
     private ChatType chatType = ChatType.DEFAULT;
 
     private static final int[] defaultColumnsWidth = {20, 100, 100, 80};
-    
+
     public enum ChatType {
 
         DEFAULT, GAME, TABLES, TOURNAMENT
@@ -145,6 +145,7 @@ public class ChatPanel extends javax.swing.JPanel {
      */
     /**
      * Creates new form ChatPanel
+     *
      * @param addPlayersTab
      */
     public ChatPanel(boolean addPlayersTab) {
@@ -154,10 +155,10 @@ public class ChatPanel extends javax.swing.JPanel {
         jTablePlayers.setBackground(new Color(0, 0, 0, ALPHA));
         jTablePlayers.setForeground(Color.white);
         jTablePlayers.setRowSorter(new MageTableRowSorter(userTableModel));
-                
+
         TableUtil.setColumnWidthAndOrder(jTablePlayers, defaultColumnsWidth, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
         jTablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
-        
+
         if (jScrollPaneTxt != null) {
             jScrollPaneTxt.setBackground(new Color(0, 0, 0, ALPHA));
             jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, ALPHA));
@@ -172,7 +173,7 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
-        TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);        
+        TableUtil.saveColumnWidthAndOrderToPrefs(jTablePlayers, KEY_USERS_COLUMNS_WIDTH, KEY_USERS_COLUMNS_ORDER);
     }
 
     public ChatType getChatType() {
@@ -275,7 +276,7 @@ public class ChatPanel extends javax.swing.JPanel {
         }
         if (username != null && !username.isEmpty()) {
             text.append(getColoredText(userColor, username + userSeparator));
-        }              
+        }
         text.append(getColoredText(textColor, ManaSymbols.replaceSymbolsWithHTML(message, ManaSymbols.Type.PAY)));
         this.txtConversation.append(text.toString());
     }
@@ -318,6 +319,7 @@ public class ChatPanel extends javax.swing.JPanel {
         sb.append("</font>");
         return sb.toString();
     }
+
     public String getText() {
         return txtConversation.getText();
     }
@@ -382,7 +384,7 @@ public class ChatPanel extends javax.swing.JPanel {
 
     class UserTableModel extends AbstractTableModel {
 
-        private final String[] columnNames = new String[]{" ","Players", "Info", "Games", "Connection"};
+        private final String[] columnNames = new String[]{"Loc", "Players", "Info", "Games", "Connection"};
         private UsersView[] players = new UsersView[0];
 
         public void loadData(RoomUsersView roomUserInfo) throws MageRemoteException {
@@ -390,12 +392,12 @@ public class ChatPanel extends javax.swing.JPanel {
             this.players = roomUserInfo.getUsersView().toArray(new UsersView[0]);
             JTableHeader th = jTablePlayers.getTableHeader();
             TableColumnModel tcm = th.getColumnModel();
-            
+
             tcm.getColumn(jTablePlayers.convertColumnIndexToView(1)).setHeaderValue("Players (" + this.players.length + ")");
             tcm.getColumn(jTablePlayers.convertColumnIndexToView(3)).setHeaderValue(
-                    "Games " + roomUserInfo.getNumberActiveGames() +
-                    (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads():" (") +
-                    " limit: " + roomUserInfo.getNumberMaxGames() + ")");
+                    "Games " + roomUserInfo.getNumberActiveGames()
+                    + (roomUserInfo.getNumberActiveGames() != roomUserInfo.getNumberGameThreads() ? " (T:" + roomUserInfo.getNumberGameThreads() : " (")
+                    + " limit: " + roomUserInfo.getNumberMaxGames() + ")");
             th.repaint();
             this.fireTableDataChanged();
         }
@@ -445,16 +447,14 @@ public class ChatPanel extends javax.swing.JPanel {
                     return Icon.class;
                 default:
                     return String.class;
-            }            
+            }
         }
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             return false;
         }
-        
 
-        
     }
 
     public void clear() {
@@ -542,9 +542,9 @@ public class ChatPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)));
+                        .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)));
         jTablePlayers = null;
         jScrollPanePlayers = null;
     }

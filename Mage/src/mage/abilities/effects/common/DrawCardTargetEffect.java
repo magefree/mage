@@ -90,7 +90,7 @@ public class DrawCardTargetEffect extends OneShotEffect {
             if (upTo) {
                 cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
             }
-            if (!optional || player.chooseUse(outcome, "Use draw effect?", game)) {
+            if (!optional || player.chooseUse(outcome, "Use draw effect?", source, game)) {
                 player.drawCards(cardsToDraw, game);
             }
             return true;

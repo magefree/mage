@@ -101,7 +101,7 @@ class HexParasiteEffect extends OneShotEffect {
             int removed = 0;
             String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
             for (String counterName : counterNames) {
-                if (player.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", game)) {
+                if (player.chooseUse(Outcome.Neutral, "Do you want to remove " + counterName + " counters?", source, game)) {
                     if (permanent.getCounters().get(counterName).getCount() == 1 || toRemove == 1) {
                         permanent.getCounters().removeCounter(counterName, 1);
                     }

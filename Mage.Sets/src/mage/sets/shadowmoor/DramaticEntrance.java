@@ -98,7 +98,7 @@ class DramaticEntranceEffect extends OneShotEffect {
         if (controller != null) {
             if (controller.getHand().count(filter, game) > 0) {
                 if (controller.chooseUse(Outcome.PutCreatureInPlay,
-                        "Put a green creature card onto the battlefield?", game)) {
+                        "Put a green creature card onto the battlefield?", source, game)) {
                     Target target = new TargetCardInHand(filter);
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());

@@ -115,11 +115,11 @@ class HordeOfNotionsEffect extends OneShotEffect {
             if (card != null ) {
                 // Probably there is no Elemental land, but who knows
                 if (card.getCardType().contains(CardType.LAND) && controller.canPlayLand() && 
-                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", game)) {
+                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
                     controller.playLand(card, game);
                 } else {
                     if (card.getSpellAbility().canChooseTarget(game) && 
-                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", game)) {
+                            controller.chooseUse(outcome, "Play " + card.getName() + " from your graveyard for free?", source, game)) {
                         controller.cast(card.getSpellAbility(), game, true);    
                     }
                 }                

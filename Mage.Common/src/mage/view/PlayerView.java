@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.view;
 
 import java.io.Serializable;
@@ -44,12 +43,14 @@ import mage.game.command.Commander;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.players.net.UserData;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class PlayerView implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private final UUID playerId;
@@ -67,7 +68,7 @@ public class PlayerView implements Serializable {
     private final CardsView exile = new CardsView();
     private final Map<UUID, PermanentView> battlefield = new LinkedHashMap<>();
     private final CardView topCard;
-    private final UserDataView userDataView;
+    private final UserData userData;
     private final List<CommandObjectView> commandList = new ArrayList<>();
     private final List<UUID> attachments = new ArrayList<>();
     private final int statesSavedSize;
@@ -89,50 +90,49 @@ public class PlayerView implements Serializable {
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.priorityTimeLeft = player.getPriorityTimeLeft();
-        this.timerActive = (this.hasPriority && player.isGameUnderControl()) ||
-                (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId())) ||
-                player.getId().equals(game.getState().getChoosingPlayerId());
+        this.timerActive = (this.hasPriority && player.isGameUnderControl())
+                || (player.getPlayersUnderYourControl().contains(state.getPriorityPlayerId()))
+                || player.getId().equals(game.getState().getChoosingPlayerId());
 
         this.hasLeft = player.hasLeft();
-        for (Card card: player.getGraveyard().getCards(game)) {
+        for (Card card : player.getGraveyard().getCards(game)) {
             graveyard.put(card.getId(), new CardView(card, game, false));
         }
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (player.getId().equals(card.getOwnerId())) {
                     exile.put(card.getId(), new CardView(card, game, false)); // unnown if it's allowed to look under a face down card
-                }                
+                }
             }
         }
-        for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
+        for (Permanent permanent : state.getBattlefield().getAllPermanents()) {
             if (showInBattlefield(permanent, state)) {
                 PermanentView view = new PermanentView(permanent, game.getCard(permanent.getId()), createdForPlayerId, game);
                 battlefield.put(view.getId(), view);
             }
         }
-        this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0 ?
-                new CardView(player.getLibrary().getFromTop(game)) : null;
+        this.topCard = player.isTopCardRevealed() && player.getLibrary().size() > 0
+                ? new CardView(player.getLibrary().getFromTop(game)) : null;
         if (player.getUserData() != null) {
-            this.userDataView = new UserDataView(player.getUserData());
+            this.userData = player.getUserData();
         } else {
-            this.userDataView = UserDataView.getDefaultUserDataView();
+            this.userData = UserData.getDefaultUserDataView();
         }
-        
+
         for (CommandObject commandObject : game.getState().getCommand()) {
             if (commandObject instanceof Emblem) {
                 Emblem emblem = (Emblem) commandObject;
                 if (emblem.getControllerId().equals(this.playerId)) {
-                    Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
+                    Card sourceCard = game.getCard(((CommandObject) emblem).getSourceId());
                     if (sourceCard != null) {
                         commandList.add(new EmblemView(emblem, sourceCard));
                     }
                 }
-            }
-            else if(commandObject instanceof Commander){
-                Commander commander = (Commander)commandObject;
-                if(commander.getControllerId().equals(this.playerId)){
+            } else if (commandObject instanceof Commander) {
+                Commander commander = (Commander) commandObject;
+                if (commander.getControllerId().equals(this.playerId)) {
                     Card sourceCard = game.getCard(commander.getSourceId());
-                    if(sourceCard != null){
+                    if (sourceCard != null) {
                         commandList.add(new CommanderView(commander, sourceCard, game));
                     }
                 }
@@ -157,13 +157,11 @@ public class PlayerView implements Serializable {
         //show permanents controlled by player or attachments to permanents controlled by player
         if (permanent.getAttachedTo() == null) {
             return permanent.getControllerId().equals(playerId);
-        }
-        else {
+        } else {
             Permanent attachedTo = state.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null) {
                 return attachedTo.getControllerId().equals(playerId);
-            }
-            else {
+            } else {
                 return permanent.getControllerId().equals(playerId);
             }
         }
@@ -221,8 +219,8 @@ public class PlayerView implements Serializable {
         return this.topCard;
     }
 
-    public UserDataView getUserData() {
-        return this.userDataView;
+    public UserData getUserData() {
+        return this.userData;
     }
 
     public List<CommandObjectView> getCommadObjectList() {

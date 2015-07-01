@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -41,17 +40,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class MycosynthGolemTest extends CardTestPlayerBase {
 
-    /** 
-     * Mycosynth Golem
-     * Artifact Creature — Golem 4/5, 11 (11)
-     * Affinity for artifacts (This spell costs {1} less to cast for each 
-     * artifact you control.)
-     * Artifact creature spells you cast have affinity for artifacts. (They cost
-     * {1} less to cast for each artifact you control.)
+    /**
+     * Mycosynth Golem Artifact Creature — Golem 4/5, 11 (11) Affinity for
+     * artifacts (This spell costs {1} less to cast for each artifact you
+     * control.) Artifact creature spells you cast have affinity for artifacts.
+     * (They cost {1} less to cast for each artifact you control.)
      *
      */
-
-    // @Ignore // at this time player.getPlayable() does not account for spells that gain abilities
     @Test
     public void testSpellsAffinity() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -60,13 +55,13 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Alpha Myr");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Myr");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Alpha Myr", 1);
         assertHandCount(playerA, "Alpha Myr", 0);
-        
+
         Permanent mountain = getPermanent("Mountain", playerA);
         Permanent forest = getPermanent("Forest", playerA);
         int tappedLands = 0;
@@ -79,5 +74,5 @@ public class MycosynthGolemTest extends CardTestPlayerBase {
         Assert.assertEquals("only one land may be tapped because the cost reduction", 1, tappedLands);
 
     }
-   
+
 }

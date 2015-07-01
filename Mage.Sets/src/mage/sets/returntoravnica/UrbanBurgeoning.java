@@ -25,10 +25,17 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -38,14 +45,6 @@ import mage.constants.PhaseStep;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -59,11 +58,10 @@ public class UrbanBurgeoning extends CardImpl {
 
     static final String rule = "Enchanted land has \"Untap this land during each other player's untap step.\"";
 
-    public UrbanBurgeoning (UUID ownerId) {
+    public UrbanBurgeoning(UUID ownerId) {
         super(ownerId, 138, "Urban Burgeoning", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Aura");
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
@@ -77,7 +75,7 @@ public class UrbanBurgeoning extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public UrbanBurgeoning (final UrbanBurgeoning card) {
+    public UrbanBurgeoning(final UrbanBurgeoning card) {
         super(card);
     }
 
@@ -114,8 +112,8 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 Permanent land = game.getPermanent(source.getSourceId());
                 boolean untap = true;
-                for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(land, game).keySet()) {
-                    untap &= effect.canBeUntapped(land, game);
+                for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(land, game).keySet()) {
+                    untap &= effect.canBeUntapped(land, source, game);
                 }
                 if (untap) {
                     land.untap(game);

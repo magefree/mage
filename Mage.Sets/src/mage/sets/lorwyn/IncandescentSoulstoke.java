@@ -122,7 +122,7 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+            if (controller.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                 FilterCard filter = new FilterCreatureCard();
                 filter.add(new SubtypePredicate(("Elemental")));
                 TargetCardInHand target = new TargetCardInHand(filter);

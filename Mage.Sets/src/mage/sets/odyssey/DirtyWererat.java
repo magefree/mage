@@ -66,16 +66,18 @@ public class DirtyWererat extends CardImpl {
         // {B}, Discard a card: Regenerate Dirty Wererat.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new DiscardCardCost());
+        this.addAbility(ability);
+
         // Threshold - As long as seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block.
         Ability thresholdAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                    new ConditionalContinuousEffect(
-                    new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                    new CardsInControllerGraveCondition(7),
-                    "<i>Threshold</i> - If seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block"
+                new ConditionalContinuousEffect(
+                        new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
+                        new CardsInControllerGraveCondition(7),
+                        "<i>Threshold</i> - If seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block"
                 ));
         Effect effect = new ConditionalRestrictionEffect(
-                    new CantBlockSourceEffect(Duration.WhileOnBattlefield),
-                    new CardsInControllerGraveCondition(7));
+                new CantBlockSourceEffect(Duration.WhileOnBattlefield),
+                new CardsInControllerGraveCondition(7));
         effect.setText("and can't block");
         thresholdAbility.addEffect(effect);
         this.addAbility(thresholdAbility);

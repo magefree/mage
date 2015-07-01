@@ -95,7 +95,7 @@ class FieryGambitEffect extends OneShotEffect {
             while (controller.flipCoin(game)) {
                 ++flipsWon;
                 if (!controller.chooseUse(outcome, new StringBuilder("You won ").append(flipsWon).append(flipsWon == 1?" flip.":" flips.")
-                        .append(" Flip another coin?").toString(), game)) {
+                        .append(" Flip another coin?").toString(), source, game)) {
                     controllerStopped = true;
                     break;
                 }

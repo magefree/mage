@@ -114,7 +114,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
         player.getLibrary().reset();
 
         if (card != null) {
-            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
+            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", source, game)) {
                 if(player.cast(card.getSpellAbility(), game, true)){
                     exile.remove(card.getId());
                 }

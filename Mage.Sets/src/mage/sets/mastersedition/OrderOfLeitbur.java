@@ -51,7 +51,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class OrderOfLeitbur extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

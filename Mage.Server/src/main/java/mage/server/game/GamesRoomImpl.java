@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server.game;
 
 import java.io.Serializable;
@@ -76,16 +75,16 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<>();
 
-    public GamesRoomImpl()  {
+    public GamesRoomImpl() {
         updateExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 try {
                     update();
                 } catch (Exception ex) {
                     logger.fatal("Games room update exception! " + ex.toString(), ex);
                 }
-                
+
             }
         }, 2, 2, TimeUnit.SECONDS);
     }
@@ -95,7 +94,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         ArrayList<MatchView> matchView = new ArrayList<>();
         List<Table> allTables = new ArrayList<>(tables.values());
         Collections.sort(allTables, new TableListSorter());
-        for (Table table: allTables) {
+        for (Table table : allTables) {
             if (table.getState() != TableState.FINISHED) {
                 tableView.add(new TableView(table));
             }
@@ -111,7 +110,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                     TournamentManager.getInstance().removeTournament(table.getTournament().getId());
                 }
                 this.removeTable(table.getId());
-           }
+            }
         }
         List<UsersView> users = new ArrayList<>();
         for (User user : UserManager.getInstance().getUsers()) {
@@ -124,7 +123,7 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
             }
         }
 
-        Collections.sort(users, new UserNameSorter());                
+        Collections.sort(users, new UserNameSorter());
         RoomUsersView roomUsersView = new RoomUsersView(users, 
                 GameManager.getInstance().getNumberActiveGames(),
                 ThreadExecutor.getInstance().getActiveThreads(ThreadExecutor.getInstance().getGameExecutor()),
@@ -219,18 +218,19 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
 /**
  * Sorts the tables for table and match view of the client room
- * 
+ *
  * @author LevelX2
  */
 class TableListSorter implements Comparator<Table> {
+
     @Override
     public int compare(Table one, Table two) {
         if (!one.getState().equals(TableState.SIDEBOARDING) && !one.getState().equals(TableState.DUELING)) {
-            if (one.getState().compareTo(two.getState()) != 0 ) {
+            if (one.getState().compareTo(two.getState()) != 0) {
                 return one.getState().compareTo(two.getState());
             }
         } else if (!two.getState().equals(TableState.SIDEBOARDING) && !two.getState().equals(TableState.DUELING)) {
-            if (one.getState().compareTo(two.getState()) != 0 ) {
+            if (one.getState().compareTo(two.getState()) != 0) {
                 return one.getState().compareTo(two.getState());
             }
         }
@@ -260,6 +260,7 @@ class TableListSorter implements Comparator<Table> {
 }
 
 class UserNameSorter implements Comparator<UsersView> {
+
     @Override
     public int compare(UsersView one, UsersView two) {
         return one.getUserName().compareToIgnoreCase(two.getUserName());

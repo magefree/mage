@@ -37,15 +37,12 @@ import mage.constants.Rarity;
  *
  * @author Backfir3
  */
-public class ElvishRanger1 extends CardImpl {
+public class ElvishRanger1 extends mage.sets.portal.ElvishRanger {
 
     public ElvishRanger1(UUID ownerId) {
-        super(ownerId, 67, "Elvish Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId);
+        this.cardNumber = 67;
         this.expansionSetCode = "ALL";
-        this.subtype.add("Elf");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(1);
     }
 
     public ElvishRanger1(final ElvishRanger1 card) {

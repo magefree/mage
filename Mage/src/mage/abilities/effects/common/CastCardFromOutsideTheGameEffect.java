@@ -73,7 +73,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect {
             return false;
         }
 
-        while (player.chooseUse(Outcome.Benefit, choiceText, game)) {
+        while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
             Cards cards = player.getSideboard();
             if (cards.isEmpty()) {
                 if (!game.isSimulation())

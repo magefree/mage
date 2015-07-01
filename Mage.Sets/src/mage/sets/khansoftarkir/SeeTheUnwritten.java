@@ -125,7 +125,7 @@ class SeeTheUnwrittenEffect extends OneShotEffect {
 
             if (!cards.isEmpty()) {
                 controller.revealCards(sourceObject.getName(), cards, game);
-                if (creatureCardsFound > 0 && controller.chooseUse(outcome, "Put creature(s) into play?", game)) {
+                if (creatureCardsFound > 0 && controller.chooseUse(outcome, "Put creature(s) into play?", source, game)) {
                     int cardsToChoose = Math.min(numberOfCardsToPutIntoPlay, creatureCardsFound); 
                     TargetCard target = new TargetCard(cardsToChoose, cardsToChoose, Zone.LIBRARY, filter);
                     if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {

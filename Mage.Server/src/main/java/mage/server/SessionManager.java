@@ -118,14 +118,14 @@ public class SessionManager {
     }
 
     public void disconnect(String sessionId, DisconnectReason reason) {
-        Session session = sessions.get(sessionId);     
+        Session session = sessions.get(sessionId);
         if (session != null) {
             if (!reason.equals(DisconnectReason.AdminDisconnect)) {
                 if (!sessions.containsKey(sessionId)) {
                     // session was removed meanwhile by another thread so we can return
                     return;
                 }
-                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: "+ sessionId);
+                logger.debug("DISCONNECT  " + reason.toString() + " - sessionId: " + sessionId);
                 sessions.remove(sessionId);
                 switch (reason) {
                     case Disconnected:
@@ -141,13 +141,13 @@ public class SessionManager {
                         LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED, sessionId);
                         break;
                     default:
-                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: "+ sessionId);
+                        logger.error("endSession: unexpected reason  " + reason.toString() + " - sessionId: " + sessionId);
                 }
             } else {
                 sessions.remove(sessionId);
                 session.kill(reason);
             }
-        } 
+        }
 
     }
 
@@ -161,6 +161,7 @@ public class SessionManager {
 
     /**
      * Admin requested the disconnect of a user
+     *
      * @param sessionId
      * @param userSessionId
      */
@@ -169,12 +170,12 @@ public class SessionManager {
             User userAdmin, user;
             if ((userAdmin = getUserFromSession(sessionId)) != null) {
                 if ((user = getUserFromSession(userSessionId)) != null) {
-                    user.showUserMessage("Admin operation","Your session was disconnected by Admin.");
+                    user.showUserMessage("Admin operation", "Your session was disconnected by Admin.");
                     userAdmin.showUserMessage("Admin action", "User" + user.getName() + " was disconnected.");
                     disconnect(userSessionId, DisconnectReason.AdminDisconnect);
                     LogServiceImpl.instance.log(LogKeys.KEY_SESSION_DISCONNECTED_BY_ADMIN, sessionId, userSessionId);
                 } else {
-                    userAdmin.showUserMessage("Admin operation","User with sessionId " + userSessionId + " could not be found!");
+                    userAdmin.showUserMessage("Admin operation", "User with sessionId " + userSessionId + " could not be found!");
                 }
             }
         }
@@ -209,7 +210,7 @@ public class SessionManager {
 
     public User getUser(String sessionId) {
         Session session = sessions.get(sessionId);
-        if (session != null) { 
+        if (session != null) {
             return UserManager.getInstance().getUser(sessions.get(sessionId).getUserId());
         }
         return null;

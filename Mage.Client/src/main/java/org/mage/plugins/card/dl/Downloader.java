@@ -11,6 +11,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -158,6 +159,14 @@ public class Downloader extends AbstractLaternaBean implements Disposable {
                     }
                 }
                 job.setState(State.FINISHED);
+            } catch(ConnectException ex) {
+                String message;
+                if (ex.getMessage() != null) {
+                    message = ex.getMessage();
+                } else {
+                    message = "Unknown error";
+                }
+                logger.warn("Error resource download " + job.getName() +" from "+ job.getSource().toString() + ": " + message);
             } catch(IOException ex) {
                 job.setError(ex);
             }

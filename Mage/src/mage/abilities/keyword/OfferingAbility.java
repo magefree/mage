@@ -159,7 +159,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl {
                 Card spellToCast = game.getCard(source.getSourceId());
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null &&  !CardUtil.isCheckPlayableMode(affectedAbility) && 
-                        player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + "?", game)) {
+                        player.chooseUse(Outcome.Benefit, "Offer a " + filter.getMessage() + " to cast " + spellToCast.getName() + "?", source, game)) {
                     Target target = new TargetControlledCreaturePermanent(1,1,filter,true);
                     player.chooseTarget(Outcome.Sacrifice, target, source, game);
                     if (!target.isChosen()) {

@@ -29,12 +29,13 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -46,7 +47,7 @@ public class RevealTargetFromHandCost extends CostImpl {
 
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
-        this.text = (target.getNumberOfTargets() == 0 ?"you may ":"") + "reveal " + target.getTargetName();
+        this.text = (target.getNumberOfTargets() == 0 ? "you may " : "") + "reveal " + target.getTargetName();
     }
 
     public RevealTargetFromHandCost(final RevealTargetFromHandCost cost) {
@@ -70,8 +71,9 @@ public class RevealTargetFromHandCost extends CostImpl {
                     cards.add(card);
                 }
             }
-            if (numberCardsRevealed > 0 ) {
-                player.revealCards("card cost", cards, game);
+            if (numberCardsRevealed > 0) {
+                MageObject baseObject = game.getBaseObject(sourceId);
+                player.revealCards(baseObject == null ? "card cost" : baseObject.getIdName(), cards, game);
             }
             if (targets.get(0).getNumberOfTargets() <= numberCardsRevealed) {
                 paid = true; // e.g. for optional additional costs.  example: Dragonlord's Prerogative also true if 0 cards shown

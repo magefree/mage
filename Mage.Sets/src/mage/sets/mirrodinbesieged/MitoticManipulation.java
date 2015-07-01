@@ -117,7 +117,7 @@ class MitoticManipulationEffect extends OneShotEffect {
         }
         player.lookAtCards("Mitotic Manipulation", cards, game);
 
-        if (!cardsFound.isEmpty() && player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put a card on the battlefield?", game)) {
+        if (!cardsFound.isEmpty() && player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put a card on the battlefield?", source, game)) {
             TargetCard target = new TargetCard(Zone.PICK, filter);
 
             if (player.choose(Outcome.PutCardInPlay, cardsFound, target, game)) {

@@ -8,18 +8,21 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * also tests regenerate and
- * tests that permanents with protection can be sacrificed
- * 
+ * also tests regenerate and tests that permanents with protection can be
+ * sacrificed
+ *
  * @author BetaSteward
  */
 public class SpitefulShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
+        // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
         addCard(Zone.BATTLEFIELD, playerA, "Glistener Elf");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        // Enchant creature
+        // Whenever enchanted creature is dealt damage, it deals that much damage to its controller.
         addCard(Zone.HAND, playerA, "Spiteful Shadows");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 

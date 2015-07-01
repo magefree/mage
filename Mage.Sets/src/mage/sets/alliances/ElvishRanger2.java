@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author Backfir3
  */
-public class ElvishRanger2 extends mage.sets.alliances.ElvishRanger1 {
+public class ElvishRanger2 extends mage.sets.portal.ElvishRanger {
 
     public ElvishRanger2(UUID ownerId) {
         super(ownerId);

@@ -121,7 +121,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
     private UUID cardId;
 
     public PraetorsGraspPlayEffect(UUID cardId) {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.cardId = cardId;
         staticText = "You may look at and play that card for as long as it remains exiled";
     }
@@ -149,7 +149,7 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl {
             if (exileId != null && controller != null) {
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(cardId)) {
-                    if (controller.chooseUse(outcome, "Play the exiled card?", game)) {
+                    if (controller.chooseUse(outcome, "Play the exiled card?", source, game)) {
                         return true;
                     }
                 } else {
@@ -198,7 +198,7 @@ class PraetorsGraspRevealEffect extends AsThoughEffectImpl {
                     Player controller = game.getPlayer(source.getControllerId());
                     Card card = game.getCard(cardId);
                     if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                        if (controller.chooseUse(outcome, "Reveal exiled card?", game)) {
+                        if (controller.chooseUse(outcome, "Reveal exiled card?", source, game)) {
                             Cards cards = new CardsImpl(card);
                             controller.lookAtCards("Exiled with " + sourceObject.getIdName(), cards, game);
                         }

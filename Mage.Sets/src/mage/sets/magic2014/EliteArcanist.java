@@ -176,7 +176,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
                     if (copiedCard != null) {
                         game.getExile().add(source.getSourceId(), "",copiedCard);
                         game.getState().setZone(copiedCard.getId(), Zone.EXILED);
-                        if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
+                        if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                             return controller.cast(copiedCard.getSpellAbility(), game, true);
                         }
                     }

@@ -37,7 +37,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class AlluringScent extends CardImpl {
 

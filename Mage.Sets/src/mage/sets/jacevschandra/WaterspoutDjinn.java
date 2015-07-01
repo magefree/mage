@@ -30,7 +30,7 @@ package mage.sets.jacevschandra;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class WaterspoutDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetCost(new TargetControlledPermanent(filter))),
+                new SacrificeSourceUnlessPaysEffect(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter))),
                 TargetController.YOU, false));
     }
 

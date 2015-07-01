@@ -42,22 +42,24 @@
         <!--<playerType name="Computer - minimax" jar="mage-player-aiminimax.jar" className="mage.player.ai.ComputerPlayer3"/>-->
         <playerType name="Computer - mad" jar="mage-player-ai-ma.jar" className="mage.player.ai.ComputerPlayer7"/>
         <!--<playerType name="Computer - monte carlo" jar="mage-player-aimcts.jar" className="mage.player.ai.ComputerPlayerMCTS"/>-->
-		<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
+	<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
     <gameTypes>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
         <gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
         <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Commander Free For All" jar="mage-game-commanderfreeforall.jar" className="mage.game.CommanderFreeForAllMatch" typeName="mage.game.CommanderFreeForAllType"/>
-		<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
+	<gameType name="Tiny Leaders Two Player Duel" jar="mage-game-tinyleadersduel.jar" className="mage.game.TinyLeadersDuelMatch" typeName="mage.game.TinyLeadersDuelType"/>
     </gameTypes>
     <tournamentTypes>
         <tournamentType name="Constructed Elimination" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedEliminationTournament" typeName="mage.tournament.ConstructedEliminationTournamentType"/>
         <tournamentType name="Constructed Swiss" jar="mage-tournament-constructed.jar" className="mage.tournament.ConstructedSwissTournament" typeName="mage.tournament.ConstructedSwissTournamentType"/>
         <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
+        <tournamentType name="Booster Draft Elimination (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftEliminationTournament" typeName="mage.tournament.RandomBoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
+        <tournamentType name="Booster Draft Swiss (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftSwissTournament" typeName="mage.tournament.RandomBoosterDraftSwissTournamentType"/>
         <tournamentType name="Sealed Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationTournamentType"/>
         <tournamentType name="Sealed Elimination (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedEliminationTournament" typeName="mage.tournament.SealedEliminationCubeTournamentType"/>
         <tournamentType name="Sealed Swiss" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissTournamentType"/>
@@ -71,6 +73,7 @@
         <draftCube name="MTGO Cube March 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOMarchCube2014"/>
         <draftCube name="MTGO Holiday Cube 2013" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2013"/>
         <draftCube name="MTGO Holiday Cube 2014" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2014"/>        
+        <draftCube name="MTGO Holiday Cube 2015" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.HolidayCube2015"/>   
         <draftCube name="MTGO Legacy Cube (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube"/>
         <draftCube name="MTGO Legacy Cube 2015 (600 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.MTGOLegacyCube2015"/>
         <draftCube name="The Peasant's Toolbox (800 cards)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.PeasantsToolboxCube"/>
@@ -83,6 +86,9 @@
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
         <deckType name="Constructed - Legacy" jar="mage-deck-constructed.jar" className="mage.deck.Legacy"/>
         <deckType name="Constructed - Pauper" jar="mage-deck-constructed.jar" className="mage.deck.Pauper"/>        
+        <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
+        <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
+	<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
         <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
         <deckType name="Block Constructed - Khans of Tarkir" jar="mage-deck-constructed.jar" className="mage.deck.KhansOfTarkirBlock"/>
@@ -92,9 +98,6 @@
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>       
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
-        <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
-        <deckType name="Variant Magic - Duel Commander" jar="mage-deck-constructed.jar" className="mage.deck.DuelCommander"/>
-		<deckType name="Variant Magic - Tiny Leaders" jar="mage-deck-constructed.jar" className="mage.deck.TinyLeaders"/>
         <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>

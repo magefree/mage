@@ -65,9 +65,6 @@ public class SacrificeSourceEffect extends OneShotEffect {
                 return permanent.sacrifice(source.getSourceId(), game);
             }
             return true;
-        } else {
-            // no permanent?
-            sourceObject.getName();
         }
         return false;
     }

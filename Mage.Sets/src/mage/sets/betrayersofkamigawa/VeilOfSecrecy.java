@@ -29,7 +29,7 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.costs.common.ReturnToHandTargetCost;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -71,7 +71,7 @@ public class VeilOfSecrecy extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         
         // Splice onto Arcane-Return a blue creature you control to its owner's hand.
-        this.addAbility(new SpliceOntoArcaneAbility(new ReturnToHandTargetCost(new TargetControlledCreaturePermanent(filter))));
+        this.addAbility(new SpliceOntoArcaneAbility(new ReturnToHandTargetPermanentCost(new TargetControlledCreaturePermanent(filter))));
     }
 
     public VeilOfSecrecy(final VeilOfSecrecy card) {

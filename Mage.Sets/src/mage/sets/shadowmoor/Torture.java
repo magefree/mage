@@ -34,7 +34,7 @@ import java.util.UUID;
  * @author jeffwadsworth
 
  */
-public class Torture extends mage.sets.homelands.Torture {
+public class Torture extends mage.sets.homelands.Torture1 {
 
     public Torture(UUID ownerId) {
         super(ownerId);

@@ -34,6 +34,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersCount;
+import mage.abilities.dynamicvalue.common.PermanentsTargetOpponentControlsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventAllDamageToSourceEffect;
@@ -45,7 +46,6 @@ import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -68,7 +68,7 @@ public class GideonChampionOfJustice extends CardImpl {
 
         // +1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
         LoyaltyAbility ability1 = new LoyaltyAbility(
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(), true), 1);
+                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(0), new PermanentsTargetOpponentControlsCount(new FilterCreaturePermanent()), true), 1);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 
@@ -89,39 +89,6 @@ public class GideonChampionOfJustice extends CardImpl {
     @Override
     public GideonChampionOfJustice copy() {
         return new GideonChampionOfJustice(this);
-    }
-}
-
-class PermanentsTargetOpponentControlsCount implements DynamicValue {
-
-    public PermanentsTargetOpponentControlsCount() {
-    }
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility.getFirstTarget() != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(sourceAbility.getFirstTarget()));
-            int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
-            return value;
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new PermanentsTargetOpponentControlsCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "creature target opponent controls";
     }
 }
 

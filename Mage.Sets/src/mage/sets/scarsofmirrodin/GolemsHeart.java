@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
@@ -46,13 +45,15 @@ import mage.game.stack.Spell;
  */
 public class GolemsHeart extends CardImpl {
 
-    public GolemsHeart (UUID ownerId) {
+    public GolemsHeart(UUID ownerId) {
         super(ownerId, 161, "Golem's Heart", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
+
+        // Whenever a player casts an artifact spell, you may gain 1 life.
         this.addAbility(new GolemsHeartAbility());
     }
 
-    public GolemsHeart (final GolemsHeart card) {
+    public GolemsHeart(final GolemsHeart card) {
         super(card);
     }
 
@@ -80,7 +81,7 @@ class GolemsHeartAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.CAST_SPELL;
+        return event.getType() == EventType.SPELL_CAST;
     }
 
     @Override

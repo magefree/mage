@@ -29,17 +29,17 @@ package mage.sets.ninthedition;
 
 import java.util.HashSet;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.PhaseStep;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -68,14 +68,13 @@ public class StorageMatrix extends CardImpl {
     }
 }
 
-
-
 class StorageMatrixRestrictionEffect extends RestrictionEffect {
 
     private int turn;
     private boolean applies;
     private static final HashSet<String> choice = new HashSet<>();
-    static{
+
+    static {
         choice.add(CardType.ARTIFACT.toString());
         choice.add(CardType.CREATURE.toString());
         choice.add(CardType.LAND.toString());
@@ -106,8 +105,8 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                     choiceImpl.setMessage("Untap which kind of permanent?");
                     choiceImpl.setChoices(choice);
                     Player player = game.getPlayer(game.getActivePlayerId());
-                    if(player != null){
-                        while(!player.choose(outcome, choiceImpl, game)) {
+                    if (player != null) {
+                        while (!player.choose(outcome, choiceImpl, game)) {
                             if (player.isInGame()) {
                                 return false;
                             }
@@ -115,11 +114,11 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
                         String choosenType = choiceImpl.getChoice();
                         game.informPlayers(storageMatrix.getLogName() + ": " + player.getLogName() + " chose to untap " + choosenType);
 
-                        if(choosenType.equals(CardType.ARTIFACT.toString())){
+                        if (choosenType.equals(CardType.ARTIFACT.toString())) {
                             type = CardType.ARTIFACT;
-                        }else if(choosenType.equals(CardType.LAND.toString())){
+                        } else if (choosenType.equals(CardType.LAND.toString())) {
                             type = CardType.LAND;
-                        }else{
+                        } else {
                             type = CardType.CREATURE;
                         }
                         applies = true;
@@ -134,7 +133,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

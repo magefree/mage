@@ -108,7 +108,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
                 int cardsHand = opponent.getHand().count(filter, game);
                 boolean fromHand = false;
                 if (cardsGraveyard > 0 && cardsHand > 0) {
-                    if (controller.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", game)) {
+                    if (controller.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", source, game)) {
                         fromHand = true;
                     }
                 } else {
@@ -155,7 +155,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect {
 class PsychicIntrusionCastFromExileEffect extends AsThoughEffectImpl {
 
     public PsychicIntrusionCastFromExileEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NON_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         staticText = "You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell";
     }
 

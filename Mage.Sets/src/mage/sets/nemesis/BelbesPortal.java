@@ -108,7 +108,7 @@ class BelbesPortalPutCreatureOnBattlefieldEffect extends OneShotEffect {
                 String choiceText = "Put a " + subtype.toLowerCase() + " creature card from your hand onto the battlefield?";
 
                 if (player != null) {
-                    if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, game)) {
+                    if (player.chooseUse(Outcome.PutCreatureInPlay, choiceText, source, game)) {
                         FilterCreatureCard creatureTypeFilter = new FilterCreatureCard();
                         creatureTypeFilter.add(new SubtypePredicate(subtype));
 

@@ -37,6 +37,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -49,7 +50,7 @@ import mage.game.stack.Spell;
  * @author emerald000
  */
 public class Dovescape extends CardImpl {
-    
+
     private static final FilterSpell filter = new FilterSpell("a noncreature spell");
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
@@ -61,7 +62,7 @@ public class Dovescape extends CardImpl {
 
 
         // Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
-        this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
     public Dovescape(final Dovescape card) {
@@ -75,21 +76,21 @@ public class Dovescape extends CardImpl {
 }
 
 class DovescapeEffect extends OneShotEffect {
-    
+
     DovescapeEffect() {
         super(Outcome.Benefit);
         this.staticText = "counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost";
     }
-    
+
     DovescapeEffect(final DovescapeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public DovescapeEffect copy() {
         return new DovescapeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(this.getTargetPointer().getFirst(game, source));

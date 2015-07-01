@@ -34,7 +34,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.LoseAbilityOrAnotherAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.SwampwalkAbility;
-import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -48,12 +48,12 @@ import mage.target.common.TargetCreaturePermanent;
 public class Urborg extends CardImpl {
 
     public Urborg(UUID ownerId) {
-        super(ownerId, 107, "Urborg", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 255, "Urborg", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LEG";
         this.supertype.add("Legendary");
 
         // {tap}: Add {B} to your mana pool.
-        this.addAbility(new GreenManaAbility());
+        this.addAbility(new BlackManaAbility());
         // {tap}: Target creature loses first strike or swampwalk until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityOrAnotherAbilityTargetEffect(FirstStrikeAbility.getInstance(), new SwampwalkAbility()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

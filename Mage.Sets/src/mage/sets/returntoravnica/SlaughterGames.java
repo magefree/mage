@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -54,15 +53,14 @@ import mage.target.common.TargetOpponent;
  */
 public class SlaughterGames extends CardImpl {
 
-    public SlaughterGames (UUID ownerId) {
+    public SlaughterGames(UUID ownerId) {
         super(ownerId, 197, "Slaughter Games", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{B}{R}");
         this.expansionSetCode = "RTR";
 
-
         // Slaughter Games can't be countered by spells or abilities.
-        Effect effect =  new CantBeCounteredSourceEffect();
+        Effect effect = new CantBeCounteredSourceEffect();
         effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
+        Ability ability = new SimpleStaticAbility(Zone.STACK, effect);
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
@@ -72,7 +70,7 @@ public class SlaughterGames extends CardImpl {
 
     }
 
-    public SlaughterGames (final SlaughterGames card) {
+    public SlaughterGames(final SlaughterGames card) {
         super(card);
     }
 
@@ -85,7 +83,7 @@ public class SlaughterGames extends CardImpl {
 class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     public SlaughterGamesEffect() {
-        super(true, "target opponent's","any number of cards with that name");
+        super(true, "target opponent's", "any number of cards with that name");
     }
 
     public SlaughterGamesEffect(final SlaughterGamesEffect effect) {
@@ -109,9 +107,9 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
             }
             String cardName;
             cardName = cardChoice.getChoice();
-            Card card = game.getCard(source.getSourceId());
-            if (card != null) {
-                game.informPlayers(card.getName()+"named card: [" + cardName + "]");
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (sourceObject != null) {
+                game.informPlayers(sourceObject.getName() + " named card: [" + cardName + "]");
             }
 
             super.applySearchAndExile(game, source, cardName, player.getId());

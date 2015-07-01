@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AuraFinesse extends CardImpl {
 
-    private static final FilterEnchantment filter = new FilterEnchantment("Aura you control");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Aura you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -115,7 +115,7 @@ class AuraFinesseEffect extends OneShotEffect {
                         creature.addAttachment(aura.getId(), game);
                     }
                 }
-            }            
+            }
             return true;
         }
         return false;

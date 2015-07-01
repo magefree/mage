@@ -389,7 +389,7 @@ public class MageActionCallback implements ActionCallback {
 
     /**
      * Hides the text popup window
-     * 
+     *
      */
     @Override
     public void hidePopup() {
@@ -446,7 +446,7 @@ public class MageActionCallback implements ActionCallback {
                 }
             }
             return;
-        }        
+        }
         if (notches < 0) {
             // move up - show normal image
             enlargeCard(EnlargeMode.NORMAL);
@@ -457,7 +457,7 @@ public class MageActionCallback implements ActionCallback {
     }
 
     /**
-     * Show the big card image on mouse position while hoovering over a card
+     * Show the big card image on mouse position while hovering over a card
      *
      * @param showAlternative defines if the original image (if it's a copied card) or the opposite side of a transformable card will be shown
      */
@@ -490,7 +490,7 @@ public class MageActionCallback implements ActionCallback {
                 cardPreviewContainer.setVisible(false);
                 cardPreviewContainer = MageFrame.getUI().getComponent(MageComponents.CARD_PREVIEW_CONTAINER_ROTATED);
                 cardPreviewContainer.setVisible(false);
-                
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -539,7 +539,7 @@ public class MageActionCallback implements ActionCallback {
                         location.translate(-parentPoint.x, -parentPoint.y);
                         popupContainer.setLocation(location);
                         popupContainer.setVisible(true);
-                        
+
                         MageCard mageCard = (MageCard) transferData.component;
                         Image image = null;
                         switch (enlargeMode) {

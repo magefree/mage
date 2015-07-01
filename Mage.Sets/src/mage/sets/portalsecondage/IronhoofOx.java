@@ -38,7 +38,7 @@ import mage.constants.Zone;
 
 /**
  *
- * @author anonymous
+ * @author ilcartographer
  */
 public class IronhoofOx extends CardImpl {
 

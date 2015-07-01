@@ -99,11 +99,11 @@ class HiddenStringsEffect extends OneShotEffect {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
                         if (permanent.isTapped()) {
-                            if (player.chooseUse(Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), game)) {                                
+                            if (player.chooseUse(Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), source, game)) {                                
                                 permanent.untap(game);
                             }
                         } else {
-                            if (player.chooseUse(Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), game)) {
+                            if (player.chooseUse(Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), source, game)) {
                                 permanent.tap(game);
                             }
                         }
