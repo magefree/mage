@@ -55,6 +55,7 @@ public class SendToSleep extends CardImpl {
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps.
         Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersNextUntapStepTargetEffect(),
                 SpellMasteryCondition.getInstance());
+        effect.setText("<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);
     }
 
