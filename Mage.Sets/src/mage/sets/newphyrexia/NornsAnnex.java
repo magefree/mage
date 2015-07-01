@@ -28,20 +28,13 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  * @author Loki
@@ -53,8 +46,8 @@ public class NornsAnnex extends CardImpl {
         this.expansionSetCode = "NPH";
 
         // {WP} ({WP} can be paid with either or 2 life.)
-        // Creatures can't attack you or a planeswalker you control unless their controller pays for each of those creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NornsAnnexReplacementEffect()));
+        // Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each of those creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{WP}"), true)));
     }
 
     public NornsAnnex(final NornsAnnex card) {
@@ -64,58 +57,6 @@ public class NornsAnnex extends CardImpl {
     @Override
     public NornsAnnex copy() {
         return new NornsAnnex(this);
-    }
-
-}
-
-class NornsAnnexReplacementEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {WP} for each creature he or she controls that's attacking you";
-
-    NornsAnnexReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    NornsAnnexReplacementEffect(NornsAnnexReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId())) {
-            return true;
-        }
-        // planeswalker
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                && permanent.getCardType().contains(CardType.PLANESWALKER);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
-            if (propagandaTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Benefit, "Pay to declare attacker?", source, game)) {
-                if (propagandaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public NornsAnnexReplacementEffect copy() {
-        return new NornsAnnexReplacementEffect(this);
     }
 
 }

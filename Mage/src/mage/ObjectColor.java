@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage;
 
 import java.io.Serializable;
@@ -50,26 +49,27 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     private boolean red;
     private boolean green;
 
-    public ObjectColor() {}
+    public ObjectColor() {
+    }
 
     public ObjectColor(String color) {
         for (int i = 0; i < color.length(); i++) {
             switch (color.charAt(i)) {
-            case 'W':
-                white = true;
-                break;
-            case 'U':
-                blue = true;
-                break;
-            case 'B':
-                black = true;
-                break;
-            case 'R':
-                red = true;
-                break;
-            case 'G':
-                green = true;
-                break;
+                case 'W':
+                    white = true;
+                    break;
+                case 'U':
+                    blue = true;
+                    break;
+                case 'B':
+                    black = true;
+                    break;
+                case 'R':
+                    red = true;
+                    break;
+                case 'G':
+                    green = true;
+                    break;
             }
         }
     }
@@ -157,30 +157,39 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public boolean isWhite() {
         return white;
     }
+
     public void setWhite(boolean white) {
         this.white = white;
     }
+
     public boolean isBlue() {
         return blue;
     }
+
     public void setBlue(boolean blue) {
         this.blue = blue;
     }
+
     public boolean isBlack() {
         return black;
     }
+
     public void setBlack(boolean black) {
         this.black = black;
     }
+
     public boolean isRed() {
         return red;
     }
+
     public void setRed(boolean red) {
         this.red = red;
     }
+
     public boolean isGreen() {
         return green;
     }
+
     public void setGreen(boolean green) {
         this.green = green;
     }
@@ -287,14 +296,10 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public boolean shares(ObjectColor color) {
-        if (this == color) {
-            return true;
-        }
-        if (!hasColor() && !color.hasColor()) {
-            return true;
-        }
-        return color.white && white || color.blue && blue || color.black && black ||
-                color.red && red || color.green && green;
+        // 105.4. [...] “Multicolored” is not a color. Neither is “colorless.”
+        return !color.isColorless()
+                && (color.white && white || color.blue && blue || color.black && black
+                || color.red && red || color.green && green);
     }
 
     @Override
@@ -309,32 +314,32 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
         if (this.isMulticolored()) {
             o1 = 6;
-        } else if(this.isColorless()) {
+        } else if (this.isColorless()) {
             o1 = 0;
-        } else if(this.isBlack()) {
+        } else if (this.isBlack()) {
             o1 = 1;
-        } else if(this.isBlue()) {
+        } else if (this.isBlue()) {
             o1 = 2;
-        } else if(this.isGreen()) {
+        } else if (this.isGreen()) {
             o1 = 3;
-        } else if(this.isRed()) {
+        } else if (this.isRed()) {
             o1 = 4;
-        } else if(this.isWhite()) {
+        } else if (this.isWhite()) {
             o1 = 5;
         }
         if (o.isMulticolored()) {
             o2 = 6;
-        } else if(o.isColorless()) {
+        } else if (o.isColorless()) {
             o2 = 0;
-        } else if(o.isBlack()) {
+        } else if (o.isBlack()) {
             o2 = 1;
-        } else if(o.isBlue()) {
+        } else if (o.isBlue()) {
             o2 = 2;
-        } else if(o.isGreen()) {
+        } else if (o.isGreen()) {
             o2 = 3;
-        } else if(o.isRed()) {
+        } else if (o.isRed()) {
             o2 = 4;
-        } else if(o.isWhite()) {
+        } else if (o.isWhite()) {
             o2 = 5;
         }
         return o1 - o2;

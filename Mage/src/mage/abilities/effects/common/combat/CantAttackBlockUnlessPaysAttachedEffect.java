@@ -25,23 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects;
+package mage.abilities.effects.common.combat;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl.RestrictType;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public interface PayCostToAttackBlockEffect extends ReplacementEffect {
+public class CantAttackBlockUnlessPaysAttachedEffect extends PayCostToAttackBlockEffectImpl {
 
-    ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game);
+    public CantAttackBlockUnlessPaysAttachedEffect(ManaCosts manaCosts, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK, manaCosts);
+        staticText = attachmentType.equals(AttachmentType.AURA) ? "Enchanted " : "Equipped "
+                + "creature can't attack or block unless its controller pays "
+                + manaCosts == null ? "" : manaCosts.getText();
+    }
 
-    Cost getOtherCostToPay(GameEvent event, Ability source, Game game);
+    public CantAttackBlockUnlessPaysAttachedEffect(CantAttackBlockUnlessPaysAttachedEffect effect) {
+        super(effect);
+    }
 
-    boolean isCostless(GameEvent event, Ability source, Game game);
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (event.getType().equals(EventType.DECLARE_ATTACKER)) {
+                return event.getSourceId().equals(enchantment.getAttachedTo());
+            }
+            if (event.getType().equals(EventType.DECLARE_BLOCKER)) {
+                return event.getSourceId().equals(enchantment.getAttachedTo());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public CantAttackBlockUnlessPaysAttachedEffect copy() {
+        return new CantAttackBlockUnlessPaysAttachedEffect(this);
+    }
 }
