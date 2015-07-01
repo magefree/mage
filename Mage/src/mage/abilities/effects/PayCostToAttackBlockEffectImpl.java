@@ -29,12 +29,13 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostImpl;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -49,12 +50,29 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     }
 
     private final Cost cost;
+    private final ManaCosts manaCosts;
+
     private final RestrictType restrictType;
+
+    public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType) {
+        super(duration, outcome, false);
+        this.restrictType = restrictType;
+        this.cost = null;
+        this.manaCosts = null;
+    }
 
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, Cost cost) {
         super(duration, outcome, false);
         this.restrictType = restrictType;
         this.cost = cost;
+        this.manaCosts = null;
+    }
+
+    public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType, ManaCosts manaCosts) {
+        super(duration, outcome, false);
+        this.restrictType = restrictType;
+        this.cost = null;
+        this.manaCosts = manaCosts;
     }
 
     public PayCostToAttackBlockEffectImpl(PayCostToAttackBlockEffectImpl effect) {
@@ -63,6 +81,11 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
             this.cost = effect.cost.copy();
         } else {
             this.cost = null;
+        }
+        if (effect.manaCosts != null) {
+            this.manaCosts = effect.manaCosts.copy();
+        } else {
+            this.manaCosts = null;
         }
         this.restrictType = effect.restrictType;
     }
@@ -82,20 +105,31 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        ManaCosts attackBlockManaTax = getManaCostToPay(event, source, game);
+        if (attackBlockManaTax != null) {
+            return handleManaCosts(attackBlockManaTax, event, source, game);
+        }
+        Cost attackBlockOtherTax = getOtherCostToPay(event, source, game);
+        if (attackBlockOtherTax != null) {
+            return handleOtherCosts(attackBlockOtherTax, event, source, game);
+        }
+        return false;
+    }
+
+    private boolean handleManaCosts(ManaCosts attackBlockManaTax, GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        Cost attackBlockTax = getCostToPay(event, source, game);
-        if (player != null && attackBlockTax != null) {
+        if (player != null) {
             String chooseText;
             if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-                chooseText = "Pay " + attackBlockTax.getText() + " to attack?";
+                chooseText = "Pay " + attackBlockManaTax.getText() + " to attack?";
             } else {
-                chooseText = "Pay " + attackBlockTax.getText() + " to block?";
+                chooseText = "Pay " + attackBlockManaTax.getText() + " to block?";
             }
-            if (attackBlockTax.canPay(source, source.getSourceId(), player.getId(), game)
+            attackBlockManaTax.clearPaid();
+            if (attackBlockManaTax.canPay(source, source.getSourceId(), player.getId(), game)
                     && player.chooseUse(Outcome.Neutral, chooseText, source, game)) {
-                if (attackBlockTax instanceof ManaCostImpl) {
-                    ManaCostsImpl manaCosts = new ManaCostsImpl(attackBlockTax.getText());
-                    if (manaCosts.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
+                if (attackBlockManaTax instanceof ManaCostsImpl) {
+                    if (attackBlockManaTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
                         return false;
                     }
                 }
@@ -105,9 +139,30 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
         return false;
     }
 
+    private boolean handleOtherCosts(Cost attackBlockOtherTax, GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(event.getPlayerId());
+        if (player != null) {
+            attackBlockOtherTax.clearPaid();
+            if (attackBlockOtherTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
+                    && player.chooseUse(Outcome.Neutral,
+                            attackBlockOtherTax.getText() + " to " + (event.getType().equals(EventType.DECLARE_ATTACKER) ? "attack?" : "block?"), source, game)) {
+                if (attackBlockOtherTax.pay(source, game, source.getSourceId(), event.getPlayerId(), false)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public Cost getCostToPay(GameEvent event, Ability source, Game game) {
+    public Cost getOtherCostToPay(GameEvent event, Ability source, Game game) {
         return cost;
+    }
+
+    @Override
+    public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
+        return manaCosts;
     }
 
 }

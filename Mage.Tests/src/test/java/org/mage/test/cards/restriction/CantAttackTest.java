@@ -118,4 +118,26 @@ public class CantAttackTest extends CardTestPlayerBase {
         assertCounterCount("Ajani Goldmane", CounterType.LOYALTY, 2);
     }
 
+    @Test
+    public void testCowedByWisdom() {
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        // Enchant creature
+        // Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
+        addCard(Zone.HAND, playerA, "Cowed by Wisdom"); // Planeswalker 4 loyality counter
+
+        // Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
+        // Battle-Mad Ronin attacks each turn if able.
+        addCard(Zone.BATTLEFIELD, playerB, "Battle-Mad Ronin");
+        addCard(Zone.HAND, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cowed by Wisdom", "Battle-Mad Ronin");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 20);
+
+        assertTapped("Battle-Mad Ronin", false);
+    }
 }

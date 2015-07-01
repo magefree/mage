@@ -30,8 +30,9 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -83,7 +84,7 @@ public class CowedByWisdom extends CardImpl {
 class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
     CowedByWisdomayCostToAttackBlockEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK, null);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK);
         staticText = "Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand";
     }
 
@@ -92,10 +93,12 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
     }
 
     @Override
-    public Cost getCostToPay(GameEvent event, Ability source, Game game) {
+    public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.getHand().isEmpty()) {
-            return new GenericManaCost(controller.getHand().size());
+            ManaCosts manaCosts = new ManaCostsImpl();
+            manaCosts.add(new GenericManaCost(controller.getHand().size()));
+            return manaCosts;
         }
         return null;
     }
