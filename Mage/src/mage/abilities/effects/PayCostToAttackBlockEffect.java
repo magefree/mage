@@ -29,6 +29,7 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -38,5 +39,7 @@ import mage.game.events.GameEvent;
  */
 public interface PayCostToAttackBlockEffect extends ReplacementEffect {
 
-    Cost getCostToPay(GameEvent event, Ability source, Game game);
+    ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game);
+
+    Cost getOtherCostToPay(GameEvent event, Ability source, Game game);
 }

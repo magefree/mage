@@ -324,6 +324,30 @@ public class ContinuousEffects implements Serializable {
         return effects;
     }
 
+    public boolean checkIfThereArePayCostToAttackBlockEffects(GameEvent event, Game game) {
+        for (ReplacementEffect effect : replacementEffects) {
+            if (!effect.checksEventType(event, game)) {
+                continue;
+            }
+            if (effect instanceof PayCostToAttackBlockEffect) {
+                HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    // for replacment effects of static abilities do not use LKI to check if to apply
+                    if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
+                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                            if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
+                                if (effect.applies(event, ability, game)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      *
      * @param event
