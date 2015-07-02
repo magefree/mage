@@ -2,7 +2,6 @@ package mage.view;
 
 import java.io.Serializable;
 import mage.players.net.UserData;
-import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 
 /**
@@ -22,7 +21,7 @@ public class UserDataView implements Serializable {
     protected boolean askMoveToGraveOrder;
 
     static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false);
+        return UserData.getDefaultUserDataView();
     }
 
     public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards,

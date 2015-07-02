@@ -43,7 +43,6 @@ import mage.game.Table;
 import mage.game.tournament.TournamentPlayer;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
-import mage.players.net.UserGroup;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
 import mage.server.game.GameSessionPlayer;
@@ -400,7 +399,7 @@ public class User {
 
     public UserData getUserData() {
         if (userData == null) {// default these to avaiod NPE -> will be updated from client short after
-            return new UserData(UserGroup.DEFAULT, 0, false, false, false, null, "world.png", false);
+            return UserData.getDefaultUserDataView();
         }
         return this.userData;
     }

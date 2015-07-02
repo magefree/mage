@@ -1155,6 +1155,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void setManaPaymentMode(UUID playerId, boolean autoPayment) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
+            player.getUserData().setManaPoolAutomatic(autoPayment);
             player.getManaPool().setAutoPayment(autoPayment);
         }
     }
@@ -1163,6 +1164,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
+            player.getUserData().setManaPoolAutomaticRestricted(autoPaymentRestricted);
             player.getManaPool().setAutoPaymentRestricted(autoPaymentRestricted);
         }
     }

@@ -175,7 +175,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         super(name, range);
         flagName = "computer";
         human = false;
-        userData = new UserData(UserGroup.COMPUTER, 64, false, true, false, null, "Computer.png", false);
+        userData = UserData.getDefaultUserDataView();
+        userData.setAvatarId(64);
+        userData.setGroupId(UserGroup.COMPUTER.getGroupId());
+        userData.setFlagName("Computer.png");
         pickedCards = new ArrayList<>();
     }
 

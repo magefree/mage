@@ -2716,6 +2716,8 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setUserData(UserData userData) {
         this.userData = userData;
+        getManaPool().setAutoPayment(userData.isManaPoolAutomatic());
+        getManaPool().setAutoPaymentRestricted(userData.isManaPoolAutomaticRestricted());
     }
 
     @Override
