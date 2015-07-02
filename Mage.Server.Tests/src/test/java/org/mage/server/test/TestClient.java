@@ -15,6 +15,7 @@ import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -205,6 +206,16 @@ public class TestClient implements MageClient {
 
     @Override
     public void gameError(UUID gameId, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void sideboard(UUID tableId, DeckView deck, int time, boolean limited) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void construct(UUID tableId, DeckView deck, int time) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

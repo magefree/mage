@@ -9,6 +9,7 @@ import mage.interfaces.ServerState;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -55,5 +56,8 @@ public interface MageClient {
     public void gameEndInfo(UUID gameId, GameEndView view);
 
     public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage);
+
+    public void sideboard(UUID tableId, DeckView deck, int time, boolean limited);
+    public void construct(UUID tableId, DeckView deck, int time);
     
 }

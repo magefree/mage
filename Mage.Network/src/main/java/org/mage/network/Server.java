@@ -1,5 +1,6 @@
 package org.mage.network;
 
+import org.mage.network.messages.callback.ConstructCallback;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -28,6 +29,7 @@ import mage.choices.Choice;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
@@ -66,6 +68,7 @@ import org.mage.network.messages.callback.GameTargetCallback;
 import org.mage.network.messages.callback.GameUpdateCallback;
 import org.mage.network.messages.callback.InformClientCallback;
 import org.mage.network.messages.callback.JoinedTableCallback;
+import org.mage.network.messages.callback.SideboardCallback;
 import org.mage.network.messages.callback.UserRequestDialogCallback;
 
 /**
@@ -326,12 +329,16 @@ public class Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void sideboard(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void sideboard(String sessionId, UUID tableId, DeckView deck, int time, boolean limited) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new SideboardCallback(tableId, deck, time, limited)).addListener(WriteListener.getInstance());
     }
 
-    public void construct(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void construct(String sessionId, UUID tableId, DeckView deck, int time) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new ConstructCallback(tableId, deck, time)).addListener(WriteListener.getInstance());
     }
 
     public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {

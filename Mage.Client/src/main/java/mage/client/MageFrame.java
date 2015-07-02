@@ -111,6 +111,7 @@ import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
 import mage.client.table.TablesPane;
 import mage.client.tournament.TournamentPane;
+import mage.client.util.DeckUtil;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.GameManager;
 import mage.client.util.SettingsManager;
@@ -126,6 +127,7 @@ import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -1646,6 +1648,31 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     @Override
     public void gameError(UUID gameId, String message) {
         this.showErrorDialog("Game Error", message);
+    }
+
+    @Override
+    public void sideboard(UUID tableId, DeckView deckView, int time, boolean limited) {
+        Deck deck = DeckUtil.construct(deckView);
+        if (limited) {
+            construct(deck, tableId, time);
+        } else {
+            sideboard(deck, tableId, time);
+        }
+    }
+    
+    @Override
+    public void construct(UUID tableId, DeckView deckView, int time) {
+        Deck deck = DeckUtil.construct(deckView);
+        construct(deck, tableId, time);
+    }
+
+
+    protected void sideboard(Deck deck, UUID tableId, int time) {
+        showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
+    }
+
+    protected void construct(Deck deck, UUID tableId, int time) {
+        showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
     }
     
 }

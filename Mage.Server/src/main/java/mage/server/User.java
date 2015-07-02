@@ -56,6 +56,7 @@ import mage.server.util.SystemUtil;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
@@ -279,12 +280,12 @@ public class User {
     }
 
     public void sideboard(final Deck deck, final UUID tableId, final int time, boolean limited) {
-        ServerMain.getInstance().sideboard(sessionId, tableId, new TableClientMessage(deck, tableId, time, limited));
+        ServerMain.getInstance().sideboard(sessionId, tableId, new DeckView(deck), time, limited);
         sideboarding.put(tableId, deck);
     }
 
     public void construct(final Deck deck, final UUID tableId, final int time) {
-        ServerMain.getInstance().construct(sessionId, tableId, new TableClientMessage(deck, tableId, time));
+        ServerMain.getInstance().construct(sessionId, tableId, new DeckView(deck), time);
     }
 
     public void tournamentStarted(final UUID tournamentId, final UUID playerId) {

@@ -31,19 +31,15 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import mage.cards.decks.Deck;
 import mage.client.MageFrame;
-import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
-import mage.client.util.DeckUtil;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.object.SaveObjectUtil;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.utils.CompressUtil;
 import mage.view.ChatMessage;
-import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
 import mage.view.GameView;
@@ -308,25 +304,25 @@ public class CallbackClientImpl implements CallbackClient {
 //                                            JOptionPane.INFORMATION_MESSAGE);
 //                                }       break;
 //                            }
-                        case "sideboard":
-                            {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                DeckView deckView = message.getDeck();
-                                Deck deck = DeckUtil.construct(deckView);
-                                if (message.getFlag()) {
-                                    construct(deck, message.getTableId(), message.getTime());
-                                } else {
-                                    sideboard(deck, message.getTableId(), message.getTime());
-                                }       break;
-                            }
-                        case "construct":
-                            {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                DeckView deckView = message.getDeck();
-                                Deck deck = DeckUtil.construct(deckView);
-                                construct(deck, message.getTableId(), message.getTime());
-                                break;
-                            }
+//                        case "sideboard":
+//                            {
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                DeckView deckView = message.getDeck();
+//                                Deck deck = DeckUtil.construct(deckView);
+//                                if (message.getFlag()) {
+//                                    construct(deck, message.getTableId(), message.getTime());
+//                                } else {
+//                                    sideboard(deck, message.getTableId(), message.getTime());
+//                                }       break;
+//                            }
+//                        case "construct":
+//                            {
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                DeckView deckView = message.getDeck();
+//                                Deck deck = DeckUtil.construct(deckView);
+//                                construct(deck, message.getTableId(), message.getTime());
+//                                break;
+//                            }
                         case "draftOver":
                             MageFrame.removeDraft(callback.getObjectId());
                             break;
@@ -484,13 +480,13 @@ public class CallbackClientImpl implements CallbackClient {
         }
     }
 
-    protected void sideboard(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
-    }
-
-    protected void construct(Deck deck, UUID tableId, int time) {
-        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
-    }
+//    protected void sideboard(Deck deck, UUID tableId, int time) {
+//        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
+//    }
+//
+//    protected void construct(Deck deck, UUID tableId, int time) {
+//        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
+//    }
 
     private void handleException(Exception ex) {
         logger.fatal("Client error\n", ex);

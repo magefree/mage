@@ -30,7 +30,6 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.UUID;
-
 import mage.cards.decks.Deck;
 
 /**

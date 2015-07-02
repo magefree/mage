@@ -4,27 +4,23 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import mage.client.components.MageUI;
-//import mage.interfaces.MageClient;
-//import mage.interfaces.callback.ClientCallback;
-import mage.remote.Connection;
-//import mage.remote.Session;
-//import mage.remote.SessionImpl;
-import mage.utils.MageVersion;
-import org.apache.log4j.Logger;
-import org.junit.Ignore;
-
-import javax.swing.*;
 import java.util.concurrent.CountDownLatch;
+import javax.swing.SwingUtilities;
 import mage.choices.Choice;
+import mage.client.components.MageUI;
 import mage.interfaces.ServerState;
+import mage.remote.Connection;
+import mage.utils.MageVersion;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
+import mage.view.DeckView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.UserRequestMessage;
+import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.mage.network.Client;
 import org.mage.network.interfaces.MageClient;
 import org.mage.network.messages.MessageType;
@@ -226,6 +222,16 @@ public class MultiConnectTest {
 
         @Override
         public void gameError(UUID gameId, String message) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void sideboard(UUID tableId, DeckView deck, int time, boolean limited) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void construct(UUID tableId, DeckView deck, int time) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }

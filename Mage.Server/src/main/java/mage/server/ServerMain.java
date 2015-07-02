@@ -73,6 +73,7 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
@@ -1290,12 +1291,12 @@ public class ServerMain implements MageServer {
         server.draftPick(sessionId, draftId, draftClientMessage);
     }
 
-    public void sideboard(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
-        server.sideboard(sessionId, tableId, tableClientMessage);
+    public void sideboard(String sessionId, UUID tableId, DeckView deck, int time, boolean limited) {
+        server.sideboard(sessionId, tableId, deck, time, limited);
     }
 
-    public void construct(String sessionId, UUID tableId, TableClientMessage tableClientMessage) {
-        server.construct(sessionId, tableId, tableClientMessage);
+    public void construct(String sessionId, UUID tableId, DeckView deck, int time) {
+        server.construct(sessionId, tableId, deck, time);
     }
 
     public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {
