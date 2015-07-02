@@ -61,10 +61,10 @@ public class DustOfMoments extends CardImpl {
         super(ownerId, 5, "Dust of Moments", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "FUT";
 
-        // Choose one - Remove two time counters from each permanent and each suspended card with time counter
+        // Choose one - Remove two time counters from each permanent and each suspended card
         this.getSpellAbility().addEffect(new RemoveCountersEffect());
 
-        // Or put two time counters on each permanent with a time counter on it and each suspended card with time counter
+        // Or put two time counters on each permanent with a time counter on it and each suspended card
         Mode mode = new Mode();
         mode.getEffects().add(new AddCountersEffect());
         this.getSpellAbility().addMode(mode);
@@ -90,10 +90,10 @@ public class DustOfMoments extends CardImpl {
     public DustOfMomentsEffect() {
           super(Outcome.Benefit);
           this.counter = new Counter(CounterType.TIME.getName(), 2);
-          this.permFilter = new FilterCard("permanent and each suspended card with time counter");
+          this.permFilter = new FilterCard("permanent and each suspended card");
           permFilter.add(new CounterPredicate(CounterType.TIME));
 
-          this.exiledFilter = new FilterCard("permanent and each suspended card with time counter");
+          this.exiledFilter = new FilterCard("permanent and each suspended card");
           exiledFilter.add(new CardCounterPredicate(CounterType.TIME));
           setText();
       }
@@ -168,7 +168,7 @@ public class DustOfMoments extends CardImpl {
           }
           if (!game.isSimulation())
             game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
-                    .append(controller.getLogName()).append(getActionStr()).append("s")
+                    .append(controller.getLogName()).append(getActionStr()).append("s ")
                     .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
                     .append(" counter on ").append(card.getName()).toString());
         }
