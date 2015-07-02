@@ -39,7 +39,6 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.KeyboardFocusManager;
 import java.awt.MenuComponent;
-import java.awt.TrayIcon;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
@@ -54,7 +53,7 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class MageDialog extends javax.swing.JInternalFrame {
-    
+
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     protected boolean modal = false;
@@ -119,10 +118,11 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     Object source = event.getSource();
                     boolean dispatch = true;
 
-                    if (event.getSource() != null && event.getSource() instanceof TrayIcon) {
-                        return;
-                    }
-
+                    // LINUX: Workaround fix for announce X Value Bug that closes modal windows under linux before values can be entered
+                    // https://github.com/magefree/mage/issues/584
+//                    if (event.getSource() != null && event.getSource() instanceof TrayIcon) {
+//                        return;
+//                    }
                     if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
@@ -225,7 +225,6 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
