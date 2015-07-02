@@ -1020,6 +1020,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         }
         Map<String, Serializable> panelOptions = new HashMap<>();
+        if (options != null) {
+            panelOptions.putAll(options);
+        }
         panelOptions.put("your_turn", true);
         String activePlayerText;
         if (gameView.getActivePlayerId().equals(playerId)) {

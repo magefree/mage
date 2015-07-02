@@ -200,6 +200,7 @@ public class HelperPanel extends JPanel {
             }
         });
 
+        // sets a darker background and higher simiss time fpr tooltip in the feedback / helper panel
         textArea.addMouseListener(new MouseAdapter() {
 
             @Override
