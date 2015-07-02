@@ -221,8 +221,13 @@ public class Client {
         return false;
     }
 
-    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String human, int i, DeckCardLists importDeck, String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {
+        try {
+            return clientMessageHandler.joinTournamentTable(roomId, tableId, playerName, playerType, skill, deck, password);
+        } catch (Exception ex) {
+            logger.error("Error joining tournament table", ex);
+        }
+        return false;
     }
 
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deck, String password) {

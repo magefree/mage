@@ -11,17 +11,16 @@ import org.mage.network.messages.responses.BooleanResponse;
  *
  * @author BetaSteward
  */
-public class JoinTableRequest extends ServerRequest {
-    
-    private UUID roomId;
-    private UUID tableId;
-    private String name;
-    private String playerType;
-    private int skill;
-    private DeckCardLists deckList;
-    private String password;
-    
-    public JoinTableRequest(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
+public class JoinTournamentTableRequest extends ServerRequest {
+    private final UUID roomId;
+    private final UUID tableId;
+    private final String name;
+    private final String playerType;
+    private final int skill;
+    private final DeckCardLists deckList;
+    private final String password;
+
+    public JoinTournamentTableRequest(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) {
         this.roomId = roomId;
         this.tableId = tableId;
         this.name = name;
@@ -33,7 +32,7 @@ public class JoinTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.joinTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.joinTournamentTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
     }
     
 }

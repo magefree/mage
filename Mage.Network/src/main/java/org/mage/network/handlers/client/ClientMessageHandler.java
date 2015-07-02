@@ -1,5 +1,6 @@
 package org.mage.network.handlers.client;
 
+import org.mage.network.messages.requests.JoinTournamentTableRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.io.Serializable;
@@ -107,6 +108,12 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         return booleanQueue.take();
     }
     
+    public boolean joinTournamentTable(UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new JoinTournamentTableRequest(roomId, tableId, name, playerType, skill, deckList, password)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
     public boolean leaveTable(UUID roomId, UUID tableId) throws Exception {
         booleanQueue.clear();
         ctx.writeAndFlush(new LeaveTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());

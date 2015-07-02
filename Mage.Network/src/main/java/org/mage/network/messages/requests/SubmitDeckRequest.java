@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageServer;
-import org.mage.network.messages.responses.SubmitDeckResponse;
+import org.mage.network.messages.responses.BooleanResponse;
 
 /**
  *
@@ -22,7 +22,7 @@ public class SubmitDeckRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new SubmitDeckResponse(server.submitDeck(ctx.channel().id().asLongText(), tableId, deckCardLists))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.submitDeck(ctx.channel().id().asLongText(), tableId, deckCardLists))).addListener(WriteListener.getInstance());
     }
     
 }

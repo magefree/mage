@@ -1,6 +1,6 @@
 package org.mage.network.messages.responses;
 
-import mage.view.TableView;
+import java.util.UUID;
 import org.mage.network.handlers.client.ClientMessageHandler;
 import org.mage.network.messages.ClientMessage;
 
@@ -8,17 +8,17 @@ import org.mage.network.messages.ClientMessage;
  *
  * @author BetaSteward
  */
-public class TableWaitingResponse extends ClientMessage {
+public class UUIDResponse extends ClientMessage {
     
-    private TableView table;
+    private UUID id;
     
-    public TableWaitingResponse(TableView table) {
-        this.table = table;
+    public UUIDResponse(UUID id) {
+        this.id = id;
     }
-    
+
     @Override
     public void handleMessage(ClientMessageHandler handler) {
-        handler.receiveTableView(table);
+        handler.receiveId(id);
     }
-    
+
 }

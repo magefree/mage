@@ -305,27 +305,22 @@ public class ServerMain implements MageServer {
         return ret;
     }
 
-//    @Override
-//    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
-//        return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
-//            @Override
-//            public Boolean execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                if (logger.isTraceEnabled()) {
-//                    User user = UserManager.getInstance().getUser(userId);
-//                    if (user != null) {
-//                        logger.trace("join tourn. tableId: " + tableId + " " + name);
-//                    }
-//                }                
-//                if (userId == null) {
-//                    logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
-//                    return false;
-//                }                 
-//                boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill, deckList, password);
-//                return ret;
-//            }
-//        });
-//    }
+    @Override
+    public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList, final String password) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        if (logger.isTraceEnabled()) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                logger.trace("join tourn. tableId: " + tableId + " " + name);
+            }
+        }                
+        if (userId == null) {
+            logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
+            return false;
+        }                 
+        boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill, deckList, password);
+        return ret;
+    }
 
     @Override
     public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) {

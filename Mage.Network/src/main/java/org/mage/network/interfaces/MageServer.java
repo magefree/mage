@@ -42,7 +42,8 @@ public interface MageServer {
     boolean leaveTable(String sessionId, UUID roomId, UUID tableId);
     void removeTable(String sessionId, UUID roomId, UUID tableId);
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2);
-
+    boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
+        
     boolean startMatch(String sessionId, UUID roomId, UUID tableId);
     UUID joinGame(UUID gameId, String sessionId);
     void sendPlayerUUID(UUID gameId, String sessionId, UUID data);
