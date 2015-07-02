@@ -29,16 +29,21 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.discard.DiscardHandAndDrawEffect;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author anonymous
+ * @author markedagain
  */
 public class Shocker extends CardImpl {
 
@@ -50,7 +55,7 @@ public class Shocker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardHandAndDrawEffect(TargetController.OPPONENT), false, true));
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ShockerEffect(), false, true));
     }
 
     public Shocker(final Shocker card) {
@@ -60,5 +65,35 @@ public class Shocker extends CardImpl {
     @Override
     public Shocker copy() {
         return new Shocker(this);
+    }
+}
+class ShockerEffect extends OneShotEffect {
+
+    public ShockerEffect() {
+        super(Outcome.Discard);
+        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
+    }
+
+    public ShockerEffect(final ShockerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ShockerEffect copy() {
+        return new ShockerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (targetPlayer != null) {
+                int count = targetPlayer.getHand().size();
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    targetPlayer.discard(card, source, game);
+                }
+                targetPlayer.drawCards(count, game);
+                return false;
+            }
+        return true;
     }
 }

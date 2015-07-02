@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author anonymous
+ * @author markedagain
  */
 public class BarbedShocker extends mage.sets.conspiracy.BarbedShocker {
 

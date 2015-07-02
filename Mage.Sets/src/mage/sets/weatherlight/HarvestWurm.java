@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author anonymous
+ * @author markedagain
  */
 public class HarvestWurm extends CardImpl {
 

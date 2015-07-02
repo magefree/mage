@@ -33,33 +33,29 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterLandCard;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author anonymous
+ * @author markedagain
  */
 public class MwonvuliAcidMoss extends CardImpl {
 
     public MwonvuliAcidMoss(UUID ownerId) {
         super(ownerId, 207, "Mwonvuli Acid-Moss", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
         this.expansionSetCode = "TSP";
-
-        FilterPermanent filter = new FilterPermanent("land");
-        filter.add(Predicates.and(new CardTypePredicate(CardType.LAND)));
         
-        FilterCard filterForest = new FilterCard("a Forest card");
+        FilterLandCard filterForest = new FilterLandCard();
         filterForest.add(new SubtypePredicate("Forest"));
         
         // Destroy target land. Search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), false, true));
     }
 

@@ -40,7 +40,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author markedagain
  */
 public class ReturnToHandFromGraveyardCost extends CostImpl {
 
