@@ -50,7 +50,7 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped) {
         super(Outcome.Benefit);
         this.tapped = tapped;
-        staticText = new StringBuilder("return that card to the battlefield").append(tapped?" tapped":"").append(" under it's owner's control").toString();
+        staticText = new StringBuilder("return that card to the battlefield").append(tapped?" tapped":"").append(" under its owner's control").toString();
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {

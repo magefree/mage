@@ -45,9 +45,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -61,11 +59,9 @@ import mage.players.Player;
 public class ErebosTitan extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-    private final static FilterCreatureCard filterCard = new FilterCreatureCard();
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
     }
 
     public ErebosTitan(UUID ownerId) {
@@ -122,7 +118,10 @@ class ErebosTitanTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.getFromZone().equals(Zone.GRAVEYARD)) {
             Card card = game.getCard(zEvent.getTargetId());
             Player controller = game.getPlayer(getControllerId());
-            return card != null && controller != null && controller.hasOpponent(card.getOwnerId(), game);
+            return card != null
+                    && card.getCardType().contains(CardType.CREATURE)
+                    && controller != null
+                    && controller.hasOpponent(card.getOwnerId(), game);
         }
         return false;
     }

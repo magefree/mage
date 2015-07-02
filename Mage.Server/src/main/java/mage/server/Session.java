@@ -140,7 +140,9 @@ public class Session {
         if (user == null) {
             user = UserManager.getInstance().findUser("Admin");
         }
-        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png", false));
+        UserData adminUserData = UserData.getDefaultUserDataView();
+        adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
+        user.setUserData(adminUserData);
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
             logger.info("Error connecting Admin!");
         }

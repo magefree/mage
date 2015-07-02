@@ -243,6 +243,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
+
         manaPoolMenuItem2 = new JCheckBoxMenuItem("No automatic usage for mana already in the pool", true);
         manaPoolMenuItem2.setMnemonic(KeyEvent.VK_N);
         manaPoolMenuItem2.setToolTipText("<html>Mana that is already in the mana pool as you start casting a spell or activating an ability<br>"
