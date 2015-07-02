@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
 import mage.cards.CardImpl;
@@ -63,8 +64,9 @@ public class ThornscapeMaster extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
-            new ManaCostsImpl("{W}{W}"));
+        Effect effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn);
+        effect.setText("Target creature gains protection from the color of your choice until end of turn.");
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

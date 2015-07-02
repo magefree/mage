@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
@@ -60,8 +61,9 @@ public class StormscapeMaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
-            new ManaCostsImpl("{W}{W}"));
+        Effect effect = new GainProtectionFromColorTargetEffect(Duration.EndOfTurn);
+        effect.setText("Target creature gains protection from the color of your choice until end of turn.");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
