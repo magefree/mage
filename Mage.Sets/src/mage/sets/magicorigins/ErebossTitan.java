@@ -56,7 +56,7 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-public class ErebosTitan extends CardImpl {
+public class ErebossTitan extends CardImpl {
 
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -64,47 +64,47 @@ public class ErebosTitan extends CardImpl {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public ErebosTitan(UUID ownerId) {
-        super(ownerId, 94, "Erebos' Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
+    public ErebossTitan(UUID ownerId) {
+        super(ownerId, 94, "Erebos's Titan", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{1}{B}{B}{B}");
         this.expansionSetCode = "ORI";
         this.subtype.add("Giant");
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Erebos' Titan has indestructible as long as no opponent controls a creature.
+        // Erebos's Titan has indestructible as long as no opponent controls a creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
                         "{this} has indestructible as long as no opponent controls a creature")));
 
-        // Whenever a creature leaves an opponent's graveyard, you may discard a card. If you do, return Erebos' Titan from your graveyard to your hand.
-        this.addAbility(new ErebosTitanTriggeredAbility());
+        // Whenever a creature leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.
+        this.addAbility(new ErebossTitanTriggeredAbility());
 
     }
 
-    public ErebosTitan(final ErebosTitan card) {
+    public ErebossTitan(final ErebossTitan card) {
         super(card);
     }
 
     @Override
-    public ErebosTitan copy() {
-        return new ErebosTitan(this);
+    public ErebossTitan copy() {
+        return new ErebossTitan(this);
     }
 }
 
-class ErebosTitanTriggeredAbility extends TriggeredAbilityImpl {
+class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
 
-    public ErebosTitanTriggeredAbility() {
+    public ErebossTitanTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()));
     }
 
-    public ErebosTitanTriggeredAbility(final ErebosTitanTriggeredAbility ability) {
+    public ErebossTitanTriggeredAbility(final ErebossTitanTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public ErebosTitanTriggeredAbility copy() {
-        return new ErebosTitanTriggeredAbility(this);
+    public ErebossTitanTriggeredAbility copy() {
+        return new ErebossTitanTriggeredAbility(this);
     }
 
     @Override
