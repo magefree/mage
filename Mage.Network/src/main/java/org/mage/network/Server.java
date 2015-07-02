@@ -1,6 +1,5 @@
 package org.mage.network;
 
-import org.mage.network.messages.callback.ConstructCallback;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -30,12 +29,11 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.DeckView;
-import mage.view.DraftClientMessage;
+import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
-import mage.view.TableClientMessage;
 import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
@@ -49,6 +47,7 @@ import org.mage.network.interfaces.MageServer;
 import org.mage.network.messages.MessageType;
 import org.mage.network.messages.PingMessage;
 import org.mage.network.messages.callback.ChatMessageCallback;
+import org.mage.network.messages.callback.ConstructCallback;
 import org.mage.network.messages.callback.GameAskCallback;
 import org.mage.network.messages.callback.GameChooseAbilityCallback;
 import org.mage.network.messages.callback.GameChooseChoiceCallback;
@@ -305,11 +304,11 @@ public class Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void startDraft(String sessionId, UUID draftId, TableClientMessage tableClientMessage) {
+    public void startDraft(String sessionId, UUID draftId, UUID playerId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void draftInit(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+    public void draftInit(String sessionId, UUID draftId, DraftPickView draftPickView) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -317,7 +316,7 @@ public class Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void draftInform(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+    public void draftInform(String sessionId, UUID draftId, DraftView draftView, String message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -325,7 +324,7 @@ public class Server {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void draftPick(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
+    public void draftPick(String sessionId, UUID draftId, DraftPickView draftPickView) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -341,7 +340,7 @@ public class Server {
             ch.writeAndFlush(new ConstructCallback(tableId, deck, time)).addListener(WriteListener.getInstance());
     }
 
-    public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {
+    public void startTournament(String sessionId, UUID tournamentId, UUID playerId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

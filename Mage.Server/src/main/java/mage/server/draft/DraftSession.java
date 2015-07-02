@@ -38,7 +38,6 @@ import mage.game.draft.Draft;
 import mage.server.User;
 import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
-import mage.view.DraftClientMessage;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
 import org.apache.log4j.Logger;
@@ -73,7 +72,7 @@ public class DraftSession {
             if (user != null) {
                 if (futureTimeout != null && !futureTimeout.isDone()) {
                     int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                    user.draftInit(draft.getId(), new DraftClientMessage(getDraftPickView(remaining)));
+                    user.draftInit(draft.getId(), getDraftPickView(remaining));
                 }
                 return true;
             }
@@ -96,7 +95,7 @@ public class DraftSession {
         if (!killed) {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.draftInform(draft.getId(), new DraftClientMessage(getDraftView(), message));
+                user.draftInform(draft.getId(), getDraftView(), message);
             }
         }
     }
@@ -115,7 +114,7 @@ public class DraftSession {
             setupTimeout(timeout);
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.draftPick(draft.getId(), new DraftClientMessage(getDraftPickView(timeout)));
+                user.draftPick(draft.getId(), getDraftPickView(timeout));
             }
         }
     }

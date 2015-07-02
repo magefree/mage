@@ -25,53 +25,53 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.client.remote;
-
-import java.util.List;
-import java.util.UUID;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import mage.client.MageFrame;
-import mage.client.draft.DraftPanel;
-import mage.client.game.GamePanel;
-import mage.client.util.audio.AudioManager;
-import mage.client.util.object.SaveObjectUtil;
-import mage.interfaces.callback.CallbackClient;
-import mage.interfaces.callback.ClientCallback;
-import mage.utils.CompressUtil;
-import mage.view.ChatMessage;
-import mage.view.DraftClientMessage;
-import mage.view.DraftView;
-import mage.view.GameView;
-import mage.view.TableClientMessage;
-import mage.view.UserRequestMessage;
-import org.apache.log4j.Logger;
-
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class CallbackClientImpl implements CallbackClient {
-
-    private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
-    private final MageFrame frame;
-    private int messageId = 0;
-    private int gameInformMessageId = 0;
-
-    public CallbackClientImpl(MageFrame frame) {
-        this.frame = frame;
-    }
-
-    @Override
-    public synchronized void processCallback(final ClientCallback callback) {
-        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
-        callback.setData(CompressUtil.decompress(callback.getData()));
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
-                    switch (callback.getMethod()) {
+//package mage.client.remote;
+//
+//import java.util.List;
+//import java.util.UUID;
+//import javax.swing.JOptionPane;
+//import javax.swing.SwingUtilities;
+//import mage.client.MageFrame;
+//import mage.client.draft.DraftPanel;
+//import mage.client.game.GamePanel;
+//import mage.client.util.audio.AudioManager;
+//import mage.client.util.object.SaveObjectUtil;
+//import mage.interfaces.callback.CallbackClient;
+//import mage.interfaces.callback.ClientCallback;
+//import mage.utils.CompressUtil;
+//import mage.view.ChatMessage;
+//import mage.view.DraftClientMessage;
+//import mage.view.DraftView;
+//import mage.view.GameView;
+//import mage.view.TableClientMessage;
+//import mage.view.UserRequestMessage;
+//import org.apache.log4j.Logger;
+//
+///**
+// *
+// * @author BetaSteward_at_googlemail.com
+// */
+//public class CallbackClientImpl implements CallbackClient {
+//
+//    private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
+//    private final MageFrame frame;
+//    private int messageId = 0;
+//    private int gameInformMessageId = 0;
+//
+//    public CallbackClientImpl(MageFrame frame) {
+//        this.frame = frame;
+//    }
+//
+//    @Override
+//    public synchronized void processCallback(final ClientCallback callback) {
+//        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());
+//        callback.setData(CompressUtil.decompress(callback.getData()));
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    logger.debug(callback.getMessageId() + " -- " + callback.getMethod());
+//                    switch (callback.getMethod()) {
 //                        case "startGame":
 //                            {
 //                                TableClientMessage message = (TableClientMessage) callback.getData();
@@ -79,27 +79,27 @@ public class CallbackClientImpl implements CallbackClient {
 //                                gameStarted(message.getGameId(), message.getPlayerId());
 //                                break;
 //                            }
-                        case "startTournament":
-                            {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                tournamentStarted(message.getGameId(), message.getPlayerId());
-                                break;
-                            }
-                        case "startDraft":
-                            {
-                                TableClientMessage message = (TableClientMessage) callback.getData();
-                                draftStarted(message.getGameId(), message.getPlayerId());
-                                break;
-                            }
-                        case "replayGame":
-                            replayGame(callback.getObjectId());
-                            break;
-                        case "showTournament":
-                            showTournament(callback.getObjectId());
-                            break;
-                        case "watchGame":
-                            watchGame(callback.getObjectId());
-                            break;
+//                        case "startTournament":
+//                            {
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                tournamentStarted(message.getGameId(), message.getPlayerId());
+//                                break;
+//                            }
+//                        case "startDraft":
+//                            {
+//                                TableClientMessage message = (TableClientMessage) callback.getData();
+//                                draftStarted(message.getGameId(), message.getPlayerId());
+//                                break;
+//                            }
+//                        case "replayGame":
+//                            replayGame(callback.getObjectId());
+//                            break;
+//                        case "showTournament":
+//                            showTournament(callback.getObjectId());
+//                            break;
+//                        case "watchGame":
+//                            watchGame(callback.getObjectId());
+//                            break;
 //                        case "chatMessage":
 //                            {
 //                                ChatMessage message = (ChatMessage) callback.getData();
@@ -135,42 +135,42 @@ public class CallbackClientImpl implements CallbackClient {
 //                                    
 //                                }       break;
 //                            }
-                        case "serverMessage":
-                            if (callback.getData() != null) {
-                                ChatMessage message = (ChatMessage) callback.getData();
-                                if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
-                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
-                                }
-                            }   break;
+//                        case "serverMessage":
+//                            if (callback.getData() != null) {
+//                                ChatMessage message = (ChatMessage) callback.getData();
+//                                if (message.getColor().equals(ChatMessage.MessageColor.RED)) {
+//                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.WARNING_MESSAGE);
+//                                } else {
+//                                    JOptionPane.showMessageDialog(null, message.getMessage(), "Server message", JOptionPane.INFORMATION_MESSAGE);
+//                                }
+//                            }   break;
 //                        case "joinedTable":
 //                            {
 //                                TableClientMessage message = (TableClientMessage) callback.getData();
 //                                joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
 //                                break;
 //                            }
-                        case "replayInit":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.init((GameView) callback.getData());
-                                }       break;
-                            }
-                        case "replayDone":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.endMessage((String) callback.getData());
-                                }       break;
-                            }
-                        case "replayUpdate":
-                            {
-                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.updateGame((GameView) callback.getData());
-                                }       break;
-                            }
+//                        case "replayInit":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.init((GameView) callback.getData());
+//                                }       break;
+//                            }
+//                        case "replayDone":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.endMessage((String) callback.getData());
+//                                }       break;
+//                            }
+//                        case "replayUpdate":
+//                            {
+//                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.updateGame((GameView) callback.getData());
+//                                }       break;
+//                            }
 //                        case "gameInit":
 //                            {
 //                                GamePanel panel = MageFrame.getGame(callback.getObjectId());
@@ -274,11 +274,11 @@ public class CallbackClientImpl implements CallbackClient {
 //                        case "endGameInfo":
 //                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
 //                            break;
-                        case "showUserMessage":
-                            List<String> messageData = (List<String>) callback.getData();
-                            if (messageData.size() == 2) {
-                                JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
-                            }   break;
+//                        case "showUserMessage":
+//                            List<String> messageData = (List<String>) callback.getData();
+//                            if (messageData.size() == 2) {
+//                                JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
+//                            }   break;
 //                        case "gameInform":
 //                            if (callback.getMessageId() > gameInformMessageId) {
 //                                {
@@ -323,58 +323,58 @@ public class CallbackClientImpl implements CallbackClient {
 //                                construct(deck, message.getTableId(), message.getTime());
 //                                break;
 //                            }
-                        case "draftOver":
-                            MageFrame.removeDraft(callback.getObjectId());
-                            break;
-                        case "draftPick":
-                            {
-                                DraftClientMessage message = (DraftClientMessage) callback.getData();
-                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.loadBooster(message.getDraftPickView());
-                                }
-                                break;
-                            }
-                        case "draftUpdate":
-                            {
-                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.updateDraft((DraftView) callback.getData());
-                                }
-                                break;
-                            }
-                        case "draftInform":
+//                        case "draftOver":
+//                            MageFrame.removeDraft(callback.getObjectId());
+//                            break;
+//                        case "draftPick":
+//                            {
+//                                DraftClientMessage message = (DraftClientMessage) callback.getData();
+//                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.loadBooster(message.getDraftPickView());
+//                                }
+//                                break;
+//                            }
+//                        case "draftUpdate":
+//                            {
+//                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.updateDraft((DraftView) callback.getData());
+//                                }
+//                                break;
+//                            }
+//                        case "draftInform":
 //                            if (callback.getMessageId() > messageId) {
-                            {
-                                DraftClientMessage message = (DraftClientMessage) callback.getData();
-                            }
+//                            {
+//                                DraftClientMessage message = (DraftClientMessage) callback.getData();
+//                            }
 //                            } else {
 //                                logger.warn("message out of sequence - ignoring");
 //                            }
-                            break;
-                        case "draftInit":
-                            {
-                                DraftClientMessage message = (DraftClientMessage) callback.getData();
-                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
-                                if (panel != null) {
-                                    panel.loadBooster(message.getDraftPickView());
-                                }
-                                break;
-                            }
-                        case "tournamentInit":
-                            break;
-                        case "userRequestDialog":
-                            frame.showUserRequestDialog((UserRequestMessage) callback.getData());
-                            break;
-                    }
-                    messageId = callback.getMessageId();
-                } catch (Exception ex) {
-                    handleException(ex);
-                }
-            }
-        });
-    }
-
+//                            break;
+//                        case "draftInit":
+//                            {
+//                                DraftClientMessage message = (DraftClientMessage) callback.getData();
+//                                DraftPanel panel = MageFrame.getDraft(callback.getObjectId());
+//                                if (panel != null) {
+//                                    panel.loadBooster(message.getDraftPickView());
+//                                }
+//                                break;
+//                            }
+//                        case "tournamentInit":
+//                            break;
+//                        case "userRequestDialog":
+//                            frame.showUserRequestDialog((UserRequestMessage) callback.getData());
+//                            break;
+//                    }
+//                    messageId = callback.getMessageId();
+//                } catch (Exception ex) {
+//                    handleException(ex);
+//                }
+//            }
+//        });
+//    }
+//
 //    private void createChatStartMessage(ChatPanel chatPanel) {
 //        chatPanel.setStartMessageDone(true);
 //        ChatPanel usedPanel = chatPanel;
@@ -428,58 +428,58 @@ public class CallbackClientImpl implements CallbackClient {
 //            Plugins.getInstance().addGamesPlayed();
 //        }
 //    }
-
-    protected void draftStarted(UUID draftId, UUID playerId) {
-        try {
-            frame.showDraft(draftId);
-            logger.info("Draft " + draftId + " started for player " + playerId);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
-
-    protected void tournamentStarted(UUID tournamentId, UUID playerId) {
-        try {
-            frame.showTournament(tournamentId);
-            AudioManager.playTournamentStarted();
-            logger.info("Tournament " + tournamentId + " started for player " + playerId);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
-
-    /**
-     * Shows the tournament info panel for a tournament
-     *
-     * @param tournamentId
-     */
-    protected void showTournament(UUID tournamentId) {
-        try {
-            frame.showTournament(tournamentId);
-            logger.info("Showing tournament " + tournamentId);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
-
-    protected void watchGame(UUID gameId) {
-        try {
-            frame.watchGame(gameId);
-            logger.info("Watching game " + gameId);
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
-
-    protected void replayGame(UUID gameId) {
-        try {
-            frame.replayGame(gameId);
-            logger.info("Replaying game");
-        } catch (Exception ex) {
-            handleException(ex);
-        }
-    }
-
+//
+//    protected void draftStarted(UUID draftId, UUID playerId) {
+//        try {
+//            frame.showDraft(draftId);
+//            logger.info("Draft " + draftId + " started for player " + playerId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
+//
+//    protected void tournamentStarted(UUID tournamentId, UUID playerId) {
+//        try {
+//            frame.showTournament(tournamentId);
+//            AudioManager.playTournamentStarted();
+//            logger.info("Tournament " + tournamentId + " started for player " + playerId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
+//
+//    /**
+//     * Shows the tournament info panel for a tournament
+//     *
+//     * @param tournamentId
+//     */
+//    protected void showTournament(UUID tournamentId) {
+//        try {
+//            frame.showTournament(tournamentId);
+//            logger.info("Showing tournament " + tournamentId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
+//
+//    protected void watchGame(UUID gameId) {
+//        try {
+//            frame.watchGame(gameId);
+//            logger.info("Watching game " + gameId);
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
+//
+//    protected void replayGame(UUID gameId) {
+//        try {
+//            frame.replayGame(gameId);
+//            logger.info("Replaying game");
+//        } catch (Exception ex) {
+//            handleException(ex);
+//        }
+//    }
+//
 //    protected void sideboard(Deck deck, UUID tableId, int time) {
 //        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);
 //    }
@@ -488,8 +488,8 @@ public class CallbackClientImpl implements CallbackClient {
 //        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
 //    }
 
-    private void handleException(Exception ex) {
-        logger.fatal("Client error\n", ex);
+//    private void handleException(Exception ex) {
+//        logger.fatal("Client error\n", ex);
 //        frame.showError("Error: " + ex.getMessage());
-    }
-}
+//    }
+//}

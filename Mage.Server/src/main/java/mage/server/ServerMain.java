@@ -74,13 +74,12 @@ import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.DeckView;
-import mage.view.DraftClientMessage;
+import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.RoomView;
-import mage.view.TableClientMessage;
 import mage.view.TableView;
 import mage.view.TournamentView;
 import mage.view.UserDataView;
@@ -1267,28 +1266,28 @@ public class ServerMain implements MageServer {
         server.gameError(sessionId, gameId, message);
     }
 
-    public void startDraft(String sessionId, UUID draftId, TableClientMessage tableClientMessage) {
-        server.startDraft(sessionId, draftId, tableClientMessage);
+    public void startDraft(String sessionId, UUID draftId, UUID playerId) {
+        server.startDraft(sessionId, draftId, playerId);
     }
 
-    public void draftInit(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
-        server.draftInit(sessionId, draftId, draftClientMessage);
+    public void draftInit(String sessionId, UUID draftId, DraftPickView draftPickView) {
+        server.draftInit(sessionId, draftId, draftPickView);
     }
 
     public void draftUpdate(String sessionId, UUID draftId, DraftView draftView) {
         server.draftUpdate(sessionId, draftId, draftView);
     }
 
-    public void draftInform(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
-        server.draftInform(sessionId, draftId, draftClientMessage);
+    public void draftInform(String sessionId, UUID draftId, DraftView draftView, String message) {
+        server.draftInform(sessionId, draftId, draftView, message);
     }
 
     public void draftOver(String sessionId, UUID draftId) {
         server.draftOver(sessionId, draftId);
     }
 
-    public void draftPick(String sessionId, UUID draftId, DraftClientMessage draftClientMessage) {
-        server.draftPick(sessionId, draftId, draftClientMessage);
+    public void draftPick(String sessionId, UUID draftId, DraftPickView draftPickView) {
+        server.draftPick(sessionId, draftId, draftPickView);
     }
 
     public void sideboard(String sessionId, UUID tableId, DeckView deck, int time, boolean limited) {
@@ -1299,8 +1298,8 @@ public class ServerMain implements MageServer {
         server.construct(sessionId, tableId, deck, time);
     }
 
-    public void startTournament(String sessionId, UUID tournamentId, TableClientMessage tableClientMessage) {
-        server.startTournament(sessionId, tournamentId, tableClientMessage);
+    public void startTournament(String sessionId, UUID tournamentId, UUID playerId) {
+        server.startTournament(sessionId, tournamentId, playerId);
     }
 
     public void showTournament(String sessionId, UUID tournamentId) {

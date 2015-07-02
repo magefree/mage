@@ -57,12 +57,11 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.DeckView;
-import mage.view.DraftClientMessage;
+import mage.view.DraftPickView;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
-import mage.view.TableClientMessage;
 import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
@@ -289,7 +288,7 @@ public class User {
     }
 
     public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
-        ServerMain.getInstance().startTournament(sessionId, tournamentId, new TableClientMessage(tournamentId, playerId));
+        ServerMain.getInstance().startTournament(sessionId, tournamentId, playerId);
     }
 
     public void showTournament(final UUID tournamentId) {
@@ -313,27 +312,27 @@ public class User {
     }
 
     public void draftStarted(final UUID draftId, final UUID playerId) {
-        ServerMain.getInstance().startDraft(sessionId, draftId, new TableClientMessage(draftId, playerId));
+        ServerMain.getInstance().startDraft(sessionId, draftId, playerId);
     }
 
-    public void draftInit(UUID draftId, DraftClientMessage draftClientMessage) {
-        ServerMain.getInstance().draftInit(sessionId, draftId, draftClientMessage);
+    public void draftInit(UUID draftId, DraftPickView view) {
+        ServerMain.getInstance().draftInit(sessionId, draftId, view);
     }
 
     public void draftUpdate(UUID draftId, DraftView draftView) {
         ServerMain.getInstance().draftUpdate(sessionId, draftId, draftView);
     }
 
-    public void draftInform(UUID draftId, DraftClientMessage draftClientMessage) {
-        ServerMain.getInstance().draftInform(sessionId, draftId, draftClientMessage);
+    public void draftInform(UUID draftId, DraftView view, String message) {
+        ServerMain.getInstance().draftInform(sessionId, draftId, view, message);
     }
 
     public void draftOver(UUID draftId) {
         ServerMain.getInstance().draftOver(sessionId, draftId);
     }
 
-    public void draftPick(UUID draftId, DraftClientMessage draftClientMessage) {
-        ServerMain.getInstance().draftPick(sessionId, draftId, draftClientMessage);
+    public void draftPick(UUID draftId, DraftPickView view) {
+        ServerMain.getInstance().draftPick(sessionId, draftId, view);
     }
 
     public void chatMessage(UUID chatId, ChatMessage chatMessage) {
