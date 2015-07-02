@@ -27,19 +27,28 @@
  */
 package mage.sets.futuresight;
 
+import java.util.List;
 import java.util.UUID;
 
+import mage.MageObject;
+import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.common.counter.AddRemoveAllTimeSuspentCountersEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
+import mage.filter.predicate.permanent.CardCounterPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -48,26 +57,17 @@ import mage.filter.predicate.permanent.CounterPredicate;
  */
 public class DustOfMoments extends CardImpl {
 
-    private static final Filter<Card> filter = new FilterCard("Has Time Counter Filter");
-
-    static {
-        filter.add(new CounterPredicate(CounterType.TIME));
-    }
-
     public DustOfMoments(UUID ownerId) {
         super(ownerId, 5, "Dust of Moments", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "FUT";
 
-        // Choose one - Remove two time counters from each permanent and each suspended card
-        final Counter counter = new Counter(CounterType.TIME.getName(), 2);
-        this.getSpellAbility().addEffect(new AddRemoveAllTimeSuspentCountersEffect(counter, filter, true));
+        // Choose one - Remove two time counters from each permanent and each suspended card with time counter
+        this.getSpellAbility().addEffect(new RemoveCountersEffect());
 
-        // Or put two time counters on each permanent with a time counter on it and each suspended card
+        // Or put two time counters on each permanent with a time counter on it and each suspended card with time counter
         Mode mode = new Mode();
-        mode.getEffects().add(new AddRemoveAllTimeSuspentCountersEffect(counter, filter, false));
-        this.getSpellAbility().getModes().addMode(mode);
-        this.getSpellAbility().getModes().setMaxModes(1);
-        this.getSpellAbility().getModes().setMinModes(1);
+        mode.getEffects().add(new AddCountersEffect());
+        this.getSpellAbility().addMode(mode);
     }
 
     public DustOfMoments(final DustOfMoments card) {
@@ -78,4 +78,169 @@ public class DustOfMoments extends CardImpl {
     public DustOfMoments copy() {
         return new DustOfMoments(this);
     }
+
+
+
+  public abstract static class DustOfMomentsEffect extends OneShotEffect {
+
+      private final Counter counter;
+      private final Filter<Card> permFilter;
+      private final Filter<Card> exiledFilter;
+
+    public DustOfMomentsEffect() {
+          super(Outcome.Benefit);
+          this.counter = new Counter(CounterType.TIME.getName(), 2);
+          this.permFilter = new FilterCard("permanent and each suspended card with time counter");
+          permFilter.add(new CounterPredicate(CounterType.TIME));
+
+          this.exiledFilter = new FilterCard("permanent and each suspended card with time counter");
+          exiledFilter.add(new CardCounterPredicate(CounterType.TIME));
+          setText();
+      }
+
+      public DustOfMomentsEffect(final DustOfMomentsEffect effect) {
+          super(effect);
+          this.counter = effect.counter.copy();
+          this.permFilter = effect.permFilter.copy();
+          this.exiledFilter = effect.exiledFilter.copy();
+      }
+
+      @Override
+      public boolean apply(Game game, Ability source) {
+          Player controller = game.getPlayer(source.getControllerId());
+          MageObject sourceObject = game.getObject(source.getSourceId());
+          if (controller != null && sourceObject != null) {
+              updatePermanents(game, controller, sourceObject);
+              updateSuspended(game, controller, sourceObject);
+              return true;
+          }
+          return false;
+      }
+
+    private void updateSuspended(final Game game, final Player controller, final MageObject sourceObject) {
+      final List<Card> exiledCards = game.getExile().getAllCards(game);
+      execute(game, controller, sourceObject, exiledCards);
+    }
+
+    private void updatePermanents(final Game game, final Player controller, final MageObject sourceObject) {
+      List<Permanent> permanents = game.getBattlefield().getAllActivePermanents();
+      executeP(game, controller, sourceObject, permanents);
+    }
+
+    private void executeP(final Game game, final Player controller, final MageObject sourceObject, final List<Permanent> cards) {
+      if (cards == null || cards.isEmpty()) {
+        return;
+      }
+      for (Permanent card : cards) {
+          if (permFilter.match(card, game)) {
+              final String counterName = counter.getName();
+              if (shouldRemoveCounters()) {
+                  final Counter existingCounterOfSameType = card.getCounters().get(counterName);
+                  final int countersToRemove = Math.min(existingCounterOfSameType.getCount(), counter.getCount());
+                  final Counter modifiedCounter = new Counter(counterName, countersToRemove);
+                  card.removeCounters(modifiedCounter, game);
+              } else {
+                  card.addCounters(counter, game);
+              }
+              if (!game.isSimulation())
+                  game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                          .append(controller.getLogName()).append(getActionStr()).append("s")
+                          .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                          .append(" counter on ").append(card.getName()).toString());
+          }
+      }
+    }
+
+    private void execute(final Game game, final Player controller, final MageObject sourceObject, final List<Card> cards) {
+      if (cards == null || cards.isEmpty()) {
+        return;
+      }
+      for (Card card : cards) {
+        if (exiledFilter.match(card, game)) {
+          final String counterName = counter.getName();
+          if (shouldRemoveCounters()) {
+            final Counter existingCounterOfSameType = card.getCounters(game).get(counterName);
+            final int countersToRemove = Math.min(existingCounterOfSameType.getCount(), counter.getCount());
+            final Counter modifiedCounter = new Counter(counterName, countersToRemove);
+            card.removeCounters(modifiedCounter, game);
+          } else {
+            card.addCounters(counter, game);
+          }
+          if (!game.isSimulation())
+            game.informPlayers(new StringBuilder(sourceObject.getName()).append(": ")
+                    .append(controller.getLogName()).append(getActionStr()).append("s")
+                    .append(counter.getCount()).append(" ").append(counterName.toLowerCase())
+                    .append(" counter on ").append(card.getName()).toString());
+        }
+      }
+    }
+
+    protected abstract boolean shouldRemoveCounters();
+
+    protected abstract String getActionStr();
+
+    private void setText() {
+          StringBuilder sb = new StringBuilder();
+          sb.append(getActionStr());
+          if (counter.getCount() > 1) {
+              sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName().toLowerCase()).append(" counters on each ");
+          } else {
+              sb.append("a ").append(counter.getName().toLowerCase()).append(" counter on each ");
+          }
+          sb.append(permFilter.getMessage());
+          staticText = sb.toString();
+      }
+  }
+
+  public static class AddCountersEffect extends DustOfMomentsEffect {
+
+    public AddCountersEffect() {
+      super();
+    }
+
+    public AddCountersEffect(final DustOfMomentsEffect effect) {
+      super(effect);
+    }
+
+    @Override
+    protected boolean shouldRemoveCounters() {
+      return false;
+    }
+
+    @Override
+    protected String getActionStr() {
+      return "add";
+    }
+
+    @Override
+    public Effect copy() {
+      return new AddCountersEffect(this);
+    }
+  }
+
+  public static class RemoveCountersEffect extends DustOfMomentsEffect {
+
+    public RemoveCountersEffect() {
+      super();
+    }
+
+    public RemoveCountersEffect(final DustOfMomentsEffect effect) {
+      super(effect);
+    }
+
+    @Override
+    protected boolean shouldRemoveCounters() {
+      return true;
+    }
+
+    @Override
+    protected String getActionStr() {
+      return "remove";
+    }
+
+    @Override
+    public Effect copy() {
+      return new RemoveCountersEffect(this);
+    }
+  }
 }

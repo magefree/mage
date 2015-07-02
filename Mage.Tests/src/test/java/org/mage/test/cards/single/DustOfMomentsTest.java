@@ -18,6 +18,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class DustOfMomentsTest extends CardTestPlayerBase {
 
+  //TODO: why the hell is PermanentImpl.getCounters() and CardImpl.getCounters(game) don't return the same value for the same card???
+
   @Test
   public void test() throws Exception {
     addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
@@ -27,20 +29,24 @@ public class DustOfMomentsTest extends CardTestPlayerBase {
     addCard(Zone.HAND, playerA, "Dust of Moments");
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Chronozoa");
-    castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deep-Sea Kraken");
-    castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Dust Of Moments");
+    activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Suspend"); // Casts Deep-Sea Kraken as Suspend
+    castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Dust of Moments");
 
     setModeChoice(playerA, "1");
 
-    setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
+    setStopAt(3, PhaseStep.END_TURN);
     execute();
 
+//    Chronozoa should have duplicated
     final List<Permanent> activeCreatures = currentGame.getBattlefield().getAllActivePermanents(CardType.CREATURE);
     Assert.assertEquals(2, activeCreatures.size());
 
     for (final Permanent creature : activeCreatures) {
       Assert.assertEquals("Chronozoa", creature.getName());
+      Assert.assertEquals(3, creature.getCounters().getCount(CounterType.TIME));
     }
+
+    // Check time counters on kraken
     final List<Card> exiledCards = currentGame.getExile().getAllCards(currentGame);
     Assert.assertEquals(1, exiledCards.size());
 
