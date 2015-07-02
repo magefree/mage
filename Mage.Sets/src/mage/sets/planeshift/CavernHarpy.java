@@ -30,12 +30,11 @@ package mage.sets.planeshift;
 import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -44,7 +43,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -53,11 +51,11 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class CavernHarpy extends CardImpl {
 
     static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
-    
+
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
     }
-                    
+
     public CavernHarpy(UUID ownerId) {
         super(ownerId, 97, "Cavern Harpy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
         this.expansionSetCode = "PLS";
@@ -70,9 +68,7 @@ public class CavernHarpy extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
-        this.addAbility(ability);        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // Pay 1 life: Return Cavern Harpy to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(1)));
     }

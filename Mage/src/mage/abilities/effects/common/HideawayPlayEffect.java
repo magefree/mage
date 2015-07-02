@@ -82,7 +82,7 @@ public class HideawayPlayEffect extends OneShotEffect {
                     // The land's last ability allows you to play the removed card as part of the resolution of that ability.
                     // Timing restrictions based on the card's type are ignored (for instance, if it's a creature or sorcery).
                     // Other play restrictions are not (such as "Play [this card] only during combat").
-                    if (controller.chooseUse(Outcome.Benefit, "Cast "+ card.getLogName() + " without paying it's mana cost?", source, game)) {
+                    if (controller.chooseUse(Outcome.Benefit, "Cast "+ card.getLogName() + " without paying its mana cost?", source, game)) {
                         card.setFaceDown(false, game);
                         return controller.cast(card.getSpellAbility(), game, true);
                     }
