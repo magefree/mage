@@ -21,13 +21,13 @@ import org.apache.log4j.Logger;
 public enum ExpansionRepository {
 
     instance;
-    
-    private static final Logger logger = Logger.getLogger(ExpansionRepository.class);      
-    
+
+    private static final Logger logger = Logger.getLogger(ExpansionRepository.class);
+
     private static final String JDBC_URL = "jdbc:h2:file:./db/cards.h2;AUTO_SERVER=TRUE";
     private static final String VERSION_ENTITY_NAME = "expansion";
     private static final long EXPANSION_DB_VERSION = 5;
-    private static final long EXPANSION_CONTENT_VERSION = 8;
+    private static final long EXPANSION_CONTENT_VERSION = 9;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
@@ -73,7 +73,7 @@ public enum ExpansionRepository {
     }
 
     public ExpansionInfo[] getWithBoostersSortedByReleaseDate() {
-        ExpansionInfo[]  sets = new ExpansionInfo[0];
+        ExpansionInfo[] sets = new ExpansionInfo[0];
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.orderBy("releaseDate", false);
@@ -96,9 +96,9 @@ public enum ExpansionRepository {
         }
         return sets;
     }
-    
+
     public List<ExpansionInfo> getSetsFromBlock(String blockName) {
-        List<ExpansionInfo>  sets = new LinkedList<>();
+        List<ExpansionInfo> sets = new LinkedList<>();
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.where().eq("blockName", new SelectArg(blockName));
@@ -119,9 +119,9 @@ public enum ExpansionRepository {
             }
         } catch (SQLException ex) {
         }
-        return set;        
+        return set;
     }
-    
+
     public ExpansionInfo getSetByName(String setName) {
         ExpansionInfo set = null;
         try {
@@ -133,7 +133,7 @@ public enum ExpansionRepository {
             }
         } catch (SQLException ex) {
         }
-        return set;        
+        return set;
     }
 
     public List<ExpansionInfo> getAll() {
@@ -145,7 +145,7 @@ public enum ExpansionRepository {
         }
         return new ArrayList<>();
     }
-    
+
     public List<String> getAllSetNames() {
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
@@ -153,14 +153,14 @@ public enum ExpansionRepository {
             List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
             List<String> setNames = new LinkedList<>();
             for (ExpansionInfo expansionInfo : expansions) {
-            	setNames.add(expansionInfo.getName());
-			}
+                setNames.add(expansionInfo.getName());
+            }
             return setNames;
         } catch (SQLException ex) {
         }
         return new ArrayList<>();
     }
-    
+
     public long getContentVersionFromDB() {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
