@@ -39,6 +39,8 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.KeyboardFocusManager;
 import java.awt.MenuComponent;
+import java.awt.TrayIcon;
+import java.awt.event.InvocationEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
@@ -118,11 +120,10 @@ public class MageDialog extends javax.swing.JInternalFrame {
                     Object source = event.getSource();
                     boolean dispatch = true;
 
-                    // LINUX: Workaround fix for announce X Value Bug that closes modal windows under linux before values can be entered
-                    // https://github.com/magefree/mage/issues/584
-//                    if (event.getSource() != null && event.getSource() instanceof TrayIcon) {
-//                        return;
-//                    }
+                    // https://github.com/magefree/mage/issues/584 - Let's hope this will fix the Linux window problem
+                    if (event.getSource() != null && event.getSource() instanceof TrayIcon && !(event instanceof InvocationEvent)) {
+                        return;
+                    }
                     if (event instanceof MouseEvent && event.getSource() instanceof Component) {
                         MouseEvent e = (MouseEvent) event;
                         MouseEvent m = SwingUtilities.convertMouseEvent((Component) e.getSource(), e, this);
