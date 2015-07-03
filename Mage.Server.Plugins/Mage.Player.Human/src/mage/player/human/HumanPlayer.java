@@ -806,7 +806,7 @@ public class HumanPlayer extends PlayerImpl {
                                     attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
                         continue;
                     }
-                    declareAttacker(attacker.getId(), attackedDefender, game, true);
+                    declareAttacker(attacker.getId(), attackedDefender, game, false);
                 }
             } else if (response.getBoolean() != null) {
                 // check if enough attackers are declared
