@@ -38,7 +38,7 @@ public class SigiledStarfish extends mage.sets.journeyintonyx.SigiledStarfish {
 
     public SigiledStarfish(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = ?;
+        this.cardNumber = 999;
         this.expansionSetCode = "ORI";
         this.rarity = Rarity.UNCOMMON;
     }

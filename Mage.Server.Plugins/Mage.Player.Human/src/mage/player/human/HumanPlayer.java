@@ -792,7 +792,7 @@ public class HumanPlayer extends PlayerImpl {
 
             game.fireSelectEvent(playerId, "Select attackers", options);
             waitForResponse(game);
-            if (response.getString() != null && response.getString().equals("special")) {
+            if (response.getString() != null && response.getString().equals("special")) { // All attack
                 setStoredBookmark(game.bookmarkState());
                 UUID attackedDefender = null;
                 if (game.getCombat().getDefenders().size() > 1) {

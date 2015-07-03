@@ -37,32 +37,56 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
-public class TransformTest extends CardTestPlayerBase{
+public class TransformTest extends CardTestPlayerBase {
 
     @Test
     public void NissaVastwoodSeerTest() {
-        
+
         addCard(Zone.LIBRARY, playerA, "Forest");
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, reveal it, put it into your hand, then shuffle your library.
         // Whenever a land enters the battlefield under your control, if you control seven or more lands, exile Nissa, then return her to the battlefield transformed under her owner's control.
-        
-        addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
+        addCard(Zone.HAND, playerA, "Nissa, Vastwood Seer");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Nissa, Vastwood Seer");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
-        
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Forest", 7);
-        
+
         assertPermanentCount(playerA, "Nissa, Vastwood Seer", 0);
         assertPermanentCount(playerA, "Nissa, Sage Animist", 1);
         assertCounterCount("Nissa, Sage Animist", CounterType.LOYALTY, 3);
+    }
+
+    @Test
+    public void LilianaHereticalHealer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        // Lifelink
+        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        addCard(Zone.HAND, playerA, "Liliana, Heretical Healer");
+
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Liliana, Heretical Healer");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(1, PhaseStep.DECLARE_ATTACKERS);
+        execute();
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Lightning Bolt", 1);
+
+        assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
+        assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
+        assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
     }
 
 }
