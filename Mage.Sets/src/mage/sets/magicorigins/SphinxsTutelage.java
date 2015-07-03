@@ -25,14 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
@@ -43,50 +44,51 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LevelX2
  */
-public class Grindstone extends CardImpl {
+public class SphinxsTutelage extends CardImpl {
 
-    public Grindstone(UUID ownerId) {
-        super(ownerId, 280, "Grindstone", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{1}");
-        this.expansionSetCode = "TMP";
+    public SphinxsTutelage(UUID ownerId) {
+        super(ownerId, 76, "Sphinx's Tutelage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        this.expansionSetCode = "ORI";
 
-        // {3}, {T}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrindstoneEffect(), new ManaCostsImpl("{3}"));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPlayer());
+        // Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
+        Ability ability = new DrawCardControllerTriggeredAbility(new SphinxsTutelageEffect(), false);
+        ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
+        // {5}{U}: Draw a card, then discard a card.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
     }
 
-    public Grindstone(final Grindstone card) {
+    public SphinxsTutelage(final SphinxsTutelage card) {
         super(card);
     }
 
     @Override
-    public Grindstone copy() {
-        return new Grindstone(this);
+    public SphinxsTutelage copy() {
+        return new SphinxsTutelage(this);
     }
 }
 
-class GrindstoneEffect extends OneShotEffect {
+class SphinxsTutelageEffect extends OneShotEffect {
 
-    public GrindstoneEffect() {
+    public SphinxsTutelageEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process";
+        this.staticText = "target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process";
     }
 
-    public GrindstoneEffect(final GrindstoneEffect effect) {
+    public SphinxsTutelageEffect(final SphinxsTutelageEffect effect) {
         super(effect);
     }
 
     @Override
-    public GrindstoneEffect copy() {
-        return new GrindstoneEffect(this);
+    public SphinxsTutelageEffect copy() {
+        return new SphinxsTutelageEffect(this);
     }
 
     @Override
@@ -111,8 +113,11 @@ class GrindstoneEffect extends OneShotEffect {
                 cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
                 if (!cards.isEmpty()) {
                     Card card1 = targetPlayer.getLibrary().removeFromTop(game);
-                    if (targetPlayer.getLibrary().size() > 0) {
-                        colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
+                    if (!card1.getCardType().contains(CardType.LAND) && targetPlayer.getLibrary().size() > 0) {
+                        Card card2 = targetPlayer.getLibrary().removeFromTop(game);
+                        if (!card2.getCardType().contains(CardType.LAND)) {
+                            colorShared = card1.getColor(game).shares(card2.getColor(game));
+                        }
                     }
                 }
                 targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);

@@ -77,21 +77,21 @@ public class SinsOfThePast extends CardImpl {
 }
 
 class SinsOfThePastEffect extends OneShotEffect {
-    
+
     SinsOfThePastEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that card would be put into your graveyard this turn, exile it instead";
     }
-    
+
     SinsOfThePastEffect(final SinsOfThePastEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public SinsOfThePastEffect copy() {
         return new SinsOfThePastEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
@@ -139,7 +139,7 @@ class SinsOfThePastCastFromGraveyardEffect extends AsThoughEffectImpl {
 }
 
 class SinsOfThePastReplacementEffect extends ReplacementEffectImpl {
-    
+
     private final UUID cardId;
 
     SinsOfThePastReplacementEffect(UUID cardId) {
@@ -158,11 +158,6 @@ class SinsOfThePastReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(this.cardId);
@@ -175,7 +170,6 @@ class SinsOfThePastReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        game.informPlayers(event.getType().name());
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 
