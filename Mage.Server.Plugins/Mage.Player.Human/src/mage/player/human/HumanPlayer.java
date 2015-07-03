@@ -915,7 +915,7 @@ public class HumanPlayer extends PlayerImpl {
         TargetDefender target = new TargetDefender(defenders, null);
         target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
         if (chooseTarget(Outcome.Damage, target, null, game)) {
-            response.getUUID();
+            return response.getUUID();
         }
         return null;
     }
