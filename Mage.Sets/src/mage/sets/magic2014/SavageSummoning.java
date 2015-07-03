@@ -49,6 +49,7 @@ import mage.constants.Rarity;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -65,13 +66,12 @@ public class SavageSummoning extends CardImpl {
         super(ownerId, 194, "Savage Summoning", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "M14";
 
-
         // Savage Summoning can't be countered.
         Ability ability = new CantBeCounteredAbility();
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // The next creature card you cast this turn can be cast as though it had flash. 
+        // The next creature card you cast this turn can be cast as though it had flash.
         // That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
         this.getSpellAbility().addEffect(new SavageSummoningAsThoughEffect());
         this.getSpellAbility().addEffect(new SavageSummoningCantCounterEffect());
@@ -91,6 +91,7 @@ public class SavageSummoning extends CardImpl {
 }
 
 class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
+
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -107,13 +108,13 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-         watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher != null && card != null) {
-             watcher.setSavageSummoningSpellActive(card, game);
-         } else {
-             throw new IllegalArgumentException("Consume Savage watcher could not be found");
-         }
+        watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (watcher != null && card != null) {
+            watcher.setSavageSummoningSpellActive(card, game);
+        } else {
+            throw new IllegalArgumentException("Consume Savage watcher could not be found");
+        }
     }
 
     @Override
@@ -126,13 +127,20 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
         return new SavageSummoningAsThoughEffect(this);
     }
 
-
     @Override
-    public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (watcher.isSavageSummoningSpellActive()) {
-            Card card = game.getCard(sourceId);
-            if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getOwnerId().equals(source.getControllerId())) {
-                    return card.getSpellAbility().isInUseableZone(game, card, null);
+            MageObject mageObject = game.getBaseObject(objectId);
+            if (mageObject instanceof Commander) {
+                Commander commander = (Commander) mageObject;
+                if (commander.getCardType().contains(CardType.CREATURE) && commander.getControllerId().equals(source.getControllerId())) {
+                    return true;
+                }
+            } else if (mageObject != null && mageObject instanceof Card) {
+                Card card = (Card) mageObject;
+                if (card.getCardType().contains(CardType.CREATURE) && card.getOwnerId().equals(source.getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -140,10 +148,10 @@ class SavageSummoningAsThoughEffect extends AsThoughEffectImpl {
 
 }
 
-
 class SavageSummoningWatcher extends Watcher {
 
-    private Set<String> savageSummoningSpells = new HashSet<>();;
+    private Set<String> savageSummoningSpells = new HashSet<>();
+    ;
     private Map<UUID, Set<String>> spellsCastWithSavageSummoning = new LinkedHashMap<>();
     private Map<String, Set<String>> cardsCastWithSavageSummoning = new LinkedHashMap<>();
 
@@ -154,10 +162,10 @@ class SavageSummoningWatcher extends Watcher {
     public SavageSummoningWatcher(final SavageSummoningWatcher watcher) {
         super(watcher);
         this.savageSummoningSpells.addAll(watcher.savageSummoningSpells);
-        for (Entry<UUID, Set<String>> entry :watcher.spellsCastWithSavageSummoning.entrySet()) {
+        for (Entry<UUID, Set<String>> entry : watcher.spellsCastWithSavageSummoning.entrySet()) {
             this.spellsCastWithSavageSummoning.put(entry.getKey(), entry.getValue());
         }
-        for (Entry<String, Set<String>> entry :watcher.cardsCastWithSavageSummoning.entrySet()) {
+        for (Entry<String, Set<String>> entry : watcher.cardsCastWithSavageSummoning.entrySet()) {
             this.cardsCastWithSavageSummoning.put(entry.getKey(), entry.getValue());
         }
     }
@@ -172,7 +180,7 @@ class SavageSummoningWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             if (isSavageSummoningSpellActive() && event.getPlayerId().equals(getControllerId())) {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
-                if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {                    
+                if (spell != null && spell.getCardType().contains(CardType.CREATURE)) {
                     spellsCastWithSavageSummoning.put(spell.getId(), new HashSet<>(savageSummoningSpells));
                     String cardKey = new StringBuilder(spell.getCard().getId().toString()).append("_").append(spell.getCard().getZoneChangeCounter(game)).toString();
                     cardsCastWithSavageSummoning.put(cardKey, new HashSet<>(savageSummoningSpells));
@@ -198,7 +206,7 @@ class SavageSummoningWatcher extends Watcher {
     }
 
     public boolean isCardCastWithThisSavageSummoning(Card card, UUID cardId, int zoneChangeCounter, Game game) {
-        String creatureCardKey = new StringBuilder(card.getId().toString()).append("_").append(card.getZoneChangeCounter(game)-1).toString();
+        String creatureCardKey = new StringBuilder(card.getId().toString()).append("_").append(card.getZoneChangeCounter(game) - 1).toString();
         // add one because card is now gone to battlefield as creature
         String cardKey = new StringBuilder(cardId.toString()).append("_").append(zoneChangeCounter).toString();
         HashSet<String> savageSpells = (HashSet<String>) cardsCastWithSavageSummoning.get(creatureCardKey);
@@ -216,6 +224,7 @@ class SavageSummoningWatcher extends Watcher {
 }
 
 class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
+
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -232,12 +241,12 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public void init(Ability source, Game game) {
-         watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher == null || card == null) {
-             throw new IllegalArgumentException("Consume Savage watcher or card could not be found");
-         }
-         this.zoneChangeCounter = card.getZoneChangeCounter(game);
+        watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (watcher == null || card == null) {
+            throw new IllegalArgumentException("Consume Savage watcher or card could not be found");
+        }
+        this.zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
     @Override
@@ -273,6 +282,7 @@ class SavageSummoningCantCounterEffect extends ContinuousRuleModifyingEffectImpl
 }
 
 class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
+
     private SavageSummoningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -289,12 +299,12 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-         watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher == null || card == null) {
-             throw new IllegalArgumentException("Consume Savage watcher or card could not be found");
-         }
-         this.zoneChangeCounter = card.getZoneChangeCounter(game);
+        watcher = (SavageSummoningWatcher) game.getState().getWatchers().get("consumeSavageSummoningWatcher", source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (watcher == null || card == null) {
+            throw new IllegalArgumentException("Consume Savage watcher or card could not be found");
+        }
+        this.zoneChangeCounter = card.getZoneChangeCounter(game);
     }
 
     @Override
@@ -316,7 +326,7 @@ class SavageSummoningEntersBattlefieldEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());

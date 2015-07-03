@@ -27,29 +27,26 @@
  */
 package mage.sets.innistrad;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.Rarity;
 import mage.constants.TimingRule;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  * @author nantuko
@@ -78,7 +75,7 @@ public class DivineReckoning extends CardImpl {
 }
 
 class DivineReckoningEffect extends OneShotEffect {
-   
+
     public DivineReckoningEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "Each player chooses a creature he or she controls. Destroy the rest";
@@ -93,10 +90,10 @@ class DivineReckoningEffect extends OneShotEffect {
         List<Card> chosen = new ArrayList<>();
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId : controller.getInRange()) {
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
 
-                Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), false);
+                Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), true);
                 if (target.canChoose(player.getId(), game)) {
                     while (player.isInGame() && !target.isChosen() && target.canChoose(player.getId(), game)) {
                         player.chooseTarget(Outcome.Benefit, target, source, game);
