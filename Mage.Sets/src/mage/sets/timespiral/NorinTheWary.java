@@ -29,21 +29,15 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -63,7 +57,7 @@ public class NorinTheWary extends CardImpl {
 
         // When a player casts a spell or a creature attacks, exile Norin the Wary. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.addAbility(new NorinTheWaryTriggeredAbility());
-        
+
     }
 
     public NorinTheWary(final NorinTheWary card) {
@@ -79,7 +73,7 @@ public class NorinTheWary extends CardImpl {
 class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
 
     public NorinTheWaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new NorinTheWaryRemovingEffect(), false);
+        super(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(), false);
     }
 
     public NorinTheWaryTriggeredAbility(final NorinTheWaryTriggeredAbility ability) {
@@ -106,45 +100,4 @@ class NorinTheWaryTriggeredAbility extends TriggeredAbilityImpl {
     public NorinTheWaryTriggeredAbility copy() {
         return new NorinTheWaryTriggeredAbility(this);
     }
-}
-
-class NorinTheWaryRemovingEffect extends OneShotEffect {
-
-    private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
-
-    NorinTheWaryRemovingEffect () {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    NorinTheWaryRemovingEffect(NorinTheWaryRemovingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
-                    //create delayed triggered ability
-                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public NorinTheWaryRemovingEffect copy() {
-        return new NorinTheWaryRemovingEffect(this);
-    }
-
 }

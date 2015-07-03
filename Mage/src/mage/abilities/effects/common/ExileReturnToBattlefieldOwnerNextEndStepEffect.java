@@ -28,64 +28,56 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect {
+public class ExileReturnToBattlefieldOwnerNextEndStepEffect extends OneShotEffect {
 
-    private boolean tapped;
-    private int zoneChangeCounter;
+    private static final String effectText = "exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect() {
-        this(false);
-    }
-
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped) {
-        this(tapped, -1);
-    }
-
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped, int zoneChangeCounter) {
+    public ExileReturnToBattlefieldOwnerNextEndStepEffect() {
         super(Outcome.Benefit);
-        this.tapped = tapped;
-        this.zoneChangeCounter = zoneChangeCounter;
-        staticText = new StringBuilder("return that card to the battlefield").append(tapped ? " tapped" : "").append(" under its owner's control").toString();
+        staticText = effectText;
     }
 
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
+    public ExileReturnToBattlefieldOwnerNextEndStepEffect(ExileReturnToBattlefieldOwnerNextEndStepEffect effect) {
         super(effect);
-        this.tapped = effect.tapped;
-        this.zoneChangeCounter = effect.zoneChangeCounter;
-    }
-
-    @Override
-    public ReturnToBattlefieldUnderOwnerControlSourceEffect copy() {
-        return new ReturnToBattlefieldUnderOwnerControlSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            // return only from public zones
-            switch (game.getState().getZone(card.getId())) {
-                case EXILED:
-                case COMMAND:
-                case GRAVEYARD:
-                    if (zoneChangeCounter < 0 || game.getState().getZoneChangeCounter(card.getId()) == zoneChangeCounter) {
-                        Zone currentZone = game.getState().getZone(card.getId());
-                        card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(), tapped);
-                    }
-                    break;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                int zcc = game.getState().getZoneChangeCounter(permanent.getId());
+                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
+                    //create delayed triggered ability and return it from every public zone he was next moved to
+                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                            new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));
+                    delayedAbility.setSourceId(source.getSourceId());
+                    delayedAbility.setControllerId(source.getControllerId());
+                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
+                    game.addDelayedTriggeredAbility(delayedAbility);
+                }
             }
             return true;
         }
         return false;
     }
+
+    @Override
+    public ExileReturnToBattlefieldOwnerNextEndStepEffect copy() {
+        return new ExileReturnToBattlefieldOwnerNextEndStepEffect(this);
+    }
+
 }
