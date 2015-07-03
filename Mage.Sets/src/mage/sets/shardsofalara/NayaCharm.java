@@ -29,19 +29,14 @@ package mage.sets.shardsofalara;
 
 import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -56,7 +51,6 @@ public class NayaCharm extends CardImpl {
         super(ownerId, 180, "Naya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{G}{W}");
         this.expansionSetCode = "ALA";
 
-
         // Choose one - Naya Charm deals 3 damage to target creature;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -67,7 +61,7 @@ public class NayaCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
         // or tap all creatures target player controls.
         mode = new Mode();
-        mode.getEffects().add(new NayaCharmEffect());
+        mode.getEffects().add(new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures")));
         mode.getTargets().add(new TargetPlayer());
         this.getSpellAbility().addMode(mode);
     }
@@ -79,38 +73,5 @@ public class NayaCharm extends CardImpl {
     @Override
     public NayaCharm copy() {
         return new NayaCharm(this);
-    }
-}
-
-class NayaCharmEffect extends OneShotEffect {
-
-    public NayaCharmEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap all creatures target player controls";
-    }
-
-    public NayaCharmEffect(final NayaCharmEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getFirstTarget() == null) {
-            return false;
-        }
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent creature : creatures) {
-            creature.tap(game);
-        }
-        return true;
-    }
-
-    @Override
-    public NayaCharmEffect copy() {
-        return new NayaCharmEffect(this);
     }
 }
