@@ -80,6 +80,7 @@ public class MythicspoilerComSource implements CardImageSource {
         cardNameAliases.put("THS-purphorosemissary", "purphorossemissary");
         cardNameAliases.put("THS-soldierofpantheon", "soldierofthepantheon");
         cardNameAliases.put("THS-vulpinegolaith", "vulpinegoliath");
+        cardNameAliases.put("ORI-kothopedhoarderofsouls", "kothophedsoulhoarder");
     }
 
     private Map<String, String> getSetLinks(String cardSet) {
@@ -130,17 +131,17 @@ public class MythicspoilerComSource implements CardImageSource {
                             if (cardNameAliases.containsKey(cardSet + "-" + cardName)) {
                                 cardName = cardNameAliases.get(cardSet + "-" + cardName);
                             }
-                            if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3")|| cardName.endsWith("4")|| cardName.endsWith("5")) {
-                                if (!cardName.startsWith("forest") && 
-                                        !cardName.startsWith("swamp") && 
-                                        !cardName.startsWith("mountain") && 
-                                        !cardName.startsWith("island") && 
-                                        !cardName.startsWith("plains")) {
+                            if (cardName.endsWith("1") || cardName.endsWith("2") || cardName.endsWith("3") || cardName.endsWith("4") || cardName.endsWith("5")) {
+                                if (!cardName.startsWith("forest")
+                                        && !cardName.startsWith("swamp")
+                                        && !cardName.startsWith("mountain")
+                                        && !cardName.startsWith("island")
+                                        && !cardName.startsWith("plains")) {
                                     cardName = cardName.substring(0, cardName.length() - 1);
-                                }                                
+                                }
                             }
                             setLinks.put(cardName, baseUrl + cardLink);
-                        }                        
+                        }
                     }
 
                 }
@@ -149,7 +150,7 @@ public class MythicspoilerComSource implements CardImageSource {
             System.out.println("Exception when parsing the mythicspoiler page: " + ex.getMessage());
         }
         return setLinks;
-    }   
+    }
 
     @Override
     public String generateURL(CardDownloadData card) throws Exception {
