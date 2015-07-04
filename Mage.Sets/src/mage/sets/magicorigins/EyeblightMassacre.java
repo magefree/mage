@@ -25,56 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.magicorigins;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class EyeblightMassacre extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Non-Elf creatures");
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.not(new SubtypePredicate("Elf")));
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public EyeblightMassacre(UUID ownerId) {
+        super(ownerId, 96, "Eyeblight Massacre", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+        this.expansionSetCode = "ORI";
+
+        // Non-Elf creatures get -2/-2 until end of turn.
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false));
+    }
+
+    public EyeblightMassacre(final EyeblightMassacre card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public EyeblightMassacre copy() {
+        return new EyeblightMassacre(this);
     }
 }

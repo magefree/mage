@@ -25,56 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.magicorigins;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author EvilGeek
+ * @author Wehk
  */
-public class UnnaturalSelection extends CardImpl {
+public class MageRingBully extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public MageRingBully(UUID ownerId) {
+        super(ownerId, 154, "Mage-Ring Bully", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Human");
+        this.subtype.add("Warrior");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Prowess
+        this.addAbility(new ProwessAbility());
+        
+         // Mage-Ring Bully attacks each turn if able.
+        this.addAbility(new AttacksEachTurnStaticAbility());
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public MageRingBully(final MageRingBully card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public MageRingBully copy() {
+        return new MageRingBully(this);
     }
 }

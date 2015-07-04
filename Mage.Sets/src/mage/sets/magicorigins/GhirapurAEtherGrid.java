@@ -25,56 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.magicorigins;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author Wehk
  */
-public class UnnaturalSelection extends CardImpl {
+public class GhirapurAEtherGrid extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped artifacts you control");
+    
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(Predicates.not(new TappedPredicate()));
+    }
+    
+    public GhirapurAEtherGrid(UUID ownerId) {
+        super(ownerId, 148, "Ghirapur AEther Grid", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
+        this.expansionSetCode = "ORI";
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+        // Tap two untaped artifacts you control: Ghirapur Aether Grid deals 1 damage to target creature or player
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new DamageTargetEffect(1),
+                new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public GhirapurAEtherGrid(final GhirapurAEtherGrid card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public GhirapurAEtherGrid copy() {
+        return new GhirapurAEtherGrid(this);
     }
 }

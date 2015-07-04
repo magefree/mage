@@ -27,16 +27,14 @@
  */
 package mage.sets.limitedalpha;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -51,7 +49,6 @@ public class ManaShort extends CardImpl {
     public ManaShort(UUID ownerId) {
         super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "LEA";
-
 
         // Tap all lands target player controls and empty his or her mana pool.
         this.getSpellAbility().addEffect(new ManaShortEffect());
@@ -68,13 +65,13 @@ public class ManaShort extends CardImpl {
     }
 }
 
-class ManaShortEffect extends OneShotEffect {
+class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
 
     public ManaShortEffect() {
-        super(Outcome.Detriment);
+        super(new FilterLandPermanent("lands"));
         staticText = "Tap all lands target player controls and empty his or her mana pool";
     }
-    
+
     public ManaShortEffect(final ManaShortEffect effect) {
         super(effect);
     }
@@ -83,24 +80,15 @@ class ManaShortEffect extends OneShotEffect {
     public ManaShortEffect copy() {
         return new ManaShortEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            FilterLandPermanent filter = new FilterLandPermanent();
-            filter.add(new ControllerIdPredicate(targetPlayer.getId()));
-
-            List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-            for (Permanent land : lands) {
-                land.tap(game);
-            }
-            
+        if(targetPlayer != null) {
+            super.apply(game, source);
             targetPlayer.getManaPool().emptyPool(game);
-            
             return true;
         }
         return false;
     }
-    
 }

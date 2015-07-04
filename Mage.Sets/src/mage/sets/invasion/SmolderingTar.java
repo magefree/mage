@@ -25,56 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.invasion;
 
-import java.util.Set;
 import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class SmolderingTar extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public SmolderingTar(UUID ownerId) {
+        super(ownerId, 275, "Smoldering Tar", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}");
+        this.expansionSetCode = "INV";
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
+        // At the beginning of your upkeep, target player loses 1 life.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeTargetEffect(1), TargetController.YOU, false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+        // Sacrifice Smoldering Tar: Smoldering Tar deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
+        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public SmolderingTar(final SmolderingTar card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public SmolderingTar copy() {
+        return new SmolderingTar(this);
     }
 }

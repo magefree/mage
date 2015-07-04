@@ -25,56 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.planeshift;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class MarchOfSouls extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public MarchOfSouls(UUID ownerId) {
+        super(ownerId, 10, "March of Souls", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
+        this.expansionSetCode = "PLS";
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
+        this.getSpellAbility().addEffect(new MarchOfSoulsEffect());
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public MarchOfSouls(final MarchOfSouls card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public MarchOfSouls copy() {
+        return new MarchOfSouls(this);
     }
+}
+
+class MarchOfSoulsEffect extends OneShotEffect {
+
+    public MarchOfSoulsEffect() {
+        super(Outcome.Benefit);
+        staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.";
+    }
+
+    public MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MarchOfSoulsEffect copy() {
+        return new MarchOfSoulsEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+         List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
+             source.getControllerId(), source.getSourceId(), game);
+         for(Permanent p : creatures) {
+             UUID controllerId = p.getControllerId();
+             if(p.destroy(source.getSourceId(), game, true)) {
+                 SpiritWhiteToken token = new SpiritWhiteToken();
+                 token.putOntoBattlefield(1, game, source.getSourceId(), controllerId);
+             }
+         }
+         return true;
+    }
+
 }

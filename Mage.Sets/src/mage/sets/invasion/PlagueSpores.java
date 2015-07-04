@@ -25,56 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.invasion;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
+import mage.ObjectColor;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class PlagueSpores extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public PlagueSpores(UUID ownerId) {
+        super(ownerId, 260, "Plague Spores", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{B}{R}");
+        this.expansionSetCode = "INV";
+
+        // Destroy target nonblack creature and target land. They can't be regenerated.
+        Effect effect = new DestroyTargetEffect(true);
+        effect.setText("Destroy target nonblack creature and target land. They can't be regenerated.");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetLandPermanent());
+    }
+
+    public PlagueSpores(final PlagueSpores card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public PlagueSpores copy() {
+        return new PlagueSpores(this);
     }
 }

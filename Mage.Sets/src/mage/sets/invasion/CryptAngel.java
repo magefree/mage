@@ -25,56 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.invasion;
 
-import java.util.Set;
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class CryptAngel extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    private static final FilterCard filter = new FilterCard("white");
+    private static final FilterCreatureCard filter2 = new FilterCreatureCard("blue or red creature card from your graveyard");
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter2.add(Predicates.or(new ColorPredicate(ObjectColor.RED), new ColorPredicate(ObjectColor.BLUE)));
+    }
+
+    public CryptAngel(UUID ownerId) {
+        super(ownerId, 97, "Crypt Angel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Angel");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // protection from white
+        this.addAbility(new ProtectionAbility(filter));
+        // When Crypt Angel enters the battlefield, return target blue or red creature card from your graveyard to your hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public CryptAngel(final CryptAngel card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public CryptAngel copy() {
+        return new CryptAngel(this);
     }
 }

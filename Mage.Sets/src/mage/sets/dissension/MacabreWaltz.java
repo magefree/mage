@@ -25,51 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author LoneFox
+
  */
-public class DawnglareInvoker extends CardImpl {
+public class MacabreWaltz extends mage.sets.magicorigins.MacabreWaltz {
 
-    public DawnglareInvoker(UUID ownerId) {
-        super(ownerId, 16, "Dawnglare Invoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        this.expansionSetCode = "ROE";
-        this.subtype.add("Kor");
-        this.subtype.add("Wizard");
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
-
-        this.addAbility(FlyingAbility.getInstance());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures")),
-                new ManaCostsImpl("{8}"));
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    public MacabreWaltz(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 47;
+        this.expansionSetCode = "DIS";
     }
 
-    public DawnglareInvoker(final DawnglareInvoker card) {
+    public MacabreWaltz(final MacabreWaltz card) {
         super(card);
     }
 
     @Override
-    public DawnglareInvoker copy() {
-        return new DawnglareInvoker(this);
+    public MacabreWaltz copy() {
+        return new MacabreWaltz(this);
     }
 }

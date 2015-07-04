@@ -25,56 +25,81 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.planeshift;
 
-import java.util.Set;
 import java.util.UUID;
-
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
  */
-public class UnnaturalSelection extends CardImpl {
+public class Stratadon extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public Stratadon(UUID ownerId) {
+        super(ownerId, 135, "Stratadon", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{10}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new StratadonCostReductionEffect()));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        super.adjustCosts(ability, game);
+        CardUtil.adjustCost((SpellAbility)ability, new DomainValue().calculate(game, ability, null));
+    }
+
+
+    public Stratadon(final Stratadon card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public Stratadon copy() {
+        return new Stratadon(this);
     }
+}
+
+// Dummy to get the text on the card.
+class StratadonCostReductionEffect extends OneShotEffect {
+    private static final String effectText = "Domain - {this} costs {1} less to cast for each basic land type among lands you control.";
+
+    StratadonCostReductionEffect() {
+        super(Outcome.Benefit);
+        this.staticText = effectText;
+    }
+
+    StratadonCostReductionEffect(StratadonCostReductionEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public StratadonCostReductionEffect copy() {
+        return new StratadonCostReductionEffect(this);
+    }
+
 }

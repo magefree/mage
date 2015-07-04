@@ -25,56 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.magicorigins;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
+import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition.CountType;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author EvilGeek
+ * @author LoneFox
+
  */
-public class UnnaturalSelection extends CardImpl {
+public class Ramroller extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent();
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new AnotherPredicate());
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public Ramroller(UUID ownerId) {
+        super(ownerId, 237, "Ramroller", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Juggernaut");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
+
+        // Ramroller attacks each turn if able.
+        this.addAbility(new AttacksEachTurnStaticAbility());
+        // Ramroller gets +2/+0 as long as you control another artifact.
+        Condition condition = new PermanentsOnTheBattlefieldCondition(filter, CountType.MORE_THAN, 0);
+        ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0,
+             Duration.WhileOnBattlefield), condition, "{this} gets +2/+0 as long as you control another artifact.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+    }
+
+    public Ramroller(final Ramroller card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public Ramroller copy() {
+        return new Ramroller(this);
     }
 }

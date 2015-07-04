@@ -27,14 +27,13 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.abilities.keyword.ChampionAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -44,11 +43,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 /**
@@ -92,14 +89,14 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
 
     public MistbindCliqueAbility() {
         // ability has to trigger independant where the source object is now
-        super(Zone.ALL, Zone.BATTLEFIELD, Zone.EXILED, new MistbindCliqueTapEffect(), "When a Faerie is championed with {this}, ", false);
+        super(Zone.ALL, Zone.BATTLEFIELD, Zone.EXILED, new TapAllTargetPlayerControlsEffect(new FilterLandPermanent("lands")), "When a Faerie is championed with {this}, ", false);
         this.addTarget(new TargetPlayer());
     }
 
     public MistbindCliqueAbility(MistbindCliqueAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public MistbindCliqueAbility copy() {
         return new MistbindCliqueAbility(this);
@@ -113,44 +110,11 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId() != null && event.getSourceId().equals(getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;            
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getTarget() != null && zEvent.getTarget().hasSubtype("Faerie")) {
                 return true;
-            }            
+            }
         }
         return false;
-    }
-}
-
-class MistbindCliqueTapEffect extends OneShotEffect {
-
-    public MistbindCliqueTapEffect() {
-        super(Outcome.Tap);
-        staticText = "tap all lands target player controls";
-    }
-
-    public MistbindCliqueTapEffect(final MistbindCliqueTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getFirstTarget() == null) {
-            return false;
-        }
-
-        FilterLandPermanent filter = new FilterLandPermanent();
-        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-
-        List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent land : lands) {
-            land.tap(game);
-        }
-        return true;
-    }
-
-    @Override
-    public MistbindCliqueTapEffect copy() {
-        return new MistbindCliqueTapEffect(this);
     }
 }
