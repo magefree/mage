@@ -30,13 +30,14 @@ package mage.sets.planeshift;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -62,13 +63,6 @@ public class Stratadon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        super.adjustCosts(ability, game);
-        CardUtil.adjustCost((SpellAbility)ability, new DomainValue().calculate(game, ability, null));
-    }
-
-
     public Stratadon(final Stratadon card) {
         super(card);
     }
@@ -79,27 +73,30 @@ public class Stratadon extends CardImpl {
     }
 }
 
-// Dummy to get the text on the card.
-class StratadonCostReductionEffect extends OneShotEffect {
-    private static final String effectText = "Domain - {this} costs {1} less to cast for each basic land type among lands you control.";
+class StratadonCostReductionEffect extends CostModificationEffectImpl {
 
-    StratadonCostReductionEffect() {
-        super(Outcome.Benefit);
-        this.staticText = effectText;
+    public StratadonCostReductionEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        staticText = "<i>Domain</i> - {this} costs {1} less to cast for each basic land type among lands you control.";
     }
 
-    StratadonCostReductionEffect(StratadonCostReductionEffect effect) {
+    protected StratadonCostReductionEffect(final StratadonCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        CardUtil.reduceCost(abilityToModify, new DomainValue().calculate(game, source, this));
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        return abilityToModify.getSourceId().equals(source.getSourceId());
     }
 
     @Override
     public StratadonCostReductionEffect copy() {
         return new StratadonCostReductionEffect(this);
     }
-
 }
