@@ -52,8 +52,6 @@ public class Rootgrapple extends CardImpl {
 
     static {
         filterNoncreature.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-    }
-    static {
         filterTreefolk.add(new SubtypePredicate("Treefolk"));
     }
 
