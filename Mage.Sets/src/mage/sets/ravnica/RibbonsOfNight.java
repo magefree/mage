@@ -52,7 +52,6 @@ public class RibbonsOfNight extends CardImpl {
 
         // Ribbons of Night deals 4 damage to target creature
         Effect effect = new DamageTargetEffect(4);
-        effect.setText("{this} deals 4 damage to target creature");
         this.getSpellAbility().addEffect(effect);
         
         // and you gain 4 life.
