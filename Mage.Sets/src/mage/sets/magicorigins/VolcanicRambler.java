@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -55,9 +54,8 @@ public class VolcanicRambler extends CardImpl {
 
         // {2}{R}: Volcanic Rambler deals 1 damage to target player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{2}{R}"));
-        ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);        
+        this.addAbility(ability);
     }
 
     public VolcanicRambler(final VolcanicRambler card) {
