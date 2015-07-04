@@ -25,51 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.Filter;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 /**
  *
- * @author fireshoes
+ * @author Wehk
  */
-public class KytheonsIrregulars extends CardImpl {
+public class GoldmeadowDodger extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with power 4 or greater");
 
-        // Renown 1 <i>(When this creature deals combat damage to a player
-        this.addAbility(new RenownAbility(1));       
-        // if it isn't renowned
-        // put a +1/+1 counter on it and it becomes renowned.)</i)
-        // {W}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));
+    }
+    
+    public GoldmeadowDodger(UUID ownerId) {
+        super(ownerId, 16, "Goldmeadow Dodger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Kithkin");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    public GoldmeadowDodger(final GoldmeadowDodger card) {
         super(card);
     }
 
     @Override
-    public KytheonsIrregulars copy() {
-        return new KytheonsIrregulars(this);
+    public GoldmeadowDodger copy() {
+        return new GoldmeadowDodger(this);
     }
 }

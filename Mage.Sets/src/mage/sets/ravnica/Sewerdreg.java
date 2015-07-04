@@ -25,51 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author fireshoes
+ * @author Wehk
  */
-public class KytheonsIrregulars extends CardImpl {
+public class Sewerdreg extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(4);
+    public Sewerdreg(UUID ownerId) {
+        super(ownerId, 104, "Sewerdreg", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Spirit");
+        this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Renown 1 <i>(When this creature deals combat damage to a player
-        this.addAbility(new RenownAbility(1));       
-        // if it isn't renowned
-        // put a +1/+1 counter on it and it becomes renowned.)</i)
-        // {W}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Swampwalk
+        this.addAbility(new SwampwalkAbility());
+        
+        // Sacrifice Sewerdreg: Exile target card from a graveyard.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new SacrificeSourceCost());
+	ability.addTarget(new TargetCardInGraveyard());
+	this.addAbility(ability);
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    public Sewerdreg(final Sewerdreg card) {
         super(card);
     }
 
     @Override
-    public KytheonsIrregulars copy() {
-        return new KytheonsIrregulars(this);
+    public Sewerdreg copy() {
+        return new Sewerdreg(this);
     }
 }

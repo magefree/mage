@@ -25,51 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.SacrificeControllerEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author fireshoes
+ * @author Wehk
  */
-public class KytheonsIrregulars extends CardImpl {
+public class VindictiveMob extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("can't be blocked by Saprolings");
+
+    static {
+        filter.add(new SubtypePredicate("Saproling"));
+    }
+    
+    public VindictiveMob(UUID ownerId) {
+        super(ownerId, 112, "Vindictive Mob", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        this.expansionSetCode = "RAV";
         this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+        this.subtype.add("Berserker");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Renown 1 <i>(When this creature deals combat damage to a player
-        this.addAbility(new RenownAbility(1));       
-        // if it isn't renowned
-        // put a +1/+1 counter on it and it becomes renowned.)</i)
-        // {W}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // When Vindictive Mob enters the battlefield, sacrifice a creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterCreaturePermanent(), 1, null)));
+        
+        // Vindictive Mob can't be blocked by Saprolings.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    public VindictiveMob(final VindictiveMob card) {
         super(card);
     }
 
     @Override
-    public KytheonsIrregulars copy() {
-        return new KytheonsIrregulars(this);
+    public VindictiveMob copy() {
+        return new VindictiveMob(this);
     }
 }
