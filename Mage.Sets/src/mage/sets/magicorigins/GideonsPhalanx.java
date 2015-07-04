@@ -54,13 +54,13 @@ public class GideonsPhalanx extends CardImpl {
         super(ownerId, 14, "Gideon's Phalanx", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{W}{W}");
         this.expansionSetCode = "ORI";
 
-        // Put four 2/2 white Soldier creature tokens with vigilance onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new GideonsPhalanxSoldierToken(), 4));
-        
+        // Put four 2/2 white Knight creature tokens with vigilance onto the battlefield.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new GideonsPhalanxKnightToken(), 4));
+
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn.
         Effect effect = new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()),
-                SpellMasteryCondition.getInstance(), 
+                SpellMasteryCondition.getInstance(),
                 "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, creatures you control gain indestructible until end of turn");
         this.getSpellAbility().addEffect(effect);
     }
@@ -75,14 +75,14 @@ public class GideonsPhalanx extends CardImpl {
     }
 }
 
-class GideonsPhalanxSoldierToken extends Token {
+class GideonsPhalanxKnightToken extends Token {
 
-    public GideonsPhalanxSoldierToken() {
-        super("Soldier", "2/2 white Soldier creature tokens with vigilance");
+    public GideonsPhalanxKnightToken() {
+        super("Soldier", "2/2 white Knight creature tokens with vigilance");
         this.setOriginalExpansionSetCode("ORI");
         cardType.add(CardType.CREATURE);
         color.setColor(ObjectColor.WHITE);
-        subtype.add("Soldier");
+        subtype.add("Knight");
         power = new MageInt(2);
         toughness = new MageInt(2);
         addAbility(VigilanceAbility.getInstance());
