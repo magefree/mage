@@ -227,8 +227,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected UserData userData;
     protected MatchPlayer matchPlayer;
 
-    protected String flagName;
-
     /**
      * During some steps we can't play anything
      */
