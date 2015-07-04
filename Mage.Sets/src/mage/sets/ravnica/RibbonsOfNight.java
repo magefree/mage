@@ -25,51 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author Wehk
  */
-public class KytheonsIrregulars extends CardImpl {
+public class RibbonsOfNight extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+    public RibbonsOfNight(UUID ownerId) {
+        super(ownerId, 101, "Ribbons of Night", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{B}");
+        this.expansionSetCode = "RAV";
 
-        // Renown 1 <i>(When this creature deals combat damage to a player
-        this.addAbility(new RenownAbility(1));       
-        // if it isn't renowned
-        // put a +1/+1 counter on it and it becomes renowned.)</i)
-        // {W}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Ribbons of Night deals 4 damage to target creature
+        Effect effect = new DamageTargetEffect(4);
+        this.getSpellAbility().addEffect(effect);
+        
+        // and you gain 4 life.
+        effect = new GainLifeEffect(4);
+        effect.setText("and you gain 4 life");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        
+        //If {U} was spent to cast Ribbons of Night, draw a card.
+       this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DrawCardSourceControllerEffect(1), 
+                new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast {this}, draw a card"));
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    public RibbonsOfNight(final RibbonsOfNight card) {
         super(card);
     }
 
     @Override
-    public KytheonsIrregulars copy() {
-        return new KytheonsIrregulars(this);
+    public RibbonsOfNight copy() {
+        return new RibbonsOfNight(this);
     }
 }

@@ -25,51 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.discard.DiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author Wehk
  */
-public class KytheonsIrregulars extends CardImpl {
+public class ExiledBoggart extends CardImpl {
 
-    public KytheonsIrregulars(UUID ownerId) {
-        super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(3);
+    public ExiledBoggart(UUID ownerId) {
+        super(ownerId, 109, "Exiled Boggart", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        this.expansionSetCode = "LRW";
+        this.subtype.add("Goblin");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Renown 1 <i>(When this creature deals combat damage to a player
-        this.addAbility(new RenownAbility(1));       
-        // if it isn't renowned
-        // put a +1/+1 counter on it and it becomes renowned.)</i)
-        // {W}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{W}{W}"));
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // When Exiled Boggart dies, discard a card.
+        this.addAbility(new DiesTriggeredAbility(new DiscardControllerEffect(1), false));
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    public ExiledBoggart(final ExiledBoggart card) {
         super(card);
     }
 
     @Override
-    public KytheonsIrregulars copy() {
-        return new KytheonsIrregulars(this);
+    public ExiledBoggart copy() {
+        return new ExiledBoggart(this);
     }
 }
