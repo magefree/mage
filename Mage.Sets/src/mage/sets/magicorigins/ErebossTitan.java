@@ -95,7 +95,7 @@ public class ErebossTitan extends CardImpl {
 class ErebossTitanTriggeredAbility extends TriggeredAbilityImpl {
 
     public ErebossTitanTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()));
+        super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new DiscardCardCost()));
     }
 
     public ErebossTitanTriggeredAbility(final ErebossTitanTriggeredAbility ability) {
