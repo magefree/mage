@@ -40,7 +40,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
@@ -50,7 +50,7 @@ import mage.game.permanent.token.Token;
  */
 public class ThopterEngineer extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Artifact creatures");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Artifact creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
