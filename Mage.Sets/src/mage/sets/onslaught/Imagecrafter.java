@@ -37,6 +37,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
@@ -68,7 +69,7 @@ public class Imagecrafter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImagecrafterEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -82,52 +83,4 @@ public class Imagecrafter extends CardImpl {
         return new Imagecrafter(this);
     }
    
-}
-
-class ImagecrafterEffect extends OneShotEffect {
-
-	public ImagecrafterEffect() {
-		super(Outcome.BoostCreature);
-		staticText = "choose a creature type other than wall, target creature's type becomes that type until end of turn";
-	}
-	
-	public ImagecrafterEffect(final ImagecrafterEffect effect) {
-        super(effect);
-    }
-
-	@Override
-	public boolean apply(Game game, Ability source) {
-		Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        String chosenType = "";
-        if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setMessage("Choose creature type other than Wall");
-            Set<String> types = CardRepository.instance.getCreatureTypes();
-            types.remove("Wall");
-            typeChoice.setChoices(types);
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.isInGame()) {
-                    return false;
-                }
-            }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            chosenType = typeChoice.getChoice();
-            if (chosenType != null && !chosenType.isEmpty()) {
-                // ADD TYPE TO TARGET
-                ContinuousEffect effect = new BecomesSubtypeTargetEffect(Duration.EndOfTurn, chosenType);
-                effect.setTargetPointer(new FixedTarget(getTargetPointer().getFirst(game, source)));
-                game.addEffect(effect, source);
-                return true;
-            }
-            
-        }
-        return false;
-	}
-
-	@Override
-	public Effect copy() {
-		return new ImagecrafterEffect(this);
-	}
-	
 }
