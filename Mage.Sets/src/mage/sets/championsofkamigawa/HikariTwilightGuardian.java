@@ -25,26 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterSpiritOrArcaneCard;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -54,7 +46,7 @@ public class HikariTwilightGuardian extends CardImpl {
 
     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
-    public HikariTwilightGuardian (UUID ownerId) {
+    public HikariTwilightGuardian(UUID ownerId) {
         super(ownerId, 12, "Hikari, Twilight Guardian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
@@ -66,54 +58,18 @@ public class HikariTwilightGuardian extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new HikariTwilightGuardianEffect(), filter, true));
+        Effect effect = new ExileReturnToBattlefieldOwnerNextEndStepEffect();
+        effect.setText("you may exile {this}. If you do, return it to the battlefield under its owner's control at the beginning of the next end step");
+        this.addAbility(new SpellCastControllerTriggeredAbility(effect, filter, true));
     }
 
-    public HikariTwilightGuardian (final HikariTwilightGuardian card) {
+    public HikariTwilightGuardian(final HikariTwilightGuardian card) {
         super(card);
     }
 
     @Override
     public HikariTwilightGuardian copy() {
         return new HikariTwilightGuardian(this);
-    }
-
-}
-
-class HikariTwilightGuardianEffect extends OneShotEffect {
-
-    private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
-
-    HikariTwilightGuardianEffect ( ) {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    HikariTwilightGuardianEffect(HikariTwilightGuardianEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getSourceId(), game)) {
-                //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public HikariTwilightGuardianEffect copy() {
-        return new HikariTwilightGuardianEffect(this);
     }
 
 }

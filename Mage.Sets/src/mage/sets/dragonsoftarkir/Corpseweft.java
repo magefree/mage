@@ -94,9 +94,9 @@ class CorpseweftEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int amount = 0;
-            for (Cost cost: source.getCosts()) {
+            for (Cost cost : source.getCosts()) {
                 if (cost instanceof ExileFromGraveCost) {
-                    amount = ((ExileFromGraveCost) cost).getExiledCards().size() *2;
+                    amount = ((ExileFromGraveCost) cost).getExiledCards().size() * 2;
                     new CreateTokenEffect(new CorpseweftZombieToken(amount, amount), 1, true, false).apply(game, source);
                 }
             }
@@ -115,6 +115,7 @@ class CorpseweftZombieToken extends Token {
         cardType.add(CardType.CREATURE);
         subtype.add("Zombie");
         subtype.add("Horror");
+        color.setBlack(true);
         this.power = new MageInt(power);
         this.toughness = new MageInt(toughness);
     }

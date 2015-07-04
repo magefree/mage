@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -42,20 +41,27 @@ import mage.game.Game;
 public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect {
 
     private boolean tapped;
+    private int zoneChangeCounter;
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect() {
         this(false);
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped) {
+        this(tapped, -1);
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped, int zoneChangeCounter) {
         super(Outcome.Benefit);
         this.tapped = tapped;
-        staticText = new StringBuilder("return that card to the battlefield").append(tapped?" tapped":"").append(" under its owner's control").toString();
+        this.zoneChangeCounter = zoneChangeCounter;
+        staticText = new StringBuilder("return that card to the battlefield").append(tapped ? " tapped" : "").append(" under its owner's control").toString();
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -67,12 +73,19 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(),tapped)) {
-                return true;
+            // return only from public zones
+            switch (game.getState().getZone(card.getId())) {
+                case EXILED:
+                case COMMAND:
+                case GRAVEYARD:
+                    if (zoneChangeCounter < 0 || game.getState().getZoneChangeCounter(card.getId()) == zoneChangeCounter) {
+                        Zone currentZone = game.getState().getZone(card.getId());
+                        card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(), tapped);
+                    }
+                    break;
             }
+            return true;
         }
         return false;
     }
-
 }

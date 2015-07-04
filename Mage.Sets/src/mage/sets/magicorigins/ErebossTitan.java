@@ -75,7 +75,7 @@ public class ErebossTitan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter, PermanentsOnTheBattlefieldCondition.CountType.MORE_THAN, 0),
-                        "{this} has indestructible as long as no opponent controls a creature")));
+                        "As long as your opponents control no creatures, {this} has indestructible")));
 
         // Whenever a creature leaves an opponent's graveyard, you may discard a card. If you do, return Erebos's Titan from your graveyard to your hand.
         this.addAbility(new ErebossTitanTriggeredAbility());

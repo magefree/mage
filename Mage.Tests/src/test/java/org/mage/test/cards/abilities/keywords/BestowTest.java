@@ -336,23 +336,26 @@ public class BestowTest extends CardTestPlayerBase {
         // Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.
         addCard(Zone.HAND, playerB, "Nighthowler");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        // First strike
+        // Whenever Alesha, Who Smiles at Death attacks, you may pay {W/B}{W/B}. If you do, return target creature card
+        // with power 2 or less from your graveyard to the battlefield tapped and attacking.
+        addCard(Zone.BATTLEFIELD, playerB, "Alesha, Who Smiles at Death");  // 3/2
         addCard(Zone.GRAVEYARD, playerB, "Pillarfield Ox");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nighthowler using bestow", "Silvercoat Lion");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Nighthowler using bestow", "Alesha, Who Smiles at Death");
 
-        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Alesha, Who Smiles at Death");
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chandra's Outrage", "Silvercoat Lion");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Chandra's Outrage", "Alesha, Who Smiles at Death");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 18); // -2 from Chandra's Outrage
-        assertLife(playerA, 17); // -3 from attack Nighthowler
+        assertLife(playerA, 16); // -3 from attack Alesha with bestowed Nighthowler
 
         assertGraveyardCount(playerA, "Chandra's Outrage", 1);
-        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerB, "Alesha, Who Smiles at Death", 1);
         assertPermanentCount(playerB, "Nighthowler", 1);
         assertPowerToughness(playerB, "Nighthowler", 2, 2);
         Permanent nighthowler = getPermanent("Nighthowler", playerB);

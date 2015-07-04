@@ -75,6 +75,7 @@ public class ScoutsWarning extends CardImpl {
 }
 
 class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
+
     private ScoutsWarningWatcher watcher;
     private int zoneChangeCounter;
 
@@ -91,12 +92,12 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-         watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get("consumeScoutsWarningWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (watcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter(game);
-             watcher.addScoutsWarningSpell(source.getSourceId(), zoneChangeCounter);
-         }
+        watcher = (ScoutsWarningWatcher) game.getState().getWatchers().get("consumeScoutsWarningWatcher", source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (watcher != null && card != null) {
+            zoneChangeCounter = card.getZoneChangeCounter(game);
+            watcher.addScoutsWarningSpell(source.getSourceId(), zoneChangeCounter);
+        }
     }
 
     @Override
@@ -109,13 +110,12 @@ class ScoutsWarningAsThoughEffect extends AsThoughEffectImpl {
         return new ScoutsWarningAsThoughEffect(this);
     }
 
-
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (watcher.isScoutsWarningSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.CREATURE) && source.getControllerId().equals(affectedControllerId)) {
-                    return card.getSpellAbility().isInUseableZone(game, card, null);
+                return true;
             }
         }
         return false;

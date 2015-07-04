@@ -25,26 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponent;
@@ -55,12 +52,11 @@ import mage.target.common.TargetOpponent;
  */
 public class GhostCouncilOfOrzhova extends CardImpl {
 
-    public GhostCouncilOfOrzhova (UUID ownerId) {
+    public GhostCouncilOfOrzhova(UUID ownerId) {
         super(ownerId, 114, "Ghost Council of Orzhova", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");
         this.expansionSetCode = "GPT";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
-
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
@@ -69,14 +65,14 @@ public class GhostCouncilOfOrzhova extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilOfOrzhovaEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
-        
+
         // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostCouncilOfOrzhovaRemovingEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
     }
 
-    public GhostCouncilOfOrzhova (final GhostCouncilOfOrzhova card) {
+    public GhostCouncilOfOrzhova(final GhostCouncilOfOrzhova card) {
         super(card);
     }
 
@@ -88,6 +84,7 @@ public class GhostCouncilOfOrzhova extends CardImpl {
 }
 
 class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
+
     GhostCouncilOfOrzhovaEffect() {
         super(Outcome.Damage);
         staticText = "target opponent loses 1 life and you gain 1 life";
@@ -111,47 +108,6 @@ class GhostCouncilOfOrzhovaEffect extends OneShotEffect {
     @Override
     public GhostCouncilOfOrzhovaEffect copy() {
         return new GhostCouncilOfOrzhovaEffect(this);
-    }
-
-}
-
-class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect {
-
-    private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
-
-    GhostCouncilOfOrzhovaRemovingEffect () {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                if (controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true)) {
-                    //create delayed triggered ability
-                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                    return true;
-                }
-            }            
-        }
-        return false;
-    }
-
-    @Override
-    public GhostCouncilOfOrzhovaRemovingEffect copy() {
-        return new GhostCouncilOfOrzhovaRemovingEffect(this);
     }
 
 }
