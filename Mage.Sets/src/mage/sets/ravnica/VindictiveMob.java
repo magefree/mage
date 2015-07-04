@@ -47,10 +47,10 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class VindictiveMob extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("can't be blocked by Saporlings");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("can't be blocked by Saprolings");
 
     static {
-        filter.add(new SubtypePredicate("Saporling"));
+        filter.add(new SubtypePredicate("Saproling"));
     }
     
     public VindictiveMob(UUID ownerId) {
