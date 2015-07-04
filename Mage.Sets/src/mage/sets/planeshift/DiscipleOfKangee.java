@@ -25,70 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class ManaShort extends CardImpl {
+public class DiscipleOfKangee extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public DiscipleOfKangee(UUID ownerId) {
+        super(ownerId, 3, "Disciple of Kangee", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // {U}, {T}: Target creature gains flying and becomes blue until end of turn.
+        Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("Target creature gains flying");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}"));
+        effect = new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn);
+        effect.setText("and becomes blue until end of turn.");
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public ManaShort(final ManaShort card) {
+    public DiscipleOfKangee(final DiscipleOfKangee card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public DiscipleOfKangee copy() {
+        return new DiscipleOfKangee(this);
     }
 }

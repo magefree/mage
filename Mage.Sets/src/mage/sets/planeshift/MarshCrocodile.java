@@ -25,70 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
+
  */
-public class ManaShort extends CardImpl {
+public class MarshCrocodile extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
     }
 
-    public ManaShort(final ManaShort card) {
+    public MarshCrocodile(UUID ownerId) {
+        super(ownerId, 115, "Marsh Crocodile", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{B}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Crocodile");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Marsh Crocodile enters the battlefield, return a blue or black creature you control to its owner's hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
+        // When Marsh Crocodile enters the battlefield, each player discards a card.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(), false));
+    }
+
+    public MarshCrocodile(final MarshCrocodile card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public MarshCrocodile copy() {
+        return new MarshCrocodile(this);
     }
 }

@@ -25,70 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
+
  */
-public class ManaShort extends CardImpl {
+public class SmolderingTar extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public SmolderingTar(UUID ownerId) {
+        super(ownerId, 275, "Smoldering Tar", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}");
+        this.expansionSetCode = "INV";
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // At the beginning of your upkeep, target player loses 1 life.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeTargetEffect(1), TargetController.YOU, false);
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+        // Sacrifice Smoldering Tar: Smoldering Tar deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
+        ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new SacrificeSourceCost());
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public ManaShort(final ManaShort card) {
+    public SmolderingTar(final SmolderingTar card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public SmolderingTar copy() {
+        return new SmolderingTar(this);
     }
 }

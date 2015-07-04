@@ -25,70 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
+
  */
-public class ManaShort extends CardImpl {
+public class RecklessAssault extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public RecklessAssault(UUID ownerId) {
+        super(ownerId, 263, "Reckless Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{R}");
+        this.expansionSetCode = "INV";
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // {1}, Pay 2 life: Reckless Assault deals 1 damage to target creature or player.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}"));
+        ability.addCost(new PayLifeCost(2));
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
-    public ManaShort(final ManaShort card) {
+    public RecklessAssault(final RecklessAssault card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public RecklessAssault copy() {
+        return new RecklessAssault(this);
     }
 }

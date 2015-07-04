@@ -25,70 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.MageInt;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
+
  */
-public class ManaShort extends CardImpl {
+public class GuardianAutomaton extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public GuardianAutomaton(UUID ownerId) {
+        super(ownerId, 227, "Guardian Automaton", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
+        this.expansionSetCode = "ORI";
+        this.subtype.add("Construct");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // When Guardian Automaton dies, you gain 3 life.
+        this.addAbility(new DiesTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public ManaShort(final ManaShort card) {
+    public GuardianAutomaton(final GuardianAutomaton card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public GuardianAutomaton copy() {
+        return new GuardianAutomaton(this);
     }
 }

@@ -25,70 +25,81 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.planeshift;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.DomainValue;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class ManaShort extends CardImpl {
+public class Stratadon extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public Stratadon(UUID ownerId) {
+        super(ownerId, 135, "Stratadon", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{10}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Beast");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new StratadonCostReductionEffect()));
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ManaShort(final ManaShort card) {
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        super.adjustCosts(ability, game);
+        CardUtil.adjustCost((SpellAbility)ability, new DomainValue().calculate(game, ability, null));
+    }
+
+
+    public Stratadon(final Stratadon card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
+    public Stratadon copy() {
+        return new Stratadon(this);
     }
 }
 
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
+// Dummy to get the text on the card.
+class StratadonCostReductionEffect extends OneShotEffect {
+    private static final String effectText = "Domain - {this} costs {1} less to cast for each basic land type among lands you control.";
 
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
+    StratadonCostReductionEffect() {
+        super(Outcome.Benefit);
+        this.staticText = effectText;
     }
 
-    public ManaShortEffect(final ManaShortEffect effect) {
+    StratadonCostReductionEffect(StratadonCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
+    public boolean apply(Game game, Ability source) {
+        return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+    public StratadonCostReductionEffect copy() {
+        return new StratadonCostReductionEffect(this);
     }
+
 }

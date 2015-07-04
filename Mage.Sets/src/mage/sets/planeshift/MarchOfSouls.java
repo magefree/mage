@@ -25,70 +25,74 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.planeshift;
 
+import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.TargetPlayer;
+import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
+
  */
-public class ManaShort extends CardImpl {
+public class MarchOfSouls extends CardImpl {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    public MarchOfSouls(UUID ownerId) {
+        super(ownerId, 10, "March of Souls", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
+        this.expansionSetCode = "PLS";
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        // Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
+        this.getSpellAbility().addEffect(new MarchOfSoulsEffect());
     }
 
-    public ManaShort(final ManaShort card) {
+    public MarchOfSouls(final MarchOfSouls card) {
         super(card);
     }
 
     @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
+    public MarchOfSouls copy() {
+        return new MarchOfSouls(this);
     }
 }
 
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
+class MarchOfSoulsEffect extends OneShotEffect {
 
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
+    public MarchOfSoulsEffect() {
+        super(Outcome.Benefit);
+        staticText = "Destroy all creatures. They can't be regenerated. For each creature destroyed this way, its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.";
     }
 
-    public ManaShortEffect(final ManaShortEffect effect) {
+    public MarchOfSoulsEffect(final MarchOfSoulsEffect effect) {
         super(effect);
     }
 
     @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
+    public MarchOfSoulsEffect copy() {
+        return new MarchOfSoulsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
-            return true;
-        }
-        return false;
+         List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
+             source.getControllerId(), source.getSourceId(), game);
+         for(Permanent p : creatures) {
+             UUID controllerId = p.getControllerId();
+             if(p.destroy(source.getSourceId(), game, true)) {
+                 SpiritWhiteToken token = new SpiritWhiteToken();
+                 token.putOntoBattlefield(1, game, source.getSourceId(), controllerId);
+             }
+         }
+         return true;
     }
+
 }

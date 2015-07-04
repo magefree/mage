@@ -25,70 +25,62 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
 
-import java.util.UUID;
+package mage.abilities.effects.common;
+
+import java.util.List;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
+import mage.abilities.Mode;
+import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 
 /**
  *
- * @author Quercitron
+ * @author LoneFox
  */
-public class ManaShort extends CardImpl {
+public class TapAllTargetPlayerControlsEffect extends OneShotEffect {
 
-    public ManaShort(UUID ownerId) {
-        super(ownerId, 66, "Mana Short", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
-        this.expansionSetCode = "LEA";
+    private FilterPermanent filter;
 
-        // Tap all lands target player controls and empty his or her mana pool.
-        this.getSpellAbility().addEffect(new ManaShortEffect());
-        this.getSpellAbility().addTarget(new TargetPlayer());
+    public TapAllTargetPlayerControlsEffect(FilterPermanent filter) {
+        super(Outcome.Tap);
+        this.filter = filter;
     }
 
-    public ManaShort(final ManaShort card) {
-        super(card);
-    }
-
-    @Override
-    public ManaShort copy() {
-        return new ManaShort(this);
-    }
-}
-
-class ManaShortEffect extends TapAllTargetPlayerControlsEffect {
-
-    public ManaShortEffect() {
-        super(new FilterLandPermanent("lands"));
-        staticText = "Tap all lands target player controls and empty his or her mana pool";
-    }
-
-    public ManaShortEffect(final ManaShortEffect effect) {
+    public TapAllTargetPlayerControlsEffect(final TapAllTargetPlayerControlsEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public ManaShortEffect copy() {
-        return new ManaShortEffect(this);
+        filter = effect.filter.copy();
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if(targetPlayer != null) {
-            super.apply(game, source);
-            targetPlayer.getManaPool().emptyPool(game);
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        if(player != null) {
+            filter.add(new ControllerIdPredicate(player.getId()));
+            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
+            for(Permanent p : permanents) {
+                p.tap(game);
+            }
             return true;
         }
         return false;
+    }
+
+    @Override
+    public TapAllTargetPlayerControlsEffect copy() {
+        return new TapAllTargetPlayerControlsEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if(staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return "tap all " + filter.getMessage() + " target player controls";
     }
 }
