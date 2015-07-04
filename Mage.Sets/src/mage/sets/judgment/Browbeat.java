@@ -97,7 +97,7 @@ class BrowbeatDrawEffect extends OneShotEffect {
             boolean drawCards = true;
             for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)){
                 Player player = game.getPlayer(playerId);
-                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 5 damage to you?", game)){
+                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 5 damage to you?", source, game)){
                     drawCards = false;
                     player.damage(5, source.getSourceId(), game, false, true);
                     game.informPlayers(player.getLogName() + " has " + spell.getLogName() + " deal 5 to him or her");

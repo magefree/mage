@@ -103,7 +103,7 @@ class DoublingChantEffect extends OneShotEffect {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Search for ").append(creatureName).append(" in your library?");
 
-                if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), game)) {
+                if (player.chooseUse(Outcome.PutCreatureInPlay, sb.toString(), source, game)) {
                     FilterCreatureCard filter = new FilterCreatureCard("creature card named" + creatureName);
                     filter.add(new NamePredicate(creatureName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);

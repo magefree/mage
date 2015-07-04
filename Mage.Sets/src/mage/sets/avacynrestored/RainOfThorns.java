@@ -32,7 +32,7 @@ import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -59,7 +59,7 @@ public class RainOfThorns extends CardImpl {
 
         Mode mode1 = new Mode();
         mode1.getEffects().add(new DestroyTargetEffect());
-        mode1.getTargets().add(new TargetPermanent(new FilterEnchantment()));
+        mode1.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.getSpellAbility().addMode(mode1);
 
         Mode mode2 = new Mode();

@@ -99,8 +99,6 @@ import mage.target.common.TargetCreaturePermanentAmount;
 import mage.target.common.TargetPermanentOrPlayer;
 import org.junit.Ignore;
 
-
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
@@ -119,7 +117,6 @@ public class TestPlayer implements Player {
 
     private final ComputerPlayer computerPlayer;
 
-    
     public TestPlayer(ComputerPlayer computerPlayer) {
         this.computerPlayer = computerPlayer;
         AIPlayer = false;
@@ -156,13 +153,14 @@ public class TestPlayer implements Player {
     }
 
     /**
-     * 
-     * @param maxCallsWithoutAction max number of priority passes a player may have for this test (default = 100)
-     */    
+     *
+     * @param maxCallsWithoutAction max number of priority passes a player may
+     * have for this test (default = 100)
+     */
     public void setMaxCallsWithoutAction(int maxCallsWithoutAction) {
         this.maxCallsWithoutAction = maxCallsWithoutAction;
     }
-   
+
     protected Permanent findPermanent(FilterPermanent filter, UUID controllerId, Game game) {
         List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(filter, controllerId, game);
         if (permanents.size() > 0) {
@@ -427,7 +425,7 @@ public class TestPlayer implements Player {
         if (numberOfActions == actions.size()) {
             foundNoAction++;
             if (foundNoAction > maxCallsWithoutAction) {
-                throw new AssertionError("More priority calls to " +getName() + " and doing no action than allowed (" + maxCallsWithoutAction +")");
+                throw new AssertionError("More priority calls to " + getName() + " and doing no action than allowed (" + maxCallsWithoutAction + ")");
             }
         } else {
             foundNoAction = 0;
@@ -512,7 +510,7 @@ public class TestPlayer implements Player {
         if (!modesSet.isEmpty() && modes.getMaxModes() > modes.getSelectedModes().size()) {
             int selectedMode = Integer.parseInt(modesSet.get(0));
             int i = 1;
-            for (Mode mode : modes.values()) {
+            for (Mode mode : modes.getAvailableModes(source, game)) {
                 if (i == selectedMode) {
                     modesSet.remove(0);
                     return mode;
@@ -609,13 +607,13 @@ public class TestPlayer implements Player {
             if (target instanceof TargetCardInGraveyard) {
                 TargetCardInGraveyard targetCardInGraveyard = ((TargetCardInGraveyard) target);
                 Set<UUID> possibleTargets = new HashSet<>();
-                for(UUID playerId: this.getInRange()) {
+                for (UUID playerId : this.getInRange()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         possibleTargets.addAll(player.getGraveyard());
                     }
                 }
-                
+
                 for (String choose2 : choices) {
                     String[] targetList = choose2.split("\\^");
                     boolean targetFound = false;
@@ -643,7 +641,7 @@ public class TestPlayer implements Player {
                         }
                     }
                 }
-            }            
+            }
             if (target instanceof TargetSource) {
                 Set<UUID> possibleTargets;
                 TargetSource t = ((TargetSource) target);
@@ -795,7 +793,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);
@@ -812,7 +810,7 @@ public class TestPlayer implements Player {
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         if (!choices.isEmpty()) {
-            for(String choice: choices) {
+            for (String choice : choices) {
                 if (choice.startsWith("X=")) {
                     int xValue = Integer.parseInt(choice.substring(2));
                     choices.remove(choice);
@@ -1131,12 +1129,12 @@ public class TestPlayer implements Player {
     public void lookAtCards(String name, Cards cards, Game game) {
         computerPlayer.lookAtCards(name, cards, game);
     }
-    
+
     @Override
     public void lookAtCards(String name, Card card, Game game) {
         computerPlayer.lookAtCards(name, card, game);
     }
-    
+
     @Override
     public void phasing(Game game) {
         computerPlayer.phasing(game);

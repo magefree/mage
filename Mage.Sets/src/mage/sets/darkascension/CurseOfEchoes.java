@@ -152,7 +152,7 @@ class CurseOfEchoesEffect extends OneShotEffect {
             for (UUID playerId: game.getPlayerList()) {
                 if (!playerId.equals(spell.getControllerId())) {
                     Player player = game.getPlayer(playerId);
-                    if (player.chooseUse(Outcome.Copy, chooseMessage, game)) {
+                    if (player.chooseUse(Outcome.Copy, chooseMessage, source, game)) {
                         Spell copy = spell.copySpell();
                         copy.setControllerId(playerId);
                         copy.setCopiedSpell(true);

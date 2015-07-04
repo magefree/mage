@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mage.abilities.mana;
+
+import mage.Mana;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.AddConditionalManaEffect;
+import mage.abilities.mana.builder.ConditionalManaBuilder;
+import mage.constants.Zone;
+
+/**
+ *
+ * @author LevelX2
+ */
+public class ConditionalColoredManaAbility extends ManaAbility {
+
+    public ConditionalColoredManaAbility(Mana mana, ConditionalManaBuilder manaBuilder) {
+        this(new TapSourceCost(), mana, manaBuilder);
+    }
+
+    public ConditionalColoredManaAbility(Cost cost, Mana mana, ConditionalManaBuilder manaBuilder) {
+        super(Zone.BATTLEFIELD, new AddConditionalManaEffect(mana, manaBuilder), cost);
+        this.netMana.add(mana);
+    }
+
+    public ConditionalColoredManaAbility(final ConditionalColoredManaAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ConditionalColoredManaAbility copy() {
+        return new ConditionalColoredManaAbility(this);
+    }
+}

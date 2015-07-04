@@ -25,20 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
 import mage.constants.*;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
 
 /**
  *
@@ -46,16 +41,16 @@ import mage.players.Player;
  */
 public class GhostlyPrison extends CardImpl {
 
-    public GhostlyPrison (UUID ownerId) {
+    public GhostlyPrison(UUID ownerId) {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
 
-        
         // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
+
     }
 
-    public GhostlyPrison (final GhostlyPrison card) {
+    public GhostlyPrison(final GhostlyPrison card) {
         super(card);
     }
 
@@ -65,58 +60,3 @@ public class GhostlyPrison extends CardImpl {
     }
 
 }
-
-class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
-
-    GhostlyPrisonReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
-    }
-
-    GhostlyPrisonReplacementEffect ( GhostlyPrisonReplacementEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) ) {
-            Player attackedPlayer = game.getPlayer(event.getTargetId());
-            if (attackedPlayer != null) {
-                // only if a player is attacked. Attacking a planeswalker is free
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-            ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
-            if (attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
-                if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public GhostlyPrisonReplacementEffect copy() {
-        return new GhostlyPrisonReplacementEffect(this);
-    }
-
-}
-

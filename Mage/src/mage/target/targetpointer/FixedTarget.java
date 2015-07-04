@@ -1,31 +1,52 @@
 package mage.target.targetpointer;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class FixedTarget implements TargetPointer {
-    private final UUID target;
+
+    private final UUID targetId;
     private int zoneChangeCounter;
+    private boolean initialized;
 
     public FixedTarget(UUID target) {
-        this.target = target;
+        this.targetId = target;
+        this.initialized = false;
+    }
+
+    /**
+     * Use this if you already want to fix the target object to the known zone
+     * now (otherwise the zone will be set if the ability triggers or not at
+     * all) If not initialized, the object of the current zone then will be
+     * used.
+     *
+     * @param targetId
+     * @param zoneChangeCounter
+     */
+    public FixedTarget(UUID targetId, int zoneChangeCounter) {
+        this.targetId = targetId;
+        this.initialized = true;
+        this.zoneChangeCounter = zoneChangeCounter;
     }
 
     public FixedTarget(final FixedTarget fixedTarget) {
-        this.target = fixedTarget.target;
+        this.targetId = fixedTarget.targetId;
         this.zoneChangeCounter = fixedTarget.zoneChangeCounter;
+        this.initialized = fixedTarget.initialized;
     }
 
     @Override
     public void init(Game game, Ability source) {
-        Card card = game.getCard(target);
-        if (card != null) {
-            this.zoneChangeCounter = card.getZoneChangeCounter(game);
+        if (!initialized) {
+            initialized = true;
+            Card card = game.getCard(targetId);
+            if (card != null) {
+                this.zoneChangeCounter = card.getZoneChangeCounter(game);
+            }
         }
     }
 
@@ -33,14 +54,14 @@ public class FixedTarget implements TargetPointer {
     public List<UUID> getTargets(Game game, Ability source) {
         // check target not changed zone
         if (this.zoneChangeCounter > 0) { // will be zero if not defined in init
-            Card card = game.getCard(target);
+            Card card = game.getCard(targetId);
             if (card != null && card.getZoneChangeCounter(game) != this.zoneChangeCounter) {
                 return new ArrayList<>(); // return empty
             }
         }
 
         ArrayList<UUID> list = new ArrayList<>(1);
-        list.add(target);
+        list.add(targetId);
         return list;
     }
 
@@ -48,26 +69,26 @@ public class FixedTarget implements TargetPointer {
     public UUID getFirst(Game game, Ability source) {
         // check target not changed zone
         if (this.zoneChangeCounter > 0) { // will be zero if not defined in init
-            Card card = game.getCard(target);
+            Card card = game.getCard(targetId);
             if (card != null && card.getZoneChangeCounter(game) != this.zoneChangeCounter) {
                 return null;
             }
         }
 
-        return target;
+        return targetId;
     }
 
     @Override
     public TargetPointer copy() {
         return new FixedTarget(this);
     }
-    
+
     public UUID getTarget() {
-        return target;
+        return targetId;
     }
 
     public int getZoneChangeCounter() {
         return zoneChangeCounter;
     }
-    
+
 }

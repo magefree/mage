@@ -109,7 +109,7 @@ class ClarionUltimatumEffect extends OneShotEffect {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Search for ").append(cardName).append(" in your library?");
 
-                if (player.chooseUse(Outcome.PutCardInPlay, sb.toString(), game)) {
+                if (player.chooseUse(Outcome.PutCardInPlay, sb.toString(), source, game)) {
                     FilterCard filter = new FilterCard("card named " + cardName);
                     filter.add(new NamePredicate(cardName));
                     TargetCardInLibrary target = new TargetCardInLibrary(filter);

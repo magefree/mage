@@ -34,23 +34,20 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -67,12 +64,12 @@ public class PhyrexianMarauder extends CardImpl {
 
         // Phyrexian Marauder enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new PhyrexianMarauderEntersEffect(), "with X +1/+1 counters on it"));
-        
+
         // Phyrexian Marauder can't block.
         this.addAbility(new CantBlockAbility());
-        
+
         // Phyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianMarauderPayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianMarauderCantAttackUnlessYouPayEffect()));
     }
 
     public PhyrexianMarauder(final PhyrexianMarauder card) {
@@ -116,53 +113,37 @@ class PhyrexianMarauderEntersEffect extends OneShotEffect {
     }
 }
 
-class PhyrexianMarauderPayEffect extends ReplacementEffectImpl {
+class PhyrexianMarauderCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPaysSourceEffect {
 
-    PhyrexianMarauderPayEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+    PhyrexianMarauderCantAttackUnlessYouPayEffect() {
+        super(new ManaCostsImpl("{0}"), RestrictType.ATTACK);
         staticText = "{this} can't attack unless you pay {1} for each +1/+1 counter on it";
     }
 
-    PhyrexianMarauderPayEffect(PhyrexianMarauderPayEffect effect) {
+    PhyrexianMarauderCantAttackUnlessYouPayEffect(PhyrexianMarauderCantAttackUnlessYouPayEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            int xValue = permanent.getCounters().getCount(CounterType.P1P1);
-            String chooseText;
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-                chooseText = "Pay {" + xValue + "} to attack?";
-            } else {
-                chooseText = "Pay {" + xValue + "} to block?";
-            }
-            ManaCostsImpl<ManaCost> attackTax = new ManaCostsImpl<>("{" + xValue + "}");
-            if (attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
-                if (attackTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == EventType.DECLARE_ATTACKER;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(source.getSourceId());
+        return source.getSourceId().equals(event.getSourceId());
     }
 
     @Override
-    public PhyrexianMarauderPayEffect copy() {
-        return new PhyrexianMarauderPayEffect(this);
+    public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        if (sourceObject != null) {
+            int counter = sourceObject.getCounters().getCount(CounterType.P1P1);
+            if (counter > 0) {
+                return new ManaCostsImpl<>("{" + counter + "}");
+            }
+        }
+        return null;
     }
+
+    @Override
+    public PhyrexianMarauderCantAttackUnlessYouPayEffect copy() {
+        return new PhyrexianMarauderCantAttackUnlessYouPayEffect(this);
+    }
+
 }

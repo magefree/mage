@@ -43,7 +43,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.ThopterColorlessToken;
 
 /**
  *
@@ -88,7 +88,7 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
 
     ThopterAssemblyTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true));
-        this.addEffect(new CreateTokenEffect(new ThopterToken(), 5));
+        this.addEffect(new CreateTokenEffect(new ThopterColorlessToken(), 5));
     }
 
     ThopterAssemblyTriggeredAbility(final ThopterAssemblyTriggeredAbility ability) {
@@ -118,17 +118,5 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "At the beginning of your upkeep, if you control no Thopters other than {this}, return {this} to its owner's hand and put five 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield";
-    }
-}
-
-class ThopterToken extends Token {
-    ThopterToken() {
-        super("Thopter", "a 1/1 colorless Thopter artifact creature token with flying");
-        cardType.add(CardType.CREATURE);
-        cardType.add(CardType.ARTIFACT);
-        subtype.add("Thopter");
-        power = new MageInt(1);
-        toughness = new MageInt(1);
-        this.addAbility(FlyingAbility.getInstance());
     }
 }

@@ -30,8 +30,10 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -64,9 +66,9 @@ public class CowedByWisdom extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CowedByWisdomEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CowedByWisdomayCostToAttackBlockEffect()));
     }
 
     public CowedByWisdom(final CowedByWisdom card) {
@@ -79,65 +81,37 @@ public class CowedByWisdom extends CardImpl {
     }
 }
 
-class CowedByWisdomEffect extends ReplacementEffectImpl {
+class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
-    private static final String effectText = "Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand";
-
-    CowedByWisdomEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
+    CowedByWisdomayCostToAttackBlockEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK_AND_BLOCK);
+        staticText = "Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand";
     }
 
-    CowedByWisdomEffect ( CowedByWisdomEffect effect ) {
+    CowedByWisdomayCostToAttackBlockEffect(CowedByWisdomayCostToAttackBlockEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER);
+    public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && !controller.getHand().isEmpty()) {
+            ManaCosts manaCosts = new ManaCostsImpl();
+            manaCosts.add(new GenericManaCost(controller.getHand().size()));
+            return manaCosts;
+        }
+        return null;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(event.getSourceId());
-        return enchantment != null && enchantment.getAttachments().contains(source.getSourceId());
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        return enchantment != null && enchantment.getAttachedTo().equals(event.getSourceId());
     }
-    
+
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        Player controller = game.getPlayer(source.getControllerId());
-        if (player != null && controller != null) {
-            if (controller.getHand().isEmpty()) {
-                return false;
-            }
-            String chooseText;
-            int cardsInHand = controller.getHand().size();
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-                chooseText = "Pay {" + cardsInHand + "} to attack?";
-            } else {
-                chooseText = "Pay {" + cardsInHand + "} to block?";
-            }
-            ManaCostsImpl attackBlockTax = new ManaCostsImpl("{" + cardsInHand + "}");
-            if (attackBlockTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
-                if (attackBlockTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public CowedByWisdomEffect copy() {
-        return new CowedByWisdomEffect(this);
+    public CowedByWisdomayCostToAttackBlockEffect copy() {
+        return new CowedByWisdomayCostToAttackBlockEffect(this);
     }
 
 }

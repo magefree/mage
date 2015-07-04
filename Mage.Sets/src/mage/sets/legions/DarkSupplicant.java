@@ -115,7 +115,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             return false;
         }
         // Library check
-        if (player.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", source, game)) {
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
@@ -131,7 +131,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             player.shuffleLibrary(game);
         }
         // Graveyard check
-        if (player.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", source, game)) {
             Cards graveyard = player.getGraveyard().copy();
             for (UUID card : graveyard) {
                 Card checkCard = game.getCard(card);
@@ -142,7 +142,7 @@ class DarkSupplicantEffect extends OneShotEffect {
             }
         }
         // Hand check
-        if (player.chooseUse(Outcome.Benefit, "Do you want to search your hand for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your hand for Scion of Darkness?", source, game)) {
             Cards hand = player.getHand().copy();
             for (UUID card : hand) {
                 Card checkCard = game.getCard(card);

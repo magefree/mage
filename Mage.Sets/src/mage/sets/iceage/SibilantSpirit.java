@@ -91,7 +91,7 @@ class SibilantSpiritEffect extends OneShotEffect {
         UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
         Player defender = game.getPlayer(defenderId);
         if (defender != null) {
-            if (defender.chooseUse(outcome, "Draw a card?", game)) {
+            if (defender.chooseUse(outcome, "Draw a card?", source, game)) {
                 defender.drawCards(1, game);
             }
         }

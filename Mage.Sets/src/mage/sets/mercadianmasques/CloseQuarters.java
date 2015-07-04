@@ -34,6 +34,9 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -41,13 +44,19 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author fireshoes
  */
 public class CloseQuarters extends CardImpl {
+    
+    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public CloseQuarters(UUID ownerId) {
         super(ownerId, 184, "Close Quarters", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "MMQ";
 
         // Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to target creature or player.
-        Ability ability = new BecomesBlockedAllTriggeredAbility(new DamageTargetEffect(1), true);
+        Ability ability = new BecomesBlockedAllTriggeredAbility(new DamageTargetEffect(1), false, filter, false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

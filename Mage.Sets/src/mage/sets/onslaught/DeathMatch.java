@@ -101,7 +101,7 @@ class DeathMatchEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getTargets().get(0).getTargetController());
         if(player != null) {
-            if(player.chooseUse(outcome, "Give targeted creature -3/-3 ?", game)) {
+            if(player.chooseUse(outcome, "Give targeted creature -3/-3 ?", source, game)) {
                 game.addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), source);
             }
             return true;

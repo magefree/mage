@@ -106,7 +106,7 @@ class ReversalOfFortuneEffect extends OneShotEffect {
                 //If you do, you may cast the copy without paying its mana cost
                 if(card != null){
                     Card copiedCard = game.copyCard(card, source, source.getControllerId());
-                    if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
+                    if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                         controller.cast(copiedCard.getSpellAbility(), game, true);
                     }
                 }

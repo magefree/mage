@@ -55,11 +55,11 @@ import mage.target.common.TargetCreaturePermanent;
 public class GildedDrake extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-    
+
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
-          
+
     public GildedDrake(UUID ownerId) {
         super(ownerId, 76, "Gilded Drake", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "USG";
@@ -72,8 +72,8 @@ public class GildedDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // When Gilded Drake enters the battlefield, exchange control of Gilded Drake and up to one target creature an opponent controls. If you don't make an exchange, sacrifice Gilded Drake. This ability can't be countered except by spells and abilities.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GildedDrakeEffect());
-        ability.addTarget(new TargetCreaturePermanent(0,1,filter, false));
-        this.addAbility(ability);                
+        ability.addTarget(new TargetCreaturePermanent(0, 1, filter, false));
+        this.addAbility(ability);
     }
 
     public GildedDrake(final GildedDrake card) {
@@ -87,21 +87,21 @@ public class GildedDrake extends CardImpl {
 }
 
 class GildedDrakeEffect extends OneShotEffect {
-    
+
     public GildedDrakeEffect() {
         super(Outcome.GainControl);
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't make an exchange, sacrifice {this}. This ability can't be countered except by spells and abilities";
     }
-    
+
     public GildedDrakeEffect(final GildedDrakeEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GildedDrakeEffect copy() {
         return new GildedDrakeEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourceObject = game.getPermanent(source.getSourceId());
@@ -111,13 +111,13 @@ class GildedDrakeEffect extends OneShotEffect {
             if (targetPointer.getFirst(game, source) != null) {
                 targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
                 if (targetPermanent != null) {
-                    ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);                    
+                    ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
                     effect.setTargetPointer(targetPointer);
                     game.addEffect(effect, source);
-                } else {
-                    sourceObject.sacrifice(source.getSourceId(), game);
+                    return true;
                 }
             }
+            sourceObject.sacrifice(source.getSourceId(), game);
             return true;
         }
         return false;

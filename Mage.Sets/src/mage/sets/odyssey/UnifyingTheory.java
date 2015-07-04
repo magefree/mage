@@ -32,27 +32,26 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
  * @author cbt33, Level_X2 (Horn of Plenty)
  */
- 
+
 public class UnifyingTheory extends CardImpl {
 
     public UnifyingTheory(UUID ownerId) {
@@ -61,7 +60,7 @@ public class UnifyingTheory extends CardImpl {
 
 
         // Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
-        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
     public UnifyingTheory(final UnifyingTheory card) {
@@ -92,13 +91,9 @@ class UnifyingTheoryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        Player caster = null;
-        if (spell != null) {
-            caster = game.getPlayer(spell.getControllerId());
-        }
+        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
         if (caster != null) {
-            if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", game)) {
+            if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", source, game)) {
                 Cost cost = new ManaCostsImpl("{2}");
                 if (cost.pay(source, game, source.getSourceId(), caster.getId(), false)) {
                     caster.drawCards(1, game);

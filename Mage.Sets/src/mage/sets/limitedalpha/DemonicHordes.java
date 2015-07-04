@@ -109,7 +109,7 @@ class DemonicHordesEffect extends OneShotEffect {
             if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ")) {
                 sb.insert(0, "Pay ");
             }
-            if (controller.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+            if (controller.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;

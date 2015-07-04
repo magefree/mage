@@ -109,7 +109,7 @@ class AEtherVialEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || player.getHand().count(filter, game) == 0
-                || !player.chooseUse(this.outcome, choiceText, game)) {
+                || !player.chooseUse(this.outcome, choiceText, source, game)) {
             return false;
         }
 

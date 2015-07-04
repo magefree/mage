@@ -28,18 +28,20 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-
-import mage.constants.*;
-import mage.abilities.Ability;
+import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -47,16 +49,26 @@ import mage.players.Player;
  */
 public class ElephantGrass extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Nonblack creatures");
+    private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("Black creatures");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
+    }
+
     public ElephantGrass(UUID ownerId) {
         super(ownerId, 54, "Elephant Grass", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "VIS";
 
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
+
         // Black creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElephantGrassReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filterBlack)));
+
         // Nonblack creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElephantGrassReplacementEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{2"), false, filter)));
     }
 
     public ElephantGrass(final ElephantGrass card) {
@@ -67,98 +79,4 @@ public class ElephantGrass extends CardImpl {
     public ElephantGrass copy() {
         return new ElephantGrass(this);
     }
-}
-
-
-class ElephantGrassReplacementEffect extends ReplacementEffectImpl {
-   
-    ElephantGrassReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Black creatures can't attack you";
-    }
-
-    ElephantGrassReplacementEffect ( ElephantGrassReplacementEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) ) {
-            Permanent creature = game.getPermanent(event.getSourceId());
-            if(creature != null && creature.getColor(game).isBlack()){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }    
-
-    @Override
-    public ElephantGrassReplacementEffect copy() {
-        return new ElephantGrassReplacementEffect(this);
-    }
-
-}
-
-class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl {
-
-    ElephantGrassReplacementEffect2 ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = "Nonblack creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
-    }
-
-    ElephantGrassReplacementEffect2 ( ElephantGrassReplacementEffect2 effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-            ManaCostsImpl attackCost = new ManaCostsImpl("{2}");
-            if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) ) {
-                if (attackCost.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) ) {
-            Permanent creature = game.getPermanent(event.getSourceId());
-            if (creature != null && !creature.getColor(game).isBlack()) {                
-                Player attackedPlayer = game.getPlayer(event.getTargetId());
-                if (attackedPlayer != null) {
-                    // only if a player is attacked. Attacking a planeswalker is free
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public ElephantGrassReplacementEffect2 copy() {
-        return new ElephantGrassReplacementEffect2(this);
-    }
-
 }

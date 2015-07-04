@@ -95,7 +95,7 @@ class PutArtifactOnBattlefieldEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutCardInPlay, choiceText, source, game)) {
             return false;
         }
 

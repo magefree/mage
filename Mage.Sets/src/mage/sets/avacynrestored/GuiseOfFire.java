@@ -29,17 +29,17 @@ package mage.sets.avacynrestored;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 
 /**
  * @author noxx
@@ -51,7 +51,6 @@ public class GuiseOfFire extends CardImpl {
         this.expansionSetCode = "AVR";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -60,8 +59,12 @@ public class GuiseOfFire extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/-1 and attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, -1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA)));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, -1, Duration.WhileOnBattlefield));
+        Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
+        effect.setText("and attacks each turn if able");
+        ability.addEffect(effect);
+        this.addAbility(ability);
+
     }
 
     public GuiseOfFire(final GuiseOfFire card) {

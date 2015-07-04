@@ -103,7 +103,7 @@ class CannibalizeEffect extends OneShotEffect {
             for(UUID targetId: getTargetPointer().getTargets(game, source)) {
                 Permanent creature = game.getPermanent(targetId);                
                 if (creature != null) {
-                    if ((count == 0 && controller.chooseUse(Outcome.Exile, "Exile " + creature.getLogName() +"?", game)) 
+                    if ((count == 0 && controller.chooseUse(Outcome.Exile, "Exile " + creature.getLogName() +"?", source, game)) 
                             || (count == 1 && !exileDone)) {
                         controller.moveCardToExileWithInfo(creature, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
                         exileDone = true;

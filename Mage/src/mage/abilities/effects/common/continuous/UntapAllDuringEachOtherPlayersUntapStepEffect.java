@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -73,10 +72,10 @@ public class UntapAllDuringEachOtherPlayersUntapStepEffect extends ContinuousEff
         if (!applied && layer.equals(Layer.RulesEffects)) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
-                    for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
-                        untap &= effect.canBeUntapped(permanent, game);
+                    for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
+                        untap &= effect.canBeUntapped(permanent, source, game);
                     }
                     if (untap) {
                         permanent.untap(game);

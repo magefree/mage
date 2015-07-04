@@ -59,7 +59,7 @@ public class Necroskitter extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Wither
+        // Wither (This deals damage to creatures in the form of -1/-1 counters.)
         this.addAbility(WitherAbility.getInstance());
 
         // Whenever a creature an opponent controls with a -1/-1 counter on it dies, you may return that card to the battlefield under your control.

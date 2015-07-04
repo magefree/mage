@@ -5,9 +5,9 @@
  */
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.constants.Zone;
 
@@ -16,6 +16,8 @@ import mage.constants.Zone;
  * @author LevelX2
  */
 public class MenaceAbility extends StaticAbility {
+    
+    private static final MenaceAbility fINSTANCE =  new MenaceAbility();
 
     public MenaceAbility() {
         super(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2));
@@ -24,10 +26,18 @@ public class MenaceAbility extends StaticAbility {
     public MenaceAbility(MenaceAbility ability) {
         super(ability);
     }
+    
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
 
+    public static MenaceAbility getInstance() {
+        return fINSTANCE;
+    }
+    
     @Override
     public Ability copy() {
-        return new MenaceAbility(this);
+        return fINSTANCE;
     }    
 
     @Override

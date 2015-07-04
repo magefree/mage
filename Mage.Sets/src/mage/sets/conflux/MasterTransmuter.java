@@ -104,7 +104,7 @@ class MasterTransmuterEffect extends OneShotEffect {
         if (controller != null) {
             Target target = new TargetCardInHand(new FilterArtifactCard("an artifact card from your hand"));
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
-                    && controller.chooseUse(outcome, "Put an artifact from your hand to battlefield?", game)
+                    && controller.chooseUse(outcome, "Put an artifact from your hand to battlefield?", source, game)
                     && controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

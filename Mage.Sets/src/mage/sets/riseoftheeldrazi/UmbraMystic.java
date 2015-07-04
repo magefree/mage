@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  */
 public class UmbraMystic extends CardImpl {
 
-    private static final FilterEnchantment filter = new FilterEnchantment("Auras attached to permanents you control");
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to permanents you control");
 
     static {
         filter.add(new SubtypePredicate("Aura"));

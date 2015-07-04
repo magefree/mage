@@ -28,10 +28,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -43,10 +39,13 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetArtifactPermanent;
-
 
 /**
  * @author nantuko
@@ -112,7 +111,6 @@ class RustTickTapTargetEffect extends TapTargetEffect {
         return true;
     }
 
-
     @Override
     public RustTickTapTargetEffect copy() {
         return new RustTickTapTargetEffect(this);
@@ -149,7 +147,7 @@ class RustTickRestrictionEffect extends RestrictionEffect {
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         return false;
     }
 

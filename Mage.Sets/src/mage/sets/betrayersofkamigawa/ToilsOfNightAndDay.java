@@ -90,9 +90,9 @@ public class ToilsOfNightAndDay extends CardImpl {
                 for (UUID targetId : source.getTargets().get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        if (player.chooseUse(Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), game)) {
+                        if (player.chooseUse(Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), source, game)) {
                             permanent.tap(game);
-                        } else if (player.chooseUse(Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), game)) {
+                        } else if (player.chooseUse(Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), source, game)) {
                             permanent.untap(game);
                         }
                     }

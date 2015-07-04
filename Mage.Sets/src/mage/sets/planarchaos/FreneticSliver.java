@@ -31,12 +31,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -98,19 +97,7 @@ class FreneticSliverEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (player.flipCoin(game)) {
-                Permanent perm = game.getPermanent(source.getSourceId());
-                if (perm != null) {
-                    UUID exileZoneId = UUID.randomUUID();
-                    perm.moveToExile(exileZoneId, perm.getName(), source.getSourceId(), game);
-                    // and return it to the battlefield under its owner's control at the beginning of the next end step.
-                    AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                            new ReturnFromExileEffect(exileZoneId, Zone.BATTLEFIELD));
-                    delayedAbility.setSourceId(source.getSourceId());
-                    delayedAbility.setControllerId(source.getControllerId());
-                    delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);
-                }
-                return true;
+                return new ExileReturnToBattlefieldOwnerNextEndStepEffect().apply(game, source);
             } else {
                 Permanent perm = game.getPermanent(source.getSourceId());
                 if (perm != null) {

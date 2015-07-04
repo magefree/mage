@@ -25,56 +25,28 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.client.util.gui.countryBox;
 
 import java.awt.Component;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import org.apache.log4j.Logger;
 
 /**
  *
  * @author LevelX2
  */
 public class CountryCellRenderer extends DefaultTableCellRenderer {
-    
-    private static final Logger logger = Logger.getLogger(CountryCellRenderer.class);
-    private final Map<String, ImageIcon> flagIconCache = new HashMap<>();
-
-    private final Map<String, String> countryMap = new HashMap<>();
-    
-    public CountryCellRenderer() {        
-        for( int i = 0; i <= CountryComboBox.countryList.length - 1; i++) {
-            countryMap.put(CountryComboBox.countryList[i][1],CountryComboBox.countryList[i][0]);
-        }
-    }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-    	JLabel label = (JLabel)super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-    	if(table.convertColumnIndexToView(0) == column) {
-            label.setToolTipText(countryMap.get((String)value));
-            label.setIcon(getCountryFlagIcon((String)value));  
-            label.setText("");
-    	}
-    	return label;
-    }
-    
-    private ImageIcon getCountryFlagIcon(String countryCode) {
-        ImageIcon flagIcon = flagIconCache.get(countryCode);
-        if (flagIcon == null) {
-            flagIcon = new javax.swing.ImageIcon(getClass().getResource("/flags/" + countryCode + (countryCode.endsWith(".png") ? "" :".png")));
-            if (flagIcon.getImage() == null) {
-                logger.warn("Country flag resource not found: " + countryCode);
-            } else {
-                flagIconCache.put(countryCode, flagIcon);
-            }
+        JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        if (value == null || ((String) value).isEmpty()) {
+            value = (String) "world";
         }
-        return flagIcon;
-    }    
+        label.setToolTipText(CountryUtil.getCountryName((String) value));
+        label.setIcon(CountryUtil.getCountryFlagIcon((String) value));
+        label.setText("");
+        return label;
+    }
 }

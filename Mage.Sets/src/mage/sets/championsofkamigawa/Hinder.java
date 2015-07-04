@@ -163,7 +163,7 @@ class HinderReplacementEffect extends ReplacementEffectImpl {
             Card card = (Card) targetObject;
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {                
-                boolean top = player.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on top of the library? Otherwise it will be put on the bottom.", game);
+                boolean top = player.chooseUse(Outcome.Neutral, "Put " + card.getName() + " on top of the library? Otherwise it will be put on the bottom.", source, game);
                 if (card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, top, event.getAppliedEffects())) {
                     game.informPlayers(player.getLogName() + " has put " + card.getName() + " on " + (top ? "top" : "the bottom") + " of the library.");
                 }

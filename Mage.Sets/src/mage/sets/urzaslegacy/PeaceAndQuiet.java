@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,7 +48,7 @@ public class PeaceAndQuiet extends CardImpl {
 
         // Destroy two target enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(2, new FilterEnchantment()));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, new FilterEnchantmentPermanent()));
     }
 
     public PeaceAndQuiet(final PeaceAndQuiet card) {

@@ -144,7 +144,7 @@ class MirrorworksEffect extends OneShotEffect {
             }
             if (target != null) {
                 Cost cost = new ManaCostsImpl("{2}");
-                if (player.chooseUse(outcome, new StringBuilder("Pay ").append(cost.getText()).append(" and put a token copy of ").append(target.getName()).append(" onto the battlefield").toString(), game)) {
+                if (player.chooseUse(outcome, new StringBuilder("Pay ").append(cost.getText()).append(" and put a token copy of ").append(target.getName()).append(" onto the battlefield").toString(), source, game)) {
                     cost.clearPaid();
                     if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                         if (target instanceof Permanent) {

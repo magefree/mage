@@ -25,24 +25,16 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.tempest;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
-import mage.constants.Duration;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -50,14 +42,15 @@ import mage.players.Player;
  */
 public class Propaganda extends CardImpl {
 
-    public Propaganda (UUID ownerId) {
+    public Propaganda(UUID ownerId) {
         super(ownerId, 80, "Propaganda", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PropagandaReplacementEffect()));
+        // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
     }
 
-    public Propaganda (final Propaganda card) {
+    public Propaganda(final Propaganda card) {
         super(card);
     }
 
@@ -65,58 +58,4 @@ public class Propaganda extends CardImpl {
     public Propaganda copy() {
         return new Propaganda(this);
     }
-}
-
-class PropagandaReplacementEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
-
-    PropagandaReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
-    }
-
-    PropagandaReplacementEffect ( PropagandaReplacementEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId())) {
-            Player attackedPlayer = game.getPlayer(event.getTargetId());
-            if (attackedPlayer != null) {
-                // only if a player is attacked. Attacking a planeswalker is free
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null ) {
-            ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
-            if ( attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Neutral, "Pay {2} to attack player?", game) )
-            {
-                if (attackTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId()) ) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public PropagandaReplacementEffect copy() {
-        return new PropagandaReplacementEffect(this);
-    }
-
 }

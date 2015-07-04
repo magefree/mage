@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.server;
 
 import java.util.ArrayList;
@@ -52,6 +51,7 @@ import mage.interfaces.ActionWithResult;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
+import mage.players.net.UserData;
 import mage.remote.MageVersionException;
 import mage.server.draft.CubeFactory;
 import mage.server.draft.DraftManager;
@@ -83,7 +83,6 @@ import mage.view.MatchView;
 import mage.view.RoomUsersView;
 import mage.view.TableView;
 import mage.view.TournamentView;
-import mage.view.UserDataView;
 import mage.view.UserView;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
@@ -117,7 +116,7 @@ public class MageServerImpl implements MageServer {
             return SessionManager.getInstance().registerUser(sessionId, userName);
         } catch (MageException ex) {
             if (ex instanceof MageVersionException) {
-                throw (MageVersionException)ex;
+                throw (MageVersionException) ex;
             }
             handleException(ex);
         }
@@ -125,11 +124,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean setUserData(final String userName, final String sessionId, final UserDataView userDataView) throws MageException {
+    public boolean setUserData(final String userName, final String sessionId, final UserData userData) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return SessionManager.getInstance().setUserData(userName, sessionId, userDataView);
+                return SessionManager.getInstance().setUserData(userName, sessionId, userData);
             }
         });
     }
@@ -162,7 +161,7 @@ public class MageServerImpl implements MageServer {
                     if (user != null) {
                         logger.debug("TABLE created - tableId: " + table.getTableId() + " " + table.getTableName());
                         logger.debug("- " + user.getName() + " userId: " + user.getId());
-                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));                        
+                        logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
                     }
                 }
                 LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
@@ -229,7 +228,7 @@ public class MageServerImpl implements MageServer {
                 if (userId == null) {
                     logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
                     return false;
-                }                
+                }
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList, password);
                 return ret;
             }
@@ -247,11 +246,11 @@ public class MageServerImpl implements MageServer {
                     if (user != null) {
                         logger.trace("join tourn. tableId: " + tableId + " " + name);
                     }
-                }                
+                }
                 if (userId == null) {
                     logger.fatal("Got no userId from sessionId" + sessionId + " tableId" + tableId);
                     return false;
-                }                 
+                }
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill, deckList, password);
                 return ret;
             }
@@ -293,8 +292,7 @@ public class MageServerImpl implements MageServer {
             } else {
                 return null;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -310,8 +308,7 @@ public class MageServerImpl implements MageServer {
             } else {
                 return null;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -326,8 +323,7 @@ public class MageServerImpl implements MageServer {
             } else {
                 return null;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -343,8 +339,7 @@ public class MageServerImpl implements MageServer {
             } else {
                 return null;
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -365,7 +360,6 @@ public class MageServerImpl implements MageServer {
 //            }
 //        });
 //    }
-
     @Override
     public boolean startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
@@ -391,7 +385,6 @@ public class MageServerImpl implements MageServer {
 //            }
 //        });
 //    }
-
     @Override
     public boolean startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
@@ -412,8 +405,7 @@ public class MageServerImpl implements MageServer {
     public TournamentView getTournament(UUID tournamentId) throws MageException {
         try {
             return TournamentManager.getInstance().getTournamentView(tournamentId);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -424,15 +416,14 @@ public class MageServerImpl implements MageServer {
     public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
         try {
             callExecutor.execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        ChatManager.getInstance().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            ChatManager.getInstance().broadcast(chatId, userName, StringEscapeUtils.escapeHtml4(message), MessageColor.BLUE);
+                        }
                     }
-                }
             );
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
     }
@@ -464,8 +455,7 @@ public class MageServerImpl implements MageServer {
     public UUID getMainRoomId() throws MageException {
         try {
             return GamesRoomManager.getInstance().getMainRoomId();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -476,8 +466,7 @@ public class MageServerImpl implements MageServer {
     public UUID getRoomChatId(UUID roomId) throws MageException {
         try {
             return GamesRoomManager.getInstance().getRoom(roomId).getChatId();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -527,8 +516,7 @@ public class MageServerImpl implements MageServer {
     public UUID getTableChatId(UUID tableId) throws MageException {
         try {
             return TableManager.getInstance().getChatId(tableId);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -572,8 +560,7 @@ public class MageServerImpl implements MageServer {
     public UUID getGameChatId(UUID gameId) throws MageException {
         try {
             return GameManager.getInstance().getChatId(gameId);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -584,8 +571,7 @@ public class MageServerImpl implements MageServer {
     public UUID getTournamentChatId(UUID tournamentId) throws MageException {
         try {
             return TournamentManager.getInstance().getChatId(tournamentId);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -602,7 +588,7 @@ public class MageServerImpl implements MageServer {
                     user.sendPlayerUUID(gameId, data);
                 } else {
                     logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-                }                 
+                }
             }
         });
     }
@@ -617,7 +603,7 @@ public class MageServerImpl implements MageServer {
                     user.sendPlayerString(gameId, data);
                 } else {
                     logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-                }                  
+                }
             }
         });
     }
@@ -647,7 +633,7 @@ public class MageServerImpl implements MageServer {
                     user.sendPlayerBoolean(gameId, data);
                 } else {
                     logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
-                }                
+                }
             }
         });
     }
@@ -675,8 +661,8 @@ public class MageServerImpl implements MageServer {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session != null) {
                     return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
-                } else{
-                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                } else {
+                    logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
                 }
                 return null;
             }
@@ -691,8 +677,8 @@ public class MageServerImpl implements MageServer {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session != null) {
                     DraftManager.getInstance().sendCardMark(draftId, session.getUserId(), cardPick);
-                } else{
-                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                } else {
+                    logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
                 }
             }
         });
@@ -706,8 +692,8 @@ public class MageServerImpl implements MageServer {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session != null) {
                     GameManager.getInstance().quitMatch(gameId, session.getUserId());
-                } else{
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
+                } else {
+                    logger.error("Session not found sessionId: " + sessionId + "  gameId:" + gameId);
                 }
             }
         });
@@ -721,8 +707,8 @@ public class MageServerImpl implements MageServer {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session != null) {
                     TournamentManager.getInstance().quit(tournamentId, session.getUserId());
-                }else{
-                    logger.error("Session not found sessionId: "+ sessionId + "  tournamentId:" + tournamentId);
+                } else {
+                    logger.error("Session not found sessionId: " + sessionId + "  tournamentId:" + tournamentId);
                 }
             }
         });
@@ -735,7 +721,7 @@ public class MageServerImpl implements MageServer {
             public void execute() {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session == null) {
-                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+                    logger.error("Session not found sessionId: " + sessionId + "  draftId:" + draftId);
                     return;
                 }
                 UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
@@ -755,14 +741,14 @@ public class MageServerImpl implements MageServer {
             public void execute() {
                 Session session = SessionManager.getInstance().getSession(sessionId);
                 if (session == null) {
-                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" + gameId);
+                    logger.error("Session not found sessionId: " + sessionId + "  gameId:" + gameId);
                     return;
                 }
                 GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
             }
         });
     }
-            
+
     @Override
     public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
@@ -893,8 +879,7 @@ public class MageServerImpl implements MageServer {
                     CardRepository.instance.getContentVersionConstant(),
                     ExpansionRepository.instance.getContentVersionConstant()
             );
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             handleException(ex);
         }
         return null;
@@ -925,7 +910,7 @@ public class MageServerImpl implements MageServer {
                 return false;
             }
         });
-     }
+    }
 
     public void handleException(Exception ex) throws MageException {
         if (!ex.getMessage().equals("No message")) {
@@ -936,12 +921,12 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
-         return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
-             @Override
-             public GameView execute() throws MageException {
-                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                 return GameManager.getInstance().getGameView(gameId, userId, playerId);
-             }
+        return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
+            @Override
+            public GameView execute() throws MageException {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                return GameManager.getInstance().getGameView(gameId, userId, playerId);
+            }
         });
     }
 
@@ -988,11 +973,11 @@ public class MageServerImpl implements MageServer {
     }
 
     /**
-     * Admin console - Remove table 
-     * 
+     * Admin console - Remove table
+     *
      * @param sessionId
      * @param tableId
-     * @throws MageException 
+     * @throws MageException
      */
     @Override
     public void removeTable(final String sessionId, final UUID tableId) throws MageException {
@@ -1009,9 +994,9 @@ public class MageServerImpl implements MageServer {
     public Object getServerMessagesCompressed(String sessionId) throws MageException {
         return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {
             @Override
-             public Object execute() throws MageException {
-                 return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
-             }
+            public Object execute() throws MageException {
+                return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
+            }
         });
     }
 
@@ -1028,7 +1013,7 @@ public class MageServerImpl implements MageServer {
             });
         }
     }
-    
+
     @Override
     public void sendBroadcastMessage(final String sessionId, final String message) throws MageException {
         if (message != null) {
@@ -1061,23 +1046,22 @@ public class MageServerImpl implements MageServer {
         if (SessionManager.getInstance().isValidSession(sessionId)) {
             try {
                 callExecutor.execute(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            if (SessionManager.getInstance().isValidSession(sessionId)) {
-                                try {
-                                    action.execute();
-                                } catch (MageException me) {
-                                    throw new RuntimeException(me);
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                if (SessionManager.getInstance().isValidSession(sessionId)) {
+                                    try {
+                                        action.execute();
+                                    } catch (MageException me) {
+                                        throw new RuntimeException(me);
+                                    }
+                                } else {
+                                    LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                                 }
-                            } else {
-                                LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                             }
                         }
-                    }
                 );
-            }
-            catch (Exception ex) {                
+            } catch (Exception ex) {
                 handleException(ex);
             }
         } else {

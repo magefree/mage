@@ -36,7 +36,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  *
  * @author LevelX2
  */
-
 public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
 
     @Test
@@ -82,9 +81,10 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Lightning Bolt", 1);
         assertPermanentCount(playerA, "Arcbound Worker", 1);
     }
+
     /**
-     * That that the creature with a +1/+1 counter does not return
-     * if the card was removed from graveyard meanwhile
+     * Test that the creature with a +1/+1 counter does not return if the card
+     * was removed from graveyard meanwhile by Relic of Progenitus
      */
     @Test
     public void testMarchesatheBlackRoseAfterExile() {
@@ -100,10 +100,10 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         // {T}: Target player exiles a card from his or her graveyard.
         // {1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
         addCard(Zone.BATTLEFIELD, playerB, "Relic of Progenitus", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arcbound Worker");
         castSpell(1, PhaseStep.END_COMBAT, playerB, "Lightning Bolt", "Arcbound Worker");
-        
+
         activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "{T}: Target player exiles", playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -113,13 +113,15 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Arcbound Worker", 0);
 
         assertExileCount("Arcbound Worker", 1);
-        
+
     }
+
     /**
-     *  With my opponent's Deathmist Raptor return-to-battlefield trigger on the stack, 
-     *  I exiled the Deathmist Raptor with Pharika, God of Affliction. However, the Deathmist Raptor 
-     *  returned to the battlefield from exile, though it should not have because it had
-     *  changed zones so was a different object.
+     * With my opponent's Deathmist Raptor return-to-battlefield trigger on the
+     * stack, I exiled the Deathmist Raptor with Pharika, God of Affliction.
+     * However, the Deathmist Raptor returned to the battlefield from exile,
+     * though it should not have because it had changed zones so was a different
+     * object.
      */
     @Test
     public void testDeathmistRaptor() {
@@ -129,20 +131,20 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Deathmist Raptor");
         addCard(Zone.HAND, playerA, "Pine Walker");
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
-                
+
         addCard(Zone.BATTLEFIELD, playerB, "Forest", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
-        // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.        
+        // {B}{G}: Exile target creature card from a graveyard. It's owner puts a 1/1 black and green Snake enchantment creature token with deathtouch onto the battlefield.
         addCard(Zone.BATTLEFIELD, playerB, "Pharika, God of Affliction", 1);
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker");
         setChoice(playerA, "Yes"); // cast it face down as 2/2 creature
 
-        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");        
-        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard", 
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "{B}{G}: Exile target creature card from a graveyard",
                 "Deathmist Raptor", "Whenever a permanent you control is turned face up");
-        
-        setStopAt(3, PhaseStep.END_TURN);        
+
+        setStopAt(3, PhaseStep.END_TURN);
 
         execute();
         assertPermanentCount(playerB, "Pharika, God of Affliction", 1);
@@ -150,6 +152,37 @@ public class ReturnToBattlefieldEffectsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Pine Walker", 1);
 
         assertExileCount("Deathmist Raptor", 1);
-        
-    }    
+
+    }
+
+    /**
+     * Reassembling Skeleton is blocked by Necroskitter, and dies. Necroskitter
+     * triggers. With the trigger on the stack, activate Skeleton and return it
+     * to play. Expected result: trigger can't find Skeleton since it changed
+     * zones. Actual result: trigger steals control of Skeleton when it's
+     * already on the battlefield.
+     */
+    @Test
+    public void testNecroskitter1() {
+        // Wither (This deals damage to creatures in the form of -1/-1 counters.)
+        // Whenever a creature an opponent controls with a -1/-1 counter on it dies, you may return that card to the battlefield under your control.
+        addCard(Zone.BATTLEFIELD, playerA, "Necroskitter", 1); //  1/4
+
+        // {1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.
+        addCard(Zone.BATTLEFIELD, playerB, "Reassembling Skeleton");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+
+        attack(2, playerB, "Reassembling Skeleton");
+        block(2, playerA, "Necroskitter", "Reassembling Skeleton");
+
+        activateAbility(2, PhaseStep.COMBAT_DAMAGE, playerB, "{1}{B}: Return", NO_TARGET, "Whenever a creature");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertLife(playerA, 20);
+        assertPermanentCount(playerB, "Reassembling Skeleton", 1);
+
+    }
 }

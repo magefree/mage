@@ -29,27 +29,18 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesColorSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -70,7 +61,7 @@ public class Spiritmonger extends CardImpl {
         // {B}: Regenerate Spiritmonger.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
         // {G}: Spiritmonger becomes the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpiritmongerChangeColorEffect(), new ManaCostsImpl("{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
     public Spiritmonger(final Spiritmonger card) {
@@ -80,39 +71,5 @@ public class Spiritmonger extends CardImpl {
     @Override
     public Spiritmonger copy() {
         return new Spiritmonger(this);
-    }
-}
-
-class SpiritmongerChangeColorEffect extends OneShotEffect {
-
-    public SpiritmongerChangeColorEffect() {
-        super(Outcome.Neutral);
-        staticText = "{this} becomes the color of your choice until end of turn";
-    }
-
-    public SpiritmongerChangeColorEffect(final SpiritmongerChangeColorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Permanent wildMongrel = game.getPermanent(source.getSourceId());
-        if (player != null && wildMongrel != null) {
-            ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Outcome.Neutral, colorChoice, game)) {
-                game.informPlayers(wildMongrel.getName() + ": " + player.getLogName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect = new BecomesColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
-                effect.setTargetPointer(new FixedTarget(source.getSourceId()));
-                game.addEffect(effect, source);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public SpiritmongerChangeColorEffect copy() {
-        return new SpiritmongerChangeColorEffect(this);
     }
 }

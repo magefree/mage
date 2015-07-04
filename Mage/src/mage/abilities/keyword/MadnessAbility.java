@@ -88,7 +88,7 @@ class MadnessReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                if (controller.chooseUse(outcome, "Move " + card.getLogName() + " to exile to cast it by Madness?", game)) {
+                if (controller.chooseUse(outcome, "Move " + card.getLogName() + " to exile to cast it by Madness?", source, game)) {
                     controller.moveCardToExileWithInfo(card, source.getSourceId(), "Madness", source.getSourceId(), game, ((ZoneChangeEvent) event).getFromZone(), true);
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.MADNESS_CARD_EXILED, card.getId(), card.getId(),controller.getId()));
                     return true;

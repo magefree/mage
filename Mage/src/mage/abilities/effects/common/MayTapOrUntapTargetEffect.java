@@ -26,11 +26,11 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (target != null && player != null) {
             if (target.isTapped()) {
-                if (player.chooseUse(Outcome.Untap, "Untap that permanent?", game)) {
+                if (player.chooseUse(Outcome.Untap, "Untap that permanent?", source, game)) {
                     target.untap(game);
                 }
             } else {
-                if (player.chooseUse(Outcome.Tap, "Tap that permanent?", game)) {
+                if (player.chooseUse(Outcome.Tap, "Tap that permanent?", source, game)) {
                     target.tap(game);
                 }
             }

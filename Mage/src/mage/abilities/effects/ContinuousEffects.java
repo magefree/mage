@@ -324,6 +324,31 @@ public class ContinuousEffects implements Serializable {
         return effects;
     }
 
+    public boolean checkIfThereArePayCostToAttackBlockEffects(GameEvent event, Game game) {
+        for (ReplacementEffect effect : replacementEffects) {
+            if (!effect.checksEventType(event, game)) {
+                continue;
+            }
+            if (effect instanceof PayCostToAttackBlockEffect) {
+                HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    // for replacment effects of static abilities do not use LKI to check if to apply
+                    if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
+                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                            if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
+                                if (effect.applies(event, ability, game)
+                                        && !((PayCostToAttackBlockEffect) effect).isCostless(event, ability, game)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      *
      * @param event
@@ -628,7 +653,7 @@ public class ContinuousEffects implements Serializable {
 
         if (spliceAbilities.size() > 0) {
             Player controller = game.getPlayer(abilityToModify.getControllerId());
-            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", game)) {
+            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", abilityToModify, game)) {
                 Cards cardsToReveal = new CardsImpl();
                 do {
                     FilterCard filter = new FilterCard("a card to splice");
@@ -655,7 +680,7 @@ public class ContinuousEffects implements Serializable {
                             spliceAbilities.remove(selectedAbility);
                         }
                     }
-                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", game));
+                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", abilityToModify, game));
                 controller.revealCards("Spliced cards", cardsToReveal, game);
             }
         }

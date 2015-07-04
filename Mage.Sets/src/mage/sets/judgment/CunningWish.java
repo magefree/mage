@@ -98,7 +98,7 @@ class CunningWishEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            while (player.chooseUse(Outcome.Benefit, choiceText, game)) {
+            while (player.chooseUse(Outcome.Benefit, choiceText, source, game)) {
                 Cards cards = player.getSideboard();
                 if(cards.isEmpty()) {
                     game.informPlayer(player, "You have no cards outside the game.");

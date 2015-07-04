@@ -112,7 +112,7 @@ class GiftOfTheGargantuanEffect extends OneShotEffect {
         }
         player.lookAtCards("Gift of the Gargantuan", cards, game);
 
-        if ((creatureCardFound || landCardFound) && player.chooseUse(Outcome.DrawCard, "Do you wish to reveal a creature card and/or a land card and put them into your hand?", game)) {
+        if ((creatureCardFound || landCardFound) && player.chooseUse(Outcome.DrawCard, "Do you wish to reveal a creature card and/or a land card and put them into your hand?", source, game)) {
             Cards revealedCards = new CardsImpl();
 
             TargetCard target = new TargetCard(Zone.PICK, new FilterCreatureCard("creature card to reveal and put into your hand"));

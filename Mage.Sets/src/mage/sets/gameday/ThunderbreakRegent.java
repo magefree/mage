@@ -52,7 +52,7 @@ import mage.target.targetpointer.FixedTarget;
 public class ThunderbreakRegent extends CardImpl {
 
     public ThunderbreakRegent(UUID ownerId) {
-        super(ownerId, 44, "Thunderbreak Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
+        super(ownerId, 43, "Thunderbreak Regent", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "MGDC";
         this.subtype.add("Dragon");
         this.power = new MageInt(4);
@@ -106,7 +106,7 @@ class ThunderbreakRegentTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             Permanent creature = game.getPermanent(event.getTargetId());
             if (creature != null && filter.match(creature, getSourceId(), getControllerId(), game)) {
-                for (Effect effect: this.getEffects()) {
+                for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }
                 return true;

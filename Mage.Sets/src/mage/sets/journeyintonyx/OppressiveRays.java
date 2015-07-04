@@ -33,11 +33,12 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysAttachedEffect;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.CostModificationType;
 import mage.constants.Duration;
@@ -45,9 +46,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -63,7 +62,6 @@ public class OppressiveRays extends CardImpl {
         this.expansionSetCode = "JOU";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -71,10 +69,11 @@ public class OppressiveRays extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature can't attack or block unless its controller pays 3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysEffect()));
+        // Enchanted creature can't attack or block unless its controller pays {3}.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
+
         // Activated abilities of enchanted creature cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect() ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect()));
     }
 
     public OppressiveRays(final OppressiveRays card) {
@@ -87,81 +86,9 @@ public class OppressiveRays extends CardImpl {
     }
 }
 
-
-class OppressiveRaysEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Enchanted creature can't attack or block unless its controller pays {3}";
-
-    OppressiveRaysEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
-    }
-
-    OppressiveRaysEffect ( OppressiveRaysEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            String chooseText;
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-                chooseText = "Pay {3} to attack?";
-            } else {
-                chooseText = "Pay {3} to block?";
-            }
-            ManaCostsImpl attackBlockTax = new ManaCostsImpl("{3}");
-            if (attackBlockTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
-                if (attackBlockTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override    
-    public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
-            case DECLARE_ATTACKER:
-            case DECLARE_BLOCKER:
-                return true;
-            default:
-                return false;
-        }
-    }    
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            return attacker != null && attacker.getAttachments().contains(source.getSourceId());
-        }
-        if (event.getType().equals(GameEvent.EventType.DECLARE_BLOCKER)) {
-            Permanent blocker = game.getPermanent(event.getSourceId());
-            return blocker != null && blocker.getAttachments().contains(source.getSourceId());
-        }
-        return false;
-    }
-
-    @Override
-    public OppressiveRaysEffect copy() {
-        return new OppressiveRaysEffect(this);
-    }
-
-}
-
 class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
 
-    OppressiveRaysCostModificationEffect ( ) {
+    OppressiveRaysCostModificationEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Activated abilities of enchanted creature cost {3} more to activate";
     }
@@ -180,10 +107,10 @@ class OppressiveRaysCostModificationEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         Permanent creature = game.getPermanent(abilityToModify.getSourceId());
         if (creature != null && creature.getAttachments().contains(source.getSourceId())) {
-        if (abilityToModify instanceof ActivatedAbility
-                && !(abilityToModify instanceof SpellAbility)) {
-            return true;
-        }
+            if (abilityToModify instanceof ActivatedAbility
+                    && !(abilityToModify instanceof SpellAbility)) {
+                return true;
+            }
         }
         return false;
     }

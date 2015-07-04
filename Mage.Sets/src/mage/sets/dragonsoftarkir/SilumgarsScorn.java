@@ -132,7 +132,7 @@ class SilumgarsScornCounterEffect extends OneShotEffect {
                 if (condition) {
                     return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }
-                if (!(player.chooseUse(Outcome.Benefit, "Would you like to pay {1} to prevent counter effect?", game) && 
+                if (!(player.chooseUse(Outcome.Benefit, "Would you like to pay {1} to prevent counter effect?", source, game) && 
                         new GenericManaCost(1).pay(source, game, spell.getSourceId(), spell.getControllerId(), false))) {
                     return game.getStack().counter(spell.getId(), source.getSourceId(), game);
                 }

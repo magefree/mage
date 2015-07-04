@@ -1,30 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.client.game;
 
 import java.awt.Color;
@@ -37,7 +37,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.UUID;
-
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -72,21 +71,23 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private boolean playingMode = true;
     private final GamePanel gamePanel;
     private final PlayAreaPanelOptions options;
-    
+
     private JCheckBoxMenuItem manaPoolMenuItem1;
     private JCheckBoxMenuItem manaPoolMenuItem2;
     private JCheckBoxMenuItem allowViewHandCardsMenuItem;
-    
+
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
 
-    /** Creates new form PlayAreaPanel
+    /**
+     * Creates new form PlayAreaPanel
+     *
      * @param player
      * @param bigCard
      * @param gameId
      * @param priorityTime
      * @param gamePanel
-     * @param options 
+     * @param options
      */
     public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime, GamePanel gamePanel, PlayAreaPanelOptions options) {
         this.gamePanel = gamePanel;
@@ -97,7 +98,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         popupMenu = new JPopupMenu();
         if (options.isPlayer) {
-            addPopupMenuPlayer(player.getUserData().allowRequestShowHandCards());
+            addPopupMenuPlayer(player.getUserData().isAllowRequestShowHandCards());
         } else {
             addPopupMenuWatcher();
         }
@@ -109,15 +110,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public void CleanUp() {
         battlefieldPanel.cleanUp();
         playerPanel.cleanUp();
-        
 
-        for (ActionListener al : btnCheat.getActionListeners() ) {
+        for (ActionListener al : btnCheat.getActionListeners()) {
             btnCheat.removeActionListener(al);
         }
-        
+
         // Taken form : https://community.oracle.com/thread/2183145
         // removed the internal focus of a popupMenu data to allow GC before another popup menu is selected
-        for(ChangeListener listener : MenuSelectionManager.defaultManager().getChangeListeners()) {
+        for (ChangeListener listener : MenuSelectionManager.defaultManager().getChangeListeners()) {
             if (listener.getClass().getName().contains("MenuKeyboardHelper")) {
                 try {
                     Field field = listener.getClass().getDeclaredField("menuInputMap");
@@ -130,7 +130,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         }
 
-        for (MouseListener ml :battlefieldPanel.getMainPanel().getMouseListeners()) {
+        for (MouseListener ml : battlefieldPanel.getMainPanel().getMouseListeners()) {
             battlefieldPanel.getMainPanel().removeMouseListener(ml);
         }
         popupMenu.getUI().uninstallUI(this);
@@ -170,11 +170,11 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     case "F9": {
                         gamePanel.getSession().sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
                         break;
-                    }                                           
+                    }
                 }
             }
         };
-                        
+
         menuItem = new JMenuItem("<html><b>F2</b> - Confirm current request");
         menuItem.setActionCommand("F2");
         menuItem.setMnemonic(KeyEvent.VK_O);
@@ -187,11 +187,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         popupMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
 
-
         JMenu skipMenu = new JMenu("Skip");
         skipMenu.setMnemonic(KeyEvent.VK_S);
         popupMenu.add(skipMenu);
-        
+
         String tooltipText = "<html>This skip actions stops if something goes to <br><b>stack</b> and if <b>attackers</b> or <b>blocker</b> have to be <b>declared</b>.";
         menuItem = new JMenuItem("<html><b>F4</b> - Phases until next turn");
         menuItem.setActionCommand("F4");
@@ -213,7 +212,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.setMnemonic(KeyEvent.VK_M);
         skipMenu.add(menuItem);
         menuItem.addActionListener(skipListener);
-        
+
         menuItem = new JMenuItem("<html><b>F9</b> - Everything until your own next turn");
         menuItem.setActionCommand("F9");
         menuItem.setToolTipText(tooltipText);
@@ -222,50 +221,51 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.addActionListener(skipListener);
 
         popupMenu.addSeparator();
-        
+
         JMenu manaPoolMenu = new JMenu("Mana payment");
-        manaPoolMenu.setMnemonic(KeyEvent.VK_M);        
+        manaPoolMenu.setMnemonic(KeyEvent.VK_M);
         popupMenu.add(manaPoolMenu);
-        
+
         manaPoolMenuItem1 = new JCheckBoxMenuItem("Automatically", true);
         manaPoolMenuItem1.setMnemonic(KeyEvent.VK_A);
         manaPoolMenuItem1.setToolTipText("<html>If not active, produced mana goes only to the mana pool<br>"
-                                             + "and you have to click the type of mana you want to use <br>"
-                                             + "in the player mana pool panel for payment.");
+                + "and you have to click the type of mana you want to use <br>"
+                + "in the player mana pool panel for payment.");
         manaPoolMenu.add(manaPoolMenuItem1);
 
         // Auto pay mana from mana pool
         manaPoolMenuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean manaPoolAutomatic = ((JCheckBoxMenuItem)e.getSource()).getState();
-                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true": "false");
+                boolean manaPoolAutomatic = ((JCheckBoxMenuItem) e.getSource()).getState();
+                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT, manaPoolAutomatic ? "true" : "false");
                 gamePanel.setMenuStates(manaPoolAutomatic, manaPoolMenuItem2.getState());
-                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON: PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
+                gamePanel.getSession().sendPlayerAction(manaPoolAutomatic ? PlayerAction.MANA_AUTO_PAYMENT_ON : PlayerAction.MANA_AUTO_PAYMENT_OFF, gameId, null);
             }
         });
+
         manaPoolMenuItem2 = new JCheckBoxMenuItem("No automatic usage for mana already in the pool", true);
         manaPoolMenuItem2.setMnemonic(KeyEvent.VK_N);
         manaPoolMenuItem2.setToolTipText("<html>Mana that is already in the mana pool as you start casting a spell or activating an ability<br>"
-                                            + " needs to be payed manually. So you use the mana in the pool only by clicking on the related<br>"
-                                            + " mana symbols of mana pool area.");
+                + " needs to be payed manually. So you use the mana in the pool only by clicking on the related<br>"
+                + " mana symbols of mana pool area.");
         manaPoolMenu.add(manaPoolMenuItem2);
 
         // Auto pay mana from mana pool
         manaPoolMenuItem2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem)e.getSource()).getState();
-                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true": "false");
+                boolean manaPoolAutomaticRestricted = ((JCheckBoxMenuItem) e.getSource()).getState();
+                PreferencesDialog.saveValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, manaPoolAutomaticRestricted ? "true" : "false");
                 gamePanel.setMenuStates(manaPoolMenuItem1.getState(), manaPoolAutomaticRestricted);
-                gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON: PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
+                gamePanel.getSession().sendPlayerAction(manaPoolAutomaticRestricted ? PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_ON : PlayerAction.MANA_AUTO_PAYMENT_RESTRICTED_OFF, gameId, null);
             }
         });
 
         JMenu automaticConfirmsMenu = new JMenu("Automatic confirms");
         automaticConfirmsMenu.setMnemonic(KeyEvent.VK_U);
         popupMenu.add(automaticConfirmsMenu);
-        
+
         menuItem = new JMenuItem("Replacement effects - reset auto select");
         menuItem.setMnemonic(KeyEvent.VK_R);
         menuItem.setToolTipText("Reset all effects that were added to the list of auto select replacement effects this game.");
@@ -281,7 +281,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         JMenu handCardsMenu = new JMenu("Cards on hand");
         handCardsMenu.setMnemonic(KeyEvent.VK_H);
         popupMenu.add(handCardsMenu);
-        
+
         if (!options.playerItself) {
             menuItem = new JMenuItem("Request permission to see the hand cards");
             menuItem.setMnemonic(KeyEvent.VK_P);
@@ -304,9 +304,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             allowViewHandCardsMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    boolean requestsAllowed = ((JCheckBoxMenuItem)e.getSource()).getState();
+                    boolean requestsAllowed = ((JCheckBoxMenuItem) e.getSource()).getState();
                     PreferencesDialog.setPrefValue(KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, requestsAllowed);
-                    gamePanel.getSession().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON: PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
+                    gamePanel.getSession().sendPlayerAction(requestsAllowed ? PlayerAction.PERMISSION_REQUESTS_ALLOWED_ON : PlayerAction.PERMISSION_REQUESTS_ALLOWED_OFF, gameId, null);
                 }
             });
 
@@ -323,7 +323,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                 }
             });
         }
-               
+
         if (options.rollbackTurnsAllowed) {
             ActionListener rollBackActionListener = new ActionListener() {
                 @Override
@@ -332,44 +332,42 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     gamePanel.getSession().sendPlayerAction(PlayerAction.ROLLBACK_TURNS, gameId, turnsToRollBack);
                 }
             };
-            
+
             JMenu rollbackMainItem = new JMenu("Roll back");
             rollbackMainItem.setMnemonic(KeyEvent.VK_R);
             rollbackMainItem.setToolTipText("The game will be rolled back to the start of the requested turn if all players agree.");
             popupMenu.add(rollbackMainItem);
-            
+
             menuItem = new JMenuItem("To the start of the current turn");
             menuItem.setMnemonic(KeyEvent.VK_C);
             menuItem.setActionCommand("0");
-            menuItem.addActionListener(rollBackActionListener);            
+            menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
-   
+
             menuItem = new JMenuItem("To the start of the previous turn");
             menuItem.setMnemonic(KeyEvent.VK_P);
             menuItem.setActionCommand("1");
-            menuItem.addActionListener(rollBackActionListener);            
+            menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
             menuItem = new JMenuItem("The current turn and the 2 turns before");
             menuItem.setMnemonic(KeyEvent.VK_2);
             menuItem.setActionCommand("2");
-            menuItem.addActionListener(rollBackActionListener);            
+            menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
 
             menuItem = new JMenuItem("The current turn and the 3 turns before");
             menuItem.setMnemonic(KeyEvent.VK_3);
             menuItem.setActionCommand("3");
-            menuItem.addActionListener(rollBackActionListener);            
+            menuItem.addActionListener(rollBackActionListener);
             rollbackMainItem.add(menuItem);
-                      
-        }            
-            
-       
+
+        }
 
         JMenu concedeMenu = new JMenu("Concede");
         concedeMenu.setMnemonic(KeyEvent.VK_C);
         popupMenu.add(concedeMenu);
-        
+
         ActionListener concedeListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -377,19 +375,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
                     case "Game": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             MageFrame.getSession().sendPlayerAction(PlayerAction.CONCEDE, gameId, null);
-                        }    
+                        }
                         break;
                     }
                     case "Match": {
                         if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                             MageFrame.getSession().quitMatch(gameId);
-                        }     
+                        }
                         break;
                     }
                 }
             }
         };
-        
+
         // Concede Game
         menuItem = new JMenuItem("Game");
         menuItem.setMnemonic(KeyEvent.VK_G);
@@ -397,7 +395,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         menuItem.setToolTipText("Concedes only the current game and after that the next game of the match is started if there is another game needed.");
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
-        
+
         // Concede Match
         menuItem = new JMenuItem("Match");
         menuItem.setMnemonic(KeyEvent.VK_M);
@@ -406,20 +404,19 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         concedeMenu.add(menuItem);
         menuItem.addActionListener(concedeListener);
 
-        
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent Me) {
                 this.checkMenu(Me);
             }
-            
+
             // neccessary for linux and mac systems
             @Override
             public void mousePressed(MouseEvent Me) {
                 this.checkMenu(Me);
             }
 
-            private void checkMenu(MouseEvent Me){
+            private void checkMenu(MouseEvent Me) {
                 if (Me.isPopupTrigger() && playingMode) {
                     popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
@@ -461,13 +458,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             public void mouseReleased(MouseEvent Me) {
                 this.checkMenu(Me);
             }
+
             // neccessary for linux and mac systems
             @Override
             public void mousePressed(MouseEvent Me) {
                 this.checkMenu(Me);
             }
 
-            private void checkMenu(MouseEvent Me){
+            private void checkMenu(MouseEvent Me) {
                 if (Me.isPopupTrigger() && playingMode) {
                     popupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
@@ -483,8 +481,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         if (MageFrame.getSession().isTestMode()) {
             this.playerId = player.getPlayerId();
             this.btnCheat.setVisible(true);
-        }
-        else {
+        } else {
             this.btnCheat.setVisible(false);
         }
     }
@@ -493,7 +490,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         this.playerPanel.update(player);
         this.battlefieldPanel.update(player.getBattlefield());
         if (this.allowViewHandCardsMenuItem != null) {
-            this.allowViewHandCardsMenuItem.setSelected(player.getUserData().allowRequestShowHandCards());
+            this.allowViewHandCardsMenuItem.setSelected(player.getUserData().isAllowRequestShowHandCards());
         }
     }
 
@@ -506,7 +503,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     }
 
     private void initComponents() {
-        setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
+        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0)));
         playerPanel = new PlayerPanelExt();
         btnCheat = new javax.swing.JButton();
         //jScrollPane1 = new javax.swing.JScrollPane();
@@ -525,16 +522,15 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         //Border empty = new EmptyBorder(0,0,0,0);
         //jScrollPane1.setBorder(empty);
         //jScrollPane1.setViewportBorder(empty);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-            layout.createSequentialGroup()
+                layout.createSequentialGroup()
                 .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(ComponentPlacement.RELATED)
                 .addComponent(battlefieldPanel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(Alignment.LEADING)
+                layout.createParallelGroup(Alignment.LEADING)
                 .addComponent(playerPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addComponent(battlefieldPanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
@@ -548,8 +544,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL));
             //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
             this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL));
-        }
-        else {
+        } else {
             this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT));
             //this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
             this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT));
@@ -576,7 +571,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             manaPoolMenuItem2.setSelected(manaPoolAutomaticRestricted);
         }
     }
-    
+
     private mage.client.game.BattlefieldPanel battlefieldPanel;
     private javax.swing.JButton btnCheat;
     //private javax.swing.JScrollPane jScrollPane1;

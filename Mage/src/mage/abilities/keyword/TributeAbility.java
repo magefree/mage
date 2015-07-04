@@ -118,7 +118,7 @@ class TributeEffect extends OneShotEffect {
                     sb.append(sourcePermanent.getName());
                     sb.append(" (add ").append(CardUtil.numberToText(tributeValue)).append(" +1/+1 counter");
                     sb.append(tributeValue > 1 ? "s":"").append(" to it)?");
-                    if (opponent.chooseUse(outcome, sb.toString(), game)) {
+                    if (opponent.chooseUse(outcome, sb.toString(), source, game)) {
                         if (!game.isSimulation())
                             game.informPlayers(opponent.getLogName() + " pays tribute to " + sourcePermanent.getLogName());
                         game.getState().setValue("tributeValue" + source.getSourceId(), "yes");

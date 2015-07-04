@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,20 +20,31 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.player.ai;
 
-import mage.constants.Outcome;
-import mage.abilities.*;
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
@@ -44,13 +55,10 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
-import java.util.*;
-
 /**
  *
  * plays randomly
- * 
+ *
  * @author BetaSteward_at_googlemail.com
  */
 public class SimulatedPlayerMCTS extends MCTSPlayer {
@@ -58,7 +66,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     private boolean isSimulatedPlayer;
     private static Random rnd = new Random();
     private int actionCount = 0;
-     private static final transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
+    private static final transient Logger logger = Logger.getLogger(SimulatedPlayerMCTS.class);
 
     public SimulatedPlayerMCTS(UUID id, boolean isSimulatedPlayer) {
         super(id);
@@ -83,14 +91,15 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         return actionCount;
     }
 
-       @Override
+    @Override
     public boolean priority(Game game) {
 //        logger.info("priority");
         boolean didSomething = false;
         Ability ability = getAction(game);
 //        logger.info("simulate " + ability.toString());
-        if (!(ability instanceof PassAbility))                
+        if (!(ability instanceof PassAbility)) {
             didSomething = true;
+        }
 
         activateAbility((ActivatedAbility) ability, game);
 
@@ -102,16 +111,18 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         List<Ability> playables = getPlayableAbilities(game);
         Ability ability;
         while (true) {
-            if (playables.size() == 1)
+            if (playables.size() == 1) {
                 ability = playables.get(0);
-            else
+            } else {
                 ability = playables.get(rnd.nextInt(playables.size()));
+            }
             List<Ability> options = getPlayableOptions(ability, game);
             if (!options.isEmpty()) {
-                if (options.size() == 1)
+                if (options.size() == 1) {
                     ability = options.get(0);
-                else
+                } else {
                     ability = options.get(rnd.nextInt(options.size()));
+                }
             }
             if (ability.getManaCosts().getVariableCosts().size() > 0) {
                 int amount = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
@@ -133,7 +144,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 //                }
 //            }
 //            else {
-                break;
+            break;
 //            }
         }
         return ability;
@@ -147,12 +158,12 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
             List<Ability> options = getPlayableOptions(source, game);
             if (options.isEmpty()) {
                 ability = source;
-            }
-            else {
-                if (options.size() == 1)
+            } else {
+                if (options.size() == 1) {
                     ability = options.get(0);
-                else
+                } else {
                     ability = options.get(rnd.nextInt(options.size()));
+                }
             }
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
@@ -205,7 +216,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
         }
 
         List<Permanent> blockers = getAvailableBlockers(game);
-        for (Permanent blocker: blockers) {
+        for (Permanent blocker : blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
@@ -242,9 +253,10 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     protected boolean chooseRandomTarget(Target target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
-        if (possibleTargets.isEmpty())
+        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
+        if (possibleTargets.isEmpty()) {
             return false;
+        }
         if (!target.isRequired(source)) {
             if (rnd.nextInt(possibleTargets.size() + 1) == 0) {
                 return false;
@@ -266,8 +278,9 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game) {
-        if (this.isHuman())
+        if (this.isHuman()) {
             return chooseRandom(target, game);
+        }
         return super.choose(outcome, target, sourceId, game);
     }
 
@@ -318,7 +331,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
 
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
+        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), playerId, game);
         if (possibleTargets.isEmpty()) {
             return !target.isRequired(source);
         }
@@ -347,11 +360,11 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public boolean chooseUse(Outcome outcome, String message, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, Ability source, Game game) {
         if (this.isHuman()) {
             return rnd.nextBoolean();
         }
-        return super.chooseUse(outcome, message, game);
+        return super.chooseUse(outcome, message, source, game);
     }
 
     @Override
@@ -396,12 +409,12 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         if (this.isHuman()) {
-            Iterator<Mode> it = modes.values().iterator();
+            Iterator<Mode> it = modes.getAvailableModes(source, game).iterator();
             Mode mode = it.next();
             if (modes.size() == 1) {
                 return mode;
             }
-            int modeNum = rnd.nextInt(modes.values().size());
+            int modeNum = rnd.nextInt(modes.getAvailableModes(source, game).size());
             for (int i = 0; i < modeNum; i++) {
                 mode = it.next();
             }
@@ -436,8 +449,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 if (targets.size() == 1) {
                     targetId = targets.get(0);
                     amount = remainingDamage;
-                }
-                else {
+                } else {
                     targetId = targets.get(rnd.nextInt(targets.size()));
                     amount = rnd.nextInt(damage + 1);
                 }
@@ -445,8 +457,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 if (permanent != null) {
                     permanent.damage(amount, sourceId, game, false, true);
                     remainingDamage -= amount;
-                }
-                else {
+                } else {
                     Player player = game.getPlayer(targetId);
                     if (player != null) {
                         player.damage(amount, sourceId, game, false, true);
@@ -455,8 +466,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
                 }
                 targets.remove(targetId);
             }
-        }
-        else {
+        } else {
             super.assignDamage(damage, targets, singleTargetName, sourceId, game);
         }
     }

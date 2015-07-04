@@ -96,7 +96,7 @@ class CounterlashEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (stackObject != null && player != null) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-            if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", game)) {
+            if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", source, game)) {
                 FilterCard filter = new FilterCard();
                 ArrayList<Predicate<MageObject>> types = new ArrayList<Predicate<MageObject>>();
                 for (CardType type: stackObject.getCardType()) {

@@ -92,7 +92,7 @@ class WildRicochetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         Player you = game.getPlayer(source.getControllerId());
-        if (spell != null && you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for " + spell.getName() + "?", game)) {
+        if (spell != null && you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for " + spell.getName() + "?", source, game)) {
             spell.chooseNewTargets(game, you.getId());
         }
         if (spell != null) {
@@ -100,7 +100,7 @@ class WildRicochetEffect extends OneShotEffect {
             copy.setControllerId(source.getControllerId());
             copy.setCopiedSpell(true);
             game.getStack().push(copy);
-            if (you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for the copied " + spell.getName() + "?", game)) {
+            if (you != null && you.chooseUse(Outcome.Benefit, "Do you wish to choose new targets for the copied " + spell.getName() + "?", source, game)) {
                 return copy.chooseNewTargets(game, you.getId());
             }
         }

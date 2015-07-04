@@ -28,18 +28,15 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,12 +50,13 @@ public class WindbornMuse extends CardImpl {
         this.subtype.add("Spirit");
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindbornMuseReplacementEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
+
     }
 
     public WindbornMuse(final WindbornMuse card) {
@@ -70,58 +68,3 @@ public class WindbornMuse extends CardImpl {
         return new WindbornMuse(this);
     }
 }
-
-class WindbornMuseReplacementEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
-
-    WindbornMuseReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    WindbornMuseReplacementEffect ( WindbornMuseReplacementEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) ) {
-            Player attackedPlayer = game.getPlayer(event.getTargetId());
-            if (attackedPlayer != null) {
-                // only if a player is attacked. Attacking a planeswalker is free
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null && event.getTargetId().equals(source.getControllerId())) {
-            ManaCostsImpl attackTax = new ManaCostsImpl("{2}");
-            if ( attackTax.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {2} to attack player?", game) )
-            {
-                if (attackTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public WindbornMuseReplacementEffect copy() {
-        return new WindbornMuseReplacementEffect(this);
-    }
-
-}
-

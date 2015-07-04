@@ -60,7 +60,7 @@ public enum CardRepository {
     // raise this if db structure was changed
     private static final long CARD_DB_VERSION = 39;
     // raise this if new cards were added to the server
-    private static final long CARD_CONTENT_VERSION = 20;
+    private static final long CARD_CONTENT_VERSION = 21;
 
     private final Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -135,7 +135,7 @@ public enum CardRepository {
                 int result = card.getName().indexOf(" // ");
                 if (result > 0) {
                     names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result+4));
+                    names.add(card.getName().substring(result + 4));
                 } else {
                     names.add(card.getName());
                 }
@@ -156,7 +156,7 @@ public enum CardRepository {
                 int result = card.getName().indexOf(" // ");
                 if (result > 0) {
                     names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result+4));
+                    names.add(card.getName().substring(result + 4));
                 } else {
                     names.add(card.getName());
                 }
@@ -165,7 +165,7 @@ public enum CardRepository {
         }
         return names;
     }
-    
+
     public Set<String> getCreatureNames() {
         Set<String> names = new TreeSet<>();
         try {
@@ -177,7 +177,7 @@ public enum CardRepository {
                 int result = card.getName().indexOf(" // ");
                 if (result > 0) {
                     names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result+4));
+                    names.add(card.getName().substring(result + 4));
                 } else {
                     names.add(card.getName());
                 }
@@ -193,7 +193,7 @@ public enum CardRepository {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
             Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.CREATURE.name() +'%'),where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            where.and(where.not().like("types", '%' + CardType.CREATURE.name() + '%'), where.not().like("types", '%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
@@ -261,7 +261,6 @@ public enum CardRepository {
         return null;
     }
 
-
     public List<String> getClassNames() {
         List<String> names = new ArrayList<>();
         try {
@@ -313,7 +312,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             criteria.buildQuery(queryBuilder);
-            
+
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
@@ -333,7 +332,7 @@ public enum CardRepository {
     public void setContentVersion(long version) {
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME  + "Content", version);
+            RepositoryUtil.updateVersion(connectionSource, VERSION_ENTITY_NAME + "Content", version);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

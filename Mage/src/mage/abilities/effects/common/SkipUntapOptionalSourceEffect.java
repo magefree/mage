@@ -39,8 +39,6 @@ import mage.players.Player;
  *
  * @author LevelX2
  */
-
-
 public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
 
     public SkipUntapOptionalSourceEffect() {
@@ -54,15 +52,15 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) &&
-                permanent.getControllerId().equals(game.getActivePlayerId()) && // your untap step
+        return permanent.getId().equals(source.getSourceId())
+                && permanent.getControllerId().equals(game.getActivePlayerId()) && // your untap step
                 permanent.isTapped();
     }
 
     @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
+    public boolean canBeUntapped(Permanent permanent, Ability source, Game game) {
         Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + "?", game);
+        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getLogName() + "?", source, game);
     }
 
     @Override

@@ -31,9 +31,8 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -42,11 +41,8 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -64,9 +60,9 @@ public class ExaltedDragon extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        
+
         // Exalted Dragon can't attack unless you sacrifice a land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExaltedDragonReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExaltedDragonCostToAttackBlockEffect()));
     }
 
     public ExaltedDragon(final ExaltedDragon card) {
@@ -79,55 +75,26 @@ public class ExaltedDragon extends CardImpl {
     }
 }
 
-class ExaltedDragonReplacementEffect extends ReplacementEffectImpl {
+class ExaltedDragonCostToAttackBlockEffect extends PayCostToAttackBlockEffectImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    ExaltedDragonReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
+    ExaltedDragonCostToAttackBlockEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK,
+                new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land"))));
         staticText = "{this} can't attack unless you sacrifice a land <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    ExaltedDragonReplacementEffect ( ExaltedDragonReplacementEffect effect ) {
+    ExaltedDragonCostToAttackBlockEffect(ExaltedDragonCostToAttackBlockEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null ) {
-            SacrificeTargetCost attackCost = new SacrificeTargetCost(new TargetControlledPermanent(filter));
-            if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Neutral, "Sacrifice a land?", game) )
-            {
-                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), false) ) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override    
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-    
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(source.getSourceId());
+        return source.getSourceId().equals(event.getSourceId());
     }
 
     @Override
-    public ExaltedDragonReplacementEffect copy() {
-        return new ExaltedDragonReplacementEffect(this);
+    public ExaltedDragonCostToAttackBlockEffect copy() {
+        return new ExaltedDragonCostToAttackBlockEffect(this);
     }
 
 }

@@ -38,7 +38,7 @@ import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -58,7 +58,7 @@ public class GolgariCharm extends CardImpl {
         // or destroy target enchantment;
         Mode mode = new Mode();
         mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetPermanent(new FilterEnchantment()));
+        mode.getTargets().add(new TargetPermanent(new FilterEnchantmentPermanent()));
         this.getSpellAbility().addMode(mode);
 
         // or regenerate each creature you control.

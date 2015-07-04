@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.combat;
 
 import java.io.Serializable;
@@ -87,13 +86,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
-        for (UUID permId: attackers) {
+        for (UUID permId : attackers) {
             Permanent attacker = game.getPermanent(permId);
             if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
                 return true;
             }
         }
-        for (UUID permId: blockers) {
+        for (UUID permId : blockers) {
             Permanent blocker = game.getPermanent(permId);
             if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
                 return true;
@@ -138,20 +137,18 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (attackers.size() > 0 && (!first || hasFirstOrDoubleStrike(game))) {
             if (blockers.isEmpty()) {
                 unblockedDamage(first, game);
-            }
-            else {
+            } else {
                 Permanent attacker = game.getPermanent(attackers.get(0));
                 if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {
                     Player player = game.getPlayer(attacker.getControllerId());
-                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", game)) {
+                    if (player.chooseUse(Outcome.Damage, "Do you wish to assign damage for " + attacker.getLogName() + " as though it weren't blocked?", null, game)) {
                         blocked = false;
                         unblockedDamage(first, game);
                     }
                 }
                 if (blockers.size() == 1) {
                     singleBlockerDamage(first, game);
-                }
-                else {
+                } else {
                     multiBlockerDamage(first, game);
                 }
             }
@@ -162,8 +159,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (blockers.size() > 0 && (!first || hasFirstOrDoubleStrike(game))) {
             if (attackers.size() == 1) {
                 singleAttackerDamage(first, game);
-            }
-            else {
+            } else {
                 multiAttackerDamage(first, game);
             }
         }
@@ -185,7 +181,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     * Determines if permanent can damage in current (First Strike or not) combat damage step
+     * Determines if permanent can damage in current (First Strike or not)
+     * combat damage step
      *
      * @param perm Permanent to check
      * @param first First strike or common combat damage step
@@ -196,8 +193,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (first) {
             // should have first strike or double strike
             return hasFirstOrDoubleStrike(perm);
-        }
-        // if now not first strike combat
+        } // if now not first strike combat
         else {
             if (hasFirstStrike(perm)) {
                 // if it has first strike in non FS combat damage step
@@ -211,7 +207,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     private void unblockedDamage(boolean first, Game game) {
-        for (UUID attackerId: attackers) {
+        for (UUID attackerId : attackers) {
             Permanent attacker = game.getPermanent(attackerId);
             if (canDamage(attacker, first)) {
                 //20091005 - 510.1c, 702.17c
@@ -221,8 +217,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
         }
     }
-
-
 
     private void singleBlockerDamage(boolean first, Game game) {
         //TODO:  handle banding
@@ -241,8 +235,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                     if (lethalDamage >= damage) {
                         blocker.markDamage(damage, attacker.getId(), game, true, true);
-                    }
-                    else {
+                    } else {
                         Player player = game.getPlayer(attacker.getControllerId());
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
@@ -251,13 +244,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                             defenderDamage(attacker, damage, game);
                         }
                     }
-                }
-                else {
+                } else {
                     blocker.markDamage(damage, attacker.getId(), game, true, true);
                 }
             }
             if (canDamage(blocker, first)) {
-                if (blocker.getBlocking() == 1) { // blocking several creatures handled separately                    
+                if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
                     attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
                 }
             }
@@ -275,7 +267,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (canDamage(attacker, first)) {
             // must be set before attacker damage marking because of effects like Test of Faith
             Map<UUID, Integer> blockerPower = new HashMap<>();
-            for (UUID blockerId: blockerOrder) {
+            for (UUID blockerId : blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
                     if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
@@ -285,7 +277,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             Map<UUID, Integer> assigned = new HashMap<>();
             if (blocked) {
-                for (UUID blockerId: blockerOrder) {
+                for (UUID blockerId : blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
                     int lethalDamage;
                     if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
@@ -309,7 +301,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);
                 }
             }
-            for (UUID blockerId: blockerOrder) {
+            for (UUID blockerId : blockerOrder) {
                 Integer power = blockerPower.get(blockerId);
                 if (power != null) {
                     attacker.markDamage(power, blockerId, game, true, true);
@@ -320,7 +312,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blocker.markDamage(entry.getValue(), attacker.getId(), game, true, true);
             }
         } else {
-            for (UUID blockerId: blockerOrder) {
+            for (UUID blockerId : blockerOrder) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (canDamage(blocker, first)) {
                     attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);
@@ -331,11 +323,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     /**
      * Damages attacking creatures by a creature that blocked several ones
-     * Damages only attackers as blocker was damage in {@link #singleBlockerDamage}.
+     * Damages only attackers as blocker was damage in
+     * {@link #singleBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
      *
-     * @param  first
+     * @param first
      * @param game
      */
     private void singleAttackerDamage(boolean first, Game game) {
@@ -351,7 +344,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     /**
      * Damages attacking creatures by a creature that blocked several ones
-     * Damages only attackers as blocker was damage in either {@link #singleBlockerDamage} or {@link #multiBlockerDamage}.
+     * Damages only attackers as blocker was damage in either
+     * {@link #singleBlockerDamage} or {@link #multiBlockerDamage}.
      *
      * Handles abilities like "{this} an block any number of creatures.".
      *
@@ -368,7 +362,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
         if (canDamage(blocker, first)) {
             Map<UUID, Integer> assigned = new HashMap<>();
-            for (UUID attackerId: attackerOrder) {
+            for (UUID attackerId : attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
                 int lethalDamage;
                 if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
@@ -398,8 +392,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (defender != null) {
                 defender.markDamage(amount, attacker.getId(), game, true, true);
             }
-        }
-        else {
+        } else {
             Player defender = game.getPlayer(defenderId);
             defender.damage(amount, attacker.getId(), game, true, true);
         }
@@ -407,10 +400,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public boolean canBlock(Permanent blocker, Game game) {
         // player can't block if another player is attacked
-        if (!defendingPlayerId.equals(blocker.getControllerId()) ) {
+        if (!defendingPlayerId.equals(blocker.getControllerId())) {
             return false;
         }
-        for (UUID attackerId: attackers) {
+        for (UUID attackerId : attackers) {
             if (!blocker.canBlock(attackerId, game)) {
                 return false;
             }
@@ -419,7 +412,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public void addBlocker(UUID blockerId, UUID playerId, Game game) {
-        for (UUID attackerId: attackers) {
+        for (UUID attackerId : attackers) {
             if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackerId, blockerId, playerId))) {
                 return;
             }
@@ -445,10 +438,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (blockerList.size() == 1) {
                 blockerOrder.add(blockerList.get(0));
                 break;
-            }
-            else {
+            } else {
                 List<Permanent> blockerPerms = new ArrayList<>();
-                for (UUID blockerId: blockerList) {
+                for (UUID blockerId : blockerList) {
                     blockerPerms.add(game.getPermanent(blockerId));
                 }
                 UUID blockerId = player.chooseBlockerOrder(blockerPerms, this, blockerOrder, game);
@@ -469,10 +461,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             if (attackerList.size() == 1) {
                 attackerOrder.add(attackerList.get(0));
                 break;
-            }
-            else {
+            } else {
                 List<Permanent> attackerPerms = new ArrayList<>();
-                for (UUID attackerId: attackerList) {
+                for (UUID attackerId : attackerList) {
                     attackerPerms.add(game.getPermanent(attackerId));
                 }
                 UUID attackerId = player.chooseAttackerOrder(attackerPerms, game);
@@ -484,7 +475,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public int totalAttackerDamage(Game game) {
         int total = 0;
-        for (UUID attackerId: attackers) {
+        for (UUID attackerId : attackers) {
             total += getDamageValueFromPermanent(game.getPermanent(attackerId), game);
         }
         return total;
@@ -517,13 +508,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             return;
         }
         for (UUID blockerId : blockers) {
-            for (UUID attackerId: attackers) {
+            for (UUID attackerId : attackers) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));
             }
         }
-        
-        if(!blockers.isEmpty()) {
-            for (UUID attackerId: attackers) {
+
+        if (!blockers.isEmpty()) {
+            for (UUID attackerId : attackers) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));
             }
         }
@@ -536,12 +527,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         if (blockersCount == 1) {
             List<UUID> toBeRemoved = new ArrayList<>();
-            for (UUID blockerId: getBlockers()) {
+            for (UUID blockerId : getBlockers()) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
                     blockWasLegal = false;
-                    if (!game.isSimulation())
+                    if (!game.isSimulation()) {
                         game.informPlayers(blocker.getLogName() + " can't block alone. Removing it from combat.");
+                    }
                     toBeRemoved.add(blockerId);
                 }
             }
@@ -567,8 +559,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
+                }
                 blockWasLegal = false;
             }
             // Check if there are to many blockers (maxBlockedBy = 0 means no restrictions)
@@ -582,20 +575,23 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockers.clear();
                 blockerOrder.clear();
                 this.blocked = false;
-                if (!game.isSimulation())
+                if (!game.isSimulation()) {
                     game.informPlayers(new StringBuilder(attacker.getLogName())
-                        .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
-                        .append(attacker.getMaxBlockedBy()==1?" creature.":" creatures.")
-                        .append(" Blockers discarded.").toString());
+                            .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
+                            .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
+                            .append(" Blockers discarded.").toString());
+                }
                 blockWasLegal = false;
             }
 
         }
         return blockWasLegal;
     }
+
     /**
-     * There are effects that let creatures assigns combat damage equal to its toughness rather than its power.
-     * So this method takes this into account to get the value of damage a creature will assign
+     * There are effects that let creatures assigns combat damage equal to its
+     * toughness rather than its power. So this method takes this into account
+     * to get the value of damage a creature will assign
      *
      * @param permanent
      * @param game
@@ -610,14 +606,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     /**
-     * There are effects, that set an attacker to be blcoked.
-     * Therefore this setter can be used.
-     * @param blocked 
+     * There are effects, that set an attacker to be blcoked. Therefore this
+     * setter can be used.
+     *
+     * @param blocked
      */
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
-   
+
     @Override
     public CombatGroup copy() {
         return new CombatGroup(this);

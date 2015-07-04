@@ -27,7 +27,6 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -56,9 +55,9 @@ public class GiftsUngiven extends CardImpl {
         super(ownerId, 62, "Gifts Ungiven", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{3}{U}");
         this.expansionSetCode = "CHK";
 
-
         // Search your library for up to four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
         this.getSpellAbility().addEffect(new GiftsUngivenEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
     public GiftsUngiven(final GiftsUngiven card) {
@@ -94,7 +93,10 @@ class GiftsUngivenEffect extends OneShotEffect {
         if (player == null || sourceCard == null) {
             return false;
         }
-
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (opponent == null) {
+            return false;
+        }
         GiftsUngivenTarget target = new GiftsUngivenTarget();
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
@@ -105,34 +107,20 @@ class GiftsUngivenEffect extends OneShotEffect {
                         cards.add(card);
                     }
                 }
-                player.revealCards(sourceCard.getName(), cards, game);
+                player.revealCards(sourceCard.getIdName(), cards, game);
 
                 CardsImpl cardsToKeep = new CardsImpl();
                 if (cards.size() > 2) {
                     cardsToKeep.addAll(cards);
-
-                    Player opponent;
-                    if (game.getOpponents(player.getId()).size() > 1) {
-                        TargetOpponent targetOpponent = new TargetOpponent();
-                        player.chooseTarget(outcome, targetOpponent, source, game);
-                        opponent = game.getPlayer(target.getFirstTarget());
-                    } else {
-                        opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
-                    }
                     TargetCard targetDiscard = new TargetCard(2, Zone.LIBRARY, new FilterCard("cards to put in graveyard"));
-                    if (opponent != null && opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
+                    if (opponent.choose(Outcome.Discard, cards, targetDiscard, game)) {
                         cardsToKeep.removeAll(targetDiscard.getTargets());
                         cards.removeAll(cardsToKeep);
                     }
                 }
 
                 player.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
-                for (UUID cardId : cardsToKeep) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        player.moveCardToHandWithInfo(card, source.getSourceId(), game, Zone.LIBRARY);
-                    }
-                }
+                player.moveCards(cardsToKeep, Zone.LIBRARY, Zone.HAND, source, game);
             }
             player.shuffleLibrary(game);
             return true;

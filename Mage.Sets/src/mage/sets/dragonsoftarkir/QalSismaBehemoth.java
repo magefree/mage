@@ -29,21 +29,14 @@ package mage.sets.dragonsoftarkir;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DECLARE_ATTACKER;
-import static mage.game.events.GameEvent.EventType.DECLARE_BLOCKER;
-import mage.players.Player;
 
 /**
  *
@@ -60,7 +53,7 @@ public class QalSismaBehemoth extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Qal Sisma Behemoth can't attack or block unless you pay {2}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new QalSismaBehemothEffect() ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(new ManaCostsImpl("{2}"), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK_AND_BLOCK)));
 
     }
 
@@ -72,67 +65,4 @@ public class QalSismaBehemoth extends CardImpl {
     public QalSismaBehemoth copy() {
         return new QalSismaBehemoth(this);
     }
-}
-
-class QalSismaBehemothEffect extends ReplacementEffectImpl {
-
-    private static final String effectText = "{this} can't attack or block unless you pay {2}";
-
-    QalSismaBehemothEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        staticText = effectText;
-    }
-
-    QalSismaBehemothEffect ( QalSismaBehemothEffect effect ) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        throw new UnsupportedOperationException("Not supported.");
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if (player != null) {
-            String chooseText;
-            if (event.getType().equals(GameEvent.EventType.DECLARE_ATTACKER)) {
-                chooseText = "Pay {2} to attack?";
-            } else {
-                chooseText = "Pay {2} to block?";
-            }
-            ManaCostsImpl attackBlockTax = new ManaCostsImpl("{2}");
-            if (attackBlockTax.canPay(source, source.getSourceId(), event.getPlayerId(), game)
-                    && player.chooseUse(Outcome.Neutral, chooseText, game)) {
-                if (attackBlockTax.payOrRollback(source, game, source.getSourceId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
-            case DECLARE_ATTACKER:
-            case DECLARE_BLOCKER:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getSourceId().equals(source.getSourceId());
-    }
-
-    @Override
-    public QalSismaBehemothEffect copy() {
-        return new QalSismaBehemothEffect(this);
-    }
-
 }

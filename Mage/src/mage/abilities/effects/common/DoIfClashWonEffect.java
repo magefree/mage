@@ -79,7 +79,7 @@ public class DoIfClashWonEffect extends OneShotEffect {
                 message = CardUtil.replaceSourceName(message, mageObject.getLogName());
             }
             
-            if (chooseUseText == null || player.chooseUse(executingEffect.getOutcome(), message, game)) {
+            if (chooseUseText == null || player.chooseUse(executingEffect.getOutcome(), message, source, game)) {
                 if (ClashEffect.getInstance().apply(game, source)) {
                     if (setTargetPointerToClashedOpponent) {
                         Object opponent = getValue("clashOpponent");

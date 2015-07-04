@@ -90,7 +90,7 @@ class WhirlpoolWhelmEffect extends OneShotEffect {
         if (controller != null) {
             boolean topOfLibrary = false;
             if (ClashEffect.getInstance().apply(game, source)) {
-                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?" , game);
+                topOfLibrary = controller.chooseUse(outcome, "Put " + creature.getLogName() + " to top of libraray instead?" , source, game);
             }
             if (topOfLibrary) {
                 controller.moveCardToHandWithInfo(creature, source.getSourceId(), game, Zone.BATTLEFIELD);

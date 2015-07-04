@@ -33,7 +33,7 @@ import java.util.UUID;
  *
  * @author dustinconrad
  */
-public class BrassclawOrcs extends mage.sets.fallenempires.BrassclawOrcs {
+public class BrassclawOrcs extends mage.sets.fallenempires.BrassclawOrcs1 {
 
     public BrassclawOrcs(UUID ownerId) {
         super(ownerId);

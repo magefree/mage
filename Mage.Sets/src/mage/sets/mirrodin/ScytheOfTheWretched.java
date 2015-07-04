@@ -89,9 +89,6 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
 
     public ScytheOfTheWretchedTriggeredAbility() {
         super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
-        Effect effect = new AttachEffect(Outcome.AddAbility);
-        effect.setText("Attach {this} to that creature.");
-        addEffect(effect);
     }
 
     public ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
@@ -115,7 +112,7 @@ class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
             Permanent equippedCreature = getEquippedCreature(game);
             for (MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(mor.getSourceId(), Zone.BATTLEFIELD);
-                if((equippedCreature != null && mor.refersTo(equippedCreature, game))
+                if ((equippedCreature != null && mor.refersTo(equippedCreature, game))
                         || (permanent != null && permanent.getAttachments().contains(getSourceId()))) {
                     setTarget(new FixedTarget(event.getTargetId()));
                     return true;
@@ -149,7 +146,7 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
 
     public ScytheOfTheWretchedReanimateEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "return that card to the battlefield under your control";
+        this.staticText = "return that card to the battlefield under your control. Attach {this} to that creature";
     }
 
     public ScytheOfTheWretchedReanimateEffect(final ScytheOfTheWretchedReanimateEffect effect) {
@@ -163,6 +160,9 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
         if (card != null && controller != null) {
             Zone currentZone = game.getState().getZone(card.getId());
             controller.putOntoBattlefieldWithInfo(card, game, currentZone, source.getSourceId());
+            Effect effect = new AttachEffect(Outcome.AddAbility);
+            effect.setTargetPointer(new FixedTarget(card.getId()));
+            effect.apply(game, source);
             return true;
         }
 

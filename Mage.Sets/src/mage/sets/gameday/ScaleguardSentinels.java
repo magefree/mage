@@ -28,7 +28,6 @@
 package mage.sets.gameday;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -60,9 +59,9 @@ public class ScaleguardSentinels extends CardImpl {
     static {
         filter.add(new SubtypePredicate("Dragon"));
     }
-    
+
     public ScaleguardSentinels(UUID ownerId) {
-        super(ownerId, 43, "Scaleguard Sentinels", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
+        super(ownerId, 44, "Scaleguard Sentinels", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}{G}");
         this.expansionSetCode = "MGDC";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
@@ -71,27 +70,27 @@ public class ScaleguardSentinels extends CardImpl {
 
         // As an additional cost to cast Scaleguard Sentinels, you may reveal a Dragon card from your hand.
         this.getSpellAbility().addEffect(new InfoEffect("As an additional cost to cast {this}, you may reveal a Dragon card from your hand"));
-        
+
         // Scaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true),
                 ScaleguardSentinelsCondition.getInstance(), true,
                 "{this} enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast {this}", ""),
                 new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
-        
+
     }
-    
+
     @Override
     public void adjustCosts(Ability ability, Game game) {
         if (ability.getAbilityType().equals(AbilityType.SPELL)) {
             Player controller = game.getPlayer(ability.getControllerId());
             if (controller != null) {
                 if (controller.getHand().count(filter, game) > 0) {
-                    ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0,1, filter)));
+                    ability.addCost(new RevealTargetFromHandCost(new TargetCardInHand(0, 1, filter)));
                 }
             }
         }
     }
-    
+
     public ScaleguardSentinels(final ScaleguardSentinels card) {
         super(card);
     }

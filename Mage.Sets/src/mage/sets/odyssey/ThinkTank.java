@@ -97,7 +97,7 @@ class ThinkTankLookLibraryEffect extends OneShotEffect {
                     CardsImpl cards = new CardsImpl();
                     cards.add(card);
                     controller.lookAtCards("Think Tank", cards, game);
-                    if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
+                    if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", source, game)) {
                         return controller.moveCards(card, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
                     }
 

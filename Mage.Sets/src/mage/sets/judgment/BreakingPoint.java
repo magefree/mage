@@ -66,34 +66,39 @@ public class BreakingPoint extends CardImpl {
 }
 
 class BreakingPointDestroyEffect extends OneShotEffect {
-    
+
     public BreakingPointDestroyEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.";
+        this.staticText = "Any player may have {this} deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.";
     }
-    
+
     public BreakingPointDestroyEffect(final BreakingPointDestroyEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public BreakingPointDestroyEffect copy() {
         return new BreakingPointDestroyEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
         StackObject spell = null;
-        for(StackObject object : game.getStack()){
-            if(object instanceof Spell && object.getSourceId().equals(source.getSourceId())){
+        for (StackObject object : game.getStack()) {
+            if (object instanceof Spell && object.getSourceId().equals(source.getSourceId())) {
                 spell = object;
             }
         }
-        if(spell != null){
+        if (spell != null) {
             boolean destroyCreatures = true;
-            for(UUID uuid : game.getPlayerList()){
-                Player player = game.getPlayer(uuid);
-                if(player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getName() + " deal 6 damage to you?", game)){
+            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                Player player = game.getPlayer(playerId);
+                if (player != null && player.chooseUse(Outcome.Detriment, "Have " + spell.getLogName() + " deal 6 damage to you?", source, game)) {
                     destroyCreatures = false;
                     player.damage(6, source.getSourceId(), game, false, true);
                     game.informPlayers(player.getLogName() + " has " + spell.getName() + " deal 6 to him or her");

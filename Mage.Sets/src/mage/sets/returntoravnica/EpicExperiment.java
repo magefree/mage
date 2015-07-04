@@ -110,7 +110,7 @@ class EpicExperimentEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
             filter.setMessage("instant and sorcery cards with converted mana cost "+ source.getManaCostsToPay().getX() +" or less");
             while (epicExperimentExileZone != null && epicExperimentExileZone.count(filter, game) > 0
-                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + sourceObject.getLogName() + " without paying its mana cost?", game)) {
+                    && controller.chooseUse(Outcome.PlayForFree, "Cast cards exiled with " + sourceObject.getLogName() + " without paying its mana cost?", source, game)) {
                 TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
                 while (epicExperimentExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, epicExperimentExileZone, target, game)) {
                         Card card = game.getCard(target.getFirstTarget());

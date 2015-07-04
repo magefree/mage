@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,12 +20,11 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.view;
 
 import java.io.Serializable;
@@ -35,9 +34,11 @@ import mage.game.tournament.TournamentPlayer;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class TournamentPlayerView implements Serializable, Comparable{
+public class TournamentPlayerView implements Serializable, Comparable {
+
     private static final long serialVersionUID = 1L;
 
+    private final String flagName;
     private final String name;
     private final String state;
     private final String results;
@@ -46,7 +47,7 @@ public class TournamentPlayerView implements Serializable, Comparable{
 
     TournamentPlayerView(TournamentPlayer tournamentPlayer) {
         this.name = tournamentPlayer.getPlayer().getName();
-        StringBuilder sb  = new StringBuilder(tournamentPlayer.getState().toString());
+        StringBuilder sb = new StringBuilder(tournamentPlayer.getState().toString());
         String stateInfo = tournamentPlayer.getStateInfo();
         if (!stateInfo.isEmpty()) {
             sb.append(" (").append(stateInfo).append(")");
@@ -56,6 +57,7 @@ public class TournamentPlayerView implements Serializable, Comparable{
         this.points = tournamentPlayer.getPoints();
         this.results = tournamentPlayer.getResults();
         this.quit = !tournamentPlayer.isInTournament();
+        this.flagName = tournamentPlayer.getPlayer().getUserData().getFlagName();
     }
 
     public String getName() {
@@ -83,4 +85,7 @@ public class TournamentPlayerView implements Serializable, Comparable{
         return ((TournamentPlayerView) t).getPoints() - this.getPoints();
     }
 
+    public String getFlagName() {
+        return flagName;
+    }
 }

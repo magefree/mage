@@ -117,7 +117,7 @@ class SwiftWarkiteEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.PutCardInPlay, "Put a creature card from your hand? (No = from your graveyard)", game)) {
+            if (controller.chooseUse(Outcome.PutCardInPlay, "Put a creature card from your hand? (No = from your graveyard)", source, game)) {
                 Target target = new TargetCardInHand(0, 1, filter);
                 controller.choose(outcome, target, source.getSourceId(), game);
                 Card card = controller.getHand().get(target.getFirstTarget(), game);

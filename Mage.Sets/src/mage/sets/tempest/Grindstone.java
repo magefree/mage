@@ -60,8 +60,7 @@ public class Grindstone extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        
-        
+
     }
 
     public Grindstone(final Grindstone card) {
@@ -75,21 +74,21 @@ public class Grindstone extends CardImpl {
 }
 
 class GrindstoneEffect extends OneShotEffect {
-    
+
     public GrindstoneEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process";
     }
-    
+
     public GrindstoneEffect(final GrindstoneEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public GrindstoneEffect copy() {
         return new GrindstoneEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
@@ -111,12 +110,9 @@ class GrindstoneEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 cards.addAll(targetPlayer.getLibrary().getTopCards(game, 2));
                 if (!cards.isEmpty()) {
-                    Card card1 = targetPlayer.getLibrary().removeFromTop(game);                    
+                    Card card1 = targetPlayer.getLibrary().removeFromTop(game);
                     if (targetPlayer.getLibrary().size() > 0) {
-                        Card card2 = targetPlayer.getLibrary().removeFromTop(game);                                        
-                        if (card1.getColor(game).hasColor() && card2.getColor(game).hasColor()) {
-                            colorShared = card1.getColor(game).shares(card2.getColor(game));
-                        }                    
+                        colorShared = card1.getColor(game).shares(targetPlayer.getLibrary().removeFromTop(game).getColor(game));
                     }
                 }
                 targetPlayer.moveCards(cards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);

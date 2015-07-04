@@ -27,9 +27,7 @@
  */
 package mage.sets.lorwyn;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,13 +37,14 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-
-import java.util.UUID;
 
 /**
  *
@@ -106,7 +105,7 @@ class SilvergillAdeptCost extends CostImpl {
 
         paid = false;
         if (player.getHand().count(filter, game) > 0
-                && player.chooseUse(Outcome.Benefit, "Reveal a Merfolk card? Otherwise pay {3}.", game)) {
+                && player.chooseUse(Outcome.Benefit, "Reveal a Merfolk card? Otherwise pay {3}.", ability, game)) {
             TargetCardInHand target = new TargetCardInHand(filter);
             if (player.choose(Outcome.Benefit, target, sourceId, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);

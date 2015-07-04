@@ -32,7 +32,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackBlockUnlessPaysSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -53,6 +55,12 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class FloodtideSerpent extends CardImpl {
 
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment you control");
+
+    static {
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
+    }
+
     public FloodtideSerpent(UUID ownerId) {
         super(ownerId, 41, "Floodtide Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "BNG";
@@ -62,8 +70,8 @@ public class FloodtideSerpent extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Floodtide Serpent can't attack unless you return an enchantment you control to its owner's hand <i>(This cost is paid as attackers are declared.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloodtideSerpentReplacementEffect()));
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(
+                new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter)), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK)));
 
     }
 
@@ -85,24 +93,23 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    FloodtideSerpentReplacementEffect ( ) {
+    FloodtideSerpentReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "{this} can't attack unless you return an enchantment you control to its owner's hand <i>(This cost is paid as attackers are declared.)</i>";
     }
 
-    FloodtideSerpentReplacementEffect ( FloodtideSerpentReplacementEffect effect ) {
+    FloodtideSerpentReplacementEffect(FloodtideSerpentReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null ) {
+        if (player != null) {
             ReturnToHandTargetPermanentCost attackCost = new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter));
-            if ( attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", game) )
-            {
-                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true) ) {
+            if (attackCost.canPay(source, source.getSourceId(), event.getPlayerId(), game)
+                    && player.chooseUse(Outcome.Neutral, "Return an enchantment you control to hand to attack?", source, game)) {
+                if (attackCost.pay(source, game, source.getSourceId(), event.getPlayerId(), true)) {
                     return false;
                 }
             }
@@ -111,11 +118,10 @@ class FloodtideSerpentReplacementEffect extends ReplacementEffectImpl {
         return false;
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.DECLARE_ATTACKER;
     }
-    
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {

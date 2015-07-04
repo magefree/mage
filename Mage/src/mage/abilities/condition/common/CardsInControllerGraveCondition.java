@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * Condition for - Controller has X or more cards in his or her graveyard
@@ -23,4 +24,10 @@ public class CardsInControllerGraveCondition implements Condition {
         Player player = game.getPlayer(source.getControllerId());
         return player != null && player.getGraveyard().size() >= value;
     }
+
+    @Override
+    public String toString() {
+        return "there are " + CardUtil.numberToText(value, "one") + " or more cards in your graveyard";
+    }
+
 }

@@ -111,7 +111,7 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
         Permanent creature = game.getPermanent(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
-            if (controller.chooseUse(outcome, "Unleash "+ creature.getName() +"?", game)) {
+            if (controller.chooseUse(outcome, "Unleash "+ creature.getName() +"?", source, game)) {
                 if (!game.isSimulation())
                     game.informPlayers(controller.getLogName() + " unleashes " + creature.getName());
                 creature.addCounters(CounterType.P1P1.createInstance(), game);

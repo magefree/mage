@@ -92,7 +92,7 @@ class PainfulQuandryEffect extends OneShotEffect {
             boolean paid = false;
             Cost cost = new DiscardTargetCost(new TargetCardInHand());
             if (cost.canPay(source, source.getSourceId(), player.getId(), game)
-                    && player.chooseUse(Outcome.Detriment, "Discard a card (otherwise you lose 5 life)?", game)) {
+                    && player.chooseUse(Outcome.Detriment, "Discard a card (otherwise you lose 5 life)?", source, game)) {
                 paid = cost.pay(source, game, source.getSourceId(), player.getId(), false);
             }
             if (!paid) {

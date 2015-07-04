@@ -33,14 +33,19 @@ import mage.abilities.Ability;
 import mage.abilities.abilityword.GrandeurAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackAnyPlayerAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -68,10 +73,9 @@ public class OrissSamiteGuardian extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        
+
         // Grandeur - Discard another card named Oriss, Samite Guardian: Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
         ability = new GrandeurAbility(new OrissSamiteGuardianCantCastEffect(), "Oriss, Samite Guardian");
-        ability.addEffect(new OrissSamiteGuardianCantAttackEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -83,6 +87,37 @@ public class OrissSamiteGuardian extends CardImpl {
     @Override
     public OrissSamiteGuardian copy() {
         return new OrissSamiteGuardian(this);
+    }
+}
+
+class OrissSamiteGuardianEffect extends OneShotEffect {
+
+    public OrissSamiteGuardianEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Target player can't cast spells this turn, and creatures that player controls can't attack this turn";
+    }
+
+    public OrissSamiteGuardianEffect(final OrissSamiteGuardianEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public OrissSamiteGuardianEffect copy() {
+        return new OrissSamiteGuardianEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.addEffect(new OrissSamiteGuardianCantCastEffect(), source);
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that player controls");
+            filter.add(new ControllerIdPredicate(getTargetPointer().getFirst(game, source)));
+            ContinuousEffect effect = new CantAttackAnyPlayerAllEffect(Duration.EndOfTurn, filter);
+            game.addEffect(effect, source);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -106,35 +141,7 @@ class OrissSamiteGuardianCantCastEffect extends ContinuousRuleModifyingEffectImp
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.CAST_SPELL;
     }
-    
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        return player != null && player.getId().equals(event.getPlayerId());
-    }
-}
 
-class OrissSamiteGuardianCantAttackEffect extends ContinuousRuleModifyingEffectImpl {
-
-    OrissSamiteGuardianCantAttackEffect() {
-        super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = ", and creatures that player controls can't attack this turn";
-    }
-
-    OrissSamiteGuardianCantAttackEffect(final OrissSamiteGuardianCantAttackEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public OrissSamiteGuardianCantAttackEffect copy() {
-        return new OrissSamiteGuardianCantAttackEffect(this);
-    }
-    
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
-    }
-    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));

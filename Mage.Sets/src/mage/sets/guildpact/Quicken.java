@@ -30,17 +30,17 @@ package mage.sets.guildpact;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
-import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -56,7 +56,6 @@ public class Quicken extends CardImpl {
     public Quicken(UUID ownerId) {
         super(ownerId, 31, "Quicken", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "GPT";
-
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
@@ -77,6 +76,7 @@ public class Quicken extends CardImpl {
 }
 
 class QuickenAsThoughEffect extends AsThoughEffectImpl {
+
     private QuickenWatcher quickenWatcher;
     private int zoneChangeCounter;
 
@@ -93,12 +93,12 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-         quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
-         Card card = game.getCard(source.getSourceId());
-         if (quickenWatcher != null && card != null) {
-             zoneChangeCounter = card.getZoneChangeCounter(game);
-             quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
-         }
+        quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
+        Card card = game.getCard(source.getSourceId());
+        if (quickenWatcher != null && card != null) {
+            zoneChangeCounter = card.getZoneChangeCounter(game);
+            quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
+        }
     }
 
     @Override
@@ -111,13 +111,12 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl {
         return new QuickenAsThoughEffect(this);
     }
 
-
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (quickenWatcher.isQuickenSpellActive(source.getSourceId(), zoneChangeCounter)) {
             Card card = game.getCard(sourceId);
             if (card != null && card.getCardType().contains(CardType.SORCERY) && source.getControllerId().equals(affectedControllerId)) {
-                    return card.getSpellAbility().isInUseableZone(game, card, null);
+                return true;
             }
         }
         return false;

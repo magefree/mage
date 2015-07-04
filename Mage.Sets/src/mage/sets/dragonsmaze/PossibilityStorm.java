@@ -53,7 +53,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
-
 public class PossibilityStorm extends CardImpl {
 
     public PossibilityStorm(UUID ownerId) {
@@ -76,7 +75,6 @@ public class PossibilityStorm extends CardImpl {
         return new PossibilityStorm(this);
     }
 }
-
 
 class PossibilityStormTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -132,11 +130,11 @@ class PossibilityStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
-        MageObject sourceObject = source.getSourceObject(game);        
+        MageObject sourceObject = source.getSourceObject(game);
         if (sourceObject != null && spell != null) {
             Player spellController = game.getPlayer(spell.getControllerId());
-            if (spellController != null &&
-                spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.STACK, true)) {
+            if (spellController != null
+                    && spellController.moveCardToExileWithInfo(spell, source.getSourceId(), sourceObject.getIdName(), source.getSourceId(), game, Zone.STACK, true)) {
                 if (spellController.getLibrary().size() > 0) {
                     Library library = spellController.getLibrary();
                     Card card;
@@ -147,10 +145,10 @@ class PossibilityStormEffect extends OneShotEffect {
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
-                    if (card != null && sharesType(card, spell.getCardType()) && 
-                            !card.getCardType().contains(CardType.LAND) &&
-                            card.getSpellAbility().getTargets().canChoose(spellController.getId(), game)) {
-                        if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", game)) {
+                    if (card != null && sharesType(card, spell.getCardType())
+                            && !card.getCardType().contains(CardType.LAND)
+                            && card.getSpellAbility().canChooseTarget(game)) {
+                        if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
                             spellController.cast(card.getSpellAbility(), game, true);
                         }
                     }
@@ -171,7 +169,7 @@ class PossibilityStormEffect extends OneShotEffect {
         return false;
     }
 
-    private boolean sharesType (Card card, List<CardType> cardTypes) {
+    private boolean sharesType(Card card, List<CardType> cardTypes) {
         for (CardType type : card.getCardType()) {
             if (cardTypes.contains(type)) {
                 return true;

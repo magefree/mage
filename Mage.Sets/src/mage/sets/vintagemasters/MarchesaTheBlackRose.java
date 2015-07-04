@@ -73,7 +73,7 @@ public class MarchesaTheBlackRose extends CardImpl {
 
         // Dethrone
         this.addAbility(new DethroneAbility());
-        
+
         // Other creatures you control have dethrone.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(new DethroneAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true)));
@@ -118,11 +118,11 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
                 && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null &&
-                    permanent.getControllerId().equals(this.getControllerId())
+            if (permanent != null
+                    && permanent.getControllerId().equals(this.getControllerId())
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getCounters().getCount(CounterType.P1P1) > 0) {
-                for (Effect effect: this.getEffects()) {
+                for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 }
                 return true;
@@ -155,7 +155,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
             effect.setText("return that card to the battlefield under your control at the beginning of the next end step");
@@ -163,7 +163,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             delayedAbility.setSourceId(source.getSourceId());
             delayedAbility.setControllerId(source.getControllerId());
             delayedAbility.setSourceObject(source.getSourceObject(game), game);
-            delayedAbility.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
+            delayedAbility.getEffects().get(0).setTargetPointer(getTargetPointer());
             game.addDelayedTriggeredAbility(delayedAbility);
             return true;
         }

@@ -25,24 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.combat.CantAttackYouUnlessPayManaAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -50,16 +47,16 @@ import mage.players.Player;
  */
 public class SphereOfSafety extends CardImpl {
 
-    public SphereOfSafety (UUID ownerId) {
+    public SphereOfSafety(UUID ownerId) {
         super(ownerId, 24, "Sphere of Safety", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "RTR";
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyPayManaToAttackAllEffect()));
 
     }
 
-    public SphereOfSafety (final SphereOfSafety card) {
+    public SphereOfSafety(final SphereOfSafety card) {
         super(card);
     }
 
@@ -70,64 +67,29 @@ public class SphereOfSafety extends CardImpl {
 
 }
 
-class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl {
+class SphereOfSafetyPayManaToAttackAllEffect extends CantAttackYouUnlessPayManaAllEffect {
 
-    private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control";
-    private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-    private final PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
-
-    
-    SphereOfSafetyReplacementEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = effectText;
+    SphereOfSafetyPayManaToAttackAllEffect() {
+        super(null, true);
+        staticText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.";
     }
 
-    SphereOfSafetyReplacementEffect ( SphereOfSafetyReplacementEffect effect ) {
+    SphereOfSafetyPayManaToAttackAllEffect(SphereOfSafetyPayManaToAttackAllEffect effect) {
         super(effect);
     }
-    
+
     @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_ATTACKER;
+    public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
+        int enchantments = game.getBattlefield().countAll(new FilterEnchantmentPermanent(), source.getControllerId(), game);
+        if (enchantments > 0) {
+            return new ManaCostsImpl<>("{" + enchantments + "}");
+        }
+        return null;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) ) {
-            return true;
-        }
-        // planeswalker
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent != null && permanent.getControllerId().equals(source.getControllerId())
-                              && permanent.getCardType().contains(CardType.PLANESWALKER)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(event.getPlayerId());
-        if ( player != null ) {
-            int ce = countEnchantments.calculate(game, source, this);
-            ManaCostsImpl safetyCosts = new ManaCostsImpl("{"+ ce +"}");
-            if ( safetyCosts.canPay(source, source.getSourceId(), event.getPlayerId(), game) &&
-                 player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) ) {
-                if (safetyCosts.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-    
-    @Override
-    public SphereOfSafetyReplacementEffect copy() {
-        return new SphereOfSafetyReplacementEffect(this);
+    public SphereOfSafetyPayManaToAttackAllEffect copy() {
+        return new SphereOfSafetyPayManaToAttackAllEffect(this);
     }
 
 }

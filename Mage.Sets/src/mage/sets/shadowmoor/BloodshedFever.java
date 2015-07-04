@@ -29,10 +29,9 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
@@ -55,7 +54,6 @@ public class BloodshedFever extends CardImpl {
         this.expansionSetCode = "SHM";
         this.subtype.add("Aura");
 
-
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
@@ -64,7 +62,8 @@ public class BloodshedFever extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature attacks each turn if able")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
     public BloodshedFever(final BloodshedFever card) {

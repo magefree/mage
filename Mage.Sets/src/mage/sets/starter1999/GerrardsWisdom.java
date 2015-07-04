@@ -28,15 +28,12 @@
 package mage.sets.starter1999;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.game.Game;
 
 /**
  *
@@ -50,7 +47,8 @@ public class GerrardsWisdom extends CardImpl {
         this.expansionSetCode = "S99";
 
         // You gain 2 life for each card in your hand.
-        this.getSpellAbility().addEffect(new GainLifeEffect(new TwiceCardsInControllerHandCount()));
+        this.getSpellAbility().addEffect(new GainLifeEffect(new MultipliedValue(new CardsInControllerHandCount(), 2),
+            "You gain 2 life for each card in your hand"));
     }
 
     public GerrardsWisdom(final GerrardsWisdom card) {
@@ -60,22 +58,5 @@ public class GerrardsWisdom extends CardImpl {
     @Override
     public GerrardsWisdom copy() {
         return new GerrardsWisdom(this);
-    }
-}
-
-class TwiceCardsInControllerHandCount extends CardsInControllerHandCount {
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return 2 * super.calculate(game, sourceAbility, effect);
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new TwiceCardsInControllerHandCount();
-    }
-
-    @Override
-    public String toString() {
-        return "2";
     }
 }

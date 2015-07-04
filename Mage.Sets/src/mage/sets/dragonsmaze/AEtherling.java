@@ -25,38 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileReturnToBattlefieldOwnerNextEndStepEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
  * @author LevelX2
  */
-
-
 public class AEtherling extends CardImpl {
 
-    public AEtherling (UUID ownerId) {
+    public AEtherling(UUID ownerId) {
         super(ownerId, 11, "AEtherling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Shapeshifter");
@@ -65,7 +55,7 @@ public class AEtherling extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {U}: Exile AEtherling. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AEherlingRemovingEffect(), new ManaCostsImpl("{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileReturnToBattlefieldOwnerNextEndStepEffect(), new ManaCostsImpl("{U}")));
         // {U}: AEtherling can't be blocked this turn
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(), new ManaCostsImpl("{U}")));
         // {1}: AEtherling gets +1/-1 until end of turn.
@@ -74,50 +64,13 @@ public class AEtherling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public AEtherling (final AEtherling card) {
+    public AEtherling(final AEtherling card) {
         super(card);
     }
 
     @Override
     public AEtherling copy() {
         return new AEtherling(this);
-    }
-
-}
-class AEherlingRemovingEffect extends OneShotEffect {
-
-    private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
-
-    AEherlingRemovingEffect () {
-        super(Outcome.Benefit);
-        staticText = effectText;
-    }
-
-    AEherlingRemovingEffect(AEherlingRemovingEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), "AEherling Exile", source.getSourceId(), game)) {
-                //create delayed triggered ability
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
-                delayedAbility.setSourceId(source.getSourceId());
-                delayedAbility.setControllerId(source.getControllerId());
-                delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public AEherlingRemovingEffect copy() {
-        return new AEherlingRemovingEffect(this);
     }
 
 }

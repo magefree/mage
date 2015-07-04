@@ -104,7 +104,7 @@ class TemptWithReflectionsEffect extends OneShotEffect {
             do {
                 if (game.getOpponents(source.getControllerId()).contains(player.getId())) {
                     String decision;
-                    if (player.chooseUse(outcome, "Put a copy of target creature onto the battlefield for you?", game)) {
+                    if (player.chooseUse(outcome, "Put a copy of target creature onto the battlefield for you?", source, game)) {
                         playersSaidYes.add(player.getId());
                         decision = " chooses to copy ";
                     } else {

@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterEnchantment;
+import mage.filter.common.FilterEnchantmentPermanent;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,9 +50,9 @@ import mage.target.TargetPermanent;
  * @author Plopman
  */
 public class DevoutHarpist extends CardImpl {
-    private static final FilterEnchantment filter = new FilterEnchantment("Auras attached to a creature");
-    static 
-    {        
+    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Auras attached to a creature");
+    static
+    {
         filter.add(new SubtypePredicate("Aura"));
         filter.add(new DevoutHarpistPredicate());
     }
@@ -69,7 +69,7 @@ public class DevoutHarpist extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
-        
+
     }
 
     public DevoutHarpist(final DevoutHarpist card) {
@@ -80,11 +80,11 @@ public class DevoutHarpist extends CardImpl {
     public DevoutHarpist copy() {
         return new DevoutHarpist(this);
     }
-    
+
 }
 
-class DevoutHarpistPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> { 
-    @Override    
+class DevoutHarpistPredicate implements ObjectPlayerPredicate<ObjectPlayer<Permanent>> {
+    @Override
     public boolean apply(ObjectPlayer<Permanent> input, Game game) {
         Permanent attachement = input.getObject();
         if (attachement != null) {

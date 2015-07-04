@@ -34,6 +34,7 @@ import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.SetTargetPointer;
 import mage.filter.FilterSpell;
 
 /**
@@ -48,7 +49,7 @@ public class NetherVoid extends CardImpl {
         this.supertype.add("World");
 
         // Whenever a player casts a spell, counter it unless that player pays {3}.
-        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
     public NetherVoid(final NetherVoid card) {

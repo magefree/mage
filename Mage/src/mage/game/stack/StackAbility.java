@@ -132,7 +132,7 @@ public class StackAbility extends StackObjImpl implements Ability {
     
     @Override
     public String getLogName() {
-        return GameLog.getColoredObjectName(this);
+        return GameLog.getColoredObjectIdName(this);
     }
     
     @Override

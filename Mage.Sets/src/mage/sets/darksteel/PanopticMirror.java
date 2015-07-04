@@ -109,7 +109,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || player.getHand().count(filter, game) == 0
-                || !player.chooseUse(this.outcome, choiceText, game)) {
+                || !player.chooseUse(this.outcome, choiceText, source, game)) {
             return false;
         }
 
@@ -177,7 +177,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
             }
             if(cardToCopy != null){
                 Card copy = game.copyCard(cardToCopy, source, source.getControllerId());
-                if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", game)) {
+                if (controller.chooseUse(outcome, "Cast the copied card without paying mana cost?", source, game)) {
                     return controller.cast(copy.getSpellAbility(), game, true);
                 }
             }

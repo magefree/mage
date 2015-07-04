@@ -99,7 +99,7 @@ class RootwaterThiefEffect extends OneShotEffect {
         }
         String message = "Pay {2} to exile a card from damaged player's library?";
         Cost cost = new ManaCostsImpl("{2}");
-        if(controller.chooseUse(Outcome.Benefit, message, game) && cost.pay(source, game, source.getSourceId(), controller.getId(), false))
+        if(controller.chooseUse(Outcome.Benefit, message, source, game) && cost.pay(source, game, source.getSourceId(), controller.getId(), false))
         {
             TargetCardInLibrary target = new TargetCardInLibrary();
             if (controller.searchLibrary(target, game, damagedPlayer.getId())) {

@@ -101,7 +101,7 @@ class PutAwayEffect extends OneShotEffect {
         }
         if (you != null) {
             if (card != null
-                    && you.chooseUse(Outcome.Benefit, "Do you wish to shuffle up to one target card from your graveyard into your library?", game)
+                    && you.chooseUse(Outcome.Benefit, "Do you wish to shuffle up to one target card from your graveyard into your library?", source, game)
                     && game.getState().getZone(card.getId()).match(Zone.GRAVEYARD)) {
                 card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 you.shuffleLibrary(game);

@@ -112,7 +112,7 @@ class WeirdHarvestEffect extends OneShotEffect {
     }
 
     private void chooseAndSearchLibrary(List<Player> usingPlayers, Player player, int xValue, Ability source, Game game) {
-        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", game)) {
+        if (player.chooseUse(Outcome.PutCardInPlay, "Search your library for up " + xValue + " creature cards and put them into your hand?", source, game)) {
             usingPlayers.add(player);
             TargetCardInLibrary target = new TargetCardInLibrary(0, xValue, new FilterCreatureCard());
             if (player.searchLibrary(target, game)) {

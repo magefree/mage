@@ -98,7 +98,7 @@ class MemoryPlunderEffect extends OneShotEffect {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() +" without paying cost?", game)) {
+            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() +" without paying cost?", source, game)) {
                 player.cast(card.getSpellAbility(), game, true);
             }
         }

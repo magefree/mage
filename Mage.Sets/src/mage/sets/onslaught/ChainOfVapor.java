@@ -98,7 +98,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                 return false;
             }            
             Player player = game.getPlayer(permanent.getControllerId());
-            if (player.chooseUse(Outcome.ReturnToHand, "Sacrifice a land to copy this spell?", game)){
+            if (player.chooseUse(Outcome.ReturnToHand, "Sacrifice a land to copy this spell?", source, game)){
                 TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledLandPermanent());
                 if (player.chooseTarget(Outcome.Sacrifice, target, source, game)){
                     Permanent land = game.getPermanent(target.getFirstTarget());

@@ -110,7 +110,7 @@ class AjanisChosenEffect extends OneShotEffect {
             {
                 Permanent oldCreature = game.getPermanent(enchantement.getAttachedTo());
 
-                if(oldCreature != null && enchantement.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game) && player.chooseUse(Outcome.Neutral, "Attach " + enchantement.getName() + " to the token ?", game))
+                if(oldCreature != null && enchantement.getSpellAbility().getTargets().get(0).canTarget(tokenPermanent.getId(), game) && player.chooseUse(Outcome.Neutral, "Attach " + enchantement.getName() + " to the token ?", source, game))
                 {
                     if(oldCreature.removeAttachment(enchantement.getId(), game)){
                         tokenPermanent.addAttachment(enchantement.getId(), game);

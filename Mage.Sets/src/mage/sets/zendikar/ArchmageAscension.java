@@ -193,6 +193,6 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
                 && archmage != null
                 && archmage.getCounters().getCount(CounterType.QUEST) >= 6
                 && you != null
-                && you.chooseUse(Outcome.Benefit, "Would you like to search your library instead of drawing a card?", game);
+                && you.chooseUse(Outcome.Benefit, "Would you like to search your library instead of drawing a card?", source, game);
     }
 }

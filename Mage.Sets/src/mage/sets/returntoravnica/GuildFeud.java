@@ -28,11 +28,7 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,14 +36,17 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
-
 
 /**
  *
@@ -79,7 +78,6 @@ public class GuildFeud extends CardImpl {
     }
 }
 
-
 class GuildFeudEffect extends OneShotEffect {
 
     public GuildFeudEffect() {
@@ -97,18 +95,19 @@ class GuildFeudEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent opponentCreature = null;
         Permanent controllerCreature = null;
-        if (opponent != null && controller != null) {
+        MageObject sourceObject = source.getSourceObject(game);
+        if (opponent != null && controller != null && sourceObject != null) {
             for (int activePlayer = 0; activePlayer < 2; activePlayer++) {
-                Player player = (activePlayer == 0? opponent : controller);
+                Player player = (activePlayer == 0 ? opponent : controller);
                 Cards topThreeCards = new CardsImpl();
                 topThreeCards.addAll(player.getLibrary().getTopCards(game, 3));
-                player.revealCards(player.getName() + " top three library cards", topThreeCards, game);
+                player.revealCards(sourceObject.getIdName() + " - " + player.getName() + " top library cards", topThreeCards, game);
                 Card creatureToBattlefield;
                 if (!topThreeCards.isEmpty()) {
-                    if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", game)) {
+                    if (player.chooseUse(Outcome.PutCreatureInPlay, "Put a creature card among them to the battlefield?", source, game)) {
                         TargetCard target = new TargetCard(Zone.LIBRARY,
                                 new FilterCreatureCard(
-                                "creature card to put on the battlefield"));
+                                        "creature card to put on the battlefield"));
                         if (player.choose(Outcome.PutCreatureInPlay, topThreeCards, target, game)) {
                             creatureToBattlefield = topThreeCards.get(target.getFirstTarget(), game);
                             if (creatureToBattlefield != null) {

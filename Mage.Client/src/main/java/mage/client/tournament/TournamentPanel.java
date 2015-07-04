@@ -31,7 +31,6 @@
  *
  * Created on 20-Jan-2011, 9:18:30 PM
  */
-
 package mage.client.tournament;
 
 import java.awt.Component;
@@ -45,14 +44,21 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.dialog.PreferencesDialog;
+import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH;
+import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER;
+import static mage.client.dialog.PreferencesDialog.KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH;
 import mage.client.util.ButtonColumn;
 import mage.client.util.Format;
+import mage.client.util.gui.TableUtil;
+import mage.client.util.gui.countryBox.CountryCellRenderer;
 import mage.remote.Session;
 import mage.view.RoundView;
 import mage.view.TournamentGameView;
@@ -76,7 +82,12 @@ public class TournamentPanel extends javax.swing.JPanel {
     private UpdateTournamentTask updateTask;
     private final DateFormat df;
 
-    /** Creates new form TournamentPanel */
+    private static final int[] defaultColumnsWidthPlayers = {30, 150, 150, 60, 400};
+    private static final int[] defaultColumnsWidthMatches = {60, 140, 140, 400, 80};
+
+    /**
+     * Creates new form TournamentPanel
+     */
     public TournamentPanel() {
         playersModel = new TournamentPlayersTableModel();
         matchesModel = new TournamentMatchesTableModel();
@@ -84,28 +95,29 @@ public class TournamentPanel extends javax.swing.JPanel {
         initComponents();
         this.restoreDividerLocations();
         btnQuitTournament.setVisible(false);
-        
+
         df = DateFormat.getDateTimeInstance();
 
         tablePlayers.createDefaultColumnsFromModel();
+        TableUtil.setColumnWidthAndOrder(tablePlayers, defaultColumnsWidthPlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
+        tablePlayers.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+
         tableMatches.createDefaultColumnsFromModel();
+        TableUtil.setColumnWidthAndOrder(tableMatches, defaultColumnsWidthMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
 
         chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
         chatPanel1.setChatType(ChatPanel.ChatType.TOURNAMENT);
 
-        Action action = new AbstractAction()
-        {
+        Action action = new AbstractAction() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int modelRow = Integer.valueOf( e.getActionCommand() );
-                
-                String state = (String)tableMatches.getValueAt(modelRow, 2);
-                String actionText = (String)tableMatches.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN);
-                UUID tableId = UUID.fromString((String)matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN +1));
-                UUID gameId = UUID.fromString((String)matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN +3));
+            public void actionPerformed(ActionEvent e) {
+                int modelRow = Integer.valueOf(e.getActionCommand());
 
-                
+                String state = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(2));
+                String actionText = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
+                UUID tableId = UUID.fromString((String) matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN + 1));
+                UUID gameId = UUID.fromString((String) matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN + 3));
+
 //                if (state.equals("Finished") && action.equals("Replay")) {
 //                    logger.info("Replaying game " + gameId);
 //                    session.replayGame(gameId);
@@ -118,7 +130,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         };
 
         // action button, don't delete this
-        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, TournamentMatchesTableModel.ACTION_COLUMN);
+        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
 
     }
 
@@ -127,6 +139,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         if (this.chatPanel1 != null) {
             this.chatPanel1.disconnect();
         }
+
     }
 
     private void saveDividerLocations() {
@@ -167,8 +180,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             startTasks();
             this.setVisible(true);
             this.repaint();
-        }
-        else {
+        } else {
             hideTournament();
         }
 
@@ -182,12 +194,15 @@ public class TournamentPanel extends javax.swing.JPanel {
         stopTasks();
         this.chatPanel1.disconnect();
         this.saveDividerLocations();
+        TableUtil.saveColumnWidthAndOrderToPrefs(tablePlayers, KEY_TOURNAMENT_PLAYER_COLUMNS_WIDTH, KEY_TOURNAMENT_PLAYER_COLUMNS_ORDER);
+        TableUtil.saveColumnWidthAndOrderToPrefs(tableMatches, KEY_TOURNAMENT_MATCH_COLUMNS_WIDTH, KEY_TOURNAMENT_MATCH_COLUMNS_ORDER);
+
         Component c = this.getParent();
         while (c != null && !(c instanceof TournamentPane)) {
             c = c.getParent();
         }
         if (c != null) {
-            ((TournamentPane)c).removeTournament();
+            ((TournamentPane) c).removeTournament();
         }
     }
 
@@ -201,21 +216,21 @@ public class TournamentPanel extends javax.swing.JPanel {
                 c = c.getParent();
             }
             if (c != null) {
-                ((TournamentPane)c).setTitle("Tournament [" + tournament.getTournamentName() +"]");
+                ((TournamentPane) c).setTitle("Tournament [" + tournament.getTournamentName() + "]");
             }
             txtName.setText(tournament.getTournamentName());
             txtType.setText(tournament.getTournamentType());
 
             txtStartTime.setText(df.format(tournament.getStartTime()));
             txtEndTime.setText("running...");
-            
+
             firstInitDone = true;
         }
         switch (tournament.getTournamentState()) {
             case "Constructing":
                 String timeLeft = "";
                 if (tournament.getStepStartTime() != null) {
-                    timeLeft = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                    timeLeft = Format.getDuration(tournament.getConstructionTime() - (tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime()) / 1000);
                 }
                 txtTournamentState.setText(new StringBuilder(tournament.getTournamentState()).append(" (").append(timeLeft).append(")").toString());
                 break;
@@ -223,7 +238,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             case "Drafting":
                 String usedTime = "";
                 if (tournament.getStepStartTime() != null) {
-                    usedTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime())/1000);
+                    usedTime = Format.getDuration((tournament.getServerTime().getTime() - tournament.getStepStartTime().getTime()) / 1000);
                 }
                 txtTournamentState.setText(tournament.getTournamentState() + " (" + usedTime + ") " + tournament.getRunningInfo());
                 break;
@@ -238,7 +253,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         if (txtEndTime.getText().equals("running...") && tournament.getEndTime() != null) {
             txtEndTime.setText(df.format(tournament.getEndTime()));
         }
-        
+
         playersModel.loadData(tournament);
         matchesModel.loadData(tournament);
         this.tablePlayers.repaint();
@@ -274,10 +289,10 @@ public class TournamentPanel extends javax.swing.JPanel {
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -505,7 +520,6 @@ public class TournamentPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
     private javax.swing.JButton btnCloseWindow;
@@ -532,7 +546,8 @@ public class TournamentPanel extends javax.swing.JPanel {
 }
 
 class TournamentPlayersTableModel extends AbstractTableModel {
-    private final String[] columnNames = new String[]{"Player Name", "State",  "Points", "Results"};
+
+    private final String[] columnNames = new String[]{"Loc", "Player Name", "State", "Points", "Results"};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
@@ -554,12 +569,14 @@ class TournamentPlayersTableModel extends AbstractTableModel {
     public Object getValueAt(int arg0, int arg1) {
         switch (arg1) {
             case 0:
-                return players[arg0].getName();
+                return players[arg0].getFlagName();
             case 1:
-                return players[arg0].getState();
+                return players[arg0].getName();
             case 2:
-                return Integer.toString(players[arg0].getPoints());
+                return players[arg0].getState();
             case 3:
+                return Integer.toString(players[arg0].getPoints());
+            case 4:
                 return players[arg0].getResults();
         }
         return "";
@@ -577,8 +594,13 @@ class TournamentPlayersTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class getColumnClass(int columnIndex){
-        return String.class;
+    public Class getColumnClass(int columnIndex) {
+        switch (columnIndex) {
+            case 0:
+                return Icon.class;
+            default:
+                return String.class;
+        }
     }
 
     @Override
@@ -599,8 +621,8 @@ class TournamentMatchesTableModel extends AbstractTableModel {
     public void loadData(TournamentView tournament) {
         List<TournamentGameView> views = new ArrayList<>();
         watchingAllowed = tournament.isWatchingAllowed();
-        for (RoundView round: tournament.getRounds()) {
-            for (TournamentGameView game: round.getGames()) {
+        for (RoundView round : tournament.getRounds()) {
+            for (TournamentGameView game : round.getGames()) {
                 views.add(game);
             }
         }
@@ -660,7 +682,7 @@ class TournamentMatchesTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Class getColumnClass(int columnIndex){
+    public Class getColumnClass(int columnIndex) {
         return String.class;
     }
 
@@ -688,7 +710,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     @Override
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
-            this.publish(session.getTournament(tournamentId));    
+            this.publish(session.getTournament(tournamentId));
             Thread.sleep(2000);
         }
         return null;
@@ -709,7 +731,8 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
             logger.fatal("Update Tournament Task error", ex);
         } catch (ExecutionException ex) {
             logger.fatal("Update Tournament Task error", ex);
-        } catch (CancellationException ex) {}
+        } catch (CancellationException ex) {
+        }
     }
 
 }

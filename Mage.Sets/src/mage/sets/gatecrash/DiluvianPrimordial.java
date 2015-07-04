@@ -127,7 +127,7 @@ class DiluvianPrimordialEffect extends OneShotEffect {
                 if (target instanceof TargetCardInOpponentsGraveyard) {
                     Card targetCard = game.getCard(target.getFirstTarget());
                     if (targetCard != null) {
-                        if (controller.chooseUse(outcome, "Cast " + targetCard.getLogName() +"?", game)) {
+                        if (controller.chooseUse(outcome, "Cast " + targetCard.getLogName() +"?", source, game)) {
                             // TODO: Handle the case if the cast is not possible, so the replacement effect shouldn't be active
                             ContinuousEffect effect = new DiluvianPrimordialReplacementEffect();
                             effect.setTargetPointer(new FixedTarget(targetCard.getId()));

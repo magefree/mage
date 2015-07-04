@@ -91,7 +91,7 @@ class BloodClockEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", game)) {
+        if (player.getLife() > 2 && player.chooseUse(Outcome.Neutral, "Pay 2 life? If you don't, return a permanent you control to its owner's hand.", source, game)) {
             player.loseLife(2, game);
             game.informPlayers(player.getLogName() + " pays 2 life. He will not return a permanent he or she controls.");
             return true;

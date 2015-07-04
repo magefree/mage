@@ -20,11 +20,11 @@ public class UserDataView implements Serializable {
     String flagName;
     protected boolean askMoveToGraveOrder;
 
-    static UserDataView getDefaultUserDataView() {
-        return new UserDataView(0, false, false, true, null,"world.png", false);
+    static UserData getDefaultUserDataView() {
+        return UserData.getDefaultUserDataView();
     }
-    
-    public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards, 
+
+    public UserDataView(int avatarId, boolean showAbilityPickerForced, boolean allowRequestShowHandCards,
             boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps, String flagName, boolean askMoveToGraveOrder) {
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -33,7 +33,7 @@ public class UserDataView implements Serializable {
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
         this.askMoveToGraveOrder = askMoveToGraveOrder;
-        
+
     }
 
     public UserDataView(UserData userData) {
@@ -74,5 +74,5 @@ public class UserDataView implements Serializable {
     public boolean askMoveToGraveOrder() {
         return askMoveToGraveOrder;
     }
-    
+
 }

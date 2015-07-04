@@ -37,7 +37,6 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
@@ -65,7 +64,6 @@ import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-
 /**
  *
  *
@@ -78,11 +76,10 @@ public class JaceArchitectOfThought extends CardImpl {
         this.expansionSetCode = "RTR";
         this.subtype.add("Jace");
 
-
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
-        this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new JaceArchitectOfThoughtDelayedTriggeredAbility()),1));
+        this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtStartEffect1(), 1));
 
         // -2: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect2(), -2));
@@ -102,16 +99,45 @@ public class JaceArchitectOfThought extends CardImpl {
     }
 }
 
+class JaceArchitectOfThoughtStartEffect1 extends OneShotEffect {
+
+    public JaceArchitectOfThoughtStartEffect1() {
+        super(Outcome.UnboostCreature);
+        this.staticText = "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn";
+    }
+
+    public JaceArchitectOfThoughtStartEffect1(final JaceArchitectOfThoughtStartEffect1 effect) {
+        super(effect);
+    }
+
+    @Override
+    public JaceArchitectOfThoughtStartEffect1 copy() {
+        return new JaceArchitectOfThoughtStartEffect1(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        DelayedTriggeredAbility delayedAbility = new JaceArchitectOfThoughtDelayedTriggeredAbility(game.getTurnNum());
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+        game.addDelayedTriggeredAbility(delayedAbility);
+        return true;
+    }
+}
+
 class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     private int startingTurn;
-            
-    public JaceArchitectOfThoughtDelayedTriggeredAbility() {
-        super(new BoostTargetEffect(-1,0, Duration.EndOfTurn), Duration.Custom, false);
+
+    public JaceArchitectOfThoughtDelayedTriggeredAbility(int startingTurn) {
+        super(new BoostTargetEffect(-1, 0, Duration.EndOfTurn), Duration.Custom, false);
+        this.startingTurn = startingTurn;
     }
 
-    public JaceArchitectOfThoughtDelayedTriggeredAbility(JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
+    public JaceArchitectOfThoughtDelayedTriggeredAbility(final JaceArchitectOfThoughtDelayedTriggeredAbility ability) {
         super(ability);
+        this.startingTurn = ability.startingTurn;
     }
 
     @Override
@@ -135,12 +161,6 @@ class JaceArchitectOfThoughtDelayedTriggeredAbility extends DelayedTriggeredAbil
         return new JaceArchitectOfThoughtDelayedTriggeredAbility(this);
     }
 
-    @Override
-    public void init(Game game) {
-        startingTurn = game.getTurnNum();
-    }
-
-    
     @Override
     public boolean isInactive(Game game) {
         return game.getActivePlayerId().equals(getControllerId()) && game.getTurnNum() != startingTurn;
@@ -195,10 +215,10 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
                     opponent = game.getPlayer(targetOpponent.getFirstTarget());
                 }
             }
-            if (opponent == null)  {
+            if (opponent == null) {
                 opponent = game.getPlayer(opponents.iterator().next());
             }
-            
+
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
             target.setRequired(false);
             Cards pile1 = new CardsImpl();
@@ -213,27 +233,27 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
             }
             player.revealCards("Pile 1 (Jace, Architect of Thought)", pile1, game);
             player.revealCards("Pile 2 (Jace, Architect of Thought)", cards, game);
-            
+
             postPileToLog("Pile 1", pile1.getCards(game), game);
             postPileToLog("Pile 2", cards.getCards(game), game);
-            
+
             Cards cardsToHand = cards;
             Cards cardsToLibrary = pile1;
             List<Card> cardPile1 = new ArrayList<>();
             List<Card> cardPile2 = new ArrayList<>();
-            for (UUID cardId: pile1) {
+            for (UUID cardId : pile1) {
                 cardPile1.add(game.getCard(cardId));
             }
-            for (UUID cardId: cards) {
+            for (UUID cardId : cards) {
                 cardPile2.add(game.getCard(cardId));
             }
 
             boolean pileChoice = player.choosePile(Outcome.Neutral, "Choose a pile to to put into your hand.", cardPile1, cardPile2, game);
-            if (pileChoice){
+            if (pileChoice) {
                 cardsToHand = pile1;
                 cardsToLibrary = cards;
             }
-            game.informPlayers(player.getLogName() +" chose pile" + (pileChoice?"1":"2"));
+            game.informPlayers(player.getLogName() + " chose pile" + (pileChoice ? "1" : "2"));
 
             for (UUID cardUuid : cardsToHand) {
                 Card card = cardsToHand.get(cardUuid, game);
@@ -260,11 +280,11 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect {
         }
         return false;
     }
-    
+
     private void postPileToLog(String pileName, Set<Card> cards, Game game) {
         StringBuilder message = new StringBuilder(pileName).append(": ");
         for (Card card : cards) {
-                message.append(card.getName()).append(" ");
+            message.append(card.getName()).append(" ");
         }
         if (cards.isEmpty()) {
             message.append(" (empty)");
@@ -320,15 +340,14 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         FilterCard filter = new FilterCard("card to cast without mana costs");
         TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
         while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
-                Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
+            Card card = game.getCard(target.getFirstTarget());
+            if (card != null) {
 
-                    if (controller.cast(card.getSpellAbility(), game, true))
-                    {
-                        game.getExile().removeCard(card, game);
-                    }
+                if (controller.cast(card.getSpellAbility(), game, true)) {
+                    game.getExile().removeCard(card, game);
                 }
-                target.clearChosen();
+            }
+            target.clearChosen();
         }
 
         return true;

@@ -28,20 +28,18 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,7 +51,6 @@ public class Voidwalk extends CardImpl {
     public Voidwalk(UUID ownerId) {
         super(ownerId, 55, "Voidwalk", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}");
         this.expansionSetCode = "GTC";
-
 
         // Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
         this.getSpellAbility().addEffect(new VoidwalkEffect());
@@ -88,21 +85,23 @@ class VoidwalkEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (getTargetPointer().getFirst(game, source) != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            Card card = game.getCard(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                if (permanent.moveToExile(source.getSourceId(), "Voidwalk", source.getSourceId(), game)) {
-                    if (card != null) {
-                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (getTargetPointer().getFirst(game, source) != null) {
+                Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+                if (permanent != null) {
+                    int zcc = game.getState().getZoneChangeCounter(permanent.getId());
+                    if (permanent.moveToExile(null, "", source.getSourceId(), game)) {
+                        AtTheBeginOfNextEndStepDelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                                new ReturnToBattlefieldUnderOwnerControlSourceEffect(false, zcc + 1));
                         delayedAbility.setSourceId(source.getSourceId());
-                        delayedAbility.setControllerId(card.getOwnerId());
+                        delayedAbility.setControllerId(source.getControllerId());
                         delayedAbility.setSourceObject(source.getSourceObject(game), game);
                         game.addDelayedTriggeredAbility(delayedAbility);
-                        return true;
                     }
                 }
             }
+            return true;
         }
         return false;
     }

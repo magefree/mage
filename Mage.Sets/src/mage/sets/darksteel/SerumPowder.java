@@ -87,7 +87,7 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Card sourceCard = game.getCard(source.getSourceId());
         if (controller != null && sourceCard != null) {
-            if (!controller.chooseUse(outcome, "Exile all cards from hand and draw that many cards?", game)) {
+            if (!controller.chooseUse(outcome, "Exile all cards from hand and draw that many cards?", source, game)) {
                 return false;
             }
             int cardsHand = controller.getHand().size();

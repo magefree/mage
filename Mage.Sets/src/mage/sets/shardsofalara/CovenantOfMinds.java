@@ -106,7 +106,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
             sb.append(" If you don't, those cards are put into his graveyard and he will draw five cards.");
 
             Zone zone = Zone.GRAVEYARD;
-            if (opponent.chooseUse(Outcome.Neutral, sb.toString(), game)) {
+            if (opponent.chooseUse(Outcome.Neutral, sb.toString(), source, game)) {
                 zone = Zone.HAND;
             } else {
                 player.drawCards(5, game);
@@ -118,7 +118,7 @@ class CovenantOfMindsEffect extends OneShotEffect {
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append(player.getLogName()).append("'s library is empty? Do you want him to draw five cards?");
-            if (!opponent.chooseUse(Outcome.Benefit, sb.toString(), game)) {
+            if (!opponent.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {
                 player.drawCards(5, game);
             }
         }

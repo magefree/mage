@@ -1,40 +1,43 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.client.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
+import javax.swing.UIManager;
 import mage.client.components.MageTextArea;
 
 /**
@@ -58,18 +61,25 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton linkSpecial;
     private javax.swing.JButton linkUndo;
 
+    private final int defaultDismissTimeout = ToolTipManager.sharedInstance().getDismissDelay();
+    private final Object tooltipBackground = UIManager.get("info");
+
     public HelperPanel() {
         initComponents();
     }
 
     private void initComponents() {
+
         setBackground(new Color(0, 0, 0, 100));
         //setLayout(new GridBagLayout());
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setOpaque(false);
 
         JPanel container = new JPanel();
+
         container.setPreferredSize(new Dimension(100, 30));
+        container.setMinimumSize(new Dimension(20, 20));
+        container.setMaximumSize(new Dimension(2000, 100));
         container.setLayout(new GridBagLayout());
         container.setOpaque(false);
 
@@ -84,7 +94,7 @@ public class HelperPanel extends JPanel {
         add(jPanel);
 
         add(container);
-        
+
         btnSpecial = new JButton("Special");
         btnSpecial.setVisible(false);
         container.add(btnSpecial);
@@ -101,22 +111,24 @@ public class HelperPanel extends JPanel {
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkLeft != null) {{
-                    Thread worker = new Thread(){
-                        @Override
-                        public void run(){
-                            SwingUtilities.invokeLater(new Runnable(){
-                                @Override
-                                public void run(){
-                                    setState("",false,"",false);
-                                    setSpecial("", false);
-                                    linkLeft.doClick();
-                                }
-                            });
-                        }
-                    };
-                    worker.start();
-                }}
+                if (linkLeft != null) {
+                    {
+                        Thread worker = new Thread() {
+                            @Override
+                            public void run() {
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setState("", false, "", false);
+                                        setSpecial("", false);
+                                        linkLeft.doClick();
+                                    }
+                                });
+                            }
+                        };
+                        worker.start();
+                    }
+                }
             }
         });
 
@@ -124,13 +136,13 @@ public class HelperPanel extends JPanel {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkRight != null) {
-                    Thread worker = new Thread(){
+                    Thread worker = new Thread() {
                         @Override
-                        public void run(){
-                            SwingUtilities.invokeLater(new Runnable(){
+                        public void run() {
+                            SwingUtilities.invokeLater(new Runnable() {
                                 @Override
-                                public void run(){
-                                    setState("",false,"",false);
+                                public void run() {
+                                    setState("", false, "", false);
                                     setSpecial("", false);
                                     linkRight.doClick();
                                 }
@@ -145,42 +157,62 @@ public class HelperPanel extends JPanel {
         btnSpecial.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkSpecial != null) {{
-                    Thread worker = new Thread(){
-                        @Override
-                        public void run(){
-                            SwingUtilities.invokeLater(new Runnable(){
-                                @Override
-                                public void run(){
-                                    setState("",false,"",false);
-                                    setSpecial("", false);
-                                    linkSpecial.doClick();
-                                }
-                            });
-                        }
-                    };
-                    worker.start();
-                }}
+                if (linkSpecial != null) {
+                    {
+                        Thread worker = new Thread() {
+                            @Override
+                            public void run() {
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setState("", false, "", false);
+                                        setSpecial("", false);
+                                        linkSpecial.doClick();
+                                    }
+                                });
+                            }
+                        };
+                        worker.start();
+                    }
+                }
             }
         });
 
         btnUndo.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (linkUndo != null) {{
-                    Thread worker = new Thread(){
-                        @Override
-                        public void run(){
-                            SwingUtilities.invokeLater(new Runnable(){
-                                @Override
-                                public void run(){
-                                    linkUndo.doClick();
-                                }
-                            });
-                        }
-                    };
-                    worker.start();
-                }}
+                if (linkUndo != null) {
+                    {
+                        Thread worker = new Thread() {
+                            @Override
+                            public void run() {
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        linkUndo.doClick();
+                                    }
+                                });
+                            }
+                        };
+                        worker.start();
+                    }
+                }
+            }
+        });
+
+        // sets a darker background and higher simiss time fpr tooltip in the feedback / helper panel
+        textArea.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                ToolTipManager.sharedInstance().setDismissDelay(100000);
+                UIManager.put("info", Color.DARK_GRAY);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent me) {
+                ToolTipManager.sharedInstance().setDismissDelay(defaultDismissTimeout);
+                UIManager.put("info", tooltipBackground);
             }
         });
     }
@@ -218,19 +250,20 @@ public class HelperPanel extends JPanel {
         this.linkSpecial = special;
         this.linkUndo = undo;
     }
-    
+
     public void setMessage(String message) {
-        if (message.startsWith("Use alternative cost")) {
-            message = "Use alternative cost?";
-        } else if (message.contains("Use ")) {            
-            if (message.length() < this.getWidth() / 10) {
-                message = getSmallText(message);
-            } else {    
-                message = "Use ability?" + getSmallText(message.substring(0, this.getWidth() / 10));                
-            }
-        } 
-        textArea.setText(message);
+//        if (message.startsWith("Use alternative cost")) {
+//            message = "Use alternative cost?";
+//        } else if (message.contains("Use ")) {
+//            if (message.length() < this.getWidth() / 10) {
+//                message = getSmallText(message);
+//            } else {
+//                message = "Use ability?" + getSmallText(message.substring(0, this.getWidth() / 10));
+//            }
+//        }
+        textArea.setText(message, this.getWidth());
     }
+
     protected String getSmallText(String text) {
         return "<div style='font-size:11pt'>" + text + "</div>";
     }

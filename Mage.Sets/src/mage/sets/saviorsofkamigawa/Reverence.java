@@ -28,20 +28,16 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -49,12 +45,18 @@ import mage.game.permanent.Permanent;
  */
 public class Reverence extends CardImpl {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 2 or less");
+
+    static {
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+    }
+
     public Reverence(UUID ownerId) {
         super(ownerId, 26, "Reverence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.expansionSetCode = "SOK";
 
         // Creatures with power 2 or less can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ReverenceRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public Reverence(final Reverence card) {
@@ -64,39 +66,5 @@ public class Reverence extends CardImpl {
     @Override
     public Reverence copy() {
         return new Reverence(this);
-    }
-}
-
-class ReverenceRestrictionEffect extends RestrictionEffect {
-
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures with power 2 or less");
-    
-    static {
-        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
-    }
-    
-    ReverenceRestrictionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Creatures with power 2 or less can't attack you";
-    }
-
-    ReverenceRestrictionEffect(final ReverenceRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
-    }
-
-    @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
-    }
-
-    @Override
-    public ReverenceRestrictionEffect copy() {
-        return new ReverenceRestrictionEffect(this);
     }
 }
