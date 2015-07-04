@@ -25,14 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.apocalypse;
+package mage.sets.onslaught;
 
 import java.util.Set;
 import java.util.UUID;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -57,24 +58,28 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author EvilGeek
  */
-public class UnnaturalSelection extends CardImpl {
+public class MistformMutant extends CardImpl {
 
-    public UnnaturalSelection(UUID ownerId) {
-        super(ownerId, 32, "Unnatural Selection", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
-        this.expansionSetCode = "APC";
+    public MistformMutant(UUID ownerId) {
+        super(ownerId, 95, "Mistform Mutant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "ONS";
+        this.subtype.add("Illusion");
+        this.subtype.add("Mutant");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
 
-        // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new GenericManaCost(1));
+        // {1}{U}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenNonWallCreatureTypeTargetEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    public MistformMutant(final MistformMutant card) {
         super(card);
     }
 
     @Override
-    public UnnaturalSelection copy() {
-        return new UnnaturalSelection(this);
+    public MistformMutant copy() {
+        return new MistformMutant(this);
     }
 }
