@@ -155,14 +155,9 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            switch (loseType) {
-                                case ALL:
-                                case ALL_BUT_COLOR:
-                                case ABILITIES_AND_PT:
-                                    permanent.getPower().setValue(token.getPower().getValue());
-                                    permanent.getToughness().setValue(token.getToughness().getValue());
-                                    break;
-                            }
+                            permanent.getPower().setValue(token.getPower().getValue());
+                            permanent.getToughness().setValue(token.getToughness().getValue());
+                            break;
                         }
                 }
             }
