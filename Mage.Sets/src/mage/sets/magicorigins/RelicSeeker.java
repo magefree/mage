@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  *
  * @author LevelX2
  */
-public class RelicSeeker  extends CardImpl {
+public class RelicSeeker extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("an Equipment card");
 
@@ -54,7 +54,7 @@ public class RelicSeeker  extends CardImpl {
     }
 
     public RelicSeeker(UUID ownerId) {
-        super(ownerId, 29, "Relic Seeker", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 29, "Relic Seeker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "ORI";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
