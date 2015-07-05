@@ -63,7 +63,6 @@ import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.BufferedImageBuilder;
-//import mage.remote.Session;
 import mage.view.CardsView;
 import mage.view.DraftPickView;
 import mage.view.DraftView;
@@ -278,7 +277,7 @@ public class DraftPanel extends javax.swing.JPanel {
                 public void event(Event event) {
                     if (event.getEventName().equals("pick-a-card")) {
                         SimpleCardView source = (SimpleCardView) event.getSource();
-                        DraftPickView view = client.sendCardPick(draftId, source.getId(), cardsHidden);
+                        DraftPickView view = client.pickCard(draftId, source.getId(), cardsHidden);
                         if (view != null) {
                             loadCardsToPickedCardsArea(view.getPicks());
                             draftBooster.loadBooster(emptyView, bigCard);                            
@@ -288,7 +287,7 @@ public class DraftPanel extends javax.swing.JPanel {
                     }
                     if (event.getEventName().equals("mark-a-card")) {
                         SimpleCardView source = (SimpleCardView) event.getSource();
-                        client.sendCardMark(draftId, source.getId());
+                        client.markCard(draftId, source.getId());
                     }
                 }
             }

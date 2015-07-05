@@ -24,7 +24,7 @@ public class PlayerActionRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerAction(playerAction, gameId, ctx.channel().id().asLongText(), data);
+        server.sendPlayerAction(playerAction, gameId, getSessionId(ctx), data);
     }
     
 }

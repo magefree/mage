@@ -10,6 +10,8 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -53,11 +55,20 @@ public interface MageClient {
     void gameSelectAmount(UUID gameId, String message, int min, int max);
     void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options);
 
-    public void gameEndInfo(UUID gameId, GameEndView view);
+    void gameEndInfo(UUID gameId, GameEndView view);
 
-    public void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage);
+    void userRequestDialog(UUID gameId, UserRequestMessage userRequestMessage);
 
-    public void sideboard(UUID tableId, DeckView deck, int time, boolean limited);
-    public void construct(UUID tableId, DeckView deck, int time);
+    void sideboard(UUID tableId, DeckView deck, int time, boolean limited);
+    void construct(UUID tableId, DeckView deck, int time);
+
+    void startDraft(UUID draftId, UUID playerId);
+    void draftInit(UUID draftId, DraftPickView draftPickView);
+    void draftUpdate(UUID draftId, DraftView draftView);
+    void draftPick(UUID draftId, DraftPickView draftPickView);
+    void draftOver(UUID draftId);
+
+    void showTournament(UUID tournamentId);
+    void tournamentStarted(UUID tournamentId);
     
 }

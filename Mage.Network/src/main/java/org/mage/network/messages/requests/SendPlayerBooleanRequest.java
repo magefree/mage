@@ -19,7 +19,7 @@ public class SendPlayerBooleanRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerBoolean(gameId, ctx.channel().id().asLongText(), b);
+        server.sendPlayerBoolean(gameId, getSessionId(ctx), b);
     }
     
 }

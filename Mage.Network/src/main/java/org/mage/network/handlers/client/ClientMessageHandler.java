@@ -1,10 +1,17 @@
 package org.mage.network.handlers.client;
 
-import org.mage.network.messages.requests.JoinTournamentTableRequest;
+import org.mage.network.messages.requests.GetTournamentChatIdRequest;
+import org.mage.network.messages.requests.GetTournamentRequest;
+import org.mage.network.messages.requests.JoinTournamentRequest;
+import org.mage.network.messages.requests.StartTournamentRequest;
+import org.mage.network.messages.requests.CreateTournamentRequest;
+import org.mage.network.messages.requests.QuitTournamentRequest;
+import org.mage.network.messages.requests.QuitMatchRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,8 +19,11 @@ import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
+import mage.view.DraftPickView;
 import mage.view.RoomView;
 import mage.view.TableView;
+import mage.view.TournamentView;
 import mage.view.UserDataView;
 import org.mage.network.handlers.WriteListener;
 import org.mage.network.interfaces.MageClient;
@@ -23,11 +33,16 @@ import org.mage.network.messages.requests.ChatRoomIdRequest;
 import org.mage.network.messages.requests.CreateTableRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
 import org.mage.network.messages.requests.JoinChatRequest;
+import org.mage.network.messages.requests.JoinDraftRequest;
 import org.mage.network.messages.requests.JoinGameRequest;
 import org.mage.network.messages.requests.JoinTableRequest;
+import org.mage.network.messages.requests.JoinTournamentTableRequest;
 import org.mage.network.messages.requests.LeaveChatRequest;
 import org.mage.network.messages.requests.LeaveTableRequest;
+import org.mage.network.messages.requests.MarkCardRequest;
+import org.mage.network.messages.requests.PickCardRequest;
 import org.mage.network.messages.requests.PlayerActionRequest;
+import org.mage.network.messages.requests.QuitDraftRequest;
 import org.mage.network.messages.requests.RemoveTableRequest;
 import org.mage.network.messages.requests.SendFeedbackRequest;
 import org.mage.network.messages.requests.SendPlayerBooleanRequest;
@@ -55,6 +70,8 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
     private final BlockingQueue<UUID> uuidQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<RoomView> roomViewQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<TableView> tableViewQueue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<TournamentView> tournamentViewQueue = new LinkedBlockingQueue<>();
+    private final BlockingQueue<DraftPickView> draftPickViewQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<List<String>> stringListQueue = new LinkedBlockingQueue<>();
 
     public ClientMessageHandler (MageClient client) {
@@ -114,6 +131,18 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         return booleanQueue.take();
     }
 
+    public boolean joinDraft(UUID draftId) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new JoinDraftRequest(draftId)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
+    public DraftPickView pickCard(UUID draftId, UUID cardId, Set<UUID> cardsHidden) throws Exception {
+        draftPickViewQueue.clear();
+        ctx.writeAndFlush(new PickCardRequest(draftId, cardId, cardsHidden)).addListener(WriteListener.getInstance());
+        return draftPickViewQueue.take();
+    }
+
     public boolean leaveTable(UUID roomId, UUID tableId) throws Exception {
         booleanQueue.clear();
         ctx.writeAndFlush(new LeaveTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());
@@ -140,6 +169,14 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void updateDeck(UUID tableId, DeckCardLists deckCardLists) throws Exception {
         ctx.writeAndFlush(new UpdateDeckRequest(tableId, deckCardLists)).addListener(WriteListener.getInstance());
+    }
+
+    public void markCard(UUID draftId, UUID cardId) {
+        ctx.writeAndFlush(new MarkCardRequest(draftId, cardId)).addListener(WriteListener.getInstance());
+    }
+
+    public void quitDraft(UUID draftId) {
+        ctx.writeAndFlush(new QuitDraftRequest(draftId)).addListener(WriteListener.getInstance());
     }
 
     public void sendFeedback(String title, String type, String message, String email) {
@@ -186,6 +223,14 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         tableViewQueue.offer(view);
     }
     
+    public void receiveTournamentView(TournamentView view) {
+        tournamentViewQueue.offer(view);
+    }
+
+    public void receiveDraftPickView(DraftPickView view) {
+        draftPickViewQueue.offer(view);
+    }
+
     public void receiveStringList(List<String> list) {
         stringListQueue.offer(list);
     }
@@ -216,6 +261,44 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
 
     public void setPreferences(UserDataView view) {
         ctx.writeAndFlush(new SetPreferencesRequest(view)).addListener(WriteListener.getInstance());
+    }
+
+    public TableView createTournamentTable(UUID roomId, TournamentOptions options) throws Exception {
+        tableViewQueue.clear();
+        ctx.writeAndFlush(new CreateTournamentRequest(roomId, options)).addListener(WriteListener.getInstance());
+        return tableViewQueue.take();
+    }
+
+    public boolean startTournament(UUID roomId, UUID tableId) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new StartTournamentRequest(roomId, tableId)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
+    public boolean joinTournament(UUID tournamentId) throws Exception {
+        booleanQueue.clear();
+        ctx.writeAndFlush(new JoinTournamentRequest(tournamentId)).addListener(WriteListener.getInstance());
+        return booleanQueue.take();
+    }
+
+    public void quitTournament(UUID tournamentId) {
+        ctx.writeAndFlush(new QuitTournamentRequest(tournamentId)).addListener(WriteListener.getInstance());
+    }
+
+    public UUID getTournamentChatId(UUID tournamentId) throws Exception {
+        uuidQueue.clear();
+        ctx.writeAndFlush(new GetTournamentChatIdRequest(tournamentId)).addListener(WriteListener.getInstance());
+        return uuidQueue.take();
+    }
+
+    public void quitMatch(UUID gameId) {
+        ctx.writeAndFlush(new QuitMatchRequest(gameId)).addListener(WriteListener.getInstance());
+    }
+
+    public TournamentView getTournament(UUID tournamentId) throws Exception {
+        tournamentViewQueue.clear();
+        ctx.writeAndFlush(new GetTournamentRequest(tournamentId)).addListener(WriteListener.getInstance());
+        return tournamentViewQueue.take();
     }
 
 }

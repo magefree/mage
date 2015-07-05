@@ -20,7 +20,7 @@ public class ChatMessageRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.receiveChatMessage(chatId, ctx.channel().id().asLongText(), message);
+        server.receiveChatMessage(chatId, getSessionId(ctx), message);
     }
             
 }

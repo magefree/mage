@@ -45,13 +45,16 @@ import mage.choices.Choice;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.constants.TableState;
+import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.game.match.MatchType;
+import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.ServerState;
 import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.server.draft.CubeFactory;
+import mage.server.draft.DraftManager;
 import mage.server.game.DeckValidatorFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
@@ -62,6 +65,7 @@ import mage.server.services.LogKeys;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
+import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.ServerMessagesUtil;
@@ -249,43 +253,33 @@ public class ServerMain implements MageServer {
         LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
         return table;
     }
-//
-//    @Override
-//    public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) throws MageException {
-//        return executeWithResult("createTournamentTable", sessionId, new ActionWithTableViewResult() {
-//            @Override
-//            public TableView execute() throws MageException {
-//                try {
-//                    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                    // check AI players max
-//                    String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
-//                    if (maxAiOpponents != null) {
-//                        int max = Integer.parseInt(maxAiOpponents);
-//                        int aiPlayers = 0;
-//                        for (String playerType : options.getPlayerTypes()) {
-//                            if (!playerType.equals("Human")) {
-//                                aiPlayers++;
-//                            }
-//                        }
-//                        if (aiPlayers > max) {
-//                            User user = UserManager.getInstance().getUser(userId);
-//                            if (user != null) {
-//                                user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
-//                            }
-//                            throw new MageException("No message");
-//                        }
-//                    }
-//                    TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
-//                    logger.debug("Tournament table " + table.getTableId() + " created");
-//                    LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
-//                    return table;
-//                } catch (Exception ex) {
-//                    handleException(ex);
-//                }
-//                return null;
-//            }
-//        });
-//    }
+
+    @Override
+    public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        // check AI players max
+        String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
+        if (maxAiOpponents != null) {
+            int max = Integer.parseInt(maxAiOpponents);
+            int aiPlayers = 0;
+            for (String playerType : options.getPlayerTypes()) {
+                if (!playerType.equals("Human")) {
+                    aiPlayers++;
+                }
+            }
+            if (aiPlayers > max) {
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null) {
+                    user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
+                }
+                return null;
+            }
+        }
+        TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
+        logger.debug("Tournament table " + table.getTableId() + " created");
+        LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
+        return table;
+    }
 
     @Override
     public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) {
@@ -437,34 +431,22 @@ public class ServerMain implements MageServer {
 //            }
 //        });
 //    }
-//
-//    @Override
-//    public boolean startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-//        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
-//            return false;
-//        }
-//        execute("startTournament", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TableManager.getInstance().startTournament(userId, roomId, tableId);
-//            }
-//        });
-//        return true;
-//    }
-//
-//    @Override
-//    //FIXME: why no sessionId here???
-//    public TournamentView getTournament(UUID tournamentId) throws MageException {
-//        try {
-//            return TournamentManager.getInstance().getTournamentView(tournamentId);
-//        }
-//        catch (Exception ex) {
-//            handleException(ex);
-//        }
-//        return null;
-//    }
-//
+
+    @Override
+    public boolean startTournament(final String sessionId, final UUID roomId, final UUID tableId) {
+        if (!TableManager.getInstance().getController(tableId).changeTableState(TableState.STARTING)) {
+            return false;
+        }
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        TableManager.getInstance().startTournament(userId, roomId, tableId);
+        return true;
+    }
+
+    @Override
+    public TournamentView getTournament(UUID tournamentId) {
+        return TournamentManager.getInstance().getTournamentView(tournamentId);
+    }
+
 //    @Override
 //    //FIXME: why no sessionId here???
 //    public void sendChatMessage(final UUID chatId, final String userName, final String message) throws MageException {
@@ -573,28 +555,20 @@ public class ServerMain implements MageServer {
         return GameManager.getInstance().getChatId(gameId);
     }
 
-//    @Override
-//    public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
-//        execute("joinDraft", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                DraftManager.getInstance().joinDraft(draftId, userId);
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
-//        execute("joinTournament", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                TournamentManager.getInstance().joinTournament(tournamentId, userId);
-//            }
-//        });
-//    }
-//
+    @Override
+    public boolean joinDraft(final UUID draftId, final String sessionId) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        DraftManager.getInstance().joinDraft(draftId, userId);
+        return true;
+    }
+
+    @Override
+    public boolean joinTournament(final UUID tournamentId, final String sessionId) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        TournamentManager.getInstance().joinTournament(tournamentId, userId);
+        return true;
+    }
+
 //    @Override
 //    //FIXME: why no sessionId here???
 //    public UUID getGameChatId(UUID gameId) throws MageException {
@@ -606,19 +580,12 @@ public class ServerMain implements MageServer {
 //        }
 //        return null;
 //    }
-//
-//    @Override
-//    //FIXME: why no sessionId here???
-//    public UUID getTournamentChatId(UUID tournamentId) throws MageException {
-//        try {
-//            return TournamentManager.getInstance().getChatId(tournamentId);
-//        }
-//        catch (Exception ex) {
-//            handleException(ex);
-//        }
-//        return null;
-//    }
-//
+
+    @Override
+    public UUID getTournamentChatId(UUID tournamentId) {
+        return TournamentManager.getInstance().getChatId(tournamentId);
+    }
+
     @Override
     public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) {
         User user = SessionManager.getInstance().getUser(sessionId);
@@ -669,87 +636,62 @@ public class ServerMain implements MageServer {
             logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
         }
     }
-//
-//    @Override
-//    public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick, final Set<UUID> hiddenCards) throws MageException {
-//        return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
-//            @Override
-//            public DraftPickView execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session != null) {
-//                    return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
-//                } else{
-//                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
-//                }
-//                return null;
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void sendCardMark(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
-//        execute("sendCardMark", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session != null) {
-//                    DraftManager.getInstance().sendCardMark(draftId, session.getUserId(), cardPick);
-//                } else{
-//                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
-//                }
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void quitMatch(final UUID gameId, final String sessionId) throws MageException {
-//        execute("quitMatch", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session != null) {
-//                    GameManager.getInstance().quitMatch(gameId, session.getUserId());
-//                } else{
-//                    logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
-//                }
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void quitTournament(final UUID tournamentId, final String sessionId) throws MageException {
-//        execute("quitTournament", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session != null) {
-//                    TournamentManager.getInstance().quit(tournamentId, session.getUserId());
-//                }else{
-//                    logger.error("Session not found sessionId: "+ sessionId + "  tournamentId:" + tournamentId);
-//                }
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void quitDraft(final UUID draftId, final String sessionId) throws MageException {
-//        execute("quitDraft", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                Session session = SessionManager.getInstance().getSession(sessionId);
-//                if (session == null) {
-//                    logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
-//                    return;
-//                }
-//                UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
-//                Table table = TableManager.getInstance().getTable(tableId);
-//                if (table.isTournament()) {
-//                    UUID tournamentId = table.getTournament().getId();
-//                    TournamentManager.getInstance().quit(tournamentId, session.getUserId());
-//                }
-//            }
-//        });
-//    }
+
+    @Override
+    public DraftPickView pickCard(final UUID draftId, final String sessionId, final UUID cardPick, final Set<UUID> hiddenCards) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session != null) {
+            return DraftManager.getInstance().sendCardPick(draftId, session.getUserId(), cardPick, hiddenCards);
+        } else{
+            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+        }
+        return null;
+    }
+
+    @Override
+    public void markCard(final UUID draftId, final String sessionId, final UUID cardPick) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session != null) {
+            DraftManager.getInstance().sendCardMark(draftId, session.getUserId(), cardPick);
+        } else{
+            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+        }
+    }
+
+    @Override
+    public void quitMatch(final UUID gameId, final String sessionId) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session != null) {
+            GameManager.getInstance().quitMatch(gameId, session.getUserId());
+        } else{
+            logger.error("Session not found sessionId: "+ sessionId + "  gameId:" +gameId);
+        }
+    }
+
+    @Override
+    public void quitTournament(final UUID tournamentId, final String sessionId) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session != null) {
+            TournamentManager.getInstance().quit(tournamentId, session.getUserId());
+        }else{
+            logger.error("Session not found sessionId: "+ sessionId + "  tournamentId:" + tournamentId);
+        }
+    }
+
+    @Override
+    public void quitDraft(final UUID draftId, final String sessionId) {
+        Session session = SessionManager.getInstance().getSession(sessionId);
+        if (session == null) {
+            logger.error("Session not found sessionId: "+ sessionId + "  draftId:" + draftId);
+            return;
+        }
+        UUID tableId = DraftManager.getInstance().getControllerByDraftId(draftId).getTableId();
+        Table table = TableManager.getInstance().getTable(tableId);
+        if (table.isTournament()) {
+            UUID tournamentId = table.getTournament().getId();
+            TournamentManager.getInstance().quit(tournamentId, session.getUserId());
+        }
+    }
 
     @Override
     public void sendPlayerAction(final PlayerAction playerAction, final UUID gameId, final String sessionId, final Serializable data) {
@@ -1278,10 +1220,6 @@ public class ServerMain implements MageServer {
         server.draftUpdate(sessionId, draftId, draftView);
     }
 
-    public void draftInform(String sessionId, UUID draftId, DraftView draftView, String message) {
-        server.draftInform(sessionId, draftId, draftView, message);
-    }
-
     public void draftOver(String sessionId, UUID draftId) {
         server.draftOver(sessionId, draftId);
     }
@@ -1298,25 +1236,25 @@ public class ServerMain implements MageServer {
         server.construct(sessionId, tableId, deck, time);
     }
 
-    public void startTournament(String sessionId, UUID tournamentId, UUID playerId) {
-        server.startTournament(sessionId, tournamentId, playerId);
+    public void tournamentStarted(String sessionId, UUID tournamentId, UUID playerId) {
+        server.tournamentStarted(sessionId, tournamentId, playerId);
     }
 
     public void showTournament(String sessionId, UUID tournamentId) {
         server.showTournament(sessionId, tournamentId);
     }
 
-    public void tournamentInit(String sessionId, UUID tournamentId, TournamentView tournamentView) {
-        server.tournamentInit(sessionId, tournamentId, tournamentView);
-    }
+//    public void tournamentInit(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+//        server.tournamentInit(sessionId, tournamentId, tournamentView);
+//    }
 
-    public void tournamentUpdate(String sessionId, UUID tournamentId, TournamentView tournamentView) {
-        server.tournamentUpdate(sessionId, tournamentId, tournamentView);
-    }
-
-    public void tournamentOver(String sessionId, UUID tournamentId) {
-        server.tournamentOver(sessionId, tournamentId);
-    }
+//    public void tournamentUpdate(String sessionId, UUID tournamentId, TournamentView tournamentView) {
+//        server.tournamentUpdate(sessionId, tournamentId, tournamentView);
+//    }
+//
+//    public void tournamentOver(String sessionId, UUID tournamentId) {
+//        server.tournamentOver(sessionId, tournamentId);
+//    }
 
     public void showGameEndDialog(String sessionId, UUID gameId) {
         server.showGameEndDialog(sessionId, gameId);

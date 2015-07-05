@@ -18,7 +18,7 @@ public class LeaveChatRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.leaveChat(chatId, ctx.channel().id().asLongText());
+        server.leaveChat(chatId, getSessionId(ctx));
     }
     
     

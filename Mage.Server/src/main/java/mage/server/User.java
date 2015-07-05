@@ -62,7 +62,6 @@ import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
-import mage.view.TournamentView;
 import mage.view.UserRequestMessage;
 import org.apache.log4j.Logger;
 import org.mage.network.messages.MessageType;
@@ -288,23 +287,11 @@ public class User {
     }
 
     public void tournamentStarted(final UUID tournamentId, final UUID playerId) {
-        ServerMain.getInstance().startTournament(sessionId, tournamentId, playerId);
+        ServerMain.getInstance().tournamentStarted(sessionId, tournamentId, playerId);
     }
 
     public void showTournament(final UUID tournamentId) {
         ServerMain.getInstance().showTournament(sessionId, tournamentId);
-    }
-
-    public void tournamentInit(UUID tournamentId, TournamentView tournamentView) {
-        ServerMain.getInstance().tournamentInit(sessionId, tournamentId, tournamentView);
-    }
-
-    public void tournamentUpdate(UUID tournamentId, TournamentView tournamentView) {
-        ServerMain.getInstance().tournamentUpdate(sessionId, tournamentId, tournamentView);
-    }
-
-    public void tournamentOver(UUID tournamentId, String message) {
-        ServerMain.getInstance().tournamentOver(sessionId, tournamentId);
     }
 
     public void showGameEndDialog(final UUID gameId) {
@@ -321,10 +308,6 @@ public class User {
 
     public void draftUpdate(UUID draftId, DraftView draftView) {
         ServerMain.getInstance().draftUpdate(sessionId, draftId, draftView);
-    }
-
-    public void draftInform(UUID draftId, DraftView view, String message) {
-        ServerMain.getInstance().draftInform(sessionId, draftId, view, message);
     }
 
     public void draftOver(UUID draftId) {

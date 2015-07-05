@@ -22,7 +22,7 @@ public class SendFeedbackRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendFeedbackMessage(ctx.channel().id().asLongText(), title, type, message, email);
+        server.sendFeedbackMessage(getSessionId(ctx), title, type, message, email);
     }
     
 }

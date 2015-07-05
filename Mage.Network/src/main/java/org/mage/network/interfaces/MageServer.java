@@ -2,17 +2,21 @@ package org.mage.network.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
+import mage.game.tournament.TournamentOptions;
 import mage.interfaces.ServerState;
 import mage.remote.Connection;
 import mage.remote.DisconnectReason;
 import mage.utils.MageVersion;
+import mage.view.DraftPickView;
 import mage.view.RoomView;
 import mage.view.TableView;
+import mage.view.TournamentView;
 import mage.view.UserDataView;
 
 /**
@@ -45,6 +49,7 @@ public interface MageServer {
     boolean joinTournamentTable(String sessionId, UUID roomId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList, String password);
         
     boolean startMatch(String sessionId, UUID roomId, UUID tableId);
+    void quitMatch(UUID gameId, String sessionId);
     UUID joinGame(UUID gameId, String sessionId);
     void sendPlayerUUID(UUID gameId, String sessionId, UUID data);
     void sendPlayerString(UUID gameId, String sessionId, String data);
@@ -55,6 +60,18 @@ public interface MageServer {
     
     boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList);
     void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList);
+    
+    boolean joinDraft(UUID draftId, String sessionId);
+    void quitDraft(UUID draftId, String sessionId);
+    void markCard(UUID draftId, String sessionId, UUID cardPick);
+    DraftPickView pickCard(UUID draftId, String sessionId, UUID cardPick, Set<UUID> hiddenCards);
+
+    TableView createTournamentTable(String sessionId, UUID roomId, TournamentOptions options);
+    boolean startTournament(String sessionId, UUID roomId, UUID tableId);
+    UUID getTournamentChatId(UUID tournamentId);
+    TournamentView getTournament(UUID tournamentId);
+    boolean joinTournament(UUID tournamentId, String sessionId);
+    void quitTournament(UUID tournamentId, String sessionId);
 
     void pingTime(long milliSeconds, String sessionId);
 

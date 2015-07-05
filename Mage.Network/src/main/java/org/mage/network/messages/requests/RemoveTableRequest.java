@@ -20,7 +20,7 @@ public class RemoveTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.removeTable(ctx.channel().id().asLongText(), roomId, tableId);
+        server.removeTable(getSessionId(ctx), roomId, tableId);
     }
             
 }

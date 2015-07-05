@@ -116,6 +116,7 @@ import mage.client.util.EDTExceptionHandler;
 import mage.client.util.GameManager;
 import mage.client.util.SettingsManager;
 import mage.client.util.SystemUtil;
+import mage.client.util.audio.AudioManager;
 import mage.client.util.audio.MusicPlayer;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.stats.UpdateMemUsageTask;
@@ -128,6 +129,8 @@ import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage;
 import mage.view.DeckView;
+import mage.view.DraftPickView;
+import mage.view.DraftView;
 import mage.view.GameClientMessage;
 import mage.view.GameEndView;
 import mage.view.GameView;
@@ -730,6 +733,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
+    @Override
     public void showTournament(final UUID tournamentId) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -1171,36 +1175,41 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         }
     }
 
-    public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
-        String name;
-        if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
-            name = "Deck Editor - " + tableId.toString();
-        } else {
-            if (deck != null) {
-                name = "Deck Editor - " + deck.getName();
-            } else {
-                name = "Deck Editor";
-            }
-            // use already open editor
-            JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
-            for (JInternalFrame window : windows) {
-                if (window instanceof DeckEditorPane && window.getTitle().equals(name)) {
-                    setActive((MagePane) window);
-                    return;
+    public void showDeckEditor(final DeckEditorMode mode, final Deck deck, final UUID tableId, final int time) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                String name;
+                if (mode == DeckEditorMode.SIDEBOARDING || mode == DeckEditorMode.LIMITED_BUILDING) {
+                    name = "Deck Editor - " + tableId.toString();
+                } else {
+                    if (deck != null) {
+                        name = "Deck Editor - " + deck.getName();
+                    } else {
+                        name = "Deck Editor";
+                    }
+                    // use already open editor
+                    JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
+                    for (JInternalFrame window : windows) {
+                        if (window instanceof DeckEditorPane && window.getTitle().equals(name)) {
+                            setActive((MagePane) window);
+                            return;
+                        }
+                    }
+                }
+
+                try {
+                    DeckEditorPane deckEditorPane = new DeckEditorPane();
+                    desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
+                    deckEditorPane.setMaximum(true);
+                    deckEditorPane.setVisible(true);
+                    deckEditorPane.show(mode, deck, name, tableId, time);
+                    setActive(deckEditorPane);
+                } catch (PropertyVetoException ex) {
+                    logger.fatal(null, ex);
                 }
             }
-        }
-
-        try {
-            DeckEditorPane deckEditorPane = new DeckEditorPane();
-            desktopPane.add(deckEditorPane, JLayeredPane.DEFAULT_LAYER);
-            deckEditorPane.setMaximum(true);
-            deckEditorPane.setVisible(true);
-            deckEditorPane.show(mode, deck, name, tableId, time);
-            setActive(deckEditorPane);
-        } catch (PropertyVetoException ex) {
-            logger.fatal(null, ex);
-        }
+        });
     }
 
     public void showUserRequestDialog(final UserRequestMessage userRequestMessage) {
@@ -1373,12 +1382,17 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return drafts.get(draftId);
     }
 
-    public static void removeDraft(UUID draftId) {
-        DraftPanel draftPanel = drafts.get(draftId);
-        if (draftPanel != null) {
-            drafts.remove(draftId);
-            draftPanel.hideDraft();
-        }
+    public static void removeDraft(final UUID draftId) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPanel draftPanel = drafts.get(draftId);
+                if (draftPanel != null) {
+                    drafts.remove(draftId);
+                    draftPanel.hideDraft();
+                }
+            }
+        });
     }
 
     public static void addDraft(UUID draftId, DraftPanel draftPanel) {
@@ -1674,7 +1688,68 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     protected void construct(Deck deck, UUID tableId, int time) {
         showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);
     }
-    
+
+    @Override
+    public void startDraft(UUID draftId, UUID playerId) {
+        showDraft(draftId);
+        logger.info("Draft " + draftId + " started for player " + playerId);
+    }
+
+    @Override
+    public void draftInit(final UUID draftId, final DraftPickView draftPickView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPanel panel = MageFrame.getDraft(draftId);
+                if (panel != null) {
+                    panel.loadBooster(draftPickView);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void draftUpdate(final UUID draftId, final DraftView draftView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPanel panel = MageFrame.getDraft(draftId);
+                if (panel != null) {
+                    panel.updateDraft(draftView);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void draftPick(final UUID draftId, final DraftPickView draftPickView) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DraftPanel panel = MageFrame.getDraft(draftId);
+                if (panel != null) {
+                    try {
+                        panel.loadBooster(draftPickView);
+                    } catch (Exception ex) {
+                        logger.error("arrrgh", ex);
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public void draftOver(UUID draftId) {
+        removeDraft(draftId);
+    }
+
+    @Override
+    public void tournamentStarted(UUID tournamentId) {
+        showTournament(tournamentId);
+        AudioManager.playTournamentStarted();
+        logger.info("Tournament " + tournamentId + " started");
+    }
+
 }
 
 class MagePaneMenuItem extends JCheckBoxMenuItem {

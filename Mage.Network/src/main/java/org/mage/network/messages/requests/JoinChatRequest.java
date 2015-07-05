@@ -18,7 +18,7 @@ public class JoinChatRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.joinChat(chatId, ctx.channel().id().asLongText());
+        server.joinChat(chatId, getSessionId(ctx));
     }
     
 }

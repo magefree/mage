@@ -8,18 +8,18 @@ import org.mage.network.interfaces.MageServer;
  *
  * @author BetaSteward
  */
-public class SendPlayerUUIDRequest extends ServerRequest {
-    private final UUID gameId;
-    private final UUID id;
+public class MarkCardRequest extends ServerRequest {
+    private final UUID draftId;
+    private final UUID cardId;
 
-    public SendPlayerUUIDRequest(UUID gameId, UUID id) {
-        this.gameId = gameId;
-        this.id = id;
+    public MarkCardRequest(UUID draftId, UUID cardId) {
+        this.draftId = draftId;
+        this.cardId = cardId;
     }
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerUUID(gameId, getSessionId(ctx), id);
+        server.markCard(draftId, getSessionId(ctx), cardId);
     }
     
 }

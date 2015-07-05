@@ -10,17 +10,16 @@ import org.mage.network.messages.responses.UUIDResponse;
  *
  * @author BetaSteward
  */
-public class JoinGameRequest extends ServerRequest {
-    
-    private UUID gameId;
-    
-    public JoinGameRequest(UUID gameId) {
-        this.gameId = gameId;
+public class GetTournamentChatIdRequest extends ServerRequest {
+    private final UUID tournamentId;
+
+    public GetTournamentChatIdRequest(UUID tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new UUIDResponse(server.joinGame(gameId, getSessionId(ctx)))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new UUIDResponse(server.getTournamentChatId(tournamentId))).addListener(WriteListener.getInstance());
     }
-
+    
 }

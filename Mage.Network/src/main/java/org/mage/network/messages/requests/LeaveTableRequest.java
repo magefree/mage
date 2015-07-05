@@ -22,7 +22,7 @@ public class LeaveTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.leaveTable(ctx.channel().id().asLongText(), roomId, tableId))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.leaveTable(getSessionId(ctx), roomId, tableId))).addListener(WriteListener.getInstance());
     }
 
 }

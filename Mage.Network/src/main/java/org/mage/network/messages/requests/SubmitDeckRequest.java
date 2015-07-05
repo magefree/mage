@@ -22,7 +22,7 @@ public class SubmitDeckRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.submitDeck(ctx.channel().id().asLongText(), tableId, deckCardLists))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.submitDeck(getSessionId(ctx), tableId, deckCardLists))).addListener(WriteListener.getInstance());
     }
     
 }

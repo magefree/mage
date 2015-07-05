@@ -8,18 +8,16 @@ import org.mage.network.interfaces.MageServer;
  *
  * @author BetaSteward
  */
-public class SendPlayerUUIDRequest extends ServerRequest {
-    private final UUID gameId;
-    private final UUID id;
+public class QuitTournamentRequest extends ServerRequest {
+    private final UUID tournamentId;
 
-    public SendPlayerUUIDRequest(UUID gameId, UUID id) {
-        this.gameId = gameId;
-        this.id = id;
+    public QuitTournamentRequest(UUID tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerUUID(gameId, getSessionId(ctx), id);
+        server.quitTournament(tournamentId, getSessionId(ctx));
     }
     
 }

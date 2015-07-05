@@ -260,8 +260,13 @@ public class Client {
         return channel.id().asLongText();
     }
 
-    public TableView createTournamentTable(UUID roomId, TournamentOptions tOptions) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TableView createTournamentTable(UUID roomId, TournamentOptions options) {
+        try {
+            return clientMessageHandler.createTournamentTable(roomId, options);
+        } catch (Exception ex) {
+            logger.error("Error creating tournament table", ex);
+        }
+        return null;
     }
 
     public void setPreferences(UserDataView view) {
@@ -282,7 +287,12 @@ public class Client {
     }
 
     public boolean startTournament(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.startTournament(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error starting tournament", ex);
+        }
+        return false;
     }
 
     public boolean leaveTable(UUID roomId, UUID tableId) {
@@ -306,7 +316,7 @@ public class Client {
         try {
             clientMessageHandler.sendPlayerAction(passPriorityAction, gameId, data);
         } catch (Exception ex) {
-            logger.error("Error swaping seats", ex);
+            logger.error("Error sending player action", ex);
         }
     }
 
@@ -324,19 +334,38 @@ public class Client {
     }
 
     public UUID getTournamentChatId(UUID tournamentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.getTournamentChatId(tournamentId);
+        } catch (Exception ex) {
+            logger.error("Error getting tournament chat room id", ex);
+        }
+        return null;
     }
 
     public boolean joinTournament(UUID tournamentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.joinTournament(tournamentId);
+        } catch (Exception ex) {
+            logger.error("Error joining tournament", ex);
+        }
+        return false;
     }
 
     public void quitTournament(UUID tournamentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.quitTournament(tournamentId);
+        } catch (Exception ex) {
+            logger.error("Error quitting tournament", ex);
+        }
     }
     
     public TournamentView getTournament(UUID tournamentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.getTournament(tournamentId);
+        } catch (Exception ex) {
+            logger.error("Error getting tournament", ex);
+        }
+        return null;
     }
 
     public void watchTable(UUID roomId, UUID tableId) {
@@ -416,23 +445,45 @@ public class Client {
     }
 
     public void quitMatch(UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.quitMatch(gameId);
+        } catch (Exception ex) {
+            logger.error("Error quitting match", ex);
+        }
     }
 
     public boolean joinDraft(UUID draftId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return clientMessageHandler.joinDraft(draftId);
+        } catch (Exception ex) {
+            logger.error("Error joining draft", ex);
+        }
+        return false;
     }
 
-    public DraftPickView sendCardPick(UUID draftId, UUID id, Set<UUID> cardsHidden) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DraftPickView pickCard(UUID draftId, UUID cardId, Set<UUID> cardsHidden) {
+        try {
+            return clientMessageHandler.pickCard(draftId, cardId, cardsHidden);
+        } catch (Exception ex) {
+            logger.error("Error sending card pick", ex);
+        }
+        return null;
     }
 
-    public void sendCardMark(UUID draftId, UUID id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void markCard(UUID draftId, UUID cardId) {
+        try {
+            clientMessageHandler.markCard(draftId, cardId);
+        } catch (Exception ex) {
+            logger.error("Error marking card", ex);
+        }
     }
 
     public void quitDraft(UUID draftId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.quitDraft(draftId);
+        } catch (Exception ex) {
+            logger.error("Error quitting draft", ex);
+        }
     }
 
     public void sendBroadcastMessage(String message) {

@@ -42,7 +42,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
         if (evt instanceof IdleStateEvent) {
             IdleStateEvent e = (IdleStateEvent) evt;
             if (e.state() == IdleState.READER_IDLE) {
-                server.disconnect(ctx.channel().id().asLongText(), DisconnectReason.LostConnection);
+                server.disconnect(getSessionId(ctx), DisconnectReason.LostConnection);
                 ctx.disconnect();
                 logger.info("Disconnected due to extended idle");
             } else if (e.state() == IdleState.WRITER_IDLE) {
@@ -57,7 +57,7 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         if (msg instanceof PongMessage) {
             long milliSeconds = TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
-            server.pingTime(milliSeconds, ctx.channel().id().asLongText());
+            server.pingTime(milliSeconds, getSessionId(ctx));
         }
         ctx.fireChannelRead(msg);
     }
@@ -66,4 +66,9 @@ public class HeartbeatHandler extends ChannelHandlerAdapter {
         startTime = System.nanoTime();
         ctx.writeAndFlush(ping).addListener(WriteListener.getInstance());
     }
+    
+    private String getSessionId(ChannelHandlerContext ctx) {
+        return ctx.channel().id().asLongText();
+    }
+
 }

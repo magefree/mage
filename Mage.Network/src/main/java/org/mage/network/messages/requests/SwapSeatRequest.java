@@ -24,7 +24,7 @@ public class SwapSeatRequest extends ServerRequest {
             
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.swapSeats(ctx.channel().id().asLongText(), roomId, tableId, seatNum1, seatNum2);
+        server.swapSeats(getSessionId(ctx), roomId, tableId, seatNum1, seatNum2);
     }
 
 }

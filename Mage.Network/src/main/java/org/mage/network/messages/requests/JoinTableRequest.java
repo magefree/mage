@@ -33,7 +33,7 @@ public class JoinTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.joinTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.joinTable(getSessionId(ctx), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
     }
     
 }

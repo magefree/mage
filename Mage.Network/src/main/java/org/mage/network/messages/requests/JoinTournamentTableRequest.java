@@ -32,7 +32,7 @@ public class JoinTournamentTableRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.joinTournamentTable(ctx.channel().id().asLongText(), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.joinTournamentTable(getSessionId(ctx), roomId, tableId, name, playerType, skill, deckList, password))).addListener(WriteListener.getInstance());
     }
     
 }

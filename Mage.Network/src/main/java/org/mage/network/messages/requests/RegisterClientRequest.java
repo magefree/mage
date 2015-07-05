@@ -26,13 +26,13 @@ public class RegisterClientRequest extends ServerRequest {
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
         String host = ((InetSocketAddress)ctx.channel().remoteAddress()).getAddress().getHostAddress();
-        boolean result = server.registerClient(connection, ctx.channel().id().asLongText(), version, host);
+        boolean result = server.registerClient(connection, getSessionId(ctx), version, host);
         if (result) {
             ctx.writeAndFlush(new ClientRegisteredResponse(server.getServerState())).addListener(WriteListener.getInstance());
         }
         else {
             ctx.writeAndFlush(new ClientRegisteredResponse(new ServerState())).addListener(WriteListener.getInstance());
-            server.disconnect(ctx.channel().id().asLongText(), DisconnectReason.ValidationError);
+            server.disconnect(getSessionId(ctx), DisconnectReason.ValidationError);
         }
     }
     

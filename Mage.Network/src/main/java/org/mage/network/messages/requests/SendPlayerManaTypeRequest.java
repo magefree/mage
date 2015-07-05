@@ -22,7 +22,7 @@ public class SendPlayerManaTypeRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerManaType(gameId, playerId, ctx.channel().id().asLongText(), manaType);
+        server.sendPlayerManaType(gameId, playerId, getSessionId(ctx), manaType);
     }
     
 }

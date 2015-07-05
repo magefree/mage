@@ -19,7 +19,7 @@ public class SendPlayerStringRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerString(gameId, ctx.channel().id().asLongText(), string);
+        server.sendPlayerString(gameId, getSessionId(ctx), string);
     }
     
 }

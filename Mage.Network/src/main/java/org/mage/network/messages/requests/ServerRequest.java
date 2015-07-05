@@ -12,4 +12,8 @@ public abstract class ServerRequest implements Serializable {
         
     public abstract void handleMessage(MageServer server, ChannelHandlerContext ctx);
     
+    protected String getSessionId(ChannelHandlerContext ctx) {
+        return ctx.channel().id().asLongText();
+    }
+
 }

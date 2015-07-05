@@ -20,7 +20,7 @@ public class UpdateDeckRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.updateDeck(ctx.channel().id().asLongText(), tableId, deckCardLists);
+        server.updateDeck(getSessionId(ctx), tableId, deckCardLists);
     }
     
 }

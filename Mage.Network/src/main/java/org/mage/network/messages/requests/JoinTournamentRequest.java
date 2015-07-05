@@ -10,19 +10,16 @@ import org.mage.network.messages.responses.BooleanResponse;
  *
  * @author BetaSteward
  */
-public class StartMatchRequest extends ServerRequest {
+public class JoinTournamentRequest extends ServerRequest {
+    private final UUID tournamentId;
 
-    private UUID roomId;
-    private UUID tableId;
-
-    public StartMatchRequest(UUID roomId, UUID tableId) {
-        this.roomId = roomId;
-        this.tableId = tableId;
+    public JoinTournamentRequest(UUID tournamentId) {
+        this.tournamentId = tournamentId;
     }
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(new BooleanResponse(server.startMatch(getSessionId(ctx), roomId, tableId))).addListener(WriteListener.getInstance());
+        ctx.writeAndFlush(new BooleanResponse(server.joinTournament(tournamentId, getSessionId(ctx)))).addListener(WriteListener.getInstance());
     }
-
+    
 }

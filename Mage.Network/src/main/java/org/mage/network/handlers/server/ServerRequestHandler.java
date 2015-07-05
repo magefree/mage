@@ -27,7 +27,11 @@ public class ServerRequestHandler extends SimpleChannelInboundHandler<ServerRequ
     
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        server.disconnect(ctx.channel().id().asLongText(), DisconnectReason.Disconnected);
+        server.disconnect(getSessionId(ctx), DisconnectReason.Disconnected);
+    }
+    
+    private String getSessionId(ChannelHandlerContext ctx) {
+        return ctx.channel().id().asLongText();
     }
     
 }

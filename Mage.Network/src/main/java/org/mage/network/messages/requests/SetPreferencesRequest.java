@@ -17,7 +17,7 @@ public class SetPreferencesRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.setPreferences(ctx.channel().id().asLongText(), view);
+        server.setPreferences(getSessionId(ctx), view);
     }
     
 }

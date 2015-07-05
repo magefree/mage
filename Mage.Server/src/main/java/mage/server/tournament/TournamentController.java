@@ -184,11 +184,6 @@ public class TournamentController {
             logger.fatal("Tournament session not found - playerId:" + playerId + "  tournamentId " + tournament.getId());
             return;
         }
-        if (!tournamentSession.init()) {
-            logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
-            return;
-        }
-        tournamentSession.update();
     }
 
     private void checkStart() {
@@ -216,13 +211,6 @@ public class TournamentController {
     }
 
     private synchronized void startTournament() {
-        for (final TournamentSession tournamentSession : tournamentSessions.values()) {
-            if (!tournamentSession.init()) {
-                logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
-                //TODO: generate client error message
-                return;
-            }
-        }
         started = true;
         logger.debug("Tournament starts (all players joined): " + tournament.getId() + " - " + tournament.getTournamentType().toString());
         tournament.nextStep();

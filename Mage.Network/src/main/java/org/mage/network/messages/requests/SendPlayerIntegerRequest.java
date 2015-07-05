@@ -19,7 +19,7 @@ public class SendPlayerIntegerRequest extends ServerRequest {
 
     @Override
     public void handleMessage(MageServer server, ChannelHandlerContext ctx) {
-        server.sendPlayerInteger(gameId, ctx.channel().id().asLongText(), i);
+        server.sendPlayerInteger(gameId, getSessionId(ctx), i);
     }
     
 }

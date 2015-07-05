@@ -28,6 +28,10 @@
 
 package mage.server.tournament;
 
+import java.util.UUID;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.cards.decks.Deck;
 import mage.game.tournament.Tournament;
 import mage.server.User;
@@ -35,11 +39,6 @@ import mage.server.UserManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
-
-import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -62,35 +61,6 @@ public class TournamentSession {
         this.tournament = tournament;
         this.playerId = playerId;
         this.tableId = tableId;
-    }
-
-    public boolean init() {
-        if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.tournamentInit(tournament.getId(), getTournamentView());
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void update() {
-        if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.tournamentUpdate(tournament.getId(), getTournamentView());
-            }
-        }
-    }
-
-    public void gameOver(final String message) {
-        if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.tournamentOver(tournament.getId(), message);
-            }
-        }
     }
 
     public void construct(int timeout) {
