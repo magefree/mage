@@ -31,7 +31,6 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl.RestrictType;
-import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -43,64 +42,47 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class CantAttackYouUnlessPayManaAllEffect extends PayCostToAttackBlockEffectImpl {
+public class CantBlockUnlessPayManaAllEffect extends PayCostToAttackBlockEffectImpl {
 
     private final FilterCreaturePermanent filterCreaturePermanent;
-    private final boolean payAlsoForAttackingPlaneswalker;
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts) {
+    public CantBlockUnlessPayManaAllEffect(ManaCosts manaCosts) {
         this(manaCosts, false);
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker) {
+    public CantBlockUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker) {
         this(manaCosts, payAlsoForAttackingPlaneswalker, null);
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker, FilterCreaturePermanent filter) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.ATTACK, manaCosts);
-        this.payAlsoForAttackingPlaneswalker = payAlsoForAttackingPlaneswalker;
+    public CantBlockUnlessPayManaAllEffect(ManaCosts manaCosts, boolean payAlsoForAttackingPlaneswalker, FilterCreaturePermanent filter) {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, RestrictType.BLOCK, manaCosts);
         this.filterCreaturePermanent = filter;
         staticText = (filterCreaturePermanent == null ? "Creatures" : filterCreaturePermanent.getMessage())
-                + " can't attack you "
-                + (payAlsoForAttackingPlaneswalker ? "or a planeswalker you control " : "")
+                + " can't block "
                 + "unless their controller pays "
                 + (manaCosts == null ? "" : manaCosts.getText())
-                + " for each creature he or she controls that's attacking you";
+                + " for each blocking creature he or she controls";
     }
 
-    public CantAttackYouUnlessPayManaAllEffect(CantAttackYouUnlessPayManaAllEffect effect) {
+    public CantBlockUnlessPayManaAllEffect(CantBlockUnlessPayManaAllEffect effect) {
         super(effect);
-        this.payAlsoForAttackingPlaneswalker = effect.payAlsoForAttackingPlaneswalker;
         this.filterCreaturePermanent = effect.filterCreaturePermanent;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        // check if attacking creature fullfills filter criteria
+        // check if blocking creature fullfills filter criteria
         if (filterCreaturePermanent != null) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (!filterCreaturePermanent.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
                 return false;
             }
         }
-        // attack target is controlling player
-        if (source.getControllerId().equals(event.getTargetId())) {
-            return true;
-        }
-        // or attack target is a planeswalker of the controlling player
-        if (payAlsoForAttackingPlaneswalker) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null
-                    && permanent.getCardType().contains(CardType.PLANESWALKER)
-                    && permanent.getControllerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
     @Override
-    public CantAttackYouUnlessPayManaAllEffect copy() {
-        return new CantAttackYouUnlessPayManaAllEffect(this);
+    public CantBlockUnlessPayManaAllEffect copy() {
+        return new CantBlockUnlessPayManaAllEffect(this);
     }
 }

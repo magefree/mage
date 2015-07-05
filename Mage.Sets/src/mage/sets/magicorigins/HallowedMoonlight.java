@@ -25,14 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander2014;
+package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.keyword.FlashAbility;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -50,47 +48,43 @@ import mage.watchers.common.CreatureWasCastWatcher;
  *
  * @author LevelX2
  */
-public class ContainmentPriest extends CardImpl {
+public class HallowedMoonlight extends CardImpl {
 
-    public ContainmentPriest(UUID ownerId) {
-        super(ownerId, 5, "Containment Priest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        this.expansionSetCode = "C14";
-        this.subtype.add("Human");
-        this.subtype.add("Cleric");
+    public HallowedMoonlight(UUID ownerId) {
+        super(ownerId, 16, "Hallowed Moonlight", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        this.expansionSetCode = "ORI";
 
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
-        // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()), new CreatureWasCastWatcher());
+        // Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead.
+        this.getSpellAbility().addEffect(new HallowedMoonlightEffect());
+        this.getSpellAbility().addWatcher(new CreatureWasCastWatcher());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ContainmentPriest(final ContainmentPriest card) {
+    public HallowedMoonlight(final HallowedMoonlight card) {
         super(card);
     }
 
     @Override
-    public ContainmentPriest copy() {
-        return new ContainmentPriest(this);
+    public HallowedMoonlight copy() {
+        return new HallowedMoonlight(this);
     }
 }
 
-class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
+class HallowedMoonlightEffect extends ReplacementEffectImpl {
 
-    public ContainmentPriestReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead";
+    public HallowedMoonlightEffect() {
+        super(Duration.EndOfTurn, Outcome.Exile);
+        staticText = "Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
-    public ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {
+    public HallowedMoonlightEffect(final HallowedMoonlightEffect effect) {
         super(effect);
     }
 
     @Override
-    public ContainmentPriestReplacementEffect copy() {
-        return new ContainmentPriestReplacementEffect(this);
+    public HallowedMoonlightEffect copy() {
+        return new HallowedMoonlightEffect(this);
     }
 
     @Override
@@ -115,14 +109,22 @@ class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE; // Token create the create Token event
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.CREATE_TOKEN;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.CREATE_TOKEN) {
+            // TODO: not clear how to check for creature type
+            // Tokens: Even though you’re probably casting a spell that makes tokens (Lingering Souls, Raise the Alarm, etc),
+            // the tokens themselves are not cast. As such, Hallowed Moonlight will stop ANY kind of creature tokens
+            // from entering the battlefield.
+            return true;
+        }
         if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(event.getTargetId());
-            if (card.getCardType().contains(CardType.CREATURE)) { // TODO: Bestow Card cast as Enchantment probably not handled correctly
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                // TODO: Bestow Card cast as Enchantment probably not handled correctly
                 CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get("CreatureWasCast");
                 if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
                     return true;
