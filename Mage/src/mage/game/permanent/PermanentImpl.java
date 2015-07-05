@@ -176,6 +176,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
+        this.renown = permanent.renown;
         this.pairedCard = permanent.pairedCard;
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
 

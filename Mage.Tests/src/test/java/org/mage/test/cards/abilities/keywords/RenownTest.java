@@ -172,9 +172,9 @@ public class RenownTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 6);
 
-        assertPowerToughness(playerA, "Rhox Maulers", 4, 4);
+        assertPowerToughness(playerA, "Rhox Maulers", 6, 6); // renown again in turn 7 after the attack
         Permanent rhoxMaulers = getPermanent("Rhox Maulers", playerA);
-        Assert.assertEquals("may not be renown", false, rhoxMaulers.isRenown());
+        Assert.assertEquals("may not be renown", true, rhoxMaulers.isRenown());
 
     }
 
