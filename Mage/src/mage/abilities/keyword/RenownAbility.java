@@ -48,7 +48,8 @@ public class RenownAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return getSourceObject(game) != null && !((Permanent) getSourceObject(game)).isRenown();
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        return sourcePermanent != null && !sourcePermanent.isRenown();
     }
 
     @Override
