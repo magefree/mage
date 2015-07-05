@@ -58,9 +58,11 @@ public class WildInstincts extends CardImpl {
         this.expansionSetCode = "ORI";
 
         // Target creature you control gets +2/+2 until end of turn. It fights target creature an opponent controls.
-        getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
+        effect.setApplyEffectsAfter();
+        getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        Effect effect = new FightTargetsEffect();
+        effect = new FightTargetsEffect();
         effect.setText("It fights target creature an opponent controls <i>(Each deals damage equal to its power to each other)</i>");
         getSpellAbility().addEffect(effect);
         getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
