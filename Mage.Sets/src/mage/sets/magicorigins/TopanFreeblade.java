@@ -30,6 +30,7 @@ package mage.sets.magicorigins;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.keyword.RenownAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -49,6 +50,8 @@ public class TopanFreeblade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Vigilance <i>(Attacking doesn't cause this creature to tap.)
+        this.addAbility(VigilanceAbility.getInstance());
+
         // Renown 1
         this.addAbility(new RenownAbility(1));
     }
