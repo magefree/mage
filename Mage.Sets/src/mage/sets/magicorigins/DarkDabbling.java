@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.SpellMasteryCondition;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -53,6 +54,7 @@ public class DarkDabbling extends CardImpl {
 
         // Regenerate target creature. Draw a card.
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control.
         this.getSpellAbility().addEffect(new DarkDabblingEffect());
