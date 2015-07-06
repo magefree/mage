@@ -45,7 +45,8 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class UndeadServant extends CardImpl {
     
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard(" card named Undead Servant");
+    
     static {
         filter.add(new NamePredicate("Undead Servant"));
     }
