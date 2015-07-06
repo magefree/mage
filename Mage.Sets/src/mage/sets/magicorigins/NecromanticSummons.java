@@ -42,7 +42,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -56,7 +56,7 @@ public class NecromanticSummons extends CardImpl {
 
         // Put target creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
         Effect effect = new ConditionalOneShotEffect(new NecromanticSummoningEffect(),
