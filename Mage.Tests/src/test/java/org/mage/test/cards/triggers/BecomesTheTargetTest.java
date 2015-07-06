@@ -25,50 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package org.mage.test.cards.triggers;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class BlindingSouleater extends CardImpl {
+public class BecomesTheTargetTest extends CardTestPlayerBase {
 
-    public BlindingSouleater(UUID ownerId) {
-        super(ownerId, 131, "Blinding Souleater", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Cleric");
+    /**
+     * Willbreaker is not working when an ability is targeting the opponet's
+     * creature. Only spells.
+     *
+     */
+    @Test
+    public void testWillbreakerAbility() {
+        // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
+        addCard(Zone.BATTLEFIELD, playerB, "Willbreaker", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Blinding Souleater", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-        // {WP},{T}: Tap target creature. ( can be paid with either or 2 life.)
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new TapTargetEffect(),
-                new PhyrexianManaCost(ColoredManaSymbol.W));
-        ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
-    }
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{WP},{T}: Tap target creature", "Silvercoat Lion");
 
-    public BlindingSouleater(final BlindingSouleater card) {
-        super(card);
-    }
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    @Override
-    public BlindingSouleater copy() {
-        return new BlindingSouleater(this);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertTapped("Silvercoat Lion", true);
+
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Willbreaker", 1);
+        assertPermanentCount(playerB, "Blinding Souleater", 1);
+
     }
 }
