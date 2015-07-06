@@ -25,45 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package org.mage.test.cards.triggers;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.MonocoloredPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
  * @author LevelX2
  */
-public class UltimatePrice extends CardImpl {
+public class BecomesTheTargetTest extends CardTestPlayerBase {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
+    /**
+     * Willbreaker is not working when an ability is targeting the opponet's
+     * creature. Only spells.
+     *
+     */
+    @Test
+    public void testWillbreakerAbility() {
+        // Whenever a creature an opponent controls becomes the target of a spell or ability you control, gain control of that creature for as long as you control Willbreaker.
+        addCard(Zone.BATTLEFIELD, playerB, "Willbreaker", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Blinding Souleater", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
 
-    static {
-        filter.add(new MonocoloredPredicate());
-    }
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
-    public UltimatePrice(UUID ownerId) {
-        super(ownerId, 82, "Ultimate Price", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "RTR";
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{WP},{T}: Tap target creature", "Silvercoat Lion");
 
-        // Destroy target monocolored creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
 
-    }
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
 
-    public UltimatePrice(final UltimatePrice card) {
-        super(card);
-    }
+        assertPermanentCount(playerA, "Silvercoat Lion", 0);
+        assertTapped("Silvercoat Lion", true);
 
-    @Override
-    public UltimatePrice copy() {
-        return new UltimatePrice(this);
+        assertPermanentCount(playerB, "Silvercoat Lion", 1);
+        assertPermanentCount(playerB, "Willbreaker", 1);
+        assertPermanentCount(playerB, "Blinding Souleater", 1);
+
     }
 }

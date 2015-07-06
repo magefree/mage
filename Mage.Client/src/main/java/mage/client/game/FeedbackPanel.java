@@ -201,9 +201,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     // Issue 256: Chat+Feedback panel: request focus prevents players from chatting
-    private void requestFocusIfPossible() {
+    // Issue #1054: XMage steals window focus whenever the screen updates
+    private void requestFocusIfPossible() {                
         boolean requestFocusAllowed = true;
-        if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
+        if (MageFrame.getInstance().getFocusOwner() == null) {
+            requestFocusAllowed = false;
+        } else if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
             if (connectedChatPanel.getTxtMessageInputComponent().hasFocus()) {
                 requestFocusAllowed = false;
             }

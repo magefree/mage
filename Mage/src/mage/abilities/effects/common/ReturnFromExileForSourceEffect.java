@@ -1,35 +1,32 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.effects.common;
 
-import java.util.LinkedList;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -41,6 +38,7 @@ import static mage.constants.Zone.GRAVEYARD;
 import static mage.constants.Zone.HAND;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -55,7 +53,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     private boolean previousZone;
 
     /**
-     * 
+     *
      * @param zone Zone the card should return to
      */
     public ReturnFromExileForSourceEffect(Zone zone) {
@@ -65,12 +63,13 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     public ReturnFromExileForSourceEffect(Zone zone, boolean tapped) {
         this(zone, tapped, true);
     }
-    
+
     /**
-     * 
+     *
      * @param zone
      * @param tapped
-     * @param previousZone if this is used from a dies leave battlefield or destroyed trigger, the exile zone is based on previous zone of the object
+     * @param previousZone if this is used from a dies leave battlefield or
+     * destroyed trigger, the exile zone is based on previous zone of the object
      */
     public ReturnFromExileForSourceEffect(Zone zone, boolean tapped, boolean previousZone) {
         super(Outcome.PutCardInPlay);
@@ -94,24 +93,25 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());        
-        if (controller != null) {
-            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter() - (previousZone ? 1:0);
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter);
-            ExileZone exile = game.getExile().getExileZone(exileId);
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject != null && controller != null) {
+            int zoneChangeCounter = source.getSourceObjectZoneChangeCounter();
+            if (zoneChangeCounter > 0 && previousZone && !(sourceObject instanceof PermanentToken)) {
+                zoneChangeCounter--;
+            }
+            ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), zoneChangeCounter));
             if (exile != null) { // null is valid if source left battlefield before enters the battlefield effect resolved
-                LinkedList<UUID> cards = new LinkedList<>(exile);
-                for (UUID cardId: cards) {
-                    Card card = game.getCard(cardId);
-                    if (card == null) {
-                        return false;
+                if (returnToZone.equals(Zone.BATTLEFIELD)) {
+                    for (Card card : exile.getCards(game)) {
+                        Player owner = game.getPlayer(card.getOwnerId());
+                        if (owner != null) {
+                            owner.putOntoBattlefieldWithInfo(card, game, Zone.EXILED, source.getSourceId());
+                        }
                     }
-                    if (!game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + " moves " + card.getLogName() + " from exile to " + returnToZone.toString().toLowerCase());
-                    }
-                    card.moveToZone(returnToZone, source.getSourceId(), game, tapped);
+                } else {
+                    controller.moveCards(exile, Zone.EXILED, returnToZone, source, game);
                 }
-                exile.clear();
             }
             return true;
         }
@@ -121,7 +121,7 @@ public class ReturnFromExileForSourceEffect extends OneShotEffect {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("return the exiled cards ");
-        switch(returnToZone) {
+        switch (returnToZone) {
             case BATTLEFIELD:
                 sb.append("to the battlefield under its owner's control");
                 if (tapped) {

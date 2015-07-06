@@ -87,6 +87,9 @@ public class TransformTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Liliana, Heretical Healer", 0);
         assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
         assertCounterCount("Liliana, Defiant Necromancer", CounterType.LOYALTY, 3);
+
+        assertPermanentCount(playerA, "Zombie", 1);
+
     }
 
 }
