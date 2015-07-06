@@ -15,7 +15,6 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-
 public class BecomesRenownSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private int renownValue;
@@ -54,6 +53,6 @@ public class BecomesRenownSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+        return "When {this} becomes renown, " + super.getRule();
     }
 }
