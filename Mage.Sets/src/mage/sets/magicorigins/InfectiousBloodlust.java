@@ -29,11 +29,11 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -42,6 +42,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -56,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author fireshoes
  */
 public class InfectiousBloodlust extends CardImpl {
-    
+
     private static final FilterCard filter = new FilterCard("card named Infectious Bloodlust");
 
     static {
@@ -74,7 +75,7 @@ public class InfectiousBloodlust extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Enchanted creature gets +2/+1, has haste, and attacks each turn if able.
         Effect effect = new BoostEnchantedEffect(2, 1);
         effect.setText("Enchanted creature gets +2/+1");
@@ -82,11 +83,12 @@ public class InfectiousBloodlust extends CardImpl {
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
         effect.setText("has haste");
         ability.addEffect(effect);
-        effect = new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA);
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and attacks each turn if able");
         ability.addEffect(effect);
         this.addAbility(ability);
-        
+
         // When enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
         this.addAbility(new DiesAttachedTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), "enchanted creature", true));
