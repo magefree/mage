@@ -211,4 +211,31 @@ public class RenownTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Ability doesn't trigger when renowned. ("Whenever an opponent casts a
+     * noncreature spell, if ~ is renowned, ~ deals 2 damage to that player.")
+     */
+    @Test
+    public void testScabClanBerserker() {
+        // Renown 1
+        // Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player.
+        addCard(Zone.BATTLEFIELD, playerA, "Scab-Clan Berserker"); // 2/2  {1}{R}{R}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
+
+        attack(3, playerA, "Scab-Clan Berserker"); // 1 damage
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+
+        Permanent berserker = getPermanent("Scab-Clan Berserker", playerA);
+        Assert.assertEquals("has has renown", true, berserker.isRenown());
+        assertPowerToughness(playerA, "Scab-Clan Berserker", 3, 3);
+
+        assertLife(playerA, 17); // Lightning Bolt
+        assertLife(playerB, 16); // 2 from attack 2 from triggered ability
+
+    }
 }

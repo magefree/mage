@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -44,7 +45,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
@@ -76,12 +77,9 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
         Ability ability = new EntersBattlefieldAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom, false),
                 DashedCondition.getInstance(), false, "", "");
-        Effect effect = new ReturnToHandTargetEffect();
-        effect.setText("return the dashed creature from the battlefield to its owner's hand");
-        effect.setTargetPointer(new FixedTarget(card.getId()));
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect), false));
+        ability.addEffect(new DashAddDelayedTriggeredAbilityEffect());
         addSubAbility(ability);
-
+        
     }
 
     public DashAbility(final DashAbility ability) {
@@ -134,7 +132,7 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
                 this.resetDash();
                 for (AlternativeCost2 dashCost : alternativeSourceCosts) {
                     if (dashCost.canPay(ability, sourceId, controllerId, game)
-                            && player.chooseUse(Outcome.Benefit, new StringBuilder(KEYWORD).append(" the creature for ").append(dashCost.getText(true)).append(" ?").toString(), ability, game)) {
+                            && player.chooseUse(Outcome.Benefit, KEYWORD + " the creature for " + dashCost.getText(true) + " ?", ability, game)) {
                         activateDash(dashCost, game);
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();
@@ -207,5 +205,37 @@ public class DashAbility extends StaticAbility implements AlternativeSourceCosts
             alterCosts.add(aCost.getCost());
         }
         return alterCosts;
+    }
+}
+
+class DashAddDelayedTriggeredAbilityEffect extends OneShotEffect {
+
+    public DashAddDelayedTriggeredAbilityEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "return the dashed creature from the battlefield to its owner's hand";
+    }
+
+    public DashAddDelayedTriggeredAbilityEffect(final DashAddDelayedTriggeredAbilityEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DashAddDelayedTriggeredAbilityEffect copy() {
+        return new DashAddDelayedTriggeredAbilityEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Effect effect = new ReturnToHandTargetEffect();
+        effect.setText("return the dashed creature from the battlefield to its owner's hand");
+        effect.setTargetPointer(new FixedTarget(source.getSourceId()));
+        // init target pointer now because the dashed creature will only be returned from current zone
+        effect.getTargetPointer().init(game, source);
+        DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
+        delayedAbility.setSourceId(source.getSourceId());
+        delayedAbility.setControllerId(source.getControllerId());
+        delayedAbility.setSourceObject(source.getSourceObject(game), game);
+        game.addDelayedTriggeredAbility(delayedAbility);
+        return false;
     }
 }

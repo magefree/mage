@@ -67,7 +67,6 @@ public class AngelOfSerenity extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(6);
 
-
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
@@ -75,7 +74,7 @@ public class AngelOfSerenity extends CardImpl {
         this.addAbility(new AngelOfSerenityTriggeredAbility());
 
         // When Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AngelOfSerenityLeaveEffect(), false ));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AngelOfSerenityLeaveEffect(), false));
     }
 
     public AngelOfSerenity(final AngelOfSerenity card) {
@@ -104,7 +103,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility {
             getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("up to three other target creatures");
             filter.add(new AnotherPredicate());
-            TargetCreaturePermanent target1 = new TargetCreaturePermanent(0,3, filter, false);
+            TargetCreaturePermanent target1 = new TargetCreaturePermanent(0, 3, filter, false);
             game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target1, this, game);
             if (target1.getTargets().size() > 0) {
                 getTargets().add(target1);
@@ -112,8 +111,8 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility {
             }
             int leftTargets = 3 - target1.getTargets().size();
             if (leftTargets > 0) {
-                FilterCard filter2 = new FilterCreatureCard("up to " + leftTargets + " target creature card" + (leftTargets > 1?"s":"") +" from graveyards");
-                TargetCardInGraveyard target2 = new TargetCardInGraveyard(0,leftTargets, filter2);
+                FilterCard filter2 = new FilterCreatureCard("up to " + leftTargets + " target creature card" + (leftTargets > 1 ? "s" : "") + " from graveyards");
+                TargetCardInGraveyard target2 = new TargetCardInGraveyard(0, leftTargets, filter2);
                 game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target2, this, game);
                 if (target2.getTargets().size() > 0) {
                     getTargets().add(target2);
@@ -160,7 +159,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect {
                         }
                     }
 
-                } else if (target instanceof TargetCardInGraveyard){
+                } else if (target instanceof TargetCardInGraveyard) {
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {

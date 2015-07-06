@@ -34,7 +34,6 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +51,6 @@ public class UltimatePrice extends CardImpl {
     public UltimatePrice(UUID ownerId) {
         super(ownerId, 82, "Ultimate Price", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
         this.expansionSetCode = "RTR";
-
 
         // Destroy target monocolored creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
