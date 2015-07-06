@@ -80,7 +80,10 @@ public class DustOfMoments extends CardImpl {
     }
 
 
-
+  //TODO: PermanentImpl.getCounters() and CardImpl.getCounters(game) don't return the same value for the same Card
+  //TODO: This means I can't use a Card generic for Permanents and Exiled cards and use Card.getCounters(game)
+  //TODO: This is the reason i've copy pasted some logic in DustOfMomentsEffect
+  //TODO: After this issue is fixed/explained i'll refactor the code
   public abstract static class DustOfMomentsEffect extends OneShotEffect {
 
       private final Counter counter;

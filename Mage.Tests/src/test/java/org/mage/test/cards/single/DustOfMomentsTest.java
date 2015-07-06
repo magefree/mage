@@ -17,10 +17,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class DustOfMomentsTest extends CardTestPlayerBase {
 
-  //TODO: why the hell is PermanentImpl.getCounters() and CardImpl.getCounters(game) don't return the same value for the same card???
-  //TODO: fix tooltip
-  //TODO: refactor effect code
-
   @Test
   public void testRemoveCounters() throws Exception {
     initGame();
