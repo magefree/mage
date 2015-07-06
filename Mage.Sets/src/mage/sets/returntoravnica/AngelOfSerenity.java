@@ -29,10 +29,12 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,10 +46,10 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -74,7 +76,7 @@ public class AngelOfSerenity extends CardImpl {
         this.addAbility(new AngelOfSerenityTriggeredAbility());
 
         // When Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AngelOfSerenityLeaveEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND, false, true), false));
     }
 
     public AngelOfSerenity(final AngelOfSerenity card) {
@@ -149,13 +151,16 @@ class AngelOfSerenityEnterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = true;
-        if (source.getTargets().size() > 0) {
+        Player controller = game.getPlayer(source.getControllerId());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (controller != null && sourceObject != null && source.getTargets().size() > 0) {
+            UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
             for (Target target : source.getTargets()) {
                 if (target instanceof TargetCreaturePermanent) {
                     for (UUID permanentId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(permanentId);
                         if (permanent != null) {
-                            result |= permanent.moveToExile(CardUtil.getCardExileZoneId(game, source), "Angel of Serenity", source.getSourceId(), game);
+                            result |= controller.moveCardToExileWithInfo(permanent, exileZoneId, sourceObject.getIdName(), source.getSourceId(), game, Zone.BATTLEFIELD, true);
                         }
                     }
 
@@ -163,43 +168,12 @@ class AngelOfSerenityEnterEffect extends OneShotEffect {
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
-                            result |= card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Angel of Serenity", source.getSourceId(), game);
+                            result |= controller.moveCardToExileWithInfo(card, exileZoneId, sourceObject.getIdName(), source.getSourceId(), game, Zone.GRAVEYARD, true);
                         }
                     }
                 }
             }
         }
         return result;
-    }
-}
-
-class AngelOfSerenityLeaveEffect extends OneShotEffect {
-
-    public AngelOfSerenityLeaveEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return the exiled cards to their owners' hands";
-    }
-
-    public AngelOfSerenityLeaveEffect(final AngelOfSerenityLeaveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AngelOfSerenityLeaveEffect copy() {
-        return new AngelOfSerenityLeaveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
-        if (exZone != null) {
-            for (Card card : exZone.getCards(game)) {
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

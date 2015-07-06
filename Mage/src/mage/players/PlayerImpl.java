@@ -2914,6 +2914,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone);
                 }
                 return result;
+            case BATTLEFIELD:
+                result = false;
+                for (Card card : cards) {
+                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId());
+                }
+                return result;
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }
