@@ -51,6 +51,7 @@ public class GameEvent implements Serializable {
     public enum EventType {
 
         //Game events
+//Game events
         BEGINNING,
         PREVENT_DAMAGE, PREVENTED_DAMAGE,
         //Turn-based events
@@ -173,7 +174,7 @@ public class GameEvent implements Serializable {
         UNFLIP, UNFLIPPED,
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
-        BECOMES_RENOWN,
+        BECOMES_RENOWNED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,

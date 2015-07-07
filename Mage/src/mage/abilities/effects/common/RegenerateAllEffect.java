@@ -25,12 +25,11 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -40,10 +39,9 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author LevelX2
  */
+public class RegenerateAllEffect extends OneShotEffect {
 
- public class RegenerateAllEffect extends OneShotEffect {
-
-    private FilterPermanent filter;
+    private final FilterPermanent filter;
 
     public RegenerateAllEffect(FilterPermanent filter) {
         super(Outcome.DestroyPermanent);
