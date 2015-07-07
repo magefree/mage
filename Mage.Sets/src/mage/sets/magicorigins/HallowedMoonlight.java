@@ -88,18 +88,12 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (controller != null) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, zEvent.getFromZone(), true);
+                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, Zone.BATTLEFIELD, true);
             }
             return true;
 
