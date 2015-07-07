@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -40,26 +39,25 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class DashTest extends CardTestPlayerBase {
 
     /**
-     * 702.108. Dash
-     * 702.108a Dash represents three abilities: two static abilities that function while the card with dash is
-     * on the stack, one of which may create a delayed triggered ability, and a static ability that
-     * functions while the object with dash is on the battlefield. “Dash [cost]” means “You may cast
-     * this card by paying [cost] rather that its mana cost,” “If this spell’s dash cost was paid, return the
-     * permanent this spell becomes to its owner’s hand at the beginning of the next end step,” and “As
-     * long as this permanent’s dash cost was paid, it has haste.” Paying a card’s dash cost follows the
-     * rules for paying alternative costs in rules 601.2b and 601.2e–g.
-     * 
-     */
-
-    /** 
-     * 	Screamreach Brawler
-     * 	Creature — Orc Berserker 2/3, 2R (3)
-     * 	Dash {1}{R} (You may cast this spell for its dash cost. If you do, it 
-     *  gains haste, and it's returned from the battlefield to its owner's hand 
-     *  at the beginning of the next end step.)
+     * 702.108. Dash 702.108a Dash represents three abilities: two static
+     * abilities that function while the card with dash is on the stack, one of
+     * which may create a delayed triggered ability, and a static ability that
+     * functions while the object with dash is on the battlefield. “Dash [cost]”
+     * means “You may cast this card by paying [cost] rather that its mana
+     * cost,” “If this spell’s dash cost was paid, return the permanent this
+     * spell becomes to its owner’s hand at the beginning of the next end step,”
+     * and “As long as this permanent’s dash cost was paid, it has haste.”
+     * Paying a card’s dash cost follows the rules for paying alternative costs
+     * in rules 601.2b and 601.2e–g.
      *
      */
-
+    /**
+     * Screamreach Brawler Creature — Orc Berserker 2/3, 2R (3) Dash {1}{R} (You
+     * may cast this spell for its dash cost. If you do, it gains haste, and
+     * it's returned from the battlefield to its owner's hand at the beginning
+     * of the next end step.)
+     *
+     */
     @Test
     public void testDash() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -96,4 +94,30 @@ public class DashTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * Also dash returns creatures to your hand at end of turn even if they died
+     * that turn.
+     */
+    @Test
+    public void testDashedCreatureDiesInCombat() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Screamreach Brawler"); // 2/3
+
+        addCard(Zone.BATTLEFIELD, playerB, "Geist of the Moors", 1); // 3/1
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Screamreach Brawler");
+        setChoice(playerA, "Yes");
+        attack(1, playerA, "Screamreach Brawler");
+        block(1, playerB, "Geist of the Moors", "Screamreach Brawler");
+
+        setStopAt(2, PhaseStep.UNTAP);
+        execute();
+
+        assertLife(playerB, 20);
+        assertPermanentCount(playerA, "Screamreach Brawler", 0);
+        assertHandCount(playerA, "Screamreach Brawler", 0);
+        assertGraveyardCount(playerA, "Screamreach Brawler", 1);
+        assertGraveyardCount(playerB, "Geist of the Moors", 1);
+
+    }
 }

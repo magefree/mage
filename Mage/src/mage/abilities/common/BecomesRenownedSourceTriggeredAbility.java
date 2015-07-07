@@ -15,28 +15,27 @@ import mage.game.events.GameEvent;
  *
  * @author LevelX2
  */
-
-public class BecomesRenownSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class BecomesRenownedSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     private int renownValue;
 
-    public BecomesRenownSourceTriggeredAbility(Effect effect, boolean optional) {
+    public BecomesRenownedSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public BecomesRenownSourceTriggeredAbility(final BecomesRenownSourceTriggeredAbility ability) {
+    public BecomesRenownedSourceTriggeredAbility(final BecomesRenownedSourceTriggeredAbility ability) {
         super(ability);
         this.renownValue = ability.renownValue;
     }
 
     @Override
-    public BecomesRenownSourceTriggeredAbility copy() {
-        return new BecomesRenownSourceTriggeredAbility(this);
+    public BecomesRenownedSourceTriggeredAbility copy() {
+        return new BecomesRenownedSourceTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.BECOMES_RENOWN;
+        return event.getType() == GameEvent.EventType.BECOMES_RENOWNED;
     }
 
     @Override
@@ -54,6 +53,6 @@ public class BecomesRenownSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} becomes monstrous, " + super.getRule();
+        return "When {this} becomes renowned, " + super.getRule();
     }
 }

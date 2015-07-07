@@ -28,16 +28,16 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,6 +54,7 @@ public class BlindingSouleater extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        // {WP},{T}: Tap target creature. ( can be paid with either or 2 life.)
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new TapTargetEffect(),
                 new PhyrexianManaCost(ColoredManaSymbol.W));

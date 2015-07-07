@@ -30,6 +30,7 @@ package mage.sets.magicorigins;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileAndReturnTransformedSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.TransformAbility;
@@ -42,6 +43,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.ZombieToken;
 
 /**
  *
@@ -74,7 +76,8 @@ public class LilianaHereticalHealer extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
-        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(ExileAndReturnTransformedSourceEffect.Gender.FEMAL), false, filter));
+        this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(ExileAndReturnTransformedSourceEffect.Gender.FEMAL,
+                new CreateTokenEffect(new ZombieToken(expansionSetCode))), false, filter));
     }
 
     public LilianaHereticalHealer(final LilianaHereticalHealer card) {

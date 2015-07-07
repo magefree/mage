@@ -227,8 +227,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected UserData userData;
     protected MatchPlayer matchPlayer;
 
-    protected String flagName;
-
     /**
      * During some steps we can't play anything
      */
@@ -2914,6 +2912,12 @@ public abstract class PlayerImpl implements Player, Serializable {
                 result = false;
                 for (Card card : cards) {
                     result |= moveCardToHandWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone);
+                }
+                return result;
+            case BATTLEFIELD:
+                result = false;
+                for (Card card : cards) {
+                    result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId());
                 }
                 return result;
             default:

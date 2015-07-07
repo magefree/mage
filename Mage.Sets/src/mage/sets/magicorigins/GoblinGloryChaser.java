@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownCondition;
+import mage.abilities.condition.common.RenownedSourceCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -59,14 +59,14 @@ public class GoblinGloryChaser extends CardImpl {
 
         // Renown 1
         this.addAbility(new RenownAbility(1));
-        
+
         // As long as Goblin Glory Chaser is renowned, it has menace.
         Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(MenaceAbility.getInstance(), Duration.WhileOnBattlefield),
-                RenownCondition.getInstance(),
+                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
+                RenownedSourceCondition.getInstance(),
                 "As long as {this} is renowned, it has menace");
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability); 
+        this.addAbility(ability);
     }
 
     public GoblinGloryChaser(final GoblinGloryChaser card) {

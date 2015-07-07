@@ -28,6 +28,7 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
@@ -37,6 +38,7 @@ public class CruelRevival extends mage.sets.onslaught.CruelRevival {
 
     public CruelRevival(UUID ownerId) {
         super(ownerId);
+        this.rarity = Rarity.UNCOMMON;
         this.cardNumber = 88;
         this.expansionSetCode = "ORI";
     }

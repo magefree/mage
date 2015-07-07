@@ -27,23 +27,18 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import java.util.List;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
 
 /**
@@ -63,7 +58,7 @@ public class DawnglareInvoker extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DawnglareInvokerEffect(),
+                new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent("creatures")),
                 new ManaCostsImpl("{8}"));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -76,38 +71,5 @@ public class DawnglareInvoker extends CardImpl {
     @Override
     public DawnglareInvoker copy() {
         return new DawnglareInvoker(this);
-    }
-}
-
-class DawnglareInvokerEffect extends OneShotEffect {
-
-    public DawnglareInvokerEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap all creatures target player controls";
-    }
-
-    public DawnglareInvokerEffect(final DawnglareInvokerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (source.getFirstTarget() == null) {
-            return false;
-        }
-
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerIdPredicate(source.getFirstTarget()));
-
-        List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-        for (Permanent creature : creatures) {
-            creature.tap(game);
-        }
-        return true;
-    }
-
-    @Override
-    public DawnglareInvokerEffect copy() {
-        return new DawnglareInvokerEffect(this);
     }
 }

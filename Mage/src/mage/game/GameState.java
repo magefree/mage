@@ -757,6 +757,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    /**
+     * Removes all waiting triggers (needed for turn end effects)
+     */
+    public void clearTriggeredAbilities() {
+        this.triggered.clear();
+    }
+
     public void addTriggeredAbility(TriggeredAbility ability) {
         this.triggered.add(ability);
     }

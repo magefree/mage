@@ -37,7 +37,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author LeveX2
  */
 
-public class JournexToNowhereTest extends CardTestPlayerBase {
+public class JourneyToNowhereTest extends CardTestPlayerBase {
 
     /*
      Journey to Nowhere   Enchantment {1}{W}

@@ -28,9 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,13 +37,15 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
-
 
 /**
  * @author LevelX2
@@ -70,7 +69,6 @@ public class PatronOfTheMoon extends CardImpl {
 
         // {1}: Put up to two land cards from your hand onto the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheMoonEffect(), new ManaCostsImpl("{1}"));
-        ability.addTarget(new TargetCardInHand(0,2, new FilterLandCard()));
         this.addAbility(ability);
 
     }
@@ -86,6 +84,7 @@ public class PatronOfTheMoon extends CardImpl {
 }
 
 class PatronOfTheMoonEffect extends OneShotEffect {
+
     PatronOfTheMoonEffect() {
         super(Outcome.PutLandInPlay);
         staticText = "Put up to two land cards from your hand onto the battlefield tapped";
@@ -99,7 +98,9 @@ class PatronOfTheMoonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID cardId : targetPointer.getTargets(game, source)) {
+            TargetCard target = new TargetCardInHand(0, 2, new FilterLandCard("up to two land cards to put onto the battlefield tapped"));
+            controller.chooseTarget(outcome, controller.getHand(), target, source, game);
+            for (UUID cardId : target.getTargets()) {
                 Card card = game.getCard(cardId);
                 if (card != null) {
                     controller.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);

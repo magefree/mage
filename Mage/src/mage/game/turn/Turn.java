@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.turn;
 
 import java.io.Serializable;
@@ -56,7 +55,7 @@ public class Turn implements Serializable {
     private final List<Phase> phases = new ArrayList<>();
     private boolean declareAttackersStepStarted = false;
     private boolean endTurn; // indicates that an end turn effect has resolved.
-    
+
     public Turn() {
         endTurn = false;
         phases.add(new BeginningPhase());
@@ -71,7 +70,7 @@ public class Turn implements Serializable {
             this.currentPhase = turn.currentPhase.copy();
         }
         this.activePlayerId = turn.activePlayerId;
-        for (Phase phase: turn.phases) {
+        for (Phase phase : turn.phases) {
             this.phases.add(phase.copy());
         }
         this.declareAttackersStepStarted = turn.declareAttackersStepStarted;
@@ -91,7 +90,7 @@ public class Turn implements Serializable {
     }
 
     public Phase getPhase(TurnPhase turnPhase) {
-        for (Phase phase: phases) {
+        for (Phase phase : phases) {
             if (phase.getType() == turnPhase) {
                 return phase;
             }
@@ -133,7 +132,7 @@ public class Turn implements Serializable {
         this.activePlayerId = activePlayer.getId();
         resetCounts();
         game.getPlayer(activePlayer.getId()).beginTurn(game);
-        for (Phase phase: phases) {
+        for (Phase phase : phases) {
             if (game.isPaused() || game.gameOver(null)) {
                 return;
             }
@@ -142,11 +141,11 @@ public class Turn implements Serializable {
                 game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayer.getId(), null, activePlayer.getId()));
                 if (!game.getState().getTurnMods().skipPhase(activePlayer.getId(), currentPhase.getType())) {
                     if (phase.play(game, activePlayer.getId())) {
-                        if(game.executingRollback()) {
+                        if (game.executingRollback()) {
                             return;
                         }
                         //20091005 - 500.4/703.4n
-                        game.emptyManaPools();                        
+                        game.emptyManaPools();
                         game.saveState(false);
 
                         //20091005 - 500.8
@@ -208,7 +207,7 @@ public class Turn implements Serializable {
     }
 
     private void resetCounts() {
-        for (Phase phase: phases) {
+        for (Phase phase : phases) {
             phase.resetCount();
         }
     }
@@ -223,7 +222,7 @@ public class Turn implements Serializable {
             return false;
         }
         Phase phase;
-        switch(extraPhase) {
+        switch (extraPhase) {
             case BEGINNING:
                 phase = new BeginningPhase();
                 break;
@@ -251,52 +250,51 @@ public class Turn implements Serializable {
     }
 
     /*protected void playExtraTurns(Game game) {
-        while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
-            this.play(game, activePlayerId);
-        }
-    }*/
-/**
- * Used for some spells with end turn effect (e.g. Time Stop).
- *
- * @param game
- * @param activePlayerId
- */
+     while (game.getState().getTurnMods().extraTurn(activePlayerId)) {
+     this.play(game, activePlayerId);
+     }
+     }*/
+    /**
+     * Used for some spells with end turn effect (e.g. Time Stop).
+     *
+     * @param game
+     * @param activePlayerId
+     */
     public void endTurn(Game game, UUID activePlayerId) {
-        // Ending the turn this way (Time Stop) means the following things happen in order: 
-       
+        // Ending the turn this way (Time Stop) means the following things happen in order:
+
         setEndTurnRequested(true);
-        
-        // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve. 
-        // It also includes spells and abilities that can't be countered. 
+
+        // 1) All spells and abilities on the stack are exiled. This includes Time Stop, though it will continue to resolve.
+        // It also includes spells and abilities that can't be countered.
         while (!game.getStack().isEmpty()) {
             StackObject stackObject = game.getStack().removeLast();
             if (stackObject instanceof Spell) {
                 ((Spell) stackObject).moveToExile(null, "", null, game);
             }
         }
-        // 2) All attacking and blocking creatures are removed from combat. 
-        for (UUID attackerId: game.getCombat().getAttackers()) {
+        // 2) All attacking and blocking creatures are removed from combat.
+        for (UUID attackerId : game.getCombat().getAttackers()) {
             Permanent permanent = game.getPermanent(attackerId);
             if (permanent != null) {
                 permanent.removeFromCombat(game);
             }
             game.getCombat().removeAttacker(attackerId, game);
         }
-        for (UUID blockerId: game.getCombat().getBlockers()) {
+        for (UUID blockerId : game.getCombat().getBlockers()) {
             Permanent permanent = game.getPermanent(blockerId);
             if (permanent != null) {
                 permanent.removeFromCombat(game);
             }
         }
-        
-        // 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack.         
-        
+        // 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack.
+        // seems like trigger events have to be removed: http://tabakrules.tumblr.com/post/122350751009/days-undoing-has-been-officially-spoiled-on
+        game.getState().clearTriggeredAbilities();
         game.checkStateAndTriggered(); // triggered effects don't go to stack because check of endTurnRequested
-        
-        // 4) The current phase and/or step ends. 
+
+        // 4) The current phase and/or step ends.
         // The game skips straight to the cleanup step. The cleanup step happens in its entirety.
         // this is caused by the endTurnRequest state
-        
     }
 
     public boolean isDeclareAttackersStepStarted() {
@@ -310,23 +308,23 @@ public class Turn implements Serializable {
     public void setEndTurnRequested(boolean endTurn) {
         this.endTurn = endTurn;
     }
-    
+
     public boolean isEndTurnRequested() {
         return endTurn;
     }
-    
+
     public Turn copy() {
         return new Turn(this);
     }
-    
+
     public String getValue(int turnNum) {
         StringBuilder sb = threadLocalBuilder.get();
         sb.append("[").append(turnNum)
-            .append(":").append(currentPhase.getType())
-            .append(":").append(currentPhase.getStep().getType())
-            .append("]");
+                .append(":").append(currentPhase.getType())
+                .append(":").append(currentPhase.getStep().getType())
+                .append("]");
 
         return sb.toString();
     }
-    
+
 }

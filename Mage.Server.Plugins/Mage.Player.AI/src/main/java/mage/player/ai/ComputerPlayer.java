@@ -173,12 +173,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
 
     public ComputerPlayer(String name, RangeOfInfluence range) {
         super(name, range);
-        flagName = "computer";
         human = false;
         userData = UserData.getDefaultUserDataView();
         userData.setAvatarId(64);
         userData.setGroupId(UserGroup.COMPUTER.getGroupId());
-        userData.setFlagName("Computer.png");
+        userData.setFlagName("computer.png");
         pickedCards = new ArrayList<>();
     }
 

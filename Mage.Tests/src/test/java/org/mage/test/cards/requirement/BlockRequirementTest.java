@@ -76,4 +76,40 @@ public class BlockRequirementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerB, "Prized Unicorn", 1);
     }
+
+    /**
+     * Joraga Invocation is bugged big time. He cast it with 2 creatures out. I
+     * only had one untapped creature. Blocked one of his, hit Done, error
+     * message popped up saying the other one needed to be blocked in an
+     * infinite loop. Had to shut down the program via Task Manager.
+     */
+    @Test
+    public void testJoragaInvocationTest() {
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 6);
+        // Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
+        addCard(Zone.HAND, playerB, "Joraga Invocation");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion"); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Pillarfield Ox"); // 2/4
+
+        // Swampwalk
+        addCard(Zone.BATTLEFIELD, playerA, "Bog Wraith"); // 3/3
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Joraga Invocation");
+
+        // Silvercoat Lion has not to block because it has to pay {3} to block
+        attack(2, playerB, "Silvercoat Lion");
+        attack(2, playerB, "Pillarfield Ox");
+        block(2, playerA, "Bog Wraith", "Pillarfield Ox");
+
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertLife(playerA, 15);
+
+        assertGraveyardCount(playerB, "Joraga Invocation", 1);
+        assertPowerToughness(playerB, "Silvercoat Lion", 5, 5);
+        assertPowerToughness(playerB, "Pillarfield Ox", 5, 7);
+        assertGraveyardCount(playerA, "Bog Wraith", 1);
+    }
+
 }

@@ -22,14 +22,12 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
-
 public class RenownAbility extends TriggeredAbilityImpl {
 
     private int renownValue;
-    
+
     public RenownAbility(int renownValue) {
-        super(Zone.BATTLEFIELD, new BecomeRenownSourceEffect(renownValue), false);
+        super(Zone.BATTLEFIELD, new BecomesRenownedSourceEffect(renownValue), false);
         this.renownValue = renownValue;
     }
 
@@ -50,7 +48,8 @@ public class RenownAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return getSourceObject(game) != null && !((Permanent)getSourceObject(game)).isRenown();
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
+        return sourcePermanent != null && !sourcePermanent.isRenowned();
     }
 
     @Override
@@ -59,45 +58,40 @@ public class RenownAbility extends TriggeredAbilityImpl {
                 && ((DamagedPlayerEvent) event).isCombatDamage();
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, " + super.getRule();
-    }
-    
     public int getRenownValue() {
         return renownValue;
     }
 }
 
-class BecomeRenownSourceEffect extends OneShotEffect {
+class BecomesRenownedSourceEffect extends OneShotEffect {
 
-    public BecomeRenownSourceEffect(int renownValue) {
+    public BecomesRenownedSourceEffect(int renownValue) {
         super(Outcome.BoostCreature);
         this.staticText = setText(renownValue);
     }
 
-    public BecomeRenownSourceEffect(final BecomeRenownSourceEffect effect) {
+    public BecomesRenownedSourceEffect(final BecomesRenownedSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public BecomeRenownSourceEffect copy() {
-        return new BecomeRenownSourceEffect(this);
+    public BecomesRenownedSourceEffect copy() {
+        return new BecomesRenownedSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && source instanceof RenownAbility) {
-            game.informPlayers(permanent.getLogName() + " is now renown");
+            game.informPlayers(permanent.getLogName() + " is now renowned");
             int renownValue = ((RenownAbility) source).getRenownValue();
             // handle renown = X
             if (renownValue == Integer.MAX_VALUE) {
                 renownValue = source.getManaCostsToPay().getX();
             }
-            new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue),true).apply(game, source);
-            permanent.setRenown(true);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWN, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
+            new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
+            permanent.setRenowned(true);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
             return true;
         }
         return false;
@@ -106,9 +100,9 @@ class BecomeRenownSourceEffect extends OneShotEffect {
     private String setText(int renownValue) {
         // Renown 1 (When this creature deals combat damage to a player, if it isn't renowned, put a +1/+1 counter on it and it becomes renowned.)
         StringBuilder sb = new StringBuilder("Renown ");
-        sb.append(renownValue == Integer.MAX_VALUE ? "X":renownValue)
+        sb.append(renownValue == Integer.MAX_VALUE ? "X" : renownValue)
                 .append(".  <i>(When this creature deals combat damage to a player, if it isn't renowned, put ")
-                .append(renownValue == Integer.MAX_VALUE ? "X":CardUtil.numberToText(renownValue, "a"))
+                .append(renownValue == Integer.MAX_VALUE ? "X" : CardUtil.numberToText(renownValue, "a"))
                 .append(" +1/+1 counter on it and it becomes renowned.)</i>").toString();
         return sb.toString();
     }

@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
@@ -56,16 +55,13 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
-
 public class CouncilOfTheAbsolute extends CardImpl {
 
-    public CouncilOfTheAbsolute (UUID ownerId) {
+    public CouncilOfTheAbsolute(UUID ownerId) {
         super(ownerId, 62, "Council of the Absolute", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Human");
         this.subtype.add("Advisor");
-
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -79,7 +75,7 @@ public class CouncilOfTheAbsolute extends CardImpl {
 
     }
 
-    public CouncilOfTheAbsolute (final CouncilOfTheAbsolute card) {
+    public CouncilOfTheAbsolute(final CouncilOfTheAbsolute card) {
         super(card);
     }
 

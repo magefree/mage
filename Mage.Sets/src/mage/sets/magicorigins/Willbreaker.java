@@ -43,7 +43,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
@@ -96,8 +95,7 @@ class WillbreakerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (getControllerId().equals(event.getPlayerId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)
-                    && StackObject.class.isInstance(game.getObject(event.getSourceId()))) {
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 Player controller = game.getPlayer(getControllerId());
                 if (controller != null && controller.hasOpponent(permanent.getControllerId(), game)) {
                     getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
