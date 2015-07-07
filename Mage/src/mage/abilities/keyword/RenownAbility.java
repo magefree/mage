@@ -83,7 +83,7 @@ class BecomeRenownSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && source instanceof RenownAbility) {
-            game.informPlayers(permanent.getLogName() + " is now renown");
+            game.informPlayers(permanent.getLogName() + " is now renowned");
             int renownValue = ((RenownAbility) source).getRenownValue();
             // handle renown = X
             if (renownValue == Integer.MAX_VALUE) {
