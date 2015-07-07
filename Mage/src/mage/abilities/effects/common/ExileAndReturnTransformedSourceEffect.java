@@ -5,7 +5,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
@@ -15,6 +14,7 @@ import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -57,7 +57,8 @@ public class ExileAndReturnTransformedSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        // Creature has to be on the battlefield to get exiled and be able to return transformed
+        Permanent sourceObject = game.getPermanent(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceObject != null && controller != null) {
             Card card = (Card) sourceObject;

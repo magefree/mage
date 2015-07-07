@@ -92,4 +92,36 @@ public class TransformTest extends CardTestPlayerBase {
 
     }
 
+    /**
+     * The creature-Liliana and another creature was out, Languish is cast
+     * killing both, Liliana comes back transformed and no zombie. I'm fairly
+     * certain she's not supposed to come back due to her exile trigger
+     * shouldn't be able to exile her cos she's dead.
+     */
+    @Test
+    public void LilianaHereticalHealer2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+
+        // Lifelink
+        // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
+        addCard(Zone.BATTLEFIELD, playerA, "Liliana, Heretical Healer");
+
+        // All creatures get -4/-4 until end of turn.
+        addCard(Zone.HAND, playerB, "Languish");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Languish");
+
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerB, "Languish", 1);
+        assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 0);
+        assertPermanentCount(playerA, "Zombie", 0);
+
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertGraveyardCount(playerA, "Liliana, Heretical Healer", 1);
+
+    }
+
 }
