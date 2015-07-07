@@ -28,12 +28,12 @@
 package mage.sets.magicorigins;
 
 import java.util.UUID;
-import mage.abilities.condition.common.RenownCondition;
+import mage.abilities.condition.common.RenownedTargetCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -56,12 +56,11 @@ public class EnshroudingMist extends CardImpl {
         Effect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE);
         effect.setText("Prevent all damage that would dealt to it this turn");
         this.getSpellAbility().addEffect(effect);
-        OneShotEffect effect2 = new UntapSourceEffect();
+        OneShotEffect effect2 = new UntapTargetEffect();
         effect2.setText("untap it");
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(effect2, RenownCondition.getInstance()));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(effect2, RenownedTargetCondition.getInstance()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        
-        
+
     }
 
     public EnshroudingMist(final EnshroudingMist card) {
