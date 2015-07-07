@@ -181,6 +181,8 @@ public class Session {
                 return 1018;
             case "Bandit":
                 return 1020;
+            case "Wehk":
+                return 66;
         }
         return 51;
     }

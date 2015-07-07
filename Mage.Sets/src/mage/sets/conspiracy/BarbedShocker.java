@@ -25,76 +25,82 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.conspiracy;
 
+import java.util.Set;
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.SpellMasteryCondition;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class DarkDabbling extends CardImpl {
+public class BarbedShocker extends CardImpl {
 
-    public DarkDabbling(UUID ownerId) {
-        super(ownerId, 89, "Dark Dabbling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "ORI";
+    public BarbedShocker(UUID ownerId) {
+        super(ownerId, 136, "Barbed Shocker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "CNS";
+        this.subtype.add("Insect");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Regenerate target creature. Draw a card.
-        this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control.
-        this.getSpellAbility().addEffect(new DarkDabblingEffect());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new BarbedShockerEffect(), false, true));
     }
 
-    public DarkDabbling(final DarkDabbling card) {
+    public BarbedShocker(final BarbedShocker card) {
         super(card);
     }
 
     @Override
-    public DarkDabbling copy() {
-        return new DarkDabbling(this);
+    public BarbedShocker copy() {
+        return new BarbedShocker(this);
     }
 }
+class BarbedShockerEffect extends OneShotEffect {
 
-class DarkDabblingEffect extends OneShotEffect {
-
-    public DarkDabblingEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "<i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control";
+    public BarbedShockerEffect() {
+        super(Outcome.Discard);
+        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
     }
 
-    public DarkDabblingEffect(final DarkDabblingEffect effect) {
+    public BarbedShockerEffect(final BarbedShockerEffect effect) {
         super(effect);
     }
 
     @Override
-    public DarkDabblingEffect copy() {
-        return new DarkDabblingEffect(this);
+    public BarbedShockerEffect copy() {
+        return new BarbedShockerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (SpellMasteryCondition.getInstance().apply(game, source)) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-                    permanent.regenerate(source.getSourceId(), game);
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (targetPlayer != null) {
+                int count = targetPlayer.getHand().size();
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    targetPlayer.discard(card, source, game);
                 }
+                targetPlayer.drawCards(count, game);
+                return false;
             }
-        }
         return true;
     }
 }

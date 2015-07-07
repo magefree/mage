@@ -25,76 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.tempest;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.SpellMasteryCondition;
+import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.RegenerateTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class DarkDabbling extends CardImpl {
+public class Shocker extends CardImpl {
 
-    public DarkDabbling(UUID ownerId) {
-        super(ownerId, 89, "Dark Dabbling", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "ORI";
+    public Shocker(UUID ownerId) {
+        super(ownerId, 204, "Shocker", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "TMP";
+        this.subtype.add("Insect");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // Regenerate target creature. Draw a card.
-        this.getSpellAbility().addEffect(new RegenerateTargetEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control.
-        this.getSpellAbility().addEffect(new DarkDabblingEffect());
+        // Whenever Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ShockerEffect(), false, true));
     }
 
-    public DarkDabbling(final DarkDabbling card) {
+    public Shocker(final Shocker card) {
         super(card);
     }
 
     @Override
-    public DarkDabbling copy() {
-        return new DarkDabbling(this);
+    public Shocker copy() {
+        return new Shocker(this);
     }
 }
+class ShockerEffect extends OneShotEffect {
 
-class DarkDabblingEffect extends OneShotEffect {
-
-    public DarkDabblingEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "<i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, also regenerate each other creature you control";
+    public ShockerEffect() {
+        super(Outcome.Discard);
+        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
     }
 
-    public DarkDabblingEffect(final DarkDabblingEffect effect) {
+    public ShockerEffect(final ShockerEffect effect) {
         super(effect);
     }
 
     @Override
-    public DarkDabblingEffect copy() {
-        return new DarkDabblingEffect(this);
+    public ShockerEffect copy() {
+        return new ShockerEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (SpellMasteryCondition.getInstance().apply(game, source)) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-                if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-                    permanent.regenerate(source.getSourceId(), game);
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+            if (targetPlayer != null) {
+                int count = targetPlayer.getHand().size();
+                for (Card card : targetPlayer.getHand().getCards(game)) {
+                    targetPlayer.discard(card, source, game);
                 }
+                targetPlayer.drawCards(count, game);
+                return false;
             }
-        }
         return true;
     }
 }
