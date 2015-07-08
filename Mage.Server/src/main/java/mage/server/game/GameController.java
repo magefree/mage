@@ -240,7 +240,7 @@ public class GameController implements GameCallback {
                                     select(event.getPlayerId(), event.getMessage(), event.getOptions());
                                     break;
                                 case PLAY_MANA:
-                                    playMana(event.getPlayerId(), event.getMessage());
+                                    playMana(event.getPlayerId(), event.getMessage(), event.getOptions());
                                     break;
                                 case PLAY_X_MANA:
                                     playXMana(event.getPlayerId(), event.getMessage());
@@ -850,11 +850,11 @@ public class GameController implements GameCallback {
         });
     }
 
-    private synchronized void playMana(UUID playerId, final String message) throws MageException {
+    private synchronized void playMana(UUID playerId, final String message, final Map<String, Serializable> options) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).playMana(message);
+                getGameSession(playerId).playMana(message, options);
             }
         });
     }
@@ -1026,7 +1026,7 @@ public class GameController implements GameCallback {
         // player has game under control (is not cotrolled by other player)
         Player player = game.getPlayer(playerId);
         if (player != null && player.isGameUnderControl()) {
-                // if it's your priority (or game not started yet in which case it will be null)
+            // if it's your priority (or game not started yet in which case it will be null)
             // then execute only your action
             if (game.getPriorityPlayerId() == null || game.getPriorityPlayerId().equals(playerId)) {
                 if (gameSessions.containsKey(playerId)) {
@@ -1041,7 +1041,7 @@ public class GameController implements GameCallback {
                         command.execute(controlled);
                     }
                 }
-                    // else player has no priority to do something, so ignore the command
+                // else player has no priority to do something, so ignore the command
                 // e.g. you click at one of your cards, but you can't play something at that moment
             }
 

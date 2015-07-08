@@ -233,7 +233,7 @@ public interface Game extends MageItem, Serializable {
 
     void firePriorityEvent(UUID playerId);
 
-    void firePlayManaEvent(UUID playerId, String message);
+    void firePlayManaEvent(UUID playerId, String message, Map<String, Serializable> options);
 
     void firePlayXManaEvent(UUID playerId, String message);
 
@@ -322,7 +322,6 @@ public interface Game extends MageItem, Serializable {
     void endMulligan(UUID playerId);
 
     // void quit(UUID playerId);
-
     void timerTimeout(UUID playerId);
 
     void idleTimeout(UUID playerId);

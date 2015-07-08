@@ -1868,11 +1868,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void firePlayManaEvent(UUID playerId, String message) {
+    public void firePlayManaEvent(UUID playerId, String message, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playMana(playerId, message);
+        playerQueryEventSource.playMana(playerId, message, options);
     }
 
     @Override

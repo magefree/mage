@@ -683,7 +683,11 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
-        game.firePlayManaEvent(playerId, "Pay " + promptText);
+        Map<String, Serializable> options = new HashMap<>();
+        if (unpaid.getText().contains("P}")) {
+            options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "Pay 2 life");
+        }
+        game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
         if (!this.isInGame()) {
             return false;

@@ -150,12 +150,6 @@ public class FeedbackPanel extends javax.swing.JPanel {
             this.btnSpecial.setVisible(special);
             this.btnSpecial.setText("Special");
             this.helper.setSpecial("Special", special);
-            // Handling Phyrexian mana
-            if (message.contains("P}")) {
-                this.btnSpecial.setVisible(true);
-                this.btnSpecial.setText("Pay 2 life");
-                this.helper.setSpecial("Pay 2 life", true);
-            }
         }
 
         requestFocusIfPossible();
@@ -202,7 +196,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     // Issue 256: Chat+Feedback panel: request focus prevents players from chatting
     // Issue #1054: XMage steals window focus whenever the screen updates
-    private void requestFocusIfPossible() {                
+    private void requestFocusIfPossible() {
         boolean requestFocusAllowed = true;
         if (MageFrame.getInstance().getFocusOwner() == null) {
             requestFocusAllowed = false;

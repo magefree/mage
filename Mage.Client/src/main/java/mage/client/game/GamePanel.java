@@ -939,9 +939,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void ask(String question, GameView gameView, int messageId) {
+    public void ask(String question, GameView gameView, int messageId, Map<String, Serializable> options) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId);
     }
 
     /**
@@ -1039,10 +1039,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
     }
 
-    public void playMana(String message, GameView gameView, int messageId) {
+    public void playMana(String message, GameView gameView, Map<String, Serializable> options, int messageId) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null, messageId);
+        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId);
     }
 
     public void playXMana(String message, GameView gameView, int messageId) {
