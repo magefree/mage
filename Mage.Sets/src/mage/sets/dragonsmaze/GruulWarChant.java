@@ -28,17 +28,17 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class GruulWarChant extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AttackingPredicate());
@@ -60,11 +60,10 @@ public class GruulWarChant extends CardImpl {
         this.expansionSetCode = "DGM";
 
 
-        // Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter));
+        // Attacking creatures you control get +1/+0 and have menace. (They can't be blocked except by two or more creatures.)
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter));
         ability.addEffect(new BoostAllEffect(1,0, Duration.WhileOnBattlefield, filter, false));
         this.addAbility(ability);
-
     }
 
     public GruulWarChant(final GruulWarChant card) {

@@ -33,9 +33,10 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
@@ -72,13 +73,14 @@ public class IroasGodOfVictory extends CardImpl {
 
         // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
+        
         // As long as your devotion to red and white is less than seven, Iroas isn't a creature.
         Effect effect = new LoseCreatureTypeSourceEffect(new DevotionCount(ColoredManaSymbol.R, ColoredManaSymbol.W), 7);
         effect.setText("As long as your devotion to red and white is less than seven, Iroas isn't a creature");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
-        // Creatures you control can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter)));
+        // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
         
         // Prevent all damage that would be dealt to attacking creatures you control.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filterAttacking)));

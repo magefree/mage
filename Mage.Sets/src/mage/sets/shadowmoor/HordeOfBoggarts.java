@@ -28,17 +28,17 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -64,8 +64,9 @@ public class HordeOfBoggarts extends CardImpl {
 
         // Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
-        // Horde of Boggarts can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
     }
 
     public HordeOfBoggarts(final HordeOfBoggarts card) {

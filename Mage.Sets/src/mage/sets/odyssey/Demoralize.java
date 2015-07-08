@@ -28,16 +28,16 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 
 
@@ -52,8 +52,8 @@ public class Demoralize extends CardImpl {
         this.expansionSetCode = "ODY";
 
 
-        // Each creature can't be blocked this turn except by two or more creatures.
-        this.getSpellAbility().addEffect(new CantBeBlockedByOneAllEffect(2, new FilterCreaturePermanent(), Duration.EndOfTurn));
+        // All creatures gain menace until end of turn. (They can't be blocked except by two or more creatures.)
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, new FilterCreaturePermanent()));
 
         // Threshold — If seven or more cards are in your graveyard, creatures can't block this turn.
         this.getSpellAbility().addEffect(

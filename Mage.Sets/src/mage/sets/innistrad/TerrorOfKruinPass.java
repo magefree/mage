@@ -38,11 +38,13 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -56,7 +58,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class TerrorOfKruinPass extends CardImpl {
 
-    private static final String ruleText = "Each Werewolf you control can't be blocked except by two or more creatures";
+    private static final String ruleText = "Werewolves you control have menace. (They can't be blocked except by two or more creatures.)";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -77,9 +79,10 @@ public class TerrorOfKruinPass extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(DoubleStrikeAbility.getInstance());
-        // Each Werewolf you control can't be blocked except by two or more creatures.
-        Effect effect = new ConditionalContinuousEffect(new CantBeBlockedByOneAllEffect(2, filter), new TransformedCondition(), ruleText);
+        // Werewolves you control have menace. (They can't be blocked except by two or more creatures.)
+        Effect effect = new ConditionalContinuousEffect(new GainAbilityAllEffect(new MenaceAbility(), Duration.Custom, filter), new TransformedCondition(), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));

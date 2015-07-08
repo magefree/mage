@@ -28,13 +28,11 @@
 package mage.sets.tenthedition;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.cards.CardImpl;
 
 /**
  *
@@ -50,8 +48,8 @@ public class ViashinoRunner extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Viashino Runner can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
     }
 
     public ViashinoRunner(final ViashinoRunner card) {

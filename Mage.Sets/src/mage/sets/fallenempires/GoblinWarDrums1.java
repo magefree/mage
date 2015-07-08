@@ -28,14 +28,15 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -45,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
  public class GoblinWarDrums1 extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
@@ -55,8 +56,8 @@ import mage.filter.predicate.permanent.ControllerPredicate;
         this.expansionSetCode = "FEM";
 
 
-        // Each creature you control can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter)));
+        // Creatures you control have menace. (They can't be blocked except by two or more creatures.)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
     }
 
     public GoblinWarDrums1(final GoblinWarDrums1 card) {
