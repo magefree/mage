@@ -29,6 +29,8 @@ package org.mage.test.combat;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.permanent.Permanent;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -60,7 +62,7 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         attack(2, playerB, "Stomping Ground");
         activateAbility(2, PhaseStep.DECLARE_ATTACKERS, playerB, "{1}{G},Sacrifice an Elf: Target creature gets +3/+3", "Stomping Ground");
         castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Lightning Blast", "Ambush Commander");
-        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(2, PhaseStep.COMBAT_DAMAGE);
         execute();
 
         assertGraveyardCount(playerB, "Elvish Mystic", 1);
@@ -68,6 +70,9 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Ambush Commander", 1);
 
         assertPowerToughness(playerB, "Stomping Ground", 0, 0);
+
+        Permanent stompingGround = getPermanent("Stomping Ground", playerB);
+        Assert.assertEquals("Stomping Ground has to be removed from combat", false, stompingGround.isAttacking());
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

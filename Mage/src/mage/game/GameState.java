@@ -534,9 +534,10 @@ public class GameState implements Serializable, Copyable<GameState> {
             player.reset();
         }
         battlefield.reset(game);
-        combat.reset();
+        combat.reset(game);
         this.reset();
         effects.apply(game);
+        combat.checkForRemoveFromCombat(game);
     }
 
     // Remove End of Combat effects

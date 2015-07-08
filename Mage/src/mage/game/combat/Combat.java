@@ -42,6 +42,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -157,9 +158,24 @@ public class Combat implements Serializable, Copyable<Combat> {
         this.useToughnessForDamageFilters.add(filter);
     }
 
-    public void reset() {
+    public void reset(Game game) {
         this.useToughnessForDamage = false;
         this.useToughnessForDamageFilters.clear();
+    }
+
+    public void checkForRemoveFromCombat(Game game) {
+        for (UUID creatureId : getAttackers()) {
+            Permanent creature = game.getPermanent(creatureId);
+            if (!creature.getCardType().contains(CardType.CREATURE)) {
+                removeFromCombat(creatureId, game, true);
+            }
+        }
+        for (UUID creatureId : getBlockers()) {
+            Permanent creature = game.getPermanent(creatureId);
+            if (!creature.getCardType().contains(CardType.CREATURE)) {
+                removeFromCombat(creatureId, game, true);
+            }
+        }
     }
 
     public void clear() {
@@ -993,7 +1009,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
-    public boolean removeFromCombat(UUID creatureId, Game game) {
+    public boolean removeFromCombat(UUID creatureId, Game game, boolean withInfo) {
         boolean result = false;
         Permanent creature = game.getPermanent(creatureId);
         if (creature != null) {
@@ -1002,6 +1018,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             creature.setRemovedFromCombat(true);
             for (CombatGroup group : groups) {
                 result |= group.remove(creatureId);
+            }
+            if (result && withInfo) {
+                game.informPlayers(creature.getLogName() + " removed from combat");
             }
         }
         return result;

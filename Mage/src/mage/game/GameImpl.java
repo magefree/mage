@@ -2124,7 +2124,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 // check if it's a creature and must be removed from combat
                 if (perm.getCardType().contains(CardType.CREATURE) && this.getCombat() != null) {
-                    this.getCombat().removeFromCombat(perm.getId(), this);
+                    perm.removeFromCombat(this, true);
                 }
                 it.remove();
             }
