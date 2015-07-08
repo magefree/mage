@@ -47,9 +47,10 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
- * 
+ *
  * This class uses ConcurrentHashMap to avoid ConcurrentModificationExceptions.
- * See ticket https://github.com/magefree/mage/issues/966 and https://github.com/magefree/mage/issues/473
+ * See ticket https://github.com/magefree/mage/issues/966 and
+ * https://github.com/magefree/mage/issues/473
  */
 public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
 
@@ -100,7 +101,6 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                         }
                     }
 
-                    // ability.setSourceObject(object);
                     if (ability.checkTrigger(event, game)) {
                         ability.trigger(game, ability.getControllerId());
                     }

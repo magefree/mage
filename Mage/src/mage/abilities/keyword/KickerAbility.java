@@ -139,8 +139,6 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     public void resetKicker(Game game, Ability source) {
-        String key = getActivationKey(source, "", game);
-        activations.remove(key);
         for (OptionalAdditionalCost cost : kickerCosts) {
             cost.reset();
         }
@@ -180,8 +178,11 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
     }
 
     private String getActivationKey(Ability source, String costText, Game game) {
-        int zcc = source.getSourceObjectZoneChangeCounter();
-        if (source.getSourceObjectZoneChangeCounter() == 0) {
+        int zcc = 0;
+        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {
+            zcc = source.getSourceObjectZoneChangeCounter();
+        }
+        if (zcc == 0) {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
         if (zcc > 0 && (source.getAbilityType().equals(AbilityType.TRIGGERED) || source.getAbilityType().equals(AbilityType.STATIC))) {
