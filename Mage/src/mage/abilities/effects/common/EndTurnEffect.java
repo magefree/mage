@@ -25,12 +25,11 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 public class EndTurnEffect extends OneShotEffect {
@@ -46,8 +45,9 @@ public class EndTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!game.isSimulation())
+        if (!game.isSimulation()) {
             game.informPlayers("The current turn ends");
+        }
         return game.endTurn();
     }
 
@@ -56,4 +56,3 @@ public class EndTurnEffect extends OneShotEffect {
         return new EndTurnEffect(this);
     }
 }
-

@@ -25,56 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.effects.common.continuous.GainProtectionFromColorTargetEffect;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class ArmoredGuardian extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public ArmoredGuardian(UUID ownerId) {
+        super(ownerId, 230, "Armored Guardian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{U}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Cat");
+        this.subtype.add("Soldier");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(5);
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        // {1}{W}{W}: Target creature you control gains protection from the color of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
+            new ManaCostsImpl("{1}{W}{W}"));
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
+        // {1}{U}{U}: Armored Guardian gains shroud until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn),
+            new ManaCostsImpl("{1}{U}{U}")));
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public ArmoredGuardian(final ArmoredGuardian card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public ArmoredGuardian copy() {
+        return new ArmoredGuardian(this);
     }
 }

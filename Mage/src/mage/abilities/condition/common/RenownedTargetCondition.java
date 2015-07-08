@@ -25,49 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.abilities.condition.common;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MoltensteelDragon extends CardImpl {
+public class RenownedTargetCondition implements Condition {
 
-    public MoltensteelDragon(UUID ownerId) {
-        super(ownerId, 88, "Moltensteel Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}{RP}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Dragon");
+    private static RenownedTargetCondition fInstance = null;
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+    private RenownedTargetCondition() {
     }
 
-    public MoltensteelDragon(final MoltensteelDragon card) {
-        super(card);
+    public static RenownedTargetCondition getInstance() {
+        if (fInstance == null) {
+            fInstance = new RenownedTargetCondition();
+        }
+        return fInstance;
     }
 
     @Override
-    public MoltensteelDragon copy() {
-        return new MoltensteelDragon(this);
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getTargets().getFirstTarget());
+        if (permanent != null) {
+            return permanent.isRenowned();
+        }
+        return false;
     }
+
+    @Override
+    public String toString() {
+        return "it's renowned";
+    }
+
 }

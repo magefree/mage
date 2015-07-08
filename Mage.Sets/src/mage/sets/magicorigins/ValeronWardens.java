@@ -89,7 +89,7 @@ class ValeronWardensTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType().equals(EventType.BECOMES_RENOWN);
+        return event.getType().equals(EventType.BECOMES_RENOWNED);
     }
 
     @Override

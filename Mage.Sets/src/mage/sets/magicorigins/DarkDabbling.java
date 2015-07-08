@@ -41,6 +41,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -91,7 +92,9 @@ class DarkDabblingEffect extends OneShotEffect {
         if (SpellMasteryCondition.getInstance().apply(game, source)) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
                 if (!permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
-                    permanent.regenerate(source.getSourceId(), game);
+                    RegenerateTargetEffect regenEffect = new RegenerateTargetEffect();
+                    regenEffect.setTargetPointer(new FixedTarget(permanent.getId()));
+                    game.addEffect(regenEffect, source);
                 }
             }
         }

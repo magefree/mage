@@ -31,16 +31,14 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CreatureWasCastWatcher;
 
@@ -88,47 +86,29 @@ class HallowedMoonlightEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (controller != null) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null) {
-                controller.moveCardToExileWithInfo(card, null, "", source.getSourceId(), game, zEvent.getFromZone(), true);
-            }
+            EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
+            controller.moveCardToExileWithInfo(entersTheBattlefieldEvent.getTarget(), null, "",
+                    source.getSourceId(), game, entersTheBattlefieldEvent.getFromZone(), true);
             return true;
-
         }
         return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE || event.getType() == GameEvent.EventType.CREATE_TOKEN;
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CREATE_TOKEN) {
-            // TODO: not clear how to check for creature type
-            // Tokens: Even though you’re probably casting a spell that makes tokens (Lingering Souls, Raise the Alarm, etc),
-            // the tokens themselves are not cast. As such, Hallowed Moonlight will stop ANY kind of creature tokens
-            // from entering the battlefield.
-            return true;
-        }
-        if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
-                // TODO: Bestow Card cast as Enchantment probably not handled correctly
-                CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get("CreatureWasCast");
-                if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
-                    return true;
-                }
+        EntersTheBattlefieldEvent entersTheBattlefieldEvent = (EntersTheBattlefieldEvent) event;
+        if (entersTheBattlefieldEvent.getTarget().getCardType().contains(CardType.CREATURE)) {
+            CreatureWasCastWatcher watcher = (CreatureWasCastWatcher) game.getState().getWatchers().get("CreatureWasCast");
+            if (watcher != null && !watcher.wasCreatureCastThisTurn(event.getTargetId())) {
+                return true;
             }
         }
         return false;

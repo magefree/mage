@@ -25,49 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package org.mage.test.cards.abilities.other;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MoltensteelDragon extends CardImpl {
+public class EndTurnEffectTest extends CardTestPlayerBase {
 
-    public MoltensteelDragon(UUID ownerId) {
-        super(ownerId, 88, "Moltensteel Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}{RP}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Dragon");
+    /**
+     * Additional bug: Days Undoing and Sphinx's Tutelage are broken. You
+     * shouldn't get triggers off of Tutelage, since the turn ends, but it has
+     * you resolve them in your cleanup step.
+     *
+     * http://tabakrules.tumblr.com/post/122350751009/days-undoing-has-been-officially-spoiled-on
+     *
+     */
+    @Test
+    public void testSpellsAffinity() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Whenever you draw a card, target opponent puts the top two cards of his or her library into his or her graveyard. If they're both nonland cards that share a color, repeat this process.
+        // {5}{U}: Draw a card, then discard a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Sphinx's Tutelage");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. If it's your turn, end the turn.
+        addCard(Zone.HAND, playerA, "Day's Undoing"); //Sorcery {2}{U}
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Day's Undoing");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertExileCount("Day's Undoing", 1);
+
+        assertHandCount(playerA, 7);
+        assertHandCount(playerB, 7);
+
+        assertGraveyardCount(playerB, 0); // because the trigegrs of Sphinx's Tutelage cease to exist
+
     }
 
-    public MoltensteelDragon(final MoltensteelDragon card) {
-        super(card);
-    }
-
-    @Override
-    public MoltensteelDragon copy() {
-        return new MoltensteelDragon(this);
-    }
 }

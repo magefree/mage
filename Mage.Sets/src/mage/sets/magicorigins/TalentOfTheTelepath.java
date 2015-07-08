@@ -136,9 +136,9 @@ class TalentOfTheTelepathEffect extends OneShotEffect {
                         target.clearChosen();
                     }
                 }
-
-                targetOpponent.moveCards(allCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             }
+
+            targetOpponent.moveCards(allCards, Zone.LIBRARY, Zone.GRAVEYARD, source, game);
             return true;
         }
         return false;

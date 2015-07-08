@@ -27,7 +27,7 @@ public class RenownAbility extends TriggeredAbilityImpl {
     private int renownValue;
 
     public RenownAbility(int renownValue) {
-        super(Zone.BATTLEFIELD, new BecomeRenownSourceEffect(renownValue), false);
+        super(Zone.BATTLEFIELD, new BecomesRenownedSourceEffect(renownValue), false);
         this.renownValue = renownValue;
     }
 
@@ -49,7 +49,7 @@ public class RenownAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        return sourcePermanent != null && !sourcePermanent.isRenown();
+        return sourcePermanent != null && !sourcePermanent.isRenowned();
     }
 
     @Override
@@ -63,35 +63,35 @@ public class RenownAbility extends TriggeredAbilityImpl {
     }
 }
 
-class BecomeRenownSourceEffect extends OneShotEffect {
+class BecomesRenownedSourceEffect extends OneShotEffect {
 
-    public BecomeRenownSourceEffect(int renownValue) {
+    public BecomesRenownedSourceEffect(int renownValue) {
         super(Outcome.BoostCreature);
         this.staticText = setText(renownValue);
     }
 
-    public BecomeRenownSourceEffect(final BecomeRenownSourceEffect effect) {
+    public BecomesRenownedSourceEffect(final BecomesRenownedSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public BecomeRenownSourceEffect copy() {
-        return new BecomeRenownSourceEffect(this);
+    public BecomesRenownedSourceEffect copy() {
+        return new BecomesRenownedSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null && source instanceof RenownAbility) {
-            game.informPlayers(permanent.getLogName() + " is now renown");
+            game.informPlayers(permanent.getLogName() + " is now renowned");
             int renownValue = ((RenownAbility) source).getRenownValue();
             // handle renown = X
             if (renownValue == Integer.MAX_VALUE) {
                 renownValue = source.getManaCostsToPay().getX();
             }
             new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
-            permanent.setRenown(true);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWN, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
+            permanent.setRenowned(true);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
             return true;
         }
         return false;

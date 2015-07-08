@@ -27,13 +27,26 @@
  */
 package mage.sets.onslaught;
 
+import java.util.Set;
 import java.util.UUID;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesChosenNonWallCreatureTypeTargetEffect;
+import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -46,7 +59,7 @@ public class Standardize extends CardImpl {
         this.expansionSetCode = "ONS";
 
         // Choose a creature type other than Wall. Each creature becomes that type until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+       
         this.getSpellAbility().addEffect(new BecomesChosenNonWallCreatureTypeTargetEffect());
     }
 
@@ -58,4 +71,54 @@ public class Standardize extends CardImpl {
     public Standardize copy() {
         return new Standardize(this);
     }
+}
+
+
+
+class StandardizeEffect extends OneShotEffect {
+
+	public StandardizeEffect() {
+		super(Outcome.BoostCreature);
+		staticText = "choose a creature type other than wall, each creature's type becomes that type until end of turn";
+	
+	}
+	
+	public StandardizeEffect(final StandardizeEffect effect) {
+		super(effect);
+	}
+
+	@Override
+	public boolean apply(Game game, Ability source) {
+		Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        String chosenType = "";
+        if (player != null && permanent != null) {
+            Choice typeChoice = new ChoiceImpl(true);
+            typeChoice.setMessage("Choose creature type other than Wall");
+            Set<String> types = CardRepository.instance.getCreatureTypes();
+            types.remove("Wall");
+            typeChoice.setChoices(types);
+            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                if (!player.isInGame()) {
+                    return false;
+                }
+            }
+            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
+            chosenType = typeChoice.getChoice();
+            if (chosenType != null && !chosenType.isEmpty()) {
+                // ADD TYPE TO TARGET
+                ContinuousEffect effect = new BecomesSubtypeAllEffect(Duration.EndOfTurn, chosenType);
+                game.addEffect(effect, source);
+                return true;
+            }
+            
+        }
+        return false;
+	}
+
+	@Override
+	public Effect copy() {
+		return new StandardizeEffect(this);
+	}
+
 }

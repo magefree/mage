@@ -16,15 +16,15 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 
-public class RenownCondition implements Condition {
+public class RenownedSourceCondition implements Condition {
 
-    private static RenownCondition fInstance = null;
+    private static RenownedSourceCondition fInstance = null;
 
-    private RenownCondition() {}
+    private RenownedSourceCondition() {}
 
-    public static RenownCondition getInstance() {
+    public static RenownedSourceCondition getInstance() {
         if (fInstance == null) {
-            fInstance = new RenownCondition();
+            fInstance = new RenownedSourceCondition();
         }
         return fInstance;
     }
@@ -33,7 +33,7 @@ public class RenownCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-           return permanent.isRenown();
+           return permanent.isRenowned();
         }
         return false;
     }

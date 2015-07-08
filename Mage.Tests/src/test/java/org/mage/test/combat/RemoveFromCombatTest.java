@@ -25,49 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package org.mage.test.combat;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Rarity;
+import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Test;
+import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MoltensteelDragon extends CardImpl {
+public class RemoveFromCombatTest extends CardTestPlayerBase {
 
-    public MoltensteelDragon(UUID ownerId) {
-        super(ownerId, 88, "Moltensteel Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}{RP}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Dragon");
+    /**
+     * In a test game against the AI, it attacked me with a Stomping Ground
+     * animated by an Ambush Commander and boosted it with the Commander's
+     * second ability. I killed the Commander. The now non-creature land
+     * continued attacking and dealt 3 damage to me.
+     */
+    @Test
+    public void testLeavesCombatIfNoLongerACreature() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 1);
 
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        // Forests you control are 1/1 green Elf creatures that are still lands.
+        // {1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
+        addCard(Zone.BATTLEFIELD, playerB, "Ambush Commander", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Stomping Ground");
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        attack(2, playerB, "Stomping Ground");
+        castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Lightning Bolt", "Ambush Commander");
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerB, "Ambush Commander", 1);
+
+        assertPowerToughness(playerB, "Stomping Ground", 0, 0);
+
     }
 
-    public MoltensteelDragon(final MoltensteelDragon card) {
-        super(card);
-    }
-
-    @Override
-    public MoltensteelDragon copy() {
-        return new MoltensteelDragon(this);
-    }
 }

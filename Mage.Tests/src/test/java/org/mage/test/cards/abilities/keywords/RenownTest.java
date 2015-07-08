@@ -174,7 +174,7 @@ public class RenownTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Rhox Maulers", 6, 6); // renown again in turn 7 after the attack
         Permanent rhoxMaulers = getPermanent("Rhox Maulers", playerA);
-        Assert.assertEquals("may not be renown", true, rhoxMaulers.isRenown());
+        Assert.assertEquals("may not be renown", true, rhoxMaulers.isRenowned());
 
     }
 
@@ -202,7 +202,7 @@ public class RenownTest extends CardTestPlayerBase {
         execute();
 
         Permanent goblin = getPermanent("Goblin Glory Chaser", playerA);
-        Assert.assertEquals("has has renown", true, goblin.isRenown());
+        Assert.assertEquals("has has renown", true, goblin.isRenowned());
         assertAbility(playerA, "Goblin Glory Chaser", new MenaceAbility(), true);
         assertPowerToughness(playerA, "Goblin Glory Chaser", 2, 2);
 
@@ -231,11 +231,40 @@ public class RenownTest extends CardTestPlayerBase {
         execute();
 
         Permanent berserker = getPermanent("Scab-Clan Berserker", playerA);
-        Assert.assertEquals("has has renown", true, berserker.isRenown());
+        Assert.assertEquals("has has renown", true, berserker.isRenowned());
         assertPowerToughness(playerA, "Scab-Clan Berserker", 3, 3);
 
         assertLife(playerA, 17); // Lightning Bolt
         assertLife(playerB, 16); // 2 from attack 2 from triggered ability
+
+    }
+
+    /**
+     * Enshrouding Mist (new card from ORI) isn't untapping renowned creatures.
+     */
+    @Test
+    public void testEnshroudingMist() {
+        // Renown 1
+        // Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player.
+        addCard(Zone.BATTLEFIELD, playerB, "Scab-Clan Berserker"); // 2/2  {1}{R}{R}
+
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 1);
+        // Target creature gets +1/+1 until end of turn. Prevent all damage that would dealt to it this turn. If it's renowned, untap it.
+        addCard(Zone.HAND, playerB, "Enshrouding Mist");
+
+        attack(2, playerB, "Scab-Clan Berserker"); // 1 damage
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Enshrouding Mist", "Scab-Clan Berserker");
+
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        Permanent berserker = getPermanent("Scab-Clan Berserker", playerB);
+        Assert.assertEquals("has has renown", true, berserker.isRenowned());
+        assertPowerToughness(playerB, "Scab-Clan Berserker", 4, 4); // +1 from renowned + 1 from Enshrouding Mist
+        assertTapped("Scab-Clan Berserker", false);
+
+        assertLife(playerA, 18); // Lightning Bolt
+        assertLife(playerB, 20);
 
     }
 }

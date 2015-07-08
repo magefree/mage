@@ -25,56 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.Game;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class MagmaBurst extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private final UUID originalId;
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
+    public MagmaBurst(UUID ownerId) {
+        super(ownerId, 66, "Magma Burst", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{R}");
+        this.expansionSetCode = "PLS";
 
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
-    }
-
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
-        super(card);
+        // Kicker-Sacrifice two lands.
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+        // Magma Burst deals 3 damage to target creature or player. If Magma Burst was kicked, it deals 3 damage to another target creature or player.
+        Effect effect = new DamageTargetEffect(3);
+        effect.setText("{this} deals 3 damage to target creature or player. If {this} was kicked, it deals 3 damage to another target creature or player.");
+        this.getSpellAbility().addEffect(effect);
+        originalId = this.getSpellAbility().getOriginalId();
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if(ability.getOriginalId().equals(originalId)) {
+             ability.addTarget(new TargetCreatureOrPlayer(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+        }
+    }
+
+    public MagmaBurst(final MagmaBurst card) {
+        super(card);
+        this.originalId = card.originalId;
+    }
+
+    @Override
+    public MagmaBurst copy() {
+        return new MagmaBurst(this);
     }
 }

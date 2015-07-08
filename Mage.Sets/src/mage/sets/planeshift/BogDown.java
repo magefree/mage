@@ -25,56 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class BogDown extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public BogDown(UUID ownerId) {
+        super(ownerId, 39, "Bog Down", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}");
+        this.expansionSetCode = "PLS";
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
+        // Kicker-Sacrifice two lands.
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
+        // Target player discards two cards. If Bog Down was kicked, that player discards three cards instead.
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DiscardTargetEffect(3),
+            new DiscardTargetEffect(2), KickedCondition.getInstance(),
+            "Target player discards two cards. If {this} was kicked, that player discards three cards instead."));
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public BogDown(final BogDown card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public BogDown copy() {
+        return new BogDown(this);
     }
 }

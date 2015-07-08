@@ -25,56 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.ObjectColor;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class Wallop extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue or black creature with flying");
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
+    static {
+        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public Wallop(UUID ownerId) {
+        super(ownerId, 223, "Wallop", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");
+        this.expansionSetCode = "INV";
+
+        // Destroy target blue or black creature with flying.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+    }
+
+    public Wallop(final Wallop card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public Wallop copy() {
+        return new Wallop(this);
     }
 }

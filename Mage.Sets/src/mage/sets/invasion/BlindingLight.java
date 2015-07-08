@@ -25,49 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.PhyrexianManaCost;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author LoneFox
+
  */
-public class MoltensteelDragon extends CardImpl {
+public class BlindingLight extends mage.sets.mirage.BlindingLight {
 
-    public MoltensteelDragon(UUID ownerId) {
-        super(ownerId, 88, "Moltensteel Dragon", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{RP}{RP}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Dragon");
-
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(1, 0, Duration.EndOfTurn),
-                new PhyrexianManaCost(ColoredManaSymbol.R)));
+    public BlindingLight(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 9;
+        this.expansionSetCode = "INV";
     }
 
-    public MoltensteelDragon(final MoltensteelDragon card) {
+    public BlindingLight(final BlindingLight card) {
         super(card);
     }
 
     @Override
-    public MoltensteelDragon copy() {
-        return new MoltensteelDragon(this);
+    public BlindingLight copy() {
+        return new BlindingLight(this);
     }
 }

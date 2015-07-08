@@ -25,56 +25,83 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class CallousGiant extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public CallousGiant(UUID ownerId) {
+        super(ownerId, 139, "Callous Giant", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Giant");
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
+        // If a source would deal 3 or less damage to Callous Giant, prevent that damage.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CallousGiantEffect()));
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public CallousGiant(final CallousGiant card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public CallousGiant copy() {
+        return new CallousGiant(this);
     }
+}
+
+class CallousGiantEffect extends PreventionEffectImpl {
+
+    public CallousGiantEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "If a source would deal 3 or less damage to {this}, prevent that damage.";
+    }
+
+    public CallousGiantEffect(final CallousGiantEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public CallousGiantEffect copy() {
+        return new CallousGiantEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if(event.getAmount() <= 3)
+        {
+            preventDamageAction(event, source, game);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return super.applies(event, source, game) && event.getTargetId().equals(source.getSourceId());
+    }
+
 }

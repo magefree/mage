@@ -25,56 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continuous.BecomesColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetSpellOrPermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class BlindSeer extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    public BlindSeer(UUID ownerId) {
+        super(ownerId, 47, "Blind Seer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
+        this.expansionSetCode = "INV";
+        this.supertype.add("Legendary");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        // {1}{U}: Target spell or permanent becomes the color of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.EndOfTurn),
+            new ManaCostsImpl("{1}{U}"));
+        ability.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability);
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public BlindSeer(final BlindSeer card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public BlindSeer copy() {
+        return new BlindSeer(this);
     }
 }

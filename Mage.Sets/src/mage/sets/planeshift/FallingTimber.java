@@ -25,56 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.effects.common.PreventDamageByTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.game.Game;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author LoneFox
+
  */
-public class GoblinGloryChaser extends CardImpl {
+public class FallingTimber extends CardImpl {
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+    private final UUID originalId;
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
+    public FallingTimber(UUID ownerId) {
+        super(ownerId, 79, "Falling Timber", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{G}");
+        this.expansionSetCode = "PLS";
 
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
-        this.addAbility(ability);
-    }
-
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
-        super(card);
+        // Kicker-Sacrifice a land.
+        this.addAbility(new KickerAbility(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent("a land"), true))));
+        // Prevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
+        Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
+        effect.setText("Prevent all combat damage target creature would deal this turn. If {this} was kicked, prevent all combat damage another target creature would deal this turn.");
+        this.getSpellAbility().addEffect(effect);
+        originalId = this.getSpellAbility().getOriginalId();
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public void adjustTargets(Ability ability, Game game) {
+        if(ability.getOriginalId().equals(originalId)) {
+             ability.addTarget(new TargetCreaturePermanent(KickedCondition.getInstance().apply(game, ability) ? 2 : 1));
+        }
+    }
+
+    public FallingTimber(final FallingTimber card) {
+        super(card);
+        this.originalId = card.originalId;
+    }
+
+    @Override
+    public FallingTimber copy() {
+        return new FallingTimber(this);
     }
 }

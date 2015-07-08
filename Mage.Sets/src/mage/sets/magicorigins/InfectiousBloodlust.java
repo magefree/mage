@@ -83,7 +83,6 @@ public class InfectiousBloodlust extends CardImpl {
         effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
         effect.setText("has haste");
         ability.addEffect(effect);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and attacks each turn if able");
         ability.addEffect(effect);

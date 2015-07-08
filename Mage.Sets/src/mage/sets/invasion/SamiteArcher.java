@@ -25,56 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magicorigins;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RenownedSourceCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.RenownAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
- * @author fireshoes
- */
-public class GoblinGloryChaser extends CardImpl {
+ * @author LoneFox
 
-    public GoblinGloryChaser(UUID ownerId) {
-        super(ownerId, 150, "Goblin Glory Chaser", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R}");
-        this.expansionSetCode = "ORI";
-        this.subtype.add("Goblin");
-        this.subtype.add("Warrior");
+ */
+public class SamiteArcher extends CardImpl {
+
+    public SamiteArcher(UUID ownerId) {
+        super(ownerId, 269, "Samite Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
+        this.subtype.add("Archer");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Renown 1
-        this.addAbility(new RenownAbility(1));
-
-        // As long as Goblin Glory Chaser is renowned, it has menace.
-        Effect effect = new ConditionalContinuousEffect(
-                new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
-                RenownedSourceCondition.getInstance(),
-                "As long as {this} is renowned, it has menace");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        // {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1),
+            new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
+        // {T}: Samite Archer deals 1 damage to target creature or player.
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    public SamiteArcher(final SamiteArcher card) {
         super(card);
     }
 
     @Override
-    public GoblinGloryChaser copy() {
-        return new GoblinGloryChaser(this);
+    public SamiteArcher copy() {
+        return new SamiteArcher(this);
     }
 }
