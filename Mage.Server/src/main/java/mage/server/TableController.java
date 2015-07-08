@@ -589,14 +589,10 @@ public class TableController {
             // log about game started
             logger.info("GAME started " + match.getGame().getId() + " [" + match.getName() + "] " + creator + " - " + opponent.toString());
             logger.debug("- matchId: " + match.getId() + " [" + match.getName() + "]");
-            if (match.getGame() != null) {
-                logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
-            } else {
-                logger.debug("- no valid game object");
-            }
+            logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
             LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         } catch (Exception ex) {
-            logger.fatal("Error starting game", ex);
+            logger.fatal("Error starting game table: " + table.getId(), ex);
             if (table != null) {
                 TableManager.getInstance().removeTable(table.getId());
             }
