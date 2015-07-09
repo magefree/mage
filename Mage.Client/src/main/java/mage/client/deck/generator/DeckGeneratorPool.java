@@ -60,7 +60,7 @@ public class DeckGeneratorPool
 
     // Count how many copies of the card exists in the deck to check we don't go over 4 copies (or 1 for singleton)
     private Map<String, Integer> cardCounts = new HashMap<>();
-    // If there is only a single colour selected to generate a deck
+    // If there is only a single color selected to generate a deck
     private boolean monoColored = false;
     // List of cards so far in the deck
     private List<Card> deckCards = new ArrayList<>();
@@ -84,7 +84,7 @@ public class DeckGeneratorPool
                 add(new DeckGeneratorCMC(0, 2, 0.20f));
                 add(new DeckGeneratorCMC(3, 5, 0.50f));
                 add(new DeckGeneratorCMC(6, 7, 0.25f));
-                add(new DeckGeneratorCMC(8, 100, 0.5f));
+                add(new DeckGeneratorCMC(8, 100, 0.05f));
             }};
 
         }
@@ -96,7 +96,7 @@ public class DeckGeneratorPool
                 add(new DeckGeneratorCMC(0, 2, 0.30f));
                 add(new DeckGeneratorCMC(3, 4, 0.45f));
                 add(new DeckGeneratorCMC(5, 6, 0.20f));
-                add(new DeckGeneratorCMC(7, 100, 0.5f));
+                add(new DeckGeneratorCMC(7, 100, 0.05f));
             }};
         }
 
@@ -216,7 +216,7 @@ public class DeckGeneratorPool
      * cards mana costs.
      * @return a list of colored mana symbols and the percentage of symbols seen in cards mana costs.
      */
-    public Map<String, Double> calculateSpellColourPercentages() {
+    public Map<String, Double> calculateSpellColorPercentages() {
 
         final Map<String, Integer> colorCount = new HashMap<>();
         for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
@@ -245,7 +245,7 @@ public class DeckGeneratorPool
         for(Map.Entry<String, Integer> singleCount: colorCount.entrySet()) {
             String color = singleCount.getKey();
             int count = singleCount.getValue();
-            // Calculate the percentage this colour has out of the total colour counts
+            // Calculate the percentage this color has out of the total color counts
             double percentage = (count / (double) totalCount) * 100;
             percentages.put(color, percentage);
         }
@@ -293,7 +293,7 @@ public class DeckGeneratorPool
     }
 
     /**
-     * Returns the card name that represents the basic land for this colour.
+     * Returns the card name that represents the basic land for this color.
      * @param symbolString the colored mana symbol.
      * @return the name of a basic land card.
      */

@@ -244,10 +244,10 @@ public class DeckGenerator {
         // Store the nonbasic lands (if any) we'll add
         List<Card> deckLands = new ArrayList<>();
 
-        // Calculates the percentage of coloured mana symbols over all spells in the deck
-        Map<String, Double> percentage = genPool.calculateSpellColourPercentages();
+        // Calculates the percentage of colored mana symbols over all spells in the deck
+        Map<String, Double> percentage = genPool.calculateSpellColorPercentages();
 
-        // Only dual/tri colour lands are generated for now, and not non-basic lands that only produce colourless mana.
+        // Only dual/tri color lands are generated for now, and not non-basic lands that only produce colorless mana.
         if (!genPool.isMonoColoredDeck() && genDialog.useNonBasicLand()) {
             List<Card> landCards = genPool.filterLands(CardRepository.instance.findCards(criteria));
             int allCount = landCards.size();
@@ -270,7 +270,7 @@ public class DeckGenerator {
                 }
             }
         }
-        // Calculate the amount of coloured mana already can be produced by the non-basic lands
+        // Calculate the amount of colored mana already can be produced by the non-basic lands
         Map<String, Integer> count = genPool.countManaProduced(deckLands);
         // Fill up the rest of the land quota with basic lands adjusted to fit the deck's mana costs
         addBasicLands(landsCount - countNonBasic, percentage, count, basicLands);
@@ -345,7 +345,7 @@ public class DeckGenerator {
      */
     private static void addBasicLands(int landsNeeded, Map<String, Double> percentage, Map<String, Integer> count, Map<String, List<CardInfo>> basicLands) {
         int colorTotal = 0;
-        ColoredManaSymbol colourToAdd = null;
+        ColoredManaSymbol colorToAdd = null;
 
         // Add up the totals for all colors, to keep track of the percentage a color is.
         for (Map.Entry<String, Integer> c : count.entrySet()) {
@@ -360,25 +360,25 @@ public class DeckGenerator {
             for (ColoredManaSymbol color : ColoredManaSymbol.values()) {
                 // What percentage of this color is requested
                 double neededPercentage = percentage.get(color.toString());
-                // If there is a 0% need for basic lands of this colour, skip it
+                // If there is a 0% need for basic lands of this color, skip it
                 if (neededPercentage <= 0) {
                     continue;
                 }
                 int currentCount = count.get(color.toString());
                 double thisPercentage = 0.0;
-                // Calculate the percentage of lands so far that produce this colour
+                // Calculate the percentage of lands so far that produce this color
                 if (currentCount > 0)
                     thisPercentage = (currentCount / (double) colorTotal) * 100.0;
                 // Check if the color is the most "needed" (highest percentage) we have seen so far
                 if (neededPercentage - thisPercentage > minPercentage) {
                     // Put this color land forward to be added
-                    colourToAdd = color;
+                    colorToAdd = color;
                     minPercentage = (neededPercentage - thisPercentage);
                 }
             }
-            if(colourToAdd != null) {
-                genPool.addCard(getBasicLand(colourToAdd, basicLands));
-                count.put(colourToAdd.toString(), count.get(colourToAdd.toString()) + 1);
+            if(colorToAdd != null) {
+                genPool.addCard(getBasicLand(colorToAdd, basicLands));
+                count.put(colorToAdd.toString(), count.get(colorToAdd.toString()) + 1);
                 colorTotal++;
                 landsNeeded--;
             }
