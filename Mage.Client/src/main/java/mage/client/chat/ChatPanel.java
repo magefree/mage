@@ -122,7 +122,7 @@ public class ChatPanel extends javax.swing.JPanel {
      */
     private ChatType chatType = ChatType.DEFAULT;
 
-    private static final int[] defaultColumnsWidth = {20, 100, 100, 80};
+    private static final int[] defaultColumnsWidth = {20, 100, 100, 80, 80};
 
     public enum ChatType {
 
