@@ -25,48 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.izzetvsgolgari;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
+import mage.game.permanent.token.SaprolingToken;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class GolgariGermination extends CardImpl {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creature you control");
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
+    public GolgariGermination(UUID ownerId) {
+        super(ownerId, 70, "Golgari Germination", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");
+        this.expansionSetCode = "DDJ";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        // Whenever a nontoken creature you control dies, put a 1/1 green Saproling creature token onto the battlefield.
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SaprolingToken()),false,filter));
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public GolgariGermination(final GolgariGermination card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public GolgariGermination copy() {
+        return new GolgariGermination(this);
     }
 }

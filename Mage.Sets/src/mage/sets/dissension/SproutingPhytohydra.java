@@ -25,48 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.dissension;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
+import mage.abilities.effects.common.PutTokenOntoBattlefieldCopySource;
+import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class SproutingPhytohydra extends CardImpl {
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
-
-        this.power = new MageInt(1);
+    public SproutingPhytohydra(UUID ownerId) {
+        super(ownerId, 95, "Sprouting Phytohydra", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}");
+        this.expansionSetCode = "DIS";
+        this.subtype.add("Plant");
+        this.subtype.add("Hydra");
+        this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        // Defender
+        this.addAbility(DefenderAbility.getInstance());
+        // Whenever Sprouting Phytohydra is dealt damage, you may put a token that's a copy of Sprouting Phytohydra onto the battlefield.
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new PutTokenOntoBattlefieldCopySource(), false));
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public SproutingPhytohydra(final SproutingPhytohydra card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public SproutingPhytohydra copy() {
+        return new SproutingPhytohydra(this);
     }
 }
