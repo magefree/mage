@@ -103,15 +103,15 @@ class TragicArroganceffect extends OneShotEffect {
 
                     FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent("a creature of " + player.getName());
                     filterCreaturePermanent.add(new ControllerIdPredicate(playerId));
-                    Target target2 = new TargetPermanent(1, 1, new FilterCreaturePermanent(), true);
+                    Target target2 = new TargetPermanent(1, 1, filterCreaturePermanent, true);
 
                     FilterEnchantmentPermanent filterEnchantmentPermanent = new FilterEnchantmentPermanent("an enchantment of " + player.getName());
                     filterEnchantmentPermanent.add(new ControllerIdPredicate(playerId));
-                    Target target3 = new TargetPermanent(1, 1, new FilterEnchantmentPermanent(), true);
+                    Target target3 = new TargetPermanent(1, 1, filterEnchantmentPermanent, true);
 
                     FilterPlaneswalkerPermanent filterPlaneswalkerPermanent = new FilterPlaneswalkerPermanent("a planeswalker of " + player.getName());
                     filterPlaneswalkerPermanent.add(new ControllerIdPredicate(playerId));
-                    Target target4 = new TargetPermanent(1, 1, new FilterPlaneswalkerPermanent(), true);
+                    Target target4 = new TargetPermanent(1, 1, filterPlaneswalkerPermanent, true);
 
                     if (target1.canChoose(controller.getId(), game)) {
                         controller.chooseTarget(Outcome.Benefit, target1, source, game);
