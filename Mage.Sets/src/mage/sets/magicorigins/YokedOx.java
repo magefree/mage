@@ -37,7 +37,7 @@ public class YokedOx extends mage.sets.theros.YokedOx {
 
     public YokedOx(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 975;
+        this.cardNumber = 42;
         this.expansionSetCode = "ORI";
     }
 

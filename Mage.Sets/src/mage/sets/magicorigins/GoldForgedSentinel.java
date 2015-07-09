@@ -37,7 +37,7 @@ public class GoldForgedSentinel extends mage.sets.journeyintonyx.GoldForgedSenti
 
     public GoldForgedSentinel(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 989;
+        this.cardNumber = 226;
         this.expansionSetCode = "ORI";
     }
 

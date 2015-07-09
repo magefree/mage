@@ -37,7 +37,7 @@ public class Meteorite extends mage.sets.magic2015.Meteorite {
 
     public Meteorite(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 985;
+        this.cardNumber = 233;
         this.expansionSetCode = "ORI";
     }
 

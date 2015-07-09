@@ -37,7 +37,7 @@ public class MaritimeGuard extends mage.sets.magic2011.MaritimeGuard {
 
     public MaritimeGuard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 986;
+        this.cardNumber = 63;
         this.expansionSetCode = "ORI";
     }
 

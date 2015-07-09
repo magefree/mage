@@ -37,7 +37,7 @@ public class YevasForcemage extends mage.sets.magic2013.YevasForcemage {
 
     public YevasForcemage(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 976;
+        this.cardNumber = 208;
         this.expansionSetCode = "ORI";
     }
 

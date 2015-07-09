@@ -37,7 +37,7 @@ public class VastwoodGorger extends mage.sets.zendikar.VastwoodGorger {
 
     public VastwoodGorger(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 978;
+        this.cardNumber = 204;
         this.expansionSetCode = "ORI";
     }
 
