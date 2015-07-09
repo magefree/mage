@@ -25,48 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.TargetSpell;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class Thwart extends CardImpl {
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Island");
+    static{
+        filter.add(new SubtypePredicate("Island"));
+    }
+    public Thwart(UUID ownerId) {
+        super(ownerId, 108, "Thwart", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{U}");
+        this.expansionSetCode = "MMQ";
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
-
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
+        // You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.
+        AlternativeCostSourceAbility ability;   
+        ability = new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(3, 3, filter, true)));
         this.addAbility(ability);
+        
+        // Counter target spell.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public Thwart(final Thwart card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public Thwart copy() {
+        return new Thwart(this);
     }
 }

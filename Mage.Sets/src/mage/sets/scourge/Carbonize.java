@@ -25,48 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.replacement.DealtDamageToCreatureBySourceDies;
+import mage.abilities.effects.common.ruleModifying.CantRegenerateTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class Carbonize extends CardImpl {
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
+    public Carbonize(UUID ownerId) {
+        super(ownerId, 83, "Carbonize", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
+        this.expansionSetCode = "SCG";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        // Carbonize deals 3 damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
+        this.getSpellAbility().addEffect(new CantRegenerateTargetEffect(Duration.EndOfTurn, "That creature"));
+        Effect effect = new DealtDamageToCreatureBySourceDies(this, Duration.EndOfTurn);
+        effect.setText("If the creature would die this turn, exile it instead");
+        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addWatcher(new DamagedByWatcher());
+        
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public Carbonize(final Carbonize card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public Carbonize copy() {
+        return new Carbonize(this);
     }
 }

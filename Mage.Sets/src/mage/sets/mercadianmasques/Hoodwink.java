@@ -25,48 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class Hoodwink extends CardImpl {
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, enchantment, or land");
+    
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.ENCHANTMENT),
+                new CardTypePredicate(CardType.LAND)));
+    }
+    public Hoodwink(UUID ownerId) {
+        super(ownerId, 84, "Hoodwink", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "MMQ";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        // Return target artifact, enchantment, or land to its owner's hand.
+        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public Hoodwink(final Hoodwink card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public Hoodwink copy() {
+        return new Hoodwink(this);
     }
 }

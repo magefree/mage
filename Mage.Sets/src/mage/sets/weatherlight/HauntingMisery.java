@@ -25,48 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.theros;
+package mage.sets.weatherlight;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.costs.common.ExileXFromYourGraveCost;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.Target;
-import mage.target.common.TargetLandPermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author markedagain
  */
-public class VoyagingSatyr extends CardImpl {
+public class HauntingMisery extends CardImpl {
 
-    public VoyagingSatyr(UUID ownerId) {
-        super(ownerId, 182, "Voyaging Satyr", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
-        this.expansionSetCode = "THS";
-        this.subtype.add("Satyr");
-        this.subtype.add("Druid");
+    public HauntingMisery(UUID ownerId) {
+        super(ownerId, 13, "Haunting Misery", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
+        this.expansionSetCode = "WTH";
 
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
-
-        // {T}: Untap target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        // As an additional cost to cast Haunting Misery, exile X creature cards from your graveyard.
+        this.getSpellAbility().addCost(new ExileXFromYourGraveCost(new FilterCreatureCard()));
+        // Haunting Misery deals X damage to target player.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DamageTargetEffect(new GetXValue()));
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    public HauntingMisery(final HauntingMisery card) {
         super(card);
     }
 
     @Override
-    public VoyagingSatyr copy() {
-        return new VoyagingSatyr(this);
+    public HauntingMisery copy() {
+        return new HauntingMisery(this);
     }
 }
