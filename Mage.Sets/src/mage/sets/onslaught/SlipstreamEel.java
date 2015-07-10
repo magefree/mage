@@ -61,7 +61,7 @@ public class SlipstreamEel extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Slipstream Eel can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(filter))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
     }
