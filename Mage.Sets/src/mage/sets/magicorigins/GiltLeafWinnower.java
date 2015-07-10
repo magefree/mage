@@ -69,7 +69,7 @@ public class GiltLeafWinnower extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // When Gilt-Leaf Winnower enters the battlefield, you may destroy target non-Elf creature whose power and toughness aren't equal.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
