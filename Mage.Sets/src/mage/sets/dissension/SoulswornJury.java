@@ -55,7 +55,6 @@ public class SoulswornJury extends CardImpl {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
 
-    
     public SoulswornJury(UUID ownerId) {
         super(ownerId, 17, "Soulsworn Jury", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
         this.expansionSetCode = "DIS";
@@ -65,9 +64,9 @@ public class SoulswornJury extends CardImpl {
 
         // Defender
         this.addAbility(DefenderAbility.getInstance());
-        
+
         // {1}{U}, Sacrifice Soulsworn Jury: Counter target creature spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{1U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addTarget(new TargetSpell(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

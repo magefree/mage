@@ -46,7 +46,7 @@ import mage.players.Player;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class TwilightsCall extends CardImpl {
 
@@ -77,7 +77,7 @@ class TwilightsCallEffect extends OneShotEffect {
 
     public TwilightsCallEffect() {
         super(Outcome.Neutral);
-        staticText = "Each player returns all creature cards from his or her graveyard to the battlefield.";
+        staticText = "Each player returns all creature cards from his or her graveyard to the battlefield";
     }
 
     public TwilightsCallEffect(TwilightsCallEffect copy) {
@@ -91,10 +91,10 @@ class TwilightsCallEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for(UUID playerId: game.getState().getPlayersInRange(source.getControllerId(), game)) {
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if(player != null) {
-                for(Card card: player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
+            if (player != null) {
+                for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
                     card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), card.getOwnerId());
                 }
             }
