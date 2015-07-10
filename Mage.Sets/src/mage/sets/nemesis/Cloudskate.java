@@ -25,28 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.nemesis;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.FadingAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
+ * @author markedagain
  */
-public class SlipstreamEel extends mage.sets.onslaught.SlipstreamEel {
+public class Cloudskate extends CardImpl {
 
-    public SlipstreamEel(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 62;
-        this.expansionSetCode = "CMD";
+    public Cloudskate(UUID ownerId) {
+        super(ownerId, 29, "Cloudskate", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
+        this.expansionSetCode = "NMS";
+        this.subtype.add("Illusion");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Fading 3
+        this.addAbility(new FadingAbility(3, this));
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    public Cloudskate(final Cloudskate card) {
         super(card);
     }
 
     @Override
-    public SlipstreamEel copy() {
-        return new SlipstreamEel(this);
+    public Cloudskate copy() {
+        return new Cloudskate(this);
     }
 }

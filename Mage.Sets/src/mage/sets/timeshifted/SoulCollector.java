@@ -25,28 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.timeshifted;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
+import mage.abilities.keyword.MorphAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
+ * @author markedagain
  */
-public class SlipstreamEel extends mage.sets.onslaught.SlipstreamEel {
+public class SoulCollector extends CardImpl {
 
-    public SlipstreamEel(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 62;
-        this.expansionSetCode = "CMD";
+    public SoulCollector(UUID ownerId) {
+        super(ownerId, 47, "Soul Collector", Rarity.SPECIAL, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
+        this.expansionSetCode = "TSB";
+        this.subtype.add("Vampire");
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Whenever a creature dealt damage by Soul Collector this turn dies, return that card to the battlefield under your control.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(false)));
+        // Morph {B}{B}{B}
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl("{B}{B}{B}")));
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    public SoulCollector(final SoulCollector card) {
         super(card);
     }
 
     @Override
-    public SlipstreamEel copy() {
-        return new SlipstreamEel(this);
+    public SoulCollector copy() {
+        return new SoulCollector(this);
     }
 }

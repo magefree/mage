@@ -25,28 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.scourge;
 
 import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author fireshoes
+ * @author markedagain
  */
-public class SlipstreamEel extends mage.sets.onslaught.SlipstreamEel {
+public class SoulCollector extends mage.sets.timeshifted.SoulCollector {
 
-    public SlipstreamEel(UUID ownerId) {
+    public SoulCollector(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 62;
-        this.expansionSetCode = "CMD";
+        this.cardNumber = 74;
+        this.expansionSetCode = "SCG";
+        this.rarity = Rarity.RARE;
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    public SoulCollector(final SoulCollector card) {
         super(card);
     }
 
     @Override
-    public SlipstreamEel copy() {
-        return new SlipstreamEel(this);
+    public SoulCollector copy() {
+        return new SoulCollector(this);
     }
 }

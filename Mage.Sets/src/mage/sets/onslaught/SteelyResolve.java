@@ -28,50 +28,70 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.MageInt;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.effects.common.ChooseCreatureTypeEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author markedagain
  */
-public class SlipstreamEel extends CardImpl {
-    
-    private static final FilterLandPermanent filter = new FilterLandPermanent("an Island");
+public class SteelyResolve extends CardImpl {
 
-    static {
-        filter.add(new SubtypePredicate("Island"));
-    }
-    
-    public SlipstreamEel(UUID ownerId) {
-        super(ownerId, 114, "Slipstream Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
+    public SteelyResolve(UUID ownerId) {
+        super(ownerId, 286, "Steely Resolve", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "ONS";
-        this.subtype.add("Fish");
-        this.subtype.add("Beast");
-        this.power = new MageInt(6);
-        this.toughness = new MageInt(6);
 
-        // Slipstream Eel can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(filter))));
-        // Cycling {1}{U}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
+        // As Steely Resolve enters the battlefield, choose a creature type.
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.AddAbility)));
+        // Creatures of the chosen type have shroud.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterSteelyResolve())));
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    public SteelyResolve(final SteelyResolve card) {
         super(card);
     }
 
     @Override
-    public SlipstreamEel copy() {
-        return new SlipstreamEel(this);
+    public SteelyResolve copy() {
+        return new SteelyResolve(this);
     }
+}
+class FilterSteelyResolve extends FilterCreaturePermanent {
+    
+    public FilterSteelyResolve() {
+        super("All creatures of the chosen type");
+    }
+    
+    public FilterSteelyResolve(final FilterSteelyResolve filter) {
+        super(filter);
+    }
+    
+    @Override
+    public FilterSteelyResolve copy() {
+        return new FilterSteelyResolve(this);
+    }
+    
+    @Override
+    public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+        if (super.match(permanent, sourceId, playerId, game)) {
+            String subtype = (String) game.getState().getValue(sourceId + "_type");
+            if (subtype != null && !subtype.equals("") && permanent.hasSubtype(subtype)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

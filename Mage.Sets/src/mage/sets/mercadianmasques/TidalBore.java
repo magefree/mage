@@ -25,28 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.commander;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.common.ReturnToHandTargetPermanentCost;
+import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author fireshoes
+ * @author markedagain
  */
-public class SlipstreamEel extends mage.sets.onslaught.SlipstreamEel {
+public class TidalBore extends CardImpl {
 
-    public SlipstreamEel(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 62;
-        this.expansionSetCode = "CMD";
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Island");
+
+    static {
+        filter.add(new SubtypePredicate("Island"));
+        filter.add(new CardTypePredicate(CardType.LAND));
+    }
+    
+    public TidalBore(UUID ownerId) {
+        super(ownerId, 109, "Tidal Bore", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "MMQ";
+
+        // You may return an Island you control to its owner's hand rather than pay Tidal Bore's mana cost.
+        this.addAbility(new AlternativeCostSourceAbility(new ReturnToHandTargetPermanentCost(new TargetControlledPermanent(filter))));
+        // You may tap or untap target creature.
+        this.getSpellAbility().addEffect(new MayTapOrUntapTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    public TidalBore(final TidalBore card) {
         super(card);
     }
 
     @Override
-    public SlipstreamEel copy() {
-        return new SlipstreamEel(this);
+    public TidalBore copy() {
+        return new TidalBore(this);
     }
 }
