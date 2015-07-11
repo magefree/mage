@@ -433,14 +433,14 @@ public class GameController implements GameCallback {
         return true;
     }
 
-    public void watch(UUID userId) {
+    public GameView watch(UUID userId) {
         if (userPlayerMap.get(userId) != null) {
             // You can't watch a game if you already a player in it
-            return;
+            return null;
         }
         if (watchers.get(userId) != null) {
             // You can't watch a game if you already watch it
-            return;
+            return null;
         }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
@@ -449,7 +449,9 @@ public class GameController implements GameCallback {
             gameWatcher.init();
             user.addGameWatchInfo(game.getId());
             ChatManager.getInstance().broadcast(chatId, user, " has started watching", MessageColor.BLUE, true, ChatMessage.MessageType.STATUS);
+            return watchers.get(userId).getGameView();
         }
+        return null;
     }
 
     public void stopWatching(UUID userId) {

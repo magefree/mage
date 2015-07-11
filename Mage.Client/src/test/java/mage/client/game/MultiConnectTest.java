@@ -271,6 +271,11 @@ public class MultiConnectTest {
         public void tournamentStarted(UUID tournamentId) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+
+        @Override
+        public void watchGame(UUID gameId, UUID chatId, GameView game) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 
     public static void main(String[] argv) throws Exception {

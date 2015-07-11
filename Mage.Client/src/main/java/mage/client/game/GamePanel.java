@@ -400,7 +400,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public synchronized void watchGame(UUID gameId, GamePane gamePane) {
+    public synchronized void watchGame(UUID gameId, UUID chatId, GameView game, GamePane gamePane) {
         this.gameId = gameId;
         this.gamePane = gamePane;
         this.playerId = null;
@@ -423,13 +423,13 @@ public final class GamePanel extends javax.swing.JPanel {
 
         this.pnlReplay.setVisible(false);
         this.gameChatPanel.clear();
-        UUID chatId = client.watchGame(gameId);
         if (chatId == null) {
             removeGame();
         }
         else {
             this.gameChatPanel.connect(chatId);
         }
+        this.init(game);
         for (PlayAreaPanel panel : getPlayers().values()) {
             panel.setPlayingMode(false);
         }

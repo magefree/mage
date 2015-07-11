@@ -1,12 +1,5 @@
 package org.mage.network.handlers.client;
 
-import org.mage.network.messages.requests.GetTournamentChatIdRequest;
-import org.mage.network.messages.requests.GetTournamentRequest;
-import org.mage.network.messages.requests.JoinTournamentRequest;
-import org.mage.network.messages.requests.StartTournamentRequest;
-import org.mage.network.messages.requests.CreateTournamentRequest;
-import org.mage.network.messages.requests.QuitTournamentRequest;
-import org.mage.network.messages.requests.QuitMatchRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import java.io.Serializable;
@@ -31,11 +24,15 @@ import org.mage.network.messages.ClientMessage;
 import org.mage.network.messages.requests.ChatMessageRequest;
 import org.mage.network.messages.requests.ChatRoomIdRequest;
 import org.mage.network.messages.requests.CreateTableRequest;
+import org.mage.network.messages.requests.CreateTournamentRequest;
 import org.mage.network.messages.requests.GetRoomRequest;
+import org.mage.network.messages.requests.GetTournamentChatIdRequest;
+import org.mage.network.messages.requests.GetTournamentRequest;
 import org.mage.network.messages.requests.JoinChatRequest;
 import org.mage.network.messages.requests.JoinDraftRequest;
 import org.mage.network.messages.requests.JoinGameRequest;
 import org.mage.network.messages.requests.JoinTableRequest;
+import org.mage.network.messages.requests.JoinTournamentRequest;
 import org.mage.network.messages.requests.JoinTournamentTableRequest;
 import org.mage.network.messages.requests.LeaveChatRequest;
 import org.mage.network.messages.requests.LeaveTableRequest;
@@ -43,6 +40,8 @@ import org.mage.network.messages.requests.MarkCardRequest;
 import org.mage.network.messages.requests.PickCardRequest;
 import org.mage.network.messages.requests.PlayerActionRequest;
 import org.mage.network.messages.requests.QuitDraftRequest;
+import org.mage.network.messages.requests.QuitMatchRequest;
+import org.mage.network.messages.requests.QuitTournamentRequest;
 import org.mage.network.messages.requests.RemoveTableRequest;
 import org.mage.network.messages.requests.SendFeedbackRequest;
 import org.mage.network.messages.requests.SendPlayerBooleanRequest;
@@ -53,10 +52,14 @@ import org.mage.network.messages.requests.SendPlayerUUIDRequest;
 import org.mage.network.messages.requests.ServerMessagesRequest;
 import org.mage.network.messages.requests.SetPreferencesRequest;
 import org.mage.network.messages.requests.StartMatchRequest;
+import org.mage.network.messages.requests.StartTournamentRequest;
+import org.mage.network.messages.requests.StopWatchingRequest;
 import org.mage.network.messages.requests.SubmitDeckRequest;
 import org.mage.network.messages.requests.SwapSeatRequest;
 import org.mage.network.messages.requests.TableWaitingRequest;
 import org.mage.network.messages.requests.UpdateDeckRequest;
+import org.mage.network.messages.requests.WatchTableRequest;
+import org.mage.network.messages.requests.WatchTournamentTableRequest;
 
 /**
  *
@@ -299,6 +302,18 @@ public class ClientMessageHandler extends SimpleChannelInboundHandler<ClientMess
         tournamentViewQueue.clear();
         ctx.writeAndFlush(new GetTournamentRequest(tournamentId)).addListener(WriteListener.getInstance());
         return tournamentViewQueue.take();
+    }
+
+    public void watchTournamentTable(UUID tableId) {
+        ctx.writeAndFlush(new WatchTournamentTableRequest(tableId)).addListener(WriteListener.getInstance());
+    }
+
+    public void watchTable(UUID roomId, UUID tableId) {
+        ctx.writeAndFlush(new WatchTableRequest(roomId, tableId)).addListener(WriteListener.getInstance());
+    }
+
+    public void stopWatching(UUID gameId) {
+        ctx.writeAndFlush(new StopWatchingRequest(gameId)).addListener(WriteListener.getInstance());
     }
 
 }

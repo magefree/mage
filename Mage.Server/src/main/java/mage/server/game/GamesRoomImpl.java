@@ -39,7 +39,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.constants.TableState;
 import mage.game.Table;
@@ -200,8 +199,8 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     }
 
     @Override
-    public boolean watchTable(UUID userId, UUID tableId) throws MageException {
-        return TableManager.getInstance().watchTable(userId, tableId);
+    public void watchTable(UUID userId, UUID tableId) {
+        TableManager.getInstance().watchTable(userId, tableId);
     }
 
     @Override

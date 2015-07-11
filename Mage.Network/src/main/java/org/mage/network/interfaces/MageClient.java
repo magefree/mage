@@ -71,4 +71,5 @@ public interface MageClient {
     void showTournament(UUID tournamentId);
     void tournamentStarted(UUID tournamentId);
     
+    void watchGame(UUID gameId, UUID chatId, GameView game);
 }

@@ -665,7 +665,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
     }
 
-    public void watchGame(final UUID gameId) {
+    @Override
+    public void watchGame(final UUID gameId, final UUID chatId, final GameView game) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -681,7 +682,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                     desktopPane.add(gamePane, JLayeredPane.DEFAULT_LAYER);
                     gamePane.setMaximum(true);
                     gamePane.setVisible(true);
-                    gamePane.watchGame(gameId);
+                    gamePane.watchGame(gameId, chatId, game);
                     setActive(gamePane);
                 } catch (PropertyVetoException ex) {
                 }
@@ -1524,13 +1525,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     @Override
     public void gameStarted(UUID gameId, UUID playerId) {
-//        try {
-            GameManager.getInstance().setCurrentPlayerUUID(playerId);
-            showGame(gameId, playerId);
-            logger.info("Game " + gameId + " started for player " + playerId);
-//        } catch (Exception ex) {
-//            handleException(ex);
-//        }
+        GameManager.getInstance().setCurrentPlayerUUID(playerId);
+        showGame(gameId, playerId);
+        logger.info("Game " + gameId + " started for player " + playerId);
 
         if (Plugins.getInstance().isCounterPluginLoaded()) {
             Plugins.getInstance().addGamesPlayed();

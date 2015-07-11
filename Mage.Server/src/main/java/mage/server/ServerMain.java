@@ -703,55 +703,30 @@ public class ServerMain implements MageServer {
         GameManager.getInstance().sendPlayerAction(playerAction, gameId, session.getUserId(), data);
     }
       
-//    @Override
-//    public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
-//        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
-//            @Override
-//            public Boolean execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                return GamesRoomManager.getInstance().getRoom(roomId).watchTable(userId, tableId);
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public boolean watchTournamentTable(final String sessionId, final UUID tableId) throws MageException {
-//        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
-//            @Override
-//            public Boolean execute() throws MageException {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                return TableManager.getInstance().watchTable(userId, tableId);
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void watchGame(final UUID gameId, final String sessionId) throws MageException {
-//        execute("watchGame", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                GameManager.getInstance().watchGame(gameId, userId);
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void stopWatching(final UUID gameId, final String sessionId) throws MageException {
-//        execute("stopWatching", sessionId, new Action() {
-//            @Override
-//            public void execute() {
-//                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-//                User user = UserManager.getInstance().getUser(userId);
-//                if (user != null) {
-//                    GameManager.getInstance().stopWatching(gameId, userId);
-//                    user.removeGameWatchInfo(gameId);
-//                }
-//
-//            }
-//        });
-//    }
-//
+    @Override
+    public void watchTable(final String sessionId, final UUID roomId, final UUID tableId) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        GamesRoomManager.getInstance().getRoom(roomId).watchTable(userId, tableId);
+    }
+
+    @Override
+    public void watchTournamentTable(final String sessionId, final UUID tableId) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        TableManager.getInstance().watchTable(userId, tableId);
+    }
+
+
+    @Override
+    public void stopWatching(final UUID gameId, final String sessionId) {
+        UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            GameManager.getInstance().stopWatching(gameId, userId);
+            user.removeGameWatchInfo(gameId);
+        }
+
+    }
+
 //    @Override
 //    public void replayGame(final UUID gameId, final String sessionId) throws MageException {
 //        execute("replayGame", sessionId, new Action() {
@@ -1244,24 +1219,12 @@ public class ServerMain implements MageServer {
         server.showTournament(sessionId, tournamentId);
     }
 
-//    public void tournamentInit(String sessionId, UUID tournamentId, TournamentView tournamentView) {
-//        server.tournamentInit(sessionId, tournamentId, tournamentView);
-//    }
-
-//    public void tournamentUpdate(String sessionId, UUID tournamentId, TournamentView tournamentView) {
-//        server.tournamentUpdate(sessionId, tournamentId, tournamentView);
-//    }
-//
-//    public void tournamentOver(String sessionId, UUID tournamentId) {
-//        server.tournamentOver(sessionId, tournamentId);
-//    }
-
     public void showGameEndDialog(String sessionId, UUID gameId) {
         server.showGameEndDialog(sessionId, gameId);
     }
 
-    public void watchGame(String sessionId, UUID gameId) {
-        server.watchGame(sessionId, gameId);
+    public void watchGame(String sessionId, UUID gameId, UUID chatId, GameView game) {
+        server.watchGame(sessionId, gameId, chatId, game);
     }
 
     public void replayGame(String sessionId, UUID gameId) {

@@ -434,22 +434,21 @@ public class TableController {
         }
     }
 
-    public boolean watchTable(UUID userId) {
+    public void watchTable(UUID userId) {
         if (table.isTournament()) {
             UserManager.getInstance().getUser(userId).showTournament(table.getTournament().getId());
-            return true;
         } else {
             if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
-                return false;
+                return;
             }
             if (table.getState() != TableState.DUELING) {
-                return false;
+                return;
             }
             // you can't watch your own game
             if (userPlayerMap.get(userId) != null) {
-                return false;
+                return;
             }
-            return UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
+            UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId(), getChatId());
         }
     }
 

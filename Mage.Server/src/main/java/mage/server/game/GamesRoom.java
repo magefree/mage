@@ -29,7 +29,6 @@
 package mage.server.game;
 
 import java.util.UUID;
-import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -51,7 +50,7 @@ public interface GamesRoom extends Room {
     void removeTable(UUID tableId);
     TableView getTable(UUID tableId);
     void leaveTable(UUID userId, UUID tableId);
-    boolean watchTable(UUID userId, UUID tableId) throws MageException;
+    void watchTable(UUID userId, UUID tableId);
 
     public RoomView getRoomView();
 

@@ -330,9 +330,10 @@ public class User {
         ServerMain.getInstance().informClient(sessionId, title, message, MessageType.ERROR);
     }
 
-    public boolean watchGame(final UUID gameId) {
-        ServerMain.getInstance().watchGame(sessionId, gameId);
-        return true;
+    public void watchGame(final UUID gameId, UUID chatId) {
+        GameView game = GameManager.getInstance().watchGame(gameId, userId);
+        if (game != null)
+            ServerMain.getInstance().watchGame(sessionId, gameId, chatId, game);
     }
 
     public void replayGame(final UUID gameId) {

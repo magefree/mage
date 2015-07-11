@@ -330,7 +330,11 @@ public class Client {
     }
 
     public void watchTournamentTable(UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.watchTournamentTable(tableId);
+        } catch (Exception ex) {
+            logger.error("Error watching tournament table", ex);
+        }
     }
 
     public UUID getTournamentChatId(UUID tournamentId) {
@@ -369,7 +373,11 @@ public class Client {
     }
 
     public void watchTable(UUID roomId, UUID tableId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.watchTable(roomId, tableId);
+        } catch (Exception ex) {
+            logger.error("Error watching table", ex);
+        }
     }
 
     public void replayGame(UUID gameId) {
@@ -416,16 +424,16 @@ public class Client {
         return null;
     }
 
-    public UUID watchGame(UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public boolean startReplay(UUID gameId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void stopWatching(UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            clientMessageHandler.stopWatching(gameId);
+        } catch (Exception ex) {
+            logger.error("Error stopping watching game", ex);
+        }
     }
 
     public void stopReplay(UUID gameId) {

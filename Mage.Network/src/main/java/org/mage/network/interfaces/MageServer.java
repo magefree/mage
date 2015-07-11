@@ -73,6 +73,10 @@ public interface MageServer {
     boolean joinTournament(UUID tournamentId, String sessionId);
     void quitTournament(UUID tournamentId, String sessionId);
 
+    void watchTable(String sessionId, UUID roomId, UUID tableId);
+    void watchTournamentTable(String sessionId, UUID tableId);
+    void stopWatching(UUID gameId, String sessionId);
+    
     void pingTime(long milliSeconds, String sessionId);
 
 }

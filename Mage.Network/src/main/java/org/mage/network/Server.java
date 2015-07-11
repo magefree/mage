@@ -75,6 +75,7 @@ import org.mage.network.messages.callback.SideboardCallback;
 import org.mage.network.messages.callback.StartDraftCallback;
 import org.mage.network.messages.callback.TournamentStartedCallback;
 import org.mage.network.messages.callback.UserRequestDialogCallback;
+import org.mage.network.messages.callback.WatchGameCallback;
 
 /**
  *
@@ -364,8 +365,10 @@ public class Server {
             ch.writeAndFlush(new ShowTournamentCallback(tournamentId)).addListener(WriteListener.getInstance());
     }
 
-    public void watchGame(String sessionId, UUID gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void watchGame(String sessionId, UUID gameId, UUID chatId, GameView game) {
+        Channel ch = findChannel(sessionId);
+        if (ch != null)
+            ch.writeAndFlush(new WatchGameCallback(gameId, chatId, game)).addListener(WriteListener.getInstance());
     }
 
     public void replayGame(String sessionId, UUID gameId) {

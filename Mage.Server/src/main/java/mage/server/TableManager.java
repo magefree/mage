@@ -270,11 +270,10 @@ public class TableManager {
         }
     }
 
-    public boolean watchTable(UUID userId, UUID tableId) {
+    public void watchTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
-            return controllers.get(tableId).watchTable(userId);
+            controllers.get(tableId).watchTable(userId);
         }
-        return false;
     }
 
 //    public boolean replayTable(UUID userId, UUID tableId) {
