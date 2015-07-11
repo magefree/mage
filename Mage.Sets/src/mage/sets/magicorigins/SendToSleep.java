@@ -29,8 +29,9 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
-import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -51,9 +52,10 @@ public class SendToSleep extends CardImpl {
         // Tap up to two target creatures.
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
-        
+
         // <i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps.
-        Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersNextUntapStepTargetEffect(),
+        Effect effect = new ConditionalOneShotEffect(
+                new AddContinuousEffectToGame(new DontUntapInControllersNextUntapStepTargetEffect()),
                 SpellMasteryCondition.getInstance());
         effect.setText("<br><i>Spell mastery</i> — If there are two or more instant and/or sorcery cards in your graveyard, those creatures don't untap during their controllers' next untap steps");
         this.getSpellAbility().addEffect(effect);

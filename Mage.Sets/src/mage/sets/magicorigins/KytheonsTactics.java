@@ -29,7 +29,8 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.abilities.condition.common.SpellMasteryCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
@@ -51,7 +52,8 @@ public class KytheonsTactics extends CardImpl {
         // Creatures you control get +2/+1 until end of turn.
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn.
-        this.getSpellAbility().addEffect(new ConditionalContinuousEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn),
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new AddContinuousEffectToGame(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn)),
                 SpellMasteryCondition.getInstance(),
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn"));
     }
