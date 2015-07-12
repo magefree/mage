@@ -166,13 +166,13 @@ public class Combat implements Serializable, Copyable<Combat> {
     public void checkForRemoveFromCombat(Game game) {
         for (UUID creatureId : getAttackers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (!creature.getCardType().contains(CardType.CREATURE)) {
+            if (creature != null && !creature.getCardType().contains(CardType.CREATURE)) {
                 removeFromCombat(creatureId, game, true);
             }
         }
         for (UUID creatureId : getBlockers()) {
             Permanent creature = game.getPermanent(creatureId);
-            if (!creature.getCardType().contains(CardType.CREATURE)) {
+            if (creature != null && !creature.getCardType().contains(CardType.CREATURE)) {
                 removeFromCombat(creatureId, game, true);
             }
         }
@@ -246,7 +246,6 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void resumeSelectAttackers(Game game) {
-        Player player = game.getPlayer(attackerId);
         for (CombatGroup group : groups) {
             for (UUID attacker : group.getAttackers()) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ATTACKER_DECLARED, group.defenderId, attacker, attackerId));
@@ -254,7 +253,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
         if (!game.isSimulation()) {
-            game.informPlayers(new StringBuilder(player.getLogName()).append(" attacks with ").append(groups.size()).append(groups.size() == 1 ? " creature" : " creatures").toString());
+            Player player = game.getPlayer(attackerId);
+            if (player != null) {
+                game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+            }
         }
     }
 
