@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.player.ai;
 
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
@@ -108,11 +108,16 @@ public class SimulatedPlayer2 extends ComputerPlayer {
 
         if (logger.isTraceEnabled()) {
             for (Ability a : allActions) {
-                logger.trace("ability==" + a);
+                logger.info("ability==" + a);
                 if (a.getTargets().size() > 0) {
-                    Player player = game.getPlayer(a.getFirstTarget());
-                    if (player != null) {
-                        logger.trace("   target="+player.getName());
+                    MageObject mageObject = game.getObject(a.getFirstTarget());
+                    if (mageObject != null) {
+                        logger.info("   target=" + mageObject.getName());
+                    } else {
+                        Player player = game.getPlayer(a.getFirstTarget());
+                        if (player != null) {
+                            logger.info("   target=" + player.getName());
+                        }
                     }
                 }
             }
@@ -124,21 +129,20 @@ public class SimulatedPlayer2 extends ComputerPlayer {
     protected void simulateOptions(Game game) {
         List<Ability> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         playables = filterAbilities(game, playables, suggested);
-        for (Ability ability: playables) {
+        for (Ability ability : playables) {
             if (ability.getAbilityType().equals(AbilityType.MANA)) {
                 continue;
             }
             List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-                options = filterOptions(game, options, ability, suggested);
+            options = filterOptions(game, options, ability, suggested);
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
-                  allActions.add(ability);
+                allActions.add(ability);
 //                simulateAction(game, previousActions, ability);
-            }
-            else {
+            } else {
 //                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
-                for (Ability option: options) {
-                      allActions.add(option);
+                for (Ability option : options) {
+                    allActions.add(option);
 //                    SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
 //                    simulationExecutor.submit(worker);
                 }
@@ -157,7 +161,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         if (card != null && numAvailable > 0) {
             // check if variable mana costs is included and get the multiplier
             VariableManaCost variableManaCost = null;
-            for (ManaCost cost: ability.getManaCostsToPay()) {
+            for (ManaCost cost : ability.getManaCostsToPay()) {
                 if (cost instanceof VariableManaCost && !cost.isPaid()) {
                     variableManaCost = (VariableManaCost) cost;
                     break; // only one VariableManCost per spell (or is it possible to have more?)
@@ -171,7 +175,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                         int xAmount = mana / multiplier;
                         Ability newAbility = ability.copy();
                         VariableManaCost varCost = null;
-                        for (ManaCost cost: newAbility.getManaCostsToPay()) {
+                        for (ManaCost cost : newAbility.getManaCostsToPay()) {
                             if (cost instanceof VariableManaCost && !cost.isPaid()) {
                                 varCost = (VariableManaCost) cost;
                                 break; // only one VariableManCost per spell (or is it possible to have more?)
@@ -207,7 +211,6 @@ public class SimulatedPlayer2 extends ComputerPlayer {
 //            allActions.add(new SimulatedAction(sim, actions));
 //        }
 //    }
-
     /**
      * if suggested abilities exist, return only those from playables
      *
@@ -253,7 +256,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                 Card card = game.getCard(ability.getSourceId());
                 for (String s : suggested) {
                     String[] groups = s.split(";");
-                    logger.trace("s="+s+";groups="+groups.length);
+                    logger.trace("s=" + s + ";groups=" + groups.length);
                     if (groups.length == 2) {
                         if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
                             // extract target and compare to suggested
@@ -330,7 +333,7 @@ public class SimulatedPlayer2 extends ComputerPlayer {
                 }
             }
         }
-        
+
         return options;
     }
 
@@ -352,15 +355,14 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
-                    if(!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
+                    if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
                         sim.undo(playerId);
-                    }                    
+                    }
                 }
             }
             if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                 logger.debug("simulating -- found redundant attack combination");
-            }
-            else {
+            } else {
                 logger.debug("simulating -- attack:" + sim.getCombat().getGroups().size());
             }
         }
@@ -424,15 +426,14 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             ability.activate(game, false);
             game.applyEffects();
             game.getPlayers().resetPassed();
-        }
-        else {
+        } else {
             SimulationNode2 parent = (SimulationNode2) game.getCustomData();
             int depth = parent.getDepth() - 1;
             if (depth == 0) {
                 return true;
             }
             logger.debug("simulating -- triggered ability - adding children:" + options.size());
-            for (Ability option: options) {
+            for (Ability option : options) {
                 addAbilityNode(parent, option, depth, game);
             }
         }
@@ -446,12 +447,12 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         sim.applyEffects();
         SimulationNode2 newNode = new SimulationNode2(parent, sim, depth, playerId);
         logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
-        for (Target target: ability.getTargets()) {
-            for (UUID targetId: target.getTargets()) {
+        for (Target target : ability.getTargets()) {
+            for (UUID targetId : target.getTargets()) {
                 newNode.getTargets().add(targetId);
             }
         }
-        for (Choice choice: ability.getChoices()) {
+        for (Choice choice : ability.getChoices()) {
             newNode.getChoices().add(choice.getChoice());
         }
         parent.children.add(newNode);
@@ -462,6 +463,5 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         //should never get here
         return false;
     }
-
 
 }

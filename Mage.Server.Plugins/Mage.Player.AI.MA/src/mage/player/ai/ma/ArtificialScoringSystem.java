@@ -1,24 +1,23 @@
 package mage.player.ai.ma;
 
+import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
-import mage.constants.Outcome;
-import mage.abilities.effects.Effect;
 
 /**
  * @author ubeefx, nantuko
  */
 public class ArtificialScoringSystem {
 
-    public static final int WIN_GAME_SCORE=100000000;
-    public static final int LOSE_GAME_SCORE=-WIN_GAME_SCORE;
+    public static final int WIN_GAME_SCORE = 100000000;
+    public static final int LOSE_GAME_SCORE = -WIN_GAME_SCORE;
 
     private static final int LIFE_SCORES[] = {0, 1000, 2000, 3000, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7400, 7800, 8200, 8600, 9000, 9200, 9400, 9600, 9800, 10000};
     private static final int MAX_LIFE = LIFE_SCORES.length - 1;
@@ -33,9 +32,9 @@ public class ArtificialScoringSystem {
             //TODO: check this for "any color" lands
             //TODO: check this for dual and filter lands
             /*for (Mana mana : card.getMana()) {
-                score += 50;
-            }*/
-            score += card.getMana().size()*50;
+             score += 50;
+             }*/
+            score += card.getMana().size() * 50;
             return score;
         }
 
@@ -43,19 +42,19 @@ public class ArtificialScoringSystem {
         if (card.getCardType().contains(CardType.CREATURE)) {
             return score + (card.getPower().getValue() + card.getToughness().getValue()) * 10;
         } else {
-            return score + (/*card.getRemoval()*50*/ +card.getRarity().getRating() * 30);
+            return score + (/*card.getRemoval()*50*/+card.getRarity().getRating() * 30);
         }
     }
 
     public static int getFixedPermanentScore(final Game game, final Permanent permanent) {
         //TODO: cache it inside Card
         int score = getCardDefinitionScore(game, permanent);
+        score += PERMANENT_SCORE;
         if (permanent.getCardType().contains(CardType.CREATURE)) {
             // TODO: implement in the mage core
             //score + =cardDefinition.getActivations().size()*50;
             //score += cardDefinition.getManaActivations().size()*80;
         } else {
-            score += PERMANENT_SCORE;
             if (permanent.getSubtype().contains("Equipment")) {
                 score += 100;
             }
@@ -101,7 +100,7 @@ public class ArtificialScoringSystem {
                     }
                 }
             }
-            score += equipments*50 + enchantments*100;
+            score += equipments * 50 + enchantments * 100;
 
             if (!permanent.canAttack(game)) {
                 score -= 100;
@@ -116,9 +115,9 @@ public class ArtificialScoringSystem {
 
     private static boolean canTap(Permanent permanent) {
         return !permanent.isTapped()
-                &&(!permanent.hasSummoningSickness()
-                    ||!permanent.getCardType().contains(CardType.CREATURE)
-                    ||permanent.getAbilities().contains(HasteAbility.getInstance()));
+                && (!permanent.hasSummoningSickness()
+                || !permanent.getCardType().contains(CardType.CREATURE)
+                || permanent.getAbilities().contains(HasteAbility.getInstance()));
     }
 
     private static int getPositive(int value) {
@@ -152,23 +151,23 @@ public class ArtificialScoringSystem {
     public static int getAttackerScore(final Permanent attacker) {
         //TODO: implement this
         /*int score = attacker.getPower().getValue() * 5 + attacker.lethalDamage * 2 - attacker.candidateBlockers.length;
-        for (final MagicCombatCreature blocker : attacker.candidateBlockers) {
+         for (final MagicCombatCreature blocker : attacker.candidateBlockers) {
 
-            score -= blocker.power;
-        }
-        // Dedicated attacker.
-        if (attacker.hasAbility(MagicAbility.AttacksEachTurnIfAble) || attacker.hasAbility(MagicAbility.CannotBlock)) {
-            score += 10;
-        }
-        // Abilities for attacking.
-        if (attacker.hasAbility(MagicAbility.Trample) || attacker.hasAbility(MagicAbility.Vigilance)) {
-            score += 8;
-        }
-        // Dangerous to block.
-        if (!attacker.normalDamage || attacker.hasAbility(MagicAbility.FirstStrike) || attacker.hasAbility(MagicAbility.Indestructible)) {
-            score += 7;
-        }
-        */
+         score -= blocker.power;
+         }
+         // Dedicated attacker.
+         if (attacker.hasAbility(MagicAbility.AttacksEachTurnIfAble) || attacker.hasAbility(MagicAbility.CannotBlock)) {
+         score += 10;
+         }
+         // Abilities for attacking.
+         if (attacker.hasAbility(MagicAbility.Trample) || attacker.hasAbility(MagicAbility.Vigilance)) {
+         score += 8;
+         }
+         // Dangerous to block.
+         if (!attacker.normalDamage || attacker.hasAbility(MagicAbility.FirstStrike) || attacker.hasAbility(MagicAbility.Indestructible)) {
+         score += 7;
+         }
+         */
         int score = 0;
         return score;
     }

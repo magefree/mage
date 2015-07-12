@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package mage.player.ai;
 
 import java.util.UUID;
@@ -60,21 +59,21 @@ public class GameStateEvaluator2 {
             StringBuilder sbPlayer = new StringBuilder();
             StringBuilder sbOpponent = new StringBuilder();
             // add values of player
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
                 int onePermScore = evaluatePermanent(permanent, game);
                 playerScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbPlayer.append(permanent.getName()).append("[").append(onePermScore).append("] ");
                 }
             }
-            if (logger.isDebugEnabled()) {                
+            if (logger.isDebugEnabled()) {
                 sbPlayer.insert(0, playerScore + " - ");
                 sbPlayer.insert(0, "Player..: ");
                 logger.debug(sbPlayer);
             }
 
             // add values of opponent
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(opponent.getId())) {
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
                 int onePermScore = evaluatePermanent(permanent, game);
                 opponentScore += onePermScore;
                 if (logger.isDebugEnabled()) {
@@ -84,7 +83,7 @@ public class GameStateEvaluator2 {
             if (logger.isDebugEnabled()) {
                 sbOpponent.insert(0, opponentScore + " - ");
                 sbOpponent.insert(0, "Opponent: ");
-                
+
                 logger.debug(sbOpponent);
             }
             permanentScore = playerScore - opponentScore;
@@ -97,28 +96,28 @@ public class GameStateEvaluator2 {
         handScore *= 5;
 
         int score = lifeScore + permanentScore + handScore;
-        logger.debug(score + " total Score (life:" + lifeScore + " permanents:" + permanentScore + " hand:" + handScore +")");
+        logger.debug(score + " total Score (life:" + lifeScore + " permanents:" + permanentScore + " hand:" + handScore + ")");
 
         return score;
     }
 
     public static int evaluatePermanent(Permanent permanent, Game game) {
         /*int value = permanent.isTapped()?4:5;
-        if (permanent.getCardType().contains(CardType.CREATURE)) {
-            value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
-        }
-        value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
-        for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-            if (!(ability instanceof ManaAbility) && ability.canActivate(ability.getControllerId(), game))
-                value += ability.getEffects().size();
-        }
-        value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).size();
-        value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).size();
-        value += permanent.getManaCost().convertedManaCost();
-        */
+         if (permanent.getCardType().contains(CardType.CREATURE)) {
+         value += evaluateCreature(permanent, game) * CREATURE_FACTOR;
+         }
+         value += permanent.getAbilities().getManaAbilities(Zone.BATTLEFIELD).size();
+         for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
+         if (!(ability instanceof ManaAbility) && ability.canActivate(ability.getControllerId(), game))
+         value += ability.getEffects().size();
+         }
+         value += permanent.getAbilities().getStaticAbilities(Zone.BATTLEFIELD).size();
+         value += permanent.getAbilities().getTriggeredAbilities(Zone.BATTLEFIELD).size();
+         value += permanent.getManaCost().convertedManaCost();
+         */
 
         int value = ArtificialScoringSystem.getFixedPermanentScore(game, permanent)
-                    + ArtificialScoringSystem.getVariablePermanentScore(game, permanent);
+                + ArtificialScoringSystem.getVariablePermanentScore(game, permanent);
 
         //TODO: add a difficulty to calculation to ManaCost - sort permanents by difficulty for casting when evaluating game states
         return value;
@@ -126,21 +125,20 @@ public class GameStateEvaluator2 {
 
     public static int evaluateCreature(Permanent creature, Game game) {
         int value = ArtificialScoringSystem.getFixedPermanentScore(game, creature)
-                    + ArtificialScoringSystem.getVariablePermanentScore(game, creature);
+                + ArtificialScoringSystem.getVariablePermanentScore(game, creature);
 
         /*int value = 0;
-        value += creature.getPower().getValue();
-        value += creature.getToughness().getValue();
-//        if (creature.canAttack(game))
-//            value += creature.getPower().getValue();
-//        if (!creature.isTapped())
-//            value += 2;
-        value += creature.getAbilities().getEvasionAbilities().size();
-        value += creature.getAbilities().getProtectionAbilities().size();
-        value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
-        value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
-        value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;*/
-
+         value += creature.getPower().getValue();
+         value += creature.getToughness().getValue();
+         //        if (creature.canAttack(game))
+         //            value += creature.getPower().getValue();
+         //        if (!creature.isTapped())
+         //            value += 2;
+         value += creature.getAbilities().getEvasionAbilities().size();
+         value += creature.getAbilities().getProtectionAbilities().size();
+         value += creature.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())?1:0;
+         value += creature.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())?2:0;
+         value += creature.getAbilities().containsKey(TrampleAbility.getInstance().getId())?1:0;*/
         return value;
     }
 

@@ -82,6 +82,7 @@ import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
+import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
@@ -1116,21 +1117,23 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
+    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         currentUnpaidMana = unpaid;
-        boolean result = playManaHandling(unpaid, game);
+        boolean result = playManaHandling(ability, unpaid, game);
         currentUnpaidMana = null;
         payManaMode = false;
         return result;
     }
 
-    protected boolean playManaHandling(ManaCost unpaid, Game game) {
+    protected boolean playManaHandling(Ability ability, ManaCost unpaid, Game game) {
 //        log.info("paying for " + unpaid.getText());
+        boolean spendAnyMana = game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, ability, ability.getControllerId(), game);
         ManaCost cost;
         List<Permanent> producers;
         if (unpaid instanceof ManaCosts) {
-            cost = ((ManaCosts<ManaCost>) unpaid).get(0);
+            ManaCosts<ManaCost> manaCosts = (ManaCosts<ManaCost>) unpaid;
+            cost = manaCosts.get(manaCosts.size() - 1);
             producers = getSortedProducers((ManaCosts) unpaid, game);
         } else {
             cost = unpaid;
@@ -1138,12 +1141,37 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             producers.addAll(this.getAvailableManaProducersWithCost(game));
         }
         for (Permanent perm : producers) {
-            // pay all colored costs first
-            for (ManaAbility ability : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
-                if (cost instanceof ColoredManaCost) {
-                    for (Mana netMana : ability.getNetMana(game)) {
+            // use color producing mana abilities with costs first that produce all color manas that are needed to pay
+            // otherwise the computer may not be able to pay the cost for that source
+            ManaAbility:
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                int colored = 0;
+                for (Mana mana : manaAbility.getNetMana(game)) {
+                    if (!unpaid.getMana().includesMana(mana)) {
+                        continue ManaAbility;
+                    }
+                    colored += mana.countColored();
+                }
+                if (colored > 1 && (cost instanceof ColoredManaCost)) {
+
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana)) {
-                            if (activateAbility(ability, game)) {
+                            if (activateAbility(manaAbility, game)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (Permanent perm : producers) {
+            // pay all colored costs first
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+                if (cost instanceof ColoredManaCost) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
                         }
@@ -1151,11 +1179,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay hybrid
-            for (ManaAbility ability : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof HybridManaCost) {
-                    for (Mana netMana : ability.getNetMana(game)) {
-                        if (cost.testPay(netMana)) {
-                            if (activateAbility(ability, game)) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
                         }
@@ -1163,11 +1191,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // then pay mono hybrid
-            for (ManaAbility ability : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof MonoHybridManaCost) {
-                    for (Mana netMana : ability.getNetMana(game)) {
-                        if (cost.testPay(netMana)) {
-                            if (activateAbility(ability, game)) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
                         }
@@ -1175,11 +1203,11 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 }
             }
             // finally pay generic
-            for (ManaAbility ability : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
+            for (ManaAbility manaAbility : perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
                 if (cost instanceof GenericManaCost) {
-                    for (Mana netMana : ability.getNetMana(game)) {
-                        if (cost.testPay(netMana)) {
-                            if (activateAbility(ability, game)) {
+                    for (Mana netMana : manaAbility.getNetMana(game)) {
+                        if (cost.testPay(netMana) || spendAnyMana) {
+                            if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
                         }
@@ -1189,7 +1217,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         }
         // pay phyrexian life costs
         if (cost instanceof PhyrexianManaCost) {
-            if (cost.pay(null, game, null, playerId, false)) {
+            if (cost.pay(null, game, null, playerId, false) || spendAnyMana) {
                 return true;
             }
         }

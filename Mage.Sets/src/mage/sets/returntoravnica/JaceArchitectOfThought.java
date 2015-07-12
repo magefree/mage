@@ -342,14 +342,12 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect {
         while (jaceExileZone.count(filter, game) > 0 && controller.choose(Outcome.PlayForFree, jaceExileZone, target, game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-
                 if (controller.cast(card.getSpellAbility(), game, true)) {
                     game.getExile().removeCard(card, game);
                 }
             }
             target.clearChosen();
         }
-
         return true;
     }
 }

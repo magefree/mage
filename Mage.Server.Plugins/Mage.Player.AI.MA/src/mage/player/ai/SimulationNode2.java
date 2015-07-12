@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.player.ai;
 
 import java.io.Serializable;
@@ -49,10 +48,10 @@ public class SimulationNode2 implements Serializable {
     protected int score;
     protected List<Ability> abilities;
     protected int depth;
-    protected List<SimulationNode2> children = new ArrayList<SimulationNode2>();
+    protected List<SimulationNode2> children = new ArrayList<>();
     protected SimulationNode2 parent;
-    protected List<UUID> targets = new ArrayList<UUID>();
-    protected List<String> choices = new ArrayList<String>();
+    protected List<UUID> targets = new ArrayList<>();
+    protected List<String> choices = new ArrayList<>();
     protected UUID playerId;
     protected Combat combat;
 
@@ -72,7 +71,7 @@ public class SimulationNode2 implements Serializable {
 
     public SimulationNode2(SimulationNode2 parent, Game game, Ability ability, int depth, UUID playerId) {
         this(parent, game, depth, playerId);
-        this.abilities = new ArrayList<Ability>();
+        this.abilities = new ArrayList<>();
         abilities.add(ability);
     }
 
