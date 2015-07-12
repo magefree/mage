@@ -27,6 +27,7 @@
  */
 package mage.sets.planeshift;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -83,16 +84,24 @@ class MarchOfSoulsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-         List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
-             source.getControllerId(), source.getSourceId(), game);
-         for(Permanent p : creatures) {
-             UUID controllerId = p.getControllerId();
-             if(p.destroy(source.getSourceId(), game, true)) {
-                 SpiritWhiteToken token = new SpiritWhiteToken();
-                 token.putOntoBattlefield(1, game, source.getSourceId(), controllerId);
-             }
-         }
-         return true;
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(),
+            source.getControllerId(), source.getSourceId(), game);
+        HashMap<UUID, Integer> playersWithCreatures = new HashMap<UUID, Integer>();
+        for(Permanent p : creatures) {
+            UUID controllerId = p.getControllerId();
+            if(p.destroy(source.getSourceId(), game, true)) {
+                if(playersWithCreatures.containsKey(controllerId)) {
+                    playersWithCreatures.put(controllerId, playersWithCreatures.get(controllerId) + 1);
+                }
+                else {
+                    playersWithCreatures.put(controllerId, 1);
+                }
+            }
+        }
+        SpiritWhiteToken token = new SpiritWhiteToken();
+        for(UUID playerId : playersWithCreatures.keySet()) {
+            token.putOntoBattlefield(playersWithCreatures.get(playerId), game, source.getSourceId(), playerId);
+        }
+        return true;
     }
-
 }

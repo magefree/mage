@@ -27,6 +27,7 @@
  */
 package mage.sets.dragonsoftarkir;
 
+import java.util.HashMap;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -87,17 +88,26 @@ class DescentOfTheDragonsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
+            HashMap<UUID, Integer> playersWithTargets = new HashMap<UUID, Integer>();
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
                     if (permanent != null) {
                         UUID controllerOfTargetId = permanent.getControllerId();
                         if (permanent.destroy(source.getSourceId(), game, false)) {
-                            DragonToken dragonToken = new DragonToken();
-                            dragonToken.putOntoBattlefield(1, game, source.getSourceId(), controllerOfTargetId);
+                            if(playersWithTargets.containsKey(controllerOfTargetId)) {
+                                playersWithTargets.put(controllerOfTargetId, playersWithTargets.get(controllerOfTargetId) + 1);
+                            }
+                            else {
+                                playersWithTargets.put(controllerOfTargetId, 1);
+                            }
                         }
                     }
                 }
+            }
+            DragonToken dragonToken = new DragonToken();
+            for(UUID playerId : playersWithTargets.keySet()) {
+                dragonToken.putOntoBattlefield(playersWithTargets.get(playerId), game, source.getSourceId(), playerId);
             }
             return true;
         }
