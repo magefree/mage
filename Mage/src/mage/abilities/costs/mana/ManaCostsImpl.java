@@ -101,6 +101,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
+    public List<Mana> getManaOptions() {
+        List<Mana> manaVariants = new ArrayList<>();
+        for (ManaCost cost : this) {
+            manaVariants.addAll(cost.getManaOptions());
+        }
+        return manaVariants;
+    }
+
+    @Override
     public Mana getPayment() {
         Mana manaTotal = new Mana();
         for (ManaCost cost : this) {

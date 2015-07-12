@@ -1,36 +1,36 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage;
 
 import java.io.Serializable;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
+import static mage.constants.ManaType.COLORLESS;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
@@ -57,7 +57,8 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     public static final Mana BlackMana = BlackMana(1);
     public static final Mana ColorlessMana = ColorlessMana(1);
 
-    public Mana() {}
+    public Mana() {
+    }
 
     public Mana(final Mana mana) {
         this.red = mana.red;
@@ -212,11 +213,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
     }
 
-
     public int count() {
         return red + green + blue + white + black + colorless + any;
     }
-    
+
     public int countColored() {
         return red + green + blue + white + black + any;
     }
@@ -283,9 +283,9 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
         return sbMana.toString();
     }
-    
+
     private static final transient ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(10);
-    
+
     @Override
     public Mana copy() {
         return new Mana(this);
@@ -342,38 +342,38 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         Mana compare = avail.copy();
         compare.subtract(this);
         if (compare.getRed() < 0 && compare.getAny() > 0) {
-            int diff = Math.min( compare.getAny(), Math.abs(compare.getRed()));
+            int diff = Math.min(compare.getAny(), Math.abs(compare.getRed()));
             compare.setAny(compare.getAny() - diff);
             compare.setRed(compare.getRed() + diff);
         }
         if (compare.getGreen() < 0 && compare.getAny() > 0) {
-            int diff = Math.min( compare.getAny(), Math.abs(compare.getGreen()));
+            int diff = Math.min(compare.getAny(), Math.abs(compare.getGreen()));
             compare.setAny(compare.getAny() - diff);
             compare.setGreen(compare.getGreen() + diff);
         }
         if (compare.getBlue() < 0 && compare.getAny() > 0) {
-            int diff = Math.min( compare.getAny(), Math.abs(compare.getBlue()));
+            int diff = Math.min(compare.getAny(), Math.abs(compare.getBlue()));
             compare.setAny(compare.getAny() - diff);
             compare.setBlue(compare.getBlue() + diff);
         }
         if (compare.getBlack() < 0 && compare.getAny() > 0) {
-            int diff = Math.min( compare.getAny(), Math.abs(compare.getBlack()));
+            int diff = Math.min(compare.getAny(), Math.abs(compare.getBlack()));
             compare.setAny(compare.getAny() - diff);
             compare.setBlack(compare.getBlack() + diff);
         }
         if (compare.getWhite() < 0 && compare.getAny() > 0) {
-            int diff = Math.min( compare.getAny(), Math.abs(compare.getWhite()));
+            int diff = Math.min(compare.getAny(), Math.abs(compare.getWhite()));
             compare.setAny(compare.getAny() - diff);
             compare.setWhite(compare.getWhite() + diff);
         }
         if (compare.getColorless() < 0) {
             int remaining = 0;
-            remaining += Math.min(0,compare.getRed());
-            remaining += Math.min(0,compare.getWhite());
-            remaining += Math.min(0,compare.getGreen());
-            remaining += Math.min(0,compare.getBlack());
-            remaining += Math.min(0,compare.getBlue());
-            remaining += Math.min(0,compare.getAny());
+            remaining += Math.min(0, compare.getRed());
+            remaining += Math.min(0, compare.getWhite());
+            remaining += Math.min(0, compare.getGreen());
+            remaining += Math.min(0, compare.getBlack());
+            remaining += Math.min(0, compare.getBlue());
+            remaining += Math.min(0, compare.getAny());
             if (remaining > 0) {
                 int diff = Math.min(remaining, Math.abs(compare.getColorless()));
                 compare.setColorless(compare.getColorless() + diff);
@@ -510,7 +510,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public int get(ManaType manaType) {
-        switch(manaType) {
+        switch (manaType) {
             case BLACK:
                 return black;
             case BLUE:
@@ -528,7 +528,7 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public void set(ManaType manaType, int amount) {
-        switch(manaType) {
+        switch (manaType) {
             case BLACK:
                 black = amount;
                 break;
@@ -569,39 +569,38 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
     }
 
     public boolean equalManaValue(Mana mana) {
-        return this.any == mana.any &&
-                this.red == mana.red &&
-                this.green == mana.green &&
-                this.white == mana.white &&
-                this.blue == mana.blue &&
-                this.black == mana.black &&
-                this.colorless == mana.colorless;
+        return this.any == mana.any
+                && this.red == mana.red
+                && this.green == mana.green
+                && this.white == mana.white
+                && this.blue == mana.blue
+                && this.black == mana.black
+                && this.colorless == mana.colorless;
     }
 
     /**
-     * Don't takes any mana into account to be usable in calculating available mana
+     * Don't takes any mana into account to be usable in calculating available
+     * mana
+     *
      * @param mana
-     * @return 
+     * @return
      */
     public boolean includesMana(Mana mana) {
-        return this.green >= mana.green &&
-                this.blue >= mana.blue &&
-                this.white >= mana.white &&
-                this.black >= mana.black &&
-                this.red >= mana.red &&
-                (
-                    this.colorless >= mana.colorless ||
-                    this.countColored() >= mana.countColored() + mana.colorless
-                );
+        return this.green >= mana.green
+                && this.blue >= mana.blue
+                && this.white >= mana.white
+                && this.black >= mana.black
+                && this.red >= mana.red
+                && (this.colorless >= mana.colorless
+                || this.countColored() >= mana.countColored() + mana.colorless);
 
     }
 
     /**
-     * Returns the mana that is more colored but does not contain
-     * one less mana in any color but colorless
-     * if you call with {1}{W}{R} and {G}{W}{R} you get back {G}{W}{R}
-     * if you call with {G}{W}{R} and {G}{W}{R} you get back {G}{W}{R}
-     * if you call with {G}{W}{B} and {G}{W}{R} you get back null
+     * Returns the mana that is more colored but does not contain one less mana
+     * in any color but colorless if you call with {1}{W}{R} and {G}{W}{R} you
+     * get back {G}{W}{R} if you call with {G}{W}{R} and {G}{W}{R} you get back
+     * {G}{W}{R} if you call with {G}{W}{B} and {G}{W}{R} you get back null
      *
      * @param mana1
      * @param mana2
@@ -617,13 +616,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
             moreMana = mana1;
             lessMana = mana2;
         }
-        if (lessMana.getWhite() > moreMana.getWhite() ||
-                lessMana.getRed() > moreMana.getRed() ||
-                lessMana.getGreen() > moreMana.getGreen() ||
-                lessMana.getBlue() > moreMana.getBlue() ||
-                lessMana.getBlack() > moreMana.getBlack() ||
-                lessMana.getAny() > moreMana.getAny()
-                ) {
+        if (lessMana.getWhite() > moreMana.getWhite()
+                || lessMana.getRed() > moreMana.getRed()
+                || lessMana.getGreen() > moreMana.getGreen()
+                || lessMana.getBlue() > moreMana.getBlue()
+                || lessMana.getBlack() > moreMana.getBlack()
+                || lessMana.getAny() > moreMana.getAny()) {
             return null;
         }
         return moreMana;

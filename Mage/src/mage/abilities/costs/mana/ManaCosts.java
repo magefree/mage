@@ -60,4 +60,5 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
     @Override
     ManaCosts<T> copy();
+
 }

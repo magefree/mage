@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities;
 
 import java.util.UUID;
@@ -65,17 +64,17 @@ public class SpellAbility extends ActivatedAbilityImpl {
         this.cardName = cardName;
         this.spellAbilityType = spellAbilityType;
         this.addManaCost(cost);
-        switch(spellAbilityType) {
+        switch (spellAbilityType) {
             case SPLIT_FUSED:
                 this.name = "Cast fused " + cardName;
                 break;
             default:
                 this.name = "Cast " + cardName;
         }
-        
+
     }
 
-    public SpellAbility(SpellAbility ability) {
+    public SpellAbility(final SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
         this.cardName = ability.cardName;
@@ -83,9 +82,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
-        return timing == TimingRule.INSTANT ||
-                object.hasAbility(FlashAbility.getInstance().getId(), game) ||
-                game.canPlaySorcery(playerId);
+        return timing == TimingRule.INSTANT
+                || object.hasAbility(FlashAbility.getInstance().getId(), game)
+                || game.canPlaySorcery(playerId);
     }
 
     @Override
@@ -96,7 +95,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 return false;
             }
             // fix for Gitaxian Probe and casting opponent's spells
-            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game) 
+            if (!game.getContinuousEffects().asThough(getSourceId(), AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, playerId, game)
                     && !controllerId.equals(playerId)) {
                 return false;
             }
@@ -122,13 +121,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
                 if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                     SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
                     if (splitCard != null) {
-                        return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game) 
+                        return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
                                 && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game));
                     }
                     return false;
 
                 } else {
-                    return  canChooseTarget(game);
+                    return canChooseTarget(game);
                 }
             }
         }

@@ -47,20 +47,19 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
 public class CommanderColorIdentityManaAbility extends ManaAbility {
 
     private FilterMana commanderMana;
 
     public CommanderColorIdentityManaAbility() {
-        super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(),new TapSourceCost());
+        super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), new TapSourceCost());
     }
-    
+
     public CommanderColorIdentityManaAbility(Cost cost) {
         super(Zone.BATTLEFIELD, new CommanderIdentityManaEffect(), cost);
         commanderMana = null;
     }
-    
+
     public CommanderColorIdentityManaAbility(final CommanderColorIdentityManaAbility ability) {
         super(ability);
         this.commanderMana = ability.commanderMana;
@@ -73,7 +72,7 @@ public class CommanderColorIdentityManaAbility extends ManaAbility {
 
     @Override
     public List<Mana> getNetMana(Game game) {
-        if (netMana.isEmpty()) {
+        if (netMana.isEmpty() && game != null) {
             Player controller = game.getPlayer(getControllerId());
             if (controller != null) {
                 if (commanderMana == null) {
@@ -109,7 +108,6 @@ public class CommanderColorIdentityManaAbility extends ManaAbility {
     public boolean definesMana() {
         return true;
     }
-
 
 }
 
@@ -190,7 +188,7 @@ class CommanderIdentityManaEffect extends ManaEffect {
                         break;
                 }
                 checkToFirePossibleEvents(mana, game, source);
-                controller.getManaPool().addMana(mana, game, source);                    
+                controller.getManaPool().addMana(mana, game, source);
                 return true;
             }
         }
