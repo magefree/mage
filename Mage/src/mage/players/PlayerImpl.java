@@ -2608,8 +2608,10 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
+        // TODO: Support modal spells with more than one selectable mode
         for (Mode mode : option.getModes().values()) {
             Ability newOption = option.copy();
+            newOption.getModes().getSelectedModes().clear();
             newOption.getModes().setMode(mode);
             if (newOption.getTargets().getUnchosen().size() > 0) {
                 if (newOption.getManaCosts().getVariableCosts().size() > 0) {
