@@ -674,7 +674,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
+    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
         payManaMode = true;
         boolean result = playManaHandling(unpaid, promptText, game);
         payManaMode = false;

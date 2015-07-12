@@ -445,7 +445,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
 
-    boolean playMana(ManaCost unpaid, String promptText, Game game);
+    boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game);
 
     /**
      * Moves the cards from cards to the bottom of the players library.

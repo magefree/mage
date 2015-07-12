@@ -1826,8 +1826,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean playMana(ManaCost unpaid, String promptText, Game game) {
-        return computerPlayer.playMana(unpaid, promptText, game);
+    public boolean playMana(Ability ability, ManaCost unpaid, String promptText, Game game) {
+        return computerPlayer.playMana(ability, unpaid, promptText, game);
     }
 
     @Override
