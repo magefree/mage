@@ -1,32 +1,34 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.game.command;
 
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -39,24 +41,14 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.game.Game;
-
-import java.util.List;
-import java.util.UUID;
 import mage.util.GameLog;
 
-/**
- *
- * @author Plopman
- */
-
-
-public class Commander implements CommandObject{
+public class Commander implements CommandObject {
 
     private final Card card;
     private final Abilities<Ability> abilites = new AbilitiesImpl<>();
 
-    
-    public Commander(Card card){
+    public Commander(Card card) {
         this.card = card;
         abilites.add(new CastCommanderAbility(card));
         for (Ability ability : card.getAbilities()) {
@@ -66,15 +58,15 @@ public class Commander implements CommandObject{
             }
         }
     }
-    
+
     private Commander(Commander copy) {
         this.card = copy.card;
     }
-    
-    public Card getCard(){
+
+    public Card getCard() {
         return card;
     }
-    
+
     @Override
     public UUID getSourceId() {
         return card.getId();
@@ -101,7 +93,7 @@ public class Commander implements CommandObject{
 
     @Override
     public String getIdName() {
-        return card.getName() + " ["+card.getId().toString().substring(0,3) +"]";        
+        return card.getName() + " [" + card.getId().toString().substring(0, 3) + "]";
     }
 
     @Override
@@ -111,7 +103,7 @@ public class Commander implements CommandObject{
 
     @Override
     public void setName(String name) {
-        
+
     }
 
     @Override
@@ -145,7 +137,7 @@ public class Commander implements CommandObject{
             return true;
         }
         Abilities<Ability> otherAbilities = game.getState().getAllOtherAbilities(getId());
-        return  otherAbilities != null && otherAbilities.containsKey(abilityId);
+        return otherAbilities != null && otherAbilities.containsKey(abilityId);
     }
 
     @Override
@@ -201,17 +193,17 @@ public class Commander implements CommandObject{
 
     @Override
     public int getZoneChangeCounter(Game game) {
-        throw new UnsupportedOperationException("Unsupported operation");
+        return card.getZoneChangeCounter(game);
     }
 
     @Override
     public void updateZoneChangeCounter(Game game) {
-        throw new UnsupportedOperationException("Unsupported operation");
+        card.updateZoneChangeCounter(game);
     }
 
     @Override
     public void setZoneChangeCounter(int value, Game game) {
-        throw new UnsupportedOperationException("Unsupported operation");
+        card.setZoneChangeCounter(value, game);
     }
-    
+
 }
