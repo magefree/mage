@@ -90,7 +90,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     protected boolean flipped;
     protected boolean transformed;
     protected boolean monstrous;
-    protected boolean renown;
+    protected boolean renowned;
     protected boolean manifested = false;
     protected boolean morphed = false;
     protected UUID originalControllerId;
@@ -176,6 +176,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.monstrous = permanent.monstrous;
+        this.renowned = permanent.renowned;
         this.pairedCard = permanent.pairedCard;
         this.timesLoyaltyUsed = permanent.timesLoyaltyUsed;
 
@@ -1199,11 +1200,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     @Override
     public boolean removeFromCombat(Game game, boolean withInfo) {
         if (this.isAttacking() || this.blocking > 0) {
-            if (game.getCombat().removeFromCombat(objectId, game) && withInfo && !game.isSimulation()) {
-                game.informPlayers(new StringBuilder(this.getLogName()).append(" removed from combat").toString());
-            }
+            return game.getCombat().removeFromCombat(objectId, game, withInfo);
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -1267,13 +1266,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     }
 
     @Override
-    public boolean isRenown() {
-        return this.renown;
+    public boolean isRenowned() {
+        return this.renowned;
     }
 
     @Override
-    public void setRenown(boolean value) {
-        this.renown = value;
+    public void setRenowned(boolean value) {
+        this.renowned = value;
     }
 
     @Override

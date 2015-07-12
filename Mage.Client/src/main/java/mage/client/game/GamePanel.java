@@ -943,9 +943,9 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void ask(String question, GameView gameView) {
+    public void ask(String question, GameView gameView, Map<String, Serializable> options) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null);
+        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options);
     }
 
     /**
@@ -1023,6 +1023,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         }
         Map<String, Serializable> panelOptions = new HashMap<>();
+        if (options != null) {
+            panelOptions.putAll(options);
+        }
         panelOptions.put("your_turn", true);
         String activePlayerText;
         if (gameView.getActivePlayerId().equals(playerId)) {
@@ -1039,10 +1042,10 @@ public final class GamePanel extends javax.swing.JPanel {
         this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions);
     }
 
-    public void playMana(String message, GameView gameView) {
+    public void playMana(String message, GameView gameView, Map<String, Serializable> options) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
+        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options);
     }
 
     public void playXMana(String message, GameView gameView) {

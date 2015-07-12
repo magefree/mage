@@ -1155,6 +1155,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void setManaPaymentMode(UUID playerId, boolean autoPayment) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
+            player.getUserData().setManaPoolAutomatic(autoPayment);
             player.getManaPool().setAutoPayment(autoPayment);
         }
     }
@@ -1163,6 +1164,7 @@ public abstract class GameImpl implements Game, Serializable {
     public synchronized void setManaPaymentModeRestricted(UUID playerId, boolean autoPaymentRestricted) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
+            player.getUserData().setManaPoolAutomaticRestricted(autoPaymentRestricted);
             player.getManaPool().setAutoPaymentRestricted(autoPaymentRestricted);
         }
     }
@@ -1866,11 +1868,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void firePlayManaEvent(UUID playerId, String message) {
+    public void firePlayManaEvent(UUID playerId, String message, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playMana(playerId, message);
+        playerQueryEventSource.playMana(playerId, message, options);
     }
 
     @Override
@@ -2122,7 +2124,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
                 // check if it's a creature and must be removed from combat
                 if (perm.getCardType().contains(CardType.CREATURE) && this.getCombat() != null) {
-                    this.getCombat().removeFromCombat(perm.getId(), this);
+                    perm.removeFromCombat(this, true);
                 }
                 it.remove();
             }

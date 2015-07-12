@@ -25,15 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -43,7 +40,6 @@ import mage.util.CardUtil;
 /**
  * @author LevelX2
  */
-
 public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
 
     private DynamicValue numberCards;
@@ -51,6 +47,7 @@ public class PutTopCardOfLibraryIntoGraveTargetEffect extends OneShotEffect {
     public PutTopCardOfLibraryIntoGraveTargetEffect(int numberCards) {
         this(new StaticValue(numberCards));
     }
+
     public PutTopCardOfLibraryIntoGraveTargetEffect(DynamicValue numberCards) {
         super(Outcome.Discard);
         this.numberCards = numberCards;

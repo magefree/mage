@@ -1,6 +1,5 @@
 package mage.abilities.decorator;
 
-import mage.MageObject;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
@@ -9,7 +8,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- * Adds condition to {@link mage.abilities.effects.ContinuousEffect}. Acts as decorator.
+ * Adds condition to {@link mage.abilities.effects.ContinuousEffect}. Acts as
+ * decorator.
  *
  * @author nantuko
  */
@@ -19,7 +19,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     protected Condition condition;
     protected String text;
 
-    public ConditionalTriggeredAbility(TriggeredAbility ability,  Condition condition, String text) {
+    public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
         this(ability, condition, text, false);
     }
 
@@ -38,7 +38,6 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         this.condition = triggered.condition;
         this.text = triggered.text;
     }
-
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
@@ -64,7 +63,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        if (text == null || text.isEmpty()) {            
+        if (text == null || text.isEmpty()) {
             return ability.getRule();
         }
         return text;
@@ -73,23 +72,6 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public Effects getEffects() {
         return ability.getEffects();
-    }
-
-    @Override
-    public MageObject getSourceObjectIfItStillExists(Game game) {
-        return ability.getSourceObjectIfItStillExists(game); 
-    }
-
-    @Override
-    public MageObject getSourceObject(Game game) {
-        return ability.getSourceObject(game);
-    }
-
-    
-    
-    @Override
-    public int getSourceObjectZoneChangeCounter() {
-        return ability.getSourceObjectZoneChangeCounter();
     }
 
 }

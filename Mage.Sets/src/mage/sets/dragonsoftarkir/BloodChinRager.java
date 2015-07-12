@@ -30,7 +30,8 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -45,7 +46,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class BloodChinRager extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Warrior","Warrior creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Warrior","Warrior creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -59,8 +60,8 @@ public class BloodChinRager extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Blood-Chin Rager attacks, each Warrior creature you control can't be blocked this turn except by two or more creatures.
-        this.addAbility(new AttacksTriggeredAbility(new CantBeBlockedByOneAllEffect(2, filter, Duration.EndOfTurn), false));
+        // Whenever Blood-Chin Rager attacks, Warrior creatures you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter), false));
     }
 
     public BloodChinRager(final BloodChinRager card) {

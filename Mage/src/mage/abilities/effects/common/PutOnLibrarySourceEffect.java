@@ -98,7 +98,7 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
         } else {
             // Put Champion of Stray Souls on top of your library from your graveyard
             sb.append("put {this} on ");
-            sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
+            sb.append(onTop ? "top" : "the bottom").append(" of its owner's library");
         }
         return sb.toString();
 

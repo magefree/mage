@@ -51,11 +51,10 @@ import mage.target.common.TargetCreaturePermanent;
 public class Lignify extends CardImpl {
 
     public Lignify(UUID ownerId) {
-            super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
+        super(ownerId, 228, "Lignify", Rarity.COMMON, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "LRW";
         this.subtype.add("Treefolk");
         this.subtype.add("Aura");
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -65,10 +64,10 @@ public class Lignify extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BecomesCreatureAttachedEffect(new LignifyTreefolkToken(),
-                "Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities",
-                Duration.WhileOnBattlefield, true)));
+                        "Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities",
+                        Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_AND_PT)));
 
     }
 

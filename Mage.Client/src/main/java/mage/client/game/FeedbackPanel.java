@@ -47,6 +47,7 @@ import mage.client.components.MageTextArea;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.Constants;
 import mage.constants.PlayerAction;
 //import mage.remote.Session;
 import org.apache.log4j.Logger;
@@ -141,14 +142,15 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 endWithTimeout();
                 break;
         }
-        this.btnSpecial.setVisible(special);
-        this.btnSpecial.setText("Special");
-        this.helper.setSpecial("Special", special);
-        // Handling Phyrexian mana
-        if (message.contains("P}")) {
+        if (options != null && options.containsKey(Constants.Option.SPECIAL_BUTTON)) {
+            String specialText = (String) options.get(Constants.Option.SPECIAL_BUTTON);
             this.btnSpecial.setVisible(true);
-            this.btnSpecial.setText("Pay 2 life");
-            this.helper.setSpecial("Pay 2 life", true);
+            this.btnSpecial.setText(specialText);
+            this.helper.setSpecial(specialText, true);
+        } else {
+            this.btnSpecial.setVisible(special);
+            this.btnSpecial.setText("Special");
+            this.helper.setSpecial("Special", special);
         }
 
         requestFocusIfPossible();
@@ -194,9 +196,12 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     // Issue 256: Chat+Feedback panel: request focus prevents players from chatting
+    // Issue #1054: XMage steals window focus whenever the screen updates
     private void requestFocusIfPossible() {
         boolean requestFocusAllowed = true;
-        if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
+        if (MageFrame.getInstance().getFocusOwner() == null) {
+            requestFocusAllowed = false;
+        } else if (connectedChatPanel != null && connectedChatPanel.getTxtMessageInputComponent() != null) {
             if (connectedChatPanel.getTxtMessageInputComponent().hasFocus()) {
                 requestFocusAllowed = false;
             }

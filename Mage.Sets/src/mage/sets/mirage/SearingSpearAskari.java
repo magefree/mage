@@ -28,18 +28,16 @@
 package mage.sets.mirage;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlankingAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -59,8 +57,9 @@ public class SearingSpearAskari extends CardImpl {
 
         // Flanking
         this.addAbility(new FlankingAbility());
-        // {1}{R}: Searing Spear Askari can't be blocked except by two or more creatures this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        
+        // {1}{R}: Searing Spear Askari gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
     public SearingSpearAskari(final SearingSpearAskari card) {

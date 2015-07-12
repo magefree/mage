@@ -7,7 +7,6 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.constants.Zone;
 
@@ -21,18 +20,18 @@ public class MenaceAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2));
     }
 
-    public MenaceAbility(MenaceAbility ability) {
+    public MenaceAbility(final MenaceAbility ability) {
         super(ability);
     }
 
     @Override
     public Ability copy() {
         return new MenaceAbility(this);
-    }    
+    }
 
     @Override
     public String getRule() {
         return "Menace <i>(This creature can't be blocked except by two or more creatures.)</i>";
-    }    
-    
+    }
+
 }

@@ -58,7 +58,6 @@ public class DreamHalls extends CardImpl {
         super(ownerId, 28, "Dream Halls", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
         this.expansionSetCode = "STH";
 
-
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));
     }
@@ -102,13 +101,13 @@ class DreamHallsEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
+            for (UUID playerId : controller.getInRange()) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
                     player.getAlternativeSourceCosts().add(alternativeCastingCostAbility);
                 }
             }
-            
+
             return true;
         }
         return false;

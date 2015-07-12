@@ -48,7 +48,7 @@ import mage.players.Player;
 /**
  *
  * @author LoneFox
-
+ *
  */
 public class LlanowarEmpath extends CardImpl {
 
@@ -96,16 +96,16 @@ class LlanowarEmpathEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         MageObject sourceObject = game.getObject(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if(controller == null || sourceObject == null) {
+        if (controller == null || sourceObject == null) {
             return false;
         }
         Cards cards = new CardsImpl();
         Card card = controller.getLibrary().getFromTop(game);
-        if(card != null) {
+        if (card != null) {
             cards.add(card);
             controller.revealCards(sourceObject.getName(), cards, game);
-            if(card.getCardType().contains(CardType.CREATURE)) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            if (card.getCardType().contains(CardType.CREATURE)) {
+                controller.moveCards(card, Zone.LIBRARY, Zone.HAND, source, game);
             }
         }
         return true;

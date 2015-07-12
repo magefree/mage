@@ -28,14 +28,12 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -51,8 +49,8 @@ public class VineKami extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Vine Kami can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
         this.addAbility(new SoulshiftAbility(6));
     }
 

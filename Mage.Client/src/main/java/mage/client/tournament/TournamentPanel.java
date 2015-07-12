@@ -113,8 +113,8 @@ public class TournamentPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 int modelRow = Integer.valueOf(e.getActionCommand());
 
-                String state = (String) tableMatches.getValueAt(modelRow, 2);
-                String actionText = (String) tableMatches.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN);
+                String state = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(2));
+                String actionText = (String) tableMatches.getValueAt(modelRow, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
                 UUID tableId = UUID.fromString((String) matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN + 1));
                 UUID gameId = UUID.fromString((String) matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN + 3));
 
@@ -130,7 +130,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         };
 
         // action button, don't delete this
-        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, TournamentMatchesTableModel.ACTION_COLUMN);
+        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, tableMatches.convertColumnIndexToView(TournamentMatchesTableModel.ACTION_COLUMN));
 
     }
 

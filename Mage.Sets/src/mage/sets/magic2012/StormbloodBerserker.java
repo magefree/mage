@@ -28,14 +28,12 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.keyword.BloodthirstAbility;
+import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.abilities.keyword.BloodthirstAbility;
-import mage.cards.CardImpl;
 
 /**
  * @author nantuko
@@ -52,8 +50,8 @@ public class StormbloodBerserker extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(new BloodthirstAbility(2));
-        // Stormblood Berserker can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
     }
 
     public StormbloodBerserker(final StormbloodBerserker card) {

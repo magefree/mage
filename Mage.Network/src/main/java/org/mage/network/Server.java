@@ -211,10 +211,10 @@ public class Server {
             ch.writeAndFlush(new GameInitCallback(gameId, gameView)).addListener(WriteListener.getInstance());
     }
     
-    public void gameAsk(String sessionId, UUID gameId, GameView gameView, String question) {
+    public void gameAsk(String sessionId, UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new GameAskCallback(gameId, gameView, question)).addListener(WriteListener.getInstance());
+            ch.writeAndFlush(new GameAskCallback(gameId, gameView, question, options)).addListener(WriteListener.getInstance());
     }
 
     public void gameTarget(String sessionId, UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
@@ -247,10 +247,10 @@ public class Server {
             ch.writeAndFlush(new GameChooseChoiceCallback(gameId, choice)).addListener(WriteListener.getInstance());
     }
 
-    public void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message) {
+    public void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
         Channel ch = findChannel(sessionId);
         if (ch != null)
-            ch.writeAndFlush(new GamePlayManaCallback(gameId, gameView, message)).addListener(WriteListener.getInstance());
+            ch.writeAndFlush(new GamePlayManaCallback(gameId, gameView, message, options)).addListener(WriteListener.getInstance());
     }
 
     public void gamePlayXMana(String sessionId, UUID gameId, GameView gameView, String message) {

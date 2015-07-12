@@ -872,9 +872,13 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean canChooseTarget(Game game) {
+        int found = 0;
         for (Mode mode : modes.values()) {
             if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
-                return true;
+                found++;
+                if (found >= getModes().getMinModes()) {
+                    return true;
+                }
             }
         }
         return false;

@@ -50,7 +50,7 @@ public class KytheonsIrregulars extends CardImpl {
         super(ownerId, 24, "Kytheon's Irregulars", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
         this.expansionSetCode = "ORI";
         this.subtype.add("Human");
-        this.subtype.add("Solder");
+        this.subtype.add("Soldier");
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 

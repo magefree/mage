@@ -44,7 +44,6 @@ import mage.constants.ManaType;
 import mage.game.Table;
 import mage.game.tournament.TournamentPlayer;
 import mage.players.net.UserData;
-import mage.players.net.UserGroup;
 import mage.remote.DisconnectReason;
 import mage.server.draft.DraftSession;
 import mage.server.game.GameManager;
@@ -213,8 +212,8 @@ public class User {
         ServerMain.getInstance().initGame(sessionId, gameId, gameView);
     }
 
-    public void gameAsk(UUID gameId, GameView gameView, String question) {
-        ServerMain.getInstance().gameAsk(sessionId, gameId, gameView, question);
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
+        ServerMain.getInstance().gameAsk(sessionId, gameId, gameView, question, options);
     }
 
     public void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
@@ -237,8 +236,8 @@ public class User {
         ServerMain.getInstance().gameChooseChoice(sessionId, gameId, choice);
     }
 
-    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
-        ServerMain.getInstance().gamePlayMana(sessionId, gameId, gameView, message);
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        ServerMain.getInstance().gamePlayMana(sessionId, gameId, gameView, message, options);
     }
 
     public void gamePlayXMana(UUID gameId, GameView gameView, String message) {
@@ -518,7 +517,7 @@ public class User {
 
     public UserData getUserData() {
         if (userData == null) {// default these to avaiod NPE -> will be updated from client short after
-            return new UserData(UserGroup.DEFAULT, 0, false, false, false, null, "world.png", false);
+            return UserData.getDefaultUserDataView();
         }
         return this.userData;
     }

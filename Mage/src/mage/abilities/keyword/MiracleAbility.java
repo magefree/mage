@@ -94,7 +94,7 @@ import mage.watchers.common.MiracleWatcher;
 public class MiracleAbility extends TriggeredAbilityImpl {
     private static final String staticRule = " <i>(You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)<i/>";
     private String ruleText;
-    
+
     @SuppressWarnings("unchecked")
     public MiracleAbility(Card card, ManaCosts miracleCosts) {
             super(Zone.HAND, new MiracleEffect((ManaCosts<ManaCost>)miracleCosts), true);
@@ -141,7 +141,7 @@ class MiracleEffect extends OneShotEffect {
 
     public MiracleEffect(ManaCosts<ManaCost> miracleCosts) {
         super(Outcome.Benefit);
-        this.staticText = "cast this card for it's miracle cost";
+        this.staticText = "cast this card for its miracle cost";
         this.miracleCosts = miracleCosts;
     }
 

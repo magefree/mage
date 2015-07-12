@@ -1,31 +1,30 @@
 /*
-* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without modification, are
-* permitted provided that the following conditions are met:
-*
-*    1. Redistributions of source code must retain the above copyright notice, this list of
-*       conditions and the following disclaimer.
-*
-*    2. Redistributions in binary form must reproduce the above copyright notice, this list
-*       of conditions and the following disclaimer in the documentation and/or other materials
-*       provided with the distribution.
-*
-* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
-* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-* The views and conclusions contained in the software and documentation are those of the
-* authors and should not be interpreted as representing official policies, either expressed
-* or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are
+ * permitted provided that the following conditions are met:
+ *
+ *    1. Redistributions of source code must retain the above copyright notice, this list of
+ *       conditions and the following disclaimer.
+ *
+ *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+ *       of conditions and the following disclaimer in the documentation and/or other materials
+ *       provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those of the
+ * authors and should not be interpreted as representing official policies, either expressed
+ * or implied, of BetaSteward_at_googlemail.com.
+ */
 package mage.abilities.effects.common;
 
 import java.util.UUID;
@@ -50,9 +49,10 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     private String targetName;
 
     /**
-     * Attention: This effect won't work with targets controlled by different controllers
-     * If this is needed, the validForTurnNum has to be saved per controller.
-     * 
+     * Attention: This effect won't work with targets controlled by different
+     * controllers If this is needed, the validForTurnNum has to be saved per
+     * controller.
+     *
      */
     public DontUntapInControllersNextUntapStepTargetEffect() {
         super(Duration.Custom, Outcome.Detriment, false, true);
@@ -94,13 +94,13 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == EventType.UNTAP_STEP || event.getType() == EventType.UNTAP;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // the check for turn number is needed if multiple effects are added to prevent untap in next untap step of controller
         // if we don't check for turn number, every untap step of a turn only one effect would be used instead of correctly only one time
         // to skip the untap effect.
-        
+
         // Discard effect if it's related to a previous turn
         if (validForTurnNum > 0 && validForTurnNum < game.getTurnNum()) {
             discard();
@@ -109,7 +109,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         // remember the turn of the untap step the effect has to be applied
         if (GameEvent.EventType.UNTAP_STEP.equals(event.getType())) {
             UUID controllerId = null;
-            for(UUID targetId : getTargetPointer().getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent != null) {
                     controllerId = permanent.getControllerId();
@@ -128,7 +128,7 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
                 validForTurnNum = game.getTurnNum();
             }
         }
-        
+
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
             if (targetPointer.getTargets(game, source).contains(event.getTargetId())) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
@@ -147,9 +147,8 @@ public class DontUntapInControllersNextUntapStepTargetEffect extends ContinuousR
         }
         if (targetName != null && targetName.length() > 0) {
             return targetName + " doesn't untap during its controller's next untap step";
-        }
-        else {
-            return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+        } else {
+            return "Target " + (mode == null ? "creature" : mode.getTargets().get(0).getTargetName()) + " doesn't untap during its controller's next untap step";
         }
     }
 

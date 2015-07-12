@@ -381,7 +381,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gameAsk(UUID gameId, GameView gameView, String question) {
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -406,7 +406,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -30,7 +30,8 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class PyreheartWolf extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -60,8 +61,8 @@ public class PyreheartWolf extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Pyreheart Wolf attacks, each creature you control can't be blocked this turn except by two or more creatures.
-        this.addAbility(new AttacksTriggeredAbility(new CantBeBlockedByOneAllEffect(2, filter, Duration.EndOfTurn), false));
+        // Whenever Pyreheart Wolf attacks, creatures you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter), false));
 
         // Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         this.addAbility(new UndyingAbility());

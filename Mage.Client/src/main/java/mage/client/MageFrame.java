@@ -1543,10 +1543,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gameAsk(UUID gameId, GameView gameView, String question) {
+    public void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
         GamePanel panel = MageFrame.getGame(gameId);
         if (panel != null) {
-            panel.ask(question, gameView);
+            panel.ask(question, gameView, options);
         }
     }
 
@@ -1583,11 +1583,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     @Override
-    public void gamePlayMana(UUID gameId, GameView gameView, String message) {
+    public void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
         GamePanel panel = MageFrame.getGame(gameId);
         if (panel != null) {
-            panel.playMana(message, gameView);
-        }       
+            panel.playMana(message, gameView, options);
+        }
     }
 
     @Override

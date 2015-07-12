@@ -33,7 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapAllTargetPlayerControlsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -44,7 +46,6 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -63,8 +64,9 @@ public class TorrentElemental extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Torrent Elemental attacks, tap all creatures defending player controls.
-        this.addAbility(new AttacksTriggeredAbility(new TorrentElementalEffect(), false, null, SetTargetPointer.PLAYER));
-
+        Effect effect = new TapAllTargetPlayerControlsEffect(new FilterCreaturePermanent());
+        effect.setText("tap all creatures defending player controls.");
+        this.addAbility(new AttacksTriggeredAbility(effect, false, null, SetTargetPointer.PLAYER));
         // {3}{B/G}{B/G}: Put Torrent Elemental from exile onto the battlefield tapped. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.EXILED, new ReturnSourceFromExileToBattlefieldEffect(true), new ManaCostsImpl("{3}{B/G}{B/G}"));
         this.addAbility(ability);
@@ -78,31 +80,6 @@ public class TorrentElemental extends CardImpl {
     @Override
     public TorrentElemental copy() {
         return new TorrentElemental(this);
-    }
-}
-
-class TorrentElementalEffect extends OneShotEffect {
-
-    public TorrentElementalEffect() {
-        super(Outcome.Tap);
-        this.staticText = "tap all creatures defending player controls";
-    }
-
-    public TorrentElementalEffect(final TorrentElementalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public TorrentElementalEffect copy() {
-        return new TorrentElementalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), getTargetPointer().getFirst(game, source), game)) {
-            permanent.tap(game);
-        }
-        return true;
     }
 }
 

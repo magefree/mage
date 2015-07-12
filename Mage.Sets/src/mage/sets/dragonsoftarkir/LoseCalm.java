@@ -30,10 +30,10 @@ package mage.sets.dragonsoftarkir;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -50,15 +50,15 @@ public class LoseCalm extends CardImpl {
         super(ownerId, 147, "Lose Calm", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{R}");
         this.expansionSetCode = "DTK";
 
-        // Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn and can't be blocked this turn except by two or more creatures.
+        // Gain control of target creature until end of turn. Untap that creature. It gains haste and menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         Effect effect = new UntapTargetEffect();
         effect.setText("Untap that creature");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "It gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        effect = new CantBeBlockedByOneTargetEffect(2, Duration.EndOfTurn);
-        effect.setText("and can't be blocked this turn except by two or more creatures");
+        effect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.EndOfTurn);
+        effect.setText("and menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.) ");
         this.getSpellAbility().addEffect(effect);
     }
 

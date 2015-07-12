@@ -28,14 +28,14 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -66,7 +66,7 @@ public class UrzasArmor extends CardImpl {
 class UrzasArmorEffect extends PreventionEffectImpl {
 
     public UrzasArmorEffect() {
-        super(Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield, 1, false, false);
         this.staticText = "If a source would deal damage to you, prevent 1 of that damage";
     }
 
@@ -75,28 +75,14 @@ class UrzasArmorEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1, false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            if (damage > 0) {
-                event.setAmount(damage - 1);
-                game.informPlayers("1 damage has been prevented.");
-            }
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getSourceId(), source.getControllerId(), 1));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER);
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DAMAGE_PLAYER) && event.getTargetId().equals(source.getControllerId())) {
-			return super.applies(event, source, game);
+        if (event.getTargetId().equals(source.getControllerId())) {
+            return super.applies(event, source, game);
         }
         return false;
     }

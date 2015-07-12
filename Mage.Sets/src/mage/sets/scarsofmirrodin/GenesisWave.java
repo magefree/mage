@@ -1,16 +1,16 @@
 /*
  *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
- * 
+ *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
- * 
+ *
  *     1. Redistributions of source code must retain the above copyright notice, this list of
  *        conditions and the following disclaimer.
- * 
+ *
  *     2. Redistributions in binary form must reproduce the above copyright notice, this list
  *        of conditions and the following disclaimer in the documentation and/or other materials
  *        provided with the distribution.
- * 
+ *
  *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
  *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
@@ -20,7 +20,7 @@
  *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  The views and conclusions contained in the software and documentation are those of the
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
@@ -29,16 +29,16 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.MageObject;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -58,7 +58,6 @@ public class GenesisWave extends CardImpl {
         super(ownerId, 122, "Genesis Wave", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{G}{G}{G}");
         this.expansionSetCode = "SOM";
 
-        
         // Reveal the top X cards of your library. You may put any number of permanent cards with converted mana
         // cost X or less from among them onto the battlefield. Then put all cards revealed this way that weren't
         // put onto the battlefield into your graveyard.
@@ -102,21 +101,21 @@ class GenesisWaveEffect extends OneShotEffect {
             cards.add(card);
         }
         if (cards.size() > 0) {
-            controller.revealCards(sourceObject.getName(), cards, game);
+            controller.revealCards(sourceObject.getIdName(), cards, game);
             FilterCard filter = new FilterCard("cards with converted mana cost " + xValue + " or less to put onto the battlefield");
             filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, xValue + 1));
             filter.add(
                     Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
-                                     new CardTypePredicate(CardType.CREATURE),
-                                     new CardTypePredicate(CardType.ENCHANTMENT),
-                                     new CardTypePredicate(CardType.LAND),
-                                     new CardTypePredicate(CardType.PLANESWALKER)
+                            new CardTypePredicate(CardType.CREATURE),
+                            new CardTypePredicate(CardType.ENCHANTMENT),
+                            new CardTypePredicate(CardType.LAND),
+                            new CardTypePredicate(CardType.PLANESWALKER)
                     ));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
             target1.setRequired(false);
 
             controller.choose(Outcome.PutCardInPlay, cards, target1, game);
-            for (UUID cardId: target1.getTargets()) {
+            for (UUID cardId : target1.getTargets()) {
                 Card card = cards.get(cardId, game);
                 if (card != null) {
                     cards.remove(card);

@@ -67,7 +67,7 @@ public class HixusPrisonWarden extends CardImpl {
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
-        
+
         // Whenever a creature deals combat damage to you, if Hixus, Prison Warden entered the battlefield this turn, exile that creature until Hixus leaves the battlefield.
         this.addAbility(new HixusPrisonWardenTriggeredAbility(new HixusPrisonWardenExileEffect()));
     }
@@ -87,7 +87,7 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
     public HixusPrisonWardenTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-     }
+    }
 
     public HixusPrisonWardenTriggeredAbility(final HixusPrisonWardenTriggeredAbility ability) {
         super(ability);
@@ -101,22 +101,22 @@ class HixusPrisonWardenTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkInterveningIfClause(Game game) {
         MageObject mageObject = getSourceObject(game);
-        return (mageObject instanceof Permanent) && ((Permanent)mageObject).getTurnsOnBattlefield() ==1;
+        return (mageObject instanceof Permanent) && ((Permanent) mageObject).getTurnsOnBattlefield() == 0;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
+        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
         Permanent sourcePermanent = game.getPermanent(event.getSourceId());
-        if (damageEvent.getPlayerId().equals(getControllerId()) && 
-                damageEvent.isCombatDamage() && 
-                sourcePermanent != null && 
-                sourcePermanent.getCardType().contains(CardType.CREATURE)) {
+        if (damageEvent.getPlayerId().equals(getControllerId())
+                && damageEvent.isCombatDamage()
+                && sourcePermanent != null
+                && sourcePermanent.getCardType().contains(CardType.CREATURE)) {
             getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
             return true;
         }
@@ -152,7 +152,9 @@ class HixusPrisonWardenExileEffect extends OneShotEffect {
         // If Prison Warden leaves the battlefield before its triggered ability resolves,
         // the target creature won't be exiled.
         if (permanent != null) {
-            return new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName()).apply(game, source);
+            Effect effect = new ExileTargetEffect(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), permanent.getIdName());
+            effect.setTargetPointer(getTargetPointer());
+            return effect.apply(game, source);
         }
         return false;
     }

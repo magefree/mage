@@ -33,9 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.BestowAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
@@ -58,12 +58,14 @@ public class PurphorossEmissary extends CardImpl {
 
         // Bestow {6}{R}  (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)
         this.addAbility(new BestowAbility(this, "{6}{R}"));
-        // Purphoros's Emissary can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
-        // Enchanted creature gets +3/+3 and can't be blocked except by two or more creatures.
+        
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
+        
+        // Enchanted creature gets +3/+3 and and has menace.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3));
-        Effect effect = new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), AttachmentType.AURA);
-        effect.setText("and can't be blocked except by two or more creatures");
+        Effect effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA);
+        effect.setText("and has menace");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

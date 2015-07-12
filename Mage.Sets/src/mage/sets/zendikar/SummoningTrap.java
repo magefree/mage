@@ -43,7 +43,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,7 +53,7 @@ import mage.target.TargetCard;
 import mage.watchers.Watcher;
 
 /**
- * 
+ *
  * @author Rafbill
  */
 public class SummoningTrap extends CardImpl {
@@ -64,7 +63,6 @@ public class SummoningTrap extends CardImpl {
                 new CardType[]{CardType.INSTANT}, "{4}{G}{G}");
         this.expansionSetCode = "ZEN";
         this.subtype.add("Trap");
-
 
         // If a creature spell you cast this turn was countered by a spell or
         // ability an opponent controlled, you may pay {0} rather than pay
@@ -117,7 +115,7 @@ class SummoningTrapWatcher extends Watcher {
             if (counterObject == null) {
                 counterObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
             }
-            if (stackObject != null && counterObject != null 
+            if (stackObject != null && counterObject != null
                     && stackObject.getCardType().contains(CardType.CREATURE)
                     && game.getOpponents(controllerId).contains(counterObject.getControllerId())) {
                 condition = true;
@@ -145,10 +143,7 @@ class SummoningTrapAlternativeCost extends AlternativeCostImpl<Cost> {
     @Override
     public boolean isAvailable(Game game, Ability source) {
         Watcher watcher = game.getState().getWatchers().get("CreatureSpellCountered", source.getControllerId());
-        if (watcher != null && watcher.conditionMet()) {
-            return true;
-        }
-        return false;
+        return watcher != null && watcher.conditionMet();
     }
 
     @Override
@@ -170,50 +165,28 @@ class SummoningTrapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(player.getLibrary().size(), 7);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-
+        Cards cards = new CardsImpl(Zone.LIBRARY);
+        cards.addAll(controller.getLibrary().getTopCards(game, 7));
         if (!cards.isEmpty()) {
-            TargetCard target = new TargetCard(Zone.PICK,
+            TargetCard target = new TargetCard(Zone.LIBRARY,
                     new FilterCreatureCard(
-                    "creature card to put on the battlefield"));
-            if (player.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
+                            "creature card to put on the battlefield"));
+            if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.putOntoBattlefield(game, Zone.PICK,
-                            source.getSourceId(), source.getControllerId());
+                    controller.putOntoBattlefieldWithInfo(card, game, Zone.LIBRARY, source.getSourceId());
                 }
             }
             if (cards.size() > 0) {
-                TargetCard target2 = new TargetCard(Zone.PICK,
-                        new FilterCard(
-                        "card to put on the bottom of your library"));
-                while (player.isInGame() && cards.size() > 1) {
-                    player.choose(Outcome.Benefit, cards, target2,
-                            game);
-                    Card card = cards.get(target2.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        player.getLibrary().putOnBottom(card, game);
-                    }
-                    target2.clearChosen();
-                }
-                Card card = cards.get(cards.iterator().next(), game);
-                cards.remove(card);
-                player.getLibrary().putOnBottom(card, game);
+                controller.putCardsOnBottomOfLibrary(cards, game, source, true);
             }
         }
-
-        return false;
+        return true;
     }
 
     @Override

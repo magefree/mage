@@ -73,7 +73,7 @@ public class BrainMaggot extends CardImpl {
         // When Brain Maggot enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BrainMaggotExileEffect());
         ability.addTarget(new TargetOpponent());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new BrainMaggotReturnExiledCreatureAbility()));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new BrainMaggotReturnExiledCardAbility()));
         this.addAbility(ability);    
     }
 
@@ -135,21 +135,21 @@ class BrainMaggotExileEffect extends OneShotEffect {
  * @author LevelX2
  */
 
-class BrainMaggotReturnExiledCreatureAbility extends DelayedTriggeredAbility {
+class BrainMaggotReturnExiledCardAbility extends DelayedTriggeredAbility {
 
-    public BrainMaggotReturnExiledCreatureAbility() {
-        super(new BrainMaggotReturnExiledCreatureEffect(), Duration.OneUse);
+    public BrainMaggotReturnExiledCardAbility() {
+        super(new BrainMaggotReturnExiledCardEffect(), Duration.OneUse);
         this.usesStack = false;
         this.setRuleVisible(false);
     }
 
-    public BrainMaggotReturnExiledCreatureAbility(final BrainMaggotReturnExiledCreatureAbility ability) {
+    public BrainMaggotReturnExiledCardAbility(final BrainMaggotReturnExiledCardAbility ability) {
         super(ability);
     }
 
     @Override
-    public BrainMaggotReturnExiledCreatureAbility copy() {
-        return new BrainMaggotReturnExiledCreatureAbility(this);
+    public BrainMaggotReturnExiledCardAbility copy() {
+        return new BrainMaggotReturnExiledCardAbility(this);
     }
 
     @Override
@@ -169,20 +169,20 @@ class BrainMaggotReturnExiledCreatureAbility extends DelayedTriggeredAbility {
     }
 }
 
-class BrainMaggotReturnExiledCreatureEffect extends OneShotEffect {
+class BrainMaggotReturnExiledCardEffect extends OneShotEffect {
 
-    public BrainMaggotReturnExiledCreatureEffect() {
+    public BrainMaggotReturnExiledCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return exiled nonland card to its owner's hand";
     }
 
-    public BrainMaggotReturnExiledCreatureEffect(final BrainMaggotReturnExiledCreatureEffect effect) {
+    public BrainMaggotReturnExiledCardEffect(final BrainMaggotReturnExiledCardEffect effect) {
         super(effect);
     }
 
     @Override
-    public BrainMaggotReturnExiledCreatureEffect copy() {
-        return new BrainMaggotReturnExiledCreatureEffect(this);
+    public BrainMaggotReturnExiledCardEffect copy() {
+        return new BrainMaggotReturnExiledCardEffect(this);
     }
 
     @Override

@@ -57,8 +57,7 @@ public class VoyagingSatyr extends CardImpl {
 
         // {T}: Untap target land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        Target target = new TargetLandPermanent();
-        ability.addTarget(target);
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 

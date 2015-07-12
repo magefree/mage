@@ -154,7 +154,9 @@ public class Session {
         if (user == null) {
             user = UserManager.getInstance().findUser("Admin");
         }
-        user.setUserData(new UserData(UserGroup.ADMIN, 0, false, false, false, null, "world.png", false));
+        UserData adminUserData = UserData.getDefaultUserDataView();
+        adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
+        user.setUserData(adminUserData);
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
             logger.info("Error connecting Admin!");
         }
@@ -167,9 +169,10 @@ public class Session {
             UserData userData = user.getUserData();
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 userData = new UserData(UserGroup.PLAYER, userDataView.getAvatarId(),
-                    userDataView.isShowAbilityPickerForced(), userDataView.allowRequestShowHandCards(),
+                    userDataView.isShowAbilityPickerForced(), userDataView.isAllowRequestShowHandCards(),
                     userDataView.confirmEmptyManaPool(), userDataView.getUserSkipPrioritySteps(),
-                    userDataView.getFlagName(), userDataView.askMoveToGraveOrder());
+                    userDataView.getFlagName(), userDataView.askMoveToGraveOrder(), 
+                    userDataView.isManaPoolAutomatic(), userDataView.isAllowRequestShowHandCards());
                 user.setUserData(userData);
             } else {
                 if (userData.getAvatarId() == 51) { // Update special avatar if first avatar is selected
@@ -177,7 +180,7 @@ public class Session {
                 }
                 userData.setAvatarId(userDataView.getAvatarId());                
                 userData.setShowAbilityPickerForced(userDataView.isShowAbilityPickerForced());
-                userData.setAllowRequestShowHandCards(userDataView.allowRequestShowHandCards());
+                userData.setAllowRequestShowHandCards(userDataView.isAllowRequestShowHandCards());
                 userData.setUserSkipPrioritySteps(userDataView.getUserSkipPrioritySteps());
                 userData.setConfirmEmptyManaPool(userDataView.confirmEmptyManaPool());
                 userData.setAskMoveToGraveOrder(userDataView.askMoveToGraveOrder());
@@ -211,6 +214,9 @@ public class Session {
                 break;
             default:
                 userData.setAvatarId(51);
+                break;
+            case "Wehk":
+                userData.setAvatarId(66);
                 break;
         }
     }

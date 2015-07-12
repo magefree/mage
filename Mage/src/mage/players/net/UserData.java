@@ -17,10 +17,12 @@ public class UserData implements Serializable {
     protected UserSkipPrioritySteps userSkipPrioritySteps;
     protected String flagName;
     protected boolean askMoveToGraveOrder;
+    protected boolean manaPoolAutomatic;
+    protected boolean manaPoolAutomaticRestricted;
 
     public UserData(UserGroup userGroup, int avatarId, boolean showAbilityPickerForced,
             boolean allowRequestShowHandCards, boolean confirmEmptyManaPool, UserSkipPrioritySteps userSkipPrioritySteps,
-            String flagName, boolean askMoveToGraveOrder) {
+            String flagName, boolean askMoveToGraveOrder, boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted) {
         this.groupId = userGroup.getGroupId();
         this.avatarId = avatarId;
         this.showAbilityPickerForced = showAbilityPickerForced;
@@ -29,6 +31,8 @@ public class UserData implements Serializable {
         this.confirmEmptyManaPool = confirmEmptyManaPool;
         this.flagName = flagName;
         this.askMoveToGraveOrder = askMoveToGraveOrder;
+        this.manaPoolAutomatic = manaPoolAutomatic;
+        this.manaPoolAutomaticRestricted = manaPoolAutomaticRestricted;
     }
 
     public void update(UserData userData) {
@@ -40,10 +44,12 @@ public class UserData implements Serializable {
         this.confirmEmptyManaPool = userData.confirmEmptyManaPool;
         this.flagName = userData.flagName;
         this.askMoveToGraveOrder = userData.askMoveToGraveOrder;
+        this.manaPoolAutomatic = userData.manaPoolAutomatic;
+        this.manaPoolAutomaticRestricted = userData.manaPoolAutomaticRestricted;
     }
 
     public static UserData getDefaultUserDataView() {
-        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false);
+        return new UserData(UserGroup.DEFAULT, 0, false, false, true, null, "world.png", false, true, true);
     }
 
     public void setGroupId(int groupId) {
@@ -98,12 +104,32 @@ public class UserData implements Serializable {
         return flagName;
     }
 
+    public void setFlagName(String flagName) {
+        this.flagName = flagName;
+    }
+
     public boolean askMoveToGraveOrder() {
         return askMoveToGraveOrder;
     }
 
     public void setAskMoveToGraveOrder(boolean askMoveToGraveOrder) {
         this.askMoveToGraveOrder = askMoveToGraveOrder;
+    }
+
+    public boolean isManaPoolAutomatic() {
+        return manaPoolAutomatic;
+    }
+
+    public void setManaPoolAutomatic(boolean manaPoolAutomatic) {
+        this.manaPoolAutomatic = manaPoolAutomatic;
+    }
+
+    public boolean isManaPoolAutomaticRestricted() {
+        return manaPoolAutomaticRestricted;
+    }
+
+    public void setManaPoolAutomaticRestricted(boolean manaPoolAutomaticRestricted) {
+        this.manaPoolAutomaticRestricted = manaPoolAutomaticRestricted;
     }
 
 }

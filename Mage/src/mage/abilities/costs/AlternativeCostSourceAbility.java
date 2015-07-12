@@ -207,7 +207,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
 
     @Override
     public String getCastMessageSuffix(Game game) {
-        return alternateCosts.isEmpty() ? " without paying it's mana costs" : " using alternative casting costs";
+        return alternateCosts.isEmpty() ? " without paying its mana costs" : " using alternative casting costs";
     }
 
     @Override

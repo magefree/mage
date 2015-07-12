@@ -1119,8 +1119,8 @@ public class ServerMain implements MageServer {
         server.initGame(sessionId, gameId, gameView);
     }
 
-    public void gameAsk(String sessionId, UUID gameId, GameView gameView, String question) {
-        server.gameAsk(sessionId, gameId, gameView, question);
+    public void gameAsk(String sessionId, UUID gameId, GameView gameView, String question, Map<String, Serializable> options) {
+        server.gameAsk(sessionId, gameId, gameView, question, options);
     }
 
     public void gameTarget(String sessionId, UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
@@ -1143,8 +1143,8 @@ public class ServerMain implements MageServer {
         server.gameChooseChoice(sessionId, gameId, choice);
     }
 
-    public void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message) {
-        server.gamePlayMana(sessionId, gameId, gameView, message);
+    public void gamePlayMana(String sessionId, UUID gameId, GameView gameView, String message, Map<String, Serializable> options) {
+        server.gamePlayMana(sessionId, gameId, gameView, message, options);
     }
 
     public void gamePlayXMana(String sessionId, UUID gameId, GameView gameView, String message) {

@@ -42,4 +42,6 @@ public interface PayCostToAttackBlockEffect extends ReplacementEffect {
     ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game);
 
     Cost getOtherCostToPay(GameEvent event, Ability source, Game game);
+
+    boolean isCostless(GameEvent event, Ability source, Game game);
 }

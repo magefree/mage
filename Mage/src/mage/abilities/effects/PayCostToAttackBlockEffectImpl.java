@@ -46,13 +46,26 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
 
     public static enum RestrictType {
 
-        ATTACK, ATTACK_AND_BLOCK, BLOCK
+        ATTACK("attack"),
+        ATTACK_AND_BLOCK("attack or block"),
+        BLOCK("block");
+
+        private final String text;
+
+        RestrictType(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
     }
 
-    private final Cost cost;
-    private final ManaCosts manaCosts;
+    protected final Cost cost;
+    protected final ManaCosts manaCosts;
 
-    private final RestrictType restrictType;
+    protected final RestrictType restrictType;
 
     public PayCostToAttackBlockEffectImpl(Duration duration, Outcome outcome, RestrictType restrictType) {
         super(duration, outcome, false);
@@ -163,6 +176,15 @@ public abstract class PayCostToAttackBlockEffectImpl extends ReplacementEffectIm
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
         return manaCosts;
+    }
+
+    @Override
+    public boolean isCostless(GameEvent event, Ability source, Game game) {
+        ManaCosts currentManaCosts = getManaCostToPay(event, source, game);
+        if (currentManaCosts != null && currentManaCosts.convertedManaCost() > 0) {
+            return false;
+        }
+        return getOtherCostToPay(event, source, game) == null;
     }
 
 }

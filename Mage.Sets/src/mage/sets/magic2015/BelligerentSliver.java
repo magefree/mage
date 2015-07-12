@@ -29,11 +29,10 @@ package mage.sets.magic2015;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -66,10 +65,9 @@ public class BelligerentSliver extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Sliver creatures you control have "This creature can't be blocked except by two or more creatures."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter);
-        effect.setText("Sliver creatures you control have \"This creature can't be blocked except by two or more creatures.\"");
+        // Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)"
+        Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter);
+        effect.setText("Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

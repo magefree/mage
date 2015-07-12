@@ -28,19 +28,19 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -62,8 +62,8 @@ public class TwoHeadedDragon extends CardImpl {
         // {1}{R}: Two-Headed Dragon gets +2/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn),new ManaCostsImpl("{1}{R}")));
 
-        // Two-Headed Dragon can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)));
+        // Menace (This creature can't be blocked except by two or more creatures.)
+        this.addAbility(new MenaceAbility());
 
         // Two-Headed Dragon can block an additional creature.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));

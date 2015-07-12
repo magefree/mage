@@ -28,16 +28,16 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,8 +53,8 @@ public class GruulNodorog extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        //{R}: Gruul Nodorog can't be blocked this turn except by two or more creatures.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        //{R}: Gruul Nodorog gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
     public GruulNodorog(final GruulNodorog card) {
@@ -65,32 +65,4 @@ public class GruulNodorog extends CardImpl {
     public GruulNodorog copy() {
         return new GruulNodorog(this);
     }
-}
-
-class GruulNodorogEffect extends OneShotEffect {
-    public GruulNodorogEffect() {
-        super(Outcome.Damage);
-        staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
-    }
-
-    public GruulNodorogEffect(final GruulNodorogEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(1, game);
-        }
-        if (loseLife > 0)
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
-        return true;
-    }
-
-    @Override
-    public GruulNodorogEffect copy() {
-        return new GruulNodorogEffect(this);
-    }
-
 }

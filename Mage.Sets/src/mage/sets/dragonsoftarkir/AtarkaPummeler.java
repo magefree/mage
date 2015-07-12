@@ -33,7 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
@@ -50,7 +51,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class AtarkaPummeler extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -64,10 +65,10 @@ public class AtarkaPummeler extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
-        // <i>Formidable</i> - {3}{R}{R}: Each creature you control can't be blocked this turn except by two or more creatures. Activate this ability only if creature you control have total power 8 or greater,
+        // <i>Formidable</i> - {3}{R}{R}: Creatures you control gain menace until end of turn. Activate this ability only if creature you control have total power 8 or greater.  (They can't be blocked except by two or more creatures.)
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
-                new CantBeBlockedByOneAllEffect(2, filter, Duration.EndOfTurn),
+                new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter),
                 new ManaCostsImpl("{3}{R}{R}"),
                 FormidableCondition.getInstance());
         ability.setAbilityWord(AbilityWord.FORMIDABLE);

@@ -73,6 +73,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
+import mage.game.events.GameEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
@@ -682,7 +683,11 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean playManaHandling(ManaCost unpaid, String promptText, Game game) {
         updateGameStatePriority("playMana", game);
-        game.firePlayManaEvent(playerId, "Pay " + promptText);
+        Map<String, Serializable> options = new HashMap<>();
+        if (unpaid.getText().contains("P}")) {
+            options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "Pay 2 life");
+        }
+        game.firePlayManaEvent(playerId, "Pay " + promptText, options);
         waitForResponse(game);
         if (!this.isInGame()) {
             return false;
@@ -785,10 +790,29 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
             options.put(Constants.Option.POSSIBLE_ATTACKERS, (Serializable) possibleAttackers);
+            if (possibleAttackers.size() > 0) {
+                options.put(Constants.Option.SPECIAL_BUTTON, (Serializable) "All attack");
+            }
 
             game.fireSelectEvent(playerId, "Select attackers", options);
             waitForResponse(game);
-            if (response.getBoolean() != null) {
+            if (response.getString() != null && response.getString().equals("special")) { // All attack
+                setStoredBookmark(game.bookmarkState());
+                UUID attackedDefender = null;
+                if (game.getCombat().getDefenders().size() > 1) {
+                    attackedDefender = selectDefenderForAllAttack(game.getCombat().getDefenders(), game);
+                } else if (game.getCombat().getDefenders().size() == 1) {
+                    attackedDefender = game.getCombat().getDefenders().iterator().next();
+                }
+                for (Permanent attacker : game.getBattlefield().getAllActivePermanents(filterCreatureForCombat, getId(), game)) {
+                    if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
+                            GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER,
+                                    attackedDefender, attacker.getId(), attacker.getControllerId()), game)) {
+                        continue;
+                    }
+                    declareAttacker(attacker.getId(), attackedDefender, game, false);
+                }
+            } else if (response.getBoolean() != null) {
                 // check if enough attackers are declared
                 if (!game.getCombat().getCreaturesForcedToAttack().isEmpty()) {
                     if (!game.getCombat().getAttackers().containsAll(game.getCombat().getCreaturesForcedToAttack().keySet())) {
@@ -891,6 +915,15 @@ public class HumanPlayer extends PlayerImpl {
         return false;
     }
 
+    protected UUID selectDefenderForAllAttack(Set<UUID> defenders, Game game) {
+        TargetDefender target = new TargetDefender(defenders, null);
+        target.setNotTarget(true); // player or planswalker hexproof does not prevent attacking a player
+        if (chooseTarget(Outcome.Damage, target, null, game)) {
+            return response.getUUID();
+        }
+        return null;
+    }
+
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
         updateGameStatePriority("selectBlockers", game);
@@ -964,7 +997,7 @@ public class HumanPlayer extends PlayerImpl {
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
-        game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), false, getOptions(target, null));
+        game.fireSelectTargetEvent(playerId, addSecondLineWithObjectName("Select attacker to block", blockerId, game), target.possibleTargets(null, playerId, game), false, getOptions(target, null));
         waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing

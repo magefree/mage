@@ -28,15 +28,14 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -65,17 +64,17 @@ public class CaterwaulingBoggart extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Each Goblin you control can't be blocked except by two or more creatures.
+        // Each Goblin you control has menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
+                new MenaceAbility(),
                 Duration.WhileOnBattlefield, filterGoblin,
-                "Each Goblin you control can't be blocked except by two or more creatures")));
+                "Each Goblin you control has menace. (They can't be blocked except by two or more creatures.)")));
 
-        // Each Elemental you control can't be blocked except by two or more creatures.
+        // Each Elemental you control has menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
-                Duration.WhileOnBattlefield, filterGoblin,
-                "Each Elemental you control can't be blocked except by two or more creatures")));
+                new MenaceAbility(),
+                Duration.WhileOnBattlefield, filterElemental,
+                "Each Elemental you control has menace. (They can't be blocked except by two or more creatures.)")));
     }
 
     public CaterwaulingBoggart(final CaterwaulingBoggart card) {

@@ -33,8 +33,8 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -47,7 +47,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -56,8 +55,9 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author emerald000
  */
 public class FormOfTheDragon extends CardImpl {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
@@ -66,17 +66,16 @@ public class FormOfTheDragon extends CardImpl {
         super(ownerId, 93, "Form of the Dragon", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}{R}");
         this.expansionSetCode = "SCG";
 
-
         // At the beginning of your upkeep, Form of the Dragon deals 5 damage to target creature or player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        
+
         // At the beginning of each end step, your life total becomes 5.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new FormOfTheDragonEffect(), TargetController.ANY, false));
-        
+
         // Creatures without flying can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FormOfTheDragonRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public FormOfTheDragon(final FormOfTheDragon card) {
@@ -90,21 +89,21 @@ public class FormOfTheDragon extends CardImpl {
 }
 
 class FormOfTheDragonEffect extends OneShotEffect {
-    
+
     FormOfTheDragonEffect() {
         super(Outcome.Neutral);
         this.staticText = "your life total becomes 5";
     }
-    
+
     FormOfTheDragonEffect(final FormOfTheDragonEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public FormOfTheDragonEffect copy() {
         return new FormOfTheDragonEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
@@ -113,32 +112,5 @@ class FormOfTheDragonEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class FormOfTheDragonRestrictionEffect extends RestrictionEffect {
-
-    FormOfTheDragonRestrictionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Creatures without flying can't attack you";
-    }
-
-    FormOfTheDragonRestrictionEffect(final FormOfTheDragonRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getCardType().contains(CardType.CREATURE) && !permanent.getAbilities().contains(FlyingAbility.getInstance());
-    }
-
-    @Override
-    public boolean canAttack(UUID defenderId, Ability source, Game game) {
-        return !defenderId.equals(source.getControllerId());
-    }
-
-    @Override
-    public FormOfTheDragonRestrictionEffect copy() {
-        return new FormOfTheDragonRestrictionEffect(this);
     }
 }

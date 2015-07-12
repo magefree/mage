@@ -534,9 +534,10 @@ public class GameState implements Serializable, Copyable<GameState> {
             player.reset();
         }
         battlefield.reset(game);
-        combat.reset();
+        combat.reset(game);
         this.reset();
         effects.apply(game);
+        combat.checkForRemoveFromCombat(game);
     }
 
     // Remove End of Combat effects
@@ -755,6 +756,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Ability ability : commandObject.getAbilities()) {
             addAbility(ability, commandObject);
         }
+    }
+
+    /**
+     * Removes all waiting triggers (needed for turn end effects)
+     */
+    public void clearTriggeredAbilities() {
+        this.triggered.clear();
     }
 
     public void addTriggeredAbility(TriggeredAbility ability) {

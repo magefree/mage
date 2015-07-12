@@ -76,7 +76,10 @@ public class HelperPanel extends JPanel {
         setOpaque(false);
 
         JPanel container = new JPanel();
+
         container.setPreferredSize(new Dimension(100, 30));
+        container.setMinimumSize(new Dimension(20, 20));
+        container.setMaximumSize(new Dimension(2000, 100));
         container.setLayout(new GridBagLayout());
         container.setOpaque(false);
 
@@ -197,6 +200,7 @@ public class HelperPanel extends JPanel {
             }
         });
 
+        // sets a darker background and higher simiss time fpr tooltip in the feedback / helper panel
         textArea.addMouseListener(new MouseAdapter() {
 
             @Override

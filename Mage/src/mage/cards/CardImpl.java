@@ -292,7 +292,9 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (spellAbility == null) {
             for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
                 // name check prevents that alternate casting methods (like "cast [card name] using bestow") are returned here
-                if (ability instanceof SpellAbility && ability.toString().endsWith(getName())) {
+                // BUG #1024: Bestow bug
+                //if (ability instanceof SpellAbility && ability.toString().endsWith(getName())) {
+                if (ability instanceof SpellAbility) {
                     spellAbility = (SpellAbility) ability;
                 }
             }

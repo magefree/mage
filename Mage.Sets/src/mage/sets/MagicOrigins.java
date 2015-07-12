@@ -51,11 +51,11 @@ public class MagicOrigins extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        /* There are 15 additional cards, numbered 270–284, that don't appear in Magic 
-           2015 booster packs. These are reprints from earlier sets that are present in
-           some supplemental products, including sample decks and the Deck Builder's Toolkit.
-           These additional cards have a Magic 2015 expansion symbol and are legal in all
-           formats in which Magic 2015 is legal. */
+        /* There are additional cards, numbered 273–288, that don't appear in Magic
+         Origin booster packs. These are reprints from earlier sets that are present in
+         some supplemental products, including sample decks and the Deck Builder's Toolkit.
+         These additional cards have a Magic Origin expansion symbol and are legal in all
+         formats in which Magic Origins is legal. */
         this.maxCardNumberInBooster = 272;
     }
 }

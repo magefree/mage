@@ -45,12 +45,12 @@ public interface MageClient {
     void gameOver(UUID gameId, String message);
     void gameError(UUID gameId, String message);
 
-    void gameAsk(UUID gameId, GameView gameView, String question);
+    void gameAsk(UUID gameId, GameView gameView, String question, Map<String, Serializable> options);
     void gameTarget(UUID gameId, GameView gameView, String question, CardsView cardView, Set<UUID> targets, boolean required, Map<String, Serializable> options);
     void gameChooseAbility(UUID gameId, AbilityPickerView abilities);
     void gameChoosePile(UUID gameId, String message, CardsView pile1, CardsView pile2);
     void gameChooseChoice(UUID gameId, Choice choice);
-    void gamePlayMana(UUID gameId, GameView gameView, String message);
+    void gamePlayMana(UUID gameId, GameView gameView, String message, Map<String, Serializable> options);
     void gamePlayXMana(UUID gameId, GameView gameView, String message);
     void gameSelectAmount(UUID gameId, String message, int min, int max);
     void gameSelect(UUID gameId, GameView gameView, String message, Map<String, Serializable> options);

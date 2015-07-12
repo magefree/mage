@@ -29,15 +29,15 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.keyword.MenaceAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -61,11 +61,11 @@ public class TwoHeadedSliver extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // All Sliver creatures have "This creature can't be blocked except by two or more creatures."
+        // All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
+                new MenaceAbility(),
                 Duration.WhileOnBattlefield, filter,
-                "All Sliver creatures have \"This creature can't be blocked except by two or more creatures.\"")));
+                "All Sliver creatures have menace. (They can't be blocked except by two or more creatures.)")));
     }
 
     public TwoHeadedSliver(final TwoHeadedSliver card) {

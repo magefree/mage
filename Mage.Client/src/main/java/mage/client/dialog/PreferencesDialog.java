@@ -63,6 +63,7 @@ import mage.client.MageFrame;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
+import mage.players.net.UserGroup;
 import mage.players.net.UserSkipPrioritySteps;
 import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
@@ -209,6 +210,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // pref setting for deck generator
     public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
     public static final String KEY_NEW_DECK_GENERATOR_SET = "newDeckGeneratorSet";
+    public static final String KEY_NEW_DECK_GENERATOR_SINGLETON = "newDeckGeneratorSingleton";
+    public static final String KEY_NEW_DECK_GENERATOR_ARTIFACTS = "newDeckGeneratorArtifacts";
+    public static final String KEY_NEW_DECK_GENERATOR_NON_BASIC_LANDS = "newDeckGeneratorNonBasicLands";
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
@@ -2421,14 +2425,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public static UserDataView getUserData(){
-        return new UserDataView(
-            getSelectedAvatar(),
+        return new UserDataView(UserGroup.PLAYER,
+            PreferencesDialog.selectedAvatarId,
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true").equals("true"),
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ALLOW_REQUEST_SHOW_HAND_CARDS, "true").equals("true"),
             PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_CONFIRM_EMPTY_MANA_POOL, "true").equals("true"),
             getUserSkipPrioritySteps(),
             MageFrame.getPreferences().get(KEY_CONNECT_FLAG, "world"),                
-            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true")
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_ASK_MOVE_TO_GRAVE_ORDER, "true").equals("true"),
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT, "true").equals("true"),
+            PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, "true").equals("true")
         );
     }
 
