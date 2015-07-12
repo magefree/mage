@@ -160,6 +160,19 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
         sources.clear();
     }
 
+    public void removeAbilitiesOfNonExistingSources(Game game) {
+        // e.g. Token that had triggered abilities
+        List<String> keysToRemove = new ArrayList<>();
+        for (Entry<String, TriggeredAbility> entry : this.entrySet()) {
+            if (game.getObject(entry.getValue().getSourceId()) == null) {
+                keysToRemove.add(entry.getKey());
+            }
+        }
+        for (String key : keysToRemove) {
+            remove(key);
+        }
+    }
+
     public TriggeredAbilities copy() {
         return new TriggeredAbilities(this);
     }

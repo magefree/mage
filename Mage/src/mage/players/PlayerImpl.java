@@ -116,7 +116,6 @@ import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
-import mage.game.permanent.PermanentToken;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
@@ -812,9 +811,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (pairedCard != null) {
                 pairedCard.clearPairedCard();
             }
-        }
-        if (permanent instanceof PermanentToken) {
-            game.getState().getTriggers().removeAbilitiesOfSource(permanent.getId());
         }
         return true;
     }
