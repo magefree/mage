@@ -56,7 +56,7 @@ public class PriestOfTheBloodRite extends CardImpl {
 
         // When Priest of the Blood Rite enters the battlefield, put a 5/5 black Demon creature token with flying onto the battlefield.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DemonToken())));
-        
+
         // At the beginning of your upkeep, you lose 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
     }
@@ -77,6 +77,7 @@ class DemonToken extends Token {
         super("Demon", "5/5 black Demon creature token with flying");
         cardType.add(CardType.CREATURE);
         subtype.add("Demon");
+        setOriginalExpansionSetCode("ORI");
 
         color.setBlack(true);
         power = new MageInt(5);
