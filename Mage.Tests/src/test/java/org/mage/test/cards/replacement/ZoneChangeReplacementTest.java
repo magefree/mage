@@ -25,24 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package org.mage.test.cards.replacement;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
  * Checks if change zone replacement effects work as intended
- * 
+ *
  * @author LevelX2
  */
-
 public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
-    // If Darksteel Colossus would be put into a graveyard from anywhere, 
-    // reveal Darksteel Colossus and shuffle it into its owner's library instead.        
+    // If Darksteel Colossus would be put into a graveyard from anywhere,
+    // reveal Darksteel Colossus and shuffle it into its owner's library instead.
     @Test
     public void testFromLibraryZoneChange() {
         addCard(Zone.LIBRARY, playerA, "Darksteel Colossus");
@@ -51,7 +50,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Tome Scour");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         skipInitShuffling();
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tome Scour", playerA);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -59,9 +58,9 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Darksteel Colossus", 0);
         assertGraveyardCount(playerA, 5); // 4 + Tome Scour
-        
+
     }
-    
+
     @Test
     public void testFromHandZoneChange() {
         addCard(Zone.HAND, playerA, "Progenitus");
@@ -69,8 +68,8 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
         addCard(Zone.HAND, playerA, "Distress");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Distress", playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distress", playerA);
         setChoice(playerA, "Progenitus");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -78,7 +77,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, 1); // Distress
-        
+
         assertHandCount(playerA, "Progenitus", 0);
     }
 
@@ -88,13 +87,13 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         // Diabolic Edict - Instant - {1}{B}
         // Target player sacrifices a creature.
         addCard(Zone.HAND, playerA, "Diabolic Edict");
-        // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from 
+        // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from
         // Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
         addCard(Zone.GRAVEYARD, playerA, "Bridge from Below");
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Diabolic Edict", playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
         setChoice(playerA, "Silvercoat Lion");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -103,7 +102,7 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertGraveyardCount(playerA, 3); // Diabolic Edict + Bridge from Below + Silvercoat Lion
         assertPermanentCount(playerA, "Zombie", 1); // Silvercoat Lion goes to graveyard so a Zombie tokes is created
-        
+
     }
 
     @Test
@@ -112,13 +111,13 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         // Diabolic Edict - Instant - {1}{B}
         // Target player sacrifices a creature.
         addCard(Zone.HAND, playerA, "Diabolic Edict");
-        // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from 
+        // Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from
         // Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
         addCard(Zone.GRAVEYARD, playerA, "Bridge from Below");
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Diabolic Edict", playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
         setChoice(playerA, "Progenitus");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -127,13 +126,11 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, 2); // Diabolic Edict + Bridge from Below
         assertPermanentCount(playerA, "Zombie", 0); // Progenitus never touches graveyard - so no Zombie tokes is created
-        
+
     }
-    
+
     // Have Progenitus and Humility on the battlefield. Destroy Progenitus. Progenitus should go to the graveyard
     // since it doesn't have any replacement effect. Currently, it gets shuffled into the library.
-
-
     @Test
     public void testHumilityDeactivatesReplacementEffectAbilities() {
         // Protection from everything
@@ -147,8 +144,8 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Diabolic Edict");
 
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
-                
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA,  "Diabolic Edict", playerA);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerA);
         setChoice(playerA, "Progenitus");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -157,10 +154,9 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Progenitus", 0);
         assertGraveyardCount(playerA, "Progenitus", 1);
         assertGraveyardCount(playerA, 2); // Diabolic Edict + Progenitus
-        
-        
+
     }
-    
+
     @Test
     public void testHumilityAndKumano() {
         // Enchantment  {2}{W}{W}
@@ -178,9 +174,9 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
-        
+
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Aggressive Urge", "Kumano's Pupils");
-        
+
         attack(2, playerB, "Silvercoat Lion");
         block(2, playerA, "Kumano's Pupils", "Silvercoat Lion");
 
@@ -194,16 +190,14 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Kumano's Pupils", 1);
         assertPowerToughness(playerA, "Kumano's Pupils", 2, 2);
         assertPermanentCount(playerB, "Silvercoat Lion", 0);
-        
+
         assertExileCount("Silvercoat Lion", 0);
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
-        
-    }  
 
+    }
 
     // A creature gets damage from Kumano's Pupils and is destroyed after.
     // The creature has to go to exile.
-
     @Test
     public void testCreatureGetsExiledByKumano() {
         // 3/3
@@ -237,12 +231,9 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
     }
 
-
-
     // A creature gets damage from Kumano's Pupils and returns to hand after.
     // Then it's cast again. This new permanent instance is destroyed. It may not
     // got to exile because only previous instance was damgaged by Kumano's Pupils.
-
     @Test
     public void testPermanentNewInstanceAndKumano() {
         // 3/3
@@ -262,10 +253,9 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 4);
 
-
         attack(2, playerB, "Pillarfield Ox");
         block(2, playerA, "Kumano's Pupils", "Pillarfield Ox");
-        
+
         castSpell(2, PhaseStep.COMBAT_DAMAGE, playerA, "Unsummon", "Pillarfield Ox");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Pillarfield Ox");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terminate", "Pillarfield Ox");
@@ -286,11 +276,11 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Pillarfield Ox", 1);
 
     }
-  /**
-   * Test that a countered spell of a card that goes always to library back
-   * instead of into the graveyard.
-   */
 
+    /**
+     * Test that a countered spell of a card that goes always to library back
+     * instead of into the graveyard.
+     */
     @Test
     public void testCounterAndMoveToLibrary() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
@@ -298,12 +288,12 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         // {W}{U}{B}{R}{G}: Exile target permanent.
         // If Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
         addCard(Zone.HAND, playerA, "Legacy Weapon");
-        
+
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         // Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.
         addCard(Zone.HAND, playerB, "Mana Drain");
         addCard(Zone.HAND, playerB, "Legacy Weapon");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Legacy Weapon");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Drain", "Legacy Weapon");
 
@@ -317,34 +307,33 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Legacy Weapon", 0);
         assertPermanentCount(playerA, "Legacy Weapon", 0);
         assertGraveyardCount(playerA, "Legacy Weapon", 0);
-        
-        assertGraveyardCount(playerB, "Mana Drain", 1);
-        
-        assertPermanentCount(playerB, "Legacy Weapon", 1);
-        
-    }
-    
- /**
-   * Test that a returned creature of Whip of Erebos
-   * got exiled if it is destroyed by a spell
-   */
 
+        assertGraveyardCount(playerB, "Mana Drain", 1);
+
+        assertPermanentCount(playerB, "Legacy Weapon", 1);
+
+    }
+
+    /**
+     * Test that a returned creature of Whip of Erebos got exiled if it is
+     * destroyed by a spell
+     */
     @Test
     public void testWhipOfErebos() {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
         // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        addCard(Zone.HAND, playerA, "Terror");        
-        
-        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. 
+        addCard(Zone.HAND, playerA, "Terror");
+
+        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield.
         // It gains haste. Exile it at the beginning of the next end step.
         // If it would leave the battlefield, exile it instead of putting it anywhere else.
         // Activate this ability only any time you could cast a sorcery.
         addCard(Zone.BATTLEFIELD, playerB, "Whip of Erebos");
         addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
         addCard(Zone.GRAVEYARD, playerB, "Silvercoat Lion");
-        
+
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}: Return target creature", "Silvercoat Lion");
-        
+
         castSpell(2, PhaseStep.BEGIN_COMBAT, playerA, "Terror", "Silvercoat Lion");
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
@@ -354,10 +343,43 @@ public class ZoneChangeReplacementTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Terror", 1);
         assertExileCount("Silvercoat Lion", 1);
-        
+
     }
 
-    
-    
-}
+    /**
+     * Jace, Vryn’s Prodigy – Jace, Telepath Unbound
+     *
+     * You can't whip him back with Whip of Erebos , flip him and then keep him.
+     * I think he is considered a new object after being exiled by his own
+     * trigger, so whip shouldn't affect him anymore.
+     */
+    @Test
+    public void testWhipOfErebosTransformPlaneswalker() {
+        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield.
+        // It gains haste. Exile it at the beginning of the next end step.
+        // If it would leave the battlefield, exile it instead of putting it anywhere else.
+        // Activate this ability only any time you could cast a sorcery.
+        addCard(Zone.BATTLEFIELD, playerB, "Whip of Erebos");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 4);
+        addCard(Zone.GRAVEYARD, playerB, "Swamp", 5);
+        addCard(Zone.GRAVEYARD, playerB, "Jace, Vryn's Prodigy");
 
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{2}{B}{B},{T}: Return target creature", "Jace, Vryn's Prodigy");
+
+        // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
+        activateAbility(2, PhaseStep.BEGIN_COMBAT, playerB, "{T}: Draw a card, then discard a card. If there are five or more cards in your graveyard");
+
+        activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "+1: Up to one target creature gets -2/-0 until your next turn");
+        setStopAt(3, PhaseStep.UNTAP);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerB, "Jace, Vryn's Prodigy", 0);
+        assertPermanentCount(playerB, "Jace, Telepath Unbound", 1);
+        assertCounterCount("Jace, Telepath Unbound", CounterType.LOYALTY, 6);
+
+    }
+
+}

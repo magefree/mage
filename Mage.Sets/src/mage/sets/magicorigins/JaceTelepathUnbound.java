@@ -78,7 +78,9 @@ public class JaceTelepathUnbound extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Up to one target creature gets -2/-0 until your next turn.
-        Ability ability = new LoyaltyAbility(new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn), 1);
+        Effect effect = new BoostTargetEffect(-2, 0, Duration.UntilYourNextTurn);
+        effect.setText("Up to one target creature gets -2/-0 until your next turn");
+        Ability ability = new LoyaltyAbility(effect, 1);
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);
 
@@ -205,7 +207,6 @@ class JaceTelepathUnboundReplacementEffect extends ReplacementEffectImpl {
 class JaceTelepathUnboundEmblem extends Emblem {
 
     //  You get an emblem with "Whenever you cast a spell, target opponent puts the top five cards of his or her library into his or her graveyard".
-
     public JaceTelepathUnboundEmblem() {
         this.setName("Emblem - Jace");
         Effect effect = new PutTopCardOfLibraryIntoGraveTargetEffect(5);
