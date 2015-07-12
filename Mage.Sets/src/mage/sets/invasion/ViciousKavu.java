@@ -25,47 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Jgod
+ * @author LoneFox
+
  */
-public class ThundersongTrumpeter extends CardImpl {
+public class ViciousKavu extends CardImpl {
 
-    public ThundersongTrumpeter(UUID ownerId) {
-        super(ownerId, 235, "Thundersong Trumpeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+    public ViciousKavu(UUID ownerId) {
+        super(ownerId, 284, "Vicious Kavu", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Kavu");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // {T}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Whenever Vicious Kavu attacks, it gets +2/+0 until end of turn.
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    public ViciousKavu(final ViciousKavu card) {
         super(card);
     }
 
     @Override
-    public ThundersongTrumpeter copy() {
-        return new ThundersongTrumpeter(this);
+    public ViciousKavu copy() {
+        return new ViciousKavu(this);
     }
 }

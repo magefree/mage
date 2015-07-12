@@ -25,47 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.invasion;
+
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
 
 /**
  *
- * @author Jgod
- */
-public class ThundersongTrumpeter extends CardImpl {
+ * @author LoneFox
 
-    public ThundersongTrumpeter(UUID ownerId) {
-        super(ownerId, 235, "Thundersong Trumpeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(2);
+ */
+public class PouncingKavu extends CardImpl {
+
+    public PouncingKavu(UUID ownerId) {
+        super(ownerId, 158, "Pouncing Kavu", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Kavu");
+        this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // {T}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        // Kicker {2}{R}
+        this.addAbility(new KickerAbility("{2}{R}"));
+        // First strike
+        this.addAbility(FirstStrikeAbility.getInstance());
+        // If Pouncing Kavu was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+            KickedCondition.getInstance(), true, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.", "");
+        ability.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    public PouncingKavu(final PouncingKavu card) {
         super(card);
     }
 
     @Override
-    public ThundersongTrumpeter copy() {
-        return new ThundersongTrumpeter(this);
+    public PouncingKavu copy() {
+        return new PouncingKavu(this);
     }
 }

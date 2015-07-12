@@ -25,47 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.effects.common.CounterTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetActivatedAbility;
 
 /**
  *
- * @author Jgod
+ * @author LoneFox
+
  */
-public class ThundersongTrumpeter extends CardImpl {
+public class Bind extends CardImpl {
 
-    public ThundersongTrumpeter(UUID ownerId) {
-        super(ownerId, 235, "Thundersong Trumpeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+    public Bind(UUID ownerId) {
+        super(ownerId, 182, "Bind", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "INV";
 
-        // {T}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Counter target activated ability.
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
+        this.getSpellAbility().addTarget(new TargetActivatedAbility());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    public Bind(final Bind card) {
         super(card);
     }
 
     @Override
-    public ThundersongTrumpeter copy() {
-        return new ThundersongTrumpeter(this);
+    public Bind copy() {
+        return new Bind(this);
     }
 }

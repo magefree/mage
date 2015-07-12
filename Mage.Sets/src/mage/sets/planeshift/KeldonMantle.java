@@ -25,47 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.RegenerateAttachedEffect;
+import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Jgod
+ * @author LoneFox
  */
-public class ThundersongTrumpeter extends CardImpl {
+public class KeldonMantle extends CardImpl {
 
-    public ThundersongTrumpeter(UUID ownerId) {
-        super(ownerId, 235, "Thundersong Trumpeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+    public KeldonMantle(UUID ownerId) {
+        super(ownerId, 65, "Keldon Mantle", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+        this.expansionSetCode = "PLS";
+        this.subtype.add("Aura");
 
-        // {T}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        // {B}: Regenerate enchanted creature.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{B}")));
+        // {R}: Enchanted creature gets +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn),
+            new ManaCostsImpl("{R}")));
+        // {G}: Enchanted creature gains trample until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(),
+            AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    public KeldonMantle(final KeldonMantle card) {
         super(card);
     }
 
     @Override
-    public ThundersongTrumpeter copy() {
-        return new ThundersongTrumpeter(this);
+    public KeldonMantle copy() {
+        return new KeldonMantle(this);
     }
 }

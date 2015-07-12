@@ -25,47 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnica;
+package mage.sets.invasion;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.combat.CantAttackBlockTargetEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.effects.common.combat.CantAttackUnlessDefenderControllsPermanent;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.target.common.TargetCreaturePermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
- * @author Jgod
+ * @author LoneFox
+
  */
-public class ThundersongTrumpeter extends CardImpl {
+public class VodalianSerpent extends CardImpl {
 
-    public ThundersongTrumpeter(UUID ownerId) {
-        super(ownerId, 235, "Thundersong Trumpeter", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}{W}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Human");
-        this.subtype.add("Soldier");
+    public VodalianSerpent(UUID ownerId) {
+        super(ownerId, 86, "Vodalian Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "INV";
+        this.subtype.add("Serpent");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
+        this.toughness = new MageInt(2);
 
-        // {T}: Target creature can't attack or block this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        // Kicker {2}
+        this.addAbility(new KickerAbility("{2}"));
+        // Vodalian Serpent can't attack unless defending player controls an Island.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent("Island", "an Island"))));
+        // If Vodalian Serpent was kicked, it enters the battlefield with four +1/+1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)),
+            KickedCondition.getInstance(), true, "If {this} was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    public VodalianSerpent(final VodalianSerpent card) {
         super(card);
     }
 
     @Override
-    public ThundersongTrumpeter copy() {
-        return new ThundersongTrumpeter(this);
+    public VodalianSerpent copy() {
+        return new VodalianSerpent(this);
     }
 }
