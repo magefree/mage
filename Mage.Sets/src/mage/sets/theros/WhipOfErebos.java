@@ -73,7 +73,7 @@ public class WhipOfErebos extends CardImpl {
 
         // Creatures you control have lifelink.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent("Creatures"))));
-        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield. 
+        // {2}{B}{B}, {T}: Return target creature card from your graveyard to the battlefield.
         // It gains haste. Exile it at the beginning of the next end step.
         // If it would leave the battlefield, exile it instead of putting it anywhere else.
         // Activate this ability only any time you could cast a sorcery.
@@ -122,12 +122,12 @@ class WhipOfErebosEffect extends OneShotEffect {
                 game.addEffect(effect, source);
                 // Exile at begin of next end step
                 ExileTargetEffect exileEffect = new ExileTargetEffect(null, null, Zone.BATTLEFIELD);
-                exileEffect.setTargetPointer(new FixedTarget(card.getId()));
+                exileEffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                game.addDelayedTriggeredAbility(delayedAbility);                
+                game.addDelayedTriggeredAbility(delayedAbility);
             }
             return true;
         }
@@ -160,12 +160,12 @@ class WhipOfErebosReplacementEffect extends ReplacementEffectImpl {
         }
         return true;
     }
-    
-    @Override    
+
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getFirstTarget())
