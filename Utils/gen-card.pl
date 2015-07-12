@@ -35,6 +35,7 @@ my $author;
 if (-e $authorFile) {
     open (DATA, $authorFile);
     $author = <DATA>;
+    chomp $author;
     close(DATA);
 } else {
     $author = 'anonymous';
@@ -136,7 +137,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
 
         if (!$baseRarity) {
             $baseRarity = $cards{$cardName}{$setName}[3];
-            
+
             $vars{'manaCost'} = fixCost($cards{$cardName}{$setName}[4]);
             $vars{'power'} = $cards{$cardName}{$setName}[6];
             $vars{'toughness'} = $cards{$cardName}{$setName}[7];
@@ -156,7 +157,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                 }
             }
             $vars{'type'} = join(', ', @types);
-           
+
             $vars{'abilitiesImports'} = '';
             $vars{'abilities'} = '';
 
@@ -198,7 +199,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                                     $vars{'abilitiesImports'} .= "\nimport mage.abilities.costs.mana.ManaCostsImpl;";
                                 }
 
-                                
+
                                 $vars{'abilitiesImports'} .= "\nimport mage.abilities.keyword." . $kw . "Ability;";
                             } else {
                                 $vars{'abilities'} .= "\n        // $kwUnchanged";
@@ -209,7 +210,7 @@ foreach my $setName (keys %{$cards{$cardName}}) {
                         }
                     }
                 }
-                
+
                 if (!$notKeyWord) {
                     $vars{'abilities'} .= "\n        // $ability";
                     if ($simpleOnly eq 'true') {
