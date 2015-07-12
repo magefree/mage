@@ -72,6 +72,7 @@ public class JaceTelepathUnbound extends CardImpl {
         this.expansionSetCode = "ORI";
         this.subtype.add("Jace");
 
+        this.color.setBlue(true);
         this.nightCard = true;
         this.canTransform = true;
 
