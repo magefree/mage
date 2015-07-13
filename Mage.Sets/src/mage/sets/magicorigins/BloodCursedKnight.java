@@ -29,6 +29,7 @@ package mage.sets.magicorigins;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -47,9 +48,9 @@ import mage.filter.common.FilterControlledEnchantmentPermanent;
  * @author fireshoes
  */
 public class BloodCursedKnight extends CardImpl {
-    
-    final static private String rule1 = "{this} gets +1/+1 as long as you control an enchantment";
-    final static private String rule2 = "{this} has lifelink as long as you control an enchantment";
+
+    final static private String rule1 = "As long as you control an enchantment, {this} gets +1/+1";
+    final static private String rule2 = "and has lifelink";
 
     public BloodCursedKnight(UUID ownerId) {
         super(ownerId, 211, "Blood-Cursed Knight", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{B}");
@@ -60,10 +61,14 @@ public class BloodCursedKnight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control an enchantment, Blood-Cursed Knight gets +1/+1 and has lifelink.
-        ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinuousEffect(
+                        new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
+                        new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule1));
+        ability.addEffect(new ConditionalContinuousEffect(
+                new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
+                new PermanentsOnTheBattlefieldCondition(new FilterControlledEnchantmentPermanent()), rule2));
+        this.addAbility(ability);
     }
 
     public BloodCursedKnight(final BloodCursedKnight card) {
