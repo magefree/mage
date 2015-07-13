@@ -40,17 +40,17 @@ import mage.game.permanent.Permanent;
  */
 public class CantBlockAttachedEffect extends RestrictionEffect {
 
-    public CantBlockAttachedEffect(AttachmentType attachmentType) {        
+    public CantBlockAttachedEffect(AttachmentType attachmentType) {
         this(attachmentType, Duration.WhileOnBattlefield);
     }
-    
-    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {        
+
+    public CantBlockAttachedEffect(AttachmentType attachmentType, Duration duration) {
         super(duration);
         StringBuilder sb = new StringBuilder();
         if (attachmentType.equals(AttachmentType.AURA)) {
             sb.append("Enchanted creature can't block");
         } else {
-            sb.append("Equiped creature can't block");
+            sb.append("Equipped creature can't block");
         }
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());

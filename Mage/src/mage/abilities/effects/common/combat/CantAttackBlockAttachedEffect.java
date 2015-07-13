@@ -45,7 +45,7 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can't attack or block";
         } else {
-            this.staticText = "Equiped creature can't attack or block";
+            this.staticText = "Equipped creature can't attack or block";
         }
     }
 
@@ -67,7 +67,7 @@ public class CantAttackBlockAttachedEffect extends RestrictionEffect {
     public boolean canAttack(Game game) {
         return false;
     }
-    
+
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
