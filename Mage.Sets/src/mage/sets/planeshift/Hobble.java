@@ -33,7 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.combat.CantAttackAttachedEffect;
@@ -70,8 +71,10 @@ public class Hobble extends CardImpl {
         // Enchanted creature can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
         // Enchanted creature can't block if it's black.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CantBlockAttachedEffect(AttachmentType.AURA),
-            new EnchantedCreatureColorCondition(ObjectColor.BLACK), "Enchanted creature can't block if it's black")));
+        Effect effect = new ConditionalRestrictionEffect(new CantBlockAttachedEffect(AttachmentType.AURA),
+            new EnchantedCreatureColorCondition(ObjectColor.BLACK));
+        effect.setText("Enchanted creature can't block if it's black.");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public Hobble(final Hobble card) {
