@@ -67,7 +67,7 @@ public class NotOfThisWorld extends CardImpl {
 
         // Counter target spell or ability that targets a permanent you control.
         this.getSpellAbility().addTarget(
-                new TargetSpellTargetingControlledPermanent());
+                new TargetStackObjectTargetingControlledPermanent());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         // Not of This World costs {7} less to cast if it targets a spell or ability that targets a creature you control with power 7 or greater.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new SpellCostReductionSourceEffect(7, NotOfThisWorldCondition.getInstance())));
@@ -83,17 +83,17 @@ public class NotOfThisWorld extends CardImpl {
     }
 }
 
-class TargetSpellTargetingControlledPermanent extends TargetObject {
+class TargetStackObjectTargetingControlledPermanent extends TargetObject {
 
     
-    public TargetSpellTargetingControlledPermanent() {
+    public TargetStackObjectTargetingControlledPermanent() {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
         this.zone = Zone.STACK;
         this.targetName = "spell or ability that targets a permanent you control";
     }
 
-    public TargetSpellTargetingControlledPermanent(final TargetSpellTargetingControlledPermanent target) {
+    public TargetStackObjectTargetingControlledPermanent(final TargetStackObjectTargetingControlledPermanent target) {
         super(target);
     }
 
@@ -164,8 +164,8 @@ class TargetSpellTargetingControlledPermanent extends TargetObject {
     }
 
     @Override
-    public TargetSpellTargetingControlledPermanent copy() {
-        return new TargetSpellTargetingControlledPermanent(this);
+    public TargetStackObjectTargetingControlledPermanent copy() {
+        return new TargetStackObjectTargetingControlledPermanent(this);
     }
 
 }

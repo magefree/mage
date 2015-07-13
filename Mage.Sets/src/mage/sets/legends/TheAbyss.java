@@ -29,11 +29,9 @@ package mage.sets.legends;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,7 +43,6 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -73,15 +70,15 @@ public class TheAbyss extends CardImpl {
 }
 
 class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
-    
+
     TheAbyssTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
-    
+
     TheAbyssTriggeredAbility(final TheAbyssTriggeredAbility ability) {
         super(ability);
     }
-    
+
     @Override
     public TheAbyssTriggeredAbility copy() {
         return new TheAbyssTriggeredAbility(this);
@@ -91,7 +88,7 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
@@ -100,18 +97,13 @@ class TheAbyssTriggeredAbility extends TriggeredAbilityImpl {
             filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
             filter.add(new ControllerIdPredicate(player.getId()));
             Target target = new TargetCreaturePermanent(filter);
-            if (target.canChoose(this.getSourceId(), this.getControllerId(), game) && player.chooseTarget(Outcome.DestroyPermanent, target, this, game)) {
-                for (Effect effect: this.getEffects()) {
-                    if (effect instanceof DestroyTargetEffect) {
-                        effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                    }
-                }
-                return true;
-            }
+            this.getTargets().clear();
+            this.getTargets().add(target);
+            return true;
         }
         return false;
     }
-    
+
     @Override
     public String getRule() {
         return "At the beginning of each player's upkeep, destroy target nonartifact creature that player controls of his or her choice. It can't be regenerated.";
