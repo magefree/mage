@@ -2922,6 +2922,16 @@ public abstract class PlayerImpl implements Player, Serializable {
                     result |= putOntoBattlefieldWithInfo(card, game, fromZone, source == null ? null : source.getSourceId());
                 }
                 return result;
+            case LIBRARY:
+                result = false;
+                boolean withName = true;
+                if (fromZone.equals(Zone.HAND) || fromZone.equals(Zone.LIBRARY)) {
+                    withName = false;
+                }
+                for (Card card : cards) {
+                    result |= moveCardToLibraryWithInfo(card, source == null ? null : source.getSourceId(), game, fromZone, true, withName);
+                }
+                return result;
             default:
                 throw new UnsupportedOperationException("to Zone not supported yet");
         }

@@ -99,9 +99,9 @@ class TheGreatAuroraEffect extends OneShotEffect {
             List<Permanent> list = permanentsOwned.get(permanent.getOwnerId());
             if (list == null) {
                 list = new ArrayList<>();
+                permanentsOwned.put(permanent.getOwnerId(), list);
             }
             list.add(permanent);
-            permanentsOwned.put(permanent.getOwnerId(), list);
         }
 
         // shuffle permanents and hand cards into owner's library
@@ -115,13 +115,13 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 List<Permanent> list = permanentsOwned.remove(player.getId());
                 permanentsCount.put(playerId, handCards + (list != null ? list.size() : 0));
                 for (Permanent permanent : list) {
-                    permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
+                    player.moveCardToLibraryWithInfo(permanent, source.getSourceId(), game, Zone.BATTLEFIELD, true, true);
                 }
                 player.getLibrary().shuffle();
             }
         }
 
-        // Draw cards 
+        // Draw cards
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
@@ -141,7 +141,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), true);
+                        player.putOntoBattlefieldWithInfo(card, game, Zone.HAND, source.getSourceId(), false);
                     }
                 }
 
