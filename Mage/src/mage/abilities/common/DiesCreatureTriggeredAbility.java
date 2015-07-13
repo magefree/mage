@@ -26,7 +26,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         this(effect, optional, new FilterCreaturePermanent("another creature"));
         filter.add(new AnotherPredicate());
     }
-    
+
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, boolean another, boolean setTargetPointer) {
         this(effect, optional, new FilterCreaturePermanent("another creature"));
         filter.add(new AnotherPredicate());
@@ -38,12 +38,16 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, filter, setTargetPointer);
+    }
+
+    public DiesCreatureTriggeredAbility(Zone zone, Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
+        super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
     }
 
-    public DiesCreatureTriggeredAbility(DiesCreatureTriggeredAbility ability) {
+    public DiesCreatureTriggeredAbility(final DiesCreatureTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointer = ability.setTargetPointer;

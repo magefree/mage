@@ -14,8 +14,8 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class EmblemsTest extends CardTestPlayerBase {
 
     /**
-     *  Venser The Sojourner:
-     *    -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
+     * Venser The Sojourner: -8: You get an emblem with "Whenever you cast a
+     * spell, exile target permanent."
      */
     @Test
     public void testVenserTheSojournerEmblem() {
@@ -40,8 +40,8 @@ public class EmblemsTest extends CardTestPlayerBase {
     }
 
     /**
-     *  Sorin, Lord of Innistrad:
-     *   -2: You get an emblem with "Creatures you control get +1/+0."
+     * Sorin, Lord of Innistrad: -2: You get an emblem with "Creatures you
+     * control get +1/+0."
      */
     @Test
     public void testSorinLordOfInnistradEmblem() {
@@ -67,8 +67,9 @@ public class EmblemsTest extends CardTestPlayerBase {
     }
 
     /**
-     *  Tamiyo, the Moon Sage:
-     *    -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+     * Tamiyo, the Moon Sage: -8: You get an emblem with "You have no maximum
+     * hand size" and "Whenever a card is put into your graveyard from anywhere,
+     * you may return it to your hand."
      *
      * Tests "You have no maximum hand size"
      */
@@ -88,10 +89,12 @@ public class EmblemsTest extends CardTestPlayerBase {
     }
 
     /**
-     *  Tamiyo, the Moon Sage:
-     *    -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+     * Tamiyo, the Moon Sage: -8: You get an emblem with "You have no maximum
+     * hand size" and "Whenever a card is put into your graveyard from anywhere,
+     * you may return it to your hand."
      *
-     * Tests "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+     * Tests "Whenever a card is put into your graveyard from anywhere, you may
+     * return it to your hand."
      */
     @Test
     public void testTamiyoTheMoonSageSecondEmblem() {
@@ -118,5 +121,40 @@ public class EmblemsTest extends CardTestPlayerBase {
             }
         }
         Assert.assertTrue("Couldn't find a card in hand: Elite Vanguard", found);
+    }
+
+    /**
+     * Liliana, Defiant Necromancer: -8: You get an emblem with "Whenever a
+     * creature you control dies, return it to the battlefield under your
+     * control at the beginning of the next end step.";
+     *
+     * Tests "Whenever a creature you control dies, return it to the battlefield
+     * under your control at the beginning of the next end step."
+     */
+    @Test
+    public void testLilianaDefiantNecromancer() {
+        addCard(Zone.BATTLEFIELD, playerA, "Liliana, Defiant Necromancer");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
+
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Liliana, Defiant Necromancer", CounterType.LOYALTY, 6);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Silvercoat Lion");
+
+        setStopAt(2, PhaseStep.UPKEEP);
+        execute();
+
+        assertEmblemCount(playerA, 1);
+
+        assertPermanentCount(playerA, "Liliana, Defiant Necromancer", 1);
+        assertPermanentCount(playerA, "Elite Vanguard", 1);
+        assertGraveyardCount(playerB, "Silvercoat Lion", 1);
+
+        assertHandCount(playerA, 0);
+
     }
 }
