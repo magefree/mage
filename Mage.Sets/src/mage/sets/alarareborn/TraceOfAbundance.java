@@ -55,17 +55,13 @@ import mage.target.common.TargetLandPermanent;
  * @author jeffwadsworth
  */
 public class TraceOfAbundance extends CardImpl {
-    
+
     private String rule = "Enchanted land has shroud";
 
     public TraceOfAbundance(UUID ownerId) {
         super(ownerId, 142, "Trace of Abundance", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{R/W}{G}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Aura");
-
-
-
-
 
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
