@@ -65,6 +65,7 @@ public class TinyLeaders extends DeckValidator {
         banned.add("Edric, Spymaster of Trest");
         banned.add("Fastbond");
         banned.add("Goblin Recruiter");
+        banned.add("Grindstone"); // banned effective July 13, 2015
         banned.add("Hermit Druid");
         banned.add("Imperial Seal");
         banned.add("Library of Alexandria");
@@ -81,7 +82,6 @@ public class TinyLeaders extends DeckValidator {
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
         banned.add("Necropotence");
-        banned.add("Painter's Servant");
         banned.add("Shahrazad");
         banned.add("Skullclamp");
         banned.add("Sol Ring");

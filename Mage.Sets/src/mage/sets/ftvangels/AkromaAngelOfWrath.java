@@ -25,36 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.ftvangels;
 
-package mage.game;
-
-import mage.game.match.MatchImpl;
-import mage.game.match.MatchOptions;
+import java.util.UUID;
+import mage.constants.Rarity;
 
 /**
  *
- * @author LevelX2
+ * @author fireshoes
  */
-public class CommanderFreeForAllMatch extends MatchImpl {
+public class AkromaAngelOfWrath extends mage.sets.timeshifted.AkromaAngelOfWrath {
 
-    public CommanderFreeForAllMatch(MatchOptions options) {
-        super(options);
+    public AkromaAngelOfWrath(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 2;
+        this.expansionSetCode = "V15";
+        this.rarity = Rarity.MYTHIC;
+    }
+
+    public AkromaAngelOfWrath(final AkromaAngelOfWrath card) {
+        super(card);
     }
 
     @Override
-    public void startGame() throws GameException {
-        int startLife = 40;
-        boolean alsoHand = true;
-        if (options.getDeckType().equals("Variant Magic - Duel Commander")) {
-            startLife = 30;
-            alsoHand = true;  // commander going to hand allowed to go to command zone effective July 17, 2015
-        }
-        CommanderFreeForAll game = new CommanderFreeForAll(options.getAttackOption(), options.getRange(), options.getFreeMulligans(), startLife);
-        game.setStartMessage(this.createGameStartMessage());
-        game.setAlsoHand(alsoHand);
-        game.setAlsoLibrary(true);
-        initGame(game);
-        games.add(game);
+    public AkromaAngelOfWrath copy() {
+        return new AkromaAngelOfWrath(this);
     }
-
 }
