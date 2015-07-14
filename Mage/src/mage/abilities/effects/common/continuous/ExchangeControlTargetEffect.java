@@ -25,9 +25,9 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
- 
+
 package mage.abilities.effects.common.continuous;
- 
+
 import java.util.*;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -38,57 +38,57 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
- 
+
 /**
  * @author magenoxx_at_googlemail.com
  */
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
- 
+
     private String rule;
     private boolean withSource;
     private boolean withSecondTarget;
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, UUID> lockedControllers = new HashMap<>();
- 
+
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
     }
- 
+
     public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource) {
         this(duration, rule, withSource, false);
     }
-    
+
     public ExchangeControlTargetEffect(Duration duration, String rule, boolean withSource, boolean withSecondTarget) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.withSource = withSource;
         this.withSecondTarget = withSecondTarget;
         this.rule = rule;
     }
- 
+
     public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
         this.withSecondTarget = effect.withSecondTarget;
-        this.lockedControllers = effect.lockedControllers;
-        this.zoneChangeCounter = effect.zoneChangeCounter;
+        this.lockedControllers = new HashMap<UUID, UUID>(effect.lockedControllers);
+        this.zoneChangeCounter = new HashMap<UUID, Integer>(effect.zoneChangeCounter);
     }
- 
+
     @Override
     public ExchangeControlTargetEffect copy() {
         return new ExchangeControlTargetEffect(this);
     }
- 
+
     @Override
     public boolean isInactive(Ability source, Game game) {
        return isDiscarded();
     }
- 
+
     @Override
     public void init(Ability source, Game game) {
         Permanent permanent1 = null;
         Permanent permanent2 = null;
-        
+
         if (withSource) {
             permanent1 = game.getPermanent(targetPointer.getFirst(game, source));
             permanent2 = game.getPermanent(source.getSourceId());
@@ -115,13 +115,13 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             this.lockedControllers.put(permanent1.getId(), permanent2.getControllerId());
             this.zoneChangeCounter.put(permanent1.getId(), permanent1.getZoneChangeCounter(game));
             this.lockedControllers.put(permanent2.getId(), permanent1.getControllerId());
-            this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));            
+            this.zoneChangeCounter.put(permanent2.getId(), permanent2.getZoneChangeCounter(game));
         } else {
             // discard if there are less than 2 permanents
             discard();
         }
     }
- 
+
     @Override
     public boolean apply(Game game, Ability source) {
         Set<UUID> toDelete = new HashSet<>();
@@ -137,7 +137,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         }
         if (!toDelete.isEmpty()) {
             for(UUID uuid: toDelete) {
-                zoneChangeCounter.remove(uuid);            
+                zoneChangeCounter.remove(uuid);
             }
             if (zoneChangeCounter.isEmpty()) {
                 discard();
@@ -146,7 +146,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         }
         return true;
     }
- 
+
     @Override
     public String getText(Mode mode) {
         return this.rule;

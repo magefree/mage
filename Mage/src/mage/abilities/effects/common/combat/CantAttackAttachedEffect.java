@@ -47,8 +47,8 @@ public class CantAttackAttachedEffect extends RestrictionEffect {
         if (attachmentType.equals(AttachmentType.AURA)) {
             this.staticText = "Enchanted creature can't attack";
         } else {
-            this.staticText = "Equiped creature can't attack";
-        }        
+            this.staticText = "Equipped creature can't attack";
+        }
     }
 
     public CantAttackAttachedEffect(final CantAttackAttachedEffect effect) {

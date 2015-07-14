@@ -57,10 +57,10 @@ public class NecromanticSummons extends CardImpl {
         // Put target creature card from a graveyard onto the battlefield under your control.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
-        
+
         // <i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it.
         Effect effect = new ConditionalOneShotEffect(new NecromanticSummoningEffect(),
-                SpellMasteryCondition.getInstance(), "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, add {B}{B}{B} to your mana pool");
+                SpellMasteryCondition.getInstance(), "<br><i>Spell mastery</i> - If there are two or more instant and/or sorcery cards in your graveyard, that creature enters the battlefield with two additional +1/+1 counters on it");
         this.getSpellAbility().addEffect(effect);
     }
 
