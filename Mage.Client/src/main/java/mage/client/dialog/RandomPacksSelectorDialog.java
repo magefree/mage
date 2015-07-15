@@ -8,6 +8,7 @@ package mage.client.dialog;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 
@@ -101,11 +102,17 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         pnlApply = new javax.swing.JPanel();
         btnApply = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Random Booster Draft Packs Selector");
         setModal(true);
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setPreferredSize(new java.awt.Dimension(600, 450));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlPacks.setLayout(new java.awt.GridLayout(11, 12));
 
@@ -174,13 +181,21 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnNoneActionPerformed
 
     private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyActionPerformed
+        this.doApply();
+    }//GEN-LAST:event_btnApplyActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.doApply();
+    }//GEN-LAST:event_formWindowClosing
+
+    public void doApply() {
         if (getSelectedPacks().size() < 2) {
-            // at least 2 packs must be selected.
+            JOptionPane.showMessageDialog(this, "At least 2 sets must be selected", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.setVisible(false);
         }
-    }//GEN-LAST:event_btnApplyActionPerformed
-
+    }
+    
     private void setAllCheckBoxes(boolean value) {
         for (Component pack : pnlPacks.getComponents()) {
             JCheckBox thePack = (JCheckBox) pack;
