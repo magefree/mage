@@ -51,27 +51,10 @@ public class RandomBoosterDraft extends BoosterDraft {
     }
 
     @Override
-    public void start() {
-        while (!isAbort() && boosterNum < numberBoosters) {
-            openBooster();
-            while (!isAbort() && pickCards()) {
-                if (boosterNum % 2 == 1) {
-                    passLeft();
-                } else {
-                    passRight();
-                }
-                fireUpdatePlayersEvent();
-            }
-        }
-        resetBufferedCards();
-        this.fireEndDraftEvent();
-    }
-
-    @Override
     protected void openBooster() {
         if (boosterNum < numberBoosters) {
             for (DraftPlayer player: players.values()) {
-                player.setBooster(getNextBooster().createBooster());
+                player.setBooster(getNextBooster().create15CardBooster());
             }
         }
         boosterNum++;

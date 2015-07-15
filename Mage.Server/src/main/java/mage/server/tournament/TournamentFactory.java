@@ -80,6 +80,13 @@ public class TournamentFactory {
                 if (tournament.getTournamentType().isCubeBooster()) {
                     tournament.getOptions().getLimitedOptions().setDraftCube(CubeFactory.getInstance().createDraftCube(tournament.getOptions().getLimitedOptions().getDraftCubeName()));
                     tournament.setBoosterInfo(tournament.getOptions().getLimitedOptions().getDraftCubeName());
+                } else if (tournament.getTournamentType().isRandom()) {
+                    StringBuilder rv = new StringBuilder( "Random Draft using sets: ");
+                    for (Map.Entry<String, Integer> entry: setInfo.entrySet()){
+                        rv.append(entry.getKey());
+                        rv.append(";");
+                    }
+                    tournament.setBoosterInfo(rv.toString());
                 } else {
                     StringBuilder sb = new StringBuilder();
                     for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {

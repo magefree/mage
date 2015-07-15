@@ -169,7 +169,7 @@
                   <Group type="102" attributes="0">
                       <Component id="pnlPacks" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlRandomPacks" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnlRandomPacks" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
@@ -521,10 +521,8 @@
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="1"/>
-        <Property name="horizontalGap" type="int" value="2"/>
-        <Property name="rows" type="int" value="0"/>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+        <Property name="axis" type="int" value="1"/>
       </Layout>
     </Container>
   </SubComponents>
