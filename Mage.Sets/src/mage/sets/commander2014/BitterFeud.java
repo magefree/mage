@@ -60,12 +60,11 @@ public class BitterFeud extends CardImpl {
         super(ownerId, 32, "Bitter Feud", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
         this.expansionSetCode = "C14";
 
-
         // As Bitter Feud enters the battlefield, choose two players.
         this.addAbility(new AsEntersBattlefieldAbility(new BitterFeudEntersBattlefieldEffect()));
 
         // If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BitterFeudEffect() ));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BitterFeudEffect()));
     }
 
     public BitterFeud(final BitterFeud card) {
@@ -94,16 +93,18 @@ class BitterFeudEntersBattlefieldEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (controller != null && permanent != null) {
-            TargetPlayer target = new TargetPlayer(2,2, true);
+            TargetPlayer target = new TargetPlayer(2, 2, true);
             controller.chooseTarget(outcome, target, source, game);
             Player player1 = game.getPlayer(target.getFirstTarget());
-            Player player2 = game.getPlayer(target.getTargets().get(1));
-            if (player1 != null && player2 != null) {
-                game.getState().setValue(source.getSourceId() + "_player1", player1);
-                game.getState().setValue(source.getSourceId() + "_player2", player2);
-                game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + player1.getLogName() + " and " + player2.getLogName());
-                permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() +", " + player2.getName() + "</font>", game);
-                return true;
+            if (target.getTargets().size() > 1) {
+                Player player2 = game.getPlayer(target.getTargets().get(1));
+                if (player1 != null && player2 != null) {
+                    game.getState().setValue(source.getSourceId() + "_player1", player1);
+                    game.getState().setValue(source.getSourceId() + "_player2", player2);
+                    game.informPlayers(permanent.getLogName() + ": " + controller.getLogName() + " has chosen " + player1.getLogName() + " and " + player2.getLogName());
+                    permanent.addInfo("chosen players", "<font color = 'blue'>Chosen players: " + player1.getName() + ", " + player2.getName() + "</font>", game);
+                    return true;
+                }
             }
         }
         return false;
@@ -135,9 +136,9 @@ class BitterFeudEffect extends ReplacementEffectImpl {
         return new BitterFeudEffect(this);
     }
 
-    @Override    
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        switch(event.getType()) {
+        switch (event.getType()) {
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
@@ -146,7 +147,7 @@ class BitterFeudEffect extends ReplacementEffectImpl {
                 return false;
         }
     }
-    
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         player1 = (Player) game.getState().getValue(source.getSourceId() + "_player1");
@@ -178,9 +179,9 @@ class BitterFeudEffect extends ReplacementEffectImpl {
                 } else if (damageSource instanceof Card) {
                     sourcePlayerId = ((Card) damageSource).getOwnerId();
                 }
-                if (sourcePlayerId != null &&
-                        (player1.getId().equals(sourcePlayerId) || player2.getId().equals(sourcePlayerId)) &&
-                        !sourcePlayerId.equals(targetPlayerId)) {
+                if (sourcePlayerId != null
+                        && (player1.getId().equals(sourcePlayerId) || player2.getId().equals(sourcePlayerId))
+                        && !sourcePlayerId.equals(targetPlayerId)) {
                     return true;
                 }
             }
