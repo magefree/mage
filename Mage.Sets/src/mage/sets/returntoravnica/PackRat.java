@@ -29,6 +29,7 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 
+import mage.abilities.effects.CopyCardEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -39,18 +40,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.EmptyToken;
-import mage.util.CardUtil;
 
 /**
  *
@@ -89,7 +83,7 @@ public class PackRat extends CardImpl {
         // Pack Rat's power and toughness are each equal to the number of Rats you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // {2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PackRatEffect(this), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyCardEffect(this, 1), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
@@ -104,37 +98,3 @@ public class PackRat extends CardImpl {
     }
 }
 
-class PackRatEffect extends OneShotEffect {
-
-    private Card card;
-
-    public PackRatEffect(Card card) {
-        super(Outcome.PutCreatureInPlay);
-        this.card = card;
-        staticText = "Put a token onto the battlefield that's a copy of {this}";
-    }
-
-    public PackRatEffect(final PackRatEffect effect) {
-        super(effect);
-        this.card = effect.card;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-        }
-        if (permanent != null) {
-            EmptyToken newToken = new EmptyToken();
-            CardUtil.copyTo(newToken).from(permanent);
-            return newToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        }
-        return false;
-    }
-
-    @Override
-    public PackRatEffect copy() {
-        return new PackRatEffect(this);
-    }
-}
