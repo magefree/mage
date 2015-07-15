@@ -28,52 +28,52 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+public class MonkRealist extends CardImpl {
+    
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public MonkRealist(UUID ownerId) {
+        super(ownerId, 21, "Monk Realist", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "USG";
+        this.subtype.add("Human");
+        this.subtype.add("Monk");
+        this.subtype.add("Cleric");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
+        // When Monk Realist enters the battlefield, destroy target enchantment.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        Target target = new TargetPermanent(filter);
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
-    public Expunge(final Expunge card) {
+    public MonkRealist(final MonkRealist card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public MonkRealist copy() {
+        return new MonkRealist(this);
     }
 }

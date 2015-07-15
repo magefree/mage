@@ -25,55 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.condition.common.MorbidCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.WolfToken;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
+public class PredatorsHowl extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+    public PredatorsHowl(UUID ownerId) {
+        super(ownerId, 37, "Predator's Howl", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
+        this.expansionSetCode = "CNS";
 
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        // Put a 2/2 green Wolf creature token onto the battlefield.
+        // Morbid - Put three 2/2 green Wolf creature tokens onto the battlefield instead if a creature died this turn.
+        Effect effect = new ConditionalOneShotEffect(
+                new CreateTokenEffect(new WolfToken(), 3),
+                new CreateTokenEffect(new WolfToken(), 1),
+                new MorbidCondition(),
+                "Put a 2/2 green Wolf creature token onto the battlefield. <br/><br/><i>Morbid</i> - Put three 2/2 green Wolf creature tokens onto the battlefield instead if a creature died this turn.");
+        this.getSpellAbility().addEffect(effect);
     }
 
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "USG";
-
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
-    }
-
-    public Expunge(final Expunge card) {
+    public PredatorsHowl(final PredatorsHowl card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public PredatorsHowl copy() {
+        return new PredatorsHowl(this);
     }
 }

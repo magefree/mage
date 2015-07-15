@@ -25,55 +25,35 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.effects.common.RegenerateAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
+public class WrapInVigor extends CardImpl {
+    
+    public WrapInVigor(UUID ownerId) {
+        super(ownerId, 183, "Wrap in Vigor", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
+        this.expansionSetCode = "CNS";
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        // Regenerate each creature you control.
+        this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
     }
 
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "USG";
-
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
-    }
-
-    public Expunge(final Expunge card) {
+    public WrapInVigor(final WrapInVigor card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public WrapInVigor copy() {
+        return new WrapInVigor(this);
     }
 }

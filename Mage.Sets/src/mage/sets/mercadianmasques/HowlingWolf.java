@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.FilterCard;
+import mage.filter.predicate.mageobject.NamePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+public class HowlingWolf extends CardImpl {
+    
+    private static final FilterCard filter = new FilterCard("cards named Howling Wolf");
 
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        filter.add(new NamePredicate("Howling Wolf"));
     }
 
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "USG";
+    public HowlingWolf(UUID ownerId) {
+        super(ownerId, 252, "Howling Wolf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        this.expansionSetCode = "MMQ";
+        this.subtype.add("Wolf");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
+        // When Howling Wolf enters the battlefield, you may search your library for up to three cards named Howling Wolf, reveal them, and put them into your hand. If you do, shuffle your library.
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 3, filter);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public Expunge(final Expunge card) {
+    public HowlingWolf(final HowlingWolf card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public HowlingWolf copy() {
+        return new HowlingWolf(this);
     }
 }

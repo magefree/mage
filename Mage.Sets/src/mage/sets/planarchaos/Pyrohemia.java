@@ -25,55 +25,49 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.ObjectColor;
+import mage.abilities.TriggeredAbility;
+import mage.abilities.common.OnEventTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.NoCreatureCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DamageEverythingEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.Zone;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
+public class Pyrohemia extends CardImpl {
+    
+    private static final String ruleText = "At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pyrohemia.";
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+    public Pyrohemia(UUID ownerId) {
+        super(ownerId, 119, "Pyrohemia", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
+        this.expansionSetCode = "PLC";
 
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "USG";
-
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
+        // At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pyrohemia.
+        TriggeredAbility triggered = new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect());
+        this.addAbility(new ConditionalTriggeredAbility(triggered, new NoCreatureCondition(), ruleText));
         
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
+        // {R}: Pyrohemia deals 1 damage to each creature and each player.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{R}")));
     }
 
-    public Expunge(final Expunge card) {
+    public Pyrohemia(final Pyrohemia card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public Pyrohemia copy() {
+        return new Pyrohemia(this);
     }
 }

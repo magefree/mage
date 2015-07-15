@@ -25,55 +25,42 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.urzassaga;
+package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
+public class ValorMadeReal extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+    public ValorMadeReal(UUID ownerId) {
+        super(ownerId, 86, "Valor Made Real", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
+        this.expansionSetCode = "CNS";
 
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+        // Target creature can block any number of creatures this turn.
+        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
-        this.expansionSetCode = "USG";
-
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
-    }
-
-    public Expunge(final Expunge card) {
+    public ValorMadeReal(final ValorMadeReal card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public ValorMadeReal copy() {
+        return new ValorMadeReal(this);
     }
 }

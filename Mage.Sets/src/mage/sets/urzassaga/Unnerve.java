@@ -28,52 +28,33 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.ObjectColor;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.CyclingAbility;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.constants.TargetController;
 
 /**
  *
- * @author Backfir3
+ * @author fireshoes
  */
-public class Expunge extends CardImpl {
+public class Unnerve extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-    }
-
-    public Expunge(UUID ownerId) {
-        super(ownerId, 135, "Expunge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
+    public Unnerve(UUID ownerId) {
+        super(ownerId, 162, "Unnerve", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}");
         this.expansionSetCode = "USG";
 
-
-        // Destroy target nonartifact, nonblack creature. It can't be regenerated.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
-        
-	// Cycling {2} ({2}, Discard this card: Draw a card.)
-	this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
-		
+        // Each opponent discards two cards.
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(new StaticValue(2), false, TargetController.OPPONENT));
     }
 
-    public Expunge(final Expunge card) {
+    public Unnerve(final Unnerve card) {
         super(card);
     }
 
     @Override
-    public Expunge copy() {
-        return new Expunge(this);
+    public Unnerve copy() {
+        return new Unnerve(this);
     }
 }
