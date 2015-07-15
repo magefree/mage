@@ -28,77 +28,71 @@
 package mage.sets.conspiracy;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author markedagain
+ * @author fireshoes
  */
-public class BarbedShocker extends CardImpl {
+public class StrongholdDiscipline extends CardImpl {
 
-    public BarbedShocker(UUID ownerId) {
-        super(ownerId, 136, "Barbed Shocker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+    public StrongholdDiscipline(UUID ownerId) {
+        super(ownerId, 126, "Stronghold Discipline", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
         this.expansionSetCode = "CNS";
-        this.subtype.add("Insect");
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
 
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new BarbedShockerEffect(), false, true));
+        // Each player loses 1 life for each creature he or she controls.
+        this.getSpellAbility().addEffect(new StrongholdDisciplineEffect());
     }
 
-    public BarbedShocker(final BarbedShocker card) {
+    public StrongholdDiscipline(final StrongholdDiscipline card) {
         super(card);
     }
 
     @Override
-    public BarbedShocker copy() {
-        return new BarbedShocker(this);
+    public StrongholdDiscipline copy() {
+        return new StrongholdDiscipline(this);
     }
 }
-class BarbedShockerEffect extends OneShotEffect {
 
-    public BarbedShockerEffect() {
-        super(Outcome.Discard);
-        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
+class StrongholdDisciplineEffect extends OneShotEffect {
+
+    StrongholdDisciplineEffect() {
+        super(Outcome.Sacrifice);
+        this.staticText = "Each player loses 1 life for each creature he or she controls";
     }
 
-    public BarbedShockerEffect(final BarbedShockerEffect effect) {
+    StrongholdDisciplineEffect(final StrongholdDisciplineEffect effect) {
         super(effect);
     }
 
     @Override
-    public BarbedShockerEffect copy() {
-        return new BarbedShockerEffect(this);
+    public StrongholdDisciplineEffect copy() {
+        return new StrongholdDisciplineEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (targetPlayer != null) {
-                int count = targetPlayer.getHand().size();
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    targetPlayer.discard(card, source, game);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                final int count = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerId, game).size();
+                if (count > 0) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.loseLife(count, game);
+                    }
                 }
-                targetPlayer.drawCards(count, game);
-                return false;
             }
-        return true;
+            return true;
+        }
+        return false;
     }
 }

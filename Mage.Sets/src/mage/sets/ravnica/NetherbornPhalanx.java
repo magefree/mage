@@ -25,80 +25,84 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.conspiracy;
+package mage.sets.ravnica;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
+import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author markedagain
+ * @author fireshoes
  */
-public class BarbedShocker extends CardImpl {
+public class NetherbornPhalanx extends CardImpl {
 
-    public BarbedShocker(UUID ownerId) {
-        super(ownerId, 136, "Barbed Shocker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        this.expansionSetCode = "CNS";
-        this.subtype.add("Insect");
+    public NetherbornPhalanx(UUID ownerId) {
+        super(ownerId, 99, "Netherborn Phalanx", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Horror");
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(4);
 
-        // Trample
-        this.addAbility(TrampleAbility.getInstance());
-        // Haste
-        this.addAbility(HasteAbility.getInstance());
-        // Whenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
-        this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new BarbedShockerEffect(), false, true));
+        // When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new NetherbornPhalanxEffect());
+        this.addAbility(ability);
+        
+        // Transmute {1}{B}{B}
+        this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public BarbedShocker(final BarbedShocker card) {
+    public NetherbornPhalanx(final NetherbornPhalanx card) {
         super(card);
     }
 
     @Override
-    public BarbedShocker copy() {
-        return new BarbedShocker(this);
+    public NetherbornPhalanx copy() {
+        return new NetherbornPhalanx(this);
     }
 }
-class BarbedShockerEffect extends OneShotEffect {
 
-    public BarbedShockerEffect() {
-        super(Outcome.Discard);
-        this.staticText = " that player discards all the cards in his or her hand, then draws that many cards";
+class NetherbornPhalanxEffect extends OneShotEffect {
+
+    NetherbornPhalanxEffect() {
+        super(Outcome.Sacrifice);
+        this.staticText = "Each opponent loses 1 life for each creature he or she controls";
     }
 
-    public BarbedShockerEffect(final BarbedShockerEffect effect) {
+    NetherbornPhalanxEffect(final NetherbornPhalanxEffect effect) {
         super(effect);
     }
 
     @Override
-    public BarbedShockerEffect copy() {
-        return new BarbedShockerEffect(this);
+    public NetherbornPhalanxEffect copy() {
+        return new NetherbornPhalanxEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (targetPlayer != null) {
-                int count = targetPlayer.getHand().size();
-                for (Card card : targetPlayer.getHand().getCards(game)) {
-                    targetPlayer.discard(card, source, game);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                final int count = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), playerId, game).size();
+                if (count > 0) {
+                    Player opponent = game.getPlayer(playerId);
+                    if (opponent != null) {
+                        opponent.loseLife(count, game);
+                    return true;
+                    }
                 }
-                targetPlayer.drawCards(count, game);
-                return false;
             }
-        return true;
+        }
+        return false;
     }
 }

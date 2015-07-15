@@ -28,35 +28,37 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
+import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.PreventAllDamageByAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public class Respite extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
+    public Respite(UUID ownerId) {
+        super(ownerId, 143, "Respite", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "TMP";
 
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
+        // Prevent all combat damage that would be dealt this turn. 
+        this.getSpellAbility().addEffect(new PreventAllDamageByAllEffect(Duration.EndOfTurn, true));
         
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        // You gain 1 life for each attacking creature.
+        this.getSpellAbility().addEffect(new GainLifeEffect(new AttackingCreatureCount()));
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public Respite(final Respite card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public Respite copy() {
+        return new Respite(this);
     }
 }

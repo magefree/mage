@@ -25,38 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
+import mage.MageInt;
+import mage.abilities.dynamicvalue.common.ControllerLifeCount;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.game.permanent.token.Token;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public class StormHerd extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
+    public StormHerd(UUID ownerId) {
+        super(ownerId, 19, "Storm Herd", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{8}{W}{W}");
+        this.expansionSetCode = "GPT";
 
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
-        
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        // Put X 1/1 white Pegasus creature tokens with flying onto the battlefield, where X is your life total.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken(), new ControllerLifeCount()));
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public StormHerd(final StormHerd card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public StormHerd copy() {
+        return new StormHerd(this);
+    }
+}
+
+class PegasusToken extends Token {
+
+    public PegasusToken() {
+        super("Pegasus", "1/1 white Pegasus creature tokens with flying");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Pegasus");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(FlyingAbility.getInstance());
     }
 }

@@ -25,38 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
+public class StasisCell extends CardImpl {
 
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
+    public StasisCell(UUID ownerId) {
+        super(ownerId, 66, "Stasis Cell", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Aura");
+
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        // Enchanted creature doesn't untap during its controller's untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        
+        // {3}{U}: Attach Stasis Cell to target creature.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "Attach {this} to target creature"), new ManaCostsImpl("{3}{U}"));
+        ability.addTarget(new TargetCreaturePermanent());
+        this.addAbility(ability);
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public StasisCell(final StasisCell card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public StasisCell copy() {
+        return new StasisCell(this);
     }
 }

@@ -25,38 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.ravnica;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.filter.common.FilterCreatureCard;
+import mage.target.TargetPermanent;
+import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public class NecromanticThirst extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
+    public NecromanticThirst(UUID ownerId) {
+        super(ownerId, 97, "Necromantic Thirst", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
+        this.expansionSetCode = "RAV";
+        this.subtype.add("Aura");
 
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
+        // Enchant creature
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        // Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.
+        Ability ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
+                new ReturnFromGraveyardToHandTargetEffect(), 
+                "enchanted creature", true, false, true, TargetController.ANY);
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.addAbility(ability);    
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public NecromanticThirst(final NecromanticThirst card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public NecromanticThirst copy() {
+        return new NecromanticThirst(this);
     }
 }

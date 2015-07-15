@@ -25,38 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public class RumblingSlum extends CardImpl {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
+    public RumblingSlum(UUID ownerId) {
+        super(ownerId, 126, "Rumbling Slum", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{G}");
+        this.expansionSetCode = "GPT";
+        this.subtype.add("Elemental");
+        this.power = new MageInt(5);
+        this.toughness = new MageInt(5);
 
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
-        
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+        // At the beginning of your upkeep, Rumbling Slum deals 1 damage to each player.
+        Effect effect = new DamagePlayersEffect(1, TargetController.ANY);
+        effect.setText("{this} deals 1 damage to each player");
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public RumblingSlum(final RumblingSlum card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public RumblingSlum copy() {
+        return new RumblingSlum(this);
     }
 }

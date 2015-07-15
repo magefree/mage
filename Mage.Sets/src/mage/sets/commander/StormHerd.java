@@ -25,38 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.commander;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DamageEverythingEffect;
-import mage.abilities.keyword.BuybackAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
  * @author fireshoes
  */
-public class EvincarsJustice extends CardImpl {
+public class StormHerd extends mage.sets.guildpact.StormHerd {
 
-    public EvincarsJustice(UUID ownerId) {
-        super(ownerId, 28, "Evincar's Justice", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
-        this.expansionSetCode = "TMP";
-
-        // Buyback {3}
-        this.addAbility(new BuybackAbility("{3}"));
-        
-        // Evincar's Justice deals 2 damage to each creature and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
+    public StormHerd(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 34;
+        this.expansionSetCode = "CMD";
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    public StormHerd(final StormHerd card) {
         super(card);
     }
 
     @Override
-    public EvincarsJustice copy() {
-        return new EvincarsJustice(this);
+    public StormHerd copy() {
+        return new StormHerd(this);
     }
 }
