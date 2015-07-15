@@ -112,6 +112,26 @@ public abstract class ExpansionSet implements Serializable {
         return name;
     }
 
+    public List<Card> create15CardBooster() {
+        // Forces 15 card booster packs. 
+        // if the packs are too small, it adds commons to fill it out.
+        // if the packs are too big, it removes the first cards.
+        // since it adds lands then commons before uncommons
+        // and rares this should be the least disruptive.
+
+        List<Card> theBooster = this.createBooster();
+        List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
+        while (15 > theBooster.size()) {
+            addToBooster(theBooster, commons);
+        }
+
+        while (theBooster.size() > 15) {
+            theBooster.remove(0);
+        }
+
+        return theBooster;
+    }
+
     public List<Card> createBooster() {
         List<Card> booster = new ArrayList<>();
         if (!hasBoosters) {
