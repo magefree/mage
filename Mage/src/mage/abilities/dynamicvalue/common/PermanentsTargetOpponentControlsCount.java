@@ -26,7 +26,7 @@ public class PermanentsTargetOpponentControlsCount implements DynamicValue {
     }
 
     public PermanentsTargetOpponentControlsCount(FilterPermanent filter, Integer multiplier) {
-        this.filter = filter;
+        this.filter = filter.copy();
         this.multiplier = multiplier;
     }
 
