@@ -64,14 +64,14 @@ public class Necropotence extends CardImpl {
         this.expansionSetCode = "ICE";
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
         // Whenever you discard a card, exile that card from your graveyard.
         Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
         effect.setText("exile that card from your graveyard");
         this.addAbility(new NecropotenceTriggeredAbility(effect));
         // Pay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new NecropotenceEffect(), new PayLifeCost(1)));
-        
+
     }
 
     public Necropotence(final Necropotence card) {
@@ -85,8 +85,9 @@ public class Necropotence extends CardImpl {
 }
 
 class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
+
     NecropotenceTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect , false);
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     NecropotenceTriggeredAbility(final NecropotenceTriggeredAbility ability) {
@@ -105,10 +106,10 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-         if (getControllerId().equals(event.getPlayerId())) {
-             this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-             return true;
-         }
+        if (getControllerId().equals(event.getPlayerId())) {
+            this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+            return true;
+        }
         return false;
     }
 
@@ -119,21 +120,21 @@ class NecropotenceTriggeredAbility extends TriggeredAbilityImpl {
 }
 
 class NecropotenceEffect extends OneShotEffect {
-    
+
     public NecropotenceEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step";
     }
-    
+
     public NecropotenceEffect(final NecropotenceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public NecropotenceEffect copy() {
         return new NecropotenceEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -144,12 +145,12 @@ class NecropotenceEffect extends OneShotEffect {
                     card.setFaceDown(true, game);
                     Effect returnToHandeffect = new ReturnToHandTargetEffect(false);
                     returnToHandeffect.setText("put that face down card into your hand");
-                    returnToHandeffect.setTargetPointer(new FixedTarget(card.getId()));
+                    returnToHandeffect.setTargetPointer(new FixedTarget(card.getId(), card.getZoneChangeCounter(game)));
                     DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(returnToHandeffect, TargetController.YOU);
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     delayedAbility.setSourceObject(source.getSourceObject(game), game);
-                    game.addDelayedTriggeredAbility(delayedAbility);                    
+                    game.addDelayedTriggeredAbility(delayedAbility);
                     return true;
                 }
                 return false;

@@ -31,6 +31,7 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -287,6 +288,24 @@ public class ManaOptionsTest extends CardTestPlayerBase {
         Assert.assertEquals("mana variations don't fit", 2, manaOptions.size());
         Assert.assertEquals("{W}{B}{B}", getManaOption(0, manaOptions));
         Assert.assertEquals("{B}{B}{B}", getManaOption(1, manaOptions));
+    }
+
+    @Test
+    @Ignore  // TriggeredManaAbilities not supported yet for getAvailableMana
+    public void testCryptGhast() {
+        //Extort (Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)
+        // Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).
+        addCard(Zone.BATTLEFIELD, playerA, "Crypt Ghast", 1);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+
+        setStopAt(1, PhaseStep.UPKEEP);
+        execute();
+
+        ManaOptions manaOptions = playerA.getAvailableManaTest(currentGame);
+
+        Assert.assertEquals("mana variations don't fit", 1, manaOptions.size());
+        Assert.assertEquals("{B}{B}", getManaOption(0, manaOptions));
     }
 
     private String getManaOption(int index, ManaOptions manaOptions) {
