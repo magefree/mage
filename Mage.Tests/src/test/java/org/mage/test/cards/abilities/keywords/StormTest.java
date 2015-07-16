@@ -204,7 +204,7 @@ public class StormTest extends CardTestPlayerBase {
      *
      */
     @Test
-    public void testStormAndFlshback() {
+    public void testStormAndFlashback() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         // Geistflame deals 1 damage to target creature or player.
@@ -229,6 +229,68 @@ public class StormTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Geistflame", 1);
         assertGraveyardCount(playerA, "Grapeshot", 1);
         assertLife(playerB, 12); // 3 from the Geistflame + 5 from Grapeshot
+    }
+
+    /*
+     * I cast Wheel of Fortune. (1st)
+     * I cast Mox Emerald. (2nd)
+     * I cast Turnabout. (3rd)
+     * I cast Yawgmoth's Will. (4th)
+     * I cast Palinchron from graveyard. (5th)
+     * I cast Mind's Desire from graveyard. Storm makes 2
+     * copies (instead of 5). (6th) I cast Turnabout from graveyard. (7th) I
+     * cast Golgari Signet from exile. (8th) I cast Empty the Warrens. Storm
+     * makes 5 copies (instead of 8). (9th)
+     *
+     */
+    @Test
+    public void testStormYawgmothsWill() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        // Each player discards his or her hand,
+        // then draws seven cards.
+        addCard(Zone.HAND, playerA, "Wheel of Fortune", 1); // {2}{R}
+        addCard(Zone.LIBRARY, playerA, "Mox Emerald", 1);
+        // Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
+        addCard(Zone.LIBRARY, playerA, "Turnabout", 1); // {2}{U}{U}
+
+        // Until end of turn, you may play cards from your graveyard.
+        // If a card would be put into your graveyard from anywhere this turn, exile that card instead.
+        addCard(Zone.LIBRARY, playerA, "Yawgmoth's Will", 1);  // {2}{B}
+        skipInitShuffling();
+
+        // Flying
+        // When Palinchron enters the battlefield, untap up to seven lands.
+        // {2}{U}{U}: Return Palinchron to its owner's hand.
+        addCard(Zone.HAND, playerA, "Palinchron", 1);  // {5}{U}{U}
+        // Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
+        // Storm
+        addCard(Zone.HAND, playerA, "Mind's Desire", 1);  // {4}{U}{U}
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wheel of Fortune");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mox Emerald");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Turnabout");
+        setChoice(playerA, "Land");
+        setChoice(playerA, "Untap");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Yawgmoth's Will");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Palinchron");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind's Desire");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, "Wheel of Fortune", 1);
+        assertPermanentCount(playerA, "Mox Emerald", 1);
+        assertGraveyardCount(playerA, "Turnabout", 1);
+        assertPermanentCount(playerA, "Palinchron", 1);
+
+        assertExileCount("Yawgmoth's Will", 1);
+        assertExileCount("Mind's Desire", 1);
+
+        assertExileCount(playerA, 8); // 6 from Mind's Desire and the Desire and the Yawgmoth's Will
+
     }
 
 }
