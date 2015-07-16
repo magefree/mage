@@ -70,7 +70,7 @@ public class Chronozoa extends CardImpl {
         // When Chronozoa is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it.
         this.addAbility(new ConditionalTriggeredAbility(new DiesCreatureTriggeredAbility(new CopyCardEffect(this, numCopies), false),
                                                         new LastTimeCounterRemovedCondition(),
-                                                        "When Chronozoa is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it."));
+                                                        "When {this} is put into a graveyard from play, if it had no time counters on it, put two tokens into play that are copies of it."));
     }
 
     public Chronozoa(final Chronozoa card) {

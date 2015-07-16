@@ -2649,16 +2649,16 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStatesRollBack.get(turnToGoTo);
                 if (restore != null) {
                     informPlayers(GameLog.getPlayerRequestColoredText("Player request: Rolling back to start of turn " + restore.getTurnNum()));
-                    for (Player playerObject : getPlayers().values()) {
-                        if (playerObject.isHuman() && playerObject.isInGame()) {
-                            playerObject.abort();
-                        }
-                    }
                     state.restoreForRollBack(restore);
                     playerList.setCurrent(state.getActivePlayerId());
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
+                    for (Player playerObject : getPlayers().values()) {
+                        if (playerObject.isHuman() && playerObject.isInGame()) {
+                            playerObject.abort();
+                        }
+                    }
                     fireUpdatePlayersEvent();
                 }
             }
