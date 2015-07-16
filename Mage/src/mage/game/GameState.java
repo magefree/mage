@@ -198,6 +198,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void restore(GameState state) {
         this.activePlayerId = state.activePlayerId;
+        this.playerList.setCurrent(state.activePlayerId);
         this.priorityPlayerId = state.priorityPlayerId;
         this.stack = state.stack;
         this.command = state.command;

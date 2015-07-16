@@ -204,6 +204,7 @@ public abstract class GameImpl implements Game, Serializable {
     private int priorityTime;
 
     private final int startLife;
+    protected PlayerList playerList;
 
     public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans, int startLife) {
         this.id = UUID.randomUUID();
@@ -613,6 +614,7 @@ public abstract class GameImpl implements Game, Serializable {
                 GameState restore = gameStates.rollback(stateNum);
                 if (restore != null) {
                     state.restore(restore);
+                    playerList.setCurrent(state.getActivePlayerId());
                 }
             }
         }
@@ -667,8 +669,8 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public void resume() {
-        PlayerList players = state.getPlayerList(state.getActivePlayerId());
-        Player player = getPlayer(players.get());
+        playerList = state.getPlayerList(state.getActivePlayerId());
+        Player player = getPlayer(playerList.get());
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!gameOver(null)) {
@@ -679,7 +681,7 @@ public abstract class GameImpl implements Game, Serializable {
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !gameOver(null)) {
                 endOfTurn();
-                player = players.getNext(this);
+                player = playerList.getNext(this);
                 state.setTurnNum(state.getTurnNum() + 1);
             }
         }
@@ -688,8 +690,8 @@ public abstract class GameImpl implements Game, Serializable {
 
     protected void play(UUID nextPlayerId) {
         if (!isPaused() && !gameOver(null)) {
-            PlayerList players = state.getPlayerList(nextPlayerId);
-            Player playerByOrder = getPlayer(players.get());
+            playerList = state.getPlayerList(nextPlayerId);
+            Player playerByOrder = getPlayer(playerList.get());
             while (!isPaused() && !gameOver(null)) {
                 playExtraTurns();
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
@@ -700,7 +702,7 @@ public abstract class GameImpl implements Game, Serializable {
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
                 playExtraTurns();
-                playerByOrder = players.getNext(this);
+                playerByOrder = playerList.getNext(this);
             }
         }
         if (gameOver(null) && !isSimulation()) {
@@ -2653,6 +2655,7 @@ public abstract class GameImpl implements Game, Serializable {
                         }
                     }
                     state.restoreForRollBack(restore);
+                    playerList.setCurrent(state.getActivePlayerId());
                     // because restore uses the objects without copy each copy the state again
                     gameStatesRollBack.put(getTurnNum(), state.copy());
                     executingRollback = true;
