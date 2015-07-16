@@ -206,7 +206,6 @@ public class BensCube extends DraftCube {
         cubeCards.add(new CardIdentity("Careful Consideration", ""));
         cubeCards.add(new CardIdentity("Cryptic Command", ""));
         cubeCards.add(new CardIdentity("Fact or Fiction", ""));
-        cubeCards.add(new CardIdentity("Gifts Given", ""));
         cubeCards.add(new CardIdentity("Gifts Ungiven", ""));
         cubeCards.add(new CardIdentity("Turnabout", ""));
         cubeCards.add(new CardIdentity("Desertion", ""));

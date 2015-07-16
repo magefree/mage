@@ -54,7 +54,7 @@ public class MTGOLegacyCube2015 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Angelic Destiny",""));
         cubeCards.add(new DraftCube.CardIdentity("Anger of the Gods",""));
         cubeCards.add(new DraftCube.CardIdentity("Animate Dead",""));
-        cubeCards.add(new DraftCube.CardIdentity("Anowon, the Ruiun Sage",""));
+        cubeCards.add(new DraftCube.CardIdentity("Anowon, the Ruin Sage",""));
         cubeCards.add(new DraftCube.CardIdentity("Arbor Elf",""));
         cubeCards.add(new DraftCube.CardIdentity("Arc Trail",""));
         cubeCards.add(new DraftCube.CardIdentity("Archangel of Thune",""));
@@ -95,7 +95,7 @@ public class MTGOLegacyCube2015 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Bloodline Keeper",""));
         cubeCards.add(new DraftCube.CardIdentity("Bloodlord of Vaasgoth",""));
         cubeCards.add(new DraftCube.CardIdentity("Bloodstained Mire",""));
-        cubeCards.add(new DraftCube.CardIdentity("Bogarden Hellkite",""));
+        cubeCards.add(new DraftCube.CardIdentity("Bogardan Hellkite",""));
         cubeCards.add(new DraftCube.CardIdentity("Bone Shredder",""));
         cubeCards.add(new DraftCube.CardIdentity("Bonesplitter",""));
         cubeCards.add(new DraftCube.CardIdentity("Bonfire of the Damned",""));
@@ -274,8 +274,8 @@ public class MTGOLegacyCube2015 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Green Sun's Zenith",""));
         cubeCards.add(new DraftCube.CardIdentity("Grim Lavamancer",""));
         cubeCards.add(new DraftCube.CardIdentity("Griselbrand",""));
-        cubeCards.add(new DraftCube.CardIdentity("Gruul Draz Assassin",""));
-        cubeCards.add(new DraftCube.CardIdentity("Gruul Draz Vampire",""));
+        cubeCards.add(new DraftCube.CardIdentity("Guul Draz Assassin",""));
+        cubeCards.add(new DraftCube.CardIdentity("Guul Draz Vampire",""));
         cubeCards.add(new DraftCube.CardIdentity("Hall of Triumph",""));
         cubeCards.add(new DraftCube.CardIdentity("Hallowed Fountain",""));
         cubeCards.add(new DraftCube.CardIdentity("Hallowed Spiritkeeper",""));
@@ -332,7 +332,7 @@ public class MTGOLegacyCube2015 extends DraftCube {
         cubeCards.add(new DraftCube.CardIdentity("Land Tax",""));
         cubeCards.add(new DraftCube.CardIdentity("Legacy's Allure",""));
         cubeCards.add(new DraftCube.CardIdentity("Leonin Relic-Warder",""));
-        cubeCards.add(new DraftCube.CardIdentity("Life From the Loam",""));
+        cubeCards.add(new DraftCube.CardIdentity("Life from the Loam",""));
         cubeCards.add(new DraftCube.CardIdentity("Lightning Bolt",""));
         cubeCards.add(new DraftCube.CardIdentity("Lightning Greaves",""));
         cubeCards.add(new DraftCube.CardIdentity("Lightning Helix",""));
