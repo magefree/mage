@@ -49,12 +49,12 @@ import mage.target.TargetPermanent;
  * @author JotaPeRL
  */
 public class NovijenSages extends CardImpl {
-    
+
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control with a +1/+1 counter on it");
 
     static {
         filter.add(new CounterPredicate(CounterType.P1P1));
-    }    
+    }
 
     public NovijenSages(UUID ownerId) {
         super(ownerId, 27, "Novijen Sages", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
@@ -67,10 +67,10 @@ public class NovijenSages extends CardImpl {
 
         // Graft 4
         this.addAbility(new GraftAbility(this, 4));
-        
+
         // {1}, Remove two +1/+1 counters from among creatures you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
-        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, Integer.MAX_VALUE, filter, true), CounterType.P1P1, 2));
+        ability.addCost(new RemoveCounterCost(new TargetPermanent(1, 2, filter, true), CounterType.P1P1, 2));
         this.addAbility(ability);
     }
 

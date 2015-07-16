@@ -161,7 +161,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     private transient final static Logger log = Logger.getLogger(ComputerPlayer.class);
 
     protected int PASSIVITY_PENALTY = 5; // Penalty value for doing nothing if some actions are availble
-    protected boolean ALLOW_INTERRUPT = true; // change this for test purposes to switch off interrupts while debugging
+    protected boolean ALLOW_INTERRUPT = false; // change this for test / debugging purposes to false to switch off interrupts while debugging
 
     private transient Map<Mana, Card> unplayable = new TreeMap<>();
     private transient List<Card> playableNonInstant = new ArrayList<>();
@@ -301,12 +301,25 @@ public class ComputerPlayer extends PlayerImpl implements Player {
             }
             for (Permanent permanent : targets) {
                 if (((TargetPermanent) target).canTarget(abilityControllerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                    // stop to add targets if not needed and outcome is no advantage for AI player
+                    if (target.getNumberOfTargets() == target.getTargets().size()) {
+                        if (outcome.isGood() && hasOpponent(permanent.getControllerId(), game)) {
+                            return true;
+                        }
+                        if (!outcome.isGood() && !hasOpponent(permanent.getControllerId(), game)) {
+                            return true;
+                        }
+                    }
+                    // add the target
                     target.add(permanent.getId(), game);
-                    return true;
+                    if (target.doneChosing()) {
+                        return true;
+                    }
                 }
             }
-            return false;
+            return target.isChosen();
         }
+
         if (target instanceof TargetCardInHand) {
             List<Card> cards = new ArrayList<>();
             for (UUID cardId : ((TargetCardInHand) target).possibleTargets(sourceId, this.getId(), game)) {

@@ -302,10 +302,10 @@ public class SimulatedPlayer2 extends ComputerPlayer {
         }
 
         if (bad) {
-            // remove its own creatures, player itself for bad effects
+            // remove its own creatures, player itself for bad effects with one target
             while (iterator.hasNext()) {
                 Ability ability1 = iterator.next();
-                if (ability1.getTargets().size() == 1) {
+                if (ability1.getTargets().size() == 1 && ability1.getTargets().get(0).getTargets().size() == 1) {
                     Permanent permanent = game.getPermanent(ability1.getFirstTarget());
                     if (permanent != null && !game.getOpponents(playerId).contains(permanent.getControllerId())) {
                         iterator.remove();
@@ -318,10 +318,10 @@ public class SimulatedPlayer2 extends ComputerPlayer {
             }
         }
         if (good) {
-            // remove opponent creatures and opponent for only good effects
+            // remove opponent creatures and opponent for only good effects with one target
             while (iterator.hasNext()) {
                 Ability ability1 = iterator.next();
-                if (ability1.getTargets().size() == 1) {
+                if (ability1.getTargets().size() == 1 && ability1.getTargets().get(0).getTargets().size() == 1) {
                     Permanent permanent = game.getPermanent(ability1.getFirstTarget());
                     if (permanent != null && game.getOpponents(playerId).contains(permanent.getControllerId())) {
                         iterator.remove();
