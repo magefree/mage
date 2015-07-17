@@ -25,33 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.scarsofmirrodin;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.GoblinToken;
 import mage.target.common.TargetControlledPermanent;
-
-import java.util.UUID;
 
 /**
  *
  * @author Loki
  */
 public class KuldothaRebirth extends CardImpl {
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
-    public KuldothaRebirth (UUID ownerId) {
+    public KuldothaRebirth(UUID ownerId) {
         super(ownerId, 96, "Kuldotha Rebirth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "SOM";
 
@@ -59,7 +58,7 @@ public class KuldothaRebirth extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
     }
 
-    public KuldothaRebirth (final KuldothaRebirth card) {
+    public KuldothaRebirth(final KuldothaRebirth card) {
         super(card);
     }
 

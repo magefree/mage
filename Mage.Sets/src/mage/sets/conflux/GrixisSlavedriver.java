@@ -25,20 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.conflux;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.ZombieToken;
-
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -53,7 +51,7 @@ public class GrixisSlavedriver extends CardImpl {
         this.subtype.add("Giant");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken("ALA")), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false));
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
     }
 

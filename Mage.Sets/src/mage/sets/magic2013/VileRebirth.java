@@ -37,8 +37,6 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.permanent.token.ZombieToken;
 import mage.target.common.TargetCardInGraveyard;
 
-
-
 /**
  *
  * @author North
@@ -49,13 +47,12 @@ public class VileRebirth extends CardImpl {
         super(ownerId, 115, "Vile Rebirth", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "M13";
 
-
         // Exile target creature card from a graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
 
         // Put a 2/2 black Zombie creature token onto the battlefield.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken("M13")));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
     public VileRebirth(final VileRebirth card) {

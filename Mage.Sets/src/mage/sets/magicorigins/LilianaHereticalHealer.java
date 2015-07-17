@@ -77,7 +77,7 @@ public class LilianaHereticalHealer extends CardImpl {
 
         // Whenever another nontoken creature you control dies, exile Liliana Heretical Healer, then return her to the battlefield transformed under her owner's control. If you do, put a 2/2 black Zombie creature token onto the battlefield.
         this.addAbility(new DiesCreatureTriggeredAbility(new ExileAndReturnTransformedSourceEffect(ExileAndReturnTransformedSourceEffect.Gender.FEMAL,
-                new CreateTokenEffect(new ZombieToken(expansionSetCode))), false, filter));
+                new CreateTokenEffect(new ZombieToken())), false, filter));
     }
 
     public LilianaHereticalHealer(final LilianaHereticalHealer card) {

@@ -112,7 +112,7 @@ class SidisiBroodTyrantAbility extends TriggeredAbilityImpl {
 class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
     public SidisiBroodTyrantTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("KTK")), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), false);
     }
 
     public SidisiBroodTyrantTriggeredAbility(final SidisiBroodTyrantTriggeredAbility ability) {
@@ -126,12 +126,12 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent)event;
+        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (Zone.LIBRARY == zEvent.getFromZone() && Zone.GRAVEYARD == zEvent.getToZone()) {
-            for (Card card: zEvent.getCards()) {
+            for (Card card : zEvent.getCards()) {
                 if (card.getOwnerId().equals(getControllerId()) && card.getCardType().contains(CardType.CREATURE)) {
                     return true;
-                }                
+                }
             }
         }
         return false;
@@ -141,7 +141,6 @@ class SidisiBroodTyrantTriggeredAbility extends TriggeredAbilityImpl {
     public SidisiBroodTyrantTriggeredAbility copy() {
         return new SidisiBroodTyrantTriggeredAbility(this);
     }
-
 
     @Override
     public String getRule() {

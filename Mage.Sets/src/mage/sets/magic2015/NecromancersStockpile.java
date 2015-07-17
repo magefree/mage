@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2015;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostImpl;
@@ -47,8 +48,6 @@ import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
-import java.util.UUID;
-
 /**
  * @author noxx
  */
@@ -59,7 +58,6 @@ public class NecromancersStockpile extends CardImpl {
     public NecromancersStockpile(UUID ownerId) {
         super(ownerId, 108, "Necromancer's Stockpile", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
         this.expansionSetCode = "M15";
-
 
         // {1}{B}, Discard a creature card: Draw a card.
         // If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped.
@@ -97,7 +95,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
+            for (UUID targetId : targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
@@ -127,6 +125,7 @@ class NecromancersStockpileDiscardTargetCost extends CostImpl {
 }
 
 class NecromancersStockpilePutTokenEffect extends OneShotEffect {
+
     NecromancersStockpilePutTokenEffect() {
         super(Outcome.Neutral);
         staticText = "If the discarded card was a Zombie card, put a 2/2 black Zombie creature token onto the battlefield tapped";
@@ -140,7 +139,7 @@ class NecromancersStockpilePutTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         NecromancersStockpileDiscardTargetCost cost = (NecromancersStockpileDiscardTargetCost) source.getCosts().get(0);
         if (cost != null && cost.isZombieCard()) {
-            new CreateTokenEffect(new ZombieToken("M15"), 1, true, false).apply(game, source);
+            new CreateTokenEffect(new ZombieToken(), 1, true, false).apply(game, source);
         }
         return true;
     }
@@ -150,4 +149,3 @@ class NecromancersStockpilePutTokenEffect extends OneShotEffect {
         return new NecromancersStockpilePutTokenEffect(this);
     }
 }
-

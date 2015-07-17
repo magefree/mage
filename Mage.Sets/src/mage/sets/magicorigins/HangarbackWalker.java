@@ -66,10 +66,10 @@ public class HangarbackWalker extends CardImpl {
 
         // Hangarback Walker enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new HangarbackWalkerEffect(), "with X +1/+1 counters on it"));
-        
+
         // When Hangarback Walker dies, put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield for each +1/+1 counter on Hangarback Walker.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken("ORI"), new CountersCount(CounterType.P1P1)), false));
-        
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), new CountersCount(CounterType.P1P1)), false));
+
         // {1}, {t}: Put a +1/+1 counter on Hangarback Walker.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
@@ -88,33 +88,33 @@ public class HangarbackWalker extends CardImpl {
 
 class HangarbackWalkerEffect extends OneShotEffect {
 
-        public HangarbackWalkerEffect() {
-            super(Outcome.BoostCreature);
-            staticText = "{this} enters the battlefield with X +1/+1 counters on it";
-        }
+    public HangarbackWalkerEffect() {
+        super(Outcome.BoostCreature);
+        staticText = "{this} enters the battlefield with X +1/+1 counters on it";
+    }
 
-        public HangarbackWalkerEffect(final HangarbackWalkerEffect effect) {
-            super(effect);
-        }
+    public HangarbackWalkerEffect(final HangarbackWalkerEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
-            if (permanent != null) {
-                Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-                if (obj != null && obj instanceof SpellAbility) {
-                    int amount = ((SpellAbility)obj).getManaCostsToPay().getX();
-                    if (amount > 0) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
-                    }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            Object obj = getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
+            if (obj != null && obj instanceof SpellAbility) {
+                int amount = ((SpellAbility) obj).getManaCostsToPay().getX();
+                if (amount > 0) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), game);
                 }
             }
-            return true;
         }
-
-        @Override
-        public HangarbackWalkerEffect copy() {
-            return new HangarbackWalkerEffect(this);
-        }
-
+        return true;
     }
+
+    @Override
+    public HangarbackWalkerEffect copy() {
+        return new HangarbackWalkerEffect(this);
+    }
+
+}

@@ -28,9 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -39,6 +36,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -71,7 +71,7 @@ public class HavengulRunebinder extends CardImpl {
         // {2}{U}, {tap}, Exile a creature card from your graveyard: Put a 2/2 black Zombie creature token onto the battlefield,
         // then put a +1/+1 counter on each Zombie creature you control.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new ZombieToken("ISD")),
+                new CreateTokenEffect(new ZombieToken()),
                 new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));

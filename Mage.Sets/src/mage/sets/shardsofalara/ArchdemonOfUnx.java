@@ -51,10 +51,11 @@ import mage.game.permanent.token.ZombieToken;
 public class ArchdemonOfUnx extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Zombie creature");
+
     static {
         filter.add(Predicates.not(new SubtypePredicate("Zombie")));
     }
-    
+
     public ArchdemonOfUnx(UUID ownerId) {
         super(ownerId, 64, "Archdemon of Unx", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.expansionSetCode = "ALA";
@@ -69,7 +70,7 @@ public class ArchdemonOfUnx extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a non-Zombie creature, then put a 2/2 black Zombie creature token onto the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), TargetController.YOU, false);
-        ability.addEffect(new CreateTokenEffect(new ZombieToken("ALA")));
+        ability.addEffect(new CreateTokenEffect(new ZombieToken()));
         this.addAbility(ability);
     }
 

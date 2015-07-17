@@ -75,7 +75,7 @@ public class OverseerOfTheDamned extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Whenever a nontoken creature an opponent controls dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
-        Token zombie = new ZombieToken("C14");
+        Token zombie = new ZombieToken();
         zombie.setTokenType(2);
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(zombie, 1, true, false), false, filter));
 

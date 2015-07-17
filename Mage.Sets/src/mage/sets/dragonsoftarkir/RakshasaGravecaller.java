@@ -53,9 +53,9 @@ public class RakshasaGravecaller extends CardImpl {
 
         // Exploit
         this.addAbility(new ExploitAbility());
-        
+
         // When Rakshasa Gravecaller exploits a creature, put two 2/2 black Zombie creature tokens onto the battlefield.
-        this.addAbility(new ExploitCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken("DTK"), 2), false));
+        this.addAbility(new ExploitCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2), false));
     }
 
     public RakshasaGravecaller(final RakshasaGravecaller card) {

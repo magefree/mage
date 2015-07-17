@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
@@ -47,7 +46,7 @@ import mage.game.permanent.token.ZombieToken;
  */
 public class NestedGhoul extends CardImpl {
 
-    public NestedGhoul (UUID ownerId) {
+    public NestedGhoul(UUID ownerId) {
         super(ownerId, 48, "Nested Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Zombie");
@@ -58,7 +57,7 @@ public class NestedGhoul extends CardImpl {
         this.addAbility(new NestedGhoulTriggeredAbility());
     }
 
-    public NestedGhoul (final NestedGhoul card) {
+    public NestedGhoul(final NestedGhoul card) {
         super(card);
     }
 
@@ -70,8 +69,9 @@ public class NestedGhoul extends CardImpl {
 }
 
 class NestedGhoulTriggeredAbility extends TriggeredAbilityImpl {
+
     NestedGhoulTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken("MBS")));
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
     }
 
     NestedGhoulTriggeredAbility(final NestedGhoulTriggeredAbility ability) {

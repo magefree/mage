@@ -60,7 +60,7 @@ public class PonybackBrigade extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Ponyback Brigade enters the battlefield or is turned face up, put three 1/1 red Goblin creature tokens onto the battlefield.
-        this.addAbility(new PonybackBrigadeAbility(new GoblinToken(expansionSetCode)));
+        this.addAbility(new PonybackBrigadeAbility(new GoblinToken()));
 
         // Morph {2}{R}{W}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}{W}{B}")));
@@ -102,7 +102,7 @@ class PonybackBrigadeAbility extends TriggeredAbilityImpl {
         if (event.getType() == EventType.TURNEDFACEUP && event.getTargetId().equals(this.getSourceId())) {
             return true;
         }
-        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId()) ) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
             Permanent sourcePermanent = game.getPermanent(getSourceId());
             if (sourcePermanent != null && !sourcePermanent.isFaceDown(game)) {
                 return true;
